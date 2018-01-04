@@ -1,5 +1,6 @@
-PATH
-  remote: ..
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim.git
+  revision: 8074bcd82668ebcfcbcd24b3214e8b6e5dcb2fc4
   specs:
     decidim (0.8.3)
       decidim-accountability (= 0.8.3)
@@ -567,7 +568,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webmock (3.2.0)
+    webmock (3.2.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
@@ -596,7 +597,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 2.4.2p198
+   ruby 2.4.1p111
 
 BUNDLED WITH
    1.16.1

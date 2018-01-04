@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim", path: ".."
+gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git"
 
 # Uncomment the following line if you want to use decidim-assemblies plugin
 # gem "decidim-assemblies", path: ".."
@@ -17,7 +17,7 @@ gem "faker", "~> 1.8.4"
 group :development, :test do
   gem "byebug", platform: :mri
 
-  gem "decidim-dev", path: ".."
+  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git"
 end
 
 group :development do
