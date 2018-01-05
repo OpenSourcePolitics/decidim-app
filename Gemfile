@@ -27,3 +27,16 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console"
 end
+
+gem "decidim-deploy-heroku", git: "https://github.com/codegram/decidim-deploy-heroku.git"
+
+group :production do
+  gem 'passenger'
+  gem 'fog-aws'
+  gem 'dalli'
+  gem 'sendgrid-ruby'
+  gem 'newrelic_rpm'
+  gem 'lograge'
+  gem 'sentry-raven'
+  gem 'sidekiq'
+end

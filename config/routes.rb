@@ -1,5 +1,9 @@
+require "sidekiq/web"
 Rails.application.routes.draw do
   
+  authenticate :user, lambda { |u| u.roles.include?("admin") } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

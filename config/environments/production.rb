@@ -1,4 +1,16 @@
 Rails.application.configure do
+  config.active_job.queue_adapter = :sidekiq
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Json.new
+  config.lograge.custom_options = lambda do |event|
+    {
+      remote_ip: event.payload[:remote_ip],
+      params: event.payload[:params].except('controller', 'action', 'format', 'utf8'),
+      user_id: event.payload[:user_id],
+      organization_id: event.payload[:organization_id],
+      referer: event.payload[:referer],
+    }
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -55,7 +67,11 @@ Rails.application.configure do
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  if ENV["MEMCACHEDCLOUD_SERVERS"].present?
+    config.cache_store = :dalli_store, ENV["MEMCACHEDCLOUD_SERVERS"].split(","), {
+      username: ENV["MEMCACHEDCLOUD_USERNAME"], password: ENV["MEMCACHEDCLOUD_PASSWORD"]
+    }
+  end
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
