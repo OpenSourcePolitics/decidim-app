@@ -6,7 +6,11 @@ This is a base app for all OSP projects. It uses OSP's decidim version.
 
 ## Deploying the app
 
-An opinionated guide to deploy this app to Heroku can be found at [https://github.com/codegram/decidim-deploy-heroku](https://github.com/codegram/decidim-deploy-heroku).
+* heroku run rake db:migrate
+* Set SEED=1 as ENV variable
+* heroku run rake db:seed --app osp-decidim
+* See (Setting up the application .3)
+
 
 ## Setting up the application
 
