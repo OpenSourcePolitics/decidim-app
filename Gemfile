@@ -28,7 +28,7 @@ group :development do
   gem "web-console"
 end
 
-gem "decidim-deploy-heroku", git: "https://github.com/codegram/decidim-deploy-heroku.git"
+
 
 group :production do
   gem 'passenger'
