@@ -1,8 +1,8 @@
-# development_app
+# OSP App
 
 Citizen Participation and Open Government application.
 
-This is the open-source repository for development_app, based on [Decidim](https://github.com/decidim/decidim).
+This is a base app for all OSP projects. It uses OSP's decidim version.
 
 ## Deploying the app
 
