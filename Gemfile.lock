@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
-  revision: 8074bcd82668ebcfcbcd24b3214e8b6e5dcb2fc4
+  revision: cf1339b53ab3c012da50648504d0d2dda815bc3c
   specs:
     decidim (0.8.3)
       decidim-accountability (= 0.8.3)
@@ -359,7 +359,7 @@ GEM
     kaminari-core (1.0.1)
     launchy (2.4.3)
       addressable (~> 2.3)
-    letter_opener (1.5.0)
+    letter_opener (1.6.0)
       launchy (~> 2.2)
     letter_opener_web (1.3.1)
       actionmailer (>= 3.2)
@@ -387,7 +387,7 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.1)
-    multi_json (1.12.2)
+    multi_json (1.13.0)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mustermann (1.0.1)
