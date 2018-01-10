@@ -1,12 +1,16 @@
-# development_app
+# OSP App
 
 Citizen Participation and Open Government application.
 
-This is the open-source repository for development_app, based on [Decidim](https://github.com/decidim/decidim).
+This is a base app for all OSP projects. It uses OSP's decidim version.
 
 ## Deploying the app
 
-An opinionated guide to deploy this app to Heroku can be found at [https://github.com/codegram/decidim-deploy-heroku](https://github.com/codegram/decidim-deploy-heroku).
+* heroku run rake db:migrate
+* Set SEED=1 as ENV variable
+* heroku run rake db:seed --app osp-decidim
+* See (Setting up the application .3)
+
 
 ## Setting up the application
 
@@ -24,3 +28,13 @@ user.save!
 6. Fill the rest of the form and submit it.
 
 You're good to go!
+
+### How to deploy
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+1. Use the "Deploy to Heroku" button
+1. Choose a name for the app, and organization and a tier
+1. Fill in the required env vars.
+1. Create the app
+1. Enable Review Apps for this app (you'll need to create a Pipeline)

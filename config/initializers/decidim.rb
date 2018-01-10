@@ -41,6 +41,10 @@ Decidim.configure do |config|
   # take over user accounts.
   #
   config.enable_html_header_snippets = false
+
+  if ENV["HEROKU_APP_NAME"].present?
+    config.base_uploads_path = ENV["HEROKU_APP_NAME"] + "/"
+  end
 end
 
 Rails.application.config.i18n.available_locales = Decidim.available_locales
