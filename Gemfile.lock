@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-user-export.git
+  revision: bdfb7b4b6b67b24d695b248c583caa74b6e0b74b
+  specs:
+    decidim-export (0.0.1)
+      decidim-core
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
   revision: 8074bcd82668ebcfcbcd24b3214e8b6e5dcb2fc4
   specs:
@@ -587,6 +594,7 @@ DEPENDENCIES
   byebug
   decidim!
   decidim-dev!
+  decidim-export!
   faker (~> 1.8.4)
   letter_opener_web (~> 1.3.0)
   listen (~> 3.1.0)
