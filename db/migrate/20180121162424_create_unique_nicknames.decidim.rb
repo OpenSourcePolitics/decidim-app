@@ -11,9 +11,9 @@ class CreateUniqueNicknames < ActiveRecord::Migration[5.1]
   def up
     add_column :decidim_users, :nickname, :string, limit: 20
 
-    # User.find_each do |user|
-    #   user.update!(nickname: User.nicknamize(user.name))
-    # end
+    User.find_each do |user|
+      user.update!(nickname: User.nicknamize(user.name))
+    end
 
     add_index :decidim_users,
               %w(nickname decidim_organization_id),
