@@ -39,7 +39,7 @@ group :production do
   gem 'dalli'
   gem 'sendgrid-ruby'
   gem 'newrelic_rpm'
-  gem 'lograge', "~>0.7.1"
+  gem 'lograge'
   gem 'sentry-raven'
   gem 'sidekiq'
 end
