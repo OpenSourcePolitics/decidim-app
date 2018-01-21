@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180110203201) do
+ActiveRecord::Schema.define(version: 20180121162510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -319,6 +319,7 @@ ActiveRecord::Schema.define(version: 20180110203201) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "decidim_participatory_space_type", null: false
+    t.string "upstream_moderation", default: "unmoderate"
     t.index ["decidim_participatory_space_id", "decidim_participatory_space_type"], name: "decidim_moderations_participatory_space"
     t.index ["decidim_reportable_type", "decidim_reportable_id"], name: "decidim_moderations_reportable", unique: true
     t.index ["hidden_at"], name: "decidim_moderations_hidden_at"
@@ -330,6 +331,7 @@ ActiveRecord::Schema.define(version: 20180110203201) do
     t.jsonb "title"
     t.string "link"
     t.string "target"
+    t.integer "weight"
     t.index ["decidim_organization_id"], name: "index_decidim_navbar_links_on_decidim_organization_id"
   end
 
@@ -668,12 +670,17 @@ ActiveRecord::Schema.define(version: 20180110203201) do
     t.boolean "managed", default: false, null: false
     t.string "roles", default: [], array: true
     t.boolean "email_on_notification", default: false, null: false
+    t.string "nickname", limit: 20
+    t.datetime "officialized_at"
+    t.jsonb "officialized_as"
     t.index ["confirmation_token"], name: "index_decidim_users_on_confirmation_token", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_users_on_decidim_organization_id"
     t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false))"
     t.index ["invitation_token"], name: "index_decidim_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_decidim_users_on_invitations_count"
     t.index ["invited_by_id"], name: "index_decidim_users_on_invited_by_id"
+    t.index ["nickname", "decidim_organization_id"], name: "index_decidim_users_on_nickame_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false))"
+    t.index ["officialized_at"], name: "index_decidim_users_on_officialized_at"
     t.index ["reset_password_token"], name: "index_decidim_users_on_reset_password_token", unique: true
   end
 
