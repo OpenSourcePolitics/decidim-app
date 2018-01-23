@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git"
+gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "patch-participations"
 gem "decidim-participations", git: "https://github.com/OpenSourcePolitics/decidim-participations.git", branch: "develop"
 
 gem "decidim-export", git: "https://github.com/OpenSourcePolitics/decidim-user-export.git"
@@ -20,7 +20,7 @@ gem "faker", "~> 1.8.4"
 group :development, :test do
   gem "byebug", platform: :mri
 
-  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git"
+  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "patch-participations"
 end
 
 group :development do
