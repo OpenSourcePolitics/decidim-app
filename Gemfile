@@ -20,7 +20,7 @@ gem "faker", "~> 1.8.4"
 group :development, :test do
   gem "byebug", platform: :mri
 
-  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "patch-participations"
+  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git"
 end
 
 group :development do
