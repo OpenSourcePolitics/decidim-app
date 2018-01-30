@@ -1,6 +1,6 @@
 {
-  "name": "development_app",
-  "description": "development_app - Direct and participatory democracy web platform based on Decidim framework",
+  "name": "osp_app",
+  "description": "OSP Agora - Direct and participatory democracy web platform based on Decidim framework",
   "keywords": [],
   "addons": [
     "heroku-postgresql:hobby-dev",
