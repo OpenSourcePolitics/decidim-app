@@ -5,8 +5,6 @@ source "https://rubygems.org"
 ruby RUBY_VERSION
 
 gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git"
-gem "decidim-participations", git: "https://github.com/OpenSourcePolitics/decidim-participations.git", branch: "develop"
-
 gem "decidim-export", git: "https://github.com/OpenSourcePolitics/decidim-user-export.git"
 
 # Uncomment the following line if you want to use decidim-assemblies plugin
