@@ -25,7 +25,7 @@ default: &default
   host: <%= ENV.fetch("DATABASE_HOST") { "localhost" } %>
   username: <%= ENV.fetch("DATABASE_USERNAME") { "" } %>
   password: <%= ENV.fetch("DATABASE_PASSWORD") { "" } %>
-  database: <%= ENV.fetch("DATABASE_NAME") { "osp_app_development" } %>
+  database: <%= ENV.fetch("DATABASE_NAME") { "osp_app" } %>
 
 development:
   <<: *default

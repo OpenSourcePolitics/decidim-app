@@ -2,11 +2,11 @@
 
 Decidim.configure do |config|
   config.application_name = "OSP Agora"
-  config.mailer_sender = "mako@osp.cat"
+  config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
 
   # Change these lines to set your preferred locales
-  config.default_locale = :en
-  config.available_locales = [:en, :fr, :ca, :es]
+  config.default_locale = :fr
+  config.available_locales = [:en, :fr]
 
   # Geocoder configuration
   # config.geocoder = {

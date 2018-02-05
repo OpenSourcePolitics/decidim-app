@@ -4,12 +4,17 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "develop"
+gem "decidim-comments", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.9-stable"
+gem "decidim-core", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.9-stable"
+gem "decidim-proposals", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.9-stable"
+
+gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.9-stable"
+# gem "decidim-participations", git: "https://github.com/OpenSourcePolitics/decidim-participations.git"
 
 gem "decidim-export", git: "https://github.com/OpenSourcePolitics/decidim-user-export.git"
 
 # Uncomment the following line if you want to use decidim-assemblies plugin
-gem "decidim-assemblies", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "develop"
+# gem "decidim-assemblies", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.9-stable"
 
 gem "puma", "~> 3.0"
 gem "uglifier", ">= 1.3.0"
@@ -19,7 +24,7 @@ gem "faker", "~> 1.8.4"
 group :development, :test do
   gem "byebug", platform: :mri
 
-  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "develop"
+  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", ref: "0.9.0.pre"
 end
 
 group :development do
@@ -29,8 +34,6 @@ group :development do
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console"
 end
-
-
 
 group :production do
   gem 'passenger'

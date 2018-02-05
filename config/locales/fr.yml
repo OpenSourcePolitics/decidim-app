@@ -1,0 +1,35 @@
+fr:
+  activemodel:
+    attributes:
+      proposal:
+        address: Adresse
+        has_address: Renseigner une adresse
+      user:
+        nickname: Votre pseudonyme
+  decidim:
+    application:
+      documents:
+        related_documents: Documents à consulter
+    devise:
+      sessions:
+        new:
+          are_you_new?: Nouveau sur la plateforme ?
+    menu:
+      # --> change "Processus participatifs" in navbar
+      # processes: Participations en cours
+    participatory_processes:
+      pages:
+        home:
+          highlighted_processes:
+            # change "Processus actif" in homepage
+            # active_processes: Participations en cours
+            # see_all_processes: Voir toutes les participations en cours
+      show:
+        local_area: Périmètre de décision
+        participatory_structure: Mode de décision
+    scopes:
+      global: Toute la ville
+  pages:
+    home:
+      extended:
+        how_to_participate: Comment puis-je participer ?

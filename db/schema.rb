@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129195545) do
+ActiveRecord::Schema.define(version: 20180205085037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -398,44 +398,6 @@ ActiveRecord::Schema.define(version: 20180129195545) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["decidim_feature_id"], name: "index_decidim_pages_pages_on_decidim_feature_id"
-  end
-
-  create_table "decidim_participations_participation_votes", id: :serial, force: :cascade do |t|
-    t.integer "decidim_participation_id", null: false
-    t.integer "decidim_author_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["decidim_author_id"], name: "decidim_participations_vote_author"
-    t.index ["decidim_participation_id", "decidim_author_id"], name: "decidim_participations_vote_participation_author_unique", unique: true
-    t.index ["decidim_participation_id"], name: "decidim_participations_vote_participation"
-  end
-
-  create_table "decidim_participations_participations", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.text "body", null: false
-    t.integer "decidim_feature_id", null: false
-    t.integer "decidim_author_id"
-    t.integer "decidim_scope_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "participation_votes_count", default: 0, null: false
-    t.integer "decidim_user_group_id"
-    t.string "state"
-    t.datetime "answered_at"
-    t.jsonb "answer"
-    t.string "reference"
-    t.text "address"
-    t.float "latitude"
-    t.float "longitude"
-    t.string "participation_type"
-    t.index ["body"], name: "decidim_participations_participation_body_search"
-    t.index ["created_at"], name: "index_decidim_participations_participations_on_created_at"
-    t.index ["decidim_author_id"], name: "index_decidim_participations_on_decidim_author_id"
-    t.index ["decidim_feature_id"], name: "index_decidim_participations_on_decidim_feature_id"
-    t.index ["decidim_scope_id"], name: "index_decidim_participations_on_decidim_scope_id"
-    t.index ["participation_votes_count"], name: "decidim_participations_votes_count"
-    t.index ["state"], name: "index_decidim_participations_participations_on_state"
-    t.index ["title"], name: "decidim_participations_participation_title_search"
   end
 
   create_table "decidim_participatory_process_groups", id: :serial, force: :cascade do |t|
