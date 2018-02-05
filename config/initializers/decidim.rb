@@ -2,11 +2,11 @@
 
 Decidim.configure do |config|
   config.application_name = "OSP Agora"
-  config.mailer_sender = "mako@osp.cat"
+  config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
 
   # Change these lines to set your preferred locales
   config.default_locale = :en
-  config.available_locales = [:en, :fr, :ca, :es]
+  config.available_locales = [:en, :fr]
 
   # Geocoder configuration
   # config.geocoder = {
@@ -40,7 +40,7 @@ Decidim.configure do |config|
   # that an organization's administrator injects malicious scripts to spy on or
   # take over user accounts.
   #
-  config.enable_html_header_snippets = false
+  config.enable_html_header_snippets = true
 
   if ENV["HEROKU_APP_NAME"].present?
     config.base_uploads_path = ENV["HEROKU_APP_NAME"] + "/"
