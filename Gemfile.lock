@@ -7,8 +7,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
-  revision: 6097f66de2ebbfcee3a09b46beeb7d92662b601d
-  ref: 6097f66de2ebbfcee3a09b46beeb7d92662b601d
+  revision: 90d4752dffc38517f7238ac23c037ed88ab18172
+  ref: 90d4752dffc38517f7238ac23c037ed88ab18172
   specs:
     decidim (0.9.2)
       decidim-accountability (= 0.9.2)
@@ -193,7 +193,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
     ast (2.4.0)
-    autoprefixer-rails (7.2.5)
+    autoprefixer-rails (7.2.6)
       execjs
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)

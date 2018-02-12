@@ -4,14 +4,14 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", ref: "6097f66de2ebbfcee3a09b46beeb7d92662b601d"
+gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", ref: "90d4752dffc38517f7238ac23c037ed88ab18172"
 
 # gem "decidim-participations", git: "https://github.com/OpenSourcePolitics/decidim-participations.git"
 
 gem "decidim-export", git: "https://github.com/OpenSourcePolitics/decidim-user-export.git"
 
 # Uncomment the following line if you want to use decidim-assemblies plugin
-gem "decidim-assemblies", git: "https://github.com/OpenSourcePolitics/decidim.git", ref: "6097f66de2ebbfcee3a09b46beeb7d92662b601d"
+gem "decidim-assemblies", git: "https://github.com/OpenSourcePolitics/decidim.git", ref: "90d4752dffc38517f7238ac23c037ed88ab18172"
 
 gem "puma", "~> 3.0"
 gem "uglifier", ">= 1.3.0"
@@ -21,7 +21,7 @@ gem "faker", "~> 1.8.4"
 group :development, :test do
   gem "pry-byebug", platform: :mri
 
-  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", ref: "6097f66de2ebbfcee3a09b46beeb7d92662b601d"
+  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", ref: "90d4752dffc38517f7238ac23c037ed88ab18172"
 end
 
 group :development do
