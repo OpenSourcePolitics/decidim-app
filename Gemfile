@@ -6,7 +6,7 @@ ruby RUBY_VERSION
 
 gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", ref: "90d4752dffc38517f7238ac23c037ed88ab18172"
 
-# gem "decidim-participations", git: "https://github.com/OpenSourcePolitics/decidim-participations.git"
+# gem "decidim-participations", git: "https://github.com/OpenSourcePolitics/decidim-participations.git", branch: "09-stable"
 
 gem "decidim-export", git: "https://github.com/OpenSourcePolitics/decidim-user-export.git"
 
