@@ -244,9 +244,9 @@ fr:
       index:
         title: Processus
       order_by_processes:
-        active: Actives
-        all: Toutes
-        past: Passées
+        active: Actifs
+        all: Tous
+        past: Passés
       pages:
         home:
           highlighted_processes:
