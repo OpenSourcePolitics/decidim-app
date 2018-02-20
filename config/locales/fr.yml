@@ -210,21 +210,6 @@ fr:
             votes_blocked: Soutiens bloqués
             votes_enabled: Soutiens activés
             votes_hidden: Cacher le compteur de soutiens
-    proposals:
-      proposals:
-        filters:
-          voted: Soutenues
-        orders:
-          most_voted: Les plus soutenues
-        vote_button:
-          already_voted: Soutenue
-          already_voted_hover: Ne plus soutenir
-          maximum_votes_reached: Nombre maximum de soutiens atteint
-          vote: Soutenir
-        votes_count:
-          count:
-            one: SOUTIEN
-            other: SOUTIENS
     participatory_process_groups:
       show:
         group_participatory_processes: 'Processus pour %{group}'
@@ -259,6 +244,21 @@ fr:
         participatory_structure: Modalités
         meta_scope: Échelle
         target: Participants
+    proposals:
+      proposals:
+        filters:
+          voted: Soutenues
+        orders:
+          most_voted: Les plus soutenues
+        vote_button:
+          already_voted: Soutenue
+          already_voted_hover: Ne plus soutenir
+          maximum_votes_reached: Nombre maximum de soutiens atteint
+          vote: Soutenir
+        votes_count:
+          count:
+            one: SOUTIEN
+            other: SOUTIENS
     scopes:
       global: Portée globale
   layouts:
