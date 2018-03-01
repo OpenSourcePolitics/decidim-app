@@ -82,12 +82,14 @@
       </div><!-- /.footer-separator -->
       <div class="main-footer">
         <div class="row">
-          <div class="medium-8 large-6 large-offset-3 column main__footer__nav">
+          <div class="medium-3 large-3 column">
             <% if current_organization.official_img_footer? %>
               <%= link_to  current_organization.official_url, class: "main-footer__badge" do %>
                 <%= image_tag current_organization.official_img_footer.url.to_s , alt: current_organization.name %>
               <% end %>
             <% end %>
+          </div>
+          <div class="medium-8 large-6 large-offset-3 column main__footer__nav">
             <% if current_organization.static_pages.any? %>
               <ul class="footer-nav">
                 <% current_organization.static_pages.each do |page| %>
@@ -101,7 +103,7 @@
       </div>
       <div class="mini-footer">
         <div class="row">
-          <div class="medium-3 large-4 column">
+          <div class="medium-3 large-6 column">
             <a rel="license" class="cc-badge"
                href="http://creativecommons.org/licenses/by-sa/4.0/"
                target="_blank">
