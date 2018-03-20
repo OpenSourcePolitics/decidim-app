@@ -245,6 +245,8 @@ fr:
         meta_scope: Échelle
         target: Participants
     proposals:
+      answers:
+        not_answered: En attente de réponse
       proposals:
         filters:
           voted: Soutenues
