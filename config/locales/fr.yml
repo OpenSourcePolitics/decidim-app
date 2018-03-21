@@ -213,6 +213,8 @@ fr:
     menu:
       processes: Processus
     proposals:
+      answers:
+        not_answered: En attente de réponse
       proposals:
         filters:
           voted: Soutenues
