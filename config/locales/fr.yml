@@ -31,6 +31,8 @@ fr:
         scope_type: Type de zone d'application
       user:
         nickname: Votre pseudonyme
+        password: Votre mot de passe
+        password_confirmation: Confirmez votre mot de passe
   activerecord:
     attributes:
       decidim/participatory_process:
