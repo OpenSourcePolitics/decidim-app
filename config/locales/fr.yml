@@ -13,6 +13,8 @@ fr:
       meeting:
         registation_terms:
         registrations_enabled: Conditions d'inscription
+      organization:
+        cta_button_text: Texte du bouton d'action
       participatory_process:
         participatory_process_group_id: Groupe de processus
         developer_group: Promoteur
