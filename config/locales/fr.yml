@@ -220,6 +220,7 @@ fr:
           voted: Soutenues
         orders:
           most_voted: Les plus soutenues
+          recent: Les plus récentes
         vote_button:
           already_voted: Soutenue
           already_voted_hover: Ne plus soutenir
