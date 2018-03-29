@@ -205,11 +205,12 @@ fr:
           vote: Soutenir
         settings:
           global:
-            vote_limit: Nombre maximum de soutiens par utilisateur
+            vote_limit: Nombre maximum de soutiens / votes par utilisateur
+            maximum_votes_per_proposal: Nombre maximum de soutiens / votes par proposition
           step:
-            votes_blocked: Soutiens bloqués
-            votes_enabled: Soutiens activés
-            votes_hidden: Cacher le compteur de soutiens
+            votes_blocked: Soutiens / votes bloqués
+            votes_enabled: Soutiens / votes activés
+            votes_hidden: Cacher le compteur de soutiens / votes
     menu:
       processes: Processus
     proposals:
