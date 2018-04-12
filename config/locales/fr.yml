@@ -211,6 +211,7 @@ fr:
             votes_blocked: Soutiens / votes bloqués
             votes_enabled: Soutiens / votes activés
             votes_hidden: Cacher le compteur de soutiens / votes
+            votes_weight_enabled: Votes pour / contre / absention activés
     menu:
       processes: Processus
     proposals:
