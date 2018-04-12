@@ -8,7 +8,7 @@ GIT
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
   revision: 116903a9e9df126c2b9b4bc31fabe660fa35a858
-  branch: 0.10-stable-wip
+  branch: 0.10-stable
   specs:
     decidim (0.10.0.pre)
       decidim-accountability (= 0.10.0.pre)
