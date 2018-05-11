@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
-  revision: 7c46c2d0841f1d09c9a253ca45b034eb535746af
-  branch: 0.11-stable-merge
+  revision: e63f0c5cf52ff5c6858255d499f8ec6505fae32b
+  branch: 0.11-stable
   specs:
     decidim (0.11.0.pre1)
       decidim-accountability (= 0.11.0.pre1)
@@ -78,7 +78,7 @@ GIT
       foundation-rails (~> 6.4, < 6.5)
       foundation_rails_helper (~> 3.0)
       geocoder (~> 1.4)
-      high_voltage (~> 3.0)
+      high_voltage (= 3.0.0)
       invisible_captcha (~> 0.10.0)
       jquery-rails (~> 4.3)
       loofah (~> 2.0, >= 2.2.1)
@@ -379,7 +379,7 @@ GEM
     graphql (1.7.14)
     hashdiff (0.3.7)
     hashie (3.5.7)
-    high_voltage (3.1.0)
+    high_voltage (3.0.0)
     highline (1.7.10)
     html_tokenizer (0.0.6)
     htmlentities (4.3.4)
