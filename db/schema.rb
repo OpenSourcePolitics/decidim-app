@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_11_144456) do
+ActiveRecord::Schema.define(version: 2018_06_11_142718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -121,9 +121,9 @@ ActiveRecord::Schema.define(version: 2018_06_11_144456) do
     t.boolean "show_statistics", default: false
     t.integer "decidim_scope_id"
     t.boolean "scopes_enabled", default: true, null: false
+    t.boolean "private_space", default: false
     t.string "reference"
     t.bigint "decidim_area_id"
-    t.boolean "private_space", default: false
     t.bigint "parent_id"
     t.ltree "parents_path"
     t.integer "children_count", default: 0
@@ -581,10 +581,10 @@ ActiveRecord::Schema.define(version: 2018_06_11_144456) do
     t.integer "available_slots", default: 0, null: false
     t.jsonb "registration_terms"
     t.integer "reserved_slots", default: 0, null: false
-    t.jsonb "services", default: []
     t.boolean "private_meeting", default: false
     t.boolean "transparent", default: true
     t.bigint "organizer_id"
+    t.jsonb "services", default: []
     t.index ["decidim_author_id"], name: "index_decidim_meetings_meetings_on_decidim_author_id"
     t.index ["decidim_component_id"], name: "index_decidim_meetings_meetings_on_decidim_component_id"
     t.index ["decidim_scope_id"], name: "index_decidim_meetings_meetings_on_decidim_scope_id"
@@ -809,8 +809,8 @@ ActiveRecord::Schema.define(version: 2018_06_11_144456) do
     t.jsonb "announcement"
     t.boolean "scopes_enabled", default: true, null: false
     t.date "start_date"
-    t.string "reference"
     t.boolean "private_space", default: false
+    t.string "reference"
     t.index ["decidim_organization_id", "slug"], name: "index_unique_process_slug_and_organization", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_processes_on_decidim_organization_id"
   end
@@ -888,9 +888,9 @@ ActiveRecord::Schema.define(version: 2018_06_11_144456) do
     t.text "address"
     t.float "latitude"
     t.float "longitude"
-    t.integer "proposal_notes_count", default: 0, null: false
     t.integer "proposal_endorsements_count", default: 0, null: false
     t.datetime "published_at"
+    t.integer "proposal_notes_count", default: 0, null: false
     t.index ["body"], name: "decidim_proposals_proposal_body_search"
     t.index ["created_at"], name: "index_decidim_proposals_proposals_on_created_at"
     t.index ["decidim_author_id"], name: "index_decidim_proposals_proposals_on_decidim_author_id"
@@ -1132,11 +1132,11 @@ ActiveRecord::Schema.define(version: 2018_06_11_144456) do
     t.string "roles", default: [], array: true
     t.boolean "email_on_notification", default: false, null: false
     t.string "nickname", limit: 20, default: "", null: false
-    t.datetime "officialized_at"
-    t.jsonb "officialized_as"
     t.string "personal_url"
     t.text "about"
     t.datetime "accepted_tos_version"
+    t.datetime "officialized_at"
+    t.jsonb "officialized_as"
     t.index ["confirmation_token"], name: "index_decidim_users_on_confirmation_token", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_users_on_decidim_organization_id"
     t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false))"
