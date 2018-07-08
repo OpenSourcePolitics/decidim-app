@@ -19,8 +19,13 @@ gem "bootsnap", "~> 1.3"
 
 gem "puma", "~> 3.0"
 gem "uglifier", ">= 1.3.0"
-
 gem "faker", "~> 1.8.4"
+
+gem "loofah" , "~> 2.2.1"
+gem "nokogiri", "~> 1.8.2"
+gem "rails-html-sanitizer", "~> 1.0.4"
+gem "sinatra", "~> 2.0.2"
+gem "sprockets", "~> 3.7.2"
 
 group :development, :test do
   gem "pry-byebug", platform: :mri
