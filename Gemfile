@@ -9,16 +9,11 @@ gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", branch:
 
 gem "decidim-consultations", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.12-stable-updated"
 gem "decidim-initiatives", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.12-stable-updated"
-
 # gem "decidim-consultations", path: "../decidim"
 # gem "decidim-initiatives", path: "../decidim"
 
-
 # gem "decidim-participations", git: "https://github.com/OpenSourcePolitics/decidim-participations.git", branch: "09-stable"
 # gem "decidim-export", git: "https://github.com/OpenSourcePolitics/decidim-user-export.git"
-
-# Uncomment the following line if you want to use decidim-assemblies plugin
-# gem "decidim-assemblies", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.12-stable-updated"
 
 gem "bootsnap", "~> 1.3"
 

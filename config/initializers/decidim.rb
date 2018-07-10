@@ -5,7 +5,7 @@ Decidim.configure do |config|
   config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
 
   # Change these lines to set your preferred locales
-  config.default_locale = :en
+  config.default_locale = :fr
   config.available_locales = [:en, :fr]
 
   config.maximum_attachment_height_or_width = 6000

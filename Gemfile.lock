@@ -1,5 +1,7 @@
-PATH
-  remote: ../decidim
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim.git
+  revision: b0803130a54a6bf51c70bd94f4466571d6590812
+  branch: 0.12-stable-updated
   specs:
     decidim (0.12.1)
       decidim-accountability (= 0.12.1)
@@ -785,7 +787,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 2.5.0p0
+   ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
