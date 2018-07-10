@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
-  revision: b0803130a54a6bf51c70bd94f4466571d6590812
+  revision: baf1a0a9997040d92c01d086fb8a732a1c656e86
   branch: 0.12-stable-updated
   specs:
     decidim (0.12.1)
@@ -390,7 +390,7 @@ GEM
     graphiql-rails (1.4.10)
       railties
       sprockets-rails
-    graphql (1.8.4)
+    graphql (1.8.5)
     hashdiff (0.3.7)
     hashie (3.5.7)
     highline (2.0.0)
@@ -517,7 +517,7 @@ GEM
       request_store (~> 1.1)
     paper_trail-association_tracking (1.0.0)
     parallel (1.12.1)
-    parser (2.5.1.0)
+    parser (2.5.1.2)
       ast (~> 2.4.0)
     passenger (5.3.3)
       rack
