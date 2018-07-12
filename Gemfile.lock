@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
-  revision: baf1a0a9997040d92c01d086fb8a732a1c656e86
-  branch: 0.12-stable-updated
+  revision: fdbc104287be4023a77927de0cb77c9126faa8e2
+  branch: 0.12-stable
   specs:
     decidim (0.12.1)
       decidim-accountability (= 0.12.1)
@@ -58,10 +58,6 @@ GIT
     decidim-comments (0.12.1)
       decidim-core (= 0.12.1)
       jquery-rails (~> 4.0)
-    decidim-consultations (0.12.1)
-      decidim-admin (= 0.12.1)
-      decidim-comments (= 0.12.1)
-      decidim-core (= 0.12.1)
     decidim-core (0.12.1)
       active_link_to (~> 1.0)
       autoprefixer-rails (~> 8.0)
@@ -474,7 +470,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     mixlib-cli (1.7.0)
-    mixlib-config (2.2.12)
+    mixlib-config (2.2.13)
       tomlrb
     msgpack (1.2.4)
     multi_json (1.13.1)
@@ -761,7 +757,6 @@ DEPENDENCIES
   bootsnap (~> 1.3)
   dalli
   decidim!
-  decidim-consultations!
   decidim-dev!
   decidim-initiatives!
   faker (~> 1.8.4)
