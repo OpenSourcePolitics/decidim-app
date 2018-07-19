@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
-  revision: fdbc104287be4023a77927de0cb77c9126faa8e2
+  revision: 4931a49d14b585f0d90677153202a10be668cf24
   branch: 0.12-stable
   specs:
     decidim (0.12.1)
@@ -130,14 +130,6 @@ GIT
       wisper-rspec (~> 1.0)
     decidim-generators (0.12.1)
       decidim-core (= 0.12.1)
-    decidim-initiatives (0.12.1)
-      decidim-admin (= 0.12.1)
-      decidim-comments (= 0.12.1)
-      decidim-core (= 0.12.1)
-      decidim-verifications (= 0.12.1)
-      kaminari (~> 1.0)
-      social-share-button (~> 1.0)
-      wicked (~> 1.3)
     decidim-meetings (0.12.1)
       cells-erb (~> 0.1.0)
       cells-rails (~> 0.0.9)
@@ -321,7 +313,7 @@ GEM
       devise (>= 4.0.0)
     diff-lcs (1.3)
     docile (1.3.1)
-    doorkeeper (4.3.2)
+    doorkeeper (4.4.0)
       railties (>= 4.2)
     doorkeeper-i18n (4.0.0)
     easy_translate (0.5.1)
@@ -383,7 +375,7 @@ GEM
     geocoder (1.4.9)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    graphiql-rails (1.4.10)
+    graphiql-rails (1.4.11)
       railties
       sprockets-rails
     graphql (1.8.5)
@@ -718,7 +710,7 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.1.0)
-    uglifier (4.1.14)
+    uglifier (4.1.15)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.0)
     valid_email2 (2.2.3)
@@ -743,8 +735,6 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
-    wicked (1.3.2)
-      railties (>= 3.0.7)
     wisper (2.0.0)
     wisper-rspec (1.1.0)
     xpath (3.1.0)
@@ -758,7 +748,6 @@ DEPENDENCIES
   dalli
   decidim!
   decidim-dev!
-  decidim-initiatives!
   faker (~> 1.8.4)
   fog-aws
   letter_opener_web (~> 1.3.0)
