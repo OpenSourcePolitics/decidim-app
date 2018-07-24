@@ -39,4 +39,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  Decidim::Verifications.register_workflow(:osp_authorization_handler) do |auth|
+    auth.form = "Decidim::OspAuthorizationHandler"
+  end
 end
