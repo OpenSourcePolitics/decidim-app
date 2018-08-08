@@ -20,6 +20,8 @@ namespace :heroku do
       exit 1
     end
 
+    skip_first_login_authorization = ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"].nil? ? false : ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"]
+
     app_name_raw = `git rev-parse --abbrev-ref HEAD`
     digit        = /\d.\d.-/.match(app_name_raw)
     if digit.nil?
@@ -36,7 +38,7 @@ namespace :heroku do
       system("heroku addons:create sendgrid:starter -a #{app_name}")
       system("heroku labs:enable runtime-dyno-metadata -a #{app_name}")
       system("heroku config:set SEED=true -a #{app_name}")
-      system("heroku config:set SKIP_FIRST_LOGIN_AUTHORIZATION=true -a #{app_name}")
+      system("heroku config:set SKIP_FIRST_LOGIN_AUTHORIZATION=#{skip_first_login_authorization} -a #{app_name}")
       system("heroku config:set SECRET_KEY_BASE=$SECRET_KEY_BASE -a #{app_name}")
       system("heroku config:set AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID")
       system("heroku config:set AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY")
