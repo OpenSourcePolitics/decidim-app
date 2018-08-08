@@ -44,7 +44,9 @@ namespace :heroku do
       system("heroku config:set AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY")
       system("heroku git:remote -a #{app_name}")
       if system("git push heroku $(git rev-parse --abbrev-ref HEAD):master")
-        system("heroku run bundle exec rake db:schema:load db:seed")
+        if system("heroku run bundle exec rake db:schema:load db:seed")
+          puts "Deploy is over, visit your app : #{`heroku apps:info -s  | grep web_url | cut -d= -f2`}"
+        end
       end
     end
   end
