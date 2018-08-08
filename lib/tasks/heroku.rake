@@ -45,7 +45,7 @@ namespace :heroku do
       system("heroku git:remote -a #{app_name}")
       if system("git push heroku $(git rev-parse --abbrev-ref HEAD):master")
         if system("heroku run bundle exec rake db:schema:load db:seed")
-          puts "Deploy is over, visit your app : #{`heroku apps:info -s  | grep web_url | cut -d= -f2`}"
+          display_url
         end
       end
     end
@@ -53,6 +53,15 @@ namespace :heroku do
 
   task push: :environment do
     system("git push heroku $(git rev-parse --abbrev-ref HEAD):master")
+    display_url
+  end
+
+  task url: :environment do
+    display_url
+  end
+
+  def display_url
+    puts "Deploy is over, visit your app : #{`heroku apps:info -s  | grep web_url | cut -d= -f2`}"
   end
 
 end
