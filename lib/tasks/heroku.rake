@@ -20,7 +20,7 @@ namespace :heroku do
       exit 1
     end
 
-    skip_first_login_authorization = ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"].nil? ? false : ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"]
+    skip_first_login_authorization = ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"].nil? ? true : ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"]
 
     app_name_raw = `git rev-parse --abbrev-ref HEAD`
     digit        = /\d.\d.-/.match(app_name_raw)
