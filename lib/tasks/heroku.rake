@@ -42,7 +42,7 @@ namespace :heroku do
       system("heroku config:set AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY")
       system("heroku git:remote -a #{app_name}")
       if system("git push heroku $(git rev-parse --abbrev-ref HEAD):master")
-        system("heroku run bundle exec rake db:create db:migrate db:seeds")
+        system("heroku run bundle exec rake db:schema:load db:seed")
       end
     end
   end
