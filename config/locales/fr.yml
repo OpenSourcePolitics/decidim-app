@@ -1,24 +1,24 @@
 fr:
   activemodel:
     attributes:
-      mel_authorization_handler:
+      osp_authorization_handler:
         document_number: Numéro unique
         postal_code: Code postal
         birthday: Date de naissance
   decidim:
     authorization_handlers:
-      mel_authorization_handler:
+      osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique
         fields:
           document_number: Numéro unique
           postal_code: Code postal
           birthday: Date de naissance
         name: Formulaire de vérification d'identité - MEL
-      mel_authorization_workflow:
+      osp_authorization_workflow:
         name: Procédure d'autorisation
     verifications:
       authorizations:
         first_login:
           actions:
-            mel_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
-            mel_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+            osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
+            osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
