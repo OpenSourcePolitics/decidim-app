@@ -13,7 +13,7 @@ fr:
           document_number: Numéro unique
           postal_code: Code postal
           birthday: Date de naissance
-        name: Formulaire de vérification d'identité - MEL
+        name: Formulaire de vérification d'identité
       osp_authorization_workflow:
         name: Procédure d'autorisation
     verifications:
