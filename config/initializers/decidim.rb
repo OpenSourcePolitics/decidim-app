@@ -2,18 +2,26 @@
 
 Decidim.configure do |config|
   config.application_name = "OSP Agora"
-  config.mailer_sender = "mako@osp.cat"
+  config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
 
   # Change these lines to set your preferred locales
-  config.default_locale = :en
-  config.available_locales = [:en, :fr, :ca, :es]
+  config.default_locale = :fr
+  config.available_locales = [:en, :fr]
+
+  config.maximum_attachment_height_or_width = 6000
 
   # Geocoder configuration
-  # config.geocoder = {
-  #   static_map_url: "https://image.maps.cit.api.here.com/mia/1.6/mapview",
-  #   here_app_id: Rails.application.secrets.geocoder[:here_app_id],
-  #   here_app_code: Rails.application.secrets.geocoder[:here_app_code]
-  # }
+  config.geocoder = {
+    static_map_url: "https://image.maps.cit.api.here.com/mia/1.6/mapview",
+    here_app_id: Rails.application.secrets.geocoder[:here_app_id],
+    here_app_code: Rails.application.secrets.geocoder[:here_app_code]
+  }
+
+  if defined?(Decidim::Initiatives)
+    # puts "Decidim::Initiatives are loaded"
+    Decidim::Initiatives.do_not_require_authorization = true
+  end
+
 
   # Custom resource reference generator method
   # config.resource_reference_generator = lambda do |resource, feature|
@@ -40,7 +48,7 @@ Decidim.configure do |config|
   # that an organization's administrator injects malicious scripts to spy on or
   # take over user accounts.
   #
-  config.enable_html_header_snippets = false
+  config.enable_html_header_snippets = true
 
   if ENV["HEROKU_APP_NAME"].present?
     config.base_uploads_path = ENV["HEROKU_APP_NAME"] + "/"

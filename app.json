@@ -1,17 +1,17 @@
 {
-  "name": "osp_app",
-  "description": "OSP Agora - Direct and participatory democracy web platform based on Decidim framework",
+  "name": "osp-app",
+  "description": "Decidim / osp-app - Direct and participatory democracy web platform based on Decidim framework",
   "keywords": [],
   "addons": [
     "heroku-postgresql:hobby-dev",
     "heroku-redis:hobby-dev",
-    "logentries:le_tryit",
     "memcachedcloud:30",
     "newrelic:wayne",
-    "sendgrid:starter"
+    "sendgrid:starter",
+    "sentry:f1"
   ],
   "scripts": {
-    "postdeploy":"rake db:schema:load db:migrate db:seed"
+    "postdeploy":"rake db:schema:load db:migrate"
   },
   "env": {
     "AWS_ACCESS_KEY_ID": {
