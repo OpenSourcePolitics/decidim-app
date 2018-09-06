@@ -1,5 +1,7 @@
-PATH
-  remote: ../decidim
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim.git
+  revision: b0eb94f7b76155245129145b1bb1f8e1ca0d6cb0
+  branch: 0.12-stable
   specs:
     decidim (0.12.2)
       decidim-accountability (= 0.12.2)
