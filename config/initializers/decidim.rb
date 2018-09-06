@@ -17,7 +17,7 @@ Decidim.configure do |config|
     here_app_code: Rails.application.secrets.geocoder[:here_app_code]
   }
 
-  if defined?(Decidim::Initiatives)
+  if defined?(Decidim::Initiatives) && defined?(Decidim::Initiatives.do_not_require_authorization)
     # puts "Decidim::Initiatives are loaded"
     Decidim::Initiatives.do_not_require_authorization = true
   end
