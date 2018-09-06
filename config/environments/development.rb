@@ -55,8 +55,4 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-
-  Decidim::Verifications.register_workflow(:osp_authorization_handler) do |auth|
-    auth.form = "Decidim::OspAuthorizationHandler"
-  end
 end
