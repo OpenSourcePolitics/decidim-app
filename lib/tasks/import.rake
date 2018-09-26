@@ -14,7 +14,8 @@ namespace :import do
 
     validate_input
 
-    check_csv(@file)
+    csv = CSV.read(@file, col_sep: ';')
+    check_csv(csv)
 
     count = CSV.read(@file).count
 
@@ -23,11 +24,11 @@ namespace :import do
     @log = File.new("import-user-#{Time.now}.log", "w+")
 
     progressbar = ProgressBar.create(title: 'Importing User', total: count, format: '%t%e%B%p%%')
-    CSV.open(@file, 'r', col_sep: ';') do |row|
-      row.each do |id, first_name, last_name, email|
-        progressbar.increment
-        import_data(id, first_name, last_name, email)
-      end
+
+    csv.each do |row|
+      progressbar.increment
+      # Import user with parsed informations id, first_name, last_name, email
+      import_data(row[0], row[1], row[2], row[3])
     end
     @log.close
   end
@@ -99,12 +100,11 @@ def display_help
 end
 
 def check_csv(file)
-  CSV.open(file, 'r', col_sep: ';') do |row|
-    row.each do |id, first_name, last_name, email|
-      if id.nil? || first_name.nil? || last_name.nil?
-        puts "Something went wrong, empty field(s) on line #{$.}"
-        exit 1
-      end
+  file.each do |row|
+    # Check if id, first_name, last_name are nil
+    if row[0].nil? || row[1].nil? || row[2].nil?
+      puts "Something went wrong, empty field(s) on line #{$.}"
+      exit 1
     end
   end
 end
