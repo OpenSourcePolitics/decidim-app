@@ -21,7 +21,7 @@ namespace :import do
 
     puts "CSV file is #{count} lines long"
 
-    @log = File.new("import-user-#{Time.now}.log", "w+")
+    @log = File.new("import-user-#{Time.now.strftime '%Y-%m-%d-%H:%M:%S'}.log", 'w+')
 
     progressbar = ProgressBar.create(title: 'Importing User', total: count, format: '%t%e%B%p%%')
 
@@ -103,7 +103,7 @@ def check_csv(file)
   file.each do |row|
     # Check if id, first_name, last_name are nil
     if row[0].nil? || row[1].nil? || row[2].nil?
-      puts "Something went wrong, empty field(s) on line #{$.}"
+      puts "Something went wrong, empty field(s) on line #{$INPUT_LINE_NUMBER}"
       exit 1
     end
   end
