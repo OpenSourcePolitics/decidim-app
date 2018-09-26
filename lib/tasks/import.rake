@@ -22,7 +22,7 @@ namespace :import do
 
     progressbar = ProgressBar.create(title: 'Importing User', total: count, format: '%t%e%B%p%%')
     CSV.open(@file, 'r', col_sep: ';') do |row|
-      row.map do |id, first_name, last_name, email|
+      row.each do |id, first_name, last_name, email|
         progressbar.increment
         import_data(id, first_name, last_name, email)
       end
@@ -97,7 +97,7 @@ end
 
 def check_csv(file)
   CSV.open(file, 'r', col_sep: ';') do |row|
-    row.map do |id, first_name, last_name, email|
+    row.each do |id, first_name, last_name, email|
       if id.nil? || first_name.nil? || last_name.nil?
         puts "Something went wrong, empty field(s) on line #{$.}"
         exit 1
