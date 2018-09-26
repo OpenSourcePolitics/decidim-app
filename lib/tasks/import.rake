@@ -37,7 +37,13 @@ namespace :import do
       exit 1
     end
 
-    progressbar = ProgressBar.create(title: 'Importing User', total: CSV.read(file).count, format: '%t%e%B%p%%')
+    check_csv(file)
+
+    count = CSV.read(file).count
+
+    puts "CSV file is #{count} lines long"
+
+    progressbar = ProgressBar.create(title: 'Importing User', total: count, format: '%t%e%B%p%%')
     CSV.open(file, 'r', col_sep: ';') do |row|
       row.map do |id, first_name, last_name, email|
         progressbar.increment
@@ -47,12 +53,25 @@ namespace :import do
   end
 end
 
+private
+
 def display_help
   puts <<~HEREDOC
     Help:
     Usage: rake import:user FILE='<filename.csv>' ORG=<organization_id> ADMIN=<admin_id> PROCESS=<process_id>
   HEREDOC
   exit 0
+end
+
+def check_csv(file)
+  CSV.open(file, 'r', col_sep: ';') do |row|
+    row.map do |id, first_name, last_name, email|
+      if id.nil? || first_name.nil? || last_name.nil?
+        puts "Something went wrong, empty field(s) on line #{$.}"
+        exit 1
+      end
+    end
+  end
 end
 
 def import_data(id, first_name, last_name, email)
@@ -69,7 +88,7 @@ def import_without_email(id, first_name, last_name)
   form = Decidim::Admin::ImpersonateUserForm.new
   form.name = name
   form.user = user
-  form.handler_name = "osp_authorization_handler"
+  form.handler_name = 'osp_authorization_handler'
   form.authorization = { "document_number": id }
   Decidim::Admin::ImpersonateUser.call(form)
 end
