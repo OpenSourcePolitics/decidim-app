@@ -12,6 +12,11 @@ namespace :import do
     @process = ENV['PROCESS'].to_i
     @auth_handler = ENV['AUTH_HANDLER']
 
+    unless File.exist?(file)
+      puts 'File does not exist, be sure to pass a full path.'
+      exit 1
+    end
+
     if File.extname(file) != '.csv'
       puts 'You must pass a CSV file'
       exit 1
