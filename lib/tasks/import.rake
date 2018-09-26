@@ -6,45 +6,22 @@ namespace :import do
   desc 'Usage: rake import:user FILE=\'<filename.csv>\' ORG=<organization_id> ADMIN=<admin_id> PROCESS=<process_id>\''
   task user: :environment do
     display_help unless ENV['FILE'] && ENV['ORG'] && ENV['ADMIN'] && ENV['PROCESS']
-    file = ENV['FILE']
+    @file = ENV['FILE']
     @org = ENV['ORG'].to_i
     @admin = ENV['ADMIN'].to_i
     @process = ENV['PROCESS'].to_i
     @auth_handler = ENV['AUTH_HANDLER']
 
-    unless File.exist?(file)
-      puts 'File does not exist, be sure to pass a full path.'
-      exit 1
-    end
+    validate_input
 
-    if File.extname(file) != '.csv'
-      puts 'You must pass a CSV file'
-      exit 1
-    end
+    check_csv(@file)
 
-    if @org.class != Integer
-      puts 'You must pass an organization id as an integer'
-      exit 1
-    end
-
-    if @process.class != Integer
-      puts 'You must pass a process id as an integer'
-      exit 1
-    end
-
-    if @admin.class != Integer
-      puts 'You must pass an admin id as an integer'
-      exit 1
-    end
-
-    check_csv(file)
-
-    count = CSV.read(file).count
+    count = CSV.read(@file).count
 
     puts "CSV file is #{count} lines long"
 
     progressbar = ProgressBar.create(title: 'Importing User', total: count, format: '%t%e%B%p%%')
-    CSV.open(file, 'r', col_sep: ';') do |row|
+    CSV.open(@file, 'r', col_sep: ';') do |row|
       row.map do |id, first_name, last_name, email|
         progressbar.increment
         import_data(id, first_name, last_name, email)
@@ -54,6 +31,61 @@ namespace :import do
 end
 
 private
+
+def validate_input
+  validate_file
+  validate_process
+  validate_admin
+  validate_org
+end
+
+def validate_org
+  if @org.class != Integer
+    puts 'You must pass an organization id as an integer'
+    exit 1
+  end
+
+  unless fetch_organization
+    puts 'Organization does not exist'
+    exit 1
+  end
+end
+
+def validate_admin
+  if @admin.class != Integer
+    puts 'You must pass an admin id as an integer'
+    exit 1
+  end
+
+  unless fetch_admin
+    puts 'Admin does not exist'
+    exit 1
+  end
+end
+
+def validate_process
+  if @process.class != Integer
+    puts 'You must pass a process id as an integer'
+    exit 1
+  end
+
+  unless fetch_process
+    puts 'Process does not exist'
+    exit 1
+  end
+end
+
+def validate_file
+  unless File.exist?(@file)
+    puts 'File does not exist, be sure to pass a full path.'
+    exit 1
+  end
+
+  if File.extname(@file) != '.csv'
+    puts 'You must pass a CSV file'
+    exit 1
+  end
+end
 
 def display_help
   puts <<~HEREDOC
