@@ -20,6 +20,8 @@ namespace :import do
 
     puts "CSV file is #{count} lines long"
 
+    @log = File.new("import-user-#{Time.now}.log", "w+")
+
     progressbar = ProgressBar.create(title: 'Importing User', total: count, format: '%t%e%B%p%%')
     CSV.open(@file, 'r', col_sep: ';') do |row|
       row.each do |id, first_name, last_name, email|
@@ -27,6 +29,7 @@ namespace :import do
         import_data(id, first_name, last_name, email)
       end
     end
+    @log.close
   end
 end
 
@@ -123,6 +126,7 @@ def import_without_email(id, first_name, last_name)
   form.handler_name = 'osp_authorization_handler'
   form.authorization = { "document_number": id }
   Decidim::Admin::ImpersonateUser.call(form)
+  log_feed("id: #{id}, first_name: #{first_name}, last_name: #{last_name}")
 end
 
 def import_with_email(first_name, last_name, email)
@@ -131,6 +135,7 @@ def import_with_email(first_name, last_name, email)
   form.name = name
   form.email = email
   Decidim::Admin::CreateParticipatorySpacePrivateUser.call(form, fetch_admin, fetch_process)
+  log_feed("first_name: #{first_name}, last_name: #{last_name}, email: #{email}")
 end
 
 def set_name(first_name, last_name)
@@ -147,4 +152,8 @@ end
 
 def fetch_process
   Decidim::ParticipatoryProcess.find(@process)
+end
+
+def log_feed(data)
+  @log.write("Registered user with #{data}\n")
 end
