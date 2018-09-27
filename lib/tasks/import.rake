@@ -123,13 +123,15 @@ def import_without_email(id, first_name, last_name)
   form = Decidim::Admin::ImpersonateUserForm.new
   form.name = name
   form.user = user
-  form.handler_name = 'osp_authorization_handler'
-  form.authorization = { "document_number": id }
+  form.authorization = {
+      handler_name: 'osp_authorization_handler',
+      document_number: id
+  }
   call = Decidim::Admin::ImpersonateUser.call(form)
   if call.include? :ok
     log_feed("id: #{id}, first_name: #{first_name}, last_name: #{last_name}")
   else
-    puts "Tried to registered user with id: #{id}, first_name: #{first_name}, last_name: #{last_name}, failed."
+    puts "Tried to register user with id: #{id}, first_name: #{first_name}, last_name: #{last_name}, failed."
     exit 1
   end
 end
@@ -141,9 +143,9 @@ def import_with_email(first_name, last_name, email)
   form.email = email
   call = Decidim::Admin::CreateParticipatorySpacePrivateUser.call(form, fetch_admin, fetch_process)
   if call.include? :ok
-  log_feed("first_name: #{first_name}, last_name: #{last_name}, email: #{email}")
+    log_feed("first_name: #{first_name}, last_name: #{last_name}, email: #{email}")
   else
-    puts "Tried to registered user with first_name: #{first_name}, last_name: #{last_name}, failed."
+    puts "Tried to register user with first_name: #{first_name}, last_name: #{last_name}, failed."
     exit 1
   end
 end
