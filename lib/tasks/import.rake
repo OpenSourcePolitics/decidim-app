@@ -2,8 +2,17 @@
 
 require 'ruby-progressbar'
 
+Rails.application.config.active_job.queue_adapter = :inline
+
+@verbose = ENV['VERBOSE'].to_s == "true"
+if @verbose
+  Rails.logger = Logger.new(STDOUT)
+else
+  Rails.logger = Logger.new("log/import-user-#{Time.now.strftime '%Y-%m-%d-%H:%M:%S'}.log")
+end
+
 namespace :import do
-  desc 'Usage: rake import:user FILE=\'<filename.csv>\' ORG=<organization_id> ADMIN=<admin_id> PROCESS=<process_id>\''
+  desc 'Usage: rake import:user FILE=\'<filename.csv>\' ORG=<organization_id> ADMIN=<admin_id> PROCESS=<process_id> [VERBOSE=true]\''
   task user: :environment do
     display_help unless ENV['FILE'] && ENV['ORG'] && ENV['ADMIN'] && ENV['PROCESS']
     @file = ENV['FILE']
@@ -14,23 +23,24 @@ namespace :import do
 
     validate_input
 
-    csv = CSV.read(@file, col_sep: ';')
+    csv = CSV.read(@file, col_sep: ';', headers: false, skip_blanks: true)
     check_csv(csv)
 
     count = CSV.read(@file).count
 
     puts "CSV file is #{count} lines long"
 
-    @log = File.new("import-user-#{Time.now.strftime '%Y-%m-%d-%H:%M:%S'}.log", 'w+')
-
-    progressbar = ProgressBar.create(title: 'Importing User', total: count, format: '%t%e%B%p%%')
+    if !@verbose
+      progressbar = ProgressBar.create(title: 'Importing User', total: count, format: '%t%e%B%p%%')
+    end
 
     csv.each do |row|
-      progressbar.increment
+      progressbar.increment unless @verbose
       # Import user with parsed informations id, first_name, last_name, email
       import_data(row[0], row[1], row[2], row[3])
     end
-    @log.close
+
+    Rails.logger.close
   end
 end
 
@@ -49,7 +59,7 @@ def validate_org
     exit 1
   end
 
-  unless fetch_organization
+  unless current_organization
     puts 'Organization does not exist'
     exit 1
   end
@@ -61,7 +71,7 @@ def validate_admin
     exit 1
   end
 
-  unless fetch_admin
+  unless current_user
     puts 'Admin does not exist'
     exit 1
   end
@@ -73,7 +83,7 @@ def validate_process
     exit 1
   end
 
-  unless fetch_process
+  unless current_process
     puts 'Process does not exist'
     exit 1
   end
@@ -104,68 +114,113 @@ def check_csv(file)
     # Check if id, first_name, last_name are nil
     if row[0].nil? || row[1].nil? || row[2].nil?
       puts "Something went wrong, empty field(s) on line #{$INPUT_LINE_NUMBER}"
+      puts row.inspect
       exit 1
     end
   end
 end
 
 def import_data(id, first_name, last_name, email)
+
+  # Extends are only loaded at the last time
+  require 'extends/commands/decidim/admin/create_participatory_space_private_user_extends.rb'
+  require 'extends/commands/decidim/admin/impersonate_user_extends.rb'
+
   if email.nil?
     import_without_email(id, first_name, last_name)
   else
-    import_with_email(first_name, last_name, email)
+    import_with_email(id, first_name, last_name, email)
   end
 end
 
 def import_without_email(id, first_name, last_name)
-  user = Decidim::User.new(managed: true, admin: false, roles: [])
-  name = set_name(first_name, last_name)
-  form = Decidim::Admin::ImpersonateUserForm.new
-  form.name = name
-  form.user = user
-  form.authorization = {
-      handler_name: 'osp_authorization_handler',
-      document_number: id
-  }
-  call = Decidim::Admin::ImpersonateUser.call(form)
-  if call.include? :ok
-    log_feed("id: #{id}, first_name: #{first_name}, last_name: #{last_name}")
-  else
-    puts "Tried to register user with id: #{id}, first_name: #{first_name}, last_name: #{last_name}, failed."
-    exit 1
+  user = Decidim::User.new(
+    managed: true,
+    name: set_name(first_name, last_name),
+    organization: current_organization,
+    admin: false,
+    roles: [],
+    tos_agreement: true
+  )
+  form = Decidim::Admin::ImpersonateUserForm.from_params(
+    user: user,
+    name: user.name,
+    reason: 'import',
+    handler_name: 'osp_authorization_handler',
+    authorization: Decidim::AuthorizationHandler.handler_for(
+      'osp_authorization_handler',
+      {
+        user: user,
+        document_number: id
+      }
+    )
+  ).with_context(
+    current_organization: current_organization,
+    current_user: current_user
+  )
+
+  Decidim::Admin::ImpersonateUser.call(form) do
+    on(:ok) do |user|
+      Rails.logger.debug I18n.t("participatory_space_private_users.create.success", scope: "decidim.admin")
+      Rails.logger.debug "Registered user with id: #{id}, first_name: #{first_name}, last_name: #{last_name} --> #{user.id}"
+    end
+
+    on(:invalid) do
+      Rails.logger.debug I18n.t("participatory_space_private_users.create.error", scope: "decidim.admin")
+      Rails.logger.debug user.errors.full_messages if user.invalid?
+      Rails.logger.debug form.errors.full_messages if form.invalid?
+      Rails.logger.debug "Failed to register user with id: #{id}, first_name: #{first_name}, last_name: #{last_name} !!"
+      # exit 1
+    end
   end
+
 end
 
-def import_with_email(first_name, last_name, email)
-  name = set_name(first_name, last_name)
-  form = Decidim::Admin::ParticipatorySpacePrivateUserForm.new
-  form.name = name
-  form.email = email
-  call = Decidim::Admin::CreateParticipatorySpacePrivateUser.call(form, fetch_admin, fetch_process)
-  if call.include? :ok
-    log_feed("first_name: #{first_name}, last_name: #{last_name}, email: #{email}")
-  else
-    puts "Tried to register user with first_name: #{first_name}, last_name: #{last_name}, failed."
-    exit 1
+def import_with_email(id, first_name, last_name, email)
+  form = Decidim::Admin::ParticipatorySpacePrivateUserForm.from_params(
+    {
+      name: set_name(first_name, last_name),
+      email: email
+    },
+    privatable_to: current_process
+  )
+  Decidim::Admin::CreateParticipatorySpacePrivateUser.call(form, current_user, current_process) do
+    on(:ok) do |user|
+      Decidim::Authorization.create_or_update_from(
+        Decidim::AuthorizationHandler.handler_for(
+          'osp_authorization_handler',
+          {
+            user: user,
+            document_number: id
+          }
+        )
+      )
+      Rails.logger.debug I18n.t("participatory_space_private_users.create.success", scope: "decidim.admin")
+      Rails.logger.debug "Registered user with id: #{id}, first_name: #{first_name}, last_name: #{last_name}, email: #{email} --> #{user.id}"
+    end
+
+    on(:invalid) do
+      Rails.logger.debug I18n.t("participatory_space_private_users.create.error", scope: "decidim.admin")
+      Rails.logger.debug form.errors.full_messages if form.invalid?
+      Rails.logger.debug "Failed to register user with id: #{id}, first_name: #{first_name}, last_name: #{last_name}, email: #{email} !!"
+      # exit 1
+    end
   end
+
 end
 
 def set_name(first_name, last_name)
   first_name + ' ' + last_name
 end
 
-def fetch_admin
-  Decidim::User.find(@admin)
+def current_user
+  @current_user ||= Decidim::User.find(@admin)
 end
 
-def fetch_organization
-  Decidim::Organization.find(@org)
+def current_organization
+  @current_organization ||= Decidim::Organization.find(@org)
 end
 
-def fetch_process
-  Decidim::ParticipatoryProcess.find(@process)
-end
-
-def log_feed(data)
-  @log.write("Registered user with #{data}\n")
+def current_process
+  @current_process ||= Decidim::ParticipatoryProcess.find(@process)
 end
