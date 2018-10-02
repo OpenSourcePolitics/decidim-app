@@ -134,7 +134,7 @@ def import_data(id, first_name, last_name, email)
 end
 
 def import_without_email(id, first_name, last_name)
-  user = Decidim::User.new(
+  new_user = Decidim::User.new(
     managed: true,
     name: set_name(first_name, last_name),
     organization: current_organization,
@@ -143,14 +143,14 @@ def import_without_email(id, first_name, last_name)
     tos_agreement: true
   )
   form = Decidim::Admin::ImpersonateUserForm.from_params(
-    user: user,
-    name: user.name,
+    user: new_user,
+    name: new_user.name,
     reason: 'import',
     handler_name: 'osp_authorization_handler',
     authorization: Decidim::AuthorizationHandler.handler_for(
       'osp_authorization_handler',
       {
-        user: user,
+        user: new_user,
         document_number: id
       }
     )
@@ -159,8 +159,14 @@ def import_without_email(id, first_name, last_name)
     current_user: current_user
   )
 
+  privatable_to = current_process
+
   Decidim::Admin::ImpersonateUser.call(form) do
     on(:ok) do |user|
+      Decidim::ParticipatorySpacePrivateUser.find_or_create_by!(
+        user: user,
+        privatable_to: privatable_to
+      )
       Rails.logger.debug I18n.t("participatory_space_private_users.create.success", scope: "decidim.admin")
       Rails.logger.debug "Registered user with id: #{id}, first_name: #{first_name}, last_name: #{last_name} --> #{user.id}"
     end
