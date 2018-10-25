@@ -1,5 +1,4 @@
-if Rails.application.secrets.sentry.enabled
-  Raven.configure do |config|
-    config.dsn = Rails.application.secrets.sentry.dsn
-  end
+Raven.configure do |config|
+  config.environments = %w[ production ]
+  config.dsn = ENV["SENTRY_DSN"]
 end
