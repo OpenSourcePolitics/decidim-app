@@ -133,3 +133,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
 end
+
+Raven.configure do |config|
+  config.environments = %w[ production ]
+  config.dsn = ENV["SENTRY_DSN"]
+end
