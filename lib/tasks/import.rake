@@ -23,7 +23,7 @@ namespace :import do
 
     validate_input
 
-    csv = CSV.read(@file, col_sep: ';', headers: false, skip_blanks: true)
+    csv = CSV.read(@file, col_sep: ',', headers: true, skip_blanks: true)
     check_csv(csv)
 
     count = CSV.read(@file).count
