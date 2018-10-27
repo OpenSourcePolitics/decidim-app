@@ -1,0 +1,17 @@
+<% if @sentry_event_id %>
+  <script>
+    Sentry.showReportDialog({
+      eventId: '<%= @sentry_event_id %>'
+    );
+  </script>
+<% end %>
+<main class="wrapper">
+  <div class="row">
+    <div class="large-8 large-centered">
+    <div class="static__message">
+      <h1 class="heading1 page-title"><%= t(".title") %></h1>
+      <p><%= t(".try_later") %></p>
+    </div>
+  </div>
+</div>
+</main>
