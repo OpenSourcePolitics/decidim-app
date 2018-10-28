@@ -1,1 +1,1 @@
-FROM decidim/decidim:0.12.2
+FROM decidim/decidim:0.15.0.dev

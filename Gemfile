@@ -4,17 +4,17 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.12-stable"
-# gem "decidim", path: "../decidim"
+# gem "decidim", git: "https://github.com/decidim/decidim.git", branch: "master"
+gem "decidim", path: "../decidim"
+gem "decidim-map", path: "../decidim-map"
 
-# gem "decidim-consultations", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.12-stable"
-# gem "decidim-initiatives", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.12-stable"
+# gem "decidim-conferences", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "master"
+# gem "decidim-consultations", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "master"
+# gem "decidim-initiatives", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "master"
 
-# gem "decidim-consultations", path: "../decidim"
-# gem "decidim-initiatives", path: "../decidim"
-
-# gem "decidim-participations", git: "https://github.com/OpenSourcePolitics/decidim-participations.git", branch: "09-stable"
-# gem "decidim-export", git: "https://github.com/OpenSourcePolitics/decidim-user-export.git"
+# gem "decidim-conferences", path: "../decidim"
+gem "decidim-consultations", path: "../decidim"
+gem "decidim-initiatives", path: "../decidim"
 
 gem "bootsnap", "~> 1.3"
 
@@ -26,8 +26,8 @@ gem "faker", "~> 1.8"
 group :development, :test do
   gem "byebug", "~> 10.0", platform: :mri
 
-  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.12-stable"
-  # gem "decidim-dev", path: "../decidim"
+  # gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "master"
+  gem "decidim-dev", path: "../decidim"
 end
 
 group :development do
