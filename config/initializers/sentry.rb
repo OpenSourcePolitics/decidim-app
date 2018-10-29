@@ -10,5 +10,6 @@ if Rails.application.secrets.dig(:sentry, :enabled)
 
   Raven.configure do |config|
     config.dsn = Rails.application.secrets.dig(:sentry, :dsn)
+    config.release = "#{Decidim.version} (#{Decidim.config.release.dig(:repo)}/#{Decidim.config.release.dig(:branch)}##{Decidim.config.release.dig(:commit)})"
   end
 end

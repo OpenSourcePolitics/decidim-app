@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 Decidim.configure do |config|
+
+  config.release = {
+    commit: `git rev-parse --short HEAD`.strip,
+    branch: `git rev-parse --abbrev-ref HEAD`.strip,
+    repo: `basename \`git rev-parse --show-toplevel\``.strip
+  }
+
   config.skip_first_login_authorization = ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"] ? ActiveRecord::Type::Boolean.new.cast(ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"]) : true
   config.application_name = "OSP Agora"
   config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
