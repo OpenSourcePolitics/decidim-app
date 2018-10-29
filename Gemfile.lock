@@ -1,12 +1,7 @@
-PATH
-  remote: ../decidim-map
-  specs:
-    decidim-map (0.15.0.dev)
-      decidim-admin (= 0.15.0.dev)
-      decidim-core (= 0.15.0.dev)
-
-PATH
-  remote: ../decidim
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim.git
+  revision: cd5e6f5cebdbfafc62ce7687e845cff5e1b74679
+  branch: 0.15-dev
   specs:
     decidim (0.15.0.dev)
       decidim-accountability (= 0.15.0.dev)
@@ -63,10 +58,6 @@ PATH
     decidim-comments (0.15.0.dev)
       decidim-core (= 0.15.0.dev)
       jquery-rails (~> 4.0)
-    decidim-consultations (0.15.0.dev)
-      decidim-admin (= 0.15.0.dev)
-      decidim-comments (= 0.15.0.dev)
-      decidim-core (= 0.15.0.dev)
     decidim-core (0.15.0.dev)
       active_link_to (~> 1.0)
       autoprefixer-rails (~> 8.0)
@@ -143,14 +134,6 @@ PATH
       wisper-rspec (~> 1.0)
     decidim-generators (0.15.0.dev)
       decidim-core (= 0.15.0.dev)
-    decidim-initiatives (0.15.0.dev)
-      decidim-admin (= 0.15.0.dev)
-      decidim-comments (= 0.15.0.dev)
-      decidim-core (= 0.15.0.dev)
-      decidim-verifications (= 0.15.0.dev)
-      kaminari (~> 1.0)
-      social-share-button (~> 1.0)
-      wicked (~> 1.3)
     decidim-meetings (0.15.0.dev)
       cells-erb (~> 0.1.0)
       cells-rails (~> 0.0.9)
@@ -264,17 +247,18 @@ GEM
       parser (>= 2.4)
       smart_properties
     bindex (0.5.0)
-    bootsnap (1.3.1)
+    bootsnap (1.3.2)
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (10.0.2)
-    capybara (3.9.0)
+    capybara (3.10.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
-      xpath (~> 3.1)
+      regexp_parser (~> 1.2)
+      xpath (~> 3.2)
     carrierwave (1.2.3)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -301,7 +285,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.2)
     crack (0.4.3)
@@ -309,7 +292,7 @@ GEM
     crass (1.0.4)
     css_parser (1.6.0)
       addressable
-    dalli (2.7.8)
+    dalli (2.7.9)
     date_validator (0.9.0)
       activemodel
       activesupport
@@ -329,7 +312,7 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.6.5)
       devise (>= 4.4)
-    devise_invitable (1.7.4)
+    devise_invitable (1.7.5)
       actionmailer (>= 4.1.0)
       devise (>= 4.0.0)
     diff-lcs (1.3)
@@ -338,11 +321,11 @@ GEM
       railties (>= 4.2)
     doorkeeper-i18n (4.0.0)
     equalizer (0.0.11)
-    erb_lint (0.0.26)
+    erb_lint (0.0.28)
       activesupport
       better_html (~> 1.0.7)
-      colorize
       html_tokenizer
+      rainbow
       rubocop (~> 0.51)
       smart_properties
     erbse (0.1.3)
@@ -357,13 +340,13 @@ GEM
       railties (>= 3.0.0)
     faker (1.9.1)
       i18n (>= 0.7)
-    faraday (0.12.2)
+    faraday (0.15.3)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     file_validators (2.3.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
-    fog-aws (3.0.0)
+    fog-aws (3.3.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
       fog-xml (~> 0.1)
@@ -396,7 +379,7 @@ GEM
     graphiql-rails (1.4.11)
       railties
       sprockets-rails
-    graphql (1.8.10)
+    graphql (1.8.11)
     hashdiff (0.3.7)
     hashie (3.5.7)
     highline (2.0.0)
@@ -404,9 +387,9 @@ GEM
     htmlentities (4.3.4)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
-    i18n (1.1.0)
+    i18n (1.1.1)
       concurrent-ruby (~> 1.0)
-    i18n-tasks (0.9.25)
+    i18n-tasks (0.9.27)
       activesupport (>= 4.0.2)
       ast (>= 2.1.0)
       erubi
@@ -422,7 +405,7 @@ GEM
     invisible_captcha (0.10.0)
       rails (>= 3.2.0)
     ipaddress (0.8.3)
-    jaro_winkler (1.5.1-x86_64-darwin-17)
+    jaro_winkler (1.5.1)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -430,7 +413,7 @@ GEM
     jquery-tmpl-rails (1.1.0)
       rails (>= 3.1.0)
     json (2.1.0)
-    jwt (1.5.6)
+    jwt (2.1.0)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.1.1)
@@ -464,7 +447,7 @@ GEM
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.7.0)
+    mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
@@ -489,15 +472,15 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mustermann (1.0.3)
-    newrelic_rpm (5.3.0.346)
+    newrelic_rpm (5.4.0.347)
     nio4r (2.3.1)
     nobspw (0.4.0)
-    nokogiri (1.8.4)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     oauth (0.5.4)
-    oauth2 (1.4.0)
-      faraday (>= 0.8, < 0.13)
-      jwt (~> 1.0)
+    oauth2 (1.4.1)
+      faraday (>= 0.8, < 0.16.0)
+      jwt (>= 1.0, < 3.0)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
@@ -547,7 +530,7 @@ GEM
     rack-attack (5.4.1)
       rack (>= 1.0, < 3)
     rack-cors (1.0.2)
-    rack-protection (2.0.3)
+    rack-protection (2.0.4)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -584,7 +567,7 @@ GEM
       thor (>= 0.19.0, < 2.0)
     rainbow (3.0.0)
     rake (12.3.1)
-    ransack (2.0.1)
+    ransack (2.1.0)
       actionpack (>= 5.0)
       activerecord (>= 5.0)
       activesupport (>= 5.0)
@@ -599,6 +582,7 @@ GEM
       virtus (~> 1.0.5)
       wisper (>= 1.6.1)
     redis (4.0.2)
+    regexp_parser (1.2.0)
     request_store (1.4.1)
       rack (>= 1.4)
     responders (2.4.0)
@@ -622,7 +606,7 @@ GEM
     rspec-mocks (3.8.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
-    rspec-rails (3.8.0)
+    rspec-rails (3.8.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -664,12 +648,12 @@ GEM
     selenium-webdriver (3.14.1)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
-    sendgrid-ruby (5.2.0)
-      ruby_http_client (~> 3.2)
+    sendgrid-ruby (5.3.0)
+      ruby_http_client (~> 3.3.0)
       sinatra (>= 1.4.7, < 3)
     sentry-raven (2.7.4)
       faraday (>= 0.7.6, < 1.0)
-    sidekiq (5.2.1)
+    sidekiq (5.2.2)
       connection_pool (~> 2.2, >= 2.2.2)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.5, < 5)
@@ -678,10 +662,10 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    sinatra (2.0.3)
+    sinatra (2.0.4)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.3)
+      rack-protection (= 2.0.4)
       tilt (~> 2.0)
     smart_properties (1.13.1)
     social-share-button (1.1.0)
@@ -722,7 +706,7 @@ GEM
     uglifier (4.1.19)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.0)
-    valid_email2 (2.3.0)
+    valid_email2 (2.3.1)
       activemodel (>= 3.2)
       mail (~> 2.5)
     virtus (1.0.5)
@@ -744,11 +728,9 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
-    wicked (1.3.3)
-      railties (>= 3.0.7)
     wisper (2.0.0)
     wisper-rspec (1.1.0)
-    xpath (3.1.0)
+    xpath (3.2.0)
       nokogiri (~> 1.8)
 
 PLATFORMS
@@ -759,10 +741,7 @@ DEPENDENCIES
   byebug (~> 10.0)
   dalli
   decidim!
-  decidim-consultations!
   decidim-dev!
-  decidim-initiatives!
-  decidim-map!
   faker (~> 1.8)
   fog-aws
   letter_opener_web (~> 1.3)
