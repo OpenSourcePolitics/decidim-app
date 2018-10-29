@@ -1,0 +1,8 @@
+<% if Rails.application.secrets.dig(:sentry, :enabled) %>
+  <script src="https://browser.sentry-cdn.com/4.2.3/bundle.min.js" crossorigin="anonymous"></script>
+  <script>
+    Sentry.init({
+      dsn: '<%= Rails.application.secrets.dig(:sentry, :dsn) %>'
+    });
+  </script>
+<% end %>
