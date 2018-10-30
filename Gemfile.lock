@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
-  revision: 8dd606775f67284327a6290220e73948818ca7e5
+  revision: da7907c609a568453e3742eb60b0a08d4e017c69
   branch: 0.12-stable
   specs:
     decidim (0.12.2)
@@ -394,7 +394,7 @@ GEM
       rails-i18n
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
-    icalendar (2.5.0)
+    icalendar (2.5.1)
       ice_cube (~> 0.16)
     ice_cube (0.16.3)
     ice_nine (0.11.2)
