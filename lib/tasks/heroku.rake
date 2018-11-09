@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :heroku do
   desc "Deploy a test version on heroku"
   task setup: :environment do
@@ -10,13 +12,13 @@ namespace :heroku do
 
     if ENV["AWS_ACCESS_KEY_ID"].nil?
       puts "No AWS_ACCESS_KEY_ID found !"
-      puts "export SECRET_KEY_BASE first"
+      puts "export AWS_ACCESS_KEY_ID first"
       exit 1
     end
 
     if ENV["AWS_SECRET_ACCESS_KEY"].nil?
-      puts "No SECRET_KEY_BASE found !"
-      puts "export SECRET_KEY_BASE first"
+      puts "No AWS_SECRET_ACCESS_KEY found !"
+      puts "export AWS_SECRET_ACCESS_KEY first"
       exit 1
     end
 
@@ -24,13 +26,20 @@ namespace :heroku do
 
     app_name_raw = `git rev-parse --abbrev-ref HEAD`
     digit        = /\d.\d.-/.match(app_name_raw)
-    if digit.nil?
-      app_name = app_name_raw.gsub("_", "-")[0..29].chomp
-    else
-      app_name = app_name_raw.gsub(digit[0], "").gsub("_", "-")[0..29].chomp
-    end
+    app_name = if digit.nil?
+                 app_name_raw
+                   .tr("/", "-")
+                   .tr("_", "-")[0..29]
+                   .chomp
+               else
+                 app_name_raw
+                   .gsub(digit[0], "")
+                   .tr("/", "-")
+                   .tr("_", "-")[0..29]
+                   .chomp
+               end
 
-    if system("heroku create #{app_name} --region eu")
+    if system("heroku create #{app_name} --region eu --org \"osp-ext\"")
       system("heroku addons:create newrelic:wayne -a #{app_name}")
       system("heroku addons:create heroku-redis:hobby-dev -a #{app_name}")
       system("heroku addons:create memcachedcloud:30 -a #{app_name}")
@@ -63,5 +72,4 @@ namespace :heroku do
   def display_url
     puts "Deploy is over, visit your app : #{`heroku apps:info -s  | grep web_url | cut -d= -f2`}"
   end
-
 end
