@@ -30,7 +30,6 @@ if ENV["HEROKU_APP_NAME"].present?
       config.fog_directory  = 'decidim-heroku'                                 # required
       config.fog_public     = true                                               # optional, defaults to true
       config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" }    # optional, defaults to {}
-      config.storage = :fog
     end
   end
 end
