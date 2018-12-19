@@ -18,7 +18,6 @@ end
 if ENV["HEROKU_APP_NAME"].present?
   if Rails.env.production?
     CarrierWave.configure do |config|
-      config.storage = :fog
       config.fog_provider = 'fog/aws'                                             # required
       config.fog_credentials = {
         provider:              'AWS',                                             # required
@@ -30,6 +29,7 @@ if ENV["HEROKU_APP_NAME"].present?
       config.fog_directory  = 'decidim-heroku'                                 # required
       config.fog_public     = true                                               # optional, defaults to true
       config.fog_attributes = { 'Cache-Control' => "max-age=#{365.day.to_i}" }    # optional, defaults to {}
+      config.storage = :fog
     end
   end
 end

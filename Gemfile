@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-# gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "fix/wizard-create-step-cookie_overflow"
+gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.12-stable"
 # gem "decidim", path: "../decidim"
 
 # gem "decidim-consultations", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.12-stable"
@@ -29,7 +29,7 @@ gem 'sentry-raven'
 group :development, :test do
   gem "byebug", "~> 10.0", platform: :mri
 
-  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "fix/wizard-create-step-cookie_overflow"
+  gem "decidim-dev", git: "https://github.com/OpenSourcePolitics/decidim.git", branch: "0.12-stable"
   # gem "decidim-dev", path: "../decidim"
 end
 
