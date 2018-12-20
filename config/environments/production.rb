@@ -60,6 +60,8 @@ Rails.application.configure do
     config.cache_store = :dalli_store, ENV["MEMCACHEDCLOUD_SERVERS"].split(","), {
       username: ENV["MEMCACHEDCLOUD_USERNAME"], password: ENV["MEMCACHEDCLOUD_PASSWORD"]
     }
+  else
+    config.cache_store = :mem_cache_store
   end
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
