@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_20_220516) do
+ActiveRecord::Schema.define(version: 2019_02_02_215327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -165,9 +165,11 @@ ActiveRecord::Schema.define(version: 2018_12_20_220516) do
     t.string "facebook_handler"
     t.string "youtube_handler"
     t.string "github_handler"
+    t.string "hostname"
     t.index ["decidim_area_id"], name: "index_decidim_assemblies_on_decidim_area_id"
     t.index ["decidim_organization_id", "slug"], name: "index_unique_assembly_slug_and_organization", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_assemblies_on_decidim_organization_id"
+    t.index ["hostname"], name: "index_decidim_assemblies_on_hostname", unique: true
     t.index ["parent_id"], name: "decidim_assemblies_assemblies_on_parent_id"
   end
 
@@ -912,6 +914,7 @@ ActiveRecord::Schema.define(version: 2018_12_20_220516) do
     t.integer "users_registration_mode", default: 0, null: false
     t.string "id_documents_methods", default: ["online"], array: true
     t.jsonb "id_documents_explanation_text", default: {}
+    t.boolean "user_groups_enabled", default: false, null: false
     t.index ["host"], name: "index_decidim_organizations_on_host", unique: true
     t.index ["name"], name: "index_decidim_organizations_on_name", unique: true
   end
