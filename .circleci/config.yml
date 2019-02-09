@@ -34,7 +34,7 @@ jobs:
       - run:
           name: libicu-dev patch for charlock_holmes-0.7.6
           command: |
-            apt-get install libicu-dev -y
+            sudo apt-get install libicu-dev -y
 
       - run:
           name: install dependencies
