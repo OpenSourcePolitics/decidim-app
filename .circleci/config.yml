@@ -34,6 +34,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
+            sudo apt-get install libicu-dev -y
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
