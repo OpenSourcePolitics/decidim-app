@@ -6,7 +6,7 @@ Decidim.configure do |config|
   config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
 
   # Change these lines to set your preferred locales
-  config.default_locale = :en
+  config.default_locale = :fr
   config.available_locales = [:en,:fr]
 
   config.maximum_attachment_height_or_width = 6000
@@ -52,6 +52,43 @@ Decidim.configure do |config|
   # take over user accounts.
   #
   config.enable_html_header_snippets = true
+
+  # SMS gateway configuration
+  #
+  # If you want to verify your users by sending a verification code via
+  # SMS you need to provide a SMS gateway service class.
+  #
+  # An example class would be something like:
+  #
+  # class MySMSGatewayService
+  #   attr_reader :mobile_phone_number, :code
+  #
+  #   def initialize(mobile_phone_number, code)
+  #     @mobile_phone_number = mobile_phone_number
+  #     @code = code
+  #   end
+  #
+  #   def deliver_code
+  #     # Actual code to deliver the code
+  #     true
+  #   end
+  # end
+  #
+  config.sms_gateway_service = 'Decidim::Verifications::Sms::ExampleGateway'
+
+  # Etherpad configuration
+  #
+  # Only needed if you want to have Etherpad integration with Decidim. See
+  # Decidim docs at docs/services/etherpad.md in order to set it up.
+  #
+
+  if !Rails.application.secrets.etherpad[:server].blank?
+    config.etherpad = {
+      server: Rails.application.secrets.etherpad[:server],
+      api_key: Rails.application.secrets.etherpad[:api_key],
+      api_version: Rails.application.secrets.etherpad[:api_version]
+    }
+  end
 
   if ENV["HEROKU_APP_NAME"].present?
     config.base_uploads_path = ENV["HEROKU_APP_NAME"] + "/"

@@ -10,5 +10,7 @@ if Rails.application.secrets.dig(:sentry, :enabled)
 
   Raven.configure do |config|
     config.dsn = Rails.application.secrets.dig(:sentry, :dsn)
+    config.timeout = 10
+    config.open_timeout = 10
   end
 end
