@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
-  revision: 37dcb766a2eade2929a128dd3c82ec112fa03d51
+  revision: debd8ffe1b3231ce8dea532c868fffa5ab727742
   branch: 0.16-stable
   specs:
     decidim (0.16.0)
@@ -265,7 +265,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (10.0.2)
-    capybara (3.14.0)
+    capybara (3.15.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -790,7 +790,7 @@ DEPENDENCIES
   puma (~> 3.0)
   ruby-progressbar
   sendgrid-ruby
-  sentry-raven (~> 2.9.0)
+  sentry-raven
   sidekiq
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
