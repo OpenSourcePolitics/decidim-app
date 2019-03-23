@@ -1,1 +1,8 @@
-<%= render partial: "layouts/decidim/sentry" %>
+<% if Rails.application.secrets.dig(:sentry, :enabled) %>
+  <script src="https://browser.sentry-cdn.com/<%= Rails.application.secrets.dig(:sentry, :js_version) %>/bundle.min.js" crossorigin="anonymous"></script>
+  <script>
+    Sentry.init({
+      dsn: '<%= Rails.application.secrets.dig(:sentry, :dsn) %>'
+    });
+  </script>
+<% end %>
