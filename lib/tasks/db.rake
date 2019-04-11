@@ -32,6 +32,32 @@ namespace :decidim do
       end
     end
 
+    namespace :admin_log do
+      desc "List admin log related to orphans data"
+      task orphans: :environment do
+        Decidim::ActionLog.distinct.pluck(:resource_type).each do |klass|
+          puts klass
+          model = klass.constantize
+          puts Decidim::ActionLog
+            .where(resource_type: klass)
+            .where.not(resource_id: [model.ids])
+            .pluck(:action, :resource_id, :extra).count
+        end
+        Rails.logger.close
+      end
+
+      desc "Delete admin log related to orphans data"
+      task clean: :environment do
+        Decidim::ActionLog.distinct.pluck(:resource_type).each do |klass|
+          model = klass.constantize
+          Decidim::ActionLog
+            .where(resource_type: klass)
+            .where.not(resource_id: [model.ids])
+            .destroy_all
+        end
+      end
+    end
+
     namespace :surveys do
       desc "List surveys related to deleted component"
       task orphans: :environment do
