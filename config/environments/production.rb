@@ -105,6 +105,15 @@ Rails.application.configure do
     }
   end
 
+  if Rails.application.secrets.smtp_disable_mailjet_tracking
+    config.action_mailer.default_options = {
+      "X-MAILJET-TRACKOPEN" => 0,
+      "X-MAILJET-TRACKCLICK" => 0
+    }
+  end
+
+  config.action_mailer.default_url_options = { protocol: 'https' }  
+
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 

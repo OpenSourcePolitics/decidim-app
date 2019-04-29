@@ -16,6 +16,10 @@ gem "decidim", git: "https://github.com/OpenSourcePolitics/decidim.git", branch:
 # gem "decidim-consultations", path: "../decidim"
 # gem "decidim-initiatives", path: "../decidim"
 
+gem "omniauth-decidim", git: "https://github.com/OpenSourcePolitics/omniauth-decidim.git", branch: "feature/add-publik-strategy"
+# gem "omniauth-decidim", path: "../omniauth-decidim"
+
+
 gem "bootsnap", "~> 1.3"
 
 gem "puma", "~> 3.0"
