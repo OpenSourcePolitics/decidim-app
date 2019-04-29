@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim.git
-  revision: 05d12f4b946ed65fd737c89975aae91434a7261b
+  revision: 7b30723cc3c4b1e0b6f5c4202b142ef2c69064f9
   branch: 0.16-stable
   specs:
     decidim (0.16.0)
