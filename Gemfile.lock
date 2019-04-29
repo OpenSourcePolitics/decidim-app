@@ -187,15 +187,6 @@ GIT
     decidim-verifications (0.16.0)
       decidim-core (= 0.16.0)
 
-GIT
-  remote: https://github.com/OpenSourcePolitics/omniauth-decidim.git
-  revision: f3d0f070e21de5bfde3492337c0de27195e97f6f
-  branch: feature/add-publik-strategy
-  specs:
-    omniauth-decidim (0.1.0)
-      omniauth (~> 1.5)
-      omniauth-oauth2 (>= 1.4.0, < 2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -796,7 +787,6 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   newrelic_rpm
-  omniauth-decidim!
   passenger
   puma (~> 3.0)
   ruby-progressbar

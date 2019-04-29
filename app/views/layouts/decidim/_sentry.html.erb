@@ -1,9 +1,0 @@
-<% if Rails.application.secrets.dig(:sentry, :enabled) %>
-  <script src="https://browser.sentry-cdn.com/4.2.3/bundle.min.js" crossorigin="anonymous"></script>
-  <script>
-    Sentry.init({
-      dsn: '<%= Rails.application.secrets.dig(:sentry, :dsn).gsub(/^https:\/\/([^:]+):[^@]+(.*)/, 'https://\1\2') %>',
-      release: '<%= Decidim.version %> (<%= Decidim.config.release.dig(:repo) %>/<%= Decidim.config.release.dig(:branch) %>#<%= Decidim.config.release.dig(:commit) %>)'
-    });
-  </script>
-<% end %>

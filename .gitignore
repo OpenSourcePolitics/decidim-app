@@ -23,6 +23,3 @@
 # Ignore public uploads
 public/uploads
 public/assets
-
-# Passenger
-passenger*.lock
