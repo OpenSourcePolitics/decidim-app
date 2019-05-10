@@ -9,7 +9,7 @@ jobs:
     working_directory: ~/repo
 
     docker:
-      - image: circleci/ruby:2.4.1-node
+      - image: circleci/ruby:2.5.3-node
         environment:
           RAILS_ENV: test
           DATABASE_HOST: 127.0.0.1
@@ -32,9 +32,15 @@ jobs:
           - v1-dependencies-
 
       - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+
+      - run:
           name: install dependencies
           command: |
-            sudo apt-get install libicu-dev -y
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
