@@ -24,3 +24,7 @@ fr:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+  layouts:
+    decidim:
+      footer:
+        download_open_data: Données ouvertes
