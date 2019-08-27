@@ -3,7 +3,7 @@ require_relative 'boot'
 require 'rails/all'
 
 # TODO : add missing dep to decidim-initiatives/lib/decidim/initiatives/engine.rb
-require "wicked_pdf"
+# require "wicked_pdf"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
