@@ -1,4 +1,4 @@
-<% if if Rails.application.secrets.dig(:hotjar).present? && Rails.application.secrets.dig(:hotjar, :enabled) %>
+<% if Rails.application.secrets.dig(:hotjar).present? && Rails.application.secrets.dig(:hotjar, :enabled) %>
   <!-- Hotjar Tracking Code for https://crowbar.osp.cat/ -->
   <script>
       (function (h, o, t, j, a, r) {
