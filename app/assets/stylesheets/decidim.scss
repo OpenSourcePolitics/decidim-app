@@ -73,6 +73,49 @@
 //   display: none;
 // }
 
-.main-footer__badge{
-  position: initial;
+.main-footer__badge {
+  text-align: center;
+}
+
+@media print, screen and (min-width: 64em) {
+  .main-footer__badge {
+    position: relative;
+    text-align: left;
+  }
+}
+
+.main-footer .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mini-footer .row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .decidim-logo {
+    display: flex;
+    flex-grow: 0;
+    width: auto;
+    margin: 0 .5rem;
+  }
+
+  img {
+    height: 1rem;
+  }
+
+  .mf-text {
+    font-size: 80%;
+    line-height: 1rem;
+
+    a {
+      font-weight: 600;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
 }
