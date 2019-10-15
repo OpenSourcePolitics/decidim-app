@@ -3,3 +3,4 @@ public/uploads
 .circleci
 .bundle
 .ruby-version
+.git
