@@ -24,8 +24,16 @@ setup:
 seed:
 	docker-compose run app "SEED=true rake db:seed"
 
+precompile:
+	docker-compose run app "RAILS_ENV=production rails assets:precompile"
+
+cache:
+	docker-compose run app "rails tmp:cache:clear assets:clobber"
+
 bump:
 	@make build
 	@make upgrade
 	@make migration
-	@make up
+	@make cache
+	@make precompile
+	@make prod
