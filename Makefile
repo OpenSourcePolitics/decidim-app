@@ -1,3 +1,5 @@
+.PHONY: build upgrade migration up
+
 migration:
 	docker-compose run app "rails db:migrate"
 
@@ -21,3 +23,9 @@ setup:
 
 seed:
 	docker-compose run app "SEED=true rake db:seed"
+
+bump:
+	@make build
+	@make upgrade
+	@make migration
+	@make up
