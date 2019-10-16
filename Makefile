@@ -1,5 +1,3 @@
-.PHONY: build upgrade migration up
-
 migration:
 	docker-compose run app "rails db:migrate"
 
@@ -13,7 +11,7 @@ prod:
 	docker-compose -f docker-compose.prod.yml up
 
 build:
-	docker-compose build
+	docker-compose build --compress --parallel
 
 drop:
 	docker-compose run app "rake db:drop"
