@@ -28,6 +28,9 @@ precompile:
 cache:
 	docker-compose run app "rails tmp:cache:clear assets:clobber"
 
+ssh:
+	docker-compose run app /bin/bash
+
 bump:
 	@make build
 	@make upgrade

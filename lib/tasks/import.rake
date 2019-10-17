@@ -2,18 +2,18 @@
 
 require 'ruby-progressbar'
 
-Rails.application.config.active_job.queue_adapter = :inline
-
-@verbose = ENV['VERBOSE'].to_s == "true"
-if @verbose
-  Rails.logger = Logger.new(STDOUT)
-else
-  Rails.logger = Logger.new("log/import-user-#{Time.now.strftime '%Y-%m-%d-%H:%M:%S'}.log")
-end
-
 namespace :import do
   desc 'Usage: rake import:user FILE=\'<filename.csv>\' ORG=<organization_id> ADMIN=<admin_id> PROCESS=<process_id> [VERBOSE=true]\''
   task user: :environment do
+    Rails.application.config.active_job.queue_adapter = :inline
+
+    @verbose = ENV['VERBOSE'].to_s == "true"
+    if @verbose
+      Rails.logger = Logger.new(STDOUT)
+    else
+      Rails.logger = Logger.new("log/import-user-#{Time.now.strftime '%Y-%m-%d-%H:%M:%S'}.log")
+    end
+
     display_help unless ENV['FILE'] && ENV['ORG'] && ENV['ADMIN'] && ENV['PROCESS']
     @file = ENV['FILE']
     @org = ENV['ORG'].to_i
