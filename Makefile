@@ -4,6 +4,9 @@ migration:
 upgrade:
 	docker-compose run app "rake decidim:upgrade"
 
+create:
+	docker-compose run app "rake db:create"
+
 up:
 	docker-compose up
 
@@ -31,10 +34,23 @@ cache:
 ssh:
 	docker-compose run app /bin/bash
 
+local-bundle:
+	bundle install
+
 bump:
+	@make local-bundle
 	@make build
 	@make upgrade
 	@make migration
 	@make cache
 	@make precompile
 	@make prod
+
+init:
+	@make create
+	@make migration
+	@make upgrade
+	@make seed
+
+build-no-cache:
+	docker-compose build --no-cache
