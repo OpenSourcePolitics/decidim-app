@@ -37,6 +37,13 @@ ssh:
 local-bundle:
 	bundle install
 
+stop-all:
+	 docker stop $$(docker ps -q -a)
+
+prune:
+	@make stop-all
+	docker volume prune
+
 bump:
 	@make local-bundle
 	@make build
