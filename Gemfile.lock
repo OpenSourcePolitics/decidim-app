@@ -814,6 +814,7 @@ DEPENDENCIES
   sidekiq-scheduler
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
+  sprockets (~> 3.7)
   uglifier (~> 4.1)
   web-console (~> 3.5)
 

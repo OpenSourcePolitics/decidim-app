@@ -30,7 +30,7 @@ gem "sentry-raven"
 
 gem "letter_opener_web", "~> 1.3"
 
-
+gem "sprockets", "~> 3.7"
 
 group :development, :test do
   gem "dotenv-rails"
