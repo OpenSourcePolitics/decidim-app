@@ -23,7 +23,7 @@ namespace :heroku do
     skip_first_login_authorization = ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"].nil? ? true : ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"]
 
     app_name_raw = `git rev-parse --abbrev-ref HEAD`
-    digit        = /\d.\d.-/.match(app_name_raw)
+    digit = /\d.\d.-/.match(app_name_raw)
     if digit.nil?
       app_name = app_name_raw.gsub("_", "-")[0..29].chomp
     else
@@ -44,7 +44,8 @@ namespace :heroku do
       system("heroku config:set AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY")
       system("heroku git:remote -a #{app_name}")
       if system("git push heroku $(git rev-parse --abbrev-ref HEAD):master")
-        if system("heroku run rails db:schema:load db:seed")
+        if system("heroku run rails db:migrate")
+          system("heroku run rails db:seed")
           display_url
         end
       end
