@@ -10,13 +10,13 @@ namespace :heroku do
 
     if ENV["AWS_ACCESS_KEY_ID"].nil?
       puts "No AWS_ACCESS_KEY_ID found !"
-      puts "export SECRET_KEY_BASE first"
+      puts "export AWS_ACCESS_KEY_ID first"
       exit 1
     end
 
     if ENV["AWS_SECRET_ACCESS_KEY"].nil?
       puts "No SECRET_KEY_BASE found !"
-      puts "export SECRET_KEY_BASE first"
+      puts "export AWS_SECRET_ACCESS_KEY first"
       exit 1
     end
 
