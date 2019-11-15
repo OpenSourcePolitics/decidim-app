@@ -48,6 +48,7 @@ namespace :heroku do
 
   task push: :environment do
     system('git push heroku $(git rev-parse --abbrev-ref HEAD):master')
+    system("heroku run rails db:migrate")
     display_url
   end
 
