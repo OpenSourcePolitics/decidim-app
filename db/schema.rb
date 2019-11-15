@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_17_132828) do
+ActiveRecord::Schema.define(version: 2019_11_15_143834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -450,9 +450,13 @@ ActiveRecord::Schema.define(version: 2019_07_17_132828) do
     t.integer "decidim_question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "session_token", default: "", null: false
+    t.string "ip_hash"
     t.index ["decidim_question_id"], name: "index_decidim_forms_answers_question_id"
     t.index ["decidim_questionnaire_id"], name: "index_decidim_forms_answers_on_decidim_questionnaire_id"
     t.index ["decidim_user_id"], name: "index_decidim_forms_answers_on_decidim_user_id"
+    t.index ["ip_hash"], name: "index_decidim_forms_answers_on_ip_hash"
+    t.index ["session_token"], name: "index_decidim_forms_answers_on_session_token"
   end
 
   create_table "decidim_forms_questionnaires", id: :serial, force: :cascade do |t|
@@ -769,6 +773,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_132828) do
     t.jsonb "smtp_settings"
     t.string "deepl_api_key"
     t.boolean "force_users_to_authenticate_before_access_organization", default: false
+    t.integer "comments_max_length", default: 1000
     t.index ["host"], name: "index_decidim_organizations_on_host", unique: true
     t.index ["name"], name: "index_decidim_organizations_on_name", unique: true
   end
