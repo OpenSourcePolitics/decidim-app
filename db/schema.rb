@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_143834) do
+ActiveRecord::Schema.define(version: 2020_01_28_153643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -774,6 +774,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_143834) do
     t.string "deepl_api_key"
     t.boolean "force_users_to_authenticate_before_access_organization", default: false
     t.integer "comments_max_length", default: 1000
+    t.jsonb "omniauth_settings"
     t.index ["host"], name: "index_decidim_organizations_on_host", unique: true
     t.index ["name"], name: "index_decidim_organizations_on_name", unique: true
   end
