@@ -17,8 +17,7 @@ class FixUserNames < ActiveRecord::Migration[5.2]
 
         entity.name = entity.name.delete(characters_to_remove).strip
         sanitized_nickname = entity.nickname.delete(characters_to_remove).strip
-        entity.nickname = Decidim::UserBaseEntity.nicknamize(sanitized_nickname, organization: entity.organization)
-        entity.save!
+        entity.update_columns(nickname: Decidim::UserBaseEntity.nicknamize(sanitized_nickname, organization: entity.organization))
       end
     end
   end
