@@ -2,6 +2,7 @@
 require "rake"
 
 class CalculateAllMetricsJob < ApplicationJob
+  queue_as :scheduled
 
   def perform
     system "rake decidim:metrics:all"

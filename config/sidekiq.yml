@@ -5,6 +5,7 @@
 - mailers
 - newsletter
 - events
+- scheduled
 
 :schedule:
   CalculateAllMetrics:
