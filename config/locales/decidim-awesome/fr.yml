@@ -1,0 +1,90 @@
+---
+fr:
+  activemodel:
+    attributes:
+      config:
+        allow_images_in_full_editor: Autoriser les images dans l'éditeur HTML
+        allow_images_in_markdown_editor: Autoriser les images dans l'éditeur Markdown
+        allow_images_in_proposals: Autoriser les images dans l'éditeur de proposition
+        allow_images_in_small_editor: Autoriser les images dans l'éditeur HTML minimal
+        use_markdown_editor: Utiliser l'éditeur Markdown à la place de l'éditeur HTML
+      constraint:
+        component_id: ou spécifiquement dans
+        component_manifest: Seulement pour les fonctionnalités du type
+        participatory_space_manifest: Appliquer sur les espaces participatifs de type
+        participatory_space_slug: Seulement dans
+  decidim:
+    admin:
+      menu:
+        decidim_awesome: Decidim Awesome
+    decidim_awesome:
+      admin:
+        checks:
+          index:
+            decidim-admin: Pour le module Admin
+            decidim-core: Pour le module Core
+            decidim-proposals: Pour le module Propositions
+            decidim_version: Version de Decidim %{version}
+            title: Vérification de la compatibilité système
+        config:
+          constraints:
+            add_condition: Ajouter une condition
+            always: Toujours
+            delete: Supprimer
+            edit: Modifier
+            title: 'Actif seulement dans les cas suivants:'
+          experimental: Options expérimentales
+          form:
+            help:
+              allow_images_in_full_editor: Ajouter une icône d'envoi d'image dans tous les éditeurs WYSIWYG avec une barre d'outil complète.
+              allow_images_in_markdown_editor: Permettre à l'éditeur Markdown d'envoyer des images par glisser/déposer ou par copier/coller.
+              allow_images_in_proposals: Permettre l'envoi d'image dans l'éditeur de proposition, pour tous les utilisateurs.
+              allow_images_in_small_editor: Ajouter une icône d'envoi d'image dans tous les éditeurs WYSIWYG avec une barre d'outil minimale.
+              drag_and_drop_supported: Support du glisser/déposer lors de l'envoi d'image. Les images seront envoyées sur le serveur et traitées comme des ressources externes (sans encodage Base64)
+              use_markdown_editor: Remplace l'éditeur WYSIWYG Quill par un éditeur Markdown coté admin et un moteur de rendu HTML coté utilisateur (le texte sera stocké au format Markdown)
+          rich_text_editor_in_public_views: "NOTE: l'éditeur de texte riche est activé pour les participants. Cette option sera donc sans effet. Utilisez plutôt les \"editors hacks\" pour ajouter des images dans les textes des propositions"
+          show:
+            title: Tweaks for %{setting}
+            update: Mise à jour de la configuration
+          system: Partout sauf dans les espaces participatifs
+          update:
+            error: Erreur lors de la mise à jour de la configuration! %{error}
+            success: Configuration mise à jour avec succès!
+        constraints:
+          create:
+            error: Erreur lors de l'ajout de la condition
+            success: Condition ajoutée avec succès
+          destroy:
+            error: Erreur lors de la suppression de la condition
+            success: Condition supprimée avec succès
+          errors:
+            not_unique: Une condition similaire existe déjà
+          new:
+            cancel: Annuler
+            constraint: Nouvelle condition
+            save: Sauvegarder
+          show:
+            cancel: Annuler
+            constraint: Modifier la condition
+            save: Sauvegarder
+          update:
+            error: Erreur lors de la mise à jour de la condition
+            success: Condition mise à jour avec succès
+        menu:
+          checks: Compatibilité système
+          editors: Editor hacks
+          proposals: Proposals hacks
+      credits: Decidim Awesome %{version} · Made with ♥ by Platoniq
+      editor_images:
+        create:
+          error: Erreur lors de l'envoi de l'image
+          success: Image envoyée avec succès!
+  layouts:
+    decidim:
+      admin:
+        decidim_awesome:
+          title: Decidim Tweaks
+      decidim_awesome:
+        awesome_config:
+          js:
+            drag_and_drop_image: Ajouter des images par glisser/déposer ou par copier/coller.

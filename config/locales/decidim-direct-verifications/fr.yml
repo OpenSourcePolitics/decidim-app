@@ -1,0 +1,68 @@
+---
+fr:
+  decidim:
+    admin:
+      models:
+        user:
+          fields:
+            roles:
+              participant: Participant
+    authorization_handlers:
+      admin:
+        direct_verifications:
+          help:
+          - 'Allows the massive introduction of users in order to:'
+          - Direct register in the organization and sends invitations
+          - Verify them in any active verification method
+          - Revoke their verification in any active verification method
+      direct_verifications:
+        explanation: Manual verification by the administrators of the organization
+        name: Direct verification
+    direct_verifications:
+      verification:
+        admin:
+          direct_verifications:
+            create:
+              authorized: "%{authorized} users have been successfully verified using
+                [%{handler}] (%{count} detected, %{errors} errors)"
+              info: "%{count} users detected, of which %{registered} are registered,
+                %{authorized} authorized using [%{handler}] (%{unconfirmed} unconfirmed)"
+              registered: "%{registered} users have been successfully registered (%{count}
+                detected, %{errors} errors) "
+              revoked: Verification from %{revoked} users have been revoked using
+                [%{handler}] (%{count} detected, %{errors} errors)
+            gdpr_disclaimer: Do this under your responsibility. Remember that you
+              need to have explicit consent from your users in order to register them.
+              Otherwise you will be infringing the GDPR regulation in EU countries.
+          index:
+            stats: User stats
+            title: Register and authorize users
+          new:
+            authorization_handler: Verification method
+            authorize: Authorize users
+            check: Check users status
+            info: Enter the emails here, one per line. If the emails are preceded
+              by a text, it will be interpreted as the user's name
+            register: Register users in the platform (if they exist they will be ignored)
+            revoke: Revoke authorization from users
+            submit: Send and process the list
+            textarea: Emails list
+          stats:
+            index:
+              authorized: Authorized
+              authorized_unconfirmed: Authorized but unconfirmed
+              global: "- Any verification method -"
+              registered: Registered
+              unconfirmed: Unconfirmed
+        authorizations:
+          new:
+            no_action: This method requires an administrator that verifies you
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            direct_verifications: Direct verification
+  devise:
+    mailer:
+      direct_invite:
+        subject: Invitation instructions

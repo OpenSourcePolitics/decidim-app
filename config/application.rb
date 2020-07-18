@@ -12,8 +12,9 @@ Bundler.require(*Rails.groups)
 module DevelopmentApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+    config.load_defaults 5.2
     config.time_zone = "Europe/Paris"
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
 
     # This needs to be set for correct images URLs in emails
     # DON'T FORGET to ALSO set this in `config/initializers/carrierwave.rb`

@@ -1,0 +1,58 @@
+---
+fr:
+  decidim:
+    admin:
+      menu:
+        comparative_stats: Statistiques comparatives
+    comparative_stats:
+      admin:
+        endpoints:
+          create:
+            error: Le point d'accès de l'API n'a pas été ajouté. Veuillez vérifier qu'il s'agit bien d'une URL Decidim valide.
+            success: Le point d'accès de l'API a été ajouté avec succès.
+          edit:
+            title: Modifier le point d'accès de l'API
+            update: Vérifier et mettre à jour le point d'accès
+          index:
+            active: Actif
+            endpoint: Point d'accès
+            name: Nom
+            no_endpoints: Il semble que vous n'avez pas encore défini de point d'accès API!
+            title: Points d'accès API
+            version: Version
+          new:
+            create: Vérifier et ajouter le point d'accès
+            subtitle: Ajouter une URL de plateforme Decidim valide pointant sur son API. Par exemple "https://www.decidim.barcelona/api"
+            title: Ajouter un point d'accès d'API Decidim
+          update:
+            error: Le point d'accès de l'API n'a pas été mis à jour. Veuillez vérifier qu'il s'agit bien d'une URL Decidim valide.
+            success: Le point d'accès de l'API a été mis à jour avec succès.
+        graphs:
+          show:
+            no_endpoints: Il semble que vous n'avez pas encore de point d'accès API actif. Veuillez d'abord ajouter et activer un ou plusieurs points d'accès.
+            title: Gérer les graphiques inter-plateforme
+        menu:
+          endpoints: Gérer les points d'accès
+          graphs: Gérer les graphiques
+      admin_log:
+        endpoint:
+          create: "%{user_name} a ajouté le point d'accès d'API %{resource_name}"
+          delete: "%{user_name} a supprimé le point d'accès d'API %{resource_name} appartenant à %{space_name}"
+          update: "%{user_name} a mis à jour le point d'accès d'API %{resource_name}"
+      endpoints:
+        add: Ajouter une URL Decidim
+      metrics:
+        users:
+          title: Utilisateurs enregistrés
+      widgets:
+        embed_modal:
+          fullscreen: Voir en plein écran
+        tabs:
+          choose_valid_graph: Aucun graphiques spécifié. Veuillez en choisir un et recommencer.
+          global_stats: Statistiques globales
+          global_stats_timeline: Frise temporelle des statistiques
+          processes_timeline: Frise temporelle des processus
+          spaces_geocoded_events: Carte aggrégée
+    components:
+      comparative_stats:
+        name: ComparativeStats
