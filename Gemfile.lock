@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-navbar_links.git
+  revision: 4a5769cbbf8e2de6e73e25ecc512eead33d76b04
+  branch: 0.21-stable
+  specs:
+    decidim-navbar_links (0.21.0)
+      decidim-core (= 0.21.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git
   revision: e5b83247eb33c8a6d4c1adb48d0ed9764b826530
   branch: 0.dev
@@ -878,6 +886,7 @@ DEPENDENCIES
   decidim-decidim_awesome!
   decidim-dev!
   decidim-direct_verifications!
+  decidim-navbar_links!
   decidim-navigation_maps!
   decidim-term_customizer!
   dotenv-rails

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_18_153741) do
+ActiveRecord::Schema.define(version: 2020_07_20_153424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -752,6 +752,17 @@ ActiveRecord::Schema.define(version: 2020_07_18_153741) do
     t.string "target"
     t.integer "weight"
     t.index ["decidim_organization_id"], name: "index_decidim_navbar_links_on_decidim_organization_id"
+  end
+
+  create_table "decidim_navbar_links_navbar_links", force: :cascade do |t|
+    t.bigint "decidim_organization_id"
+    t.jsonb "title"
+    t.string "link"
+    t.string "target"
+    t.integer "weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["decidim_organization_id"], name: "decidim_navbar_links_on_organization_id"
   end
 
   create_table "decidim_newsletters", id: :serial, force: :cascade do |t|
