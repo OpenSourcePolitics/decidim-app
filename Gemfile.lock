@@ -16,6 +16,14 @@ GIT
       decidim-core
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module_cookies.git
+  revision: b3ea1a0a5cdd5852617f1967b07216d8cd970621
+  branch: release/0.22-stable
+  specs:
+    decidim-cookies (0.22.0)
+      decidim-core (= 0.22.0)
+
+GIT
   remote: https://github.com/decidim/decidim.git
   revision: d80d6cb6d1f59963b0a452e418f4a4788abaf1a9
   branch: release/0.22-stable
@@ -836,6 +844,7 @@ DEPENDENCIES
   byebug (~> 11.0)
   dalli
   decidim!
+  decidim-cookies!
   decidim-dev!
   decidim-navbar_links!
   decidim-term_customizer!
