@@ -28,3 +28,6 @@ fr:
     decidim:
       footer:
         download_open_data: Données ouvertes
+  faker:
+    address:
+      country_code: ['FR','FR0','FR1','FR2','FR3','FR4','FR5','FR6','FR7','FR8','FR9']
