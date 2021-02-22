@@ -1,16 +1,12 @@
+require "sentry-ruby"
+
 if Rails.application.secrets.dig(:sentry, :enabled)
-  Rails.application.config.rails_activesupport_breadcrumbs = true
-
-  # With this enabled 'exceptions_app' isnt executed, so instead we
-  # set ``config.consider_all_requests_local = false`` in development.
-  # config.action_dispatch.show_exceptions = false
-
-  # Inject Sentry logger breadcrumbs
-  require 'raven/breadcrumbs/logger'
-
-  Raven.configure do |config|
+  Sentry.init do |config|
     config.dsn = Rails.application.secrets.dig(:sentry, :dsn)
-    config.timeout = 10
-    config.open_timeout = 10
+    config.breadcrumbs_logger = [:active_support_logger]
+
+    # To activate performance monitoring, set one of these options.
+    # We recommend adjusting the value in production:
+    config.traces_sample_rate = ENV.fetch("SENTRY_SAMPLE_RATE", 0.5)
   end
 end
