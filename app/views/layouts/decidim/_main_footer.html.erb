@@ -20,9 +20,6 @@
         <% end %>
       <% end %>
       <li><%= link_to t("layouts.decidim.footer.download_open_data"), decidim.open_data_download_path %></li>
-      <% if cookies_accepted? %>
-        <li><%= link_to t("layouts.decidim.footer.revoke_cookies"), "#", id: "reset-button" %></li>
-      <% end %>
     </ul>
     <%= render partial: "layouts/decidim/social_media_links" %>
   </div>
