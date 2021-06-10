@@ -2,9 +2,11 @@
 
 source "https://rubygems.org"
 
+DECIDIM_VERSION = "0.24.2"
+
 ruby RUBY_VERSION
 
-gem "decidim", "0.24.2"
+gem "decidim", DECIDIM_VERSION
 # gem "decidim", path: "../decidim"
 
 # gem "decidim-conferences", git: "https://github.com/decidim/decidim.git", branch: "release/0.23-stable"
@@ -41,7 +43,7 @@ gem "sprockets", "~> 3.7"
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
-  gem "decidim-dev", "0.24.2"
+  gem "decidim-dev", DECIDIM_VERSION
   # gem "decidim-dev", path: "../decidim"
 end
 
