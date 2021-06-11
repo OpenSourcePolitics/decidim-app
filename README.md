@@ -2,8 +2,6 @@
 
 Citizen Participation and Open Government application.
 
-This is a base app for all OSP projects. It uses OSP's decidim version.
-
 ## Setting up the application
 
 You will need to do some steps before having the app working properly once you've deployed it:
