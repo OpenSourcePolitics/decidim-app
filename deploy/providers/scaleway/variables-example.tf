@@ -24,6 +24,3 @@
 #   default = ""
 # }
 #
-# variable "user" {
-#   default = ""
-# }
