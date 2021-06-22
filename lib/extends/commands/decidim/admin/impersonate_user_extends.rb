@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ImpersonateUserExtends
   # Executes the command. Broadcasts these events:
   #

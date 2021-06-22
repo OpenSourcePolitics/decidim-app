@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "sentry-ruby"
 
 if Rails.application.secrets.dig(:sentry, :enabled)

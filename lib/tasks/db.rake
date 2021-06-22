@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 namespace :decidim do
-  Rails.logger = Logger.new(STDOUT)
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
+  Rails.logger = Logger.new($stdout)
+  ActiveRecord::Base.logger = Logger.new($stdout)
 
   namespace :db do
-
     namespace :notification do
       desc "List notifications related to orphans data"
       task orphans: :environment do
@@ -78,7 +77,5 @@ namespace :decidim do
         Rails.logger.close
       end
     end
-
   end
-
 end

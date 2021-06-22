@@ -1,38 +1,36 @@
 # frozen_string_literal: true
 
-require 'ruby-progressbar'
+require "ruby-progressbar"
 
 namespace :import do
-  desc 'Usage: rake import:user FILE=\'<filename.csv>\' ORG=<organization_id> ADMIN=<admin_id> PROCESS=<process_id> [VERBOSE=true]\''
+  desc "Usage: rake import:user FILE='<filename.csv>' ORG=<organization_id> ADMIN=<admin_id> PROCESS=<process_id> [VERBOSE=true]'"
   task user: :environment do
     Rails.application.config.active_job.queue_adapter = :inline
 
-    @verbose = ENV['VERBOSE'].to_s == "true"
-    if @verbose
-      Rails.logger = Logger.new(STDOUT)
-    else
-      Rails.logger = Logger.new("log/import-user-#{Time.now.strftime '%Y-%m-%d-%H:%M:%S'}.log")
-    end
+    @verbose = ENV["VERBOSE"].to_s == "true"
+    Rails.logger = if @verbose
+                     Logger.new($stdout)
+                   else
+                     Logger.new("log/import-user-#{Time.zone.now.strftime "%Y-%m-%d-%H:%M:%S"}.log")
+                   end
 
-    display_help unless ENV['FILE'] && ENV['ORG'] && ENV['ADMIN'] && ENV['PROCESS']
-    @file = ENV['FILE']
-    @org = ENV['ORG'].to_i
-    @admin = ENV['ADMIN'].to_i
-    @process = ENV['PROCESS'].to_i
-    @auth_handler = ENV['AUTH_HANDLER']
+    display_help unless ENV["FILE"] && ENV["ORG"] && ENV["ADMIN"] && ENV["PROCESS"]
+    @file = ENV["FILE"]
+    @org = ENV["ORG"].to_i
+    @admin = ENV["ADMIN"].to_i
+    @process = ENV["PROCESS"].to_i
+    @auth_handler = ENV["AUTH_HANDLER"]
 
     validate_input
 
-    csv = CSV.read(@file, col_sep: ',', headers: true, skip_blanks: true)
+    csv = CSV.read(@file, col_sep: ",", headers: true, skip_blanks: true)
     check_csv(csv)
 
     count = CSV.read(@file).count
 
     puts "CSV file is #{count} lines long"
 
-    if !@verbose
-      progressbar = ProgressBar.create(title: 'Importing User', total: count, format: '%t%e%B%p%%')
-    end
+    progressbar = ProgressBar.create(title: "Importing User", total: count, format: "%t%e%B%p%%") unless @verbose
 
     csv.each do |row|
       progressbar.increment unless @verbose
@@ -55,48 +53,48 @@ end
 
 def validate_org
   if @org.class != Integer
-    puts 'You must pass an organization id as an integer'
+    puts "You must pass an organization id as an integer"
     exit 1
   end
 
   unless current_organization
-    puts 'Organization does not exist'
+    puts "Organization does not exist"
     exit 1
   end
 end
 
 def validate_admin
   if @admin.class != Integer
-    puts 'You must pass an admin id as an integer'
+    puts "You must pass an admin id as an integer"
     exit 1
   end
 
   unless current_user
-    puts 'Admin does not exist'
+    puts "Admin does not exist"
     exit 1
   end
 end
 
 def validate_process
   if @process.class != Integer
-    puts 'You must pass a process id as an integer'
+    puts "You must pass a process id as an integer"
     exit 1
   end
 
   unless current_process
-    puts 'Process does not exist'
+    puts "Process does not exist"
     exit 1
   end
 end
 
 def validate_file
   unless File.exist?(@file)
-    puts 'File does not exist, be sure to pass a full path.'
+    puts "File does not exist, be sure to pass a full path."
     exit 1
   end
 
-  if File.extname(@file) != '.csv'
-    puts 'You must pass a CSV file'
+  if File.extname(@file) != ".csv"
+    puts "You must pass a CSV file"
     exit 1
   end
 end
@@ -112,19 +110,18 @@ end
 def check_csv(file)
   file.each do |row|
     # Check if id, first_name, last_name are nil
-    if row[0].nil? || row[1].nil? || row[2].nil?
-      puts "Something went wrong, empty field(s) on line #{$INPUT_LINE_NUMBER}"
-      puts row.inspect
-      exit 1
-    end
+    next unless row[0].nil? || row[1].nil? || row[2].nil?
+
+    puts "Something went wrong, empty field(s) on line #{$INPUT_LINE_NUMBER}"
+    puts row.inspect
+    exit 1
   end
 end
 
 def import_data(id, first_name, last_name, email)
-
   # Extends are only loaded at the last time
-  require 'extends/commands/decidim/admin/create_participatory_space_private_user_extends.rb'
-  require 'extends/commands/decidim/admin/impersonate_user_extends.rb'
+  require "extends/commands/decidim/admin/create_participatory_space_private_user_extends"
+  require "extends/commands/decidim/admin/impersonate_user_extends"
 
   if email.nil?
     import_without_email(id, first_name, last_name)
@@ -145,10 +142,10 @@ def import_without_email(id, first_name, last_name)
   form = Decidim::Admin::ImpersonateUserForm.from_params(
     user: new_user,
     name: new_user.name,
-    reason: 'import',
-    handler_name: 'osp_authorization_handler',
+    reason: "import",
+    handler_name: "osp_authorization_handler",
     authorization: Decidim::AuthorizationHandler.handler_for(
-      'osp_authorization_handler',
+      "osp_authorization_handler",
       {
         user: new_user,
         document_number: id
@@ -179,7 +176,6 @@ def import_without_email(id, first_name, last_name)
       # exit 1
     end
   end
-
 end
 
 def import_with_email(id, first_name, last_name, email)
@@ -194,7 +190,7 @@ def import_with_email(id, first_name, last_name, email)
     on(:ok) do |user|
       Decidim::Authorization.create_or_update_from(
         Decidim::AuthorizationHandler.handler_for(
-          'osp_authorization_handler',
+          "osp_authorization_handler",
           {
             user: user,
             document_number: id
@@ -212,11 +208,10 @@ def import_with_email(id, first_name, last_name, email)
       # exit 1
     end
   end
-
 end
 
 def set_name(first_name, last_name)
-  first_name + ' ' + last_name
+  "#{first_name} #{last_name}"
 end
 
 def current_user
