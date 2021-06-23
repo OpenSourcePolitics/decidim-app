@@ -57,11 +57,13 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
-      - run: |
-          count=$(ls spec/**/*_spec.rb | wc -l | tr -d ' ')
-          half=$(expr $count / 2)
-          list_of_files=$(ls ./spec/**/*_spec.rb | sed -n "1,$(echo $half)p" | xargs)
-          bundle exec rspec $(echo $list_of_files)
+      - run: echo "COUNT=$(ls spec/**/*_spec.rb | wc -l | tr -d ' ')" >> $GITHUB_ENV
+        name: Set count
+      - run: echo "HALF=$(expr $COUNT / 2)" >> $GITHUB_ENV
+        name: Set half
+      - run: echo "LIST_OF_FILES=$(ls ./spec/**/*_spec.rb | sed -n "1,$(echo $HALF)p" | xargs)" >> $GITHUB_ENV
+        name: Set list of files
+      - run: bundle exec rspec $(echo $LIST_OF_FILES)
         name: RSpec
       - run: ./.github/upload_coverage.sh $DECIDIM_MODULE $GITHUB_EVENT_PATH
         name: Upload coverage
