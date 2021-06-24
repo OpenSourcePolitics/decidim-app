@@ -23,8 +23,6 @@ describe "Homepage", type: :system do
       create :content_block, organization: organization, scope_name: :homepage, manifest_name: :sub_hero
       create :content_block, organization: organization, scope_name: :homepage, manifest_name: :highlighted_content_banner
       create :content_block, organization: organization, scope_name: :homepage, manifest_name: :how_to_participate
-      create :content_block, organization: organization, scope_name: :homepage, manifest_name: :stats
-      create :content_block, organization: organization, scope_name: :homepage, manifest_name: :metrics
       create :content_block, organization: organization, scope_name: :homepage, manifest_name: :footer_sub_hero
 
       switch_to_host(organization.host)
@@ -50,8 +48,8 @@ describe "Homepage", type: :system do
                  official_url: official_url,
                  enable_omnipresent_banner: true,
                  omnipresent_banner_url: "#{official_url}/processes",
-                 omnipresent_banner_title: Decidim::Faker::Localized.sentence(3),
-                 omnipresent_banner_short_description: Decidim::Faker::Localized.sentence(3))
+                 omnipresent_banner_title: Decidim::Faker::Localized.sentence(word_count: 3),
+                 omnipresent_banner_short_description: Decidim::Faker::Localized.sentence(word_count: 3))
         end
 
         before do
@@ -175,6 +173,87 @@ describe "Homepage", type: :system do
             expect(page).to have_content(organization.name)
           end
         end
+
+        context "when organization forces users to authenticate before access" do
+          let(:organization) do
+            create(
+              :organization,
+              official_url: official_url,
+              force_users_to_authenticate_before_access_organization: true
+            )
+          end
+          let(:user) { nil }
+          let!(:static_page_1) { create(:static_page, organization: organization, show_in_footer: true, allow_public_access: true) }
+          let!(:static_page_topic1) { create(:static_page_topic, organization: organization, show_in_footer: true) }
+          let!(:static_page_topic1_page1) do
+            create(
+              :static_page,
+              organization: organization,
+              topic: static_page_topic1,
+              weight: 0,
+              allow_public_access: false
+            )
+          end
+          let!(:static_page_topic1_page2) do
+            create(
+              :static_page,
+              organization: organization,
+              topic: static_page_topic1,
+              weight: 1,
+              allow_public_access: true
+            )
+          end
+          let!(:static_page_topic2) { create(:static_page_topic, organization: organization, show_in_footer: true) }
+          let!(:static_page_topic2_page1) { create(:static_page, organization: organization, topic: static_page_topic2, weight: 0) }
+          let!(:static_page_topic2_page2) { create(:static_page, organization: organization, topic: static_page_topic2, weight: 1) }
+          let!(:static_page_topic3) { create(:static_page_topic, organization: organization) }
+          let!(:static_page_topic3_page1) { create(:static_page, organization: organization, topic: static_page_topic3) }
+
+          # Re-visit required for the added pages and topics to be visible and
+          # to sign in the user when it is defined.
+          before do
+            login_as user, scope: :user if user
+            visit current_path
+          end
+
+          it "displays only publicly accessible pages and topics in the footer" do
+            within ".main-footer" do
+              expect(page).to have_content(static_page_1.title["en"])
+              expect(page).to have_no_content(static_page_2.title["en"])
+              expect(page).to have_no_content(static_page_3.title["en"])
+              expect(page).to have_content(static_page_topic1.title["en"])
+              expect(page).to have_no_content(static_page_topic2.title["en"])
+              expect(page).to have_no_content(static_page_topic3.title["en"])
+
+              expect(page).to have_link(
+                static_page_topic1.title["en"],
+                href: "/pages/#{static_page_topic1_page2.slug}"
+              )
+            end
+          end
+
+          context "when authenticated" do
+            let(:user) { create :user, :confirmed, organization: organization }
+
+            it "displays all pages and topics in footer that are configured to display in footer" do
+              expect(page).to have_content(static_page_1.title["en"])
+              expect(page).to have_content(static_page_2.title["en"])
+              expect(page).to have_no_content(static_page_3.title["en"])
+              expect(page).to have_content(static_page_topic1.title["en"])
+              expect(page).to have_content(static_page_topic2.title["en"])
+              expect(page).to have_no_content(static_page_topic3.title["en"])
+
+              expect(page).to have_link(
+                static_page_topic1.title["en"],
+                href: "/pages/#{static_page_topic1_page1.slug}"
+              )
+              expect(page).to have_link(
+                static_page_topic2.title["en"],
+                href: "/pages/#{static_page_topic2_page1.slug}"
+              )
+            end
+          end
+        end
       end
 
       describe "includes statistics" do
@@ -190,18 +269,19 @@ describe "Homepage", type: :system do
           )
         end
 
-        context "when organization show_statistics attribute is false" do
-          let(:organization) { create(:organization, show_statistics: false) }
+        context "when organization doesn't have the stats content block" do
+          let(:organization) { create(:organization) }
 
           it "does not show the statistics block" do
             expect(page).to have_no_content("Current state of #{organization.name}")
           end
         end
 
-        context "when organization show_statistics attribute is true" do
-          let(:organization) { create(:organization, show_statistics: true) }
+        context "when organization has the stats content block" do
+          let(:organization) { create(:organization) }
 
           before do
+            create :content_block, organization: organization, scope_name: :homepage, manifest_name: :stats
             visit current_path
           end
 
@@ -226,16 +306,16 @@ describe "Homepage", type: :system do
       end
 
       describe "includes metrics" do
-        context "when organization show_statistics attribute is false" do
-          let(:organization) { create(:organization, show_statistics: false) }
+        context "when organization doesn't have the metrics content block" do
+          let(:organization) { create(:organization) }
 
           it "does not show the statistics block" do
             expect(page).to have_no_content("Participation in figures")
           end
         end
 
-        context "when organization show_statistics attribute is true" do
-          let(:organization) { create(:organization, show_statistics: true) }
+        context "when organization does have the metrics content block" do
+          let(:organization) { create(:organization) }
           let(:metrics) do
             Decidim.metrics_registry.all.each do |metric_registry|
               create(:metric, metric_type: metric_registry.metric_name, day: Time.zone.today, organization: organization, cumulative: 5, quantity: 2)
@@ -245,6 +325,7 @@ describe "Homepage", type: :system do
           context "and have metric records" do
             before do
               metrics
+              create :content_block, organization: organization, scope_name: :homepage, manifest_name: :metrics
               visit current_path
             end
 
@@ -263,6 +344,7 @@ describe "Homepage", type: :system do
 
           context "and does not have metric records" do
             before do
+              create :content_block, organization: organization, scope_name: :homepage, manifest_name: :metrics
               visit current_path
             end
 
@@ -306,10 +388,10 @@ describe "Homepage", type: :system do
           create(:organization,
                  official_url: official_url,
                  highlighted_content_banner_enabled: true,
-                 highlighted_content_banner_title: Decidim::Faker::Localized.sentence(2),
-                 highlighted_content_banner_short_description: Decidim::Faker::Localized.sentence(2),
-                 highlighted_content_banner_action_title: Decidim::Faker::Localized.sentence(2),
-                 highlighted_content_banner_action_subtitle: Decidim::Faker::Localized.sentence(2),
+                 highlighted_content_banner_title: Decidim::Faker::Localized.sentence(word_count: 2),
+                 highlighted_content_banner_short_description: Decidim::Faker::Localized.sentence(word_count: 2),
+                 highlighted_content_banner_action_title: Decidim::Faker::Localized.sentence(word_count: 2),
+                 highlighted_content_banner_action_subtitle: Decidim::Faker::Localized.sentence(word_count: 2),
                  highlighted_content_banner_action_url: ::Faker::Internet.url,
                  highlighted_content_banner_image: Decidim::Dev.test_file("city.jpeg", "image/jpeg"))
         end
@@ -333,6 +415,24 @@ describe "Homepage", type: :system do
 
         it "shows the banner's action subtitle" do
           expect(page).to have_i18n_content(organization.highlighted_content_banner_action_subtitle)
+        end
+      end
+
+      context "when downloading open data", download: true do
+        before do
+          Decidim::OpenDataJob.perform_now(organization)
+          switch_to_host(organization.host)
+          visit decidim.root_path
+        end
+
+        it "lets the users download open data files" do
+          click_link "Download Open Data files"
+          expect(File.basename(download_path)).to include("open-data.zip")
+          Zip::File.open(download_path) do |zipfile|
+            expect(zipfile.glob("*open-data-proposals.csv").length).to eq(1)
+            expect(zipfile.glob("*open-data-results.csv").length).to eq(1)
+            expect(zipfile.glob("*open-data-meetings.csv").length).to eq(1)
+          end
         end
       end
     end

@@ -1245,6 +1245,6 @@ RSpec/DescribedClass:
   Enabled: false
 
 RSpec/MultipleMemoizedHelpers:
-  Max: 6
+  Max: 15
 
 inherit_from: .rubocop_rails.yml

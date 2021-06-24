@@ -1,39 +1,65 @@
+---
 fr:
   activemodel:
     attributes:
-      participatory_process:
-        private_space: Espace privé
       osp_authorization_handler:
+        birthday: Date de naissance
         document_number: Numéro unique
         postal_code: Code postal
-        birthday: Date de naissance
+      participatory_process:
+        private_space: Espace privé
   decidim:
-    authorization_handlers:
-      osp_authorization_handler:
-        explanation: Vérifier votre identité en saisissant un numéro unique
-        fields:
-          document_number: Numéro unique
-          postal_code: Code postal
-          birthday: Date de naissance
-        name: Formulaire de vérification d'identité
-      osp_authorization_workflow:
-        name: Procédure d'autorisation
+    admin:
+      participatory_space_private_users:
+        create:
+          error: Erreur
+          success: Succès
     amendments:
       emendation:
         announcement:
           evaluating: |-
             Cet amendement pour le %{amendable_type} %{proposal_link}
             est en cours d’évaluation.
+    authorization_handlers:
+      osp_authorization_handler:
+        explanation: Vérifier votre identité en saisissant un numéro unique
+        fields:
+          birthday: Date de naissance
+          document_number: Numéro unique
+          postal_code: Code postal
+        name: Formulaire de vérification d'identité
+      osp_authorization_workflow:
+        name: Procédure d'autorisation
     verifications:
       authorizations:
         first_login:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+  faker:
+    address:
+      country_code:
+      - FR
+      - FR0
+      - FR1
+      - FR2
+      - FR3
+      - FR4
+      - FR5
+      - FR6
+      - FR7
+      - FR8
+      - FR9
   layouts:
     decidim:
       footer:
         download_open_data: Données ouvertes
-  faker:
-    address:
-      country_code: ['FR','FR0','FR1','FR2','FR3','FR4','FR5','FR6','FR7','FR8','FR9']
+        made_with_open_source: Made with open source
+      header:
+        close_menu: Close menu
+        navigation: Navigation
+        sign_in: Sign in
+        sign_up: Sign up
+      user_menu:
+        conversations: Conversations
+        notifications: Notifications
