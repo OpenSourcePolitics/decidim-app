@@ -5,7 +5,8 @@ namespace :decidim do
     namespace :notification do
       desc "List notifications related to orphans data"
       task orphans: :environment do
-        logger
+        Rails.logger = Logger.new($stdout)
+        ActiveRecord::Base.logger = Logger.new($stdout)
 
         Decidim::Notification.distinct.pluck(:decidim_resource_type).each do |klass|
           puts klass
@@ -21,7 +22,8 @@ namespace :decidim do
 
       desc "Delete notifications related to orphans data"
       task clean: :environment do
-        logger
+        Rails.logger = Logger.new($stdout)
+        ActiveRecord::Base.logger = Logger.new($stdout)
 
         Decidim::Notification.distinct.pluck(:decidim_resource_type).each do |klass|
           model = klass.constantize
@@ -36,7 +38,8 @@ namespace :decidim do
     namespace :admin_log do
       desc "List admin log related to orphans data"
       task orphans: :environment do
-        logger
+        Rails.logger = Logger.new($stdout)
+        ActiveRecord::Base.logger = Logger.new($stdout)
 
         Decidim::ActionLog.distinct.pluck(:resource_type).each do |klass|
           puts klass
@@ -51,7 +54,8 @@ namespace :decidim do
 
       desc "Delete admin log related to orphans data"
       task clean: :environment do
-        logger
+        Rails.logger = Logger.new($stdout)
+        ActiveRecord::Base.logger = Logger.new($stdout)
 
         Decidim::ActionLog.distinct.pluck(:resource_type).each do |klass|
           model = klass.constantize
@@ -66,7 +70,8 @@ namespace :decidim do
     namespace :surveys do
       desc "List surveys related to deleted component"
       task orphans: :environment do
-        logger
+        Rails.logger = Logger.new($stdout)
+        ActiveRecord::Base.logger = Logger.new($stdout)
 
         Decidim::Surveys::Survey
           .where.not(decidim_component_id: [Decidim::Component.ids])
@@ -78,7 +83,8 @@ namespace :decidim do
 
       desc "Delete surveys related to deleted component"
       task clean: :environment do
-        logger
+        Rails.logger = Logger.new($stdout)
+        ActiveRecord::Base.logger = Logger.new($stdout)
 
         Decidim::Surveys::Survey
           .where.not(decidim_component_id: [Decidim::Component.ids])
@@ -87,10 +93,5 @@ namespace :decidim do
         Rails.logger.close
       end
     end
-  end
-
-  def logger
-    Rails.logger = Logger.new($stdout)
-    ActiveRecord::Base.logger = Logger.new($stdout)
   end
 end

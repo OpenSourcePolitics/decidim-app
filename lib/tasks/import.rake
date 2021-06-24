@@ -62,8 +62,8 @@ namespace :import do
 
     def display_help
       puts <<~HEREDOC
-      Help:
-      Usage: rake import:user FILE='<filename.csv>' ORG=<organization_id> ADMIN=<admin_id> PROCESS=<process_id>
+        Help:
+        Usage: rake import:user FILE='<filename.csv>' ORG=<organization_id> ADMIN=<admin_id> PROCESS=<process_id>
       HEREDOC
       exit 0
     end
@@ -93,28 +93,28 @@ namespace :import do
 
     def import_without_email(id, first_name, last_name)
       new_user = Decidim::User.new(
-          managed: true,
-          name: set_name(first_name, last_name),
-          organization: current_organization,
-          admin: false,
-          roles: [],
-          tos_agreement: true
+        managed: true,
+        name: set_name(first_name, last_name),
+        organization: current_organization,
+        admin: false,
+        roles: [],
+        tos_agreement: true
       )
       form = Decidim::Admin::ImpersonateUserForm.from_params(
-          user: new_user,
-          name: new_user.name,
-          reason: "import",
-          handler_name: "osp_authorization_handler",
-          authorization: Decidim::AuthorizationHandler.handler_for(
-              "osp_authorization_handler",
-              {
-                  user: new_user,
-                  document_number: id
-              }
-          )
+        user: new_user,
+        name: new_user.name,
+        reason: "import",
+        handler_name: "osp_authorization_handler",
+        authorization: Decidim::AuthorizationHandler.handler_for(
+          "osp_authorization_handler",
+          {
+            user: new_user,
+            document_number: id
+          }
+        )
       ).with_context(
-          current_organization: current_organization,
-          current_user: current_user
+        current_organization: current_organization,
+        current_user: current_user
       )
 
       privatable_to = current_process
@@ -122,8 +122,8 @@ namespace :import do
       Decidim::Admin::ImpersonateUser.call(form) do
         on(:ok) do |user|
           Decidim::ParticipatorySpacePrivateUser.find_or_create_by!(
-              user: user,
-              privatable_to: privatable_to
+            user: user,
+            privatable_to: privatable_to
           )
           Rails.logger.debug I18n.t("participatory_space_private_users.create.success", scope: "decidim.admin")
           Rails.logger.debug "Registered user with id: #{id}, first_name: #{first_name}, last_name: #{last_name} --> #{user.id}"
@@ -141,22 +141,22 @@ namespace :import do
 
     def import_with_email(id, first_name, last_name, email)
       form = Decidim::Admin::ParticipatorySpacePrivateUserForm.from_params(
-          {
-              name: set_name(first_name, last_name),
-              email: email
-          },
-          privatable_to: current_process
+        {
+          name: set_name(first_name, last_name),
+          email: email
+        },
+        privatable_to: current_process
       )
       Decidim::Admin::CreateParticipatorySpacePrivateUser.call(form, current_user, current_process) do
         on(:ok) do |user|
           Decidim::Authorization.create_or_update_from(
-              Decidim::AuthorizationHandler.handler_for(
-                  "osp_authorization_handler",
-                  {
-                      user: user,
-                      document_number: id
-                  }
-              )
+            Decidim::AuthorizationHandler.handler_for(
+              "osp_authorization_handler",
+              {
+                user: user,
+                document_number: id
+              }
+            )
           )
           Rails.logger.debug I18n.t("participatory_space_private_users.create.success", scope: "decidim.admin")
           Rails.logger.debug "Registered user with id: #{id}, first_name: #{first_name}, last_name: #{last_name}, email: #{email} --> #{user.id}"
@@ -216,8 +216,8 @@ namespace :import do
 
     csv.each do |row|
       progressbar.increment unless @verbose
-        # Import user with parsed informations id, first_name, last_name, email
-        import_data(row[0], row[1], row[2], row[3])
+      # Import user with parsed informations id, first_name, last_name, email
+      import_data(row[0], row[1], row[2], row[3])
     end
 
     Rails.logger.close
