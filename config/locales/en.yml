@@ -44,8 +44,8 @@ en:
   layouts:
     decidim:
       footer:
-        download_open_data: Download Open Data files
-        made_with_open_source: Made with open source
+        download_open_data: Open data
+        made_with_open_source: Website made by <a target="_blank" href="https://opensourcepolitics.eu/en/">Open Source Politics</a> with the <a target="_blank" href="https://github.com/decidim/decidim">decidim free software</a>.
       header:
         close_menu: Close menu
         navigation: Navigation
