@@ -10,7 +10,7 @@ fr:
         private_space: Espace privé
   decidim:
     accessibility:
-      skip_button: Skip button
+      skip_button: Passer au contenu principal
     admin:
       participatory_space_private_users:
         create:
