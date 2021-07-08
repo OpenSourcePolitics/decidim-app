@@ -39,7 +39,7 @@ resource "scaleway_instance_server" "decidim_app" {
   type  = var.instance_type
   image = var.instance_image
 
-  tags = [ "decidim", "ansible", var.instance_purpose ]
+  tags = [ "decidim", "deploy_decidim" ]
 
   ip_id = scaleway_instance_ip.decidim_app_public_ip.id
 
