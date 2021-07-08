@@ -12,10 +12,6 @@
 #   default = ""
 # }
 #
-# variable "instance_purpose" {
-#   default = ""
-#}
-# 
 # variable "sg_name" {
 #   default = ""
 # }
