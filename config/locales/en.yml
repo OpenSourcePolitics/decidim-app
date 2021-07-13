@@ -3,41 +3,41 @@ en:
   activemodel:
     attributes:
       osp_authorization_handler:
-        birthday: Date de naissance
-        document_number: Numéro unique
-        postal_code: Code postal
+        birthday: Birthday
+        document_number: Unique number
+        postal_code: Postal code
       participatory_process:
-        private_space: Espace privé
+        private_space: Private space
   decidim:
     accessibility:
       skip_button: Skip button
     admin:
       participatory_space_private_users:
         create:
-          error: Erreur
-          success: Succès
+          error: Error
+          success: Success
     amendments:
       emendation:
         announcement:
           evaluating: |-
-            Cet amendement pour le %{amendable_type} %{proposal_link}
-            est en cours d’évaluation.
+            This amendment for %{amendable_type} %{proposal_link}
+            is in evaluation state.
     authorization_handlers:
       osp_authorization_handler:
-        explanation: Vérifier votre identité en saisissant un numéro unique
+        explanation: Verify your identity by entering a unique number
         fields:
-          birthday: Date de naissance
-          document_number: Numéro unique
-          postal_code: Code postal
-        name: Formulaire de vérification d'identité
+          birthday: Birthday
+          document_number: Unique number
+          postal_code: Postal code
+        name: Identity Verification Form
       osp_authorization_workflow:
-        name: Procédure d'autorisation
+        name: Authorization procedure
     verifications:
       authorizations:
         first_login:
           actions:
-            osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
-            osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+            osp_authorization_handler: Verify with the identity verification form
+            osp_authorization_workflow: Verify with the identity verification form
   faker:
     address:
       country_code: '["EN", "EN0", "EN1", "EN2", "EN3", "EN4", "EN5", "EN6", "EN7", "EN8", "EN9"]'
