@@ -58,11 +58,11 @@ fr:
         download_open_data: Données ouvertes
         made_with_open_source: Site réalisé par <a target="_blank" href="https://opensourcepolitics.eu">Open Source Politics</a> grâce au <a target="_blank" href="https://github.com/decidim/decidim">logiciel libre Decidim</a>.
       header:
-        close_menu: Close menu
+        close_menu: Fermer
         navigation: Navigation
-        sign_in: Sign in
-        sign_up: Sign up
+        sign_in: Se connecter
+        sign_up: S'inscrire
       user_menu:
-        account: Account
+        account: Mon compte
         conversations: Conversations
         notifications: Notifications
