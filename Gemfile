@@ -14,7 +14,6 @@ gem "decidim", DECIDIM_VERSION
 # gem "decidim-initiatives", git: "https://github.com/decidim/decidim.git", branch: "release/0.23-stable"
 
 gem "decidim-decidim_awesome", "~> 0.7.0"
-gem "decidim-navbar_links", git: "https://github.com/OpenSourcePolitics/decidim-module-navbar_links.git", branch: "release/0.24-stable"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "master"
 
 # gem "decidim-calendar", git: "https://github.com/alabs/decidim-module-calendar"

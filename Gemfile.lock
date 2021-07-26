@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-module-navbar_links.git
-  revision: fee5b5887748b9ab6293d3ad5be1758abfeaf8c0
-  branch: release/0.24-stable
-  specs:
-    decidim-navbar_links (0.24.2)
-      decidim-core (~> 0.24.2)
-
-GIT
   remote: https://github.com/mainio/decidim-module-term_customizer.git
   revision: c9f127e78bd52b29ee02bc62f252db2634f9a1f0
   branch: master
@@ -908,7 +900,6 @@ DEPENDENCIES
   decidim (= 0.24.2)
   decidim-decidim_awesome (~> 0.7.0)
   decidim-dev (= 0.24.2)
-  decidim-navbar_links!
   decidim-term_customizer!
   dotenv-rails
   faker (~> 2.14)
@@ -936,4 +927,4 @@ RUBY VERSION
    ruby 2.7.1p83
 
 BUNDLED WITH
-   2.2.11
+   2.2.18
