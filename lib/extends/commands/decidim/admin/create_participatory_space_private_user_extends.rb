@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CreateParticipatorySpacePrivateUserExtends
   # Executes the command. Broadcasts these events:
   #
