@@ -1,37 +1,57 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+---
 en:
+  activemodel:
+    attributes:
+      osp_authorization_handler:
+        birthday: Birthday
+        document_number: Unique number
+        postal_code: Postal code
+      participatory_process:
+        private_space: Private space
+  decidim:
+    accessibility:
+      skip_button: Skip button
+    admin:
+      participatory_space_private_users:
+        create:
+          error: Error
+          success: Success
+    amendments:
+      emendation:
+        announcement:
+          evaluating: |-
+            This amendment for %{amendable_type} %{proposal_link}
+            is in evaluation state.
+    authorization_handlers:
+      osp_authorization_handler:
+        explanation: Verify your identity by entering a unique number
+        fields:
+          birthday: Birthday
+          document_number: Unique number
+          postal_code: Postal code
+        name: Identity Verification Form
+      osp_authorization_workflow:
+        name: Authorization procedure
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            osp_authorization_handler: Verify with the identity verification form
+            osp_authorization_workflow: Verify with the identity verification form
+  faker:
+    address:
+      country_code: '["EN", "EN0", "EN1", "EN2", "EN3", "EN4", "EN5", "EN6", "EN7", "EN8", "EN9"]'
   layouts:
     decidim:
       footer:
         download_open_data: Open data
         made_with_open_source: Website made by <a target="_blank" href="https://opensourcepolitics.eu/en/">Open Source Politics</a> with the <a target="_blank" href="https://github.com/decidim/decidim">decidim free software</a>.
+      header:
+        close_menu: Close menu
+        navigation: Navigation
+        sign_in: Sign in
+        sign_up: Sign up
+      user_menu:
+        account: Account
+        conversations: Conversations
+        notifications: Notifications

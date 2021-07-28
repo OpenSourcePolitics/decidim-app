@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Decidim::Proposals.configure do |config|
   # 0 means that 0% is required for the proposal to be proposed to the comparator.
   # 100% means the proposals have to be fully similar.
