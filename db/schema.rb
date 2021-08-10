@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_26_155447) do
+ActiveRecord::Schema.define(version: 2021_07_28_101101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -1562,6 +1562,32 @@ ActiveRecord::Schema.define(version: 2021_07_26_155447) do
     t.boolean "confidential", default: true, null: false
     t.index ["decidim_organization_id"], name: "index_oauth_applications_on_decidim_organization_id"
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
+  end
+
+  create_table "redirect_rules", id: :serial, force: :cascade do |t|
+    t.string "source", null: false
+    t.boolean "source_is_regex", default: false, null: false
+    t.boolean "source_is_case_sensitive", default: false, null: false
+    t.string "destination", null: false
+    t.boolean "active", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "decidim_organization_id"
+    t.index ["active"], name: "index_redirect_rules_on_active"
+    t.index ["source"], name: "index_redirect_rules_on_source"
+    t.index ["source_is_case_sensitive"], name: "index_redirect_rules_on_source_is_case_sensitive"
+    t.index ["source_is_regex"], name: "index_redirect_rules_on_source_is_regex"
+  end
+
+  create_table "request_environment_rules", id: :serial, force: :cascade do |t|
+    t.integer "redirect_rule_id", null: false
+    t.string "environment_key_name", null: false
+    t.string "environment_value", null: false
+    t.boolean "environment_value_is_regex", default: false, null: false
+    t.boolean "environment_value_is_case_sensitive", default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["redirect_rule_id"], name: "index_request_environment_rules_on_redirect_rule_id"
   end
 
   create_table "versions", force: :cascade do |t|

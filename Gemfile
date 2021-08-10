@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-DECIDIM_VERSION = "0.24.2"
+DECIDIM_VERSION = "0.24.3"
 
 ruby RUBY_VERSION
 
@@ -15,6 +15,8 @@ gem "decidim", DECIDIM_VERSION
 
 gem "decidim-decidim_awesome", "~> 0.7.0"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "master"
+gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: "master"
+gem "decidim-url_aliases", git: "https://github.com/OpenSourcePolitics/decidim-urlaliases.git", branch: "master"
 
 # gem "decidim-calendar", git: "https://github.com/alabs/decidim-module-calendar"
 # gem "decidim-combined_budgeting", git: "https://github.com/mainio/decidim-module-combined_budgeting"
@@ -23,6 +25,8 @@ gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-te
 # gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git"
 # gem "decidim-initiatives_no_signature_allowed", git: "https://github.com/OpenSourcePolitics/decidim-module-initiatives_nosignature_allowed.git"
 # gem "decidim-navigation_maps", git: "https://github.com/Platoniq/decidim-module-navigation_maps"
+
+gem "acts_as_textcaptcha", "~> 4.5.1"
 
 gem "bootsnap", "~> 1.4"
 
