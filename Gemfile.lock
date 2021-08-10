@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-module-navbar_links.git
-  revision: 6c05e0ea3e1bffef2bf0ed115d82f25588a7daa4
-  branch: 0.23.5
-  specs:
-    decidim-navbar_links (0.23.5)
-      decidim-core (~> 0.23.5)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git
   revision: 85b3fb71f55117685ed878b40c7b84be8689ed53
   branch: release/0.23-stable
@@ -904,7 +896,6 @@ DEPENDENCIES
   decidim!
   decidim-decidim_awesome (~> 0.6.0)
   decidim-dev!
-  decidim-navbar_links!
   decidim-question_captcha!
   decidim-term_customizer!
   decidim-url_aliases!
