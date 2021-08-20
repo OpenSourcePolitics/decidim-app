@@ -13,12 +13,12 @@ Decidim.configure do |config|
 
   # Geocoder configuration
   config.maps = {
-      provider: :here,
-      api_key: Rails.application.secrets.maps[:api_key],
-      static: { url: "https://image.maps.ls.hereapi.com/mia/1.6/mapview" },
-      autocomplete: {
-          address_format: [%w[houseNumber street], "city", "country"]
-      }
+    provider: :here,
+    api_key: Rails.application.secrets.maps[:api_key],
+    static: { url: "https://image.maps.ls.hereapi.com/mia/1.6/mapview" },
+    autocomplete: {
+      address_format: [%w(houseNumber street), "city", "country"]
+    }
   }
 
   if defined?(Decidim::Initiatives) && defined?(Decidim::Initiatives.do_not_require_authorization)
