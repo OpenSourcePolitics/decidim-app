@@ -14,9 +14,8 @@ gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VE
 # gem "decidim-initiatives", git: "https://github.com/decidim/decidim.git", branch: "release/0.23-stable"
 
 gem "decidim-decidim_awesome", "~> 0.6.0"
-gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: "release/0.23-stable"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "0.23-stable"
-gem "decidim-url_aliases", git: "https://github.com/OpenSourcePolitics/decidim-urlaliases.git", branch: "release/0.23-stable"
+
 
 # gem "decidim-calendar", git: "https://github.com/alabs/decidim-module-calendar"
 # gem "decidim-combined_budgeting", git: "https://github.com/mainio/decidim-module-combined_budgeting"
@@ -26,7 +25,6 @@ gem "decidim-url_aliases", git: "https://github.com/OpenSourcePolitics/decidim-u
 # gem "decidim-initiatives_no_signature_allowed", git: "https://github.com/OpenSourcePolitics/decidim-module-initiatives_nosignature_allowed.git"
 # gem "decidim-navigation_maps", git: "https://github.com/Platoniq/decidim-module-navigation_maps"
 
-gem "acts_as_textcaptcha", "~> 4.5.1"
 
 gem "bootsnap", "~> 1.4"
 
