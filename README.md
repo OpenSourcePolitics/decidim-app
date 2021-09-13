@@ -65,3 +65,14 @@ user.save!
 
 You're good to go!
 
+## Running tests
+
+This application has a functional testing suite. You can easily run locally the tests as following :
+
+Create test environment database 
+
+`bundle exec rake test:setup`
+
+And then run tests using `rspec`
+
+`bundle exec rspec spec/`
