@@ -32,6 +32,11 @@ resource "scaleway_instance_security_group" "decidim_app_sg" {
     action = "accept"
     port   = "80"
   }
+
+  inbound_rule {
+    action = "accept"
+    port   = "443"
+  }
 }
 
 resource "scaleway_instance_server" "decidim_app" {
