@@ -1,23 +1,4 @@
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git
-  revision: 85b3fb71f55117685ed878b40c7b84be8689ed53
-  branch: release/0.23-stable
-  specs:
-    decidim-question_captcha (0.23.1)
-      acts_as_textcaptcha (~> 4.5.1)
-      decidim-core (~> 0.23.1)
-
-GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-urlaliases.git
-  revision: 52a9920ca301011f6c086b680a5bb0847ee1dcc2
-  branch: release/0.23-stable
-  specs:
-    decidim-url_aliases (0.0.1)
-      decidim-core (~> 0.23)
-      rails (>= 5.2)
-      redirector
-
-GIT
   remote: https://github.com/decidim/decidim.git
   revision: 81a3ea3531bcd7f3fb518451aa9a2139e7c37580
   branch: release/0.23-stable
@@ -277,7 +258,6 @@ GEM
       tzinfo (~> 1.1)
     acts_as_list (0.9.19)
       activerecord (>= 3.0)
-    acts_as_textcaptcha (4.5.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     anchored (1.1.0)
@@ -697,8 +677,6 @@ GEM
       virtus (~> 1.0.5)
       wisper (>= 1.6.1)
     redcarpet (3.5.1)
-    redirector (1.1.7)
-      rails (>= 3.1)
     redis (4.3.1)
     regexp_parser (2.1.1)
     request_store (1.5.0)
@@ -889,16 +867,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts_as_textcaptcha (~> 4.5.1)
   bootsnap (~> 1.4)
   byebug (~> 11.0)
   dalli
   decidim!
   decidim-decidim_awesome (~> 0.6.0)
   decidim-dev!
-  decidim-question_captcha!
   decidim-term_customizer!
-  decidim-url_aliases!
   dotenv-rails
   faker (~> 1.9)
   fog-aws
