@@ -2,7 +2,6 @@ require: rubocop-rspec
 
 # Common configuration.
 AllCops:
-  NewCops: enable
   Include:
     - .simplecov
     - "**/*.rb"
@@ -16,10 +15,7 @@ AllCops:
     - "db/migrate/*.rb"
     - "db/schema.rb"
     - "bin/*"
-    - "development_app/**/*"
-    - "spec/decidim_dummy_app/**/*"
     - "node_modules/**/*"
-    - "test/**/*"
   # Default formatter will be used if no -f/--format option is given.
   DefaultFormatter: progress
   # Cop names are not displayed in offense messages by default. Change behavior
@@ -93,7 +89,7 @@ Style/Alias:
     - prefer_alias_method
 
 # Align the elements of a hash literal if they span more than one line.
-Layout/HashAlignment:
+Layout/AlignHash:
   # Alignment of entries using hash rocket as separator. Valid values are:
   #
   # key - left alignment of keys
@@ -156,7 +152,7 @@ Layout/HashAlignment:
     - ignore_implicit
     - ignore_explicit
 
-Layout/ParameterAlignment:
+Layout/AlignParameters:
   # Alignment of parameters in multi-line method calls.
   #
   # The `with_first_parameter` style aligns the following lines along the same
@@ -266,6 +262,20 @@ Style/BlockDelimiters:
     - lambda
     - proc
     - it
+
+Style/BracesAroundHashParameters:
+  EnforcedStyle: no_braces
+  SupportedStyles:
+    # The `braces` style enforces braces around all method parameters that are
+    # hashes.
+    - braces
+    # The `no_braces` style checks that the last parameter doesn't have braces
+    # around it.
+    - no_braces
+    # The `context_dependent` style checks that the last parameter doesn't have
+    # braces around it, but requires braces if the second to last parameter is
+    # also a hash literal.
+    - context_dependent
 
 # Indentation of `when`.
 Layout/CaseIndentation:
@@ -459,7 +469,7 @@ Naming/FileName:
   # files with a shebang in the first line).
   IgnoreExecutableScripts: true
 
-Layout/FirstArgumentIndentation:
+Layout/IndentFirstArgument:
   EnforcedStyle: special_for_inner_method_call_in_parentheses
   SupportedStyles:
     # The first parameter should always be indented one step more than the
@@ -547,7 +557,7 @@ Layout/IndentationWidth:
   Width: 2
 
 # Checks the indentation of the first element in an array literal.
-Layout/FirstArrayElementIndentation:
+Layout/IndentFirstArrayElement:
   # The value `special_inside_parentheses` means that array literals with
   # brackets that have their opening bracket on the same line as a surrounding
   # opening round parenthesis, shall have their first element indented relative
@@ -569,13 +579,13 @@ Layout/FirstArrayElementIndentation:
   IndentationWidth: ~
 
 # Checks the indentation of assignment RHS, when on a different line from LHS
-Layout/AssignmentIndentation:
+Layout/IndentAssignment:
   # By default, the indentation width from Style/IndentationWidth is used
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
 
 # Checks the indentation of the first key in a hash literal.
-Layout/FirstHashElementIndentation:
+Layout/IndentFirstHashElement:
   # The value `special_inside_parentheses` means that hash literals with braces
   # that have their opening brace on the same line as a surrounding opening
   # round parenthesis, shall have their first key indented relative to the
@@ -782,12 +792,12 @@ Naming/PredicateName:
     - has_
     - have_
   # Predicate name prefixes that should be removed.
-  ForbiddenPrefixes:
+  NamePrefixBlacklist:
     - is_
     - have_
   # Predicate names which, despite having a blacklisted prefix, or no ?,
   # should still be accepted
-  AllowedMethods:
+  NameWhitelist:
     - is_a?
   # Exclude Rspec specs because there is a strong convetion to write spec
   # helpers in the form of `have_something` or `be_something`.
@@ -968,7 +978,7 @@ Style/TernaryParentheses:
     - require_no_parentheses
   AllowSafeAssignment: true
 
-Layout/TrailingEmptyLines:
+Layout/TrailingBlankLines:
   EnforcedStyle: final_newline
   SupportedStyles:
     - final_newline
@@ -1018,7 +1028,7 @@ Style/TrivialAccessors:
   # Commonly used in DSLs
   AllowDSLWriters: false
   IgnoreClassMethods: false
-  AllowedMethods:
+  Whitelist:
     - to_ary
     - to_a
     - to_c
@@ -1092,7 +1102,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - "**/*/permissions.rb"
 
-Layout/LineLength:
+Metrics/LineLength:
   Max: 180
   # To make it possible to copy or click on URIs in the code, we allow lines
   # containing a URI to be longer than Max.
@@ -1243,8 +1253,5 @@ RSpec/LeakyConstantDeclaration:
 
 RSpec/DescribedClass:
   Enabled: false
-
-RSpec/MultipleMemoizedHelpers:
-  Max: 15
 
 inherit_from: .rubocop_rails.yml
