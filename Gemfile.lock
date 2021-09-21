@@ -780,6 +780,9 @@ GEM
       unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-ast (1.7.0)
       parser (>= 3.0.1.1)
+    rubocop-faker (1.1.0)
+      faker (>= 2.12.0)
+      rubocop (>= 0.82.0)
     rubocop-rails (2.9.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
@@ -943,6 +946,7 @@ DEPENDENCIES
   newrelic_rpm
   passenger
   puma (~> 5.0.0)
+  rubocop-faker
   ruby-progressbar
   sendgrid-ruby
   sentry-rails
