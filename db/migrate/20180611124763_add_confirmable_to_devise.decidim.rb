@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim (originally 20161006085629)
 
 class AddConfirmableToDevise < ActiveRecord::Migration[5.0]

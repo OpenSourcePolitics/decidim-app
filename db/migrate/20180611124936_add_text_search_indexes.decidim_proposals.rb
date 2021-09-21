@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_proposals (originally 20170113114245)
 
 class AddTextSearchIndexes < ActiveRecord::Migration[5.0]

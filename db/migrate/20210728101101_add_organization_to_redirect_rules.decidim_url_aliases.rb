@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_url_aliases (originally 20190820104806)
 
 class AddOrganizationToRedirectRules < ActiveRecord::Migration[5.2]

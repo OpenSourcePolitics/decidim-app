@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_calendar (originally 20190312132654)
 
 class CreateDecidimCalendarExternalEvents < ActiveRecord::Migration[5.2]
