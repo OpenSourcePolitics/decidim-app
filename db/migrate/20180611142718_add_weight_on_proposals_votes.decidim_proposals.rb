@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This migration comes from decidim_proposals (originally 20180212152542)
 class AddWeightOnProposalsVotes < ActiveRecord::Migration[5.1]
   def change

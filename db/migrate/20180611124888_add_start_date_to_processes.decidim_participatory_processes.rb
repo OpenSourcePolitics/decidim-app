@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_participatory_processes (originally 20170830081725)
 
 class AddStartDateToProcesses < ActiveRecord::Migration[5.1]

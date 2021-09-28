@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim (originally 20170119150255)
 
 class CreateUserGroupMemberships < ActiveRecord::Migration[5.0]

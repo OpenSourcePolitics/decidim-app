@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_decidim_awesome (originally 20200324170000)
 
 class CreateDecidimAwesomeConfig < ActiveRecord::Migration[5.2]
