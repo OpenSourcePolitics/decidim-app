@@ -2,11 +2,11 @@
 
 source "https://rubygems.org"
 
-DECIDIM_VERSION = "0.24.3"
+DECIDIM_VERSION = "release/0.24-stable"
 
 ruby RUBY_VERSION
 
-gem "decidim", DECIDIM_VERSION
+gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
 # gem "decidim", path: "../decidim"
 
 # gem "decidim-conferences", git: "https://github.com/decidim/decidim.git", branch: "release/0.23-stable"
@@ -32,7 +32,7 @@ gem "bootsnap", "~> 1.4"
 
 gem "dotenv-rails"
 
-gem "puma", "~> 5.0.0"
+gem "puma", "~> 5.3.1"
 gem "uglifier", "~> 4.1"
 
 gem "faker", "~> 2.14"
@@ -46,7 +46,7 @@ gem "sprockets", "~> 3.7"
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
-  gem "decidim-dev", DECIDIM_VERSION
+  gem "decidim-dev", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
   # gem "decidim-dev", path: "../decidim"
 end
 
