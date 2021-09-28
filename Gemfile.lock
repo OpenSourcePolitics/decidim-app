@@ -954,6 +954,7 @@ DEPENDENCIES
   newrelic_rpm
   passenger
   puma (~> 5.3.1)
+  rubocop-faker
   ruby-progressbar
   sendgrid-ruby
   sentry-rails
