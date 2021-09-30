@@ -32,6 +32,13 @@ fr:
         name: Formulaire de vérification d'identité
       osp_authorization_workflow:
         name: Procédure d'autorisation
+    events:
+      budgets:
+        pending_order:
+          email_intro: Le vote sur le budget "%{resource_title}" n'est pas encore confirmé dans "%{participatory_space_title}".
+          email_outro: Vous avez reçu cette notification parce que vous participez aux activités dans "%{participatory_space_title}"
+          email_subject: Votre vote est toujours en attente dans %{participatory_space_title}
+          notification_title: Le vote pour le budget <a href="%{resource_path}">%{resource_title}</a> attend toujours votre confirmation dans %{participatory_space_title}
     verifications:
       authorizations:
         first_login:
