@@ -5,6 +5,11 @@ require "spec_helper"
 describe "rake budgets:remind_pending_order", type: :task do
   let(:task) { Rake::Task[:"budgets:remind_pending_order"] }
 
+  before do
+    clear_enqueued_jobs
+    clear_performed_jobs
+  end
+
   after do
     clear_enqueued_jobs
     clear_performed_jobs
@@ -17,6 +22,6 @@ describe "rake budgets:remind_pending_order", type: :task do
   it "performs a job" do
     task.reenable
 
-    expect { task.invoke }.to have_enqueued_job(OrdersReminderJob)
+    expect { task.invoke }.to have_enqueued_job(OrdersReminderJob).at_least(:once)
   end
 end
