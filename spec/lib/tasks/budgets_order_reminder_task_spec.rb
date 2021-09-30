@@ -7,6 +7,7 @@ describe "rake budgets:remind_pending_order", type: :task do
 
   after do
     clear_enqueued_jobs
+    clear_performed_jobs
   end
 
   it "preloads the Rails environment" do
@@ -14,9 +15,8 @@ describe "rake budgets:remind_pending_order", type: :task do
   end
 
   it "performs a job" do
-    expect(OrdersReminderJob).to receive(:perform_now)
-
     task.reenable
-    task.invoke
+
+    expect { task.invoke }.to have_enqueued_job(OrdersReminderJob)
   end
 end
