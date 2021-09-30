@@ -14,7 +14,9 @@ describe "rake budgets:remind_pending_order", type: :task do
   end
 
   it "performs a job" do
+    expect(OrdersReminderJob).to receive(:perform_now)
+
     task.reenable
-    expect { task.invoke }.to have_enqueued_job(OrdersReminderJob).exactly(:once)
+    task.invoke
   end
 end

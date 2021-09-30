@@ -19,10 +19,10 @@ class OrdersReminderJob < ApplicationJob
 
   def send_notification(user, budget)
     Decidim::EventsManager.publish(
-        event: "decidim.events.budgets.pending_order",
-        event_class: Decidim::Budgets::PendingOrderEvent,
-        resource: budget,
-        followers: [user]
+      event: "decidim.events.budgets.pending_order",
+      event_class: Decidim::Budgets::PendingOrderEvent,
+      resource: budget,
+      followers: [user]
     )
   end
 end

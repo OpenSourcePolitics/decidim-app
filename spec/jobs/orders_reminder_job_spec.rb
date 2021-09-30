@@ -16,13 +16,13 @@ describe OrdersReminderJob do
 
   it "sends a notification per user" do
     expect(Decidim::EventsManager)
-        .to receive(:publish)
-                .with(
-                    event: "decidim.events.budgets.pending_order",
-                    event_class: Decidim::Budgets::PendingOrderEvent,
-                    resource: budget,
-                    followers: [user]
-                )
+      .to receive(:publish)
+      .with(
+        event: "decidim.events.budgets.pending_order",
+        event_class: Decidim::Budgets::PendingOrderEvent,
+        resource: budget,
+        followers: [user]
+      )
 
     subject.perform_now
   end
@@ -32,7 +32,9 @@ describe OrdersReminderJob do
       let!(:order) { create(:order, budget: budget) }
 
       it "returns nothing" do
+        # rubocop:disable Rails/SkipsModelValidations
         order.update_column(:checked_out_at, Time.current)
+        # rubocop:enable Rails/SkipsModelValidations
 
         expect(subject.new.send(:pending_orders)).to eq([])
       end
