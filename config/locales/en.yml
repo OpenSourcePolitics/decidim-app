@@ -32,6 +32,13 @@ en:
         name: Identity Verification Form
       osp_authorization_workflow:
         name: Authorization procedure
+    events:
+      budgets:
+        pending_order:
+          email_intro: The vote on budget "%{resource_title}" is not confirmed yet in "%{participatory_space_title}".
+          email_outro: You have received this notification because you are participating in "%{participatory_space_title}"
+          email_subject: Your vote is still pending in %{participatory_space_title}
+          notification_title: The vote on budget <a href="%{resource_path}">%{resource_title}</a> is still waiting for your confirmation in %{participatory_space_title}
     verifications:
       authorizations:
         first_login:
