@@ -3,7 +3,7 @@
 require "rake"
 
 class BackupJob < ApplicationJob
-  unique :until_and_while_executing, runtime_lock_ttl: 10.minutes, on_runtime_conflict: :log
+  unique :while_executing, on_conflict: :log
 
   def perform
     BackupService.run
