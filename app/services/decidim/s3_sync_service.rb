@@ -52,16 +52,6 @@ module Decidim
     end
 
     def execute
-      service = Fog::Storage.new(
-          provider: "AWS",
-          aws_access_key_id: @options[:s3_access_key],
-          aws_secret_access_key: @options[:s3_secret_key],
-          region: @options[:s3_region],
-          endpoint: @options[:s3_endpoint],
-          aws_signature_version: 4,
-          enable_signature_v4_streaming: false
-      )
-
       directory = service.directories.get("osp-backup-dev", prefix: subfolder)
 
       Dir.each_child(@options[:local_backup_dir]) do |filename|
@@ -88,6 +78,20 @@ module Decidim
 
       Rails.logger.info "Sync time stamp is #{timestamp}"
       directory.files.create(key: "#{subfolder}/#{@options[:s3_timestamp_file]}", body: timestamp)
+    end
+
+    private
+
+    def service
+      @service ||= Fog::Storage.new(
+          provider: "AWS",
+          aws_access_key_id: @options[:s3_access_key],
+          aws_secret_access_key: @options[:s3_secret_key],
+          region: @options[:s3_region],
+          endpoint: @options[:s3_endpoint],
+          aws_signature_version: 4,
+          enable_signature_v4_streaming: false
+      )
     end
   end
 end
