@@ -22,7 +22,8 @@ module Decidim
         s3_access_key: Rails.application.config.backup.dig(:s3sync, :access_key),
         s3_secret_key: Rails.application.config.backup.dig(:s3sync, :secret_key),
         s3_subfolder: Rails.application.config.backup.dig(:s3sync, :subfolder),
-        s3_timestamp_file: Rails.application.config.backup.dig(:s3sync, :timestamp_file)
+        s3_timestamp_file: Rails.application.config.backup.dig(:s3sync, :timestamp_file),
+        s3_sync_enabled: Rails.application.config.backup.dig(:s3sync, :enabled)
       }
     end
 
@@ -82,6 +83,8 @@ module Decidim
     private
 
     def service
+      return unless @options[:s3_sync_enabled]
+
       @service ||= Fog::Storage.new(
         provider: "AWS",
         aws_access_key_id: @options[:s3_access_key],

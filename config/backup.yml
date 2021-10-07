@@ -4,12 +4,12 @@ default: &default
   prefix: <%= ENV.fetch("BACKUP_PREFIX") { "decidim-backup" } %>
   timestamp_file: <%= ENV.fetch("BACKUP_TIMESTAMP_FILE") { "timestamp-backup.log" } %>
   s3sync:
-    enabled: <%= ENV.fetch("BACKUP_S3SYNC_ENABLE") { true } %>
+    enabled: <%= ENV.fetch("BACKUP_S3SYNC_ENABLE") { false } %>
     region: <%= ENV.fetch("BACKUP_S3SYNC_REGION") { "fr-par" } %>
     endpoint: <%= ENV.fetch("BACKUP_S3SYNC_ENDPOINT") { "https://s3.fr-par.scw.cloud" } %>
-    bucket: <%= Rails.application.secrets.backup.dig(:s3sync, :bucket) %>
-    access_key: <%= Rails.application.secrets.backup.dig(:s3sync, :access_key) %>
-    secret_key: <%= Rails.application.secrets.backup.dig(:s3sync, :secret_key) %>
+    bucket: <%= ENV.fetch("BACKUP_S3SYNC_BUCKET") { nil } %>
+    access_key: <%= ENV.fetch("BACKUP_S3SYNC_ACCESS_KEY") { nil } %>
+    secret_key: <%= ENV.fetch("BACKUP_S3SYNC_SECRET_KEY") { nil } %>
     subfolder: <%= ENV.fetch("BACKUP_S3SYNC_SUBFOLDER") { nil } %>
     timestamp_file: <%= ENV.fetch("BACKUP_S3SYNC_TIMESTAMP_FILE") { "timestamp-sync.log" } %>
 
