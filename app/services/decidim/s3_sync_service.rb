@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-require 'fog/aws'
-require 'digest'
-
+require "fog/aws"
+require "digest"
 
 module Decidim
   class S3SyncService
@@ -16,14 +15,14 @@ module Decidim
 
     def default_options
       {
-          local_backup_dir: Rails.application.config.backup.dig(:directory),
-          s3_region: Rails.application.config.backup.dig(:s3sync, :region),
-          s3_endpoint: Rails.application.config.backup.dig(:s3sync, :endpoint),
-          s3_bucket: Rails.application.config.backup.dig(:s3sync, :bucket),
-          s3_access_key: Rails.application.config.backup.dig(:s3sync, :access_key),
-          s3_secret_key: Rails.application.config.backup.dig(:s3sync, :secret_key),
-          s3_subfolder: Rails.application.config.backup.dig(:s3sync, :subfolder),
-          s3_timestamp_file: Rails.application.config.backup.dig(:s3sync, :timestamp_file)
+        local_backup_dir: Rails.application.config.backup[:directory],
+        s3_region: Rails.application.config.backup.dig(:s3sync, :region),
+        s3_endpoint: Rails.application.config.backup.dig(:s3sync, :endpoint),
+        s3_bucket: Rails.application.config.backup.dig(:s3sync, :bucket),
+        s3_access_key: Rails.application.config.backup.dig(:s3sync, :access_key),
+        s3_secret_key: Rails.application.config.backup.dig(:s3sync, :secret_key),
+        s3_subfolder: Rails.application.config.backup.dig(:s3sync, :subfolder),
+        s3_timestamp_file: Rails.application.config.backup.dig(:s3sync, :timestamp_file)
       }
     end
 
@@ -33,10 +32,10 @@ module Decidim
 
     def generate_subfolder_name
       [
-          `hostname`,
-          File.basename(`git rev-parse --show-toplevel`),
-          `git branch --show-current`
-      ].map { |e| e.parameterize }.join("--")
+        `hostname`,
+        File.basename(`git rev-parse --show-toplevel`),
+        `git branch --show-current`
+      ].map(&:parameterize).join("--")
     end
 
     def subfolder
@@ -48,7 +47,7 @@ module Decidim
     end
 
     def timestamp
-      @timestamp ||= Time.now.strftime("%Y-%m-%d-%H%M%S")
+      @timestamp ||= Time.zone.now.strftime("%Y-%m-%d-%H%M%S")
     end
 
     def execute
@@ -84,13 +83,13 @@ module Decidim
 
     def service
       @service ||= Fog::Storage.new(
-          provider: "AWS",
-          aws_access_key_id: @options[:s3_access_key],
-          aws_secret_access_key: @options[:s3_secret_key],
-          region: @options[:s3_region],
-          endpoint: @options[:s3_endpoint],
-          aws_signature_version: 4,
-          enable_signature_v4_streaming: false
+        provider: "AWS",
+        aws_access_key_id: @options[:s3_access_key],
+        aws_secret_access_key: @options[:s3_secret_key],
+        region: @options[:s3_region],
+        endpoint: @options[:s3_endpoint],
+        aws_signature_version: 4,
+        enable_signature_v4_streaming: false
       )
     end
   end

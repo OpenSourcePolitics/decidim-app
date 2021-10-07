@@ -29,12 +29,12 @@ module Decidim
 
     def default_options
       {
-          disk_space_limit: Rails.application.config.backup.dig(:disk_space_limit),
-          db_conf: Rails.configuration.database_configuration[Rails.env].deep_symbolize_keys,
-          backup_dir: Rails.application.config.backup.dig(:directory),
-          backup_prefix: Rails.application.config.backup.dig(:prefix),
-          backup_timestamp_file: Rails.application.config.backup.dig(:timestamp_file),
-          scope: :all
+        disk_space_limit: Rails.application.config.backup[:disk_space_limit],
+        db_conf: Rails.configuration.database_configuration[Rails.env].deep_symbolize_keys,
+        backup_dir: Rails.application.config.backup[:directory],
+        backup_prefix: Rails.application.config.backup[:prefix],
+        backup_timestamp_file: Rails.application.config.backup[:timestamp_file],
+        scope: :all
       }
     end
 
@@ -97,9 +97,9 @@ module Decidim
                         .map { |array| array[1] }
 
         file_list = [
-            "git-status.txt",
-            ".git/HEAD",
-            ".git/ORIG_HEAD"
+          "git-status.txt",
+          ".git/HEAD",
+          ".git/ORIG_HEAD"
         ].concat(git_delta)
 
         file = generate_backup_file_path("git", "tar.bz2")
@@ -141,11 +141,11 @@ module Decidim
     end
 
     def need_timestamp?
-      @need_timestamp ||= !ARGV.include?("--no-timestamp")
+      @need_timestamp ||= ARGV.exclude?("--no-timestamp")
     end
 
     def timestamp
-      @timestamp ||= Time.now.strftime("%Y-%m-%d-%H%M%S")
+      @timestamp ||= Time.zone.now.strftime("%Y-%m-%d-%H%M%S")
     end
 
     def generate_backup_file_path(name, ext)
