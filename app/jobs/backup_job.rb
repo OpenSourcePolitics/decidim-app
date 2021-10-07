@@ -3,9 +3,9 @@
 require "rake"
 
 class BackupJob < ApplicationJob
-  def perform(args)
-    Rails.application.load_tasks
-    Rake::Task[args[:task]].reenable
-    Rake::Task[args[:task]].invoke(args[:args])
+  unique :until_and_while_executing, runtime_lock_ttl: 10.minutes, on_runtime_conflict: :log
+
+  def perform
+    BackupService.run
   end
 end

@@ -22,9 +22,6 @@
     class: OrdersReminderJob
     queue: scheduled
   Backup:
-    every: ['24h', first_in: '10s']
+    cron: '0 * * * * *' # Run every minutes
     class: BackupJob
     queue: backups
-    args:
-      task: "decidim:backup:all"
-      args: "-- -v --no-timestamp"

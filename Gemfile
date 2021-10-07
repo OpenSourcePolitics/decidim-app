@@ -44,8 +44,9 @@ gem "letter_opener_web", "~> 1.3"
 
 gem "sprockets", "~> 3.7"
 
-gem "sys-filesystem"
+gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "fog-aws"
+gem "sys-filesystem"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
