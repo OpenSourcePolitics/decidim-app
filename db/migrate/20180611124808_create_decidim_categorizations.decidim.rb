@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim (originally 20170612100253)
 
 class CreateDecidimCategorizations < ActiveRecord::Migration[5.1]

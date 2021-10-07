@@ -18,7 +18,7 @@ resource "scaleway_instance_security_group" "decidim_app_sg" {
 
   name = var.sg_name
 
-  inbound_default_policy  = "accept"
+  inbound_default_policy  = "drop"
   outbound_default_policy = "accept"
   
   enable_default_security = "false"
@@ -31,6 +31,11 @@ resource "scaleway_instance_security_group" "decidim_app_sg" {
   inbound_rule {
     action = "accept"
     port   = "80"
+  }
+
+  inbound_rule {
+    action = "accept"
+    port   = "443"
   }
 }
 

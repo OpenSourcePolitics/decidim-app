@@ -1,0 +1,23 @@
+default: &default
+  disk_space_limit: <%= ENV.fetch("BACKUP_DISK_SPACE_LIMIT") { 10 } %>
+  directory: <%= ENV.fetch("BACKUP_DIRECTORY") { "tmp/backups" } %>
+  prefix: <%= ENV.fetch("BACKUP_PREFIX") { "decidim-backup" } %>
+  timestamp_file: <%= ENV.fetch("BACKUP_TIMESTAMP_FILE") { "timestamp-backup.log" } %>
+  s3sync:
+    enabled: <%= ENV.fetch("BACKUP_S3SYNC_ENABLE") { true } %>
+    region: <%= ENV.fetch("BACKUP_S3SYNC_REGION") { "fr-par" } %>
+    endpoint: <%= ENV.fetch("BACKUP_S3SYNC_ENDPOINT") { "https://s3.fr-par.scw.cloud" } %>
+    bucket: <%= Rails.application.secrets.backup.dig(:s3sync, :bucket) %>
+    access_key: <%= Rails.application.secrets.backup.dig(:s3sync, :access_key) %>
+    secret_key: <%= Rails.application.secrets.backup.dig(:s3sync, :secret_key) %>
+    subfolder: <%= ENV.fetch("BACKUP_S3SYNC_SUBFOLDER") { nil } %>
+    timestamp_file: <%= ENV.fetch("BACKUP_S3SYNC_TIMESTAMP_FILE") { "timestamp-sync.log" } %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

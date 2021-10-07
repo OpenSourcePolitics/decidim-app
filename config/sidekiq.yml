@@ -1,6 +1,7 @@
 :concurrency: 5
 :queues:
 - default
+- backups
 - metrics
 - mailers
 - newsletter
@@ -9,14 +10,21 @@
 
 :schedule:
   CalculateAllMetrics:
-    every: ['24h', first_in: '1m']
+    cron: '0 0 0 * * *' # Run at midnight
     class: CalculateAllMetricsJob
     queue: scheduled
   PreloadOpenData:
-    every: ['24h', first_in: '1m']
+    cron: '0 0 1 * * *' # Run at midnight
     class: PreloadOpenDataJob
     queue: scheduled
   OrdersReminder:
-    every: ['24h', first_in: '1m']
+    cron: '0 0 18 * * *' # Run at 18:00
     class: OrdersReminderJob
     queue: scheduled
+  Backup:
+    every: ['24h', first_in: '10s']
+    class: BackupJob
+    queue: backups
+    args:
+      task: "decidim:backup:all"
+      args: "-- -v --no-timestamp"

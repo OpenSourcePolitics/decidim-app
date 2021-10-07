@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 # This migration comes from redirector_engine (originally 20120823163756)
 class CreateRequestEnvironmentRules < ActiveRecord::Migration[4.2]
   def change
     create_table :request_environment_rules do |t|
-      t.integer :redirect_rule_id, :null => false
-      t.string :environment_key_name, :null => false
-      t.string :environment_value, :null => false
-      t.boolean :environment_value_is_regex, :null => false, :default => false
-      t.boolean :environment_value_is_case_sensitive, :null => false, :default => true
+      t.integer :redirect_rule_id, null: false
+      t.string :environment_key_name, null: false
+      t.string :environment_value, null: false
+      t.boolean :environment_value_is_regex, null: false, default: false
+      t.boolean :environment_value_is_case_sensitive, null: false, default: true
       t.timestamps
     end
     add_index :request_environment_rules, :redirect_rule_id
