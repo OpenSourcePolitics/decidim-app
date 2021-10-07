@@ -1,11 +1,12 @@
 :concurrency: 5
 :queues:
-  - mailers
-  - default
-  - newsletter
-  - events
-  - scheduled
-  - metrics
+- default
+- backups
+- metrics
+- mailers
+- newsletter
+- events
+- scheduled
 
 :schedule:
   CalculateAllMetrics:
@@ -20,3 +21,10 @@
     cron: '0 0 18 * * *' # Run at 18:00
     class: OrdersReminderJob
     queue: scheduled
+  Backup:
+    every: ['24h', first_in: '10s']
+    class: BackupJob
+    queue: backups
+    args:
+      task: "decidim:backup:all"
+      args: "-- -v --no-timestamp"

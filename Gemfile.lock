@@ -892,6 +892,8 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     ssrf_filter (1.0.7)
+    sys-filesystem (1.4.2)
+      ffi (~> 1.1)
     system_test_html_screenshots (0.1.2)
       actionpack (>= 5.2, < 6.0.a)
     temple (0.8.2)
@@ -981,6 +983,7 @@ DEPENDENCIES
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
   sprockets (~> 3.7)
+  sys-filesystem
   uglifier (~> 4.1)
   web-console (~> 3.5)
 

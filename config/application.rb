@@ -22,6 +22,8 @@ module DevelopmentApp
     # DON'T FORGET to ALSO set this in `config/initializers/carrierwave.rb`
     # config.action_mailer.asset_host = "https://your.server.url"
 
+    config.backup = config_for(:backup).deep_symbolize_keys
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
