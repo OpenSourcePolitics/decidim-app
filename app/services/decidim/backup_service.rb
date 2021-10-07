@@ -96,11 +96,7 @@ module Decidim
                         .reject { |array| array[0] == "D" }
                         .map { |array| array[1] }
 
-        file_list = [
-          "git-status.txt",
-          ".git/HEAD",
-          ".git/ORIG_HEAD"
-        ].concat(git_delta)
+        file_list = %w(git-status.txt .git/HEAD .git/ORIG_HEAD).concat(git_delta)
 
         file = generate_backup_file_path("git", "tar.bz2")
 
