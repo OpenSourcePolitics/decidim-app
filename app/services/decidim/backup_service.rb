@@ -16,15 +16,16 @@ module Decidim
     end
 
     def execute
+      create_backup_dir
       backup_database if check_scope?(:db)
       backup_uploads if check_scope?(:uploads)
       backup_env if check_scope?(:env)
       backup_git if check_scope?(:git)
       generate_timestamp_file
 
-      Decidim::S3SyncService.run
+      Decidim::S3SyncService.run unless ENV["DRY_RUN"]
 
-      clean_temp_file
+      clean_temp_file unless ENV["DRY_RUN"]
     end
 
     def default_options
@@ -36,6 +37,13 @@ module Decidim
         backup_timestamp_file: Rails.application.config.backup[:timestamp_file],
         scope: :all
       }
+    end
+
+    def create_backup_dir
+      backup_dir = Rails.root.join(@options[:backup_dir])
+      return if File.exist?(backup_dir)
+
+      FileUtils.mkdir_p(backup_dir)
     end
 
     def backup_database
@@ -89,14 +97,12 @@ module Decidim
 
     def backup_git
       if File.exist?(".git")
-        system "git status -s > git-status.txt"
-        git_delta = File.read("git-status.txt")
-                        .split("\n")
-                        .map(&:split)
-                        .reject { |array| array[0] == "D" }
-                        .map { |array| array[1] }
+        git_delta = `git status -s`.split("\n")
+                                   .map(&:split)
+                                   .map { |array| array[1] }
 
-        file_list = %w(git-status.txt .git/HEAD .git/ORIG_HEAD).concat(git_delta)
+        file_list = %w(.git/HEAD .git/ORIG_HEAD).concat(git_delta)
+                                                .select { |file| File.exist? file }
 
         file = generate_backup_file_path("git", "tar.bz2")
 

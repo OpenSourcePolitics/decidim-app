@@ -52,6 +52,8 @@ module Decidim
     end
 
     def execute
+      return unless @options[:s3_sync_enabled]
+
       directory = service.directories.get("osp-backup-dev", prefix: subfolder)
 
       Dir.each_child(@options[:local_backup_dir]) do |filename|
