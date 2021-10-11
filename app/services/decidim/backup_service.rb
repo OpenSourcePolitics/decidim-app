@@ -1,24 +1,49 @@
 # frozen_string_literal: true
 
-require 'sys/filesystem'
-require 'fog/aws'
-require 'digest'
+require "sys/filesystem"
+require "fog/aws"
+require "digest"
+require "fileutils"
 
 module Decidim
   class BackupService
-
-    def initialize(options = {})
+    def initialize(options)
       @options = default_options.merge(options)
+    end
+
+    def self.run(options = {})
+      new(options).execute
+    end
+
+    def execute
+      create_backup_dir
+      backup_database if check_scope?(:db)
+      backup_uploads if check_scope?(:uploads)
+      backup_env if check_scope?(:env)
+      backup_git if check_scope?(:git)
+      generate_timestamp_file
+
+      Decidim::S3SyncService.run unless ENV["DRY_RUN"]
+
+      clean_temp_file unless ENV["DRY_RUN"]
     end
 
     def default_options
       {
-        :disk_space_limit => Rails.application.config.backup.dig(:disk_space_limit),
-        :db_conf => Rails.configuration.database_configuration[Rails.env].deep_symbolize_keys,
-        :backup_dir => Rails.application.config.backup.dig(:directory),
-        :backup_prefix => Rails.application.config.backup.dig(:prefix),
-        :backup_timestamp_file => Rails.application.config.backup.dig(:timestamp_file),
+        disk_space_limit: Rails.application.config.backup[:disk_space_limit],
+        db_conf: Rails.configuration.database_configuration[Rails.env].deep_symbolize_keys,
+        backup_dir: Rails.application.config.backup[:directory],
+        backup_prefix: Rails.application.config.backup[:prefix],
+        backup_timestamp_file: Rails.application.config.backup[:timestamp_file],
+        scope: :all
       }
+    end
+
+    def create_backup_dir
+      backup_dir = Rails.root.join(@options[:backup_dir])
+      return if File.exist?(backup_dir)
+
+      FileUtils.mkdir_p(backup_dir)
     end
 
     def backup_database
@@ -32,7 +57,9 @@ module Decidim
         cmd = "PGPASSWORD=#{@options[:db_conf][:password]} #{cmd}" if @options[:db_conf][:password].present?
         cmd += " -d '#{@options[:db_conf][:database]}'" if @options[:db_conf][:database].present?
         cmd += " -f '#{file}'"
-  
+
+        Rails.logger.info("Started backup_database with #{cmd}")
+
         execute_backup_command(file, cmd)
       else
         Rails.logger.error "Cannot connect to DB with configuration"
@@ -45,9 +72,9 @@ module Decidim
     def backup_uploads
       if File.exist?("public/uploads")
         file = generate_backup_file_path("uploads", "tar.bz2")
-        
+
         cmd = "tar -jcf #{file} --exclude='public/uploads/tmp' public/uploads"
-  
+
         execute_backup_command(file, cmd)
       else
         Rails.logger.warn "uploads directory not found"
@@ -58,7 +85,7 @@ module Decidim
     def backup_env
       if File.exist?(".env")
         file = generate_backup_file_path("env", "tar.bz2")
-        
+
         cmd = "tar -jcf #{file} .env"
 
         execute_backup_command(file, cmd)
@@ -70,19 +97,17 @@ module Decidim
 
     def backup_git
       if File.exist?(".git")
-        system "git status -s > git-status.txt"
-        git_delta = File.read("git-status.txt").split()
-  
-        file_list = [
-          "git-status.txt",
-          ".git/HEAD",
-          ".git/ORIG_HEAD",
-        ].concat(git_delta.select.with_index {|e, i| i.odd?})
-  
+        git_delta = `git status -s`.split("\n")
+                                   .map(&:split)
+                                   .map { |array| array[1] }
+
+        file_list = %w(.git/HEAD .git/ORIG_HEAD).concat(git_delta)
+                                                .select { |file| File.exist? file }
+
         file = generate_backup_file_path("git", "tar.bz2")
-        
+
         cmd = "tar -jcf #{file} #{file_list.join(" ")}"
-  
+
         execute_backup_command(file, cmd)
       else
         Rails.logger.warn ".git directory not found"
@@ -118,28 +143,37 @@ module Decidim
     end
 
     def need_timestamp?
-      @need_timestamp ||= !ARGV.include?("--no-timestamp")
-    end
-
-    def verbose?
-      @verbose ||= ARGV.include?("-v") || ARGV.include?("--verbose")
+      @need_timestamp ||= ARGV.exclude?("--no-timestamp")
     end
 
     def timestamp
-      @timestamp ||= Time.now.strftime("%Y-%m-%d-%H%M%S")
+      @timestamp ||= Time.zone.now.strftime("%Y-%m-%d-%H%M%S")
     end
 
     def generate_backup_file_path(name, ext)
       path = @options[:backup_dir]
       path += "/#{@options[:backup_prefix]}-#{name}"
       path += "-#{timestamp}" if need_timestamp?
-      path += ".#{ext}"
+
+      "#{path}.#{ext}"
     end
 
     def execute_backup_command(file, cmd)
-      Rails.logger.info "Command : #{cmd}" if verbose?
-      result = system cmd
+      Rails.logger.info "Command : #{cmd}"
+      result = system(cmd)
       Rails.logger.info "Created file #{file} with exit code #{result}"
+    end
+
+    def clean_temp_file
+      return unless File.exist?(Rails.root.join(@options[:backup_dir]))
+
+      FileUtils.rm_f(Dir.glob(Rails.root.join(@options[:backup_dir], "*")))
+    end
+
+    def check_scope?(scope)
+      return true if @options[:scope] == :all
+
+      @options[:scope] == scope
     end
   end
 end
