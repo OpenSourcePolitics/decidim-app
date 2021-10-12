@@ -4,7 +4,7 @@ default: &default
   prefix: <%= ENV.fetch("BACKUP_PREFIX") { "decidim-backup" } %>
   timestamp_file: <%= ENV.fetch("BACKUP_TIMESTAMP_FILE") { "timestamp-backup.log" } %>
   s3sync:
-    enabled: <%= ENV.fetch("BACKUP_S3SYNC_ENABLE") { false } %>
+    enabled: <%= ENV["BACKUP_S3SYNC_ENABLE"]&.downcase == "true" %>
     region: <%= ENV.fetch("BACKUP_S3SYNC_REGION") { "fr-par" } %>
     endpoint: <%= ENV.fetch("BACKUP_S3SYNC_ENDPOINT") { "https://s3.fr-par.scw.cloud" } %>
     bucket: <%= ENV.fetch("BACKUP_S3SYNC_BUCKET") { nil } %>

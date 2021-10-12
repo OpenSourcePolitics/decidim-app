@@ -24,7 +24,12 @@ namespace :decidim do
 
     desc "Backup all"
     task all: :environment do
-      Decidim::BackupService.run
+      Decidim::BackupService.run(s3sync: false)
+    end
+
+    desc "Synchronize files with Object Storage"
+    task s3sync: :environment do
+      Decidim::S3SyncService.run
     end
   end
 end

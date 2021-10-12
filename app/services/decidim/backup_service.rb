@@ -9,6 +9,7 @@ module Decidim
   class BackupService
     def initialize(options)
       @options = default_options.merge(options)
+      @local_files = []
     end
 
     def self.run(options = {})
@@ -21,11 +22,12 @@ module Decidim
       backup_uploads if check_scope?(:uploads)
       backup_env if check_scope?(:env)
       backup_git if check_scope?(:git)
-      generate_timestamp_file
 
-      Decidim::S3SyncService.run unless ENV["DRY_RUN"]
+      generate_timestamp_file unless @options[:timestamp_in_filename]
 
-      clean_temp_file unless ENV["DRY_RUN"]
+      Decidim::S3SyncService.run(local_backup_files: @local_files) if @options[:s3sync]
+
+      clean_local_files unless @options[:keep_local_files]
     end
 
     def default_options
@@ -35,6 +37,9 @@ module Decidim
         backup_dir: Rails.application.config.backup[:directory],
         backup_prefix: Rails.application.config.backup[:prefix],
         backup_timestamp_file: Rails.application.config.backup[:timestamp_file],
+        timestamp_in_filename: true,
+        s3sync: Rails.application.config.backup.dig(:s3sync, :enabled),
+        keep_local_files: true,
         scope: :all
       }
     end
@@ -117,7 +122,9 @@ module Decidim
 
     def generate_timestamp_file
       Rails.logger.info "Backup time stamp is #{timestamp}"
-      File.write("#{@options[:backup_dir]}/#{@options[:backup_timestamp_file]}", timestamp)
+      file = "#{@options[:backup_dir]}/#{@options[:backup_timestamp_file]}"
+      File.write(file, timestamp)
+      @local_files << file
     end
 
     protected
@@ -143,7 +150,7 @@ module Decidim
     end
 
     def need_timestamp?
-      @need_timestamp ||= ARGV.exclude?("--no-timestamp")
+      @options[:timestamp_in_filename]
     end
 
     def timestamp
@@ -161,13 +168,12 @@ module Decidim
     def execute_backup_command(file, cmd)
       Rails.logger.info "Command : #{cmd}"
       result = system(cmd)
-      Rails.logger.info "Created file #{file} with exit code #{result}"
+      @local_files << file if result
+      Rails.logger.info "Created file #{file} with exit code #{$?}"
     end
 
-    def clean_temp_file
-      return unless File.exist?(Rails.root.join(@options[:backup_dir]))
-
-      FileUtils.rm_f(Dir.glob(Rails.root.join(@options[:backup_dir], "*")))
+    def clean_local_files
+      FileUtils.rm(@local_files)
     end
 
     def check_scope?(scope)

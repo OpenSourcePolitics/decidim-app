@@ -16,14 +16,15 @@ module Decidim
     def default_options
       {
         local_backup_dir: Rails.application.config.backup[:directory],
+        local_backup_files: [],
+        force_upload: false,
         s3_region: Rails.application.config.backup.dig(:s3sync, :region),
         s3_endpoint: Rails.application.config.backup.dig(:s3sync, :endpoint),
         s3_bucket: Rails.application.config.backup.dig(:s3sync, :bucket),
         s3_access_key: Rails.application.config.backup.dig(:s3sync, :access_key),
         s3_secret_key: Rails.application.config.backup.dig(:s3sync, :secret_key),
         s3_subfolder: Rails.application.config.backup.dig(:s3sync, :subfolder),
-        s3_timestamp_file: Rails.application.config.backup.dig(:s3sync, :timestamp_file),
-        s3_sync_enabled: Rails.application.config.backup.dig(:s3sync, :enabled)
+        s3_timestamp_file: Rails.application.config.backup.dig(:s3sync, :timestamp_file)
       }
     end
 
@@ -44,29 +45,42 @@ module Decidim
     end
 
     def force_upload?
-      @force_upload ||= ARGV.include?("--force")
+      @options[:force_upload]
     end
 
     def timestamp
       @timestamp ||= Time.zone.now.strftime("%Y-%m-%d-%H%M%S")
     end
 
+    def datestamp
+      @datestamp ||= Time.zone.now.strftime("%Y-%m-%d")
+    end
+
+    def file_list
+      if @options[:local_backup_files].empty?
+        Dir.children(@options[:local_backup_dir]).map do |filename| 
+          "#{@options[:local_backup_dir]}/#{filename}"
+        end
+      else 
+        @options[:local_backup_files]
+      end
+    end
+
     def execute
-      return unless @options[:s3_sync_enabled]
+      directory = service.directories.get(@options[:s3_bucket], prefix: subfolder)
 
-      directory = service.directories.get("osp-backup-dev", prefix: subfolder)
-
-      Dir.each_child(@options[:local_backup_dir]) do |filename|
-        md5 = Digest::MD5.file("#{@options[:local_backup_dir]}/#{filename}").base64digest
-        key = "#{subfolder}/#{filename}"
+      file_list.each do |filename|
+        md5 = Digest::MD5.file(filename).base64digest
+        key = "#{subfolder}/#{File.basename(filename)}"
 
         old_file = directory.files.head(key: key)
 
         if old_file.nil? || force_upload? || old_file.content_md5 != md5
-          file = directory.files.new(key: key, body: File.open("#{@options[:local_backup_dir]}/#{filename}"))
+          file = directory.files.new(key: key, body: File.open(filename))
           file.multipart_chunk_size = 10 * 1024 * 1024
           file.concurrency = 10
           file.content_md5 = md5
+          file.tags = "date=#{datestamp}"
           Rails.logger.info "Uploading #{key}"
           if file.save
             Rails.logger.info "Upload complete"
@@ -85,8 +99,6 @@ module Decidim
     private
 
     def service
-      return unless @options[:s3_sync_enabled]
-
       @service ||= Fog::Storage.new(
         provider: "AWS",
         aws_access_key_id: @options[:s3_access_key],

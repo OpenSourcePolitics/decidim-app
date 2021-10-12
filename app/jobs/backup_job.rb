@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require "rake"
-
 class BackupJob < ApplicationJob
   unique :while_executing, on_conflict: :log
 
   def perform
-    BackupService.run
+    Decidim::BackupService.run(keep_local_files: false)
   end
 end
