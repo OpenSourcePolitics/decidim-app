@@ -22,6 +22,6 @@
     class: OrdersReminderJob
     queue: scheduled
   Backup:
-    cron: '0 4 * * * *' # Run at 04:00
+    cron: '0 0 4 * * ?' # Run at 04:00
     class: BackupJob
     queue: backups
