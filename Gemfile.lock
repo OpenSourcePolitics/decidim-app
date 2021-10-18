@@ -1,32 +1,4 @@
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git
-  revision: 4816914fa58e8b684c8bdf53948475b4193a8c7e
-  branch: master
-  specs:
-    decidim-question_captcha (0.24.3)
-      acts_as_textcaptcha (~> 4.5.1)
-      decidim-core (= 0.24.3)
-
-GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-urlaliases.git
-  revision: 3527043c1ce2886ef86cd1f34e14d2bef5c759bb
-  branch: master
-  specs:
-    decidim-url_aliases (0.0.1)
-      decidim-core (~> 0.24)
-      rails (>= 5.2)
-      redirector
-
-GIT
-  remote: https://github.com/PopulateTools/decidim-module-anonymous_proposals
-  revision: f3ce445affd1992f2bfc660acf50d37c5c144fea
-  branch: main
-  specs:
-    decidim-anonymous_proposals (0.1)
-      decidim-core (>= 0.24.0)
-      deface (~> 1.5)
-
-GIT
   remote: https://github.com/decidim/decidim.git
   revision: a610ad4fe4c4a821e0dc66188bdd6c7fe2998c34
   branch: release/0.24-stable
@@ -295,7 +267,6 @@ GEM
       tzinfo (~> 1.1)
     acts_as_list (0.9.19)
       activerecord (>= 3.0)
-    acts_as_textcaptcha (4.5.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     anchored (1.1.0)
@@ -390,11 +361,6 @@ GEM
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
-    deface (1.8.1)
-      nokogiri (>= 1.6)
-      polyglot
-      rails (>= 5.2)
-      rainbow (>= 2.1.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.8.0)
@@ -673,7 +639,6 @@ GEM
     pg_search (2.3.5)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
-    polyglot (0.3.5)
     premailer (1.15.0)
       addressable
       css_parser (>= 1.6.0)
@@ -749,8 +714,6 @@ GEM
       virtus (~> 1.0.5)
       wisper (>= 1.6.1)
     redcarpet (3.5.1)
-    redirector (1.1.7)
-      rails (>= 3.1)
     redis (4.4.0)
     redlock (1.2.2)
       redis (>= 3.0.0, < 5.0)
@@ -958,17 +921,13 @@ PLATFORMS
 
 DEPENDENCIES
   activejob-uniqueness
-  acts_as_textcaptcha (~> 4.5.1)
   bootsnap (~> 1.4)
   byebug (~> 11.0)
   dalli
   decidim!
-  decidim-anonymous_proposals!
   decidim-decidim_awesome (~> 0.7.0)
   decidim-dev!
-  decidim-question_captcha!
   decidim-term_customizer!
-  decidim-url_aliases!
   dotenv-rails
   faker (~> 2.14)
   fog-aws
