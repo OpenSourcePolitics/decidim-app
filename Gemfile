@@ -8,11 +8,8 @@ ruby RUBY_VERSION
 
 gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
 
-gem "decidim-anonymous_proposals", git: "https://github.com/PopulateTools/decidim-module-anonymous_proposals", branch: :main
 gem "decidim-decidim_awesome", "~> 0.7.0"
-gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: "master"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "master"
-gem "decidim-url_aliases", git: "https://github.com/OpenSourcePolitics/decidim-urlaliases.git", branch: "master"
 
 gem "bootsnap", "~> 1.4"
 
@@ -37,7 +34,6 @@ group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
   gem "decidim-dev", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
-  # gem "decidim-dev", path: "../decidim"
 end
 
 group :development do
@@ -49,7 +45,6 @@ group :development do
 end
 
 group :production do
-  # gem "rubocop-rails"
   gem "dalli"
   gem "lograge"
   gem "newrelic_rpm"
