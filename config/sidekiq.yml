@@ -1,11 +1,12 @@
 :concurrency: 5
 :queues:
-  - mailers
   - default
+  - backups
+  - metrics
+  - mailers
   - newsletter
   - events
   - scheduled
-  - metrics
 
 :schedule:
   CalculateAllMetrics:
@@ -20,3 +21,7 @@
     cron: '0 18 * * * *' # Run at 18:00
     class: OrdersReminderJob
     queue: scheduled
+  Backup:
+    cron: '0 0 4 * * *' # Run at 04:00
+    class: BackupJob
+    queue: backups
