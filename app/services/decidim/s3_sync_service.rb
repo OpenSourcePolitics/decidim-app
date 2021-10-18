@@ -58,10 +58,10 @@ module Decidim
 
     def file_list
       if @options[:local_backup_files].empty?
-        Dir.children(@options[:local_backup_dir]).map do |filename| 
+        Dir.children(@options[:local_backup_dir]).map do |filename|
           "#{@options[:local_backup_dir]}/#{filename}"
         end
-      else 
+      else
         @options[:local_backup_files]
       end
     end

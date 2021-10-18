@@ -169,7 +169,7 @@ module Decidim
       Rails.logger.info "Command : #{cmd}"
       result = system(cmd)
       @local_files << file if result
-      Rails.logger.info "Created file #{file} with exit code #{$?}"
+      Rails.logger.info "Created file #{file} with exit code #{$CHILD_STATUS}"
     end
 
     def clean_local_files
