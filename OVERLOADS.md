@@ -1,3 +1,11 @@
+## Overrides
+
+* `app/serializers/decidim/meetings/registration_serializer.rb`
+Fix meetings registration serializer
+
+* `lib/decidim/forms/user_answers_serializer.rb`
+Fix UserAnswersSerializer for CSV exports
+
 * `lib/extends/commands/decidim/admin/create_participatory_space_private_user_extends.rb`
 28c8d74 - Add basic tests to reference package (#1), 2021-07-26
 
