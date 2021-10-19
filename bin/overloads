@@ -17,9 +17,10 @@ if PARAMS.fetch(:extra_files).empty?
   return
 end
 
-File.open(PARAMS.fetch(:registry), "a") do |f|
+File.open(PARAMS.fetch(:registry), "r+") do |f|
+  content = f.readlines
   PARAMS.fetch(:extra_files).each do |line|
-    next unless `grep #{line} #{PARAMS.fetch(:registry)}`.empty?
+    next if content.select { |overload| overload.match? line }.count.positive?
 
     f.puts "* \`#{line}\`"
     f.puts `git log -n 1 --pretty=format:'%C(auto)%h - %s, %as' -- #{line}`
