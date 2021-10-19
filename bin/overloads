@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require "byebug"
 PARAMS = { standard: ".overloads", folders: %w(app config lib), registry: "OVERLOADS.md", project_files: [], extra_files: [] }
 
 return unless File.exist?(PARAMS.fetch(:standard))
@@ -18,12 +19,14 @@ end
 
 File.open(PARAMS.fetch(:registry), "a") do |f|
   PARAMS.fetch(:extra_files).each do |line|
+    next unless `grep #{line} #{PARAMS.fetch(:registry)}`.empty?
+
     f.puts "* \`#{line}\`"
     f.puts `git log -n 1 --pretty=format:'%C(auto)%h - %s, %as' -- #{line}`
     f.puts "\n"
   end
 
-  puts "Found #{PARAMS.fetch(:extra_files).count} overloads not registered, added to '#{PARAMS.fetch(:registry)}'"
+  puts "Found #{PARAMS.fetch(:extra_files).count} overloads, added to '#{PARAMS.fetch(:registry)}'"
 end
 
 File.open(PARAMS.fetch(:standard), "a") do |f|
