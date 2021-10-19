@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require "byebug"
 PARAMS = { standard: ".overloads", folders: %w(app config lib), registry: "OVERLOADS.md", project_files: [], extra_files: [] }
 
 return unless File.exist?(PARAMS.fetch(:standard))
