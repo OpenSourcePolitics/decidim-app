@@ -28,7 +28,3 @@ File.open(PARAMS.fetch(:registry), "a") do |f|
 
   puts "Found #{PARAMS.fetch(:extra_files).count} overloads, added to '#{PARAMS.fetch(:registry)}'"
 end
-
-File.open(PARAMS.fetch(:standard), "a") do |f|
-  PARAMS.fetch(:extra_files).each { |file| f.puts file }
-end
