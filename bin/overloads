@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'byebug'
+
+filename = ".overloads"
+return unless File.exists?(filename)
+
+standard_files = File.open(filename).readlines.map(&:chomp)
+
+standard_files.each do |line|
+	puts "* \`#{line}\`"
+	puts `git log -n 1 --pretty=format:'%C(auto)%h - %s, %as' -- #{line}`
+	puts "\n"
+end
