@@ -1,14 +1,31 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-require 'byebug'
+PARAMS = { standard: ".overloads", folders: %w(app config lib), registry: "OVERLOADS.md", project_files: [], extra_files: [] }
 
-filename = ".overloads"
-return unless File.exists?(filename)
+return unless File.exist?(PARAMS.fetch(:standard))
 
-standard_files = File.open(filename).readlines.map(&:chomp)
+PARAMS.fetch(:folders).each do |folder|
+  PARAMS[:project_files] += Dir.glob("#{folder}/**/*.*").select { |path| File.file?(path) }
+end
 
-standard_files.each do |line|
-	puts "* \`#{line}\`"
-	puts `git log -n 1 --pretty=format:'%C(auto)%h - %s, %as' -- #{line}`
-	puts "\n"
+PARAMS[:extra_files] = PARAMS[:project_files] - File.open(PARAMS.fetch(:standard)).readlines.map(&:chomp)
+
+if PARAMS.fetch(:extra_files).empty?
+  puts "No overloads found"
+  return
+end
+
+File.open(PARAMS.fetch(:registry), "a") do |f|
+  PARAMS.fetch(:extra_files).each do |line|
+    f.puts "* \`#{line}\`"
+    f.puts `git log -n 1 --pretty=format:'%C(auto)%h - %s, %as' -- #{line}`
+    f.puts "\n"
+  end
+
+  puts "Found #{PARAMS.fetch(:extra_files).count} overloads not registered, added to '#{PARAMS.fetch(:registry)}'"
+end
+
+File.open(PARAMS.fetch(:standard), "a") do |f|
+  PARAMS.fetch(:extra_files).each { |file| f.puts file }
 end
