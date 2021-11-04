@@ -88,13 +88,12 @@ ignore_missing:
 ignore_unused:
   - faker.*
   - activemodel.attributes.osp_authorization_handler.*
+  - activemodel.attributes.participatory_process.private_space
+  - decidim.accessibility.skip_button
   - decidim.authorization_handlers.osp_authorization_handler.*
   - decidim.authorization_handlers.osp_authorization_workflow.*
-  - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
-  - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow
-  - activemodel.attributes.participatory_process.private_space
   - decidim.amendments.emendation.announcement.evaluating
   - decidim.events.budgets.pending_order.*
-
-
-
+  - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
+  - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow
+  - layouts.decidim.user_menu.account
