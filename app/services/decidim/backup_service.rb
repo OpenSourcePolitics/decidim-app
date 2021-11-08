@@ -32,9 +32,7 @@ module Decidim
         )
       end
 
-      if @options[:s3retention]
-        Decidim::S3RetentionService.run
-      end 
+      Decidim::S3RetentionService.run if @options[:s3retention]
 
       clean_local_files unless @options[:keep_local_files]
     end

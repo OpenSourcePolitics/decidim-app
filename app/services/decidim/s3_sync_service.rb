@@ -5,7 +5,6 @@ require "digest"
 
 module Decidim
   class S3SyncService
-
     include Decidim::BackupHelper
 
     def self.run(options = {})

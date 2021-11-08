@@ -5,7 +5,6 @@ require "digest"
 
 module Decidim
   class S3RetentionService
-
     include Decidim::BackupHelper
 
     def self.run(options = {})
@@ -34,10 +33,10 @@ module Decidim
 
     def retention_dates
       retention_dates = [Time.zone.now.strftime("%Y-%m-%d")]
-      for i in 1..13 do
+      (1..13).each do |i|
         retention_dates << i.days.ago.strftime("%Y-%m-%d")
       end
-      for i in 1..6 do
+      (1..6).each do |i|
         retention_dates << i.weeks.ago.strftime("%Y-%m-%d")
       end
       for i in 1..6 do
@@ -51,15 +50,14 @@ module Decidim
       directory = service.directories.get(@options[:s3_bucket], prefix: subfolder)
 
       directory.files.all.each do |file|
-        unless file.key.end_with?(@options[:s3_timestamp_file])
-          date_tag = service.get_object_tagging(@options[:s3_bucket], file.key).data.dig(:body, "ObjectTagging","date")
-          unless retention_dates.include?(date_tag)
-            Rails.logger.info "Destroying file #{file.key} with date tag #{date_tag}"
-            file.destroy
-          end
+        next if file.key.end_with?(@options[:s3_timestamp_file])
+
+        date_tag = service.get_object_tagging(@options[:s3_bucket], file.key).data.dig(:body, "ObjectTagging", "date")
+        unless retention_dates.include?(date_tag)
+          Rails.logger.info "Destroying file #{file.key} with date tag #{date_tag}"
+          file.destroy
         end
       end
-
     end
 
     private
