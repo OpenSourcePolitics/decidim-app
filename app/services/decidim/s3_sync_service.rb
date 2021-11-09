@@ -5,6 +5,8 @@ require "digest"
 
 module Decidim
   class S3SyncService
+    include Decidim::BackupHelper
+
     def self.run(options = {})
       new(options).execute
     end
@@ -15,9 +17,10 @@ module Decidim
 
     def default_options
       {
+        datestamp: Time.zone.now.strftime("%Y-%m-%d"),
+        force_upload: false,
         local_backup_dir: Rails.application.config.backup[:directory],
         local_backup_files: [],
-        force_upload: false,
         s3_region: Rails.application.config.backup.dig(:s3sync, :region),
         s3_endpoint: Rails.application.config.backup.dig(:s3sync, :endpoint),
         s3_bucket: Rails.application.config.backup.dig(:s3sync, :bucket),
@@ -32,14 +35,6 @@ module Decidim
       File.directory?(@options[:local_backup_dir]) & File.readable?(@options[:local_backup_dir])
     end
 
-    def generate_subfolder_name
-      [
-        `hostname`,
-        File.basename(`git rev-parse --show-toplevel`),
-        `git branch --show-current`
-      ].map(&:parameterize).join("--")
-    end
-
     def subfolder
       @subfolder ||= @options[:subfolder].presence || generate_subfolder_name
     end
@@ -50,10 +45,6 @@ module Decidim
 
     def timestamp
       @timestamp ||= Time.zone.now.strftime("%Y-%m-%d-%H%M%S")
-    end
-
-    def datestamp
-      @datestamp ||= Time.zone.now.strftime("%Y-%m-%d")
     end
 
     def file_list
@@ -70,17 +61,20 @@ module Decidim
       directory = service.directories.get(@options[:s3_bucket], prefix: subfolder)
 
       file_list.each do |filename|
-        md5 = Digest::MD5.file(filename).base64digest
+        md5 = Digest::MD5.file(filename)
         key = "#{subfolder}/#{File.basename(filename)}"
 
-        old_file = directory.files.head(key: key)
+        old_file = directory.files.head(key)
+        # the HEAD request does not send back the content_md5 value (base64)
+        # we make the comparison with the etag field which host the Hex MD5 value
 
-        if old_file.nil? || force_upload? || old_file.content_md5 != md5
+        if old_file.nil? || force_upload? || old_file.etag != md5.hexdigest
           file = directory.files.new(key: key, body: File.open(filename))
           file.multipart_chunk_size = 10 * 1024 * 1024
           file.concurrency = 10
-          file.content_md5 = md5
-          file.tags = "date=#{datestamp}"
+          # This is used by the Object Storage service to validate the uploaded file
+          file.content_md5 = md5.base64digest
+          file.tags = "date=#{@options[:datestamp]}"
           Rails.logger.info "Uploading #{key}"
           if file.save
             Rails.logger.info "Upload complete"

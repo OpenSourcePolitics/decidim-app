@@ -25,7 +25,14 @@ module Decidim
 
       generate_timestamp_file unless @options[:timestamp_in_filename]
 
-      Decidim::S3SyncService.run(local_backup_files: @local_files) if @options[:s3sync]
+      if @options[:s3sync]
+        Decidim::S3SyncService.run(
+          datestamp: Time.zone.now.strftime("%Y-%m-%d"),
+          local_backup_files: @local_files
+        )
+      end
+
+      Decidim::S3RetentionService.run if @options[:s3retention]
 
       clean_local_files unless @options[:keep_local_files]
     end
@@ -39,6 +46,7 @@ module Decidim
         backup_timestamp_file: Rails.application.config.backup[:timestamp_file],
         timestamp_in_filename: true,
         s3sync: Rails.application.config.backup.dig(:s3sync, :enabled),
+        s3retention: Rails.application.config.backup.dig(:s3retention, :enabled),
         keep_local_files: true,
         scope: :all
       }

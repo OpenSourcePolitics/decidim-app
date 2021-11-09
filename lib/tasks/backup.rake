@@ -31,5 +31,10 @@ namespace :decidim do
     task s3sync: :environment do
       Decidim::S3SyncService.run
     end
+
+    desc "Delete old files from Object Storage with a retention schedule"
+    task s3retention: :environment do
+      Decidim::S3RetentionService.run
+    end
   end
 end
