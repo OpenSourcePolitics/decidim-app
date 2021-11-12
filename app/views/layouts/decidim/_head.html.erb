@@ -18,11 +18,11 @@
 <meta property="og:image" content="<%= decidim_meta_image_url %>">
 
 <%= favicon %>
-<%= stylesheet_link_tag "application", media: "all", defer: true, integrity: true %>
+<%= stylesheet_link_tag "application", media: "all", integrity: true %>
 <%= invisible_captcha_styles %>
 <%= organization_colors %>
-<%= javascript_include_tag "decidim/confirm", defer: true, integrity: true %>
-<%= javascript_include_tag "application", defer: true, integrity: true %>
+<%= javascript_include_tag "decidim/confirm", integrity: true %>
+<%= javascript_include_tag "application", integrity: true %>
 <%= foundation_datepicker_locale_tag %>
 
 <%= render partial: "layouts/decidim/head_extra" %>
