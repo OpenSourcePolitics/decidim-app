@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_participatory_processes (originally 20161110092735)
 
 class AddIndexForProcessSlugOrganization < ActiveRecord::Migration[5.0]

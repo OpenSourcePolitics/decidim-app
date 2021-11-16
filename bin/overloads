@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+PARAMS = { standard: ".overloads", folders: %w(app config lib), registry: "OVERLOADS.md", project_files: [], extra_files: [] }
+
+return unless File.exist?(PARAMS.fetch(:standard))
+
+PARAMS.fetch(:folders).each do |folder|
+  PARAMS[:project_files] += Dir.glob("#{folder}/**/*.*").select { |path| File.file?(path) }
+end
+
+PARAMS[:extra_files] = PARAMS[:project_files] - File.open(PARAMS.fetch(:standard)).readlines.map(&:chomp)
+
+if PARAMS.fetch(:extra_files).empty?
+  puts "No overloads found"
+  return
+end
+
+File.open(PARAMS.fetch(:registry), "r+") do |f|
+  content = f.readlines
+  PARAMS.fetch(:extra_files).each do |line|
+    next if content.select { |overload| overload.match? line }.count.positive?
+
+    f.puts "* \`#{line}\`"
+    f.puts `git log -n 1 --pretty=format:'%C(auto)%h - %s, %as' -- #{line}`
+    f.puts "\n"
+  end
+
+  puts "Found #{PARAMS.fetch(:extra_files).count} overloads, added to '#{PARAMS.fetch(:registry)}'"
+end
