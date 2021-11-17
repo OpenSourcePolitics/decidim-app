@@ -39,6 +39,20 @@ en:
           email_outro: You have received this notification because you are participating in "%{participatory_space_title}"
           email_subject: Your vote is still pending in %{participatory_space_title}
           notification_title: The vote on budget <a href="%{resource_path}">%{resource_title}</a> is still waiting for your confirmation in %{participatory_space_title}
+    meetings:
+      directory:
+        meetings:
+          index:
+            all: All
+      meeting:
+        not_allowed: You are not allowed to view this meeting
+      meetings:
+        create:
+          invalid: There was a problem creating this meeting.
+          success: You have created the meeting successfully.
+        update:
+          invalid: There was a problem updating the meeting.
+          success: You have updated the meeting successfully.
     verifications:
       authorizations:
         first_login:
