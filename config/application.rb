@@ -2,7 +2,11 @@
 
 require_relative "boot"
 
-require "rails/all"
+require "decidim/rails"
+# Add the frameworks used by your app that are not loaded by Decidim.
+# require "action_cable/engine"
+# require "action_mailbox/engine"
+# require "action_text/engine"
 
 # TODO : add missing dep to decidim-initiatives/lib/decidim/initiatives/engine.rb
 # require "wicked_pdf"
