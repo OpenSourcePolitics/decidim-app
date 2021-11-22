@@ -16,8 +16,7 @@ describe "Account", type: :system do
     it "shows the account form when clicking on the menu" do
       visit decidim.root_path
 
-      within ".topbar__user__logged" do
-        find("a", text: user.name).hover
+      within_user_menu do
         find("a", text: "account").click
       end
 
@@ -30,9 +29,12 @@ describe "Account", type: :system do
       visit decidim.account_path
     end
 
+    it_behaves_like "accessible page"
+
     describe "updating personal data" do
       it "updates the user's data" do
         within "form.edit_user" do
+          select "Français", from: :user_locale
           fill_in :user_name, with: "Nikola Tesla"
           fill_in :user_personal_url, with: "https://example.org"
           fill_in :user_about, with: "A Serbian-American inventor, electrical engineer, mechanical engineer, physicist, and futurist."
@@ -40,7 +42,9 @@ describe "Account", type: :system do
         end
 
         within_flash_messages do
-          expect(page).to have_content("successfully")
+          expect(page).to have_content("Your account was successfully updated.")
+          # TODO: Open Issue because the expectation shouldn't be in english
+          # expect(page).to have_content("Votre compte a été mis à jour avec succès.")
         end
 
         within ".title-bar" do
@@ -49,9 +53,8 @@ describe "Account", type: :system do
 
         user.reload
 
-        within ".topbar__user__logged" do
-          find("a", text: user.name).hover
-          find("a", text: "public profile").click
+        within_user_menu do
+          find("a", text: "Mon profil public").click
         end
 
         expect(page).to have_content("example.org")
