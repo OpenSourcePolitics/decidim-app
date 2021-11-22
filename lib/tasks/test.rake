@@ -3,8 +3,9 @@
 namespace :test do
   desc "Setup tests environment"
   task setup: :environment do
-    system("rake db:drop RAILS_ENV=test")
-    system("rake db:create RAILS_ENV=test")
-    system("rake db:migrate RAILS_ENV=test")
+    system("RAILS_ENV=test bundle exec rake db:drop")
+    system("RAILS_ENV=test bundle exec rake db:create")
+    system("RAILS_ENV=test bundle exec rake db:migrate")
+    system("RAILS_ENV=test bundle exec rails assets:precompile")
   end
 end
