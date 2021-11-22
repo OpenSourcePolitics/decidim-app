@@ -70,6 +70,8 @@ jobs:
           bundle exec rails db:migrate
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
+      - run: yarn install
+        name: Yarn install
       - uses: nanasess/setup-chromedriver@v1.0.1
       - run: RAILS_ENV=test bundle exec rails assets:precompile
         name: Precompile assets
