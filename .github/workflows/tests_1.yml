@@ -74,7 +74,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: public/packs-test
-          key: ${{ runner.os }}-assets-${{ github.sha }}
+          key: ${{ runner.os }}-assets-${{ github.ref }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-assets-
       - name: Compile Assets
