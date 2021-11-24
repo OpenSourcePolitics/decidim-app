@@ -97,3 +97,11 @@ ignore_unused:
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow
   - layouts.decidim.user_menu.account
+  - layouts.decidim.header.close_menu
+  - layouts.decidim.header.navigation
+  - layouts.decidim.header.sign_in
+  - layouts.decidim.header.sign_up
+  - layouts.decidim.footer.download_open_data
+  - layouts.decidim.footer.made_with_open_source
+  - layouts.decidim.user_menu.conversations
+  - layouts.decidim.user_menu.notifications
