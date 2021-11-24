@@ -54,16 +54,16 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - name: Get Yarn cache directory
+      - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Use Yarn cache
-        uses: actions/cache@v2
+      - uses: actions/cache@v1
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
       - name: Create db
@@ -74,7 +74,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: public/packs-test
-          key: ${{ runner.os }}-assets-${{ steps.extract_branch.outputs.branch }}
+          key: ${{ runner.os }}-assets-${{ github.ref }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-assets-
       - name: Compile Assets
