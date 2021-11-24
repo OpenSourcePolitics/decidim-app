@@ -8,7 +8,7 @@ namespace :test do
     system("rake db:migrate RAILS_ENV=test")
   end
 
-  desc "Split test for CI testing rake test:split\\[CHUNK_NUMBER\\]"
+  desc "Split test for CI testing bundle exec rake test:split\\[CHUNK_NUMBER\\]"
   task :split, [:chunk] => [:environment] do |_task, args|
     chunk = args[:chunk].to_i
     files_array = Dir.glob(File.join(Rails.root.join("spec"), "**/*_spec.rb"))
