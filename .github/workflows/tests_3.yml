@@ -1,4 +1,4 @@
-name: Tests
+name: Tests 3
 on:
   push:
     branches:
@@ -14,6 +14,7 @@ env:
   CI: "true"
   SIMPLECOV: "true"
   RUBY_VERSION: 2.7.1
+  NODE_VERSION: 16.9.1
 
 jobs:
   tests:
@@ -50,10 +51,40 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Use Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        run: yarn install --prefer-offline --frozen-lockfile
       - name: Create db
         run: |
-          bundle exec rails db:create
-          bundle exec rails db:migrate
+          bundle exec rails db:create db:schema:load
+      - name: Cache Assets
+        id: assets-cache
+        uses: actions/cache@v1
+        with:
+          path: public/packs-test
+          key: ${{ runner.os }}-assets-${{ steps.extract_branch.outputs.branch }}
+          restore-keys: |
+            ${{ runner.os }}-assets-
+      - name: Compile Assets
+        shell: bash
+        run: |
+          if [[ ! -d public/packs-test ]]; then
+            bundle exec rails webpacker:compile
+          else
+            echo "No need to compile assets."
+          fi
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
