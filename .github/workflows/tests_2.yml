@@ -1,4 +1,4 @@
-name: Tests 3
+name: Tests 2
 on:
   push:
     branches:
@@ -88,7 +88,7 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
-      - run: bundle exec rspec $(bundle exec rake test:split\[3\])
+      - run: bundle exec rspec $(bundle exec rake test:split\[2\])
         name: RSpec
       - run: ./.github/upload_coverage.sh $DECIDIM_MODULE $GITHUB_EVENT_PATH
         name: Upload coverage
