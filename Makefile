@@ -12,3 +12,13 @@ deploy-scw:
 
 destroy-scw:
 	terraform -chdir=deploy/providers/scaleway destroy
+
+docker-start:
+	docker-compose up
+
+docker-stop:
+	docker-compose down
+
+docker-delete:
+	@make docker-stop
+	docker compose down && docker volume prune

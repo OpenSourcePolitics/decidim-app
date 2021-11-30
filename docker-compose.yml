@@ -1,28 +1,24 @@
 version: '3'
 services:
-  app:
-    build: .
-    image: osp-app:0.18-dev
-    volumes:
-      - .:/app
-      - bundle:/usr/local/bundle
-      - node_modules:/app/node_modules
-    environment:
-      - PORT=3000
-      - DATABASE_HOST=pg
-      - DATABASE_USERNAME=postgres
-      - RAILS_ENV=development
-    ports:
-      - 3000:3000
-    links:
-      - pg
-    command: ["puma"]
-    entrypoint: /app/docker-entrypoint.sh
-  pg:
-    image: postgres:11
+  database:
+    image: postgres
     volumes:
       - pg-data:/var/lib/postgresql/data
-
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+  app:
+    image: decidim-app:develop
+    volumes:
+      - node_modules:/app/node_modules
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_HOST=database
+      - DATABASE_USERNAME=postgres
+      - DECIDIM_HOST=0.0.0.0
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
 volumes:
   node_modules: {}
   bundle: {}
