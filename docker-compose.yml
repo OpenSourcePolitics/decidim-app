@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
   app:
-    image: decidim-app:develop
+    image: decidim-app:latest
     volumes:
       - node_modules:/app/node_modules
     environment:
