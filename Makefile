@@ -28,20 +28,23 @@ restore-dump:
 	bundle exec rake restore_dump 
 
 # Start commands seperated by context
+start:
+	docker-compose up
+
 start-dumped-decidim:
 	@make create-database
 	@make -i restore-dump
 	@make run-migrations
-	docker-compose up
+	@make start
 start-seeded-decidim:
 	@make create-database
 	@make run-migrations
 	@make create-seeds
-	docker-compose up
+	@make start
 start-clean-decidim:
 	@make create-database
 	@make run-migrations
-	docker-compose up
+	@make start
 
 # Utils commands
 rails-console:
