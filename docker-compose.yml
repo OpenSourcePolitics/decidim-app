@@ -6,6 +6,23 @@ services:
       - pg-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/var/lib/redis/data
+  sidekiq:
+    image: decidim-app:latest
+    command: ["sidekiq", "-C", "config/sidekiq.yml"]
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - app
+    links:
+      - database
+      - redis 
+
   app:
     image: decidim-app:latest
     volumes:
@@ -15,10 +32,13 @@ services:
       - DATABASE_HOST=database
       - DATABASE_USERNAME=postgres
       - DECIDIM_HOST=0.0.0.0
+      - REDIS_URL=redis://redis:6379
     ports:
       - 3000:3000
-    depends_on:
+    links:
       - database
+      - redis
 volumes:
   node_modules: {}
   pg-data: {}
+  redis-data: {}
