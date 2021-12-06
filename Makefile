@@ -1,4 +1,4 @@
-#### Scaleway provider
+#### Terraform | Scaleway provider
 init-scw:
 	terraform -chdir=deploy/providers/scaleway init
 
@@ -14,6 +14,19 @@ destroy-scw:
 	terraform -chdir=deploy/providers/scaleway destroy
 
 ### Docker usage
+
+# Docker images commands
+
+build-classic:
+	docker build -t decidim-app:latest .
+build-scw:
+	docker build -t rg.fr-par.scw.cloud/decidim-app/decidim-app:latest .
+push:
+	@make build-scw
+	docker push rg.fr-par.scw.cloud/decidim-app/decidim-app:latest
+pull:
+	@make build-scw
+	docker pull rg.fr-par.scw.cloud/decidim-app/decidim-app:latest
 
 # Bundle commands
 create-database:
