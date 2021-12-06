@@ -17,16 +17,26 @@ destroy-scw:
 
 # Docker images commands
 
+REGISTRY := rg.fr-par.scw.cloud
+NAMESPACE := decidim-app
+VERSION := latest
+IMAGE_NAME := decidim-app
+TAG := $(REGISTRY)/$(NAMESPACE)/$(IMAGE_NAME):$(VERSION)
+
+login:
+	docker login $(REGISTRY) -u nologin -p $(SCW_SECRET_TOKEN)
+
 build-classic:
-	docker build -t decidim-app:latest .
+	docker build -t $(IMAGE_NAME):$(VERSION) .
 build-scw:
-	docker build -t rg.fr-par.scw.cloud/decidim-app/decidim-app:latest .
+	docker build -t $(TAG) .
 push:
 	@make build-scw
-	docker push rg.fr-par.scw.cloud/decidim-app/decidim-app:latest
+	@make login
+	docker push $(TAG)
 pull:
 	@make build-scw
-	docker pull rg.fr-par.scw.cloud/decidim-app/decidim-app:latest
+	docker pull $(TAG)
 
 # Bundle commands
 create-database:
