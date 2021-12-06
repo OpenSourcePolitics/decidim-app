@@ -70,4 +70,4 @@ stop:
 	docker-compose down
 delete:
 	@make stop
-	docker compose down && docker volume prune
+	docker volume prune
