@@ -77,6 +77,61 @@ And then run tests using `rspec`
 
 `bundle exec rspec spec/`
 
+## Docker
+### How to use it? 
+You can boot a Decidim environment in Docker using the Makefile taht will run docker-compose commands and the last built image from the Dockerfile.
+Three context are available : 
+
+- **Clean Decidim**
+
+An environment running the current Decidim version (from Gemfile) without any data.
+```make
+make start-clean-decidim
+```
+
+- **Seeded Decidim**
+
+An environment running the current Decidim version (from Gemfile) with generated seeds
+```make
+make start-seeded-decidim
+```
+
+- **Dumped Decidim**
+
+An environment running the current Decidim version (from Gemfile) with real data dumped from an existing platform to simulate a Decidim bump version before doing in the real production environment.
+```make
+make start-dumped-decidim
+```
+***Warning : you need to get a psql dump on your local machine to restore it in your containerized database***
+***Warning2 : you need to set organization host to 0.0.0.0 with the rails console***
+
+
+### How to stop and remove it? 
+
+To get rid off your Docker environmnent : 
+
+- Shut down Docker environmnent
+```make
+make stop
+```
+
+- Delete resources
+```make
+make delete
+```
+### Troubleshooting
+
+Make commands are available to help you troubleshoot your Docker environment
+
+- Start Rails console
+ ```make
+make rails-console
+```
+- Start bash session to app container
+```make
+make connect-app
+```
+
 ## Database architecture (ERD)
 
 ![Architecture_decidim](https://user-images.githubusercontent.com/52420208/133789299-9458fc42-a5e7-4e3d-a934-b55c6afbc8aa.jpg)
