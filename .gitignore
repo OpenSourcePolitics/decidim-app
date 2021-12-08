@@ -73,3 +73,6 @@ terraform.rc
 
 # Ignore git status file
 git-status.txt
+
+# Ignore RSpec failures
+.rspec-failures
