@@ -24,7 +24,7 @@ services:
       - redis 
 
   app:
-    image: decidim-app:latest
+    image: decidim-app:develop
     volumes:
       - node_modules:/app/node_modules
     environment:

@@ -79,3 +79,6 @@ git-status.txt
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Ignore vendor/cache
+vendor/cache
