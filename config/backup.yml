@@ -1,4 +1,5 @@
 default: &default
+  enabled: <%= ENV["BACKUP_ENABLED"]&.downcase == "true" %>
   disk_space_limit: <%= ENV.fetch("BACKUP_DISK_SPACE_LIMIT") { 10 } %>
   directory: <%= ENV.fetch("BACKUP_DIRECTORY") { "tmp/backups" } %>
   prefix: <%= ENV.fetch("BACKUP_PREFIX") { "decidim-backup" } %>

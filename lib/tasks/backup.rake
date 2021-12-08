@@ -4,22 +4,22 @@ namespace :decidim do
   namespace :backup do
     desc "Backup Database"
     task db: :environment do
-      Decidim::BackupService.run(scope: :db)
+      Decidim::BackupService.run(scope: :db, s3sync: false)
     end
 
     desc "Backup uploads"
     task uploads: :environment do
-      Decidim::BackupService.run(scope: :uploads)
+      Decidim::BackupService.run(scope: :uploads, s3sync: false)
     end
 
     desc "Backup env"
     task env: :environment do
-      Decidim::BackupService.run(scope: :env)
+      Decidim::BackupService.run(scope: :env, s3sync: false)
     end
 
     desc "Backup git"
     task git: :environment do
-      Decidim::BackupService.run(scope: :git)
+      Decidim::BackupService.run(scope: :git, s3sync: false)
     end
 
     desc "Backup all"
