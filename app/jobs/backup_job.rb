@@ -8,6 +8,6 @@ class BackupJob < ApplicationJob
   end
 
   def backup_enabled?
-    Rails.application.config.backup.dig(:enabled)
+    Rails.application.config.backup[:enabled]
   end
 end

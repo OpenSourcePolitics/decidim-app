@@ -20,13 +20,6 @@ module Decidim
       create_backup_dir
 
       if has_enough_disk_space?
-        backup_database if check_scope?(:db)
-        backup_uploads if check_scope?(:uploads)
-        backup_env if check_scope?(:env)
-        backup_git if check_scope?(:git)
-
-        generate_timestamp_file unless @options[:timestamp_in_filename]
-
         if @options[:s3sync]
           Decidim::S3SyncService.run(
             datestamp: Time.zone.now.strftime("%Y-%m-%d"),
@@ -62,6 +55,14 @@ module Decidim
       return if File.exist?(backup_dir)
 
       FileUtils.mkdir_p(backup_dir)
+    end
+
+    def create_backup_export
+      backup_database if check_scope?(:db)
+      backup_uploads if check_scope?(:uploads)
+      backup_env if check_scope?(:env)
+      backup_git if check_scope?(:git)
+      generate_timestamp_file unless @options[:timestamp_in_filename]
     end
 
     def backup_database
