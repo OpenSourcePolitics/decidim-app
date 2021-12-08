@@ -12,4 +12,10 @@
 * `lib/extends/commands/decidim/admin/impersonate_user_extends.rb`
 ##  cd5c2cc - Backport fix/user answers serializer (#11), 2021-09-30
 * `lib/decidim/forms/user_answers_serializer.rb`
-
+## Fix metrics issue in admin dashboard
+ - **app/stylesheets/decidim/vizzs/_areachart.scss**
+```scss
+    .area{
+        fill: rgba($primary, .2);;
+    }
+```
