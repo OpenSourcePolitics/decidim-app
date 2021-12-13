@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-PARAMS = { standard: ".overloads", folders: %w(app config lib), registry: "OVERLOADS.md", project_files: [], extra_files: [] }
+PARAMS = { standard: ".overloads", folders: %w(app config lib), registry: "OVERLOADS.md", project_files: [], extra_files: [] }.freeze
 
 return unless File.exist?(PARAMS.fetch(:standard))
 

@@ -13,9 +13,8 @@ AllCops:
     - "**/Gemfile"
     - "**/Rakefile"
   Exclude:
-    - "**/vendor/**/*"
+    - "vendor/**/*"
     - "node_modules/**/*"
-    - "bin/**/*"
     - "db/schema.rb"
   # Default formatter will be used if no -f/--format option is given.
   DefaultFormatter: progress
@@ -175,6 +174,15 @@ Layout/ParameterAlignment:
   # By default, the indentation width from Style/IndentationWidth is used
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
+
+Style/ArrayCoercion:
+  Description: >-
+    Use Array() instead of explicit Array check or [*var], when dealing
+    with a variable you want to treat as an Array, but you're not certain it's an array.
+  StyleGuide: '#array-coercion'
+  Safe: false
+  Enabled: false
+  VersionAdded: '0.88'
 
 Style/AndOr:
   # Whether `and` and `or` are banned only in conditionals (conditionals)
@@ -389,6 +397,10 @@ Style/Copyright:
 
 Style/DocumentationMethod:
   RequireForNonPublicMethods: false
+
+Style/MixinUsage:
+  Exclude:
+    - "bin/*"
 
 # Multi-line method chaining should be done with leading dots.
 Layout/DotPosition:
@@ -1183,8 +1195,8 @@ Layout/LineLength:
     - http
     - https
   Exclude:
-    - "**/spec/**/*"
-    - "db/**/*"
+    - "spec/**/*"
+    - "db/schema.rb"
 
 # Checks for unused block arguments
 Lint/UnusedBlockArgument:
@@ -1215,13 +1227,10 @@ RSpec/ContextWording:
 RSpec/DescribeClass:
   Exclude:
     - spec/gemfiles_spec.rb
-    - spec/js_bundles_spec.rb
+    - spec/webpacker_spec.rb
     - spec/i18n_spec.rb
     - "**/*/spec/**/*_badge_spec.rb"
     - "**/tasks/**/*"
-
-RSpec/EmptyExampleGroup:
-  Enabled: true
 
 RSpec/ExampleLength:
   Max: 49
@@ -1240,9 +1249,6 @@ RSpec/MessageSpies:
 
 RSpec/MultipleExpectations:
   Enabled: false
-
-RSpec/MultipleMemoizedHelpers:
-  Max: 35
 
 RSpec/NestedGroups:
   Max: 7

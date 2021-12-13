@@ -74,5 +74,12 @@ terraform.rc
 # Ignore git status file
 git-status.txt
 
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+
 # Ignore RSpec failures
 .rspec-failures
