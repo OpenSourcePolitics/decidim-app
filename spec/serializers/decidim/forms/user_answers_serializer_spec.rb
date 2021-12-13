@@ -72,8 +72,8 @@ module Decidim
         it "includes the answer for each question" do
           questions.each_with_index do |question, idx|
             expect(serialized).to include(
-              "#{question.position + 1}. #{translated(question.body, locale: I18n.locale)}" => answers[idx].body
-            )
+                                    "#{question.position + 1}. #{translated(question.body, locale: I18n.locale)}" => answers[idx].body
+                                  )
           end
 
           serialized_matrix_answer = matrixmultiple_rows.map do |row|
@@ -88,20 +88,20 @@ module Decidim
           serialized_files_answer = files_answer.attachments.map(&:url)
 
           expect(serialized).to include(
-            "#{multichoice_question.position + 1}. #{translated(multichoice_question.body, locale: I18n.locale)}" => multichoice_answer_choices.map(&:body)
-          )
+                                  "#{multichoice_question.position + 1}. #{translated(multichoice_question.body, locale: I18n.locale)}" => multichoice_answer_choices.map(&:body)
+                                )
 
           expect(serialized).to include(
-            "#{singlechoice_question.position + 1}. #{translated(singlechoice_question.body, locale: I18n.locale)}" => ["Free text"]
-          )
+                                  "#{singlechoice_question.position + 1}. #{translated(singlechoice_question.body, locale: I18n.locale)}" => ["Free text"]
+                                )
 
           expect(serialized).to include(
-            "#{matrixmultiple_question.position + 1}. #{translated(matrixmultiple_question.body, locale: I18n.locale)}" => serialized_matrix_answer
-          )
+                                  "#{matrixmultiple_question.position + 1}. #{translated(matrixmultiple_question.body, locale: I18n.locale)}" => serialized_matrix_answer
+                                )
 
           expect(serialized).to include(
-            "#{files_question.position + 1}. #{translated(files_question.body, locale: I18n.locale)}" => serialized_files_answer
-          )
+                                  "#{files_question.position + 1}. #{translated(files_question.body, locale: I18n.locale)}" => serialized_files_answer
+                                )
         end
 
         context "and includes the attributes" do

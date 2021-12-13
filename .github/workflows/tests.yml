@@ -15,6 +15,8 @@ env:
   SIMPLECOV: "true"
   RUBY_VERSION: 2.7.1
   RAILS_ENV: test
+  NODE_VERSION: 16.9.1
+  RUBYOPT: '-W:no-deprecated'
 
 jobs:
   tests:
@@ -77,7 +79,7 @@ jobs:
       - uses: nanasess/setup-chromedriver@v1.0.1
       - run: bundle exec rspec
         name: RSpec
-      - run: ./.github/upload_coverage.sh $DECIDIM_MODULE $GITHUB_EVENT_PATH
+      - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
         name: Upload coverage
       - uses: actions/upload-artifact@v2-preview
         if: always()
