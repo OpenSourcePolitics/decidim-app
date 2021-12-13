@@ -28,7 +28,7 @@ describe "rake decidim:backup", type: :task do
         task.reenable
         task.invoke
 
-        expect(Decidim::BackupService).to have_received(:run).with({ s3sync: false, scope: command.to_sym }).once
+        expect(Decidim::BackupService).to have_received(:run).with({ s3sync: false, scope: command.to_sym })
       end
     end
   end
@@ -49,7 +49,7 @@ describe "rake decidim:backup", type: :task do
       task.reenable
       task.invoke
 
-      expect(Decidim::BackupService).to have_received(:run).with(s3sync: false).once
+      expect(Decidim::BackupService).to have_received(:run).with(s3sync: false)
     end
   end
 
@@ -64,7 +64,7 @@ describe "rake decidim:backup", type: :task do
       task.reenable
       task.invoke
 
-      expect(Decidim::S3SyncService).to have_received(:run).once
+      expect(Decidim::S3SyncService).to have_received(:run)
     end
   end
 
@@ -79,7 +79,7 @@ describe "rake decidim:backup", type: :task do
       task.reenable
       task.invoke
 
-      expect(Decidim::S3RetentionService).to have_received(:run).once
+      expect(Decidim::S3RetentionService).to have_received(:run)
     end
   end
 end
