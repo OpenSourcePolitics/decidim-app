@@ -25,7 +25,7 @@ describe "rake decidim:backup", type: :task do
       end
 
       it "performs backup service with scope #{command}" do
-        expect(Decidim::BackupService).to receive(:run).with({ s3sync: false, scope: command.to_sym }).once
+        expect(Decidim::BackupService).to receive(:run).with({ s3sync: false, scope: command.to_sym }).at_least(:once)
 
         task.reenable
         task.invoke
@@ -46,7 +46,7 @@ describe "rake decidim:backup", type: :task do
     end
 
     it "performs backup service with s3sync all" do
-      expect(Decidim::BackupService).to receive(:run).with(s3sync: false).once
+      expect(Decidim::BackupService).to receive(:run).with(s3sync: false).at_least(:once)
 
       task.reenable
       task.invoke
@@ -61,7 +61,7 @@ describe "rake decidim:backup", type: :task do
     end
 
     it "calls S3SyncService" do
-      expect(Decidim::S3SyncService).to receive(:run).once
+      expect(Decidim::S3SyncService).to receive(:run).at_least(:once)
 
       task.reenable
       task.invoke
@@ -76,7 +76,7 @@ describe "rake decidim:backup", type: :task do
     end
 
     it "calls S3RetentionService" do
-      expect(Decidim::S3RetentionService).to receive(:run).once
+      expect(Decidim::S3RetentionService).to receive(:run).at_least(:once)
 
       task.reenable
       task.invoke
