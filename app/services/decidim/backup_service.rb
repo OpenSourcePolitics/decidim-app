@@ -20,6 +20,8 @@ module Decidim
       create_backup_dir
 
       if has_enough_disk_space?
+        create_backup_export
+
         if @options[:s3sync]
           Decidim::S3SyncService.run(
             datestamp: Time.zone.now.strftime("%Y-%m-%d"),
