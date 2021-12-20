@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: decidim-app-staging-migration-job
+spec:
+  ttlSecondsAfterFinished: 120
+  template:
+    spec:
+      containers:
+        - name: decidim-app-staging-migration-job
+          image: rg.fr-par.scw.cloud/decidim-app/decidim-app:latest
+          command: ["bundle",  "exec", "rails", "db:migrate"]
+          env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-secrets
+                key: database_url
+          - name : SECRET_KEY_BASE
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-secrets
+                key: secret_key_base
+      restartPolicy: Never

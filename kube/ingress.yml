@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: decidim-app-staging-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/issuer: letsencrypt-prod
+spec:
+  rules:
+  - host: decidim-app-staging.osp.dev
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: decidim-app-staging-load-balancer
+            port:
+              number: 80
+  tls:
+  - hosts:
+    -  decidim-app-staging.osp.dev
+    secretName: decidim-app-staging-ingress-secret

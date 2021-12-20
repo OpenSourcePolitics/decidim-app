@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: decidim-app-staging-sidekiq-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: decidim-app-staging-sidekiq
+  template:
+    metadata:
+      labels:
+        app: decidim-app-staging-sidekiq
+    spec:
+      containers:
+      - name: decidim-app-staging-sidekiq
+        image: rg.fr-par.scw.cloud/decidim-app/decidim-app:latest
+        resources:
+          requests:
+            cpu: "256m"
+            memory: "600Mi"
+          limits:
+            cpu: "300m"
+            memory: "900Mi"
+        command: ["sidekiq", "-C", "config/sidekiq.yml"]
+        env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-secrets
+                key: database_url
+          - name: REDIS_URL
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-sidekiq-secret
+                key: redis_url

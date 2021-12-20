@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: decidim-app-staging-deployment
+spec:
+  selector:
+    matchLabels:
+      app: decidim-app-staging
+  template:
+    metadata:
+      labels:
+        app: decidim-app-staging
+    spec:
+      containers:
+      - name: decidim-app-staging
+        image: rg.fr-par.scw.cloud/decidim-app/decidim-app:latest
+        resources:
+          requests:
+            cpu: "900m"
+            memory: "1250Mi"
+          limits:
+            cpu: "1024m"
+            memory: "1500Mi"
+        ports:
+        - containerPort: 3000
+        env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-secrets
+                key: database_url
+          - name: SECRET_KEY_BASE
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-secrets
+                key: secret_key_base
+          - name: GEOCODER_LOOKUP_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-secrets
+                key: geocoder_lookup_api_key
+          - name: REDIS_URL
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-sidekiq-secret
+                key: redis_url
+          - name: SCALEWAY_ID
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-secrets
+                key: scaleway_id
+          - name: SCALEWAY_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-secrets
+                key: scaleway_token
+          - name: SCALEWAY_BUCKET_NAME
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-secrets
+                key: scaleway_bucket_name
+          - name: ASSET_HOST
+            valueFrom:
+              secretKeyRef:
+                name: decidim-app-staging-secrets
+                key: asset_host

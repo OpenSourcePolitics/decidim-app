@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: decidim-app-staging-config
+  labels:
+    app: decidim-app-staging
+data:
+  RAILS_ENV: production
