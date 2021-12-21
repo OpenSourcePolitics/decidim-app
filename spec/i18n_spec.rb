@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
+require "spec_helper"
 require "i18n/tasks"
 
 describe "I18n sanity" do
   let(:locales) do
-    ENV["ENFORCED_LOCALES"].presence || "en,fr"
+    ENV["ENFORCED_LOCALES"].presence || Decidim.available_locales.map(&:to_s).join(",")
   end
 
   let(:i18n) { I18n::Tasks::BaseTask.new({ locales: locales.split(",") }, config_file: nil) }
