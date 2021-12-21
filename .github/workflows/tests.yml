@@ -1,15 +1,5 @@
 name: Tests
-on:
-  push:
-    branches:
-      - develop
-      - master
-      - release/*
-      - "*-stable"
-  pull_request:
-    branches-ignore:
-      - "chore/l10n*"
-
+on: "push"
 env:
   CI: "true"
   SIMPLECOV: "true"
@@ -26,7 +16,6 @@ jobs:
     strategy:
       matrix:
         chunk-number: [ 1, 2, 3, 4, 5, 6 , 7, 8 ]
-    if: "!startsWith(github.head_ref, 'chore/l10n')"
     services:
       postgres:
         image: postgres:11
@@ -47,7 +36,6 @@ jobs:
       ENFORCED_LOCALES: "en,fr"
     steps:
       - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
-        if: "github.ref != 'refs/heads/master' || github.ref != 'refs/heads/develop'"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - uses: actions/checkout@v2.0.0

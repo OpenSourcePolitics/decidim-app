@@ -1,14 +1,5 @@
 name: "[CI] Lint"
-on:
-  push:
-    branches:
-      - develop
-      - release/*
-      - "*-stable"
-  pull_request:
-    branches-ignore:
-      - "chore/l10n*"
-
+on: "push"
 env:
   CI: "true"
   SIMPLECOV: "true"
@@ -20,11 +11,9 @@ jobs:
   lint:
     name: Lint code
     runs-on: ubuntu-latest
-    if: "!startsWith(github.head_ref, 'chore/l10n')"
     timeout-minutes: 60
     steps:
       - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
-        if: "github.ref != 'refs/heads/develop'"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - uses: actions/checkout@v2.0.0
