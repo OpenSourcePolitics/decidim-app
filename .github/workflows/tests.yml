@@ -1,4 +1,4 @@
-name: Tests 2
+name: Tests
 on:
   push:
     branches:
@@ -15,11 +15,15 @@ env:
   SIMPLECOV: "true"
   RUBY_VERSION: 2.7.1
   NODE_VERSION: 16.9.1
+  CI_PARALLEL: 8
 
 jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        chunk-number: [ 1, 2, 3, 4, 5, 6 , 7, 8 ]
     if: "!startsWith(github.head_ref, 'chore/l10n')"
     services:
       postgres:
@@ -88,7 +92,7 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
-      - run: bundle exec rspec $(bundle exec rake test:split\[2\])
+      - run: bundle exec rspec $(bundle exec rake test:split\[${{matrix.chunk-number}}\])
         name: RSpec
       - run: ./.github/upload_coverage.sh $DECIDIM_MODULE $GITHUB_EVENT_PATH
         name: Upload coverage
