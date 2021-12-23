@@ -77,8 +77,8 @@ module Decidim
           Rails.logger.info "Uploading #{key}"
           if file.save
             Rails.logger.info "Upload complete"
-            data = file.service.put_object_tagging(directory.key, key, {date: @options[:datestamp]})
-            if data.status == 200 
+            data = file.service.put_object_tagging(directory.key, key, { date: @options[:datestamp] })
+            if data.status == 200
               Rails.logger.info "Tagging complete"
             else
               Rails.logger.error "!! Tagging NOT complete !!"
