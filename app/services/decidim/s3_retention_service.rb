@@ -55,7 +55,7 @@ module Decidim
         next if file.key.end_with?(@options[:s3_timestamp_file])
 
         date_tag = service.get_object_tagging(@options[:s3_bucket], file.key).data.dig(:body, "ObjectTagging", "date")
-        unless retention_dates.include?(date_tag)
+        unless date_tag.present? || retention_dates.include?(date_tag)
           Rails.logger.info "Destroying file #{file.key} with date tag #{date_tag}"
           file.destroy
         end
