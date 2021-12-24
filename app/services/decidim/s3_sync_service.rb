@@ -74,10 +74,16 @@ module Decidim
           file.concurrency = 10
           # This is used by the Object Storage service to validate the uploaded file
           file.content_md5 = md5.base64digest
-          file.tags = "date=#{@options[:datestamp]}"
           Rails.logger.info "Uploading #{key}"
           if file.save
             Rails.logger.info "Upload complete"
+            data = file.service.put_object_tagging(directory.key, key, { date: @options[:datestamp] })
+            if data.status == 200
+              Rails.logger.info "Tagging complete"
+            else
+              Rails.logger.error "!! Tagging NOT complete !!"
+              Rails.logger.error data
+            end
           else
             Rails.logger.error "!! Upload NOT complete !!"
           end
