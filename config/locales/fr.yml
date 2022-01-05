@@ -44,15 +44,6 @@ fr:
         meetings:
           index:
             all: Tous
-      meeting:
-        not_allowed: You are not allowed to view this meeting
-      meetings:
-        create:
-          invalid: There was a problem creating this meeting.
-          success: You have created the meeting successfully.
-        update:
-          invalid: There was a problem updating the meeting.
-          success: You have updated the meeting successfully.
     proposals:
       create:
         error: Il y a eu des erreurs lors de la sauvegarde de la proposition.
@@ -60,6 +51,15 @@ fr:
       destroy_draft:
         error: Des erreurs sont survenues lors de la suppression du brouillon de la proposition.
         success: Le brouillon de la proposition a bien été supprimé.
+      meeting:
+        not_allowed: Vous n'êtes pas autorisé à vous inscrire à cette rencontre.
+      meetings:
+        create:
+          invalid: Il y a eu une erreur lors de la création de la rencontre.
+          success: La rencontre a été créée avec succès.
+        update:
+          invalid: Il y a eu une erreur lors de la mise à jour de la rencontre.
+          success: La rencontre a été mise à jour avec succès.
       proposals:
         compare:
           no_similars_found: Bien joué ! Aucune proposition similaire n'a été trouvée
