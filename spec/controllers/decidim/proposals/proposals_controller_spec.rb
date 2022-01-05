@@ -335,10 +335,12 @@ module Decidim
               before { sign_in user }
 
               context "and the user is the author of the emendation" do
-                let(:user) { amendment.amender }
+                let!(:amendment) { create(:amendment, amender: user, amendable: amendable, emendation: emendation) }
+                let(:user) { create(:user, :confirmed, organization: component.organization) }
 
                 it "shows the proposal" do
                   get :show, params: params.merge(id: emendation.id)
+
                   expect(response).to have_http_status(:ok)
                   expect(subject).to render_template(:show)
                 end
