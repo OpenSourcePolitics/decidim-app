@@ -44,13 +44,6 @@ fr:
         meetings:
           index:
             all: Tous
-    proposals:
-      create:
-        error: Il y a eu des erreurs lors de la sauvegarde de la proposition.
-        success: Proposition créée avec succès. Enregistrée comme brouillon.
-      destroy_draft:
-        error: Des erreurs sont survenues lors de la suppression du brouillon de la proposition.
-        success: Le brouillon de la proposition a bien été supprimé.
       meeting:
         not_allowed: Vous n'êtes pas autorisé à vous inscrire à cette rencontre.
       meetings:
@@ -60,6 +53,13 @@ fr:
         update:
           invalid: Il y a eu une erreur lors de la mise à jour de la rencontre.
           success: La rencontre a été mise à jour avec succès.
+    proposals:
+      create:
+        error: Il y a eu des erreurs lors de la sauvegarde de la proposition.
+        success: Proposition créée avec succès. Enregistrée comme brouillon.
+      destroy_draft:
+        error: Des erreurs sont survenues lors de la suppression du brouillon de la proposition.
+        success: Le brouillon de la proposition a bien été supprimé.
       proposals:
         compare:
           no_similars_found: Bien joué ! Aucune proposition similaire n'a été trouvée
