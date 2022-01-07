@@ -9,8 +9,7 @@ Security is very important to us.
 If you have any issue regarding security, please disclose the information
 responsibly by sending an email to : 
 
-* alain [at] opensourcepolitics [dot] eu
-* armand [at] opensourcepolitics [dot] eu
+* security [at] opensourcepolitics [dot] eu
 
 ## Decidim is also concerned by this vulnerability ? 
 
