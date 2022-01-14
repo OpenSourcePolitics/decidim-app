@@ -1,0 +1,30 @@
+name: "[CI] Build master Docker image"
+on:
+  push:
+    branches:
+    - "master"
+
+  pull_request:
+    branches-ignore:
+      - "chore/l10n*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      -
+        name: Checkout 
+        uses: actions/checkout@v2
+      -
+        name: Login to registry
+        run: |
+          docker login ${{ secrets.REGISTRY }} -u nologin -p ${{ secrets.TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: rg.fr-par.scw.cloud/decidim-app/decidim-app:master
