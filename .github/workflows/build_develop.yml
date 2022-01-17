@@ -21,6 +21,14 @@ jobs:
         run: |
           docker login ${{ secrets.REGISTRY }} -u nologin -p ${{ secrets.TOKEN }}
       -
+        name: Wait on tests
+        uses: lewagon/wait-on-check-action@master
+        with:
+          ref: master
+          check-name: Tests 
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 30
+      -
         name: Build and push
         uses: docker/build-push-action@v2
         with:
