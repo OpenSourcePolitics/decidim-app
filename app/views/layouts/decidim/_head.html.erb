@@ -29,3 +29,9 @@
 <%== current_organization.header_snippets if Decidim.enable_html_header_snippets %>
 <%= snippets.display(:head) %>
 <%= content_for :header_snippets %>
+
+<% if defined?(Decidim::DecidimAwesome).present? %>
+  <%= stylesheet_link_tag    "decidim/decidim_awesome/awesome_application", media: "all" %>
+  <%= stylesheet_link_tag(tenant_stylesheets, media: "all") if tenant_stylesheets %>
+  <%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles %>
+<% end %>
