@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixI18nAttachmentTitle < ActiveRecord::Migration[5.2]
   def change
     PaperTrail.request(enabled: false) do
