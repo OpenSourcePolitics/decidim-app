@@ -20,12 +20,12 @@ describe OrdersReminderJob do
   it "sends a notification per user" do
     expect(Decidim::EventsManager)
       .to receive(:publish)
-            .with(
-              event: "decidim.events.budgets.pending_order",
-              event_class: Decidim::Budgets::PendingOrderEvent,
-              resource: budget,
-              followers: [user]
-            )
+      .with(
+        event: "decidim.events.budgets.pending_order",
+        event_class: Decidim::Budgets::PendingOrderEvent,
+        resource: budget,
+        followers: [user]
+      )
 
     subject.perform_now
   end
