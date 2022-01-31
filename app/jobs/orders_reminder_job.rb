@@ -14,7 +14,9 @@ class OrdersReminderJob < ApplicationJob
   private
 
   def pending_orders
-    Decidim::Budgets::Order.where(checked_out_at: nil)
+    @pending_orders ||= Decidim::Budgets::Order.where(checked_out_at: nil)
+                                               .reject { |order| order.component.published_at.nil? }
+                                               .reject { |order| order.component.participatory_space.published_at.nil? }
   end
 
   def send_notification(user, budget)
