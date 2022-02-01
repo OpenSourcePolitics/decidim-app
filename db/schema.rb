@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_18_123426) do
+ActiveRecord::Schema.define(version: 2022_01_28_181438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -432,8 +432,8 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
     t.string "decidim_root_commentable_type", null: false
     t.integer "decidim_root_commentable_id", null: false
     t.string "decidim_author_type", null: false
-    t.jsonb "body"
     t.integer "comments_count", default: 0, null: false
+    t.jsonb "body"
     t.index ["created_at"], name: "index_decidim_comments_comments_on_created_at"
     t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_comments_comments_on_decidim_author"
     t.index ["decidim_author_id"], name: "decidim_comments_comment_author"
@@ -1173,9 +1173,9 @@ ActiveRecord::Schema.define(version: 2021_10_18_123426) do
     t.jsonb "execution_period"
     t.datetime "state_published_at"
     t.integer "endorsements_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
     t.jsonb "title"
     t.jsonb "body"
-    t.integer "comments_count", default: 0, null: false
     t.integer "follows_count", default: 0, null: false
     t.index "md5((body)::text)", name: "decidim_proposals_proposal_body_search"
     t.index "md5((title)::text)", name: "decidim_proposals_proposal_title_search"
