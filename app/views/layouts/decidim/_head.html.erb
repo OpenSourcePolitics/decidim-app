@@ -34,4 +34,5 @@
   <%= stylesheet_link_tag    "decidim/decidim_awesome/awesome_application", media: "all" %>
   <%= stylesheet_link_tag(tenant_stylesheets, media: "all") if tenant_stylesheets %>
   <%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles %>
+  <%= javascript_include_tag "decidim/decidim_awesome/awesome_application" %>
 <% end %>
