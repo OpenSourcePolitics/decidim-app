@@ -1,5 +1,8 @@
 # Overrides
 
+## Load decidim-awesome assets only if dependencie is present
+* `app/views/layouts/decidim/_head.html.erb:33`
+
 ## Fix meetings orders in indexes
 * `app/controllers/decidim/meetings/meetings_controller.rb`
 * `app/controllers/decidim/meetings/directory/meetings_controller.rb`
