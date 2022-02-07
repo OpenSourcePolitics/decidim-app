@@ -27,18 +27,18 @@ module Decidim
       def index
         if component_settings.participatory_texts_enabled?
           @proposals = Decidim::Proposals::Proposal
-                         .where(component: current_component)
-                         .published
-                         .not_hidden
-                         .only_amendables
-                         .includes(:category, :scope)
-                         .order(position: :asc)
+                       .where(component: current_component)
+                       .published
+                       .not_hidden
+                       .only_amendables
+                       .includes(:category, :scope)
+                       .order(position: :asc)
           render "decidim/proposals/proposals/participatory_texts/participatory_text"
         else
           @base_query = search
-                          .results
-                          .published
-                          .not_hidden
+                        .results
+                        .published
+                        .not_hidden
 
           @proposals = @base_query.includes(:component, :coauthorships)
           @all_geocoded_proposals = @base_query.geocoded.where.not(latitude: Float::NAN, longitude: Float::NAN)
@@ -92,8 +92,8 @@ module Decidim
       def compare
         @step = :step_2
         @similar_proposals ||= Decidim::Proposals::SimilarProposals
-                                 .for(current_component, @proposal)
-                                 .all
+                               .for(current_component, @proposal)
+                               .all
 
         if @similar_proposals.blank?
           flash[:notice] = I18n.t("proposals.proposals.compare.no_similars_found", scope: "decidim")
