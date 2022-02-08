@@ -55,7 +55,7 @@ en:
           success: You have updated the meeting successfully.
     proposals:
       create:
-        error: Error
+        error: There was a problem saving
         success: Success
       destroy_draft:
         error: Error
@@ -67,14 +67,14 @@ en:
         error: Error
         success: Success
       update:
-        error: Error
-        success: Success
+        error: There was a problem saving
+        success: Proposal successfully updated.
       update_draft:
-        error: Error
+        error: There was a problem saving
         success: Success
       withdraw:
         errors:
-          has_supports: Has supports
+          has_supports: This proposal can not be withdrawn because it already has supports.
     verifications:
       authorizations:
         first_login:
