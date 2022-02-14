@@ -53,6 +53,13 @@ fr:
         update:
           invalid: Il y a eu une erreur lors de la mise à jour de la rencontre.
           success: La rencontre a été mise à jour avec succès.
+    scopes:
+      global: Portée générale
+      picker:
+        cancel: Annuler
+        change: Modifier
+        choose: Sélectionner
+        currently_selected: Sélectionné
     verifications:
       authorizations:
         first_login:

@@ -53,6 +53,13 @@ en:
         update:
           invalid: There was a problem updating the meeting.
           success: You have updated the meeting successfully.
+    scopes:
+      global: Global
+      picker:
+        cancel: Cancel
+        change: Change
+        choose: Choose
+        currently_selected: Currently selected
     verifications:
       authorizations:
         first_login:
