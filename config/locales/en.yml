@@ -75,6 +75,13 @@ en:
       withdraw:
         errors:
           has_supports: This proposal can not be withdrawn because it already has supports.
+    scopes:
+      global: Global
+      picker:
+        cancel: Cancel
+        change: Change
+        choose: Choose
+        currently_selected: Currently selected
     verifications:
       authorizations:
         first_login:

@@ -75,6 +75,13 @@ fr:
       withdraw:
         errors:
           has_supports: Cette proposition ne peut pas être retirée car elle dispose déjà de supports.
+    scopes:
+      global: Portée générale
+      picker:
+        cancel: Annuler
+        change: Modifier
+        choose: Sélectionner
+        currently_selected: Sélectionné
     verifications:
       authorizations:
         first_login:
