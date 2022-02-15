@@ -293,7 +293,7 @@ module Decidim
               before { sign_in user }
 
               context "and the user is the author of the emendation" do
-                let(:user) { amendment.amender }
+                let!(:amendment) { create(:amendment, amendable: amendable, emendation: emendation, amender: user) }
 
                 it "shows the proposal" do
                   get :show, params: params.merge(id: emendation.id)
