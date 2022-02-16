@@ -3,6 +3,12 @@
 ## Load decidim-awesome assets only if dependencie is present
 * `app/views/layouts/decidim/_head.html.erb:33`
 
+## Fix geocoded proposals
+* `app/controllers/decidim/proposals/proposals_controller.rb:44`
+```ruby
+          @all_geocoded_proposals = @base_query.geocoded.where.not(latitude: Float::NAN, longitude: Float::NAN)
+```
+
 ## Fix meetings orders in indexes
 * `app/controllers/decidim/meetings/meetings_controller.rb`
 * `app/controllers/decidim/meetings/directory/meetings_controller.rb`

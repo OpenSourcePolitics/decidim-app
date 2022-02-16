@@ -1059,6 +1059,10 @@ Naming/VariableNumber:
     - snake_case
     - normalcase
     - non_integer
+  Exclude:
+    - "**/*/dummy_authorization_handler.rb"
+    - "app/controllers/decidim/proposals/proposals_controller.rb"
+    - "spec/system/homepage_spec.rb"
 
 # WordArray enforces how array literals of word-like strings should be expressed.
 Style/WordArray:

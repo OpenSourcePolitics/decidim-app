@@ -53,6 +53,28 @@ en:
         update:
           invalid: There was a problem updating the meeting.
           success: You have updated the meeting successfully.
+    proposals:
+      create:
+        error: There was a problem saving
+        success: Success
+      destroy_draft:
+        error: Error
+        success: Success
+      proposals:
+        compare:
+          no_similars_found: No similars found
+      publish:
+        error: Error
+        success: Success
+      update:
+        error: There was a problem saving
+        success: Proposal successfully updated.
+      update_draft:
+        error: There was a problem saving
+        success: Success
+      withdraw:
+        errors:
+          has_supports: This proposal can not be withdrawn because it already has supports.
     scopes:
       global: Global
       picker:
