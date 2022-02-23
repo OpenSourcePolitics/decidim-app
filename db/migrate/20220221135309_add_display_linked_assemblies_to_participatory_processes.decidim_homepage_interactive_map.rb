@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_homepage_interactive_map (originally 20201113100047)
 
 class AddDisplayLinkedAssembliesToParticipatoryProcesses < ActiveRecord::Migration[5.2]
