@@ -9,6 +9,9 @@ Decidim.configure do |config|
   config.default_locale = :en
   config.available_locales = [:en, :fr]
 
+  # Timeout session
+  config.expire_session_after = ENV.fetch("DECIDIM_SESSION_TIMEOUT", 180).to_i.minutes
+
   config.maximum_attachment_height_or_width = 6000
 
   # Geocoder configuration
