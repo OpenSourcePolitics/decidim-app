@@ -19,3 +19,11 @@
         fill: rgba($primary, .2);;
     }
 ```
+## Disable proposals cells caching
+- **app/cells/decidim/proposals/proposal_m_cell.rb**
+```ruby
+      # Potential backport at https://github.com/decidim/decidim/pull/8566/files
+      def perform_caching?
+        false
+      end
+```
