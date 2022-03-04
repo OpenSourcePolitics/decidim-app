@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler.git
+  revision: 17a0bb949db97e944babd0946c641006183f51df
+  branch: bump/0.25-stable
+  specs:
+    decidim-phone_authorization_handler (1.0.0)
+      decidim-core (= 0.25.2)
+
+GIT
   remote: https://github.com/decidim/decidim.git
   revision: d0c925e2dfd1e4d9ab218ab472019612ee6670d6
   branch: release/0.25-stable
@@ -102,7 +110,7 @@ GIT
       social-share-button (~> 1.2, >= 1.2.1)
       truncato (~> 0.7)
       valid_email2 (~> 2.1)
-      webpacker (~> 6.0.0.rc.5)
+      webpacker (= 6.0.0.rc.5)
       wisper (~> 2.0)
     decidim-debates (0.25.2)
       decidim-comments (= 0.25.2)
@@ -872,6 +880,7 @@ DEPENDENCIES
   dalli
   decidim!
   decidim-dev!
+  decidim-phone_authorization_handler!
   dotenv-rails
   faker (~> 2.14)
   fog-aws
