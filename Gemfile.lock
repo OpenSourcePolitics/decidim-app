@@ -102,7 +102,7 @@ GIT
       social-share-button (~> 1.2, >= 1.2.1)
       truncato (~> 0.7)
       valid_email2 (~> 2.1)
-      webpacker (~> 6.0.0.rc.5)
+      webpacker (= 6.0.0.rc.5)
       wisper (~> 2.0)
     decidim-debates (0.25.2)
       decidim-comments (= 0.25.2)
@@ -174,6 +174,14 @@ GIT
       decidim-forms (= 0.25.2)
     decidim-verifications (0.25.2)
       decidim-core (= 0.25.2)
+
+GIT
+  remote: https://github.com/mainio/decidim-module-term_customizer.git
+  revision: 437042198ed04cdd5582b29d5df83b032ecc518f
+  specs:
+    decidim-term_customizer (0.25.0)
+      decidim-admin (~> 0.25.0)
+      decidim-core (~> 0.25.0)
 
 GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
@@ -872,6 +880,7 @@ DEPENDENCIES
   dalli
   decidim!
   decidim-dev!
+  decidim-term_customizer!
   dotenv-rails
   faker (~> 2.14)
   fog-aws

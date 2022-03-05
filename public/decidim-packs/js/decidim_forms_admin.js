@@ -1,10 +1,10 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-admin/app/packs/src/decidim/admin/field_dependent_inputs.component.js":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-admin/app/packs/src/decidim/admin/field_dependent_inputs.component.js ***!
-  \***********************************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-admin/app/packs/src/decidim/admin/field_dependent_inputs.component.js":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-admin/app/packs/src/decidim/admin/field_dependent_inputs.component.js ***!
+  \**************************************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -88,27 +88,27 @@ function createFieldDependentInputs(options) {
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/entrypoints/decidim_forms_admin.js":
-/*!****************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/entrypoints/decidim_forms_admin.js ***!
-  \****************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/entrypoints/decidim_forms_admin.js":
+/*!*******************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/entrypoints/decidim_forms_admin.js ***!
+  \*******************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var src_decidim_forms_admin_collapsible_questions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/decidim/forms/admin/collapsible_questions */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/collapsible_questions.js");
+/* harmony import */ var src_decidim_forms_admin_collapsible_questions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/decidim/forms/admin/collapsible_questions */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/collapsible_questions.js");
 /* harmony import */ var src_decidim_forms_admin_collapsible_questions__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(src_decidim_forms_admin_collapsible_questions__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _src_decidim_forms_admin_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/decidim/forms/admin/forms */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/forms.js");
+/* harmony import */ var _src_decidim_forms_admin_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/decidim/forms/admin/forms */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/forms.js");
 
 
 window.Decidim.createEditableForm = _src_decidim_forms_admin_forms__WEBPACK_IMPORTED_MODULE_1__["default"];
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/auto_buttons_by_min_items.component.js":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/auto_buttons_by_min_items.component.js ***!
-  \********************************************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/auto_buttons_by_min_items.component.js":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/auto_buttons_by_min_items.component.js ***!
+  \***********************************************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -171,10 +171,10 @@ var AutoButtonsByMinItemsComponent = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_by_total_items.component.js":
-/*!*****************************************************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_by_total_items.component.js ***!
-  \*****************************************************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_by_total_items.component.js":
+/*!********************************************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_by_total_items.component.js ***!
+  \********************************************************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -235,10 +235,10 @@ var AutoSelectOptionsByTotalItemsComponent = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_from_url.component.js":
-/*!***********************************************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_from_url.component.js ***!
-  \***********************************************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_from_url.component.js":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_from_url.component.js ***!
+  \**************************************************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -318,10 +318,10 @@ var AutoSelectOptionsFromUrl = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/collapsible_questions.js":
-/*!******************************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/collapsible_questions.js ***!
-  \******************************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/collapsible_questions.js":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/collapsible_questions.js ***!
+  \*********************************************************************************************************************************************************************/
 /***/ (function() {
 
 (function () {
@@ -339,10 +339,10 @@ var AutoSelectOptionsFromUrl = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/forms.js":
-/*!**************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/forms.js ***!
-  \**************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/forms.js":
+/*!*****************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/forms.js ***!
+  \*****************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -350,16 +350,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ createEditableForm; }
 /* harmony export */ });
-/* harmony import */ var src_decidim_forms_admin_auto_buttons_by_min_items_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/decidim/forms/admin/auto_buttons_by_min_items.component */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/auto_buttons_by_min_items.component.js");
-/* harmony import */ var src_decidim_forms_admin_auto_select_options_by_total_items_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/decidim/forms/admin/auto_select_options_by_total_items.component */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_by_total_items.component.js");
-/* harmony import */ var src_decidim_forms_admin_auto_select_options_from_url_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/decidim/forms/admin/auto_select_options_from_url.component */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_from_url.component.js");
-/* harmony import */ var src_decidim_forms_admin_live_text_update_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/decidim/forms/admin/live_text_update.component */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/live_text_update.component.js");
-/* harmony import */ var src_decidim_admin_auto_buttons_by_position_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/decidim/admin/auto_buttons_by_position.component */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-admin/app/packs/src/decidim/admin/auto_buttons_by_position.component.js");
-/* harmony import */ var src_decidim_admin_auto_label_by_position_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/decidim/admin/auto_label_by_position.component */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-admin/app/packs/src/decidim/admin/auto_label_by_position.component.js");
-/* harmony import */ var src_decidim_admin_sort_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/decidim/admin/sort_list.component */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-admin/app/packs/src/decidim/admin/sort_list.component.js");
-/* harmony import */ var src_decidim_admin_dynamic_fields_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/decidim/admin/dynamic_fields.component */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-admin/app/packs/src/decidim/admin/dynamic_fields.component.js");
-/* harmony import */ var src_decidim_admin_field_dependent_inputs_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/decidim/admin/field_dependent_inputs.component */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-admin/app/packs/src/decidim/admin/field_dependent_inputs.component.js");
-/* harmony import */ var src_decidim_editor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/decidim/editor */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-core/app/packs/src/decidim/editor.js");
+/* harmony import */ var src_decidim_forms_admin_auto_buttons_by_min_items_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/decidim/forms/admin/auto_buttons_by_min_items.component */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/auto_buttons_by_min_items.component.js");
+/* harmony import */ var src_decidim_forms_admin_auto_select_options_by_total_items_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/decidim/forms/admin/auto_select_options_by_total_items.component */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_by_total_items.component.js");
+/* harmony import */ var src_decidim_forms_admin_auto_select_options_from_url_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/decidim/forms/admin/auto_select_options_from_url.component */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/auto_select_options_from_url.component.js");
+/* harmony import */ var src_decidim_forms_admin_live_text_update_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/decidim/forms/admin/live_text_update.component */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/live_text_update.component.js");
+/* harmony import */ var src_decidim_admin_auto_buttons_by_position_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/decidim/admin/auto_buttons_by_position.component */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-admin/app/packs/src/decidim/admin/auto_buttons_by_position.component.js");
+/* harmony import */ var src_decidim_admin_auto_label_by_position_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/decidim/admin/auto_label_by_position.component */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-admin/app/packs/src/decidim/admin/auto_label_by_position.component.js");
+/* harmony import */ var src_decidim_admin_sort_list_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/decidim/admin/sort_list.component */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-admin/app/packs/src/decidim/admin/sort_list.component.js");
+/* harmony import */ var src_decidim_admin_dynamic_fields_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/decidim/admin/dynamic_fields.component */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-admin/app/packs/src/decidim/admin/dynamic_fields.component.js");
+/* harmony import */ var src_decidim_admin_field_dependent_inputs_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/decidim/admin/field_dependent_inputs.component */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-admin/app/packs/src/decidim/admin/field_dependent_inputs.component.js");
+/* harmony import */ var src_decidim_editor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/decidim/editor */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/editor.js");
 /* eslint-disable max-lines */
 
 /* eslint-disable require-jsdoc */
@@ -764,10 +764,10 @@ function createEditableForm() {
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/live_text_update.component.js":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/src/decidim/forms/admin/live_text_update.component.js ***!
-  \***********************************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/live_text_update.component.js":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/src/decidim/forms/admin/live_text_update.component.js ***!
+  \**************************************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1024,7 +1024,7 @@ function createLiveTextUpdateComponent(options) {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_html5sortable_dist_html5sortable_es_js","_rbenv_versions_2_7_1_lib_ruby_gems_2_7_0_bundler_gems_decidim-4f7e0ffd5b1e_decidim-core_app_-2668e2","_rbenv_versions_2_7_1_lib_ruby_gems_2_7_0_bundler_gems_decidim-4f7e0ffd5b1e_decidim-admin_app-f36652"], function() { return __webpack_require__("../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-forms/app/packs/entrypoints/decidim_forms_admin.js"); })
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_html5sortable_dist_html5sortable_es_js","_rbenv_versions_2_7_1_lib_ruby_gems_2_7_0_bundler_gems_decidim-d0c925e2dfd1_decidim-core_app_-656659","_rbenv_versions_2_7_1_lib_ruby_gems_2_7_0_bundler_gems_decidim-d0c925e2dfd1_decidim-admin_app-dee16c"], function() { return __webpack_require__("../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-forms/app/packs/entrypoints/decidim_forms_admin.js"); })
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

@@ -13987,7 +13987,7 @@ ol.no-bullet-indented {
   font-weight: 600;
 }
 .areachart .area {
-  fill: rgba(var(--primary-rgb), 0.05);
+  fill: rgba(203, 60, 41, 0.2);
 }
 .areachart .line {
   fill: none;
@@ -17875,6 +17875,39 @@ select[multiple] {
     right: 10px;
     margin-top: 0;
   }
+}
+
+#add-translations-search {
+  overflow: visible;
+}
+#add-translations-search .autocompleteContainer {
+  width: 100%;
+}
+#add-translations-search .autocomplete-w1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#add-translations-search .autocomplete {
+  border: 1px solid #e8e8e8;
+  background: #fff;
+  cursor: default;
+  text-align: left;
+  max-height: 350px;
+  overflow: auto;
+}
+#add-translations-search .autocomplete strong {
+  font-weight: normal;
+  color: #be6400;
+}
+#add-translations-search .autocomplete .selected {
+  background: #e8e8e8;
+}
+#add-translations-search .autocomplete div {
+  padding: 2px 5px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=decidim_admin.css.map*/

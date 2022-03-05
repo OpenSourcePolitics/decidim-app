@@ -1,10 +1,10 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-core/app/packs/src/decidim/geocoding/attach_input.js":
-/*!******************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-core/app/packs/src/decidim/geocoding/attach_input.js ***!
-  \******************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/geocoding/attach_input.js":
+/*!*********************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/geocoding/attach_input.js ***!
+  \*********************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ attachGeocoding; }
 /* harmony export */ });
-/* harmony import */ var _coordinate_input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./coordinate_input */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-core/app/packs/src/decidim/geocoding/coordinate_input.js");
+/* harmony import */ var _coordinate_input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./coordinate_input */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/geocoding/coordinate_input.js");
 /* eslint-disable require-jsdoc */
 
 /**
@@ -151,10 +151,10 @@ function attachGeocoding($input, options, callback) {
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-core/app/packs/src/decidim/geocoding/coordinate_input.js":
-/*!**********************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-core/app/packs/src/decidim/geocoding/coordinate_input.js ***!
-  \**********************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/geocoding/coordinate_input.js":
+/*!*************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/geocoding/coordinate_input.js ***!
+  \*************************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -188,10 +188,10 @@ function getCoordinateInputName(coordinate, $input, options) {
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals.js":
-/*!**************************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals.js ***!
-  \**************************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals.js":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals.js ***!
+  \*****************************************************************************************************************************************************************/
 /***/ (function() {
 
 /* eslint-disable no-invalid-this */
@@ -339,15 +339,15 @@ $(function () {
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_form.js":
-/*!*******************************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_form.js ***!
-  \*******************************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_form.js":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_form.js ***!
+  \**********************************************************************************************************************************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var src_decidim_geocoding_attach_input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/decidim/geocoding/attach_input */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-core/app/packs/src/decidim/geocoding/attach_input.js");
+/* harmony import */ var src_decidim_geocoding_attach_input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/decidim/geocoding/attach_input */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/geocoding/attach_input.js");
 
 $(function () {
   var $form = $(".proposal_form_admin");
@@ -379,11 +379,27 @@ $(function () {
 
 /***/ }),
 
-/***/ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_picker.js":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_picker.js ***!
-  \*********************************************************************************************************************************************************************/
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_picker.js":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_picker.js ***!
+  \************************************************************************************************************************************************************************/
 /***/ (function() {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
 
 $(function () {
   var $content = $(".picker-content"),
@@ -395,20 +411,36 @@ $(function () {
   };
 
   var jqxhr = null;
+  var filterBuffer = "";
   toggleNoProposals();
   $(".data_picker-modal-content").on("change keyup", "#proposals_filter", function (event) {
     var filter = event.target.value.toLowerCase();
 
     if (pickerMore) {
+      if (filter.length < 3) {
+        return;
+      }
+
+      if (filter === filterBuffer) {
+        return;
+      }
+
       if (jqxhr !== null) {
         jqxhr.abort();
       }
 
       $content.html("<div class='loading-spinner'></div>");
       jqxhr = $.get("".concat(pickerPath, "?q=").concat(filter), function (data) {
+        filterBuffer = filter;
         $content.html(data);
         jqxhr = null;
         toggleNoProposals();
+
+        if (_typeof(window.theDataPicker) === "object" && window.theDataPicker.current !== null) {
+          window.theDataPicker._handleCheckboxes($content);
+
+          window.theDataPicker._handleLinks($content);
+        }
       });
     } else {
       $("#proposals_list li").each(function (index, li) {
@@ -493,14 +525,14 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 !function() {
 "use strict";
-/*!************************************************************************************************************************************************************!*\
-  !*** ../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-proposals/app/packs/entrypoints/decidim_proposals_admin.js ***!
-  \************************************************************************************************************************************************************/
+/*!***************************************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-proposals/app/packs/entrypoints/decidim_proposals_admin.js ***!
+  \***************************************************************************************************************************************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var src_decidim_proposals_admin_proposals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/decidim/proposals/admin/proposals */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals.js");
+/* harmony import */ var src_decidim_proposals_admin_proposals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/decidim/proposals/admin/proposals */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals.js");
 /* harmony import */ var src_decidim_proposals_admin_proposals__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(src_decidim_proposals_admin_proposals__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var src_decidim_proposals_admin_proposals_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/decidim/proposals/admin/proposals_form */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_form.js");
-/* harmony import */ var src_decidim_proposals_admin_proposals_picker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/decidim/proposals/admin/proposals_picker */ "../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-4f7e0ffd5b1e/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_picker.js");
+/* harmony import */ var src_decidim_proposals_admin_proposals_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/decidim/proposals/admin/proposals_form */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_form.js");
+/* harmony import */ var src_decidim_proposals_admin_proposals_picker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/decidim/proposals/admin/proposals_picker */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-proposals/app/packs/src/decidim/proposals/admin/proposals_picker.js");
 /* harmony import */ var src_decidim_proposals_admin_proposals_picker__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(src_decidim_proposals_admin_proposals_picker__WEBPACK_IMPORTED_MODULE_2__);
 
 

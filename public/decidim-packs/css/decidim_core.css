@@ -16618,7 +16618,7 @@ a.ssb-icon.ssb-whatsapp_app {
   font-weight: 600;
 }
 .areachart .area {
-  fill: rgba(var(--primary-rgb), 0.05);
+  fill: rgba(203, 60, 41, 0.2);
 }
 .areachart .line {
   fill: none;
