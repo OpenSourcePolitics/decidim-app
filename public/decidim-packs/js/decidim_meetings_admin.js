@@ -88,6 +88,116 @@ function createFieldDependentInputs(options) {
 
 /***/ }),
 
+/***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/editor.js":
+/*!*****************************************************************************************************************************************!*\
+  !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/editor.js ***!
+  \*****************************************************************************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ createQuillEditor; }
+/* harmony export */ });
+/* harmony import */ var src_decidim_editor_linebreak_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/decidim/editor/linebreak_module */ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/editor/linebreak_module.js");
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+/* eslint-disable require-jsdoc */
+
+
+
+var quillFormats = ["bold", "italic", "link", "underline", "header", "list", "video", "image", "alt", "break"];
+function createQuillEditor(container) {
+  var toolbar = $(container).data("toolbar");
+  var disabled = $(container).data("disabled");
+  var quillToolbar = [["bold", "italic", "underline", "linebreak"], [{
+    list: "ordered"
+  }, {
+    list: "bullet"
+  }], ["link", "clean"]];
+
+  if (toolbar === "full") {
+    quillToolbar = [[{
+      header: [1, 2, 3, 4, 5, 6, false]
+    }]].concat(_toConsumableArray(quillToolbar), [["video"]]);
+  } else if (toolbar === "basic") {
+    quillToolbar = [].concat(_toConsumableArray(quillToolbar), [["video"]]);
+  }
+
+  var $input = $(container).siblings('input[type="hidden"]');
+  container.innerHTML = $input.val() || "";
+  var quill = new Quill(container, {
+    modules: {
+      linebreak: {},
+      toolbar: {
+        container: quillToolbar,
+        handlers: {
+          "linebreak": src_decidim_editor_linebreak_module__WEBPACK_IMPORTED_MODULE_0__["default"]
+        }
+      }
+    },
+    formats: quillFormats,
+    theme: "snow"
+  });
+
+  if (disabled) {
+    quill.disable();
+  }
+
+  quill.on("text-change", function () {
+    var text = quill.getText(); // Triggers CustomEvent with the cursor position
+    // It is required in input_mentions.js
+
+    var event = new CustomEvent("quill-position", {
+      detail: quill.getSelection()
+    });
+    container.dispatchEvent(event);
+
+    if (text === "\n" || text === "\n\n") {
+      $input.val("");
+    } else {
+      $input.val(quill.root.innerHTML);
+    }
+  }); // After editor is ready, linebreak_module deletes two extraneous new lines
+
+  quill.emitter.emit("editor-ready");
+  return quill;
+}
+
+/***/ }),
+
 /***/ "../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/geocoding/attach_input.js":
 /*!*********************************************************************************************************************************************************!*\
   !*** ../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-core/app/packs/src/decidim/geocoding/attach_input.js ***!
@@ -868,7 +978,7 @@ $(function () {
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_html5sortable_dist_html5sortable_es_js","_rbenv_versions_2_7_1_lib_ruby_gems_2_7_0_bundler_gems_decidim-d0c925e2dfd1_decidim-core_app_-656659","_rbenv_versions_2_7_1_lib_ruby_gems_2_7_0_bundler_gems_decidim-d0c925e2dfd1_decidim-admin_app-dee16c"], function() { return __webpack_require__("../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-meetings/app/packs/entrypoints/decidim_meetings_admin.js"); })
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_html5sortable_dist_html5sortable_es_js","_rbenv_versions_2_7_1_lib_ruby_gems_2_7_0_bundler_gems_decidim-d0c925e2dfd1_decidim-core_app_-b427a9","_rbenv_versions_2_7_1_lib_ruby_gems_2_7_0_bundler_gems_decidim-d0c925e2dfd1_decidim-admin_app-dee16c"], function() { return __webpack_require__("../../../.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/bundler/gems/decidim-d0c925e2dfd1/decidim-meetings/app/packs/entrypoints/decidim_meetings_admin.js"); })
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

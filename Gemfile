@@ -8,7 +8,7 @@ ruby RUBY_VERSION
 
 gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
 
-# gem "decidim-decidim_awesome", "~> 0.7.0"
+gem "decidim-decidim_awesome", "~> 0.8.1"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git"
 
 gem "bootsnap", "~> 1.4"

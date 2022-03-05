@@ -1,0 +1,135 @@
+.dropdown-pane {
+  z-index: 1000;
+}
+
+.wrapper {
+  padding: 0;
+}
+.wrapper .callout.announcement {
+  margin-top: 2rem;
+}
+.wrapper .google-map {
+  margin-bottom: 0;
+}
+
+#awesome-map {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#awesome-map .loading-spinner {
+  z-index: 10000;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#awesome-map .leaflet-container {
+  font: inherit;
+}
+#awesome-map .leaflet-container #bodyContent .description img,
+#awesome-map .leaflet-container #bodyContent .description iframe {
+  max-height: 5em;
+}
+#awesome-map .leaflet-control-layers-list hr {
+  margin: 0.5em 0;
+}
+#awesome-map .leaflet-control-layers-list b {
+  margin: 1em 0;
+  display: block;
+}
+#awesome-map .leaflet-control-layers-list label {
+  line-height: 1;
+  font-size: 0.8rem;
+  margin: 0 0 0.5em;
+}
+#awesome-map .leaflet-control-layers-list label i {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: var(--primary);
+}
+#awesome-map .leaflet-control-layers-list input {
+  margin: 0;
+}
+#awesome-map .map-legend {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1em;
+  border: 2px solid #bbb;
+  border-radius: 4px;
+}
+#awesome-map .awesome_map-title-control {
+  display: block;
+  cursor: pointer;
+}
+#awesome-map .awesome_map-title-control::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+  border-bottom: 0;
+  display: inline-block;
+  margin: 0 0 2px 5px;
+}
+#awesome-map .active .awesome_map-title-control::after {
+  border-top: 0;
+  border-bottom: 5px solid black;
+}
+
+#awesome_map-categories-control {
+  display: none;
+}
+#awesome_map-categories-control label {
+  margin-left: 0;
+  display: none;
+}
+#awesome_map-categories-control label i {
+  margin-left: 0.5em;
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: var(-- primary);
+}
+#awesome_map-categories-control label.subcategory {
+  padding-left: 1em;
+}
+#awesome_map-categories-control .categories-container {
+  display: none;
+}
+#awesome_map-categories-control.active .categories-container {
+  display: block;
+}
+#awesome_map-hashtags-control {
+  display: none;
+}
+#awesome_map-hashtags-control label {
+  display: inline-block;
+  line-height: 1;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+#awesome_map-hashtags-control label span {
+  margin: 0 0.5rem 2px 0;
+}
+#awesome_map-hashtags-control label input {
+  vertical-align: top;
+}
+#awesome_map-hashtags-control .awesome_map-toggle_all_tags {
+  margin: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+#awesome_map-hashtags-control .hashtags-container,
+#awesome_map-hashtags-control .awesome_map-toggle_all_tags {
+  display: none;
+}
+#awesome_map-hashtags-control.active .hashtags-container,
+#awesome_map-hashtags-control.active .awesome_map-toggle_all_tags {
+  display: block;
+}
+
+/*# sourceMappingURL=decidim_decidim_awesome_map.css.map*/
