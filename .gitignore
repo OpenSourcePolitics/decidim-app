@@ -75,6 +75,7 @@ terraform.rc
 git-status.txt
 
 /public/packs
+/public/decidim-packs
 /public/packs-test
 /node_modules
 /yarn-error.log
