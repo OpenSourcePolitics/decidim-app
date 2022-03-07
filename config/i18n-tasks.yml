@@ -96,4 +96,6 @@ ignore_unused:
   - decidim.events.budgets.pending_order.*
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow
-  - layouts.decidim.user_menu.account
+  - layouts.decidim.user_menu.*
+  - layouts.decidim.footer.*
+  - layouts.decidim.header.*

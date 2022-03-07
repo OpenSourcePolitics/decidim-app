@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-DECIDIM_VERSION = "release/0.24-stable"
+DECIDIM_VERSION = "release/0.25-stable"
 
 ruby RUBY_VERSION
 
@@ -17,16 +17,14 @@ gem "bootsnap", "~> 1.4"
 
 gem "dotenv-rails"
 
-gem "puma", "~> 5.3.1"
-gem "uglifier", "~> 4.1"
+gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
+gem "puma", "~> 5.5.1"
 
 gem "faker", "~> 2.14"
 
 gem "ruby-progressbar"
 
 gem "letter_opener_web", "~> 1.3"
-
-gem "sprockets", "~> 3.7"
 
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "fog-aws"

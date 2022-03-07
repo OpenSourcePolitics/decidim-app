@@ -31,10 +31,6 @@ app/services/decidim/s3_sync_service.rb
 app/services/dummy_authorization_handler.rb
 app/views/analytics/_hotjar.html.erb
 app/views/layouts/decidim/_head_extra.html.erb
-app/views/layouts/decidim/_main_footer.html.erb
-app/views/layouts/decidim/_mini_footer.html.erb
-app/views/layouts/decidim/_social_media_links.html.erb
-app/views/layouts/decidim/_wrapper.html.erb
 app/views/layouts/decidim/admin/_template_bottom.html.erb
 app/views/support/_beacon.html.erb
 app/views/support/_helpscout.html.erb
