@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Decidim.configure do |config|
-  config.expire_session_after = ENV.fetch("DECIDIM_SESSION_TIMEOUT", 90).to_i.minutes
   config.skip_first_login_authorization = ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"] ? ActiveRecord::Type::Boolean.new.cast(ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"]) : true
   config.application_name = "OSP Agora"
   config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
@@ -102,6 +101,3 @@ end
 
 Rails.application.config.i18n.available_locales = Decidim.available_locales
 Rails.application.config.i18n.default_locale = Decidim.default_locale
-
-# Inform Decidim about the assets folder
-Decidim.register_assets_path File.expand_path("app/packs", Rails.application.root)
