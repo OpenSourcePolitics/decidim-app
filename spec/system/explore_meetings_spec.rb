@@ -44,18 +44,18 @@ describe "Explore meeting directory", :slow, type: :system do
     end
   end
 
-    context "when no upcoming meetings scheduled" do
-      let!(:meetings) do
-        create_list(:meeting, 2, component: component, start_time: 4.days.ago, end_time: 2.days.ago)
-      end
-
-      it "only shows the past meetings" do
-        visit_component
-        expect(page).to have_css(".card--meeting", count: 2)
-      end
+  context "when no upcoming meetings scheduled" do
+    let!(:meetings) do
+      create_list(:meeting, 2, component: component, start_time: 4.days.ago, end_time: 2.days.ago)
+    end
 
     before do
       visit directory
+    end
+
+    it "only shows the past meetings" do
+      visit_component
+      expect(page).to have_css(".card--meeting", count: 2)
     end
 
     it "allows filtering by space" do
