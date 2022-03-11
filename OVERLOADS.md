@@ -19,3 +19,5 @@
         fill: rgba($primary, .2);;
     }
 ```
+## Disable proposals cells caching
+- **app/cells/decidim/proposals/proposal_m_cell.rb:128**
