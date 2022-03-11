@@ -74,7 +74,7 @@ terraform.rc
 # Ignore git status file
 git-status.txt
 
-packages
+packages/*
 /public/packs
 /public/decidim-packs
 /public/packs-test
