@@ -1,5 +1,8 @@
 # Overrides
 
+## Fix proposals cells caching
+- **app/cells/decidim/proposals/proposal_m_cell.rb:128**
+
 ## Load decidim-awesome assets only if dependencie is present
 * `app/views/layouts/decidim/_head.html.erb:33`
 
