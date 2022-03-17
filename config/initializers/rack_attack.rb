@@ -8,4 +8,3 @@ if Rails.env.production?
     end
   end
 end
-
