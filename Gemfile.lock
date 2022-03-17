@@ -184,6 +184,14 @@ GIT
       decidim-core (= 0.25.2)
 
 GIT
+  remote: https://github.com/mainio/decidim-module-term_customizer.git
+  revision: 437042198ed04cdd5582b29d5df83b032ecc518f
+  specs:
+    decidim-term_customizer (0.25.0)
+      decidim-admin (~> 0.25.0)
+      decidim-core (~> 0.25.0)
+
+GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
   revision: 45709e28f567b2e619a06091eb63d4f050f861d8
   specs:
@@ -883,6 +891,7 @@ DEPENDENCIES
   decidim!
   decidim-dev!
   decidim-question_captcha!
+  decidim-term_customizer!
   dotenv-rails
   faker (~> 2.14)
   fog-aws
