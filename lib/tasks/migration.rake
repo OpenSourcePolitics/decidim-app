@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :db do
   namespace :schema do
     desc "Dump schema migration table in a sql file named in db/schema_migrations.sql"
@@ -14,6 +16,7 @@ namespace :db do
       end
     end
 
+    desc "Load schema migration table from db/schema_migrations.sql"
     task migrations_replace: :environment do
       database_name = Rails.configuration.database_configuration[Rails.env]["database"]
       input = Rails.root.join("db/schema_migrations.sql")
