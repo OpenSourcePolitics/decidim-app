@@ -13,6 +13,24 @@ namespace :db do
         puts "Failed to dump schema migration table to #{output}"
       end
     end
+
+    task migrations_replace: :environment do
+      database_name = Rails.configuration.database_configuration[Rails.env]['database']
+      input = Rails.root.join('db/schema_migrations.sql')
+      migrations_count = ActiveRecord::SchemaMigration.count
+
+      drop = system("psql -q -d '#{database_name}' -c 'DROP TABLE schema_migrations'", exception: true)
+      import = system("psql -q -d '#{database_name}' -f #{input}", exception: true)
+      migrations_to_delete = ActiveRecord::SchemaMigration.all.map(&:version)[migrations_count..-1]
+      ActiveRecord::SchemaMigration.where(version: migrations_to_delete).delete_all
+      sequence = system("psql -q -d '#{database_name}' -c 'ALTER SEQUENCE versions_id_seq RESTART WITH #{migrations_count + 1}'", exception: true)
+
+      if drop && import && sequence
+        puts "Schema migration table replaced"
+      else
+        puts "Failed to replace schema migration table"
+      end
+    end
   end
 end
 
