@@ -1,9 +1,4 @@
 namespace :db do
-  task migrations_fix: :environment do
-    eval(File.read(Rails.root.join("db/migration_fixes.rb")))
-    puts "Migration fixes applied"
-  end
-
   namespace :schema do
     desc "Dump schema migration table in a sql file named in db/schema_migrations.sql"
     task migrations_dump: :environment do
