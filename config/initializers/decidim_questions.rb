@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 Decidim::QuestionCaptcha.configure do |config|
+  # Type: Hash
+  # List of localized questions
   config.questions = {
     en: [
-      { "question" => "1+5", "answers" => "6,six" },
-      { "question" => "The blue hat is what color?", "answers" => "blue" },
-      { "question" => "The green hat is what color?", "answers" => "green" },
-      { "question" => "The yellow hat is what color?", "answers" => "yellow" },
-      { "question" => "The red hat is what color?", "answers" => "red" }
-
+      { "question" => "1+1", "answers" => "2,two" },
+      { "question" => "The green hat is what color?", "answers" => "green" }
     ],
     es: [
       { "question" => "1+2", "answers" => "3,tres" },
@@ -19,4 +17,20 @@ Decidim::QuestionCaptcha.configure do |config|
       { "question" => "El barret verd és de quin color?", "answers" => "verd" }
     ]
   }
+
+  # Type: String
+  # URL of a question API instance
+  config.api_endpoint = "https://testm1obgqmc-decidimcaptchaapi.functions.fnc.fr-par.scw.cloud"
+
+  # Type: Boolean
+  # if the text captcha should be performed or not
+  config.perform_textcaptcha = true
+
+  # Type: Integer
+  # Expiration of the captcha between form submission
+  config.expiration_time = 20
+
+  # Type: Boolean
+  # Raise an error if something wrong happens (Wrong API response, timeout etc...)
+  config.raise_error = false
 end
