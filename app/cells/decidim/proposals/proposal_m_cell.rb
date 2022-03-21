@@ -146,7 +146,7 @@ module Decidim
         hash << has_footer?
         hash << has_actions?
 
-        hash.join(Decidim.cache_key_separator)
+        hash.join("/")
       end
     end
   end
