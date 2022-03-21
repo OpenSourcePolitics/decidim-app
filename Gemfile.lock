@@ -361,6 +361,10 @@ GEM
     db-query-matchers (0.10.0)
       activesupport (>= 4.0, < 7)
       rspec (~> 3.0)
+    decidim-decidim_awesome (0.8.1)
+      decidim-admin (>= 0.25.0, < 0.27)
+      decidim-core (>= 0.25.0, < 0.27)
+      sassc (~> 2.3)
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
@@ -765,6 +769,8 @@ GEM
     rubyzip (2.3.2)
     rufus-scheduler (3.8.0)
       fugit (~> 1.1, >= 1.1.6)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     searchlight (4.1.0)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
@@ -896,6 +902,7 @@ DEPENDENCIES
   byebug (~> 11.0)
   dalli
   decidim!
+  decidim-decidim_awesome
   decidim-dev!
   decidim-question_captcha!
   decidim-spam_detection!

@@ -8,11 +8,11 @@ ruby RUBY_VERSION
 
 gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
 
-gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git"
-# gem "decidim-decidim_awesome"
 gem "acts_as_textcaptcha", "~> 4.5.1"
 gem "bootsnap", "~> 1.4"
+gem "decidim-decidim_awesome"
 gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git"
+gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git"
 
 gem "dotenv-rails"
