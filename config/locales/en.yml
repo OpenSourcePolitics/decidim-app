@@ -33,6 +33,18 @@ en:
       osp_authorization_workflow:
         name: Authorization procedure
     events:
+      users:
+        user_officialized:
+          email_intro: Participant %{name} (%{nickname}) has been officialized.
+          email_outro: You have received this notification because you are an administrator of the organization.
+          email_subject: "%{name} has been officialized"
+          notification_title: Participant %{name} (%{nickname}) has been officialized.
+      verifications:
+        verify_with_managed_user:
+          email_intro: The participant <a href="%{resource_path}">%{resource_title}</a> has tried to verify themself with the data of the managed participant <a href="%{managed_user_path}">%{managed_user_name}</a>.
+          email_outro: Check the <a href="%{conflicts_path}">Verifications's conflicts list</a> and contact the participant to verify their details and solve the issue.
+          email_subject: Failed verification attempt against a managed participant
+          notification_title: The participant <a href="%{resource_path}">%{resource_title}</a> has tried to verify themself with the data of the managed participant <a href="%{managed_user_path}">%{managed_user_name}</a>.
       budgets:
         pending_order:
           email_intro: The vote on budget "%{resource_title}" is not confirmed yet in "%{participatory_space_title}".
@@ -91,17 +103,17 @@ en:
   faker:
     address:
       country_code:
-      - EN
-      - EN0
-      - EN1
-      - EN2
-      - EN3
-      - EN4
-      - EN5
-      - EN6
-      - EN7
-      - EN8
-      - EN9
+        - EN
+        - EN0
+        - EN1
+        - EN2
+        - EN3
+        - EN4
+        - EN5
+        - EN6
+        - EN7
+        - EN8
+        - EN9
   layouts:
     decidim:
       footer:
