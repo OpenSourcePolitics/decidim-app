@@ -4,4 +4,3 @@ module Decidim
   class Command < Rectify::Command
   end
 end
-

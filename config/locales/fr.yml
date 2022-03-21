@@ -84,6 +84,9 @@ fr:
         currently_selected: Sélectionné
     verifications:
       authorizations:
+        create:
+          error: Erreur
+          success: Succès
         first_login:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
