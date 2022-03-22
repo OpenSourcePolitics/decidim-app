@@ -13,6 +13,7 @@ describe "Authentication", type: :system do
 
   before do
     allow(Decidim::QuestionCaptcha.config).to receive(:questions).and_return(questions)
+    allow(Decidim::QuestionCaptcha.config).to receive(:api_endpoint).and_return(false)
     switch_to_host(organization.host)
     visit decidim.root_path
   end
