@@ -7,6 +7,14 @@ GIT
       decidim-core (= 0.25.2)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
+  revision: 17a0bb949db97e944babd0946c641006183f51df
+  branch: bump/0.25-stable
+  specs:
+    decidim-phone_authorization_handler (1.0.0)
+      decidim-core (= 0.25.2)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-spam_detection.git
   revision: d1d0eabb59772eba20d0301cc4a896871a1c9732
   specs:
@@ -904,6 +912,7 @@ DEPENDENCIES
   decidim!
   decidim-decidim_awesome
   decidim-dev!
+  decidim-phone_authorization_handler!
   decidim-question_captcha!
   decidim-spam_detection!
   decidim-term_customizer!
@@ -934,4 +943,4 @@ RUBY VERSION
    ruby 2.7.1p83
 
 BUNDLED WITH
-   2.2.29
+   2.3.9
