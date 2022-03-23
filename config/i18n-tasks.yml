@@ -83,6 +83,11 @@ translation:
 # Do not consider these keys missing:
 ignore_missing:
  - faker.*
+ - activemodel.attributes.common.created_at
+ - decidim.endorsable.endorsements_count
+ - decidim.endorsable.endorsements
+ - decidim.proposals.proposals.votes_count.most_popular_proposal
+ - decidim.proposals.proposals.votes_count.need_more_votes
 
 # Consider these keys used:
 ignore_unused:
@@ -96,4 +101,6 @@ ignore_unused:
   - decidim.events.budgets.pending_order.*
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow
-  - layouts.decidim.user_menu.account
+  - layouts.decidim.user_menu.*
+  - layouts.decidim.footer.*
+  - layouts.decidim.header.*

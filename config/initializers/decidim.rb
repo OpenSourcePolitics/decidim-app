@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Decidim.configure do |config|
+  config.expire_session_after = ENV.fetch("DECIDIM_SESSION_TIMEOUT", 90).to_i.minutes
   config.skip_first_login_authorization = ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"] ? ActiveRecord::Type::Boolean.new.cast(ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"]) : true
   config.application_name = "OSP Agora"
   config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"

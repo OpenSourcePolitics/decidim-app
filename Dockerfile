@@ -23,6 +23,10 @@ WORKDIR /app
 
 RUN bundle install && yarn install && bundle exec rails assets:precompile
 
+# Perform assets compilation
+RUN yarn install
+RUN SECRET_KEY_BASE=dummy bundle exec rails assets:precompile
+
 # Configure endpoint.
 COPY ./entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh

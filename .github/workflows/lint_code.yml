@@ -13,6 +13,7 @@ env:
   CI: "true"
   SIMPLECOV: "true"
   RUBY_VERSION: 2.7.1
+  RAILS_ENV: test
 
 jobs:
   lint:
