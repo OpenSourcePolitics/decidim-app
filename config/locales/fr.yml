@@ -97,8 +97,8 @@ fr:
     verifications:
       authorizations:
         create:
-          error: Erreur
-          success: Succès
+          error: Il y a eu une erreur lors de votre vérification.
+          success: Vous avez été vérifié avec succès.
         first_login:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
