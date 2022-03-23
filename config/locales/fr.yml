@@ -9,6 +9,13 @@ fr:
       participatory_process:
         private_space: Espace privé
   decidim:
+    system:
+      organizations:
+        omniauth_settings:
+          publik:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
     accessibility:
       skip_button: Passer au contenu principal
     admin:
