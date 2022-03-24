@@ -104,3 +104,4 @@ ignore_unused:
   - layouts.decidim.user_menu.*
   - layouts.decidim.footer.*
   - layouts.decidim.header.*
+  - decidim.system.organizations.omniauth_settings.publik.*

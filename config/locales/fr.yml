@@ -9,13 +9,6 @@ fr:
       participatory_process:
         private_space: Espace privé
   decidim:
-    system:
-      organizations:
-        omniauth_settings:
-          publik:
-            client_id: Client ID
-            client_secret: Client secret
-            site_url: Site URL
     accessibility:
       skip_button: Passer au contenu principal
     admin:
@@ -82,6 +75,13 @@ fr:
       withdraw:
         errors:
           has_supports: Cette proposition ne peut pas être retirée car elle dispose déjà de supports.
+    system:
+      organizations:
+        omniauth_settings:
+          publik:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
     verifications:
       authorizations:
         first_login:
