@@ -39,7 +39,6 @@ describe "Homepage", type: :system do
 
       it "includes the official organization links and images" do
         expect(page).to have_selector("a.logo-cityhall[href='#{official_url}']")
-        expect(page).to have_selector("a.main-footer__badge[href='#{official_url}']")
       end
 
       context "and the organization has the omnipresent banner enabled" do
