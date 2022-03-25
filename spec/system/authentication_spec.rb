@@ -12,8 +12,16 @@ describe "Authentication", type: :system do
   end
 
   before do
+    allow(Decidim::QuestionCaptcha).to receive(:config).and_return({:questions=>questions,
+                                                                   :perform_textcaptcha=>true,
+                                                                   :expiration_time=>20,
+                                                                   :raise_error=>false,
+                                                                   :api_endpoint=>false})
     allow(Decidim::QuestionCaptcha.config).to receive(:questions).and_return(questions)
     allow(Decidim::QuestionCaptcha.config).to receive(:api_endpoint).and_return(false)
+    allow(Decidim::QuestionCaptcha.config).to receive(:perform_textcaptcha).and_return(true)
+    allow(Decidim::QuestionCaptcha.config).to receive(:expiration_time).and_return(20)
+    allow(Decidim::QuestionCaptcha.config).to receive(:raise_error).and_return(false)
     switch_to_host(organization.host)
     visit decidim.root_path
   end
