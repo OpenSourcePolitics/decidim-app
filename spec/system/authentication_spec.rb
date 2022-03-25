@@ -12,11 +12,11 @@ describe "Authentication", type: :system do
   end
 
   before do
-    allow(Decidim::QuestionCaptcha).to receive(:config).and_return({:questions=>questions,
-                                                                   :perform_textcaptcha=>true,
-                                                                   :expiration_time=>20,
-                                                                   :raise_error=>false,
-                                                                   :api_endpoint=>false})
+    allow(Decidim::QuestionCaptcha).to receive(:config).and_return({ questions: questions,
+                                                                     perform_textcaptcha: true,
+                                                                     expiration_time: 20,
+                                                                     raise_error: false,
+                                                                     api_endpoint: false })
     allow(Decidim::QuestionCaptcha.config).to receive(:questions).and_return(questions)
     allow(Decidim::QuestionCaptcha.config).to receive(:api_endpoint).and_return(false)
     allow(Decidim::QuestionCaptcha.config).to receive(:perform_textcaptcha).and_return(true)
