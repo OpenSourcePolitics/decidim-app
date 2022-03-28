@@ -1,4 +1,47 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
+  revision: f3c176fa2fa82772e729e846c1bb7ebcd986f3f6
+  branch: bump/0.25-stable
+  specs:
+    decidim-homepage_interactive_map (1.0.0)
+      decidim-admin (= 0.25.2)
+      decidim-core (= 0.25.2)
+      decidim-dev (= 0.25.2)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git
+  revision: 9da03dc9d560c7abf8869ee5c5fe00f9324f2fc1
+  branch: release/0.25-stable
+  specs:
+    decidim-question_captcha (0.25.2)
+      acts_as_textcaptcha (~> 4.5.1)
+      decidim-core (= 0.25.2)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
+  revision: ead83feb8134d6f797ba076a53a4bbfd7d5911a7
+  branch: bump/0.25-stable
+  specs:
+    decidim-phone_authorization_handler (1.0.0)
+      decidim-core (= 0.25.2)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-spam_detection.git
+  revision: d1d0eabb59772eba20d0301cc4a896871a1c9732
+  specs:
+    decidim-spam_detection (1.1.2)
+      decidim-core (~> 0.25)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/omniauth-publik
+  revision: 1e7c6ab77084bfcb0fc652f89e309f6c71e1bfd3
+  branch: v0.0.9
+  specs:
+    omniauth-publik (0.0.9)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (>= 1.7.2, < 2.0)
+
+GIT
   remote: https://github.com/decidim/decidim.git
   revision: d0c925e2dfd1e4d9ab218ab472019612ee6670d6
   branch: release/0.25-stable
@@ -102,7 +145,7 @@ GIT
       social-share-button (~> 1.2, >= 1.2.1)
       truncato (~> 0.7)
       valid_email2 (~> 2.1)
-      webpacker (~> 6.0.0.rc.5)
+      webpacker (= 6.0.0.rc.5)
       wisper (~> 2.0)
     decidim-debates (0.25.2)
       decidim-comments (= 0.25.2)
@@ -174,6 +217,14 @@ GIT
       decidim-forms (= 0.25.2)
     decidim-verifications (0.25.2)
       decidim-core (= 0.25.2)
+
+GIT
+  remote: https://github.com/mainio/decidim-module-term_customizer.git
+  revision: 437042198ed04cdd5582b29d5df83b032ecc518f
+  specs:
+    decidim-term_customizer (0.25.0)
+      decidim-admin (~> 0.25.0)
+      decidim-core (~> 0.25.0)
 
 GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
@@ -251,6 +302,7 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     acts_as_list (0.9.19)
       activerecord (>= 3.0)
+    acts_as_textcaptcha (4.5.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     anchored (1.1.0)
@@ -337,6 +389,10 @@ GEM
     db-query-matchers (0.10.0)
       activesupport (>= 4.0, < 7)
       rspec (~> 3.0)
+    decidim-decidim_awesome (0.8.1)
+      decidim-admin (>= 0.25.0, < 0.27)
+      decidim-core (>= 0.25.0, < 0.27)
+      sassc (~> 2.3)
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
@@ -741,6 +797,8 @@ GEM
     rubyzip (2.3.2)
     rufus-scheduler (3.8.0)
       fugit (~> 1.1, >= 1.1.6)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     searchlight (4.1.0)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
@@ -867,11 +925,18 @@ PLATFORMS
 
 DEPENDENCIES
   activejob-uniqueness
+  acts_as_textcaptcha (~> 4.5.1)
   bootsnap (~> 1.4)
   byebug (~> 11.0)
   dalli
   decidim!
+  decidim-decidim_awesome
   decidim-dev!
+  decidim-homepage_interactive_map!
+  decidim-phone_authorization_handler!
+  decidim-question_captcha!
+  decidim-spam_detection!
+  decidim-term_customizer!
   dotenv-rails
   faker (~> 2.14)
   fog-aws
@@ -880,6 +945,7 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   newrelic_rpm
+  omniauth-publik!
   passenger
   puma (~> 5.5.1)
   rubocop-faker
@@ -899,4 +965,4 @@ RUBY VERSION
    ruby 2.7.1p83
 
 BUNDLED WITH
-   2.2.29
+   2.3.9
