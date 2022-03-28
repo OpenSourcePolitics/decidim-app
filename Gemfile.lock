@@ -10,8 +10,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-publik
-  revision: 1e7c6ab77084bfcb0fc652f89e309f6c71e1bfd3
-  branch: v0.0.9
+  revision: 6b728e9c48a036eed913853af79a5263ad62c4c1
+  branch: release/0.24-stable
   specs:
     omniauth-publik (0.0.9)
       omniauth (~> 1.9)
@@ -227,8 +227,8 @@ GIT
 
 GIT
   remote: https://github.com/mainio/decidim-module-term_customizer.git
-  revision: 0e823f4f768f6255de57559c618dcad784c5d655
-  branch: master
+  revision: 4b385c55996e390406ac68a8b5ab68b9da2c8817
+  branch: 0.24-stable
   specs:
     decidim-term_customizer (0.24.0)
       decidim-admin (~> 0.24.0)
