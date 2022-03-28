@@ -10,7 +10,6 @@ describe "Omniauth Publik", type: :system do
     }
   end
 
-
   before do
     switch_to_host(organization.host)
     allow(Decidim::QuestionCaptcha).to receive(:config).and_return({ questions: questions,
