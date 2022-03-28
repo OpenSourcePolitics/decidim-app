@@ -27,6 +27,7 @@ default: &default
   username: <%= ENV.fetch("DATABASE_USERNAME") { "" } %>
   password: <%= ENV.fetch("DATABASE_PASSWORD") { "" } %>
   database: <%= ENV.fetch("DATABASE_NAME") { "osp_app" } %>
+  prepared_statements: <%= ENV.fetch("DATABASE_PREPARED_STATEMENTS") { true } %>
 
 development:
   <<: *default
