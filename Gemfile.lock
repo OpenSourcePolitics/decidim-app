@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-publik
-  revision: c235fa09c6386148b2d965f003fb0e7d932e09be
+  revision: 1e7c6ab77084bfcb0fc652f89e309f6c71e1bfd3
   branch: v0.0.9
   specs:
     omniauth-publik (0.0.9)
