@@ -23,10 +23,6 @@
     cron: '0 0 8 * * *' # Run at 08:00
     class: Decidim::SpamDetection::MarkUsersJob
     queue: scheduled
-  OrdersReminder:
-    cron: '0 0 18 * * *' # Run at 18:00
-    class: OrdersReminderJob
-    queue: scheduled
   Backup:
     cron: '0 0 4 * * *' # Run at 04:00
     class: BackupJob
