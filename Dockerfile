@@ -13,7 +13,7 @@ RUN apt update && apt install -y yarn
 RUN apt install -y libicu-dev postgresql-client
 
 # Install npm
-RUN npm install -g npm@6.3.0
+RUN npm install -g npm@7.21.0
 # Install bundler
 RUN gem install bundler:2.2.29
 
@@ -21,7 +21,7 @@ RUN gem install bundler:2.2.29
 ADD . /app
 WORKDIR /app
 
-RUN bundle install
+RUN bundle install && yarn install && bundle exec rails assets:precompile
 
 # Perform assets compilation
 RUN yarn install
