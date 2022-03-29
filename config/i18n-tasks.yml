@@ -106,3 +106,6 @@ ignore_unused:
   - layouts.decidim.footer.*
   - layouts.decidim.header.*
   - decidim.system.organizations.omniauth_settings.publik.*
+  - layouts.decidim.user_menu.account
+  - decidim.events.users.*
+  - decidim.events.verifications.*

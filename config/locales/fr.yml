@@ -39,6 +39,18 @@ fr:
           email_outro: Vous avez reçu cette notification parce que vous avez commencé à voter sur la concertation "%{participatory_space_title}"
           email_subject: Votre vote est toujours en attente sur la concertation %{participatory_space_title}
           notification_title: Votre vote pour le budget <a href="%{resource_path}">%{resource_title}</a> attend d'être finalisé sur la concertation %{participatory_space_title}
+      users:
+        user_officialized:
+          email_intro: Le participant %{name} (%{nickname}) a été officialisé.
+          email_outro: Vous avez reçu cette notification car vous êtes administrateur de l'organisation.
+          email_subject: "%{name} a été officialisé"
+          notification_title: Le participant %{name} (%{nickname}) a été officialisé.
+      verifications:
+        verify_with_managed_user:
+          email_intro: Le participant <a href="%{resource_path}">%{resource_title}</a> a tenté de se faire vérifier avec les données de l'utilisateur représenté <a href="%{managed_user_path}">%{managed_user_name}</a>.
+          email_outro: Vérifiez la <a href="%{conflicts_path}">Liste de conflits des vérifications</a> et contactez les participants pour vérifier leurs renseignements et résoudre le problème.
+          email_subject: Un utilisateur a tenté de se faire vérifier avec les données d'un utilisateur représenté
+          notification_title: Le participant <a href="%{resource_path}">%{resource_title}</a> a tenté de se faire vérifier avec les données de l'utilisateur représenté <a href="%{managed_user_path}">%{managed_user_name}</a>.
     meetings:
       directory:
         meetings:
@@ -84,6 +96,9 @@ fr:
             site_url: Site URL
     verifications:
       authorizations:
+        create:
+          error: Il y a eu une erreur lors de votre vérification.
+          success: Vous avez été vérifié avec succès.
         first_login:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité

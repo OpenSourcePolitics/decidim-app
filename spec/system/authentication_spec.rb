@@ -334,7 +334,7 @@ describe "Authentication", type: :system do
           click_link "Français"
         end
 
-        expect(page).to have_content("Se connecter avec Facebook")
+        expect(page).to have_content("S'identifier avec Facebook")
       end
     end
 

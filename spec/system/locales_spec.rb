@@ -44,7 +44,7 @@ describe "Locales", type: :system do
 
       visit decidim_admin.root_path
 
-      expect(page).to have_content("Vous devez vous connecter ou vous inscrire avant de continuer")
+      expect(page).to have_content("Vous devez vous identifier ou vous créer un compte avant de continuer")
     end
 
     it "displays devise messages with the right locale when authentication fails " do
