@@ -1,5 +1,26 @@
 # Migration fixes
 
+## How to use
+* Import your previous databasse
+* Run this command:
+```sh
+bundle exec rails db:schema:migrations_replace
+```
+* Run migration:
+```sh
+bundle exec rails db:migrate
+```
+* If everything is ok, you should not see an modified schema_migration.sql file and schema.rb
+
+### Example
+```sh
+bundle && \
+bundle exec rails db:drop db:create && \
+pg_restore -O -d "osp_app" "../decidim-cd34/pg_dump/$(ls -t ../decidim-cd34/pg_dump | head -1)";\
+bundle exec rails db:schema:migrations_replace && \
+bundle exec rails db:migrate
+```
+
 Executes the following fixes in a rails console
 
 ## ERROR:  relation "redirect_rules" does not exists
