@@ -1,0 +1,7 @@
+User-agent: Googlebot
+Disallow:
+Disallow: /profiles
+Disallow: /*.pdf
+
+User-agent: *
+Disallow: /
