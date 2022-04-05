@@ -12,6 +12,7 @@ gem "decidim-decidim_awesome", "~> 0.7.0"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: "master"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "0.24-stable"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik", branch: "release/0.24-stable"
+gem "omniauth-france_connect", git: "https://github.com/quentinchampenois/omniauth-france_connect"
 
 gem "bootsnap", "~> 1.4"
 
