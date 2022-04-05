@@ -95,6 +95,10 @@ Decidim.configure do |config|
   end
 
   config.base_uploads_path = "#{ENV["HEROKU_APP_NAME"]}/" if ENV["HEROKU_APP_NAME"].present?
+
+  # Api configuration
+  Decidim::Api::Schema.max_complexity = 5000
+  Decidim::Api::Schema.max_depth = 50
 end
 
 Rails.application.config.i18n.available_locales = Decidim.available_locales
