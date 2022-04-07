@@ -12,7 +12,7 @@ if Rails.application.secrets.dig(:omniauth, :france_connect).present?
         env["omniauth.strategy"].options[:client_secret] = provider_config[:client_secret]
         env["omniauth.strategy"].options[:site] = provider_config[:site_url]
       },
-      scope: "openid email profile"
+      scope: "openid email"
     )
   end
 end
