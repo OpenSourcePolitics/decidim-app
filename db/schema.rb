@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_21_135855) do
+ActiveRecord::Schema.define(version: 2022_02_21_135309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -265,7 +265,7 @@ ActiveRecord::Schema.define(version: 2022_03_21_135855) do
   end
 
   create_table "decidim_awesome_config", force: :cascade do |t|
-    t.string "var"
+    t.jsonb "var"
     t.jsonb "value"
     t.integer "decidim_organization_id"
     t.datetime "created_at", null: false
