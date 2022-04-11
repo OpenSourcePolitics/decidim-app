@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_21_135855) do
+ActiveRecord::Schema.define(version: 2022_02_21_135309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -265,7 +265,7 @@ ActiveRecord::Schema.define(version: 2022_03_21_135855) do
   end
 
   create_table "decidim_awesome_config", force: :cascade do |t|
-    t.string "var"
+    t.jsonb "var"
     t.jsonb "value"
     t.integer "decidim_organization_id"
     t.datetime "created_at", null: false
@@ -432,8 +432,8 @@ ActiveRecord::Schema.define(version: 2022_03_21_135855) do
     t.string "decidim_root_commentable_type", null: false
     t.integer "decidim_root_commentable_id", null: false
     t.string "decidim_author_type", null: false
-    t.jsonb "body"
     t.integer "comments_count", default: 0, null: false
+    t.jsonb "body"
     t.index ["created_at"], name: "index_decidim_comments_comments_on_created_at"
     t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_comments_comments_on_decidim_author"
     t.index ["decidim_author_id"], name: "decidim_comments_comment_author"
@@ -1129,6 +1129,19 @@ ActiveRecord::Schema.define(version: 2022_03_21_135855) do
     t.index ["decidim_component_id"], name: "idx_participatory_texts_on_decidim_component_id"
   end
 
+  create_table "decidim_proposals_proposal_endorsements", force: :cascade do |t|
+    t.bigint "decidim_proposal_id", null: false
+    t.bigint "decidim_author_id", null: false
+    t.bigint "decidim_user_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "decidim_author_type", null: false
+    t.index "decidim_proposal_id, decidim_author_id, COALESCE(decidim_user_group_id, ('-1'::integer)::bigint)", name: "decidim_proposals_proposal_endorsmt_proposal_auth_ugroup_uniq", unique: true
+    t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_proposals_proposal_endorsements_on_decidim_author"
+    t.index ["decidim_proposal_id"], name: "decidim_proposals_proposal_endorsement_proposal"
+    t.index ["decidim_user_group_id"], name: "decidim_proposals_proposal_endorsement_user_group"
+  end
+
   create_table "decidim_proposals_proposal_notes", force: :cascade do |t|
     t.bigint "decidim_proposal_id", null: false
     t.bigint "decidim_author_id", null: false
@@ -1177,9 +1190,9 @@ ActiveRecord::Schema.define(version: 2022_03_21_135855) do
     t.jsonb "execution_period"
     t.datetime "state_published_at"
     t.integer "endorsements_count", default: 0, null: false
+    t.integer "comments_count", default: 0, null: false
     t.jsonb "title"
     t.jsonb "body"
-    t.integer "comments_count", default: 0, null: false
     t.integer "follows_count", default: 0, null: false
     t.index "md5((body)::text)", name: "decidim_proposals_proposal_body_search"
     t.index "md5((title)::text)", name: "decidim_proposals_proposal_title_search"
