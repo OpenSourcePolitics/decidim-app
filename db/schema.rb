@@ -432,8 +432,8 @@ ActiveRecord::Schema.define(version: 2022_02_21_135309) do
     t.string "decidim_root_commentable_type", null: false
     t.integer "decidim_root_commentable_id", null: false
     t.string "decidim_author_type", null: false
-    t.integer "comments_count", default: 0, null: false
     t.jsonb "body"
+    t.integer "comments_count", default: 0, null: false
     t.index ["created_at"], name: "index_decidim_comments_comments_on_created_at"
     t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_comments_comments_on_decidim_author"
     t.index ["decidim_author_id"], name: "decidim_comments_comment_author"
@@ -1190,9 +1190,9 @@ ActiveRecord::Schema.define(version: 2022_02_21_135309) do
     t.jsonb "execution_period"
     t.datetime "state_published_at"
     t.integer "endorsements_count", default: 0, null: false
-    t.integer "comments_count", default: 0, null: false
     t.jsonb "title"
     t.jsonb "body"
+    t.integer "comments_count", default: 0, null: false
     t.integer "follows_count", default: 0, null: false
     t.index "md5((body)::text)", name: "decidim_proposals_proposal_body_search"
     t.index "md5((title)::text)", name: "decidim_proposals_proposal_title_search"
@@ -1441,6 +1441,15 @@ ActiveRecord::Schema.define(version: 2022_02_21_135309) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "decidim_user_suspensions", force: :cascade do |t|
+    t.bigint "decidim_user_id"
+    t.integer "suspending_user_id"
+    t.text "justification"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["decidim_user_id"], name: "index_decidim_user_suspensions_on_decidim_user_id"
+  end
+
   create_table "decidim_users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -1500,6 +1509,9 @@ ActiveRecord::Schema.define(version: 2022_02_21_135309) do
     t.integer "block_id"
     t.boolean "email_on_moderations", default: true
     t.integer "follows_count", default: 0, null: false
+    t.boolean "suspended", default: false, null: false
+    t.datetime "suspended_at"
+    t.integer "suspension_id"
     t.index ["confirmation_token"], name: "index_decidim_users_on_confirmation_token", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_users_on_decidim_organization_id"
     t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false) AND ((type)::text = 'Decidim::User'::text))"
@@ -1639,6 +1651,8 @@ ActiveRecord::Schema.define(version: 2022_02_21_135309) do
   add_foreign_key "decidim_user_moderations", "decidim_users"
   add_foreign_key "decidim_user_reports", "decidim_user_moderations", column: "user_moderation_id"
   add_foreign_key "decidim_user_reports", "decidim_users", column: "user_id"
+  add_foreign_key "decidim_user_suspensions", "decidim_users"
+  add_foreign_key "decidim_user_suspensions", "decidim_users", column: "suspending_user_id"
   add_foreign_key "decidim_users", "decidim_organizations"
   add_foreign_key "decidim_verifications_conflicts", "decidim_users", column: "current_user_id"
   add_foreign_key "decidim_verifications_conflicts", "decidim_users", column: "managed_user_id"
