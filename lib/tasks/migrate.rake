@@ -4,11 +4,13 @@ class LoggerWithStdout < Logger
   def initialize(*)
     super
 
+    # rubocop:disable Lint/NestedMethodDefinition
     def @logdev.write(msg)
       super
 
       puts msg
     end
+    # rubocop:enable Lint/NestedMethodDefinition
   end
 end
 
@@ -16,7 +18,7 @@ namespace :decidim do
   namespace :db do
     desc "Migrate Database"
     task migrate: :environment do
-      logger = LoggerWithStdout.new("log/db-migrations-#{DateTime.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
+      logger = LoggerWithStdout.new("log/db-migrations-#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
 
       migrations_folder_path = Rails.root.join migrations_folder
       check_config_or_exit(logger, migrations_folder_path)
@@ -55,7 +57,7 @@ namespace :decidim do
       migrations_not_found.each do |migration|
         osp_app = Dir.glob(osp_app_path).select { |path| path if path.include?(migration) }
 
-        accepted_migrations << osp_app.first unless osp_app.blank?
+        accepted_migrations << osp_app.first if osp_app.present?
       end
 
       # Retrieve migration file for not found ones
@@ -69,11 +71,11 @@ namespace :decidim do
       count_nok = []
 
       already_existing_versions.each do |version|
-        if ActiveRecord::SchemaMigration.find_by(version: version).blank?
-          ActiveRecord::SchemaMigration.create!(version: version)
-          count_ok << version
-          logger.info("Migration '#{version}' up")
-        end
+        next if ActiveRecord::SchemaMigration.find_by(version: version).present?
+
+        ActiveRecord::SchemaMigration.create!(version: version)
+        count_ok << version
+        logger.info("Migration '#{version}' up")
       end
 
       migrations_down = migration_status.map { |migration_array| migration_array.second if migration_array.first == "down" }.compact
@@ -140,7 +142,6 @@ def build_osp_app_path
     "#{osp_app_path}/*"
   end
 end
-
 
 def check_config_or_exit(logger, migrations_folder_path)
   unless File.directory?(migrations_folder_path)
