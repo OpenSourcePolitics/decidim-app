@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+=begin
+
 
 Decidim::QuestionCaptcha.configure do |config|
   # Type: Hash
@@ -34,3 +36,4 @@ Decidim::QuestionCaptcha.configure do |config|
   # Raise an error if something wrong happens (Wrong API response, timeout etc...)
   config.raise_error = false
 end
+=end

@@ -55,7 +55,7 @@ Rails.application.configure do
                            username: ENV["MEMCACHEDCLOUD_USERNAME"], password: ENV["MEMCACHEDCLOUD_PASSWORD"]
                          }]
                        else
-                         :memory_store
+                         :mem_cache_store
                        end
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
