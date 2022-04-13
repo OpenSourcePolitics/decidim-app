@@ -46,19 +46,19 @@ namespace :decidim do
         exit 0
       end
 
+      # accepted_migrations contains all migration files from old decidim-app
       accepted_migrations = []
+      # needed_migrations contains all migration files from current app, based on the ones present in accepted_migrations
       needed_migrations = []
+
+      # Retrieve migration file for versions not found
       migrations_not_found.each do |migration|
         osp_app = Dir.glob(osp_app_path).select { |path| path if path.include?(migration) }
 
         accepted_migrations << osp_app.first unless osp_app.blank?
       end
 
-      migrations_down.each do |_, _, name|
-        osp_app = Dir.glob(osp_app_path).select { |path| path if path.include?(name.downcase.split(' ')[0..-2].join('_')) }
-        accepted_migrations << osp_app.first unless osp_app.blank?
-      end
-
+      # Retrieve migration file for not found ones
       accepted_migrations.each do |migration|
         needed_migrations << Dir.glob("#{migrations_folder_path}/*#{migration.split("/")[-1].split("_")[1..-1].join("_")}")
       end
@@ -66,6 +66,7 @@ namespace :decidim do
       already_existing_versions = needed_migrations.map { |ary| ary.first.split("/")[-1].split("_")[0] }
 
       count_ok = []
+      count_nok = []
 
       already_existing_versions.each do |version|
         if ActiveRecord::SchemaMigration.find_by(version: version).blank?
@@ -77,7 +78,6 @@ namespace :decidim do
 
       migrations_down = migration_status.map { |migration_array| migration_array.second if migration_array.first == "down" }.compact
 
-      count_nok = []
       migrations_down.each do |down|
         migration_process = `bundle exec rails db:migrate:up VERSION=#{down}`
         if migration_process.include?("migrated")
