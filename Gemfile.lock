@@ -9,6 +9,15 @@ GIT
       decidim-dev (= 0.25.2)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git
+  revision: 1527438a4481b262f3b3ca1c5b5f8046cb2d3728
+  branch: release/0.25-stable
+  specs:
+    decidim-question_captcha (0.25.2)
+      acts_as_textcaptcha (~> 4.5.1)
+      decidim-core (= 0.25.2)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
   revision: ead83feb8134d6f797ba076a53a4bbfd7d5911a7
   branch: bump/0.25-stable
@@ -293,6 +302,7 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     acts_as_list (0.9.19)
       activerecord (>= 3.0)
+    acts_as_textcaptcha (4.5.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     anchored (1.1.0)
@@ -915,6 +925,7 @@ PLATFORMS
 
 DEPENDENCIES
   activejob-uniqueness
+  acts_as_textcaptcha (~> 4.5.1)
   bootsnap (~> 1.4)
   byebug (~> 11.0)
   dalli
@@ -923,6 +934,7 @@ DEPENDENCIES
   decidim-dev!
   decidim-homepage_interactive_map!
   decidim-phone_authorization_handler!
+  decidim-question_captcha!
   decidim-spam_detection!
   decidim-term_customizer!
   dotenv-rails
