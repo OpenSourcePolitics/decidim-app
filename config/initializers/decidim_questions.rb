@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 Decidim::QuestionCaptcha.configure do |config|
   # Type: Hash
   # List of localized questions
