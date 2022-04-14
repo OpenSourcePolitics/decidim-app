@@ -9,6 +9,27 @@ en:
       participatory_process:
         private_space: Private space
   decidim:
+    system:
+      organizations:
+        omniauth_settings:
+          france_connect:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
+          france_connect_profile:
+            client_id: Client ID
+            client_secret: Client secret
+            provider_name: Provider name
+            site: Site URL
+          france_connect_uid:
+            client_id: Client ID
+            client_secret: Client secret
+            provider_name: Provider name
+            site: Site URL
+          publik:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
     accessibility:
       skip_button: Skip button
     admin:
