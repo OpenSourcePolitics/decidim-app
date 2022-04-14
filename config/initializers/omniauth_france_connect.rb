@@ -16,8 +16,8 @@ if Rails.application.secrets.dig(:omniauth, :france_connect).present?
     )
   end
 end
-if Rails.application.secrets.dig(:omniauth, :france_connect_profile).present?
 
+if Rails.application.secrets.dig(:omniauth, :france_connect_profile).present?
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider(
       :france_connect_profile,
@@ -33,8 +33,8 @@ if Rails.application.secrets.dig(:omniauth, :france_connect_profile).present?
     )
   end
 end
-if Rails.application.secrets.dig(:omniauth, :france_connect_uid).present?
 
+if Rails.application.secrets.dig(:omniauth, :france_connect_uid).present?
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider(
       :france_connect_uid,
