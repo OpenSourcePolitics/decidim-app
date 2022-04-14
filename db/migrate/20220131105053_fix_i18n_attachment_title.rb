@@ -7,7 +7,7 @@ class FixI18nAttachmentTitle < ActiveRecord::Migration[5.2]
         fix_content(attachment, :title)
         fix_content(attachment, :description)
 
-        attachment.save! if attachment.has_changes_to_save?
+        attachment.save!(validate: false) if attachment.has_changes_to_save?
       end
     end
   end
