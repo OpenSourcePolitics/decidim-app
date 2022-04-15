@@ -102,11 +102,13 @@ en:
             client_secret: Client secret
             site_url: Site URL
           france_connect_profile:
+            button_path: Button path
             client_id: Client ID
             client_secret: Client secret
             provider_name: Provider name
             site: Site URL
           france_connect_uid:
+            button_path: Button path
             client_id: Client ID
             client_secret: Client secret
             provider_name: Provider name
