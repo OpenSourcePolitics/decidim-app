@@ -31,7 +31,7 @@ namespace :decidim do
         logger.info("Migration '#{version}' up")
       end
 
-      rails_migrations.reload_down!.each do |_status, version, _name|
+      rails_migrations.reload_down!&.each do |_status, version, _name|
         # Migration up each version one by one
         migration_process = `bundle exec rails db:migrate:up VERSION=#{version}`
 
@@ -101,8 +101,8 @@ class RailsMigrations
 
   # Return all migrations marked as 'down'
   def down
-    @down ||= @fetch_all.map do |migration_ary|
-      migration_ary if migration_ary.first == "down"
+    @down ||= @fetch_all&.map do |migration_ary|
+      migration_ary if migration_ary&.first == "down"
     end.compact
   end
 
@@ -113,21 +113,21 @@ class RailsMigrations
 
   # Print migrations status
   def display_status!
-    @fetch_all.each do |status, version, name|
+    @fetch_all&.each do |status, version, name|
       @migration_fixer.logger.info("#{status.center(8)}  #{version.ljust(14)}  #{name}")
     end
   end
 
   # Returns all migration present in DB but with no migration files defined
   def not_found
-    @not_found ||= @fetch_all.map { |_, version, name| version if name.include?("NO FILE") }.compact
+    @not_found ||= @fetch_all&.map { |_, version, name| version if name.include?("NO FILE") }.compact
   end
 
   # returns all versions marked as 'down' but already passed in past
   # This methods is based on migration filenames from osp-app folder, then compare with current migration folder and retrieve duplicated migration with another version number
   # Returns array of 'down' versions
   def versions_down_but_already_passed
-    needed_migrations = already_accepted_migrations.map do |migration|
+    needed_migrations = already_accepted_migrations&.map do |migration|
       Dir.glob("#{@migration_fixer.migrations_path}/*#{migration_name_for(migration)}")
     end.flatten!
 
@@ -152,8 +152,8 @@ class RailsMigrations
 
   # returns migrations filename from old osp-app folder, based on versions present in database with no file related
   def already_accepted_migrations
-    @already_accepted_migrations ||= not_found.map do |migration|
-      osp_app = Dir.glob("#{@migration_fixer.osp_app_path}*").select { |path| path if path.include?(migration) }
+    @already_accepted_migrations ||= not_found&.map do |migration|
+      osp_app = Dir.glob("#{@migration_fixer.osp_app_path}*")&.select { |path| path if path.include?(migration) }
 
       osp_app.first if osp_app.present?
     end.compact
