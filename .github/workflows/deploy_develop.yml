@@ -4,6 +4,9 @@ on:
     branches:
       - feature/cd-ansible
 
+env:
+  ROCKETCHAT_TOKEN: ${{ secrets.ROCKETCHAT_TOKEN }}
+
 jobs:
   deploy_develop:
     name: Deploy develop branch on develop instance
