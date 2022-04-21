@@ -1,0 +1,21 @@
+name: "[CD] Deploy develop branch"
+on:
+  pull_request:
+    types:
+      - opened
+    branches:    
+      - develop
+
+jobs:
+  deploy_develop:
+    name: Deploy develop branch on develop instance
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run Ansible playbook
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: ${{ secrets.ANSIBLE_HOST }}
+        username: ${{ secrets.ANSIBLE_USERNAME }}
+        key: ${{ secrets.ANSIBLE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/develop.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
