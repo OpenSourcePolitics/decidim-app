@@ -1,10 +1,8 @@
 name: "[CD] Deploy develop branch"
 on:
-  pull_request:
-    types:
-      - opened
-    branches:    
-      - develop
+  push:
+    branches:
+      - feature/cd-ansible
 
 jobs:
   deploy_develop:
