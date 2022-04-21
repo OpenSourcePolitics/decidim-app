@@ -1,10 +1,13 @@
 name: "[CI] Lint"
 on:
-  pull_request:
-    types:
-      - opened
-    branches:    
+  push:
+    branches:
       - develop
+      - release/*
+      - "*-stable"
+  pull_request:
+    branches-ignore:
+      - "chore/l10n*"
 
 env:
   CI: "true"
