@@ -16,9 +16,44 @@ env:
   RUBY_VERSION: 2.7.1
 
 jobs:
+  lint:
+    name: Lint code
+    runs-on: ubuntu-latest
+    if: "!startsWith(github.head_ref, 'chore/l10n')"
+    timeout-minutes: 60
+    steps:
+      - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
+        if: "github.ref != 'refs/heads/develop'"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/checkout@v2.0.0
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Get npm cache directory path
+        id: npm-cache-dir-path
+        run: echo "::set-output name=dir::$(npm get cache)-lint"
+      - uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: ${{ steps.npm-cache-dir-path.outputs.dir }}
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            npm-
+      - name: Install JS dependencies
+        run: npm ci
+      - run: bundle exec rubocop -P
+        name: Lint Ruby files
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    needs: [lint]
     if: "!startsWith(github.head_ref, 'chore/l10n')"
     services:
       postgres:
@@ -66,3 +101,16 @@ jobs:
         with:
           name: screenshots
           path: ./spec/decidim_dummy_app/tmp/screenshots
+  deploy_develop:
+    name: Deploy develop branch on develop instance
+    runs-on: ubuntu-latest
+    needs: [lint, tests]
+    steps:
+      - name: Run Ansible playbook
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.ANSIBLE_HOST }}
+          username: ${{ secrets.ANSIBLE_USERNAME }}
+          key: ${{ secrets.ANSIBLE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/develop.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
