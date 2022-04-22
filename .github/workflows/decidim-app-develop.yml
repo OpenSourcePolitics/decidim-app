@@ -1,4 +1,4 @@
-name: "[CD] Deploy develop branch"
+name: "[CD] Decidim-app-develop deployment"
 on:
   push:
     branches:
