@@ -131,3 +131,5 @@ fr:
         account: Mon compte
         conversations: Conversations
         notifications: Notifications
+password_validator:
+  nickname_included_in_password: est trop similaire à votre surnom
