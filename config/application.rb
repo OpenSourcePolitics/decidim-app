@@ -20,7 +20,7 @@ module DevelopmentApp
 
     # This needs to be set for correct images URLs in emails
     # DON'T FORGET to ALSO set this in `config/initializers/carrierwave.rb`
-    # config.action_mailer.asset_host = "https://your.server.url"
+    config.action_mailer.asset_host = "https://#{Rails.application.secrets[:asset_host]}/" if Rails.application.secrets[:asset_host].present?
 
     config.backup = config_for(:backup).deep_symbolize_keys
 
