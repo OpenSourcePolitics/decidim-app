@@ -23,7 +23,7 @@ namespace :decidim do
       versions_migration_success = []
       versions_migration_forced = []
 
-      rails_migrations.versions_down_but_already_passed.each do |version|
+      rails_migrations.versions_down_but_already_passed&.each do |version|
         next if ActiveRecord::SchemaMigration.find_by(version: version).present?
 
         ActiveRecord::SchemaMigration.create!(version: version)
@@ -131,7 +131,7 @@ class RailsMigrations
       Dir.glob("#{@migration_fixer.migrations_path}/*#{migration_name_for(migration)}")
     end.flatten!
 
-    needed_migrations.map { |filename| migration_version_for(filename) }
+    needed_migrations&.map { |filename| migration_version_for(filename) }
   end
 
   private

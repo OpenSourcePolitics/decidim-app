@@ -94,6 +94,29 @@ fr:
         change: Modifier
         choose: Sélectionner
         currently_selected: Sélectionné
+    system:
+      organizations:
+        omniauth_settings:
+          france_connect:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
+          france_connect_profile:
+            button_path: Chemin du bouton
+            client_id: Client ID
+            client_secret: Client secret
+            provider_name: Provider name
+            site: Site URL
+          france_connect_uid:
+            button_path: Chemin du bouton
+            client_id: Client ID
+            client_secret: Client secret
+            provider_name: Provider name
+            site: Site URL
+          publik:
+            client_id: ID client
+            client_secret: Secret client
+            site_url: URL site
     verifications:
       authorizations:
         create:
