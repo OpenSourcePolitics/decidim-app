@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 2022_02_21_135309) do
 
-ActiveRecord::Schema.define(version: 2022_04_06_125821) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
@@ -1215,19 +1215,6 @@ ActiveRecord::Schema.define(version: 2022_04_06_125821) do
     t.index ["decidim_component_id"], name: "idx_participatory_texts_on_decidim_component_id"
   end
 
-  create_table "decidim_proposals_proposal_endorsements", force: :cascade do |t|
-    t.bigint "decidim_proposal_id", null: false
-    t.bigint "decidim_author_id", null: false
-    t.bigint "decidim_user_group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "decidim_author_type", null: false
-    t.index "decidim_proposal_id, decidim_author_id, COALESCE(decidim_user_group_id, ('-1'::integer)::bigint)", name: "decidim_proposals_proposal_endorsmt_proposal_auth_ugroup_uniq", unique: true
-    t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_proposals_proposal_endorsements_on_decidim_author"
-    t.index ["decidim_proposal_id"], name: "decidim_proposals_proposal_endorsement_proposal"
-    t.index ["decidim_user_group_id"], name: "decidim_proposals_proposal_endorsement_user_group"
-  end
-
   create_table "decidim_proposals_proposal_notes", force: :cascade do |t|
     t.bigint "decidim_proposal_id", null: false
     t.bigint "decidim_author_id", null: false
@@ -1527,15 +1514,6 @@ ActiveRecord::Schema.define(version: 2022_04_06_125821) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "decidim_user_suspensions", force: :cascade do |t|
-    t.bigint "decidim_user_id"
-    t.integer "suspending_user_id"
-    t.text "justification"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["decidim_user_id"], name: "index_decidim_user_suspensions_on_decidim_user_id"
-  end
-
   create_table "decidim_users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -1595,9 +1573,6 @@ ActiveRecord::Schema.define(version: 2022_04_06_125821) do
     t.integer "block_id"
     t.boolean "email_on_moderations", default: true
     t.integer "follows_count", default: 0, null: false
-    t.boolean "suspended", default: false, null: false
-    t.datetime "suspended_at"
-    t.integer "suspension_id"
     t.index ["confirmation_token"], name: "index_decidim_users_on_confirmation_token", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_users_on_decidim_organization_id"
     t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false) AND ((type)::text = 'Decidim::User'::text))"
@@ -1738,8 +1713,6 @@ ActiveRecord::Schema.define(version: 2022_04_06_125821) do
   add_foreign_key "decidim_user_moderations", "decidim_users"
   add_foreign_key "decidim_user_reports", "decidim_user_moderations", column: "user_moderation_id"
   add_foreign_key "decidim_user_reports", "decidim_users", column: "user_id"
-  add_foreign_key "decidim_user_suspensions", "decidim_users"
-  add_foreign_key "decidim_user_suspensions", "decidim_users", column: "suspending_user_id"
   add_foreign_key "decidim_users", "decidim_organizations"
   add_foreign_key "decidim_verifications_conflicts", "decidim_users", column: "current_user_id"
   add_foreign_key "decidim_verifications_conflicts", "decidim_users", column: "managed_user_id"
