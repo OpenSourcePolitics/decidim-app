@@ -104,3 +104,4 @@ ignore_unused:
   - layouts.decidim.user_menu.account
   - decidim.events.users.*
   - decidim.events.verifications.*
+  - decidim.system.organizations.omniauth_settings.*
