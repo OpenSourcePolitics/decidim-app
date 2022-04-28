@@ -3,13 +3,19 @@
     <div class="columns large-4 mediumlarge-6 medium-8 medium-centered">
       <%- current_organization.enabled_omniauth_providers.keys.each do |provider| %>
         <div class="social-register">
-          <%= link_to decidim.send("user_#{provider}_omniauth_authorize_path"), class: "button button--social button--#{normalize_provider_name(provider)}", method: :post do %>
+          <% if provider.match?("france") %>
+            <%= link_to decidim.send("user_#{provider}_omniauth_authorize_path"), class: "button--#{normalize_provider_name(provider)}", method: :post do %>
+              <%= image_pack_tag "media/images/FCboutons-10@2x.png", alt: t("devise.shared.links.sign_in_with_provider", provider: normalize_provider_name(provider).titleize) %>
+            <% end %>
+          <% else %>
+            <%= link_to decidim.send("user_#{provider}_omniauth_authorize_path"), class: "button button--social button--#{normalize_provider_name(provider)}", method: :post do %>
             <span class="button--social__icon">
               <%= oauth_icon provider %>
             </span>
-            <span class="button--social__text">
+              <span class="button--social__text">
               <%= t("devise.shared.links.sign_in_with_provider", provider: normalize_provider_name(provider).titleize) %>
             </span>
+            <% end %>
           <% end %>
         </div>
       <% end %>
