@@ -31,6 +31,7 @@
         fill: rgba($primary, .2);;
     }
 ```
+
  - **V0.24** `app/assets/stylesheets/decidim/vizzs/_areachart.scss`
 
 * `app/views/decidim/scopes/picker.html.erb`
@@ -47,3 +48,5 @@ de6d804 - fix multipart object tagging (#40) (#41), 2021-12-24
 
 * `lib/tasks/restore_dump.rake`
 705e0ad - Run rubocop, 2021-12-01
+## Disable proposals cells caching
+- **app/cells/decidim/proposals/proposal_m_cell.rb:128**

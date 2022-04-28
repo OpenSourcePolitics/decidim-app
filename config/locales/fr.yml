@@ -87,6 +87,7 @@ fr:
       withdraw:
         errors:
           has_supports: Cette proposition ne peut pas être retirée car elle dispose déjà de supports.
+<<<<<<< HEAD
     scopes:
       global: Portée générale
       picker:
@@ -117,6 +118,15 @@ fr:
             client_id: ID client
             client_secret: Secret client
             site_url: URL site
+=======
+    system:
+      organizations:
+        omniauth_settings:
+          publik:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
+>>>>>>> rc/0.25-stable
     verifications:
       authorizations:
         create:

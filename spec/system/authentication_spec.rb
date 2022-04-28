@@ -5,8 +5,23 @@ require "spec_helper"
 describe "Authentication", type: :system do
   let(:organization) { create(:organization) }
   let(:last_user) { Decidim::User.last }
+  let(:questions) do
+    {
+      en: [{ "question" => "1+1", "answers" => "2" }]
+    }
+  end
 
   before do
+    allow(Decidim::QuestionCaptcha).to receive(:config).and_return({ questions: questions,
+                                                                     perform_textcaptcha: true,
+                                                                     expiration_time: 20,
+                                                                     raise_error: false,
+                                                                     api_endpoint: false })
+    allow(Decidim::QuestionCaptcha.config).to receive(:questions).and_return(questions)
+    allow(Decidim::QuestionCaptcha.config).to receive(:api_endpoint).and_return(false)
+    allow(Decidim::QuestionCaptcha.config).to receive(:perform_textcaptcha).and_return(true)
+    allow(Decidim::QuestionCaptcha.config).to receive(:expiration_time).and_return(20)
+    allow(Decidim::QuestionCaptcha.config).to receive(:raise_error).and_return(false)
     switch_to_host(organization.host)
     visit decidim.root_path
   end
@@ -22,20 +37,20 @@ describe "Authentication", type: :system do
           fill_in :registration_user_nickname, with: "responsible"
           fill_in :registration_user_password, with: "DfyvHn425mYAy2HL"
           fill_in :registration_user_password_confirmation, with: "DfyvHn425mYAy2HL"
-
+          fill_in :registration_user_textcaptcha_answer, with: "2"
           check :registration_user_tos_agreement
           check :registration_user_newsletter
           find("*[type=submit]").click
         end
 
-        expect(page).to have_content("A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.")
+        expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
       end
     end
 
     context "when using another langage" do
       before do
         within_language_menu do
-          click_link "Castellano"
+          click_link "Français"
         end
       end
 
@@ -48,14 +63,14 @@ describe "Authentication", type: :system do
           fill_in :registration_user_nickname, with: "responsible"
           fill_in :registration_user_password, with: "DfyvHn425mYAy2HL"
           fill_in :registration_user_password_confirmation, with: "DfyvHn425mYAy2HL"
-
+          fill_in :registration_user_textcaptcha_answer, with: "2"
           check :registration_user_tos_agreement
           check :registration_user_newsletter
           find("*[type=submit]").click
         end
 
-        expect(page).to have_content("Se ha enviado un mensaje con un enlace de confirmación a tu dirección de correo electrónico. Por favor, sigue el enlace para activar tu cuenta.")
-        expect(last_user.locale).to eq("es")
+        expect(page).to have_content("Un message avec un lien de confirmation a été envoyé à votre adresse e-mail")
+        expect(last_user.locale).to eq("fr")
       end
     end
 
@@ -70,13 +85,12 @@ describe "Authentication", type: :system do
           fill_in :registration_user_nickname, with: "responsible"
           fill_in :registration_user_password, with: "DfyvHn425mYAy2HL"
           fill_in :registration_user_password_confirmation, with: "DfyvHn425mYAy2HL"
-
           check :registration_user_tos_agreement
           check :registration_user_newsletter
           find("*[type=submit]").click
         end
 
-        expect(page).not_to have_content("You have signed up successfully")
+        expect(page).not_to have_content("A message with a confirmation link has been sent to your email address.")
       end
     end
 
@@ -95,11 +109,14 @@ describe "Authentication", type: :system do
       before do
         OmniAuth.config.test_mode = true
         OmniAuth.config.mock_auth[:facebook] = omniauth_hash
+        OmniAuth.config.add_camelization "facebook", "FaceBook"
+        OmniAuth.config.request_validation_phase = ->(env) {} if OmniAuth.config.respond_to?(:request_validation_phase)
       end
 
       after do
         OmniAuth.config.test_mode = false
         OmniAuth.config.mock_auth[:facebook] = nil
+        OmniAuth.config.camelizations.delete("facebook")
       end
 
       context "when the user has confirmed the email in facebook" do
@@ -131,11 +148,15 @@ describe "Authentication", type: :system do
       before do
         OmniAuth.config.test_mode = true
         OmniAuth.config.mock_auth[:twitter] = omniauth_hash
+
+        OmniAuth.config.add_camelization "twitter", "Twitter"
+        OmniAuth.config.request_validation_phase = ->(env) {} if OmniAuth.config.respond_to?(:request_validation_phase)
       end
 
       after do
         OmniAuth.config.test_mode = false
         OmniAuth.config.mock_auth[:twitter] = nil
+        OmniAuth.config.camelizations.delete("twitter")
       end
 
       context "when the response doesn't include the email" do
@@ -202,11 +223,15 @@ describe "Authentication", type: :system do
       before do
         OmniAuth.config.test_mode = true
         OmniAuth.config.mock_auth[:google_oauth2] = omniauth_hash
+
+        OmniAuth.config.add_camelization "google_oauth2", "GoogleOauth"
+        OmniAuth.config.request_validation_phase = ->(env) {} if OmniAuth.config.respond_to?(:request_validation_phase)
       end
 
       after do
         OmniAuth.config.test_mode = false
         OmniAuth.config.mock_auth[:google_oauth2] = nil
+        OmniAuth.config.camelizations.delete("google_oauth2")
       end
 
       it "creates a new User" do
@@ -306,10 +331,10 @@ describe "Authentication", type: :system do
         expect(page).to have_content("Sign in with Facebook")
 
         within_language_menu do
-          click_link "Català"
+          click_link "Français"
         end
 
-        expect(page).to have_content("Inicia sessió amb Facebook")
+        expect(page).to have_content("S'identifier avec Facebook")
       end
     end
 
@@ -353,8 +378,7 @@ describe "Authentication", type: :system do
       end
 
       it "signs out the user" do
-        within ".topbar__user__logged" do
-          find("a", text: user.name).hover
+        within_user_menu do
           find(".sign-out-link").click
         end
 
@@ -472,11 +496,14 @@ describe "Authentication", type: :system do
     before do
       OmniAuth.config.test_mode = true
       OmniAuth.config.mock_auth[:facebook] = omniauth_hash
+      OmniAuth.config.add_camelization "facebook", "FaceBook"
+      OmniAuth.config.request_validation_phase = ->(env) {} if OmniAuth.config.respond_to?(:request_validation_phase)
     end
 
     after do
       OmniAuth.config.test_mode = false
       OmniAuth.config.mock_auth[:facebook] = nil
+      OmniAuth.config.camelizations.delete("facebook")
     end
 
     describe "Sign in" do
@@ -538,13 +565,13 @@ describe "Authentication", type: :system do
             fill_in :registration_user_nickname, with: "responsible"
             fill_in :registration_user_password, with: "DfyvHn425mYAy2HL"
             fill_in :registration_user_password_confirmation, with: "DfyvHn425mYAy2HL"
-
+            fill_in :registration_user_textcaptcha_answer, with: "2"
             check :registration_user_tos_agreement
             check :registration_user_newsletter
             find("*[type=submit]").click
           end
 
-          expect(page).to have_content("A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.")
+          expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
         end
       end
     end
@@ -569,11 +596,14 @@ describe "Authentication", type: :system do
     before do
       OmniAuth.config.test_mode = true
       OmniAuth.config.mock_auth[:facebook] = omniauth_hash
+      OmniAuth.config.add_camelization "facebook", "FaceBook"
+      OmniAuth.config.request_validation_phase = ->(env) {} if OmniAuth.config.respond_to?(:request_validation_phase)
     end
 
     after do
       OmniAuth.config.test_mode = false
       OmniAuth.config.mock_auth[:facebook] = nil
+      OmniAuth.config.camelizations.delete("facebook")
     end
 
     describe "Sign Up" do
