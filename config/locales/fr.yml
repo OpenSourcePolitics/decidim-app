@@ -127,9 +127,9 @@ fr:
         navigation: Navigation
         sign_in: Se connecter
         sign_up: S'inscrire
+      password_validator:
+        nickname_included_in_password: est trop similaire à votre surnom
       user_menu:
         account: Mon compte
         conversations: Conversations
         notifications: Notifications
-password_validator:
-  nickname_included_in_password: est trop similaire à votre surnom
