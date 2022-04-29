@@ -34,6 +34,14 @@
 
  - **V0.24** `app/assets/stylesheets/decidim/vizzs/_areachart.scss`
 
+## Add FC Connect SSO
+ - **app/views/decidim/devise/shared/_omniauth_buttons.html.erb**
+```ruby
+<% if provider.match?("france") %>
+```
+
+ - **V0.24** `app/assets/stylesheets/decidim/vizzs/_areachart.scss`
+
 * `app/views/decidim/scopes/picker.html.erb`
 c76437f - Modify cancel button behaviour to match close button, 2022-02-08
 
