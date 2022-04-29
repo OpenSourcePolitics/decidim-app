@@ -4,18 +4,12 @@
       <%- current_organization.enabled_omniauth_providers.keys.each do |provider| %>
         <div class="social-register">
           <% if provider.match?("france") %>
-            <%= link_to decidim.send("user_#{provider}_omniauth_authorize_path"), class: "button--#{normalize_provider_name(provider)}", method: :post do %>
-              <%= image_pack_tag "media/images/FCboutons-10@2x.png", alt: t("devise.shared.links.sign_in_with_provider", provider: normalize_provider_name(provider).titleize) %>
-            <% end %>
+            <span class="register__separator">
+              <span class="register__separator__text"><%= t("devise.shared.links.sign_in_with_provider", provider: normalize_full_provider_name(provider).titleize) %></span>
+            </span>
+              <%= sso_provider_image(provider, decidim) %>
           <% else %>
-            <%= link_to decidim.send("user_#{provider}_omniauth_authorize_path"), class: "button button--social button--#{normalize_provider_name(provider)}", method: :post do %>
-            <span class="button--social__icon">
-              <%= oauth_icon provider %>
-            </span>
-              <span class="button--social__text">
-              <%= t("devise.shared.links.sign_in_with_provider", provider: normalize_provider_name(provider).titleize) %>
-            </span>
-            <% end %>
+              <%== sso_provider_button(provider, decidim).html_safe %>
           <% end %>
         </div>
       <% end %>
