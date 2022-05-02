@@ -7,9 +7,9 @@
             <span class="register__separator">
               <span class="register__separator__text"><%= t("devise.shared.links.sign_in_with_provider", provider: normalize_full_provider_name(provider).titleize) %></span>
             </span>
-              <%= sso_provider_image(provider, decidim) %>
+              <%= sso_provider_image(provider, decidim.send("user_#{provider}_omniauth_authorize_path")) %>
           <% else %>
-              <%== sso_provider_button(provider, decidim).html_safe %>
+              <%== sso_provider_button(provider, decidim.send("user_#{provider}_omniauth_authorize_path")).html_safe %>
           <% end %>
         </div>
       <% end %>
