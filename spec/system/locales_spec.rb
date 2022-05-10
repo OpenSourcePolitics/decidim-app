@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Locales", type: :system do
   describe "switching locales" do
-    let(:organization) { create(:organization, available_locales: %w(en ca)) }
+    let(:organization) { create(:organization, available_locales: %w(en fr)) }
 
     before do
       switch_to_host(organization.host)
@@ -13,15 +13,15 @@ describe "Locales", type: :system do
 
     it "changes the locale to the chosen one" do
       within_language_menu do
-        click_link "Català"
+        click_link "Français"
       end
 
-      expect(page).to have_content("Inici")
+      expect(page).to have_content("Accueil")
     end
 
     it "only shows the available locales" do
       within_language_menu do
-        expect(page).to have_content("Català")
+        expect(page).to have_content("Français")
         expect(page).to have_content("English")
         expect(page).to have_no_content("Castellano")
       end
@@ -29,27 +29,27 @@ describe "Locales", type: :system do
 
     it "keeps the locale between pages" do
       within_language_menu do
-        click_link "Català"
+        click_link "Français"
       end
 
-      click_link "Inici"
+      click_link "Accueil"
 
-      expect(page).to have_content("Inici")
+      expect(page).to have_content("Accueil")
     end
 
     it "displays devise messages with the right locale when not authenticated " do
       within_language_menu do
-        click_link "Català"
+        click_link "Français"
       end
 
       visit decidim_admin.root_path
 
-      expect(page).to have_content("Has d'iniciar la sessió o registrar-te abans de continuar.")
+      expect(page).to have_content("Vous devez vous identifier ou vous créer un compte avant de continuer")
     end
 
     it "displays devise messages with the right locale when authentication fails " do
       within_language_menu do
-        click_link "Català"
+        click_link "Français"
       end
 
       find(".sign-in-link").click
@@ -57,13 +57,13 @@ describe "Locales", type: :system do
       fill_in "session_user_email", with: "toto@example.org"
       fill_in "session_user_password", with: "toto"
 
-      click_button "Iniciar sessió"
+      click_button "S'identifier"
 
-      expect(page).to have_content("Email o la contrasenya no són vàlids.")
+      expect(page).to have_content("Email ou mot de passe invalide")
     end
 
     context "with a signed in user" do
-      let(:user) { create(:user, :confirmed, locale: "ca", organization: organization) }
+      let(:user) { create(:user, :confirmed, locale: "fr", organization: organization) }
 
       before do
         login_as user, scope: :user
@@ -71,7 +71,7 @@ describe "Locales", type: :system do
       end
 
       it "uses the user's locale" do
-        expect(page).to have_content("Inici")
+        expect(page).to have_content("Accueil")
       end
     end
   end

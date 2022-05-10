@@ -2,7 +2,11 @@
 
 require_relative "boot"
 
-require "rails/all"
+require "decidim/rails"
+# Add the frameworks used by your app that are not loaded by Decidim.
+require "action_cable/engine"
+# require "action_mailbox/engine"
+# require "action_text/engine"
 
 # TODO : add missing dep to decidim-initiatives/lib/decidim/initiatives/engine.rb
 # require "wicked_pdf"
@@ -23,6 +27,12 @@ module DevelopmentApp
     config.action_mailer.asset_host = "https://#{Rails.application.secrets[:asset_host]}/" if Rails.application.secrets[:asset_host].present?
 
     config.backup = config_for(:backup).deep_symbolize_keys
+
+    config.action_dispatch.default_headers = {
+      "X-Frame-Options" => "SAMEORIGIN",
+      "X-XSS-Protection" => "1; mode=block",
+      "X-Content-Type-Options" => "nosniff"
+    }
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
