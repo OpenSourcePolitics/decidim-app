@@ -9,9 +9,6 @@
           @all_geocoded_proposals = @base_query.geocoded.where.not(latitude: Float::NAN, longitude: Float::NAN)
 ```
 
-## Fix meetings orders in indexes
-* `app/controllers/decidim/meetings/meetings_controller.rb`
-* `app/controllers/decidim/meetings/directory/meetings_controller.rb`
 ##  Fix meetings registration serializer
 * `app/serializers/decidim/meetings/registration_serializer.rb`
 ## Fix UserAnswersSerializer for CSV exports
@@ -28,8 +25,6 @@
         fill: rgba($primary, .2);;
     }
 ```
-
- - **V0.24** `app/assets/stylesheets/decidim/vizzs/_areachart.scss`
 
 ## Add FC Connect SSO
  - **app/views/decidim/devise/shared/_omniauth_buttons.html.erb**
@@ -51,5 +46,3 @@ de6d804 - fix multipart object tagging (#40) (#41), 2021-12-24
 
 * `lib/tasks/restore_dump.rake`
 705e0ad - Run rubocop, 2021-12-01
-## Disable proposals cells caching
-- **app/cells/decidim/proposals/proposal_m_cell.rb:128**
