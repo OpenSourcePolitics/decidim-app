@@ -227,7 +227,8 @@ GIT
 
 GIT
   remote: https://github.com/mainio/decidim-module-term_customizer.git
-  revision: 437042198ed04cdd5582b29d5df83b032ecc518f
+  revision: 1d20451c56b7809cf0d509bbb4d0ac63d4791c8c
+  branch: release/0.25-stable
   specs:
     decidim-term_customizer (0.25.0)
       decidim-admin (~> 0.25.0)
@@ -581,6 +582,7 @@ GEM
     mime-types-data (3.2022.0105)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.0)
     minitest (5.15.0)
     mixlib-cli (2.1.8)
     mixlib-config (3.0.9)
@@ -595,6 +597,9 @@ GEM
     newrelic_rpm (8.6.0)
     nio4r (2.5.8)
     nobspw (0.6.2)
+    nokogiri (1.13.4)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     nokogiri (1.13.4-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.4-x86_64-linux)
