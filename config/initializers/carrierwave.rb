@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Default CarrierWave setup.
-unless Rails.env.development? || Rails.env.test?
+if Rails.env.production?
   CarrierWave.configure do |config|
     if Rails.application.secrets.dig(:scaleway, :id).blank?
       config.permissions = 0o666

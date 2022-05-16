@@ -31,7 +31,14 @@
         fill: rgba($primary, .2);;
     }
 ```
+
  - **V0.24** `app/assets/stylesheets/decidim/vizzs/_areachart.scss`
+
+## Add FC Connect SSO
+ - **app/views/decidim/devise/shared/_omniauth_buttons.html.erb**
+```ruby
+<% if provider.match?("france") %>
+```
 
 * `app/views/decidim/scopes/picker.html.erb`
 c76437f - Modify cancel button behaviour to match close button, 2022-02-08
@@ -47,3 +54,5 @@ de6d804 - fix multipart object tagging (#40) (#41), 2021-12-24
 
 * `lib/tasks/restore_dump.rake`
 705e0ad - Run rubocop, 2021-12-01
+## Disable proposals cells caching
+- **app/cells/decidim/proposals/proposal_m_cell.rb:128**

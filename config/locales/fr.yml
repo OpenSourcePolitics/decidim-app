@@ -114,9 +114,9 @@ fr:
             provider_name: Provider name
             site: Site URL
           publik:
-            client_id: ID client
-            client_secret: Secret client
-            site_url: URL site
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
     verifications:
       authorizations:
         create:

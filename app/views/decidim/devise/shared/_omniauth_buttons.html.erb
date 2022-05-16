@@ -1,0 +1,23 @@
+<% if Devise.mappings[:user].omniauthable? && current_organization.enabled_omniauth_providers.any? %>
+  <div class="row">
+    <div class="columns large-4 mediumlarge-6 medium-8 medium-centered">
+      <%- current_organization.enabled_omniauth_providers.keys.each do |provider| %>
+        <div class="social-register">
+          <% if provider.match?("france") %>
+            <span class="register__separator">
+              <span class="register__separator__text"><%= t("devise.shared.links.sign_in_with_provider", provider: normalize_full_provider_name(provider).titleize) %></span>
+            </span>
+              <%= sso_provider_image(provider, decidim.send("user_#{provider}_omniauth_authorize_path")) %>
+          <% else %>
+              <%== sso_provider_button(provider, decidim.send("user_#{provider}_omniauth_authorize_path")).html_safe %>
+          <% end %>
+        </div>
+      <% end %>
+      <%- if current_organization.sign_in_enabled? %>
+        <span class="register__separator">
+          <span class="register__separator__text"><%= t(".or") %></span>
+        </span>
+      <%- end %>
+    </div>
+  </div>
+<% end %>

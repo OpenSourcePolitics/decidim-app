@@ -95,3 +95,7 @@ Rails/Validation:
 Rails/BulkChangeTable:
   Exclude:
     - db/**/*
+
+RSpec/MultipleMemoizedHelpers:
+  Exclude:
+    - spec/**/**
