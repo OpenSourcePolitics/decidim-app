@@ -20,7 +20,7 @@ module ApplicationHelper
   def sso_provider_button(provider, link_to_path)
     ActionController::Base.helpers.link_to link_to_path, class: "button button--social button--#{normalize_provider_name(provider)}", method: :post do
       html_element = content_tag(:span, oauth_icon(provider), class: "button--social__icon")
-      html_element += content_tag(:span, normalize_provider_name(provider).titleize, class: "button--social__text")
+      html_element += content_tag(:span, t("devise.shared.links.sign_in_with_provider", provider: normalize_provider_name(provider).titleize), class: "button--social__text")
 
       html_element
     end

@@ -7,7 +7,7 @@ DECIDIM_VERSION = "release/0.26-stable"
 ruby RUBY_VERSION
 
 gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
-
+gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik", branch: "v0.0.9"
 # gem "acts_as_textcaptcha", "~> 4.5.1"
 #gem "decidim-decidim_awesome"
 #gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: "bump/0.25-stable"
