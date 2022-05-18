@@ -30,6 +30,31 @@ describe "Account", type: :system do
       visit decidim.account_path
     end
 
+    it_behaves_like "accessible page"
+
+    describe "update avatar" do
+      it "can update avatar" do
+        attach_file :user_avatar, Decidim::Dev.asset("avatar.jpg")
+
+        within "form.edit_user" do
+          find("*[type=submit]").click
+        end
+
+        expect(page).to have_css(".flash.success")
+      end
+
+      it "shows error when image is too big" do
+        attach_file :user_avatar, Decidim::Dev.asset("5000x5000.png")
+
+        within "form.edit_user" do
+          find("*[type=submit]").click
+        end
+
+        expect(page).to have_content("The image is too big", count: 1)
+        expect(page).to have_css(".flash.alert")
+      end
+    end
+
     describe "updating personal data" do
       it "updates the user's data" do
         within "form.edit_user" do
