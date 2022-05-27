@@ -596,12 +596,12 @@ GEM
     newrelic_rpm (8.7.0)
     nio4r (2.5.8)
     nobspw (0.6.2)
-    nokogiri (1.13.6)
+    nokogiri (1.13.4)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    nokogiri (1.13.6-x86_64-darwin)
+    nokogiri (1.13.4-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.6-x86_64-linux)
+    nokogiri (1.13.4-x86_64-linux)
       racc (~> 1.4)
     oauth (0.5.10)
     oauth2 (1.4.9)
@@ -972,6 +972,7 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   newrelic_rpm
+  nokogiri (= 1.13.4)
   omniauth-france_connect!
   omniauth-publik!
   passenger
@@ -993,4 +994,4 @@ RUBY VERSION
    ruby 2.7.1p83
 
 BUNDLED WITH
-   2.3.12
+   2.3.10
