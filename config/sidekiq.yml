@@ -2,11 +2,11 @@
 :queues:
   - mailers
   - default
+  - backups
   - events
   - newsletter
   - user_report
   - block_user
-  - backups
   - scheduled
   - metrics
 
