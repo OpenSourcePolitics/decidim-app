@@ -60,3 +60,4 @@ group :production do
   gem "sidekiq"
   gem "sidekiq-scheduler"
 end
+gem "nokogiri", "1.13.4"
