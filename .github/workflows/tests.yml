@@ -1,14 +1,5 @@
-name: Tests
-on:
-  push:
-    branches:
-      - develop
-      - master
-      - release/*
-      - "*-stable"
-  pull_request:
-    branches-ignore:
-      - "chore/l10n*"
+name: "CI/CD"
+on: [push]
 
 env:
   CI: "true"
