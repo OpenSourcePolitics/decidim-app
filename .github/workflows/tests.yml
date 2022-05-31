@@ -47,8 +47,6 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
-    needs: [lint]
-    if: "!startsWith(github.head_ref, 'chore/l10n')"
     services:
       postgres:
         image: postgres:11
