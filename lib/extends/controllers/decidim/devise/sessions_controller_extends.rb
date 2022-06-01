@@ -19,6 +19,6 @@ module SessionControllerExtends
   end
 end
 
-Devise::SessionsController.class_eval do
+Decidim::Devise::SessionsController.class_eval do
   prepend(SessionControllerExtends)
 end

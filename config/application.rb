@@ -38,5 +38,9 @@ module DevelopmentApp
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.after_load_config_initializers do
+      require "extends/controllers/decidim/devise/sessions_controller_extends"
+    end
   end
 end
