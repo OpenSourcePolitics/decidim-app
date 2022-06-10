@@ -112,7 +112,7 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
-      - run: bundle exec rspec
+      - run: bundle exec rspec spec/**/*_spec.rb
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
         name: Upload coverage
@@ -120,4 +120,4 @@ jobs:
         if: always()
         with:
           name: screenshots
-          path: ./spec/decidim_dummy_app/tmp/screenshots
+          path: ./spec/tmp/screenshots
