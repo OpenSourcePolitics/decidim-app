@@ -7,6 +7,7 @@ DECIDIM_VERSION = "release/0.25-stable"
 ruby RUBY_VERSION
 
 gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
+gem "decidim-templates"
 
 gem "acts_as_textcaptcha", "~> 4.5.1"
 gem "bootsnap", "~> 1.4"
