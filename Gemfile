@@ -10,6 +10,7 @@ gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VE
 
 gem "acts_as_textcaptcha", "~> 4.5.1"
 gem "bootsnap", "~> 1.4"
+gem "decidim-budgets_paper_ballots", git: "https://github.com/digidemlab/decidim-module-budgets_paper_ballots", branch: "release/0.25-stable"
 gem "decidim-decidim_awesome"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: "bump/0.25-stable"
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: "bump/0.25-stable"
