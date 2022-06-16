@@ -9,6 +9,9 @@ if Rails.application.secrets.dig(:sentry, :enabled)
 
     # To activate performance monitoring, set one of these options.
     # We recommend adjusting the value in production:
-    config.traces_sample_rate = ENV.fetch("SENTRY_SAMPLE_RATE", 0.5)
+    config.traces_sample_rate = ENV.fetch("SENTRY_SAMPLE_RATE", 1.0)
   end
+
+  Sentry.set_tags('server.hostname': `hostname`.chomp)
+  Sentry.set_tags('server.ip': `hostname -I | awk '{print $1}'`.chomp)
 end
