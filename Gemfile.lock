@@ -219,6 +219,15 @@ GIT
       decidim-core (= 0.25.2)
 
 GIT
+  remote: https://github.com/digidemlab/decidim-module-budgets_paper_ballots
+  revision: 992dd118685d29224bbfe490897b5924f16c6429
+  branch: release/0.25-stable
+  specs:
+    decidim-budgets_paper_ballots (0.25.0)
+      decidim-budgets (~> 0.25.0)
+      decidim-core (~> 0.25.0)
+
+GIT
   remote: https://github.com/mainio/decidim-module-term_customizer.git
   revision: 1d20451c56b7809cf0d509bbb4d0ac63d4791c8c
   branch: release/0.25-stable
@@ -952,6 +961,7 @@ DEPENDENCIES
   byebug (~> 11.0)
   dalli
   decidim!
+  decidim-budgets_paper_ballots!
   decidim-decidim_awesome
   decidim-dev!
   decidim-homepage_interactive_map!
