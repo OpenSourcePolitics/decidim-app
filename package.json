@@ -19,11 +19,6 @@
     "select2": "^4.1.0-rc.0"
   },
   "version": "0.1.0",
-  "babel": {
-    "presets": [
-      "./node_modules/@rails/webpacker/package/babel/preset.js"
-    ]
-  },
   "browserslist": [
     "extends @decidim/browserslist-config"
   ],
@@ -31,6 +26,7 @@
     "@decidim/dev": "file:packages/dev",
     "@decidim/eslint-config": "file:packages/eslint-config",
     "@decidim/stylelint-config": "file:packages/stylelint-config",
+    "babel-loader": "^8.2.5",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^11.0.0",
