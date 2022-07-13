@@ -1,21 +1,16 @@
 // Variables
 
 // - Default
-// $body-header-color: #1a181d;
-// $body-footer-color: #2c2930;
-
-// - Light theme
 $body-header-color: #fefefe;
 $body-footer-color: #fefefe;
-
 
 /* Application Overrides --------- */
 
 table.body th.decidim-bar,
 table.body td.decidim-bar{
-  background-color: $body-header-color;
+  background-color: $body-header-color !important;
 }
 
 .cityhall-bar{
-  background-color: $body-footer-color;
+  background-color: $body-footer-color !important;
 }
