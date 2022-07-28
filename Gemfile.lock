@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-ludens.git
+  revision: 368c2da5b5875f9fa5197e4a6f5983aaa08a9743
+  branch: release/0.25-stable
+  specs:
+    decidim-ludens (0.25.2)
+      decidim-core (= 0.25.2)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
   revision: 11f232528dca6a8e162f9011acf28bc641193783
   branch: bump/0.25-stable
@@ -955,6 +963,7 @@ DEPENDENCIES
   decidim-decidim_awesome
   decidim-dev!
   decidim-homepage_interactive_map!
+  decidim-ludens!
   decidim-phone_authorization_handler!
   decidim-question_captcha!
   decidim-spam_detection

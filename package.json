@@ -7,6 +7,7 @@
     "@decidim/elections": "file:packages/elections",
     "@decidim/webpacker": "file:packages/webpacker",
     "codemirror": "^5.65.3",
+    "confetti-js": "^0.0.18",
     "europa": "^4.0.0",
     "form-storage": "^1.3.5",
     "formBuilder": "^3.8.3",
