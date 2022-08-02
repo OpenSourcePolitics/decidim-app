@@ -89,7 +89,9 @@ ignore_missing:
  - decidim.proposals.proposals.votes_count.most_popular_proposal
  - decidim.proposals.proposals.votes_count.need_more_votes
  - layouts.decidim.header.user_menu
-
+ - layouts.decidim.header.user_menu
+ - decidim.devise.shared.omniauth_buttons.or
+ - devise.shared.links.sign_in_with_provider
 # Consider these keys used:
 ignore_unused:
   - faker.*
