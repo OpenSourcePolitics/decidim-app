@@ -100,6 +100,7 @@ en:
           france_connect:
             client_id: Client ID
             client_secret: Client secret
+            scope: Scope
             site_url: Site URL
           france_connect_profile:
             button_path: Button path

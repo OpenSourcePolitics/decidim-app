@@ -35,9 +35,9 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-france_connect
-  revision: dfed6cd11d755ee643dad335c3bf0881d6007429
+  revision: 4665875c94d45a71dac163889e0eedd21b2ba41d
   specs:
-    omniauth-france_connect (0.0.9)
+    omniauth-france_connect (0.1.0)
       omniauth_openid_connect (~> 0.4.0)
 
 GIT
@@ -528,7 +528,7 @@ GEM
     invisible_captcha (0.13.0)
       rails (>= 3.2.0)
     json (2.6.2)
-    json-jwt (1.13.0)
+    json-jwt (1.14.0)
       activesupport (>= 4.2)
       aes_key_wrap
       bindata
@@ -681,7 +681,7 @@ GEM
       rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
-    rack-oauth2 (1.19.0)
+    rack-oauth2 (1.21.2)
       activesupport
       attr_required
       httpclient
@@ -979,6 +979,7 @@ DEPENDENCIES
   nokogiri (= 1.13.4)
   omniauth-france_connect!
   omniauth-publik!
+  omniauth-rails_csrf_protection (~> 1.0)
   passenger
   puma (~> 5.5.1)
   rubocop-faker
