@@ -13,7 +13,7 @@ namespace :decidim_app do
     system("bundle exec rake decidim_homepage_interactive_map:install:migrations")
     puts "[Term customizer] Installing migrations"
     system("bundle exec rails decidim_term_customizer:install:migrations")
-    puts 'Checking for migrations to apply...'
+    puts "Checking for migrations to apply..."
     migrations = `bundle exec rake db:migrate:status | grep down`
     if migrations.present?
       puts "Missing migrations :
