@@ -59,6 +59,8 @@ user.save!
 5. Set the correct default host for the organization, otherwise the app will not work properly. Note that you need to include any subdomain you might be using.
 6. Fill the rest of the form and submit it.
 
+__IMPORTANT!__ : You must ensure all environnement variables are defined, see [.env-example](./.env-example)
+
 You're good to go!
 
 ## Running tests
