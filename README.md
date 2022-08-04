@@ -8,6 +8,13 @@ This application is maintained by [Open Source Politics](https://opensourcepolit
 
 Once repository is cloned, you can now install dependencies, fetch external migrations and migrate
 
+> We created a rake task to install automatically the dependencies
+
+Execute command : 
+> bundle exec rake decidim_app:setup
+
+Otherwise follow these steps : 
+
 1. Install dependencies
 
 ```bash
@@ -17,7 +24,6 @@ bundle install
 ```bash
 bundle exec rails decidim_decidim_awesome:install:migrations
 bundle exec rails decidim_decidim_awesome:webpacker:install
-bundle exec rails db:migrate
 ```
 3. Install Homepage Interactive Map dependencies
 ```bash
@@ -26,6 +32,12 @@ bundle exec rake decidim_homepage_interactive_map:install:migrations
 4. Install Term Customizer dependencies
 ```bash
 bundle exec rails decidim_term_customizer:install:migrations
+```
+
+5. Install migrations
+
+```bash
+bundle exec rake db:migrate
 ```
 
 All dependencies should be now installed and ready-to-use !
