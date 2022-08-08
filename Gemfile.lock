@@ -220,9 +220,6 @@ GIT
       devise (~> 4.7)
       devise-i18n (~> 1.2)
       devise_invitable (~> 2.0)
-    decidim-templates (0.25.2)
-      decidim-core (= 0.25.2)
-      decidim-forms (= 0.25.2)
     decidim-verifications (0.25.2)
       decidim-core (= 0.25.2)
 
@@ -407,6 +404,9 @@ GEM
       sassc (~> 2.3)
     decidim-spam_detection (1.1.2)
       decidim-core (~> 0.25)
+    decidim-templates (0.25.2)
+      decidim-core (= 0.25.2)
+      decidim-forms (= 0.25.2)
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
@@ -964,6 +964,7 @@ DEPENDENCIES
   decidim-phone_authorization_handler!
   decidim-question_captcha!
   decidim-spam_detection
+  decidim-templates
   decidim-term_customizer!
   dotenv-rails
   faker (~> 2.14)

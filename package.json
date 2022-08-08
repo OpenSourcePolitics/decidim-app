@@ -21,11 +21,6 @@
     "select2": "^4.1.0-rc.0"
   },
   "version": "0.1.0",
-  "babel": {
-    "presets": [
-      "./node_modules/@rails/webpacker/package/babel/preset.js"
-    ]
-  },
   "browserslist": [
     "extends @decidim/browserslist-config"
   ],
