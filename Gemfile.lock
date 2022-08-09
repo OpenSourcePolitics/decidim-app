@@ -8,13 +8,13 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
-  revision: 8bcfdd264fda716c9d97830ed56c0de28e1f7ca3
-  branch: bump/0.25-stable
+  revision: a741b907a8849f43ffbbd66e49efe786104eef25
+  branch: release/0.25-stable
   specs:
-    decidim-homepage_interactive_map (1.0.0)
-      decidim-admin (= 0.25.2)
-      decidim-core (= 0.25.2)
-      decidim-dev (= 0.25.2)
+    decidim-homepage_interactive_map (2.0.0)
+      decidim-admin (>= 0.25.0, < 0.26)
+      decidim-core (>= 0.25.0, < 0.26)
+      decidim-dev (>= 0.25.0, < 0.26)
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git
@@ -997,4 +997,4 @@ RUBY VERSION
    ruby 2.7.1p83
 
 BUNDLED WITH
-   2.3.9
+   2.3.10
