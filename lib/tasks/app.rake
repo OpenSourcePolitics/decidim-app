@@ -11,8 +11,10 @@ namespace :app do
     end
 
     upgrader = Upgrader.new decidim_version
+
     upgrader.fetch_ruby_version!
     upgrader.fetch_node_version!
+    upgrader.update_rubocop!
   end
 end
 
@@ -31,6 +33,15 @@ class Upgrader
 
   def fetch_node_version!
     fetch_and_save! ".node-version"
+  end
+
+  def update_rubocop!
+    puts "Fetching and saving file '.rubocop.yml'..." unless @quiet
+
+    rubocop = YAML.load_file('.rubocop.yml')
+    rubocop["inherit_from"] = "#{@repository_url}.rubocop.yml"
+
+    File.write(".rubocop.yml", rubocop.to_yaml)
   end
 
   private
@@ -53,7 +64,5 @@ class Upgrader
   def curl(uri)
     response = Faraday.get(uri)
     response.body
-    # response = Net::HTTP.get_response(uri)
-    # response.body if response.is_a?(Net::HTTPOK) && response.respond_to?(:body)
   end
 end
