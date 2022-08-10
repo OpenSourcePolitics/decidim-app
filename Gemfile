@@ -8,6 +8,7 @@ ruby RUBY_VERSION
 
 gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
 
+## Block gems /!\ Required comment for : $ rake app:upgrade
 # gem "acts_as_textcaptcha", "~> 4.5.1"
 # gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: "bump/0.25-stable"
 # gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: "bump/0.25-stable"
@@ -18,6 +19,7 @@ gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omnia
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik", branch: "v0.0.9"
 
 gem "decidim-decidim_awesome", "0.8.3"
+## End gems /!\ Required comment for : $ rake app:upgrade
 
 gem "dotenv-rails"
 
