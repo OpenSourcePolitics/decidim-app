@@ -46,8 +46,10 @@ class Upgrader
   end
 
   def rewrite_gemfile!
+    puts "Preparing Gemfile..." unless @quiet
     in_block = false
-    File.readlines('Gemfile').each do |line|
+
+    file_contents = File.readlines('Gemfile').map do |line|
       if line.include?("DECIDIM_VERSION =")
         line = "DECIDIM_VERSION = \"#{@version}\""
       end
@@ -64,8 +66,11 @@ class Upgrader
         in_block = true
       end
 
-      puts(line)
+      line
     end
+
+    File.write("Gemfile", file_contents.join)
+    puts "Gemfile updated!" unless @quiet
   end
 
   private
