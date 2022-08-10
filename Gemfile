@@ -2,8 +2,7 @@
 
 source "https://rubygems.org"
 
-DECIDIM_VERSION = "release/0.26-stable"
-
+DECIDIM_VERSION = "release/0.27-stable"
 ruby RUBY_VERSION
 
 gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
@@ -15,39 +14,39 @@ gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VE
 # gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: DECIDIM_VERSION
 # gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git"
 # gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git"
-gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
-gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik", branch: "v0.0.9"
-
-gem "decidim-decidim_awesome", "0.8.3"
+# gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
+# gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik", branch: "v0.0.9"
+# 
+# gem "decidim-decidim_awesome", "0.8.3"
 ## End gems /!\ Required comment for : $ rake app:upgrade
 
 gem "dotenv-rails"
-
-gem "bootsnap", "~> 1.4"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
-
-gem "puma", ">= 5.5.1"
-
-gem "faker", "~> 2.14"
-
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "fog-aws"
 gem "sys-filesystem"
 
+gem "bootsnap", "~> 1.4"
+
+gem "puma", ">= 5.6.2"
+
+gem "faker", "~> 2.14"
+
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
-  gem "brakeman", "~> 5.1"
+  gem "brakeman", "~> 5.2"
   gem "decidim-dev", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
+  gem "parallel_tests", "~> 3.7"
 end
 
 group :development do
-  gem "letter_opener_web", "~> 1.3"
+  gem "letter_opener_web", "~> 2.0"
   gem "listen", "~> 3.1"
   gem "rubocop-faker"
   gem "spring", "~> 2.0"
   gem "spring-watcher-listen", "~> 2.0"
-  gem "web-console", "4.0.4"
+  gem "web-console", "4.2"
 end
 
 group :production do
