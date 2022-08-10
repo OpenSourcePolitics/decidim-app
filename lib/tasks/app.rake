@@ -12,9 +12,9 @@ namespace :app do
 
     upgrader = Upgrader.new decidim_version
 
-    # upgrader.fetch_ruby_version!
-    # upgrader.fetch_node_version!
-    # upgrader.update_rubocop!
+    upgrader.fetch_ruby_version!
+    upgrader.fetch_node_version!
+    upgrader.update_rubocop!
     upgrader.rewrite_gemfile!
   end
 end
@@ -71,9 +71,22 @@ class Upgrader
 
     File.write("Gemfile", file_contents.join)
     puts "Gemfile updated!" unless @quiet
+    compare_gemfiles
   end
 
   private
+
+  def compare_gemfiles
+    puts "/!\ You must know compare manually the original Gemfile and the Decidim-app Gemfile"
+    puts "Please update the dependencies versions according to the following Gemfile"
+    sleep 3
+
+    new = get("Gemfile")
+    new.split("\n").each { |line| puts line }
+
+    puts "Done ? (Type Enter)"
+    $stdin.gets.to_s.strip
+  end
 
   def fetch_and_save!(filename)
     puts "Fetching and saving file '#{filename}'..." unless @quiet
