@@ -14,7 +14,7 @@ namespace :app do
 
     upgrader.fetch_ruby_version!
     upgrader.fetch_node_version!
-    upgrader.update_rubocop!
+    # upgrader.update_rubocop!
     upgrader.rewrite_gemfile!
   end
 end
@@ -51,7 +51,7 @@ class Upgrader
 
     file_contents = File.readlines('Gemfile').map do |line|
       if line.include?("DECIDIM_VERSION =")
-        line = "DECIDIM_VERSION = \"#{@version}\""
+        line = "DECIDIM_VERSION = \"#{@version}\"\n"
       end
 
       if line.include?("## End")
