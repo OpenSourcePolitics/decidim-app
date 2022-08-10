@@ -12,9 +12,10 @@ namespace :app do
 
     upgrader = Upgrader.new decidim_version
 
-    upgrader.fetch_ruby_version!
-    upgrader.fetch_node_version!
-    upgrader.update_rubocop!
+    # upgrader.fetch_ruby_version!
+    # upgrader.fetch_node_version!
+    # upgrader.update_rubocop!
+    upgrader.rewrite_gemfile!
   end
 end
 
@@ -42,6 +43,15 @@ class Upgrader
     rubocop["inherit_from"] = "#{@repository_url}.rubocop.yml"
 
     File.write(".rubocop.yml", rubocop.to_yaml)
+  end
+
+  def rewrite_gemfile!
+    File.readlines('Gemfile').each do |line|
+      if line.include?("DECIDIM_VERSION =")
+        line = "DECIDIM_VERSION = \"#{@version}\""
+      end
+      puts(line)
+    end
   end
 
   private
