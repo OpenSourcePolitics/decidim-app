@@ -12,10 +12,11 @@ namespace :app do
 
     upgrader = Upgrader.new decidim_version
 
-    upgrader.fetch_ruby_version!
-    upgrader.fetch_node_version!
-    # upgrader.update_rubocop!
-    upgrader.rewrite_gemfile!
+    # upgrader.fetch_ruby_version!
+    # upgrader.fetch_node_version!
+    # # upgrader.update_rubocop!
+    # upgrader.rewrite_gemfile!
+    upgrader.overloads
   end
 end
 
@@ -72,6 +73,14 @@ class Upgrader
     File.write("Gemfile", file_contents.join)
     puts "Gemfile updated!" unless @quiet
     compare_gemfiles
+  end
+
+  def overloads
+    YAML.load_file(".overloads.yml").each do |key, value|
+      value.each do |path|
+        File.write(path, get("decidim-#{key}/#{path}"))
+      end
+    end
   end
 
   private
