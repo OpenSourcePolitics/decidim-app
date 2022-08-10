@@ -9,7 +9,15 @@ core:
   - spec/system/homepage_spec.rb
   - spec/system/locales_spec.rb
   - spec/system/user_tos_acceptance_spec.rb
+  - spec/events/decidim/profile_updated_event_officialize_user_spec.rb
+  - spec/controllers/sessions_controller_spec.rb
 proposals:
   - app/controllers/decidim/proposals/proposals_controller.rb
+  - spec/controllers/decidim/proposals/proposals_controller_spec.rb
 participatory_processes:
   - spec/system/participatory_processes_spec.rb
+  - spec/controllers/participatory_process_groups_controller_spec.rb
+  - spec/controllers/participatory_processes_controller_spec.rb
+verifications:
+  - spec/events/decidim/verifications/managed_user_error_event_spec.rb
+  - spec/commands/decidim/verifications/authorize_user_spec.rb
