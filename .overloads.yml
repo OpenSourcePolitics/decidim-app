@@ -3,5 +3,13 @@ core:
   - app/views/layouts/decidim/_main_footer.html.erb
   - app/views/layouts/decidim/_mini_footer.html.erb
   - app/views/layouts/decidim/_wrapper.html.erb
+  - app/views/decidim/devise/shared/_omniauth_buttons.html.erb
+  - spec/system/account_spec.rb
+  - spec/system/authentication_spec.rb
+  - spec/system/homepage_spec.rb
+  - spec/system/locales_spec.rb
+  - spec/system/user_tos_acceptance_spec.rb
 proposals:
   - app/controllers/decidim/proposals/proposals_controller.rb
+participatory_processes:
+  - spec/system/participatory_processes_spec.rb
