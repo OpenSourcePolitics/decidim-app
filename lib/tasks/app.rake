@@ -46,10 +46,24 @@ class Upgrader
   end
 
   def rewrite_gemfile!
+    in_block = false
     File.readlines('Gemfile').each do |line|
       if line.include?("DECIDIM_VERSION =")
         line = "DECIDIM_VERSION = \"#{@version}\""
       end
+
+      if line.include?("## End")
+        in_block = false
+      end
+
+      if in_block
+        line = "# #{line}" unless line.start_with?("#")
+      end
+
+      if line.include?("## Block")
+        in_block = true
+      end
+
       puts(line)
     end
   end
