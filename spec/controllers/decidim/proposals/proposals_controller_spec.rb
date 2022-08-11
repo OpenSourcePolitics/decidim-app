@@ -276,7 +276,7 @@ module Decidim
         end
 
         describe "when current user is NOT the author of the proposal" do
-          let(:current_user) { create(:user, organization: component.organization) }
+          let(:current_user) { create(:user, :confirmed, organization: component.organization) }
           let(:proposal) { create(:proposal, component: component, users: [current_user]) }
 
           context "and the proposal has no supports" do
@@ -335,12 +335,10 @@ module Decidim
               before { sign_in user }
 
               context "and the user is the author of the emendation" do
-                let!(:amendment) { create(:amendment, amender: user, amendable: amendable, emendation: emendation) }
-                let(:user) { create(:user, :confirmed, organization: component.organization) }
+                let(:user) { amendment.amender }
 
                 it "shows the proposal" do
                   get :show, params: params.merge(id: emendation.id)
-
                   expect(response).to have_http_status(:ok)
                   expect(subject).to render_template(:show)
                 end

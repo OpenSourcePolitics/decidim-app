@@ -25,6 +25,13 @@ module Decidim
 
       before_action :set_participatory_text
 
+      # rubocop:disable Naming/VariableNumber
+      STEP1 = :step_1
+      STEP2 = :step_2
+      STEP3 = :step_3
+      STEP4 = :step_4
+      # rubocop:enable Naming/VariableNumber
+
       def index
         if component_settings.participatory_texts_enabled?
           @proposals = Decidim::Proposals::Proposal
@@ -37,7 +44,7 @@ module Decidim
           render "decidim/proposals/proposals/participatory_texts/participatory_text"
         else
           @base_query = search
-                        .results
+                        .result
                         .published
                         .not_hidden
 
@@ -63,7 +70,7 @@ module Decidim
 
       def new
         enforce_permission_to :create, :proposal
-        @step = :step_1
+        @step = STEP1
         if proposal_draft.present?
           redirect_to edit_draft_proposal_path(proposal_draft, component_id: proposal_draft.component.id, question_slug: proposal_draft.component.participatory_space.slug)
         else
@@ -73,7 +80,7 @@ module Decidim
 
       def create
         enforce_permission_to :create, :proposal
-        @step = :step_1
+        @step = STEP1
         @form = form(ProposalWizardCreateStepForm).from_params(proposal_creation_params)
 
         CreateProposal.call(@form, current_user) do
@@ -92,7 +99,7 @@ module Decidim
 
       def compare
         enforce_permission_to :edit, :proposal, proposal: @proposal
-        @step = :step_2
+        @step = STEP2
         @similar_proposals ||= Decidim::Proposals::SimilarProposals
                                .for(current_component, @proposal)
                                .all
@@ -105,7 +112,7 @@ module Decidim
 
       def complete
         enforce_permission_to :edit, :proposal, proposal: @proposal
-        @step = :step_3
+        @step = STEP3
 
         @form = form_proposal_model
 
@@ -114,13 +121,13 @@ module Decidim
 
       def preview
         enforce_permission_to :edit, :proposal, proposal: @proposal
-        @step = :step_4
+        @step = STEP4
         @form = form(ProposalForm).from_model(@proposal)
       end
 
       def publish
         enforce_permission_to :edit, :proposal, proposal: @proposal
-        @step = :step_4
+        @step = STEP4
         PublishProposal.call(@proposal, current_user) do
           on(:ok) do
             flash[:notice] = I18n.t("proposals.publish.success", scope: "decidim")
@@ -135,12 +142,12 @@ module Decidim
       end
 
       def edit_draft
-        @step = :step_3
+        @step = STEP3
         enforce_permission_to :edit, :proposal, proposal: @proposal
       end
 
       def update_draft
-        @step = :step_1
+        @step = STEP1
         enforce_permission_to :edit, :proposal, proposal: @proposal
 
         @form = form_proposal_params
@@ -211,25 +218,25 @@ module Decidim
 
       private
 
-      def search_klass
-        ProposalSearch
+      def search_collection
+        Proposal.where(component: current_component).published.not_hidden.with_availability(params[:filter].try(:[], :with_availability))
       end
 
       def default_filter_params
         {
-          search_text: "",
-          origin: default_filter_origin_params,
+          search_text_cont: "",
+          with_any_origin: default_filter_origin_params,
           activity: "all",
-          category_id: default_filter_category_params,
-          state: %w(accepted evaluating state_not_published),
-          scope_id: default_filter_scope_params,
+          with_any_category: default_filter_category_params,
+          with_any_state: %w(accepted evaluating state_not_published),
+          with_any_scope: default_filter_scope_params,
           related_to: "",
           type: "all"
         }
       end
 
       def default_filter_origin_params
-        filter_origin_params = %w(citizens meeting)
+        filter_origin_params = %w(participants meeting)
         filter_origin_params << "official" if component_settings.official_proposals_enabled
         filter_origin_params << "user_group" if current_organization.user_groups_enabled?
         filter_origin_params
