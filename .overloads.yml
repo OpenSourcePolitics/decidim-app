@@ -1,3 +1,5 @@
+admin:
+  - app/views/layouts/decidim/admin/_template_bottom.html.erb
 core:
   - app/views/layouts/decidim/_head_extra.html.erb
   - app/views/layouts/decidim/_main_footer.html.erb
