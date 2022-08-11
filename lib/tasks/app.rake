@@ -22,15 +22,17 @@ namespace :app do
     puts "Files updated on '#{upgrader.version}'"
     puts "----------- Next steps (manually) --------------"
     puts "1. Check overrides for extends
-In lib/extends/**/*.rb"
+  See in lib/extends/**/*.rb"
     puts "2. Run
-$ bundle install"
+  $ bundle install"
     puts "3. Upgrade Decidim
-$ bundle exec rake decidim:upgrade"
-    puts "4. Apply migrations
-$ bundle exec rake db:migrate"
-    puts "5. Run locally the application
-$ bundle exec rails s"
+  $ bundle exec rake decidim:upgrade"
+    puts "4. Install Yarn dependencies
+  $ yarn install"
+    puts "5. Apply migrations
+  $ bundle exec rake db:migrate"
+    puts "6. Run locally the application
+  $ bundle exec rails s"
   end
 end
 
