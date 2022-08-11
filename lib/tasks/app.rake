@@ -18,6 +18,19 @@ namespace :app do
     # upgrader.update_rubocop!
     upgrader.rewrite_gemfile!
     upgrader.overloads
+
+    puts "Files updated on '#{upgrader.version}'"
+    puts "----------- Next steps (manually) --------------"
+    puts "1. Check overrides for extends
+In lib/extends/**/*.rb"
+    puts "2. Run
+$ bundle install"
+    puts "3. Upgrade Decidim
+$ bundle exec rake decidim:upgrade"
+    puts "4. Apply migrations
+$ bundle exec rake db:migrate"
+    puts "5. Run locally the application
+$ bundle exec rails s"
   end
 end
 
