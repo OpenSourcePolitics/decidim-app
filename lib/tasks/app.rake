@@ -12,10 +12,11 @@ namespace :app do
 
     upgrader = Upgrader.new decidim_version
 
-    # upgrader.fetch_ruby_version!
-    # upgrader.fetch_node_version!
-    # # upgrader.update_rubocop!
-    # upgrader.rewrite_gemfile!
+    upgrader.fetch_ruby_version!
+    upgrader.fetch_node_version!
+    upgrader.fetch_erblint!
+    # upgrader.update_rubocop!
+    upgrader.rewrite_gemfile!
     upgrader.overloads
   end
 end
@@ -35,6 +36,10 @@ class Upgrader
 
   def fetch_node_version!
     fetch_and_save! ".node-version"
+  end
+
+  def fetch_erblint!
+    fetch_and_save! ".erb-lint.yml"
   end
 
   def update_rubocop!
