@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-spam_detection.git
+  revision: 8a3609077cded8a9d2f87e4c537f1321aba777b3
+  specs:
+    decidim-spam_detection (2.0.0)
+      decidim-core (~> 0.26)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-france_connect
   revision: dfed6cd11d755ee643dad335c3bf0881d6007429
   specs:
@@ -897,6 +904,7 @@ DEPENDENCIES
   decidim!
   decidim-decidim_awesome (= 0.8.3)
   decidim-dev!
+  decidim-spam_detection!
   dotenv-rails
   faker (~> 2.14)
   fog-aws
@@ -925,4 +933,4 @@ RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.3.13
+   2.3.14
