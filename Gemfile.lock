@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
+  revision: 488cc8827845ec1c5266aa499df2ebf9b20e02a3
+  branch: release/0.26-stable
+  specs:
+    decidim-phone_authorization_handler (1.0.0)
+      decidim-core (~> 0.26)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-spam_detection.git
   revision: 8a3609077cded8a9d2f87e4c537f1321aba777b3
   specs:
@@ -194,6 +202,14 @@ GIT
       decidim-forms (= 0.26.1)
     decidim-verifications (0.26.1)
       decidim-core (= 0.26.1)
+
+GIT
+  remote: https://github.com/mainio/decidim-module-term_customizer.git
+  revision: 9540a2ab20b872896e51ea5f97c5ebae3388ca60
+  specs:
+    decidim-term_customizer (0.26.0)
+      decidim-admin (~> 0.26.0)
+      decidim-core (~> 0.26.0)
 
 GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
@@ -904,7 +920,9 @@ DEPENDENCIES
   decidim!
   decidim-decidim_awesome (= 0.8.3)
   decidim-dev!
+  decidim-phone_authorization_handler!
   decidim-spam_detection!
+  decidim-term_customizer!
   dotenv-rails
   faker (~> 2.14)
   fog-aws
@@ -930,7 +948,7 @@ DEPENDENCIES
   web-console (= 4.0.4)
 
 RUBY VERSION
-   ruby 2.7.5p203
+   ruby 2.7.1p83
 
 BUNDLED WITH
    2.3.14
