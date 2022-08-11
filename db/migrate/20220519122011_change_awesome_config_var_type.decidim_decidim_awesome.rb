@@ -4,6 +4,8 @@
 
 class ChangeAwesomeConfigVarType < ActiveRecord::Migration[5.2]
   def change
+    return unless defined?(Decidim::DecidimAwesome)
+
     change_column :decidim_awesome_config, :var, :string
 
     Decidim::DecidimAwesome::AwesomeConfig.find_each do |config|
