@@ -1,50 +1,46 @@
 # Decidim app by OSP
 
-Citizen Participation and Open Government application.
+Citizen Participation and Open Government application based on [Decidim](https://github.com/decidim/decidim).
 
-## Deploy with Terraform
+This application is maintained by [Open Source Politics](https://opensourcepolitics.eu/). Some non official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
 
-Terraform is an open-source infrastructure as code software tool that provides an easy deployment of your infrastructure for installing Decidim.
+## Installation guide
 
-Many providers are available (**AWS**, **Heroku**, **DigitalOcean**...). Check the [Terraform registry to see how to use Terraform with your provider](https://registry.terraform.io/browse/providers)
+Once repository is cloned, you can now install dependencies, fetch external migrations and migrate
 
-Each Terraform deployment are stored in the **deploy** folder and sorted by providers
+> We created a rake task to install automatically the dependencies
 
-Feel free to add new deployments!
+Execute command : 
+> bundle exec rake decidim_app:setup
 
-## Availables deployments 
+Otherwise follow these steps : 
 
-- [Scaleway](https://github.com/OpenSourcePolitics/decidim-app/tree/develop/deploy/providers/scaleway)
-- [DigitalOcean](https://github.com/OpenSourcePolitics/decidim-app/tree/develop/deploy/providers/digitalocean/)
-
-## Environment variables
-
-Each provider will need a way to authenticate at their API. Make sure to set environment variables asked in the provider's documentation before using deployments.
-
-- To use Scaleway's provider
+1. Install dependencies
 
 ```bash
-export SCW_ACCESS_KEY=<your_access_key>
-export SCW_TOKEN=<your_scw_token>
-export SCW_DEFAULT_PROJECT_ID=<id_of_your_project/organization>
+bundle install
 ```
-
-- To use DigitalOcean's provider
+2. Install Decidim Awesome dependencies
 ```bash
-export DIGITALOCEAN_TOKEN=<your_do_token>
-export SPACES_ACCESS_KEY_ID=<your_do_space_access_key>
-export SPACES_SECRET_ACCESS_KEY=<your_do_space_secret_key>
+bundle exec rails decidim_decidim_awesome:install:migrations
+bundle exec rails decidim_decidim_awesome:webpacker:install
+```
+3. Install Homepage Interactive Map dependencies
+```bash
+bundle exec rake decidim_homepage_interactive_map:install:migrations
+```
+4. Install Term Customizer dependencies
+```bash
+bundle exec rails decidim_term_customizer:install:migrations
 ```
 
-## How to deploy with Terraform?
+5. Install migrations
 
-Check the list of make commands in the Makefile. Each command corresponds to a provider and a specific need.
-
-- To deploy a new infrastructure with Scaleway
-
-```make
-make deploy-scw
+```bash
+bundle exec rake db:migrate
 ```
+
+All dependencies should be now installed and ready-to-use !
 
 ## Setting up the application
 
@@ -62,6 +58,8 @@ user.save!
 4. Create a new organization. Check the locales you want to use for that organization, and select a default locale.
 5. Set the correct default host for the organization, otherwise the app will not work properly. Note that you need to include any subdomain you might be using.
 6. Fill the rest of the form and submit it.
+
+__IMPORTANT!__ : You must ensure all environnement variables are defined, see [.env-example](./.env-example)
 
 You're good to go!
 
@@ -130,6 +128,50 @@ make rails-console
 - Start bash session to app container
 ```make
 make connect-app
+```
+
+## Deploy with Terraform
+
+Terraform is an open-source infrastructure as code software tool that provides an easy deployment of your infrastructure for installing Decidim.
+
+Many providers are available (**AWS**, **Heroku**, **DigitalOcean**...). Check the [Terraform registry to see how to use Terraform with your provider](https://registry.terraform.io/browse/providers)
+
+Each Terraform deployment are stored in the **deploy** folder and sorted by providers
+
+Feel free to add new deployments!
+
+## Availables deployments
+
+- [Scaleway](https://github.com/OpenSourcePolitics/decidim-app/tree/develop/deploy/providers/scaleway)
+- [DigitalOcean](https://github.com/OpenSourcePolitics/decidim-app/tree/develop/deploy/providers/digitalocean/)
+
+## Environment variables
+
+Each provider will need a way to authenticate at their API. Make sure to set environment variables asked in the provider's documentation before using deployments.
+
+- To use Scaleway's provider
+
+```bash
+export SCW_ACCESS_KEY=<your_access_key>
+export SCW_TOKEN=<your_scw_token>
+export SCW_DEFAULT_PROJECT_ID=<id_of_your_project/organization>
+```
+
+- To use DigitalOcean's provider
+```bash
+export DIGITALOCEAN_TOKEN=<your_do_token>
+export SPACES_ACCESS_KEY_ID=<your_do_space_access_key>
+export SPACES_SECRET_ACCESS_KEY=<your_do_space_secret_key>
+```
+
+## How to deploy with Terraform?
+
+Check the list of make commands in the Makefile. Each command corresponds to a provider and a specific need.
+
+- To deploy a new infrastructure with Scaleway
+
+```make
+make deploy-scw
 ```
 
 ## Database architecture (ERD)
