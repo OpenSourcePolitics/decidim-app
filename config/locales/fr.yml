@@ -65,6 +65,11 @@ fr:
         update:
           invalid: Il y a eu une erreur lors de la mise à jour de la rencontre.
           success: La rencontre a été mise à jour avec succès.
+    omniauth:
+      france_connect:
+        external:
+          link: https://franceconnect.gouv.fr/
+          text: Qu'est-ce-que FranceConnect ?
     proposals:
       create:
         error: Il y a eu des erreurs lors de la sauvegarde de la proposition.
@@ -100,6 +105,8 @@ fr:
           france_connect:
             client_id: Client ID
             client_secret: Client secret
+            provider: FranceConnect
+            provider_name: FranceConnect
             scope: Périmètre de données
             site_url: Site URL
           france_connect_profile:
