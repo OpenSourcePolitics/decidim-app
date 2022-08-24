@@ -577,7 +577,7 @@ GEM
       timeout
     newrelic_rpm (8.10.0)
     nio4r (2.5.8)
-    nokogiri (1.13.8-x86_64-darwin)
+    nokogiri (1.13.4-x86_64-darwin)
       racc (~> 1.4)
     oauth (1.0.0)
       version_gem (~> 1.1)
@@ -935,6 +935,7 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   newrelic_rpm
+  nokogiri (= 1.13.4)
   omniauth-france_connect!
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
