@@ -1020,10 +1020,10 @@
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
 "@decidim/browserslist-config@file:packages/browserslist-config":
-  version "0.25.1"
+  version "0.25.2"
 
 "@decidim/core@file:packages/core":
-  version "0.25.1"
+  version "0.25.2"
   dependencies:
     "@joeattardi/emoji-button" "^4.6.0"
     "@zeitiger/appendaround" "^1.0.0"
@@ -1062,25 +1062,25 @@
     uuid "^3.2.1"
 
 "@decidim/dev@file:packages/dev":
-  version "0.25.1"
+  version "0.25.2"
   dependencies:
     axe-core "^4.1.4"
 
 "@decidim/elections@file:packages/elections":
-  version "0.25.1"
+  version "0.25.2"
   dependencies:
     "@codegram/decidim-bulletin_board" "0.21.2"
     "@codegram/voting_schemes-dummy" "0.21.2"
     "@codegram/voting_schemes-electionguard" "0.21.2"
 
 "@decidim/eslint-config@file:packages/eslint-config":
-  version "0.25.1"
+  version "0.25.2"
 
 "@decidim/stylelint-config@file:packages/stylelint-config":
-  version "0.25.1"
+  version "0.25.2"
 
 "@decidim/webpacker@file:packages/webpacker":
-  version "0.25.1"
+  version "0.25.2"
   dependencies:
     "@babel/core" "^7.13.13"
     "@babel/eslint-parser" "^7.13.14"
@@ -2377,10 +2377,15 @@ codemirror-spell-checker@^1.1.2:
   dependencies:
     typo-js "*"
 
-codemirror@^5.33.0, codemirror@^5.58.2, codemirror@^5.65.3:
+codemirror@^5.33.0, codemirror@^5.58.2:
   version "5.65.3"
   resolved "https://registry.npmjs.org/codemirror/-/codemirror-5.65.3.tgz"
   integrity sha512-kCC0iwGZOVZXHEKW3NDTObvM7pTIyowjty4BUqeREROc/3I6bWbgZDA3fGDwlA+rbgRjvnRnfqs9SfXynel1AQ==
+
+codemirror@^5.65.8:
+  version "5.65.8"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.65.8.tgz#50f145ba7eb725091110c31f3a7c1fdef6bdc721"
+  integrity sha512-TNGkSkkoAsmZSf6W6g35LMVQJBHKasc2CKwhr/fTxSYun7cn6J+CbtyNjV/MYlFVkNTsqZoviegyCZimWhoMMA==
 
 color-convert@^1.9.0, color-convert@^1.9.3:
   version "1.9.3"
@@ -4216,10 +4221,10 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.npmjs.org/hex-color-regex/-/hex-color-regex-1.1.0.tgz"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
-highlight.js@^11.5.1:
-  version "11.5.1"
-  resolved "https://registry.npmjs.org/highlight.js/-/highlight.js-11.5.1.tgz"
-  integrity sha512-LKzHqnxr4CrD2YsNoIf/o5nJ09j4yi/GcH5BnYz9UnVpZdS4ucMgvP61TDty5xJcFGRjnH4DpujkS9bHT3hq0Q==
+highlight.js@^11.6.0:
+  version "11.6.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-11.6.0.tgz#a50e9da05763f1bb0c1322c8f4f755242cff3f5a"
+  integrity sha512-ig1eqDzJaB0pqEvlPVIpSSyMaO92bH1N2rJpLMN/nX396wTpDA4Eq0uK+7I/2XG17pFaaKE0kjV/XPeGt7Evjw==
 
 hoist-non-react-statics@^3.3.2:
   version "3.3.2"
@@ -4858,10 +4863,10 @@ jquery-ui-sortable@*:
   resolved "https://registry.npmjs.org/jquery-ui-sortable/-/jquery-ui-sortable-1.0.0.tgz"
   integrity sha1-DuBizgKymzZYXt46Pg3d5mYGD5Y=
 
-jquery-ui@^1.13.1:
-  version "1.13.1"
-  resolved "https://registry.npmjs.org/jquery-ui/-/jquery-ui-1.13.1.tgz"
-  integrity sha512-2VlU59N5P4HaumDK1Z3XEVjSvegFbEOQRgpHUBaB2Ak98Axl3hFhJ6RFcNQNuk9SfL6WxIbuLst8dW/U56NSiA==
+jquery-ui@^1.13.2:
+  version "1.13.2"
+  resolved "https://registry.yarnpkg.com/jquery-ui/-/jquery-ui-1.13.2.tgz#de03580ae6604773602f8d786ad1abfb75232034"
+  integrity sha512-wBZPnqWs5GaYJmo1Jj0k/mrSkzdQzKDwhXNtHKcBdAcKVxMM3KNYFq+iJ2i1rwiG53Z8M4mTn3Qxrm17uH1D4Q==
   dependencies:
     jquery ">=1.8.0 <4.0.0"
 
