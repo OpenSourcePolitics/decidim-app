@@ -11,6 +11,13 @@
           <% else %>
               <%== sso_provider_button(provider, decidim.send("user_#{provider}_omniauth_authorize_path")).html_safe %>
           <% end %>
+          <% if I18n.exists?("decidim.omniauth.france_connect.external.link") %>
+            <%= link_to t("link", scope: "decidim.omniauth.france_connect.external"), class: "primary", target: "_blank" do %>
+              <small>
+                <%= t("text", scope: "decidim.omniauth.france_connect.external") %>
+              </small>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
       <%- if current_organization.sign_in_enabled? %>

@@ -10,6 +10,7 @@ gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VE
 
 # gem "acts_as_textcaptcha", "~> 4.5.1"
 # gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: "bump/0.25-stable"
+gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: "release/0.26-stable"
 # gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: DECIDIM_VERSION
 gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git"
@@ -18,7 +19,6 @@ gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omnia
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik", branch: "v0.0.9"
 
 gem "decidim-decidim_awesome", "0.8.3"
-gem "decidim-friendly_signup"
 
 gem "dotenv-rails"
 
@@ -32,6 +32,8 @@ gem "faker", "~> 2.14"
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "fog-aws"
 gem "sys-filesystem"
+
+gem "omniauth-rails_csrf_protection", "~> 1.0"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
