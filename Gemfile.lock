@@ -968,6 +968,7 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   newrelic_rpm
+  nokogiri (= 1.13.4)
   omniauth-france_connect!
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
@@ -987,7 +988,7 @@ DEPENDENCIES
   web-console (~> 3.5)
 
 RUBY VERSION
-   ruby 2.7.1p83
+   ruby 2.7.5p203
 
 BUNDLED WITH
    2.3.13
