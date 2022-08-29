@@ -69,7 +69,7 @@ en:
       france_connect:
         external:
           link: https://franceconnect.gouv.fr/
-          text: Qu'est-ce-que FranceConnect ?
+          text: What is FranceConnect ?
     proposals:
       create:
         error: There was a problem saving
