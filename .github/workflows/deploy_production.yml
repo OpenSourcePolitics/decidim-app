@@ -1,4 +1,4 @@
-name: "Deploy on master"
+name: "Deploy production"
 on: [workflow_dispatch]
 
 env:
@@ -12,7 +12,7 @@ env:
 jobs:
   deploy_master:
     if: "github.ref == 'refs/heads/master'"
-    name: Deploy master branch on develop instance
+    name: Deploy master branch on production instance
     runs-on: ubuntu-latest
     steps:
       - name: Run Ansible playbook
@@ -22,5 +22,4 @@ jobs:
           username: ${{ secrets.ANSIBLE_USERNAME }}
           key: ${{ secrets.ANSIBLE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/master.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
-
+          script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/production.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
