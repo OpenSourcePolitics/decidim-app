@@ -76,6 +76,7 @@ git-status.txt
 
 /public/decidim-packs
 /public/packs-test
+/public/sw.*
 /node_modules
 /yarn-error.log
 yarn-debug.log*
@@ -93,3 +94,4 @@ vendor/cache
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+/packages/
