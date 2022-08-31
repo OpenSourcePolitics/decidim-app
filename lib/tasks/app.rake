@@ -4,11 +4,7 @@ namespace :app do
   desc "Upgrade the base code of the Decidim-app"
   task upgrade: :environment do
     puts "----- Upgrading base code of Decidim-app ------"
-    if ENV["DECIDIM_BRANCH"]
-      decidim_version = ENV["DECIDIM_BRANCH"]
-    else
-      raise "You must provide env var 'DECIDIM_BRANCH' for using this rake task"
-    end
+    raise "You must provide env var 'DECIDIM_BRANCH' for using this rake task" unless decidim_version == ENV.fetch("DECIDIM_BRANCH", nil)
 
     upgrader = Upgrader.new decidim_version
 
@@ -39,7 +35,7 @@ end
 class Upgrader
   attr_accessor :version
 
-  def initialize(gh_branch, quiet = false)
+  def initialize(gh_branch, _quiet: false)
     @version = gh_branch
     @quiet = false
     @repository_url = "https://raw.githubusercontent.com/decidim/decidim/#{@version}/"
@@ -60,7 +56,7 @@ class Upgrader
   def update_rubocop!
     puts "Fetching and saving file '.rubocop.yml'..." unless @quiet
 
-    rubocop = YAML.load_file('.rubocop.yml')
+    rubocop = YAML.load_file(".rubocop.yml")
     rubocop["inherit_from"] = "#{@repository_url}.rubocop.yml"
 
     File.write(".rubocop.yml", rubocop.to_yaml)
@@ -70,22 +66,14 @@ class Upgrader
     puts "Preparing Gemfile..." unless @quiet
     in_block = false
 
-    file_contents = File.readlines('Gemfile').map do |line|
-      if line.include?("DECIDIM_VERSION =")
-        line = "DECIDIM_VERSION = \"#{@version}\"\n"
-      end
+    file_contents = File.readlines("Gemfile").map do |line|
+      line = "DECIDIM_VERSION = \"#{@version}\"\n" if line.include?("DECIDIM_VERSION =")
 
-      if line.include?("## End")
-        in_block = false
-      end
+      in_block = false if line.include?("## End")
 
-      if in_block
-        line = "# #{line}" unless line.start_with?("#")
-      end
+      line = "# #{line}" if in_block && !line.start_with?("#")
 
-      if line.include?("## Block")
-        in_block = true
-      end
+      in_block = true if line.include?("## Block")
 
       line
     end

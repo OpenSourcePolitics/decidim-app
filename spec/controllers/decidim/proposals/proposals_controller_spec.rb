@@ -57,7 +57,9 @@ module Decidim
           context "when latitude and longitude are not properly geocoded" do
             it "doesn't includes it in collection" do
               geocoded_proposals = create_list :proposal, 10, component: component, latitude: 1.1, longitude: 2.2
+              # rubocop:disable Lint/BinaryOperatorWithIdenticalOperands
               improperly_geocoded_proposal = create :proposal, component: component, latitude: (0.0 / 0.0), longitude: (0.0 / 0.0)
+              # rubocop:enable Lint/BinaryOperatorWithIdenticalOperands
               _non_geocoded_proposals = create_list :proposal, 2, component: component, latitude: nil, longitude: nil
 
               get :index
@@ -66,7 +68,7 @@ module Decidim
 
               expect(assigns(:proposals).count).to eq 13
               expect(assigns(:all_geocoded_proposals)).to match_array(geocoded_proposals)
-              expect(assigns(:all_geocoded_proposals).include?(improperly_geocoded_proposal)).to eq(false)
+              expect(assigns(:all_geocoded_proposals).include?(improperly_geocoded_proposal)).to be(false)
             end
           end
         end

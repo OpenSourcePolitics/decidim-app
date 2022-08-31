@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_accountability (originally 20220331150155)
 
 class MoveLegacyDescriptionToTitleOfTimelineEntries < ActiveRecord::Migration[6.1]

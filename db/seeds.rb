@@ -9,7 +9,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # You can remove the 'faker' gem if you don't want Decidim seeds.
 if ENV["HEROKU_APP_NAME"].present?
-  ENV["DECIDIM_HOST"] = "#{ENV["HEROKU_APP_NAME"]}.herokuapp.com"
+  ENV["DECIDIM_HOST"] = "#{ENV.fetch("HEROKU_APP_NAME", nil)}.herokuapp.com"
   ENV["SEED"] = "true"
 end
 Decidim.seed!

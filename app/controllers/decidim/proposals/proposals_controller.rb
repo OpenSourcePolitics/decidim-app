@@ -25,12 +25,10 @@ module Decidim
 
       before_action :set_participatory_text
 
-      # rubocop:disable Naming/VariableNumber
       STEP1 = :step_1
       STEP2 = :step_2
       STEP3 = :step_3
       STEP4 = :step_4
-      # rubocop:enable Naming/VariableNumber
 
       def index
         if component_settings.participatory_texts_enabled?

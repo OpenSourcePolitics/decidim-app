@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim (originally 20220215172439)
 
 class AddDigestSentAtToUsers < ActiveRecord::Migration[6.0]

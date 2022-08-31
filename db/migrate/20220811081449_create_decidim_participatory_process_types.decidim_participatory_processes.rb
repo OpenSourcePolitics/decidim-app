@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_participatory_processes (originally 20211125202008)
 
 class CreateDecidimParticipatoryProcessTypes < ActiveRecord::Migration[6.0]

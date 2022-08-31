@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim (originally 20210831181634)
 
 # This migration comes from active_storage (originally 20190112182829)
