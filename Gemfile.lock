@@ -87,6 +87,11 @@ GIT
     decidim-comments (0.26.2)
       decidim-core (= 0.26.2)
       redcarpet (~> 3.5, >= 3.5.1)
+    decidim-conferences (0.26.2)
+      decidim-core (= 0.26.2)
+      decidim-meetings (= 0.26.2)
+      wicked_pdf (~> 2.1)
+      wkhtmltopdf-binary (~> 0.12)
     decidim-core (0.26.2)
       active_link_to (~> 1.0)
       acts_as_list (~> 0.9)
@@ -577,6 +582,8 @@ GEM
       timeout
     newrelic_rpm (8.10.0)
     nio4r (2.5.8)
+    nokogiri (1.13.4-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.4-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.4-x86_64-linux)
@@ -914,6 +921,7 @@ GEM
     zeitwerk (2.6.0)
 
 PLATFORMS
+  arm64-darwin-21
   x86_64-darwin-20
   x86_64-linux
 
@@ -924,6 +932,7 @@ DEPENDENCIES
   byebug (~> 11.0)
   dalli
   decidim!
+  decidim-conferences!
   decidim-decidim_awesome (= 0.8.3)
   decidim-dev!
   decidim-friendly_signup!
