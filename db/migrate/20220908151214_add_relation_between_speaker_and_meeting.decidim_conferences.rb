@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_conferences (originally 20181010133930)
 
 class AddRelationBetweenSpeakerAndMeeting < ActiveRecord::Migration[5.2]

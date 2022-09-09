@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_conferences (originally 20210310134942)
 
 class AddFollowableCounterCacheToConferences < ActiveRecord::Migration[5.2]

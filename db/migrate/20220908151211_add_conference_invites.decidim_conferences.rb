@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_conferences (originally 20180706104306)
 
 class AddConferenceInvites < ActiveRecord::Migration[5.2]
