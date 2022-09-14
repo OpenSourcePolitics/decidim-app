@@ -6,7 +6,7 @@ DECIDIM_VERSION = "release/0.26-stable"
 
 ruby RUBY_VERSION
 
-gem "acts_as_textcaptcha", "~> 4.5.1"
+# gem "acts_as_textcaptcha", "~> 4.5.1"
 gem "bootsnap", "~> 1.4"
 
 gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
@@ -15,18 +15,14 @@ gem "decidim-decidim_awesome"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: "release/0.26-stable"
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: "release/0.26-stable"
-gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: DECIDIM_VERSION
+# gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: DECIDIM_VERSION
 gem "decidim-spam_detection"
 gem "decidim-templates"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git"
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik", branch: "v0.0.9"
 
-gem "decidim-decidim_awesome", "0.8.3"
-
 gem "dotenv-rails"
-
-gem "bootsnap", "~> 1.4"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
 
 gem "puma", ">= 5.5.1"
@@ -67,4 +63,5 @@ group :production do
   gem "sidekiq"
   gem "sidekiq-scheduler"
 end
-gem "nokogiri", "1.13.4"
+gem "nokogiri", "~> 1.12"
+
