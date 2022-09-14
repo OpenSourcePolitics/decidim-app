@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 if Rails.env.production?
-  class Rack::Attack
-    # source: https://github.com/rack/rack-attack/blob/4d201f7e425f99a0c1f0956fbcc935614d695308/examples/rack_attack.rb#L5
-    throttle("req/ip", limit: 10, period: 1) do |req|
-      Rails.logger.warn("[Rack::Attack] [THROTTLE - req / ip] :: #{req.ip} :: #{req.path} :: #{req.GET}")
-      req.ip unless req.path.start_with?("/assets")
-    end
+  Rack::Attack.throttle("req/ip",
+                        limit: Decidim.throttling_max_requests,
+                        period: Decidim.throttling_period) do |req|
+    next if req.path.start_with?("/assets")
+    next if req.path.start_with?("/rails/active_storage")
+
+    rack_logger = Rails.root.join("log/rack_attack.log")
+    rack_logger.warn("[Rack::Attack] [THROTTLE - req / ip] | #{req.ip} | #{req.path} | #{req.GET}")
+
+    req.ip
   end
 end
