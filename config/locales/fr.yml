@@ -105,7 +105,9 @@ fr:
           france_connect:
             client_id: Client ID
             client_secret: Client secret
-            scope: scope
+            provider: FranceConnect
+            provider_name: FranceConnect
+            scope: Périmètre de données
             site_url: Site URL
           france_connect_profile:
             button_path: Chemin du bouton
