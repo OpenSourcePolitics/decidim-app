@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://github.com/decidim/decidim.git
-  revision: 5043f94d3d98ae81f52c2138a3ad1217286aed18
+  revision: 02b096af43059785da71fed661af78fda6dd4ff3
   branch: release/0.26-stable
   specs:
     decidim (0.26.2)
@@ -564,6 +564,7 @@ GEM
     mime-types-data (3.2022.0105)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.0)
     minitest (5.16.3)
     mixlib-cli (2.1.8)
     mixlib-config (3.0.27)
@@ -582,6 +583,9 @@ GEM
       timeout
     newrelic_rpm (8.10.0)
     nio4r (2.5.8)
+    nokogiri (1.13.4)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     nokogiri (1.13.4-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.4-x86_64-darwin)
@@ -922,6 +926,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  ruby
   x86_64-darwin-20
   x86_64-linux
 
