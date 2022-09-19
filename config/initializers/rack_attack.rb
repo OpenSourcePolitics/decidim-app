@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 if Rails.env.production?
-  Rack::Attack.throttle("req/ip", limit: Decidim.throttling_max_requests, period: Decidim.throttling_max_requests) do |req|
-    req.ip unless req.path.start_with?("/assets") || req.path.start_with?("/rails/active_storage")
-  end
+  Rack::Attack.throttle("req/ip",
+                        limit: Decidim.throttling_max_requests,
+                        period: Decidim.throttling_period) do |req|
+    next if req.path.start_with?("/assets")
+    next if req.path.start_with?("/rails/active_storage")
 
-  ActiveSupport::Notifications.subscribe("throttle.rack_attack") do |_name, _start, _finish, _request_id, payload|
-    req = payload[:request]
+    rack_logger = Rails.root.join("log/rack_attack.log")
+    rack_logger.warn("[Rack::Attack] [THROTTLE - req / ip] | #{req.ip} | #{req.path} | #{req.GET}")
 
-    Rails.logger.warn("[Rack::Attack] [THROTTLE - req / ip] :: #{req.ip} :: #{req.path} :: #{req.GET}")
+    req.ip
   end
 end
