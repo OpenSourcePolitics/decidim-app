@@ -7,7 +7,7 @@ if Rails.env.production?
     next if req.path.start_with?("/assets")
     next if req.path.start_with?("/rails/active_storage")
 
-    rack_logger = Rails.root.join("log/rack_attack.log")
+    rack_logger = Logger.new(Rails.root.join("log/rack_attack.log"))
     rack_logger.warn("[Rack::Attack] [THROTTLE - req / ip] | #{req.ip} | #{req.path} | #{req.GET}")
 
     req.ip
