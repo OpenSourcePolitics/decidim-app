@@ -14,7 +14,7 @@
     "highlight.js": "^11.5.1",
     "inline-attachment": "^2.0.3",
     "inscrybmde": "^1.11.6",
-    "jquery-ui": "^1.13.1",
+    "jquery-ui": "^1.13.2",
     "jsrender": "^1.0.11",
     "leaflet.featuregroup.subgroup": "^1.0.2",
     "select2": "^4.1.0-rc.0",
@@ -22,11 +22,6 @@
     "webpack-cli": "^4.8.0"
   },
   "version": "0.1.0",
-  "babel": {
-    "presets": [
-      "./node_modules/@rails/webpacker/package/babel/preset.js"
-    ]
-  },
   "browserslist": [
     "extends @decidim/browserslist-config"
   ],
