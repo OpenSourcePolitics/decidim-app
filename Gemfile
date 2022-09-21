@@ -10,7 +10,7 @@ gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VE
 
 gem "decidim-decidim_awesome", "~> 0.7.0"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: "master"
-gem "decidim-polis", git: "https://github.com/OpenSourcePolitics/decidim-polis", branch: "0.24.3"
+gem "decidim-polis", git: "https://github.com/OpenSourcePolitics/decidim-polis"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "0.24-stable"
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik", branch: "release/0.24-stable"
