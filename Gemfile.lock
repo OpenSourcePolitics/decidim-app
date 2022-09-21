@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-polis
-  revision: e959a74d87a5b7871bfeea90cb75b0bab6985242
+  revision: 5e4f88b698d6e43b060b6da8f5969b7737a87f30
   specs:
     decidim-polis (0.24.3)
       decidim-core (= 0.24.3)
