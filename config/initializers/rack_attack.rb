@@ -2,18 +2,16 @@
 
 # Enabled by default in production
 # Can be deactivated with 'ENABLE_RACK_ATTACK="2"'
-Rack::Attack.enabled = (ENV['ENABLE_RACK_ATTACK'] == "1") || Rails.env.production?
+Rack::Attack.enabled = (ENV["ENABLE_RACK_ATTACK"] == "1") || Rails.env.production?
 
 Rack::Attack.throttled_response_retry_after_header = true
 
 # By default use the memory store for inspecting requests
 # Better to use MemCached or Redis in production mode
-if !ENV['MEMCACHEDCLOUD_SERVERS'] || Rails.env.test?
-  Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
-end
+Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new if !ENV["MEMCACHEDCLOUD_SERVERS"] || Rails.env.test?
 
 Rack::Attack.throttled_responder = lambda do |request|
-  match_data = request.env['rack.attack.match_data']
+  match_data = request.env["rack.attack.match_data"]
   now = match_data[:epoch_time]
   # throttle_time = match_data[:period]
   until_period = I18n.l(Time.at(now + 60).to_datetime, format: :decidim_short)
@@ -26,7 +24,7 @@ Rack::Attack.throttled_responder = lambda do |request|
 
   rack_logger = Logger.new(Rails.root.join("log/rack_attack.log"))
 
-  request_uuid = request.env['action_dispatch.request_id']
+  request_uuid = request.env["action_dispatch.request_id"]
   params = {
     "ip" => request.ip,
     "path" => request.path,
@@ -38,18 +36,14 @@ Rack::Attack.throttled_responder = lambda do |request|
 
   rack_logger.warn("[#{request_uuid}] #{params}")
 
-  [ 429, {'Content-Type' => 'text/html'}, [html_template(until_period)]]
+  [429, { "Content-Type" => "text/html" }, [html_template(until_period)]]
 end
 
 Rack::Attack.throttle("req/ip",
-                      limit: Decidim.throttling_max_requests,
-                      period: Decidim.throttling_period) do |req|
-
-  unless req.path.start_with?("/assets") || req.path.start_with?("/rails/active_storage")
-    req.ip
-  end
+                      limit: Rails.application.secrets.decidim.throttling_max_requests,
+                      period: Rails.application.secrets.decidim.throttling_period) do |req|
+  req.ip unless req.path.start_with?("/assets") || req.path.start_with?("/rails/active_storage")
 end
-
 
 def html_template(until_period)
   "
@@ -114,9 +108,9 @@ def html_template(until_period)
   <div class='dialog'>
     <div>
       <h1>429 - Too many requests</h1>
-      <p>#{I18n.t('rack_attack.too_many_requests.message')}</p>
+      <p>#{I18n.t("rack_attack.too_many_requests.message")}</p>
 
-      <b>#{I18n.t('rack_attack.too_many_requests.time', period: until_period)}</b>
+      <b>#{I18n.t("rack_attack.too_many_requests.time", period: until_period)}</b>
     </div>
   </div>
 </body>
