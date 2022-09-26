@@ -162,3 +162,7 @@ fr:
         account: Mon compte
         conversations: Conversations
         notifications: Notifications
+  rack_attack:
+    too_many_requests:
+      message: Il semblerait que vous fassiez trop de requêtes sur notre serveur, votre connexion a ete ralentie.
+      time: Vous pourrez naviguer sur notre plateforme a %{period}
