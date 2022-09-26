@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
+# Enabled by default in production
+# Can be deactivated with 'ENABLE_RACK_ATTACK="2"'
+Rack::Attack.enabled = (ENV['ENABLE_RACK_ATTACK'] == "1") || Rails.env.production?
 
-Rack::Attack.enabled = ENV['ENABLE_RACK_ATTACK'] || Rails.env.production?
+# By default use the memory store for inspecting requests
+# Better to use MemCached or Redis in production mode
 if !ENV['MEMCACHEDCLOUD_SERVERS'] || Rails.env.test?
   Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
 end
-
 
 Rack::Attack.throttle("req/ip",
                       limit: Decidim.throttling_max_requests,
