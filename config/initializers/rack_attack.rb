@@ -14,7 +14,7 @@ Rack::Attack.throttled_responder = lambda do |request|
   match_data = request.env["rack.attack.match_data"]
   now = match_data[:epoch_time]
   # throttle_time = match_data[:period]
-  until_period = I18n.l(Time.at(now + 60).to_datetime, format: :decidim_short)
+  until_period = I18n.l(Time.zone.at(now + 60), format: :decidim_short)
 
   # headers = {
   #   'RateLimit-Limit' => match_data[:limit].to_s,
@@ -40,8 +40,8 @@ Rack::Attack.throttled_responder = lambda do |request|
 end
 
 Rack::Attack.throttle("req/ip",
-                      limit: Rails.application.secrets.decidim.throttling_max_requests,
-                      period: Rails.application.secrets.decidim.throttling_period) do |req|
+                      limit: Rails.application.secrets.decidim[:throttling_max_requests],
+                      period: Rails.application.secrets.decidim[:throttling_period]) do |req|
   req.ip unless req.path.start_with?("/assets") || req.path.start_with?("/rails/active_storage")
 end
 

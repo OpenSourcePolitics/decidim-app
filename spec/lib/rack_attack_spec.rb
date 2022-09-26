@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe Rack::Attack, type: :request do
+describe "Rack::Attack", type: :request do
   include ActiveSupport::Testing::TimeHelpers
   let(:organization) { create(:organization) }
 
