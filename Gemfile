@@ -64,3 +64,5 @@ group :production do
   gem "sidekiq-scheduler"
 end
 gem "nokogiri", "1.13.4"
+
+gem "rack-attack", "~> 6.6"
