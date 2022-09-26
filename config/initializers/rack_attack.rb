@@ -15,21 +15,21 @@ Rack::Attack.throttle("req/ip",
                       period: Decidim.throttling_period) do |req|
 
   unless req.path.start_with?("/assets") || req.path.start_with?("/rails/active_storage")
-    rack_logger = Logger.new(Rails.root.join("log/rack_attack.log"))
+    unless Rails.env.test?
+      rack_logger = Logger.new(Rails.root.join("log/rack_attack.log"))
 
-    request_uuid = req.env['action_dispatch.request_id']
+      request_uuid = req.env['action_dispatch.request_id']
+      params = {
+        "ip" => req.ip,
+        "path" => req.path,
+        "get" => req.GET,
+        "post" => req.POST,
+        "host" => req.host,
+        "referer" => req.referer
+      }
 
-    params = {
-      "ip" => req.ip,
-      "path" => req.path,
-      "get" => req.GET,
-      "post" => req.POST,
-      "host" => req.host,
-      "referer" => req.referer
-    }
-
-    rack_logger.warn("[#{request_uuid}] #{params}")
-
+      rack_logger.warn("[#{request_uuid}] #{params}")
+    end
     req.ip
   end
 end
