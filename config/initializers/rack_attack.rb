@@ -43,7 +43,7 @@ end
 Rack::Attack.throttle("req/ip",
                       limit: Rails.application.secrets.decidim[:throttling_max_requests],
                       period: Rails.application.secrets.decidim[:throttling_period]) do |req|
-  req.ip unless req.path.start_with?("/assets") || req.path.start_with?("/rails/active_storage")
+  req.ip unless req.path.start_with?("/decidim-packs") || req.path.start_with?("/rails/active_storage")
 end
 
 def html_template(until_period, organization_name)
