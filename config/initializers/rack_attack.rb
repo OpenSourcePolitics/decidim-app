@@ -17,9 +17,6 @@ Rails.application.config.after_initialize do
 end
 
 Rack::Attack.throttled_responder = lambda do |request|
-  match_data = request.env["rack.attack.match_data"]
-  throttle_time = match_data[:period]&.to_i
-
   # headers = {
   #   'RateLimit-Limit' => match_data[:limit].to_s,
   #   'RateLimit-Remaining' => '0',
@@ -40,7 +37,7 @@ Rack::Attack.throttled_responder = lambda do |request|
 
   rack_logger.warn("[#{request_uuid}] #{params}")
 
-  [429, { "Content-Type" => "text/html" }, [html_template(throttle_time, request.env["decidim.current_organization"].name)]]
+  [429, { "Content-Type" => "text/html" }, [html_template(10, request.env["decidim.current_organization"]&.name)]]
 end
 
 Rack::Attack.throttle("req/ip",
@@ -112,7 +109,7 @@ def html_template(until_period, organization_name)
 <body class='rails-default-error-page'>
   <div class='dialog'>
     <div>
-      <b>Thank you for your participation on #{name}</b>
+      <b>#{I18n.t("rack_attack.too_many_requests.title", organization_name: name)}</b>
       <br>
       <h1>429 - Too many requests</h1>
       <p>#{I18n.t("rack_attack.too_many_requests.message")}</p>
@@ -120,7 +117,7 @@ def html_template(until_period, organization_name)
       <b>#{I18n.t("rack_attack.too_many_requests.time")}</b>
 
       <br>
-      <b class='counter'><span id='timer'>#{until_period}</span> secondes</b>
+      <b class='counter'><span id='timer'>#{until_period}</span> #{I18n.t("rack_attack.too_many_requests.time_unit")}</b>
     </div>
   </div>
 
