@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Enabled by default in production
-# Can be deactivated with 'ENABLE_RACK_ATTACK="2"'
+# Can be deactivated with 'ENABLE_RACK_ATTACK=0'
 Rack::Attack.enabled = (ENV["ENABLE_RACK_ATTACK"] == "1") || Rails.env.production?
 
 Rack::Attack.throttled_response_retry_after_header = true
