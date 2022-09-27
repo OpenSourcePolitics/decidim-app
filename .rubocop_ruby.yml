@@ -16,6 +16,7 @@ AllCops:
     - "vendor/**/*"
     - "node_modules/**/*"
     - "db/schema.rb"
+    - "bin/*"
   # Default formatter will be used if no -f/--format option is given.
   DefaultFormatter: progress
   # Cop names are not displayed in offense messages by default. Change behavior
@@ -520,6 +521,8 @@ Style/FormatStringToken:
 
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
+  Exclude:
+    - bin/*
   SupportedStyles:
     - never
     # `always` will always add the frozen string literal comment to a file

@@ -10,6 +10,7 @@
   - block_user
   - translation
   - scheduled
+  - translations
   - metrics
 
 :schedule:
