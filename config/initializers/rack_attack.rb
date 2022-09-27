@@ -12,9 +12,29 @@ if Rails.env.production?
     next if req.path.start_with?("/decidim-packs")
     next if req.path.start_with?("/rails/active_storage")
 
-    rack_logger = Logger.new(Rails.root.join("log/rack_attack.log"))
-    rack_logger.warn("[Rack::Attack] [THROTTLE - req / ip] | #{req.ip} | #{req.path} | #{req.GET}")
-
     req.ip
+  end
+  ActiveSupport::Notifications.subscribe("throttle.rack_attack") do |name, start, finish, request_id, payload|
+    # request object available in payload[:request]
+
+    rack_logger = Logger.new(Rails.root.join("log/rack_attack.log"))
+
+    request = payload[:request]
+
+    params = {
+      "name" => name,
+      "start" => start,
+      "finish" => finish,
+      "request_id" => request_id,
+      "payload" => request.instance_variable_get(:@env)["rack.attack.match_data"],
+      "ip" => request.ip,
+      "path" => request.path,
+      "get" => request.GET,
+      "post" => request.POST,
+      "host" => request.host,
+      "referer" => request.referer
+    }
+
+    rack_logger.warn("[Rack::Attack] [THROTTLE - req / ip] | #{params}")
   end
 end
