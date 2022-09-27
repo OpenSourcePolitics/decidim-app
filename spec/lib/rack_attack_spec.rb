@@ -26,7 +26,7 @@ describe "Rack::Attack", type: :request do
 
       get decidim.root_path, params: {}, headers: headers
       expect(response).to have_http_status(:too_many_requests)
-      expect(response.body).to include("Your connection have been slowed because server received too many requests.")
+      expect(response.body).to include("Your connection has been slowed because server received too many requests.")
 
       travel_to(1.minute.from_now) do
         get decidim.root_path, params: {}, headers: headers
@@ -41,7 +41,7 @@ describe "Rack::Attack", type: :request do
       end
 
       get decidim.root_path, params: {}, headers: headers
-      expect(response.body).not_to include("Your connection have been slowed because server received too many requests.")
+      expect(response.body).not_to include("Your connection has been slowed because server received too many requests.")
       expect(response).not_to have_http_status(:too_many_requests)
 
       travel_to(1.minute.from_now) do

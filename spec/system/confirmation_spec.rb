@@ -76,6 +76,9 @@ describe "Registration", type: :system do
 
     before do
       allow(Rails).to receive(:cache).and_return(memory_store)
+      Rack::Attack.enabled = true
+      Rack::Attack.reset!
+
       visit decidim_friendly_signup.confirmation_codes_path(confirmation_token: confirmation_token)
 
       6.times do
@@ -84,8 +87,12 @@ describe "Registration", type: :system do
       end
     end
 
+    after do
+      Rack::Attack.enabled = false
+    end
+
     it "throttles after 5 attempts per minute" do
-      expect(page).to have_content("Retry later")
+      expect(page).to have_content("Your connection has been slowed because server received too many requests.")
     end
   end
 end
