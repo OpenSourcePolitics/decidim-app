@@ -165,4 +165,4 @@ en:
   rack_attack:
     too_many_requests:
       message: Your connection have been slowed because server received too many requests.
-      time: You will be able to navigate on our website at %{period}
+      time: "You will be able to navigate on our website in :"

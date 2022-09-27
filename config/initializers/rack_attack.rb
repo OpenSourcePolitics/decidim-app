@@ -10,11 +10,15 @@ Rack::Attack.throttled_response_retry_after_header = true
 # Better to use MemCached or Redis in production mode
 Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new if !ENV["MEMCACHEDCLOUD_SERVERS"] || Rails.env.test?
 
+# Remove the original throttle fron decidim-core
+# see https://github.com/decidim/decidim/blob/release/0.26-stable/decidim-core/config/initializers/rack_attack.rb#L19
+Rails.application.config.after_initialize do
+  Rack::Attack.throttles.delete("requests by ip")
+end
+
 Rack::Attack.throttled_responder = lambda do |request|
   match_data = request.env["rack.attack.match_data"]
-  now = match_data[:epoch_time]
-  # throttle_time = match_data[:period]
-  until_period = I18n.l(Time.zone.at(now + 60), format: :decidim_short)
+  throttle_time = match_data[:period]&.to_i
 
   # headers = {
   #   'RateLimit-Limit' => match_data[:limit].to_s,
@@ -36,7 +40,7 @@ Rack::Attack.throttled_responder = lambda do |request|
 
   rack_logger.warn("[#{request_uuid}] #{params}")
 
-  [429, { "Content-Type" => "text/html" }, [html_template(until_period)]]
+  [429, { "Content-Type" => "text/html" }, [html_template(throttle_time, request.env["decidim.current_organization"].name)]]
 end
 
 Rack::Attack.throttle("req/ip",
@@ -45,7 +49,9 @@ Rack::Attack.throttle("req/ip",
   req.ip unless req.path.start_with?("/assets") || req.path.start_with?("/rails/active_storage")
 end
 
-def html_template(until_period)
+def html_template(until_period, organization_name)
+  name = organization_name.presence || "our platform"
+
   "
 <!DOCTYPE html>
 <html>
@@ -104,15 +110,38 @@ def html_template(until_period)
 </head>
 
 <body class='rails-default-error-page'>
-  <!-- This file lives in public/422.html -->
   <div class='dialog'>
     <div>
+      <b>Thank you for your participation on #{name}</b>
+      <br>
       <h1>429 - Too many requests</h1>
       <p>#{I18n.t("rack_attack.too_many_requests.message")}</p>
 
-      <b>#{I18n.t("rack_attack.too_many_requests.time", period: until_period)}</b>
+      <b>#{I18n.t("rack_attack.too_many_requests.time")}</b>
+
+      <br>
+      <b class='counter'><span id='timer'>#{until_period}</span> secondes</b>
     </div>
   </div>
+
+<script>
+    let timer = document.getElementById('timer')
+    let total = timer.textContent
+
+    const interval = setInterval(updateTimer, 1000)
+
+    function updateTimer() {
+        if (total <= 0) {
+            clearInterval(interval)
+            location.reload()
+        } else {
+            console.log(total)
+            timer.innerHTML = total
+            total -= 1
+        }
+    }
+</script>
+
 </body>
 </html>
 
