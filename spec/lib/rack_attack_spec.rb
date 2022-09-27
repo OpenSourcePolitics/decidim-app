@@ -15,7 +15,7 @@ describe "Rack::Attack", type: :request do
     Rack::Attack.enabled = false
   end
 
-  describe "GET decidim.root_path" do
+  describe "Throttling" do
     let(:headers) { { "REMOTE_ADDR" => "1.2.3.4", "decidim.current_organization" => organization } }
 
     it "successful for 100 requests, then blocks the user nicely" do
@@ -45,6 +45,23 @@ describe "Rack::Attack", type: :request do
       expect(response).not_to have_http_status(:too_many_requests)
 
       travel_to(1.minute.from_now) do
+        get decidim.root_path, params: {}, headers: headers
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
+
+  describe "Fail2Ban" do
+    let(:headers) { { "REMOTE_ADDR" => "1.2.3.4", "decidim.current_organization" => organization } }
+
+    it "Block directly requests for invalid routes for 1 hour" do
+      get "#{decidim.root_path}/etc/passwd", params: {}, headers: headers
+      expect(response).to have_http_status(:forbidden)
+
+      get decidim.root_path, params: {}, headers: headers
+      expect(response).to have_http_status(:forbidden)
+
+      travel_to(61.minutes.from_now) do
         get decidim.root_path, params: {}, headers: headers
         expect(response).to have_http_status(:ok)
       end
