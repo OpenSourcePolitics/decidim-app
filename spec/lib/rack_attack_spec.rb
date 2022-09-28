@@ -19,7 +19,7 @@ describe "Rack::Attack", type: :request do
     let(:headers) { { "REMOTE_ADDR" => "1.2.3.4", "decidim.current_organization" => organization } }
 
     it "successful for 100 requests, then blocks the user" do
-      100.times do
+      100.times do |_|
         get decidim.root_path, params: {}, headers: headers
         expect(response).to have_http_status(:ok)
       end
