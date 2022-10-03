@@ -41,11 +41,29 @@ Rack::Attack.throttled_responder = lambda do |request|
 end
 
 Rack::Attack.throttle("req/ip",
-                      limit: Rails.application.secrets.decidim[:throttling_max_requests],
-                      period: Rails.application.secrets.decidim[:throttling_period]) do |req|
-  req.ip unless req.path.start_with?("/decidim-packs") || req.path.start_with?("/rails/active_storage")
+                      limit: Rails.application.secrets.dig(:decidim, :rack_attack, :throttle, :max_requests),
+                      period: Rails.application.secrets.dig(:decidim, :rack_attack, :throttle, :period)) do |req|
+  req.ip unless req.path.start_with?("/decidim-packs") || req.path.start_with?("/rails/active_storage") || req.path.start_with?("/admin/")
 end
 
+if Rails.application.secrets.dig(:decidim, :rack_attack, :fail2ban, :enabled) == 1
+  # Block suspicious requests made for pentesting
+  # After 1 forbidden request, block all requests from that IP for 1 hour.
+  Rack::Attack.blocklist("fail2ban pentesters") do |req|
+    # `filter` returns truthy value if request fails, or if it's from a previously banned IP
+    # so the request is blocked
+    Rack::Attack::Fail2Ban.filter("pentesters-#{req.ip}", maxretry: 0, findtime: 10.minutes, bantime: 1.hour) do
+      # The count for the IP is incremented if the return value is truthy
+      req.path.include?("/etc/passwd") ||
+        req.path.include?("/wp-admin/") ||
+        req.path.include?("/wp-login/") ||
+        req.path.include?("SELECT") ||
+        req.path.include?("CONCAT") ||
+        req.path.include?("UNION%20SELECT") ||
+        req.path.include?("/.git/")
+    end
+  end
+end
 def html_template(until_period, organization_name)
   name = organization_name.presence || "our platform"
 
