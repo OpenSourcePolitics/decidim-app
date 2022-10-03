@@ -5,6 +5,7 @@ Decidim::Dev.dummy_app_path = File.expand_path(Rails.root.to_s)
 require "decidim/dev/test/base_spec_helper"
 
 RSpec.configure do |config|
+  Decidim.available_locales = %w(en es fr)
   config.before do
     # Initializers configs
     SocialShareButton.configure do |social_share_button|
