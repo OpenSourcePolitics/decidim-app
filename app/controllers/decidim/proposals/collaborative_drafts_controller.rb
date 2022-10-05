@@ -25,10 +25,10 @@ module Decidim
 
       def index
         @collaborative_drafts = search
-                                  .result
-                                  .not_hidden
-                                  .includes(:category)
-                                  .includes(:scope)
+                                .results
+                                .not_hidden
+                                .includes(:category)
+                                .includes(:scope)
 
         @collaborative_drafts = paginate(@collaborative_drafts)
         @collaborative_drafts = reorder(@collaborative_drafts)
@@ -137,16 +137,16 @@ module Decidim
         @geocoded_collaborative_draft ||= search.result.not_hidden.select(&:geocoded_and_valid?)
       end
 
-      def search_collection
-        CollaborativeDraft.where(component: current_component).not_hidden
+      def search_klass
+        CollaborativeDraftSearch
       end
 
       def default_filter_params
         {
-          search_text_cont: "",
-          with_any_category: default_filter_category_params,
-          with_any_state: %w(open),
-          with_any_scope: default_filter_scope_params,
+          search_text: "",
+          category_id: default_filter_category_params,
+          state: %w(open),
+          scope_id: default_filter_scope_params,
           related_to: ""
         }
       end

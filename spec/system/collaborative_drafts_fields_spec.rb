@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 require "spec_helper"
@@ -120,7 +119,7 @@ describe "Collaborative drafts", type: :system do
           let!(:component) do
             create(:proposal_component,
                    :with_creation_enabled,
-                   manifest:manifest,
+                   manifest: manifest,
                    participatory_space: participatory_process)
           end
 
@@ -185,7 +184,7 @@ describe "Collaborative drafts", type: :system do
                    :with_extra_hashtags,
                    suggested_hashtags: component_suggested_hashtags,
                    automatic_hashtags: component_automatic_hashtags,
-                   manifest:manifest,
+                   manifest: manifest,
                    participatory_space: participatory_process)
           end
 
@@ -221,10 +220,10 @@ describe "Collaborative drafts", type: :system do
         end
 
         context "when the user has verified organizations" do
-          let(:user_group) { create(:user_group, :verified, organization:organization) }
+          let(:user_group) { create(:user_group, :verified, organization: organization) }
 
           before do
-            create(:user_group_membership, user:user, user_group:user_group)
+            create(:user_group_membership, user: user, user_group: user_group)
           end
 
           it "creates a new collaborative draft as a user group", :slow do
@@ -252,7 +251,7 @@ describe "Collaborative drafts", type: :system do
             let!(:component) do
               create(:proposal_component,
                      :with_creation_enabled,
-                     manifest:manifest,
+                     manifest: manifest,
                      participatory_space: participatory_process,
                      settings: {
                        geocoding_enabled: true,
@@ -288,33 +287,12 @@ describe "Collaborative drafts", type: :system do
           end
         end
 
-        context "when the user isn't authorized" do
-          before do
-            permissions = {
-              create: {
-                authorization_handlers: {
-                  "dummy_authorization_handler" => { "options" => {} }
-                }
-              }
-            }
-
-            component.update!(permissions:permissions)
-          end
-
-          it "shows a modal dialog" do
-            visit_component
-            click_link "Access collaborative drafts"
-            click_link "New collaborative draft"
-            expect(page).to have_content("Authorization required")
-          end
-        end
-
         context "when attachments are allowed" do
           let!(:component) do
             create(:proposal_component,
                    :with_creation_enabled,
                    :with_attachments_allowed_and_collaborative_drafts_enabled,
-                   manifest:manifest,
+                   manifest: manifest,
                    participatory_space: participatory_process)
           end
 
@@ -326,6 +304,7 @@ describe "Collaborative drafts", type: :system do
               fill_in :collaborative_draft_body, with: "This is my collaborative draft and I want to upload attachments."
             end
 
+            fill_in :collaborative_draft_attachment_title, with: "My attachment"
             attach_file :collaborative_draft_attachment_file, Decidim::Dev.asset("city.jpeg")
 
             within ".new_collaborative_draft" do
@@ -345,7 +324,7 @@ describe "Collaborative drafts", type: :system do
         let!(:component) do
           create(:proposal_component,
                  :with_collaborative_drafts_enabled,
-                 manifest:manifest,
+                 manifest: manifest,
                  participatory_space: participatory_process)
         end
 
