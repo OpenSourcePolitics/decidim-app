@@ -125,11 +125,11 @@ describe "Collaborative drafts", type: :system do
 
           before do
             component.update!(settings: {
-              geocoding_enabled: true,
-              collaborative_drafts_enabled: true,
-              scopes_enabled: true,
-              scope_id: participatory_process.scope&.id
-            })
+                                geocoding_enabled: true,
+                                collaborative_drafts_enabled: true,
+                                scopes_enabled: true,
+                                scope_id: participatory_process.scope&.id
+                              })
           end
 
           it "creates a new collaborative draft", :slow do
@@ -193,10 +193,10 @@ describe "Collaborative drafts", type: :system do
 
           before do
             component.update!(settings: {
-              collaborative_drafts_enabled: true,
-              scopes_enabled: true,
-              scope_id: participatory_process.scope&.id
-            })
+                                collaborative_drafts_enabled: true,
+                                scopes_enabled: true,
+                                scope_id: participatory_process.scope&.id
+                              })
           end
 
           it "offers and save extra hashtags", :slow do
