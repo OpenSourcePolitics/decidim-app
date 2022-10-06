@@ -105,9 +105,9 @@ en:
           france_connect:
             client_id: Client ID
             client_secret: Client secret
-            scope: scope
             provider: FranceConnect
             provider_name: FranceConnect
+            scope: Scope
             site_url: Site URL
           france_connect_profile:
             button_path: Button path
