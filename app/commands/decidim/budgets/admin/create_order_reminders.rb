@@ -29,13 +29,13 @@ module Decidim
               next if %w(active pending).exclude? record.state
 
               record.state = begin
-                               if record.remindable.created_at > minimum_time_between_reminders ||
-                                 (reminder.deliveries.present? && reminder.deliveries.last.created_at > minimum_time_between_reminders)
-                                 "pending"
-                               else
-                                 "active"
-                               end
-                             end
+                if record.remindable.created_at > minimum_time_between_reminders ||
+                   (reminder.deliveries.present? && reminder.deliveries.last.created_at > minimum_time_between_reminders)
+                  "pending"
+                else
+                  "active"
+                end
+              end
               record.save if record.changed?
             end
           end

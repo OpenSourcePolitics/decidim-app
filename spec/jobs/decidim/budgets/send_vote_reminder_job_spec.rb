@@ -20,8 +20,8 @@ describe Decidim::Budgets::SendVoteReminderJob do
     it "sends an email and creates reminder delivery" do
       allow(mailer_class)
         .to receive(:vote_reminder)
-              .with(reminder)
-              .and_return(mailer)
+        .with(reminder)
+        .and_return(mailer)
       expect(mailer)
         .to receive(:deliver_now)
 

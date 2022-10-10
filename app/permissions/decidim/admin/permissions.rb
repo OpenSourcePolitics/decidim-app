@@ -70,7 +70,7 @@ module Decidim
 
       def read_admin_dashboard_action?
         return unless permission_action.subject == :admin_dashboard &&
-          permission_action.action == :read
+                      permission_action.action == :read
 
         return user_manager_permissions if user_manager?
 
@@ -177,7 +177,7 @@ module Decidim
 
       def user_can_enter_space_area?(**args)
         return unless permission_action.action == :enter &&
-          permission_action.subject == :space_area
+                      permission_action.subject == :space_area
 
         space_allows_admin_access_to_current_action?(**args)
       end

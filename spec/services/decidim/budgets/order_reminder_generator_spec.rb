@@ -78,8 +78,8 @@ module Decidim::Budgets
               expect(Decidim::Budgets::SendVoteReminderJob).to receive(:perform_later)
 
               expect { subject.generate }.to change(reminder.records, :count)
-                                               .by(0)
-                                               .and change(Decidim::Reminder, :count).by(0)
+                .by(0)
+                .and change(Decidim::Reminder, :count).by(0)
             end
 
             context "with confirmed order" do
@@ -137,8 +137,8 @@ module Decidim::Budgets
               expect(Decidim::Budgets::SendVoteReminderJob).to receive(:perform_later)
 
               expect { subject.generate }.to change(reminder.records.active, :count)
-                                               .to(1)
-                                               .and change(reminder.records.completed, :count).to(1)
+                .to(1)
+                .and change(reminder.records.completed, :count).to(1)
               expect(reminder.records.active.first.remindable).to eq(first_order)
             end
           end
@@ -150,8 +150,8 @@ module Decidim::Budgets
               expect(Decidim::Budgets::SendVoteReminderJob).to receive(:perform_later)
 
               expect { subject.generate }.to change(reminder.records.active, :count)
-                                               .to(1)
-                                               .and change(reminder.records.completed, :count).to(1)
+                .to(1)
+                .and change(reminder.records.completed, :count).to(1)
               expect(reminder.records.active.first.remindable).to eq(recent_order)
             end
           end
@@ -163,8 +163,8 @@ module Decidim::Budgets
               expect(Decidim::Budgets::SendVoteReminderJob).to receive(:perform_later)
 
               expect { subject.generate }.to change(reminder.records.active, :count)
-                                               .to(1)
-                                               .and change(reminder.records.deleted, :count).to(1)
+                .to(1)
+                .and change(reminder.records.deleted, :count).to(1)
               expect(reminder.records.active.first.remindable).to eq(recent_order)
             end
           end
@@ -176,8 +176,8 @@ module Decidim::Budgets
               expect(Decidim::Budgets::SendVoteReminderJob).to receive(:perform_later)
 
               expect { subject.generate }.to change(reminder.records.deleted, :count)
-                                               .to(1)
-                                               .and change(reminder.records.deleted, :count).to(1)
+                .to(1)
+                .and change(reminder.records.deleted, :count).to(1)
               expect(reminder.records.active.first.remindable).to eq(first_order)
             end
           end
