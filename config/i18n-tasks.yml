@@ -108,3 +108,4 @@ ignore_unused:
   - decidim.system.organizations.omniauth_settings.publik.*
   - decidim.verifications.authorizations.create.*
   - decidim.verifications.authorizations.first_login.actions.*
+  - decidim.budgets.admin.reminders.orders.*

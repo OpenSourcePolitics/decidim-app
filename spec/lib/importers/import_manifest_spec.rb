@@ -197,8 +197,8 @@ module Decidim
         it "returns the example data" do
           expect(subject.example(nil, component)).to eq(
                                                        [
-                                                         %w(id name/en name/ca name/es),
-                                                         [component.id, component.name["en"], component.name["ca"], component.name["es"]]
+                                                         %w(id name/en name/es name/fr),
+                                                         [component.id, component.name["en"], component.name["es"], component.name["fr"]]
                                                        ]
                                                      )
         end

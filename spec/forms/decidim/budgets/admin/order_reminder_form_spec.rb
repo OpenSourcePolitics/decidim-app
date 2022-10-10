@@ -37,7 +37,10 @@ describe Decidim::Budgets::Admin::OrderReminderForm do
     end
 
     context "and there are 5 hours left in the day" do
-      before { allow(Time.zone).to receive(:now).and_return(Time.zone.now.end_of_day - 5.hours) }
+      before do
+        Time.zone = "UTC"
+        allow(Time.zone).to receive(:now).and_return(Time.zone.now.end_of_day - 5.hours)
+      end
 
       it "voting_ends_soon? returns true" do
         expect(subject.voting_ends_soon?).to eq(true)

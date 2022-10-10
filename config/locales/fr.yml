@@ -24,15 +24,6 @@ fr:
             other: "%{count} utilisateurs recevront le rappel"
         new:
           submit: Send
-      vote_reminder_mailer:
-        vote_reminder:
-          email_budgets: 'Zone où vous avez un vote non terminé'
-          email_intro: Vous avez commencé un vote de budget participatif, mais vous ne l'avez pas terminé.
-          email_link: Continuer le vote
-          email_outro: Pensez à terminer votre vote. Pour voter, vous devez d'abord séléctionner la ou les propositions pour lesquelles vous voulez voter, puis confirmr votre vote avec le bouton "Vote".
-          email_subject:
-            one: Vous avez un vote non terminé sur le vote du budget participatif.
-            other: Vous avez des votes non terminés sur le vote du budget participatif.
     amendments:
       emendation:
         announcement:
@@ -57,6 +48,15 @@ fr:
             title:
               one: Vous êtes sur le point d'envoyer un mail de rappel à %{count} utilisateur.
               other: Vous êtes sur le point d'envoyer un mail de rappel à %{count} utilisateurs.
+      vote_reminder_mailer:
+        vote_reminder:
+          email_budgets: Zone où vous avez un vote non terminé
+          email_intro: Vous avez commencé un vote de budget participatif, mais vous ne l'avez pas terminé.
+          email_link: Continuer le vote
+          email_outro: Pensez à terminer votre vote. Pour voter, vous devez d'abord séléctionner la ou les propositions pour lesquelles vous voulez voter, puis confirmr votre vote avec le bouton "Vote".
+          email_subject:
+            one: Vous avez un vote non terminé sur le vote du budget participatif.
+            other: Vous avez des votes non terminés sur le vote du budget participatif.
     events:
       budgets:
         pending_order:

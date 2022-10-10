@@ -125,7 +125,7 @@ FactoryBot.define do
 
   factory :user, class: "Decidim::User" do
     email { generate(:email) }
-    password { "password1234" }
+    password { "decidim123456" }
     password_confirmation { password }
     name { generate(:name) }
     nickname { generate(:nickname) }
@@ -139,6 +139,7 @@ FactoryBot.define do
     accepted_tos_version { organization.tos_version }
     email_on_notification { true }
     email_on_moderations { true }
+    extended_data { {} }
 
     trait :confirmed do
       confirmed_at { Time.current }
