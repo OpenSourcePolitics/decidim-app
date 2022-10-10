@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Decidim
+  autoload :ManifestMessages, "decidim/manifest_messages"
+
   module Importers
     # For importing data from files to components. Every resource type should
     # specify it's own creator, which will be responsible for producing (creating)

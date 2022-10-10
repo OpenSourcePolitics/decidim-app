@@ -17,7 +17,6 @@ describe "Admin reminds users with pending orders", type: :system do
     switch_to_host(organization.host)
     login_as user, scope: :user
     visit_component_admin
-    initialize_reminders
     click_link "Send voting reminders"
   end
 
@@ -52,25 +51,6 @@ describe "Admin reminds users with pending orders", type: :system do
       click_link "Send voting reminders"
       perform_enqueued_jobs { click_button "Send" }
       expect(page).to have_content("0 users will be reminded")
-    end
-  end
-end
-
-def initialize_reminders
-  return unless Decidim.reminders_registry.all.empty?
-
-  Decidim.reminders_registry.register(:orders) do |reminder_registry|
-    reminder_registry.generator_class_name = "Decidim::Budgets::OrderReminderGenerator"
-    reminder_registry.form_class_name = "Decidim::Budgets::Admin::OrderReminderForm"
-    reminder_registry.command_class_name = "Decidim::Budgets::Admin::CreateOrderReminders"
-
-    reminder_registry.settings do |settings|
-      settings.attribute :reminder_times, type: :array, default: [2.hours, 1.week, 2.weeks]
-    end
-
-    reminder_registry.messages do |msg|
-      msg.set(:title) { |count: 0| I18n.t("decidim.budgets.admin.reminders.orders.title", count: count) }
-      msg.set(:description) { I18n.t("decidim.budgets.admin.reminders.orders.description") }
     end
   end
 end
