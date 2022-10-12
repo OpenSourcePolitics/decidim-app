@@ -16,6 +16,14 @@ fr:
         create:
           error: Erreur
           success: Succès
+      reminders:
+        create:
+          error: Il y a eu un problème en créant le rappel.
+          success:
+            one: "%{count} utilisateur recevra le rappel"
+            other: "%{count} utilisateurs recevront le rappel"
+        new:
+          submit: Send
     amendments:
       emendation:
         announcement:
@@ -33,11 +41,27 @@ fr:
       osp_authorization_workflow:
         name: Procédure d'autorisation
     budgets:
+      admin:
+        reminders:
+          orders:
+            description: Les utilisateurs vont recevoir un mail avec les liens des budgets pour lesquels ils ont un vote en cours.
+            title:
+              one: Vous êtes sur le point d'envoyer un mail de rappel à %{count} utilisateur.
+              other: Vous êtes sur le point d'envoyer un mail de rappel à %{count} utilisateurs.
       projects:
         count:
           projects_count:
             one: 1 projet
-            other: "%{count} projets"
+            other: "%{count} projets"vote_reminder_mailer:
+        vote_reminder:
+          email_budgets: 'Budget où vous avez un vote non terminé:'
+          email_intro: Vous avez commencé un vote de budget participatif, mais vous ne l'avez pas terminé.
+          email_link: Terminer mon vote
+          email_outro: Pensez à terminer votre vote. Pour voter, vous devez d'abord séléctionner le ou les projets pour lesquels vous voulez voter, puis confirmer votre vote avec le bouton "Voter".
+          email_subject:
+            one: Vous n'avez pas finalisé votre vote
+            other: Vous n'avez pas finalisé vos votes
+
     events:
       budgets:
         pending_order:
