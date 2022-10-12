@@ -17,7 +17,7 @@ module Decidim
         @reminder = reminder
         @user = reminder.user
         with_user(@user) do
-          @orders = reminder.records.active.map(&:remindable)
+          @orders = reminder.records.where(string: "active").map(&:remindable)
           @organization = @user.organization
 
           subject = I18n.t(
