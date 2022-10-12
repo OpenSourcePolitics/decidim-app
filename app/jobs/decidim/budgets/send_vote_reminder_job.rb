@@ -6,7 +6,7 @@ module Decidim
       queue_as :vote_reminder
 
       def perform(reminder)
-        return if reminder.records.where(string:"active").blank?
+        return if reminder.records.where(string: "active").blank?
 
         ::Decidim::ReminderDelivery.create(reminder: reminder)
         ::Decidim::Budgets::VoteReminderMailer.vote_reminder(reminder).deliver_now

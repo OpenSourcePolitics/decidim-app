@@ -38,7 +38,7 @@ module Decidim
           reminder = Decidim::Reminder.find_or_create_by(user: user, component: component)
           users_pending_orders = pending_orders.where(user: user)
           update_reminder_records(reminder, users_pending_orders)
-          if reminder.records.where(string:"active").any?
+          if reminder.records.where(string: "active").any?
             Decidim::Budgets::SendVoteReminderJob.perform_later(reminder)
             @reminder_jobs_queued += 1
           end
