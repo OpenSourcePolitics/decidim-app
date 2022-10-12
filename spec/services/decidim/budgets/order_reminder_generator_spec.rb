@@ -93,11 +93,20 @@ module Decidim::Budgets
             end
           end
 
-          context "and user has been already reminded" do
+          context "and user has been already reminded less than 24h ago" do
             let!(:reminder_delivery) { create(:reminder_delivery, reminder: reminder, created_at: 1.hour.ago) }
 
             it "does not send reminder" do
               expect(Decidim::Budgets::SendVoteReminderJob).not_to receive(:perform_later)
+              expect { subject.generate }.not_to change(Decidim::Reminder, :count)
+            end
+          end
+
+          context "and user has been already reminded more than 24h ago" do
+            let!(:reminder_delivery) { create(:reminder_delivery, reminder: reminder, created_at: 25.hours.ago) }
+
+            it "does send existing reminder" do
+              expect(Decidim::Budgets::SendVoteReminderJob).to receive(:perform_later)
               expect { subject.generate }.not_to change(Decidim::Reminder, :count)
             end
           end
