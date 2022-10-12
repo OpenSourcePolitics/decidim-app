@@ -32,16 +32,29 @@ module Decidim
 
       def send_reminders(component)
         budgets = Decidim::Budgets::Budget.where(component: component)
-        pending_orders = Decidim::Budgets::Order.where(budget: budgets, checked_out_at: nil)
+        pending_orders = Decidim::Budgets::Order.where(budget: budgets, checked_out_at: nil, created_at: Time.zone.at(0)..minimum_time_before_first_reminder.ago)
         users = Decidim::User.where(id: pending_orders.pluck(:decidim_user_id).uniq)
         users.each do |user|
           reminder = Decidim::Reminder.find_or_create_by(user: user, component: component)
           users_pending_orders = pending_orders.where(user: user)
           update_reminder_records(reminder, users_pending_orders)
-          if reminder.records.where(string: "active").any?
+          if reminder.records.where(string: "active").any? && (reminder.deliveries.blank? || reminder.deliveries.last.created_at < minimum_interval_between_reminders.ago)
             Decidim::Budgets::SendVoteReminderJob.perform_later(reminder)
             @reminder_jobs_queued += 1
           end
+        end
+      end
+
+      def minimum_interval_between_reminders
+        24.hours
+      end
+
+      def minimum_time_before_first_reminder
+        @minimum_time_before_first_reminder ||= begin
+          reminder_manifest = Decidim.reminders_registry.for(:orders)
+          return minimum_interval_between_reminders if reminder_manifest.blank?
+
+          Array(reminder_manifest.settings.attributes[:reminder_times].default).first
         end
       end
 
