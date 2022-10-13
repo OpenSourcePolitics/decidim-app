@@ -15,7 +15,7 @@
 
 :schedule:
   CalculateAllMetrics:
-    cron: '0 0 0 * * *' # Run at midnight
+    cron: '0 9 0 * * *' # Run at 00:09
     class: CalculateAllMetricsJob
     queue: scheduled
   PreloadOpenData:
