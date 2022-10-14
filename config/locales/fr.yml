@@ -74,26 +74,26 @@ fr:
       collaborative_drafts:
         collaborative_draft:
           publish:
-            error: Erreur
-            success: Succès
+            error: Il y a eu des erreurs lors de la publication du brouillon collaboratif.
+            success: Brouillon collaboratif publié avec succès en tant que proposition.
           withdraw:
-            error: Erreur
-            success: Succès
+            error: Il y a eu des erreurs en fermant le brouillon collaboratif.
+            success: Brouillon collaboratif retiré avec succès.
         create:
-          error: Erreur
-          success: Succès
+          error: Il y a eu un problème lors de la création de ces brouillons collaboratifs
+          success: Brouillon collaboratif créé avec succès.
         show:
           back: Retour
-          edit: Modifier
-          info-message: Message d'information
-          publish_info: Publier le message d'information
-          requested_access: Accès requis
+          edit: Modifier un brouillon collaboratif
+          info-message: Ceci est un <strong>projet collaboratif</strong> pour une proposition. Cela signifie que vous pouvez aider leurs auteurs à façonner la proposition en utilisant la section commentaire ci-dessous ou l'améliorer directement en demandant l'accès pour la modifier. Une fois que les auteurs vous accordent l'accès, vous pourrez apporter des modifications à ce brouillon.
+          publish_info: Publiez cette version du brouillon ou
+          requested_access: Accès demandé
         update:
-          error: Erreur
-          success: Succès
+          error: Il y a eu des erreurs lors de l'enregistrement du brouillon collaboratif.
+          success: Brouillon collaboratif mis à jour avec succès.
         wizard_aside:
           back_from_collaborative_draft: Retour aux brouillons collaboratifs
-          info: Information
+          info: Vous créez un <strong>projet collaboratif</strong>.
       create:
         error: Il y a eu des erreurs lors de la sauvegarde de la proposition.
         success: Proposition créée avec succès. Enregistrée comme brouillon.
