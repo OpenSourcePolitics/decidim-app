@@ -71,12 +71,41 @@ en:
           link: https://franceconnect.gouv.fr/
           text: What is FranceConnect ?
     proposals:
+      collaborative_drafts:
+        collaborative_draft:
+          publish:
+            error: Error
+            success: Success
+          withdraw:
+            error: Error
+            success: Success
+        create:
+          error: Error
+          success: Success
+        show:
+          back: Back
+          edit: Edit
+          info-message: Info-message
+          publish_info: Publish info
+          requested_access: Requested access
+        update:
+          error: Error
+          success: Success
+        wizard_aside:
+          back_from_collaborative_draft: Back from collaborative draft
+          info: Info
       create:
         error: There was a problem saving
         success: Success
       destroy_draft:
         error: Error
         success: Success
+      models:
+        collaborative_draft:
+          fields:
+            authors: Authors
+            comments: Comments
+            contributions: Contributions
       proposals:
         compare:
           no_similars_found: No similars found
@@ -105,9 +134,9 @@ en:
           france_connect:
             client_id: Client ID
             client_secret: Client secret
-            scope: scope
             provider: FranceConnect
             provider_name: FranceConnect
+            scope: scope
             site_url: Site URL
           france_connect_profile:
             button_path: Button path
