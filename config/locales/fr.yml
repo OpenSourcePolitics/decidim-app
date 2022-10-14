@@ -74,26 +74,26 @@ fr:
       collaborative_drafts:
         collaborative_draft:
           publish:
-            error: Error
-            success: Success
+            error: Erreur
+            success: Succès
           withdraw:
-            error: Error
-            success: Success
+            error: Erreur
+            success: Succès
         create:
-          error: Error
-          success: Success
+          error: Erreur
+          success: Succès
         show:
-          back: Back
-          edit: Edit
-          info-message: Info-message
-          publish_info: Publish info
-          requested_access: Requested access
+          back: Retour
+          edit: Modifier
+          info-message: Message d'information
+          publish_info: Publier le message d'information
+          requested_access: Accès requis
         update:
-          error: Error
-          success: Success
+          error: Erreur
+          success: Succès
         wizard_aside:
-          back_from_collaborative_draft: Back from collaborative draft
-          info: Info
+          back_from_collaborative_draft: Retour aux brouillons collaboratifs
+          info: Information
       create:
         error: Il y a eu des erreurs lors de la sauvegarde de la proposition.
         success: Proposition créée avec succès. Enregistrée comme brouillon.
@@ -103,8 +103,8 @@ fr:
       models:
         collaborative_draft:
           fields:
-            authors: Authors
-            comments: Comments
+            authors: Auteurs
+            comments: Commentaires
             contributions: Contributions
       proposals:
         compare:
