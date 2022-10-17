@@ -12,6 +12,7 @@
   - scheduled
   - translations
   - metrics
+  - vote_reminder
 
 :schedule:
   CalculateAllMetrics:
