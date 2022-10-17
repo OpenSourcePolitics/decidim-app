@@ -13,6 +13,7 @@
   - translations
   - metrics
   - vote_reminder
+  - reminders
 
 :schedule:
   CalculateAllMetrics:
