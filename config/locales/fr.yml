@@ -32,6 +32,12 @@ fr:
         name: Formulaire de vérification d'identité
       osp_authorization_workflow:
         name: Procédure d'autorisation
+    budgets:
+      projects:
+        count:
+          projects_count:
+            one: 1 projet
+            other: "%{count} projets"
     events:
       budgets:
         pending_order:
