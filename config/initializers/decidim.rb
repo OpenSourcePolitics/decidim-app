@@ -14,6 +14,13 @@ Decidim.configure do |config|
 
   config.maximum_attachment_height_or_width = 6000
 
+  # Rack Attack configs
+  # Max requests in a time period to prevent DoS attacks. Only applied on production.
+  config.throttling_max_requests = Rails.application.secrets.decidim[:throttling_max_requests].to_i
+
+  # Time window in which the throttling is applied.
+  config.throttling_period = Rails.application.secrets.decidim[:throttling_period].to_i.minutes
+
   # Geocoder configuration
   config.maps = {
     provider: :here,
@@ -39,7 +46,7 @@ Decidim.configure do |config|
   # end
 
   # Currency unit
-  # config.currency_unit = "€"
+  config.currency_unit = Rails.application.secrets.decidim[:currency]
 
   # The number of reports which an object can receive before hiding it
   # config.max_reports_before_hiding = 3
