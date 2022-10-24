@@ -52,7 +52,8 @@ en:
         count:
           projects_count:
             one: 1 project
-            other: "%{count} projects"vote_reminder_mailer:
+            other: "%{count} projects"
+      vote_reminder_mailer:
         vote_reminder:
           email_budgets: 'Areas where you have an unfinished vote:'
           email_intro: You have started the participatory budgeting vote, but have not completed it.

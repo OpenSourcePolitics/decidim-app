@@ -52,7 +52,8 @@ fr:
         count:
           projects_count:
             one: 1 projet
-            other: "%{count} projets"vote_reminder_mailer:
+            other: "%{count} projets"
+      vote_reminder_mailer:
         vote_reminder:
           email_budgets: 'Budget où vous avez un vote non terminé:'
           email_intro: Vous avez commencé un vote de budget participatif, mais vous ne l'avez pas terminé.
