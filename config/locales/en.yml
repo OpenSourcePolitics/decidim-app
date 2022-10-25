@@ -30,6 +30,7 @@ en:
           evaluating: |-
             This amendment for %{amendable_type} %{proposal_link}
             is in evaluation state.
+    anonymous_user: Anonymous user
     authorization_handlers:
       osp_authorization_handler:
         explanation: Verify your identity by entering a unique number
@@ -41,13 +42,37 @@ en:
       osp_authorization_workflow:
         name: Authorization procedure
     budgets:
+      actions:
+        confirm_destroy: Are you sure you want to delete this project?
+        destroy: Delete
+        edit: Edit
+        edit_projects: Manage projects
+        new: New %{name}
+        preview: Preview
+        title: Actions
       admin:
+        budgets:
+          index:
+            finished_orders: Finished votes
+            pending_orders: Pending votes
+            title: Budgets
+            users_with_finished_orders: Users with finished votes
+            users_with_pending_orders: Users with pending votes
+        models:
+          budget:
+            name: Budget
         reminders:
           orders:
             description: Users will receive an email with links to the budgets where they have pending order.
             title:
               one: You are about to send an email reminder to %{count} user
               other: You are about to send an email reminder to %{count} users
+      models:
+        budget:
+          fields:
+            name: Name
+            projects_count: Projects count
+            total_budget: Total budget
       projects:
         count:
           projects_count:
@@ -62,7 +87,6 @@ en:
           email_subject:
             one: You have an unfinished vote in the participatory budgeting vote
             other: You have unfinished votes in the participatory budgeting vote
-
     events:
       budgets:
         pending_order:
