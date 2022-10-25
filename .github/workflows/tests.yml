@@ -102,6 +102,8 @@ jobs:
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
       - run: bundle exec rspec spec/**/*_spec.rb
+        name: RSpec decidim
+      - run: bundle exec rspec spec/*_spec.rb
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
         name: Upload coverage
