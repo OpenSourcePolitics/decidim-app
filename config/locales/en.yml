@@ -16,12 +16,21 @@ en:
         create:
           error: Error
           success: Success
+      reminders:
+        create:
+          error: There was a problem creating reminders.
+          success:
+            one: "%{count} user will be reminded."
+            other: "%{count} users will be reminded."
+        new:
+          submit: Send
     amendments:
       emendation:
         announcement:
           evaluating: |-
             This amendment for %{amendable_type} %{proposal_link}
             is in evaluation state.
+    anonymous_user: Anonymous user
     authorization_handlers:
       osp_authorization_handler:
         explanation: Verify your identity by entering a unique number
@@ -33,11 +42,51 @@ en:
       osp_authorization_workflow:
         name: Authorization procedure
     budgets:
+      actions:
+        confirm_destroy: Are you sure you want to delete this project?
+        destroy: Delete
+        edit: Edit
+        edit_projects: Manage projects
+        new: New %{name}
+        preview: Preview
+        title: Actions
+      admin:
+        budgets:
+          index:
+            finished_orders: Finished votes
+            pending_orders: Pending votes
+            title: Budgets
+            users_with_finished_orders: Users with finished votes
+            users_with_pending_orders: Users with pending votes
+        models:
+          budget:
+            name: Budget
+        reminders:
+          orders:
+            description: Users will receive an email with links to the budgets where they have pending order.
+            title:
+              one: You are about to send an email reminder to %{count} user
+              other: You are about to send an email reminder to %{count} users
+      models:
+        budget:
+          fields:
+            name: Name
+            projects_count: Projects count
+            total_budget: Total budget
       projects:
         count:
           projects_count:
             one: 1 project
             other: "%{count} projects"
+      vote_reminder_mailer:
+        vote_reminder:
+          email_budgets: 'Areas where you have an unfinished vote:'
+          email_intro: You have started the participatory budgeting vote, but have not completed it.
+          email_link: Go to continue voting
+          email_outro: Please remember to complete the vote. To vote, you must first select the proposal or proposals you want to vote on and then confirm your vote with the "Vote" button.
+          email_subject:
+            one: You have an unfinished vote in the participatory budgeting vote
+            other: You have unfinished votes in the participatory budgeting vote
     events:
       budgets:
         pending_order:

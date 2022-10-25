@@ -16,12 +16,21 @@ fr:
         create:
           error: Erreur
           success: Succès
+      reminders:
+        create:
+          error: Il y a eu un problème en créant le rappel.
+          success:
+            one: "%{count} utilisateur recevra le rappel"
+            other: "%{count} utilisateurs recevront le rappel"
+        new:
+          submit: Send
     amendments:
       emendation:
         announcement:
           evaluating: |-
             Cet amendement pour le %{amendable_type} %{proposal_link}
             est en cours d’évaluation.
+    anonymous_user: Utilisateur anonyme
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique
@@ -33,11 +42,51 @@ fr:
       osp_authorization_workflow:
         name: Procédure d'autorisation
     budgets:
+      actions:
+        confirm_destroy: Êtes-vous certain de vouloir supprimer ce projet?
+        destroy: Supprimer
+        edit: Modifier
+        edit_projects: Gérer les projets
+        new: Nouveau %{name}
+        preview: Aperçu
+        title: Actions
+      admin:
+        budgets:
+          index:
+            finished_orders: Votes terminés
+            pending_orders: Votes en cours
+            title: Budgets
+            users_with_finished_orders: Utilisateurs ayant fini leur vote
+            users_with_pending_orders: Utilisateurs ayant des votes en attente
+        models:
+          budget:
+            name: Budget
+        reminders:
+          orders:
+            description: Les utilisateurs vont recevoir un mail avec les liens des budgets pour lesquels ils ont un vote en cours. Le rappel ne sera pas envoyé aux utilisateurs ayant commencé leur vote il y a moins de deux heures, ni à ceux ayant reçu un rappel dans les dernières 24 heures.
+            title:
+              one: Vous êtes sur le point d'envoyer un mail de rappel à %{count} utilisateur.
+              other: Vous êtes sur le point d'envoyer un mail de rappel à %{count} utilisateurs.
+      models:
+        budget:
+          fields:
+            name: Nom
+            projects_count: Nombre de projets
+            total_budget: Budget total
       projects:
         count:
           projects_count:
             one: 1 projet
             other: "%{count} projets"
+      vote_reminder_mailer:
+        vote_reminder:
+          email_budgets: 'Budget où vous avez un vote non terminé:'
+          email_intro: Vous avez commencé un vote de budget participatif, mais vous ne l'avez pas terminé.
+          email_link: Terminer mon vote
+          email_outro: Pensez à terminer votre vote. Pour voter, vous devez d'abord séléctionner le ou les projets pour lesquels vous voulez voter, puis confirmer votre vote avec le bouton "Voter".
+          email_subject:
+            one: Vous n'avez pas finalisé votre vote
+            other: Vous n'avez pas finalisé vos votes
     events:
       budgets:
         pending_order:
