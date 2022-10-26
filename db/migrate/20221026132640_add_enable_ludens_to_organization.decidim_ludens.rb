@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_ludens (originally 20221229185754)
 
 class AddEnableLudensToOrganization < ActiveRecord::Migration[6.0]
