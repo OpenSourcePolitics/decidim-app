@@ -1,0 +1,1 @@
+Decidim::Api::QueryType.include ::QueryExtensions
