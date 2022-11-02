@@ -10,6 +10,7 @@ class DeploymentType < Decidim::Api::Types::BaseObject
   field :version, GraphQL::Types::String, "The current decidim's version of this deployment.", null: false
   field :up_to_date, GraphQL::Types::Boolean, "The current decidim's version of this deployment.", null: false
   field :latest_commit, GraphQL::Types::String, "The current decidim's version of this deployment.", null: false
+  field :locally_modified, GraphQL::Types::String, "The current decidim's version of this deployment.", null: false
 
   def current_commit
     `git rev-parse HEAD`.strip
@@ -37,5 +38,9 @@ class DeploymentType < Decidim::Api::Types::BaseObject
 
     response = https.request(request)
     JSON.parse(response.read_body)["sha"]
+  end
+
+  def locally_modified
+    !`git status --porcelain`.strip.empty?
   end
 end
