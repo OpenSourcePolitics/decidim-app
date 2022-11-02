@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "uri"
 require "net/http"
 
@@ -19,7 +20,7 @@ class DeploymentType < Decidim::Api::Types::BaseObject
   def version
     Decidim.version
   end
-  
+
   def branch
     `git rev-parse --abbrev-ref HEAD`.strip
   end
@@ -29,7 +30,7 @@ class DeploymentType < Decidim::Api::Types::BaseObject
   end
 
   def latest_commit
-    url = URI("https://api.github.com/repos/OpenSourcePolitics/decidim-app/commits/master")
+    url = URI("https://api.github.com/repos/#{partial_url}/commits/master")
 
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
@@ -42,5 +43,10 @@ class DeploymentType < Decidim::Api::Types::BaseObject
 
   def locally_modified
     !`git status --porcelain`.strip.empty?
+  end
+
+  def partial_url
+    remote = `git ls-remote --get-url`.strip
+    remote.sub(/https:\/\/github.com\//, "")
   end
 end
