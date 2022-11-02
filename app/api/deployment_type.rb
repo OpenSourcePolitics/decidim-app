@@ -30,7 +30,7 @@ class DeploymentType < Decidim::Api::Types::BaseObject
   end
 
   def latest_commit
-    url = URI("https://api.github.com/repos/#{partial_url}/commits/master")
+    url = URI("https://api.github.com/repos/#{partial_url}/commits/#{branch}")
 
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
