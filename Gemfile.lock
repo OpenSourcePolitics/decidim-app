@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-ludens.git
+  revision: b4d4c318da64c2fbf593c4dc9e91b2e34d59fc71
+  specs:
+    decidim-ludens (0.26.2)
+      decidim-core (= 0.26.2)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git
   revision: fbf147b5aae425130976807b5ed38f76393439aa
   specs:
@@ -948,6 +955,7 @@ DEPENDENCIES
   decidim-dev!
   decidim-friendly_signup!
   decidim-homepage_interactive_map!
+  decidim-ludens!
   decidim-phone_authorization_handler!
   decidim-spam_detection!
   decidim-templates
