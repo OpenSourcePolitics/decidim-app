@@ -1,5 +1,9 @@
 # Overrides
 
+## Backport sort of budgets projects
+* `app/controllers/decidim/budgets/projects_controller.rb`
+* `spec/system/sorting_projects_spec.rb`
+
 ## Load decidim-awesome assets only if dependencie is present
 * `app/views/layouts/decidim/_head.html.erb:33`
 
