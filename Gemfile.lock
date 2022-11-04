@@ -46,10 +46,9 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-publik
-  revision: 1e7c6ab77084bfcb0fc652f89e309f6c71e1bfd3
-  branch: v0.0.9
+  revision: ab703a565c402b773ce0025593554b329f603e5c
   specs:
-    omniauth-publik (0.0.9)
+    omniauth-publik (0.1.1)
       omniauth (~> 2.0)
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
@@ -990,4 +989,4 @@ RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.3.22
+   2.3.13
