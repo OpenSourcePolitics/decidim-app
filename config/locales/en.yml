@@ -9,8 +9,6 @@ en:
       participatory_process:
         private_space: Private space
   decidim:
-    accessibility:
-      skip_button: Skip button
     admin:
       participatory_space_private_users:
         create:
@@ -235,14 +233,4 @@ en:
   layouts:
     decidim:
       footer:
-        download_open_data: Open data
         made_with_open_source: Website made by <a target="_blank" href="https://opensourcepolitics.eu/en/">Open Source Politics</a> with the <a target="_blank" href="https://github.com/decidim/decidim">decidim free software</a>.
-      header:
-        close_menu: Close menu
-        navigation: Navigation
-        sign_in: Sign in
-        sign_up: Sign up
-      user_menu:
-        account: Account
-        conversations: Conversations
-        notifications: Notifications
