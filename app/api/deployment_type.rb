@@ -47,6 +47,6 @@ class DeploymentType < Decidim::Api::Types::BaseObject
 
   def partial_url
     remote = `git ls-remote --get-url`.strip
-    remote.sub(/https:\/\/github.com\//, "")
+    remote.sub(%r{https://github.com/}, "")
   end
 end
