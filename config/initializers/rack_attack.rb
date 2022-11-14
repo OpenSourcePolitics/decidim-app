@@ -64,6 +64,7 @@ if Rails.application.secrets.dig(:decidim, :rack_attack, :fail2ban, :enabled) ==
     end
   end
 end
+
 def html_template(until_period, organization_name)
   name = organization_name.presence || "our platform"
 
