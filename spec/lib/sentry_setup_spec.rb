@@ -18,15 +18,30 @@ describe SentrySetup do
     subject.init
   end
 
-  context "when sentry is enabled" do
+  describe ".init" do
     it "is configured" do
-      expect(Sentry).to be_initialized
       expect(Sentry.configuration.dsn.host).to eq("sentry.dsn")
       expect(Sentry.configuration.traces_sample_rate).to eq(1.0)
     end
+
+    context "when sentry is disabled" do
+      let(:secrets) do
+        {
+          sentry: {
+            enabled: false
+          }
+        }
+      end
+
+      let(:sentry) { double("Sentry") }
+
+      it "is not configured" do
+        expect(sentry).not_to receive(:init)
+      end
+    end
   end
 
-  describe "#ip" do
+  describe ".ip" do
     let(:hostname_command_output) { false }
 
     before do
