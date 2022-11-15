@@ -234,3 +234,9 @@ en:
     decidim:
       footer:
         made_with_open_source: Website made by <a target="_blank" href="https://opensourcepolitics.eu/en/">Open Source Politics</a> with the <a target="_blank" href="https://github.com/decidim/decidim">decidim free software</a>.
+  rack_attack:
+    too_many_requests:
+      message: Your connection has been slowed because server received too many requests.
+      time: 'You will be able to navigate on our website in :'
+      time_unit: seconds
+      title: Thank you for your participation on %{organization_name}
