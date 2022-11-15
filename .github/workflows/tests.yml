@@ -101,7 +101,73 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
-      - run: bundle exec rspec
+      - run: bundle exec rspec --exclude-pattern "spec/system/**/*_spec.rb"
+        name: RSpec
+      - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
+        name: Upload coverage
+      - uses: actions/upload-artifact@v2-preview
+        if: always()
+        with:
+          name: screenshots
+          path: ./spec/tmp/screenshots
+  system_tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_PASSWORD: postgres
+    env:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: localhost
+      RAILS_ENV: test
+      # Set locales available for i18n tasks
+      ENFORCED_LOCALES: "en,fr"
+    steps:
+      - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
+        if: "github.ref != 'refs/heads/master' || github.ref != 'refs/heads/develop'"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/checkout@v2.0.0
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Use Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        run: yarn install --prefer-offline --frozen-lockfile
+      - name: Create db
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+      - name: Precompile assets
+        run: |
+          bundle exec rake assets:precompile
+      - run: mkdir -p ./spec/tmp/screenshots
+        name: Create the screenshots folder
+      - uses: nanasess/setup-chromedriver@v1.0.1
+      - run: bundle exec rspec spec/system/**/*_spec.rb
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
         name: Upload coverage
@@ -112,7 +178,7 @@ jobs:
           path: ./spec/tmp/screenshots
   deploy_develop:
     if: "github.ref == 'refs/heads/develop'"
-    needs: [lint, tests]
+    needs: [lint, tests, system_tests]
     name: Deploy develop branch on develop instance
     runs-on: ubuntu-latest
     steps:
@@ -126,7 +192,7 @@ jobs:
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/develop.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
   deploy_rc:
     if: "github.ref == 'refs/heads/rc'"
-    needs: [lint, tests]
+    needs: [lint, tests, system_tests]
     name: Deploy rc branch on RC instance
     runs-on: ubuntu-latest
     steps:
@@ -140,7 +206,7 @@ jobs:
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/rc.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
   deploy_staging:
     if: "github.ref == 'refs/heads/master'"
-    needs: [lint, tests]
+    needs: [lint, tests, system_tests]
     name: Deploy staging branch on staging instance
     runs-on: ubuntu-latest
     steps:
