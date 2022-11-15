@@ -4,14 +4,14 @@ require "uri"
 require "net/http"
 
 class DeploymentType < Decidim::Api::Types::BaseObject
-  description "Decidim's framework-related properties."
+  description "Deployment's related properties."
 
   field :current_commit, GraphQL::Types::String, "The current commit hash for this deployment", null: false
   field :branch, GraphQL::Types::String, "The current branch name for this deployment", null: false
   field :version, GraphQL::Types::String, "The current decidim's version of this deployment.", null: false
   field :up_to_date, GraphQL::Types::Boolean, "Comparison between current_commit and latest_commit", null: false
   field :latest_commit, GraphQL::Types::String, "Latest commit on the remote branch", null: false
-  field :locally_modified, GraphQL::Types::String, "Output of git status", null: false
+  field :locally_modified, GraphQL::Types::Boolean, "Output of git status", null: false
 
   def current_commit
     `git rev-parse HEAD`.strip
