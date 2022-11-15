@@ -4,7 +4,7 @@ on: [push]
 env:
   CI: "true"
   SIMPLECOV: "true"
-  RUBY_VERSION: 2.7.1
+  RUBY_VERSION: 2.7.5
   RAILS_ENV: test
   NODE_VERSION: 16.9.1
   RUBYOPT: '-W:no-deprecated'
@@ -167,7 +167,7 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
-      - run: bundle exec rspec spec/system/**/*_spec.rb
+      - run: bundle exec rspec --pattern "spec/system/**/*_spec.rb"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
         name: Upload coverage
