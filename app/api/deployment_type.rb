@@ -38,7 +38,11 @@ class DeploymentType < Decidim::Api::Types::BaseObject
     request = Net::HTTP::Get.new(url)
 
     response = https.request(request)
-    JSON.parse(response.read_body)["sha"]
+    if response.code == "200"
+      JSON.parse(response.read_body)["sha"]
+    else
+      ""
+    end
   end
 
   def locally_modified
