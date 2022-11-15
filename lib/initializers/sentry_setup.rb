@@ -24,7 +24,6 @@ module SentrySetup
 
     def hostname
       `hostname`.chomp
-
     rescue Errno::ENOENT
       nil
     end
