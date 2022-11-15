@@ -111,7 +111,7 @@ jobs:
           name: screenshots
           path: ./spec/tmp/screenshots
   system_tests:
-    name: Tests
+    name: System tests
     runs-on: ubuntu-latest
     services:
       postgres:
