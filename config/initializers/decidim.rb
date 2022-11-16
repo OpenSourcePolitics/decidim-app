@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Decidim.configure do |config|
-  config.expire_session_after = ENV.fetch("DECIDIM_SESSION_TIMEOUT", 90).to_i.minutes
   config.application_name = "OSP Agora"
   config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
 
