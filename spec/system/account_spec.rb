@@ -294,6 +294,7 @@ describe "Account", type: :system do
       end
     end
   end
+
   context "when on the notifications page in a PWA browser" do
     let(:organization) { create(:organization, host: "pwa.lvh.me") }
     let(:user) { create(:user, :confirmed, password: password, password_confirmation: password, organization: organization) }
