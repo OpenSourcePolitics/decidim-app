@@ -123,6 +123,8 @@ fr:
         external:
           link: https://franceconnect.gouv.fr/
           text: Qu'est-ce-que FranceConnect ?
+        forgot_password:
+          ok_text: Attention, ce mot de passe est celui de votre compte local et en aucun cas celui du compte que vous utilisez au travers de FranceConnect. Il vous servira uniquement lorsque vous vous connecterez avec votre adresse mail plutôt que via FranceConnect.
     proposals:
       collaborative_drafts:
         collaborative_draft:
