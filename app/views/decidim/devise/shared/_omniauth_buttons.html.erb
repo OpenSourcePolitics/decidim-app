@@ -1,6 +1,6 @@
 <% if Devise.mappings[:user].omniauthable? && current_organization.enabled_omniauth_providers.any? %>
   <div class="row">
-    <div class="columns large-4 mediumlarge-6 medium-8 medium-centered">
+    <div class="columns mediumlarge-6 medium-centered">
       <%- current_organization.enabled_omniauth_providers.keys.each do |provider| %>
         <div class="social-register">
           <% if provider.match?("france") %>
@@ -8,15 +8,17 @@
               <span class="register__separator__text"><%= t("devise.shared.links.sign_in_with_provider", provider: normalize_full_provider_name(provider).titleize) %></span>
             </span>
             <%= sso_provider_image(provider, decidim.send("user_#{provider}_omniauth_authorize_path")) %>
-          <% else %>
-              <%== sso_provider_button(provider, decidim.send("user_#{provider}_omniauth_authorize_path")).html_safe %>
-          <% end %>
-          <% if I18n.exists?("decidim.omniauth.france_connect.external.link") %>
-            <%= link_to t("link", scope: "decidim.omniauth.france_connect.external"), class: "primary", target: "_blank" do %>
-              <small>
-                <%= t("text", scope: "decidim.omniauth.france_connect.external") %>
-              </small>
+            <% if I18n.exists?("decidim.omniauth.france_connect.external.link") %>
+              <%= link_to t("link", scope: "decidim.omniauth.france_connect.external"), class: "primary", target: "_blank" do %>
+                <small>
+                  <%= t("text", scope: "decidim.omniauth.france_connect.external") %>
+                </small>
+              <% end %>
             <% end %>
+          <% else %>
+            <div class="social-register__provider medium-centered">
+              <%== sso_provider_button(provider, decidim.send("user_#{provider}_omniauth_authorize_path")).html_safe %>
+            </div>
           <% end %>
         </div>
       <% end %>
