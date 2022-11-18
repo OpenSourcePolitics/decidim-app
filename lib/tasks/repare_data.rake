@@ -49,6 +49,20 @@ namespace :decidim do
 
       exit 0
     end
+
+    desc "Fix searchables when doing a release"
+    task search: :environment do
+      puts "#{Decidim::SearchableResource.count} searchable resources before"
+      Decidim::SearchableResource.destroy_all
+
+      Decidim.resource_manifests.map do |manifest|
+        manifest.model_class_name
+                .constantize
+                .find_each(&:try_update_index_for_search_resource)
+      end
+
+      puts "#{Decidim::SearchableResource.count} searchable resources after"
+    end
   end
 end
 
