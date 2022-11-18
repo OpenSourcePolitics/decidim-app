@@ -35,7 +35,7 @@ describe "rake decidim:repare:search", type: :task do
         # The post and the comment are not indexed anymore because the component has been deleted
         # Each resource has 2 SearchableResource records (one per locale)
         # Therefore we expect to have 4 SearchableResource records less
-        expect { Rake::Task[task_cmd].invoke }.to change(Decidim::SearchableResource, :count).by(-(Decidim.available_locales.count) * 2)
+        expect { Rake::Task[task_cmd].invoke }.to change(Decidim::SearchableResource, :count).by(-Decidim.available_locales.count * 2)
       end
     end
   end
