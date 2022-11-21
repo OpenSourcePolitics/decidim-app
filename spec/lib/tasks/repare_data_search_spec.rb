@@ -7,14 +7,17 @@ describe "rake decidim:repare:search", type: :task do
 
   let!(:organization) { create(:organization) }
   let!(:users) { create_list(:user, 3, organization: organization) }
-  let!(:participatory_process) { create :participatory_process, organization: organization }
-  let!(:component) { create :component, participatory_space: participatory_process, manifest_name: "blogs" }
+  let!(:participatory_process_1) { create(:participatory_process, organization: organization) }
+  let!(:component) { create :component, participatory_space: participatory_process_1, manifest_name: "blogs" }
   let!(:post) { create(:post, component: component, author: users.first) }
   let!(:comment) { create(:comment, commentable: post, author: users.last) }
+  let!(:participatory_process_group) { create(:participatory_process_group, organization: organization) }
+  let!(:participatory_process_2) { create(:participatory_process, organization: organization, participatory_process_group: participatory_process_group) }
 
   before do
     # ParticipatoryProcess are not indexed by default
-    participatory_process.try_update_index_for_search_resource
+    participatory_process_1.try_update_index_for_search_resource
+    participatory_process_2.try_update_index_for_search_resource
   end
 
   after do

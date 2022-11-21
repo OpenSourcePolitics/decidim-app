@@ -58,7 +58,7 @@ namespace :decidim do
       Decidim.resource_manifests.map do |manifest|
         manifest.model_class_name
                 .constantize
-                .find_each(&:try_update_index_for_search_resource)
+                .find_each { |model| model.try(:try_update_index_for_search_resource) }
       end
 
       puts "#{Decidim::SearchableResource.count} searchable resources after"
