@@ -17,10 +17,10 @@
               <%= f.email_field :email, autofocus: true %>
             </div>
 
-            <% if Devise.mappings[:user].omniauthable? && current_organization.enabled_omniauth_providers.any? %>
-            <div class="help-text ok-text">
-              <p><%= t("decidim.omniauth.france_connect.forgot_password.ok_text") %></p>
-            </div>
+            <% if current_organization.enabled_omniauth_providers.keys.any? { |provider| provider.match?("france") } %>
+              <div class="help-text ok-text">
+                <p><%= t("decidim.omniauth.france_connect.forgot_password.ok_text") %></p>
+              </div>
             <% end %>
 
             <div class="actions">
