@@ -317,6 +317,22 @@ GEM
     aes_key_wrap (1.1.0)
     ast (2.4.2)
     attr_required (1.0.1)
+    aws-eventstream (1.2.0)
+    aws-partitions (1.665.0)
+    aws-sdk-core (3.168.1)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.651.0)
+      aws-sigv4 (~> 1.5)
+      jmespath (~> 1, >= 1.6.1)
+    aws-sdk-kms (1.59.0)
+      aws-sdk-core (~> 3, >= 3.165.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.117.1)
+      aws-sdk-core (~> 3, >= 3.165.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.4)
+    aws-sigv4 (1.5.2)
+      aws-eventstream (~> 1, >= 1.0.2)
     axe-core-api (4.4.1)
       dumb_delegator
       virtus
@@ -521,6 +537,7 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     invisible_captcha (0.13.0)
       rails (>= 3.2.0)
+    jmespath (1.6.1)
     json (2.6.2)
     json-jwt (1.15.3)
       activesupport (>= 4.2)
@@ -944,6 +961,7 @@ PLATFORMS
 
 DEPENDENCIES
   activejob-uniqueness
+  aws-sdk-s3
   bootsnap (~> 1.4)
   brakeman (~> 5.1)
   byebug (~> 11.0)
