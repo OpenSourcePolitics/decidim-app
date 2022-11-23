@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "json"
 
 describe SentrySetup do
   let(:secrets) do
@@ -13,8 +14,18 @@ describe SentrySetup do
     }
   end
 
+  let(:server_metadata) do
+    JSON.dump({
+                "hostname": "my_hostname",
+                "public_ip": {
+                  "address": "123.123.123.123"
+                }
+              })
+  end
+
   before do
     allow(Rails.application).to receive(:secrets).and_return(secrets)
+    allow(described_class).to receive(:`).with("scw-metadata-json").and_return(server_metadata)
     subject.init
   end
 
@@ -42,24 +53,45 @@ describe SentrySetup do
   end
 
   describe ".ip" do
-    let(:hostname_command_output) { false }
-
-    before do
-      allow(described_class).to receive(:`).with("hostname").and_return("my_hostname")
-      allow(described_class).to receive(:`).with("hostname -I").and_return("123.123.123.123 2001:bc7:4764:1b1a::3")
-      allow(described_class).to receive(:system).with("hostname -I > /dev/null 2>&1").and_return(hostname_command_output)
+    it "returns the ip" do
+      expect(subject.send(:ip)).to eq("123.123.123.123")
     end
 
-    it "returns nil" do
-      expect(subject.send(:ip)).to eq(nil)
-    end
+    context "when server_metadata is not available" do
+      let(:server_metadata) { nil }
 
-    context "when hostname -I is defined" do
-      let(:hostname_command_output) { true }
-
-      it "returns ip" do
-        expect(subject.send(:ip)).to eq("123.123.123.123")
+      it "returns nil" do
+        expect(subject.send(:ip)).to be_nil
       end
+    end
+  end
+
+  describe ".hostname" do
+    it "returns the hostname" do
+      expect(subject.send(:hostname)).to eq("my_hostname")
+    end
+
+    context "when server_metadata is not available" do
+      let(:server_metadata) { nil }
+
+      it "returns nil" do
+        expect(subject.send(:hostname)).to be_nil
+      end
+    end
+  end
+
+  describe ".server_metadata" do
+
+    context "when metadata are non-existent" do
+      let(:server_metadata) { nil }
+
+      it "returns nil" do
+        expect(subject.send(:server_metadata)).to be_nil
+      end
+    end
+
+    it "returns a metadata hash" do
+      expect(subject.send(:server_metadata)).to be_a(Hash)
     end
   end
 end

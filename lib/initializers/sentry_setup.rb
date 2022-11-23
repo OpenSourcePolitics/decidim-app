@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "sentry-ruby"
+require "json"
 
 module SentrySetup
   class << self
@@ -22,19 +23,18 @@ module SentrySetup
 
     private
 
-    def hostname
-      `hostname`.chomp
-    rescue Errno::ENOENT
+    def server_metadata
+      JSON.parse(`scw-metadata-json`)
+    rescue Errno::ENOENT, TypeError
       nil
     end
 
-    def ip
-      return if hostname.blank?
-      return unless system("hostname -I > /dev/null 2>&1")
+    def hostname
+      server_metadata&.dig("hostname")
+    end
 
-      `hostname -I`.strip
-                   .split(" ")
-                   .first
+    def ip
+      server_metadata&.dig("public_ip", "address")
     end
   end
 end
