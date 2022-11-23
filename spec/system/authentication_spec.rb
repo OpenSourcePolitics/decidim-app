@@ -253,7 +253,7 @@ describe "Authentication", type: :system do
   end
 
   context "when confirming the account" do
-    let!(:user) { create(:user, email_on_notification: true, organization: organization) }
+    let!(:user) { create(:user, organization: organization) }
 
     before do
       perform_enqueued_jobs { user.confirm }
@@ -368,8 +368,8 @@ describe "Authentication", type: :system do
         visit last_email_link
 
         within ".new_user" do
-          fill_in :password_user_password, with: "example"
-          fill_in :password_user_password_confirmation, with: "example"
+          fill_in :password_user_password, with: "whatislove"
+          fill_in :password_user_password_confirmation, with: "whatislove"
           find("*[type=submit]").click
         end
 
