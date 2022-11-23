@@ -81,7 +81,6 @@ describe SentrySetup do
   end
 
   describe ".server_metadata" do
-
     context "when metadata are non-existent" do
       let(:server_metadata) { nil }
 
