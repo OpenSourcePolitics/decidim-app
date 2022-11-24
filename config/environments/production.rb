@@ -34,6 +34,12 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
+  # By default, files uploaded to Active Storage will be served from a private URL.
+  # in production, you'll want to set this to :public so that files are served
+  # unfortunately, this is not working with the current version of ActiveStorage
+  # TODO: Update rails version and switch to public:true from active_storage
+  config.active_storage.service_urls_expire_in = ENV.fetch("SERVICE_URLS_EXPIRE_IN", 100.years)
+
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
