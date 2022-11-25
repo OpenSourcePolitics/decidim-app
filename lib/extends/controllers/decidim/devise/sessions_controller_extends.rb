@@ -17,7 +17,7 @@ module SessionControllerExtends
     private
 
     # Skip authorization handler by default
-    def skip_fist_login_authorization?
+    def skip_first_login_authorization?
       ActiveRecord::Type::Boolean.new.cast(ENV.fetch("SKIP_FIRST_LOGIN_AUTHORIZATION", "false"))
     end
   end
