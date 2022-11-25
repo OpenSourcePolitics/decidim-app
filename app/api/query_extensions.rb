@@ -2,7 +2,7 @@
 
 module QueryExtensions
   def self.included(type)
-    type.field :deployment, ::DeploymentType, "Decidim's framework properties.", null: true
+    type.field :deployment, ::DeploymentType, "Deployment's properties.", null: true
   end
 
   def deployment
