@@ -32,7 +32,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  config.active_storage.service = :local
+  config.active_storage.service = Rails.application.secrets.dig(:scaleway, :id).blank? ? :local : :scaleway
 
   # By default, files uploaded to Active Storage will be served from a private URL.
   # in production, you'll want to set this to :public so that files are served

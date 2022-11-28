@@ -33,7 +33,7 @@
 ## Add FC Connect SSO
  - **app/views/decidim/devise/shared/_omniauth_buttons.html.erb**
 ```ruby
-<% if provider.match?("france") %>
+    <% if provider.match?("france") %>
 ```
 
 * `app/views/decidim/scopes/picker.html.erb`
