@@ -68,19 +68,23 @@ module Decidim
 
                   it { is_expected.to eq("/authorizations/first_login") }
                 end
+
+                context "when first login authorization is skipped" do
+                  before do
+                    ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"] = "true"
+                  end
+
+                  after do
+                    ENV.delete("SKIP_FIRST_LOGIN_AUTHORIZATION")
+                  end
+
+                  it { is_expected.to eq("/") }
+                end
               end
 
               context "and otherwise", with_authorization_workflows: [] do
                 before do
                   allow(user.organization).to receive(:available_authorizations).and_return([])
-                end
-
-                it { is_expected.to eq("/") }
-              end
-
-              context "and authorization handler is skipped" do
-                before do
-                  allow(ENV).to receive(:[]).with("SKIP_FIRST_LOGIN_AUTHORIZATION").and_return("true")
                 end
 
                 it { is_expected.to eq("/") }
