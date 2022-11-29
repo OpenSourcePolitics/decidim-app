@@ -1,5 +1,9 @@
 # Overrides
 
+## Update France Connect with requirements
+* `app/views/decidim/devise/passwords/new.html.erb`
+* `app/views/decidim/shared/_login_modal.html.erb`
+
 ## Backport sort of budgets projects
 * `app/controllers/decidim/budgets/projects_controller.rb`
 * `spec/system/sorting_projects_spec.rb`
