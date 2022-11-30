@@ -9,8 +9,6 @@ fr:
       participatory_process:
         private_space: Espace privé
   decidim:
-    accessibility:
-      skip_button: Passer au contenu principal
     admin:
       participatory_space_private_users:
         create:
@@ -235,14 +233,10 @@ fr:
   layouts:
     decidim:
       footer:
-        download_open_data: Données ouvertes
         made_with_open_source: Site réalisé par <a target="_blank" href="https://opensourcepolitics.eu">Open Source Politics</a> grâce au <a target="_blank" href="https://github.com/decidim/decidim">logiciel libre Decidim</a>.
-      header:
-        close_menu: Fermer
-        navigation: Navigation
-        sign_in: Se connecter
-        sign_up: S'inscrire
-      user_menu:
-        account: Mon compte
-        conversations: Conversations
-        notifications: Notifications
+  rack_attack:
+    too_many_requests:
+      message: Il semblerait que vous fassiez trop de requêtes sur notre serveur, votre connexion a ete ralentie.
+      time: 'Vous pourrez naviguer de nouveau sur notre plateforme dans :'
+      time_unit: seconds
+      title: Thank you for your participation on %{organization_name}

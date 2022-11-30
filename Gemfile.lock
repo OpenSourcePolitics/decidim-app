@@ -991,6 +991,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection (~> 1.0)
   passenger
   puma (>= 5.5.1)
+  rack-attack (~> 6.6)
   rubocop-faker
   sendgrid-ruby
   sentry-rails

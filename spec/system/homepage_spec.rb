@@ -430,7 +430,7 @@ describe "Homepage", type: :system do
         end
 
         it "lets the users download open data files" do
-          click_link "Open data"
+          click_link "Download Open Data files"
           expect(File.basename(download_path)).to include("open-data.zip")
           Zip::File.open(download_path) do |zipfile|
             expect(zipfile.glob("*open-data-proposals.csv").length).to eq(1)
