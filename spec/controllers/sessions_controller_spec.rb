@@ -116,13 +116,13 @@ module Decidim
         context "when France Connect is enabled" do
           let(:organization) { create(:organization, omniauth_settings: omniauth_settings) }
           let(:omniauth_settings) do
-            {"omniauth_settings_france_connect_enabled": true}
+            { "omniauth_settings_france_connect_enabled": true }
           end
 
           before do
             stub_request(:get, /test-france-connect.fr/).
-              with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
-              to_return(status: 200, body: "", headers: {})
+              with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" })
+                                                        .to_return(status: 200, body: "", headers: {})
 
             request.env["decidim.current_organization"] = user.organization
             request.env["devise.mapping"] = ::Devise.mappings[:user]
@@ -131,7 +131,7 @@ module Decidim
           end
 
           it "logout user from France Connect" do
-            delete :destroy, session: {"omniauth.france_connect.end_session_uri" => "http://test-france-connect.fr/"}
+            delete :destroy, session: { "omniauth.france_connect.end_session_uri" => "http://test-france-connect.fr/" }
 
             expect(controller.current_user).to be_nil
             expect(controller).to redirect_to("http://test-france-connect.fr/")
