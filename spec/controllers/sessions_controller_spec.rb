@@ -120,9 +120,9 @@ module Decidim
           end
 
           before do
-            stub_request(:get, /test-france-connect.fr/).
-              with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" })
-                                                        .to_return(status: 200, body: "", headers: {})
+            stub_request(:get, /test-france-connect.fr/)
+              .with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" })
+              .to_return(status: 200, body: "", headers: {})
 
             request.env["decidim.current_organization"] = user.organization
             request.env["devise.mapping"] = ::Devise.mappings[:user]
