@@ -234,7 +234,7 @@ fr:
         send_me_reset_password_instructions: Envoyez-moi les instructions de réinitialisation du mot de passe
     sessions:
       new:
-        sign_in: Se connecter
+        sign_in: S'identifier
     shared:
       links:
         forgot_your_password: Mot de passe oublié ?
