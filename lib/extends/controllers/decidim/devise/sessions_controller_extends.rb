@@ -3,7 +3,7 @@
 module SessionControllerExtends
   def destroy
     current_user.invalidate_all_sessions!
-    if session["omniauth.france_connect.end_session_uri"].present?
+    if active_france_connect_session?
       destroy_france_connect_session(session["omniauth.france_connect.end_session_uri"])
     elsif params[:translation_suffix].present?
       super { set_flash_message! :notice, params[:translation_suffix], { scope: "decidim.devise.sessions" } }
@@ -37,6 +37,10 @@ module SessionControllerExtends
     end
 
     redirect_to fc_logout_path
+  end
+
+  def active_france_connect_session?
+    current_organization.enabled_omniauth_providers.include?(:france_connect) && session["omniauth.france_connect.end_session_uri"].present?
   end
 end
 
