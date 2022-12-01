@@ -111,6 +111,27 @@ module Decidim
 
           expect(controller.current_user).to be_nil
         end
+
+        context "when France Connect is enabled" do
+          before do
+            stub_request(:get, /test-france-connect.fr/).
+              with(headers: {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+              to_return(status: 200, body: "", headers: {})
+
+            request.env["decidim.current_organization"] = user.organization
+            request.env["devise.mapping"] = ::Devise.mappings[:user]
+
+            sign_in user
+          end
+
+          it "logout user from France Connect" do
+            delete :destroy, session: {"omniauth.france_connect.end_session_uri" => "http://test-france-connect.fr/"}
+
+            expect(controller.current_user).to be_nil
+            expect(controller).to redirect_to("http://test-france-connect.fr/")
+            expect(session["flash"]["flashes"]["notice"]).to eq("Signed out successfully.")
+          end
+        end
       end
     end
   end

@@ -12,10 +12,9 @@ module Decidim
 
       def destroy
         current_user.invalidate_all_sessions!
-        if current_organization.enabled_omniauth_providers.keys.any? { |provider| provider.match?("france") } &&
-          current_user.identities.find_by(provider: "france_connect").present?
-          redirect_to session["omniauth_logout"]
-          flash[:notice] = t("devise.sessions.signed_out")
+
+        if session["omniauth.france_connect.end_session_uri"].present?
+          destroy_france_connect_session(session["omniauth.france_connect.end_session_uri"])
         elsif params[:translation_suffix].present?
           super { set_flash_message! :notice, params[:translation_suffix], { scope: "decidim.devise.sessions" } }
         else
@@ -53,6 +52,12 @@ module Decidim
 
       def check_sign_in_enabled
         redirect_to new_user_session_path unless current_organization.sign_in_enabled?
+      end
+
+      def destroy_france_connect_session(fc_logout_path)
+        signed_out = (::Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+        set_flash_message! :notice, :signed_out if signed_out
+        redirect_to fc_logout_path
       end
     end
   end
