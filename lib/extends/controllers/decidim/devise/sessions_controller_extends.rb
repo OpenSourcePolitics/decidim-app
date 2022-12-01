@@ -1,32 +1,36 @@
 # frozen_string_literal: true
 
 module SessionControllerExtends
-  def destroy
-    current_user.invalidate_all_sessions!
-    if active_france_connect_session?
-      destroy_france_connect_session(session["omniauth.france_connect.end_session_uri"])
-    elsif params[:translation_suffix].present?
-      super { set_flash_message! :notice, params[:translation_suffix], { scope: "decidim.devise.sessions" } }
-    else
-      super
+  extend ActiveSupport::Concern
+
+  included do
+    def destroy
+      current_user.invalidate_all_sessions!
+      if active_france_connect_session?
+        destroy_france_connect_session(session["omniauth.france_connect.end_session_uri"])
+      elsif params[:translation_suffix].present?
+        super { set_flash_message! :notice, params[:translation_suffix], { scope: "decidim.devise.sessions" } }
+      else
+        super
+      end
     end
-  end
 
-  def after_sign_in_path_for(user)
-    if user.present? && user.blocked?
-      check_user_block_status(user)
-    elsif first_login_and_not_authorized?(user) && !user.admin? && !pending_redirect?(user) && !skip_authorization_handler?
-      decidim_verifications.first_login_authorizations_path
-    else
-      super
+    def after_sign_in_path_for(user)
+      if user.present? && user.blocked?
+        check_user_block_status(user)
+      elsif !skip_first_login_authorization? && (first_login_and_not_authorized?(user) && !user.admin? && !pending_redirect?(user))
+        decidim_verifications.first_login_authorizations_path
+      else
+        super
+      end
     end
-  end
 
-  private
+    private
 
-  # Skip authorization handler by default
-  def skip_authorization_handler?
-    ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"] ? ActiveRecord::Type::Boolean.new.cast(ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"]) : true
+    # Skip authorization handler by default
+    def skip_first_login_authorization?
+      ActiveRecord::Type::Boolean.new.cast(ENV.fetch("SKIP_FIRST_LOGIN_AUTHORIZATION", "false"))
+    end
   end
 
   def destroy_france_connect_session(fc_logout_path)
@@ -45,5 +49,5 @@ module SessionControllerExtends
 end
 
 Decidim::Devise::SessionsController.class_eval do
-  prepend(SessionControllerExtends)
+  include(SessionControllerExtends)
 end
