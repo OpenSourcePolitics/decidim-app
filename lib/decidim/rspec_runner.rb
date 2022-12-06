@@ -2,17 +2,19 @@
 
 module Decidim
   class RSpecRunner
-    def initialize(pattern, slice)
+    def initialize(pattern, mask, slice)
       @pattern = pattern
+      @mask = mask
       @slice = parsed_slice(slice).first
       @total = parsed_slice(slice).last
     end
 
-    def self.for(pattern = nil, slice = nil)
+    def self.for(pattern = nil, mask = nil, slice = nil)
       raise "Missing pattern" unless pattern
+      raise "Missing mask" unless mask
       raise "Missing slice" unless slice
 
-      new(pattern, slice).run
+      new(pattern, mask, slice).run
     end
 
     def run
@@ -24,7 +26,7 @@ module Decidim
     end
 
     def all_files
-      Dir.glob(@pattern)
+      Dir.glob(@mask)
          .in_groups(@total, false)
     end
 

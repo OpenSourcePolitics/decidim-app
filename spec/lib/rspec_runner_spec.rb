@@ -5,18 +5,19 @@ require "decidim/rspec_runner"
 
 module Decidim
   describe RSpecRunner do
-    subject { described_class.new(pattern, slice) }
+    subject { described_class.new(pattern, mask, slice) }
 
-    let(:pattern) { "spec/**/*_spec.rb" }
+    let(:pattern) { "include" }
+    let(:mask) { "spec/**/*_spec.rb" }
     let(:slice) { "1-4" }
     let(:files) do
-      %w(example1.rb example2.rb example3.rb example4.rb example5.rb)
+      %w(system/example1.rb lib/example2.rb controllers/example3.rb lib/example4.rb system/example5.rb)
     end
 
     describe "#run" do
       before do
         allow(Dir).to receive(:glob).and_return(files)
-        allow(subject).to receive(:exec).with("bundle exec rspec example3.rb")
+        allow(subject).to receive(:exec).with("bundle exec rspec controllers/example3.rb")
       end
 
       it "executes the rspec command on the correct files" do
@@ -24,13 +25,13 @@ module Decidim
       end
     end
 
-    describe "#files" do
+    describe "#all_files" do
       before do
         allow(Dir).to receive(:glob).and_return(files)
       end
 
       it "returns the correct files" do
-        expect(subject.all_files).to eq([%w(example1.rb example2.rb), %w(example3.rb), %w(example4.rb), %w(example5.rb)])
+        expect(subject.all_files).to eq([%w(system/example1.rb lib/example2.rb), %w(controllers/example3.rb), %w(lib/example4.rb), %w(system/example5.rb)])
       end
     end
 
@@ -40,7 +41,7 @@ module Decidim
       end
 
       it "returns the correct files" do
-        expect(subject.sliced_files).to eq(%w(example3.rb))
+        expect(subject.sliced_files).to eq(%w(controllers/example3.rb))
       end
     end
   end

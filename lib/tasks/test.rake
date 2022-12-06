@@ -11,7 +11,7 @@ namespace :test do
     system("rake assets:precompile RAILS_ENV=test")
   end
 
-  task :run, [:pattern, :slice] => :environment do |_, args|
-    Decidim::RSpecRunner.for(args[:pattern], args[:slice])
+  task :run, [:pattern, :mask, :slice] => :environment do |_, args|
+    Decidim::RSpecRunner.for(args[:pattern], args[:mask], args[:slice])
   end
 end
