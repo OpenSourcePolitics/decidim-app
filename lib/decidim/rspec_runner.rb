@@ -2,6 +2,8 @@
 
 module Decidim
   class RSpecRunner
+    DEFAULT_PATTERN = "spec/**/*_spec.rb"
+
     def initialize(pattern, mask, slice)
       @pattern = pattern
       @mask = mask
@@ -22,12 +24,17 @@ module Decidim
     end
 
     def sliced_files
-      all_files[@slice]
+      all_files.in_groups(@total, false)[@slice]
     end
 
     def all_files
-      Dir.glob(@mask)
-         .in_groups(@total, false)
+      return Dir.glob(@mask) if @pattern == "include"
+
+      default_files - Dir.glob(@mask)
+    end
+
+    def default_files
+      Dir.glob(DEFAULT_PATTERN)
     end
 
     private

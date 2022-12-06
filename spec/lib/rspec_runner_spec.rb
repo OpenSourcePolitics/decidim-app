@@ -25,13 +25,47 @@ module Decidim
       end
     end
 
-    describe "#all_files" do
+    describe "#defaults_files" do
       before do
         allow(Dir).to receive(:glob).and_return(files)
       end
 
-      it "returns the correct files" do
-        expect(subject.all_files).to eq([%w(system/example1.rb lib/example2.rb), %w(controllers/example3.rb), %w(lib/example4.rb), %w(system/example5.rb)])
+      it "returns the default files" do
+        expect(subject.default_files).to eq(files)
+      end
+    end
+
+    describe "#all_files" do
+      context "when using include pattern" do
+        before do
+          allow(Dir).to receive(:glob).and_return(files)
+        end
+
+        it "returns the correct files" do
+          expect(subject.all_files).to eq(%w(system/example1.rb lib/example2.rb controllers/example3.rb lib/example4.rb system/example5.rb))
+        end
+      end
+
+      context "when using exclude pattern" do
+        let(:pattern) { "exclude" }
+        let(:files) do
+          %w(system/example1.rb lib/example2.rb controllers/example3.rb lib/example4.rb system/example5.rb)
+        end
+        let(:filtered_files) do
+          %w(system/example1.rb system/example5.rb)
+        end
+
+        before do
+          # Default files returns all spec files
+          allow(subject).to receive(:default_files).and_return(files)
+
+          # Filtered files returns the ones that match the mask
+          allow(Dir).to receive(:glob).and_return(filtered_files)
+        end
+
+        it "returns the correct files" do
+          expect(subject.all_files).to eq(%w(lib/example2.rb controllers/example3.rb lib/example4.rb))
+        end
       end
     end
 
