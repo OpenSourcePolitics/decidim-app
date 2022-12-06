@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-france_connect
-  revision: 4665875c94d45a71dac163889e0eedd21b2ba41d
+  revision: 14a53ad31928c8a83742360cfbdb90938d0a057e
   specs:
     omniauth-france_connect (0.1.0)
       omniauth_openid_connect (~> 0.4.0)
