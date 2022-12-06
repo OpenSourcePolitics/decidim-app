@@ -19,6 +19,8 @@ module Decidim
     end
 
     def run
+      logger.info("Running tests for slice #{@slice} of #{@total} slices")
+      logger.info("Running tests for files: #{sliced_files.join(", ")}")
       exec("bundle exec rspec #{sliced_files.join(" ")}")
     end
 
@@ -40,6 +42,10 @@ module Decidim
 
     def parsed_slice(slice)
       slice.split("-").map(&:to_i)
+    end
+
+    def logger
+      Logger.new($stdout)
     end
   end
 end
