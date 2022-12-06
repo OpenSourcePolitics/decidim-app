@@ -16,12 +16,16 @@ module Decidim
     end
 
     def run
-      files = Dir.glob(@pattern)
-                 .in_groups(@total)[@slice]
-                 .compact
-                 .join(" ")
+      exec("bundle exec rspec #{sliced_files.join(" ")}")
+    end
 
-      exec("bundle exec rspec #{files}")
+    def sliced_files
+      all_files[@slice]
+    end
+
+    def all_files
+      Dir.glob(@pattern)
+         .in_groups(@total, false)
     end
 
     private
