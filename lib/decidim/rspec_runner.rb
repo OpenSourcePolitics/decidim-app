@@ -7,8 +7,7 @@ module Decidim
     def initialize(pattern, mask, slice)
       @pattern = pattern
       @mask = mask
-      @slice = parsed_slice(slice).first
-      @total = parsed_slice(slice).last
+      @slice, @total = parsed_slice(slice)
     end
 
     def self.for(pattern = nil, mask = nil, slice = nil)
