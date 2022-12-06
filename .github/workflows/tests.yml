@@ -111,6 +111,9 @@ jobs:
           name: screenshots
           path: ./spec/tmp/screenshots
   system_tests:
+    strategy:
+      matrix:
+        slice: [ "0-4", "1-4", "2-4", "3-4" ]
     name: System tests
     runs-on: ubuntu-latest
     services:
@@ -167,7 +170,7 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
-      - run: bundle exec rspec --pattern "spec/system/**/*_spec.rb"
+      - run:  bundle exec rake "test:run['spec/system/**/*.rb', ${{ matrix.slice }}]"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
         name: Upload coverage
