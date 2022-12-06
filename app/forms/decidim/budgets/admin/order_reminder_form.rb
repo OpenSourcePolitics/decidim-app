@@ -37,6 +37,8 @@ module Decidim
           24.hours
         end
 
+        private
+
         def minimum_time_before_first_reminder
           @minimum_time_before_first_reminder ||= begin
             reminder_manifest = Decidim.reminders_registry.for(:orders)
@@ -45,8 +47,6 @@ module Decidim
             Array(reminder_manifest.settings.attributes[:reminder_times].default).first
           end
         end
-
-        private
 
         def participatory_space
           @participatory_space ||= current_component.participatory_space
