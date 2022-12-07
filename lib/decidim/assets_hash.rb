@@ -4,18 +4,12 @@ require "digest"
 
 module Decidim
   class AssetsHash
-    def initialize
-      @yarn_hash = yarn_hash
-      @app_assets_hash = app_assets_hash
-      @app_dependencies_hash = app_dependencies_hash
-    end
-
     def self.run
       new.run
     end
 
     def run
-      hash("#{@app_assets_hash}#{@yarn_hash}#{@app_dependencies_hash}")
+      hash("#{app_assets_hash}#{yarn_hash}#{app_dependencies_hash}")
     end
 
     private
@@ -25,7 +19,8 @@ module Decidim
     end
 
     def app_dependencies_files
-      files_cat(Bundler.load.specs
+      files_cat(Bundler.load
+                       .specs
                        .map(&:full_gem_path)
                        .map { |path| assets_pattern.map { |pattern| "#{path}/#{pattern}" } }
                        .flatten)
@@ -60,7 +55,7 @@ module Decidim
            .flatten
            .select { |file| File.file?(file) }
            .map(&File.method(:read))
-           .join
+           .join("\n")
     end
   end
 end
