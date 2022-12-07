@@ -98,6 +98,13 @@ jobs:
         run: |
           bundle exec rails db:create
           bundle exec rails db:migrate
+      - name: asset cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            public/packs-test
+            tmp/webpacker-cache
+          key: asset-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
       - name: Precompile assets
         run: |
           bundle exec rake assets:precompile
@@ -167,6 +174,13 @@ jobs:
         run: |
           bundle exec rails db:create
           bundle exec rails db:migrate
+      - name: asset cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            public/packs-test
+            tmp/webpacker-cache
+          key: asset-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
       - name: Precompile assets
         run: |
           bundle exec rake assets:precompile
