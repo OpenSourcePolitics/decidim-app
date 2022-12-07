@@ -15,7 +15,7 @@ module Decidim
     end
 
     def run
-      Digest::SHA256.hexdigest("#{@app_assets_hash}#{@yarn_hash}#{@app_dependencies_hash}")
+      hash("#{@app_assets_hash}#{@yarn_hash}#{@app_dependencies_hash}")
     end
 
     private
