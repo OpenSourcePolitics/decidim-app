@@ -180,7 +180,7 @@ jobs:
           path: |
             public/packs-test
             tmp/webpacker-cache
-          key: asset-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+          key: asset-cache-${{ runner.os }}-${{ github.ref }}
       - name: Precompile assets
         run: |
           bundle exec rake assets:precompile
