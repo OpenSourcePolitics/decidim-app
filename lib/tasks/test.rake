@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "decidim/rspec_runner"
+require "decidim/assets_hash"
 
 namespace :test do
   desc "Setup tests environment"
@@ -17,5 +18,9 @@ namespace :test do
 
   task run_all: :environment do
     Rake::Task["test:run"].invoke("include", "spec/**/*_spec.rb", "0-1")
+  end
+
+  task assets_hash: :environment do
+    print Decidim::AssetsHash.run
   end
 end
