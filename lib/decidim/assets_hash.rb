@@ -40,7 +40,7 @@ module Decidim
     end
 
     def assets_pattern
-      %w(app/assets/**/* app/packs/**/* vendor/**/* packages/**/*)
+      %w(app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*)
     end
 
     def yarn_hash
