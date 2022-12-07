@@ -101,7 +101,7 @@ jobs:
       - name: Register cache hash
         id: cache-hash
         run: |
-          echo "::set-output name=hash::$(bundle exec rake cache_hash)"
+          echo "::set-output name=hash::$(bundle exec rake test:assets_hash)"
       - name: asset cache
         uses: actions/cache@v3
         with:
@@ -181,14 +181,14 @@ jobs:
       - name: Register cache hash
         id: cache-hash
         run: |
-          echo "::set-output name=hash::$(bundle exec rake cache_hash)"
+          echo "::set-output name=hash::$(bundle exec rake test:assets_hash)"
       - name: asset cache
         uses: actions/cache@v3
         with:
           path: |
             public/packs-test
             tmp/webpacker-cache
-          key: asset-cache-${{ runner.os }}-${{ bundle exec rake test:assets_hash }}
+          key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
       - name: Precompile assets
         run: |
           bundle exec rake assets:precompile
