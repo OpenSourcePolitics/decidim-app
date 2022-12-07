@@ -16,7 +16,7 @@ namespace :test do
     Decidim::RSpecRunner.for(args[:pattern], args[:mask], args[:slice])
   end
 
-  task :assets_hash => :environment do
+  task assets_hash: :environment do
     print Decidim::AssetsHash.run
   end
 end
