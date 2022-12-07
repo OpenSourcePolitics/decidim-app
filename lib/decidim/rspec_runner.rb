@@ -21,7 +21,7 @@ module Decidim
     def run
       logger.info("Running tests for slice #{@slice} of #{@total} slices")
       logger.info("Running tests for files: #{sliced_files.join(", ")}")
-      exec("bundle exec rspec #{sliced_files.join(" ")}")
+      exec("RAILS_ENV=test bundle exec rake parallel:spec #{sliced_files.join(" ")}")
     end
 
     def sliced_files
