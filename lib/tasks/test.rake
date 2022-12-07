@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "decidim/rspec_runner"
+require "decidim/assets_hash"
 
 namespace :test do
   desc "Setup tests environment"
@@ -13,5 +14,9 @@ namespace :test do
 
   task :run, [:pattern, :mask, :slice] => :environment do |_, args|
     Decidim::RSpecRunner.for(args[:pattern], args[:mask], args[:slice])
+  end
+
+  task :assets_hash => :environment do
+    print Decidim::AssetsHash.run
   end
 end
