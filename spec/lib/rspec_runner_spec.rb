@@ -17,7 +17,7 @@ module Decidim
     describe "#run" do
       before do
         allow(Dir).to receive(:glob).and_return(files)
-        allow(subject).to receive(:exec).with("bundle exec rspec controllers/example3.rb")
+        allow(subject).to receive(:exec).with("RAILS_ENV=test bundle exec rake parallel:spec controllers/example3.rb")
       end
 
       it "executes the rspec command on the correct files" do
