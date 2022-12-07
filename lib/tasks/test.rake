@@ -14,4 +14,8 @@ namespace :test do
   task :run, [:pattern, :mask, :slice] => :environment do |_, args|
     Decidim::RSpecRunner.for(args[:pattern], args[:mask], args[:slice])
   end
+
+  task run_all: :environment do
+    Rake::Task["test:run"].invoke("include", "spec/**/*_spec.rb", "0-1")
+  end
 end
