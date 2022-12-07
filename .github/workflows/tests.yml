@@ -98,13 +98,17 @@ jobs:
         run: |
           bundle exec rails db:create
           bundle exec rails db:migrate
+      - name: Register cache hash
+        id: cache-hash
+        run: |
+          echo "::set-output name=hash::$(bundle exec rake cache_hash)"
       - name: asset cache
         uses: actions/cache@v3
         with:
           path: |
             public/packs-test
             tmp/webpacker-cache
-          key: asset-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+          key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
       - name: Precompile assets
         run: |
           bundle exec rake assets:precompile
@@ -174,6 +178,10 @@ jobs:
         run: |
           bundle exec rails db:create
           bundle exec rails db:migrate
+      - name: Register cache hash
+        id: cache-hash
+        run: |
+          echo "::set-output name=hash::$(bundle exec rake cache_hash)"
       - name: asset cache
         uses: actions/cache@v3
         with:
