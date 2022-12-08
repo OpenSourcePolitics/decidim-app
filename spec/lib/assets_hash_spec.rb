@@ -33,7 +33,7 @@ module Decidim
 
     describe "#run" do
       let(:content) { "content\ncontent\ncontent" }
-      let(:content_digest) { Digest::SHA256.hexdigest(Digest::SHA256.hexdigest(content) * 3) }
+      let(:content_digest) { Digest::SHA256.hexdigest(Digest::SHA256.hexdigest(content) * 2) }
 
       before do
         allow(subject).to receive(:files_cat).and_return(content)
