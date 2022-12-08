@@ -9,7 +9,7 @@ module Decidim
     end
 
     def run
-      hash("#{app_assets_hash}#{yarn_hash}#{app_dependencies_hash}")
+      hash("#{app_assets_hash}#{app_dependencies_hash}")
     end
 
     private
@@ -19,11 +19,7 @@ module Decidim
     end
 
     def app_dependencies_files
-      files_cat(Bundler.load
-                       .specs
-                       .map(&:full_gem_path)
-                       .map { |path| assets_pattern.map { |pattern| "#{path}/#{pattern}" } }
-                       .flatten)
+      files_cat("Gemfile", "Gemfile.lock", "package.json", "yarn.lock")
     end
 
     def app_assets_hash
@@ -36,14 +32,6 @@ module Decidim
 
     def assets_pattern
       %w(app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*)
-    end
-
-    def yarn_hash
-      hash(yarn_files)
-    end
-
-    def yarn_files
-      files_cat("**/yarn.lock")
     end
 
     def hash(value)
