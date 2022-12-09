@@ -9,7 +9,7 @@ module Decidim
 
     let(:pattern) { "include" }
     let(:mask) { "spec/**/*_spec.rb" }
-    let(:slice) { "1-4" }
+    let(:slice) { "0-4" }
     let(:files) do
       %w(system/example1.rb lib/example2.rb controllers/example3.rb lib/example4.rb system/example5.rb)
     end
@@ -17,7 +17,7 @@ module Decidim
     describe "#run" do
       before do
         allow(Dir).to receive(:glob).and_return(files)
-        allow(subject).to receive(:exec).with("bundle exec rspec controllers/example3.rb")
+        allow(subject).to receive(:exec).with("RAILS_ENV=test bundle exec rake parallel:spec['system/example1.rb|lib/example2.rb']")
       end
 
       it "executes the rspec command on the correct files" do
@@ -75,7 +75,7 @@ module Decidim
       end
 
       it "returns the correct files" do
-        expect(subject.sliced_files).to eq(%w(controllers/example3.rb))
+        expect(subject.sliced_files).to eq(%w(system/example1.rb lib/example2.rb))
       end
     end
   end
