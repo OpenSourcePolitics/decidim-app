@@ -39,6 +39,10 @@ module DevelopmentApp
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.active_record.database_selector = { delay: 0.seconds }
+    config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
+    config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
     config.after_initialize do
       require "extends/controllers/decidim/devise/sessions_controller_extends"
 

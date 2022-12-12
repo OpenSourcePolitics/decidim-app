@@ -16,7 +16,7 @@
 #
 # On Linux, the 'host: "localhost"' line below should be commented out to avoid 'password required' error.
 #
-default: &default
+common: &common
   adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
@@ -28,6 +28,17 @@ default: &default
   password: <%= ENV.fetch("DATABASE_PASSWORD") { "" } %>
   database: <%= ENV.fetch("DATABASE_NAME") { "osp_app" } %>
   prepared_statements: <%= ENV.fetch("DATABASE_PREPARED_STATEMENTS") { true } %>
+
+default: &default
+  primary:
+    <<: *common
+  primary_replica:
+    <<: *common
+    host: <%= ENV.fetch("DATABASE_HOST_REPLICA") { "" } %>
+    port: <%= ENV.fetch("DATABASE_PORT_REPLICA") { "5432" } %>
+    database: <%= ENV.fetch("DATABASE_NAME_REPLICA") { "osp_app" } %>
+    replica: true
+    database_tasks: false
 
 development:
   <<: *default
@@ -64,7 +75,6 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: <%= ENV.fetch("DATABASE_NAME") { "osp_app_test" } %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
