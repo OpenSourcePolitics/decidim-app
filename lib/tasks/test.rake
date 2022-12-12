@@ -6,10 +6,7 @@ require "decidim/assets_hash"
 namespace :test do
   desc "Setup tests environment"
   task setup: :environment do
-    system("rake parallel:drop RAILS_ENV=test")
-    system("rake parallel:create RAILS_ENV=test")
-    system("rake parallel:migrate RAILS_ENV=test")
-    system("rake assets:precompile RAILS_ENV=test")
+    system("rake parallel:drop parallel:create parallel:migrate assets:precompile RAILS_ENV=test")
   end
 
   task :run, [:pattern, :mask, :slice] => :environment do |_, args|
