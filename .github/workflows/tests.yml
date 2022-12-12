@@ -30,7 +30,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
       - name: Install JS dependencies
         run: npm ci
       - run: bundle exec rubocop -P
@@ -74,7 +73,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
       - name: Create db
@@ -145,7 +143,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
       - name: Create db
