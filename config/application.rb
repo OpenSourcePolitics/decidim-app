@@ -49,6 +49,8 @@ module DevelopmentApp
       Decidim::GraphiQL::Rails.config.tap do |config|
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
       end
+
+      Decidim::Organization.all.find_each { |organization| Decidim::AssembliesSetting.find_or_create_by!(organization: organization) }
     end
   end
 end
