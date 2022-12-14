@@ -43,6 +43,7 @@ group :development, :test do
 
   gem "brakeman", "~> 5.1"
   gem "decidim-dev", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
+  gem "parallel_tests"
 end
 
 group :development do

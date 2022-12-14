@@ -671,6 +671,8 @@ GEM
       activerecord (>= 5.2)
       request_store (~> 1.1)
     parallel (1.22.1)
+    parallel_tests (3.7.3)
+      parallel
     parser (3.1.2.1)
       ast (~> 2.4.1)
     passenger (6.0.15)
@@ -989,6 +991,7 @@ DEPENDENCIES
   omniauth-france_connect!
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
+  parallel_tests
   passenger
   puma (>= 5.5.1)
   rack-attack (~> 6.6)
