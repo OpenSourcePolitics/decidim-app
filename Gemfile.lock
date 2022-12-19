@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git
-  revision: fbf147b5aae425130976807b5ed38f76393439aa
+  revision: ed9f58716b7103afaa8b19a874086aaa485018d4
   specs:
     decidim-friendly_signup (0.4.2)
       decidim-core (~> 0.26.0)
@@ -39,7 +39,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-france_connect
-  revision: 4665875c94d45a71dac163889e0eedd21b2ba41d
+  revision: 14a53ad31928c8a83742360cfbdb90938d0a057e
   specs:
     omniauth-france_connect (0.1.0)
       omniauth_openid_connect (~> 0.4.0)
@@ -671,6 +671,8 @@ GEM
       activerecord (>= 5.2)
       request_store (~> 1.1)
     parallel (1.22.1)
+    parallel_tests (3.7.3)
+      parallel
     parser (3.1.2.1)
       ast (~> 2.4.1)
     passenger (6.0.15)
@@ -989,6 +991,7 @@ DEPENDENCIES
   omniauth-france_connect!
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
+  parallel_tests
   passenger
   puma (>= 5.5.1)
   rack-attack (~> 6.6)

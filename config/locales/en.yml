@@ -85,6 +85,10 @@ en:
           email_subject:
             one: You have an unfinished vote in the participatory budgeting vote
             other: You have unfinished votes in the participatory budgeting vote
+    devise:
+      sessions:
+        new:
+          sign_in_disabled: Sign in disabled
     events:
       budgets:
         pending_order:
@@ -123,6 +127,8 @@ en:
         external:
           link: https://franceconnect.gouv.fr/
           text: What is FranceConnect ?
+        forgot_password:
+          ok_text: Warning, this password is the one of your local account and in no case the one of the account you use through FranceConnect. It will only be used when you log in with your email address rather than via FranceConnect.
     proposals:
       collaborative_drafts:
         collaborative_draft:
@@ -181,6 +187,11 @@ en:
         change: Change
         choose: Choose
         currently_selected: Currently selected
+    shared:
+      login_modal:
+        close_modal: Close modal
+        please_sign_in: Please sign in
+        sign_up: Sign up
     system:
       organizations:
         omniauth_settings:
@@ -216,6 +227,17 @@ en:
           actions:
             osp_authorization_handler: Verify with the identity verification form
             osp_authorization_workflow: Verify with the identity verification form
+  devise:
+    passwords:
+      new:
+        forgot_your_password: Forgot your password
+        send_me_reset_password_instructions: Send me reset password instructions
+    sessions:
+      new:
+        sign_in: Log in
+    shared:
+      links:
+        forgot_your_password: Forgot your password
   faker:
     address:
       country_code:
