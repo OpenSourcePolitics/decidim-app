@@ -279,6 +279,7 @@ namespace :benchmark do
     Dir.mkdir("benchmarks") unless File.exist?("benchmarks")
 
     count = Dir.glob("benchmarks/*").count
+    title = ["Performance benchmark", ENV.fetch("BENCHMARK_PREFIX", "")].join(" ")
     file_name = [ENV.fetch("BENCHMARK_PREFIX", ""), "performance_benchmark", benchmark_times, count].join("_")
 
     puts "Checking if url exists..."
@@ -287,7 +288,7 @@ namespace :benchmark do
     puts "Url exists! Starting benchmark..."
 
     Dir.chdir("benchmarks") do
-      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: "Performance benchmark", file_name: file_name do |x|
+      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: title, file_name: file_name.downcase do |x|
         x.report "Old" do |i|
           benchmark_command.call(proposals_url, i)
         end
