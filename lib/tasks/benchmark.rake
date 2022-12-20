@@ -261,7 +261,7 @@ namespace :benchmark do
 
     curl_command = ->(url) { `curl -sS -o /dev/null -w '%{time_total}' #{url}`.to_f }
     benchmark_times = ENV.fetch("BENCHMARK_TIMES", 100).to_i
-    ten_th = (benchmark_times / 10).to_i
+    ten_th = benchmark_times > 1 ? (benchmark_times / 10).to_i : 1
     benchmark_command = lambda do |url, new = false, iteration|
       ENV["BENCHMARK_FLAG"] = new ? "true" : nil
 
@@ -289,7 +289,7 @@ namespace :benchmark do
     puts "Url exists! Starting benchmark..."
 
     Dir.chdir("benchmarks") do
-      Benchmark.plot (0..benchmark_times).step(ten_th).to_a, title: "Performance benchmark", file_name: file_name do |x|
+      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: "Performance benchmark", file_name: file_name do |x|
         x.report "Old" do |i|
           benchmark_command.call(proposals_url, i)
         end
