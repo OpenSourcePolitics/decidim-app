@@ -6,6 +6,10 @@ require "decidim/faker/localized"
 namespace :benchmark do
   desc "Run benchmark"
   task run: :environment do
+    raise "Please activate cache" unless Rails.application.config.action_controller.perform_caching
+
+    Rails.cache.clear
+
     participatory_space = Decidim::ParticipatoryProcess.first
     proposal_component = Decidim::Component.find_by(participatory_space: participatory_space, manifest_name: "proposals")
 
@@ -258,15 +262,18 @@ namespace :benchmark do
     curl_command = ->(url) { `curl -sS -o /dev/null -w '%{time_total}' #{url}`.to_f }
     benchmark_times = ENV.fetch("BENCHMARK_TIMES", 100).to_i
     ten_th = (benchmark_times / 10).to_i
-    benchmark_command = lambda do |url, new = false|
+    benchmark_command = lambda do |url, new = false, iteration|
       ENV["BENCHMARK_FLAG"] = new ? "true" : nil
 
-      benchmarks = benchmark_times.times.map do |i|
-        puts "Benchmarking #{url} #{i} of #{benchmark_times}"
+      puts "Benchmarking #{url} #{iteration} of #{benchmark_times}"
+      benchmarks = (1..benchmark_times / ten_th).map do |i|
+        puts "  Subiteration #{i}"
         curl_command.call(url)
       end
 
-      benchmarks.each_slice(ten_th).collect { |x| x.sum / ten_th }
+      benchmarks.map(&:to_f).each_slice(10).map do |slice|
+        slice.sum / slice.size
+      end
     end
 
     puts "Benchmarking #{benchmark_times} times for #{proposals_url}..."
@@ -282,13 +289,13 @@ namespace :benchmark do
     puts "Url exists! Starting benchmark..."
 
     Dir.chdir("benchmarks") do
-      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: "Performance benchmark", file_name: file_name do |x|
-        x.report "Old" do
-          benchmark_command.call(proposals_url)
+      Benchmark.plot (0..benchmark_times).step(ten_th).to_a, title: "Performance benchmark", file_name: file_name do |x|
+        x.report "Old" do |i|
+          benchmark_command.call(proposals_url, i)
         end
 
-        x.report "New" do
-          benchmark_command.call(proposals_url, true)
+        x.report "New" do |i|
+          benchmark_command.call(proposals_url, true, i)
         end
       end
     end
