@@ -255,14 +255,23 @@ namespace :benchmark do
 
     proposals_url = "http://localhost:3000/processes/#{participatory_space.slug}/f/#{proposal_component.id}"
 
-    curl_command = ->(url, header = false) { `curl -sS -H "X-Filter-Flag: #{header}" -o /dev/null -w '%{time_total}' #{url}`.to_f }
+    curl_command = ->(url) { `curl -sS -o /dev/null -w '%{time_total}' #{url}`.to_f }
     benchmark_times = ENV.fetch("BENCHMARK_TIMES", 100).to_i
     ten_th = (benchmark_times / 10).to_i
-    benchmark_command = ->(url, header = false) { benchmark_times.times.map { curl_command.call(url, header) }.each_slice(ten_th).collect { |x| x.sum / ten_th } }
+    benchmark_command = lambda do |url, new = false|
+      ENV["BENCHMARK_FLAG"] = new ? "true" : nil
+
+      benchmarks = benchmark_times.times.map do |i|
+        puts "Benchmarking #{url} #{i} of #{benchmark_times}"
+        curl_command.call(url)
+      end
+
+      benchmarks.each_slice(ten_th).collect { |x| x.sum / ten_th }
+    end
 
     puts "Benchmarking #{benchmark_times} times for #{proposals_url}..."
 
-    Dir.mkdir("benchmarks") unless File.exists?("benchmarks")
+    Dir.mkdir("benchmarks") unless File.exist?("benchmarks")
 
     count = Dir.glob("benchmarks/*").count
     file_name = [ENV.fetch("BENCHMARK_PREFIX", ""), "performance_benchmark", count].join("_")
@@ -273,7 +282,7 @@ namespace :benchmark do
     puts "Url exists! Starting benchmark..."
 
     Dir.chdir("benchmarks") do
-      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: "Performance benchmark", file_name: file_name  do |x|
+      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: "Performance benchmark", file_name: file_name do |x|
         x.report "Old" do
           benchmark_command.call(proposals_url)
         end
