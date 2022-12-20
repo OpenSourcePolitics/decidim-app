@@ -6,15 +6,15 @@ require "decidim/faker/localized"
 namespace :benchmark do
   desc "Run benchmark"
   task run: :environment do
-    proposal_component = Decidim::Component.find_by(manifest_name: "proposals")
-    participatory_space = proposal_component.participatory_space
+    participatory_space = Decidim::ParticipatoryProcess.first
+    proposal_component = Decidim::Component.find_by(participatory_space: participatory_space, manifest_name: "proposals")
 
     if Decidim::AreaType.count <= 2
       puts "Creating more seeds for decidim filters benchmark..."
       ActiveRecord::Base.transaction do
         organization = Decidim::Organization.first
 
-        (100).times do |i|
+        100.times do |i|
           territorial = Decidim::AreaType.create!(
             name: Decidim::Faker::Localized.literal("territorial_#{i}"),
             plural: Decidim::Faker::Localized.literal("territorials_#{i}"),
@@ -255,7 +255,7 @@ namespace :benchmark do
 
     proposals_url = "http://localhost:3000/processes/#{participatory_space.slug}/f/#{proposal_component.id}"
 
-    curl_command = ->(url, header = false) { `curl -H "X-Filter-Flag: #{header}" -o /dev/null -w '%{time_total}' #{url}`.to_f }
+    curl_command = ->(url, header = false) { `curl -sS -H "X-Filter-Flag: #{header}" -o /dev/null -w '%{time_total}' #{url}`.to_f }
     benchmark_times = ENV.fetch("BENCHMARK_TIMES", 100).to_i
     ten_th = (benchmark_times / 10).to_i
     benchmark_command = ->(url, header = false) { benchmark_times.times.map { curl_command.call(url, header) }.each_slice(ten_th).collect { |x| x.sum / ten_th } }
@@ -267,7 +267,11 @@ namespace :benchmark do
     count = Dir.glob("benchmarks/*").count
     file_name = [ENV.fetch("BENCHMARK_PREFIX", ""), "performance_benchmark", count].join("_")
 
-    # Performing the benchmark
+    puts "Checking if url exists..."
+    raise "Url returns an non 200 status" unless `curl -o /dev/null -s -w '%{http_code}' #{proposals_url}` == "200"
+
+    puts "Url exists! Starting benchmark..."
+
     Dir.chdir("benchmarks") do
       Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: "Performance benchmark", file_name: file_name  do |x|
         x.report "Old" do
