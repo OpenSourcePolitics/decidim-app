@@ -281,7 +281,7 @@ namespace :benchmark do
     Dir.mkdir("benchmarks") unless File.exist?("benchmarks")
 
     count = Dir.glob("benchmarks/*").count
-    file_name = [ENV.fetch("BENCHMARK_PREFIX", ""), "performance_benchmark", count].join("_")
+    file_name = [ENV.fetch("BENCHMARK_PREFIX", ""), "performance_benchmark", benchmark_times, count].join("_")
 
     puts "Checking if url exists..."
     raise "Url returns an non 200 status" unless `curl -o /dev/null -s -w '%{http_code}' #{proposals_url}` == "200"
