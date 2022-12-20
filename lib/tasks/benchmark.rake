@@ -265,10 +265,11 @@ namespace :benchmark do
     Dir.mkdir("benchmarks") unless File.exists?("benchmarks")
 
     count = Dir.glob("benchmarks/*").count
+    file_name = [ENV.fetch("BENCHMARK_PREFIX", ""), "performance_benchmark", count].join("_")
 
     # Performing the benchmark
     Dir.chdir("benchmarks") do
-      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: "Performance benchmark", file_name: "performance_benchmark_#{count}" do |x|
+      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: "Performance benchmark", file_name: file_name  do |x|
         x.report "Old" do
           benchmark_command.call(proposals_url)
         end
