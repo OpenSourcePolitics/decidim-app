@@ -20,8 +20,8 @@ Decidim.configure do |config|
   # Time window in which the throttling is applied.
   config.throttling_period = Rails.application.secrets.decidim[:throttling_period].to_i.minutes
 
-  # Whether SSL should be forced or not.
-  config.force_ssl = ENV.fetch("FORCE_SSL", "1") == "1"
+  # Whether SSL should be forced or not (only in production).
+  config.force_ssl = (ENV.fetch("FORCE_SSL", "1") == "1") && Rails.env.production?
 
   # Geocoder configuration
   config.maps = {
