@@ -293,9 +293,10 @@ namespace :benchmark do
 
     Dir.mkdir("benchmarks") unless File.exist?("benchmarks")
 
-    count = Dir.glob("benchmarks/*").count
     title = ["Performance benchmark", ENV.fetch("BENCHMARK_PREFIX", "")].join(" ")
-    file_name = [ENV.fetch("BENCHMARK_PREFIX", "").gsub(" ", "_"), "performance_benchmark", benchmark_times, count].join("_")
+    prefix = ENV.fetch("BENCHMARK_PREFIX", "").gsub(" ", "_")
+    file_name = [prefix, "performance_benchmark", benchmark_times.to_s].reject(&:empty?).join("_")
+    count = Dir.glob("benchmarks/*").map{|f| f.split("/").last.split("_")[0..-2].join("_")}.select{|f| f == file_name}.count
 
     puts "Checking if url exists..."
     raise "Url returns an non 200 status" unless `curl -o /dev/null -s -w '%{http_code}' #{proposals_url}` == "200"
@@ -303,7 +304,7 @@ namespace :benchmark do
     puts "Url exists! Starting benchmark..."
 
     Dir.chdir("benchmarks") do
-      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: title, file_name: file_name.downcase do |x|
+      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: title, file_name: [file_name, count].join("_").downcase do |x|
         x.report "Old" do |i|
           benchmark_command.call(proposals_url, i)
         end
