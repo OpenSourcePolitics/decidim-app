@@ -295,7 +295,7 @@ namespace :benchmark do
 
     count = Dir.glob("benchmarks/*").count
     title = ["Performance benchmark", ENV.fetch("BENCHMARK_PREFIX", "")].join(" ")
-    file_name = [ENV.fetch("BENCHMARK_PREFIX", ""), "performance_benchmark", benchmark_times, count].join("_")
+    file_name = [ENV.fetch("BENCHMARK_PREFIX", "").gsub(" ", "_"), "performance_benchmark", benchmark_times, count].join("_")
 
     puts "Checking if url exists..."
     raise "Url returns an non 200 status" unless `curl -o /dev/null -s -w '%{http_code}' #{proposals_url}` == "200"
