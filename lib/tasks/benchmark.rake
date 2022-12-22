@@ -273,25 +273,17 @@ namespace :benchmark do
     end
 
     proposals_url = "http://localhost:3000/processes/#{participatory_space.slug}/f/#{proposal_component.id}"
-    benchmark_times = ENV.fetch("BENCHMARK_TIMES", 100).to_i
-    ten_th = benchmark_times > 1 ? (benchmark_times / 10).to_i : 1
+    benchmark_times = ENV.fetch("BENCHMARK_TIMES", 10).to_i
     title = ["Performance benchmark", ENV.fetch("BENCHMARK_PREFIX", "")].join(" ")
     prefix = ENV.fetch("BENCHMARK_PREFIX", "").gsub(" ", "_")
     file_name = [prefix, "performance_benchmark", benchmark_times.to_s].reject(&:empty?).join("_")
     count = Dir.glob("benchmarks/*").map { |f| f.split("/").last.split("_")[0..-2].join("_") }.select { |f| f == file_name.downcase }.count
     flags = ["default"] + ENV.fetch("BENCHMARK_FLAGS", "all").split(",").map(&:strip).reject(&:empty?).map(&:downcase)
 
-    curl_command = ->(url, new) { `curl -sS -H "X-FEATURE-FLAG: #{new}" -o /dev/null -w '%{time_total}' #{url}`.to_f }
+    curl_command = ->(url, new) { `curl -sS -H "X-FEATURE-FLAG: #{new}" -o /dev/null #{url}` }
     benchmark_command = lambda do |url, flag, iteration|
       puts "Benchmarking #{url} #{iteration + (benchmark_times * flags.find_index(flag))} of #{benchmark_times * flags.size} with #{flag} flag"
-      benchmarks = (1..benchmark_times / ten_th).map do |i|
-        puts "  Subiteration #{i}"
-        curl_command.call(url, flag)
-      end
-
-      benchmarks.map(&:to_f).each_slice(10).map do |slice|
-        slice.sum / slice.size
-      end
+      curl_command.call(url, flag)
     end
 
     puts "Benchmarking #{benchmark_times} times for #{proposals_url}..."
@@ -304,7 +296,7 @@ namespace :benchmark do
     puts "Url exists! Starting benchmark..."
 
     Dir.chdir("benchmarks") do
-      Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: title, file_name: [file_name, count].join("_").downcase do |x|
+      Benchmark.plot (1..benchmark_times), title: title, file_name: [file_name, count].join("_").downcase do |x|
         flags.each do |flag|
           x.report flag.titleize do |i|
             benchmark_command.call(proposals_url, flag, i)
