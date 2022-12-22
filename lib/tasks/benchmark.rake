@@ -4,7 +4,7 @@ require "benchmark/plot"
 require "decidim/faker/localized"
 
 namespace :benchmark do
-  desc "Run benchmark"
+  desc "Run benchmark, example: BENCHMARK_FLAGS=\"filters,address,all\" bundle exec rake benchmark:run"
   task run: :environment do
     raise "Please activate cache" unless Rails.application.config.action_controller.perform_caching
 
@@ -273,15 +273,20 @@ namespace :benchmark do
     end
 
     proposals_url = "http://localhost:3000/processes/#{participatory_space.slug}/f/#{proposal_component.id}"
-
-    curl_command = ->(url, new) { `curl -sS -H "X-FEATURE-FLAG: #{new}" -o /dev/null -w '%{time_total}' #{url}`.to_f }
     benchmark_times = ENV.fetch("BENCHMARK_TIMES", 100).to_i
     ten_th = benchmark_times > 1 ? (benchmark_times / 10).to_i : 1
-    benchmark_command = lambda do |url, new = false, iteration|
-      puts "Benchmarking #{url} #{iteration + (benchmark_times * (new ? 1 : 0))} of #{benchmark_times * 2}"
+    title = ["Performance benchmark", ENV.fetch("BENCHMARK_PREFIX", "")].join(" ")
+    prefix = ENV.fetch("BENCHMARK_PREFIX", "").gsub(" ", "_")
+    file_name = [prefix, "performance_benchmark", benchmark_times.to_s].reject(&:empty?).join("_")
+    count = Dir.glob("benchmarks/*").map { |f| f.split("/").last.split("_")[0..-2].join("_") }.select { |f| f == file_name.downcase }.count
+    flags = ["default"] + ENV.fetch("BENCHMARK_FLAGS", "all").split(",").map(&:strip).reject(&:empty?).map(&:downcase)
+
+    curl_command = ->(url, new) { `curl -sS -H "X-FEATURE-FLAG: #{new}" -o /dev/null -w '%{time_total}' #{url}`.to_f }
+    benchmark_command = lambda do |url, flag, iteration|
+      puts "Benchmarking #{url} #{iteration + (benchmark_times * flags.find_index(flag))} of #{benchmark_times * flags.size} with #{flag} flag"
       benchmarks = (1..benchmark_times / ten_th).map do |i|
         puts "  Subiteration #{i}"
-        curl_command.call(url, new)
+        curl_command.call(url, flag)
       end
 
       benchmarks.map(&:to_f).each_slice(10).map do |slice|
@@ -293,11 +298,6 @@ namespace :benchmark do
 
     Dir.mkdir("benchmarks") unless File.exist?("benchmarks")
 
-    title = ["Performance benchmark", ENV.fetch("BENCHMARK_PREFIX", "")].join(" ")
-    prefix = ENV.fetch("BENCHMARK_PREFIX", "").gsub(" ", "_")
-    file_name = [prefix, "performance_benchmark", benchmark_times.to_s].reject(&:empty?).join("_")
-    count = Dir.glob("benchmarks/*").map{|f| f.split("/").last.split("_")[0..-2].join("_")}.select{|f| f == file_name.downcase}.count
-
     puts "Checking if url exists..."
     raise "Url returns an non 200 status" unless `curl -o /dev/null -s -w '%{http_code}' #{proposals_url}` == "200"
 
@@ -305,12 +305,10 @@ namespace :benchmark do
 
     Dir.chdir("benchmarks") do
       Benchmark.plot (1..benchmark_times).step(ten_th).to_a, title: title, file_name: [file_name, count].join("_").downcase do |x|
-        x.report "Old" do |i|
-          benchmark_command.call(proposals_url, i)
-        end
-
-        x.report "New" do |i|
-          benchmark_command.call(proposals_url, true, i)
+        flags.each do |flag|
+          x.report flag.titleize do |i|
+            benchmark_command.call(proposals_url, flag, i)
+          end
         end
       end
     end

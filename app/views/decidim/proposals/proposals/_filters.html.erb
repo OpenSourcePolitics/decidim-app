@@ -1,6 +1,6 @@
 <%= render partial: "decidim/shared/filter_form_help", locals: { skip_to_id: "proposals" } %>
 
-<% if request.headers["X-FEATURE-FLAG"] == "true" %>
+<% if %w[all filters].include? request.headers["X-FEATURE-FLAG"]  %>
   <% cache [filter.instance_variable_get(:@filter), current_user] do %>
     <%= filter_form_for filter do |form| %>
       <div class="filters__section">
