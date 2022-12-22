@@ -12,11 +12,15 @@ namespace :benchmark do
 
     participatory_space = Decidim::ParticipatoryProcess.first
     proposal_component = Decidim::Component.find_by(participatory_space: participatory_space, manifest_name: "proposals")
+    organization = proposal_component.organization
 
     if Decidim::AreaType.count <= 2
       puts "Creating more seeds for decidim filters benchmark..."
+
       ActiveRecord::Base.transaction do
-        organization = Decidim::Organization.first
+        proposals_settings = proposal_component.dup.settings
+        proposals_settings[:geocoding_enabled] = true
+        proposal_component.update!(settings: proposals_settings)
 
         100.times do |i|
           territorial = Decidim::AreaType.create!(
@@ -53,7 +57,7 @@ namespace :benchmark do
               description: Decidim::Faker::Localized.wrapped("<p>", "</p>") do
                 Decidim::Faker::Localized.paragraph(sentence_count: 3)
               end,
-              participatory_space: Decidim::ParticipatoryProcess.all.sample
+              participatory_space: participatory_space
             )
           end
 
@@ -79,6 +83,7 @@ namespace :benchmark do
             end
 
             params = {
+              address: "#{i} avenue daumesnil 75012 paris",
               component: proposal_component,
               category: participatory_space.categories.sample,
               scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
@@ -150,6 +155,7 @@ namespace :benchmark do
               )
 
               params = {
+                address: "#{i} avenue daumesnil 75012 paris",
                 component: proposal_component,
                 category: participatory_space.categories.sample,
                 scope: Faker::Boolean.boolean(true_ratio: 0.5) ? global : scopes.sample,
@@ -253,6 +259,15 @@ namespace :benchmark do
 
             Decidim::Comments::Seed.comments_for(proposal)
           end
+        end
+
+        Decidim::Proposals::Proposal.where.not(address: nil).find_each do |proposal|
+          latitude, longitude = proposal.geocode
+
+          proposal.update!(
+            latitude: latitude,
+            longitude: longitude
+          )
         end
       end
     end
