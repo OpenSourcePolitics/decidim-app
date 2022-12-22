@@ -1,6 +1,6 @@
 <%= render partial: "decidim/shared/component_announcement" %>
 
-<% if false#request.headers["X-FEATURE-FLAG"] == "true" %>
+<% if request.headers["X-FEATURE-FLAG"] == "true" %>
   <% if component_settings.geocoding_enabled? %>
     <% cache @all_geocoded_proposals do %>
       <%= dynamic_map_for proposals_data_for_map(@all_geocoded_proposals) do %>
