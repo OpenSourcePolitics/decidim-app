@@ -275,10 +275,10 @@ namespace :benchmark do
     proposals_url = "http://localhost:3000/processes/#{participatory_space.slug}/f/#{proposal_component.id}"
 
     curl_command = ->(url, new) { `curl -sS -H "X-FEATURE-FLAG: #{new}" -o /dev/null -w '%{time_total}' #{url}`.to_f }
-    benchmark_times = ENV.fetch("BENCHMARK_TIMES", 100).to_i * 2
+    benchmark_times = ENV.fetch("BENCHMARK_TIMES", 100).to_i
     ten_th = benchmark_times > 1 ? (benchmark_times / 10).to_i : 1
     benchmark_command = lambda do |url, new = false, iteration|
-      puts "Benchmarking #{url} #{iteration + (benchmark_times / 2 * (new ? 1 : 0))} of #{benchmark_times}"
+      puts "Benchmarking #{url} #{iteration + (benchmark_times * (new ? 1 : 0))} of #{benchmark_times * 2}"
       benchmarks = (1..benchmark_times / ten_th).map do |i|
         puts "  Subiteration #{i}"
         curl_command.call(url, new)
