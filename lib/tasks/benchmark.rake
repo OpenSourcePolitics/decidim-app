@@ -275,10 +275,10 @@ namespace :benchmark do
     proposals_url = "http://localhost:3000/processes/#{participatory_space.slug}/f/#{proposal_component.id}"
 
     curl_command = ->(url, new) { `curl -sS -H "X-FEATURE-FLAG: #{new}" -o /dev/null -w '%{time_total}' #{url}`.to_f }
-    benchmark_times = ENV.fetch("BENCHMARK_TIMES", 100).to_i
+    benchmark_times = ENV.fetch("BENCHMARK_TIMES", 100).to_i * 2
     ten_th = benchmark_times > 1 ? (benchmark_times / 10).to_i : 1
     benchmark_command = lambda do |url, new = false, iteration|
-      puts "Benchmarking #{url} #{iteration} of #{benchmark_times}"
+      puts "Benchmarking #{url} #{iteration + (benchmark_times / 2 * (new ? 1 : 0))} of #{benchmark_times}"
       benchmarks = (1..benchmark_times / ten_th).map do |i|
         puts "  Subiteration #{i}"
         curl_command.call(url, new)
@@ -296,7 +296,7 @@ namespace :benchmark do
     title = ["Performance benchmark", ENV.fetch("BENCHMARK_PREFIX", "")].join(" ")
     prefix = ENV.fetch("BENCHMARK_PREFIX", "").gsub(" ", "_")
     file_name = [prefix, "performance_benchmark", benchmark_times.to_s].reject(&:empty?).join("_")
-    count = Dir.glob("benchmarks/*").map{|f| f.split("/").last.split("_")[0..-2].join("_")}.select{|f| f == file_name}.count
+    count = Dir.glob("benchmarks/*").map{|f| f.split("/").last.split("_")[0..-2].join("_")}.select{|f| f == file_name.downcase}.count
 
     puts "Checking if url exists..."
     raise "Url returns an non 200 status" unless `curl -o /dev/null -s -w '%{http_code}' #{proposals_url}` == "200"
