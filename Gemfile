@@ -15,7 +15,7 @@ gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/deci
 gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git"
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
-gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik", branch: "v0.0.9"
+gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik.git"
 #
 # gem "decidim-decidim_awesome", "0.8.3"
 ## End gems /!\ Required comment for : $ rake app:upgrade
