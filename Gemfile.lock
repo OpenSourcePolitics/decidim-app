@@ -1,6 +1,47 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git
+  revision: 7157ac214dea5beb99cab5be29b5fbb9f8f9d4d1
+  branch: release/0.27-stable
+  specs:
+    decidim-question_captcha (2.0)
+      acts_as_textcaptcha (~> 4.5.1)
+      decidim-core (~> 0.27)
+      deface (~> 1.6)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
+  revision: 79f2a5f6c3357d63f92423a2b173893f4c4d06d8
+  branch: release/0.27-stable
+  specs:
+    decidim-phone_authorization_handler (1.0.0)
+      decidim-core (~> 0.27)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-spam_detection.git
+  revision: d519240aab7e1452283b0800275ed4075ce074c0
+  specs:
+    decidim-spam_detection (4.0.0)
+      decidim-core (~> 0.27.0)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/omniauth-france_connect
+  revision: 14a53ad31928c8a83742360cfbdb90938d0a057e
+  specs:
+    omniauth-france_connect (0.1.0)
+      omniauth_openid_connect (~> 0.4.0)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/omniauth-publik
+  revision: 1e7c6ab77084bfcb0fc652f89e309f6c71e1bfd3
+  branch: v0.0.9
+  specs:
+    omniauth-publik (0.0.9)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (>= 1.7.2, < 2.0)
+
+GIT
   remote: https://github.com/decidim/decidim.git
-  revision: ab333ed55ff77b7447635e76f64b53553229c7cf
+  revision: 1cd44173cebd0a65dd33eb03233afeb7acf08534
   branch: release/0.27-stable
   specs:
     decidim (0.27.1)
@@ -172,6 +213,14 @@ GIT
       decidim-core (= 0.27.1)
 
 GIT
+  remote: https://github.com/mainio/decidim-module-term_customizer.git
+  revision: 5a8d4c67972ef10cd52e774d64a3c7cff9bc9325
+  specs:
+    decidim-term_customizer (0.27.0)
+      decidim-admin (~> 0.27.0)
+      decidim-core (~> 0.27.0)
+
+GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
   revision: bc33600db7a2d16ce3cdc1f8369d0d7e7c4245b5
   specs:
@@ -251,10 +300,13 @@ GEM
       zeitwerk (~> 2.3)
     acts_as_list (0.9.19)
       activerecord (>= 3.0)
+    acts_as_textcaptcha (4.5.2)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    aes_key_wrap (1.1.0)
     ast (2.4.2)
-    axe-core-api (4.5.0)
+    attr_required (1.0.1)
+    axe-core-api (4.5.1)
       dumb_delegator
       virtus
     axe-core-rspec (4.1.0)
@@ -275,10 +327,11 @@ GEM
       html_tokenizer (~> 0.0.6)
       parser (>= 2.4)
       smart_properties
+    bindata (2.4.14)
     bindex (0.8.1)
-    bootsnap (1.13.0)
+    bootsnap (1.15.0)
       msgpack (~> 1.2)
-    brakeman (5.3.1)
+    brakeman (5.4.0)
     browser (2.7.1)
     builder (3.2.4)
     byebug (11.1.3)
@@ -291,7 +344,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    carrierwave (2.2.2)
+    carrierwave (2.2.3)
       activemodel (>= 5.0.0)
       activesupport (>= 5.0.0)
       addressable (~> 2.6)
@@ -311,7 +364,7 @@ GEM
       actionpack (>= 5.0)
       cells (>= 4.1.6, < 5.0.0)
     charlock_holmes (0.7.7)
-    chef-utils (18.0.172)
+    chef-utils (18.1.0)
       concurrent-ruby
     childprocess (4.1.0)
     coercible (1.0.0)
@@ -329,9 +382,10 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    css_parser (1.12.0)
+    css_parser (1.14.0)
       addressable
     dalli (3.2.3)
+    date (3.3.3)
     date_validator (0.12.0)
       activemodel (>= 3)
       activesupport (>= 3)
@@ -341,6 +395,12 @@ GEM
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
+    deface (1.9.0)
+      actionview (>= 5.2)
+      nokogiri (>= 1.6)
+      polyglot
+      railties (>= 5.2)
+      rainbow (>= 2.1.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.8.1)
@@ -351,7 +411,7 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.10.2)
       devise (>= 4.8.0)
-    devise_invitable (2.0.6)
+    devise_invitable (2.0.7)
       actionmailer (>= 5.0)
       devise (>= 4.6)
     diff-lcs (1.5.0)
@@ -360,7 +420,7 @@ GEM
       nokogiri (>= 1.13.2, < 1.14.0)
       rubyzip (~> 2.3.0)
     docile (1.4.0)
-    doorkeeper (5.6.0)
+    doorkeeper (5.6.2)
       railties (>= 5)
     doorkeeper-i18n (4.0.1)
     dotenv (2.8.1)
@@ -378,11 +438,11 @@ GEM
       smart_properties
     erbse (0.1.4)
       temple
-    erubi (1.11.0)
+    erubi (1.12.0)
     escape_utils (1.3.0)
     et-orbi (1.2.7)
       tzinfo
-    excon (0.94.0)
+    excon (0.97.1)
     execjs (2.8.1)
     extended-markdown-filter (0.7.0)
       html-pipeline (~> 2.9)
@@ -393,9 +453,11 @@ GEM
       railties (>= 3.0.0)
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
-    faraday (2.7.0)
+    faraday (2.7.2)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
+    faraday-follow_redirects (0.3.0)
+      faraday (>= 1, < 3)
     faraday-net_http (3.0.2)
     ffi (1.15.5)
     file_validators (3.0.0)
@@ -419,7 +481,7 @@ GEM
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (1.1.0)
-    fugit (1.7.2)
+    fugit (1.8.0)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
     gemoji (3.0.1)
@@ -437,13 +499,14 @@ GEM
       sass (~> 3.4)
     hashdiff (1.0.1)
     hashie (5.0.0)
-    highline (2.0.3)
+    highline (2.1.0)
     hkdf (0.3.0)
     html-pipeline (2.14.3)
       activesupport (>= 2)
       nokogiri (>= 1.4)
     html_tokenizer (0.0.7)
     htmlentities (4.3.4)
+    httpclient (2.8.3)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.37)
@@ -465,8 +528,14 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     invisible_captcha (0.13.0)
       rails (>= 3.2.0)
-    json (2.6.2)
-    jwt (2.5.0)
+    json (2.6.3)
+    json-jwt (1.16.1)
+      activesupport (>= 4.2)
+      aes_key_wrap
+      bindata
+      faraday (~> 2.0)
+      faraday-follow_redirects
+    jwt (2.6.0)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -483,8 +552,8 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
-    launchy (2.5.0)
-      addressable (~> 2.7)
+    launchy (2.5.2)
+      addressable (~> 2.8)
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
     letter_opener_web (2.0.0)
@@ -492,7 +561,7 @@ GEM
       letter_opener (~> 1.7)
       railties (>= 5.2)
       rexml
-    listen (3.7.1)
+    listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     lograge (0.12.0)
@@ -503,8 +572,11 @@ GEM
     loofah (2.3.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.7.1)
+    mail (2.8.0.1)
       mini_mime (>= 0.1.1)
+      net-imap
+      net-pop
+      net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
     mdl (0.12.0)
@@ -517,9 +589,9 @@ GEM
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
-    mini_magick (4.11.0)
+    mini_magick (4.12.0)
     mini_mime (1.1.2)
-    minitest (5.16.3)
+    minitest (5.17.0)
     mixlib-cli (2.1.8)
     mixlib-config (3.0.27)
       tomlrb
@@ -529,17 +601,18 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     mustache (1.1.1)
-    net-protocol (0.1.3)
+    net-imap (0.3.4)
+      date
+      net-protocol
+    net-pop (0.1.2)
+      net-protocol
+    net-protocol (0.2.1)
       timeout
     net-smtp (0.3.3)
       net-protocol
-    newrelic_rpm (8.13.0)
+    newrelic_rpm (8.15.0)
     nio4r (2.5.8)
-    nokogiri (1.13.9-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.13.9-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.13.9-x86_64-linux)
+    nokogiri (1.13.10-x86_64-darwin)
       racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
@@ -577,6 +650,21 @@ GEM
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
+    omniauth_openid_connect (0.4.0)
+      addressable (~> 2.5)
+      omniauth (>= 1.9, < 3)
+      openid_connect (~> 1.1)
+    openid_connect (1.4.2)
+      activemodel
+      attr_required (>= 1.0.0)
+      json-jwt (>= 1.15.0)
+      net-smtp
+      rack-oauth2 (~> 1.21)
+      swd (~> 1.3)
+      tzinfo
+      validate_email
+      validate_url
+      webfinger (~> 1.2)
     orm_adapter (0.5.0)
     paper_trail (12.3.0)
       activerecord (>= 5.2)
@@ -584,15 +672,16 @@ GEM
     parallel (1.22.1)
     parallel_tests (3.13.0)
       parallel
-    parser (3.1.2.1)
+    parser (3.2.0.0)
       ast (~> 2.4.1)
-    passenger (6.0.15)
+    passenger (6.0.16)
       rack
       rake (>= 0.8.1)
     pg (1.1.4)
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    polyglot (0.3.5)
     premailer (1.18.0)
       addressable
       css_parser (>= 1.12.0)
@@ -601,17 +690,23 @@ GEM
       actionmailer (>= 3)
       net-smtp
       premailer (~> 1.7, >= 1.7.9)
-    public_suffix (5.0.0)
+    public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
     raabro (1.4.0)
-    racc (1.6.0)
-    rack (2.2.4)
+    racc (1.6.2)
+    rack (2.2.5)
     rack-attack (6.6.1)
       rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
-    rack-protection (3.0.3)
+    rack-oauth2 (1.21.3)
+      activesupport
+      attr_required
+      httpclient
+      json-jwt (>= 1.11.0)
+      rack (>= 2.1.0)
+    rack-protection (3.0.5)
       rack
     rack-proxy (0.7.4)
       rack
@@ -663,7 +758,7 @@ GEM
     redis (4.8.0)
     redlock (1.3.2)
       redis (>= 3.0.0, < 6.0)
-    regexp_parser (2.6.0)
+    regexp_parser (2.6.1)
     request_store (1.5.1)
       rack (>= 1.4)
     responders (3.0.1)
@@ -679,13 +774,13 @@ GEM
       rspec-rails (>= 3.0.0, < 6.1.0)
     rspec-core (3.12.0)
       rspec-support (~> 3.12.0)
-    rspec-expectations (3.12.0)
+    rspec-expectations (3.12.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-html-matchers (0.9.4)
       nokogiri (~> 1)
       rspec (>= 3.0.0.a, < 4)
-    rspec-mocks (3.12.0)
+    rspec-mocks (3.12.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-rails (4.1.2)
@@ -710,7 +805,7 @@ GEM
       rubocop-ast (>= 1.17.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.23.0)
+    rubocop-ast (1.24.1)
       parser (>= 3.1.1.0)
     rubocop-faker (1.1.0)
       faker (>= 2.12.0)
@@ -744,23 +839,23 @@ GEM
     semantic_range (3.0.0)
     sendgrid-ruby (6.6.2)
       ruby_http_client (~> 3.4)
-    sentry-rails (5.6.0)
+    sentry-rails (5.7.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.6.0)
-    sentry-ruby (5.6.0)
+      sentry-ruby (~> 5.7.0)
+    sentry-ruby (5.7.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    sentry-sidekiq (5.6.0)
-      sentry-ruby (~> 5.6.0)
+    sentry-sidekiq (5.7.0)
+      sentry-ruby (~> 5.7.0)
       sidekiq (>= 3.0)
     seven_zip_ruby (1.3.0)
-    sidekiq (6.5.4)
-      connection_pool (>= 2.2.2)
+    sidekiq (6.5.8)
+      connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
-      redis (>= 4.5.0)
-    sidekiq-scheduler (4.0.2)
+      redis (>= 4.5.0, < 5)
+    sidekiq-scheduler (4.0.3)
       redis (>= 4.2.0)
       rufus-scheduler (~> 3.2)
-      sidekiq (>= 4)
+      sidekiq (>= 4, < 7)
       tilt (>= 1.4.0)
     simplecov (0.21.2)
       docile (~> 1.1)
@@ -781,14 +876,18 @@ GEM
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
-    sprockets (4.1.1)
+    sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
-      rack (> 1, < 3)
+      rack (>= 2.2.4, < 4)
     sprockets-rails (3.4.2)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     ssrf_filter (1.1.1)
+    swd (1.3.0)
+      activesupport (>= 3)
+      attr_required (>= 0.0.5)
+      httpclient (>= 2.4)
     sys-filesystem (1.4.3)
       ffi (~> 1.1)
     temple (0.9.1)
@@ -797,15 +896,21 @@ GEM
     thor (1.2.1)
     thread_safe (0.3.6)
     tilt (2.0.11)
-    timeout (0.3.0)
+    timeout (0.3.1)
     tomlrb (2.0.3)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
-    unicode-display_width (2.3.0)
+    unicode-display_width (2.4.2)
     valid_email2 (2.3.1)
       activemodel (>= 3.2)
       mail (~> 2.5)
+    validate_email (0.1.6)
+      activemodel (>= 3.0)
+      mail (>= 2.2.5)
+    validate_url (1.0.15)
+      activemodel (>= 3.0.0)
+      public_suffix
     version_gem (1.1.1)
     virtus (2.0.0)
       axiom-types (~> 0.1)
@@ -826,6 +931,9 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    webfinger (1.2.0)
+      activesupport
+      httpclient (>= 2.4)
     webmock (3.18.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -845,25 +953,28 @@ GEM
       activesupport
     wisper (2.0.1)
     wisper-rspec (1.1.0)
-    wkhtmltopdf-binary (0.12.6.5)
+    wkhtmltopdf-binary (0.12.6.6)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.6)
 
 PLATFORMS
-  arm64-darwin-21
-  x86_64-darwin-19
   x86_64-darwin-21
-  x86_64-linux
 
 DEPENDENCIES
   activejob-uniqueness
+  acts_as_textcaptcha (~> 4.5.1)
   bootsnap (~> 1.4)
   brakeman (~> 5.2)
   byebug (~> 11.0)
   dalli
   decidim!
   decidim-dev!
+  decidim-phone_authorization_handler!
+  decidim-question_captcha!
+  decidim-spam_detection!
+  decidim-term_customizer!
+  deface
   dotenv-rails
   faker (~> 2.14)
   fog-aws
@@ -872,6 +983,8 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   newrelic_rpm
+  omniauth-france_connect!
+  omniauth-publik!
   parallel_tests (~> 3.7)
   passenger
   puma (>= 5.6.2)
