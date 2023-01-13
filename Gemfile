@@ -26,8 +26,8 @@ gem "fog-aws"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
 gem "sys-filesystem"
 
-gem "deface"
 gem "bootsnap", "~> 1.4"
+gem "deface"
 
 gem "puma", ">= 5.6.2"
 
