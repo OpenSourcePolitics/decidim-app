@@ -3,34 +3,34 @@
 Decidim::QuestionCaptcha.configure do |config|
   # Type: Hash
   # List of localized questions
-  if Rails.env.test?
-    config.questions ={
-      en: [
-        { "question" => "99+1", "answers" => "100" }
-      ],
-      es: [
-        { "question" => "49+1", "answers" => "50" }
-      ],
-      ca: [
-        { "question" => "19+1", "answers" => "20" }
-      ]
-    }
-  else
-    config.questions ={
-      en: [
-        { "question" => "1+1", "answers" => "2,two" },
-        { "question" => "The green hat is what color?", "answers" => "green" }
-      ],
-      es: [
-        { "question" => "1+2", "answers" => "3,tres" },
-        { "question" => "El sombrero verde es de qué color?", "answers" => "verde" }
-      ],
-      ca: [
-        { "question" => "2+2", "answers" => "4,quatre" },
-        { "question" => "El barret verd és de quin color?", "answers" => "verd" }
-      ]
-    }
-  end
+  config.questions = if Rails.env.test?
+                       {
+                         en: [
+                           { "question" => "99+1", "answers" => "100" }
+                         ],
+                         es: [
+                           { "question" => "49+1", "answers" => "50" }
+                         ],
+                         ca: [
+                           { "question" => "19+1", "answers" => "20" }
+                         ]
+                       }
+                     else
+                       {
+                         en: [
+                           { "question" => "1+1", "answers" => "2,two" },
+                           { "question" => "The green hat is what color?", "answers" => "green" }
+                         ],
+                         es: [
+                           { "question" => "1+2", "answers" => "3,tres" },
+                           { "question" => "El sombrero verde es de qué color?", "answers" => "verde" }
+                         ],
+                         ca: [
+                           { "question" => "2+2", "answers" => "4,quatre" },
+                           { "question" => "El barret verd és de quin color?", "answers" => "verd" }
+                         ]
+                       }
+                     end
 
   # Type: String
   # URL of a question API instance
