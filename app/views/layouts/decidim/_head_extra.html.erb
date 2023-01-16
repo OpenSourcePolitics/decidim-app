@@ -1,0 +1,18 @@
+<% if Rails.application.secrets.dig(:sentry, :enabled) %>
+  <script src="https://browser.sentry-cdn.com/<%= Rails.application.secrets.dig(:sentry, :js_version) %>/bundle.min.js" crossorigin="anonymous"></script>
+  <script>
+    Sentry.init({
+      dsn: '<%= Rails.application.secrets.dig(:sentry, :dsn) %>'
+    });
+  </script>
+<% end %>
+
+<% if defined?(Decidim::DecidimAwesome) %>
+  <%= stylesheet_pack_tag "decidim_decidim_awesome", media: "all" %>
+  <%= render(partial: "layouts/decidim/decidim_awesome/custom_styles") if awesome_custom_styles %>
+
+  <%= render partial: "layouts/decidim/decidim_awesome/awesome_config" %>
+  <%= javascript_pack_tag "decidim_decidim_awesome" %>
+  <%= javascript_pack_tag "decidim_decidim_awesome_custom_fields" if awesome_proposal_custom_fields %>
+
+<% end %>
