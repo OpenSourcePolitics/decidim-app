@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_templates (originally 20200518093819)
 
 class CreateDecidimTemplates < ActiveRecord::Migration[5.2]
