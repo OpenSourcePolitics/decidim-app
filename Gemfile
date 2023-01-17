@@ -10,9 +10,11 @@ gem "decidim", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VE
 ## Block gems /!\ Required comment for : $ rake app:upgrade
 gem "acts_as_textcaptcha", "~> 4.5.1"
 # gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: "bump/0.25-stable"
+gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens", branch: "bump/0.27"
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: DECIDIM_VERSION
 gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: DECIDIM_VERSION
 gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git"
+gem "decidim-templates"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git"
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik.git"

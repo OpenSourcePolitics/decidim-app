@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_11_081453) do
+ActiveRecord::Schema.define(version: 2023_01_17_124137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -1085,6 +1085,8 @@ ActiveRecord::Schema.define(version: 2022_08_11_081453) do
     t.string "machine_translation_display_priority", default: "original", null: false
     t.string "external_domain_whitelist", default: [], array: true
     t.boolean "enable_participatory_space_filters", default: true
+    t.jsonb "assistant"
+    t.boolean "enable_ludens", default: false
     t.index ["host"], name: "index_decidim_organizations_on_host", unique: true
     t.index ["name"], name: "index_decidim_organizations_on_name", unique: true
     t.index ["secondary_hosts"], name: "index_decidim_organizations_on_secondary_hosts"
@@ -1096,6 +1098,18 @@ ActiveRecord::Schema.define(version: 2022_08_11_081453) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["decidim_component_id"], name: "index_decidim_pages_pages_on_decidim_component_id"
+  end
+
+  create_table "decidim_participative_actions", force: :cascade do |t|
+    t.boolean "completed"
+    t.integer "points"
+    t.string "resource"
+    t.string "action"
+    t.string "category"
+    t.string "recommendation"
+    t.bigint "decidim_organization_id", null: false
+    t.string "documentation"
+    t.index ["decidim_organization_id"], name: "index_decidim_participative_actions_on_decidim_organization_id"
   end
 
   create_table "decidim_participatory_process_groups", id: :serial, force: :cascade do |t|
@@ -1562,6 +1576,18 @@ ActiveRecord::Schema.define(version: 2022_08_11_081453) do
     t.index ["reset_password_token"], name: "index_decidim_system_admins_on_reset_password_token", unique: true
   end
 
+  create_table "decidim_templates_templates", force: :cascade do |t|
+    t.integer "decidim_organization_id", null: false
+    t.string "templatable_type"
+    t.bigint "templatable_id"
+    t.jsonb "name", null: false
+    t.jsonb "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["decidim_organization_id"], name: "index_decidim_templates_organization"
+    t.index ["templatable_type", "templatable_id"], name: "index_decidim_templates_templatable"
+  end
+
   create_table "decidim_term_customizer_constraints", force: :cascade do |t|
     t.bigint "decidim_organization_id", null: false
     t.string "subject_type"
@@ -1815,6 +1841,7 @@ ActiveRecord::Schema.define(version: 2022_08_11_081453) do
   add_foreign_key "decidim_editor_images", "decidim_users", column: "decidim_author_id"
   add_foreign_key "decidim_identities", "decidim_organizations"
   add_foreign_key "decidim_newsletters", "decidim_users", column: "author_id"
+  add_foreign_key "decidim_participative_actions", "decidim_organizations"
   add_foreign_key "decidim_participatory_process_steps", "decidim_participatory_processes"
   add_foreign_key "decidim_participatory_process_types", "decidim_organizations"
   add_foreign_key "decidim_participatory_processes", "decidim_organizations"

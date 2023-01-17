@@ -6,6 +6,7 @@
     "@decidim/core": "file:packages/core",
     "@decidim/elections": "file:packages/elections",
     "@decidim/webpacker": "file:packages/webpacker",
+    "confetti-js": "^0.0.18",
     "workbox-webpack-plugin": "^6.5.4"
   },
   "version": "0.1.0",

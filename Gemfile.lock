@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-ludens
+  revision: 6310e1463c1606e01280cb356ee51cbd304f13e8
+  branch: bump/0.27
+  specs:
+    decidim-ludens (1.1)
+      decidim-core (~> 0.27)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git
   revision: 7157ac214dea5beb99cab5be29b5fbb9f8f9d4d1
   branch: release/0.27-stable
@@ -205,9 +213,6 @@ GIT
       devise (~> 4.7)
       devise-i18n (~> 1.2)
       devise_invitable (~> 2.0)
-    decidim-templates (0.27.1)
-      decidim-core (= 0.27.1)
-      decidim-forms (= 0.27.1)
     decidim-verifications (0.27.1)
       decidim-core (= 0.27.1)
 
@@ -391,6 +396,9 @@ GEM
     db-query-matchers (0.10.0)
       activesupport (>= 4.0, < 7)
       rspec (~> 3.0)
+    decidim-templates (0.27.1)
+      decidim-core (= 0.27.1)
+      decidim-forms (= 0.27.1)
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
@@ -972,9 +980,11 @@ DEPENDENCIES
   dalli
   decidim!
   decidim-dev!
+  decidim-ludens!
   decidim-phone_authorization_handler!
   decidim-question_captcha!
   decidim-spam_detection!
+  decidim-templates
   decidim-term_customizer!
   deface
   dotenv-rails
