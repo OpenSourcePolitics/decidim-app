@@ -19,7 +19,7 @@ module DevelopmentApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
-    config.time_zone = "Europe/Paris"
+    config.time_zone = "Europe/Paris" unless Rails.env.test?
     config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml").to_s]
 
     # This needs to be set for correct images URLs in emails
