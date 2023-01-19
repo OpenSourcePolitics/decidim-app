@@ -19,7 +19,7 @@ gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidi
 gem "decidim-templates"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git"
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
-gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik", branch: "v0.0.9"
+gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik"
 
 gem "dotenv-rails"
 
