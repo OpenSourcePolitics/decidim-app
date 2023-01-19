@@ -1,0 +1,7 @@
+<% if %w[all cell_rendering].include? request.headers["X-FEATURE-FLAG"] %>
+  <% cache project do %>
+    <%= cell "decidim/budgets/project_list_item", project %>
+  <% end %>
+<% else %>
+  <%= cell "decidim/budgets/project_list_item", project %>
+<% end %>

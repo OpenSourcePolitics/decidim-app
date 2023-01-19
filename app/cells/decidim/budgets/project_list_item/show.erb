@@ -1,0 +1,15 @@
+<% if %w[all cache_cell].include? request.headers["X-FEATURE-FLAG"] %>
+  <% Rails.cache.fetch("budget_cell/#{model.id}") do %>
+    <div id="project-<%= model.id %>-item" class="budget-list__item">
+      <%= render :project_image %>
+      <%= render :project_text %>
+      <%= render :project_data %>
+    </div>
+  <% end %>
+<% else %>
+  <div id="project-<%= model.id %>-item" class="budget-list__item">
+    <%= render :project_image %>
+    <%= render :project_text %>
+    <%= render :project_data %>
+  </div>
+<% end %>

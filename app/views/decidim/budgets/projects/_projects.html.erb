@@ -1,0 +1,17 @@
+<div class="collection-sort-controls row small-up-1 medium-up-3 card-grid">
+  <div class="column">
+    <%= order_selector available_orders, i18n_scope: "decidim.budgets.projects.orders" %>
+  </div>
+</div>
+
+<div class="budget-list">
+  <% projects.each do |project| %>
+    <% if %w[all path].include? request.headers["X-FEATURE-FLAG"] %>
+      <%= render partial: "decidim/budgets/projects/project", locals: { project: project } %>
+    <% else %>
+      <%= render partial: "project", locals: { project: project } %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= decidim_paginate projects %>
