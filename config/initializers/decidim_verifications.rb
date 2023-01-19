@@ -19,7 +19,7 @@
 #   end
 # end
 
-if Rails.env == "test"
+if Rails.env.test?
   Decidim::Verifications.register_workflow(:dummy_authorization_handler) do |workflow|
     workflow.form = "DummyAuthorizationHandler"
     workflow.action_authorizer = "DummyAuthorizationHandler::DummyActionAuthorizer"
