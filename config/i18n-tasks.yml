@@ -89,6 +89,8 @@ ignore_missing:
  - layouts.decidim.header.user_menu
  - decidim.devise.shared.omniauth_buttons.or
  - devise.shared.links.sign_in_with_provider
+ - decidim.forms.step_navigation.*
+ - decidim.forms.questionnaires.show.*
 # Consider these keys used:
 ignore_unused:
   - faker.*

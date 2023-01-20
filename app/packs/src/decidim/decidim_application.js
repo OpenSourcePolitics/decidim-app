@@ -13,11 +13,12 @@ $(() => {
             $(".confirm-reveal .button:first").on("mouseup", function () {
                 $("form.answer-questionnaire").validate({
                     ignore: "thrhwrt",
+                    errorPlacement: function (error, element) {},
                     focusInvalid: false,
                     invalidHandler: function(form, validator) {
 
                         $(".questionnaire-step").each(function () {
-                            console.log($(this).removeClass("hide"))
+                            $(this).removeClass("hide");
                         });
                         $(".next_survey").hide();
                         $(".back_survey").hide();
