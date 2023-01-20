@@ -2,7 +2,7 @@
 
 module Decidim
   module Forms
-    class ApplicationHelperExtends
+    module ApplicationHelperExtends
       def invalid?(responses)
         responses.map { |response| response.errors.any? }.any?
       end
@@ -10,6 +10,6 @@ module Decidim
   end
 end
 
-Decidim::Forms::ApplicationHelper.class_eval do
+Decidim::Forms::ApplicationHelper.module_eval do
   prepend(Decidim::Forms::ApplicationHelperExtends)
 end
