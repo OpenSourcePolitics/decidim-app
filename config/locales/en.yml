@@ -159,6 +159,10 @@ en:
       destroy_draft:
         error: There was a problem deleting the collaborative draft.
         success: Proposal draft was successfully deleted.
+      index:
+        collaborative_drafts_list: Collaborative drafts list
+        new_proposal: New proposal
+        view_proposal: View proposal
       models:
         collaborative_draft:
           fields:
