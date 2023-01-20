@@ -13,6 +13,7 @@ gem "decidim-conferences", git: "https://github.com/decidim/decidim.git", branch
 gem "decidim-decidim_awesome"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_VERSION
+gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens.git"
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: DECIDIM_VERSION
 # gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: DECIDIM_VERSION
 gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git"
@@ -31,6 +32,7 @@ gem "puma", ">= 5.5.1"
 gem "faker", "~> 2.14"
 
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
+gem "aws-sdk-s3", require: false
 gem "fog-aws"
 gem "sys-filesystem"
 
@@ -41,6 +43,7 @@ group :development, :test do
 
   gem "brakeman", "~> 5.1"
   gem "decidim-dev", git: "https://github.com/decidim/decidim.git", branch: DECIDIM_VERSION
+  gem "parallel_tests"
 end
 
 group :development do
@@ -65,3 +68,5 @@ group :production do
   gem "sidekiq-scheduler"
 end
 gem "nokogiri", "1.13.4"
+
+gem "rack-attack", "~> 6.6"

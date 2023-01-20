@@ -32,7 +32,13 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  config.active_storage.service = :local
+  config.active_storage.service = Rails.application.secrets.dig(:scaleway, :id).blank? ? :local : :scaleway
+
+  # By default, files uploaded to Active Storage will be served from a private URL.
+  # in production, you'll want to set this to :public so that files are served
+  # unfortunately, this is not working with the current version of ActiveStorage
+  # TODO: Update rails version and switch to public:true from active_storage
+  config.active_storage.service_urls_expire_in = ENV.fetch("SERVICE_URLS_EXPIRE_IN", 100.years)
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
@@ -40,7 +46,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = ENV.fetch("FORCE_SSL", "1") == "1"
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.

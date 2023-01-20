@@ -9,8 +9,6 @@ fr:
       participatory_process:
         private_space: Espace privé
   decidim:
-    accessibility:
-      skip_button: Passer au contenu principal
     admin:
       participatory_space_private_users:
         create:
@@ -87,6 +85,10 @@ fr:
           email_subject:
             one: Vous n'avez pas finalisé votre vote
             other: Vous n'avez pas finalisé vos votes
+    devise:
+      sessions:
+        new:
+          sign_in_disabled: Vous pouvez accéder avec un compte externe
     events:
       budgets:
         pending_order:
@@ -125,6 +127,8 @@ fr:
         external:
           link: https://franceconnect.gouv.fr/
           text: Qu'est-ce-que FranceConnect ?
+        forgot_password:
+          ok_text: Attention, ce mot de passe est celui de votre compte local et en aucun cas celui du compte que vous utilisez au travers de FranceConnect. Il vous servira uniquement lorsque vous vous connecterez avec votre adresse mail plutôt que via FranceConnect.
     proposals:
       collaborative_drafts:
         collaborative_draft:
@@ -183,6 +187,11 @@ fr:
         change: Modifier
         choose: Sélectionner
         currently_selected: Sélectionné
+    shared:
+      login_modal:
+        close_modal: Fermer
+        please_sign_in: Veuillez vous connecter
+        sign_up: Créer un compte
     system:
       organizations:
         omniauth_settings:
@@ -218,6 +227,17 @@ fr:
           actions:
             osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
+  devise:
+    passwords:
+      new:
+        forgot_your_password: Mot de passe oublié ?
+        send_me_reset_password_instructions: Envoyez-moi les instructions de réinitialisation du mot de passe
+    sessions:
+      new:
+        sign_in: S'identifier
+    shared:
+      links:
+        forgot_your_password: Mot de passe oublié ?
   faker:
     address:
       country_code:
@@ -235,14 +255,10 @@ fr:
   layouts:
     decidim:
       footer:
-        download_open_data: Données ouvertes
         made_with_open_source: Site réalisé par <a target="_blank" href="https://opensourcepolitics.eu">Open Source Politics</a> grâce au <a target="_blank" href="https://github.com/decidim/decidim">logiciel libre Decidim</a>.
-      header:
-        close_menu: Fermer
-        navigation: Navigation
-        sign_in: Se connecter
-        sign_up: S'inscrire
-      user_menu:
-        account: Mon compte
-        conversations: Conversations
-        notifications: Notifications
+  rack_attack:
+    too_many_requests:
+      message: Il semblerait que vous fassiez trop de requêtes sur notre serveur, votre connexion a ete ralentie.
+      time: 'Vous pourrez naviguer de nouveau sur notre plateforme dans :'
+      time_unit: seconds
+      title: Thank you for your participation on %{organization_name}

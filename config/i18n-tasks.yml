@@ -91,6 +91,9 @@ ignore_missing:
  - devise.shared.links.sign_in_with_provider
  - decidim.forms.step_navigation.*
  - decidim.forms.questionnaires.show.*
+ - decidim.account.destroy.success
+ - decidim.account.destroy.error
+
 # Consider these keys used:
 ignore_unused:
   - faker.*
@@ -113,3 +116,6 @@ ignore_unused:
   - decidim.verifications.authorizations.create.*
   - decidim.verifications.authorizations.first_login.actions.*
   - decidim.budgets.admin.reminders.orders.*
+  - rack_attack.too_many_requests.*
+  - decidim.account.destroy.success
+  - decidim.account.destroy.error

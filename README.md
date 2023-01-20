@@ -34,7 +34,12 @@ bundle exec rake decidim_homepage_interactive_map:install:migrations
 bundle exec rails decidim_term_customizer:install:migrations
 ```
 
-5. Install migrations
+5. Install Ludens dependencies and initialize the module
+```bash
+bundle exec rake decidim_ludens:install:migrations
+bundle exec rake decidim_ludens:initialize
+```
+6. Install migrations
 
 ```bash
 bundle exec rake db:migrate

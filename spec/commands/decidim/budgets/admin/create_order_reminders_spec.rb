@@ -22,11 +22,11 @@ describe Decidim::Budgets::Admin::CreateOrderReminders do
   let(:component) { create(:component, organization: organization, manifest_name: "budgets") }
   let(:budget) { create(:budget, component: component) }
 
-  context "when there is a new order" do
+  context "when there is a new order (created at less than 2 hours)" do
     let!(:new_order) { create(:order, budget: budget, created_at: 10.minutes.ago) }
 
-    it "generates reminder and broadcasts ok with count of reminded people" do
-      expect { command }.to change(Decidim::Reminder, :count).by(1).and broadcast(:ok, 0)
+    it "does not send any reminder" do
+      expect { command }.not_to change(Decidim::Reminder, :count)
     end
   end
 
