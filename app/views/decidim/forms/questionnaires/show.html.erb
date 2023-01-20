@@ -62,7 +62,7 @@
                   <% answer_idx = 0 %>
                   <% cleaned_answer_idx = 0 %>
                   <% @form.responses_by_step.each_with_index do |step_answers, step_index| %>
-                    <div id="step-<%= step_index %>" class="<%= (step_index.zero? || @form.errors.any?) ? "questionnaire-step" : "questionnaire-step hide" %>" data-toggler=".hide">
+                    <div id="step-<%= step_index %>" class="<%= (step_index.zero? || invalid?(@form.responses)) ? "questionnaire-step" : "questionnaire-step hide" %>" data-toggler=".hide">
                       <% if @form.total_steps > 1 %>
                         <h3 class="section-heading">
                           <%= t(".current_step", step: step_index + 1) %>
@@ -120,7 +120,7 @@
                         total_steps: @form.total_steps,
                         button_disabled: !current_participatory_space.can_participate?(current_user),
                         form: form,
-                        errors: @form.errors.any?
+                        errors: invalid?(@form.responses)
                       ) %>
                     </div>
                   <% end %>
