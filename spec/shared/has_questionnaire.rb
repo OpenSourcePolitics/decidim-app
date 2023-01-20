@@ -233,22 +233,44 @@ shared_examples_for "has questionnaire" do
     end
 
     describe "leaving a blank question (with js)" do
-      include_context "when a non multiple choice question is mandatory"
+      context "when one non multiple choice question is mandatory" do
+        include_context "when a non multiple choice question is mandatory"
+        before do
+          click_link "Continue"
+          click_button "Submit"
+          click_link "OK"
+        end
 
-      before do
-        click_link "Continue"
-        click_button "Submit"
-        page.execute_script('$(".button[aria-label=\'Ok\']").trigger("mouseup")')
-        click_link "OK"
+        it "shows errors without submitting the form" do
+          expect(page).to have_no_selector ".alert.flash"
+          different_error = I18n.t("decidim.forms.questionnaires.answer.max_choices_alert")
+          expect(different_error).to eq("There are too many choices selected")
+          expect(page).not_to have_content(different_error)
+
+          expect(page).to have_content("can't be blank")
+        end
       end
 
-      it "shows errors without submitting the form" do
-        expect(page).to have_no_selector ".alert.flash"
-        different_error = I18n.t("decidim.forms.questionnaires.answer.max_choices_alert")
-        expect(different_error).to eq("There are too many choices selected")
-        expect(page).not_to have_content(different_error)
+      context "when one non multiple choice question is mandatory" do
+        include_context "when a non multiple choice question is mandatory"
+        let!(:question2) { create(:questionnaire_question, questionnaire: questionnaire, position: 2, mandatory: true) }
 
-        expect(page).to have_content("can't be blank")
+        before do
+          visit questionnaire_public_path
+          click_link "Continue"
+          click_button "Submit"
+          page.execute_script('$(".confirm-reveal .button:first").trigger("mouseup")')
+          click_link "OK"
+        end
+
+        it "shows errors without submitting the form" do
+          expect(page).to have_no_selector ".alert.flash"
+          different_error = I18n.t("decidim.forms.questionnaires.answer.max_choices_alert")
+          expect(different_error).to eq("There are too many choices selected")
+          expect(page).not_to have_content(different_error)
+
+          expect(page).to have_content("can't be blank").twice
+        end
       end
     end
 
@@ -266,12 +288,14 @@ shared_examples_for "has questionnaire" do
           ]
         )
       end
+      let!(:separator) { create(:questionnaire_question, questionnaire: questionnaire, position: 1, question_type: :separator) }
+      let!(:question2) { create(:questionnaire_question, questionnaire: questionnaire, position: 2) }
 
       before do
         visit questionnaire_public_path
 
+        click_link "Continue"
         check "questionnaire_tos_agreement"
-
         accept_confirm { click_button "Submit" }
       end
 

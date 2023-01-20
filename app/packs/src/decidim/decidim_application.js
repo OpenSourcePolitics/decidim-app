@@ -10,7 +10,7 @@ import "jquery-validation"
 $(() => {
     if($(".submit_survey").length) {
         $("body").on('DOMNodeInserted', '.confirm-reveal', function () {
-            $('.button[aria-label="Ok"]').on("mouseup", function () {
+            $(".confirm-reveal .button:first").on("mouseup", function () {
                 $("form.answer-questionnaire").validate({
                     ignore: "thrhwrt",
                     focusInvalid: false,
