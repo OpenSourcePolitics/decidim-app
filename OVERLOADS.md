@@ -170,3 +170,11 @@ end
 * `spec/mailers/decidim/budgets/vote_reminder_mailer_spec.rb`
 * `spec/services/decidim/budgets/order_reminder_generator_spec.rb`
 * `spec/system/admin_reminds_users_with_pending_orders_spec.rb`
+
+## Fix survey validation
+* `app/cells/decidim/forms/step_navigation/show.erb`
+* `app/packs/src/decidim/decidim_application.js`
+* `app/views/decidim/forms/questionnaires/show.html.erb`
+* `config/initializers/decidim_verifications.rb`
+* `spec/shared/has_questionnaire.rb`
+* `spec/system/survey_spec.rb`

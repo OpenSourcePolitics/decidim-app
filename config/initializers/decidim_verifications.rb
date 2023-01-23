@@ -19,6 +19,18 @@
 #   end
 # end
 
-Decidim::Verifications.register_workflow(:osp_authorization_handler) do |auth|
-  auth.form = "Decidim::OspAuthorizationHandler"
+if Rails.env.test?
+  Decidim::Verifications.register_workflow(:dummy_authorization_handler) do |workflow|
+    workflow.form = "DummyAuthorizationHandler"
+    workflow.action_authorizer = "DummyAuthorizationHandler::DummyActionAuthorizer"
+    workflow.expires_in = 1.hour
+
+    workflow.options do |options|
+      options.attribute :postal_code, type: :string, default: "08001", required: false
+    end
+  end
+else
+  Decidim::Verifications.register_workflow(:osp_authorization_handler) do |auth|
+    auth.form = "Decidim::OspAuthorizationHandler"
+  end
 end
