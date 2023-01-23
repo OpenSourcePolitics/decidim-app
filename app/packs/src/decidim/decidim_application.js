@@ -3,3 +3,38 @@
 
 // Load images
 require.context("../../images", true)
+
+import $ from "jquery"
+import "jquery-validation"
+
+$(() => {
+    if($(".submit_survey").length) {
+        $("body").on('DOMNodeInserted', '.confirm-reveal', function () {
+            $(".confirm-reveal .button:first").on("mouseup", function () {
+                $("form.answer-questionnaire").validate({
+                    ignore: "thrhwrt",
+                    errorPlacement: function (error, element) {},
+                    focusInvalid: false,
+                    invalidHandler: function(form, validator) {
+
+                        $(".questionnaire-step").each(function () {
+                            $(this).removeClass("hide");
+                        });
+                        $(".next_survey").hide();
+                        $(".back_survey").hide();
+
+                        if (!validator.numberOfInvalids())
+                            return;
+
+                        const y = validator.errorList[0].element.parentElement.getBoundingClientRect().top + window.pageYOffset - 10;
+
+                        window.scrollTo({top: y, behavior: 'smooth'});
+                    }
+                });
+                if ($("form.answer-questionnaire").valid()) {
+                    $(".survey-form").submit();
+                }
+            });
+        });
+    }
+});
