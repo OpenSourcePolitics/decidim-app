@@ -47,6 +47,16 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
+  remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
+  revision: e1e48fc6b4aaca1af2f04897a63a3f664f2340fc
+  branch: main
+  specs:
+    decidim-decidim_awesome (0.9.0)
+      decidim-admin (>= 0.26.0, < 0.28)
+      decidim-core (>= 0.26.0, < 0.28)
+      sassc (~> 2.3)
+
+GIT
   remote: https://github.com/decidim/decidim.git
   revision: 1cd44173cebd0a65dd33eb03233afeb7acf08534
   branch: release/0.27-stable
@@ -841,6 +851,8 @@ GEM
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -979,6 +991,7 @@ DEPENDENCIES
   byebug (~> 11.0)
   dalli
   decidim!
+  decidim-decidim_awesome!
   decidim-dev!
   decidim-ludens!
   decidim-phone_authorization_handler!
