@@ -31,7 +31,7 @@ namespace :decidim do
           updated_users << user
         end
 
-        if ask_for_permission(updated_users.count)
+        if ask_for_permission(logger, updated_users.count)
           logger.info("[decidim:repair:nickname] :: Updating users...")
           updated_users.each do |user|
             user.save!
@@ -53,7 +53,7 @@ namespace :decidim do
   end
 end
 
-def ask_for_permission(users_count)
+def ask_for_permission(logger, users_count)
   return true if ENV["REPAIR_NICKNAME_FORCE"] == "1"
 
   logger.info("[decidim:repair:nickname] :: Do you want to update these #{users_count} users ?")
