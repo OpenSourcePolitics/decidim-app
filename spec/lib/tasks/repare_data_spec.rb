@@ -6,13 +6,13 @@ describe "rake decidim:repare:nickname", type: :task do
   let!(:organization) { create(:organization) }
   let(:task_cmd) { :"decidim:repare:nickname" }
 
-  let!(:user) { create(:user, organization: organization) }
-  let!(:valid_user_2) { create(:user, nickname: "Azerty_Uiop123", organization: organization) }
+  let!(:valid_user) { create(:user, nickname: "Azerty_Uiop123", organization: organization) }
   let(:invalid_user_1) { build(:user, nickname: "Foo bar", organization: organization) }
   let(:invalid_user_2) { build(:user, nickname: "Foo M. bar", organization: organization) }
   let(:invalid_user_3) { build(:user, nickname: "Foo-Bar_fooo$", organization: organization) }
   let(:invalid_user_4) { build(:user, nickname: "foo.bar.foo", organization: organization) }
   let(:invalid_user_5) { build(:user, nickname: ".foobar.foo_bar.", organization: organization) }
+  let(:invalid_user_6) { build(:user, nickname: "Foo  bar", organization: organization) }
 
   context "when executing task" do
     before do
@@ -21,20 +21,19 @@ describe "rake decidim:repare:nickname", type: :task do
       invalid_user_3.save(validate: false)
       invalid_user_4.save(validate: false)
       invalid_user_5.save(validate: false)
+      invalid_user_6.save(validate: false)
     end
 
-    it "exits with 0 code" do
-      allow($stdin).to receive(:gets).and_return("y")
-
-      expect { Rake::Task[task_cmd].invoke }.to raise_error(SystemExit) do |error|
-        expect(error.status).to eq(0)
-      end
+    after do
+      ENV["REPARE_NICKNAME_FORCE"] = nil
     end
 
     context "when user accepts update" do
-      it "updates invalid nicknames" do
-        allow($stdin).to receive(:gets).and_return("y")
+      before do
+        ENV["REPARE_NICKNAME_FORCE"] = "1"
+      end
 
+      it "updates invalid nicknames" do
         expect { Rake::Task[task_cmd].invoke }.to change(invalid_user_1, :nickname).from("Foo bar").to("foobar")
 
         invalid_user_1.reload
@@ -45,10 +44,21 @@ describe "rake decidim:repare:nickname", type: :task do
         expect(invalid_user_3.nickname).to eq("foobarfooo")
         invalid_user_4.reload
         expect(invalid_user_4.nickname).to eq("foobarfoo")
+        invalid_user_5.reload
+        expect(invalid_user_5.nickname).to eq("foobarfoobar")
+        invalid_user_6.reload
+        expect(invalid_user_6.nickname).to eq("foobar1")
+
+        valid_user.reload
+        expect(valid_user.nickname).to eq("Azerty_Uiop123")
       end
     end
 
     context "when user refuses update" do
+      before do
+        ENV["REPARE_NICKNAME_FORCE"] = nil
+      end
+
       it "updates invalid nicknames" do
         allow($stdin).to receive(:gets).and_return("n")
 
@@ -64,6 +74,11 @@ describe "rake decidim:repare:nickname", type: :task do
         expect(invalid_user_4.nickname).to eq("foo.bar.foo")
         invalid_user_5.reload
         expect(invalid_user_5.nickname).to eq(".foobar.foo_bar.")
+        invalid_user_6.reload
+        expect(invalid_user_6.nickname).to eq("Foo  bar")
+
+        valid_user.reload
+        expect(valid_user.nickname).to eq("Azerty_Uiop123")
       end
     end
   end
