@@ -56,10 +56,8 @@ end
 def ask_for_permission(users_count)
   return true if ENV["REPAIR_NICKNAME_FORCE"] == "1"
 
-  $stdout.puts "Do you want to update these #{users_count} users ? [y/n]"
-  answer = $stdin.gets.chomp
-
-  %w(y Y yes YES).include?(answer)
+  logger.info("[decidim:repair:nickname] :: Do you want to update these #{users_count} users ?")
+  logger.info("[decidim:repair:nickname] :: prepend REPAIR_NICKNAME_FORCE=1 to your command to update")
 end
 
 def ascii_to_valid_char(id)
