@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "digest"
 
 module ProjectListItemCellExtends
@@ -7,7 +8,7 @@ module ProjectListItemCellExtends
   end
 
   def perform_caching?
-    %w[all list_cache].include? request.headers["X-FEATURE-FLAG"]
+    %w(all list_cache).include? request.headers["X-FEATURE-FLAG"]
   end
 
   def cache_hash
@@ -21,7 +22,7 @@ module ProjectListItemCellExtends
     hash.push(can_have_order?)
 
     hash.push(I18n.locale)
-    hash.push(current_settings.attributes)
+    hash.push(current_settings)
 
     Digest::MD5.hexdigest(hash.join(Decidim.cache_key_separator))
   end
