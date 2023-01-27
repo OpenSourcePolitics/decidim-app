@@ -96,7 +96,7 @@ describe SentrySetup do
 
   describe ".sample rate" do
     it "returns the sample rate" do
-      expect(subject.send(:sample_rate)).to eq(0.5)
+      expect(subject.send(:sample_rate)).to eq("0.5")
     end
 
     context "when in a sidekiq worker" do
@@ -105,7 +105,7 @@ describe SentrySetup do
       end
 
       it "returns the sample rate" do
-        expect(subject.send(:sample_rate)).to eq(0.1)
+        expect(subject.send(:sample_rate)).to eq("0.1")
       end
     end
   end

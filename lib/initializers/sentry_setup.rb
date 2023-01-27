@@ -12,7 +12,7 @@ module SentrySetup
         config.dsn = Rails.application.secrets.dig(:sentry, :dsn)
         config.breadcrumbs_logger = [:active_support_logger, :http_logger]
 
-        config.traces_sample_rate = sample_rate
+        config.traces_sample_rate = sample_rate.to_f
       end
 
       Sentry.set_tags('server.hostname': hostname) if hostname.present?
@@ -36,7 +36,7 @@ module SentrySetup
     end
 
     def sample_rate
-      Sidekiq.server? ? ENV.fetch("SENTRY_SAMPLE_RATE", 0.1) : ENV.fetch("SENTRY_SAMPLE_RATE", 0.5)
+      Sidekiq.server? ? ENV.fetch("SENTRY_SIDEKIQ_SAMPLE_RATE", "0.1") : ENV.fetch("SENTRY_SAMPLE_RATE", "0.5")
     end
   end
 end
