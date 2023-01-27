@@ -2,8 +2,9 @@
 
 # Enabled by default in production
 # Can be deactivated with 'ENABLE_RACK_ATTACK=0'
-Rack::Attack.enabled = (ENV["ENABLE_RACK_ATTACK"] == "1") || Rails.env.production?
+return if Rails.application.secrets.dig(:decidim, :rack_attack, :enabled) == 0
 
+Rack::Attack.enabled = (Rails.application.secrets.dig(:decidim, :rack_attack, :enabled) == 1) || Rails.env.production?
 Rack::Attack.throttled_response_retry_after_header = true
 
 # By default use the memory store for inspecting requests
@@ -17,12 +18,6 @@ Rails.application.config.after_initialize do
 end
 
 Rack::Attack.throttled_responder = lambda do |request|
-  # headers = {
-  #   'RateLimit-Limit' => match_data[:limit].to_s,
-  #   'RateLimit-Remaining' => '0',
-  #   'RateLimit-Reset' => (now + (match_data[:period] - now % match_data[:period])).to_s
-  # }
-
   rack_logger = Logger.new(Rails.root.join("log/rack_attack.log"))
 
   request_uuid = request.env["action_dispatch.request_id"]
@@ -30,7 +25,6 @@ Rack::Attack.throttled_responder = lambda do |request|
     "ip" => request.ip,
     "path" => request.path,
     "get" => request.GET,
-    "post" => request.POST,
     "host" => request.host,
     "referer" => request.referer
   }
