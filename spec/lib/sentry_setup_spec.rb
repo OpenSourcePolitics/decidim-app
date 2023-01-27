@@ -32,7 +32,7 @@ describe SentrySetup do
   describe ".init" do
     it "is configured" do
       expect(Sentry.configuration.dsn.host).to eq("sentry.dsn")
-      expect(Sentry.configuration.traces_sample_rate).to eq(1.0)
+      expect(Sentry.configuration.traces_sample_rate).to eq(0.5)
     end
 
     context "when sentry is disabled" do
@@ -91,6 +91,22 @@ describe SentrySetup do
 
     it "returns a metadata hash" do
       expect(subject.send(:server_metadata)).to be_a(Hash)
+    end
+  end
+
+  describe ".sample rate" do
+    it "returns the sample rate" do
+      expect(subject.send(:sample_rate)).to eq(0.5)
+    end
+
+    context "when in a sidekiq worker" do
+      before do
+        allow(Sidekiq).to receive(:server?).and_return("constant")
+      end
+
+      it "returns the sample rate" do
+        expect(subject.send(:sample_rate)).to eq(0.1)
+      end
     end
   end
 end
