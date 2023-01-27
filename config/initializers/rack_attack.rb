@@ -2,7 +2,7 @@
 
 # Enabled by default in production
 # Can be deactivated with 'ENABLE_RACK_ATTACK=0'
-return if Rails.application.secrets.dig(:decidim, :rack_attack, :enabled) == 0
+return if Rails.application.secrets.dig(:decidim, :rack_attack, :enabled).zero?
 
 Rack::Attack.enabled = (Rails.application.secrets.dig(:decidim, :rack_attack, :enabled) == 1) || Rails.env.production?
 Rack::Attack.throttled_response_retry_after_header = true
