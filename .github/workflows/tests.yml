@@ -175,6 +175,7 @@ jobs:
           name: screenshots
           path: ./spec/tmp/screenshots
   test_build:
+    name: Test build docker image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -223,7 +224,8 @@ jobs:
           key: ${{ secrets.ANSIBLE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/staging.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
-  build:
+  build_and_push_image:
+    name: Build and push image to Registry
     if: "github.ref == 'refs/heads/develop'"
     needs: [lint, tests, system_tests, test_build]
     runs-on: ubuntu-latest
