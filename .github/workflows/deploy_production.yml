@@ -1,5 +1,5 @@
 name: "Deploy production"
-on: [workflow_dispatch]
+on: [ workflow_dispatch ]
 
 env:
   CI: "true"
@@ -23,3 +23,18 @@ jobs:
           key: ${{ secrets.ANSIBLE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/production.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
+  build:
+    if: "github.ref == 'refs/heads/master'"
+    needs: [ test_build ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to registry
+        run: |
+          docker login ${{ secrets.REGISTRY }} -u userdoesnotmatter -p ${{ secrets.TOKEN }}
+      - name: Build image
+        run: |
+          docker build . --compress --tag ${{ env.IMAGE_NAME }}:latest --tag ${{ env.IMAGE_NAME }}:${{ GITHUB_SHA }}
+      - name: Push Image
+        run: |
+          docker push --all-tags
