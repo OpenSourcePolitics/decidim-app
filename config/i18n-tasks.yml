@@ -93,6 +93,8 @@ ignore_missing:
  - decidim.forms.questionnaires.show.*
  - decidim.account.destroy.success
  - decidim.account.destroy.error
+ - decidim.editor_images.create.error
+ - decidim.editor_images.create.success
 
 # Consider these keys used:
 ignore_unused:
