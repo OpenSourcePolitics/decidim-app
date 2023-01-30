@@ -73,7 +73,7 @@ module Decidim
           end.to change { Decidim::EditorImage.count }.by(1)
 
           active_storage_path = Decidim::EditorImage.first.attached_uploader(:file).path
-          expect(response.body).to eq({ url: "http://#{organization.host}#{active_storage_path}",message: "Image uploaded successfully" }.to_json)
+          expect(response.body).to eq({ url: "http://#{organization.host}#{active_storage_path}", message: "Image uploaded successfully" }.to_json)
         end
 
         context "when file is not valid" do
