@@ -191,8 +191,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: false
-        tags:
-          - ${{ env.IMAGE_NAME }}:develop
+          tags: ${{ env.IMAGE_NAME }}:develop
       - name: Test build
         run: |
           ./.github/test_build.rb
@@ -257,5 +256,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags:
-            - ${{ env.IMAGE_NAME }}:develop
+          tags: ${{ env.IMAGE_NAME }}:develop

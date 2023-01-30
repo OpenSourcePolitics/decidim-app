@@ -41,6 +41,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags:
-            - ${{ env.IMAGE_NAME }}:latest
-            - ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          tags: ${{ env.IMAGE_NAME }}:latest,${{ env.IMAGE_NAME }}:${{ github.sha }}
