@@ -15,10 +15,10 @@ RUN curl https://deb.nodesource.com/setup_16.x | bash && \
     gem install bundler:2.2.17 && \
     rm -rf /var/lib/apt/lists/*
 
-COPY Gemfile* .
+COPY Gemfile* ./
 RUN bundle config set --local without 'development test' && bundle install
 
-COPY package* .
+COPY package* ./
 COPY yarn.lock .
 COPY packages packages
 RUN yarn install
