@@ -202,10 +202,19 @@ jobs:
           registry: ${{ vars.REGISTRY }}
           username: userdoesnotmatter
           password: ${{ secrets.TOKEN }}
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
       - name: Build image
         uses: docker/build-push-action@v3
         with:
           push: false
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
           tags: ${{ vars.IMAGE_NAME }}:develop
       - name: Test build
         run: |

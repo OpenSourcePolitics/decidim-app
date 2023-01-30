@@ -6,7 +6,8 @@ ENV RAILS_ENV=production \
 WORKDIR /app
 
 # Install NodeJS
-RUN curl https://deb.nodesource.com/setup_16.x | bash && \
+RUN --mount=type=cache,target=/var/cache/apt \
+    curl https://deb.nodesource.com/setup_16.x | bash && \
     apt install -y nodejs && \
     apt update && \
     npm install -g npm@8.19.2 && \
