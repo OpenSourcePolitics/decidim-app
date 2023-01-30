@@ -63,12 +63,19 @@ describe Decidim::Budgets::ProjectListItemCell, type: :cell do
       end
     end
 
-    context "when no current user" do
-      it "generate a different hash" do
+    context "when current user" do
+      it "generate a hash" do
         old_hash = my_cell.send(:cache_hash)
-        allow(controller).to receive(:current_user).and_return(nil)
 
-        expect(my_cell.send(:cache_hash)).not_to eq(old_hash)
+        expect(my_cell.send(:cache_hash)).to eq(old_hash)
+      end
+      context "and user changes" do
+        it "generate a different hash" do
+          old_hash = my_cell.send(:cache_hash)
+          allow(controller).to receive(:current_user).and_return(nil)
+
+          expect(my_cell.send(:cache_hash)).not_to eq(old_hash)
+        end
       end
     end
 
