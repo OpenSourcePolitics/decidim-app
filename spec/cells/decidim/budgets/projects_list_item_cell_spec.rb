@@ -82,6 +82,14 @@ describe Decidim::Budgets::ProjectListItemCell, type: :cell do
 
         expect(my_cell.send(:cache_hash)).to eq(old_hash)
       end
+
+      context "and photos is unpublished" do
+        it "generate same hash" do
+          old_hash = my_cell.send(:cache_hash)
+          allow(model).to receive(:photos).and_return([])
+          expect(my_cell.send(:cache_hash)).not_to eq(old_hash)
+        end
+      end
     end
   end
 end
