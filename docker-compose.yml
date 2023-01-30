@@ -15,8 +15,6 @@ services:
   sidekiq:
     build:
       context: .
-      cache_from:
-        - ${IMAGE_NAME}:${IMAGE_TAG}
     command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
     environment:
       - REDIS_URL=redis://redis:6379
@@ -28,8 +26,6 @@ services:
   app:
     build:
       context: .
-      cache_from:
-        - ${IMAGE_NAME}:${IMAGE_TAG}
     volumes:
       - .:/app
       - node_modules:/app/node_modules

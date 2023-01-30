@@ -179,10 +179,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Scaleway registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: userdoesnotmatter
+          password: ${{ secrets.TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: false
+        tags:
+          - ${{ env.IMAGE_NAME }}:develop
       - name: Test build
         run: |
-          export IMAGE_NAME=${{ env.IMAGE_NAME }}
-          export IMAGE_TAG=nightly
           ./.github/test_build.rb
   deploy_develop:
     if: "github.ref == 'refs/heads/develop'"
@@ -233,13 +245,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Login to registry
-        run: |
-          docker login ${{ env.REGISTRY }} -u userdoesnotmatter -p ${{ secrets.TOKEN }}
-      - name: Build image
-        run: |
-          docker build . --compress --tag ${{ env.IMAGE_NAME }}:develop --cache-from ${{ env.IMAGE_NAME }}:develop
-      - name: Push Image
-        run: |
-          docker push --all-tags
-
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Scaleway registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: userdoesnotmatter
+          password: ${{ secrets.TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags:
+            - ${{ env.IMAGE_NAME }}:develop
