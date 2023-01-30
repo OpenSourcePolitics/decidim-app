@@ -216,6 +216,8 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
           tags: ${{ vars.IMAGE_NAME }}:develop
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
       - name: Test build
         run: |
           docker images
