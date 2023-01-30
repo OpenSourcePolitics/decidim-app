@@ -235,7 +235,7 @@ jobs:
           docker login ${{ secrets.REGISTRY }} -u userdoesnotmatter -p ${{ secrets.TOKEN }}
       - name: Build image
         run: |
-          docker build . --compress --tag ${{ env.IMAGE_NAME }}:nightly --tag ${{ env.IMAGE_NAME }}:${{ GITHUB_SHA }}
+          docker build . --compress --tag ${{ env.IMAGE_NAME }}:nightly --tag ${{ env.IMAGE_NAME }}:${{ env.GITHUB_SHA }}
       - name: Push Image
         run: |
           docker push ${{ secrets.PRODUCTION_TAG }}
