@@ -187,7 +187,7 @@ jobs:
           registry: ${{ vars.REGISTRY }}
           username: userdoesnotmatter
           password: ${{ secrets.TOKEN }}
-      - name: Build and push
+      - name: Build image
         uses: docker/build-push-action@v3
         with:
           push: false
