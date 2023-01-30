@@ -175,7 +175,6 @@ jobs:
           name: screenshots
           path: ./spec/tmp/screenshots
   test_build:
-    needs: [ tests, tests_system, lint ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
