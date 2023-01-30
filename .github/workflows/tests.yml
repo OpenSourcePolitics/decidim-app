@@ -218,6 +218,7 @@ jobs:
           tags: ${{ vars.IMAGE_NAME }}:develop
       - name: Test build
         run: |
+          docker images
           docker run -d -e DATABASE_USERNAME=${{env.DATABASE_USERNAME}} -e DATABASE_PASSWORD=${{env.DATABASE_PASSWORD}} -e DATABASE_HOST=${{env.DATABASE_HOST}} -p 3000:3000 --name decidim-app ${{ vars.IMAGE_NAME }}:develop
           docker exec decidim-app bundle exec rake db:create db:migrate
           ./.github/test_build.sh
