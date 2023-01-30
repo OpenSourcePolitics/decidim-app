@@ -1,31 +1,31 @@
-FROM ruby:2.7.1
+FROM ruby:2.7.5
 
-# Install NodeJS
-RUN curl https://deb.nodesource.com/setup_16.x | bash
-RUN apt install -y nodejs
+ENV RAILS_ENV=production \
+    SECRET_KEY_BASE=dummy
 
-# Install Yarn
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null
-RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt update && apt install -y yarn
-
-# Decidim dependencies
-RUN apt install -y libicu-dev postgresql-client
-
-# Install npm
-RUN npm install -g npm@7.21.0
-# Install bundler
-RUN gem install bundler:2.2.29
-
-# Copy all decidim-app content to /app
-ADD . /app
 WORKDIR /app
 
-RUN bundle install && yarn install && bundle exec rails assets:precompile
+# Install NodeJS
+RUN curl https://deb.nodesource.com/setup_16.x | bash && \
+    apt install -y nodejs && \
+    apt update && \
+    npm install -g npm@8.19.2 && \
+    npm install --global yarn && \
+    apt install -y libicu-dev postgresql-client && \
+    gem install bundler:2.2.17 && \
+    rm -rf /var/lib/apt/lists/*
 
-# Perform assets compilation
+COPY Gemfile* .
+RUN bundle config set --local without 'development test' && bundle install
+
+COPY package* .
+COPY yarn.lock .
+COPY packages packages
 RUN yarn install
-RUN SECRET_KEY_BASE=dummy bundle exec rails assets:precompile
+
+COPY . .
+
+RUN bundle exec bootsnap precompile --gemfile app/ lib/ config/ bin/ db/ && bundle exec rails assets:precompile
 
 # Configure endpoint.
 COPY ./entrypoint.sh /usr/bin/
@@ -33,4 +33,4 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
