@@ -156,6 +156,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
+            decidim-packs
             public/packs-test
             tmp/webpacker-cache
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
@@ -215,6 +216,7 @@ jobs:
           push: false
           cache-from: type=local,src=/tmp/.buildx-cache,mode=max
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
+          load: true
           tags: ${{ vars.IMAGE_NAME }}:develop
       # TODO: Understand why this is needed, docker image should be here locally
       - name: Setup upterm session
