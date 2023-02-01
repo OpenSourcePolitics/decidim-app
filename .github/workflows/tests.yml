@@ -209,8 +209,6 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
           restore-keys: |
             ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
-      - name: Create cache dir if not exists
-        run: mkdir -p /tmp/.buildx-cache
       - name: Build image
         uses: docker/build-push-action@v3
         with:
