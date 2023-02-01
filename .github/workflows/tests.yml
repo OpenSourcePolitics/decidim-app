@@ -213,15 +213,14 @@ jobs:
       - name: Build image
         uses: docker/build-push-action@v3
         with:
-          push: false
           cache-from: type=local,src=/tmp/.buildx-cache,mode=max
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
-          load: true
+          outputs: type=docker,compression=gzip
           tags: ${{ vars.IMAGE_NAME }}:develop
       - name: Test build
         run: |
           docker run --rm --add-host=host.docker.internal:host-gateway -d -e DATABASE_USERNAME=${{env.DATABASE_USERNAME}} -e DATABASE_PASSWORD=${{env.DATABASE_PASSWORD}} -e DATABASE_HOST=${{env.DATABASE_HOST}} -p 3000:3000 --name decidim-app ${{ vars.IMAGE_NAME }}:develop
-          docker exec -it decidim-app bundle exec rake db:create db:migrate
+          docker exec decidim-app bundle exec rake db:create db:migrate
           ./.github/test_build.sh
   deploy_develop:
     if: "github.ref == 'refs/heads/develop'"
