@@ -1,5 +1,8 @@
 # Overrides
 
+## Fix cache on Hero Cell
+* `lib/extends/cells/decidim/content_blocks/hero_cell_extends.rb:13`
+
 ## Add budget and proposal map caching
 * `app/views/decidim/budgets/projects/index.html.erb:9`
 * `app/views/decidim/proposals/proposals/index.html.erb:5`
