@@ -54,10 +54,12 @@ namespace :decidim do
 end
 
 def ask_for_permission(logger, users_count)
+  logger.info("[decidim:repair:nickname] :: Do you want to update these #{users_count} users ?")
   return true if ENV["REPAIR_NICKNAME_FORCE"] == "1"
 
-  logger.info("[decidim:repair:nickname] :: Do you want to update these #{users_count} users ?")
   logger.info("[decidim:repair:nickname] :: prepend REPAIR_NICKNAME_FORCE=1 to your command to update")
+
+  false
 end
 
 def ascii_to_valid_char(id)
