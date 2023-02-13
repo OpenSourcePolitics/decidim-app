@@ -16,6 +16,7 @@ gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolit
 gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens.git"
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: DECIDIM_VERSION
 # gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: DECIDIM_VERSION
+gem "decidim-cleaner"
 gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git"
 gem "decidim-templates"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git"
