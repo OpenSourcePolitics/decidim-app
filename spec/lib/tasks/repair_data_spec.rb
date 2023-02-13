@@ -26,11 +26,13 @@ describe "rake decidim:repair:nickname", type: :task do
     invalid_user_6.save(validate: false)
     invalid_user_7.save(validate: false)
 
+    Rake::Task[task_cmd].reenable
+
     ENV["REPAIR_NICKNAME_FORCE"] = repair_nick_name_force
   end
 
   after do
-    ENV["REPAIR_NICKNAME_FORCE"] = nil
+    ENV["REPAIR_NICKNAME_FORCE"] = "0"
   end
 
   it "updates invalid nicknames" do
@@ -47,7 +49,7 @@ describe "rake decidim:repair:nickname", type: :task do
   end
 
   context "when user refuses update" do
-    let(:repair_nick_name_force) { nil }
+    let(:repair_nick_name_force) { "0" }
 
     it "updates invalid nicknames" do
       Rake::Task[task_cmd].invoke

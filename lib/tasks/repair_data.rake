@@ -4,7 +4,7 @@ namespace :decidim do
   namespace :repair do
     desc "Check for nicknames that doesn't respect valid format and update them, if needed force update with REPAIR_NICKNAME_FORCE=1"
     task nickname: :environment do
-      logger = Logger.new($stdout)
+      logger = logger(Rails.env)
       logger.info("[decidim:repair:nickname] :: Checking all nicknames...")
       invalid_users = Decidim::User.where.not("nickname ~* ?", "^[\\w-]+$")
 
@@ -53,11 +53,21 @@ namespace :decidim do
   end
 end
 
+def logger(env)
+  if env == "production"
+    Logger.new($stdout)
+  else
+    Rails.logger
+  end
+end
+
 def ask_for_permission(logger, users_count)
+  logger.info("[decidim:repair:nickname] :: Do you want to update these #{users_count} users ?")
   return true if ENV["REPAIR_NICKNAME_FORCE"] == "1"
 
-  logger.info("[decidim:repair:nickname] :: Do you want to update these #{users_count} users ?")
   logger.info("[decidim:repair:nickname] :: prepend REPAIR_NICKNAME_FORCE=1 to your command to update")
+
+  false
 end
 
 def ascii_to_valid_char(id)
