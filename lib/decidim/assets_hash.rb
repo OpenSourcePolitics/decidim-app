@@ -41,6 +41,7 @@ module Decidim
     def files_cat(*files)
       files.map { |pattern| Dir.glob(pattern) }
            .flatten
+           .sort
            .select { |file| File.file?(file) }
            .map(&File.method(:read))
            .join("\n")
