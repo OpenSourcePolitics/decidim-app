@@ -98,8 +98,6 @@ jobs:
             public/packs-test
             tmp/webpacker-cache
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
-      - name: Debugging with ssh
-        uses: lhotari/action-upterm@v1
       - name: Precompile assets
         run: |
           bundle exec rake assets:precompile
@@ -170,8 +168,6 @@ jobs:
             public/packs-test
             tmp/webpacker-cache
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
-      - name: Debugging with ssh
-        uses: lhotari/action-upterm@v1
       - name: Precompile assets
         run: |
           bundle exec rake assets:precompile
