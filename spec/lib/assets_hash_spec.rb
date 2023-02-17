@@ -19,14 +19,14 @@ module Decidim
       end
 
       it "concatenates the files" do
-        expect(subject.send(:files_cat, "app/packs/**/*")).to eq("content\ncontent")
+        expect(subject.send(:files_cat, "app/packs/**/*")).to eq("ed7002b439e9ac845f22357d822bac1444730fbdb6016d3ec9432297b9ec9f73\ned7002b439e9ac845f22357d822bac1444730fbdb6016d3ec9432297b9ec9f73")
       end
 
       context "when there are multiples files in the same directory" do
         let(:files) { [%w(app/packs/js/file0.js app/packs/js/file1.js), "app/packs/js/file2.js"] }
 
         it "concatenates the files" do
-          expect(subject.send(:files_cat, "app/packs/**/*")).to eq("content\ncontent\ncontent")
+          expect(subject.send(:files_cat, "app/packs/**/*")).to eq("ed7002b439e9ac845f22357d822bac1444730fbdb6016d3ec9432297b9ec9f73\ned7002b439e9ac845f22357d822bac1444730fbdb6016d3ec9432297b9ec9f73\ned7002b439e9ac845f22357d822bac1444730fbdb6016d3ec9432297b9ec9f73")
         end
       end
     end

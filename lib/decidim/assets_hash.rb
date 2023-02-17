@@ -43,7 +43,7 @@ module Decidim
            .flatten
            .sort
            .select { |file| File.file?(file) }
-           .map(&File.method(:read))
+           .map { |file| hash(File.read(file)) }
            .join("\n")
     end
   end
