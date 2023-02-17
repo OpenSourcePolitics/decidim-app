@@ -6,18 +6,8 @@ namespace :decidim_app do
     # :nocov:
     puts "Running bundler installation"
     system("bundle install")
-    puts "[Decidim Awesome] Installing migrations..."
-    system("bundle exec rails decidim_decidim_awesome:install:migrations")
-    puts "[Decidim Awesome] Installing webpacker..."
-    system("bundle exec rails decidim_decidim_awesome:webpacker:install")
-    puts "[Homepage Interactive map] Installing migrations..."
-    system("bundle exec rake decidim_homepage_interactive_map:install:migrations")
-    puts "[Term customizer] Installing migrations"
-    system("bundle exec rails decidim_term_customizer:install:migrations")
-    puts "[Decidim Ludens] Installing migrations"
-    system("bundle exec rails decidim_ludens:install:migrations")
-    puts "Initializing decidim_ludens..."
-    system("bundle exec rake decidim_ludens:initialize")
+    puts "Installing engine migrations..."
+    system("bundle exec rake railties:install:migrations")
     puts "Checking for migrations to apply..."
     migrations = `bundle exec rake db:migrate:status | grep down`
     if migrations.present?
