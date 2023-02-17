@@ -39,6 +39,7 @@ module Decidim
     end
 
     def files_cat(*files)
+      # TODO: Investigate on inconstitent results on CI, sometimes the hash generated is different for the slice 1-2 without apparent reason.
       files.map { |pattern| Dir.glob(pattern) }
            .flatten
            .sort
