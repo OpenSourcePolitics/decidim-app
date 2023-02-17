@@ -10,6 +10,15 @@ env:
   RUBYOPT: '-W:no-deprecated'
 
 jobs:
+  todo:
+    name: TODO
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: "TODO to Issue"
+        uses: "alstr/todo-to-issue-action@v4"
   lint:
     name: Lint code
     runs-on: ubuntu-latest
