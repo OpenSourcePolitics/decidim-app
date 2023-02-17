@@ -3,6 +3,7 @@
 namespace :decidim_app do
   desc "Setup Decidim-app"
   task setup: :environment do
+    # :nocov:
     puts "Running bundler installation"
     system("bundle install")
     puts "[Decidim Awesome] Installing migrations..."
@@ -29,5 +30,6 @@ namespace :decidim_app do
     end
 
     puts "Setup successfully terminated"
+    # :nocov:
   end
 end
