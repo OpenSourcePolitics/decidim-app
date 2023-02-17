@@ -39,7 +39,7 @@ module Decidim
     end
 
     def sliced_files_groups
-      sliced_files.map{ |file| file.split("/")[1].sub("_spec.rb", "") }.uniq.join("-")
+      sliced_files.map { |file| file.split("/")[1].sub("_spec.rb", "") }.uniq.join("-")
     end
 
     def environment_variables

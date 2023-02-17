@@ -90,8 +90,12 @@ module Decidim
     end
 
     describe "#environnement_variables" do
+      before do
+        allow(Dir).to receive(:glob).and_return(files)
+      end
+
       it "returns the correct env" do
-        expect(subject.environment_variables).to eq("RAILS_ENV=test TEST_ENV_SLICE=0 TEST_ENV_TYPE=types-i18n-forms-mailers-system")
+        expect(subject.environment_variables).to eq("RAILS_ENV=test TEST_ENV_SLICE=0 TEST_ENV_TYPE=example1-example2")
       end
     end
   end
