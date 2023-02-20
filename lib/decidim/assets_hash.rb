@@ -4,19 +4,21 @@ require "digest"
 
 module Decidim
   class AssetsHash
-    def initialize
+    def initialize(options = {})
       @assets_patterns = %w(Gemfile* package* yarn* app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*)
       @included_extensions = %w(lock Gemfile gemspec json js mjs jsx ts tsx gql graphql bmp gif jpeg jpg png tiff ico avif webp eot otf ttf woff woff2 svg md odt)
+      @output = options.fetch("output", true)
+      @output_path = options.fetch("output_path", "tmp/assets_manifest.json")
     end
 
-    def self.run(output: true)
-      new.run(output)
+    def self.run(options = {})
+      new(options).run
     end
 
-    def run(output)
+    def run
       assets_manifest = JSON.pretty_generate(files_digest(@assets_patterns))
 
-      File.write("tmp/assets_manifest.json", assets_manifest) if output
+      File.write(@output_path, assets_manifest) if @output
 
       digest(assets_manifest)
     end
