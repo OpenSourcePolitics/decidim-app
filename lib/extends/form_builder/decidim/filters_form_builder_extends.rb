@@ -51,7 +51,7 @@ module DecidimFilterFormBuilderExtends
 
   # Wrap the category select in a custom fieldset.
   def categories_select(method, collection, options = {}, html_options = {})
-    Rails.cache.fetch("categories_select/#{digest([method, collection, options, html_options])}") do
+    Rails.cache.fetch("categories_select/#{digest(method, collection, options, html_options)}") do
       fieldset_wrapper(options.delete(:legend_title), "#{method}_categories_select_filter") do
         super(method, collection, options, html_options)
       end
@@ -60,7 +60,7 @@ module DecidimFilterFormBuilderExtends
 
   # Wrap the areas select in a custom fieldset.
   def areas_select(method, collection, options = {}, html_options = {})
-    Rails.cache.fetch("areas_select/#{digest([method, collection, options, html_options])}") do
+    Rails.cache.fetch("areas_select/#{digest(method, collection, options, html_options)}") do
       fieldset_wrapper(options[:legend_title], "#{method}_areas_select_filter") do
         super(method, collection, options, html_options)
       end
@@ -71,7 +71,7 @@ module DecidimFilterFormBuilderExtends
   # Any *_select can be used as a custom_select; what changes is the superclass method,
   # and this one knows which one has to be called, depending on the `name` provided.
   def custom_select(name, method, collection, options = {})
-    Rails.cache.fetch("custom_select/#{digest([name, method, collection, options])}") do
+    Rails.cache.fetch("custom_select/#{digest(name, method, collection, options)}") do
       fieldset_wrapper(options[:legend_title], "#{method}_#{name}_select_filter") do
         send(:"#{name}_select", method, collection, options)
       end
