@@ -112,9 +112,12 @@ jobs:
         if: always()
         with:
           name: screenshots
-          path: |
-            ./spec/tmp/screenshots
-            ./tmp/assets_manifest.json
+          path: ./spec/tmp/screenshots
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: assets-manifest-${{ matrix.slice }}
+          path: ./tmp/assets_manifest.json
   system_tests:
     strategy:
       matrix:
@@ -184,9 +187,12 @@ jobs:
         if: always()
         with:
           name: screenshots
-          path: |
-            ./spec/tmp/screenshots
-            ./tmp/assets_manifest.json
+          path: ./spec/tmp/screenshots
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: assets-manifest-${{ matrix.slice }}
+          path: ./tmp/assets_manifest.json
   test_build:
     name: Test build docker image
     runs-on: ubuntu-latest
