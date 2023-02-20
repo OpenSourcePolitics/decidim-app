@@ -8,14 +8,14 @@ module Decidim
       @assets_patterns = %w(Gemfile Gemfile.lock package.json yarn.lock app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*)
     end
 
-    def self.run
-      new.run
+    def self.run(output: true)
+      new.run(output)
     end
 
-    def run
+    def run(output: true)
       assets_manifest = JSON.pretty_generate(files_digest(@assets_patterns))
 
-      File.write("tmp/assets_manifest.json", assets_manifest)
+      File.write("tmp/assets_manifest.json", assets_manifest) if output
 
       digest(assets_manifest)
     end

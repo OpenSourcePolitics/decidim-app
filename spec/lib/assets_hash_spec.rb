@@ -47,8 +47,8 @@ module Decidim
       end
 
       it "returns a hash" do
-        expect(subject.run).to be_a(String)
-        expect(subject.run).to eq(content_digest)
+        expect(subject.run(output: false)).to be_a(String)
+        expect(subject.run(output: false)).to eq(content_digest)
       end
     end
   end
