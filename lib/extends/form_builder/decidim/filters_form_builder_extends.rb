@@ -3,6 +3,7 @@
 module DecidimFilterFormBuilderExtends
   # Wrap the radio buttons collection in a custom fieldset.
   # It also renders the inputs inside its labels.
+  # rubocop:disable Metrics/ParameterLists
   def collection_radio_buttons(method, collection, value_method, label_method, options = {}, html_options = {})
     Rails.cache.fetch("collection_radio_buttons/#{digest(method, collection, value_method, label_method, options, html_options)}") do
       fieldset_wrapper(options[:legend_title], "#{method}_collection_radio_buttons_filter") do
@@ -16,9 +17,11 @@ module DecidimFilterFormBuilderExtends
       end
     end
   end
+  # rubocop:enable Metrics/ParameterLists
 
   # Wrap the check_boxes collection in a custom fieldset.
   # It also renders the inputs inside its labels.
+  # rubocop:disable Metrics/ParameterLists
   def collection_check_boxes(method, collection, value_method, label_method, options = {}, html_options = {})
     Rails.cache.fetch("collection_check_boxes/#{digest(method, collection, value_method, label_method, options, html_options)}") do
       fieldset_wrapper(options[:legend_title], "#{method}_collection_check_boxes_filter") do
@@ -32,6 +35,7 @@ module DecidimFilterFormBuilderExtends
       end
     end
   end
+  # rubocop:enable Metrics/ParameterLists
 
   # Wrap the dependant check_boxes in a custom fieldset.
   # checked parent checks its children
