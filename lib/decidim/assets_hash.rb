@@ -5,29 +5,32 @@ require "digest"
 module Decidim
   class AssetsHash
     def initialize
-      @app_dependencies_patterns = %w(Gemfile Gemfile.lock package.json yarn.lock)
-      @assets_patterns = %w(app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*)
+      @assets_patterns = %w(Gemfile* package* yarn* app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*)
+      @included_extensions = %w(lock Gemfile gemspec json js mjs jsx ts tsx gql graphql bmp gif jpeg jpg png tiff ico avif webp eot otf ttf woff woff2 svg md odt)
     end
 
-    def self.run
-      new.run
+    def self.run(output: true)
+      new.run(output)
     end
 
-    def run
-      app_assets_hashes = files_digest(@assets_patterns)
-      app_dependencies_hashes = files_digest(@app_dependencies_patterns)
+    def run(output)
+      assets_manifest = JSON.pretty_generate(files_digest(@assets_patterns))
 
-      digest("#{app_assets_hashes}#{app_dependencies_hashes}")
+      File.write("tmp/assets_manifest.json", assets_manifest) if output
+
+      digest(assets_manifest)
     end
 
     def files_digest(patterns)
-      # TODO: Investigate on inconsistency results on CI, sometimes the hash generated is different for the slice 1-2 without apparent reason.
-      Array.wrap(patterns).map { |pattern| Dir.glob(pattern) }
-           .flatten
-           .sort
-           .select { |file| File.file?(file) }
-           .map { |file| digest(File.read(file)) }
-           .join("\n")
+      patterns.map { |pattern| Dir.glob(pattern) }
+              .flatten
+              .sort
+              .each_with_object({}) do |file, result|
+        next unless File.file?(file)
+        next unless @included_extensions.any? { |ext| file.end_with?(ext) }
+
+        result[file] = digest(File.read(file))
+      end
     end
 
     private
