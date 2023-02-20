@@ -4,46 +4,40 @@ require "digest"
 
 module Decidim
   class AssetsHash
+    def initialize
+      @app_dependencies_patterns = %w(Gemfile Gemfile.lock package.json yarn.lock)
+      @assets_patterns = %w(app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*)
+    end
+
     def self.run
       new.run
     end
 
     def run
-      hash("#{app_assets_hash}#{app_dependencies_hash}")
+      app_assets_hashes = files_digest(@assets_patterns)
+      app_dependencies_hashes = files_digest(@app_dependencies_patterns)
+
+      File.write("tmp/assets_manifest.json", JSON.pretty_generate(app_assets_hashes))
+
+      digest("#{app_assets_hashes.values.join("\n")}#{app_dependencies_hashes.values.join("\n")}")
+    end
+
+    def files_digest(patterns)
+      # TODO: Investigate on inconsistency results on CI, sometimes the hash generated is different for the slice 1-2 without apparent reason.
+      Array.wrap(patterns).map { |pattern| Dir.glob(pattern) }
+           .flatten
+           .sort
+           .each_with_object({}) do |file, result|
+        next unless File.file?(file)
+
+        result[file] = digest(File.read(file))
+      end
     end
 
     private
 
-    def app_dependencies_hash
-      hash(app_dependencies_files)
-    end
-
-    def app_dependencies_files
-      files_cat("Gemfile", "Gemfile.lock", "package.json", "yarn.lock")
-    end
-
-    def app_assets_hash
-      hash(app_assets_files)
-    end
-
-    def app_assets_files
-      files_cat(assets_pattern)
-    end
-
-    def assets_pattern
-      %w(app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*)
-    end
-
-    def hash(value)
+    def digest(value)
       Digest::SHA256.hexdigest(value)
-    end
-
-    def files_cat(*files)
-      files.map { |pattern| Dir.glob(pattern) }
-           .flatten
-           .select { |file| File.file?(file) }
-           .map(&File.method(:read))
-           .join("\n")
     end
   end
 end
