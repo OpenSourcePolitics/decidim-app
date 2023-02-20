@@ -114,7 +114,7 @@ jobs:
           name: screenshots
           path: |
             ./spec/tmp/screenshots
-            tmp/assets_manifest.json
+            ./tmp/assets_manifest.json
   system_tests:
     strategy:
       matrix:
@@ -186,7 +186,7 @@ jobs:
           name: screenshots
           path: |
             ./spec/tmp/screenshots
-            tmp/assets_manifest.json
+            ./tmp/assets_manifest.json
   test_build:
     name: Test build docker image
     runs-on: ubuntu-latest
