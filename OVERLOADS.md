@@ -1,5 +1,8 @@
 # Overrides
 
+## Add cache on Filters
+* `lib/extends/form_builder/decidim/filters_form_builder_extends.rb`
+
 ## Fix cache on Hero Cell
 * `lib/extends/cells/decidim/content_blocks/hero_cell_extends.rb:13`
 
