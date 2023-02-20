@@ -22,7 +22,6 @@ module Decidim
     end
 
     def files_digest(patterns)
-      # TODO: Investigate on inconsistency results on CI, sometimes the hash generated is different for the slice 1-2 without apparent reason.
       patterns.map { |pattern| Dir.glob(pattern) }
               .flatten
               .sort
