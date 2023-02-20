@@ -10,7 +10,7 @@ module Decidim
     # We need to stub the methods that call the filesystem to avoid
     # having to create the files in the filesystem.
     describe "#files_digest" do
-      let(:files) { %w(app/packs/js/file0.js app/packs/js/file1.js) }
+      let(:files) { %w(app/packs/js/file0.js app/packs/js/file1.js app/packs/js/file1.rb) }
 
       before do
         allow(Dir).to receive(:glob).and_return(files)
@@ -26,7 +26,7 @@ module Decidim
       end
 
       context "when there are multiples files in the same directory" do
-        let(:files) { [["app/packs/js/file0.js", "app/packs/js/file1.js"], "app/packs/js/file2.js"] }
+        let(:files) { [%w(app/packs/js/file0.js app/packs/js/file1.js app/packs/js/file1.rb), "app/packs/js/file2.js"] }
 
         it "digest the files" do
           expect(subject.files_digest(["app/packs/**/*"])).to eq({
