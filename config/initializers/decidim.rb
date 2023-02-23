@@ -106,6 +106,14 @@ Decidim.configure do |config|
   end
 
   config.base_uploads_path = "#{ENV["HEROKU_APP_NAME"]}/" if ENV["HEROKU_APP_NAME"].present?
+
+  # Machine Translation Configuration
+  #
+  # Enable machine translations
+  config.enable_machine_translations = true
+  config.machine_translation_service = "DeeplTranslator"
+
+  config.base_uploads_path = ENV["HEROKU_APP_NAME"] + "/" if ENV["HEROKU_APP_NAME"].present?
 end
 
 Decidim.module_eval do
@@ -135,6 +143,12 @@ end
 
 Rails.application.config.i18n.available_locales = Decidim.available_locales
 Rails.application.config.i18n.default_locale = Decidim.default_locale
+
+# DeepL Translation service configuration
+DeepL.configure do |config|
+  config.auth_key = Rails.application.secrets.translator[:api_key]
+  config.host = Rails.application.secrets.translator[:host]
+end
 
 # Inform Decidim about the assets folder
 Decidim.register_assets_path File.expand_path("app/packs", Rails.application.root)

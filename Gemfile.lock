@@ -427,6 +427,7 @@ GEM
     declarative-builder (0.1.0)
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
+    deepl-rb (2.5.3)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.8.1)
@@ -979,6 +980,7 @@ DEPENDENCIES
   decidim-spam_detection!
   decidim-templates
   decidim-term_customizer!
+  deepl-rb
   dotenv-rails
   faker (~> 2.14)
   fog-aws
