@@ -31,13 +31,6 @@ GIT
       decidim-core (~> 0.26)
 
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-spam_detection.git
-  revision: 8a3609077cded8a9d2f87e4c537f1321aba777b3
-  specs:
-    decidim-spam_detection (2.0.0)
-      decidim-core (~> 0.26)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-france_connect
   revision: 14a53ad31928c8a83742360cfbdb90938d0a057e
   specs:
@@ -403,6 +396,8 @@ GEM
       decidim-comments (= 0.26.2)
       decidim-core (= 0.26.2)
       decidim-proposals (= 0.26.2)
+    decidim-spam_detection (2.0.0)
+      decidim-core (~> 0.26)
     decidim-surveys (0.26.2)
       decidim-core (= 0.26.2)
       decidim-forms (= 0.26.2)
@@ -970,7 +965,7 @@ DEPENDENCIES
   decidim-homepage_interactive_map!
   decidim-ludens!
   decidim-phone_authorization_handler!
-  decidim-spam_detection!
+  decidim-spam_detection
   decidim-templates
   decidim-term_customizer!
   dotenv-rails
