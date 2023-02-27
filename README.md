@@ -33,7 +33,32 @@ bundle exec rails decidim_decidim_awesome:webpacker:install
 ```
 3. Install Homepage Interactive Map dependencies
 ```bash
+bundle
 bundle exec rake decidim_homepage_interactive_map:install:migrations
+bundle exec rake db:migrate
+bundle exec rake decidim_homepage_interactive_map:webpacker:install
+```
+
+* On OSX:
+```bash
+brew install proj
+bundle config set build.rgeo-proj4 --with-proj-dir="/opt/homebrew/"
+bundle pristine rgeo-proj4
+bundle install
+```
+
+* On Ubuntu:
+```bash
+sudo apt update && sudo apt install libproj-dev proj-bin -y
+PROJ_DIR=$(which proj) bundle config set build.rgeo-proj4 --with-proj-dir="${PROJ_DIR%proj}"
+bundle pristine rgeo-proj4
+bundle install
+```
+
+## How to use
+```bash
+bundle exec rake decidim_homepage_interactive_map:check_for_repair
+bundle exec rake decidim_homepage_interactive_map:repair_data
 ```
 4. Install Term Customizer dependencies
 ```bash

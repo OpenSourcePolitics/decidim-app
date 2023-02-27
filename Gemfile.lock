@@ -14,13 +14,15 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
-  revision: 3710b53715587bd67f0a20911972077bb074cb0d
+  revision: a55f268c8847f225d19e8c2b88997d95e2093aea
   branch: release/0.26-stable
   specs:
     decidim-homepage_interactive_map (2.0.0)
       decidim-admin (>= 0.25.0, < 0.27)
       decidim-core (>= 0.25.0, < 0.27)
       decidim-dev (>= 0.25.0, < 0.27)
+      rgeo (~> 2.4)
+      rgeo-proj4 (~> 3.1)
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
@@ -759,6 +761,9 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
+    rgeo (2.4.0)
+    rgeo-proj4 (3.1.1)
+      rgeo (~> 2.0)
     rspec (3.11.0)
       rspec-core (~> 3.11.0)
       rspec-expectations (~> 3.11.0)
