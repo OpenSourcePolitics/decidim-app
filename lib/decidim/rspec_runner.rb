@@ -21,7 +21,7 @@ module Decidim
     def run
       logger.info("Running tests for slice #{@slice} of #{@total} slices")
       logger.info("Running tests for files: #{sliced_files.join(", ")}")
-      exec("RAILS_ENV=test bundle exec rake parallel:spec\['#{sliced_files.join("\|")}'\]")
+      exec("#{environment_variables} bundle exec rake parallel:spec\['#{sliced_files.join("\|")}'\]")
     end
 
     def sliced_files
@@ -36,6 +36,18 @@ module Decidim
 
     def default_files
       Dir.glob(DEFAULT_PATTERN)
+    end
+
+    def sliced_files_groups
+      sliced_files.map { |file| file.split("/")[1].sub("_spec.rb", "") }.uniq.join("-")
+    end
+
+    def environment_variables
+      [
+        "RAILS_ENV=test",
+        "TEST_ENV_SLICE=#{@slice}",
+        "TEST_ENV_TYPE=#{sliced_files_groups}"
+      ].join(" ")
     end
 
     private

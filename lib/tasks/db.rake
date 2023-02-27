@@ -4,6 +4,7 @@ namespace :decidim do
   namespace :db do
     namespace :notification do
       desc "List notifications related to orphans data"
+      # TODO: Add tests
       task orphans: :environment do
         Rails.logger = Logger.new($stdout)
         # ActiveRecord::Base.logger = Logger.new($stdout)
@@ -21,6 +22,7 @@ namespace :decidim do
       end
 
       desc "Delete notifications related to orphans data"
+      # TODO: Add tests
       task clean: :environment do
         Rails.logger = Logger.new($stdout)
         # ActiveRecord::Base.logger = Logger.new($stdout)
@@ -37,6 +39,7 @@ namespace :decidim do
 
     namespace :admin_log do
       desc "List admin log related to orphans data"
+      # TODO: Add tests
       task orphans: :environment do
         Rails.logger = Logger.new($stdout)
         # ActiveRecord::Base.logger = Logger.new($stdout)
@@ -53,6 +56,7 @@ namespace :decidim do
       end
 
       desc "Delete admin log related to orphans data"
+      # TODO: Add tests
       task clean: :environment do
         Rails.logger = Logger.new($stdout)
         # ActiveRecord::Base.logger = Logger.new($stdout)
@@ -69,6 +73,7 @@ namespace :decidim do
 
     namespace :surveys do
       desc "List surveys related to deleted component"
+      # TODO: Add tests
       task orphans: :environment do
         Rails.logger = Logger.new($stdout)
         # ActiveRecord::Base.logger = Logger.new($stdout)
@@ -82,6 +87,7 @@ namespace :decidim do
       end
 
       desc "Delete surveys related to deleted component"
+      # TODO: Add tests
       task clean: :environment do
         Rails.logger = Logger.new($stdout)
         # ActiveRecord::Base.logger = Logger.new($stdout)

@@ -4,46 +4,41 @@ require "digest"
 
 module Decidim
   class AssetsHash
-    def self.run
-      new.run
+    def initialize(options = {})
+      @assets_patterns = %w(Gemfile* package* yarn* app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*)
+      @included_extensions = %w(lock Gemfile gemspec json js mjs jsx ts tsx gql graphql bmp gif jpeg jpg png tiff ico avif webp eot otf ttf woff woff2 svg md odt)
+      @output = options.fetch("output", true)
+      @output_path = options.fetch("output_path", "tmp/assets_manifest.json")
+    end
+
+    def self.run(options = {})
+      new(options).run
     end
 
     def run
-      hash("#{app_assets_hash}#{app_dependencies_hash}")
+      assets_manifest = JSON.pretty_generate(files_digest(@assets_patterns))
+
+      File.write(@output_path, assets_manifest) if @output
+
+      digest(assets_manifest)
+    end
+
+    def files_digest(patterns)
+      patterns.map { |pattern| Dir.glob(pattern) }
+              .flatten
+              .sort
+              .each_with_object({}) do |file, result|
+        next unless File.file?(file)
+        next unless @included_extensions.any? { |ext| file.end_with?(ext) }
+
+        result[file] = digest(File.read(file))
+      end
     end
 
     private
 
-    def app_dependencies_hash
-      hash(app_dependencies_files)
-    end
-
-    def app_dependencies_files
-      files_cat("Gemfile", "Gemfile.lock", "package.json", "yarn.lock")
-    end
-
-    def app_assets_hash
-      hash(app_assets_files)
-    end
-
-    def app_assets_files
-      files_cat(assets_pattern)
-    end
-
-    def assets_pattern
-      %w(app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*)
-    end
-
-    def hash(value)
+    def digest(value)
       Digest::SHA256.hexdigest(value)
-    end
-
-    def files_cat(*files)
-      files.map { |pattern| Dir.glob(pattern) }
-           .flatten
-           .select { |file| File.file?(file) }
-           .map(&File.method(:read))
-           .join("\n")
     end
   end
 end

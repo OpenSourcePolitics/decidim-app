@@ -4,6 +4,12 @@ Citizen Participation and Open Government application based on [Decidim](https:/
 
 This application is maintained by [Open Source Politics](https://opensourcepolitics.eu/). Some non official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
 
+[![codecov](https://codecov.io/gh/OpenSourcePolitics/decidim-app/branch/master/graph/badge.svg?token=VDQ3ORQLN6)](https://codecov.io/gh/OpenSourcePolitics/decidim-app)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f5abcda931760d6ee65d/maintainability)](https://codeclimate.com/github/OpenSourcePolitics/decidim-app/maintainability)
+![Tests](https://github.com/OpenSourcePolitics/decidim-app/actions/workflows/deploy_production.yml/badge.svg?branch=master)
+![Tests](https://github.com/OpenSourcePolitics/decidim-app/actions/workflows/tests.yml/badge.svg?branch=master)
+
+
 ## Installation guide
 
 Once repository is cloned, you can now install dependencies, fetch external migrations and migrate

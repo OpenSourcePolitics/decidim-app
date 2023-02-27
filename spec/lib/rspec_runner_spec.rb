@@ -11,13 +11,13 @@ module Decidim
     let(:mask) { "spec/**/*_spec.rb" }
     let(:slice) { "0-4" }
     let(:files) do
-      %w(system/example1.rb lib/example2.rb controllers/example3.rb lib/example4.rb system/example5.rb)
+      %w(system/example1_spec.rb lib/example2_spec.rb controllers/example3_spec.rb lib/example4_spec.rb system/example5_spec.rb)
     end
 
     describe "#run" do
       before do
         allow(Dir).to receive(:glob).and_return(files)
-        allow(subject).to receive(:exec).with("RAILS_ENV=test bundle exec rake parallel:spec['system/example1.rb|lib/example2.rb']")
+        allow(subject).to receive(:exec).with("RAILS_ENV=test TEST_ENV_SLICE=0 TEST_ENV_TYPE=example1-example2 bundle exec rake parallel:spec['system/example1_spec.rb|lib/example2_spec.rb']")
       end
 
       it "executes the rspec command on the correct files" do
@@ -42,17 +42,17 @@ module Decidim
         end
 
         it "returns the correct files" do
-          expect(subject.all_files).to eq(%w(system/example1.rb lib/example2.rb controllers/example3.rb lib/example4.rb system/example5.rb))
+          expect(subject.all_files).to eq(%w(system/example1_spec.rb lib/example2_spec.rb controllers/example3_spec.rb lib/example4_spec.rb system/example5_spec.rb))
         end
       end
 
       context "when using exclude pattern" do
         let(:pattern) { "exclude" }
         let(:files) do
-          %w(system/example1.rb lib/example2.rb controllers/example3.rb lib/example4.rb system/example5.rb)
+          %w(system/example1_spec.rb lib/example2_spec.rb controllers/example3_spec.rb lib/example4_spec.rb system/example5_spec.rb)
         end
         let(:filtered_files) do
-          %w(system/example1.rb system/example5.rb)
+          %w(system/example1_spec.rb system/example5_spec.rb)
         end
 
         before do
@@ -64,7 +64,7 @@ module Decidim
         end
 
         it "returns the correct files" do
-          expect(subject.all_files).to eq(%w(lib/example2.rb controllers/example3.rb lib/example4.rb))
+          expect(subject.all_files).to eq(%w(lib/example2_spec.rb controllers/example3_spec.rb lib/example4_spec.rb))
         end
       end
     end
@@ -75,7 +75,27 @@ module Decidim
       end
 
       it "returns the correct files" do
-        expect(subject.sliced_files).to eq(%w(system/example1.rb lib/example2.rb))
+        expect(subject.sliced_files).to eq(%w(system/example1_spec.rb lib/example2_spec.rb))
+      end
+    end
+
+    describe "#sliced_files_groups" do
+      before do
+        allow(Dir).to receive(:glob).and_return(files)
+      end
+
+      it "returns the correct files" do
+        expect(subject.sliced_files_groups).to eq("example1-example2")
+      end
+    end
+
+    describe "#environnement_variables" do
+      before do
+        allow(Dir).to receive(:glob).and_return(files)
+      end
+
+      it "returns the correct env" do
+        expect(subject.environment_variables).to eq("RAILS_ENV=test TEST_ENV_SLICE=0 TEST_ENV_TYPE=example1-example2")
       end
     end
   end
