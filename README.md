@@ -4,6 +4,12 @@ Citizen Participation and Open Government application based on [Decidim](https:/
 
 This application is maintained by [Open Source Politics](https://opensourcepolitics.eu/). Some non official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
 
+[![codecov](https://codecov.io/gh/OpenSourcePolitics/decidim-app/branch/master/graph/badge.svg?token=VDQ3ORQLN6)](https://codecov.io/gh/OpenSourcePolitics/decidim-app)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f5abcda931760d6ee65d/maintainability)](https://codeclimate.com/github/OpenSourcePolitics/decidim-app/maintainability)
+![Tests](https://github.com/OpenSourcePolitics/decidim-app/actions/workflows/deploy_production.yml/badge.svg?branch=master)
+![Tests](https://github.com/OpenSourcePolitics/decidim-app/actions/workflows/tests.yml/badge.svg?branch=master)
+
+
 ## Installation guide
 
 Once repository is cloned, you can now install dependencies, fetch external migrations and migrate
@@ -27,8 +33,34 @@ bundle exec rails decidim_decidim_awesome:webpacker:install
 ```
 3. Install Homepage Interactive Map dependencies
 ```bash
+bundle
 bundle exec rake decidim_homepage_interactive_map:install:migrations
+bundle exec rake db:migrate
+bundle exec rake decidim_homepage_interactive_map:webpacker:install
 ```
+
+* On OSX:
+```bash
+brew install proj
+bundle config set build.rgeo-proj4 --with-proj-dir="/opt/homebrew/"
+bundle pristine rgeo-proj4
+bundle install
+```
+
+* On Ubuntu:
+```bash
+sudo apt update && sudo apt install libproj-dev proj-bin -y
+PROJ_DIR=$(which proj) bundle config set build.rgeo-proj4 --with-proj-dir="${PROJ_DIR%proj}"
+bundle pristine rgeo-proj4
+bundle install
+```
+
+## How to use
+```bash
+bundle exec rake decidim_homepage_interactive_map:check_for_repair
+bundle exec rake decidim_homepage_interactive_map:repair_data
+```
+
 4. Install Term Customizer dependencies
 ```bash
 bundle exec rails decidim_term_customizer:install:migrations
