@@ -94,3 +94,4 @@ vendor/cache
 yarn-debug.log*
 .yarn-integrity
 .idea
+coverage/
