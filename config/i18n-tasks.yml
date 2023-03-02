@@ -95,6 +95,8 @@ ignore_missing:
  - decidim.account.destroy.error
  - decidim.editor_images.create.error
  - decidim.editor_images.create.success
+ - decidim.forms.questionnaires.question.max_choices
+ - activemodel.errors.models.questionnaire.request_invalid
 
 # Consider these keys used:
 ignore_unused:
@@ -121,3 +123,4 @@ ignore_unused:
   - rack_attack.too_many_requests.*
   - decidim.account.destroy.success
   - decidim.account.destroy.error
+
