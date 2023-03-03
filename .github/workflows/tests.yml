@@ -60,7 +60,7 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - run: bundle exec rake bonobo:status
+      - run: bundle exec rake bonobot:status
         name: Check overloads
   tests:
     strategy:
