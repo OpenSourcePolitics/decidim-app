@@ -173,6 +173,8 @@ GEM
       smart_properties
     bindata (2.4.10)
     bindex (0.8.1)
+    bonobot (0.0.1)
+      rails (~> 6.0)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     brakeman (5.3.1)
@@ -955,6 +957,7 @@ PLATFORMS
 DEPENDENCIES
   activejob-uniqueness
   aws-sdk-s3
+  bonobot
   bootsnap (~> 1.4)
   brakeman (~> 5.1)
   byebug (~> 11.0)

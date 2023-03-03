@@ -34,6 +34,7 @@ gem "rack-attack", "~> 6.6"
 gem "sys-filesystem"
 
 group :development do
+  gem "bonobot"
   gem "letter_opener_web", "~> 1.3"
   gem "listen", "~> 3.1"
   gem "rubocop-faker"
