@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Demonstrating the use of the bonobot gem in a ruby file
+# bonobot_fingerprint: 4f10ba75e11f80030a8bbc04dd2828d7
+
 module Decidim
   module Forms
     # This class holds a Form to answer a questionnaire from Decidim's public page.
