@@ -12,6 +12,7 @@ gem "aws-sdk-s3", require: false
 gem "bootsnap", "~> 1.4"
 gem "decidim", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-cache_cleaner"
+gem "decidim-cleaner"
 gem "decidim-conferences", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-decidim_awesome"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
