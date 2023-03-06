@@ -12,13 +12,13 @@ gem "aws-sdk-s3", require: false
 gem "bootsnap", "~> 1.4"
 gem "decidim", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-cache_cleaner"
+gem "decidim-cleaner"
 gem "decidim-conferences", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-decidim_awesome"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
 gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens.git"
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: DECIDIM_BRANCH
-gem "decidim-cleaner"
 gem "decidim-spam_detection"
 gem "decidim-templates"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git"
