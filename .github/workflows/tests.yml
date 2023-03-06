@@ -10,6 +10,15 @@ env:
   RUBYOPT: '-W:no-deprecated'
 
 jobs:
+  todo:
+    name: TODO
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: "TODO to Issue"
+        uses: "alstr/todo-to-issue-action@v4"
   lint:
     name: Lint code
     runs-on: ubuntu-latest
@@ -99,11 +108,16 @@ jobs:
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
         name: Upload coverage
-      - uses: actions/upload-artifact@v2-preview
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: screenshots
           path: ./spec/tmp/screenshots
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: assets-manifest-${{ matrix.slice }}
+          path: ./tmp/assets_manifest.json
   system_tests:
     strategy:
       matrix:
@@ -169,14 +183,66 @@ jobs:
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
         name: Upload coverage
-      - uses: actions/upload-artifact@v2-preview
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: screenshots
           path: ./spec/tmp/screenshots
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: assets-manifest-${{ matrix.slice }}
+          path: ./tmp/assets_manifest.json
+  test_build:
+    name: Test build docker image
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11
+        ports: [ "5432:5432" ]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_PASSWORD: postgres
+    env:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: host.docker.internal
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Scaleway registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ vars.REGISTRY }}
+          username: userdoesnotmatter
+          password: ${{ secrets.TOKEN }}
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
+      - name: Build image
+        uses: docker/build-push-action@v3
+        with:
+          cache-from: type=local,src=/tmp/.buildx-cache,mode=max
+          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
+          outputs: type=docker,compression=gzip
+          tags: ${{ vars.IMAGE_NAME }}:develop
+      - name: Test build
+        run: |
+          docker run --rm --add-host=host.docker.internal:host-gateway -d -e DATABASE_USERNAME=${{env.DATABASE_USERNAME}} -e DATABASE_PASSWORD=${{env.DATABASE_PASSWORD}} -e DATABASE_HOST=${{env.DATABASE_HOST}} -p 3000:3000 --name decidim-app ${{ vars.IMAGE_NAME }}:develop
+          docker exec decidim-app bundle exec rake db:create db:migrate
+          ./.github/test_build.sh
   deploy_develop:
     if: "github.ref == 'refs/heads/develop'"
-    needs: [lint, tests, system_tests]
+    needs: [lint, tests, system_tests, test_build]
     name: Deploy develop branch on develop instance
     runs-on: ubuntu-latest
     steps:
@@ -190,7 +256,7 @@ jobs:
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/develop.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
   deploy_rc:
     if: "github.ref == 'refs/heads/rc'"
-    needs: [lint, tests, system_tests]
+    needs: [lint, tests, system_tests, test_build]
     name: Deploy rc branch on RC instance
     runs-on: ubuntu-latest
     steps:
@@ -204,7 +270,7 @@ jobs:
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/rc.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
   deploy_staging:
     if: "github.ref == 'refs/heads/master'"
-    needs: [lint, tests, system_tests]
+    needs: [lint, tests, system_tests, test_build]
     name: Deploy staging branch on staging instance
     runs-on: ubuntu-latest
     steps:
@@ -216,3 +282,32 @@ jobs:
           key: ${{ secrets.ANSIBLE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/staging.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
+  build_and_push_image:
+    name: Build and push image to Registry
+    if: "github.ref == 'refs/heads/develop'"
+    needs: [lint, tests, system_tests, test_build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Scaleway registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ vars.REGISTRY }}
+          username: userdoesnotmatter
+          password: ${{ secrets.TOKEN }}
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          cache-from: type=local,src=/tmp/.buildx-cache,mode=max
+          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
+          push: true
+          tags: ${{ vars.IMAGE_NAME }}:develop

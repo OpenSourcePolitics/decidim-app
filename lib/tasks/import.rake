@@ -4,6 +4,7 @@ require "ruby-progressbar"
 
 namespace :import do
   desc "Usage: rake import:user FILE='<filename.csv>' ORG=<organization_id> ADMIN=<admin_id> PROCESS=<process_id> [VERBOSE=true]'"
+  # TODO: Add tests
   task user: :environment do
     def validate_input
       validate_file
