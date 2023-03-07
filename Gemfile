@@ -43,7 +43,7 @@ group :development do
 end
 
 group :development, :test do
-  gem "bonobot", path: "../bonobot"
+  gem "bonobot"
   gem "brakeman", "~> 5.1"
   gem "byebug", "~> 11.0", platform: :mri
   gem "decidim-dev", "~> #{DECIDIM_VERSION}.0"
