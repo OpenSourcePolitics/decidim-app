@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# bonobot_fingerprint: 1c20ab37da796aaeb95b71403ec5135f
+
 module Decidim
   module Budgets
     # Exposes the project resource so users can view them

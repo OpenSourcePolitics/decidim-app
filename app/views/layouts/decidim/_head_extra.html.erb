@@ -1,3 +1,5 @@
+
+<%# bonobot_fingerprint: 1b8237357754cf519f4e418135f78440 %>
 <% if Rails.application.secrets.dig(:sentry, :enabled) %>
   <script src="https://browser.sentry-cdn.com/<%= Rails.application.secrets.dig(:sentry, :js_version) %>/bundle.min.js" crossorigin="anonymous"></script>
   <script>

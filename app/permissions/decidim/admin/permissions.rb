@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# bonobot_fingerprint: 6cf59c5317be4218bd2c0779fe8700d5
+
 module Decidim
   module Admin
     class Permissions < Decidim::DefaultPermissions

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# bonobot_fingerprint: 4aff1b94255db5ffa8868a0f2876c14f
+
 require "devise/models/decidim_validatable"
 require "devise/models/decidim_newsletterable"
 require "valid_email2"

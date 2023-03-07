@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# bonobot_fingerprint: 215fd685276b272435ecd40f758ed87b
+
 module Decidim
   module Proposals
     # Exposes Collaborative Drafts resource so users can view and create them.

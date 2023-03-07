@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# bonobot_fingerprint: 6f73c3cad3c713358535c92e2ed84f60
+
 module Decidim
   module Proposals
     # Exposes the proposal resource so users can view and create them.

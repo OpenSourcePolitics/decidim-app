@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# bonobot_fingerprint: d442e263dbd1ff38aae0ca9526d6bbef
+
 module Decidim
   module Admin
     module Components

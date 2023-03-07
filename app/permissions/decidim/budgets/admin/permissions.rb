@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# bonobot_fingerprint: a5a6008df381d7a4c3d220495d7b6c5e
+
 module Decidim
   module Budgets
     module Admin

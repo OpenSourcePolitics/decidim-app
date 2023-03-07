@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Adding a wrong fingerprint to trigger outdated
-# bonobot_fingerprint: 4c8abdd09bc475cc97c6d54a8b15c18e9
+# bonobot_fingerprint: c8abdd09bc475cc97c6d54a8b15c18e8
 
 module Decidim
   module Forms
