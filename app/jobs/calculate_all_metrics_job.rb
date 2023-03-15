@@ -3,7 +3,7 @@
 require "rake"
 
 class CalculateAllMetricsJob < ApplicationJob
-  queue_as :scheduled
+  queue_as :metrics
 
   def perform
     Rails.application.load_tasks
