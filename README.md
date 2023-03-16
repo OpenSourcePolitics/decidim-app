@@ -2,7 +2,7 @@
 
 Citizen Participation and Open Government application based on [Decidim](https://github.com/decidim/decidim).
 
-This application is maintained by [Open Source Politics](https://opensourcepolitics.eu/). Some non official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
+This application is maintained by [Open Source Politics](https://opensourcepolitics.eu/). Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
 
 [![codecov](https://codecov.io/gh/OpenSourcePolitics/decidim-app/branch/master/graph/badge.svg?token=VDQ3ORQLN6)](https://codecov.io/gh/OpenSourcePolitics/decidim-app)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f5abcda931760d6ee65d/maintainability)](https://codeclimate.com/github/OpenSourcePolitics/decidim-app/maintainability)
@@ -11,6 +11,19 @@ This application is maintained by [Open Source Politics](https://opensourcepolit
 
 
 ## Installation guide
+### Prerequesite
+- [Ruby](https://www.ruby-lang.org/en/)
+- [Bundler](https://bundler.io/)
+- [Rbenv](https://github.com/rbenv/rbenv)
+
+
+
+### Installation
+0. Clone this repository 
+```bash
+git clone https://github.com/OpenSourcePolitics/decidim-app/
+cd decidim-app
+```
 
 Once repository is cloned, you can now install dependencies, fetch external migrations and migrate
 
