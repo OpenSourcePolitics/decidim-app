@@ -18,6 +18,8 @@ It consists of the main application with modules developed by the community that
 
 It includes **official modules** supported by the community and **community-based modules** developed by us our [our partners](https://github.com/decidim-ice)
 
+### List of our modules
+
 You can find below an exhaustive list of modules with their repository links and latest version available :
 
 
