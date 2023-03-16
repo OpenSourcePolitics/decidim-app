@@ -1,10 +1,13 @@
-# Overrides
+# Overrides 🍰
+
+## Deployment's related properties for API
+* `app/api/deployment_type.rb`
+* `app/api/query_extensions.rb`
 
 ## Fix cache on Hero Cell
 * `lib/extends/cells/decidim/content_blocks/hero_cell_extends.rb:13`
 
-## Add budget and proposal map caching
-* `app/views/decidim/budgets/projects/index.html.erb:9`
+## Add proposal map caching
 * `app/views/decidim/proposals/proposals/index.html.erb:5`
 
 ## Update France Connect with requirements
@@ -12,7 +15,6 @@
 * `app/views/decidim/shared/_login_modal.html.erb`
 
 ## Backport sort of budgets projects
-* `app/controllers/decidim/budgets/projects_controller.rb`
 * `spec/system/sorting_projects_spec.rb`
 
 ## Load decidim-awesome assets only if dependencie is present
