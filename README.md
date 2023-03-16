@@ -7,7 +7,7 @@
 ## Decidim
 ![](./docs/decidim-logo-claim.svg)
 
-[Decidim](https://github.com/decidim/decidim) is a digital platform for ditizen participation. Related documentation can be found [here](https://docs.decidim.org)
+[Decidim](https://github.com/decidim/decidim) is a digital platform for citizen participation. Related documentation can be found [here](https://docs.decidim.org)
 
 ## [Open Source Politics](https://opensourcepolitics.eu/) 
 ![Open Source Politics](./docs/open-source-politics.svg)
