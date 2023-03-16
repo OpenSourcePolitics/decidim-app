@@ -19,7 +19,7 @@
   CalculateAllMetrics:
     cron: '0 9 0 * * *' # Run at 00:09
     class: CalculateAllMetricsJob
-    queue: metrics
+    queue: scheduled
   PreloadOpenData:
     cron: '0 0 1 * * *' # Run at 01:00
     class: PreloadOpenDataJob
