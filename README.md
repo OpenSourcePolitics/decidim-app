@@ -9,9 +9,9 @@
 
 [Decidim](https://github.com/decidim/decidim) is a digital platform for ditizen participation. Related documentation can be found [here](https://docs.decidim.org)
 
-## Open Source Politics 
+## [Open Source Politics](https://opensourcepolitics.eu/) 
 ![Open Source Politics](./docs/open-source-politics.svg)
-Stands for [Open Source Politics](https://opensourcepolitics.eu/). This repository contains the code of the decidim-app implemented for our customers. It consists of the main application with modules developed by the community that we often use. 
+This repository contains the code of the decidim-app implemented for our customers. It consists of the main application with modules developed by the community that we often use. 
 
 Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
 
