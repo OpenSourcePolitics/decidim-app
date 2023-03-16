@@ -5,9 +5,12 @@
 ![Tests](https://github.com/OpenSourcePolitics/decidim-app/actions/workflows/tests.yml/badge.svg?branch=master)
 
 ## Decidim
+![](./docs/decidim-logo-claim.svg)
+
 [Decidim](https://github.com/decidim/decidim) is a digital platform for ditizen participation. Related documentation can be found [here](https://docs.decidim.org)
 
-## OSP
+## Open Source Politics 
+![](./docs/open-source-politics.svg)
 Stands for [Open Source Politics](https://opensourcepolitics.eu/). This repository contains the code of the decidim-app implemented for our customers. It consists of the main application with modules developed by the community that we often use. 
 
 Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
@@ -19,4 +22,4 @@ Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md)
 - See our [contributing guide](./docs/CONTRIBUTING.md)
 
 ## 🔒 Security
-Security is very important to us. If you have any issue regarding security, please disclose the information responsibly by sending an email to security [at] opensourcepolitics [dot] eu and not by creating a Github issue. 
+Security is very important to us. If you have any issue regarding security, please disclose the information responsibly by sending an email to **security[at]opensourcepolitics[dot]eu** and not by creating a Github issue. 
