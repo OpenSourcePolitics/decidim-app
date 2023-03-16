@@ -11,15 +11,28 @@
 
 ## [Open Source Politics](https://opensourcepolitics.eu/) 
 ![Open Source Politics](./docs/open-source-politics.svg)
-This repository contains the code of the decidim-app implemented for our customers. It consists of the main application with modules developed by the community that we often use. 
+
+This repository contains the code of the **decidim-app** implemented for our customers.
+
+It consists of the main application with modules developed by the community that we often use.
+
+It includes **official modules** supported by the community and **community-based modules** developed by us our [our partners](https://github.com/decidim-ice)
+
+You can find below an exhaustive list of modules with their repository links and latest version available :
+|Module|Link|Version compatibility|
+|-|-|-|
+
 
 Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
 
 ## 🚀 Getting started
-- See our [installation guide](./DEVELOPERS.md) for mode information
+- See our [installation guide](./docs/GETTING_STARTED.md) for mode information
 
 ## 👋 Contributing
 - See our [contributing guide](./docs/CONTRIBUTING.md)
 
 ## 🔒 Security
 Security is very important to us. If you have any issue regarding security, please disclose the information responsibly by sending an email to **security[at]opensourcepolitics[dot]eu** and not by creating a Github issue. 
+
+## License
+The decidim-app is licensed under the [AGPLv3](./LICENSE-AGPLV3.txt), same license as Decidim.
