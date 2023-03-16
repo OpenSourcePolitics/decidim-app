@@ -279,8 +279,6 @@ GEM
       decidim-core (= 0.26.5)
     decidim-cache_cleaner (1.0.4)
       decidim-core (~> 0.26)
-    decidim-cleaner (0.0.1)
-      decidim-core (~> 0.26)
     decidim-comments (0.26.5)
       decidim-core (= 0.26.5)
       redcarpet (~> 3.5, >= 3.5.1)
@@ -963,7 +961,6 @@ DEPENDENCIES
   dalli
   decidim (~> 0.26.0)
   decidim-cache_cleaner
-  decidim-cleaner
   decidim-conferences (~> 0.26.0)
   decidim-decidim_awesome
   decidim-dev (~> 0.26.0)
