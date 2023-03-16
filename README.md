@@ -19,8 +19,22 @@ It consists of the main application with modules developed by the community that
 It includes **official modules** supported by the community and **community-based modules** developed by us our [our partners](https://github.com/decidim-ice)
 
 You can find below an exhaustive list of modules with their repository links and latest version available :
-|Module|Link|Version compatibility|
-|-|-|-|
+
+
+| Decidim Module                      | Version |
+|-------------------------------------|---------|
+| decidim-core                        | v0.26.2 |
+| decidim-conferences                 | v0.26.2 |
+| decidim-cache_cleaner               | ✅       |
+| decidim-cleaner                     | ✅       |
+| decidim-decidim_awesome             | ✅       |
+| decidim-friendly_signup             | ✅       |
+| decidim-homepage_interactive_map    | ✅       |
+| decidim-ludens                      | ✅       |
+| decidim-phone_authorization_handler | ✅       |
+| decidim-spam_detection              | ✅       |
+| decidim-templates                   | ✅       |
+| decidim-term_customizer             | ✅       |
 
 
 Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
