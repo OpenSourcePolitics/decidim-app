@@ -18,11 +18,8 @@
 * `lib/extends/commands/decidim/admin/create_participatory_space_private_user_extends.rb`
 * `lib/extends/commands/decidim/admin/impersonate_user_extends.rb`
 
-##  cd5c2cc - Backport fix/user answers serializer (#11), 2021-09-30
-* `lib/decidim/forms/user_answers_serializer.rb`
-
 ## Fix metrics issue in admin dashboard
- - **app/stylesheets/decidim/vizzs/_areachart.scss**
+ - **app/packs/stylesheets/decidim/vizzs/_areachart.scss**
 ```scss
     .area{
         fill: rgba($primary, .2);;
@@ -35,18 +32,11 @@
     <% if provider.match?("france") %>
 ```
 
-* `app/views/decidim/scopes/picker.html.erb`
-c76437f - Modify cancel button behaviour to match close button, 2022-02-08
-
+## Backups
 * `app/helpers/decidim/backup_helper.rb`
 83830be - Add retention service for daily backups (#19), 2021-11-09
-
 * `app/services/decidim/s3_retention_service.rb`
 de6d804 - fix multipart object tagging (#40) (#41), 2021-12-24
-
-* `config/initializers/omniauth_publik.rb`
-9d50925 - Feature omniauth publik (#46), 2022-01-18
-
 * `lib/tasks/restore_dump.rake`
 705e0ad - Run rubocop, 2021-12-01
 
@@ -56,7 +46,7 @@ de6d804 - fix multipart object tagging (#40) (#41), 2021-12-24
 * `app/views/v0.26/decidim/proposals/collaborative_drafts/_show.html.erb`
 * `spec/system/collaborative_drafts_fields_spec.rb`
 
-## Add budget reminder(#170)
+## Add budget reminder(#170) backport #8621
 * `app/commands/decidim/budgets/admin/create_order_reminders.rb`
 * `app/controllers/decidim/admin/components/base_controller.rb`
 * `app/controllers/decidim/admin/reminders_controller.rb`
@@ -162,7 +152,7 @@ end
 * `spec/services/decidim/budgets/order_reminder_generator_spec.rb`
 * `spec/system/admin_reminds_users_with_pending_orders_spec.rb`
 
-## Fix survey validation
+## Fix survey validation (#228)
 * `app/cells/decidim/forms/step_navigation/show.erb`
 * `app/packs/src/decidim/decidim_application.js`
 * `app/views/decidim/forms/questionnaires/show.html.erb`
@@ -170,7 +160,7 @@ end
 * `spec/shared/has_questionnaire.rb`
 * `spec/system/survey_spec.rb`
 
-## Fix survey conditionnal question saving
+## Fix survey conditional question saving, backport #10386
 * `spec/commands/decidim/forms/answer_questionnaire_spec.rb`
 * `app/forms/decidim/forms/answer_form.rb`
 * `app/forms/decidim/forms/questionnaire_form.rb`
