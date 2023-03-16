@@ -21,7 +21,7 @@ If you haven't already, come find the Decidim community in [Matrix](https://app.
 
 ## Do you intend to add a new feature or change an existing one?
 *  🇫🇷 Please create a new feature proposal on our french open roadmap [here](https://club.decidim.opensourcepolitics.eu/assemblies/feuille-de-route/f/232/)
-* 🌎 Open an issue on the current repository and describe it following our template
+* 🌎 Create a proposal on the [Meta.decidim platform](https://meta.decidim.org/processes/roadmap/f/122/), to see if it can be accepted in the core of the software
 
 ## Do you have questions about the Decidim's source code?
 
