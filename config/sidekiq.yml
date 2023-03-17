@@ -1,4 +1,4 @@
-:concurrency: 5
+:concurrency: 10
 :queues:
   - mailers
   - default
@@ -17,7 +17,7 @@
 
 :schedule:
   CalculateAllMetrics:
-    cron: '0 9 0 * * *' # Run at 00:09
+    cron: '9 0 * * *' # Run at 00:09
     class: CalculateAllMetricsJob
     queue: scheduled
   PreloadOpenData:
