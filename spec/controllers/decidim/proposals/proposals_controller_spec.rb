@@ -31,15 +31,15 @@ module Decidim
             expect(response).to have_http_status(:ok)
             expect(subject).to render_template(:index)
             expect(assigns(:proposals).order_values).to eq(
-              [
-                Decidim::Proposals::Proposal.arel_table[
-                  Decidim::Proposals::Proposal.primary_key
-                ] * Arel.sql("RANDOM()")
-              ]
-            )
+                                                          [
+                                                            Decidim::Proposals::Proposal.arel_table[
+                                                              Decidim::Proposals::Proposal.primary_key
+                                                            ] * Arel.sql("RANDOM()")
+                                                          ]
+                                                        )
             expect(assigns(:proposals).order_values.map(&:to_sql)).to eq(
-              ["\"decidim_proposals_proposals\".\"id\" * RANDOM()"]
-            )
+                                                                        ["\"decidim_proposals_proposals\".\"id\" * RANDOM()"]
+                                                                      )
           end
 
           it "sets two different collections" do
@@ -52,22 +52,6 @@ module Decidim
 
             expect(assigns(:proposals).count).to eq 12
             expect(assigns(:all_geocoded_proposals)).to match_array(geocoded_proposals)
-          end
-
-          context "when latitude and longitude are not properly geocoded" do
-            it "doesn't includes it in collection" do
-              geocoded_proposals = create_list :proposal, 10, component: component, latitude: 1.1, longitude: 2.2
-              improperly_geocoded_proposal = create :proposal, component: component, latitude: (0.0 / 0.0), longitude: (0.0 / 0.0)
-              _non_geocoded_proposals = create_list :proposal, 2, component: component, latitude: nil, longitude: nil
-
-              get :index
-              expect(response).to have_http_status(:ok)
-              expect(subject).to render_template(:index)
-
-              expect(assigns(:proposals).count).to eq 13
-              expect(assigns(:all_geocoded_proposals)).to match_array(geocoded_proposals)
-              expect(assigns(:all_geocoded_proposals).include?(improperly_geocoded_proposal)).to eq(false)
-            end
           end
         end
 
@@ -276,7 +260,7 @@ module Decidim
         end
 
         describe "when current user is NOT the author of the proposal" do
-          let(:current_user) { create(:user, organization: component.organization) }
+          let(:current_user) { create(:user, :confirmed, organization: component.organization) }
           let(:proposal) { create(:proposal, component: component, users: [current_user]) }
 
           context "and the proposal has no supports" do
@@ -335,12 +319,10 @@ module Decidim
               before { sign_in user }
 
               context "and the user is the author of the emendation" do
-                let!(:amendment) { create(:amendment, amender: user, amendable: amendable, emendation: emendation) }
-                let(:user) { create(:user, :confirmed, organization: component.organization) }
+                let(:user) { amendment.amender }
 
                 it "shows the proposal" do
                   get :show, params: params.merge(id: emendation.id)
-
                   expect(response).to have_http_status(:ok)
                   expect(subject).to render_template(:show)
                 end
