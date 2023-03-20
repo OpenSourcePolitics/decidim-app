@@ -19,6 +19,7 @@ Example:
 #### Tasks
 - [ ] Add specs
 - [ ] Add note about overrides in OVERLOADS.md
+- [ ] In case of new dependencies or version bump, update related documentation
 
 ### :camera: Screenshots
 *Please add screenshots of the changes you're proposing if related to the UI*
