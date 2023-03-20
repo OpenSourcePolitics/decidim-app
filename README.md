@@ -39,7 +39,8 @@ You can find below an exhaustive list of modules with their repository links and
 Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
 
 ## 🚀 Getting started
-- See our [installation guide](./docs/GETTING_STARTED.md) to run a decidim-app by OSP locally 
+- See our [installation guide](./docs/GETTING_STARTED.md) to run a decidim-app by OSP locally
+- See our [homepage interactive map module](./docs/HOMEPAGE_INTERACTIVE_MAP.md) to configure module (OSX/Ubuntu)
 
 ## 👋 Contributing
 - See our [contributing guide](./docs/CONTRIBUTING.md)
