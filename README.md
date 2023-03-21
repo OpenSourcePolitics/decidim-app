@@ -1,190 +1,52 @@
 # Decidim app by OSP
-
-Citizen Participation and Open Government application based on [Decidim](https://github.com/decidim/decidim).
-
-This application is maintained by [Open Source Politics](https://opensourcepolitics.eu/). Some non official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
-
 [![codecov](https://codecov.io/gh/OpenSourcePolitics/decidim-app/branch/master/graph/badge.svg?token=VDQ3ORQLN6)](https://codecov.io/gh/OpenSourcePolitics/decidim-app)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f5abcda931760d6ee65d/maintainability)](https://codeclimate.com/github/OpenSourcePolitics/decidim-app/maintainability)
 ![Tests](https://github.com/OpenSourcePolitics/decidim-app/actions/workflows/deploy_production.yml/badge.svg?branch=master)
 ![Tests](https://github.com/OpenSourcePolitics/decidim-app/actions/workflows/tests.yml/badge.svg?branch=master)
 
+## Decidim
+![](./docs/decidim-logo-claim.svg)
 
-## Installation guide
+[Decidim](https://github.com/decidim/decidim) is a digital platform for citizen participation. Related documentation can be found [here](https://docs.decidim.org)
 
-Once repository is cloned, you can now install dependencies, fetch external migrations and migrate
+## [Open Source Politics](https://opensourcepolitics.eu/) 
+![Open Source Politics](./docs/open-source-politics.svg)
 
-> We created a rake task to install automatically the dependencies
+This repository contains the code of the **decidim-app** implemented for our customers.
 
-Execute command : 
-> bundle exec rake decidim_app:setup
+It consists of the main application with modules developed by the community that we often use.
 
-Otherwise follow these steps : 
+It includes **official modules** supported by the community and **community-based modules** developed by us our [our partners](https://github.com/decidim-ice)
 
-1. Install dependencies
+### List of our modules
 
-```bash
-bundle install
-```
-2. Install Decidim Awesome dependencies
-```bash
-bundle exec rails decidim_decidim_awesome:install:migrations
-bundle exec rails decidim_decidim_awesome:webpacker:install
-```
-3. Install Homepage Interactive Map dependencies
-```bash
-bundle exec rake decidim_homepage_interactive_map:install:migrations
-```
-4. Install Term Customizer dependencies
-```bash
-bundle exec rails decidim_term_customizer:install:migrations
-```
+You can find below an exhaustive list of modules with their repository links and latest version available :
 
-5. Install Ludens dependencies and initialize the module
-```bash
-bundle exec rake decidim_ludens:install:migrations
-bundle exec rake decidim_ludens:initialize
-```
-6. Install migrations
-
-```bash
-bundle exec rake db:migrate
-```
-
-All dependencies should be now installed and ready-to-use !
-
-## Setting up the application
-
-You will need to do some steps before having the app working properly once you've deployed it:
-
-1. Open a Rails console in the server: `bundle exec rails console`
-2. Create a System Admin user:
-```ruby
-email = <your email>
-password = <a secure password>
-user = Decidim::System::Admin.new(email: email, password: password, password_confirmation: password)
-user.save!
-```
-3. Visit `<your app url>/system` and login with your system admin credentials
-4. Create a new organization. Check the locales you want to use for that organization, and select a default locale.
-5. Set the correct default host for the organization, otherwise the app will not work properly. Note that you need to include any subdomain you might be using.
-6. Fill the rest of the form and submit it.
-
-__IMPORTANT!__ : You must ensure all environnement variables are defined, see [.env-example](./.env-example)
-
-You're good to go!
-
-## Running tests
-
-This application has a functional testing suite. You can easily run locally the tests as following :
-
-Create test environment database 
-
-`bundle exec rake test:setup`
-
-And then run tests using `rspec`
-
-`bundle exec rspec spec/`
-
-## Docker
-### How to use it? 
-You can boot a Decidim environment in Docker using the Makefile taht will run docker-compose commands and the last built image from the Dockerfile.
-Three context are available : 
-
-- **Clean Decidim**
-
-An environment running the current Decidim version (from Gemfile) without any data.
-```make
-make start-clean-decidim
-```
-
-- **Seeded Decidim**
-
-An environment running the current Decidim version (from Gemfile) with generated seeds
-```make
-make start-seeded-decidim
-```
-
-- **Dumped Decidim**
-
-An environment running the current Decidim version (from Gemfile) with real data dumped from an existing platform to simulate a Decidim bump version before doing in the real production environment.
-```make
-make start-dumped-decidim
-```
-***Warning : you need to get a psql dump on your local machine to restore it in your containerized database***
-***Warning2 : you need to set organization host to 0.0.0.0 with the rails console***
+| Decidim Module                      | Version |             Brief description                                    |
+|-------------------------------------|---------|------------------------------------------------------------------|
+| decidim-core                        | v0.26.2 |
+| decidim-conferences                 | v0.26.2 |
+| [decidim-cache_cleaner](https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner)               | ✅      |Allow admins to clear cache of the application in the back-office|
+| [decidim-decidim_awesome](https://github.com/decidim-ice/decidim-module-decidim_awesome)             | ✅      |An awesome module that allows (among others) : adding extra-fields for proposals creation, fullscreen iframe component, image in rich text editor, customs redirections etc. |
+| [decidim-friendly_signup](https://github.com/OpenSourcePolitics/decidim-module-friendly_signup)             | ✅      |Module that drastically simplify the registration process of users by deleting some registration fields|
+| [decidim-homepage_interactive_map](https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map)    | ✅      |Module that allow the adding of a content-block on the homepage diplaying a map of assemblies in order to allow geo-located participation |
+| [decidim-ludens](https://github.com/OpenSourcePolitics/decidim-ludens)                      | ✅      |Gamified tutorial in the admin back-office to help admins understand how Decidim works|
+| [decidim-phone_authorization_handler](https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler) | ✅      |Module allowing gathering phone number on a particular participant action|
+| [decidim-spam_detection](https://github.com/OpenSourcePolitics/decidim-spam_detection)              | ✅      |Module adding a spam detection algorithm that runs periodically detecting spam accounts|
+| [decidim-term_customizer](https://github.com/mainio/decidim-module-term_customizer)             | ✅      |Module allowing the change of translated strings |
 
 
-### How to stop and remove it? 
+Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
 
-To get rid off your Docker environmnent : 
+## 🚀 Getting started
+- See our [installation guide](./docs/GETTING_STARTED.md) to run a decidim-app by OSP locally
+- See our [homepage interactive map module](./docs/HOMEPAGE_INTERACTIVE_MAP.md) to configure module (OSX/Ubuntu)
 
-- Shut down Docker environmnent
-```make
-make stop
-```
+## 👋 Contributing
+- See our [contributing guide](./docs/CONTRIBUTING.md)
 
-- Delete resources
-```make
-make delete
-```
-### Troubleshooting
+## 🔒 Security
+Security is very important to us. If you have any issue regarding security, please disclose the information responsibly by sending an email to **security[at]opensourcepolitics[dot]eu** and not by creating a Github issue. 
 
-Make commands are available to help you troubleshoot your Docker environment
-
-- Start Rails console
- ```make
-make rails-console
-```
-- Start bash session to app container
-```make
-make connect-app
-```
-
-## Deploy with Terraform
-
-Terraform is an open-source infrastructure as code software tool that provides an easy deployment of your infrastructure for installing Decidim.
-
-Many providers are available (**AWS**, **Heroku**, **DigitalOcean**...). Check the [Terraform registry to see how to use Terraform with your provider](https://registry.terraform.io/browse/providers)
-
-Each Terraform deployment are stored in the **deploy** folder and sorted by providers
-
-Feel free to add new deployments!
-
-## Availables deployments
-
-- [Scaleway](https://github.com/OpenSourcePolitics/decidim-app/tree/develop/deploy/providers/scaleway)
-- [DigitalOcean](https://github.com/OpenSourcePolitics/decidim-app/tree/develop/deploy/providers/digitalocean/)
-
-## Environment variables
-
-Each provider will need a way to authenticate at their API. Make sure to set environment variables asked in the provider's documentation before using deployments.
-
-- To use Scaleway's provider
-
-```bash
-export SCW_ACCESS_KEY=<your_access_key>
-export SCW_TOKEN=<your_scw_token>
-export SCW_DEFAULT_PROJECT_ID=<id_of_your_project/organization>
-```
-
-- To use DigitalOcean's provider
-```bash
-export DIGITALOCEAN_TOKEN=<your_do_token>
-export SPACES_ACCESS_KEY_ID=<your_do_space_access_key>
-export SPACES_SECRET_ACCESS_KEY=<your_do_space_secret_key>
-```
-
-## How to deploy with Terraform?
-
-Check the list of make commands in the Makefile. Each command corresponds to a provider and a specific need.
-
-- To deploy a new infrastructure with Scaleway
-
-```make
-make deploy-scw
-```
-
-## Database architecture (ERD)
-
-![Architecture_decidim](https://user-images.githubusercontent.com/52420208/133789299-9458fc42-a5e7-4e3d-a934-b55c6afbc8aa.jpg)
+## License
+The decidim-app is licensed under the [AGPLv3](./LICENSE-AGPLV3.txt), same license as Decidim.
