@@ -22,4 +22,28 @@ namespace :decidim_app do
     puts "Setup successfully terminated"
     # :nocov:
   end
+
+  desc "Create admin user with decidim_app:create_user name='John Doe' nickname='johndoe' email='john@example.org', password='decidim123456' organization_id='1'"
+  task create_user: :environment do
+    params = {
+      organization: Decidim::Organization.find(ENV.fetch("organization_id", "1").to_i),
+      name: ENV["name"],
+      nickname: ENV["nickname"],
+      email: ENV["email"],
+      password: ENV["password"]
+    }
+
+    missing = params.select { |_k, v| v.nil? }.keys
+
+    raise "Missing parameters: #{missing.join(", ")}" unless missing.empty?
+
+    Decidim::User.create!(organization: params[:organization],
+                          name: params[:name],
+                          nickname: params[:nickname],
+                          email: params[:email],
+                          password: params[:password],
+                          password_confirmation: params[:password],
+                          tos_agreement: "1",
+                          admin: true)
+  end
 end
