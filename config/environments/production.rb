@@ -135,4 +135,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Global IDs are used to identify records and
+  # are known to cause issue with moderation due to expiration
+  # Setting this to 100 years should be enough
+  config.global_id.expires_in = 100.years
 end
