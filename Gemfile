@@ -52,6 +52,7 @@ end
 
 group :production do
   gem "dalli"
+  gem "health_check", "~> 3.1"
   gem "lograge"
   gem "newrelic_rpm"
   gem "passenger"
@@ -60,5 +61,6 @@ group :production do
   gem "sentry-ruby"
   gem "sentry-sidekiq"
   gem "sidekiq"
+  gem "sidekiq_alive", "~> 2.2"
   gem "sidekiq-scheduler"
 end
