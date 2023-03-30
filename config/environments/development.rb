@@ -55,5 +55,8 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # config.active_job.queue_adapter = :sidekiq
+  # Global IDs are used to identify records and
+  # are known to cause issue with moderation due to expiration
+  # Setting this to 100 years should be enough
+  config.global_id.expires_in = 100.years
 end
