@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CalculateAllMetricsJob < ApplicationJob
-  sidekiq_options retry: 0, queue: :scheduled
+  sidekiq_options retry: 1, queue: :metrics
 
   def perform
     Decidim::Organization.find_each do |organization|
