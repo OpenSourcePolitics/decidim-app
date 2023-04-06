@@ -45,6 +45,7 @@ jobs:
         name: Lint Ruby files
   tests:
     strategy:
+      fail-fast: false
       matrix:
         slice: [ "0-2", "1-2" ]
     name: Tests
