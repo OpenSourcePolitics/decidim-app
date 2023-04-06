@@ -25,8 +25,14 @@ namespace :decidim_app do
 
   desc "Create admin user with decidim_app:create_admin name='John Doe' nickname='johndoe' email='john@example.org', password='decidim123456' organization_id='1'"
   task create_admin: :environment do
+    def env_organization_or_first(organization_id)
+      Decidim::Organization.find(organization_id)
+    rescue ActiveRecord::RecordNotFound
+      Decidim::Organization.first
+    end
+
     params = {
-      organization: Decidim::Organization.find(ENV.fetch("organization_id", "1").to_i),
+      organization: env_organization_or_first(ENV["organization_id"]),
       name: ENV["name"],
       nickname: ENV["nickname"],
       email: ENV["email"],
