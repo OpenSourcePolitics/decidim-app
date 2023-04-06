@@ -15,6 +15,7 @@ describe "DeploymentType" do
           deployment {
             version
             branch
+            remote
             upToDate
             currentCommit
             latestCommit
@@ -57,6 +58,7 @@ describe "DeploymentType" do
       expect(response["deployment"]).to eq({
                                              "version" => Decidim::Core.version,
                                              "branch" => "master",
+                                             "remote" => repo_name,
                                              "upToDate" => true,
                                              "currentCommit" => "220fd7b6f8701816c60c0610d5a62a59b962b231",
                                              "latestCommit" => "220fd7b6f8701816c60c0610d5a62a59b962b231",

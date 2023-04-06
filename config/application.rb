@@ -44,7 +44,7 @@ module DevelopmentApp
       require "extends/controllers/decidim/editor_images_controller_extends"
 
       Decidim::GraphiQL::Rails.config.tap do |config|
-        config.initial_query = "{\n  deployment {\n    version\n    branch\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
+        config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
       end
     end
   end
