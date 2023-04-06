@@ -505,6 +505,8 @@ GEM
     graphql (1.12.24)
     hashdiff (1.0.1)
     hashie (5.0.0)
+    health_check (3.1.0)
+      railties (>= 5.0)
     highline (2.0.3)
     html_tokenizer (0.0.7)
     htmlentities (4.3.4)
@@ -855,6 +857,10 @@ GEM
       rufus-scheduler (~> 3.2)
       sidekiq (>= 4)
       tilt (>= 1.4.0)
+    sidekiq_alive (2.2.0)
+      rack (< 3)
+      sidekiq (>= 5, < 8)
+      webrick (>= 1, < 2)
     simplecov (0.19.1)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -940,6 +946,7 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
+    webrick (1.8.1)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -980,6 +987,7 @@ DEPENDENCIES
   faker (~> 2.14)
   fog-aws
   foundation_rails_helper!
+  health_check (~> 3.1)
   letter_opener_web (~> 1.3)
   listen (~> 3.1)
   lograge
@@ -999,6 +1007,7 @@ DEPENDENCIES
   sentry-sidekiq
   sidekiq
   sidekiq-scheduler
+  sidekiq_alive (~> 2.2)
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
   sys-filesystem
