@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_ludens (originally 20230315112752)
 
 class DeleteLudensColumnsFromOrganizations < ActiveRecord::Migration[6.0]

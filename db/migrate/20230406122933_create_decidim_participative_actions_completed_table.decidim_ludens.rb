@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_ludens (originally 20230315113349)
 
 class CreateDecidimParticipativeActionsCompletedTable < ActiveRecord::Migration[6.0]

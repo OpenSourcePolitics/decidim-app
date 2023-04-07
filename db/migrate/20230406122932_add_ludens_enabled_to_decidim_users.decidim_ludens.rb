@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim_ludens (originally 20230315113147)
 
 class AddLudensEnabledToDecidimUsers < ActiveRecord::Migration[6.0]
