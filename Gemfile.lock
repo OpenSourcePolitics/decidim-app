@@ -1005,7 +1005,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   sentry-sidekiq
-  sidekiq
+  sidekiq (~> 6.0)
   sidekiq-scheduler
   sidekiq_alive (~> 2.2)
   spring (~> 2.0)
