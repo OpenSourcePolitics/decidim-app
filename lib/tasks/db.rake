@@ -4,36 +4,13 @@ namespace :decidim do
   namespace :db do
     namespace :notification do
       desc "List notifications related to orphans data"
-      # TODO: Add tests
       task orphans: :environment do
-        Rails.logger = Logger.new($stdout)
-        # ActiveRecord::Base.logger = Logger.new($stdout)
-
-        Decidim::Notification.distinct.pluck(:decidim_resource_type).each do |klass|
-          puts klass
-          model = klass.constantize
-          puts Decidim::Notification
-            .where(decidim_resource_type: klass)
-            .where.not(decidim_resource_id: [model.ids])
-            .pluck(:event_name, :decidim_resource_id, :extra).count
-        end
-
-        Rails.logger.close
+        Decidim::NotificationService.new(verbose: true).orphans
       end
 
       desc "Delete notifications related to orphans data"
-      # TODO: Add tests
       task clean: :environment do
-        Rails.logger = Logger.new($stdout)
-        # ActiveRecord::Base.logger = Logger.new($stdout)
-
-        Decidim::Notification.distinct.pluck(:decidim_resource_type).each do |klass|
-          model = klass.constantize
-          Decidim::Notification
-            .where(decidim_resource_type: klass)
-            .where.not(decidim_resource_id: [model.ids])
-            .destroy_all
-        end
+        Decidim::NotificationService.new(verbose: true).clear
       end
     end
 
