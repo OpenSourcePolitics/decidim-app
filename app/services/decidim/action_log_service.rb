@@ -15,10 +15,6 @@ module Decidim
         .pluck(:action, :resource_id, :extra)
     end
 
-    def orphans_count_for(klass)
-      orphans_for(klass).count
-    end
-
     def clear_data_for(klass)
       actions = Decidim::ActionLog
                 .where(resource_type: klass)

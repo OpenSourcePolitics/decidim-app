@@ -15,10 +15,6 @@ module Decidim
         .pluck(:event_name, :decidim_resource_id, :extra)
     end
 
-    def orphans_count_for(klass)
-      orphans_for(klass).count
-    end
-
     def clear_data_for(klass)
       Decidim::Notification.where(decidim_resource_type: klass).where.not(decidim_resource_id: [klass.constantize.ids]).destroy_all
     end
