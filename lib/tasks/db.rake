@@ -30,28 +30,13 @@ namespace :decidim do
       desc "List surveys related to deleted component"
       # TODO: Add tests
       task orphans: :environment do
-        Rails.logger = Logger.new($stdout)
-        # ActiveRecord::Base.logger = Logger.new($stdout)
-
-        Decidim::Surveys::Survey
-          .where.not(decidim_component_id: [Decidim::Component.ids])
-          .pluck(:id, :title, :decidim_component_id).each do |s|
-            puts s.inspect
-          end
-        Rails.logger.close
+        Decidim::SurveysService.new(verbose: true).orphans
       end
 
       desc "Delete surveys related to deleted component"
       # TODO: Add tests
       task clean: :environment do
-        Rails.logger = Logger.new($stdout)
-        # ActiveRecord::Base.logger = Logger.new($stdout)
-
-        Decidim::Surveys::Survey
-          .where.not(decidim_component_id: [Decidim::Component.ids])
-          .destroy_all
-
-        Rails.logger.close
+        Decidim::SurveysService.new(verbose: true).clear
       end
     end
   end
