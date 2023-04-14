@@ -8,6 +8,11 @@ module Decidim
     end
 
     def orphans
+      if resource_types.blank?
+        @logger.info "No resource_types found, terminating..." if @verbose
+        return
+      end
+
       @logger.info "Finding orphans rows in database for #{resource_types.join(", ")} ..." if @verbose
 
       orphans = {}

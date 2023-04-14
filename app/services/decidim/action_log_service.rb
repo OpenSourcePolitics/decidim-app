@@ -13,6 +13,10 @@ module Decidim
         .where(resource_type: klass)
         .where.not(resource_id: [klass.constantize.ids])
         .pluck(:action, :resource_id, :extra)
+    rescue StandardError => e
+      @logger.warn "Error found : #{e.message}"
+      @logger.warn "Skipping class : #{klass}"
+      []
     end
 
     def clear_data_for(klass)
