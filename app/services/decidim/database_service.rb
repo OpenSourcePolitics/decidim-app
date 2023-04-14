@@ -32,15 +32,15 @@ module Decidim
     private
 
     def resource_types
-      raise NotImpletedError
+      raise "Method resource_types isn't defined for #{self.class}"
     end
 
     def orphans_for(_klass)
-      raise NotImpletedError
+      raise "Method orphans_for isn't defined for #{self.class}"
     end
 
     def clear_data_for(_klass)
-      raise NotImpletedError
+      raise "Method clear_data_for isn't defined for #{self.class}"
     end
 
     def orphans_count_for(klass)
