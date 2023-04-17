@@ -1,5 +1,8 @@
 # Overrides
 
+## Rescue from ActiveStorage::InvariantError
+* `lib/extends/uploaders/decidim/application_uploader_extends.rb`
+
 ## Fix cache on Hero Cell
 * `lib/extends/cells/decidim/content_blocks/hero_cell_extends.rb:13`
 
