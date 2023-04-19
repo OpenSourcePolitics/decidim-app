@@ -29,20 +29,10 @@ jobs:
         if: "github.ref != 'refs/heads/develop'"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      - uses: actions/checkout@v3
+      - uses: OpenSourcePolitics/lint-action@master
         with:
-          fetch-depth: 1
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Install JS dependencies
-        run: npm ci
-      - run: bundle exec rubocop -P
-        name: Lint Ruby files
+          ruby_version: ${{ env.RUBY_VERSION }}
+          node_version: ${{ env.NODE_VERSION }}
   tests:
     strategy:
       fail-fast: false
@@ -199,7 +189,7 @@ jobs:
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: host.docker.internal
     steps:
-      - uses: OpenSourcePolitics/build-and-test-images@master
+      - uses: OpenSourcePolitics/build-and-test-images-action@master
         with:
           image_name: ${{ vars.IMAGE_NAME }}
           image_tag: develop
@@ -256,7 +246,7 @@ jobs:
     needs: [lint, tests, system_tests, test_build]
     runs-on: ubuntu-latest
     steps:
-      - uses: OpenSourcePolitics/build-and-push-images@master
+      - uses: OpenSourcePolitics/build-and-push-images-action@master
         with:
           registry: ${{ vars.REGISTRY }}
           password: ${{ secrets.TOKEN }}

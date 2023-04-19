@@ -28,7 +28,7 @@ jobs:
     if: "github.ref == 'refs/heads/master'"
     runs-on: ubuntu-latest
     steps:
-      - uses: OpenSourcePolitics/build-and-push-action@master
+      - uses: OpenSourcePolitics/build-and-push-images-action@master
         with:
           registry: ${{ vars.REGISTRY }}
           password: ${{ secrets.TOKEN }}
