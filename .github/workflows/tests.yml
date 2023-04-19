@@ -199,34 +199,15 @@ jobs:
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: host.docker.internal
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Login to Scaleway registry
-        uses: docker/login-action@v2
+      - uses: OpenSourcePolitics/build-and-test-images@master
         with:
+          image_name: ${{ vars.IMAGE_NAME }}
+          image_tag: develop
           registry: ${{ vars.REGISTRY }}
-          username: userdoesnotmatter
           password: ${{ secrets.TOKEN }}
-      - name: Cache Docker layers
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
-      - name: Build image
-        uses: docker/build-push-action@v3
-        with:
-          cache-from: type=local,src=/tmp/.buildx-cache,mode=max
-          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
-          outputs: type=docker,compression=gzip
-          tags: ${{ vars.IMAGE_NAME }}:develop
-      - name: Test build
-        run: |
-          docker run --rm --add-host=host.docker.internal:host-gateway -d -e DATABASE_USERNAME=${{env.DATABASE_USERNAME}} -e DATABASE_PASSWORD=${{env.DATABASE_PASSWORD}} -e DATABASE_HOST=${{env.DATABASE_HOST}} -p 3000:3000 --name decidim-app ${{ vars.IMAGE_NAME }}:develop
-          docker exec decidim-app bundle exec rake db:create db:migrate
-          ./.github/test_build.sh
+          database_username: ${{ env.DATABASE_USERNAME }}
+          database_password: ${{ env.DATABASE_PASSWORD }}
+          database_host: ${{ env.DATABASE_HOST }}
   deploy_develop:
     if: "github.ref == 'refs/heads/develop'"
     needs: [lint, tests, system_tests, test_build]
@@ -275,26 +256,9 @@ jobs:
     needs: [lint, tests, system_tests, test_build]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Login to Scaleway registry
-        uses: docker/login-action@v2
+      - uses: OpenSourcePolitics/build-and-push-images@master
         with:
           registry: ${{ vars.REGISTRY }}
-          username: userdoesnotmatter
           password: ${{ secrets.TOKEN }}
-      - name: Cache Docker layers
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          cache-from: type=local,src=/tmp/.buildx-cache,mode=max
-          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
-          push: true
-          tags: ${{ vars.IMAGE_NAME }}:develop
+          image_name: ${{ vars.IMAGE_NAME }}
+          tag: "develop"
