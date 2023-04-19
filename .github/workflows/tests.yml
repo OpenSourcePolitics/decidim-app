@@ -92,16 +92,9 @@ jobs:
         id: cache-hash
         run: |
           echo "::set-output name=hash::$(bundle exec rake test:assets_hash)"
-      - name: asset cache
-        uses: actions/cache@v3
+      - uses: OpenSourcePolitics/cache-precompile-action@master
         with:
-          path: |
-            public/packs-test
-            tmp/webpacker-cache
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
-      - name: Precompile assets
-        run: |
-          bundle exec rake assets:precompile
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
@@ -167,16 +160,9 @@ jobs:
         id: cache-hash
         run: |
           echo "::set-output name=hash::$(bundle exec rake test:assets_hash)"
-      - name: asset cache
-        uses: actions/cache@v3
+      - uses: OpenSourcePolitics/cache-precompile-action@master
         with:
-          path: |
-            public/packs-test
-            tmp/webpacker-cache
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
-      - name: Precompile assets
-        run: |
-          bundle exec rake assets:precompile
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
