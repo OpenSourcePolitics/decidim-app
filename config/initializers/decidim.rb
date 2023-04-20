@@ -5,8 +5,13 @@ Decidim.configure do |config|
   config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
 
   # Change these lines to set your preferred locales
-  config.default_locale = ENV.fetch("DEFAULT_LOCALE", "en").to_sym
-  config.available_locales = ENV.fetch("AVAILABLE_LOCALES", "en,fr").split(",").map(&:to_sym)
+  if Rails.env.production?
+    config.default_locale = ENV.fetch("DEFAULT_LOCALE", "fr").to_sym
+    config.available_locales = ENV.fetch("AVAILABLE_LOCALES", "fr").split(",").map(&:to_sym)
+  else
+    config.default_locale = ENV.fetch("DEFAULT_LOCALE", "en").to_sym
+    config.available_locales = ENV.fetch("AVAILABLE_LOCALES", "en,fr").split(",").map(&:to_sym)
+  end
 
   # Timeout session
   config.expire_session_after = ENV.fetch("DECIDIM_SESSION_TIMEOUT", 180).to_i.minutes
