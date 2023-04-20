@@ -496,7 +496,7 @@ GEM
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (1.1.0)
-    fugit (1.7.1)
+    fugit (1.8.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
     geocoder (1.7.5)
@@ -852,10 +852,9 @@ GEM
       connection_pool (>= 2.2.5)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
-    sidekiq-scheduler (4.0.2)
-      redis (>= 4.2.0)
+    sidekiq-scheduler (5.0.2)
       rufus-scheduler (~> 3.2)
-      sidekiq (>= 4)
+      sidekiq (>= 6, < 8)
       tilt (>= 1.4.0)
     sidekiq_alive (2.2.0)
       rack (< 3)
@@ -1006,7 +1005,7 @@ DEPENDENCIES
   sentry-ruby
   sentry-sidekiq
   sidekiq (~> 6.0)
-  sidekiq-scheduler
+  sidekiq-scheduler (~> 5.0)
   sidekiq_alive (~> 2.2)
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
