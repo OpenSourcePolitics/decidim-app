@@ -191,9 +191,10 @@ jobs:
     steps:
       - uses: OpenSourcePolitics/build-and-test-images-action@master
         with:
-          image_name: ${{ vars.IMAGE_NAME }}
-          image_tag: develop
           registry: ${{ vars.REGISTRY }}
+          namespace: ${{ vars.REGISTRY_NAMESPACE }}
+          image_name: ${{ vars.IMAGE_NAME }}
+          tag: ${ github.ref }
           password: ${{ secrets.TOKEN }}
           database_username: ${{ env.DATABASE_USERNAME }}
           database_password: ${{ env.DATABASE_PASSWORD }}
