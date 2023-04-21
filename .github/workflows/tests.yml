@@ -194,7 +194,7 @@ jobs:
           registry: ${{ vars.REGISTRY }}
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
           image_name: ${{ vars.IMAGE_NAME }}
-          tag: ${ github.ref }
+          tag: ${{ github.ref }}
           password: ${{ secrets.TOKEN }}
           database_username: ${{ env.DATABASE_USERNAME }}
           database_password: ${{ env.DATABASE_PASSWORD }}
@@ -250,6 +250,7 @@ jobs:
       - uses: OpenSourcePolitics/build-and-push-images-action@master
         with:
           registry: ${{ vars.REGISTRY }}
+          namespace: ${{ vars.REGISTRY_NAMESPACE }}
           password: ${{ secrets.TOKEN }}
           image_name: ${{ vars.IMAGE_NAME }}
           tag: "develop"

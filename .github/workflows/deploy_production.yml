@@ -31,6 +31,7 @@ jobs:
       - uses: OpenSourcePolitics/build-and-push-images-action@master
         with:
           registry: ${{ vars.REGISTRY }}
+          namespace: ${{ vars.REGISTRY_NAMESPACE }}
           password: ${{ secrets.TOKEN }}
           image_name: ${{ vars.IMAGE_NAME }}
           tag: ${{ github.sha }}
