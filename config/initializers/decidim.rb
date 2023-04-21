@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "decidim/dev/dummy_translator"
 
 Decidim.configure do |config|
@@ -114,8 +115,6 @@ Decidim.configure do |config|
   config.enable_machine_translations = true
   config.machine_translation_service = "DeeplTranslator"
   config.machine_translation_delay = 0.seconds
-
-  config.base_uploads_path = "#{ENV["HEROKU_APP_NAME"]}/" if ENV["HEROKU_APP_NAME"].present?
 end
 
 Decidim.module_eval do
@@ -147,9 +146,11 @@ Rails.application.config.i18n.available_locales = Decidim.available_locales
 Rails.application.config.i18n.default_locale = Decidim.default_locale
 
 # DeepL Translation service configuration
-DeepL.configure do |config|
-  config.auth_key = Rails.application.secrets.translator[:api_key]
-  config.host = Rails.application.secrets.translator[:host]
+if Rails.application.secrets.translator[:api_key].present?
+  DeepL.configure do
+    config.auth_key = Rails.application.secrets.translator[:api_key]
+    config.host = Rails.application.secrets.translator[:host]
+  end
 end
 
 # Inform Decidim about the assets folder
