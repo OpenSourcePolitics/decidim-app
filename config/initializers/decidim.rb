@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "decidim/dev/dummy_translator"
 
 Decidim.configure do |config|
   config.application_name = "OSP Agora"
@@ -114,7 +115,7 @@ Decidim.configure do |config|
   config.machine_translation_service = "DeeplTranslator"
   config.machine_translation_delay = 0.seconds
 
-  config.base_uploads_path = ENV["HEROKU_APP_NAME"] + "/" if ENV["HEROKU_APP_NAME"].present?
+  config.base_uploads_path = "#{ENV["HEROKU_APP_NAME"]}/" if ENV["HEROKU_APP_NAME"].present?
 end
 
 Decidim.module_eval do
