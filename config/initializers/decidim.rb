@@ -145,13 +145,5 @@ end
 Rails.application.config.i18n.available_locales = Decidim.available_locales
 Rails.application.config.i18n.default_locale = Decidim.default_locale
 
-# DeepL Translation service configuration
-if Rails.application.secrets.translator[:api_key].present?
-  DeepL.configure do
-    config.auth_key = Rails.application.secrets.translator[:api_key]
-    config.host = Rails.application.secrets.translator[:host]
-  end
-end
-
 # Inform Decidim about the assets folder
 Decidim.register_assets_path File.expand_path("app/packs", Rails.application.root)
