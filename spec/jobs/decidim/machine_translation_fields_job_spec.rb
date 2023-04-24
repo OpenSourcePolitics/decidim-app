@@ -21,14 +21,14 @@ module Decidim
       it "calls DummyTranslator to create machine translations" do
         expect(Decidim::Dev::DummyTranslator)
           .to receive(:new)
-                .with(
-                  process,
-                  "title",
-                  process["title"][source_locale],
-                  target_locale,
-                  source_locale
-                )
-                .and_call_original
+          .with(
+            process,
+            "title",
+            process["title"][source_locale],
+            target_locale,
+            source_locale
+          )
+          .and_call_original
 
         process.save
 
