@@ -59,4 +59,6 @@ Rails.application.configure do
   # are known to cause issue with moderation due to expiration
   # Setting this to 100 years should be enough
   config.global_id.expires_in = 100.years
+
+  config.active_job.queue_adapter = ActiveJob::QueueAdapters::AsyncAdapter.new
 end
