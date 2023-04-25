@@ -774,8 +774,6 @@ GEM
       wisper (>= 1.6.1)
     redcarpet (3.6.0)
     redis (4.8.1)
-    redis-client (0.14.1)
-      connection_pool
     redlock (1.3.2)
       redis (>= 3.0.0, < 6.0)
     regexp_parser (2.7.0)
@@ -868,11 +866,10 @@ GEM
       sentry-ruby (~> 5.8.0)
       sidekiq (>= 3.0)
     seven_zip_ruby (1.3.0)
-    sidekiq (7.0.8)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      rack (>= 2.2.4)
-      redis-client (>= 0.11.0)
+    sidekiq (6.5.8)
+      connection_pool (>= 2.2.5, < 3)
+      rack (~> 2.0)
+      redis (>= 4.5.0, < 5)
     sidekiq-scheduler (5.0.2)
       rufus-scheduler (~> 3.2)
       sidekiq (>= 6, < 8)
@@ -981,6 +978,7 @@ GEM
     zeitwerk (2.6.7)
 
 PLATFORMS
+  arm64-darwin-21
   arm64-darwin-22
   x86_64-darwin-20
   x86_64-darwin-21
@@ -1027,7 +1025,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   sentry-sidekiq
-  sidekiq
+  sidekiq (~> 6.0)
   sidekiq-scheduler
   sidekiq_alive (~> 2.2)
   spring (~> 2.0)
@@ -1039,4 +1037,4 @@ RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.4.6
+   2.4.9
