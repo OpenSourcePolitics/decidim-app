@@ -2,42 +2,35 @@
 
 require "spec_helper"
 
-describe Decidim::NotificationService do
+describe Decidim::RepairNicknameService do
   subject { described_class.new }
 
-  let!(:notifications) { create_list(:notification, 10) }
+  let!(:users) { create_list(:user, 10) }
 
-  describe "#orphans" do
-    it "returns a Hash with count" do
-      orphans = subject.orphans
-      expect(orphans).to be_a Hash
-      expect(orphans).to eq("Decidim::DummyResources::DummyResource" => 0)
+  describe "#run" do
+    subject { described_class.run }
+
+    it "returns empty array" do
+      expect(subject).to be_empty
     end
 
-    context "when there is orphans data" do
-      let!(:notifications) { create_list(:notification, 10) }
+    context "when invalid nicknames" do
+      let(:invalid) { build :user }
 
       before do
-        Decidim::Notification.all.each { |notif| notif.resource.destroy }
+        invalid.nickname = "Décidim"
+        invalid.save!(validate: false)
       end
 
-      it "returns all orphans elements" do
-        orphans = subject.orphans
-        expect(orphans).to be_a Hash
-        expect(orphans).to eq("Decidim::DummyResources::DummyResource" => 10)
+      it "returns array of invalid user IDs" do
+        expect(subject).to eq([invalid.id])
       end
     end
   end
 
-  describe "#clear" do
-    before do
-      Decidim::Notification.all.each { |notif| notif.resource.destroy }
-    end
-
-    it "destroys directly the orphans data found" do
-      expect do
-        subject.clear
-      end.to change(Decidim::Notification, :count).from(10).to(0)
+  describe "#ok?" do
+    it "returns true" do
+      expect(subject).to be_ok
     end
   end
 end

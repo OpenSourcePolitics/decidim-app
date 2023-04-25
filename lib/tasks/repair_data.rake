@@ -14,7 +14,7 @@ namespace :decidim do
         logger.info("No users updated")
       else
         logger.info("#{updates.count} users updated")
-        logger.info("Updated users ID : #{updates.join(', ')}")
+        logger.info("Updated users ID : #{updates.join(", ")}")
       end
 
       logger.info("Operation terminated")

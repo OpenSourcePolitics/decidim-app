@@ -2,7 +2,7 @@
 
 module Decidim
   class RepairNicknameService
-    def initialize;end
+    def initialize; end
 
     def self.run
       new.execute
