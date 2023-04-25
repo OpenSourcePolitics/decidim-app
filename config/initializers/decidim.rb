@@ -7,8 +7,13 @@ Decidim.configure do |config|
   config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"
 
   # Change these lines to set your preferred locales
-  config.default_locale = ENV.fetch("DEFAULT_LOCALE", "en").to_sym
-  config.available_locales = ENV.fetch("AVAILABLE_LOCALES", "en,fr").split(",").map(&:to_sym)
+  if Rails.env.production?
+    config.default_locale = ENV.fetch("DEFAULT_LOCALE", "fr").to_sym
+    config.available_locales = ENV.fetch("AVAILABLE_LOCALES", "fr").split(",").map(&:to_sym)
+  else
+    config.default_locale = ENV.fetch("DEFAULT_LOCALE", "en").to_sym
+    config.available_locales = ENV.fetch("AVAILABLE_LOCALES", "en,fr").split(",").map(&:to_sym)
+  end
 
   # Timeout session
   config.expire_session_after = ENV.fetch("DECIDIM_SESSION_TIMEOUT", 180).to_i.minutes
@@ -34,14 +39,6 @@ Decidim.configure do |config|
       address_format: [%w(houseNumber street), "city", "country"]
     }
   }
-
-  if defined?(Decidim::Initiatives) && defined?(Decidim::Initiatives.do_not_require_authorization)
-    # puts "Decidim::Initiatives are loaded"
-    Decidim::Initiatives.minimum_committee_members = 1
-    Decidim::Initiatives.do_not_require_authorization = true
-    Decidim::Initiatives.print_enabled = false
-    Decidim::Initiatives.face_to_face_voting_allowed = false
-  end
 
   # Custom resource reference generator method
   # config.resource_reference_generator = lambda do |resource, feature|

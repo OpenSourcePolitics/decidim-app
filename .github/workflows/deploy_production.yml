@@ -28,26 +28,10 @@ jobs:
     if: "github.ref == 'refs/heads/master'"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Login to Scaleway registry
-        uses: docker/login-action@v2
+      - uses: OpenSourcePolitics/build-and-push-images-action@master
         with:
           registry: ${{ vars.REGISTRY }}
-          username: userdoesnotmatter
+          namespace: ${{ vars.REGISTRY_NAMESPACE }}
           password: ${{ secrets.TOKEN }}
-      - name: Cache Docker layers
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-${{ vars.IMAGE_NAME }}
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          cache-from: type=local,src=/tmp/.buildx-cache,mode=max
-          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
-          push: true
-          tags: ${{ vars.IMAGE_NAME }}:latest,${{ vars.IMAGE_NAME }}:${{ github.sha }}
+          image_name: ${{ vars.IMAGE_NAME }}
+          tag: ${{ github.sha }}

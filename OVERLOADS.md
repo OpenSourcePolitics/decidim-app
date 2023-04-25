@@ -1,4 +1,8 @@
-# Overrides
+# Overrides 🍰
+
+## Deployment's related properties for API
+* `app/api/deployment_type.rb`
+* `app/api/query_extensions.rb`
 
 ## Rescue from ActiveStorage::InvariantError
 * `lib/extends/uploaders/decidim/application_uploader_extends.rb`
@@ -6,38 +10,19 @@
 ## Fix cache on Hero Cell
 * `lib/extends/cells/decidim/content_blocks/hero_cell_extends.rb:13`
 
-## Add budget and proposal map caching
-* `app/views/decidim/budgets/projects/index.html.erb:9`
+## Add proposal map caching
 * `app/views/decidim/proposals/proposals/index.html.erb:5`
 
 ## Update France Connect with requirements
 * `app/views/decidim/devise/passwords/new.html.erb`
 * `app/views/decidim/shared/_login_modal.html.erb`
 
-## Backport sort of budgets projects
-* `app/controllers/decidim/budgets/projects_controller.rb`
-* `spec/system/sorting_projects_spec.rb`
-
-## Load decidim-awesome assets only if dependencie is present
-* `app/views/layouts/decidim/_head.html.erb:33`
-
-## Fix geocoded proposals
-* `app/controllers/decidim/proposals/proposals_controller.rb:44`
-```ruby
-          @all_geocoded_proposals = @base_query.geocoded.where.not(latitude: Float::NAN, longitude: Float::NAN)
-```
-
-##  Fix meetings registration serializer
-* `app/serializers/decidim/meetings/registration_serializer.rb`
-## Fix UserAnswersSerializer for CSV exports
-* `lib/decidim/forms/user_answers_serializer.rb`
 ## 28c8d74 - Add basic tests to reference package (#1), 2021-07-26
 * `lib/extends/commands/decidim/admin/create_participatory_space_private_user_extends.rb`
 * `lib/extends/commands/decidim/admin/impersonate_user_extends.rb`
-##  cd5c2cc - Backport fix/user answers serializer (#11), 2021-09-30
-* `lib/decidim/forms/user_answers_serializer.rb`
+
 ## Fix metrics issue in admin dashboard
- - **app/stylesheets/decidim/vizzs/_areachart.scss**
+ - **app/packs/stylesheets/decidim/vizzs/_areachart.scss**
 ```scss
     .area{
         fill: rgba($primary, .2);;
@@ -50,18 +35,11 @@
     <% if provider.match?("france") %>
 ```
 
-* `app/views/decidim/scopes/picker.html.erb`
-c76437f - Modify cancel button behaviour to match close button, 2022-02-08
-
+## Backups
 * `app/helpers/decidim/backup_helper.rb`
 83830be - Add retention service for daily backups (#19), 2021-11-09
-
 * `app/services/decidim/s3_retention_service.rb`
 de6d804 - fix multipart object tagging (#40) (#41), 2021-12-24
-
-* `config/initializers/omniauth_publik.rb`
-9d50925 - Feature omniauth publik (#46), 2022-01-18
-
 * `lib/tasks/restore_dump.rake`
 705e0ad - Run rubocop, 2021-12-01
 
@@ -71,7 +49,7 @@ de6d804 - fix multipart object tagging (#40) (#41), 2021-12-24
 * `app/views/v0.26/decidim/proposals/collaborative_drafts/_show.html.erb`
 * `spec/system/collaborative_drafts_fields_spec.rb`
 
-## Add budget reminder(#170)
+## Add budget reminder(#170) backport #8621
 * `app/commands/decidim/budgets/admin/create_order_reminders.rb`
 * `app/controllers/decidim/admin/components/base_controller.rb`
 * `app/controllers/decidim/admin/reminders_controller.rb`
@@ -177,7 +155,7 @@ end
 * `spec/services/decidim/budgets/order_reminder_generator_spec.rb`
 * `spec/system/admin_reminds_users_with_pending_orders_spec.rb`
 
-## Fix survey validation
+## Fix survey validation (#228)
 * `app/cells/decidim/forms/step_navigation/show.erb`
 * `app/packs/src/decidim/decidim_application.js`
 * `app/views/decidim/forms/questionnaires/show.html.erb`
@@ -185,7 +163,7 @@ end
 * `spec/shared/has_questionnaire.rb`
 * `spec/system/survey_spec.rb`
 
-## Fix survey conditionnal question saving
+## Fix survey conditional question saving, backport #10386
 * `spec/commands/decidim/forms/answer_questionnaire_spec.rb`
 * `app/forms/decidim/forms/answer_form.rb`
 * `app/forms/decidim/forms/questionnaire_form.rb`
