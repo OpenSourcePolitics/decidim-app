@@ -8,7 +8,7 @@ namespace :decidim do
       logger = Logger.new($stdout)
       logger.info("Checking all nicknames...")
 
-      updates = Decidim::RepairService.run
+      updates = Decidim::RepairNicknameService.run
 
       if updates.blank?
         logger.info("No users updated")

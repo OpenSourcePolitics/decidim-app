@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Decidim
-  class RepairService
+  class RepairNicknameService
     def initialize;end
 
     def self.run
