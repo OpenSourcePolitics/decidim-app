@@ -1026,7 +1026,7 @@ DEPENDENCIES
   sentry-ruby
   sentry-sidekiq
   sidekiq (~> 6.0)
-  sidekiq-scheduler
+  sidekiq-scheduler (~> 5.0)
   sidekiq_alive (~> 2.2)
   spring (~> 2.0)
   spring-watcher-listen (~> 2.0)
