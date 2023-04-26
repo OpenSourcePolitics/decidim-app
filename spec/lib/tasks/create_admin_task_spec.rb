@@ -5,7 +5,7 @@ require "spec_helper"
 describe "rake decidim_app:create_admin", type: :task do
   let(:task_cmd) { :"decidim_app:create_admin" }
   let!(:organization) { create(:organization) }
-  let(:name) { "John Doe 2" }
+  let(:name) { "John Doe" }
   let(:nickname) { "JD" }
   let(:email) { "john@example.org" }
   let(:password) { "decidim123456" }
