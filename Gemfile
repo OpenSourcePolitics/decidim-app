@@ -52,6 +52,7 @@ end
 group :development, :test do
   gem "brakeman", "~> 5.1"
   gem "byebug", "~> 11.0", platform: :mri
+  gem "climate_control", "~> 1.2"
   gem "decidim-dev", "~> #{DECIDIM_VERSION}.0"
   gem "parallel_tests"
 end
