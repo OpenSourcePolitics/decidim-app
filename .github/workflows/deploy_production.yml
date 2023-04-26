@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: OpenSourcePolitics/build-and-push-images-action@master
         with:
-          registry: ${{ vars.REGISTRY }}
+          registry: ${{ vars.REGISTRY_ENDPOINT }}
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
           password: ${{ secrets.TOKEN }}
           image_name: ${{ vars.IMAGE_NAME }}
