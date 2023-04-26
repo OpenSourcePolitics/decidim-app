@@ -14,13 +14,9 @@ describe "rake decidim_app:create_system_admin", type: :task do
     }
   end
 
-  before do
-    Rake::Task[task_cmd].reenable
-  end
-
   it "creates admin" do
     with_modified_env(environment) do
-      expect { Rake::Task[task_cmd].invoke }.to change(Decidim::System::Admin, :count).by(1)
+      expect { Rake::Task[task_cmd].execute }.to change(Decidim::System::Admin, :count).by(1)
       expect(Decidim::System::Admin.last.email).to eq(email)
     end
   end

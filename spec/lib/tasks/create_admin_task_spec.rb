@@ -21,13 +21,9 @@ describe "rake decidim_app:create_admin", type: :task do
     }
   end
 
-  before do
-    Rake::Task[task_cmd].reenable
-  end
-
   it "creates admin" do
     with_modified_env(environment) do
-      expect { Rake::Task[task_cmd].invoke }.to change(Decidim::User, :count).by(1)
+      expect { Rake::Task[task_cmd].execute }.to change(Decidim::User, :count).by(1)
       expect(Decidim::User.last.admin).to eq(true)
       expect(Decidim::User.last.nickname).to eq(nickname)
       expect(Decidim::User.last.organization).to eq(organization)
@@ -35,17 +31,17 @@ describe "rake decidim_app:create_admin", type: :task do
     end
   end
 
-  # context "when organization is missing" do
-  #   let(:organization_id) { nil }
-  #
-  #   it "creates admins with first organization" do
-  #     with_modified_env(environment) do
-  #       expect { Rake::Task[task_cmd].invoke }.to change(Decidim::User, :count).by(1)
-  #       expect(Decidim::User.last.admin).to eq(true)
-  #       expect(Decidim::User.last.nickname).to eq(nickname)
-  #       expect(Decidim::User.last.organization).to eq(organization)
-  #       expect(Decidim::User.last.email).to eq(email)
-  #     end
-  #   end
-  # end
+  context "when organization is missing" do
+    let(:organization_id) { nil }
+
+    it "creates admins with first organization" do
+      with_modified_env(environment) do
+        expect { Rake::Task[task_cmd].execute }.to change(Decidim::User, :count).by(1)
+        expect(Decidim::User.last.admin).to eq(true)
+        expect(Decidim::User.last.nickname).to eq(nickname)
+        expect(Decidim::User.last.organization).to eq(organization)
+        expect(Decidim::User.last.email).to eq(email)
+      end
+    end
+  end
 end
