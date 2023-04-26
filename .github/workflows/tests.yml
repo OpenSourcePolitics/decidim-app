@@ -191,7 +191,7 @@ jobs:
     steps:
       - uses: OpenSourcePolitics/build-and-test-images-action@master
         with:
-          registry: ${{ vars.REGISTRY }}
+          registry: ${{ vars.REGISTRY_ENDPOINT }}
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
           image_name: ${{ vars.IMAGE_NAME }}
           tag: ${{ github.ref }}
@@ -249,7 +249,7 @@ jobs:
     steps:
       - uses: OpenSourcePolitics/build-and-push-images-action@master
         with:
-          registry: ${{ vars.REGISTRY }}
+          registry: ${{ vars.REGISTRY_ENDPOINT }}
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
           password: ${{ secrets.TOKEN }}
           image_name: ${{ vars.IMAGE_NAME }}
