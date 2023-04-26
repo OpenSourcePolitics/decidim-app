@@ -6,8 +6,8 @@ describe "rake decidim_app:create_admin", type: :task do
   let(:task_cmd) { :"decidim_app:create_admin" }
   let!(:organization) { create(:organization) }
   let(:name) { "John Doe 2" }
-  let(:nickname) { "JD2" }
-  let(:email) { "john2@example.org" }
+  let(:nickname) { "JD" }
+  let(:email) { "john@example.org" }
   let(:password) { "decidim123456" }
   let(:organization_id) { organization.id.to_s }
 
