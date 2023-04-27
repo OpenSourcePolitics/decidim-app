@@ -4,6 +4,7 @@ on: [push]
 env:
   CI: "true"
   SIMPLECOV: "true"
+  RSPEC_FORMAT: "documentation"
   RUBY_VERSION: 2.7.5
   RAILS_ENV: test
   NODE_VERSION: 16.9.1
