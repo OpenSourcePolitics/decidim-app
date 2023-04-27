@@ -90,28 +90,32 @@ Rails.application.configure do
 
   # config.action_mailer.raise_delivery_errors = true
   # config.action_mailer.delivery_method = :letter_opener_web
-
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: Rails.application.secrets.smtp_address,
-    port: Rails.application.secrets.smtp_port,
-    authentication: Rails.application.secrets.smtp_authentication,
-    user_name: Rails.application.secrets.smtp_username,
-    password: Rails.application.secrets.smtp_password,
-    domain: Rails.application.secrets.smtp_domain,
-    enable_starttls_auto: Rails.application.secrets.smtp_starttls_auto,
-    openssl_verify_mode: "none"
-  }
-
-  if Rails.application.secrets.sendgrid
-    config.action_mailer.default_options = {
-      "X-SMTPAPI" => {
-        filters: {
-          clicktrack: { settings: { enable: 0 } },
-          opentrack: { settings: { enable: 0 } }
-        }
-      }.to_json
+  if ENV.fetch("ENABLE_LETTER_OPENER", "0") == "1"
+    config.action_mailer.delivery_method = :letter_opener_web
+    config.action_mailer.default_url_options = { port: 3000 }
+  else
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: Rails.application.secrets.smtp_address,
+      port: Rails.application.secrets.smtp_port,
+      authentication: Rails.application.secrets.smtp_authentication,
+      user_name: Rails.application.secrets.smtp_username,
+      password: Rails.application.secrets.smtp_password,
+      domain: Rails.application.secrets.smtp_domain,
+      enable_starttls_auto: Rails.application.secrets.smtp_starttls_auto,
+      openssl_verify_mode: "none"
     }
+
+    if Rails.application.secrets.sendgrid
+      config.action_mailer.default_options = {
+        "X-SMTPAPI" => {
+          filters: {
+            clicktrack: { settings: { enable: 0 } },
+            opentrack: { settings: { enable: 0 } }
+          }
+        }.to_json
+      }
+    end
   end
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
@@ -141,4 +145,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Global IDs are used to identify records and
+  # are known to cause issue with moderation due to expiration
+  # Setting this to 100 years should be enough
+  config.global_id.expires_in = 100.years
 end
