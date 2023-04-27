@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/create_admin"
+require "decidim/admin_creator"
 
 module Decidim
-  describe CreateAdmin do
+  describe AdminCreator do
     let!(:organization) { create(:organization) }
     let(:name) { "John Doe" }
     let(:nickname) { "JD" }

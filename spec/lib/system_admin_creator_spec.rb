@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim/create_system_admin"
+require "decidim/system_admin_creator"
 
 module Decidim
-  describe CreateSystemAdmin do
+  describe SystemAdminCreator do
     let(:email) { "john@example.org" }
     let(:password) { "decidim123456" }
 
