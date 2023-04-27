@@ -131,6 +131,8 @@ en:
           ok_text: Warning, this password is the one of your local account and in no case the one of the account you use through FranceConnect. It will only be used when you log in with your email address rather than via FranceConnect.
     proposals:
       collaborative_drafts:
+        new:
+          add_file: Add file
         collaborative_draft:
           publish:
             error: There was a problem publishing the collaborative draft.
