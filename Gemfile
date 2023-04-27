@@ -54,6 +54,7 @@ end
 group :development, :test do
   gem "brakeman", "~> 5.1"
   gem "byebug", "~> 11.0", platform: :mri
+  gem "climate_control", "~> 1.2"
   gem "decidim-dev", "~> #{DECIDIM_VERSION}.0"
   gem "parallel_tests"
 end
@@ -68,7 +69,7 @@ group :production do
   gem "sentry-rails"
   gem "sentry-ruby"
   gem "sentry-sidekiq"
-  gem "sidekiq"
+  gem "sidekiq", "~> 6.0"
   gem "sidekiq_alive", "~> 2.2"
-  gem "sidekiq-scheduler"
+  gem "sidekiq-scheduler", "~> 5.0"
 end
