@@ -23,6 +23,7 @@ namespace :decidim_app do
     end
 
     puts "Setup successfully terminated"
+    # :nocov:
   end
 
   desc "Create admin user with decidim_app:create_admin name='John Doe' nickname='johndoe' email='john@example.org', password='decidim123456' organization_id='1'"
