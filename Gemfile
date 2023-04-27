@@ -60,8 +60,6 @@ group :production do
   gem "dalli"
   gem "health_check", "~> 3.1"
   gem "lograge"
-  gem "newrelic_rpm"
-  gem "passenger"
   gem "sendgrid-ruby"
   gem "sentry-rails"
   gem "sentry-ruby"
