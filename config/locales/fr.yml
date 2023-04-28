@@ -131,8 +131,6 @@ fr:
           ok_text: Attention, ce mot de passe est celui de votre compte local et en aucun cas celui du compte que vous utilisez au travers de FranceConnect. Il vous servira uniquement lorsque vous vous connecterez avec votre adresse mail plutôt que via FranceConnect.
     proposals:
       collaborative_drafts:
-        new:
-          add_file: Add file
         collaborative_draft:
           publish:
             error: Il y a eu des erreurs lors de la publication du brouillon collaboratif.
@@ -143,6 +141,8 @@ fr:
         create:
           error: Il y a eu un problème lors de la création de ces brouillons collaboratifs
           success: Brouillon collaboratif créé avec succès.
+        new:
+          edit_file: Editer le fichier
         show:
           back: Retour
           edit: Modifier un brouillon collaboratif
