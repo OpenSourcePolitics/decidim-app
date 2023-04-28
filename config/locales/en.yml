@@ -142,6 +142,7 @@ en:
           error: There was a problem creating this collaborative drafts
           success: Collaborative draft successfully created.
         new:
+          add_file: Add file
           edit_file: Edit file
         show:
           back: Back

@@ -123,5 +123,5 @@ ignore_unused:
   - rack_attack.too_many_requests.*
   - decidim.account.destroy.success
   - decidim.account.destroy.error
-  - decidim.proposals.collaborative_drafts.new.edit_file
+  - decidim.proposals.collaborative_drafts.new.*
 

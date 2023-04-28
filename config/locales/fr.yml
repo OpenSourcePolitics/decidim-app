@@ -142,6 +142,7 @@ fr:
           error: Il y a eu un problème lors de la création de ces brouillons collaboratifs
           success: Brouillon collaboratif créé avec succès.
         new:
+          add_file: Ajouter le fichier
           edit_file: Editer le fichier
         show:
           back: Retour
