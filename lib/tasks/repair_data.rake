@@ -8,13 +8,13 @@ namespace :decidim do
       logger = Logger.new($stdout)
       logger.info("Checking all nicknames...")
 
-      updates = Decidim::RepairNicknameService.run
+      udpated_user_ids = Decidim::RepairNicknameService.run
 
-      if updates.blank?
+      if udpated_user_ids.blank?
         logger.info("No users updated")
       else
-        logger.info("#{updates.count} users updated")
-        logger.info("Updated users ID : #{updates.join(", ")}")
+        logger.info("#{udpated_user_ids.count} users updated")
+        logger.info("Updated users ID : #{udpated_user_ids.join(", ")}")
       end
 
       logger.info("Operation terminated")
