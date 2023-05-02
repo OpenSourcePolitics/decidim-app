@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
-  revision: a2f9510facd0b3b0e3701eb9c86744c2ddbb77b8
+  revision: 3bbd5fff51fbfa94ff6e784baa73af190b1c679d
   branch: release/0.26-stable
   specs:
     decidim-homepage_interactive_map (2.0.0)
@@ -133,7 +133,7 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     acts_as_list (0.9.19)
       activerecord (>= 3.0)
-    addressable (2.8.3)
+    addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
     aes_key_wrap (1.1.0)
     ast (2.4.2)
@@ -154,7 +154,7 @@ GEM
       aws-sigv4 (~> 1.4)
     aws-sigv4 (1.5.2)
       aws-eventstream (~> 1, >= 1.0.2)
-    axe-core-api (4.6.0)
+    axe-core-api (4.7.0)
       dumb_delegator
       virtus
     axe-core-rspec (4.1.0)
@@ -434,13 +434,13 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.11.0)
       devise (>= 4.9.0)
-    devise_invitable (2.0.7)
+    devise_invitable (2.0.8)
       actionmailer (>= 5.0)
       devise (>= 4.6)
     diff-lcs (1.5.0)
     diffy (3.4.2)
-    doc2text (0.4.5)
-      nokogiri (>= 1.13.2, < 1.14.0)
+    doc2text (0.4.6)
+      nokogiri (>= 1.13.2, < 1.15.0)
       rubyzip (~> 2.3.0)
     docile (1.4.0)
     doorkeeper (5.6.6)
@@ -517,7 +517,7 @@ GEM
     html_tokenizer (0.0.7)
     htmlentities (4.3.4)
     httpclient (2.8.3)
-    i18n (1.12.0)
+    i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.37)
       activesupport (>= 4.0.2)
@@ -682,10 +682,10 @@ GEM
     paper_trail (12.3.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
-    parallel (1.22.1)
+    parallel (1.23.0)
     parallel_tests (4.2.0)
       parallel
-    parser (3.2.2.0)
+    parser (3.2.2.1)
       ast (~> 2.4.1)
     pg (1.1.4)
     pg_search (2.3.6)
@@ -704,7 +704,7 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.6.2)
-    rack (2.2.6.4)
+    rack (2.2.7)
     rack-attack (6.6.1)
       rack (>= 1.0, < 3)
     rack-cors (1.1.1)
@@ -715,7 +715,7 @@ GEM
       httpclient
       json-jwt (>= 1.11.0)
       rack (>= 2.1.0)
-    rack-protection (3.0.5)
+    rack-protection (3.0.6)
       rack
     rack-proxy (0.7.6)
       rack
@@ -773,7 +773,7 @@ GEM
     redis (4.8.1)
     redlock (1.3.2)
       redis (>= 3.0.0, < 6.0)
-    regexp_parser (2.7.0)
+    regexp_parser (2.8.0)
     request_store (1.5.1)
       rack (>= 1.4)
     responders (3.1.0)
@@ -790,9 +790,9 @@ GEM
     rspec-cells (0.3.8)
       cells (>= 4.0.0, < 6.0.0)
       rspec-rails (>= 3.0.0, < 6.1.0)
-    rspec-core (3.12.1)
+    rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
-    rspec-expectations (3.12.2)
+    rspec-expectations (3.12.3)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-html-matchers (0.9.4)
@@ -823,7 +823,7 @@ GEM
       rubocop-ast (>= 0.5.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-ast (1.28.0)
+    rubocop-ast (1.28.1)
       parser (>= 3.2.1.0)
     rubocop-faker (1.1.0)
       faker (>= 2.12.0)
@@ -972,7 +972,7 @@ GEM
     wkhtmltopdf-binary (0.12.6.6)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.7)
+    zeitwerk (2.6.8)
 
 PLATFORMS
   arm64-darwin-21
@@ -1033,4 +1033,4 @@ RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.4.9
+   2.4.6
