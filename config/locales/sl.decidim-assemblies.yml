@@ -1,0 +1,483 @@
+---
+sl:
+  activemodel:
+    attributes:
+      assembly:
+        area_id: Območje
+        assembly_type: Vrsta skupščine
+        assembly_type_other: Vrsta skupščine, drugo
+        banner_image: Slika pasice
+        closing_date: Zaključni datum
+        closing_date_reason: Razlog zaključnega datuma
+        composition: Sestava
+        copy_categories: Kopiraj kategorije
+        copy_components: Kopiraj komponente
+        copy_features: Kopiraj značilnosti
+        created_by: Ustvaril
+        created_by_other: Ustvaril drug
+        creation_date: Ustvarjeno dne
+        decidim_area_id: Območje
+        decidim_assemblies_type_id: Vrsta skupščine
+        decidim_scope_id: Področje
+        description: Opis
+        developer_group: Skupina promotorjev
+        domain: Domena
+        duration: Trajanje
+        facebook: Facebook
+        github: GitHub
+        hashtag: Ključnik
+        hero_image: Vhodna slika
+        included_at: Vključeno dne
+        instagram: Instagram
+        internal_organisation: Notranja organizacija
+        is_transparent: Je pregledna
+        local_area: Območje organizacije
+        meta_scope: Metapodatki področja
+        parent_id: Nadrejena skupščina
+        participatory_processes_ids: Povezani participativni procesi
+        participatory_scope: O čem se odloča
+        participatory_structure: Kako se odloča
+        private_space: Zasebni prostor
+        promoted: Izpostavljeno
+        published_at: Objavljeno ob
+        purpose_of_action: Namen dejanja
+        scope_id: Področje
+        scopes_enabled: Področja omogočena
+        short_description: Kratek opis
+        show_statistics: Prikaži statistiko
+        slug: Polje dinamičnih podatkov URL
+        special_features: Posebne značilnosti
+        subtitle: Podnaslov
+        target: Kdo sodeluje
+        title: Naslov
+        twitter: Twitter
+        youtube: YouTube
+      assembly_member:
+        birthday: Rojstni dan
+        birthplace: Rojstni kraj
+        ceased_date: Datum prenehanja
+        designation_date: Datum imenovanja
+        designation_mode: Način imenovanja
+        full_name: Ime in priimek
+        gender: Spol
+        position: Položaj
+      assembly_user_role:
+        email: E-naslov
+        name: Ime
+        role: Vloga
+    errors:
+      models:
+        assembly:
+          attributes:
+            document:
+              invalid_document_type: 'Neveljavna vrsta dokumenta. Sprejemljive oblike so: %{valid_mime_types}'
+  activerecord:
+    models:
+      decidim/assembly:
+        few: Skupščine
+        one: Skupščina
+        other: Evropski državljanski forumi
+        two: Skupščine
+      decidim/assembly_member:
+        few: Člani skupščine
+        one: Član skupščine
+        other: Članov skupščine
+        two: Člana skupščine
+      decidim/assembly_user_role:
+        few: Vloge uporabnika skupščine
+        one: Vloga uporabnika skupščine
+        other: Vlog uporabnika skupščine
+        two: Vlogi uporabnika skupščine
+  decidim:
+    admin:
+      actions:
+        import_assembly: Uvozi
+        new_assembly: Nova skupščina
+        new_assembly_type: Nova vrsta skupščine
+      assemblies:
+        create:
+          error: Pri ustvarjanju nove skupščine se je pojavila težava.
+          success: Skupščina je bila uspešno ustvarjena.
+        edit:
+          update: Posodobi
+        index:
+          not_published: Ni objavljeno
+          private: Zasebno
+          public: Javno
+          published: Objavljeno
+        new:
+          create: Ustvari
+          title: Nova skupščina
+        update:
+          error: Pri posodobitvi te skupščine se je pojavila težava.
+          success: Skupščina je bila uspešno posodobljena.
+      assemblies_copies:
+        create:
+          error: Pri podvojitvi te skupščine se je pojavila težava.
+          success: Skupščina je bila uspešno podvojena.
+      assemblies_settings:
+        update:
+          error: Pri posodobitvi nastavitev se je pojavila težava.
+          success: Nastavitve so bile uspešno posodobljene.
+      assemblies_types:
+        create:
+          error: Pri ustvarjanju nove vrste skupščine se je pojavila težava.
+          success: Vrsta skupščina je bila uspešno ustvarjena.
+        destroy:
+          success: Vrsta skupščina je bila uspešno izbrisana.
+        new:
+          create: Ustvari
+          title: Nova vrsta skupščine
+        update:
+          error: Pri posodobitvi te vrste skupščine se je pojavila težava.
+          success: Vrsta skupščine je bila uspešno posodobljena.
+      assembly_copies:
+        new:
+          copy: Kopiraj
+          select: Izberite podatke, ki jih želite podvojiti.
+          title: Podvoji skupščino
+      assembly_imports:
+        create:
+          error: Pri uvozu te skupščine se je pojavila težava.
+          success: Skupščina je bil uspešno uvožena.
+        new:
+          import: Uvozi
+          select: Izberite podatke, ki jih želite uvoziti.
+          title: Uvozi skupščino
+      assembly_members:
+        create:
+          error: Pri dodajanju člana za to skupščino se je pojavila težava.
+          success: Član je bil uspešno ustvarjen za to skupščino.
+        destroy:
+          success: Član je bil uspešno izbrisan za to skupščino.
+        edit:
+          title: Posodobi člana skupščine.
+          update: Posodobi
+        index:
+          assembly_members_title: Člani skupščine
+        new:
+          create: Ustvari
+          title: Nov član skupščine.
+        update:
+          error: Pri posodobitvi člana za to skupščino se je pojavila težava.
+          success: Član je bil uspešno posodobljen za to skupščino.
+      assembly_publications:
+        create:
+          error: Pri objavi te skupščine se je pojavila težava.
+          success: Skupščina je bila uspešno objavljena.
+        destroy:
+          error: Pri umiku te skupščine se je pojavila težava.
+          success: Skupščina je bila uspešno umaknjena.
+      assembly_user_roles:
+        create:
+          error: Pri dodajanju skrbnika za to skupščino se je pojavila težava.
+          success: Skrbnik je bil uspešno dodan tej skupščini.
+        destroy:
+          success: Skrbnik je bil uspešno odstranjen iz te skupščine.
+        edit:
+          title: Posodobi skrbnika skupščine.
+          update: Posodobi
+        index:
+          assembly_admins_title: Skrbniki skupščine
+        new:
+          create: Ustvari
+          title: Nov skrbnik skupščine.
+        update:
+          error: Pri posodobitvi skrbnika za to skupščino se je pojavila težava.
+          success: Skrbnik je bil uspešno posodobljen za to skupščino.
+      menu:
+        assemblies: Skupščine
+        assemblies_settings: Nastavitve
+        assemblies_submenu:
+          assembly_admins: Skrbniki skupščine
+          assembly_members: Člani
+          attachment_collections: Mape
+          attachment_files: Datoteke
+          attachments: Priloge
+          categories: Kategorije
+          components: Komponente
+          info: Informacije
+          moderations: Moderiranja
+          private_users: Zasebni uporabniki
+        assemblies_types: Vrste skupščin
+      models:
+        assemblies_types:
+          fields:
+            created_at: Ustvarjeno ob
+            title: Naslov
+        assembly:
+          fields:
+            created_at: Ustvarjeno ob
+            private: Zasebno
+            promoted: Izpostavljeno
+            published: Objavljeno
+            title: Naslov
+          name: Skupščina
+        assembly_member:
+          fields:
+            ceased_date: Datum prenehanja
+            designation_date: Datum imenovanja
+            full_name: Ime
+            position: Položaj
+          name: Član
+          positions:
+            other: Drugo
+            president: Predsednik
+            secretary: Tajnik
+            vice_president: Podpredsednik
+        assembly_user_role:
+          fields:
+            email: E-naslov
+            name: Ime
+            role: Vloga
+          name: Skrbnik skupščine
+          roles:
+            admin: Skrbnik
+            collaborator: Sodelavec
+            valuator: Ocenjevalec
+      titles:
+        assemblies: Skupščine
+        assemblies_types: Vrste skupščin
+    admin_log:
+      assembly:
+        create: "%{user_name} je ustvaril skupščino %{resource_name}."
+        publish: "%{user_name} je objavil skupščino %{resource_name}."
+        unpublish: "%{user_name} je umaknil skupščino %{resource_name}."
+        update: "%{user_name} je posodobil skupščino %{resource_name}."
+      assembly_member:
+        create: "%{user_name} je ustvaril člana %{resource_name} v skupščini %{space_name}."
+        delete: "%{user_name} je odstranil člana %{resource_name} iz skupščine %{space_name}."
+        update: "%{user_name} je posodobil člana %{resource_name} v skupščini %{space_name}."
+      assembly_setting:
+        update: "%{user_name} je posodobil nastavitve skupščin."
+      assembly_type:
+        create: "%{user_name} je ustvaril vrsto skupščine %{resource_name}."
+        delete: "%{user_name} je odstranil člana %{resource_name} iz vrste skupščine %{space_name}."
+        publish: "%{user_name} je objavil vrsto skupščine %{resource_name}."
+        unpublish: "%{user_name} je umaknil vrsto skupščine %{resource_name}."
+        update: "%{user_name} je posodobil vrsto skupščine %{resource_name}."
+      assembly_user_role:
+        create: "%{user_name} je povabil %{resource_name} v skupščino %{space_name}."
+        delete: "%{user_name} je odstranil udeleženca %{resource_name} iz skupščine %{space_name}."
+        update: "%{user_name} je spremenil vlogo %{resource_name} v skupščini %{space_name}."
+    assemblies:
+      admin:
+        assemblies:
+          form:
+            duration: Trajanje
+            duration_help: Če je trajanje te skupščine omejeno, izberite končni datum. V nasprotnem primeru bo prikazan kot nedoločen.
+            filters: Filtri
+            images: Slike
+            included_at_help: Izberite datum, ko je bila ta skupščina dodana v platformo Decidim. Ni potrebno, da je isti kot datum ustvarjenja.
+            metadata: Metapodatki
+            other: Drugo
+            select_a_created_by: Izberi avtorja
+            select_an_area: Izberi območje
+            select_an_assembly_type: Izberi vrsto skupščine
+            select_parent_assembly: Izberi nadrejeno skupščino
+            slug_help: 'S polji dinamičnih podatkov URL se ustvarijo URL-ji, ki kažejo na to skupščino. Sprejema samo črke, številke in črte, mora pa se začeti s črko. Primer: %{url}'
+            social_handlers: Družbeno
+            title: Splošne informacije
+            visbility: Vidljivost
+        assemblies_settings:
+          edit:
+            update: Posodobi
+          form:
+            title: Nastavitve za skupščine
+        assemblies_types:
+          form:
+            title: Naslov
+        assembly_copies:
+          form:
+            slug_help: 'S polji dinamičnih podatkov URL se ustvarijo URL-ji, ki kažejo na to skupščino. Sprejema samo črke, številke in črte, mora pa se začeti s črko. Primer: %{url}'
+        assembly_imports:
+          form:
+            document_legend: Dodaj dokument
+            slug_help: 'S polji dinamičnih podatkov URL se ustvarijo URL-ji, ki kažejo na to skupščino. Sprejema samo črke, številke in črte, mora pa se začeti s črko. Primer: %{url}'
+        assembly_members:
+          form:
+            existing_user: Obstoječ udeleženec
+            non_user: Neudeleženec
+            select_a_position: Izberi položaj
+            select_user: Izberi udeleženca
+            user_type: Vrsta udeleženca
+          index:
+            filter:
+              all: Vse
+              ceased: Prenehal
+              not_ceased: Ni prenehal
+            filter_by: Filtriraj po
+            search: Išči
+        content_blocks:
+          highlighted_assemblies:
+            max_results: Največja količina elementov za prikaz
+      assembly_members:
+        index:
+          members: Člani
+      assembly_types:
+        commission: Komisija
+        consultative_advisory: Posvetovalen/svetovalen
+        executive: Izvršen
+        government: Vlada
+        others: Drugi
+        participatory: Participativen
+        working_group: Delovna skupina
+      content_blocks:
+        highlighted_assemblies:
+          name: Označene skupščine
+      created_by:
+        city_council: Mestni svet
+        others: Drugi
+        public: Javno
+      filter:
+        all: Vse vrste
+        commission: Komisija
+        consultative_advisory: Posvetovalen/svetovalen
+        executive: Izvršen
+        government: Vlada
+        help: 'Prikaži:'
+        others: Drugi
+        participatory: Participativen
+        working_group: Delovna skupina
+      index:
+        title: Skupščine
+      last_activity:
+        new_assembly: Nova skupščina
+      pages:
+        home:
+          highlighted_assemblies:
+            active_assemblies: Aktivne skupščine
+            assemblies_button_title: Povezava na stran skupščin, ki prikazuje vse skupščine
+            see_all_assemblies: Prikaži vse skupščine
+        user_profile:
+          member_of:
+            member_of: Član
+      show:
+        area: Območje
+        assembly_type: Vrsta skupščine
+        children: Skupščine
+        closing_date: Zaključni datum
+        composition: Sestava
+        created_by: Ustvaril
+        creation_date: Ustvarjeno dne
+        developer_group: Skupina promotorjev
+        duration: Trajanje
+        included_at: Vključeno dne
+        indefinite_duration: Nedoločeno
+        internal_organisation: Notranja organizacija
+        is_transparent:
+          'false': nejasen
+          'true': pregleden
+        local_area: Območje organizacije
+        participatory_scope: O čem se odloča
+        participatory_structure: Kako se odloča
+        private_space: To je zasebna skupščina
+        purpose_of_action: Namen dejanja
+        read_less: Manj
+        read_more: Več
+        related_participatory_processes: Povezani participativni procesi
+        scope: Področje
+        social_networks: Družbena omrežja
+        social_networks_title: Deli to skupščino na
+        target: Kdo sodeluje
+      statistics:
+        answers_count: Odgovori
+        assemblies_count: Skupščine
+        comments_count: Komentarji
+        debates_count: Razprave
+        endorsements_count: Odobravanje
+        headline: Dejavnost
+        meetings_count: Sestanki
+        orders_count: Podpora
+        pages_count: Strani
+        posts_count: Objave
+        projects_count: Projekti
+        proposals_count: Zamisli
+        results_count: Rezultati
+        surveys_count: Raziskave
+        users_count: Udeleženci
+        votes_count: Podpora
+    assembly_members:
+      assembly_member:
+        designated_on: Določeno dne
+      index:
+        title: Člani
+    conferences:
+      pages:
+        home:
+          highlighted_conferences:
+            conferences_button_title: Povezava na stran konferenc, ki prikazuje vse konference
+    events:
+      assemblies:
+        create_assembly_member:
+          email_intro: Skrbnik skupščine <a href="%{resource_url}">%{resource_name}</a> vas je dodal med svoje člane.
+          email_outro: To obvestilo ste prejeli, ker ste bili povabljeni v skupščino. Preveri <a href="%{resource_path}">stran skupščine</a> za prispevek!
+          email_subject: Povabljeni ste med člane skupščine %{resource_name}!
+          notification_title: Registrirani ste kot član skupščine <a href="%{resource_path}">%{resource_name}</a>. Preveri <a href="%{resource_path}">stran skupščine</a> za prispevek!
+      assembly:
+        role_assigned:
+          email_intro: Določeni ste bili kot %{role} za skupščino "%{resource_title}".
+          email_outro: To obvestilo ste prejeli, ker ste %{role} skupščine "%{resource_title}".
+          email_subject: Določeni ste bili kot %{role} za "%{resource_title}".
+          notification_title: Določeni ste bili kot %{role} za skupščino <a href="%{resource_url}">%{resource_title}</a>.
+    help:
+      participatory_spaces:
+        assemblies:
+          contextual: "<p><strong>Skupščina</strong> je skupina članov organizacije, ki se redno srečujejo za odločanje o nekem območju ali področju organizacije.</p> <p>Skupščine organizirajo sestanke, med katerimi so nekateri zasebni, drugi pa javni. Če so javni, je mogoče v njih sodelovati (na primer: s prisotnostjo, če jo zmogljivosti dopuščajo, z dodajanjem točk na dnevni red ali s pripombami k predlogom in odločitvam, ki jih sprejme ta organ).</p> <p>Primeri: Primeri skupščin so splošna skupščina (ki se sestane enkrat letno, da bi določila glavne ukrepe organizacije in izglasovala njena izvršna telesa), svetovalni svet za enakost (ki se sestane vsaka dva meseca, da bi pripravil predloge za izboljšanje odnosov med spoloma v organizaciji), komisija za ocenjevanje (ki se sestane vsak mesec, da bi spremljala kak proces) ali jamstveni organ (ki zbira incidente, zlorabe ali predloge, da bi izboljšal postopke odločanja).</p>\n"
+          page: "<p><strong>Skupščina</strong> je skupina članov organizacije, ki se redno srečujejo za odločanje o nekem območju ali področju organizacije.</p> <p>Skupščine organizirajo sestanke, med katerimi so nekateri zasebni, drugi pa javni. Če so javni, je mogoče v njih sodelovati (na primer: s prisotnostjo, če jo zmogljivosti dopuščajo, z dodajanjem točk na dnevni red ali s pripombami k predlogom in odločitvam, ki jih sprejme ta organ).</p> <p>Primeri: Primeri skupščin so splošna skupščina (ki se sestane enkrat letno, da bi določila glavne ukrepe organizacije in izglasovala njena izvršna telesa), svetovalni svet za enakost (ki se sestane vsaka dva meseca, da bi pripravil predloge za izboljšanje odnosov med spoloma v organizaciji), komisija za ocenjevanje (ki se sestane vsak mesec, da bi spremljala kak proces) ali jamstveni organ (ki zbira incidente, zlorabe ali predloge, da bi izboljšal postopke odločanja).</p>\n"
+          title: Kaj so skupščine?
+    log:
+      value_types:
+        assembly_presenter:
+          not_found: 'Skupščina ni bila najdena v podatkovni zbirki (ID: %{id})'
+        assembly_type_presenter:
+          not_found: 'Vrsta skupščine ni bila najdena v podatkovni zbirki (ID: %{id})'
+    menu:
+      assemblies: Skupščine
+    metrics:
+      assemblies:
+        description: Število ustvarjenih skupščin
+        object: skupščine
+        title: Skupščine
+    pages:
+      home:
+        hero:
+          participate_title: Sodeluj v procesih platforme
+        sub_hero:
+          register_title: Vpišite se, da ustvarite račun na platformi
+    participatory_processes:
+      pages:
+        home:
+          highlighted_processes:
+            processes_button_title: Povezava na stran procesov, ki prikazuje vse procese
+      show:
+        related_assemblies: Povezane skupščine
+  errors:
+    messages:
+      cannot_be_blank: ne more ostati prazno
+  layouts:
+    decidim:
+      assemblies:
+        assembly:
+          more_info: Več informacij
+          take_part: Sodeluj
+        index:
+          children: 'Skupščine:'
+          organizational_chart: Organizacijski diagram
+          promoted_assemblies: Označene skupščine
+          reset_chart: Ponastavi
+        order_by_assemblies:
+          assemblies:
+            few: "%{count} skupščine"
+            one: "%{count} skupščina"
+            other: "%{count} skupščin"
+            two: "%{count} skupščini"
+        promoted_assembly:
+          more_info: Več informacij
+          take_part: Sodeluj
+      assembly_navigation:
+        assembly_member_menu_item: Člani
+        assembly_menu_item: Vizitka
+      assembly_widgets:
+        show:
+          take_part: Sodeluj

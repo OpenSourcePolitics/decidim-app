@@ -1,0 +1,170 @@
+---
+et:
+  activemodel:
+    attributes:
+      answer:
+        body: Vastus
+      question:
+        max_choices: Maksimaalne valikuvõimaluste arv
+        question_type: Tüüp
+      questionnaire_question:
+        mandatory: Kohustuslik
+    errors:
+      models:
+        answer:
+          attributes:
+            choices:
+              missing: pole valmis
+              too_many: on liiga palju
+        questionnaire:
+          request_invalid: Taotluse töötlemisel tekkis tõrge. Proovige uuesti
+  decidim:
+    forms:
+      admin:
+        models:
+          components:
+            description: Kirjeldus
+            tos: Teenusetingimused
+        questionnaires:
+          actions:
+            back: Tagasi küsimuste lehele
+            show: Kuva vastused
+          answer_option:
+            answer_option: Vastusevariant
+            free_text: Vabas vormis tekst
+            remove: Eemalda
+            statement: Väide
+          answers:
+            actions:
+              back: Tagasi vastuste lehele
+              export: Ekspordi
+              show: Kuva vastused
+            empty: Vastuseid veel pole
+            export:
+              answer:
+                title: Vastuse nr %{number}
+            export_response:
+              title: uuring_kasutaja_vastused_%{token}
+            index:
+              title: Vastuseid kokku %{total}
+            show:
+              title: Vastus nr %{number}
+          display_condition:
+            answer_option: Vastusevariant
+            condition_question: Küsimus
+            condition_type: Tingimus
+            condition_types:
+              answered: Vastatud
+              equal: Võrdub
+              match: Hõlmab teksti
+              not_answered: Vastamata
+              not_equal: Ei võrdu
+            condition_value: Hõlmatud tekst
+            display_condition: Kuvatingimus
+            mandatory: See tingimus peab olema täidetud, olenemata teiste tingimuste olekust
+            remove: Eemalda
+            save_warning: Ärge unustage vormi enne kuvatingimuste konfigureerimist salvestada
+            select_answer_option: Valige vastusevariant
+            select_condition_question: Valige küsimus
+            select_condition_type: Valige tingimuse tüüp
+          edit:
+            save: Salvesta
+            title: Muuda küsimustikku
+          form:
+            add_question: Lisa küsimus
+            add_separator: Lisa eraldaja
+            already_answered_warning: Mõned kasutajad on vastusevormi juba täitnud, mistõttu ei saa selle küsimusi enam muuta.
+            collapse: Kitsenda kõik küsimused
+            expand: Laienda kõik küsimused
+            preview: Eelvaade
+            title: Muuda vormi
+            unpublished_warning: Vorm on avaldamata. Võite selle küsimusi muuta, kuid sellega kustutate kõik praegused vastused.
+          matrix_row:
+            matrix_row: Rida
+            remove: Eemalda
+            statement: Väide
+          question:
+            add_answer_option: Lisa vastusevariant
+            add_display_condition: Lisa kuvatingimus
+            add_display_condition_info: Kuvatingimuste konfigureerimiseks salvestage vorm
+            add_matrix_row: Lisa rida
+            any: Kõik
+            collapse: Kitsenda
+            description: Kirjeldus
+            down: Alla
+            expand: Laienda
+            question: Küsimus
+            remove: Eemalda
+            statement: Väide
+            up: Üles
+          separator:
+            down: Alla
+            remove: Eemalda
+            separator: Eraldaja
+            up: Üles
+          update:
+            invalid: Vormi salvestamisel tekkis probleem.
+            success: Vormid on salvestatud.
+      errors:
+        answer:
+          body: Sisuväli ei saa olla tühi
+      files:
+        extension_whitelist: 'Lubatud vormingud:'
+      images:
+        dimensions_info: 'See pilt on:'
+        processors:
+          resize_and_pad: 'Suurust kohandatakse ja see lisatakse järgmisele:'
+          resize_to_fit: Suurust on sobivaks kohandatud
+      question_types:
+        long_answer: Pikk vastus
+        matrix_multiple: Maatriks (mitu valikut)
+        matrix_single: Maatriks (üks valik)
+        multiple_option: Mitu valikut
+        short_answer: Lühike vastus
+        single_option: Üks valik
+        sorting: Sortimine
+      questionnaires:
+        answer:
+          invalid: Vastusevormi täitmisel tekkis probleem.
+          max_choices_alert: Valitud on liiga palju vastusevariante
+          success: Vastusevorm on täidetud.
+        question:
+          max_choices: 'Valikuid maksimaalselt: %{n}'
+        show:
+          answer_questionnaire:
+            anonymous_user_message: <a href="%{sign_in_link}">Vastusevormi täitmiseks logige oma kontoga sisse</a> või <a href="%{sign_up_link}">registreeruge</a>.
+            title: Täida vastusevorm
+          current_step: Etapp %{step}
+          of_total_steps: "/ %{total_steps}"
+          questionnaire_answered:
+            body: Olete selle vastusevormi juba täitnud.
+            title: Juba vastatud
+          questionnaire_closed:
+            body: Vastusevorm on suletud ja seda ei saa enam täita.
+            title: Vorm suletud
+          questionnaire_for_private_users:
+            body: Vorm on saadaval üksnes privaatsetele kasutajatele
+            title: Vorm suletud
+          questionnaire_js_disabled:
+            body: Mõned selle vormi funktsioonid keelatakse. Parema kasutuskogemuse saamiseks lubage oma brauseris JavaScript.
+            title: JavaScript pole lubatud
+          questionnaire_not_published:
+            body: Vorm on veel avaldamata.
+          tos_agreement: Osalemisega kinnitate, et nõustute teenusetingimustega
+      step_navigation:
+        show:
+          are_you_sure: Seda toimingut ei saa tühistada ja te ei saa hiljem oma vastuseid muuta. Kas olete kindel?
+          back: Tagasi
+          continue: Jätka
+          submit: Esita
+      user_answers_serializer:
+        body: Vastus
+        completion: Lõpetamine
+        created_at: Vastatud
+        id: Vastuse ID
+        ip_hash: IP räsimine
+        question: Küsimus
+        registered: Registreeritud
+        session_token: Kasutaja identifikaator
+        unregistered: Registreerimata
+        user_status: Kasutaja olek

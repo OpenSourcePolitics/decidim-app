@@ -1,0 +1,80 @@
+---
+el:
+  decidim:
+    footer_links:
+      common:
+        items:
+          about_this_site: Γενικά
+          cookies: Cookies
+          language_policy: Γλωσσική πολιτική
+          legal_notice: Νομική ανακοίνωση
+          sitemap: Περιεχόμενα
+      contact_the_eu:
+        items:
+          call_us: Τηλεφωνήστε μας στο <a href="tel:0080067891011">00 800 6 7 8 9 10 11</a>
+          contact_form: Γράψτε μας μέσω <a href="https://europa.eu/european-union/contact/write-to-us_el">του δελτίου επικοινωνίας</a>
+          meet_us: Συναντήστε μας σε <a href="https://europa.eu/european-union/contact/meet-us_el">τοπικό γραφείο της ΕΕ</a>
+          other_telephone: Χρησιμοποιήστε άλλες <a href="https://europa.eu/european-union/contact/call-us_el">τηλεφωνικές επιλογές</a>
+        title: Επικοινωνήστε με την ΕΕ
+      eu_institution:
+        items:
+          agencies:
+            label: Οργανισμοί
+            url: https://europa.eu/european-union/about-eu/agencies_el
+          central_bank:
+            label: Ευρωπαϊκή Κεντρική Τράπεζα (ΕΚΤ)
+            url: https://www.ecb.europa.eu/home/languagepolicy/html/index.el.html
+          commission:
+            label: Ευρωπαϊκή Επιτροπή
+            url: https://ec.europa.eu/commission/index_el
+          council:
+            label: Ευρωπαϊκό Συμβούλιο
+            url: http://www.consilium.europa.eu/el/european-council/
+          council_eu:
+            label: Συμβούλιο της Ευρωπαϊκής Ένωσης
+            url: http://www.consilium.europa.eu/el/home/
+          court_of_auditors:
+            label: Ευρωπαϊκό Ελεγκτικό Συνέδριο (ΕΕΣ)
+            url: http://www.eca.europa.eu/el
+          court_of_justice:
+            label: Δικαστήριο της Ευρωπαϊκής Ένωσης (ΔΕΕ)
+            url: http://curia.europa.eu/jcms/jcms/j_6/el/
+          data_protection_supervisor:
+            label: Ευρωπαίος Επόπτης Προστασίας Δεδομένων (ΕΕΠΔ)
+            url: https://secure.edps.europa.eu/EDPSWEB/edps/EDPS?lang=el
+          dpb:
+            label: Ευρωπαϊκό Συμβούλιο Προστασίας Δεδομένων
+            url: https://edpb.europa.eu/edpb_el
+          economic_social_committee:
+            label: Ευρωπαϊκή Οικονομική και Κοινωνική Επιτροπή (ΕΟΚΕ)
+            url: http://www.eesc.europa.eu/?i=portal.el.home
+          eu_regional_comittee:
+            label: Ευρωπαϊκή Επιτροπή των Περιφερειών (ΕτΠ)
+            url: https://cor.europa.eu/el
+          external_action_service:
+            label: Ευρωπαϊκή Υπηρεσία Εξωτερικής Δράσης (ΕΥΕΔ)
+            url: http://eeas.europa.eu/index_el.htm
+          investment_bank:
+            label: Ευρωπαϊκή Τράπεζα Επενδύσεων (ΕΤΕ)
+            url: https://www.eib.org/en/index.htm
+          ombudsman:
+            label: Ευρωπαίος Διαμεσολαβητής
+            url: https://www.ombudsman.europa.eu/el/home
+          parliament:
+            label: Ευρωπαϊκό Κοινοβούλιο
+            url: http://www.europarl.europa.eu/portal/el
+          pou:
+            label: Υπηρεσία Εκδόσεων της Ευρωπαϊκής Ένωσης
+            url: https://op.europa.eu/el/home
+          pso:
+            label: Η Ευρωπαϊκή Υπηρεσία Επιλογής Προσωπικού
+            url: https://epso.europa.eu/home_el
+        title: Όργανα της ΕΕ
+      social_media:
+        items:
+          search_channels:
+            label: Αναζητήστε τις σελίδες της ΕΕ στα μέσα κοινωνικής δικτύωσης
+            url: https://europa.eu/european-union/contact/social-networks_el
+        title: Βρείτε έναν λογαριασμό σε κοινωνικό δίκτυο
+    footer_menu:
+      organization: Διάσκεψη για το Μέλλον της Ευρώπης

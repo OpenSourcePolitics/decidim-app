@@ -1,0 +1,144 @@
+---
+bg:
+  activemodel:
+    attributes:
+      oauth_application:
+        name: Име на приложението за OAuth
+        organization_logo: Лого на организацията (квадратно)
+        organization_name: Организация
+        organization_url: URL адрес на организацията
+        redirect_uri: Пренасочващ URI
+    errors:
+      models:
+        oauth_application:
+          attributes:
+            redirect_uri:
+              must_be_ssl: Пренасочващият URI трябва да бъде SSL URI
+  decidim:
+    system:
+      actions:
+        confirm_destroy: Наистина ли искате да изтриете това?
+        destroy: Изтриване
+        edit: Редактиране
+        new: Нови
+        save: Запазване
+        title: Действия
+      admins:
+        create:
+          error: Възникна проблем при създаването на нов администратор.
+          success: Администраторът беше създаден успешно
+        destroy:
+          success: Администраторът беше изтрит успешно
+        edit:
+          title: Редактиране на администратора
+          update: Актуализация
+        index:
+          title: Администратори
+        new:
+          create: Създаване
+          title: Нов администратор
+        update:
+          error: Възникна проблем при актуализирането на този администратор.
+          success: Администраторът беше актуализиран успешно
+      default_pages:
+        placeholders:
+          content: Моля, добавете важно съдържание на статичната страница %{page} в администраторското табло.
+          title: Заглавие по подразбиране за %{page}
+      menu:
+        admins: Администратори
+        dashboard: Табло за управление
+        oauth_applications: Приложения за OAuth
+        organizations: Организации
+      models:
+        admin:
+          fields:
+            created_at: Създадено на
+            email: Електронна поща
+          name: Администрация
+          validations:
+            email_uniqueness: вече съществува друг администратор със същата електронна поща
+        oauth_application:
+          fields:
+            created_at: Създадено на
+            name: Име на приложението за OAuth
+            organization_name: Организация
+          name: Приложение за OAuth
+        organization:
+          actions:
+            save_and_invite: Създаване на организация и изпращане на покана на администратор
+          fields:
+            created_at: Създадено на
+            name: Наименование
+            omniauth_settings: Настройки за Omniauth
+            smtp_settings: Настройки за SMTP
+          name: Организация
+      oauth_applications:
+        create:
+          error: Възникна проблем при създаването на това приложение.
+          success: Приложението беше създадено успешно.
+        destroy:
+          error: Възникна проблем при премахването на това приложение.
+          success: Приложението беше премахнато успешно.
+        edit:
+          save: Запазване
+          title: Редактиране на приложението
+        form:
+          select_organization: Избор на организация
+        index:
+          confirm_delete: Наистина ли искате да изтриете това приложение?
+          title: Приложения за OAuth
+        new:
+          save: Запазване
+          title: Ново приложение
+        update:
+          error: Възникна проблем при актуализирането на това приложение.
+          success: Приложението беше актуализирано успешно.
+      organizations:
+        create:
+          error: Възникна проблем при създаването на нова организация.
+          success: Организацията беше създадена успешно.
+        edit:
+          secondary_hosts_hint: Въведете всяка от тях на нов ред
+        index:
+          title: Организации
+        new:
+          reference_prefix_hint: Префиксът за справка се използва за уникално идентифициране на ресурси във всички организации
+          secondary_hosts_hint: Въведете всяка от тях на нов ред
+          title: Нова организация
+        omniauth_settings:
+          decidim:
+            client_id: Идент. № на клиента
+            client_secret: Клиентска тайна
+            site_url: URL адрес на сайта
+          enabled: Активирано
+          enabled_by_default: Този доставчик е активиран по подразбиране. Може да бъде редактиран, но не и деактивиран.
+          facebook:
+            app_id: Идент. № на приложението
+            app_secret: Тайна на приложението
+          google_oauth2:
+            client_id: Идент. № на клиента
+            client_secret: Клиентска тайна
+          icon: Икона
+          icon_path: Път до иконата
+          twitter:
+            api_key: Ключ за API
+            api_secret: Тайна на API
+        smtp_settings:
+          instructions:
+            from_label: 'Подателят на имейла ще бъде: „името-на-организацията-ви <Вашата-организация@Вашият-доставчик.org>“. Оставете празно, за да използвате „from_email“ като етикет'
+          placeholder:
+            from_email: Вашата-организация@Вашият-доставчик.org
+            from_label: името-на-организацията-Ви
+        update:
+          error: Възникна проблем при актуализирането на тази организация.
+          success: Организацията беше актуализирана успешно.
+        users_registration_mode:
+          disabled: Достъпът е възможен само с външни профили
+          enabled: Разрешете на участниците да се регистрират и да влизат в профила си
+          existing: Не разрешавайте на участниците да се регистрират, но разрешете на съществуващите участници да влизат в профила си
+      shared:
+        notices:
+          no_organization_warning_html: Трябва да създадете организация, за да започнете. Трябва да прочетете %{guide}, преди да продължите.
+          our_getting_started_guide: нашето ръководство за първи стъпки
+      titles:
+        dashboard: Табло за управление

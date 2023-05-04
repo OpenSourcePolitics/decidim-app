@@ -1,0 +1,169 @@
+---
+da:
+  activemodel:
+    attributes:
+      answer:
+        body: Svar
+      question:
+        max_choices: Maksimalt antal valg
+        question_type: Type
+      questionnaire_question:
+        mandatory: Obligatorisk
+    errors:
+      models:
+        answer:
+          attributes:
+            choices:
+              missing: er ikke komplette
+              too_many: er for mange
+        questionnaire:
+          request_invalid: Der er sket en fejl under behandlingen af anmodningen. Du bedes prøve igen
+  decidim:
+    forms:
+      admin:
+        models:
+          components:
+            description: Beskrivelse
+            tos: Servicevilkår
+        questionnaires:
+          actions:
+            back: Tilbage til spørgsmål
+            show: Vis svar
+          answer_option:
+            answer_option: Svarmulighed
+            free_text: Fri tekst
+            remove: Fjern
+            statement: Udmelding
+          answers:
+            actions:
+              back: Tilbage til svar
+              export: Eksport
+              show: Vis svar
+            empty: Ingen svar endnu
+            export:
+              answer:
+                title: 'Svar #%{number}'
+            export_response:
+              title: survey_user_answers_%{token}
+            index:
+              title: "%{total} samlett antal svar"
+            show:
+              title: 'Svar #%{number}'
+          display_condition:
+            answer_option: Svarmulighed
+            condition_question: Spørgsmål
+            condition_type: Tilstand
+            condition_types:
+              answered: Svaret
+              equal: Lige
+              match: Inkluderer tekst
+              not_answered: Ikke besvaret
+              not_equal: ikke lige
+            condition_value: Inkluderer tekst
+            display_condition: Vis tilstand
+            mandatory: Denne betingelse skal altid være opfyldt uanset status for andre betingelser
+            remove: Fjern
+            save_warning: Husk at gemme formularen, før du konfigurerer skærmtilstanden
+            select_answer_option: Vælg svarmulighed
+            select_condition_question: Vælg et spørgsmål
+            select_condition_type: Vælg en tilstandstype
+          edit:
+            save: Gem
+            title: Rediger spørgeskema
+          form:
+            add_question: Tilføj spørgsmål
+            add_separator: Tilføj separator
+            already_answered_warning: Formularen er allerede besvaret af nogle brugere, så du kan ikke ændre dens spørgsmål.
+            collapse: Skjul alle spørgsmål
+            expand: Udvid alle spørgsmål
+            preview: Forhåndsvisning
+            title: Rediger formular
+            unpublished_warning: Formularen offentliggøres ikke. Du kan ændre spørgsmålene, men hvis du gør det, slettes foreliggende svar.
+          matrix_row:
+            matrix_row: Række
+            remove: Fjern
+            statement: Udmelding
+          question:
+            add_answer_option: Tilføj svarmulighed
+            add_display_condition: Tilføj skærmtilstand
+            add_display_condition_info: Gem formularen for at konfigurere skærmtilstand
+            add_matrix_row: Tilføj række
+            any: Enhver
+            collapse: Skjul
+            description: Beskrivelse
+            down: Ned
+            expand: Udvid
+            question: Spørgsmål
+            remove: Fjern
+            statement: Udmelding
+            up: Op
+          separator:
+            down: Ned
+            remove: Fjern
+            up: Op
+          update:
+            invalid: Der var et problem med at gemme dem.
+            success: Formularer blev gemt.
+      errors:
+        answer:
+          body: Brødtekst må ikke være tomt
+      files:
+        extension_whitelist: 'Accepterede formater:'
+      images:
+        dimensions_info: 'Dette billede vil få:'
+        processors:
+          resize_and_pad: Ændret format og blive beskåret
+          resize_to_fit: Ændre størrelse for at passe
+      question_types:
+        long_answer: Langt svar
+        matrix_multiple: Matrix (flere muligheder)
+        matrix_single: Matrix (enkelt mulighed)
+        multiple_option: Flere muligheder
+        short_answer: Kort svar
+        single_option: Enkelt mulighed
+        sorting: Sortering
+      questionnaires:
+        answer:
+          invalid: Der var et problem med at svare i formularen.
+          max_choices_alert: Der er valgt for mange valgmuligheder
+          success: Formularer blev besvaret.
+        question:
+          max_choices: 'Maks. balgmuligheder: %{n}'
+        show:
+          answer_questionnaire:
+            anonymous_user_message: <a href="%{sign_in_link}">Log ind med din konto</a> eller <a href="%{sign_up_link}">tilmeld dig for</a> at besvare formularen.
+            title: Besvar formularen
+          current_step: Trin %{step}
+          of_total_steps: af %{total_steps}
+          questionnaire_answered:
+            body: Du har allerede besvaret denne formular.
+            title: Allerede besvaret
+          questionnaire_closed:
+            body: Formularen er lukket og kan ikke besvares.
+            title: Formular lukket
+          questionnaire_for_private_users:
+            body: Formularen er kun tilgængelig for private brugere
+            title: Formular lukket
+          questionnaire_js_disabled:
+            body: Nogle af denne formulars funktioner vil blive deaktiveret. For at forbedre din oplevelse skal du aktivere JavaScript i din browser.
+            title: JavaScript er deaktiveret
+          questionnaire_not_published:
+            body: Denne formular er ikke offentliggjort endnu.
+          tos_agreement: Ved at deltage accepterer du dens servicevilkår
+      step_navigation:
+        show:
+          are_you_sure: Denne handling kan ikke fortrydes, og du kan ikke redigere dine svar. Er du sikker?
+          back: Tilbage
+          continue: Fortsæt
+          submit: Indsend
+      user_answers_serializer:
+        body: Svar
+        completion: Færdiggørelse
+        created_at: Besvaret den
+        id: Svar-ID
+        ip_hash: IP Hash
+        question: Spørgsmål
+        registered: Registreret
+        session_token: Bruger-id
+        unregistered: Uregistreret
+        user_status: Brugerstatus

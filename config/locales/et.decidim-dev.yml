@@ -1,0 +1,56 @@
+---
+et:
+  activemodel:
+    attributes:
+      dummy_resource:
+        created_at: Loodi
+        decidim_scope_id: Kohaldamisala
+        field: Minu valdkond
+        start_date: Alguskuupäev
+        title: Pealkiri
+        translatable_text: Tõlgitav tekst
+        updated_at: Värskendati
+  decidim:
+    components:
+      dummy:
+        settings:
+          global:
+            readonly_attribute: Kirjutuskaitse atribuut
+            test: Test
+            test_choices:
+              a: Valik A
+              b: Valik B
+              c: Valik C
+          step:
+            endorsements_blocked: Kinnitamine pole lubatud
+            endorsements_enabled: Kinnitamine on lubatud
+            readonly_step_attribute: Etapi kirjutuskaitse atribuut
+    dummy:
+      admin:
+        exports:
+          dummies: Kohatäited/asetekst
+    gamification:
+      badges:
+        test:
+          conditions: Kasutage Decidimi testimiskeskkonda.
+          description: Osalejad saavad selle tunnustusmärgi testide tegemise eest.
+          description_another: See osaleja on loonud %{score} testi.
+          description_own: Olete loonud %{score} testi.
+          name: Testid
+          next_level_in: Järgmisele tasemele jõudmiseks peate looma veel %{score} testi.
+          unearned_another: See osaleja pole veel teste loonud.
+          unearned_own: Te pole veel teste loonud.
+    pages:
+      home:
+        statistics:
+          bar: Funktsioonikutse „bar“
+          dummies_count_high: Kohatäited/asetekst – kõrge
+          dummies_count_medium: Asetekst – keskmine
+          foo: Funktsioonikutse „foo“
+    participatory_processes:
+      statistics:
+        dummies_count_high: Kõrge
+        dummies_count_medium: Keskmine
+    resource_links:
+      test_link:
+        dummy_resource_dummy: Seotud kohatäited/asetekst

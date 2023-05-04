@@ -1,0 +1,450 @@
+---
+da:
+  activemodel:
+    attributes:
+      participatory_process:
+        announcement: Meddelelse
+        area_id: Område
+        banner_image: Bannerbillede
+        copy_categories: Kopi kategorier
+        copy_components: Kopi komponenter
+        copy_steps: Kopier trin
+        decidim_area_id: Område
+        description: Beskrivelse
+        developer_group: Promotorgruppe
+        domain: Domæne
+        end_date: Slutdato
+        hashtag: Hashtag
+        hero_image: Hjemmebillede
+        local_area: Organisationens område
+        meta_scope: Omfang metadata
+        participatory_process_group_id: Procesgruppe
+        participatory_scope: Hvad der er besluttet
+        participatory_structure: Hvordan er det besluttet
+        promoted: Fremmet
+        published_at: Offentliggjort kl.
+        related_process_ids: Relaterede processer
+        scope_id: Omfang
+        scope_type_max_depth_id: Omfang filterdybde
+        scopes_enabled: Omfang aktiveret
+        short_description: Kort beskrivelse
+        show_metrics: Vis parametre
+        show_statistics: Vis statistikker
+        slug: URL-slug
+        start_date: Startdato
+        subtitle: Underoverskrift
+        target: Hvem deltager
+        title: Betegnelse
+      participatory_process_group:
+        description: Beskrivelse
+        hero_image: Billede
+        name: Navn
+        participatory_process_ids: Relaterede processer
+      participatory_process_step:
+        cta_path: Handlingssti
+        cta_text: Handlingstekst
+        description: Beskrivelse
+        end_date: Slutdato
+        short_description: Kort beskrivelse
+        start_date: Startdato
+        title: Betegnelse
+      participatory_process_user_role:
+        email: E-mail
+        name: Navn
+        role: Stilling
+    errors:
+      models:
+        participatory_process:
+          attributes:
+            document:
+              invalid_document_type: 'Ugyldig dokumenttype. Accepterede formater er: %{valid_mime_types}'
+    models:
+      decidim/participatory_process_step_activated_event: Fase aktiveret
+      decidim/participatory_process_step_changed_event: Fase ændret
+  activerecord:
+    models:
+      decidim/participatory_process:
+        one: Emne
+        other: Emner
+      decidim/participatory_process_group:
+        one: Gruppe i deltagelsesproces
+        other: Grupper i deltagelsesproces
+      decidim/participatory_process_step:
+        one: Fase
+        other: Faser
+  decidim:
+    admin:
+      actions:
+        activate: Aktiver
+        configure: Konfigurer
+        confirm_destroy: Bekræft sletning
+        destroy: Slet
+        duplicate: Duplikere
+        edit: Rediger
+        filter:
+          all_processes: Vis alle processer
+          process_groups: Procesgrupper
+        import_process: Import
+        new_process: Ny proces
+        new_process_group: Ny procesgruppe
+        new_process_step: Ny fase
+        new_process_user_role: Ny procesadmin
+        preview: Forhåndsvisning
+        publish: Offentliggør
+        resend_invitation: Send invitationen igen
+        unpublish: Afpublicer
+      menu:
+        participatory_process_groups: Procesgrupper
+        participatory_processes_submenu:
+          attachment_collections: Mapper
+          attachment_files: Filer
+          attachments: Vedhæftede filer
+          categories: Kategorier
+          components: Komponenter
+          info: Info
+          moderations: Moderationer
+          private_users: Private deltagere
+          process_admins: Procesadministratorer
+          steps: Faser
+      models:
+        participatory_process:
+          fields:
+            created_at: Oprettet kl.
+            private: Privat
+            promoted: Fremhævet
+            published: Offentliggjort
+            title: Betegnelse
+          name: Deltagelsesproces
+        participatory_process_group:
+          fields:
+            name: Navn
+          name: Procesgruppe
+        participatory_process_step:
+          fields:
+            end_date: Slutdato
+            start_date: Startdato
+            title: Betegnelse
+          name: Fase i deltagelsesproces
+        participatory_process_user_role:
+          fields:
+            email: E-mail
+            name: Navn
+            role: Stilling
+          name: Admin i deltagelsesproces
+          roles:
+            admin: Administrator
+            collaborator: Medarbejder
+            moderator: Ordstyrer
+            valuator: Evaluator
+        user:
+          fields:
+            invitation_accepted_at: Invitation accepteret kl.
+            invitation_sent_at: Invitation sendt kl.
+      participatory_process_copies:
+        new:
+          copy: Kopi
+          select: Vælg hvilke data, du vil kopiere
+          title: Dupliker deltagelsesproces
+      participatory_process_groups:
+        destroy:
+          error: Der opstod en fejl under sletnign af gruppen i deltagelsesprocessen.
+          success: Gruppe i deltagelsesprocessen blev slettet.
+        edit:
+          title: Rediger procesgruppe
+          update: Opdater
+        new:
+          create: Opret
+          title: Ny procesgruppe
+        update:
+          error: Der var et problem med at opdatere gruppen i deltagelsesprocessen.
+          success: Gruppe i deltagelsesprocessen blev opdateret.
+      participatory_process_imports:
+        create:
+          error: Der var et problem med at opdatere deltagelsesprocessen.
+          success: Deltagelsesprocessen blev importeret.
+        new:
+          import: Import
+          select: Vælg hvilke data, du vil importere
+          title: Importer deltagelsesproces
+      participatory_process_publications:
+        create:
+          error: Der var et problem med at offentliggøre deltagelsesprocessen.
+          success: Deltagelsesprocessen blev offentliggjort.
+        destroy:
+          error: Der var et problem med at afpublicere deltagelsesprocessen.
+          success: Deltagelsesprocessen blev afpubliceret.
+      participatory_process_step_activations:
+        create:
+          error: Der var et problem med at aktivere denne fase i deltagelsesprocessen.
+          success: Fase i deltagelsesprocessen blev aktiveret.
+      participatory_process_steps:
+        create:
+          error: Der var et problem med at oprette en ny fase i deltagelsesprocessen.
+          success: Fase i deltagelsesprocessen blev oprettet.
+        default_title: Introduktion
+        destroy:
+          error:
+            active_step: Kan ikke slette den aktive fase.
+            last_step: Kan ikke slette den sidste fase af en proces.
+          success: Fase i deltagelsesprocessen slettet.
+        edit:
+          title: Rediger fase i deltagelsesproces
+          update: Opdater
+        index:
+          steps_title: Faser
+        new:
+          create: Opret
+          title: Ny fase i deltagelsesproces
+        ordering:
+          error: Der var et problem med at omordne disse faser af deltagelsesprocessen.
+        update:
+          error: Der var et problem med at opdatere denne fase af deltagelsesprocessen.
+          success: Deltagelsesfasen er opdateret.
+      participatory_process_user_roles:
+        create:
+          error: Der var et problem med at tilføje en privat deltager til deltagelsesprocessen.
+          success: Admin blev føjet til denne deltagelsesproces.
+        destroy:
+          success: Admin fjernet fra denne deltagelsesproces.
+        edit:
+          title: Opdater admin i deltagelsesproces
+          update: Opdater
+        index:
+          process_admins_title: Admins i deltagelsesproces
+        new:
+          create: Opret
+          title: Ny admin i deltagelsesproces
+        update:
+          error: Der var et problem med at opdatere en admin i deltagelsesprocessen.
+          success: Admin opdateret for denne deltagelsesproces.
+      participatory_processes:
+        create:
+          error: Der var et problem med at oprette en ny deltagelsesproces.
+          success: Deltagelsesproces blev oprettet. Konfigurer nu dens faser.
+        edit:
+          update: Opdater
+        index:
+          not_published: Ikke offentliggjort
+          private: Privat
+          public: Offentlig
+          published: Offentliggjort
+        new:
+          create: Opret
+          title: Ny deltagelsesproces
+        update:
+          error: Der var et problem med at opdatere deltagelsesprocessen.
+          success: Deltagelsesprocessen blev opdateret.
+      participatory_processes_copies:
+        create:
+          error: Der var et problem med at dublikere deltagelsesprocessen.
+          success: Deltagelsesprocessen blev duplikeret.
+      participatory_processes_group:
+        create:
+          error: Der var et problem med at oprette en ny gruppe i deltagelsesprocessen.
+          success: Gruppe i deltagelsesprocessen blev oprettet.
+      titles:
+        participatory_process_groups: Grupper i deltagelsesproces
+      users:
+        resend_invitation:
+          error: Der var et problem med at sende invitationen igen.
+          success: Invitationen blev sendt.
+    admin_log:
+      participatory_process:
+        create: "%{user_name} oprettede %{resource_name} deltagelsesprocessen"
+        publish: "%{user_name} offentliggjorde %{resource_name} deltagelsesprocessen"
+        unpublish: "%{user_name} afpublicerede  %{resource_name} deltagelsesprocessen"
+        update: "%{user_name} opdaterede %{resource_name} deltagelsesprocessen"
+      participatory_process_group:
+        create: "%{user_name} oprettede %{resource_name} gruppen i deltagelsesprocessen"
+        update: "%{user_name} opdaterede %{resource_name} gruppen i deltagelsesprocessen"
+      participatory_process_step:
+        activate: "%{user_name} aktiverede%{resource_name}-fasen i %{space_name} deltagelsesprocessen"
+        create: "%{user_name} oprettede %{resource_name}-fasen i %{space_name} deltagelsesprocessen"
+        delete: "%{user_name} slettede %{resource_name}-fasen i %{space_name} deltagelsesprocessen"
+        update: "%{user_name} opdaterede %{resource_name}-fasen i %{space_name} deltagelsesprocessen"
+      participatory_process_user_role:
+        create: "%{user_name} inviterede deltageren %{resource_name} til %{space_name} deltagelsesprocessen"
+        delete: "%{user_name} fjernede deltageren %{resource_name} fra %{space_name} deltagelsesprocessen"
+        update: "%{user_name} ændrede deltagerens rolle %{resource_name} i %{space_name} deltagelsesprocessen"
+    events:
+      participatory_process:
+        role_assigned:
+          email_intro: Du er blevet tilknyttet som %{role} til deltagelsesprocessen "%{resource_title}".
+          email_outro: Du har modtaget denne underretning, fordi du er %{role} i "%{resource_title}"-deltagelsesprocessen.
+          email_subject: Du er blevet udpeget som %{role} for "%{resource_title}".
+          notification_title: Du er blevet tilknyttet som %{role} i deltagelsesprocessen ” <a href="%{resource_url}">%{resource_title}</a>.
+        step_activated:
+          email_intro: "%{resource_title}-fasen er nu aktiv for %{participatory_space_title}. Du kan se det fra denne side:"
+          email_outro: Du har modtaget denne underretning, fordi du følger %{participatory_space_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: En opdatering til %{participatory_space_title}
+          notification_title: '%{resource_title}-fasen er nu aktiv for <a href="%{resource_path}">%{participatory_space_title}</a>'
+        step_changed:
+          email_intro: 'Datoer for %{resource_title}-fasen i %{participatory_space_title} er blevet opdateret. Du kan se det fra denne side:'
+          email_outro: Du har modtaget denne underretning, fordi du følger %{participatory_space_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: En opdatering til %{participatory_space_title}
+          notification_title: Datoer for <a href="%{resource_path}">%{resource_title}</a>-fasen ved <a href="%{participatory_space_url}">%{participatory_space_title}</a> er blevet opdateret.
+    help:
+      participatory_spaces:
+        participatory_processes:
+          contextual: "<p>En <strong>deltagelsesproces</strong> er en sekvens af deltagelsesaktiviteter (f.eks. først at udfylde et undersøgelsesskema, derefter fremsætte forslag, diskutere dem i et møde eller på virtuelle møder og endelig prioritere dem) med det formål at definere og træffe en beslutning om en bestemt emne.</p><p> Eksempler på deltagelsesprocesser er: en proces med valg af komitémedlemmer (hvor kandidaturer først præsenteres, derefter debatteres og til sidst vælges et kandidatur), deltagelsesbudgetter (hvor forslag fremsættes, vurderes økonomisk og afstemmes med de disponible penge), en strategisk planlægningsproces, den fælles udarbejdelse af et regelsæt eller norm, udformningen af et byrum eller produktionen af en plan for det offentlige.</p>\n"
+          page: "<p>En <strong>deltagelsesproces</strong> er en sekvens af deltagelsesaktiviteter (f.eks. først at udfylde et undersøgelsesskema, derefter fremsætte forslag, diskutere dem i et møde eller på virtuelle møder og endelig prioritere dem) med det formål at definere og træffe en beslutning om en bestemt emne.</p><p> Eksempler på deltagelsesprocesser er: en proces med valg af komitémedlemmer (hvor kandidaturer først præsenteres, derefter debatteres og til sidst vælges et kandidatur), deltagelsesbudgetter (hvor forslag fremsættes, vurderes økonomisk og afstemmes med de disponible penge), en strategisk planlægningsproces, den fælles udarbejdelse af et regelsæt eller norm, udformningen af et byrum eller produktionen af en plan for det offentlige.</p>\n"
+          title: Hvad er en deltagelsesproces?
+    metrics:
+      participatory_processes:
+        description: Antal deltagelsesprocesser i denne organisation
+        object: deltagelsesproces
+        title: Deltagelsesprocesser
+    participatory_process:
+      show:
+        related_assemblies: Relaterede forsamlinger
+    participatory_process_groups:
+      show:
+        group_participatory_processes:
+          one: 1 proces for %{group}
+          other: "%{count} processer for %{group}"
+        title: Grupper i deltagelsesproces
+    participatory_process_steps:
+      index:
+        process_steps: Procesfaser
+        title: Fase i deltagelsesproces
+    participatory_processes:
+      admin:
+        content_blocks:
+          highlighted_processes:
+            max_results: Maksimalt antal elementer, der skal vises
+        participatory_process_copies:
+          form:
+            slug_help: 'URL-slugs bruges til at generere de URL''er, der peger hen imod denne proces. Accepterer kun bogstaver, tal og bindestreg og skal begynde med et bogstav. Eksempel: %{url}'
+        participatory_process_imports:
+          form:
+            document_legend: Tilføj et dokument
+            slug_help: 'URL-slugs bruges til at generere de URL''er, der peger hen imod denne proces. Accepterer kun bogstaver, tal og bindestreg og skal begynde med et bogstav. Eksempel: %{url}'
+        participatory_process_steps:
+          form:
+            cta_path_help: 'Brug delvise stier, ikke fuldstændige URL''er her. Accepterer bogstaver, tal, bindestreger og skråstreger og skal starte med et bogstav. Hvis den ikke er indstillet, vises knappen ikke. Eksempel: %{url}'
+            cta_text_help: Hvis den ikke er indstillet, vises knappen ikke.
+        participatory_processes:
+          form:
+            announcement_help: Teksten, du indtaster her, vises til brugeren lige under procesoplysningerne.
+            duration: Varighed
+            filters: Filtre
+            images: Billeder
+            metadata: Metadata
+            other: Andet
+            related_processes: Relaterede processer
+            scope_type_max_depth_help: Begræns rækkevidden af filterdybde; Filteret viser fra generelt til den valgte omfangstype.
+            select_an_area: Vælg et område
+            select_process_group: Vælg en procesgruppe
+            slug_help: 'URL-slugs bruges til at generere de URL''er, der peger hen imod denne proces. Accepterer kun bogstaver, tal og bindestreg og skal begynde med et bogstav. Eksempel: %{url}'
+            title: Generel information
+            visbility: Sigtbarhed
+      content_blocks:
+        highlighted_processes:
+          name: Fremhævede emner
+      index:
+        title: Deltagelsesprocesser
+      last_activity:
+        new_participatory_process: Ny deltagelsesproces
+      pages:
+        home:
+          highlighted_processes:
+            active_processes: Emner
+            active_step: Aktiv fase
+            more_information: Flere oplysninger
+            participate: Deltage
+            participate_in: Deltag i proces%{resource_name}
+            see_all_processes: Se alle processer
+      participatory_process_steps:
+        index:
+          back_to_process: Tilbage til processiden
+      participatory_processes:
+        filters:
+          counters:
+            active:
+              one: 1 emne, vi taler om
+              other: Emner, vi taler om
+            all:
+              one: 1 proces
+              other: "%{count} processer"
+            past:
+              one: 1 tidligere proces
+              other: "%{count} tidligere processer"
+            upcoming:
+              one: 1 kommende proces
+              other: "%{count} kommende processer"
+          explanations:
+            no_active: Ingen aktive processer
+            no_active_nor_upcoming: Ingen aktive eller kommende processer
+            no_active_nor_upcoming_callout: Der er ingen aktive eller kommende processer. Her er en liste over de tidligere.
+          names:
+            active: Aktiv
+            all: Alle
+            past: Tidligere
+            upcoming: Kommende
+          see: Se
+        index:
+          loading: Indlæser resultater ...
+      show:
+        area: Område
+        dates: Datoer
+        developer_group: Promotorgruppe
+        end_date: Slutdato
+        local_area: Organisationsområde
+        participatory_scope: Hvad der er besluttet
+        participatory_structure: Hvordan er det besluttet
+        private_space: Dette er en privat proces
+        related_processes: Relaterede processer
+        scope: Omfang
+        start_date: Startdato
+        target: Hvem deltager
+        unspecified: Ikke specificeret
+      statistics:
+        answers_count: Svar
+        comments_count: Bemærkninger
+        debates_count: Debatter
+        endorsements_count: Anbefalinger
+        followers_count: Følgere
+        headline: Hvad sker der inden for dette emne?
+        meetings_count: Arrangementer
+        no_stats: Der er endnu ingen statistikker.
+        orders_count: Støtter
+        pages_count: Sider
+        participants_count: Deltagere
+        processes_count: Emner
+        projects_count: Projekter
+        proposals_count: Idéer
+        results_count: Resultater
+        supports_count: Støtter
+        surveys_count: Undersøgelser
+        users_count: Deltagere
+  layouts:
+    decidim:
+      participatory_process_groups:
+        participatory_process_group:
+          browse: Gennemse
+          browse_resource: Gennemse procesgruppe %{resource_name}
+          processes_count: 'Processer:'
+      participatory_process_widgets:
+        show:
+          active_step: Aktiv fase
+          take_part: Deltag
+      participatory_processes:
+        index:
+          promoted_processes: Fremhævede processer
+        participatory_process:
+          active_step: 'Nuværende fase:'
+          more_info: Flere oplysninger
+          more_info_about: Flere oplysninger om dette emne %{resource_name}
+          take_part: Deltag i emnet %{resource_name}
+          take_part_in: Deltag i dette emne %{resource_name}
+        promoted_process:
+          active_step: 'Nuværende fase:'
+          more_info: Flere oplysninger
+          more_info_about: Flere oplysninger om emnet %{resource_name}
+          take_part: Deltag
+          take_part_in: Deltag i proces %{resource_name}
+      process_header_steps:
+        step: Fase %{current} af %{total}
+        view_steps: Procesfaser
+      process_navigation:
+        process_menu_item: Om emnet

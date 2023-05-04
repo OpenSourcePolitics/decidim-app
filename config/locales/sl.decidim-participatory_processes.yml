@@ -1,0 +1,467 @@
+---
+sl:
+  activemodel:
+    attributes:
+      participatory_process:
+        announcement: Obvestilo
+        area_id: Območje
+        banner_image: Slika pasice
+        copy_categories: Kopiraj kategorije
+        copy_components: Kopiraj komponente
+        copy_steps: Kopiraj korake
+        decidim_area_id: Območje
+        description: Opis
+        developer_group: Skupina promotorjev
+        domain: Domena
+        end_date: Končni datum
+        hashtag: Ključnik
+        hero_image: Vhodna slika
+        local_area: Območje organizacije
+        meta_scope: Metapodatki področja
+        participatory_process_group_id: Skupina za proces
+        participatory_scope: O čem se odloča
+        participatory_structure: Kako se odloča
+        promoted: Promoviraj
+        published_at: Objavljeno ob
+        related_process_ids: Povezani procesi
+        scope_id: Področje
+        scope_type_max_depth_id: Globina filtra področja
+        scopes_enabled: Področja omogočena
+        short_description: Kratek opis
+        show_metrics: Pokaži metriko
+        show_statistics: Prikaži statistiko
+        slug: Polje dinamičnih podatkov URL
+        start_date: Začetni datum
+        subtitle: Podnaslov
+        target: Kdo sodeluje
+        title: Naslov
+      participatory_process_group:
+        description: Opis
+        hero_image: Slika
+        name: Ime
+        participatory_process_ids: Povezani procesi
+      participatory_process_step:
+        cta_path: Pot poziv k ukrepanju
+        cta_text: Besedilo poziva k ukrepanju
+        description: Opis
+        end_date: Končni datum
+        short_description: Kratek opis
+        start_date: Začetni datum
+        title: Naslov
+      participatory_process_user_role:
+        email: E-naslov
+        name: Ime
+        role: Vloga
+    errors:
+      models:
+        participatory_process:
+          attributes:
+            document:
+              invalid_document_type: 'Neveljavna vrsta dokumenta. Sprejemljive oblike so: %{valid_mime_types}'
+    models:
+      decidim/participatory_process_step_activated_event: Faza aktivirana
+      decidim/participatory_process_step_changed_event: Faza spremenjena
+  activerecord:
+    models:
+      decidim/participatory_process:
+        few: Participativni procesi
+        one: Tema
+        other: Teme
+        two: Participativna procesa
+      decidim/participatory_process_group:
+        few: Skupine za participativni proces
+        one: Skupina za participativni proces
+        other: Skupin za participativni proces
+        two: Skupini za participativni proces
+      decidim/participatory_process_step:
+        few: Faze
+        one: Faza
+        other: Faz
+        two: Fazi
+  decidim:
+    admin:
+      actions:
+        activate: Aktiviraj
+        configure: Konfiguriraj
+        confirm_destroy: Potrdi izbris
+        destroy: Izbriši
+        duplicate: Podvoji
+        edit: Uredi
+        filter:
+          all_processes: Prikaži vse procese
+          process_groups: Skupine za proces
+        import_process: Uvozi
+        new_process: Nov proces
+        new_process_group: Nova skupina za proces
+        new_process_step: Nova faza
+        new_process_user_role: Novega skrbnik procesa
+        preview: Predogled
+        publish: Objavi
+        resend_invitation: Ponovno pošlji povabilo
+        unpublish: Prekliči objavo
+      menu:
+        participatory_process_groups: Skupine za proces
+        participatory_processes_submenu:
+          attachment_collections: Mape
+          attachment_files: Datoteke
+          attachments: Priloge
+          categories: Kategorije
+          components: Komponente
+          info: Informacije
+          moderations: Moderiranja
+          private_users: Zasebni udeleženci
+          process_admins: Skrbniki procesa
+          steps: Faze
+      models:
+        participatory_process:
+          fields:
+            created_at: Ustvarjeno ob
+            private: Zasebno
+            promoted: Izpostavljeno
+            published: Objavljeno
+            title: Naslov
+          name: Participativni proces
+        participatory_process_group:
+          fields:
+            name: Ime
+          name: Skupina za proces
+        participatory_process_step:
+          fields:
+            end_date: Končni datum
+            start_date: Začetni datum
+            title: Naslov
+          name: Faza participativnega procesa
+        participatory_process_user_role:
+          fields:
+            email: E-naslov
+            name: Ime
+            role: Vloga
+          name: Skrbnik participativnega procesa
+          roles:
+            admin: Skrbnik
+            collaborator: Sodelavec
+            valuator: Ocenjevalec
+        user:
+          fields:
+            invitation_accepted_at: Vabilo je bilo sprejeto ob
+            invitation_sent_at: Vabilo je bilo poslano ob
+      participatory_process_copies:
+        new:
+          copy: Kopiraj
+          select: Izberite podatke, ki jih želite podvojiti.
+          title: Podvoji participativni proces
+      participatory_process_groups:
+        destroy:
+          error: Med brisanjem skupine za participativni proces se je pojavila napaka.
+          success: Skupina za participativni proces je bila uspešno izbrisana.
+        edit:
+          title: Uredi skupino za proces
+          update: Posodobi
+        new:
+          create: Ustvari
+          title: Nova skupina za proces
+        update:
+          error: Pri posodabljanju te skupine za participativni proces se je pojavila težava.
+          success: Skupina za participativni proces je bila uspešno posodobljena.
+      participatory_process_imports:
+        create:
+          error: Pri uvozu tega participativnega procesa se je pojavila težava.
+          success: Participativni proces je bil uspešno uvožen.
+        new:
+          import: Uvozi
+          select: Izberite podatke, ki jih želite uvoziti.
+          title: Uvozi participativni proces
+      participatory_process_publications:
+        create:
+          error: Pri objavi tega participativnega procesa se je pojavila težava.
+          success: Participativni proces je uspešno objavljen.
+        destroy:
+          error: Pri umiku objave tega participativnega procesa se je pojavila težava.
+          success: Objava participativnega procesa je bila uspešno umaknjena.
+      participatory_process_step_activations:
+        create:
+          error: Pri aktiviranju faze tega participativnega procesa se je pojavila težava.
+          success: Faza participativnega procesa je bila uspešno aktivirana.
+      participatory_process_steps:
+        create:
+          error: Pri ustvarjanju nove faze participativnega procesa se je pojavila težava.
+          success: Faza participativnega procesa je bila uspešno ustvarjena.
+        default_title: Uvod
+        destroy:
+          error:
+            active_step: Aktivne faze ni mogoče izbrisati.
+            last_step: Zadnje faze procesa ni mogoče izbrisati.
+          success: Faza participativnega procesa je bila uspešno izbrisana.
+        edit:
+          title: Uredi fazo participativnega procesa
+          update: Posodobi
+        index:
+          steps_title: Faze
+        new:
+          create: Ustvari
+          title: Nova faza participativnega procesa
+        ordering:
+          error: Pri preurejanju teh faz participativnega procesa se je pojavila težava.
+        update:
+          error: Pri posodabljanju te faze participativnega procesa se je pojavila težava.
+          success: Participativna faza je bila uspešno posodobljena.
+      participatory_process_user_roles:
+        create:
+          error: Pri dodajanju udeleženca v ta participativni proces se je pojavila težava.
+          success: Skrbnik je bil uspešno dodan v ta participativni proces.
+        destroy:
+          success: Skrbnik je bil uspešno odstranjen iz tega participativnega procesa.
+        edit:
+          title: Posodobi skrbnika participativnega procesa
+          update: Posodobi
+        index:
+          process_admins_title: Skrbniki participativnega procesa
+        new:
+          create: Ustvari
+          title: Nov skrbnik participativnega procesa
+        update:
+          error: Pri posodobitvi skrbnika za participativni proces se je pojavila težava.
+          success: Skrbnik je bil uspešno posodobljen za ta participativni proces.
+      participatory_processes:
+        create:
+          error: Pri ustvarjanju novega participativnega procesa se je pojavila težava.
+          success: Participativni proces je bil uspešno ustvarjen. Konfigurirajte zdaj njegove faze.
+        edit:
+          update: Posodobi
+        index:
+          not_published: Ni objavljeno
+          private: Zasebno
+          public: Javno
+          published: Objavljeno
+        new:
+          create: Ustvari
+          title: Nov participativni proces
+        update:
+          error: Pri posodobitvi tega participativnega procesa je pojavila težava.
+          success: Participativni proces je bil uspešno posodobljen.
+      participatory_processes_copies:
+        create:
+          error: Pri podvojitvi tega participativnega procesa se je pojavila težava.
+          success: Participativni proces je bil uspešno podvojen.
+      participatory_processes_group:
+        create:
+          error: Pri ustvarjanju nove skupine za participativni proces se je pojavila težava.
+          success: Skupina za participativni proces je bila uspešno ustvarjena.
+      titles:
+        participatory_process_groups: Skupine za participativni proces
+      users:
+        resend_invitation:
+          error: Pri ponovnem pošiljanju povabila se je pojavila težava.
+          success: Povabilo je bilo uspešno ponovno poslano.
+    admin_log:
+      participatory_process:
+        create: "%{user_name} je ustvaril participativni proces %{resource_name}."
+        publish: "%{user_name} je objavil participativni proces %{resource_name}."
+        unpublish: "%{user_name} je umaknil objavo participativnega procesa %{resource_name}."
+        update: "%{user_name} je posodobil participativni proces %{resource_name}."
+      participatory_process_group:
+        create: "%{user_name} je ustvaril skupino za participativni proces %{resource_name}."
+        update: "%{user_name} je posodobil skupino za participativni proces %{resource_name}."
+      participatory_process_step:
+        activate: "%{user_name} je aktiviral fazo %{resource_name} v participativnem procesu %{space_name}."
+        create: "%{user_name} je ustvaril fazo %{resource_name} v participativnem procesu %{space_name}."
+        delete: "%{user_name} je izbrisal fazo %{resource_name} v participativnem procesu %{space_name}."
+        update: "%{user_name} je posodobil fazo %{resource_name} v participativnem procesu %{space_name}."
+      participatory_process_user_role:
+        create: "%{user_name} je povabil udeleženca %{resource_name} v participativni proces %{space_name}."
+        delete: "%{user_name} je odstranil udeleženca %{resource_name} iz participativnega procesa %{space_name}."
+        update: "%{user_name} je spremenil vlogo udeleženca %{resource_name} v participativnem procese %{space_name}."
+    events:
+      participatory_process:
+        role_assigned:
+          email_intro: Določeni ste bili kot %{role} za participativni proces "%{resource_title}".
+          email_outro: To obvestilo ste prejeli, ker ste %{role} participativnega procesa "%{resource_title}".
+          email_subject: Določeni ste bili kot %{role} za "%{resource_title}".
+          notification_title: Določeni ste bili kot %{role} za participativni proces <a href="%{resource_url}">%{resource_title}</a>.
+        step_activated:
+          email_intro: 'Faza %{resource_title} je zdaj aktivna za %{participatory_space_title}. Posodobitev lahko vidite na tej strani:'
+          email_outro: To obvestilo ste prejeli, ker sledite %{participatory_space_title}. Prejemanje obvestil lahko ustavite tako, da sledite prejšnji povezavi.
+          email_subject: Posodobitev na %{participatory_space_title}
+          notification_title: Faza %{resource_title} je zdaj aktivna za <a href="%{resource_path}">%{participatory_space_title}</a>
+        step_changed:
+          email_intro: 'Datumi za %{resource_title} fazo na %{participatory_space_title} so bili posodobljeni. Posodobitev lahko vidite na tej strani:'
+          email_outro: To obvestilo ste prejeli, ker sledite %{participatory_space_title}. Prejemanje obvestil lahko ustavite tako, da sledite prejšnji povezavi.
+          email_subject: Posodobitev na %{participatory_space_title}
+          notification_title: Datumi za fazo <a href="%{resource_path}">%{resource_title}</a> na <a href="%{participatory_space_url}">%{participatory_space_title} </a> so posodobljeni.
+    help:
+      participatory_spaces:
+        participatory_processes:
+          contextual: "<p><strong>Participativni proces</strong> je zaporedje participativnih dejavnosti (npr. najprej se izpolni anketa, nato se podajo predlogi, se razpravlja o njih na osebnih ali virtualnih sestankih ter nazadnje se prednostno obravnavajo), katerih cilj je opredeliti in sprejemati odločitve o neki temi.</p> <p>Primeri participativnih procesov so: proces za izvolitev članov odbora (pri katerem se najprej predstavi kandidature, nato se o njih razpravlja in nazadnje se kandidatura izbere), participativni proračuni (pri katerih se podajo predlogi, se ekonomsko ocenijo in se o njih glasuje z razpoložljivim denarjem), proces strateškega načrtovanja, sodelovalna priprava osnutkov predpisov ali pravil, oblikovanje mestnega prostora ali izdelava načrta javne politike.</p>\n"
+          page: "<p><strong>Participativni proces</strong> je zaporedje participativnih dejavnosti (npr. najprej se izpolni anketa, nato se podajo predlogi, se razpravlja o njih na osebnih ali virtualnih sestankih ter nazadnje se prednostno obravnavajo), katerih cilj je opredeliti in sprejemati odločitve o neki temi.</p> <p>Primeri participativnih procesov so: proces za izvolitev članov odbora (pri katerem se najprej predstavi kandidature, nato se o njih razpravlja in nazadnje se kandidatura izbere), participativni proračuni (pri katerih se podajo predlogi, se ekonomsko ocenijo in se o njih glasuje z razpoložljivim denarjem), proces strateškega načrtovanja, sodelovalna priprava osnutkov predpisov ali pravil, oblikovanje mestnega prostora ali izdelava načrta javne politike.</p>\n"
+          title: Kaj je participativni proces?
+    menu:
+      processes: Teme
+    metrics:
+      participatory_processes:
+        description: Število participativnih procesov v tej organizaciji
+        object: participativni procesi
+        title: Participativni procesi
+    participatory_process:
+      show:
+        related_assemblies: Povezane skupščine
+    participatory_process_groups:
+      show:
+        group_participatory_processes:
+          few: "%{count} procesi za %{group}"
+          one: 1 proces za %{group}
+          other: "%{count} procesov za %{group}"
+          two: "%{count} procesa za %{group}"
+        title: Skupine za participativni proces
+    participatory_process_steps:
+      index:
+        process_steps: Faze procesa
+        title: Faze participativnega procesa
+    participatory_processes:
+      admin:
+        content_blocks:
+          highlighted_processes:
+            max_results: Največja količina elementov za prikaz
+        participatory_process_copies:
+          form:
+            slug_help: 'S polji dinamičnih podatkov URL se ustvarijo URL-ji, ki kažejo na ta proces. Sprejema samo črke, številke in črte, mora pa se začeti s črko. Primer: %{url}'
+        participatory_process_imports:
+          form:
+            document_legend: Dodaj dokument
+            slug_help: 'S polji dinamičnih podatkov URL se ustvarijo URL-ji, ki kažejo na ta proces. Sprejema samo črke, številke in črte, mora pa se začeti s črko. Primer: %{url}'
+        participatory_process_steps:
+          form:
+            cta_path_help: 'Tu uporabite delne poti, ne polnih URL-jev. Sprejema črke, številke, črte in poševnice, mora pa se začeti s črko. Če ni nastavljen, gumb ne bo prikazan. Primer: %{url}'
+            cta_text_help: Če ni nastavljen, gumb ne bo prikazan.
+        participatory_processes:
+          form:
+            announcement_help: Besedilo, ki ga vnesete tukaj, se bo uporabniku prikazalo tik pod informacijami o procesu.
+            duration: Trajanje
+            filters: Filtri
+            images: Slike
+            metadata: Metapodatki
+            other: Drugo
+            related_processes: Povezani procesi
+            scope_type_max_depth_help: Omeji globino filtra področja; Filter bo prikazal od splošne do izbrane vrste področja.
+            select_an_area: Izberi območje
+            select_process_group: Izberi skupino za proces
+            slug_help: 'S polji dinamičnih podatkov URL se ustvarijo URL-ji, ki kažejo na ta proces. Sprejema samo črke, številke in črte, mora pa se začeti s črko. Primer: %{url}'
+            title: Splošne informacije
+            visbility: Vidljivost
+      content_blocks:
+        highlighted_processes:
+          name: Izpostavljene teme
+      index:
+        title: Participativni procesi
+      last_activity:
+        new_participatory_process: Nov participativni proces
+      pages:
+        home:
+          highlighted_processes:
+            active_processes: Teme
+            active_step: Aktivna faza
+            more_information: Več informacij
+            participate: Sodeluj
+            participate_in: Sodeluj v procesu %{resource_name}
+            see_all_processes: Prikaži vse procese
+      participatory_process_steps:
+        index:
+          back_to_process: Nazaj na stran procesa
+      participatory_processes:
+        filters:
+          counters:
+            active:
+              few: Naše teme
+              one: 1 v razpravi
+              other: Teme v razpravi
+              two: Naše teme
+            all:
+              few: "%{count} procesi"
+              one: 1 proces
+              other: "%{count} procesov"
+              two: "%{count} procesa"
+            past:
+              few: "%{count} pretekli procesi"
+              one: 1 pretekli proces
+              other: "%{count} preteklih procesov"
+              two: "%{count} pretekla procesa"
+            upcoming:
+              few: "%{count} prihajajoči procesi"
+              one: 1 prihajajoči proces
+              other: "%{count} prihajajočih procesov"
+              two: "%{count} prihajajoča procesa"
+          explanations:
+            no_active: Ni aktivnih procesov
+            no_active_nor_upcoming: Ni aktivnih ali prihajajočih procesov.
+            no_active_nor_upcoming_callout: Ni aktivnih ali prihajajočih procesov. Tukaj je seznam preteklih.
+          names:
+            active: Aktivni
+            all: Vsi
+            past: Pretekli
+            upcoming: Prihajajoči
+          see: Prikaži
+        index:
+          loading: Nalaganje rezultatov...
+      show:
+        area: Območje
+        dates: Datumi
+        developer_group: Skupina promotorjev
+        end_date: Končni datum
+        local_area: Območje organizacije
+        participatory_scope: O čem se odloča
+        participatory_structure: Kako se odloča
+        private_space: To je zasebni proces
+        related_processes: Povezani procesi
+        scope: Področje
+        start_date: Začetni datum
+        target: Kdo sodeluje
+        unspecified: Ni opredeljeno
+      statistics:
+        answers_count: Odgovori
+        comments_count: Komentarji
+        debates_count: Razprave
+        endorsements_count: Izrazi podpore
+        followers_count: Sledilci
+        headline: Kaj se dogaja pri tej temi?
+        meetings_count: Dogodki
+        no_stats: Trenutno še ni statistike.
+        orders_count: Podpora
+        pages_count: Strani
+        participants_count: Udeleženci
+        processes_count: Teme
+        projects_count: Projekti
+        proposals_count: Zamisli
+        results_count: Rezultati
+        supports_count: Podpora
+        surveys_count: Raziskave
+        users_count: Udeleženci
+  layouts:
+    decidim:
+      participatory_process_groups:
+        participatory_process_group:
+          browse: Brskaj
+          browse_resource: Brskaj po skupini za proces %{resource_name}
+          processes_count: 'Procesi:'
+      participatory_process_widgets:
+        show:
+          active_step: Aktivna faza
+          take_part: Sodeluj
+      participatory_processes:
+        index:
+          promoted_processes: Izpostavljeni procesi
+        participatory_process:
+          active_step: 'Trenutna faza:'
+          more_info: Več informacij
+          more_info_about: Več informacij o temi %{resource_name}
+          take_part: Sodeluj v temi %{resource_name}
+          take_part_in: Sodeluj v temi %{resource_name}
+        promoted_process:
+          active_step: 'Trenutna faza:'
+          more_info: Več informacij
+          more_info_about: Več informacij o temi %{resource_name}
+          take_part: Sodeluj
+          take_part_in: Sodeluj v procesu %{resource_name}
+      process_header_steps:
+        step: Faza %{current} od %{total}
+        view_steps: Faze procesa
+      process_navigation:
+        process_menu_item: O temi

@@ -1,0 +1,892 @@
+---
+da:
+  activemodel:
+    attributes:
+      collaborative_draft:
+        address: Adresse
+        body: Brødtekst
+        category_id: Kategori
+        decidim_scope_id: Omfang
+        has_address: Har adresse
+        scope_id: Omfang
+        state: Tilstand
+        title: Betegnelse
+        user_group_id: Opret samarbejdsudkast som
+      proposal:
+        address: Adresse
+        answer: Svar
+        answered_at: Svaret kl.
+        automatic_hashtags: Hashtags tilføjet automatisk
+        body: Brødtekst
+        category_id: Kategori
+        decidim_scope_id: Omfang
+        has_address: Har adresse
+        scope_id: Omfang
+        state: Tilstand
+        suggested_hashtags: Foreslåede hashtags
+        title: Titel
+        user_group_id: Opret forslag som
+      proposal_answer:
+        answer: Svar
+      proposals_copy:
+        copy_proposals: Jeg forstår, at dette vil importere alle forslag fra den valgte komponent til den aktuelle, og at denne handling ikke kan vendes.
+        origin_component_id: Komponent til at kopiere forslagene fra
+      proposals_import:
+        import_proposals: Importer forslag
+        keep_authors: Behold originale forfattere
+      valuation_assignment:
+        admin_log:
+          valuator_role_id: Valuator-navn
+    errors:
+      models:
+        participatory_text:
+          attributes:
+            document:
+              invalid_document_type: 'Ugyldig dokumenttype. Accepterede formater er: %{valid_mime_types}'
+        proposal:
+          attributes:
+            attachment:
+              needs_to_be_reattached: Skal fastgøres igen
+            body:
+              cant_be_equal_to_template: må ikke svare til skabelonen
+              identical: OG titel må ikke være identisk
+            title:
+              identical: OG brødtekst må ikke være identisk
+    models:
+      decidim/proposals/accepted_proposal_event: Forslag accepteret
+      decidim/proposals/admin/update_proposal_category_event: Forslagskategori ændret
+      decidim/proposals/admin/update_proposal_scope_event: Forslagsomfang ændret
+      decidim/proposals/creation_enabled_event: Oprettelse af forslag aktiveret
+      decidim/proposals/endorsing_enabled_event: Anbefaling af forslag aktiveret
+      decidim/proposals/evaluating_proposal_event: Forslag evalueres
+      decidim/proposals/proposal_mentioned_event: Forslag nævnt
+      decidim/proposals/publish_proposal_event: Forslag offentliggjort
+      decidim/proposals/rejected_proposal_event: Forslag afvist
+      decidim/proposals/voting_enabled_event: Afstemning om forslag aktiveret
+  activerecord:
+    models:
+      decidim/proposals/collaborative_draft:
+        one: Samarbejdsudkast
+        other: Samarbejdsudkast
+      decidim/proposals/proposal:
+        one: Forslag
+        other: Forslag
+      decidim/proposals/proposal_note:
+        one: Note
+        other: Noter
+      decidim/proposals/proposal_vote:
+        one: Støtte
+        other: Støtter
+  decidim:
+    admin:
+      filters:
+        proposals:
+          category_id_eq:
+            label: Kategorier
+          is_emendation_true:
+            label: Type
+            values:
+              'false': Forslag
+              'true': Ændringer
+          scope_id_eq:
+            label: Omfang
+          state_eq:
+            label: Tilstand
+            values:
+              accepted: Accepter
+              evaluating: Evaluerer
+              published: Offentliggjort
+              rejected: Afvist
+              validating: Teknisk validering
+              withdrawn: Trukket tilbage
+          state_null:
+            label: Tilstand
+            values:
+              'true': Ikke besvaret
+          valuator_role_ids_has:
+            label: Henvist til valuator
+        search_placeholder:
+          id_string_or_title_cont: Søg i %{collection} efter ID eller titel.
+    components:
+      proposals:
+        actions:
+          amend: Ændrer
+          create: Opret
+          endorse: Anbefal
+          vote: Støtte
+          withdraw: Trække tilbage
+        name: Idéer
+        settings:
+          global:
+            allow_card_image: Tillad kortbillede
+            amendments_enabled: Ændringer aktiveret
+            amendments_enabled_help: Hvis den er aktiv, skal du konfigurere ændringsfunktioner for hvert trin.
+            amendments_wizard_help_text: Ændringsguide-hjælpetekst
+            announcement: Meddelelse
+            attachments_allowed: Tillad vedhæftede filer
+            can_accumulate_supports_beyond_threshold: Kan akkumulere support ud over tærsklen
+            collaborative_drafts_enabled: Samarbejdsudkast aktiveret
+            comments_enabled: Bemærkninger aktiveret
+            comments_max_length: Bemærkninger maks. længde (lad 0 være standardværdi)
+            geocoding_enabled: Geokodning aktiveret
+            minimum_votes_per_user: Minimum-support pr. bruger
+            new_proposal_body_template: Ny skabelon til forslagsbrødtekst
+            new_proposal_body_template_help: Du kan definere forudfyldt tekst, som de nye forslag vil have
+            new_proposal_help_text: Hjælpetekst i nyt forslag
+            official_proposals_enabled: Officielle forslag aktiveret
+            participatory_texts_enabled: Deltagelsestekster aktiveret
+            participatory_texts_enabled_readonly: Kan ikke interagere med denne indstilling, hvis der er eksisterende forslag. Opret en ny ”forslagskomponent”, hvis du vil aktivere denne funktion eller kassere alle importerede forslag i menuen ”Samarbejdstekster', hvis du vil deaktivere den.
+            proposal_answering_enabled: Svar på forslag aktiveret
+            proposal_edit_before_minutes: Idéer kan redigeres af ophavspersoner, inden der er gået så mange minutter
+            proposal_length: Maksimal brødtekstlængde for forslag
+            proposal_limit: Forslagsgrænse pr. deltager
+            proposal_wizard_step_1_help_text: Forslagsguiden "Opret"- trinhjælpstekst
+            proposal_wizard_step_2_help_text: Forslagsguiden "Sammenlign"- trinhjælpstekst
+            proposal_wizard_step_3_help_text: Gennemse
+            proposal_wizard_step_4_help_text: Forslagsguiden "Offentliggør"- trinhjælpstekst
+            resources_permissions_enabled: Handlingstilladelser kan indstilles for hvert forslag
+            threshold_per_proposal: Tærskel pr. forslag
+            vote_limit: Supportgrænse pr. deltager
+          step:
+            amendment_creation_enabled: Oprettelse af ændringer aktiveret
+            amendment_creation_enabled_help: Deltager kan ændre forslag.
+            amendment_promotion_enabled: Fremme af ændringer aktiveret
+            amendment_promotion_enabled_help: Forfattere af tekstrettelser vil være i stand til at fremme den afviste tekstrettelse til forslaget.
+            amendment_reaction_enabled: Ændringsreaktion aktiveret
+            amendment_reaction_enabled_help: Forslagets forfattere vil være i stand til at acceptere eller afvise deltagerens tekstrettelser.
+            amendments_visibility: Ændrings synlighed
+            amendments_visibility_choices:
+              all: Ændringer er synlige for alle
+              participants: Ændringer er kun synlige for deres forfattere
+            amendments_visibility_help: Hvis indstillingen "Ændringer kun er synlige for deres forfattere" er valgt, skal deltageren være logget ind for at se de foretagne ændringer.
+            announcement: Meddelelse
+            answers_with_costs: Aktiver omkostninger ved svar på forslag
+            automatic_hashtags: Hashtags tilføjet til alle forslag
+            comments_blocked: Bemærkninger blokeret
+            creation_enabled: Oprettelse af forslag aktiveret
+            endorsements_blocked: Anbefalinger blokeret
+            endorsements_enabled: Anbefalinger aktiveret
+            proposal_answering_enabled: Svar på forslag aktiveret
+            publish_answers_immediately: Offentliggør svar på forslaget med det samme
+            suggested_hashtags: Hashtags foreslået til deltagerne til nye forslag
+            votes_blocked: Support blokeret
+            votes_enabled: Support aktiveret
+            votes_hidden: Support skjult (hvis suport er aktiveret, vil tjek af dette skjule antallet af supporter)
+    events:
+      proposals:
+        admin:
+          proposal_note_created:
+            email_intro: Nogen har efterladt en note til forslaget "%{resource_title}". Tjek det ud på <a href="%{admin_proposal_info_url}">adminpanelet</a>
+            email_outro: Du har modtaget denne underretning, fordi du kan bedømme forslag.
+            email_subject: Nogen efterlod en note til forslaget %{resource_title}.
+            notification_title: Nogen har efterladt en note til forslaget <a href="%{resource_path}">%{resource_title}</a>. Tjek det ud på <a href="%{admin_proposal_info_path}">adminpanelet</a>
+        collaborative_draft_access_accepted:
+          email_intro: '%{requester_name} har fået accept af at få adgang som bidragyder til samarbejdsudkastet <a href="%{resource_path}">%{resource_title}</a>.'
+          email_outro: Du har modtaget denne underretning, fordi du er samarbejdspartner med <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: "%{requester_name} har fået accept af at få adgang som bidragyder til %{resource_title}."
+          notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> har fået <strong>accept af at få adgang som bidragyder</strong> til samarbejdsudkastet <a href="%{resource_path}">%{resource_title}</a>.
+        collaborative_draft_access_rejected:
+          email_intro: '%{requester_name} er blevet afvist i forhold til at få adgang som bidragyder til <a href="%{resource_path}">%{resource_title}</a>samarbejdsudkastet.'
+          email_outro: Du har modtaget denne underretning, fordi du er samarbejdspartner med <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: "%{requester_name} er blevet afvist i forhold til at få adgang som bidragyder til %{resource_title} samarbejdsudkastet."
+          notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> er blevet <strong>afvist i forhold til at få adgang som bidragyder</strong> til <a href="%{resource_path}">%{resource_title}</a> samarbejdsudkastet.
+        collaborative_draft_access_requested:
+          email_intro: '%{requester_name} anmodede om adgang som bidragyder. Du kan <strong>acceptere eller afvise anmodningen</strong> fra <a href="%{resource_path}">%{resource_title}</a> på samarbejdets udkastsside.'
+          email_outro: Du har modtaget denne underretning, fordi du er samarbejdspartner med <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: "%{requester_name} anmodede om adgang til at bidrage til %{resource_title}."
+          notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> anmodede om adgang til at bidrage til <a href="%{resource_path}">%{resource_title}</a> samarbejdsudkastet. <strong>accepter eller afvis anmodningen</strong>.
+        collaborative_draft_access_requester_accepted:
+          email_intro: Du har fået accept af at få adgang som bidragyder til <a href="%{resource_path}">%{resource_title}</a>-samarbejdsudkastet.
+          email_outro: Du har modtaget denne underretning, fordi du har anmodet om at blive samarbejdspartner med <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: Du er blevet accepteret som bidragyder af %{resource_title}.
+          notification_title: Du har fået <strong>accept af at få adgang som bidragyder til</strong> of the <a href="%{resource_path}">%{resource_title}</a> samarbejdsudkastet.
+        collaborative_draft_access_requester_rejected:
+          email_intro: Du er blevet afvist i forhold til at få adgang som bidragyder til <a href="%{resource_path}">%{resource_title}</a> samarbejdsudkastet.
+          email_outro: Du har modtaget denne underretning, fordi du har anmodet om at blive samarbejdspartner med <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: Du er blevet afvist som bidragyder til %{resource_title}.
+          notification_title: Du har fået afvist i forhold til <strong> af at få adgang som bidragyder til</strong> of the <a href="%{resource_path}">%{resource_title}</a> samarbejdsudkastet.
+        collaborative_draft_withdrawn:
+          email_intro: <a href="%{author_path}">%{author_name} %{author_nickname}</a> tilbagekaldte<a href="%{resource_path}">%{resource_title}</a> samarbejdsudkastet.
+          email_outro: Du har modtaget denne underretning, fordi du er samarbejdspartner med <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: "%{author_name} %{author_nickname} tilbagekaldte %{resource_title} samarbejdsudkastet."
+          notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> <strong>har tilbakaldt</strong> the <a href="%{resource_path}">%{resource_title}</a> samarbejdsudkastet.
+        creation_enabled:
+          email_intro: 'Du kan nu oprette nye idéer i %{participatory_space_title}! Begynd at deltage på denne side:'
+          email_outro: Du har modtaget denne underretning, fordi du følger %{participatory_space_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: Idéer er nu tilgængelige i %{participatory_space_title}
+          notification_title: Du kan nu komme med <a href="%{resource_path}">nye idéer</a> i <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+        endorsing_enabled:
+          email_intro: 'Du kan anbefale idéer i %{participatory_space_title}! Begynd at deltage på denne side:'
+          email_outro: Du har modtaget denne underretning, fordi du følger %{participatory_space_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: Anbefaling af idéer er påbegyndt for %{participatory_space_title}
+          notification_title: Du kan nu <a href="%{resource_path}">anbefale idéer </a> i <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+        proposal_accepted:
+          affected_user:
+            email_intro: 'Din idé "%{resource_title}" er blevet accepteret. Du kan læse svaret på denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du er forfatter til initiativet %{resource_title}.
+            email_subject: Din idé er blevet accepteret
+            notification_title: Din idé <a href="%{resource_path}">%{resource_title}</a> er blevet accepteret.
+          follower:
+            email_intro: 'Idéen "%{resource_title}" er blevet accepteret. Du kan læse svaret på denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du følger "%{resource_title}". Du kan holde op med at følge det fra det tidligere link.
+            email_subject: En idé, du følger, er blevet accepteret
+            notification_title: Idéen <a href="%{resource_path}">%{resource_title}</a> er blevet accepteret.
+        proposal_evaluating:
+          affected_user:
+            email_intro: 'Din idé "%{resource_title}" evalueres i øjeblikket. Du kan tjekke, om der er kommet svar, på denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du er forfatter til initiativet ”%{resource_title}”.
+            email_subject: Din idé evalueres i øjeblikket
+            notification_title: Din idé <a href="%{resource_path}">%{resource_title}</a> er blevet evalueret.
+          follower:
+            email_intro: 'Idéen "%{resource_title}" evalueres i øjeblikket. Du kan tjekke, om der er kommet svar, på denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du følger "%{resource_title}". Du kan holde op med at følge det fra det tidligere link.
+            email_subject: En idé, du følger, evalueres i øjeblikket
+            notification_title: Din idé <a href="%{resource_path}">%{resource_title}</a> er blevet evalueret.
+        proposal_mentioned:
+          email_intro: '- Din idé "%{mentioned_proposal_title}" er blevet nævnt <a href="%{resource_url}">i dette rum</a> i kommentarerne.'
+          email_outro: Du har modtaget denne underretning, fordi du er forfatter til initiativet %{resource_title}.
+          email_subject: '- Din idé "%{mentioned_proposal_title}" er blevet nævnt'
+          notification_title: '- Din idé "%{mentioned_proposal_title}" er blevet nævnt <a href="%{resource_path}">i dette rum</a> i kommentarerne.'
+        proposal_published:
+          email_intro: '- %{author_name} %{author_nickname}, som du følger, har offentliggjort en ny idé kaldet "%{resource_title}". Tjek den ud og bidrag:'
+          email_outro: Du har modtaget denne underretning, fordi du følger %{author_nickname}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: '- Ny idé "%{resource_title}" af %{author_nickname}'
+          notification_title: '- Idéen <a href="%{resource_path}">%{resource_title}</a> er blevet offentliggjort af <a href="%{author_path}">%{author_name} %{author_nickname}</a>.'
+        proposal_published_for_space:
+          email_intro: '- Idéen "%{resource_title}" er blevet føjet til "%{participatory_space_title}", som du følger.'
+          email_outro: Du har modtaget denne underretning, fordi du følger "%{participatory_space_title}". Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: '- Ny idé "%{resource_title}" føjet til %{participatory_space_title}'
+          notification_title: '- Idéen <a href="%{resource_path}">%{resource_title}</a> er blevet føjet til %{participatory_space_title}'
+        proposal_rejected:
+          affected_user:
+            email_intro: 'Din idé "%{resource_title}" er blevet afvist. Du kan læse svaret på denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du er forfatter til initiativet %{resource_title}.
+            email_subject: Din idé er blevet afvist
+            notification_title: Din idé <a href="%{resource_path}">%{resource_title}</a> er blevet afvist.
+          follower:
+            email_intro: 'Idéen "%{resource_title}" er blevet afvist. Du kan læse svaret på denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du følger "%{resource_title}". Du kan holde op med at følge det fra det tidligere link.
+            email_subject: En idé, du følger, er blevet afvist
+            notification_title: Idéen <a href="%{resource_path}">%{resource_title}</a> er blevet afvist.
+        proposal_update_category:
+          email_intro: 'En admin har opdateret kategorien for din idé "%{resource_title}", tjek det ud på denne side:'
+          email_outro: Du har modtaget denne meddelelse, fordi du er ophavsperson til idéen.
+          email_subject: Idékategorien %{resource_title} er blevet opdateret
+          notification_title: Idékategorien <a href="%{resource_path}">%{resource_title}</a> er blevet opdateret af en admin.
+        proposal_update_scope:
+          email_intro: 'En admin har opdateret området for din idé "%{resource_title}", tjek det ud på denne side:'
+          email_outro: Du har modtaget denne meddelelse, fordi du er ophavsperson til idéen.
+          email_subject: Idéområdet%{resource_title} er blevet opdateret
+          notification_title: Forslagsomfanget <a href="%{resource_path}">%{resource_title}</a> er blevet opdateret af en admin.
+        voting_enabled:
+          email_intro: 'Du kan støtte idéer i %{participatory_space_title}! Begynd at deltage på denne side:'
+          email_outro: Du har modtaget denne underretning, fordi du følger %{participatory_space_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: Idéstøtten er påbegyndt for %{participatory_space_title}
+          notification_title: Du kan nu bebynde <a href="%{resource_path}"> på at anbefale forslag </a> i <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+    gamification:
+      badges:
+        accepted_proposals:
+          description: Dette badge gives, når du deltager aktivt med nye idéer, og disse accepteres.
+          description_another: Denne deltager havde %{score} accepterede idéer.
+          description_own: Du fik %{score} idéer accepteret.
+          name: Accepterede idéer
+          next_level_in: Få %{score} flere idéer accepteret for at nå det næste niveau!
+          unearned_another: Denne deltager har endnu ikke haft nogen accepterede idéer.
+          unearned_own: Du har ikke endnu fået nogen idéer accepteret.
+        proposal_votes:
+          description: Dette badge gives, når du støtter andres idéer.
+          description_another: Denne deltager har støttet %{score} idéer.
+          description_own: Du har støttet %{score} idéer.
+          name: Idéstøtte
+          next_level_in: Støt %{score} flere idéer for at nå det næste niveau!
+          unearned_another: Denne deltager har endnu ikke støttet nogen idéer.
+          unearned_own: Du har endnu ikke støttet nogen idéer.
+        proposals:
+          description: Dette badge gives, når du aktivt deltager med nye idéer.
+          description_another: Denne deltager har oprettet %{score} idéer.
+          description_own: Du har oprettet %{score} idéer.
+          name: Idéer
+          next_level_in: Opret %{score} flere idéer for at nå det næste niveau!
+          unearned_another: Denne deltager har ikke oprettet nogen idéer endnu.
+          unearned_own: Du har ikke oprettet nogen idéer endnu.
+    metrics:
+      accepted_proposals:
+        description: Antal accepterede forslag
+        object: idéer
+        title: Accepterede forslag
+      endorsements:
+        description: Antal anbefalinger til forslag
+        object: anbefalinger
+        title: Anbefalinger
+      proposals:
+        description: Antal forslag
+        object: idéer
+        title: Idéer
+      votes:
+        description: Antal støtter til forslag
+        object: støtte
+        title: Støtter
+    participatory_processes:
+      participatory_process_groups:
+        highlighted_proposals:
+          proposals: Forslag
+    participatory_spaces:
+      highlighted_proposals:
+        see_all: Se alle idéer (%{count})
+    proposals:
+      actions:
+        answer_proposal: Svar på forslag
+        edit_proposal: Rediger idé
+        import: Importer fra en anden komponent
+        new: Ny idé
+        participatory_texts: Deltagelsestekster
+        show: Vis idé
+        title: Handlinger
+      admin:
+        actions:
+          preview: Forhåndsvisning
+        exports:
+          comments: Bemærkninger
+          proposals: Forslag
+        models:
+          proposal:
+            name: Forslag
+        participatory_texts:
+          bulk-actions:
+            are_you_sure: Er du sikker på, at du vil kassere hele det deltagende tekstudkast?
+            discard_all: Kassér alle
+            import_doc: Importer dokument
+          discard:
+            success: Alle deltagende tekstudkast er kasseret.
+          import:
+            invalid: Formularen er ugyldig!
+            invalid_file: Filen indeholder en fejl, prøv at redigere filens indhold og upload den igen.
+            success: Tillykke, følgende afsnit er blevet konverteret til forslag. Nu kan du gennemgå og justere dem inden offentliggørelse.
+          index:
+            info_1: Det følgende afsnit er blevet konverteret til forslag. Nu kan du gennemgå og justere dem inden offentliggørelse.
+            publish_document: Offentliggør dokument
+            save_draft: Gem udkast
+            title: Forhåndsvisning af deltagende tekst
+          new_import:
+            accepted_mime_types:
+              md: Markdown
+              odt: ODT
+            bottom_hint: "(Du vil kunne se forhåndsvinsning af og sortere dokumentsektioner)"
+            document_legend: 'Tilføj et dokument, der er mindre end 2 MB, hver sektion indtil 3 niveauer dybt vil blive analyseret i forslag. Understøttede formater er: %{valid_mime_types}'
+            title: Tilføj et dokument
+            upload_document: Upload dokument
+          publish:
+            invalid: Kunne ikke offentliggøre forslag
+            success: Alle forslag er blevet offentliggjort
+          sections:
+            article: "<em>Artikel</em>"
+            section: "<em>Afsnit:</em> <strong>%{title}</strong>"
+            sub-section: "<em>Underafsnit:</em> %{title}"
+          update:
+            success: Deltagelsestekst blev opdateret.
+        proposal_answers:
+          form:
+            accepted: Accepter
+            answer_proposal: Svar
+            evaluating: Evaluerer
+            rejected: Afvist
+            title: Svar til forslag %{title}
+        proposal_notes:
+          create:
+            error: Der var et problem med at oprette denne forslagsnote
+            success: Forslagsnote blev oprettet
+          form:
+            submit: Indsend
+          leave_your_note: Læg en note
+          title: Private noter
+        proposals:
+          answer:
+            invalid: Der har været et problem med at besvare dette forslag
+            success: Forslaget blev besvaret
+          create:
+            invalid: Der har været et problem med at oprette dette forslag
+            success: Forslag blev oprettet
+          edit:
+            title: Opdater forslag
+            update: Opdater
+          form:
+            attachment_legend: "(Valgfrit) Tilføj en vedhæftet fil"
+            created_in_meeting: Dette forslag kommer fra et møde
+            select_a_category: Vælg en kategori
+            select_a_meeting: Vælg et møde
+          index:
+            actions: Handlinger
+            assign_to_valuator: Henvis til valuator
+            assign_to_valuator_button: Henvis
+            cancel: Annuller
+            change_category: Skift kategori
+            change_scope: Skift omfang
+            merge: Flet sammen til et nyt
+            merge_button: Flet
+            publish: Offentliggør
+            publish_answers: Offentliggør svar
+            select_component: Vælg en komponent
+            selected: valgt
+            split: Opdel forslag
+            split_button: Opdel
+            title: Forslag
+            unassign_from_valuator: Tilbagekald fra valuator
+            unassign_from_valuator_button: Tilbagkald henvisning
+            update: Opdater
+            update_scope_button: Opdater omfang
+          new:
+            create: Opret
+            title: Opret forslag
+          publish_answers:
+            number_of_proposals: Svar på %{number} forslag vil blive offentliggjort.
+            select_a_proposal: Vælg et forslag
+          show:
+            amendments_count: Antal ændringer
+            assigned_valuators: Tilknyttede valuatorer
+            authors: Forfattere
+            body: Brødtekst
+            comments_count: Antal bemærkninger
+            comments_negative_count: Mod
+            comments_neutral_count: Neutral
+            comments_positive_count: Fordel
+            created_at: Oprettelsesdato
+            documents: Dokumenter
+            endorsements_count: Antal enbefalinger
+            endorsements_ranking: Placer i tangordning efter anbefalinger
+            endorsers: Anbefalere
+            n_more_endorsers:
+              one: og 1 mere
+              other: og %{count} mere
+            photos: Fotos
+            proposals: Forslag
+            ranking: "%{ranking} af %{total}"
+            related_meetings: Relaterede møder
+            remove_assignment: Fjern opgave
+            remove_assignment_confirmation: Er du sikker på, at du vil fjerne valuator fra dette forslag?
+            valuators: Valuatorer
+            votes_count: Antal supporter
+            votes_ranking: Placer i rangordning efter support
+          update_category:
+            invalid: 'Disse forslag havde allerede %{subject_name}-kategorien: %{proposals}.'
+            select_a_category: Vælg en kategori
+            select_a_proposal: Vælg et forslag
+            success: 'Forslag opdateret til kategorien %{subject_name}: %{proposals}.'
+          update_scope:
+            invalid: 'Disse forslag havde allerede %{subject_name}-omfanget: %{proposals}.'
+            select_a_proposal: Vælg et forslag
+            select_a_scope: Vælg et Omfang
+            success: 'Forslag opdateret til omfanget %{subject_name}: %{proposals}.'
+        proposals_imports:
+          create:
+            invalid: Der opstod et problem med at importere forslagene
+            success: "%{number} forslag blev importeret"
+          new:
+            create: Importer forslag
+            no_components: Der er ingen andre forslagskomponenter i dette deltagelsesrum til at importere forslagene Fra.
+            select_component: Vælg en komponent
+            select_states: Kontroller status for de forslag, der skal importeres
+        proposals_merges:
+          create:
+            invalid: Der opstod et problem med at flette de valgte forslag.
+            success: Flettede forslagene til et nyt.
+        proposals_splits:
+          create:
+            invalid: Der opstod et problem med at opdele de valgte forslag.
+            success: Opsplittede forslagene til nye.
+        valuation_assignments:
+          create:
+            invalid: Der opstod en fejl ved henvisning af forslag til en valuator
+            success: Forslag henvist til en valuator
+          delete:
+            invalid: Der opstod en fejl ved henvisning af forslag til en valuator
+            success: Valuator frigjort fra forslag
+      admin_log:
+        proposal:
+          answer: "%{user_name} svarede på %{resource_name} forslag på %{space_name}-rummet"
+          create: "%{user_name} oprettede %{resource_name} forslaget på %{space_name}-rummet som et officielt forslag"
+          publish_answer: "%{user_name} offentgliggjorde svaret på %{resource_name} forslag på %{space_name}-rummet"
+          update: "%{user_name} opdaterede det %{resource_name} officielle forslag på %{space_name}-rummet"
+        proposal_note:
+          create: "%{user_name} lagde en privat note til %{resource_name} forslaget på %{space_name}-rummet"
+        valuation_assignment:
+          create: "%{user_name} henviste %{resource_name} forslaget til en valuator"
+          delete: "%{user_name} fritog en valuator fra forslaget %{proposal_title}"
+      answers:
+        accepted: Accepter
+        evaluating: Evaluerer
+        not_answered: Ikke besvaret
+        rejected: Afvist
+        withdrawn: Trukket tilbage
+      application_helper:
+        filter_category_values:
+          all: Alle
+        filter_origin_values:
+          all: Alle
+          meetings: Arrangementer
+          official: Officiel
+          participants: Borgere
+          user_groups: Grupper
+        filter_scope_values:
+          all: Alle
+        filter_state_values:
+          accepted: Accepter
+          all: Alle
+          evaluating: Evaluerer
+          not_answered: Ikke besvaret
+          rejected: Afvist
+        filter_type_values:
+          all: Alle
+          amendments: Ændringer
+          proposals: Idéer
+      collaborative_drafts:
+        collaborative_draft:
+          publish:
+            error: Der var et problem med at offentliggøre samarbejdsudkastet.
+            irreversible_action_modal:
+              body: Efter udgivelsen af udkastet som forslag kan udkastet ikke længere redigeres. Forslaget accepterer ikke nye forfattere eller bidrag.
+              cancel: Annuller
+              ok: Offentliggør som forslag
+              title: Den følgende handling er uigenkaldelig
+            success: Samarbejdsudkast offentliggjort som forslag.
+          view_collaborative_draft: Se samarbejdsudkast
+          withdraw:
+            error: Der var et problem med at lukke samarbejdsudkastet.
+            irreversible_action_modal:
+              body: Efter lukningen af udkastet kan udkastet ikke længere redigeres. Forslaget accepterer ikke nye forfattere eller bidrag.
+              cancel: Annuller
+              ok: Træk samarbejdsudkastet tilbage
+              title: Den følgende handling er uigenkaldelig
+            success: Samarbejdsudkast trukket tilbage.
+        compare:
+          mine_is_different: Mit samarbejdsudkast er anderledes
+          no_similars_found: Godt klaret! Ingen lignende samarbejdsudkast fundet
+          title: Lignende samarbejdsudkast
+        complete:
+          send: Send
+          title: Færddiggør dit samarbejdsudkast
+        count:
+          drafts_count:
+            one: "%{count} samarbejdsudkast"
+            other: "%{count} samarbejdsudkast"
+        create:
+          error: Der var et problem med at oprette dette samarbejdsudkast
+          success: Samarbejdsudkast blev oprettet.
+        edit:
+          attachment_legend: "(Valgfrit) Tilføj en vedhæftet fil"
+          back: Tilbage
+          select_a_category: Vælg en kategori
+          send: Send
+          title: Rediger samarbejdsudkast
+        filters:
+          all: Alle
+          amendment: Ændringer
+          category: Kategori
+          open: Åbn
+          published: Offentliggjort
+          related_to: Relateret til
+          scope: Omfang
+          search: Søg
+          state: Status
+          withdrawn: Trukket tilbage
+        filters_small_view:
+          close_modal: Luk modal
+          filter: Filtrer
+          filter_by: Filtrer efter
+          unfold: Fold ud
+        new:
+          send: Fortsæt
+          title: Færddiggør dit samarbejdsudkast
+        new_collaborative_draft_button:
+          new_collaborative_draft: Nyt samarbejdsudkast
+        orders:
+          label: 'Opstil udkast efter:'
+          most_contributed: Flest bidrog
+          random: Tilfældigt
+          recent: Nylig
+        requests:
+          accepted_request:
+            error: Kunne ikke accepteres som samarbejdspartner. prøv igen senere.
+            success: "@%{user} er blevet accepteret som en samarbejdspartner"
+          access_requested:
+            error: Din anmodning kunne ikke færdiggøres, prøv igen senere.
+            success: Din anmodning om at samarbejde er blevet sendt
+          collaboration_requests:
+            accept_request: Accepter
+            reject_request: Afvis
+            title: Samarbejdsanmodninger
+          rejected_request:
+            error: Kunne ikke afvises som samarbejdspartner, prøv igen senere.
+            success: "@%{user} er blevet afvist som samarbejdspartner"
+        show:
+          back: Tilbage
+          edit: Rediger samarbejdsudkast
+          final_proposal: endeligt forslag
+          final_proposal_help_text: Dette udkast er færdig. Tjek det endelige forslag
+          hidden_authors_count:
+            one: og %{count} flere personer
+            other: og %{count} flere personer
+          info-message: Dette er et <strong>samarbejdsudkast</strong> til et forslag. Dette betyder, at du kan hjælpe forfatternee med at forme forslaget ved hjælp af kommentarsektionen nedenfor eller forbedre det direkte ved at anmode om adgang til at redigere det. Når forfatterne giver dig adgang, kan du foretage ændringer i dette udkast.
+          publish: Offentliggør
+          publish_info: Offentliggør denne version af udkastet eller
+          published_proposal: det offentliggjorte forslag
+          request_access: Anmod om adgang
+          requested_access: Anmodet om adgang
+          version_history: se versionshistorik for dette forslag
+          withdraw: træk udkastet tilbage
+        states:
+          open: Åbn
+          published: Offentliggjort
+          withdrawn: Trukket tilbage
+        update:
+          error: Der var et problem med at gemme samarbejdsudkastet.
+          success: Samarbejdsudkast blev oprettet.
+          title: Rediger samarbejdsudkast
+        wizard_aside:
+          back: Tilbage
+          back_from_collaborative_draft: Tilbage til samarbejdsudkast
+          back_from_step_1: Tilbage til samarbejdsudkast
+          back_from_step_2: Tilbage til samarbejdsudkast
+          back_from_step_3: Tilbage til samarbejdsudkast
+          back_from_step_4: Tilbage for at redigere udkast
+          info: Du er ved at oprette et <strong>samarbejdsudkast</strong>.
+        wizard_steps:
+          current_step: Nuværende trin
+          see_steps: se trin
+          step_1: Færddiggør dit samarbejdsudkast
+          step_2: Sammenlign med samarbejdes udkast
+          step_3: Færddiggør dit samarbejdsudkast
+          step_of: Trin %{current_step_num} af %{total_steps}
+          title: Trin til oprettelse af samarbejdsudkast
+      create:
+        error: Der var et problem med at gemme forslaget.
+        success: Forslag blev oprettet. Gemt som kladde.
+      destroy_draft:
+        error: Der var et problem med at slette samarbejdsudkastet.
+        success: Idéudkastet er slettet.
+      last_activity:
+        new_proposal_at_html: "<span>Ny idé i %{link}</span>"
+      models:
+        collaborative_draft:
+          fields:
+            authors: Forfattere
+            comments: Bemærkninger
+            contributions: Bidrag
+        proposal:
+          fields:
+            category: Kategori
+            comments: Bemærkninger
+            id: ID
+            notes: Noter
+            official_proposal: Officielt forslag
+            published_answer: Offentliggjort svar
+            published_at: Offentliggjort kl.
+            scope: Omfang
+            state: Status
+            title: Titel
+            valuator: Evaluator
+            valuators: Valuatorer
+            votes: Afstemninger
+      new:
+        limit_reached: Du kan ikke oprette nye forslag, da du har overskredet grænsen.
+      participatory_text_proposal:
+        alternative_title: Der er ingen samarbejdstekster i øjeblikket
+        buttons:
+          amend: Ændrer
+          comment: Bemærkning
+          comments: Bemærkninger
+      proposal_votes:
+        create:
+          error: Der var et problem med at støtte forslaget.
+      proposals:
+        compare:
+          continue: Fortsæt
+          no_similars_found: Godt klaret! Der er ikke fundet lignende idéer
+          title: Sammenlign med lignende idéer
+        complete:
+          send: Send
+          title: Færdiggør din idé
+        count:
+          proposals_count:
+            one: "%{count} Idé"
+            other: "%{count} Idéer"
+        edit:
+          attachment_legend: "(Valgfrit) Tilføj et billede"
+          back: Tilbage
+          select_a_category: Vælg en kategori
+          send: Forhåndsvisning
+          title: Rediger forslag
+        edit_draft:
+          discard: Kasser dette udkast
+          discard_confirmation: Er du sikker på, at du vil kassere denne idé?
+          send: Forhåndsvisning
+          title: Rediger idéudkast
+        filters:
+          activity: Idéer
+          all: Alle
+          amendment_type: Type
+          category: Kategori
+          my_proposals: Mine idéer
+          origin: Oprindelse
+          related_to: Relateret
+          scope: Omfang
+          search: Idéer
+          state: Kategori
+          type: Type
+          voted: Støttet
+        filters_small_view:
+          close_modal: Luk modal
+          filter: Filtrer
+          filter_by: Idé
+          unfold: Fold ud
+        index:
+          click_here: Klik her
+          collaborative_drafts_list: Gå til samarbejdsudkast
+          new_proposal: Ny idé
+          see_all: Se alle idéer
+          see_all_withdrawn: Se alle tilbagekaldte idéer
+          text_banner: Idéer, som er blevet trukket tilbage. %{go_back_link} for at gå tilbage til oversigten over idéer.
+          view_proposal: Se forslag
+        linked_proposals:
+          proposal_votes:
+            one: støtte
+            other: støtter
+        new:
+          send: Fortsæt
+          title: Opret dit forslag
+        orders:
+          label: Sorter idéer efter
+          most_commented: Mest kommenterede
+          most_endorsed: De mest anbefalede
+          most_followed: De mest fulgte
+          most_voted: Mest understøttede
+          random: Tilfældigt
+          recent: Seneste
+          with_more_authors: Med flere forfattere
+        participatory_texts:
+          index:
+            document_index: Dokumentindeks
+          view_index:
+            see_index: Se indeks
+        preview:
+          modify: Ændr din idé
+          proposal_edit_before_minutes:
+            one: Du har %{count} minutter efter offentliggørelsen til at redigere din idé, hvis du stadig har brug for at foretage ændringer.
+            other: Du har %{count} minutter efter offentliggørelsen til at redigere din idé, hvis du stadig har brug for at foretage ændringer.
+          publish: Offentliggør
+          title: Offentliggør din idé
+        proposal:
+          creation_date: 'Oprettelse: %{date}'
+          view_proposal: Se forslag
+        proposals:
+          empty: Der er endnu ingen idé
+          empty_filters: Der er ingen idéer med disse kriterier
+        show:
+          answer: Svar
+          back_to: Tilbage til
+          back_to_list: Tilbage til listen
+          changes_at_title: Ændring til "%{title}"
+          comments: Bemærkninger
+          edit_proposal: Rediger idé
+          endorsements_list: Anbefalet af
+          estimated_cost: Anslåede omkostninger
+          hidden_endorsers_count:
+            one: og %{count} flere personer
+            other: og %{count} flere personer
+          link_to_collaborative_draft_help_text: Dette forslag er resultatet af et samarbejdsudkast. Gennemgå historikken
+          link_to_collaborative_draft_text: Se samarbejdsudkastet
+          link_to_promoted_emendation_help_text: Dette forslag er en fremmet tekstrettelse
+          link_to_promoted_emendation_text: Se den afviste tekstrettelse.
+          link_to_proposal_from_emendation_help_text: Dette er en afvist tekstrettelse
+          link_to_proposal_from_emendation_text: Se idéen
+          proposal_accepted_reason: 'Dette forslag er blevet accepteret, fordi:'
+          proposal_in_evaluation_reason: Dette forslag evalueres for øjeblikket
+          proposal_rejected_reason: 'Dette forslag er blevet forkastet, fordi:'
+          read_less: Læs mindre
+          read_more: Læs mere
+          report: Rapporter
+          withdraw_btn_hint: Bemærk, at idéen stadig vil figurere på listen over tilbagetrukne idéer og vil ikke blive slettet permanent.
+          withdraw_confirmation_html: Er du sikker på, at du vil trække denne idé tilbage?<br><br><strong>Du kan ikke fortryde denne handling!</strong>
+          withdraw_proposal: Træk idé tilbage
+        tags:
+          changed_from: "(ændret fra <u>%{previous_name}</u> af en administrator)"
+        update:
+          title: Opdater idé
+        vote_button:
+          already_voted: Allerede støttet
+          already_voted_hover: Træk support tilbage
+          maximum_votes_reached: Supporttærskel nået
+          no_votes_remaining: Ingen resterende støtter
+          vote: Støtte
+          votes_blocked: Støtte deaktiveret
+        votes_count:
+          count:
+            one: Støtte
+            other: Støtter
+          most_popular_proposal: Mest populære idé
+          need_more_votes: Har brug for mere støtte
+        voting_rules:
+          can_accumulate_supports_beyond_threshold:
+            description: "- Hver idé kan få mere end %{limit} anbefalinger."
+          minimum_votes_per_user:
+            description: Du skal fordele et minimum af %{votes} støtter blandt forskellige forslag.
+            given_enough_votes: Du har givet støtte nok.
+            supports_remaining: Du skal støtte %{remaining_votes} flere forslag for at din støtte kan blive taget i betragtning.
+          proposal_limit:
+            description: Du kan oprette op til %{limit} forslag.
+          threshold_per_proposal:
+            description: "- En idé skal have %{limit} anbefalinger for at blive godkendt;"
+          title: 'Regler for anbefalinger:'
+          vote_limit:
+            description: "- Du kan støtte op til %{limit} idéer;"
+            left: Resterende
+            votes: Støtter
+        wizard_aside:
+          back: Tilbage
+          back_from_step_1: Tilbage til forslag
+          back_from_step_2: Tilbage til forslag
+          back_from_step_3: Tilbage til sammenligning af idéer
+          back_from_step_4: Tilbage for at redigere udkast
+          info: Du er ved at oprette et <strong>forslag</strong>.
+        wizard_steps:
+          current_step: Nuværende trin
+          see_steps: se trin
+          step_1: Opret dit forslag
+          step_2: Sammenlign
+          step_3: Afslut
+          step_4: Offentliggør dit forslag
+          step_of: Trin %{current_step_num} af %{total_steps}
+          title: Sådan opretter du et forslag
+      proposals_picker:
+        choose_proposals: Vælg idéer
+        close: Luk
+        more_proposals: Der er %{number} flere forslag. Afgræns din søgning for at finde dem.
+        no_proposals: Ingen idéer matcher dine søgekriterier, eller der er ikke nogen idéer.
+      publish:
+        error: Der var et problem med at offentliggøre idéen.
+        success: Idéen er offentliggjort.
+      publish_answers:
+        success: Svar til forslaget offentliggjort.
+      update:
+        error: Der var et problem med at gemme forslaget.
+        success: Idéen er opdateret.
+      update_draft:
+        error: Der var et problem med at gemme samarbejdsudkastet.
+        success: Idéen er opdateret.
+      versions:
+        collaborative_drafts:
+          back_to_resource: Tilbage til samarbejdsudkast
+        index:
+          title: Versioner
+        proposals:
+          back_to_resource: Gå tilbage til forslag
+      withdraw:
+        errors:
+          has_supports: Dette forslag kan ikke trækkes tilbage, idet det allerede har støtte.
+    resource_links:
+      copied_from_component:
+        proposal_proposal: Relaterede idéer
+      included_projects:
+        project_result: 'Resultater, der vises i dette projekt:'
+      included_proposals:
+        proposal_project: 'Forslag, der vises i disse projekter:'
+        proposal_result: 'Forslag, der vises i disse projekter:'

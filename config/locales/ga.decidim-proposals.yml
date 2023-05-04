@@ -1,0 +1,186 @@
+---
+ga:
+  activemodel:
+    attributes:
+      proposal:
+        body: Corp
+        category_id: Catagóir
+        title: Teideal
+        user_group_id: Cruthaigh smaoineamh mar
+    models:
+      decidim/proposals/publish_proposal_event: Foilsíodh an smaoineamh
+  activerecord:
+    models:
+      decidim/proposals/proposal:
+        few: Smaoineamh
+        many: Smaoineamh
+        one: Smaoineamh
+        other: Smhaoineamh
+        two: Smaoineamh
+  decidim:
+    admin:
+      filters:
+        proposals:
+          category_id_eq:
+            label: Catagóirí
+    components:
+      proposals:
+        actions:
+          endorse: Tacaíocht a thabhairt
+        name: Smaointe
+        settings:
+          global:
+            proposal_edit_before_minutes: Is féidir leis na húdair smaointe a chur in eagar go dtí go mbeidh an líon seo nóiméad istigh
+            proposal_wizard_step_3_help_text: Féach siar
+    events:
+      proposals:
+        creation_enabled:
+          email_intro: 'Is féidir leat smaointe nua a chruthú sa %{participatory_space_title}! Tosaigh ag glacadh páirte sa leathanach seo:'
+          email_subject: Tá smaointe ar fáil anois sa %{participatory_space_title}
+          notification_title: Is féidir <a href="%{resource_path}">smaointe nua</a> a mholadh anois sa <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+        endorsing_enabled:
+          email_intro: 'Is féidir leat tacú le smaointe sa %{participatory_space_title}! Tosaigh ag glacadh páirte sa leathanach seo:'
+          email_subject: Tosaíodh ar thacú le smaointe sa %{participatory_space_title}
+          notification_title: Is féidir leat tosú <a href="%{resource_path}">ag tacú le smaointe</a> sa <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+        proposal_mentioned:
+          email_intro: '- Luadh an smaoineamh uait "%{mentioned_proposal_title}" <a href="%{resource_url}">sa spás seo</a> sna nótaí tráchta.'
+          email_subject: '- Luadh an smaoineamh uait "%{mentioned_proposal_title}"'
+          notification_title: '- Luadh an smaoineamh uait "%{mentioned_proposal_title}" <a href="%{resource_path}">sa spás seo</a> sna nótaí tráchta.'
+        proposal_published:
+          email_intro: '- D’fhoilsigh %{author_name} %{author_nickname}, duine atá á leanúint agat, smaoineamh nua darb ainm "%{resource_title}". Caith súil air agus bí páirteach ann:'
+          email_subject: '- Smaoineamh nua "%{resource_title}" ó %{author_nickname}'
+          notification_title: '- D’fhoilsigh <a href="%{author_path}">%{author_name} %{author_nickname}</a> an smaoineamh <a href="%{resource_path}">%{resource_title}</a>.'
+        proposal_published_for_space:
+          email_intro: '- Cuireadh an smaoineamh "%{resource_title}" le "%{participatory_space_title}" atá á leanúint agat.'
+          email_subject: '- Cuireadh smaoineamh nua "%{resource_title}" le %{participatory_space_title}'
+          notification_title: '- Cuireadh an smaoineamh <a href="%{resource_path}">%{resource_title}</a> le %{participatory_space_title}'
+        proposal_update_category:
+          email_intro: 'D’athraigh riarthóir an chatagóir lena mbaineann do smaoineamh "%{resource_title}", caith súil air ar an leathanach seo:'
+          email_outro: Fuair tú an fógra seo toisc gur tusa údar an smaoinimh.
+          email_subject: Tugadh an chatagóir smaointe %{resource_title} cothrom le dáta
+          notification_title: Tá an chatagóir smaointe <a href="%{resource_path}">%{resource_title}</a> athraithe ag riarthóir.
+    metrics:
+      accepted_proposals:
+        object: smaointe
+      proposals:
+        object: smaointe
+        title: Smaointe
+    participatory_spaces:
+      highlighted_proposals:
+        see_all: Amharc gach smaoineamh (%{count})
+    proposals:
+      actions:
+        edit_proposal: Smaoineamh a Chur in Eagar
+        new: Smaoineamh nua
+        show: An smaoineamh a thaispeáint
+      application_helper:
+        filter_category_values:
+          all: Gach
+        filter_origin_values:
+          meetings: Imeachtaí
+        filter_type_values:
+          proposals: Smaointe
+      destroy_draft:
+        success: Scriosadh an dréacht den smaoineamh.
+      last_activity:
+        new_proposal_at_html: "<span>Smaoineamh nua faoi %{link}</span>"
+      models:
+        proposal:
+          fields:
+            category: Catagóir
+      proposals:
+        compare:
+          no_similars_found: Maith thú! Níor aimsíodh aon smaointe eile den chineál céanna
+          title: Comparáid le smaointe eile den chineál céanna
+        complete:
+          title: Féach siar ar do smaoineamh
+        count:
+          proposals_count:
+            few: "%{count} Smaoineamh"
+            many: "%{count} Smaoineamh"
+            one: Smaoineamh amháin
+            other: "%{count} Smaoineamh"
+            two: 2 Smaoineamh
+        edit:
+          select_a_category: Roghnaigh catagóir
+          send: Réamhamharc
+        edit_draft:
+          discard_confirmation: An bhfuil tú cinnte gur mian leat an dréacht den smaoineamh seo a chuileáil?
+          title: Dréacht den Smaoineamh a Chur in Eagar
+        filters:
+          activity: Smaointe
+          all: Gach
+          category: Catagóir
+          my_proposals: Mo Chuid Smaointe
+          origin: Tionscnamh
+          related_to: Gaolmhar
+          search: Smaointe
+          state: Catagóir
+        filters_small_view:
+          filter_by: Smaoineamh
+        index:
+          new_proposal: Smaoineamh nua
+          see_all_withdrawn: Féach ar gach smaoineamh a tarraingíodh siar
+          view_proposal: Féach ar an smaoineamh
+        new:
+          title: Do smaoineamh a chur in iúl
+        orders:
+          label: 'Sórtáil smaointe de réir:'
+          most_commented: Is mó tráchta
+          most_endorsed: Is mó tacaithe
+          most_followed: " Is mo leanta"
+          random: Randamach
+          recent: Is déanaí
+          with_more_authors: le níos mó údar
+        preview:
+          modify: Do smaoineamh a athrú
+          proposal_edit_before_minutes:
+            few: Beidh tú in ann an smaoineamh seo a chur in eagar ar feadh %{count} nóiméad tar éis a fhoilsithe. Nuair a bheidh an t-achar ama sin istigh, ní bheidh tú in ann an smaoineamh a chur in eagar.
+            many: Beidh tú in ann an smaoineamh seo a chur in eagar ar feadh %{count} nóiméad tar éis a fhoilsithe. Nuair a bheidh an t-achar ama sin istigh, ní bheidh tú in ann an smaoineamh a chur in eagar.
+            one: Beidh tú in ann an smaoineamh seo a chur in eagar sa chéad nóiméad tar éis an smaoineamh a fhoilsiú. Nuair a bheidh an t-achar ama sin istigh, ní bheidh tú in ann an smaoineamh a chur in eagar.
+            other: Beidh tú in ann an smaoineamh seo a chur in eagar ar feadh %{count} nóiméad tar éis a fhoilsithe. Nuair a bheidh an t-achar ama sin istigh, ní bheidh tú in ann an smaoineamh a chur in eagar.
+            two: Beidh tú in ann an smaoineamh seo a chur in eagar sa chéad dá nóiméad tar éis an smaoineamh a fhoilsiú. Nuair a bheidh an t-achar ama sin istigh, ní bheidh tú in ann an smaoineamh a chur in eagar.
+          title: Do smaoineamh a fhoilsiú
+        proposal:
+          view_proposal: Féach ar an smaoineamh
+        proposals:
+          empty: Níl aon smaoineamh ann go fóill
+          empty_filters: Níl aon smaoineamh ann a mbaineann na critéir seo leo
+        show:
+          back_to_list: Ar ais chuig an liosta
+          edit_proposal: An smaoineamh a chur in eagar
+          endorsements_list: Tacaíocht tugtha ag
+          link_to_proposal_from_emendation_text: An smaoineamh a fheiceáil
+          withdraw_btn_hint: Tabhair do d'aire go mbeidh an smaoineamh fós le feiceáil ar liosta na smaointe a tarraingíodh siar, agus ní scriosfar go buan é.
+          withdraw_confirmation_html: An bhfuil tú cinnte gur mian leat an smaoineamh seo a tharraingt siar?<br><br><strong>Ní féidir an beart seo a chur ar ceal!</strong>
+          withdraw_proposal: An smaoineamh a tharraingt siar
+        update:
+          title: An smaoineamh a athrú
+        votes_count:
+          most_popular_proposal: An smaoineamh is mó tóir
+        wizard_aside:
+          back_from_step_1: Siar chuig smaointe
+          back_from_step_2: Siar chuig smaointe
+          back_from_step_3: Siar chuig ‘smaointe a chur i gcomparáid’
+          info: Tá <strong>smaoineamh</strong> á chomhroinnt agat.
+        wizard_steps:
+          step_1: Comhroinn do smaoineamh
+          step_3: Cuir i gcrích
+          step_4: Foilsigh do smaoineamh
+          title: Na céimeanna chun smaoineamh a comhroinnt
+      proposals_picker:
+        choose_proposals: Roghnaigh smaointe
+        no_proposals: Níl aon smaoineamh ag freagairt do na critéir chuardaigh a d’úsáid tú nó níl aon smaoineamh ann.
+      publish:
+        error: Tharla fadhb agus an smaoineamh á fhoilsiú.
+        success: Foilsíodh an smaoineamh.
+      update:
+        success: Nuashonraíodh an smaoineamh.
+      update_draft:
+        success: Nuashonraíodh an dréacht den smaoineamh.
+      versions:
+        proposals:
+          back_to_resource: Ar ais chuig an smaoineamh
+    resource_links:
+      copied_from_component:
+        proposal_proposal: Smaointe gaolmhara
