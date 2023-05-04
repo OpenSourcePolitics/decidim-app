@@ -30,6 +30,7 @@ gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publ
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", "~> 1.4"
+gem "deepl-rb", require: "deepl"
 gem "dotenv-rails"
 gem "faker", "~> 2.14"
 gem "fog-aws"
