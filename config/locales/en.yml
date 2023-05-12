@@ -124,6 +124,7 @@ en:
           success: You have updated the meeting successfully.
     omniauth:
       france_connect:
+        explanation: Explanation
         external:
           link: https://franceconnect.gouv.fr/
           text: What is FranceConnect ?
@@ -224,6 +225,7 @@ en:
     shared:
       links:
         forgot_your_password: Forgot your password
+        sign_in_with_france_connect: Sign in with france connect
   faker:
     address:
       country_code:
