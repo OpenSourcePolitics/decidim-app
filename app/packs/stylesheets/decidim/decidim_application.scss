@@ -9,25 +9,18 @@
 @import "email/email-custom";
 @import "modules/footer";
 
-.social-register {
-  margin-bottom: 1rem;
-  text-align: center;
-}
+.social-register > .text-center > a.primary.external-link-container {color: #002057;}
 
-.primary.external-link-container {
-  color: var(--secondary)
+.social-register > .text-center a.button--france_connect > img {
+  height: 60px;
+  width: 228px;
+}
+.social-register > .text-center a.button--france_connect > img:hover {
+  filter: brightness(165%);
 }
 
 a.button--france_connect {
   display: block;
-  margin: 0 auto;
-  padding: 0;
-  background-color: transparent;
-  max-width: 230px;
-}
-a.button--france_connect:hover {
-  background-color: transparent;
-  filter: brightness(120%);
 }
 
 a[title="Find out more about cookies"]{
