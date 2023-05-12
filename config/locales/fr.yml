@@ -124,6 +124,7 @@ fr:
           success: La rencontre a été mise à jour avec succès.
     omniauth:
       france_connect:
+        explanation: FranceConnect est la solution proposée par l’État pour sécuriser et simplifier la connexion à vos services en ligne.
         external:
           link: https://franceconnect.gouv.fr/
           text: Qu'est-ce-que FranceConnect ?
@@ -221,6 +222,7 @@ fr:
     shared:
       links:
         forgot_your_password: Mot de passe oublié ?
+        sign_in_with_france_connect: FranceConnect
   faker:
     address:
       country_code:
