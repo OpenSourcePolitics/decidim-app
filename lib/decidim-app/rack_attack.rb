@@ -1,6 +1,7 @@
 module DecidimApp
   module RackAttack
-    AUTHORIZED_PATH = ["/decidim-packs", "/rails/active_storage", "/admin/"]
+    AUTHORIZED_THROTTLING_PATHS = ["/decidim-packs", "/rails/active_storage", "/admin/"]
+    UNAUTHORIZED_FAIL2BAN_PATHS = ["/etc/passwd", "/wp-admin/", "/wp-login/", "SELECT", "CONCAT", "UNION%20SELECT", "/.git/"]
 
     def self.rack_enabled?
       (Rails.application.secrets.dig(:decidim, :rack_attack, :enabled) == 1) || Rails.env.production?
@@ -8,7 +9,12 @@ module DecidimApp
 
     # If true: request must not be taken in account by Rack Attack Throttling
     def self.authorized_throttle_path?(path)
-      AUTHORIZED_PATH.map { |authorized| path.start_with?(authorized) }.include?(true)
+      AUTHORIZED_THROTTLING_PATHS.map { |authorized| path.start_with?(authorized) }.include?(true)
+    end
+
+    # If true: request must be sent to Fail2ban service
+    def self.unauthorized_fail2ban_path?(path)
+      UNAUTHORIZED_FAIL2BAN_PATHS.map { |unauthorized| path.include?(unauthorized) }.include?(true)
     end
 
     # Define how many time user is throttled

@@ -59,13 +59,7 @@ if Rails.application.secrets.dig(:decidim, :rack_attack, :fail2ban, :enabled) ==
     # so the request is blocked
     Rack::Attack::Fail2Ban.filter("pentesters-#{req.remote_ip}", maxretry: 0, findtime: 10.minutes, bantime: 1.hour) do
       # The count for the IP is incremented if the return value is truthy
-      req.path.include?("/etc/passwd") ||
-        req.path.include?("/wp-admin/") ||
-        req.path.include?("/wp-login/") ||
-        req.path.include?("SELECT") ||
-        req.path.include?("CONCAT") ||
-        req.path.include?("UNION%20SELECT") ||
-        req.path.include?("/.git/")
+      DecidimApp::RackAttack.unauthorized_fail2ban_path?(req.path)
     end
   end
 end
