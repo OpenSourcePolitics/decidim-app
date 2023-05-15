@@ -1,12 +1,22 @@
 # frozen_string_literal: true
 
+
+# Source: https://github.com/rack/rack-attack/issues/145#issuecomment-886180424
+class Rack::Attack
+  class Request < ::Rack::Request
+    def remote_ip
+      # doc: https://api.rubyonrails.org/classes/ActionDispatch/RemoteIp.html
+      @remote_ip ||= ActionDispatch::Request.new(env).remote_ip
+    end
+  end
+end
+
 # Enabled by default in production
 # Can be deactivated with 'ENABLE_RACK_ATTACK=0'
-return if Rails.application.secrets.dig(:decidim, :rack_attack, :enabled).zero?
-
 Rack::Attack.enabled = (Rails.application.secrets.dig(:decidim, :rack_attack, :enabled) == 1) || Rails.env.production?
-Rack::Attack.throttled_response_retry_after_header = true
+return unless Rack::Attack.enabled
 
+Rack::Attack.throttled_response_retry_after_header = true
 # By default use the memory store for inspecting requests
 # Better to use MemCached or Redis in production mode
 Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new if !ENV["MEMCACHEDCLOUD_SERVERS"] || Rails.env.test?
@@ -19,10 +29,13 @@ end
 
 Rack::Attack.throttled_responder = lambda do |request|
   rack_logger = Logger.new(Rails.root.join("log/rack_attack.log"))
+  match_data = request.env["rack.attack.match_data"]
+  now = match_data[:epoch_time]
+  limit = now + (match_data[:period] - (now % match_data[:period]))
 
   request_uuid = request.env["action_dispatch.request_id"]
   params = {
-    "ip" => request.ip,
+    "ip" => request.remote_ip,
     "path" => request.path,
     "get" => request.GET,
     "host" => request.host,
@@ -31,13 +44,14 @@ Rack::Attack.throttled_responder = lambda do |request|
 
   rack_logger.warn("[#{request_uuid}] #{params}")
 
-  [429, { "Content-Type" => "text/html" }, [html_template(10, request.env["decidim.current_organization"]&.name)]]
+  [429, { "Content-Type" => "text/html" }, [html_template(limit - now, request.env["decidim.current_organization"]&.name)]]
 end
 
 Rack::Attack.throttle("req/ip",
                       limit: Rails.application.secrets.dig(:decidim, :rack_attack, :throttle, :max_requests),
                       period: Rails.application.secrets.dig(:decidim, :rack_attack, :throttle, :period)) do |req|
-  req.ip unless req.path.start_with?("/decidim-packs") || req.path.start_with?("/rails/active_storage") || req.path.start_with?("/admin/")
+
+  req.remote_ip unless req.path.start_with?("/decidim-packs") || req.path.start_with?("/rails/active_storage") || req.path.start_with?("/admin/")
 end
 
 if Rails.application.secrets.dig(:decidim, :rack_attack, :fail2ban, :enabled) == 1
@@ -46,7 +60,7 @@ if Rails.application.secrets.dig(:decidim, :rack_attack, :fail2ban, :enabled) ==
   Rack::Attack.blocklist("fail2ban pentesters") do |req|
     # `filter` returns truthy value if request fails, or if it's from a previously banned IP
     # so the request is blocked
-    Rack::Attack::Fail2Ban.filter("pentesters-#{req.ip}", maxretry: 0, findtime: 10.minutes, bantime: 1.hour) do
+    Rack::Attack::Fail2Ban.filter("pentesters-#{req.remote_ip}", maxretry: 0, findtime: 10.minutes, bantime: 1.hour) do
       # The count for the IP is incremented if the return value is truthy
       req.path.include?("/etc/passwd") ||
         req.path.include?("/wp-admin/") ||
@@ -157,3 +171,4 @@ def html_template(until_period, organization_name)
 
 "
 end
+
