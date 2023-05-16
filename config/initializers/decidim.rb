@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "decidim-app/config"
+
 Decidim.configure do |config|
   config.application_name = "OSP Agora"
   config.mailer_sender = "OSP Agora <ne-pas-repondre@opensourcepolitics.eu>"

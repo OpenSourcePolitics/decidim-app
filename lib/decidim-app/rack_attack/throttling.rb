@@ -126,7 +126,6 @@ module DecidimApp
             clearInterval(interval)
             location.reload()
         } else {
-            console.log(total)
             timer.innerHTML = total
             total -= 1
         }

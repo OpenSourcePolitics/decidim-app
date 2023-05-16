@@ -9,7 +9,11 @@ class Rack::Attack
   class Request < ::Rack::Request
     def remote_ip
       # doc: https://api.rubyonrails.org/classes/ActionDispatch/RemoteIp.html
-      @remote_ip ||= ActionDispatch::Request.new(env).remote_ip
+      @remote_ip ||= if DecidimApp::Config.proxy_present?
+                        ActionDispatch::Request.new(env).remote_ip
+                     else
+                       ip
+                     end
     end
   end
 end
@@ -33,7 +37,7 @@ Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new if !ENV["MEMCAC
 
 Rack::Attack.throttled_responder = lambda do |request|
   rack_logger = Logger.new(Rails.root.join("log/rack_attack.log"))
-  throttling_limit = DecidimApp::RackAttack::Throttling.throttling_limit_for(request.env["rack.attack.match_data"])
+  throttling_limit = DecidimApp::RackAttack::Throttling.time_limit_for(request.env["rack.attack.match_data"])
 
   request_uuid = request.env["action_dispatch.request_id"]
   params = {
