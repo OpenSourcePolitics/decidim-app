@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DecidimApp
   module RackAttack
     module Throttling
-      AUTHORIZED_THROTTLING_PATHS = ["/decidim-packs", "/rails/active_storage", "/admin/"]
+      AUTHORIZED_THROTTLING_PATHS = ["/decidim-packs", "/rails/active_storage", "/admin/"].freeze
 
       # If true: request must not be taken in account by Rack Attack Throttling
       def self.authorized_path?(path)

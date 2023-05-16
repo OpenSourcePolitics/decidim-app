@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DecidimApp
   module RackAttack
     def self.rack_enabled?

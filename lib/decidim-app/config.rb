@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DecidimApp
   module Config
     def self.proxy_present?

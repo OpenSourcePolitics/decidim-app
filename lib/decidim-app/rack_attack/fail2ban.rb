@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module DecidimApp
   module RackAttack
     module Fail2ban
-      UNAUTHORIZED_FAIL2BAN_PATHS = ["/etc/passwd", "/wp-admin/", "/wp-login/", "SELECT", "CONCAT", "UNION%20SELECT", "/.git/"]
+      UNAUTHORIZED_FAIL2BAN_PATHS = ["/etc/passwd", "/wp-admin/", "/wp-login/", "SELECT", "CONCAT", "UNION%20SELECT", "/.git/"].freeze
 
       def self.enabled?
         Rails.application.secrets.dig(:decidim, :rack_attack, :fail2ban, :enabled) == 1

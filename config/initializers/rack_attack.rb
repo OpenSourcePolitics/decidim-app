@@ -10,7 +10,7 @@ class Rack::Attack
     def remote_ip
       # doc: https://api.rubyonrails.org/classes/ActionDispatch/RemoteIp.html
       @remote_ip ||= if DecidimApp::Config.proxy_present?
-                        ActionDispatch::Request.new(env).remote_ip
+                       ActionDispatch::Request.new(env).remote_ip
                      else
                        ip
                      end
@@ -56,7 +56,6 @@ end
 Rack::Attack.throttle(DecidimApp::RackAttack::Throttling.name,
                       limit: DecidimApp::RackAttack::Throttling.max_requests,
                       period: DecidimApp::RackAttack::Throttling.period) do |req|
-
   req.remote_ip unless DecidimApp::RackAttack::Throttling.authorized_path?(req.path)
 end
 
@@ -72,4 +71,3 @@ if DecidimApp::RackAttack::Fail2ban.enabled?
     end
   end
 end
-
