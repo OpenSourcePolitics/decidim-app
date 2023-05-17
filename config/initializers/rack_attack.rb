@@ -4,24 +4,14 @@ require "decidim-app/rack_attack"
 require "decidim-app/rack_attack/throttling"
 require "decidim-app/rack_attack/fail2ban"
 
-# Source: https://github.com/rack/rack-attack/issues/145#issuecomment-886180424
-class Rack::Attack
-  class Request < ::Rack::Request
-    def remote_ip
-      # doc: https://api.rubyonrails.org/classes/ActionDispatch/RemoteIp.html
-      @remote_ip ||= if DecidimApp::Config.proxy_present?
-                       ActionDispatch::Request.new(env).remote_ip
-                     else
-                       ip
-                     end
-    end
-  end
-end
-
 # Enabled by default in production
 # Can be deactivated with 'ENABLE_RACK_ATTACK=0'
 Rack::Attack.enabled = DecidimApp::RackAttack.rack_enabled?
 return unless Rack::Attack.enabled
+
+DecidimApp::Config.trusted_proxies.each do |ip|
+  Rack::Attack.safelist_ip(ip)
+end
 
 # Remove the original throttle from decidim-core
 # see https://github.com/decidim/decidim/blob/release/0.26-stable/decidim-core/config/initializers/rack_attack.rb#L19
@@ -41,7 +31,7 @@ Rack::Attack.throttled_responder = lambda do |request|
 
   request_uuid = request.env["action_dispatch.request_id"]
   params = {
-    "ip" => request.remote_ip,
+    "ip" => request.ip,
     "path" => request.path,
     "get" => request.GET,
     "host" => request.host,
@@ -56,7 +46,7 @@ end
 Rack::Attack.throttle(DecidimApp::RackAttack::Throttling.name,
                       limit: DecidimApp::RackAttack::Throttling.max_requests,
                       period: DecidimApp::RackAttack::Throttling.period) do |req|
-  req.remote_ip unless DecidimApp::RackAttack::Throttling.authorized_path?(req.path)
+  req.ip unless DecidimApp::RackAttack::Throttling.authorized_path?(req.path)
 end
 
 if DecidimApp::RackAttack::Fail2ban.enabled?
@@ -65,7 +55,7 @@ if DecidimApp::RackAttack::Fail2ban.enabled?
   Rack::Attack.blocklist("fail2ban pentesters") do |req|
     # `filter` returns truthy value if request fails, or if it's from a previously banned IP
     # so the request is blocked
-    Rack::Attack::Fail2Ban.filter("pentesters-#{req.remote_ip}", maxretry: 0, findtime: 10.minutes, bantime: 1.hour) do
+    Rack::Attack::Fail2Ban.filter("pentesters-#{req.ip}", maxretry: 0, findtime: 10.minutes, bantime: 1.hour) do
       # The count for the IP is incremented if the return value is truthy
       DecidimApp::RackAttack::Fail2ban.unauthorized_path?(req.path)
     end

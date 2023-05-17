@@ -7,7 +7,7 @@ module DecidimApp
     end
 
     def self.trusted_proxies
-      Rails.application.secrets.dig(:decidim, :rack_attack, :trusted_proxies)
+      Rails.application.secrets.dig(:decidim, :rack_attack, :trusted_proxies).presence || []
     end
   end
 end

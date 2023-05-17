@@ -34,8 +34,12 @@ module DevelopmentApp
       "X-Content-Type-Options" => "nosniff"
     }
 
-    trusted_ips = Rails.application.secrets.dig(:decidim, :rack_attack, :trusted_ips)
-    config.action_dispatch.trusted_proxies = trusted_ips.map { |ip| IPAddr.new(ip) } if trusted_ips.present?
+    # Action dispatch proxies
+    proxies = Rails.application.secrets.dig(:decidim, :rack_attack, :trusted_proxies).presence || []
+    if proxies.any?
+      trusted_proxies = proxies.map { |ip| IPAddr.new(ip) }
+      config.action_dispatch.trusted_proxies = ActionDispatch::RemoteIp::TRUSTED_PROXIES + trusted_proxies
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
