@@ -53,8 +53,3 @@ de6d804 - fix multipart object tagging (#40) (#41), 2021-12-24
 * `config/initializers/decidim_verifications.rb`
 * `spec/shared/has_questionnaire.rb`
 * `spec/system/survey_spec.rb`
-
-## Fix survey conditional question saving, backport #10386
-* `spec/commands/decidim/forms/answer_questionnaire_spec.rb`
-* `app/forms/decidim/forms/answer_form.rb`
-* `app/forms/decidim/forms/questionnaire_form.rb`
