@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+=begin
 
 Decidim::FriendlySignup.configure do |config|
   # Override password views or leave the originals (default is true):
@@ -13,3 +14,4 @@ Decidim::FriendlySignup.configure do |config|
   # Send the users a 4-digit number that needs to be entered in a confirmation page instead of a confirmation link (default is true)
   config.use_confirmation_codes = ENV.fetch("FRIENDLY_SIGNUP_USE_CONFIRMATION_CODES", "1") == "1"
 end
+=end
