@@ -43,12 +43,6 @@ de6d804 - fix multipart object tagging (#40) (#41), 2021-12-24
 * `lib/tasks/restore_dump.rake`
 705e0ad - Run rubocop, 2021-12-01
 
-## Fix collaborative draft
-* `app/controllers/decidim/proposals/collaborative_drafts_controller.rb`
-* `app/views/decidim/proposals/collaborative_drafts/_wizard_aside.html.erb`
-* `app/views/v0.26/decidim/proposals/collaborative_drafts/_show.html.erb`
-* `spec/system/collaborative_drafts_fields_spec.rb`
-
 ## Fix survey validation (#228)
 * `app/cells/decidim/forms/step_navigation/show.erb`
 * `app/packs/src/decidim/decidim_application.js`

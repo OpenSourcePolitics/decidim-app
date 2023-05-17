@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-ludens.git
-  revision: 9e945f923da0d9677dff825abb00bfb6e2af05da
-  branch: release/0.27-stable
+  revision: 28c3c4abaa66b28bdd7705d3e8c9db715eff6666
+  branch: bump/0.27
   specs:
-    decidim-ludens (1.1)
-      decidim-core (~> 0.27)
+    decidim-ludens (1.0.0)
+      decidim-core (~> 0.27.0)
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
