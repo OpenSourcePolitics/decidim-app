@@ -1,0 +1,171 @@
+---
+cs:
+  activemodel:
+    attributes:
+      answer:
+        body: Odpověď
+      question:
+        max_choices: Maximální počet voleb
+        question_type: Druh
+      questionnaire_question:
+        mandatory: Povinné
+    errors:
+      models:
+        answer:
+          attributes:
+            choices:
+              missing: nejsou kompletní
+              too_many: je jich příliš mnoho
+        questionnaire:
+          request_invalid: Při zpracování požadavku došlo k chybě. Zkuste to prosím znovu
+  decidim:
+    forms:
+      admin:
+        models:
+          components:
+            description: Popis
+            tos: Smluvní podmínky
+        questionnaires:
+          actions:
+            back: Zpět k otázkám
+            show: Zobrazit odpovědi
+          answer_option:
+            answer_option: Možnost odpovědi
+            free_text: Volný text
+            remove: Odebrat
+            statement: Prohlášení
+          answers:
+            actions:
+              back: Zpět k odpovědím
+              export: Export
+              show: Zobrazit odpovědi
+            empty: Zatím žádné odpovědi
+            export:
+              answer:
+                title: 'Odpověď #%{number}'
+            export_response:
+              title: survey_user_answers_%{token}
+            index:
+              title: 'Celkový počet odpovědí: %{total}'
+            show:
+              title: Odpověď %{number}
+          display_condition:
+            answer_option: Možnost odpovědi
+            condition_question: Otázka
+            condition_type: Podmínka
+            condition_types:
+              answered: Zodpovězeno
+              equal: Rovná se
+              match: Obsahuje text
+              not_answered: Nezodpovězeno
+              not_equal: Nerovná se
+            condition_value: Text obsažen
+            display_condition: Podmínka zobrazení
+            mandatory: Tuto podmínku je potřeba vždy splnit bez ohledu na status ostatních podmínek
+            remove: Odebrat
+            save_warning: Před konfigurací podmínek zobrazení formulář nezapomeňte uložit
+            select_answer_option: Vybrat možnost odpovědi
+            select_condition_question: Vybrat otázku
+            select_condition_type: Vybrat druh podmínky
+          edit:
+            save: Uložit
+            title: Upravit dotazník
+          form:
+            add_question: Přidat otázku
+            add_separator: Přidat separátor
+            already_answered_warning: Formulář už obsahuje odpovědi od několika uživatelů, proto není možné upravit jeho otázky.
+            collapse: Sbalit všechny otázky
+            expand: Rozbalit všechny otázky
+            preview: Náhled
+            title: Upravit formulář
+            unpublished_warning: Formulář není zveřejněn. Můžete upravit jeho otázky, ale tím dojde ke smazání současných odpovědí.
+          matrix_row:
+            matrix_row: Řádek
+            remove: Odebrat
+            statement: Prohlášení
+          question:
+            add_answer_option: Přidat možnost odpovědi
+            add_display_condition: Přidat podmínku zobrazení
+            add_display_condition_info: Uložte formulář, aby došlo ke konfiguraci podmínek zobrazení
+            add_matrix_row: Přidat řádek
+            any: Jakékoli
+            collapse: Sbalit
+            description: Popis
+            down: Dolů
+            expand: Rozbalit
+            question: Otázka
+            remove: Odebrat
+            statement: Prohlášení
+            up: Nahoru
+          separator:
+            down: Dolů
+            remove: Odebrat
+            separator: Separátor
+            up: Nahoru
+          update:
+            invalid: Při ukládání formuláře došlo k problému.
+            success: Formuláře byly úspěšně uloženy.
+      errors:
+        answer:
+          body: Tělo textu nemůže být prázdné
+      files:
+        extension_whitelist: 'Povolené formáty:'
+      images:
+        dimensions: "%{width} x %{height} px"
+        dimensions_info: 'Tento obrázek bude:'
+        processors:
+          resize_and_pad: Velikost a podklad změněny na
+          resize_to_fit: Velikost přizpůsobena
+      question_types:
+        long_answer: Dlouhá odpověď
+        matrix_multiple: Matice (více možností)
+        matrix_single: Matice (jedna možnost)
+        multiple_option: Více možností
+        short_answer: Krátká odpověď
+        single_option: Jedna možnost
+        sorting: Třídění
+      questionnaires:
+        answer:
+          invalid: Při vyplňování formuláře došlo k problému.
+          max_choices_alert: Je vybráno příliš mnoho možností
+          success: Formulář byl úspěšně vyplněn.
+        question:
+          max_choices: 'Max. počet možností: %{n}'
+        show:
+          answer_questionnaire:
+            anonymous_user_message: <a href="%{sign_in_link}">Přihlaste se do svého účtu</a> nebo <a href="%{sign_up_link}">se registrujte</a>, abyste formulář mohli vyplnit.
+            title: Vyplnit formulář
+          current_step: Krok %{step}
+          of_total_steps: z %{total_steps}
+          questionnaire_answered:
+            body: Tento formulář jste již vyplnili.
+            title: Již zodpovězeno
+          questionnaire_closed:
+            body: Formulář je uzavřen a není možné ho vyplnit.
+            title: Formulář uzavřen
+          questionnaire_for_private_users:
+            body: Formulář je dostupný pouze pro soukromé uživatele
+            title: Formulář uzavřen
+          questionnaire_js_disabled:
+            body: Některé prvky tohoto formuláře budou zablokovány. Pokud chcete zobrazení zlepšit, povolte si v prohlížeči JavaScript.
+            title: JavaScript je blokován
+          questionnaire_not_published:
+            body: Tento formulář ještě není zveřejněn.
+          tos_agreement: Účastí vyjadřujete souhlas se smluvními podmínkami
+      step_navigation:
+        show:
+          are_you_sure: Tuto akci nelze vrátit a nebudete moci svoje odpovědi upravit. Jste si jistí?
+          back: Zpět
+          continue: Pokračovat
+          submit: Odeslat
+      user_answers_serializer:
+        body: Odpověď
+        completion: Dokončení
+        created_at: Zodpovězeno
+        id: ID odpovědi
+        ip_hash: IP Hash
+        question: Otázka
+        registered: Registrováno
+        session_token: Uživatelský identifikátor
+        unregistered: Neregistrováno
+        user_status: Uživatelský status

@@ -1,0 +1,56 @@
+---
+cs:
+  activemodel:
+    attributes:
+      dummy_resource:
+        created_at: Vytvořeno
+        decidim_scope_id: Rozsah
+        field: Můj obor
+        start_date: Datum zahájení
+        title: Název
+        translatable_text: Přeložitelný text
+        updated_at: Aktualizováno
+  decidim:
+    components:
+      dummy:
+        settings:
+          global:
+            readonly_attribute: Atribut „pouze pro čtení“
+            test: Test A
+            test_choices:
+              a: Možnost A
+              b: Možnost B
+              c: Možnost C
+          step:
+            endorsements_blocked: Schvalování blokováno
+            endorsements_enabled: Schvalování povoleno
+            readonly_step_attribute: Atribut kroku „pouze pro čtení“
+    dummy:
+      admin:
+        exports:
+          dummies: Testovací soubory
+    gamification:
+      badges:
+        test:
+          conditions: Použijte testovací prostředí decidim.
+          description: Účastníci získají tento odznak vytvářením testů.
+          description_another: 'Počet testů, které tento účastník vytvořil: %{score}.'
+          description_own: 'Počet testů, které jste vytvořili: %{score}.'
+          name: Testy
+          next_level_in: 'Pokud se chcete dostat na další úroveň, potřebujete vytvořit ještě tento počet testů: %{score}.'
+          unearned_another: Tento účastník zatím nevytvořil žádné testy.
+          unearned_own: Zatím jste nevytvořili žádné testy.
+    pages:
+      home:
+        statistics:
+          bar: Bar
+          dummies_count_high: Vysoký počet testovacích souborů
+          dummies_count_medium: Střední počet testovacích souborů
+          foo: Foo
+    participatory_processes:
+      statistics:
+        dummies_count_high: Vysoký
+        dummies_count_medium: Střední
+    resource_links:
+      test_link:
+        dummy_resource_dummy: Související testovací soubor

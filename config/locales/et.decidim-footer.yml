@@ -1,0 +1,80 @@
+---
+et:
+  decidim:
+    footer_links:
+      common:
+        items:
+          about_this_site: Selle saidi kohta
+          cookies: Küpsised
+          language_policy: Keelepoliitika
+          legal_notice: Õigusteave
+          sitemap: Sisujuht
+      contact_the_eu:
+        items:
+          call_us: Helistage meile <a href="tel:0080067891011">00 800 6 7 8 9 10 11</a>
+          contact_form: Kirjutage meile <a href="https://europa.eu/european-union/contact/write-to-us_et">kontaktvormi vahendusel</a>
+          meet_us: Külastage meid <a href="https://europa.eu/european-union/contact/meet-us_et">kohalikus ELi esinduses</a>
+          other_telephone: Kasutage ka muid <a href="https://europa.eu/european-union/contact/call-us_et">helistamisvõimalusi</a>
+        title: Võtke ELiga ühendust
+      eu_institution:
+        items:
+          agencies:
+            label: Asutused ja ametid
+            url: https://europa.eu/european-union/about-eu/agencies_et
+          central_bank:
+            label: Euroopa Keskpank (EKP)
+            url: https://www.ecb.europa.eu/home/languagepolicy/html/index.et.html
+          commission:
+            label: Euroopa Komisjon
+            url: https://ec.europa.eu/commission/index_et
+          council:
+            label: Euroopa Ülemkogu
+            url: http://www.consilium.europa.eu/et/european-council/
+          council_eu:
+            label: Euroopa Liidu Nõukogu
+            url: http://www.consilium.europa.eu/et/home/
+          court_of_auditors:
+            label: Euroopa Kontrollikoda
+            url: http://www.eca.europa.eu/et
+          court_of_justice:
+            label: Euroopa Liidu Kohus
+            url: http://curia.europa.eu/jcms/jcms/j_6/et/
+          data_protection_supervisor:
+            label: Euroopa Andmekaitseinspektor
+            url: https://secure.edps.europa.eu/EDPSWEB/edps/EDPS?lang=et
+          dpb:
+            label: Euroopa Andmekaitsenõukogu
+            url: https://edpb.europa.eu/edpb_et
+          economic_social_committee:
+            label: Euroopa Majandus- ja Sotsiaalkomitee
+            url: http://www.eesc.europa.eu/?i=portal.et.home
+          eu_regional_comittee:
+            label: Euroopa Regioonide Komitee
+            url: https://cor.europa.eu/et
+          external_action_service:
+            label: Euroopa välisteenistus (EEAS)
+            url: http://eeas.europa.eu/index_et.htm
+          investment_bank:
+            label: Euroopa Investeerimispank
+            url: https://www.eib.org/en/index.htm
+          ombudsman:
+            label: Euroopa Ombudsman
+            url: https://www.ombudsman.europa.eu/et/home
+          parliament:
+            label: Euroopa Parlament
+            url: http://www.europarl.europa.eu/portal/et
+          pou:
+            label: Euroopa Liidu Väljaannete Talitus
+            url: https://op.europa.eu/et/home
+          pso:
+            label: Euroopa Personalivaliku Amet
+            url: https://epso.europa.eu/home_et
+        title: ELi institutsioonid
+      social_media:
+        items:
+          search_channels:
+            label: Kasutage ELi sotsiaalmeedia kanaleid
+            url: https://europa.eu/european-union/contact/social-networks_et
+        title: Leidke sotsiaalmeediakonto
+    footer_menu:
+      organization: Euroopa tuleviku konverents

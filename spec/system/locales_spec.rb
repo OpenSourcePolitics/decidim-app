@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Locales", type: :system do
   describe "switching locales" do
-    let(:organization) { create(:organization, available_locales: %w(en fr)) }
+    let(:organization) { create(:organization, available_locales: %w(fr en bg cs da el et ga hr it mt sl)) }
 
     before do
       switch_to_host(organization.host)
@@ -23,6 +23,9 @@ describe "Locales", type: :system do
       within_language_menu do
         expect(page).to have_content("Français")
         expect(page).to have_content("English")
+        expect(page).to have_content("Italiano")
+        expect(page).to have_content("Malti")
+        expect(page).to have_content("hrvatski")
         expect(page).to have_no_content("Castellano")
       end
     end
@@ -73,6 +76,14 @@ describe "Locales", type: :system do
       it "uses the user's locale" do
         expect(page).to have_content("Accueil")
       end
+    end
+
+    it "works with newly added locales" do
+      within_language_menu do
+        click_link "dansk"
+      end
+
+      expect(page).to have_content("Tilmeld")
     end
   end
 end

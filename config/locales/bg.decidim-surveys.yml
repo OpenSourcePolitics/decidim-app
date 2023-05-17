@@ -1,0 +1,61 @@
+---
+bg:
+  activemodel:
+    models:
+      decidim/surveys/closed_survey_event: Проучването приключи
+      decidim/surveys/opened_survey_event: Проучването започна
+  activerecord:
+    models:
+      decidim/surveys/survey:
+        one: Проучване
+        other: Проучвания
+      decidim/surveys/survey_answer:
+        one: Отговор
+        other: Отговори
+  decidim:
+    components:
+      surveys:
+        actions:
+          answer: Отговор
+        name: Проучване
+        settings:
+          global:
+            announcement: Съобщение
+            clean_after_publish: Изтриване на отговорите при публикуване на проучването
+          step:
+            allow_answers: Разрешаване на отговори
+            allow_unregistered: Разрешаване на нерегистрирани потребители да отговарят на въпросите в проучването
+            allow_unregistered_help: Ако тази функция е активна, няма да се изисква влизане в профила за отговаряне на въпросите в проучването. Това може да доведе до извеждането на ненадеждни данни с лошо качество, като наред с това проучването ще бъде по-уязвимо на автоматизирани атаки. Бъдете внимателни!
+            announcement: Съобщение
+    events:
+      surveys:
+        survey_closed:
+          email_intro: Проучването %{resource_title} в(ъв) %{participatory_space_title} беше затворено.
+          email_outro: Получавате това известие, защото следвате %{participatory_space_title}. Можете да престанете да получавате известия, като щракнете на предходната връзка.
+          email_subject: Приключи проучване в(ъв) %{participatory_space_title}
+          notification_title: Проучването <a href="%{resource_path}">%{resource_title}</a> в(ъв) <a href="%{participatory_space_url}">%{participatory_space_title}</a> приключи.
+        survey_opened:
+          email_intro: 'Проучването %{resource_title} в(ъв) %{participatory_space_title} вече е отворено. Можете да участвате в него от тази страница:'
+          email_outro: Получавате това известие, защото следвате %{participatory_space_title}. Можете да престанете да получавате известия, като щракнете на предходната връзка.
+          email_subject: Ново проучване в(ъв) %{participatory_space_title}
+          notification_title: Проучването <a href="%{resource_path}">%{resource_title}</a> в(ъв) <a href="%{participatory_space_url}">%{participatory_space_title}</a> вече е отворено.
+    metrics:
+      survey_answers:
+        description: Брой на проучванията с отговори от участници
+        object: отговори в проучвания
+        title: Отговори в проучвания
+    surveys:
+      admin:
+        exports:
+          survey_user_answers: Отговори на участник в проучване
+        surveys:
+          update:
+            invalid: Възникна проблем при запазването на проучването.
+            success: Проучването беше запазено успешно.
+      last_activity:
+        new_survey_at_html: "<span>Ново проучване в %{link}</span>"
+      surveys:
+        answer:
+          invalid: Възникна проблем при попълването на отговорите в проучването.
+          spam_detected: Възникна проблем при попълването на отговорите във формуляра. Навярно бяхте прекалено бързи, бихте ли опитали отново?
+          success: Отговорите за проучването са попълнени успешно.

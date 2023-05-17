@@ -1,0 +1,239 @@
+---
+bg:
+  activemodel:
+    attributes:
+      close_meeting:
+        proposals: Идеи
+      constraint:
+        subject_id: Тема
+      meeting:
+        cofe_charter_html: Съгласен съм с <a href="%{url}" target="_blank">хартата</a> на Конференцията за бъдещето на Европа
+        online_meeting_url: Интернет линк за срещата
+        registration_url: Интернет линк за регистрация
+      user:
+        language_preference: Езикови предпочитания
+        user_name: Потребителско име
+  activerecord:
+    models:
+      decidim/proposals/proposal/other: Идея
+  date:
+    abbr_month_names:
+    - 
+    - Ян
+    - Фев
+    - Март
+    - Апр
+    - Май
+    - Юни
+    - Юли
+    - Авг
+    - Сеп
+    - Окт
+    - Ноем
+    - Дек
+    month_names:
+    - 
+    - Януари
+    - Февруари
+    - Март
+    - Април
+    - Май
+    - Юни
+    - юли
+    - Август
+    - Септември
+    - Октомври
+    - Ноември
+    - Декември
+  decidim:
+    account:
+      show:
+        available_locales_helper: Езикът, на който ще получавате имейл известия.
+    comments:
+      comments:
+        create:
+          quota_exceeded: Превишен лимит
+        delete:
+          error: Неуспешно изтриване на коментара.
+        update:
+          error: Възникна проблем при актуализирането на коментара.
+    components:
+      comment:
+        confirm_destroy: Наистина ли искате да изтриете този коментар?
+        delete: Изтриване
+        deleted_at: Коментарът е изтрит на %{date}
+        edit: Редактиране
+        edited: Редактирано
+      edit_comment_modal_form:
+        close: Затваряне
+        form:
+          body:
+            label: Коментар
+            placeholder: Какво мислите за това?
+          submit: Изпращане
+        title: Редактирайте своя коментар
+      meetings:
+        settings:
+          global:
+            cofe_charter_url: URL адрес на хартата на CoFE
+    events:
+      reports:
+        resource_hidden:
+          notification_title: 'Модераторът премахна %{resource_type} по следните причини %{report_reasons}.</br><i>%{resource_content}</i></br>Вж. обяснение по-долу:'
+    first_created_meeting_mailer:
+      notify:
+        boost_instructions: Искаме да гарантираме, че всеки европеец, който желае това, може да участва в дебата за общото ни бъдеще. Приканваме Ви също така да разпространите информацията и да препоръчате на своите приятели, близки и други съграждани да се регистрират в платформата, да присъстват на събитията и да изразяват мнението си.
+        email_greeting: Уважаеми %{user_name},
+        email_intro: Благодарим за проявения интерес и участието Ви в Конференцията за бъдещето на Европа. С удоволствие Ви информираме, че Вашето събитие %{link} беше публикувано успешно и вече е видимо за гражданите в цяла Европа.
+        email_outro: Ние истински ценим Вашия интерес и участие в Конференцията за бъдещето на Европа. Не се колебайте да се свържете с нас, ако имате въпроси!
+        email_signature: С уважение,<br>от модераторите.
+        more_info: 'За подробности, моля, вижте "%{title}": %{link}'
+        subject: Благодарим, че създадохте събитие и участвахте в конференцията за бъдещето на Европа.
+    first_published_proposal_mailer:
+      notify:
+        boost_instructions: 'Споделите я в социалните медии и я разгласете:'
+        email_greeting: Уважаеми %{user_name},
+        email_intro: Благодарим за проявения интерес и участието Ви в Конференцията за бъдещето на Европа. С удоволствие Ви информираме, че Вашата идея %{link} беше публикувана успешно и вече е видима за гражданите в цяла Европа.
+        email_outro: Искаме да гарантираме, че всеки европеец, който желае това, може да участва в дебата за общото ни бъдеще. Приканваме Ви също така да разпространите информацията и да препоръчате на своите приятели, близки и други съграждани да се регистрират в платформата, да присъстват на събитията и да изразяват мнението си.
+        email_signature: С уважение,<br>от модераторите.
+        share_facebook: Сподели във Facebook
+        share_telegram: Сподели в Telegram
+        share_twitter: Сподели в Twitter
+        share_whats_app: Сподели в WhatsApp
+        subject: Благодарим, че представихте своя идея и участвахте в Конференцията за бъдещето на Европа.
+    forms:
+      meetings:
+        attendees_count_help_text: Не забравяйте да посочите общия брой участници в събитието. Важно е да знаем колко хора участват физически, онлайн или на смесен принцип.
+    gamification:
+      badges:
+        accepted_proposals:
+          conditions:
+            '0': Изберете интересна за Вас област на участие с активирано представяне на идеи
+            '1': Старайте се да представяте осъществими идеи. Така е по-вероятно те да бъдат приети.
+        attended_meetings:
+          conditions:
+            '0': Регистрирайте се за събитията, в които искате да участвате
+        proposal_votes:
+          conditions:
+            '0': Разгледайте и помислете и над чужди идеи
+            '1': Подкрепете идеите, които Ви допадат или представляват интерес за Вас
+        proposals:
+          conditions:
+            '0': Изберете интересна за Вас област на участие с активирано представяне на идеи
+            '1': Представи нова идея
+    meetings:
+      actions:
+        hide: Скрий
+        unhide: Покажи
+      admin:
+        meetings:
+          edit:
+            title: Редактиране на събитие
+          form:
+            select_a_meeting_type: Моля, изберете вид събитие
+      directory:
+        meetings:
+          index:
+            subheading1: Изразете и споделете идеите си онлайн и в срещи на живо близо до вас.
+      extra:
+        filters:
+          all: Всички
+          closed: Събития с доклад
+          meeting_report: Доклади за събитие
+          pending: Събития с предстоящ доклад
+      last_activity:
+        meeting_updated_at_html: "<span>Актуализирано събитие на адрес: %{link}</span>"
+      meeting_closes:
+        edit:
+          close: Приключи събитието
+          title: Приключи събитието
+      meetings:
+        filters:
+          activity: моята дейност
+          all: Всички
+          my_meetings: Моите събития
+          type: Видове прояви
+          type_values:
+            all: Всички
+            hybrid: Смесени
+            online: Онлайн
+        form:
+          select_a_meeting_type: Моля, изберете вид среща
+          select_a_registration_type: Моля, изберете вид регистрация
+        index:
+          click_here: Щракни тук
+        online_meeting_link:
+          online_event: Посетете уебсайта на събитието
+        show:
+          close_meeting: Приключи събитието
+          with_meeting_report: Наличен доклад от събитието
+      models:
+        meeting:
+          fields:
+            citizen_meeting: Събитие за граждани
+            group_meeting: Събитие за група
+      registration_type:
+        on_different_platform: На друга платформа
+        registration_disabled: Регистрацията е изключена
+      type_of_meeting:
+        hybrid: И двете
+        in_person: Присъствени
+        online: Онлайн
+    pages:
+      tabbed:
+        unfold: Разгъни
+    participatory_spaces:
+      highlighted_meetings:
+        see_all_button: Преглед на всички
+        see_all_count: "(виж всички%{count})"
+      highlighted_proposals:
+        see_all_button: Преглед на всички
+        see_all_count: "(виж всички%{count})"
+    proposals:
+      content_blocks:
+        highlighted_proposals:
+          proposals: Идеи
+      proposals:
+        edit:
+          gallery_legend: "(По избор) Добавяне на изображение към картата на идеята"
+        index:
+          heading: Споделете с нас своя идея
+          subheading1: Можете да споделяте своите идеи, но можете и да разгледате идеи от цяла Европа. Участвайте в дискусията, като оставите коментар или гласувате за идеи, които харесвате, така че повече хора да ги открият.
+        preview:
+          announcement_body: Имате възможност да прегледате и да внесете промени в идеята си. Щом идеята Ви е готова, щракнете върху „Публикуване“ и тя ще се появи в платформата.
+          announcement_title: "<b>Има още една последна стъпка, която трябва да изпълните, преди да можете да публикувате идеята си.</b>"
+    shared:
+      flag_user_modal:
+        does_not_belong: Разпространява съдържание за незаконни действия, заплахи за самоубийство, лична информация или друго съдържание, което считате за неподходящо.
+        offensive: Разпространява съдържание за дискриминация на расова основа, дискриминация на полова основа, клевети, лични нападки, заплахи за убийство, заплахи за самоубийство или каквато и да е форма на изказвания, проповядващи вражда и омраза.
+        spam: Разпространява съдържание за кликбейт, реклами, измами или скрипт ботове.
+    statistics:
+      answers_count: Отговори
+      comments_count: Забележки
+      debates_count: Дебати
+      endorsements_count: Брой препоръки
+      followers_count: Последователи
+      headline: Какво се случва по тази тема?
+      meetings_count: Прояви
+      no_stats: Все още няма статистика.
+      orders_count: Подкрепяния
+      pages_count: Страници
+      participants_count: Участници
+      processes_count: Теми
+      projects_count: Проекти
+      proposals_count: Идеи
+      results_count: Резултати
+      supports_count: Подкрепяния
+      surveys_count: Проучвания
+      users_count: Участници
+  layouts:
+    decidim:
+      language_chooser:
+        close: Затваряне
+        eu_languages: Официални езици на ЕС
+        select_your_language: Изберете език
+      user:
+        logged_in: Влязъл в системата
+        logged_in_as: Влязъл като %{user}
+      wrapper:
+        unfold: Разгъни

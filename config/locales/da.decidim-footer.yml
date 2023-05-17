@@ -1,0 +1,80 @@
+---
+da:
+  decidim:
+    footer_links:
+      common:
+        items:
+          about_this_site: Om dette websted
+          cookies: Cookies
+          language_policy: Sprogpolitik
+          legal_notice: Juridisk meddelelse
+          sitemap: Oversigt
+      contact_the_eu:
+        items:
+          call_us: Ring til os på <a href="tel:0080067891011">00 800 6 7 8 9 10 11</a>
+          contact_form: Skriv til os via <a href="https://europa.eu/european-union/contact/write-to-us_da">kontaktformularen</a>
+          meet_us: Mød os på et <a href="https://europa.eu/european-union/contact/meet-us_da">lokalt EU-kontor</a>
+          other_telephone: Brug andre muligheder for <a href="https://europa.eu/european-union/contact/call-us_da">telefonhenvendelse</a>
+        title: Kontakt EU
+      eu_institution:
+        items:
+          agencies:
+            label: Agenturer
+            url: https://europa.eu/european-union/about-eu/agencies_da
+          central_bank:
+            label: Den Europæiske Centralbank (ECB)
+            url: https://www.ecb.europa.eu/home/languagepolicy/html/index.da.html
+          commission:
+            label: Europa-Kommissionen
+            url: https://ec.europa.eu/commission/index_da
+          council:
+            label: Det Europæiske Råd
+            url: http://www.consilium.europa.eu/da/european-council/
+          council_eu:
+            label: Rådet for Den Europæiske Union
+            url: http://www.consilium.europa.eu/da/home/
+          court_of_auditors:
+            label: Den Europæiske Revisionsret
+            url: http://www.eca.europa.eu/da
+          court_of_justice:
+            label: Den Europæiske Unions Domstol (EU-Domstolen)
+            url: http://curia.europa.eu/jcms/jcms/j_6/da/
+          data_protection_supervisor:
+            label: Den Europæiske Tilsynsførende for Databeskyttelse (EDPS)
+            url: https://secure.edps.europa.eu/EDPSWEB/edps/EDPS?lang=da
+          dpb:
+            label: Det Europæiske Databeskyttelsesråd
+            url: https://edpb.europa.eu/edpb_da
+          economic_social_committee:
+            label: Det Europæiske Økonomiske og Sociale Udvalg (EØSU)
+            url: http://www.eesc.europa.eu/?i=portal.da.home
+          eu_regional_comittee:
+            label: Det Europæiske Regionsudvalg
+            url: https://cor.europa.eu/da
+          external_action_service:
+            label: Tjenesten for EU's Optræden Udadtil (EU-Udenrigstjenesten)
+            url: http://eeas.europa.eu/index_da.htm
+          investment_bank:
+            label: Den Europæiske Investeringsbank (EIB)
+            url: https://www.eib.org/en/index.htm
+          ombudsman:
+            label: Den europæiske ombudsmand
+            url: https://www.ombudsman.europa.eu/da/home
+          parliament:
+            label: Europa-Parlamentet
+            url: http://www.europarl.europa.eu/portal/da
+          pou:
+            label: Den Europæiske Unions Publikationskontor
+            url: https://op.europa.eu/da/home
+          pso:
+            label: Det Europæiske Personaleudvælgelseskontor
+            url: https://epso.europa.eu/home_da
+        title: EU-institutionerne
+      social_media:
+        items:
+          search_channels:
+            label: Find EU på de sociale medier
+            url: https://europa.eu/european-union/contact/social-networks_da
+        title: Find en konto på de sociale medier
+    footer_menu:
+      organization: Konferencen om Europas fremtid

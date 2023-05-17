@@ -1,0 +1,249 @@
+---
+sl:
+  activemodel:
+    attributes:
+      close_meeting:
+        proposals: Zamisli
+      constraint:
+        subject_id: Tema
+      demographic:
+        current_occupations: Trenutna zaposlitev
+      meeting:
+        cofe_charter_html: Strinjam se <a href="%{url}" target="_blank">z listino</a> Konference o prihodnosti Evrope.
+        online_meeting_url: URL sestanka prek spleta
+        registration_url: URL za registracijo
+      user:
+        eu_login_department_number: Oddelek
+        eu_login_organisation: Organizacija
+        language_preference: Izbira jezika
+        user_name: Uporabniško ime
+  activerecord:
+    models:
+      decidim/proposals/proposal/other: Zamisel
+  date:
+    abbr_month_names:
+    - 
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - Maj
+    - Jun
+    - Jul
+    - Avg
+    - Sep
+    - Okt
+    - Nov
+    - Dec
+    month_names:
+    - 
+    - Januar
+    - Februar
+    - Marec
+    - April
+    - Maj
+    - Junij
+    - Julij
+    - August
+    - September
+    - Oktober
+    - November
+    - December
+  decidim:
+    account:
+      show:
+        available_locales_helper: Jezik, v katerem boste prejemali e-poštna obvestila.
+    comments:
+      comments:
+        create:
+          quota_exceeded: Kvota je presežena.
+        delete:
+          error: Komentarja ni bilo mogoče izbrisati.
+        update:
+          error: Pri posodobitvi komentarja se je pojavila težava.
+    components:
+      comment:
+        confirm_destroy: Ali res želite izbrisati ta komentar?
+        delete: Izbriši
+        deleted_at: Komentar je izbrisan %{date}
+        edit: Uredi
+        edited: Urejeno
+      edit_comment_modal_form:
+        close: Zapri
+        form:
+          body:
+            label: Komentar
+            placeholder: Kaj menite o tem?
+          submit: Pošlji
+        title: Uredite svoj komentar
+      meetings:
+        settings:
+          global:
+            cofe_charter_url: URL listine CoFE
+    events:
+      reports:
+        resource_hidden:
+          notification_title: 'Moderator je odstranil vaš prispevek %{resource_type}, ker je bil prijavljen zaradi: %{report_reasons}.</br><i>%{resource_content}</i></br>Pojasnilo:'
+    first_created_meeting_mailer:
+      notify:
+        boost_instructions: Vsakemu Evropejcu, ki želi sodelovati v razpravi o naši skupni prihodnosti, želimo omogočiti, da to lahko stori. Zato vas vabimo, da širite besedo in priporočate svojim prijateljem, družinskim članom in drugim sodržavljanom, da se registrirajo na platformi, se udeležijo dogodkov in izrazijo svoje mnenje.
+        email_greeting: Spoštovani/Spoštovana %{user_name},
+        email_intro: Zahvaljujemo se vam za zanimanje za Konferenco o prihodnosti Evrope in sodelovanje na njej. Z veseljem vas obveščamo, da je bil vaš dogodek %{link} uspešno objavljen in je zdaj viden državljanom iz vse Evrope.
+        email_outro: Zelo cenimo vaše zanimanje za konferenco o prihodnosti Evrope in sodelovanje na njej. Če imate kakršna koli vprašanja, se lahko kadar koli obrnete na nas.
+        email_signature: S spoštovanjem,<br>moderatorska skupina
+        more_info: 'Več informacij je na voljo v "%{title}": %{link}'
+        subject: zahvaljujemo se vam, da ste z ustvarjenjem dogodka prispevali h Konferenci o prihodnosti Evrope.
+    first_published_proposal_mailer:
+      notify:
+        boost_instructions: 'Povečajte prepoznavnost svoje zamisli, tako da jo delite na družbenih omrežjih:'
+        email_greeting: Spoštovani/Spoštovana %{user_name},
+        email_intro: Zahvaljujemo se vam za zanimanje za Konferenco o prihodnosti Evrope in sodelovanje na njej. Z veseljem vas obveščamo, da je bila vaša zamisel %{link} uspešno objavljena in je zdaj vidna državljanom iz vse Evrope.
+        email_outro: Vsakemu Evropejcu, ki želi sodelovati v razpravi o naši skupni prihodnosti, želimo omogočiti, da to lahko stori. Zato vas vabimo, da širite besedo in priporočate svojim prijateljem, družinskim članom in drugim sodržavljanom, da se registrirajo na platformi, se udeležijo dogodkov in izrazijo svoje mnenje.
+        email_signature: S spoštovanjem,<br>moderatorska skupina
+        share_facebook: Deli na Facebooku
+        share_telegram: Deli na Telegramu
+        share_twitter: Deli na Twitterju
+        share_whats_app: Deli na WhatsAppu
+        subject: zahvaljujemo se vam, da ste s predložitvijo zamisli prispevali h Konferenci o prihodnosti Evrope.
+    forms:
+      meetings:
+        attendees_count_help_text: Ne pozabite navesti skupnega števila udeležencev dogodka. Ne glede na to, ali se ga udeležijo osebno, mešano ali spletno, je pomembno, da vemo, koliko ljudi je vključenih.
+    gamification:
+      badges:
+        accepted_proposals:
+          conditions:
+            '0': Izberite prostor za sodelovanje, ki vas zanima in v katerem je oddaja zamisli omogočena.
+            '1': Poskusite posredovati izvedljive zamisli. Tako bo bolj verjetno, da bodo sprejete.
+        attended_meetings:
+          conditions:
+            '0': Registrirajte se za dogodke, ki se jih želite udeležiti.
+        proposal_votes:
+          conditions:
+            '0': Brskajte in si vzemite nekaj časa za branje zamisli drugih ljudi.
+            '1': Podprite zamisli, ki so vam všeč ali se vam zdijo zanimive.
+        proposals:
+          conditions:
+            '0': Izberite prostor za sodelovanje, ki vas zanima in v katerem je oddaja zamisli omogočena.
+            '1': Ustvari novo zamisel
+    meetings:
+      actions:
+        hide: Skrij
+        unhide: Prikaži
+      admin:
+        meetings:
+          edit:
+            title: Uredi dogodek
+          form:
+            select_a_meeting_type: Izberite vrsto sestanka
+      directory:
+        meetings:
+          index:
+            subheading1: Izrazite svoje mnenje in predstavite svoje zamisli na spletnih in prezenčnih dogodkih, ki potekajo v vaši bližini.
+      extra:
+        filters:
+          all: Vsi
+          closed: Dogodki s poročilom
+          meeting_report: Poročila o dogodku
+          pending: Dogodki še brez poročila
+      last_activity:
+        meeting_updated_at_html: "<span>Dogodek posodobljen ob %{link}</span>"
+      meeting_closes:
+        edit:
+          close: Zapri dogodek
+          title: Zapri dogodek
+      meetings:
+        filters:
+          activity: Moja dejavnost
+          all: Vse
+          my_meetings: Moja srečanja
+          type: Vrste dogodkov
+          type_values:
+            all: Vsi
+            hybrid: Oboje
+            online: Spletni
+        form:
+          select_a_meeting_type: Izberite vrsto sestanka.
+          select_a_registration_type: Izberite vrsto prijave
+        index:
+          click_here: Kliknite tu
+        online_meeting_link:
+          online_event: Pojdi na spletno stran dogodka
+        show:
+          close_meeting: Zapri dogodek
+          with_meeting_report: Poročilo o dogodku na voljo
+      models:
+        meeting:
+          fields:
+            citizen_meeting: Državljanski dogodek
+            group_meeting: Skupinski dogodek
+      registration_type:
+        on_different_platform: Na drugi platformi
+        registration_disabled: Registracija je onemogočena.
+      type_of_meeting:
+        hybrid: Oboje
+        in_person: V živo
+        online: Prek spleta
+    pages:
+      tabbed:
+        unfold: Razgrni
+    participatory_spaces:
+      highlighted_meetings:
+        see_all_button: Prikaži vse
+        see_all_count: "(prikaži vse %{count})"
+      highlighted_proposals:
+        see_all_button: Prikaži vse
+        see_all_count: "(prikaži vse %{count})"
+    proposals:
+      content_blocks:
+        highlighted_proposals:
+          proposals: Zamisli
+      proposals:
+        edit:
+          gallery_legend: "(neobvezno) Dodaj sliko na vizitko zamisli"
+        index:
+          heading: Delite z nami svojo zamisel
+          subheading1: Lahko delite lastne zamisli, pa tudi najdete druge zamisli iz vse Evrope. Pridružite se razpravi s komentarjem ali glasovanjem za zamisli, ki so vam všeč, tako da jih bo lahko našlo več ljudi.
+        preview:
+          announcement_body: Svojo zamisel lahko pregledate in jo po potrebi spremenite. Ko je zamisel pripravljena, kliknite »Pošlji«, da se prikaže na platformi.
+          announcement_title: "<b>Preden lahko objavite zamisel, vas čaka še zadnji korak.</b>"
+    shared:
+      flag_user_modal:
+        does_not_belong: Spodbuja nezakonito dejavnost, grožnje s samomorom, osebne podatke ali kaj drugega, kar po vašem mnenju ne spada sem.
+        offensive: Spodbuja rasizem, seksizem, obrekovanje, osebne napade, grožnje s smrtjo, prošnje za samomor ali kakršne koli oblike sovražnega govora.
+        spam: Spodbuja klikvabe, oglaševanje, prevare ali skriptne bote.
+    statistics:
+      answers_count: Odgovori
+      comments_count: Komentarji
+      debates_count: Razprave
+      endorsements_count: Izrazi podpore
+      followers_count: Sledilci
+      headline: Statistika
+      meetings_count: Dogodki
+      no_stats: Trenutno še ni statistike.
+      orders_count: Podpora
+      pages_count: Strani
+      participants_count: Udeleženci
+      processes_count: Teme
+      projects_count: Projekti
+      proposals_count: Zamisli
+      results_count: Rezultati
+      supports_count: Podpora
+      surveys_count: Raziskave
+      users_count: Udeleženci
+    verifications:
+      dummy_authorization:
+        extra_explanation:
+          postal_codes:
+            few: 'Udeležba je omejena na udeležence s katero koli od naslednjih poštnih številk: %{postal_codes}.'
+            two: 'Udeležba je omejena na udeležence s katero koli od naslednjih poštnih številk: %{postal_codes}.'
+  layouts:
+    decidim:
+      language_chooser:
+        close: Zapri
+        eu_languages: Uradni jeziki EU
+        select_your_language: Izberite jezik
+      user:
+        logged_in: Prijavljeni
+        logged_in_as: Prijavljeni kot %{user}
+      wrapper:
+        unfold: Razgrni

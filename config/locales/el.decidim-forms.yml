@@ -1,0 +1,168 @@
+---
+el:
+  activemodel:
+    attributes:
+      answer:
+        body: Απάντηση
+      question:
+        max_choices: Μέγιστος αριθμός επιλογών
+        question_type: Τύπος
+      questionnaire_question:
+        mandatory: Υποχρεωτική
+    errors:
+      models:
+        answer:
+          attributes:
+            choices:
+              missing: δεν έχουν ολοκληρωθεί
+              too_many: είναι πάρα πολλές
+        questionnaire:
+          request_invalid: Παρουσιάστηκε σφάλμα κατά την επεξεργασία του αιτήματος. Δοκιμάστε ξανά
+  decidim:
+    forms:
+      admin:
+        models:
+          components:
+            description: Περιγραφή
+            tos: Όροι παροχής υπηρεσιών
+        questionnaires:
+          actions:
+            back: Επιστροφή στις ερωτήσεις
+            show: Εμφάνιση απαντήσεων
+          answer_option:
+            answer_option: Επιλογή απάντησης
+            free_text: Ελεύθερο κείμενο
+            remove: Κατάργηση
+            statement: Δήλωση
+          answers:
+            actions:
+              back: Επιστροφή στις απαντήσεις
+              export: Εξαγωγή
+              show: Εμφάνιση απαντήσεων
+            empty: Δεν υπάρχουν απαντήσεις ακόμη
+            export:
+              answer:
+                title: 'Απόκριση #%{number}'
+            index:
+              title: "%{total} συνολικές απαντήσεις"
+            show:
+              title: 'Απάντηση #%{number}'
+          display_condition:
+            answer_option: Επιλογή απάντησης
+            condition_question: Ερώτηση
+            condition_type: Κατάσταση
+            condition_types:
+              answered: Απαντήθηκε
+              equal: Ισούται
+              match: Περιλαμβάνει κείμενο
+              not_answered: Δεν απαντήθηκε
+              not_equal: Δεν ισούται
+            condition_value: Περιλαμβανόμενο κείμενο
+            display_condition: Συνθήκη εμφάνισης
+            mandatory: Αυτή η συνθήκη πρέπει να ικανοποιείται πάντα ανεξάρτητα από την κατάσταση άλλων συνθηκών
+            remove: Κατάργηση
+            save_warning: Θυμηθείτε να αποθηκεύσετε τη φόρμα πριν διαμορφώσετε τις συνθήκες εμφάνισης
+            select_answer_option: Επιλέξτε δυνατότητα απάντησης
+            select_condition_question: Επιλέξτε ερώτηση
+            select_condition_type: Επιλογή τύπου συνθήκης
+          edit:
+            save: Αποθήκευση
+            title: Επεξεργασία ερωτηματολογίου
+          form:
+            add_question: Προσθήκη ερώτησης
+            add_separator: Προσθήκη διαχωριστικού
+            already_answered_warning: Η φόρμα έχει ήδη απαντηθεί από ορισμένους χρήστες, επομένως δεν μπορείτε να τροποποιήσετε τις ερωτήσεις της.
+            collapse: Σύμπτυξη όλων των ερωτήσεων
+            expand: Ανάπτυξη όλων των ερωτήσεων
+            preview: Προεπισκόπηση
+            title: Επεξεργασία φόρμας
+            unpublished_warning: Η φόρμα δεν έχει δημοσιευτεί. Μπορείτε να τροποποιήσετε τις ερωτήσεις της, αλλά εάν το κάνετε αυτό, θα διαγραφούν οι τρέχουσες απαντήσεις.
+          matrix_row:
+            matrix_row: Γραμμή
+            remove: Κατάργηση
+            statement: Δήλωση
+          question:
+            add_answer_option: Προσθήκη επιλογής απάντησης
+            add_display_condition: Προσθήκη συνθήκης εμφάνισης
+            add_display_condition_info: Αποθηκεύστε τη φόρμα για να διαμορφώσετε συνθήκες εμφάνισης
+            add_matrix_row: Προσθήκη γραμμής
+            any: Οποιοδήποτε
+            collapse: Σύμπτυξη
+            description: Περιγραφή
+            down: Κάτω
+            expand: Επέκταση
+            question: Ερώτηση
+            remove: Κατάργηση
+            statement: Δήλωση
+            up: Επάνω
+          separator:
+            down: Κάτω
+            remove: Κατάργηση
+            separator: Διαχωριστικό
+            up: Επάνω
+          update:
+            invalid: Παρουσιάστηκε πρόβλημα κατά την αποθήκευση της φόρμας.
+            success: Οι φόρμες αποθηκεύτηκαν με επιτυχία.
+      errors:
+        answer:
+          body: Το σώμα δεν μπορεί να είναι κενό
+      files:
+        extension_whitelist: 'Αποδεκτές μορφές:'
+      images:
+        dimensions_info: 'Σε αυτήν την εικόνα θα γίνουν τα εξής:'
+        processors:
+          resize_and_pad: Αλλαγή μεγέθους και προσθήκη περιθωρίων εικόνας
+          resize_to_fit: Αλλαγή μεγέθους για προσαρμογή
+      question_types:
+        long_answer: Πλήρης απάντηση
+        matrix_multiple: Μήτρα (Πολλαπλή επιλογή)
+        matrix_single: Μήτρα (Μία επιλογή)
+        multiple_option: Πολλαπλή επιλογή
+        short_answer: Σύντομη απάντηση
+        single_option: Μία επιλογή
+        sorting: Ταξινόμηση
+      questionnaires:
+        answer:
+          invalid: Παρουσιάστηκε πρόβλημα κατά την απάντηση της φόρμας.
+          max_choices_alert: Επιλέχθηκαν πάρα πολλά στοιχεία
+          success: Η φόρμα απαντήθηκε με επιτυχία.
+        question:
+          max_choices: 'Ανώτατος αριθμός επιλογών: %{n}'
+        show:
+          answer_questionnaire:
+            anonymous_user_message: <a href="%{sign_in_link}">Συνδεθείτε με τον λογαριασμό σας</a> ή <a href="%{sign_up_link}">εγγραφείτε</a>, για να απαντήσετε τη φόρμα.
+            title: Απαντήστε τη φόρμα
+          current_step: Βήμα %{step}
+          of_total_steps: από %{total_steps}
+          questionnaire_answered:
+            body: Έχετε ήδη απαντήσει αυτήν τη φόρμα.
+            title: Έχει ήδη απαντηθεί
+          questionnaire_closed:
+            body: Η φόρμα είναι κλειστή και δεν μπορεί να απαντηθεί.
+            title: Η φόρμα είναι κλειστή
+          questionnaire_for_private_users:
+            body: Η φόρμα είναι διαθέσιμη μόνο για ιδιωτικούς χρήστες
+            title: Η φόρμα είναι κλειστή
+          questionnaire_js_disabled:
+            body: Ορισμένες από τις δυνατότητες αυτής της φόρμας θα απενεργοποιηθούν. Για να βελτιώσετε την εμπειρία σας, ενεργοποιήστε την JavaScript στο πρόγραμμα περιήγησης.
+            title: Η JavaScript είναι απενεργοποιημένη
+          questionnaire_not_published:
+            body: Αυτή η φόρμα δεν έχει δημοσιευτεί ακόμη.
+          tos_agreement: Με τη συμμετοχή σας αποδέχεστε τους όρους χρήσης της
+      step_navigation:
+        show:
+          are_you_sure: Δεν είναι δυνατή η αναίρεση αυτής της ενέργειας και δεν θα μπορείτε να επεξεργαστείτε τις απαντήσεις σας. Είστε βέβαιοι;
+          back: Πίσω
+          continue: Συνέχεια
+          submit: Υποβολή
+      user_answers_serializer:
+        body: Απάντηση
+        completion: Ολοκλήρωση
+        created_at: Απαντήθηκε στις
+        id: Αναγνωριστικό απάντησης
+        ip_hash: Κατακερματισμός IP
+        question: Ερώτηση
+        registered: Εγγεγραμμένος
+        session_token: Αναγνωριστικό χρήστη
+        unregistered: Μη εγγεγραμμένος
+        user_status: Κατάσταση χρήστη
