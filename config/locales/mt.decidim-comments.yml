@@ -1,0 +1,127 @@
+---
+mt:
+  activemodel:
+    models:
+      decidim/comments/comment_by_followed_user_event: Kumment
+      decidim/comments/comment_created_event: Kumment
+      decidim/comments/reply_created_event: Tweġiba għall-kumment
+      decidim/comments/user_group_mentioned_event: Semmi
+      decidim/comments/user_mentioned_event: Semmi
+  activerecord:
+    models:
+      decidim/comments/comment:
+        few: Kummenti
+        many: Kummenti
+        one: Kumment
+        other: Kummenti
+      decidim/comments/comment_vote:
+        few: Voti
+        many: Voti
+        one: Vot
+        other: Voti
+  decidim:
+    comments:
+      comments_count: Għadd ta’ kummenti
+      last_activity:
+        new_comment_at_html: "<span>Kumment ġdid fi %{link}</span>"
+      view: Ara
+      votes:
+        create:
+          error: Kien hemm problema biex jiġi vvutat il-kumment.
+    components:
+      add_comment_form:
+        account_message: <a href="%{sign_in_url}">Illoggja bil-kont tiegħek</a> jew <a href="%{sign_up_url}">irreġistra</a> biex iżżid il-kumment tiegħek.
+        form:
+          body:
+            label: Kumment
+            placeholder: Dan x'taħseb dwaru?
+          form_error: It-test huwa meħtieġ u ma jistax ikun itwal minn %{length} karattru.
+          submit: Ibgħat
+          user_group_id:
+            label: Ikkummenta bħala
+        opinion:
+          neutral: Newtrali
+        remaining_characters: 'Kemm fadal karattri: %{count}'
+        remaining_characters_1: 'Kemm fadal karattri: %{count}'
+        title: Powst
+      comment:
+        alignment:
+          against: Kontra
+          in_favor: Favur
+        deleted_user: Parteċipant imħassar
+        hide_replies: Aħbi t-tweġibiet
+        reply: Wieġeb
+        report:
+          action: Irrapporta
+          already_reported: Dan il-kontenut diġà ġie rrappurtat u se jiġi rivedut minn amministratur.
+          close: Agħlaq
+          description: Dan kontenut mhux xieraq?
+          details: Kummenti addizzjonali
+          reasons:
+            does_not_belong: Fiha attività illegali, theddid ta’ suwiċidju, informazzjoni personali, jew xi ħaġa oħra li ma taħsibx li tappartjeni hawnhekk.
+            offensive: Fih razziżmu, sessiżmu, tgħajjir, attakki personali, theddid ta’ mewt, talbiet ta’ suwiċidju jew kwalunkwe forma ta’ diskors ta’ mibegħda.
+            spam: Fih clickbait, reklamar, scams jew script bots.
+          title: Irrapporta kontenut mhux xieraq
+        show_replies: Uri %{replies_count} tweġiba/iet
+        single_comment_link_title: Ikseb link
+      comment_order_selector:
+        order:
+          best_rated: L-ogħla kklassifikati
+          most_discussed: L-aktar diskussi
+          older: L-eqdem
+          recent: X’hemm ġdid
+        title: 'Issortja skont:'
+      comment_thread:
+        title: Konverżazzjoni
+      comments:
+        blocked_comments_for_user_warning: Ma tistax tikkummenta f’dan il-mument, iżda tista’ taqra ta’ qabel.
+        blocked_comments_warning: Il-kummenti huma diżattivati bħalissa, iżda tista’ taqra ta’ qabel.
+        comment_details_title: Dettalji tal-kumment
+        loading: Illowdjar tal-kummenti ...
+        single_comment_warning: Tista’ tiċċekkja l-bqija tal-kummenti <a href="%{url}">hawnhekk</a>.
+        single_comment_warning_title: Qed tara kumment wieħed
+        title: 'Kummenti: %{count}'
+      down_vote_button:
+        text: Ma naqbilx ma’ dan il-kumment
+      up_vote_button:
+        text: Naqbel ma’ dan il-kumment
+    events:
+      comments:
+        comment_by_followed_user:
+          email_intro: 'Tħalla kumment minn %{author_name} fi %{resource_title}. Tista’ tarah f’din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi lil %{author_name}. Tista’ ma tibqax issegwi lil dan l-utent mill-paġna tal-profil tiegħu.
+          email_subject: Hemm kumment ġdid ta’ %{author_name} fi %{resource_title}
+          notification_title: Hemm kumment ġdid ta' <a href="%{author_path}">%{author_name} %{author_nickname}</a> fi <a href="%{resource_path}">%{resource_title}</a>.
+        comment_by_followed_user_group:
+          email_intro: 'Il-grupp %{author_name} ħalla kumment fi %{resource_title}. Tista’ tarah f’din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi lil %{author_name}. Tista’ ma tibqax issegwi dan il-grupp mill-paġna tal-profil tiegħu.
+          email_subject: Hemm kumment ġdid ta’ %{author_name} fi %{resource_title}
+          notification_title: Hemm kumment ġdid ta' <a href="%{author_path}">%{author_name} %{author_nickname}</a> fi <a href="%{resource_path}">%{resource_title}</a>.
+        comment_created:
+          email_intro: 'Kien hemm kumment dwar %{resource_title}. Tista’ taqrah f’din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi lil "%{resource_title}” jew lill-awtur tiegħu. Tista’ ma tibqax issegwih permezz tal-link preċedenti.
+          email_subject: Hemm kumment ġdid ta' %{author_name} fi %{resource_title}
+          notification_title: Hemm kumment ġdid ta' <a href="%{author_path}">%{author_name} %{author_nickname}</a> fi <a href="%{resource_path}">%{resource_title}</a>
+        reply_created:
+          email_intro: 'Hemm tweġiba għall-kumment tiegħek mingħand %{author_name} fi %{resource_title}. Tista’ taraha f’din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax il-kumment tiegħek ġie mwieġeb.
+          email_subject: "%{author_name} wieġeb il-kumment tiegħek fi %{resource_title}"
+          notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> wieġeb il-kumment tiegħek <a href="%{resource_path}">%{resource_title}</a>
+        user_group_mentioned:
+          email_intro: Issemma grupp li tappartjeni għalih
+          email_outro: Irċevejt din in-notifika minħabba li inti membru tal-grupp %{group_name} li ssemma fi %{resource_title}.
+          email_subject: Issemmejt fi %{resource_title} bħala membru ta’%{group_name}
+          notification_title: Issemmejt fi <a href="%{resource_path}">%{resource_title}</a> minn <a href="%{author_path}">%{author_name} %{author_nickname}</a> bħala membru ta' <a href="%{group_path}">%{group_name} %{group_nickname}</a>
+        user_mentioned:
+          email_intro: Issemmejt
+          email_outro: Irċevejt din in-notifika għax issemmejt fi %{resource_title}.
+          email_subject: Issemmejt fi %{resource_title}
+          notification_title: Issemmejt fi <a href="%{resource_path}">%{resource_title}</a> minn <a href="%{author_path}">%{author_name} %{author_nickname}</a>
+    metrics:
+      comments:
+        description: Għadd ta’ kummenti ġġenerati mill-parteċipanti
+        object: kummenti
+        title: Kummenti
+  errors:
+    messages:
+      cannot_have_comments: ma jistax ikollok kummenti

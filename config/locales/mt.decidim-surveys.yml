@@ -1,0 +1,65 @@
+---
+mt:
+  activemodel:
+    models:
+      decidim/surveys/closed_survey_event: L-istħarriġ intemm
+      decidim/surveys/opened_survey_event: L-istħarriġ beda
+  activerecord:
+    models:
+      decidim/surveys/survey:
+        few: Stħarriġiet
+        many: Stħarriġiet
+        one: Stħarriġ
+        other: Stħarriġiet
+      decidim/surveys/survey_answer:
+        few: Tweġibiet
+        many: Tweġibiet
+        one: Tweġiba
+        other: Tweġibiet
+  decidim:
+    components:
+      surveys:
+        actions:
+          answer: Tweġiba
+        name: Stħarriġ
+        settings:
+          global:
+            announcement: Tħabbira
+            clean_after_publish: Ħassar it-tweġibiet meta tippubblika l-istħarriġ
+          step:
+            allow_answers: Ippermetti t-tweġibiet
+            allow_unregistered: Ippermetti lill-utenti mhux irreġistrati jwieġbu l-istħarriġ
+            allow_unregistered_help: Jekk ikun attiv, ma jkun meħtieġ l-ebda login biex jitwieġeb l-istħarriġ. Dan jista’ jwassal għal data ta’ kwalità baxxa jew mhux affidabbli u tkun aktar vulnerabbli għal attakki awtomatizzati. Uża b’kawtela!
+            announcement: Tħabbira
+    events:
+      surveys:
+        survey_closed:
+          email_intro: L-istħarriġ %{resource_title} fi %{participatory_space_title} ingħalaq.
+          email_outro: Irċevejt din in-notifika għax qed issegwi %{participatory_space_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: Tlesta stħarriġ fi %{participatory_space_title}
+          notification_title: L-istħarriġ <a href="%{resource_path}">%{resource_title}</a> fi <a href="%{participatory_space_url}">%{participatory_space_title}</a> intemm.
+        survey_opened:
+          email_intro: 'L-istħarriġ %{resource_title} fi %{participatory_space_title} issa miftuħ. Tista’ tipparteċipa fih minn din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi %{participatory_space_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: Stħarriġ ġdid fi %{participatory_space_title}
+          notification_title: L-istħarriġ <a href="%{resource_path}">%{resource_title}</a> in <a href="%{participatory_space_url}">%{participatory_space_title}</a> issa miftuħ.
+    metrics:
+      survey_answers:
+        description: Numru ta’ stħarriġ imweġbin mill-parteċipanti
+        object: tweġibiet għall-istħarriġ
+        title: Tweġibiet għall-istħarriġ
+    surveys:
+      admin:
+        exports:
+          survey_user_answers: Tweġibiet tal-parteċipanti fl-istħarriġ
+        surveys:
+          update:
+            invalid: Kien hemm problema biex jiġi ssejvjat l-istħarriġ.
+            success: L-istħarriġ ġie ssejvjat.
+      last_activity:
+        new_survey_at_html: "<span>Stħarriġ ġdid fi %{link}</span>"
+      surveys:
+        answer:
+          invalid: Kien hemm problema biex jitwieġeb l-istħarriġ.
+          spam_detected: Kien hemm problema biex titwieġeb il-formola. Forsi għaġġilt wisq, tista’ terġa’ tipprova?
+          success: L-istħarriġ twieġeb.

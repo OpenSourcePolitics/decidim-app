@@ -126,7 +126,7 @@ jobs:
       DATABASE_HOST: localhost
       RAILS_ENV: test
       # Set locales available for i18n tasks
-      ENFORCED_LOCALES: "en,fr"
+      AVAILABLE_LOCALES: "en,fr,bg,cs,da,el,et,ga,hr,it,mt,sl"
     steps:
       - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
         if: "github.ref != 'refs/heads/master' || github.ref != 'refs/heads/develop'"

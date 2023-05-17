@@ -1,0 +1,168 @@
+---
+lt:
+  activemodel:
+    attributes:
+      answer:
+        body: Atsakyti
+      question:
+        max_choices: Didžiausias pasirenkamų atsakymų skaičius
+        question_type: Tipas
+      questionnaire_question:
+        mandatory: Privalomi
+    errors:
+      models:
+        answer:
+          attributes:
+            choices:
+              missing: nebaigti
+              too_many: per daug
+        questionnaire:
+          request_invalid: Tvarkant prašymą įvyko klaida. Bandykite dar kartą.
+  decidim:
+    forms:
+      admin:
+        models:
+          components:
+            description: Aprašymas
+            tos: Paslaugų teikimo sąlygos
+        questionnaires:
+          actions:
+            back: Grįžti į klausimus
+            show: Rodyti atsakymus
+          answer_option:
+            answer_option: Atsakymo variantas
+            free_text: Laisvo pobūdžio tekstas
+            remove: Šalinti
+            statement: Pareiškimas
+          answers:
+            actions:
+              back: Grįžti į atsakymus
+              export: Eksportuoti
+              show: Rodyti atsakymus
+            empty: Atsakymų dar nėra
+            export:
+              answer:
+                title: 'Atsakymas #%{number}'
+            index:
+              title: "%{total} iš viso atsakymų"
+            show:
+              title: "%{number} atsakymas"
+          display_condition:
+            answer_option: Atsakymo variantas
+            condition_question: Klausimas
+            condition_type: Sąlyga
+            condition_types:
+              answered: Atsakyta
+              equal: Lygu
+              match: Pateikiamas tekstas
+              not_answered: Neatsakyta
+              not_equal: nelygu
+            condition_value: Tekstas pateiktas
+            display_condition: Rodyti sąlygą
+            mandatory: Ši sąlyga turi būti tenkinama visada, neatsižvelgiant į kitų sąlygų statusą.
+            remove: Šalinti
+            save_warning: Prieš konfigūruodami rodymo sąlygas, nepamirškite išsaugoti formos.
+            select_answer_option: Pasirinkti atsakymo variantą
+            select_condition_question: Pasirinkti klausimą
+            select_condition_type: Pasirinkti sąlygos tipą
+          edit:
+            save: Išsaugoti
+            title: Keisti klausimyną
+          form:
+            add_question: Pridėti klausimą
+            add_separator: Pridėti skyriklį
+            already_answered_warning: Kai kurie naudotojai jau atsakė į formos klausimus, todėl jos klausimų keisti negalite.
+            collapse: Suskleisti visus klausimus
+            expand: Išskleisti visus klausimus
+            preview: Peržiūrėti
+            title: Keisti formą
+            unpublished_warning: Forma nepaskelbta. Galite keisti savo klausimus, tačiau tai darydami pašalinsite esamus atsakymus.
+          matrix_row:
+            matrix_row: Eilutė
+            remove: Šalinti
+            statement: Pareiškimas
+          question:
+            add_answer_option: Pridėti atsakymo variantą
+            add_display_condition: Pridėti rodymo sąlygą
+            add_display_condition_info: Prieš konfigūruodami rodymo sąlygas, išsaugokite formą.
+            add_matrix_row: Pridėti eilutę
+            any: Visi/visos
+            collapse: Suskleisti
+            description: Aprašymas
+            down: Žemyn
+            expand: Išplėsti
+            question: Klausimas
+            remove: Šalinti
+            statement: Pareiškimas
+            up: Aukštyn
+          separator:
+            down: Žemyn
+            remove: Šalinti
+            separator: Skirtukas
+            up: Aukštyn
+          update:
+            invalid: Išsaugant šią formą iškilo problema.
+            success: Formos išsaugotos.
+      errors:
+        answer:
+          body: Pagrindinė dalis negali būti tuščia.
+      files:
+        extension_whitelist: 'Priimtini formatai:'
+      images:
+        dimensions_info: 'Šis paveikslėlis bus:'
+        processors:
+          resize_and_pad: Pakeisto dydžio ir užpildytas iki
+          resize_to_fit: Pakeistas dydis, kad tiktų
+      question_types:
+        long_answer: Ilgas atsakymas
+        matrix_multiple: Matrica (su keliais variantais)
+        matrix_single: Matrica (vienas variantas)
+        multiple_option: Keli variantai
+        short_answer: Trumpas atsakymas
+        single_option: Vienas variantas
+        sorting: Rūšiavimas
+      questionnaires:
+        answer:
+          invalid: Atsakant į šios formos klausimus iškilo problema.
+          max_choices_alert: Per daug pasirinktų variantų
+          success: Į formos klausimus atsakyta.
+        question:
+          max_choices: 'Didžiausias pasirinkčių skaičius: %{n}'
+        show:
+          answer_questionnaire:
+            anonymous_user_message: <a href="%{sign_in_link}">Prisijunkite su savo paskyra</a> arba <a href="%{sign_up_link}">užsiregistruokite</a> norėdami užpildyti formą.
+            title: Atsakyti į formos klausimus
+          current_step: "%{step} veiksmas"
+          of_total_steps: iš %{total_steps}
+          questionnaire_answered:
+            body: Jau atsakėte iš šios formos klausimus.
+            title: Jau atsakyta
+          questionnaire_closed:
+            body: Forma uždaryta ir į ją atsakyti negalima.
+            title: Forma uždaryta
+          questionnaire_for_private_users:
+            body: Forma pateikiama tik privatiems naudotojams.
+            title: Forma uždaryta
+          questionnaire_js_disabled:
+            body: Kai kurie šios formos požymiai bus neaktyvūs. Kad pagerintumėte naudojimo patirtį, naršyklėje įjunkite „JavaScript“.
+            title: "„JavaScript“ išjungta."
+          questionnaire_not_published:
+            body: Ši forma dar nepaskelbta.
+          tos_agreement: Dalyvaudami sutinkate su paslaugos teikimo sąlygomis.
+      step_navigation:
+        show:
+          are_you_sure: Šio veiksmo atšaukti negalima ir savo atsakymų keisti negalėsite. Ar tikrai?
+          back: Grįžti
+          continue: Tęsti
+          submit: Pateikti
+      user_answers_serializer:
+        body: Atsakymas
+        completion: Pildymas
+        created_at: Atsakyta
+        id: Atsakymo ID
+        ip_hash: IP adreso maiša
+        question: Klausimas
+        registered: Registruotas
+        session_token: Naudotojo identifikatorius
+        unregistered: Neregistruotas
+        user_status: Naudotojo būsena

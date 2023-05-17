@@ -1,0 +1,463 @@
+---
+mt:
+  activemodel:
+    attributes:
+      participatory_process:
+        announcement: Tħabbira
+        area_id: Żona Ġeografika
+        banner_image: Immaġni tal-istrixxun
+        copy_categories: Ikkopja l-kategoriji
+        copy_components: Ikkopja l-komponenti
+        copy_steps: Ikkopja l-passi
+        decidim_area_id: Żona Ġeografika
+        description: Deskrizzjoni
+        developer_group: Grupp promotur
+        domain: Dominju
+        end_date: Data tat-tmiem
+        hashtag: Hashtag
+        hero_image: Immaġni tal-paġna ewlenija
+        local_area: Żona tal-organizzazzjoni
+        meta_scope: Metadata tal-kamp ta' applikazzjoni
+        participatory_process_group_id: Grupp ta’ proċessi
+        participatory_scope: X’jiġi deċiż
+        participatory_structure: Kif jiġi deċiż
+        promoted: Promossi
+        published_at: Ippubblikat fi
+        related_process_ids: Proċessi relatati
+        scope_id: Kamp ta’ applikazzjoni
+        scope_type_max_depth_id: Fond tal-filtru tal-kamp ta’ applikazzjoni
+        scopes_enabled: Kampijiet ta’ applikazzjoni attivati
+        short_description: Deskrizzjoni qasira
+        show_metrics: Uri l-metriċi
+        show_statistics: Uri l-istatistika
+        slug: slug tal-URL
+        start_date: Data tal-bidu
+        subtitle: Sottotitlu
+        target: Min jipparteċipa
+        title: Titlu
+      participatory_process_group:
+        description: Deskrizzjoni
+        hero_image: Immaġni
+        name: Isem
+        participatory_process_ids: Proċessi relatati
+      participatory_process_step:
+        cta_path: Indirizz tas-Sejħa għal Azzjoni
+        cta_text: Test tas-Sejħa għal Azzjoni
+        description: Deskrizzjoni
+        end_date: Data tat-tmiem
+        short_description: Deskrizzjoni qasira
+        start_date: Data tal-bidu
+        title: Titlu
+      participatory_process_user_role:
+        email: Email
+        name: Isem
+        role: Rwol
+    errors:
+      models:
+        participatory_process:
+          attributes:
+            document:
+              invalid_document_type: 'Tip ta’ dokument invalidu. Il-formati aċċettati huma: %{valid_mime_types}'
+    models:
+      decidim/participatory_process_step_activated_event: Fażi attivata
+      decidim/participatory_process_step_changed_event: Fażi mibdula
+  activerecord:
+    models:
+      decidim/participatory_process:
+        few: Proċessi parteċipatorji
+        many: Proċessi parteċipatorji
+        one: Suġġett
+        other: Suġġetti
+      decidim/participatory_process_group:
+        few: Gruppi ta' proċess parteċipatorju
+        many: Gruppi ta' proċess parteċipatorju
+        one: Grupp ta' proċess parteċipatorju
+        other: Gruppi ta' proċess parteċipatorju
+      decidim/participatory_process_step:
+        few: Fażijiet
+        many: Fażijiet
+        one: Fażi
+        other: Fażijiet
+  decidim:
+    admin:
+      actions:
+        activate: Attiva
+        configure: Ikkonfigura
+        confirm_destroy: Ikkonferma t-tħassir
+        destroy: Ħassar
+        duplicate: Idduplika
+        edit: Editja
+        filter:
+          all_processes: Uri l-proċessi kollha
+          process_groups: Gruppi tal-proċess
+        import_process: Importa
+        new_process: Proċess ġdid
+        new_process_group: Grupp tal-proċess ġdid
+        new_process_step: Fażi ġdida
+        new_process_user_role: Amministratur tal-proċess ġdid
+        publish: Ippubblika
+        resend_invitation: Erġa’ ibgħat l-istedina
+        unpublish: Neħħi mill-pubblikazzjoni
+      menu:
+        participatory_process_groups: Gruppi tal-proċess
+        participatory_processes_submenu:
+          attachment_collections: Fowlders
+          attachment_files: Fajls
+          attachments: Hemżiet
+          categories: Kategoriji
+          components: Komponenti
+          info: Informazzjoni
+          moderations: Moderazzjonijiet
+          private_users: Parteċipanti privati
+          process_admins: Amministraturi tal-proċess
+          steps: Fażijiet
+      models:
+        participatory_process:
+          fields:
+            created_at: Inħolqot fi
+            private: Privat
+            promoted: Iħħajlajtjat
+            published: Ippubblikat
+            title: Titlu
+          name: Proċess parteċipatorju
+        participatory_process_group:
+          fields:
+            name: Isem
+          name: Grupp tal-proċess
+        participatory_process_step:
+          fields:
+            end_date: Data tat-tmiem
+            start_date: Data tal-bidu
+            title: Titlu
+          name: Fażi tal-proċess parteċipatorju
+        participatory_process_user_role:
+          fields:
+            name: Isem
+            role: Rwol
+          name: Amministratur tal-proċess parteċipatorju
+          roles:
+            admin: Amministratur
+            collaborator: Kollaboratur
+            moderator: Moderatur
+            valuator: Stimatur
+        user:
+          fields:
+            invitation_accepted_at: L-istedina ġiet aċċettata fi
+            invitation_sent_at: L-istedina ntbagħtet fi
+      participatory_process_copies:
+        new:
+          copy: Ikkopja
+          select: Agħżel liema data tixtieq tidduplika
+          title: Proċess parteċipatorju dduplikat
+      participatory_process_groups:
+        destroy:
+          error: Kien hemm żball waqt il-qerda tal-grupp tal-proċess parteċipatorju.
+          success: Il-grupp tal-proċess parteċipatorju tħassar.
+        edit:
+          title: Editja l-grupp tal-proċess
+          update: Aġġorna
+        new:
+          create: Oħloq
+          title: Grupp tal-proċess ġdid
+        update:
+          error: Kien hemm problema biex jiġi aġġornat il-grupp tal-proċess parteċipatorju.
+          success: Il-grupp tal-proċess parteċipatorju ġie aġġornat.
+      participatory_process_imports:
+        create:
+          error: Kien hemm problema biex jiġi importat dan il-proċess parteċipatorju.
+          success: Il-proċess parteċipatorju ġie importat.
+        new:
+          import: Importa
+          select: Agħżel liema data tixtieq timporta
+          title: Importa proċess parteċipatorju
+      participatory_process_publications:
+        create:
+          error: Kien hemm problema biex jiġi ppubblikat dan il-proċess parteċipatorju.
+          success: Il-proċess parteċipatorju ġie ppubblikat.
+        destroy:
+          error: Kien hemm problema biex i dan il-proċess parteċipatorju jitneħħa mill-pubblikazzjoni.
+          success: Il-proċess parteċipatorju tneħħa mill-pubblikazzjoni.
+      participatory_process_step_activations:
+        create:
+          error: Kien hemm problema biex tiġi attivata din il-fażi tal-proċess parteċipatorju.
+          success: Il-fażi tal-proċess parteċipatorju ġiet attivata.
+      participatory_process_steps:
+        create:
+          error: Kien hemm problema biex tinħoloq fażi tal-proċess parteċipatorju ġdida.
+          success: Il-fażi tal-proċess parteċipatorju nħolqot.
+        default_title: Introduzzjoni
+        destroy:
+          error:
+            active_step: Ma tistax tħassar il-fażi attiva.
+            last_step: Ma tistax tħassar l-aħħar fażi ta’ proċess.
+          success: Il-fażi tal-proċess parteċipatorju tħassret.
+        edit:
+          title: Editja fażi tal-proċess parteċipatorju
+          update: Aġġorna
+        index:
+          steps_title: Fażijiet
+        new:
+          create: Oħloq
+          title: Fażi ġdida tal-proċess parteċipatorju
+        ordering:
+          error: Kien hemm problema biex jiġu riordinati dawn il-fażijiet tal-proċess parteċipatorju.
+        update:
+          error: Kien hemm problema biex tiġi aġġornata din il-fażi tal-proċess parteċipatorju.
+          success: Il-fażi parteċipatorja ġiet aġġornata.
+      participatory_process_user_roles:
+        create:
+          error: Kien hemm problema biex jinżdied parteċipant għal dan il-proċess parteċipatorju.
+          success: Inżdied amministratur għal dan il-proċess parteċipatorju.
+        destroy:
+          success: Tneħħa amministratur minn dan il-proċess parteċipatorju.
+        edit:
+          title: Aġġorna amministratur tal-proċess parteċipatorju
+          update: Aġġorna
+        index:
+          process_admins_title: Amministraturi tal-proċess parteċipatorju
+        new:
+          create: Oħloq
+          title: Amministratur ġdid tal-proċess parteċipatorju
+        update:
+          error: Kien hemm problema biex jiġi aġġornat amministratur għal din il-proċess parteċipatorju.
+          success: Amministratur għal dan il-proċess parteċipatorju ġie aġġornat.
+      participatory_processes:
+        create:
+          error: Kien hemm problema biex jinħoloq proċess parteċipatorju ġdid.
+          success: Il-proċess parteċipatorju nħoloq. Ikkonfigura l-fażijiet tiegħu issa.
+        edit:
+          update: Aġġorna
+        index:
+          not_published: Mhux ippubblikat
+          private: Privat
+          public: Pubbliku
+          published: Ippubblikat
+        new:
+          create: Oħloq
+          title: Proċess parteċipatorju ġdid
+        update:
+          error: Kien hemm problema biex dan il-proċess parteċipatorju jiġi aġġornat.
+          success: Il-proċess parteċipatorju ġie aġġornat.
+      participatory_processes_copies:
+        create:
+          error: Kien hemm problema biex jiġi dduplikat dan il-proċess parteċipatorju.
+          success: Il-proċess parteċipatorju ġie dduplikat.
+      participatory_processes_group:
+        create:
+          error: Kien hemm problema biex jinħoloq grupp tal-proċess parteċipatorju ġdid.
+          success: Il-grupp tal-proċess parteċipatorju nħoloq.
+      titles:
+        participatory_process_groups: Gruppi tal-proċess parteċipatorju
+      users:
+        resend_invitation:
+          error: Kien hemm problema biex terġa’ tintbagħat l-istedina.
+          success: L-istedina reġgħet intbagħtet.
+    admin_log:
+      participatory_process:
+        create: "%{user_name} ħoloq il-proċess parteċipatorju %{resource_name}"
+        publish: "%{user_name} ippubblika l-proċess parteċipatorju %{resource_name}"
+        unpublish: "%{user_name} neħħa l-pubblikazzjoni tal-proċess parteċipatorju %{resource_name}"
+        update: "%{user_name} aġġorna l-proċess parteċipatorju %{resource_name}"
+      participatory_process_group:
+        create: "%{user_name} ħoloq il-grupp tal-proċess parteċipatorju %{resource_name} grupp"
+        update: "%{user_name} aġġorna l-grupp tal-proċess parteċipatorju %{resource_name}"
+      participatory_process_step:
+        activate: "%{user_name} attiva l-fażi tal-%{resource_name} fil-proċess parteċipatorju %{space_name}"
+        create: "%{user_name} ħoloq il-fażi tal-%{resource_name} fil-proċess parteċipatorju %{space_name}"
+        delete: "%{user_name} ħassar il-fażi tal-%{resource_name} fil-proċess parteċipatorju %{space_name}"
+        update: "%{user_name} aġġorna l-fażi tal-%{resource_name} fil-proċess parteċipatorju %{space_name}"
+      participatory_process_user_role:
+        create: "%{user_name} stieden lill-parteċipant %{resource_name} għall-proċess parteċipatorju %{space_name}"
+        delete: "%{user_name} neħħa l-parteċipant %{resource_name} mill-proċess parteċipatorju %{space_name}"
+        update: "%{user_name} biddel ir-rwol tal-parteċipant %{resource_name} fil-proċess parteċipatorju %{space_name}"
+    events:
+      participatory_process:
+        role_assigned:
+          email_intro: Ġejt assenjat bħala %{role} għall-proċess parteċipatorju "%{resource_title}".
+          email_outro: Irċevejt din in-notifika minħabba li inti %{role} tal-proċess parteċipatorju "%{resource_title}”.
+          email_subject: Ġejt assenjat bħala %{role} għal "%{resource_title}".
+          notification_title: Ġejt assenjat bħala %{role} fil-proċess parteċipatorju <a href="%{resource_url}">%{resource_title}</a>.
+        step_activated:
+          email_intro: 'Il-fażi %{resource_title} issa hija attiva għal %{participatory_space_title}. Tista’ tarah minn din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi %{participatory_space_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: Aġġornament għal %{participatory_space_title}
+          notification_title: Il-fażi %{resource_title} issa hija attiva għal <a href="%{resource_path}">%{participatory_space_title}</a>
+        step_changed:
+          email_intro: 'Id-dati għall-fażi %{resource_title} fi %{participatory_space_title} ġew aġġornati. Tista’ tarah minn din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi %{participatory_space_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: Aġġornament għal %{participatory_space_title}
+          notification_title: Id-dati għall-fażi <a href="%{resource_path}">%{resource_title}</a> fi <a href="%{participatory_space_url}">%{participatory_space_title}</a> ġew aġġornati.
+    help:
+      participatory_spaces:
+        participatory_processes:
+          contextual: "<p><strong>Proċess parteċipatorju</strong> huwa sekwenza ta’ attivitajiet parteċipatorji (eż. l-ewwel timla stħarriġ, imbagħad tagħmel proposti, tiddiskutihom f’laqgħat wiċċ imb’ wiċċ jew virtwali, u finalment tipprijoritizzahom) bil-għan li tiddefinixxi u tieħu deċiżjoni dwar suġġett speċifiku.</p> <p>Eżempji ta’ proċessi parteċipatorji huma: proċess ta’ elezzjoni tal-membri tal-kumitat (fejn l-ewwel jiġu ppreżentati l-kandidaturi, imbagħad jiġu diskussi u finalment tintgħażel kandidatura), baġits parteċipatorji (fejn isiru l-proposti, jiġu vvalutati ekonomikament u ssir votazzjoni dwarhom bil-flus disponibbli), proċess ta’ ppjanar strateġiku, abbozzar kollaborattiv ta’ regolament jew norma, tfassil ta’ spazju urban jew il-produzzjoni ta’ pjan ta’ politika pubblika.</p>\n"
+          page: "<p><strong>Proċess parteċipatorju</strong> huwa sekwenza ta’ attivitajiet parteċipatorji (eż. l-ewwel timla stħarriġ, imbagħad tagħmel proposti, tiddiskutihom f’laqgħat wiċċ imb’ wiċċ jew virtwali, u finalment tipprijoritizzahom) bil-għan li tiddefinixxi u tieħu deċiżjoni dwar suġġett speċifiku.</p> <p>Eżempji ta’ proċessi parteċipatorji huma: proċess ta’ elezzjoni tal-membri tal-kumitat (fejn l-ewwel jiġu ppreżentati l-kandidaturi, imbagħad jiġu diskussi u finalment tintgħażel kandidatura), baġits parteċipatorji (fejn isiru l-proposti, jiġu vvalutati ekonomikament u ssir votazzjoni dwarhom bil-flus disponibbli), proċess ta’ ppjanar strateġiku, abbozzar kollaborattiv ta’ regolament jew norma, tfassil ta’ spazju urban jew il-produzzjoni ta’ pjan ta’ politika pubblika.</p>\n"
+          title: X’inhu proċess parteċipatorju?
+    metrics:
+      participatory_processes:
+        description: Numru ta’ proċessi parteċipatorji f’din l-organizzazzjoni
+        object: proċessi parteċipatorji
+        title: Proċessi parteċipatorji
+    participatory_process:
+      show:
+        related_assemblies: Assembleji relatati
+    participatory_process_groups:
+      show:
+        group_participatory_processes:
+          few: "%{count} proċessi għal %{group}"
+          many: "%{count} proċessi għal %{group}"
+          one: proċess wieħed għal %{group}
+          other: "%{count} proċessi għal %{group}"
+        title: Gruppi tal-proċess parteċipatorju
+    participatory_process_steps:
+      index:
+        process_steps: Fażijiet tal-proċess
+        title: Fażijiet tal-proċess parteċipatorju
+    participatory_processes:
+      admin:
+        content_blocks:
+          highlighted_processes:
+            max_results: Ammont massimu ta’ elementi li jridu jintwerew
+        participatory_process_copies:
+          form:
+            slug_help: 'Jintużaw URL slugs biex jiġu ġġenerati l-URLs li joħduk f’dan il- proċess. Jaċċettaw biss ittri, numri u singijiet, u jridu jibdew b’ittra. Eżempju: %{url}'
+        participatory_process_imports:
+          form:
+            document_legend: Żid dokument
+            slug_help: 'Jintużaw URL slugs biex jiġu ġġenerati l-URLs li joħduk f’dan il- proċess. Jaċċettaw biss ittri, numri u singijiet, u jridu jibdew b’ittra. Eżempju: %{url}'
+        participatory_process_steps:
+          form:
+            cta_path_help: 'Uża indirizzi parzjali, mhux URLs sħaħ hawnhekk. Jaċċetta ittri, numri, singijiet u slashes, u jrid jibda b’ittra. Jekk ma tkunx issettjata, il-buttuna ma tintweriex. Eżempju: %{url}'
+            cta_text_help: Jekk ma tkunx issettjata, il-buttuna ma tintweriex.
+        participatory_processes:
+          form:
+            announcement_help: It-test li ddaħħal hawnhekk jintwera lill-utent eżatt taħt l-informazzjoni dwar il-proċess.
+            duration: Durata
+            filters: Filtri
+            images: Immaġnijiet
+            other: Ieħor
+            related_processes: Proċessi relatati
+            scope_type_max_depth_help: Irrestrinġi l-fond tal-filtru tal-kamp ta’ applikazzjoni; Il-filtru se juri minn ġenerali għat-tip ta’ kamp ta’ applikazzjoni magħżul.
+            select_an_area: Agħżel Żona ġeografika
+            select_process_group: Agħżel grupp tal-proċess
+            slug_help: 'Jintużaw URL slugs biex jiġu ġġenerati l-URLs li joħduk f’dan il- proċess. Jaċċettaw biss ittri, numri u singijiet, u jridu jibdew b’ittra. Eżempju: %{url}'
+            title: Informazzjoni Ġenerali
+            visbility: Viżibbiltà
+      content_blocks:
+        highlighted_processes:
+          name: Suġġetti iħħajlajtjati
+      index:
+        title: Proċessi parteċipatorji
+      last_activity:
+        new_participatory_process: Proċess parteċipatorju ġdid
+      pages:
+        home:
+          highlighted_processes:
+            active_processes: Suġġetti
+            active_step: Fażi attiva
+            more_information: Aktar informazzjoni
+            participate: Ipparteċipa
+            participate_in: Ipparteċipa fil-proċess %{resource_name}
+            see_all_processes: Ara l-proċessi kollha
+      participatory_process_steps:
+        index:
+          back_to_process: Lura għall-paġna tal-proċessi
+      participatory_processes:
+        filters:
+          counters:
+            active:
+              few: Is-suġġetti tagħna
+              many: Is-suġġetti tagħna
+              one: Suġġett 1 li qed nitkellmu dwaru
+              other: Suġġetti li qed nitkellmu dwarhom
+            all:
+              few: "%{count} proċessi"
+              many: "%{count} proċessi"
+              one: proċess wieħed
+              other: "%{count} proċessi"
+            past:
+              few: "%{count} proċessi passati"
+              many: "%{count} proċessi passati"
+              one: proċess passat wieħed
+              other: "%{count} proċessi passati"
+            upcoming:
+              few: "%{count} proċessi li jmiss"
+              many: "%{count} proċessi li jmiss"
+              one: proċess li jmiss wieħed
+              other: "%{count} proċessi li jmiss"
+          explanations:
+            no_active: Ebda proċess attiv
+            no_active_nor_upcoming: L-ebda proċess attiv jew li ġej
+            no_active_nor_upcoming_callout: Ma hemm l-ebda proċess attiv jew li ġej. Din hija lista ta’ dawk li saru qabel.
+          names:
+            active: Attivi
+            all: Kollha
+            past: Passat
+            upcoming: Li Ġejjin
+          see: Ara
+        index:
+          loading: Ir-riżultati qed jillowdjaw...
+      show:
+        area: Żona Ġeografika
+        dates: Dati
+        developer_group: Grupp promotur
+        end_date: Data tat-tmiem
+        local_area: Żona tal-Organizzazzjoni
+        participatory_scope: X’jiġi deċiż
+        participatory_structure: Kif jiġi deċiż
+        private_space: Dan proċess privat
+        related_processes: Proċessi relatati
+        scope: Kamp ta’ applikazzjoni
+        start_date: Data tal-bidu
+        target: Min jipparteċipa
+        unspecified: Mhux speċifikat
+      statistics:
+        answers_count: Tweġibiet
+        comments_count: Kummenti
+        debates_count: Dibattiti
+        endorsements_count: Approvazzjonijiet
+        followers_count: Segwaċi
+        headline: X’inhu jiġri f’dan is-suġġett?
+        meetings_count: Avvenimenti
+        no_stats: Għad m’hemm l-ebda statistika.
+        orders_count: Sostenji
+        pages_count: Paġni
+        participants_count: Parteċipanti
+        processes_count: Suġġetti
+        projects_count: Proġetti
+        proposals_count: Ideat
+        results_count: Riżultati
+        supports_count: Sostenji
+        surveys_count: Stħarriġ
+        users_count: Parteċipanti
+  layouts:
+    decidim:
+      participatory_process_groups:
+        participatory_process_group:
+          browse: Ibbrawżja
+          browse_resource: Ibbrawżja l-grupp tal-proċess %{resource_name}
+          processes_count: 'Proċessi:'
+      participatory_process_widgets:
+        show:
+          active_step: Fażi attiva
+          take_part: Ħu sehem
+      participatory_processes:
+        index:
+          promoted_processes: Proċessi ħħajlajtjati
+        participatory_process:
+          active_step: 'Fażi attwali:'
+          more_info: Iktar informazzjoni
+          more_info_about: Aktar informazzjoni dwar dan is-suġġett %{resource_name}
+          take_part: Ħu sehem fis-suġġett %{resource_name}
+          take_part_in: Ħu sehem f’dan is-suġġett %{resource_name}
+        promoted_process:
+          active_step: 'Fażi attwali:'
+          more_info: Iktar informazzjoni
+          more_info_about: Aktar informazzjoni dwar is-suġġett %{resource_name}
+          take_part: Ħu sehem
+          take_part_in: Ħu sehem fil-proċess %{resource_name}
+      process_header_steps:
+        step: Fażi %{current} minn %{total}
+        view_steps: Fażijiet tal-proċess
+      process_navigation:
+        process_menu_item: Dwar

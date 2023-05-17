@@ -1,0 +1,115 @@
+---
+hr:
+  activemodel:
+    models:
+      decidim/comments/comment_by_followed_user_event: Komentar
+      decidim/comments/comment_created_event: Komentar
+      decidim/comments/reply_created_event: Komentiraj odgovor
+      decidim/comments/user_group_mentioned_event: Spomeni
+      decidim/comments/user_mentioned_event: Spomeni
+  decidim:
+    comments:
+      comments_count: Broj komentara
+      last_activity:
+        new_comment_at_html: "<span>Novi komentar u %{link}</span>"
+      view: Prikaži
+      votes:
+        create:
+          error: Došlo je do problema pri glasanju o komentaru.
+    components:
+      add_comment_form:
+        account_message: <a href="%{sign_in_url}">Prijavite se svojim računom</a> ili <a href="%{sign_up_url}"> se registrirajte</a> kako biste mogli komentirati.
+        form:
+          body:
+            label: Komentar
+            placeholder: Što mislite o tome?
+          form_error: 'Tekst je obavezan i ne može biti dulji od sljedećeg broja znakova: %{length}.'
+          submit: Pošalji
+          user_group_id:
+            label: Komentiraj kao
+        opinion:
+          neutral: Neutralni
+        remaining_characters: 'Broj preostalih znakova: %{count}'
+        remaining_characters_1: 'Broj preostalih znakova: %{count}'
+        title: Objavi
+      comment:
+        alignment:
+          against: Protiv
+          in_favor: Za
+        deleted_user: Izbrisani sudionik
+        hide_replies: Sakrij odgovore
+        reply: Odgovori
+        report:
+          action: Izvješće
+          already_reported: Sadržaj je već prijavljen i administrator će ga pregledati.
+          close: Zatvori
+          description: Je li sadržaj neprimjeren?
+          details: Dodatni komentari
+          reasons:
+            does_not_belong: Sadržava nezakonite aktivnosti, samoubilačke prijetnje, osobne informacije ili nešto drugo čemu prema vašem mišljenju ovdje nije mjesto.
+            offensive: Sadržava rasizam, seksizam, uvrede, osobne napade, prijetnje smrću, zahtjeve za samoubojstvo ili bilo koji oblik govora mržnje.
+            spam: Sadržava poveznice mamce, reklame, prijevare ili skriptne botove.
+          title: Prijavi neprimjereni sadržaj
+        show_replies: 'Prikaži odgovora: %{replies_count}'
+        single_comment_link_title: Poveznica
+      comment_order_selector:
+        order:
+          best_rated: Najbolje ocijenjeno
+          most_discussed: Najviše komentara
+          older: Starije
+          recent: Novije
+        title: 'Sortiraj prema:'
+      comment_thread:
+        title: Razgovor
+      comments:
+        blocked_comments_for_user_warning: Trenutačno ne možete komentirati, ali možete pročitati prethodne komentare.
+        blocked_comments_warning: Komentari su trenutačno onemogućeni, ali možete pročitati prethodne komentare.
+        comment_details_title: Pojedinosti o komentaru
+        loading: Učitavanje komentara...
+        single_comment_warning: Možete pročitati ostale komentare <a href="%{url}">ovdje</a>.
+        single_comment_warning_title: Prikazuje vam se jedan komentar
+        title: 'Broj komentara: %{count}'
+      down_vote_button:
+        text: Ne slažem se s tim komentarom
+      up_vote_button:
+        text: Slažem se s tim komentarom
+    events:
+      comments:
+        comment_by_followed_user:
+          email_intro: "%{author_name} je komentirao na %{resource_title}. Možete ga pročitati na stranici:"
+          email_outro: Primili ste ovu obavijest jer pratite skupinu %{author_name}. Možete prestati pratiti korisnika na njegovoj stranici profila.
+          email_subject: Novi komentar skupine %{author_name} na %{resource_title}
+          notification_title: Novi komentar skupine <a href="%{author_path}">%{author_name} %{author_nickname}</a> na <a href="%{resource_path}">%{resource_title}</a>.
+        comment_by_followed_user_group:
+          email_intro: 'Skupina %{author_name} dala je komentar na %{resource_title}. Možete ga pročitati na stranici:'
+          email_outro: Primili ste ovu obavijest jer pratite skupinu %{author_name}. Možete prestati pratiti skupinu na njezinoj stranici profila.
+          email_subject: Novi komentar skupine %{author_name} na %{resource_title}
+          notification_title: Novi komentar skupine <a href="%{author_path}">%{author_name} %{author_nickname}</a> na <a href="%{resource_path}">%{resource_title}</a>.
+        comment_created:
+          email_intro: 'Dodan je komentar na %{resource_title}. Možete pročitati komentar na stranici:'
+          email_outro: Primili ste ovu obavijest jer pratite "%{resource_title}"ili njegova autora. Klikom na prethodnu poveznicu možete ga prestati pratiti.
+          email_subject: Novi komentar autora %{author_name} na %{resource_title}
+          notification_title: Novi komentar autora <a href="%{author_path}">%{author_name} %{author_nickname}</a> na <a href="%{resource_path}">%{resource_title}</a>
+        reply_created:
+          email_intro: "%{author_name} je odgovorio na vaš komentar na %{resource_title}. Možete ga pročitati na stranici:"
+          email_outro: Primili ste ovu obavijest jer je netko odgovorio na vaš komentar.
+          email_subject: "%{author_name} je odgovorio na vaš komentar na %{resource_title}"
+          notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> je odgovorio na vaš komentar na <a href="%{resource_path}">%{resource_title}</a>
+        user_group_mentioned:
+          email_intro: Spomenuta je skupina čiji ste član
+          email_outro: Primili ste ovu obavijest jer ste član skupine %{group_name} koja je spomenuta na %{resource_title}.
+          email_subject: Spomenuti ste na %{resource_title} kao član skupine %{group_name}
+          notification_title: Spomenuo vas je autor <a href="%{author_path}">%{author_name} %{author_nickname}</a> na <a href="%{resource_path}">%{resource_title}</a> kao člana skupine <a href="%{group_path}">%{group_name} %{group_nickname}</a>
+        user_mentioned:
+          email_intro: Spomenuti ste
+          email_outro: Primili ste ovu obavijest jer ste spomenuti na %{resource_title}.
+          email_subject: Spomenuti ste na %{resource_title}
+          notification_title: Spomenuo vas je autor <a href="%{author_path}">%{author_name} %{author_nickname}</a> na <a href="%{resource_path}">%{resource_title}</a>
+    metrics:
+      comments:
+        description: Broj komentara koje su generirali sudionici
+        object: komentari
+        title: Komentari
+  errors:
+    messages:
+      cannot_have_comments: ne može se komentirati

@@ -1,0 +1,61 @@
+---
+el:
+  activemodel:
+    models:
+      decidim/surveys/closed_survey_event: Η έρευνα ολοκληρώθηκε
+      decidim/surveys/opened_survey_event: Η έρευνα ξεκίνησε
+  activerecord:
+    models:
+      decidim/surveys/survey:
+        one: Έρευνα
+        other: Έρευνες
+      decidim/surveys/survey_answer:
+        one: Απάντηση
+        other: Απαντήσεις
+  decidim:
+    components:
+      surveys:
+        actions:
+          answer: Απάντηση
+        name: Έρευνα
+        settings:
+          global:
+            announcement: Ανακοίνωση
+            clean_after_publish: Διαγράψτε απαντήσεις κατά τη δημοσίευση της έρευνας
+          step:
+            allow_answers: Να επιτρέπονται οι απαντήσεις
+            allow_unregistered: Να επιτρέπεται σε μη εγγεγραμμένους χρήστες να απαντούν στην έρευνα
+            allow_unregistered_help: Εάν ο χρήστης είναι ενεργός, δεν θα απαιτείται να συνδεθεί για να απαντήσει στην έρευνα. Αυτό μπορεί να οδηγήσει σε ανεπαρκή ή αναξιόπιστα δεδομένα και το σύστημα θα είναι πιο ευάλωτο σε αυτοματοποιημένες επιθέσεις. Προσοχή στη χρήση!
+            announcement: Ανακοίνωση
+    events:
+      surveys:
+        survey_closed:
+          email_intro: Η έρευνα %{resource_title} στο %{participatory_space_title} έκλεισε.
+          email_outro: Λάβατε αυτήν την ειδοποίηση, επειδή ακολουθείτε τον συμμετοχικό χώρο %{participatory_space_title}. Μπορείτε να διακόψετε τη λήψη ειδοποιήσεων, ακολουθώντας τον προηγούμενο σύνδεσμο.
+          email_subject: Μια έρευνα ολοκληρώθηκε στον συμμετοχικό χώρο %{participatory_space_title}
+          notification_title: Η έρευνα <a href="%{resource_path}">%{resource_title}</a> στον συμμετοχικό χώρο <a href="%{participatory_space_url}">%{participatory_space_title}</a> ολοκληρώθηκε.
+        survey_opened:
+          email_intro: 'Η έρευνα %{resource_title} στον συμμετοχικό χώρο %{participatory_space_title} είναι πλέον ανοικτή. Μπορείτε να συμμετάσχετε από αυτήν τη σελίδα:'
+          email_outro: Λάβατε αυτήν την ειδοποίηση, επειδή ακολουθείτε τον συμμετοχικό χώρο %{participatory_space_title}. Μπορείτε να διακόψετε τη λήψη ειδοποιήσεων, ακολουθώντας τον προηγούμενο σύνδεσμο.
+          email_subject: Μια νέα έρευνα στον συμμετοχικό χώρο %{participatory_space_title}
+          notification_title: Η έρευνα <a href="%{resource_path}">%{resource_title}</a> στον συμμετοχικό χώρο <a href="%{participatory_space_url}">%{participatory_space_title}</a> είναι πλέον ανοικτή.
+    metrics:
+      survey_answers:
+        description: Αριθμός ερευνών που απαντήθηκαν από συμμετέχοντες
+        object: απαντήσεις σε έρευνες
+        title: Απαντήσεις σε έρευνες
+    surveys:
+      admin:
+        exports:
+          survey_user_answers: Απαντήσεις συμμετέχοντος στην έρευνα
+        surveys:
+          update:
+            invalid: Παρουσιάστηκε πρόβλημα κατά την αποθήκευση της έρευνας.
+            success: Η έρευνα αποθηκεύτηκε με επιτυχία
+      last_activity:
+        new_survey_at_html: "<span>Νέα έρευνα σε %{link}</span>"
+      surveys:
+        answer:
+          invalid: Παρουσιάστηκε πρόβλημα κατά την απάντηση της έρευνας.
+          spam_detected: Παρουσιάστηκε πρόβλημα κατά την απάντηση της φόρμας. Ίσως είστε πολύ γρήγοροι, μπορείτε να δοκιμάσετε ξανά;
+          success: Η έρευνα απαντήθηκε με επιτυχία.

@@ -1,0 +1,65 @@
+---
+cs:
+  activemodel:
+    models:
+      decidim/surveys/closed_survey_event: Průzkum ukončen
+      decidim/surveys/opened_survey_event: Průzkum zahájen
+  activerecord:
+    models:
+      decidim/surveys/survey:
+        few: Průzkumy
+        many: Průzkumy
+        one: Průzkum
+        other: Průzkumy
+      decidim/surveys/survey_answer:
+        few: Odpovědi
+        many: Odpovědi
+        one: Odpověď
+        other: Odpovědi
+  decidim:
+    components:
+      surveys:
+        actions:
+          answer: Odpověď
+        name: Průzkum
+        settings:
+          global:
+            announcement: Oznámení
+            clean_after_publish: Smazat odpovědi při zveřejňování průzkumu
+          step:
+            allow_answers: Povolit odpovědi
+            allow_unregistered: Povolit neregistrovaným uživatelům odpovídat na průzkum
+            allow_unregistered_help: Pokud je aktivní, nebude za účelem zodpovězení průzkumu vyžadováno přihlášení. To může vést ke slabým nebo nespolehlivým údajům a větší zranitelnosti vůči automatizovaným útokům. Používat obezřetně!
+            announcement: Oznámení
+    events:
+      surveys:
+        survey_closed:
+          email_intro: Průzkum %{resource_title} v prostoru %{participatory_space_title} byl uzavřen.
+          email_outro: Toto oznámení jste obdrželi, protože sledujete prostor %{participatory_space_title}. Pokud nechcete oznámení dostávat, klikněte na předchozí odkaz.
+          email_subject: Průzkum v prostoru %{participatory_space_title} byl ukončen
+          notification_title: Průzkum <a href="%{resource_path}">%{resource_title}</a> v prostoru <a href="%{participatory_space_url}">%{participatory_space_title}</a> byl ukončen.
+        survey_opened:
+          email_intro: 'Průzkum %{resource_title} v prostoru %{participatory_space_title} je nyní otevřen. Můžete se ho zúčastnit prostřednictvím této stránky:'
+          email_outro: Toto oznámení jste obdrželi, protože sledujete prostor %{participatory_space_title}. Pokud nechcete oznámení dostávat, klikněte na předchozí odkaz.
+          email_subject: Nový průzkum v prostoru %{participatory_space_title}
+          notification_title: Průzkum <a href="%{resource_path}">%{resource_title}</a> v prostoru <a href="%{participatory_space_url}">%{participatory_space_title}</a> je nyní otevřen.
+    metrics:
+      survey_answers:
+        description: Počet průzkumů zodpovězených účastníky
+        object: odpovědi na průzkumy
+        title: Odpovědi na průzkumy
+    surveys:
+      admin:
+        exports:
+          survey_user_answers: Odpovědi účastníka na průzkum
+        surveys:
+          update:
+            invalid: Při ukládání průzkumu došlo k problému.
+            success: Průzkum byl úspěšně uložen.
+      last_activity:
+        new_survey_at_html: "<span>Nový průzkum na %{link}</span>"
+      surveys:
+        answer:
+          invalid: Při vyplňování průzkumu došlo k problému.
+          spam_detected: Při vyplňování formuláře došlo k problému. Možná jste byli moc rychlí, můžete to zkusit znovu?
+          success: Průzkum byl úspěšně zodpovězen.

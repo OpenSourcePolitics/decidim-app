@@ -1,0 +1,144 @@
+---
+lt:
+  activemodel:
+    attributes:
+      oauth_application:
+        name: "„OAuth“ programos pavadinimas"
+        organization_logo: Organizacijos logotipas (keturkampis)
+        organization_name: Organizacija
+        organization_url: Organizacijos URL
+        redirect_uri: Nukreipti URI
+    errors:
+      models:
+        oauth_application:
+          attributes:
+            redirect_uri:
+              must_be_ssl: Nukreiptas URI turi būti SSL URI
+  decidim:
+    system:
+      actions:
+        confirm_destroy: Ar tikrai norite pašalinti tai?
+        destroy: Pašalinti
+        edit: Keisti
+        new: Nauja
+        save: Išsaugoti
+        title: Veiksmai
+      admins:
+        create:
+          error: Kuriant naują administratorių iškilo problema.
+          success: Administratorius sukurtas.
+        destroy:
+          success: Administratorius pašalintas.
+        edit:
+          title: Keisti administratorių
+          update: Atnaujinti
+        index:
+          title: Administratoriai
+        new:
+          create: Sukurti
+          title: Naujas administratorius
+        update:
+          error: Atnaujinant šį administratorių iškilo problema.
+          success: Administratorius atnaujintas.
+      default_pages:
+        placeholders:
+          content: Administratoriaus suvestinės statiniame puslapyje %{page} įrašykite prasmingą turinį.
+          title: "%{page} numatytasis pavadinimas"
+      menu:
+        admins: Administratoriai
+        dashboard: Suvestinė
+        oauth_applications: "„OAuth“ programos"
+        organizations: Organizacijos
+      models:
+        admin:
+          fields:
+            created_at: Sukurta
+            email: E. paštas
+          name: Administratorius
+          validations:
+            email_uniqueness: jau yra kitas administratorius su tokiu pačiu e. pašto adresu.
+        oauth_application:
+          fields:
+            created_at: Sukurta
+            name: "„OAuth“ programos pavadinimas"
+            organization_name: Organizacija
+          name: "„OAuth“ programa"
+        organization:
+          actions:
+            save_and_invite: Sukurti organizaciją ir pakviesti administratorių
+          fields:
+            created_at: Sukurta
+            name: Pavadinimas
+            omniauth_settings: "„Omniauth“ nuostatos"
+            smtp_settings: SMTP nuostatos
+          name: Organizacija
+      oauth_applications:
+        create:
+          error: Kuriant šią programą iškilo problema.
+          success: Programa sukurta.
+        destroy:
+          error: Naikinant šią programą iškilo problema.
+          success: Programa panaikinta.
+        edit:
+          save: Išsaugoti
+          title: Keisti programą
+        form:
+          select_organization: Pasirinkti organizaciją
+        index:
+          confirm_delete: Ar tikrai norite panaikinti šią programą?
+          title: "„OAuth“ programos"
+        new:
+          save: Išsaugoti
+          title: Naujas prašymas
+        update:
+          error: Atnaujinant šią programą iškilo problema.
+          success: Programa atnaujinta.
+      organizations:
+        create:
+          error: Kuriant naują organizaciją iškilo problema.
+          success: Organizacija sukurta.
+        edit:
+          secondary_hosts_hint: Kiekvieną iš jų įrašykite į naują eilutę.
+        index:
+          title: Organizacijos
+        new:
+          reference_prefix_hint: Nuorodos priešdėlis naudojamas visiems organizacijos ištekliams unikaliai identifikuoti.
+          secondary_hosts_hint: Kiekvieną iš jų įrašykite į naują eilutę.
+          title: Nauja organizacija
+        omniauth_settings:
+          decidim:
+            client_id: Kliento ID
+            client_secret: Kliento paslaptis
+            site_url: Svetainės URL
+          enabled: Įjungta
+          enabled_by_default: Šis teikėjas įjungtas pagal numatytuosius parametrus. Jis gali būti keičiamas, bet negali būti išjungiamas.
+          facebook:
+            app_id: Programos ID
+            app_secret: Programos paslaptis
+          google_oauth2:
+            client_id: Kliento ID
+            client_secret: Kliento paslaptis
+          icon: Piktograma
+          icon_path: Piktogramos kelias
+          twitter:
+            api_key: API raktas
+            api_secret: API paslaptis
+        smtp_settings:
+          instructions:
+            from_label: 'E. laiško siuntėjas: "your-organization-name <your-organization@your-provider.org>". Palikite tuščią, kad galėtumėte naudoti „from_email“ kaip žymą.'
+          placeholder:
+            from_email: jūsų-organizacija@jūsų-teikėjas.org
+            from_label: jūsų-organizacijos-pavadinimas
+        update:
+          error: Atnaujinant šią organizaciją iškilo problema.
+          success: Organizacija atnaujinta.
+        users_registration_mode:
+          disabled: Prieiga galima tik iš išorės paskyrų.
+          enabled: Leisti dalyviams registruotis ir prisijungti
+          existing: neleiskite dalyviams užsiregistruoti, bet leiskite esamiems dalyviams prisijungti.
+      shared:
+        notices:
+          no_organization_warning_html: Kad galėtumėte pradėti, turite sukurti organizaciją. Prieš imdamiesi tolesnių veiksmų, perskaitykite %{guide}.
+          our_getting_started_guide: mūsų veiklos pradžios vadovas
+      titles:
+        dashboard: Suvestinė

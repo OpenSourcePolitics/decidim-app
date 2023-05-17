@@ -1,0 +1,53 @@
+---
+hr:
+  activemodel:
+    models:
+      decidim/surveys/closed_survey_event: Završetak ankete
+      decidim/surveys/opened_survey_event: Početak ankete
+  decidim:
+    components:
+      surveys:
+        actions:
+          answer: Odgovori
+        name: Anketa
+        settings:
+          global:
+            announcement: Objava
+            clean_after_publish: Obriši odgovore pri objavi ankete
+          step:
+            allow_answers: Dopusti odgovore
+            allow_unregistered: Dopusti neregistriranim korisnicima da ispune anketu
+            allow_unregistered_help: Ako je omogućeno, za ispunjavanje ankete nije potrebna prijava. To može dovesti do loših ili nepouzdanih podataka i veće izloženosti automatiziranim napadima. Upotrebljavajte s oprezom!
+            announcement: Objava
+    events:
+      surveys:
+        survey_closed:
+          email_intro: Anketa %{resource_title} u participativnom prostoru %{participatory_space_title} je zatvorena.
+          email_outro: Primili ste ovu obavijest jer pratite participativni prostor %{participatory_space_title}. Klikom na prethodnu poveznicu možete zaustaviti primanje obavijesti.
+          email_subject: Anketa u participativnom prostoru %{participatory_space_title} je dovršena
+          notification_title: Anketa <a href="%{resource_path}">%{resource_title}</a> u participativnom prostoru <a href="%{participatory_space_url}">%{participatory_space_title}</a> je dovršena.
+        survey_opened:
+          email_intro: 'Anketa %{resource_title} u participativnom prostoru %{participatory_space_title} sada je otvorena. Možete sudjelovati na stranici:'
+          email_outro: Primili ste ovu obavijest jer pratite participativni prostor %{participatory_space_title}. Klikom na prethodnu poveznicu možete zaustaviti primanje obavijesti.
+          email_subject: Nova anketa u participativnom prostoru %{participatory_space_title}
+          notification_title: Anketa <a href="%{resource_path}">%{resource_title}</a> u participativnom prostoru <a href="%{participatory_space_url}">%{participatory_space_title}</a> sada je otvorena.
+    metrics:
+      survey_answers:
+        description: Broj anketa na koje su sudionici odgovorili
+        object: odgovori na ankete
+        title: Odgovori na ankete
+    surveys:
+      admin:
+        exports:
+          survey_user_answers: Odgovori sudionika ankete
+        surveys:
+          update:
+            invalid: Došlo je do problema pri spremanju ankete.
+            success: Anketa je uspješno spremljena.
+      last_activity:
+        new_survey_at_html: "<span>Nova anketa u %{link}</span>"
+      surveys:
+        answer:
+          invalid: Došlo je do problema pri ispunjavanju ankete.
+          spam_detected: Došlo je do problema pri ispunjavanju obrasca. Možda ste bili prebrzi. Možete li pokušati ponovno?
+          success: Anketa je uspješno ispunjena.

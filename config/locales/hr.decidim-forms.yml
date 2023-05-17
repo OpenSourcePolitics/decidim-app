@@ -1,0 +1,168 @@
+---
+hr:
+  activemodel:
+    attributes:
+      answer:
+        body: Odgovori
+      question:
+        max_choices: Maksimalni broj odabira
+        question_type: Vrsta
+      questionnaire_question:
+        mandatory: Obvezno
+    errors:
+      models:
+        answer:
+          attributes:
+            choices:
+              missing: nisu potpuni
+              too_many: je previše
+        questionnaire:
+          request_invalid: Došlo je do pogreške pri obradi zahtjeva. Pokušajte ponovno
+  decidim:
+    forms:
+      admin:
+        models:
+          components:
+            description: Opis
+            tos: Uvjeti pružanja usluga
+        questionnaires:
+          actions:
+            back: Povratak na pitanja
+            show: Prikaži odgovore
+          answer_option:
+            answer_option: Opcija odgovora
+            free_text: Slobodan tekst
+            remove: Ukloni
+            statement: Izjava
+          answers:
+            actions:
+              back: Povratak na odgovore
+              export: Izvezi
+              show: Prikaži odgovore
+            empty: Još nema nijednog odgovora
+            export:
+              answer:
+                title: 'Odgovor br. #%{number}'
+            index:
+              title: 'Ukupan broj odgovora: %{total}'
+            show:
+              title: 'Odgovor br. #%{number}'
+          display_condition:
+            answer_option: Opcija odgovora
+            condition_question: Pitanje
+            condition_type: Uvjet
+            condition_types:
+              answered: Odgovoreno
+              equal: Jednako
+              match: Uključuje tekst
+              not_answered: Nije odgovoreno
+              not_equal: Nije jednako
+            condition_value: Uključeni tekst
+            display_condition: Uvjet prikaza
+            mandatory: Ovaj uvjet mora uvijek biti ispunjen bez obzira na status drugih uvjeta
+            remove: Ukloni
+            save_warning: Ne zaboravite spremiti obrazac prije konfiguriranja uvjeta prikaza
+            select_answer_option: Odaberite opciju odgovora
+            select_condition_question: Odaberite pitanje
+            select_condition_type: Odaberite vrstu uvjeta
+          edit:
+            save: Spremi
+            title: Uređivanje upitnika
+          form:
+            add_question: Dodaj pitanje
+            add_separator: Dodaj razdjelnik
+            already_answered_warning: Ne možete mijenjati pitanja obrasca jer su neki korisnici već odgovorili na njega.
+            collapse: Sažmi prikaz svih pitanja
+            expand: Proširi prikaz svih pitanja
+            preview: Pretpregled
+            title: Uređivanje obrasca
+            unpublished_warning: Obrazac nije objavljen. Možete izmijeniti pitanja, ali to će dovesti do brisanja postojećih odgovora.
+          matrix_row:
+            matrix_row: Redak
+            remove: Ukloni
+            statement: Izjava
+          question:
+            add_answer_option: Dodaj opciju odgovora
+            add_display_condition: Dodaj uvjet prikaza
+            add_display_condition_info: Za konfiguraciju uvjeta prikaza spremite obrazac
+            add_matrix_row: Dodaj redak
+            any: Bilo koje
+            collapse: Sažmi
+            description: Opis
+            down: Dolje
+            expand: Proširi
+            question: Pitanje
+            remove: Ukloni
+            statement: Izjava
+            up: Gore
+          separator:
+            down: Dolje
+            remove: Ukloni
+            separator: Razdjelnik
+            up: Gore
+          update:
+            invalid: Došlo je do problema pri spremanju obrasca.
+            success: Obrasci su uspješno spremljeni.
+      errors:
+        answer:
+          body: Polje teksta ne može biti prazno
+      files:
+        extension_whitelist: 'Prihvaćeni formati:'
+      images:
+        dimensions_info: 'Ova će slika biti:'
+        processors:
+          resize_and_pad: Prilagodba veličine i dodavanje popune
+          resize_to_fit: Prilagodba veličine po mjeri
+      question_types:
+        long_answer: Dugi odgovor
+        matrix_multiple: Matrica (višestruka opcija)
+        matrix_single: Matrica (jedna opcija)
+        multiple_option: Višestruka opcija
+        short_answer: Kratak odgovor
+        single_option: Jedna opcija
+        sorting: Sortiranje
+      questionnaires:
+        answer:
+          invalid: Došlo je do problema pri ispunjavanju obrasca.
+          max_choices_alert: Označeno je previše odabira
+          success: Obrazac je uspješno ispunjen.
+        question:
+          max_choices: 'Maksimalni broj odabira: %{n}'
+        show:
+          answer_questionnaire:
+            anonymous_user_message: <a href="%{sign_in_link}">Prijavite se svojim računom</a> ili <a href="%{sign_up_link}">se registrirajte</a> za ispunjavanje obrasca.
+            title: Ispuni obrazac
+          current_step: Korak %{step}
+          of_total_steps: od %{total_steps}
+          questionnaire_answered:
+            body: Već ste ispunili ovaj obrazac.
+            title: Već je odgovoreno
+          questionnaire_closed:
+            body: Obrazac je zatvoren i ne može se ispunjavati.
+            title: Obrazac je zatvoren
+          questionnaire_for_private_users:
+            body: Obrazac je dostupan samo privatnim korisnicima
+            title: Obrazac je zatvoren
+          questionnaire_js_disabled:
+            body: Neke od značajki ovog obrasca bit će onemogućene. Za bolje iskustvo uključite JavaScript u pregledniku.
+            title: JavaScript je onemogućen
+          questionnaire_not_published:
+            body: Obrazac još nije objavljen.
+          tos_agreement: Sudjelovanjem prihvaćate uvjete pružanja usluga
+      step_navigation:
+        show:
+          are_you_sure: Nije moguće poništiti radnju i nećete moći uređivati svoje odgovore. Jeste li sigurni?
+          back: Povratak
+          continue: Nastavi
+          submit: Pošalji
+      user_answers_serializer:
+        body: Odgovori
+        completion: Dovršetak
+        created_at: Odgovoreno
+        id: Identifikacijska oznaka odgovora
+        ip_hash: Sažimanje IP-a
+        question: Pitanje
+        registered: Registriran
+        session_token: Identifikator korisnika
+        unregistered: Nije registriran
+        user_status: Status korisnika

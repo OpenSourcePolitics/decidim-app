@@ -1,0 +1,31 @@
+---
+da:
+  activerecord:
+    models:
+      decidim/pages/page:
+        one: Side
+        other: Sider
+  decidim:
+    admin_log:
+      page:
+        update: "%{user_name} opdaterede %{resource_name}-siden i %{space_name}"
+    components:
+      pages:
+        name: Side
+        settings:
+          global:
+            announcement: Meddelelse
+          step:
+            announcement: Meddelelse
+    pages:
+      admin:
+        models:
+          components:
+            body: Brødtekst
+        pages:
+          edit:
+            save: Opdater
+            title: Rediger side
+          update:
+            invalid: Der var et problem med at gemme siden.
+            success: Siden blev gemt.

@@ -1,0 +1,143 @@
+---
+mt:
+  activemodel:
+    attributes:
+      oauth_application:
+        name: Isem tal-Applikazzjoni OAuth
+        organization_logo: Logo tal-organizzazzjoni (kaxxa)
+        organization_name: Organizzazzjoni
+        organization_url: Il-URL tal-organizzazzjoni
+        redirect_uri: URI ridirett
+    errors:
+      models:
+        oauth_application:
+          attributes:
+            redirect_uri:
+              must_be_ssl: Il-URI ridirett irid ikun SSL URI
+  decidim:
+    system:
+      actions:
+        confirm_destroy: Żgur trid tħassarha?
+        destroy: Ħassar
+        edit: Editja
+        new: Ġdida
+        save: Issejvja
+        title: Azzjonijiet
+      admins:
+        create:
+          error: Kien hemm problema biex jinħoloq amministratur ieħor.
+          success: L-amministratur inħoloq
+        destroy:
+          success: L-amministratur tħassar
+        edit:
+          title: Editja l-amministratur
+          update: Aġġorna
+        index:
+          title: Amministraturi
+        new:
+          create: Oħloq
+          title: Amministratur ġdid
+        update:
+          error: Kien hemm problema biex jiġi aġġornata dan l-amministratur.
+          success: L-amministratur ġie aġġornat
+      default_pages:
+        placeholders:
+          content: Jekk jogħġbok żid kontenut sinifikattiv fil-paġna statika %{page} fuq id-dashboard tal-amministratur.
+          title: Titlu prestabbilit għal %{page}
+      menu:
+        admins: Amministraturi
+        dashboard: Dashboard
+        oauth_applications: Applikazzjonijiet OAuth
+        organizations: Organizzazzjonijiet
+      models:
+        admin:
+          fields:
+            created_at: Inħolqot fi
+          name: Amministratur
+          validations:
+            email_uniqueness: diġà jeżisti amministratur ieħor bl-istess indirizz tal-email
+        oauth_application:
+          fields:
+            created_at: Inħolqot fi
+            name: Isem tal-applikazzjoni OAuth
+            organization_name: Organizzazzjoni
+          name: Applikazzjonijiet OAuth
+        organization:
+          actions:
+            save_and_invite: Oħloq organizzazzjoni & stieden amministratur
+          fields:
+            created_at: Inħolqot fi
+            name: Isem
+            omniauth_settings: Konfigurazzjonijiet tal-Omniauth
+            smtp_settings: Konfigurazzjonijiet SMTP
+          name: Organizzazzjoni
+      oauth_applications:
+        create:
+          error: Kien hemm problema biex tinħoloq din l-applikazzjoni.
+          success: L-applikazzjoni inħolqot.
+        destroy:
+          error: Kien hemm problema biex tinqered din l-applikazzjoni.
+          success: L-applikazzjoni inqerdet.
+        edit:
+          save: Issejvja
+          title: Editja l-applikazzjoni
+        form:
+          select_organization: Agħżel organizzazzjoni
+        index:
+          confirm_delete: Żgur trid tħassar din l-applikazzjoni?
+          title: Applikazzjonijiet OAuth
+        new:
+          save: Issejvja
+          title: Applikazzjoni ġdida
+        update:
+          error: Kien hemm problema biex tiġi aġġornata din l-applikazzjoni.
+          success: L-applikazzjoni ġiet aġġornata.
+      organizations:
+        create:
+          error: Kien hemm problema biex tinħoloq organizzazzjoni ġdida.
+          success: L-organizzazzjoni nħolqot.
+        edit:
+          secondary_hosts_hint: Daħħal kull waħda minnhom f’linja ġdida
+        index:
+          title: Organizzazzjonijiet
+        new:
+          reference_prefix_hint: Il-prefiss ta’ referenza jintuża biex jidentifika b’mod uniku r-riżorsi fl-organizzazzjoni kollha
+          secondary_hosts_hint: Daħħal kull waħda minnhom f’linja ġdida
+          title: Organizzazzjoni ġdida
+        omniauth_settings:
+          decidim:
+            client_id: ID tal-Klijent
+            client_secret: Sigriet tal-klijent
+            site_url: URL tas-sit
+          enabled: Attivat
+          enabled_by_default: Dan il-fornitur huwa attivat b’mod prestabbilit. Jista’ jiġi editjat iżda mhux diżattivat.
+          facebook:
+            app_id: ID tal-app
+            app_secret: Sigriet tal-app
+          google_oauth2:
+            client_id: ID tal-Klijent
+            client_secret: Sigriet tal-klijent
+          icon: Ikona
+          icon_path: Indirizz tal-ikona
+          twitter:
+            api_key: Ċavetta API
+            api_secret: Sigriet tal-API
+        smtp_settings:
+          instructions:
+            from_label: 'Il-mittent tal-email se jkun: "isem-l-organizzazzjoni-tiegħek <isem-l-organizzazzjoni-tiegħek@il-fornitur-tiegħek.org>". Ħalli l-vojt biex tuża l-“from_email” bħala tikketta'
+          placeholder:
+            from_email: isem-l-organizzazzjoni-tiegħek@il-fornitur-tiegħek.org
+            from_label: isem-l-organizzazzjoni-tiegħek
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ din l-organizzazzjoni.
+          success: L-organizzazzjoni ġiet aġġornata.
+        users_registration_mode:
+          disabled: L-aċċess jista’ jsir biss b’kontijiet esterni
+          enabled: Ippermetti lill-parteċipanti jirreġistraw u jilloggjaw
+          existing: Tħallix lill-parteċipanti jirreġistraw, iżda ħalli lill-parteċipanti eżistenti jilloggjaw
+      shared:
+        notices:
+          no_organization_warning_html: Trid toħloq organizzazzjoni biex tibda. Kun ċert li taqra %{guide} qabel ma tipproċedi.
+          our_getting_started_guide: il-gwida tagħna biex nibdew
+      titles:
+        dashboard: Dashboard

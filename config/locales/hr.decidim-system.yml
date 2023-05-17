@@ -1,0 +1,141 @@
+---
+hr:
+  activemodel:
+    attributes:
+      oauth_application:
+        name: Ime OAuth aplikacije
+        organization_logo: Logotip organizacije (kvadrat)
+        organization_name: Organizacija
+        organization_url: URL organizacije
+        redirect_uri: URI za preusmjeravanje
+    errors:
+      models:
+        oauth_application:
+          attributes:
+            redirect_uri:
+              must_be_ssl: URI za preusmjeravanje mora biti SSL URI
+  decidim:
+    system:
+      actions:
+        confirm_destroy: Želite li zaista ovo izbrisati?
+        destroy: Izbriši
+        edit: Uređivanje
+        new: Novo
+        save: Spremi
+        title: Radnje
+      admins:
+        create:
+          error: Došlo je do problema pri stvaranju novog administratora.
+          success: Administrator je uspješno stvoren
+        destroy:
+          success: Administrator je uspješno izbrisan
+        edit:
+          title: Uređivanje administratora
+          update: Ažuriraj
+        index:
+          title: Administratori
+        new:
+          create: Stvori
+          title: Novi administrator
+        update:
+          error: Došlo je do problema pri ažuriranju administratora.
+          success: Administrator je uspješno ažuriran
+      default_pages:
+        placeholders:
+          content: Dodajte smislen sadržaj statičnoj stranici %{page} na administratorskoj nadzornoj ploči.
+          title: Zadani naslov za %{page}
+      menu:
+        admins: Administratori
+        dashboard: Nadzorna ploča
+        oauth_applications: OAuth aplikacije
+        organizations: Organizacije
+      models:
+        admin:
+          fields:
+            created_at: Stvoreno
+            email: Adresa e-pošte
+          name: Administrator
+          validations:
+            email_uniqueness: postoji drugi administrator s istom adresom e-pošte
+        oauth_application:
+          fields:
+            created_at: Stvoreno
+            name: Naziv OAuth aplikacije
+            organization_name: Organizacija
+          name: OAuth aplikacija
+        organization:
+          actions:
+            save_and_invite: Stvori organizaciju i pozovi administratora
+          fields:
+            created_at: Stvoreno
+            name: Naziv
+            omniauth_settings: Omniauth postavke
+            smtp_settings: SMTP postavke
+          name: Organizacija
+      oauth_applications:
+        create:
+          error: Došlo je do problema pri stvaranju aplikacije.
+          success: Aplikacija je uspješno stvorena.
+        destroy:
+          error: Došlo je do problema pri uništavanju aplikacije.
+          success: Aplikacija je uspješno uništena.
+        edit:
+          save: Spremi
+          title: Uređivanje aplikacije
+        form:
+          select_organization: Odaberite organizaciju
+        index:
+          confirm_delete: Želite li zaista izbrisati aplikaciju?
+          title: OAuth aplikacije
+        new:
+          save: Spremi
+          title: Nova aplikacija
+        update:
+          error: Došlo je do problema pri ažuriranju aplikacije.
+          success: Aplikacija je uspješno ažurirana.
+      organizations:
+        create:
+          error: Došlo je do problema pri stvaranju nove organizacije.
+          success: Organizacija je uspješno stvorena.
+        edit:
+          secondary_hosts_hint: Svaku od njih unesite u novi redak
+        index:
+          title: Organizacije
+        new:
+          reference_prefix_hint: Referentni prefiks upotrebljava se za jedinstvenu identifikaciju izvora u cijeloj organizaciji
+          secondary_hosts_hint: Svaku od njih unesite u novi redak
+          title: Nova organizacija
+        omniauth_settings:
+          decidim:
+            client_id: Identifikacijska oznaka klijenta
+            client_secret: Tajni ključ klijenta
+            site_url: URL mjesta
+          enabled: Omogućeno
+          enabled_by_default: Taj je pružatelj usluga omogućen prema zadanim postavkama. Može se uređivati, ali ne i onemogućiti.
+          facebook:
+            app_id: Identifikacijska oznaka aplikacije
+            app_secret: Tajni ključ aplikacije
+          google_oauth2:
+            client_id: Identifikacijska oznaka klijenta
+            client_secret: Tajni ključ klijenta
+          icon: Ikona
+          icon_path: Put ikone
+          twitter:
+            api_key: Ključ za API
+            api_secret: Tajni ključ za API
+        smtp_settings:
+          instructions:
+            from_label: 'Pošiljatelj e-pošte bit će: "your-organization-name <your-organization@your-provider.org>". Ostavite prazno ako kao oznaku želite upotrebljavati ''from_email'''
+        update:
+          error: Došlo je do problema pri ažuriranju organizacije.
+          success: Organizacija je uspješno ažurirana.
+        users_registration_mode:
+          disabled: Pristup je moguć samo s vanjskim računima
+          enabled: Dopusti registraciju i prijavu sudionika
+          existing: Nemoj dopustiti registraciju novih, već samo prijavu postojećih sudionika
+      shared:
+        notices:
+          no_organization_warning_html: Za početak morate stvoriti organizaciju. Prije nastavka pročitajte %{guide}.
+          our_getting_started_guide: naš vodič za početak rada
+      titles:
+        dashboard: Nadzorna ploča
