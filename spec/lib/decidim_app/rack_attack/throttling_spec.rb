@@ -31,7 +31,7 @@ describe DecidimApp::RackAttack::Throttling do
     context "with defined match_data_h" do
       let(:match_data_h) do
         {
-          epoch_time: Date.new(2023,5,22).to_time.to_i,
+          epoch_time: Date.new(2023, 5, 22).to_time.to_i,
           period: 30
         }
       end
