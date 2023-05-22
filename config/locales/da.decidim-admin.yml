@@ -1,0 +1,843 @@
+---
+da:
+  activemodel:
+    attributes:
+      area:
+        area_type: Områdetype
+        name: Navn
+        organization: Organisation
+      area_type:
+        name: Navn
+        organization: Organisation
+        plural: Flertal
+      attachment:
+        attachment_collection_id: Mappe
+        description: Beskrivelse
+        file: Fil
+        title: Navn på bilag eller billede
+      attachment_collection:
+        description: Beskrivelse
+        name: Navn
+      category:
+        description: Beskrivelse
+        name: Navn
+        parent_id: Moder
+      component:
+        name: Navn
+        published_at: Offentliggjort på
+        weight: Vægt
+      id: ID
+      newsletter:
+        body: Krop
+        subject: Emne
+      organization:
+        address: SMTP-værtsnavn
+        alert_color: Varsling
+        badges_enabled: Mulighed for badges
+        comments_max_length: Bemærkninger maksimumslængde (Lad 0 forblive standardværdi)
+        cta_button_path: Sti til handlingsknappen
+        cta_button_text: Tekst til handlingsknappen
+        customize_welcome_notification: Tilpas velkomstmeddelelse
+        default_locale: Default locale
+        description: Beskrivelse
+        enable_omnipresent_banner: Vis allestedsnærværende banner
+        facebook_handler: Facebook-handler
+        favicon: Ikon
+        from: Fra e-mailadresse
+        github_handler: GitHub-handler
+        header_snippets: Header snippets
+        highlight_alternative_color: Fremhæv, alternativ
+        highlight_color: Fremhæv
+        highlighted_content_banner_action_subtitle: Underoverskrift til handlingsknap
+        highlighted_content_banner_action_title: Overskrift til handlingsknap
+        highlighted_content_banner_action_url: URL handlingsknap
+        highlighted_content_banner_enabled: Vis det fremhævede indholdsbanner
+        highlighted_content_banner_image: Billede
+        highlighted_content_banner_short_description: Kort beskrivelse
+        highlighted_content_banner_title: Betegnelse
+        instagram_handler: Instagram-handler
+        logo: Logo
+        machine_translation_display_priority: Prioritet for visning af maskinoversættelse
+        machine_translation_display_priority_original: Oprindelig tekst først
+        machine_translation_display_priority_translation: Oversat tekst først
+        name: Navn
+        official_img_footer: Officielt logo
+        official_img_header: Officielt logo
+        official_url: URL for officielle organisationer
+        omnipresent_banner_short_description: Kort beskrivelse
+        omnipresent_banner_title: Betegnelse
+        omnipresent_banner_url: URL
+        password: Adgangskode
+        port: Port
+        primary_color: Primær
+        reference_prefix: Præfiks
+        rich_text_editor_in_public_views: Aktiverer rich text editor for deltagere
+        secondary_color: Sekundær
+        send_welcome_notification: Send velkomstmeddelelse
+        show_statistics: Vis statistikker
+        success_color: Vellykket
+        time_zone: Tidszone
+        tos_version: Version af brugsbetingelser
+        twitter_handler: Twitter-handler
+        user_groups_enabled: Aktivér grupper
+        user_name: Brugernavn
+        warning_color: Advarsel
+        welcome_notification_body: Velkomstmeddelelse, tekst
+        welcome_notification_subject: Velkomstmeddelelse, emne
+        youtube_handler: YouTube-handler
+      scope:
+        code: Kode
+        name: Navn
+        organization: Organisation
+        parent_id: Moder
+        scope_type: Anvendelsesområde
+        scope_type_id: Anvendelsesområde
+      scope_type:
+        name: Navn
+        organization: Organisation
+        plural: Flertal
+      static_page:
+        changed_notably: Der er sket betydelige ændringer.
+        content: Indhold
+        organization: Organisation
+        show_in_footer: Vis i sidefoden
+        slug: URL-slug
+        title: Betegnelse
+        weight: Vægt
+      static_page_topic:
+        description: Beskrivelse
+        show_in_footer: Vis i sidefoden
+        title: Betegnelse
+        weight: Vægt
+      user_group_csv_verification:
+        file: Fil
+    errors:
+      models:
+        organization:
+          attributes:
+            official_img_footer:
+              allowed_file_content_types: Ugyldig billedfil
+            official_img_header:
+              allowed_file_content_types: Ugyldig billedfil
+  activerecord:
+    attributes:
+      decidim/static_page:
+        content: Indhold
+        slug: URL-slug
+        title: Betegnelse
+      doorkeeper/application:
+        authorize_url: Godkend URL
+        client_id: Kunde-ID
+        client_secret: Kunde Secret
+        organization_name: Organisationens navn
+        organization_url: Organisationens URL
+        redirect_uri: Videresendelse af URI
+        site: Websted
+  decidim:
+    admin:
+      actions:
+        add: Tilføj
+        browse: Gennemse
+        export: Eksport
+        manage: Administrer
+        new: Nyt %{name}
+        per_page: Pr. side
+        permissions: Tilladelser
+        reject: Afvis
+        share: Del
+        verify: Verificer
+      admin_terms_of_use:
+        accept:
+          error: Der er sket en fejl ved accepten af brugsbetingelserne.
+          success: Perfekt! Du har accepteret de administrative brugsbetingelser.
+        actions:
+          accept: Jeg er enig i disse administrative betingelser.
+          are_you_sure: Er du sikker på, at du vil afvise admin?
+          refuse: Afvis admin-betingelser
+          title: Godkend brugsbetingelser
+        required_review:
+          alert: 'Påkrævet: Gennemgå vores administrative brugsbetingelser'
+          callout: Brug et øjeblik på at gennemgå de administrative brugsbetingelser. Ellers vil du ikke være i stand til at administrere platformen.
+          cta: Gennemgå dem nu.
+        title: Administrative brugsbetingelser
+      area_types:
+        create:
+          error: Der var et problem med oprettelsen af en ny områdetype.
+          success: Områdetype oprettet.
+        destroy:
+          success: Områdetype slettet
+        edit:
+          title: Rediger områdetype
+          update: Opdater
+        new:
+          create: Opret arealtype
+          title: Ny områdetype
+        update:
+          error: Der var et problem med ajourføringen af denne type område.
+          success: Områdetype opdateret med et positivt resultat
+      areas:
+        create:
+          error: Der var et problem med at skabe et nyt område.
+          success: Området er skabt med succes.
+        destroy:
+          has_spaces: Områder, der er afhængige af mellemrum, må ikke være afhængige af hinanden for at blive slettet.
+          success: Området er blevet ødelagt
+        edit:
+          title: Rediger område
+          update: Opdater
+        new:
+          create: Opret område
+          title: Nyt område
+        no_areas: Ingen områder
+        update:
+          error: Der var et problem med en opdatering af dette område.
+          success: Området er opdateret
+      attachment_collections:
+        create:
+          error: Der opstod et problem med oprettelsen af en ny mappe.
+          success: Mappen oprettes med succes.
+        destroy:
+          success: Mappen blev ødelagt med succes.
+        edit:
+          title: Rediger mappe
+          update: Opdater
+        index:
+          attachment_collection_used: Denne folder kan ikke fjernes, fordi den er i brug.
+          attachment_collections_title: Vedhæftede mapper
+        new:
+          create: Opret
+          title: Ny mappe
+        update:
+          error: Der var et problem med ajourføringen af denne folder.
+          success: Mappen ajourføres med succes.
+      attachments:
+        create:
+          error: Der var et problem med oprettelsen af et nyt bilag.
+          success: Bilag oprettet.
+        destroy:
+          success: Bilaget er slettet.
+        edit:
+          title: Rediger bilag
+          update: Opdater
+        index:
+          attachments_title: Bilag
+        new:
+          create: Opret bilag
+          title: Ny vedhæftet fil
+        update:
+          error: Der var et problem med opdatering af dette bilag.
+          success: Bilaget er opdateret.
+      autocomplete:
+        no_results: Ingen resultater fundet
+        search_prompt: Skriv mindst tre søgeord
+      categories:
+        create:
+          error: Der var et problem med oprettelsen af denne kategori.
+          success: Kategori oprettet.
+        destroy:
+          error: Der var et problem med at slette denne kategori. Slet underkategorierne først, sørg for, at ingen anden enhed tilhører denne kategori, og prøv igen.
+          success: Kategorien slettet.
+        edit:
+          title: Rediger kategori
+          update: Opdater
+        index:
+          categories_title: Kategorier
+          category_used: Denne kategori kan ikke fjernes, da den er i brug.
+        new:
+          create: Opret kategori
+          title: Ny kategori
+        update:
+          error: Der var et problem med en opdatering af denne kategori.
+          success: Kategorien er blevet opdateret med et godt resultat.
+      component_permissions:
+        update:
+          error: Der var et problem med at ajourføre tilladelserne til denne komponent.
+          success: Tilladelser opdateret.
+      components:
+        create:
+          error: Der var et problem med at skabe denne komponent.
+          success: Komponenten er oprettet.
+        destroy:
+          error: Der var et problem med at slette denne komponent.
+          success: Komponenten er slettet.
+        edit:
+          title: Rediger element
+          update: Opdater
+        form:
+          default_step_settings: Indstillinger for standardtrin
+          global_settings: Generelle indstillinger
+          step_settings: Trinindstillinger
+        index:
+          add: Tilføj komponent
+          headers:
+            actions: Handlinger
+            name: Komponentens navn
+            type: Komponentens type
+        new:
+          add: Tilføj komponent
+          title: 'Tilføj komponent: %{name}'
+        publish:
+          success: Komponenten er offentliggjort.
+        title: Komponenter
+        unpublish:
+          success: Komponenten er blevet fjernet.
+        update:
+          error: Der var et problem med opdateringen af denne komponent.
+          success: Komponenten blev opdateret.
+      dashboard:
+        show:
+          view_more_logs: Se flere logs
+          welcome: Velkommen til Decidim administrationspanel
+      exports:
+        export_as: "%{name} som %{export_format}"
+        formats:
+          CSV: CSV
+          Excel: Excel
+          FormPDF: PDF
+          JSON: JSON
+        notice: Din eksport foregår i øjeblikket. Du vil modtage en e-mail, når den er færdig.
+      filters:
+        category_id_eq:
+          label: Kategori
+        filter_label: Filter
+        officialized_at_null:
+          label: Tilstand
+          values:
+            'false': Officialiseret
+            'true': Ikke officialiseret
+        private_space_eq:
+          label: Privat
+          values:
+            'false': Offentlig
+            'true': Privat
+        published_at_null:
+          label: Offentliggjort
+          values:
+            'false': Offentliggjort
+            'true': Ikke offentliggjort
+        scope_id_eq:
+          label: Anvendelsesområde
+        search_label: Søg
+        search_placeholder:
+          name_or_nickname_or_email_cont: Søg i %{collection} med e-mail, navn eller tilnavn.
+          title_cont: Søg i %{collection} med titel
+        state_eq:
+          label: Tilstand
+      help_sections:
+        error: Der var et problem med opdateringen af hjælpeafsnittene
+        form:
+          save: Gem
+        success: Hjælpeafsnit opdateret
+      impersonatable_users:
+        index:
+          filter:
+            all: Alle
+            managed: Administreret
+            not_managed: Ikke administreret
+          filter_by: Sorter efter
+          impersonate: Impersonate
+          impersonate_new_managed_user: Administrer ny deltager
+          managed: Administreret
+          name: Navn
+          needs_authorization_warning: Du skal have mindst én aktiveret tilladelse for denne organisation.
+          not_managed: Ikke administreret
+          promote: Fremme
+          search: Søg
+          status: Status
+          view_logs: Se logs
+      impersonations:
+        close_session:
+          error: Der var et problem med afslutningen af den aktuelle session om administration af deltagere.
+          success: Den nuværende impersonation-session er nu afsluttet.
+        create:
+          error: Der var et problem med administrationen af deltageren.
+          success: Den administrerede deltager er blevet oprettet.
+        form:
+          authorization_method: Godkendelsesmetode
+          name: Navn
+          reason: Begrundelse
+        new:
+          impersonate: Impersonate
+          impersonate_existing_managed_user: Administrer deltager ”(%{name})”
+          impersonate_existing_user: Administrer deltager ”(%{name})”
+          impersonate_new_managed_user: Administrer ny deltager
+      logs:
+        logs_list:
+          no_logs_yet: Der er endnu ingen logs.
+      managed_users:
+        promotion:
+          error: Der var et problem med at fremme den administrerede deltager.
+          success: Den administrerede deltager er blevet fremmet med succes.
+        promotions:
+          new:
+            explanation: De administrerede deltagere kan forfremmes til standarddeltagere. Det betyder, at de vil blive inviteret til applikationen, og du vil ikke kunne administrere dem igen. Den inviterede deltager vil modtage en e-mail med henblik på accept af din invitation.
+            new_managed_user_promotion: Fremme af ny, forvaltet deltager
+            promote: Fremme
+      menu:
+        admin_log: Log af admin aktiviteter
+        admins: Admins
+        appearance: Udseende
+        area_types: Områdetyper
+        areas: Områder
+        configuration: Konfiguration
+        dashboard: Dashboard
+        help_sections: Hjælpeafsnit
+        homepage: Hjemmeside
+        impersonations: Impersonations
+        newsletters: Nyhedsbreve
+        participants: Deltagere
+        scope_types: Områdetyper
+        scopes: Områder
+        settings: Indstillinger
+        static_pages: Sider
+        user_groups: Grupper
+        users: Deltagere
+      metrics:
+        metrics:
+          see_more_metrics: Se flere parametre
+      models:
+        area:
+          fields:
+            area_type: Områdetype
+            name: Navn
+        area_type:
+          fields:
+            name: Navn
+            plural: Flertal
+        attachment:
+          fields:
+            collection: Mappe
+            content_type: Type
+            file_size: Størrelse
+            title: Betegnelse
+          name: Bilag
+        attachment_collection:
+          name: Mappe
+        category:
+          name: Kategori
+        impersonation_log:
+          fields:
+            ended_at: Afsluttet kl.
+            expired_at: Udløbet kl.
+            reason: Begrundelse
+            started_at: Begyndte kl.
+            user: Deltager
+        newsletter:
+          fields:
+            created_at: Oprettet kl.
+            progress: Fremskridt
+            sent_at: Sendt på
+            sent_to: Sendt til
+            subject: Emne
+          name: Nyhedsbrev
+        participatory_space_private_user:
+          name: Privat deltager i detagelsesrum
+        scope:
+          fields:
+            name: Navn
+            scope_type: Anvendelsesområde
+        scope_type:
+          fields:
+            name: Navn
+            plural: Flertal
+        share_token:
+          fields:
+            created_at: Oprettet kl.
+            expires_at: Udløber kl.
+            last_used_at: Seneste tidsforbrug
+            times_used: Anvendte tidspunkter
+            token: Token
+            user: Oprettet af
+        static_page:
+          fields:
+            created_at: Oprettet kl.
+            title: Betegnelse
+        user:
+          fields:
+            created_at: Oprettelsesdato
+            email: E-mail
+            last_sign_in_at: Sidste dato for log-in
+            name: Navn
+            role: Stilling
+            roles:
+              user_manager: Deltageradministrator
+          name: Deltager
+        user_group:
+          fields:
+            actions: Handlinger
+            created_at: Oprettet kl.
+            document_number: Dokumentnummer
+            name: Navn
+            phone: Telefon
+            state: Tilstand
+            users_count: Antal deltagere
+      moderations:
+        index:
+          title: Ændringer
+        report:
+          reasons:
+            does_not_belong: Hører ikke til
+            offensive: Stødende
+            spam: Spam
+      newsletter_templates:
+        index:
+          preview_template: Forhåndsvisning
+          title: Skabeloner til nyhedsbreve
+          use_template: Brug denne skabelon
+        show:
+          preview: 'Skabelon til forhåndsvisning: %{template_name}'
+          use_template: Brug denne skabelon
+      newsletters:
+        create:
+          error: Der var et problem med oprettelsen af dette nyhedsbrev.
+          success: Nyhedsbrevet blev oprettet. Du bedes gennemgå det, inden det sendes.
+        deliver:
+          error: Der var et problem med udsendelsen af dette nyhedsbrev.
+          success: Nyhedsbrevet blev udsendt.
+        destroy:
+          error_already_sent: 'Kan ikke slette nyhedsbrevet: Det er allerede sendt.'
+          success: Nyhedsbrevet blev slettet.
+        edit:
+          save_and_preview: Gem og forhåndsvis
+          title: Rediger nyhedsbrev
+        index:
+          all: alle
+          all_users: Alle brugere
+          and: og
+          confirm_delete: Er du sikker på, at du vil slette dette nyhedsbrev?
+          followers: følgere
+          has_been_sent_to: 'Er sendt til:'
+          no_scopes: Ingen områder
+          not_sent: Ikke sendt
+          participants: deltagere
+          segmented_to: 'Segmenteret til %{subject}:'
+          subscribed_count: 'Abonneret:'
+          title: Nyhedsbreve
+        new:
+          save: Gem
+          title: Nyt nyhedsbrev
+        select_recipients_to_deliver:
+          all_spaces: Alle
+          all_users_help: Sender nyhedsbrevet til alle bekræftede brugere.
+          confirm_deliver: Er du sikker på, at du vil udsende dette nyhedsbrev? Denne handling kan ikke fortrydes.
+          deliver: Udsend nyhedsbrev
+          followers_help: Sender nyhedsbrevet til alle bekræftede brugere, der følger et hvilket som helst af de udvalgte detagelsesrum på listen.
+          none: Ingen
+          participants_help: Sender nyhedsbrevet til alle bekræftede brugere, der har deltaget i et hvilket som helst af de udvalgte detagelsesrum på listen.
+          recipients_count: Dette nyhedsbrev vil blive sendt til <strong id='recipients_count'>%{count}</strong> brugere.
+          scopes_help: Sender nyhedsbrevet til brugere, der har et eller flere af de valgte anvendelsesområder, som aktiveres i deres "Mine interesser" -indstillinger.
+          select_scopes: Filter for brugere, der har aktiveret et hvilket som helst udvalgt område i deres konto Mine Interesser-indstillinger.
+          select_spaces: Vælg rum til at segmentere nyhedsbrevet
+          select_users: Vælg, hvilke brugere du ønsker at tilsende nyhedsbrevet
+          send_to_all_users: Send til alle brugere
+          send_to_followers: Send til følgere
+          send_to_participants: Send til deltagere
+          title: Vælg modtagere at levere til
+          warning: "<strong>Bemærk:</strong> Dette nyhedsbrev sendes kun til brugere, der har aktiveret <em>I ønsker at modtage nyhedsbreve</em> i deres indstillinger for meddelelser."
+        send:
+          no_recipients: Ingen modtagere ifølge denne udvælgelse
+        show:
+          preview: Forhåndsvisning
+          select_recipients_to_deliver: Vælg modtagere at levere til
+          subject: Emne
+        update:
+          error: Der var et problem med at opdatere dette nyhedsbrev.
+          success: Nyhedsbrevet er opdateret. Du bedes gennemgå det, inden det sendes.
+      officializations:
+        create:
+          success: Deltager officialiseret
+        destroy:
+          success: Deltager afofficialiseret
+        index:
+          actions: Handlinger
+          badge: Badge
+          created_at: Oprettet kl.
+          name: Navn
+          nickname: Tilnavn
+          not_officialized: Ikke officialiseret
+          officialize: Officialisere
+          officialized: Officialiseret
+          reofficialize: Genofficialiseret
+          show_email: Vis e-mailadresse
+          status: Status
+          unofficialize: Afofficialisere
+        new:
+          badge: Officialiseringsbadge
+          officialize: Officialisere
+          title: Officialisere deltager "%{name}”
+        show_email_modal:
+          close_modal: Luk modal
+          description: Hvis du skal kontakte en deltager direkte, kan du klikke på knappen Vis for at se e-mailadressen. Denne handling vil blive logget.
+          email_address: E-mailadresse
+          full_name: Fulde navn
+          hidden: skjult
+          show: Vis
+          title: Vis e-mailadresse
+      organization:
+        edit:
+          title: Rediger organisation
+          update: Opdater
+        form:
+          facebook: Facebook
+          github: GitHub
+          instagram: Instagram
+          rich_text_editor_in_public_views_help: I nogle tekstområder vil deltagerne kunne indsætte nogle HTML-tags ved at bruge rich text editor.
+          social_handlers: Sociale
+          twitter: Twitter
+          url: URL
+          youtube: YouTube
+        update:
+          error: Der var et problem med at opdatere denne organisation.
+          success: Organisationen blev opdateret.
+      organization_appearance:
+        edit:
+          update: Opdater
+        form:
+          colors:
+            colors_title: Organisationsfarver
+            header_snippets_help: Brug dette felt til at tilføje ting til HTML-hovedet. Den mest almindelige brug er at integrere tredjepartstjenester, der kræver ekstra JavaScript eller CSS. Du kan også bruge ekstra metamærker til HTML. Bemærk, at dette kun vil ske på offentlige sider, ikke i den administrative del.
+          cta_button_path_help: 'Du kan overskrive, hvor handlingsknappen på forsiden linker til. Brug delvise stier, ikke fuldstændige URL''er her. Accepterer bogstaver, tal, bindestreger og streger og skal begynde med et bogstav. Handlingsknappen vises på forsiden mellem velkomstteksten og beskrivelsen. Eksempel: %{url}'
+          cta_button_text_help: Du kan overskrive teksten til handlingsknappen på forsiden for hvert af de tilgængelige sprog i din organisation. Hvis dette ikke er indstillet, anvendes standardværdien. Handlingsknappen vises på forsiden mellem velkomstteksten og beskrivelsen.
+          homepage_appearance_title: Rediger forsidens udseende
+          homepage_highlighted_content_banner_title: Fremhævet indholdsbanner
+          images:
+            layout_appearance_title: Rediger layoutets udseende
+            preview: Forhåndsvisning
+          omnipresent_banner_appearance_title: Rediger allestedsnærværende banner
+      organization_homepage:
+        edit:
+          active_content_blocks: Aktive indholdsblokke
+          inactive_content_blocks: Inaktive indholdsblokke
+      organization_homepage_content_blocks:
+        edit:
+          update: Opdater
+      participatory_space_private_users:
+        create:
+          error: Der var et problem med at tilføje en privat deltager for dette detagelsesrum.
+          success: Der er skabt adgang til detagelsesrum for private deltagere.
+        destroy:
+          error: Der var et problem med at slette en privat deltager i dette detagelsesrum.
+          success: Adgang til detagelsesrum for private deltagere er blevet slettet.
+        index:
+          import_via_csv: Import via CSV
+          title: Privat deltager i detagelsesrum
+        new:
+          create: Opret
+          title: Ny privat deltager i detagelsesrum.
+      participatory_space_private_users_csv_imports:
+        create:
+          invalid: Der var et problem med at læse CSV-filen.
+          success: CSV-fil uploadet, vi sender en indbydelses-e-mail til deltagerne. Det kan tage et stykke tid.
+        new:
+          explanation: Upload din CSV-fil. Den skal have to kolonner med e-mail i den første kolonne af filen og navnet i den sidste kolonne af filen (e-mail, navn) på de brugere, du ønsker at tilføje til detagelsesrumme, uden overskrifter.
+          title: Upload din CSV-fil
+          upload: Upload
+      resource_permissions:
+        edit:
+          submit: Send
+          title: Rediger tilladelser
+        update:
+          success: Tilladelser opdateret.
+      scope_types:
+        create:
+          error: Der var et problem med at skabe en ny type område.
+          success: Områdetype oprettet.
+        destroy:
+          success: Områdetype slettet
+        edit:
+          title: Rediger områdetype
+          update: Opdater
+        new:
+          create: Opret områdetype
+          title: Nyt område
+        update:
+          error: Der var et problem med opdatering af denne områdetype.
+          success: Områdetypen opdateret
+      scopes:
+        create:
+          error: Der var et problem med at oprette et nyt omfang.
+          success: Omfang oprettet.
+        destroy:
+          success: Omfang slettet
+        edit:
+          title: Rediger område
+          update: Opdater
+        new:
+          create: Opret område
+          title: Nyt område
+        no_scopes: Ingen områder på dette niveau.
+        update:
+          error: Der var et problem med opdatering af dette omfang.
+          success: Området opdateret
+      share_tokens:
+        actions:
+          confirm_destroy: Er du sikker på, at du vil slette denne token?
+          destroy: Slet
+          share: Del
+        destroy:
+          error: Der var et problem med at slette denne token.
+          success: Token slettet.
+        share_tokens:
+          empty: Der er ingen aktive tokens
+          help: Disse tokens anvendes til offentligt at dele denne ikke-offentliggjorte ressource til enhver bruger. De vil blive skjult, når ressourcen offentliggøres. Klik på tokenens dele-ikon for at besøge den delelige URL.
+          title: Del tokens
+      shared:
+        gallery:
+          add_images: Tilføj billeder
+          delete_image: Slet billede
+          gallery_legend: Tilføj et billedgalleri (valgfrit)
+      static_page_topics:
+        create:
+          error: Der var et problem med at oprette et nyt emne.
+          success: Emnet blev oprettet.
+        destroy:
+          success: Emnet blev slettet
+        edit:
+          title: Rediger emne
+          update: Opdater emne
+        new:
+          create: Opret emne
+          title: Nyt emne
+        update:
+          error: Der var et problem med at opdatere dette emne.
+          success: Emnet opdateret
+      static_pages:
+        actions:
+          view: Vis offentlig side
+        create:
+          error: Der var et problem med at oprette en ny side.
+          success: Side oprettet.
+        destroy:
+          success: Side slettet
+        edit:
+          changed_notably_help: Hvis tjekket vil deltagerne få meddelelse om at acceptere de nye betingelser.
+          title: Rediger side
+          update: Opdater
+        form:
+          none: Ingen
+          slug_help: 'Brug delvise stier, ikke fuldstændige URL''er her. Accepterer bogstaver, tal, bindestreger og streger og skal begynde med et bogstav. Eksempel: %{url}'
+        index:
+          last_notable_change: Seneste væsentlige ændring
+        new:
+          create: Opret side
+          title: Ny side
+        topic:
+          destroy: Fjern emne
+          edit: Rediger emne
+          empty: Der er ingen sider under dette emne
+          without_topic: Sider uden emne
+        update:
+          error: Der var et problem med opdateringen af denne side.
+          success: Siden er blevet opdateret
+      titles:
+        admin_log: Admin log
+        area_types: Områdetyper
+        areas: Områder
+        authorization_workflows: Kontrolmetoder
+        dashboard: Dashboard
+        impersonatable_users: Administrerbare deltagere
+        impersonations: Administration af deltagere
+        metrics: Parametre
+        participants: Deltagere
+        scope_types: Områdetyper
+        scopes: Områder
+        static_pages: Sider
+        statistics: Aktivitet
+        user_groups: Grupper
+        users: Deltagere
+      user_group:
+        csv_verify:
+          invalid: Der var et problem med at læse CSV-filen.
+          success: CSV-fil uploadet, så vi verificerer, hvilke grupper der opfylder kriterierne. Det kan tage et stykke tid.
+        reject:
+          invalid: Der var et problem med at afvise denne gruppe.
+          success: Gruppen blev afvist
+        verify:
+          invalid: Der var et problem med at verificere denne gruppe.
+          success: Gruppe verificeret
+      user_groups:
+        index:
+          filter:
+            all: Alle
+            pending: Afventer
+            rejected: Afvist
+            verified: Verificeret
+          filter_by: Sorter efter
+          search: Søg
+          state:
+            pending: Afventer
+            rejected: Afvist
+            verified: Verificeret
+          verify_via_csv: Bekræft via CSV
+      user_groups_csv_verifications:
+        new:
+          explanation: Upload din CSV-fil. De skal have de officielle mails fra grupperne i din organisation i den første kolonne i filen uden headere. Kun grupper, der har bekræftet deres e-mail, og som har en e-mail fra CSV-filen, vil blive valideret.
+          title: Upload din CSV-fil
+          upload: Upload
+      users:
+        create:
+          error: Der var et problem med at invitere denne admin.
+          success: Deltager inviteret.
+        destroy:
+          error: Der var et problem med forsøget på at slette denne admin.
+          success: Deltageren er ikke længere administrator.
+        form:
+          email: E-mail
+          name: Navn
+          role: Stilling
+        new:
+          create: Inviter
+          title: Inviter deltageren som administrator
+      users_statistics:
+        users_count:
+          admins: Admins
+          last_day: Sidste dag
+          last_month: Sidste måned
+          last_week: Sidste uge
+          no_users_count_statistics_yet: Der findes endnu ingen statistikker over brugerne
+          participants: Deltagere
+      view_public_page: Vis offentlig side
+    forms:
+      errors:
+        impersonate_user:
+          reason: Du skal angive en begrundelse, når du leder en ikke-forvaltet deltager
+    moderations:
+      actions:
+        hidden: Skjult
+        hide: Gem
+        not_hidden: Ikke skjult
+        title: Handlinger
+        unhide: Unskjul
+        unreport: Rapport
+      admin:
+        reportable:
+          hide:
+            invalid: Der var et problem, der skjulte ressourcen.
+            success: Er blevet skjult med et godt resultat.
+          unhide:
+            invalid: Der var et problem, der skjulte ressourcen.
+            success: Ressourcen er ikke skjult.
+          unreport:
+            invalid: Der opstod problemer med indberetningen af ressourcen.
+            success: Ressourcer afindberettet.
+      models:
+        moderation:
+          fields:
+            hidden_at: Skjult
+            report_count: Optælling
+            reportable: Indberetningspligtige
+            reported_content_url: Oplysning om indhold
+            reports: Rapporter
+            visit_url: Besøg-URL
+  errors:
+    messages:
+      invalid_json: Ugyldig JSON
+  layouts:
+    decidim:
+      admin:
+        newsletters:
+          title: Nyhedsbreve
+        settings:
+          title: Indstillinger
+        users:
+          title: Deltagere

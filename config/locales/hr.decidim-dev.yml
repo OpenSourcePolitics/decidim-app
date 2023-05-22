@@ -1,0 +1,54 @@
+---
+hr:
+  activemodel:
+    attributes:
+      dummy_resource:
+        created_at: Stvoreno
+        decidim_scope_id: Tema
+        field: Moje polje
+        start_date: Datum početka
+        title: Naslov
+        translatable_text: Tekst za prijevod
+        updated_at: Ažurirano
+  decidim:
+    components:
+      dummy:
+        settings:
+          global:
+            readonly_attribute: Atribut „samo za čitanje”
+            test: Test A
+            test_choices:
+              a: Odabir A
+              b: Odabir B
+              c: Odabir C
+          step:
+            endorsements_blocked: Podrške su blokirane
+            endorsements_enabled: Podrške su omogućene
+            readonly_step_attribute: Atribut koraka „samo za čitanje”
+    dummy:
+      admin:
+        exports:
+          dummies: Fiktivne vrijednosti
+    gamification:
+      badges:
+        test:
+          conditions: Upotrijebi testno okruženje za Decidim.
+          description: Sudionici dobivaju tu značku stvaranjem testova.
+          description_another: 'Sudionik je stvorio sljedeći broj testova: %{score}.'
+          description_own: 'Broj testova koje ste stvorili: %{score}.'
+          name: Testovi
+          next_level_in: 'Kako biste dostigli sljedeću razinu, stvorite sljedeći broj testova: %{score}!'
+          unearned_another: Sudionik još nije stvorio nijedan test.
+          unearned_own: Još niste stvorili nijedan test.
+    pages:
+      home:
+        statistics:
+          dummies_count_high: Veliki broj fiktivnih vrijednosti
+          dummies_count_medium: Srednji broj fiktivnih vrijednosti
+    participatory_processes:
+      statistics:
+        dummies_count_high: Mnogo
+        dummies_count_medium: Srednje
+    resource_links:
+      test_link:
+        dummy_resource_dummy: Povezana fiktivna vrijednost

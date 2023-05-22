@@ -1,0 +1,80 @@
+---
+ga:
+  decidim:
+    footer_links:
+      common:
+        items:
+          about_this_site: Faoin suíomh seo
+          cookies: Fianáin
+          language_policy: Beartas teanga
+          legal_notice: Fógra dlíthiúil
+          sitemap: Mapa suímh
+      contact_the_eu:
+        items:
+          call_us: Glaoigh orainn ar <a href="tel:0080067891011">00 800 6 7 8 9 10 11</a>
+          contact_form: Scríobh chugainn tríd an <a href="https://europa.eu/european-union/contact/write-to-us_ga">bhfoirm theagmhála</a>
+          meet_us: Buail linn in <a href="https://europa.eu/european-union/contact/meet-us_ga">oifig áitiúil de chuid an Aontais</a>
+          other_telephone: Úsáid <a href="https://europa.eu/european-union/contact/call-us_ga">roghanna teileafóin eile</a>
+        title: Déan teagmháil leis an Aontas Eorpach
+      eu_institution:
+        items:
+          agencies:
+            label: Gníomhaireachtaí
+            url: https://europa.eu/european-union/about-eu/agencies_ga
+          central_bank:
+            label: an Banc Ceannais Eorpach (BCE)
+            url: https://www.ecb.europa.eu/home/languagepolicy/html/index.ga.html
+          commission:
+            label: An Coimisiún Eorpach
+            url: https://ec.europa.eu/commission/index_ga
+          council:
+            label: An Chomhairle Eorpach
+            url: http://www.consilium.europa.eu/ga/european-council/
+          council_eu:
+            label: Comhairle an Aontais Eorpaigh
+            url: http://www.consilium.europa.eu/ga/home/
+          court_of_auditors:
+            label: Cúirt Iniúchóirí na hEorpa
+            url: http://www.eca.europa.eu/ga
+          court_of_justice:
+            label: Cúirt Bhreithiúnais an Aontais Eorpaigh
+            url: http://curia.europa.eu/jcms/jcms/j_6/en/
+          data_protection_supervisor:
+            label: An Maoirseoir Eorpach ar Chosaint Sonraí (MECS)
+            url: https://secure.edps.europa.eu/EDPSWEB/edps/EDPS?lang=ga
+          dpb:
+            label: An Bord Eorpach um Chosaint Sonraí
+            url: https://edpb.europa.eu/edpb_ga
+          economic_social_committee:
+            label: Coiste Eacnamaíoch agus Sóisialta na hEorpa (CESE)
+            url: http://www.eesc.europa.eu/?i=portal.ga.home
+          eu_regional_comittee:
+            label: European Committee of the Regions (CoR)
+            url: http://cor.europa.eu/ga/
+          external_action_service:
+            label: An tSeirbhís Eorpach Gníomhaíochta Seachtraí (SEGS)
+            url: http://eeas.europa.eu/index_ga.htm
+          investment_bank:
+            label: An Banc Eorpach Infheistíochta (BEI)
+            url: https://www.eib.org/en/index.htm
+          ombudsman:
+            label: An tOmbudsman Eorpach
+            url: https://www.ombudsman.europa.eu/ga/home
+          parliament:
+            label: Parlaimint na hEorpa
+            url: http://www.europarl.europa.eu/portal/ga
+          pou:
+            label: Oifig Foilseachán an Aontais Eorpaigh
+            url: https://op.europa.eu/ga/home
+          pso:
+            label: An Oifig Eorpach um Roghnú Foirne
+            url: https://epso.europa.eu/home_ga
+        title: Institiúidí an Aontais Eorpaigh
+      social_media:
+        items:
+          search_channels:
+            label: Cainéil an Aontais Eorpaigh ar na meáin shóisialta a chuardach
+            url: https://europa.eu/european-union/contact/social-networks_ga
+        title: Cuntas sna meáin shóisialta a aimsiú
+    footer_menu:
+      organization: An Chomhdháil ar Thodhchaí na hEorpa

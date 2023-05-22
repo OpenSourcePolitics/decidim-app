@@ -1,0 +1,33 @@
+---
+sl:
+  activerecord:
+    models:
+      decidim/pages/page:
+        few: Strani
+        one: Stran
+        other: Strani
+        two: Strani
+  decidim:
+    admin_log:
+      page:
+        update: "%{user_name} je posodobil stran %{resource_name} v %{space_name}."
+    components:
+      pages:
+        name: Stran
+        settings:
+          global:
+            announcement: Obvestilo
+          step:
+            announcement: Obvestilo
+    pages:
+      admin:
+        models:
+          components:
+            body: Telo
+        pages:
+          edit:
+            save: Posodobi
+            title: Uredi stran
+          update:
+            invalid: Pri shranjevanju te strani se je pojavila težava.
+            success: Stran je bila uspešno shranjena.

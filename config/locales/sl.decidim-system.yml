@@ -1,0 +1,144 @@
+---
+sl:
+  activemodel:
+    attributes:
+      oauth_application:
+        name: Ime aplikacije OAuth
+        organization_logo: Logotip organizacije (kvadrat)
+        organization_name: Organizacija
+        organization_url: URL organizacije
+        redirect_uri: Preusmeritveni URI
+    errors:
+      models:
+        oauth_application:
+          attributes:
+            redirect_uri:
+              must_be_ssl: Preusmeritveni URI mora biti SSL URI
+  decidim:
+    system:
+      actions:
+        confirm_destroy: Ali res želite izbrisati to?
+        destroy: Izbriši
+        edit: Uredi
+        new: Novo
+        save: Shrani
+        title: Dejanja
+      admins:
+        create:
+          error: Pri ustvarjanju novega skrbnika se je pojavila težava.
+          success: Skrbnik je bil uspešno ustvarjen.
+        destroy:
+          success: Skrbnik je bil uspešno izbrisan.
+        edit:
+          title: Uredi skrbnika
+          update: Posodobi
+        index:
+          title: Skrbniki
+        new:
+          create: Ustvari
+          title: Nov skrbnik
+        update:
+          error: Pri posodobitvi tega skrbnika se je pojavila težava.
+          success: Skrbnik je bil uspešno posodobljen.
+      default_pages:
+        placeholders:
+          content: Dodajte smiselno vsebino na statično stran %{page} na skrbniški nadzorni plošči.
+          title: Privzeti naslov za %{page}
+      menu:
+        admins: Skrbniki
+        dashboard: Nadzorna plošča
+        oauth_applications: Aplikacije OAuth
+        organizations: Organizacije
+      models:
+        admin:
+          fields:
+            created_at: Ustvarjeno ob
+            email: E-naslov
+          name: Skrbnik
+          validations:
+            email_uniqueness: že obstaja drug skrbnik z istim e-naslovom
+        oauth_application:
+          fields:
+            created_at: Ustvarjeno ob
+            name: Ime aplikacije OAuth
+            organization_name: Organizacija
+          name: Aplikacija OAuth
+        organization:
+          actions:
+            save_and_invite: Ustvari organizacijo in povabi skrbnika
+          fields:
+            created_at: Ustvarjeno ob
+            name: Ime
+            omniauth_settings: Nastavitve Omniauth
+            smtp_settings: Nastavitve SMTP
+          name: Organizacija
+      oauth_applications:
+        create:
+          error: Pri ustvarjanju te aplikacije se je pojavila težava.
+          success: Aplikacija je bila uspešno ustvarjena.
+        destroy:
+          error: Pri uničenju te aplikacije se je pojavila težava.
+          success: Aplikacija je bila uspešno uničena.
+        edit:
+          save: Shrani
+          title: Uredi aplikacijo
+        form:
+          select_organization: Izberi organizacijo
+        index:
+          confirm_delete: Ali res želite izbrisati to organizacijo?
+          title: Aplikacije OAuth
+        new:
+          save: Shrani
+          title: Nova aplikacija
+        update:
+          error: Pri posodobitvi te aplikacije se je pojavila težava.
+          success: Aplikacija je bila uspešno posodobljena.
+      organizations:
+        create:
+          error: Pri ustvarjanju nove organizacije se je pojavila težava.
+          success: Organizacija je bila uspešno ustvarjena.
+        edit:
+          secondary_hosts_hint: Vsako od njih vstavite v novo vrstico.
+        index:
+          title: Organizacije
+        new:
+          reference_prefix_hint: Referenčna predpona se izključno uporablja za identifikacijo virov v vseh organizacijah.
+          secondary_hosts_hint: Vsako od njih vstavite v novo vrstico
+          title: Nova organizacija
+        omniauth_settings:
+          decidim:
+            client_id: ID številka odjemalca
+            client_secret: Skrivnost odjemalca
+            site_url: URL spletnega mesta
+          enabled: Omogočeno
+          enabled_by_default: Ta ponudnik je privzeto omogočen. Lahko ga urejate, vendar ne onemogočite.
+          facebook:
+            app_id: ID številka aplikacije
+            app_secret: Skrivnost aplikacije
+          google_oauth2:
+            client_id: ID številka odjemalca
+            client_secret: Skrivnost odjemalca
+          icon: Ikona
+          icon_path: Pot ikone
+          twitter:
+            api_key: Ključ API
+            api_secret: Skrivnost API-ja
+        smtp_settings:
+          instructions:
+            from_label: 'E-naslov pošiljatelja bo: "your-organization-name <your-organization@your-provider.org>". Pustite prazno, če želite uporabiti oznako ''from_email'''
+          placeholder:
+            from_email: vaša-organizacija@vaš-ponudnik.org
+            from_label: ime-vaše-organizacije
+        update:
+          error: Pri posodobitvi te organizacije se je pojavila težava.
+          success: Organizacija je bila uspešno posodobljena.
+        users_registration_mode:
+          disabled: Dostop je mogoč samo z zunanjimi računi.
+          enabled: Dovoli udeležencem, da se registrirajo in prijavijo.
+          existing: Ne dovoli udeležencem, da se registrirajo, dovoli pa, da se obstoječi udeleženci prijavijo.
+      shared:
+        notices:
+          no_organization_warning_html: Če želite začeti, morate ustvariti organizacijo. Pred nadaljevanjem obvezno preberite %{guide}.
+          our_getting_started_guide: naš vodnik za začetek
+      titles:
+        dashboard: Nadzorna plošča

@@ -1,0 +1,55 @@
+---
+sl:
+  activemodel:
+    attributes:
+      dummy_resource:
+        created_at: Ustvarjeno ob
+        decidim_scope_id: Področje
+        field: Moje področje
+        start_date: Začetni datum
+        title: Naslov
+        translatable_text: Besedilo, ki ga je mogoče prevesti
+        updated_at: Posodobljeno ob
+  decidim:
+    components:
+      dummy:
+        settings:
+          global:
+            readonly_attribute: Atribut samo za branje
+            test: Test A
+            test_choices:
+              a: Izbira A
+              b: Izbira B
+              c: Izbira C
+          step:
+            endorsements_blocked: Odobravanje onemogočeno
+            endorsements_enabled: Odobravanje omogočeno
+            readonly_step_attribute: Korak atributa samo za branje
+    dummy:
+      admin:
+        exports:
+          dummies: Preskusne lutke
+    gamification:
+      badges:
+        test:
+          conditions: Za decidim uporabite testno okolje.
+          description: Udeleženci prejmejo to značko z ustvarjanjem testov.
+          description_another: Ta udeleženec je ustvaril %{score} testov.
+          description_own: Ustvarili ste %{score} testov.
+          name: Testi
+          next_level_in: Ustvarite še dodatnih %{score} testov, da dosežete naslednjo raven!
+          unearned_another: Ta udeleženec še ni ustvaril nobenega testa.
+          unearned_own: Niste ustvarili še nobenega testa.
+    pages:
+      home:
+        statistics:
+          bar: Vrstica
+          dummies_count_high: Visoke preskusne lutke
+          dummies_count_medium: Srednje preskusne lutke
+    participatory_processes:
+      statistics:
+        dummies_count_high: visoko
+        dummies_count_medium: srednje
+    resource_links:
+      test_link:
+        dummy_resource_dummy: Povezane preskusne lutke

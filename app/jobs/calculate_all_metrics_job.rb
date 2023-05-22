@@ -1,17 +1,23 @@
 # frozen_string_literal: true
 
-require "rake"
-
 class CalculateAllMetricsJob < ApplicationJob
   queue_as :scheduled
 
   def perform
-    Rails.application.load_tasks
-    task.reenable
-    task.invoke
+    Decidim::Organization.find_each do |organization|
+      Decidim.metrics_registry.all.each do |metric_manifest|
+        call_metric_job(metric_manifest, organization)
+      end
+    end
   end
 
-  def task
-    Rake::Task["decidim:metrics:all"]
+  private
+
+  def call_metric_job(metric_manifest, organization, day = nil)
+    Decidim::MetricJob.perform_later(
+      metric_manifest.manager_class,
+      organization,
+      day
+    )
   end
 end

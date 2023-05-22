@@ -1,0 +1,450 @@
+---
+et:
+  activemodel:
+    attributes:
+      participatory_process:
+        announcement: Teadaanne
+        area_id: Piirkond
+        banner_image: Reklaamiriba pilt
+        copy_categories: Kopeeri kategooriad
+        copy_components: Kopeeri komponendid
+        copy_steps: Kopeeri etapid
+        decidim_area_id: Piirkond
+        description: Kirjeldus
+        developer_group: Edendusrühm
+        domain: Valdkond
+        end_date: Lõppkuupäev
+        hashtag: Teemaviide
+        hero_image: Avalehe pilt
+        local_area: Organisatsiooni piirkond
+        meta_scope: Kohaldamisala metaandmed
+        participatory_process_group_id: Protsesside rühm
+        participatory_scope: Mille üle otsustatakse?
+        participatory_structure: Kuidas otsustatakse?
+        promoted: Edendatud
+        published_at: Avaldati
+        related_process_ids: Seotud protsessid
+        scope_id: Kohaldamisala
+        scope_type_max_depth_id: Kohaldamisala filtri sügavus
+        scopes_enabled: Kohaldamisala lubatud
+        short_description: Lühikirjeldus
+        show_metrics: Kuva mõõdikud
+        show_statistics: Kuva statistika
+        slug: URL-komponent
+        start_date: Alguskuupäev
+        subtitle: Alapealkiri
+        target: Kes osalevad?
+        title: Pealkiri
+      participatory_process_group:
+        description: Kirjeldus
+        hero_image: Pilt
+        name: Nimi
+        participatory_process_ids: Seotud protsessid
+      participatory_process_step:
+        cta_path: Tegevuskutse nupu tee
+        cta_text: Tegevuskutse nupu tekst
+        description: Kirjeldus
+        end_date: Lõppkuupäev
+        short_description: Lühikirjeldus
+        start_date: Alguskuupäev
+        title: Pealkiri
+      participatory_process_user_role:
+        email: Meil
+        name: Nimi
+        role: Roll
+    errors:
+      models:
+        participatory_process:
+          attributes:
+            document:
+              invalid_document_type: 'Dokumendi tüüp on sobimatu. Lubatud vormingud: %{valid_mime_types}'
+    models:
+      decidim/participatory_process_step_activated_event: Etapp aktiveeritud
+      decidim/participatory_process_step_changed_event: Etapp muudetud
+  activerecord:
+    models:
+      decidim/participatory_process:
+        one: Teema
+        other: Teemad
+      decidim/participatory_process_group:
+        one: Osalusprotsessi rühm
+        other: Osalusprotsesside rühmad
+      decidim/participatory_process_step:
+        one: Etapp
+        other: Etapid
+  decidim:
+    admin:
+      actions:
+        activate: Aktiveeri
+        configure: Konfigureeri
+        confirm_destroy: Kinnita kustutamine
+        destroy: Kustuta
+        duplicate: Kopeeri
+        edit: Muuda
+        filter:
+          all_processes: Kuva kõik protsessid
+          process_groups: Protsessirühmad
+        import_process: Impordi
+        new_process: Uus protsess
+        new_process_group: Uus protsessirühm
+        new_process_step: Uus etapp
+        new_process_user_role: Uus protsessi administraator
+        preview: Eelvaade
+        publish: Avalda
+        resend_invitation: Saada kutse uuesti
+        unpublish: Peata avaldamine
+      menu:
+        participatory_process_groups: Protsessirühmad
+        participatory_processes_submenu:
+          attachment_collections: Kaustad
+          attachment_files: Failid
+          attachments: Manused
+          categories: Kategooriad
+          components: Komponendid
+          info: Teave
+          moderations: Modereerimised
+          private_users: Privaatsed osalejad
+          process_admins: Protsessi administraatorid
+          steps: Etapid
+      models:
+        participatory_process:
+          fields:
+            created_at: Loodi
+            private: Privaatne
+            promoted: Esile tõstetud
+            published: Avaldatud
+            title: Pealkiri
+          name: Osalusprotsess
+        participatory_process_group:
+          fields:
+            name: Nimi
+          name: Protsessirühm
+        participatory_process_step:
+          fields:
+            end_date: Lõppkuupäev
+            start_date: Alguskuupäev
+            title: Pealkiri
+          name: Osalusprotsessi etapp
+        participatory_process_user_role:
+          fields:
+            email: Meil
+            name: Nimi
+            role: Roll
+          name: Osalusprotsessi administraator
+          roles:
+            admin: Administraator
+            collaborator: Koostööpartner
+            moderator: Moderaator
+            valuator: Hindaja
+        user:
+          fields:
+            invitation_accepted_at: Kutse võeti vastu
+            invitation_sent_at: Kutse saadeti
+      participatory_process_copies:
+        new:
+          copy: Kopeeri
+          select: Valige andmed, mida soovite kopeerida
+          title: Kopeeri osalusprotsess
+      participatory_process_groups:
+        destroy:
+          error: Osalusprotsessi rühma kustutamisel tekkis probleem.
+          success: Osalusprotsessi rühm on kustutatud.
+        edit:
+          title: Muuda protsessirühma
+          update: Värskenda
+        new:
+          create: Loo
+          title: Uus protsessirühm
+        update:
+          error: Selle osalusprotsessi rühma värskendamisel tekkis probleem.
+          success: Osalusprotsessi rühm on värskendatud.
+      participatory_process_imports:
+        create:
+          error: Selle osalusprotsessi importimisel tekkis probleem.
+          success: Osalusprotsess on imporditud.
+        new:
+          import: Impordi
+          select: Valige andmed, mida soovite importida
+          title: Impordi osalusprotsess
+      participatory_process_publications:
+        create:
+          error: Selle osalusprotsessi avaldamisel tekkis probleem.
+          success: Osalusprotsess on avaldatud.
+        destroy:
+          error: Selle osalusprotsessi avaldamise peatamisel tekkis probleem.
+          success: Osalusprotsessi avaldamine on peatatud.
+      participatory_process_step_activations:
+        create:
+          error: Selle osalusprotsessi etapi aktiveerimisel tekkis probleem.
+          success: Osalusprotsessi etapp on aktiveeritud.
+      participatory_process_steps:
+        create:
+          error: Uue osalusprotsessi etapi loomisel tekkis probleem.
+          success: Osalusprotsessi etapp on loodud.
+        default_title: Sissejuhatus
+        destroy:
+          error:
+            active_step: Aktiivset etappi ei saa kustutada.
+            last_step: Protsessi viimast etappi ei saa kustutada.
+          success: Osalusprotsessi etapp on kustutatud.
+        edit:
+          title: Muuda osalusprotsessi etappi
+          update: Värskenda
+        index:
+          steps_title: Etapid
+        new:
+          create: Loo
+          title: Uus osalusprotsessi etapp
+        ordering:
+          error: Osalusprotsessi nende etappide järjestuse muutmisel tekkis probleem.
+        update:
+          error: Selle osalusprotsessi etapi värskendamisel tekkis probleem.
+          success: Osalusprotsessi etapp on värskendatud.
+      participatory_process_user_roles:
+        create:
+          error: Selle osalusprotsessi osaleja lisamisel tekkis probleem.
+          success: Selle osalusprotsessi administraator on lisatud.
+        destroy:
+          success: Selle osalusprotsessi administraator on eemaldatud.
+        edit:
+          title: Värskenda osalusprotsessi administraatorikirjet
+          update: Värskenda
+        index:
+          process_admins_title: Osalusprotsessi administraatorid
+        new:
+          create: Loo
+          title: Uus osalusprotsessi administraator
+        update:
+          error: Selle osalusprotsessi administraatorikirje värskendamisel tekkis probleem.
+          success: Selle osalusprotsessi administraatorikirje on värskendatud.
+      participatory_processes:
+        create:
+          error: Uue osalusprotsessi loomisel tekkis probleem.
+          success: Osalusprotsess on loodud. Konfigureerige nüüd selle etapid.
+        edit:
+          update: Värskenda
+        index:
+          not_published: Avaldamata
+          private: Privaatne
+          public: Avalik
+          published: Avaldatud
+        new:
+          create: Loo
+          title: Uus osalusprotsess
+        update:
+          error: Selle osalusprotsessi värskendamisel tekkis probleem.
+          success: Osalusprotsess on värskendatud.
+      participatory_processes_copies:
+        create:
+          error: Selle osalusprotsessi kopeerimisel tekkis probleem.
+          success: Osalusprotsess on kopeeritud.
+      participatory_processes_group:
+        create:
+          error: Uue osalusprotsessi rühma loomisel tekkis probleem.
+          success: Osalusprotsessi rühm on loodud.
+      titles:
+        participatory_process_groups: Osalusprotsesside rühmad
+      users:
+        resend_invitation:
+          error: Kutse uuesti saamisel tekkis probleem.
+          success: Kutse on uuesti saadetud.
+    admin_log:
+      participatory_process:
+        create: Kasutaja %{user_name} lõi osalusprotsessi %{resource_name}
+        publish: Kasutaja %{user_name} avaldas osalusprotsessi %{resource_name}
+        unpublish: Kasutaja %{user_name} peatas osalusprotsessi %{resource_name} avaldamise
+        update: Kasutaja%{user_name} värskendas osalusprotsessi %{resource_name}
+      participatory_process_group:
+        create: Kasutaja%{user_name} lõi osalusprotsessi rühma %{resource_name}
+        update: Kasutaja%{user_name} värskendas osalusprotsessi rühma %{resource_name}
+      participatory_process_step:
+        activate: Kasutaja%{user_name} aktiveeris osalusruumi %{space_name} osalusprotsessi etapi %{resource_name}
+        create: Kasutaja%{user_name} lõi osalusruumi %{space_name} osalusprotsessi etapi %{resource_name}
+        delete: Kasutaja%{user_name} kustutas osalusruumi %{space_name} osalusprotsessi etapi %{resource_name}
+        update: Kasutaja%{user_name} värskendas osalusruumi %{space_name} osalusprotsessi etappi %{resource_name}
+      participatory_process_user_role:
+        create: Kasutaja %{user_name} kutsus osaleja %{resource_name} liituma osalusruumi %{space_name} osalusprotsessiga
+        delete: Kasutaja %{user_name} eemaldas osaleja %{resource_name} osalusruumi %{space_name} osalusprotsessist
+        update: Kasutaja %{user_name} muutis osaleja %{resource_name} rolli osalusruumi %{space_name} osalusprotsessis
+    events:
+      participatory_process:
+        role_assigned:
+          email_intro: Teile on määratud osalusprotsessis „%{resource_title}“ roll „%{role}“.
+          email_outro: Saite selle teate, kuna teil on osalusprotsessis „%{resource_title}“ roll %{role}.
+          email_subject: Teile on määratud üksuses „%{resource_title}“ roll %{role}.
+          notification_title: Teile on määratud osalusprotsessis „<a href="%{resource_url}">%{resource_title}</a>“ roll „%{role}“.
+        step_activated:
+          email_intro: 'Etapp %{resource_title} on nüüd osalusruumis %{participatory_space_title} aktiivne. Näete seda järgmisel lehel:'
+          email_outro: Saite selle teate, kuna jälgite osalusruumi %{participatory_space_title}. Teadetest saate loobuda eeltoodud linki kasutades.
+          email_subject: Osalusruumi %{participatory_space_title} on värskendatud
+          notification_title: Etapp %{resource_title} on nüüd osalusruumis <a href="%{resource_path}">%{participatory_space_title}</a> aktiivne
+        step_changed:
+          email_intro: 'Osalusruumis %{participatory_space_title} värskendati etapi %{resource_title} kuupäevi. Näete seda järgmisel lehel:'
+          email_outro: Saite selle teate, kuna jälgite osalusruumi %{participatory_space_title}. Teadetest saate loobuda eeltoodud linki kasutades.
+          email_subject: Osalusruumi %{participatory_space_title} on värskendatud
+          notification_title: Osalusruumis <a href="%{participatory_space_url}">%{participatory_space_title}</a> värskendati etapi <a href="%{resource_path}">%{resource_title}</a> kuupäevi.
+    help:
+      participatory_spaces:
+        participatory_processes:
+          contextual: "<p><strong>Osalusprotsess</strong> on jada järjestikuseid osalustegevusi (nt esmalt uuringuküsimustiku täitmine, siis ettepanekute tegemine, nende näost näkku kohtumistel või virtuaalsetel koosolekutel arutamine ja viimaks nende tähtsusjärjekorda seadmine), mille eesmärk on määratleda kindla teemaga seotud olulisi küsimusi ning nende üle otsustada.</p> <p>Osalusprotsessi näited on muu hulgas järgmised: komisjoni liikmete valimine (esmalt esitatakse kandidaadid, siis kaalutakse neid ja lõpuks tehakse valik), osaluseelarvete määramine (tehakse ettepanekud, hinnatakse nende majanduslikku mõju ja hääletatakse nende üle, jagades olemasolevad rahalised vahendid), strateegiline kavandamine, õigusnormide/-aktide ettepanekute ühine kavandamine, linnaruumi kujundamine või avaliku poliitika kava koostamine.</p>\n"
+          page: "<p><strong>Osalusprotsess</strong> on jada järjestikuseid osalustegevusi (nt esmalt uuringuküsimustiku täitmine, siis ettepanekute tegemine, nende näost näkku kohtumistel või virtuaalsetel koosolekutel arutamine ja viimaks nende tähtsusjärjekorda seadmine), mille eesmärk on määratleda kindla teemaga seotud olulisi küsimusi ning nende üle otsustada.</p> <p>Osalusprotsessi näited on muu hulgas järgmised: komisjoni liikmete valimine (esmalt esitatakse kandidaadid, siis kaalutakse neid ja lõpuks tehakse valik), osaluseelarvete määramine (tehakse ettepanekud, hinnatakse nende majanduslikku mõju ja hääletatakse nende üle, jagades olemasolevad rahalised vahendid), strateegiline kavandamine, õigusnormide/-aktide ettepanekute ühine kavandamine, linnaruumi kujundamine või avaliku poliitika kava koostamine.</p>\n"
+          title: Mis on osalusprotsess?
+    metrics:
+      participatory_processes:
+        description: Selle organisatsiooni osalusprotsesside arv
+        object: osalusprotsessid
+        title: Osalusprotsessid
+    participatory_process:
+      show:
+        related_assemblies: Seotud assambleed
+    participatory_process_groups:
+      show:
+        group_participatory_processes:
+          one: 1 protsess rühmas %{group}
+          other: "%{count} protsessi rühmas %{group}"
+        title: Osalusprotsesside rühmad
+    participatory_process_steps:
+      index:
+        process_steps: Protsessi etapid
+        title: Osalusprotsessi etapid
+    participatory_processes:
+      admin:
+        content_blocks:
+          highlighted_processes:
+            max_results: Kuvatavate elementide maksimaalne arv
+        participatory_process_copies:
+          form:
+            slug_help: 'URL-komponente kasutatakse sellele protsessile suunavate URLide loomiseks. Lubatud on ainult tähed, numbrid ja kriipsud ning alguses peab olema täht. Näide: %{url}'
+        participatory_process_imports:
+          form:
+            document_legend: Lisa dokument
+            slug_help: 'URL-komponente kasutatakse sellele protsessile suunavate URLide loomiseks. Lubatud on ainult tähed, numbrid ja kriipsud ning alguses peab olema täht. Näide: %{url}'
+        participatory_process_steps:
+          form:
+            cta_path_help: 'Kasutage siin osalisi teid, mitte täielikke URLe. Lubatud on tähed, numbrid, kriipsud ja kaldkriipsud ning alguses peab olema täht. Kui see on määramata, siis nuppu ei kuvata. Näide: %{url}'
+            cta_text_help: Kui see on määramata, siis nuppu ei kuvata.
+        participatory_processes:
+          form:
+            announcement_help: Siia sisestatav tekst kuvatakse kasutajale protsessiteabe all.
+            duration: Kestus
+            filters: Filtrid
+            images: Pildid
+            metadata: Metaandmed
+            other: Muu
+            related_processes: Seotud protsessid
+            scope_type_max_depth_help: Piira kohaldamisala filtri sügavust. Filter kuvab üldisest tasandist kuni valitud kohaldamisalani.
+            select_an_area: Valige piirkond
+            select_process_group: Valige protsessirühm
+            slug_help: 'URL-komponente kasutatakse sellele protsessile suunavate URLide loomiseks. Lubatud on ainult tähed, numbrid ja kriipsud ning alguses peab olema täht. Näide: %{url}'
+            title: Üldteave
+            visbility: Nähtavus
+      content_blocks:
+        highlighted_processes:
+          name: Esiletõstetud teemad
+      index:
+        title: Osalusprotsessid
+      last_activity:
+        new_participatory_process: Uus osalusprotsess
+      pages:
+        home:
+          highlighted_processes:
+            active_processes: Teemad
+            active_step: Aktiivne etapp
+            more_information: Lisateave
+            participate: Võtke osa
+            participate_in: Osale protsessis %{resource_name}
+            see_all_processes: Kuva kõik protsessid
+      participatory_process_steps:
+        index:
+          back_to_process: Tagasi protsessi lehele
+      participatory_processes:
+        filters:
+          counters:
+            active:
+              one: 1 teema, millest me räägime
+              other: Teemad, mida arutame
+            all:
+              one: 1 protsess
+              other: "%{count} protsessi"
+            past:
+              one: 1 minevikuprotsess
+              other: "%{count} minevikuprotsessi"
+            upcoming:
+              one: 1 eelseisev protsess
+              other: "%{count} eelseisvat protsessi"
+          explanations:
+            no_active: Aktiivseid protsesse ei ole
+            no_active_nor_upcoming: Aktiivseid ega eelseisvaid protsesse pole
+            no_active_nor_upcoming_callout: Aktiivseid ega eelseisvaid protsesse pole. Siin on minevikuprotsesside loetelu.
+          names:
+            active: Aktiivsed
+            all: Kõik
+            past: Möödunud
+            upcoming: Eelseisvad
+          see: Kuva
+        index:
+          loading: Tulemusi laaditakse
+      show:
+        area: Piirkond
+        dates: Kuupäevad
+        developer_group: Edendusrühm
+        end_date: Lõppkuupäev
+        local_area: Organisatsiooni piirkond
+        participatory_scope: Mille üle otsustatakse?
+        participatory_structure: Kuidas otsustatakse?
+        private_space: See on privaatne protsess
+        related_processes: Seotud protsessid
+        scope: Kohaldamisala
+        start_date: Alguskuupäev
+        target: Kes osalevad?
+        unspecified: Pole täpsustatud
+      statistics:
+        answers_count: Vastused
+        comments_count: Kommentaarid
+        debates_count: Arutelud
+        endorsements_count: Kinnitused
+        followers_count: Jälgijat
+        headline: Mis sellel teemal toimub?
+        meetings_count: Üritused
+        no_stats: Statistikat veel pole.
+        orders_count: Toetusavaldused
+        pages_count: Lehed
+        participants_count: Osalejat
+        processes_count: Teemad
+        projects_count: Projektid
+        proposals_count: Ideed
+        results_count: Tulemused
+        supports_count: Toetusavaldused
+        surveys_count: Uuringud
+        users_count: Osalejad
+  layouts:
+    decidim:
+      participatory_process_groups:
+        participatory_process_group:
+          browse: Sirvi
+          browse_resource: Sirvi protsessirühma %{resource_name}
+          processes_count: 'Protsessid:'
+      participatory_process_widgets:
+        show:
+          active_step: Aktiivne etapp
+          take_part: Võtke osa
+      participatory_processes:
+        index:
+          promoted_processes: Esiletõstetud protsessid
+        participatory_process:
+          active_step: 'Praegune etapp:'
+          more_info: Lisateave
+          more_info_about: 'Lisateave sel teemal: %{resource_name}'
+          take_part: Osalege seoses teemaga %{resource_name}
+          take_part_in: 'Osalege seoses selle teemaga: %{resource_name}'
+        promoted_process:
+          active_step: 'Praegune etapp:'
+          more_info: Lisateave
+          more_info_about: Lisateave teemal %{resource_name}
+          take_part: Võtke osa
+          take_part_in: Osalege protsessis %{resource_name}
+      process_header_steps:
+        step: Etapp %{current} / %{total}
+        view_steps: Protsessi etapid
+      process_navigation:
+        process_menu_item: Teave

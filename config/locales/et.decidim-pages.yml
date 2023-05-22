@@ -1,0 +1,31 @@
+---
+et:
+  activerecord:
+    models:
+      decidim/pages/page:
+        one: Leht
+        other: Lehed
+  decidim:
+    admin_log:
+      page:
+        update: Kasutaja %{user_name} värskendas osalusruumis %{space_name} lehte%{resource_name}
+    components:
+      pages:
+        name: Leht
+        settings:
+          global:
+            announcement: Teadaanne
+          step:
+            announcement: Teadaanne
+    pages:
+      admin:
+        models:
+          components:
+            body: Sisu
+        pages:
+          edit:
+            save: Värskenda
+            title: Muuda lehte
+          update:
+            invalid: Lehe salvestamisel tekkis probleem.
+            success: Leht on salvestatud.

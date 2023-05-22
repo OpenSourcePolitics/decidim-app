@@ -1,0 +1,65 @@
+---
+sl:
+  activemodel:
+    models:
+      decidim/surveys/closed_survey_event: Anketa se je končala
+      decidim/surveys/opened_survey_event: Anketa se je začela
+  activerecord:
+    models:
+      decidim/surveys/survey:
+        few: Ankete
+        one: Anketa
+        other: Anket
+        two: Anketi
+      decidim/surveys/survey_answer:
+        few: Odgovori
+        one: Odgovor
+        other: Odgovorov
+        two: Odgovora
+  decidim:
+    components:
+      surveys:
+        actions:
+          answer: Odgovor
+        name: Anketa
+        settings:
+          global:
+            announcement: Obvestilo
+            clean_after_publish: Izbriši odgovore, ko se objavi anketa
+          step:
+            allow_answers: Dovoli odgovore
+            allow_unregistered: Dovoli neregistriranim uporabnikom, da odgovorijo na anketo
+            allow_unregistered_help: Če je anketa aktivna, za njeno izpolnitev ne bo potrebna prijava. To lahko pripelje do slabih ali nezanesljivih podatkov in bo bolj dovzetna za avtomatizirane napade. Uporabljajte previdno!
+            announcement: Obvestilo
+    events:
+      surveys:
+        survey_closed:
+          email_intro: Anketa %{resource_title} v %{participatory_space_title} je bila zaprta.
+          email_outro: To obvestilo ste prejeli, ker sledite %{participatory_space_title}. Prejemanje obvestil lahko ustavite tako, da sledite prejšnji povezavi.
+          email_subject: Anketa se je končala v %{participatory_space_title}.
+          notification_title: Anketa <a href="%{resource_path}">%{resource_title}</a> v <a href="%{participatory_space_url}">%{participatory_space_title}</a> je končana.
+        survey_opened:
+          email_intro: 'Anketa %{resource_title} v %{participatory_space_title} je zdaj odprta. Sodelujete lahko na tej strani:'
+          email_outro: To obvestilo ste prejeli, ker sledite %{participatory_space_title}. Prejemanje obvestil lahko ustavite tako, da sledite prejšnji povezavi.
+          email_subject: Nova anketa v %{participatory_space_title}
+          notification_title: Anketa <a href="%{resource_path}">%{resource_title}</a> v <a href="%{participatory_space_url}">%{participatory_space_title}</a> je zdaj odprta.
+    metrics:
+      survey_answers:
+        description: Število anket, na katere se odgovorili udeleženci
+        object: odgovori na ankete
+        title: Odgovori na ankete
+    surveys:
+      admin:
+        exports:
+          survey_user_answers: Odgovori udeležencev ankete
+        surveys:
+          update:
+            invalid: Pri shranjevanju ankete se je pojavila težava.
+            success: Anketa je bila uspešno shranjena.
+      last_activity:
+        new_survey_at_html: "<span>Nova anketa v %{link}</span>"
+      surveys:
+        answer:
+          invalid: Pri odgovoru na anketo se je pojavila težava.
+          spam_detected: Pri izpolnjevanju obrazca se je pojavila težava. Mogoče ste bili prehitri, lahko poskusite znova?
+          success: Anketa je uspešno izpolnjena.

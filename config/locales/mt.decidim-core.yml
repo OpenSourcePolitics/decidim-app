@@ -1,0 +1,1612 @@
+---
+mt:
+  activemodel:
+    attributes:
+      account:
+        delete_reason: Raġuni biex tħassar il-kont tiegħek
+      common:
+        created_at: Inħolqot fi
+      group:
+        about: Dwar
+        avatar: Avatar
+        document_number: Numru tad-dokument
+        email: Email
+        name: Isem
+        nickname: Identifikatur
+        phone: Telefown
+      report:
+        details: Kummenti addizzjonali
+      user:
+        about: Dwar
+        email: L-email tiegħek
+        name: Ismek
+        nickname: Identifikatur
+        password: Password
+        password_confirmation: Ikkonferma l-password tiegħek
+        personal_url: URL Personali
+        remove_avatar: Neħħi l-avatar
+    models:
+      decidim/attachment_created_event: Hemża
+      decidim/component_published_event: Komponent attiv
+      decidim/demoted_membership: Ma għadekx amministratur tal-grupp
+      decidim/gamification/badge_earned_event: Ksibt badge
+      decidim/gamification/level_up_event: Tlajt livell
+      decidim/join_request_accepted_event: It-talba biex tissieħeb ġiet aċċettata
+      decidim/join_request_rejected_event: It-talba biex tissieħeb ġiet miċħuda
+      decidim/profile_updated_event: Profil aġġornat
+      decidim/promote_to_admin: Promoss għal amministratur tal-grupp
+      decidim/removed_from_group: Imneħħi mill-grupp
+      decidim/resource_endorsed_event: Riżorsa approvata
+  activerecord:
+    attributes:
+      decidim/user:
+        current_password: Password attwali
+        email: Email
+        name: Identifikatur
+        password: Password
+        password_confirmation: Konferma tal-password
+        remember_me: Ftakarni
+    models:
+      decidim/amendment:
+        few: Emendi
+        many: Emendi
+        one: Emenda
+        other: Emendi
+      decidim/endorsement:
+        few: Approvazzjonijiet
+        many: Approvazzjonijiet
+        one: Approvazzjoni
+        other: Approvazzjonijiet
+      decidim/user:
+        few: Parteċipanti
+        many: Parteċipanti
+        one: Parteċipant
+        other: Parteċipanti
+      decidim/user_group:
+        few: Gruppi
+        many: Gruppi
+        one: Grupp
+        other: Gruppi
+  booleans:
+    'false': Le
+    'true': Iva
+  carrierwave:
+    errors:
+      general: Żball fl-ipproċessar tal-immaġni
+      image_too_big: L-immaġni kbira wisq
+  decidim:
+    accessibility:
+      external_link: Link esterna
+      logo: Logo uffiċjali tal-%{organization}
+      skip_button: Mur għall-kontenut ewlieni
+    account:
+      data_portability_export:
+        file_no_exists: Il-fajl ma jeżistix
+        notice: Bħalissa qed titniżżel id-data tiegħek. Se tirċievi email meta tkun lesta.
+      delete:
+        alert: Din l-azzjoni ma tistax titreġġa’ lura. Jekk tħassar il-kont tiegħek ma tkunx tista’ tidħol bil-kredenzjali tiegħek. It-tħassir tal-kont tiegħek se jirriżulta fl-anonimizzazzjoni tal-kontributi tiegħek. Xorta se tkun tista’ toħloq kont ġdid, iżda dawn il-kontribuzzjonijiet mhux se jkunu assoċjati miegħu.
+        confirm:
+          close: Agħlaq it-tieqa
+          ok: Iva, irrid inħassar il-kont tiegħi
+          question: Żgur trid tħassar il-kont tiegħek?
+          title: Ħassar il-kont tiegħi
+        explanation: Imla r-raġuni għala trid tħassar il-kont tiegħek (fakultattiv).
+      destroy:
+        error: Kien hemm problema biex jitħassar il-kont tiegħek.
+        success: Il-kont tiegħek tħassar.
+      show:
+        change_password: Ibdel il-password
+        update_account: Aġġorna l-kont
+      update:
+        error: Kien hemm problema biex jiġi aġġornat il-kont tiegħek.
+        success: Il-kont tiegħek ġie aġġornat.
+        success_with_email_confirmation: Il-kont tiegħek ġie aġġornat. Se tirċievi email biex tikkonferma l-indirizz tal-email il-ġdid tiegħek.
+    admin:
+      actions:
+        cancel: Ikkanċella
+    admin_log:
+      area:
+        create: "%{user_name} ħoloq iż-żona ġeografika %{resource_name}"
+        delete: "%{user_name} ħassar iż-żona ġeografika %{resource_name}"
+        update: "%{user_name} aġġorna ż-żona ġeografika %{resource_name}"
+      component:
+        create: "%{user_name} żied il-komponent %{resource_name} mal-ispazju %{space_name}"
+        delete: "%{user_name} neħħa l-komponent %{resource_name} mill-ispazju %{space_name}"
+        publish: "%{user_name} ippubblika l-komponent %{resource_name} fl-ispazju %{space_name}"
+        unpublish: "%{user_name} neħħa l-pubblikazzjoni tal-komponent %{resource_name} mill-ispazju %{space_name}"
+      moderation:
+        hide: "%{user_name} ħeba riżorsa tat-tip %{resource_type} fl-ispazju %{space_name}"
+        unreport: "%{user_name} neħħa r-rapport dwar ir-riżorsa tat-tip %{resource_type} fl-ispazju %{space_name}"
+      newsletter:
+        create: "%{user_name} ħoloq il-bullettin %{resource_name}"
+        delete: "%{user_name} ħassar il-bullettin %{resource_name}"
+        deliver: "%{user_name} bagħat il-bullettin %{resource_name}"
+        update: "%{user_name} aġġorna l-bullettin %{resource_name}"
+      oauth_application:
+        create: "%{user_name} ħoloq l-applikazzjoni OAuth %{resource_name}"
+        delete: "%{user_name} ħassar l-applikazzjoni OAuth %{resource_name}"
+        update: "%{user_name} aġġorna l-applikazzjoni OAuth %{resource_name}"
+      organization:
+        update: "%{user_name} aġġorna l-konfigurazzjonijiet tal-organizzazzjoni"
+      participatory_space_private_user:
+        create: "%{user_name} stieden lil %{resource_name} biex ikun parteċipant privat"
+        create_via_csv: "%{user_name} stieden lil %{resource_name} permezz tas-csv biex ikun parteċipant privat"
+        delete: "%{user_name} neħħa l-parteċipant %{resource_name} bħala ċittadin privat"
+      scope:
+        create: "%{user_name} ħoloq il-kamp ta' applikazzjoni %{resource_name}"
+        create_with_parent: "%{user_name} ħoloq il-kamp ta' applikazzjoni %{resource_name} ġol- kamp ta' applikazzjoni %{parent_scope}"
+        delete: "%{user_name} ħassar il-kamp ta' applikazzjoni %{resource_name}"
+        delete_with_parent: "%{user_name} ħassar kamp ta' applikazzjoni %{resource_name} ġol-kamp ta' applikazzjoni %{parent_scope}"
+        update: "%{user_name} aġġorna l-kamp ta' applikazzjoni %{resource_name}"
+        update_with_parent: "%{user_name} aġġorna l-kamp ta' applikazzjoni %{resource_name} ġol-kamp ta' applikazzjoni %{parent_scope}"
+      static_page:
+        create: "%{user_name} ħoloq il-paġna statika %{resource_name}"
+        delete: "%{user_name} ħassar il-paġna statika %{resource_name}"
+        update: "%{user_name} aġġorna l-paġna statika %{resource_name}"
+      user:
+        invite: "%{user_name} stieden lill-parteċipant %{resource_name} bir-rwol: %{role}"
+        officialize: "%{user_name} uffiċjalizza l-parteċipant %{resource_name}"
+        remove_from_admin: "%{user_name} neħħa lill-parteċipant %{resource_name} bir-rwol: %{role}"
+        show_email: "%{user_name} kiseb l-email tal-parteċipant %{resource_name}"
+        unofficialize: "%{user_name} neħħi l-uffiċjalizzazzjoni tal-parteċipant %{resource_name}"
+      user_group:
+        reject: "%{user_name} ċaħad il-verifika tal-grupp %{resource_name}"
+        verify: "%{user_name} ivverifika l-grupp %{resource_name}"
+        verify_via_csv: "%{user_name} ivverifika l-grupp %{resource_name} permezz ta’ fajl CSV"
+    admin_terms_of_use:
+      default_body: "<h2>TERMINI TAL-UŻU GĦALL-AMMINISTRATURI</h2><p>Nimmaġinaw li ġa kellek tisma’ d-diskors tas-soltu mingħand l-Amministratur tas-Sistema lokali. Normalment kollox idur ma’ dawn it-tliet affarijiet:</p><ol><li>Irrispetta l-privatezza tal-oħrajn.</li><li>Aħseb qabel ma tikklikkja.</li><li>Poteri kbar iġibu magħhom responsabbiltajiet kbar.</li></ol>"
+    alert:
+      dismiss: Neħħi n-notifika
+    amendments:
+      accepted:
+        error: Sar żball waqt li kienet qed tiġi aċċettata l-emenda.
+        success: L-emenda ġiet aċċettata.
+      amendable:
+        amended_by: Emendat minn
+        button: Emenda %{model_name}
+        error: Kien hemm żball fl-emenda ta’ din ir-riżorsa.
+        help_text: Tejjeb dan il-%{model_name} billi timmodifika l-%{amendable_fields} tiegħu
+        promote_button: Ippromwovi sa %{model_name}
+        promote_confirm_text: Żgur trid tħassar din l-emenda?
+        promote_help_text: Tista’ tippromwovi din l-emenda u tippubblikaha bħala %{model_name} indipendenti
+        section_heading: Emendi (%{count})
+      compare_draft:
+        continue: Kompli
+        no_similars_found: Ma nstabet l-ebda emenda simili.
+        title: Emendi simili
+      created:
+        error: Sar żball waqt li kien qed jinħoloq l-abbozz tal-emenda.
+        success: L-abbozz ta’ emenda nħoloq.
+      destroy_draft:
+        error: Kien hemm problema biex jitħassar l-abbozz tal-emenda.
+        success: L-abbozz tal-emenda tħassar.
+      edit_draft:
+        discard: Warrab dan l-abbozz
+        discard_confirmation: Żgur trid twarrab dan l-abbozz?
+        send: Preview
+        title: Editja l-Abbozz tal-Emenda
+      emendation:
+        actions:
+          button_accept: Aċċetta
+          button_reject: Iċħad
+          help_text: Irrevedi l-bidliet u aċċetta jew iċħad din l-emenda. Se tintbagħat notifika lill-awtur(i) tagħha.
+        announcement:
+          accepted: |-
+            Din l-emenda għall-%{amendable_type} %{proposal_link} ġiet
+            aċċettata fi <strong>%{date}</strong>.
+          evaluating: |-
+            Din l-emenda għall-%{amendable_type} %{proposal_link}
+            qed tiġi evalwata.
+          promoted: Promoss għal %{amendable_type}.
+          rejected: Din l-emenda għall-%{amendable_type} %{proposal_link} ġiet miċħuda fi <strong>%{date}</strong>.
+          withdrawn: |-
+            Din l-emenda għall-%{amendable_type} %{proposal_link}
+            ġiet irtirata mill-awtur.
+      new:
+        amendment_author: Awtur tal-emenda
+        send: Oħloq
+        title: Oħloq Abbozz tal-Emenda
+      preview_draft:
+        modify: Immodifika
+        publish: Ippubblika
+        title: Ippubblika l-Abbozz tal-Emenda
+      promoted:
+        error: Kien hemm problema biex tiġi ppubblikata l-emenda bħala proposta ġdida
+        success: L-emenda ġiet ippubblikata bħala proposta ġdida
+      publish_draft:
+        error: Kien hemm problema biex tiġi ppubblikata l-emenda.
+        success: L-emenda ġiet ippubblikata.
+      rejected:
+        error: Kien hemm problema biex din l-emenda tiġi miċħuda, jekk jogħġbok erġa’ pprova aktar tard
+        success: L-emenda ġiet miċħuda
+      review:
+        back: Lura
+        heading: Irrevedi l-emenda
+        help_text: Qed tirrevedi emenda għall-%{model_name}
+        send: Aċċetta l-emenda
+      update_draft:
+        error: Kien hemm problema biex jiġi aġġornat l-abbozz tal-emenda.
+        success: L-abbozz tal-emenda ġie aġġornat.
+      withdraw:
+        error: Sar żball waqt li kienet qed tiġi irtirata l-emenda
+        success: L-emenda ġiet irtirata
+      wizard_step_form:
+        steps:
+          '1': Oħloq l-emenda tiegħek
+          '2': Qabbel l-emenda tiegħek
+          '3': Lesti l-emenda tiegħek
+          '4': Ippubblika l-emenda tiegħek
+    anonymous_user: Anonimu
+    application:
+      collection:
+        documents:
+          few: Dokumenti
+          many: Dokumenti
+          one: Dokument
+          other: Dokumenti
+      document:
+        download: Niżżel il-fajl
+      documents:
+        related_documents: Trid issir taf aktar?
+      photos:
+        related_photos: Midja relatata
+    author:
+      avatar: Avatar
+      comments:
+        few: kummenti
+        many: kummenti
+        one: kumment
+        other: kummenti
+      endorsements:
+        few: approvazzjonijiet
+        many: approvazzjonijiet
+        one: approvazzjoni
+        other: approvazzjonijiet
+    authorization_handlers:
+      another_dummy_authorization_handler:
+        explanation: Introduċi numru tal-passaport li jibda bl-“A” biex tiġi vverifikat
+        fields:
+          passport_number: Numru tal-passaport
+          postal_code: Kodiċi postali
+        name: Eżempju ieħor ta’ awtorizzazzjoni
+      dummy_authorization_handler:
+        explanation: Introduċi numru ta’ dokument li jispiċċa bix-“X” biex tiġi vverifikat
+        fields:
+          allowed_postal_codes: Kodiċijiet postali permessi (separati b’virgoli)
+          allowed_scope_id: Kamp ta’ applikazzjoni permess
+          document_number: Numru tad-dokument
+          postal_code: Kodiċi postali
+          scope_id: Kamp ta’ applikazzjoni
+        name: Awtorizzazzjoni ta’ eżempju
+      dummy_authorization_workflow:
+        name: Workflow tal-awtorizzazzjoni finta
+      errors:
+        duplicate_authorization: Parteċipant huwa diġà awtorizzat bl-istess data.
+      expired_at: Skadiet fil-%{timestamp}
+      expires_at: Tiskadi fil-%{timestamp}
+      foo_authorization:
+        fields:
+          bar: Bar
+          foo: Foo
+        name: Awtorizzazzjoni tal-Foo
+      granted_at: Mogħtija fil-%{timestamp}
+      renew: Ġedded il-verifika
+      sms:
+        explanation: Niżżel in-numru tal-mowbajl tiegħek biex inkunu nistgħu nivverifikaw l-identità tiegħek.
+        name: Kodiċi bl-SMS
+      started_at: Beda fil-%{timestamp}
+    authorization_modals:
+      content:
+        expired:
+          authorize: Awtorizza mill-ġdid b’"%{authorization}”
+          explanation: L-awtorizzazzjoni tiegħek skadiet. Biex twettaq din l-azzjoni, jeħtieġ li tiġi awtorizzat mill-ġdid b’ "%{authorization}".
+          title: L-awtorizzazzjoni skadiet
+        incomplete:
+          cancel: Ikkanċella
+          explanation: 'Minkejja li bħalissa inti awtorizzat b’"%{authorization}", neħtieġu li terġa’ tawtorizza għax m’għandniex id-data li ġejja:'
+          reauthorize: Erġa’ awtorizza
+          title: Jekk jogħġbok erġa’ awtorizza
+        missing:
+          authorize: Awtorizza b’"%{authorization}”
+          explanation: Biex twettaq din l-azzjoni, jeħtieġ li tiġi awtorizzat b’"%{authorization}".
+          title: Meħtieġa awtorizzazzjoni
+        pending:
+          explanation: Biex twettaq din l-azzjoni, jeħtieġ li tiġi awtorizzat mill-ġdid b’ "%{authorization}", imma l-awtorizzazzjoni tiegħek għadha pendenti
+          resume: Ivverifika l-progress tal-awtorizzazzjoni "%{authorization}” tiegħek
+          title: L-awtorizzazzjoni għadha pendenti
+        unauthorized:
+          explanation: Jiddispjaċina, ma tistax twettaq din l-azzjoni peress li parti mid-data tal-awtorizzazzjoni tiegħek ma taqbilx.
+          invalid_field: "%{field} valur %{value} mhux validu."
+          ok: Ok
+          title: Mhux awtorizzat
+        unconfirmed:
+          confirmation_instructions: 'Jekk ma rċevejtx l-istruzzjonijiet tal-konferma tista’ terġa’ titlobhom:'
+          explanation_html: Sabiex twettaq din l-azzjoni trid tkun awtorizzat, qabel ma tagħmel hekk trid tikkonferma l-email tiegħek <strong>%{email}</strong>.
+          request_confirmation_instructions: Itlob istruzzjonijiet ta’ konferma
+          title: Ikkonferma l-email tiegħek
+      show:
+        close_modal: Agħlaq il-kaxxa ż-żgħira
+    collapsible_list:
+      hidden_elements_count:
+        few: u %{count} aktar
+        many: u %{count} aktar
+        one: u %{count} aktar
+        other: u %{count} aktar
+      see_less: "(ara inqas)"
+      see_more: "(ara aktar)"
+    components:
+      component_order_selector:
+        no_content: Ma stajna nsibu l-ebda kontenut b’dawn il-kriterji
+        order:
+          all_types: It-tipi kollha
+          collaborative_draft: Abbozz Kollaborattiv
+          comment: Kumment
+          debate: Dibattitu
+          initiative: Inizjattiva
+          meeting: Avvenimenti
+          post: Powst
+          proposal: Ideat
+          question: Mistoqsija
+        title: 'Uri:'
+      dummy:
+        actions:
+          bar: Bar
+          foo: Foo
+        name: Komponent finta
+        settings:
+          global:
+            amendments_enabled: Emendi attivati
+            comments_enabled: Kummenti attivati
+            comments_max_length: Tul massimu tal-kummenti
+            dummy_global_attribute_1: Attribut 1 finta
+            dummy_global_attribute_2: Attribut 2 finta
+            dummy_global_translatable_text: Test Traduċibbli finta
+            enable_pads_creation: Attiva l-ħolqien ta’ pads
+            resources_permissions_enabled: Permessi tar-riżorsi attivati
+          step:
+            amendment_creation_enabled: Ħolqien tal-emendi attivat
+            amendment_promotion_enabled: Promozzjoni tal-emendi attivata
+            amendment_reaction_enabled: Reazzjoni għall-emendi attivata
+            amendments_visibility: Viżibbiltà tal-emendi
+            comments_blocked: Kummenti mblukkati
+            dummy_step_attribute_1: Pass tal-Attribut 1 finta
+            dummy_step_attribute_2: Pass tal-Attribut 2 finta
+            dummy_step_translatable_text: Pass tat-Test Traduċibbli finta
+    contact: Kuntatt
+    content_blocks:
+      footer_sub_hero:
+        name: Footer taħt il-hero banner
+      hero:
+        name: Hero image
+      hero_settings_form:
+        background_image: Immaġni fl-isfond
+        welcome_text: Test ta’ merħba
+      highlighted_content_banner:
+        name: Strixxun tal-kontenut iħħajlajtjat
+      how_to_participate:
+        name: Kif tieħu sehem
+      html:
+        html_content: Kontenut HTML
+        name: Blokka HTML
+      last_activity:
+        name: L-aħħar attività
+        title: L-Aħħar Attività (jew Attivitajiet)
+        view_all: Ara kollox
+      metrics:
+        name: Metrika tal-organizzazzjoni
+      stats:
+        name: Statistika tal-organizzazzjoni
+      sub_hero:
+        name: Taħt il-hero banner
+    core:
+      actions:
+        login_before_access: Jekk jogħġbok, illoggja bil-kont tiegħek qabel l-aċċess
+        unauthorized: You must log in to perform this action.
+    data_portability:
+      export:
+        ready: Lest
+      show:
+        download_data: Niżżel id-data
+        download_data_description: Fajl li fih l-informazzjoni kollha marbuta mal-kont tiegħek se jintbagħat lil <strong>%{user_email}</strong>. Din l-email se tinkludi fajl .zip u password biex tiftħu.<br/><br/>Biex tiftaħ (“unzip”) il-fajl, ikollok bżonn <a href="https://www.7-zip.org/">7-Zip</a> (għall-Windows) jew <a href="https://www.keka.io/">Keka</a> (għall-MacOS). Jekk tuża Linux, ħafna drabi jkollok dan installat awtomatikament. Inkella, tista’ tuża <a href="https://gitlab.gnome.org/GNOME/file-roller">File Roller</a> jew <a href="https://peazip.github.io">PeaZip</a>).
+        request_data: Itlob id-data tiegħek
+    datepicker:
+      help_text: 'Format mistenni: %{datepicker_format}'
+    devise:
+      omniauth_registrations:
+        create:
+          email_already_exists: Kont ieħor qed juża l-istess indirizz tal-email
+        new:
+          complete_profile: Lesti l-profil
+          nickname_help: Il-psewdonimu tiegħek f’%{organization}
+          sign_up: Jekk jogħġbok lesti l-profil tiegħek
+          subtitle: Jekk jogħġbok imla l-formola li ġejja sabiex tlesti r-reġistrazzjoni
+          username_help: L-isem pubbliku li jidher fil-powsts tiegħek. Bl-għan li tiġi garantita l-anonimità, jista’ jkun kwalunkwe isem.
+      registrations:
+        new:
+          already_have_an_account?: Diġà għandek kont?
+          newsletter: Irċievi bullettin kull tant żmien bl-informazzjoni rilevanti
+          newsletter_title: Permess ta’ kuntatt
+          nickname_help: Il-psewdonimu tiegħek f’%{organization}
+          password_help: "%{minimun_characters} karattri minimi, ma jridux ikunu komuni wisq (eż. 123456) u jridu jkunu differenti mill-identifikatur tiegħek u mill-email tiegħek."
+          sign_in: Illoggja
+          sign_up: Irreġistra
+          sign_up_as:
+            legend: Irreġistra bħala
+          subtitle: Irreġistra biex tieħu sehem fid-diskussjonijiet u tagħti s-sostenn lill-proposti.
+          terms: it-termini u l-kundizzjonijiet tal-użu
+          tos_agreement: Bir-reġistrazzjoni tiegħek tkun qed taqbel ma’ %{link}.
+          tos_title: Termini tas-Servizz
+          username_help: L-isem pubbliku li jidher fil-powsts tiegħek. Bl-għan li tiġi garantita l-anonimità, jista’ jkun kwalunkwe isem.
+      sessions:
+        new:
+          are_you_new?: Ġdid fil-pjattaforma?
+          register: Oħloq kont
+          sign_in_disabled: Tista’ taċċessa b’kont estern
+          sign_up_disabled: Ir-reġistrazzjoni hija diżattivata, tista’ tuża kont eżistenti biex taċċessa
+      shared:
+        newsletter_modal:
+          buttons:
+            check: Ivverifika u kompli
+            close_modal: Agħlaq il-kaxxa ż-żgħira
+            uncheck: Żommha mhux immarkata
+          notice: |-
+            <p>Żgur li ma tridx tirċievi bullettin?<br>
+            Jekk jogħġbok erġa’ kkunsidra li timmarka l-kaxxa tal-bullettini hawn taħt.<br>
+            Għalina importanti ħafna li tkun tista’ tirċievi l-emails minn żmien għal żmien
+            biex nagħtuk avviżi importanti. Dan dejjem tista’ tbiddlu
+            mill-paġna tal-konfigurazzjonijiet tan-notifiki tiegħek.</p>
+            <p>Jekk ma timmarkax il-kaxxa jaf titlef informazzjoni rilevanti
+            dwar opportunitajiet parteċipatorji ġodda fil-pjattaforma.<br>
+            Jekk xorta trid tevita li tirċievi l-bullettin, nifhmu
+            perfettament id-deċiżjoni tiegħek.</p>
+            <p>Grazzi talli qgħadt taqraha!</p>
+          title: Notifiki tal-bullettini
+        omniauth_buttons:
+          or: Jew
+    doorkeeper:
+      authorizations:
+        new:
+          authorize: Awtorizza l-applikazzjoni
+          by_organization_link_html: <small class="heading-small">minn %{link}</small>
+          cancel: Ikkanċella
+          connect_your_account_html: Qabbad il-kont tiegħek billi tilloggja ma’ <strong>%{organization}</strong>
+          publish_content: Ippubblika l-kontenut għalik
+          see_email: Ara l-email tiegħek
+          see_name: Ara ismek
+          see_username: Ara l-identifikatur tiegħek
+          this_application_will_be_able_to: 'Din l-applikazzjoni se tkun tista’:'
+          this_application_will_not_be_able_to: 'Din l-applikazzjoni mhux se tkun tista’:'
+          update_profile: Aġġorna l-profil tiegħek
+          wants_to_use_your_account_html: "<strong>%{application_name}</strong> trid tuża l-kont tiegħek"
+    endorsable:
+      endorsements: Approvazzjonijiet
+      endorsements_count: Għadd ta’ approvazzjonijiet
+    endorsement_buttons_cell:
+      already_endorsed: Approvati
+      endorse: Approva
+    endorsements:
+      identities:
+        done: Lest
+        select_identity: Agħżel l-identità
+    errors:
+      internal_server_error:
+        title: Kien hemm problema bis-server tagħna
+        try_later: Erġa’ pprova aktar tard.
+      not_found:
+        back_home: Lura fil-paġna ewlenija
+        content_doesnt_exist: Dan l-indirizz huwa skorrett jew tneħħa.
+        title: Il-paġna li qed tfittex ma tistax tinstab
+    events:
+      amendments:
+        amendment_accepted:
+          affected_user:
+            email_intro: 'Ġiet aċċettata emenda għal %{amendable_title}. Tista’ tarah minn din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax inti awtur ta’ %{amendable_title}.
+            email_subject: Emenda aċċettata għal %{amendable_title} minn %{emendation_author_nickname}
+            notification_title: L-<a href="%{emendation_path}">emenda</a> maħluqa minn <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> ġiet aċċettata għal <a href="%{amendable_path}">%{amendable_title}</a>.
+          follower:
+            email_intro: 'Ġiet aċċettata emenda għal %{amendable_title}. Tista’ tarah minn din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax qed issegwi lil %{amendable_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+            email_subject: Emenda aċċettata għal %{amendable_title} minn %{emendation_author_nickname}
+            notification_title: L-<a href="%{emendation_path}">emenda</a> maħluqa minn <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> ġiet aċċettata għal <a href="%{amendable_path}">%{amendable_title}</a>.
+        amendment_created:
+          affected_user:
+            email_intro: 'Inħolqot emenda għal %{amendable_title}. Tista’ tarah minn din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax inti awtur ta’ %{amendable_title}.
+            email_subject: Emenda ġdida għal %{amendable_title}
+            notification_title: Inħolqot emenda ġdida għal <a href="%{amendable_path}">%{amendable_title}</a>.
+          follower:
+            email_intro: 'Inħolqot emenda għal %{amendable_title}. Tista’ tarah minn din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax qed issegwi lil %{amendable_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+            email_subject: Emenda ġdida għal %{amendable_title}
+            notification_title: Inħolqot emenda ġdida għal <a href="%{amendable_path}">%{amendable_title}</a>.
+        amendment_promoted:
+          affected_user:
+            email_intro: 'Emenda miċħuda għal %{amendable_title} ġiet ippubblikata bħala %{amendable_type} ġdid. Tista’ tarah minn din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax inti awtur ta’ %{amendable_title}.
+            email_subject: Emenda minn %{emendation_author_nickname} ġiet ippubblikata bħala %{amendable_type} ġdid
+            notification_title: <a href="%{emendation_path}">Emenda miċħuda</a> għal <a href="%{amendable_path}">%{amendable_title}</a> ġiet ippubblikata bħala %{amendable_type} ġdid minn <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.
+          follower:
+            email_intro: 'Emenda miċħuda għal %{amendable_title} ġiet ippubblikata bħala %{amendable_type} ġdid. Tista’ tarah minn din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax qed issegwi lil %{amendable_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+            email_subject: Emenda minn %{emendation_author_nickname} ġiet ippubblikata bħala %{amendable_type} ġdid
+            notification_title: <a href="%{emendation_path}">Emenda miċħuda</a> għal <a href="%{amendable_path}">%{amendable_title}</a> ġiet ippubblikata bħala %{amendable_type} ġdid minn <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.
+        amendment_rejected:
+          affected_user:
+            email_intro: 'Emenda għal %{amendable_title} ġiet miċħuda. Tista’ tarah minn din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax inti awtur ta’ %{amendable_title}.
+            email_subject: Emenda għal %{amendable_title} ġiet miċħuda minn %{emendation_author_nickname}
+            notification_title: L-<a href="%{emendation_path}">emenda</a> maħluqa minn <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> ġiet miċħuda għal <a href="%{amendable_path}">%{amendable_title}</a>.
+          follower:
+            email_intro: 'Emenda għal %{amendable_title} ġiet miċħuda. Tista’ tarah minn din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax qed issegwi lil %{amendable_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+            email_subject: Emenda għal %{amendable_title} ġiet miċħuda minn %{emendation_author_nickname}
+            notification_title: L-<a href="%{emendation_path}">emenda</a> maħluqa minn <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> ġiet miċħuda għal <a href="%{amendable_path}">%{amendable_title}</a>.
+      attachments:
+        attachment_created:
+          email_intro: 'Ġie miżjud dokument ġdid ma’ %{resource_title}. Tista’ tarah minn din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi %{resource_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: Aġġornament għal %{resource_title}
+          notification_title: Ġie miżjud <a href="%{resource_path}">dokument ġdid</a> ma’ <a href="%{attached_to_url}">%{resource_title}</a>
+      components:
+        component_published:
+          email_intro: 'Il-komponent %{resource_title} issa huwa attiv għal %{participatory_space_title}. Tista’ tarah minn din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi %{participatory_space_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: Aġġornament għal %{participatory_space_title}
+          notification_title: Il-komponent %{resource_title} issa huwa attiv għal <a href="%{resource_path}">%{participatory_space_title}</a>
+      email_event:
+        email_greeting: Insellmulek %{user_name},
+        email_intro: 'Kien hemm aġġornament għal “%{resource_title}”. Tista’ tarah minn din il-paġna:'
+        email_outro: Irċevejt din in-notifika għax qed issegwi "%{resource_title}". Tista’ ma tibqax issegwiha permezz tal-link preċedenti.
+        email_subject: Aġġornament għal %{resource_title}
+      gamification:
+        badge_earned:
+          email_intro: Proset! Ksibt il-badge <a href="%{resource_path}">%{badge_name} </a> (livell %{current_level}).
+          email_outro: Irċevejt din in-notifika għax għamilt attività fis-sit tagħna.
+          email_subject: 'Ksibt badge ġdida: %{badge_name}!'
+          notification_title: Proset! Ksibt il-<a href="%{resource_path}">%{badge_name} badge</a> (level %{current_level}).
+        level_up:
+          email_intro: Proset! Ilħaqt il-livell %{current_level} fil-<a href="%{resource_url}">%{badge_name} badge</a>!
+          email_outro: Irċevejt din in-notifika għax għamilt attività fis-sit tagħna.
+          email_subject: Ilħaqt il-livell %{current_level} fil-%{badge_name} badge!
+          notification_title: Proset! Ilħaqt il-livell %{current_level} fil-<a href="%{resource_path}">%{badge_name} badge</a>!
+      groups:
+        demoted_membership:
+          email_intro: Amministratur tal-grupp <a href="%{resource_url}">%{user_group_name}</a> neħħa d-drittijiet ta’ amministratur tiegħek għal dak il-grupp.
+          email_outro: Irċevejt din in-notifika għax inti membru ta’ dak il-grupp.
+          email_subject: M’għadekx amministratur tal-grupp %{user_group_name}!
+          notification_title: M’għadekx amministratur tal-grupp <a href="%{resource_path}">%{user_group_name}</a>.
+        invited_to_group:
+          email_intro: Amministratur tal-grupp <a href="%{resource_url}">%{user_group_name}</a> stiednek tingħaqad miegħu.
+          email_outro: Irċevejt din in-notifika minħabba li ġejt mistieden fi grupp. Jekk jogħġbok immarka t-tab Gruppi fil-profil tiegħek biex tapprovaha.
+          email_subject: Ġejt mistieden tingħaqad mal-grupp %{user_group_name}!
+          notification_title: Ġejt mistieden tingħaqad mal-grupp <a href="%{resource_path}">%{user_group_name}</a>. Immarka <a href="%{groups_profile_tab_path}">l-paġna Gruppi</a> fil-profil tiegħek biex tapprovaha!
+        join_request_accepted:
+          email_intro: Proset! Amministratur tal-grupp <a href="%{resource_url}">%{user_group_name}</a> laqa’ t-talba tiegħek biex tingħaqad miegħu.
+          email_outro: Irċevejt din in-notifika minħabba li t-talba tiegħek biex tingħaqad mal-grupp ġiet aġġornata.
+          email_subject: Ġejt aċċettat fil-grupp %{user_group_name}!
+          notification_title: Ġejt aċċettat fil-grupp <a href="%{resource_path}">%{user_group_name}</a>.
+        join_request_created:
+          email_intro: Xi ħadd talab li jingħaqad mal-grupp %{user_group_name}. Tista’ taċċettah jew tirrifjutah <a href="%{resource_url}">mill-paġna tal-membri tal-grupp</a>.
+          email_outro: Irċevejt din in-notifika minħabba li tista’ tiġġestixxi l-grupp %{user_group_name}.
+          email_subject: Xi ħadd talab li jingħaqad mal-grupp %{user_group_name}!
+          notification_title: Xi ħadd talab li jingħaqad mal-grupp %{user_group_name}. Tista’ taċċettah jew tirrifjutah <a href="%{resource_path}">mill-paġna tal-membri tal-grupp</a>.
+        join_request_rejected:
+          email_intro: Amministratur tal-grupp <a href="%{resource_url}">%{user_group_name}</a> ċaħad it-talba tiegħek biex tingħaqad miegħu.
+          email_outro: Irċevejt din in-notifika minħabba li t-talba tiegħek biex tingħaqad mal-grupp ġiet aġġornata.
+          email_subject: It-talba tiegħek biex tingħaqad fil-grupp %{user_group_name} ġiet miċħuda!
+          notification_title: It-talba tiegħek biex tingħaqad fil-grupp <a href="%{resource_path}">%{user_group_name}</a> ġiet miċħuda.
+        promoted_to_admin:
+          email_intro: Amministratur tal-grupp <a href="%{resource_url}">%{user_group_name}</a> tak id-drittijiet ta’ amministratur għal dak il-grupp.
+          email_outro: Irċevejt din in-notifika għax inti membru ta’ dak il-grupp.
+          email_subject: Issa inti amministratur tal-grupp %{user_group_name}!
+          notification_title: Issa inti amministratur tal-grupp <a href="%{resource_path}">%{user_group_name}</a>.
+        removed_from_group:
+          email_intro: Amministratur tal-grupp <a href="%{resource_url}">%{user_group_name}</a> neħħiek minnu.
+          email_outro: Irċevejt din in-notifika għax kont membru ta’ dak il-grupp.
+          email_subject: Tneħħejt mill-grupp %{user_group_name}!
+          notification_title: Tneħħejt mill-grupp <a href="%{resource_path}">%{user_group_name}</a>.
+        user_group_created:
+          email_intro: Inħoloq grupp tal-utenti ġdid bl-isem %{user_group_name}. Issa tista’ tivverifikah <a href="%{groups_admin_url}">fil-panel tal-amministraturi</a>.
+          email_outro: Irċevejt din in-notifika għax inti amministratur tal-pjattaforma.
+          email_subject: Inħoloq grupp tal-utenti ġdid
+          notification_title: Inħoloq il-grupp tal-utenti %{user_group_name}. Issa tista’ tivverifikah <a href="%{groups_admin_path}">fil-panel tal-amministraturi</a>.
+        user_group_updated:
+          email_intro: Grupp tal-utenti bl-isem %{user_group_name} aġġorna l-profil tiegħu, u ħallih mhux ivverifikat. Issa tista’ tivverifikah <a href="%{groups_admin_url}">fil-panel tal-amministraturi</a>.
+          email_outro: Irċevejt din in-notifika għax inti amministratur tal-pjattaforma.
+          email_subject: Grupp tal-utenti aġġorna l-profil tiegħu
+          notification_title: Il-grupp tal-utenti %{user_group_name} aġġorna l-profil tiegħu, u ħallih mhux ivverifikat. Issa tista’ tivverifikah <a href="%{groups_admin_path}">fil-panel tal-amministraturi</a>.
+      notification_event:
+        notification_title: Ġara avveniment lil <a href="%{resource_path}">%{resource_title}</a>.
+      resource_endorsed:
+        email_intro: '%{endorser_name} %{endorser_nickname}, li qed issegwi, għadu kemm approva "%{resource_title}” u naħsbu li jista’ jkun interessanti għalik. Mur araha u kkontribwixxi:'
+        email_outro: Irċevejt din in-notifika għax qed issegwi %{endorser_nickname}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+        email_subject: "%{endorser_nickname} wettaq approvazzjoni ġdida"
+        notification_title: <a href="%{resource_path}">%{resource_title}</a> %{resource_type} ġie approvat minn <a href="%{endorser_path}">%{endorser_name} %{endorser_nickname}</a>.
+      users:
+        profile_updated:
+          email_intro: Il-<a href="%{resource_url}">paġna tal-profil</a> ta’ %{name} (%{nickname}), li qed issegwi, ġiet aġġornata.
+          email_outro: Irċevejt din in-notifika għax qed issegwi lil %{nickname}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: "%{nickname} aġġornaw il-profil tagħhom"
+          notification_title: Il-<a href="%{resource_path}">paġna tal-profil</a> ta’ %{name} (%{nickname}), li qed issegwi, ġiet aġġornata.
+    export_mailer:
+      data_portability_export:
+        click_button: 'Ikklikkja fuq il-link li jmiss biex tiddawnlowdja d-data tiegħek.<br/>Il-fajl se jkun disponibbli sa %{date}.<br/>Se jkollok bżonn <a href="https://www.7-zip.org/">7-Zip</a> (għall-Windows), <a href="https://www.keka.io/en/">Keka</a> (għall-MacOS) jew <a href="https://peazip.github.io">PeaZip</a> (għall-Linux) biex tiftħu. Password: %{password}'
+        download: Niżżel
+      export:
+        ready: Għandek issib verżjoni żżippjata tal-esportazzjoni tiegħek mehmuża.
+      subject: L-esportazzjoni tiegħek "%{name}” lesta
+    filters:
+      linked_classes:
+        all: Kollha
+        collaborative_draft: Abbozz kollaborattiv
+        dummy_resource: Riżorsi finta
+        meeting: Avvenimenti
+        project: Proġetti
+        proposal: Idea
+        result: Riżultati
+    fingerprint:
+      check: Ivverifika l-marka tas-swaba’
+      explanation: Il-parti tat-test ta’ hawn taħt hija rappreżentazzjoni mqassra u hashed ta’ dan il-kontenut. Huwa utli li jiġi żgurat li l-kontenut ma jiġix imbagħbas, peress li modifika waħda tirriżulta f’valur totalment differenti.
+      online_calculator_name: Kalkulatur MD5 online
+      replicate_help: Din il-marka tas-swaba’ tiġi kkalkulata bl-użu tal-algoritmu tal-hashing SHA256. Sabiex tirreplikah int stess, tista’ tuża %{online_calculator_link} u tikkopja u tippejstja d-data sors.
+      source: Sors
+      title: Marka tas-swaba’
+      value: Valur
+    followers:
+      followers_count:
+        few: "%{count} segwaċi"
+        many: "%{count} segwaċi"
+        one: "%{count} segwaċi"
+        other: "%{count} segwaċi"
+      no_followers: Għad m’hemmx segwaċi.
+    following:
+      no_followings: Għadu ma jsegwi lil ħadd jew lil xejn.
+    follows:
+      create:
+        button: Segwi
+        error: Kien hemm problema biex tiġi segwita din ir-riżorsa.
+        participatory_space: Diġà ssegwi <span class="show-for-sr">%{resource_name}</span>
+      destroy:
+        button: Waqqaf issegwi
+        error: Kien hemm problema biex tieqaf issegwi din ir-riżorsa.
+    forms:
+      current_file: Fajl attwali
+      current_image: Immaġni attwali
+      default_image: Immaġni prestabbilita
+      errors:
+        decidim/user:
+          password: Il-password qasira wisq.
+          password_confirmation: Il-konferma tal-password trid taqbel mal-password.
+        error: Hemm żball f’dan il-kamp tad-data.
+      file_help:
+        file:
+          explanation: 'Gwida għall-fajl:'
+          message_1: Għandu jkun immaġni jew dokument.
+          message_2: Għal immaġnijiet, uża preferibbilment immaġnijiet mimdudin, is-servizz jikkroppja l-immaġni.
+        image:
+          explanation: 'Gwida għall-immaġni:'
+          message_1: Preferibbilment immaġni mimduda li ma jkun fiha l-ebda test.
+          message_2: Is-servizz jikkroppja l-immaġni.
+      file_validation:
+        allowed_file_extensions: 'Estensjonijiet tal-fajl permessi: %{extensions}'
+        max_file_size: 'Daqs massimu tal-fajl: %{megabytes}MB'
+      remove_this_file: Neħħi dan il-fajl
+    gamification:
+      all_badges_link: Ara l-badges kollha disponibbli.
+      badges:
+        followers:
+          conditions: Li tkun attiv u ssegwi nies oħrajn żgur li jwassal biex nies oħra jsegwu lilek.
+          description: Din il-badge tingħata meta tilħaq ċertu numru ta’ segwaċi. %{organization_name} huwa network soċjali u politiku, ibni n-network tiegħek biex tikkomunika ma’ nies oħrajn fil-pjattaforma.
+          description_another: Dan il-parteċipant għandu %{score} segwaċi.
+          description_own: "%{score} persuni qed isegwuk."
+          name: Segwaċi
+          next_level_in: Ġib %{score} aktar persuni jsegwuk biex tilħaq il-livell li jmiss!
+          unearned_another: Dan il-parteċipant għad m’għandux segwaċi.
+          unearned_own: Għad m’għandekx segwaċi.
+        index:
+          badge_title: "%{name} badge"
+          how: Kif tista’ tiksibha
+          page_description: Il-badges huma rikonoxximenti għall-azzjonijiet tal-parteċipanti u l-progress fil-pjattaforma. Hekk kif tibda tiskopri, tipparteċipa u tinteraġixxi fil-pjattaforma, tikseb badges differenti. Din hija l-lista tal-badges u xi modi kif tista’ tikseb dawn il-badges.
+          title: Badges
+        invitations:
+          conditions: |-
+            Uża l-link “stieden il-ħbieb” fil-paġna tal-utent tiegħek biex tistieden lil ħbiebek
+            Ippersonalizza, jekk trid, il-messaġġ li tibgħat
+            Titla’ livell billi tibgħat stediniet u tirreġistrahom.
+          description: Din il-badge tingħata meta tkun stedint xi nies u dawn iqattgħu ftit ħin biex jirreġistraw fi %{organization_name} u jsiru parteċipanti. Grazzi talli għamilt lil %{organization_name} magħrufa mill-oħrajn u talli għent biex tespandi l-komunità!
+          description_another: Dan il-parteċipant stieden %{score} persuni.
+          description_own: Stedint %{score} persuni.
+          name: Stediniet
+          next_level_in: Stieden %{score} aktar persuni biex tilħaq il-livell li jmiss!
+          unearned_another: Dan il-parteċipant għadu ma stieden lil ħadd.
+          unearned_own: Għadek ma stedint lil ħadd.
+      description: Il-badges huma rikonoxximenti għall-azzjonijiet tal-parteċipanti u l-progress fil-pjattaforma. Hekk kif tibda tiskopri, tipparteċipa u tinteraġixxi fil-pjattaforma, tikseb badges differenti.
+      level: Livell %{level}
+      reached_top: Ilħaqt l-ogħla livell għal din il-badge.
+    group_admins:
+      actions:
+        are_you_sure: Żgur? Dan mhux se jneħħi lill-parteċipant mill-grupp.
+        demote_admin: Neħħi l-amministratur
+      demote:
+        error: Kien hemm problema biex dan il-parteċipant jitneħħa mil-lista tal-amministraturi
+        success: Il-parteċipant tneħħa minn amministratur
+      index:
+        current_admins: 'Amministraturi attwali:'
+        manage_admins: Ġestixxi l-amministraturi
+    group_invites:
+      accept:
+        error: Kien hemm problema biex tinħoloq din l-istedina
+        success: L-istedina ġiet aċċettata
+      accept_invitation: Aċċetta
+      accept_or_reject_group_invitations: 'Il-gruppi li ġejjin stidnuk tingħaqad magħhom. Aċċetta jew iċħad it-talbiet tagħhom:'
+      index:
+        invite: Stieden
+        invite_user: Stieden parteċipant
+      invite:
+        error: Kien hemm problema biex jiġi mistieden dan il-parteċipant
+        success: Il-parteċipant ġie mistieden
+      reject:
+        error: Kien hemm problema biex tiġi miċħuda din l-istedina
+        success: L-istedina ġiet miċħuda
+      reject_invitation: Iċħad
+    group_members:
+      accept:
+        error: Kien hemm problema biex tiġi aċċettata din it-talba biex jingħaqad xi ħadd
+        success: It-talba biex jingħaqad ġiet aċċettata
+      actions:
+        are_you_sure: Żgur?
+        promote_to_admin: Agħmel amministratur
+        remove_from_group: Neħħi parteċipant
+      index:
+        current_members_without_admins: 'Membri attwali (mingħajr amministraturi):'
+        manage_members: Ġestixxi l-membri
+      promote:
+        error: Kien hemm problema biex jiġi promoss dan il-parteċipant
+        success: Il-parteċipant ġie promoss
+      reject:
+        error: Kien hemm problema biex tiġi miċħuda din it-talba biex jingħaqad xi ħadd
+        success: It-talba biex jingħaqad ġiet miċħuda
+      remove:
+        error: Kien hemm problema biex dan il-parteċipant jitneħħa mill-grupp
+        success: Il-parteċipant tneħħa mill-grupp
+    groups:
+      actions:
+        are_you_sure: Żgur?
+      create:
+        error: Kien hemm problema biex jinħoloq dan il-grupp
+        success: Il-grupp inħoloq
+      edit:
+        edit_user_group: Editja l-grupp
+        update_user_group: Aġġorna l-grupp
+      form:
+        document_number_help: Tużax singijiet u lanqas spazji
+        email_help: Email tal-organizzazzjoni, assoċjazzjoni, kollettiva, grupp, eċċ. tiegħek.
+        fill_in_for_verification: 'Imla dawn il-kampijiet tad-data jekk tixtieq li l-grupp tiegħek jiġi vverifikat:'
+        name_help: Isem l-organizzazzjoni, l-assoċjazzjoni, il-kollettiva, il-grupp, eċċ. tiegħek.
+        nickname_help: L-identifikatur l-organizzazzjoni, l-assoċjazzjoni, il-kollettiva, il-grupp, eċċ. tiegħek. Tużax spazji u lanqas aċċenti.
+        phone_help: Tużax singijiet u lanqas spazji
+      join:
+        error: Kien hemm problema biex tingħaqad mal-grupp
+        success: It-talba biex tingħaqad inħolqot. Amministratur se jirrevedi t-talba tiegħek qabel jaċċettak fil-grupp.
+      leave:
+        error: Kien hemm problema biex tħalli l-grupp
+        success: Il-grupp ġie abbandunat.
+      members:
+        accept_or_reject_join_requests: 'L-utenti li ġejjin applikaw biex jingħaqdu ma’ dan il-grupp. Aċċetta jew iċħad it-talbiet tagħhom:'
+        accept_request: Aċċetta
+        reject_request: Iċħad
+      new:
+        create_user_group: Oħloq grupp
+        new_user_group: Grupp ġdid
+        subtitle: Oħloq grupp u stieden utenti oħra biex jingħaqdu biex jipparteċipaw f’livell kollettiv.
+      no_user_groups: Għadu ma jappartjeni għal ebda grupp.
+      roles:
+        admin: Amministratur
+        creator: Kreatur
+        member: Membru
+      update:
+        error: Kien hemm problema biex jiġi aġġornat il-grupp
+        success: Il-grupp aġġorna
+    help:
+      main_topic:
+        default_page:
+          content: "<p>Fi %{organization} tista’ tipparteċipa u tiddeċiedi dwar suġġetti differenti, permezz tal-ispazji li tara fil-menù ta’ fuq: Proċessi, Assembleji, Inizjattivi, Konsultazzjonijiet.</p> <p>F’kull wieħed minnhom issib għażliet differenti biex tipparteċipa: tagħmel proposti - individwalment jew ma’ persuni oħra -, tieħu sehem f’dibattiti, tipprijoratizza il-proġetti li jridu jiġu implimentati, tattendi laqgħat wiċċ imb wiċċ u azzjonijiet oħra.</p>\n"
+          title: X’nista’ nagħmel f’%{organization}?
+        description: Aqra aktar dwar %{organization}
+        title: Għajnuna Ġenerali
+    last_activities:
+      activities:
+        no_activities_warning: L-ebda attività
+      all: It-tipi kollha ta’ attivitajiet
+      index:
+        last_activity: L-aktar attività riċenti
+        resource_type: Tip
+    log:
+      base_presenter:
+        create: "%{user_name} ħoloq %{resource_name}"
+        create_with_space: "%{user_name} ħoloq %{resource_name} fi %{space_name}"
+        delete: "%{user_name} ħassar %{resource_name}"
+        delete_with_space: "%{user_name} ħassar %{resource_name} fi %{space_name}"
+        unknown_action: "%{user_name} għamel xi azzjoni fi %{resource_name}"
+        unknown_action_with_space: "%{user_name} għamel xi azzjoni fi %{resource_name} in %{space_name}"
+        update: "%{user_name} aġġorna %{resource_name}"
+        update_with_space: "%{user_name} aġġorna %{resource_name} fi %{space_name}"
+      value_types:
+        area_presenter:
+          not_found: 'Iż-żona ġeografika ma nstabitx fil-bażi tad-data (ID: %{id})'
+        area_type_presenter:
+          not_found: 'It-tip ta’ żona ġeografika ma nstabx fil-bażi tad-data (ID: %{id})'
+        scope_presenter:
+          not_found: 'Il-kamp ta'' applikazzjoni ma nstabx fil-bażi tad-data (ID: %{id})'
+        scope_type_presenter:
+          not_found: 'It-tip ta’ kamp ta'' applikazzjoni ma nstabx fil-bażi tad-data (ID: %{id})'
+    managed_users:
+      expired_session: Is-sessjoni attwali ta’ amministrazzjoni ta’ parteċipant skadiet.
+    map:
+      dynamic:
+        screen_reader_explanation: L-element li ġej huwa mappa li tippreżenta l-affarijiet f’din il-paġna bħala punti fuq il-mappa. L-element jista’ jintuża b’qarrej tal-iskrin iżda jista’ jkun diffiċli biex jinftiehem.
+        skip_button: Aqbeż il-mappa
+      static:
+        latlng_text: 'latitudni: %{latitude}, lonġitudni: %{longitude}'
+        map_service_brand: OpenStreetMap
+    members:
+      no_members: Dan il-grupp għad m’għandu l-ebda membru.
+    menu:
+      help: Dwar il-Konferenza
+      processes: Suġġetti
+    messaging:
+      conversation_mailer:
+        comanagers_new_conversation:
+          admin_in_group: Dan qed tirċevih għax inti amministratur fi %{group}.
+          greeting: Il-ġurnata t-tajba, %{recipient}!
+          intro: "%{manager} beda konverżazzjoni ġdida f’isem %{group}. Ikklikkja hawn biex taraha:"
+          outro: Uża decidim!
+          subject: "%{manager} beda konverżazzjoni ġdida bħala %{group}"
+        comanagers_new_message:
+          admin_in_group: Dan qed tirċevih għax inti amministratur fi %{group}.
+          greeting: Il-ġurnata t-tajba, %{recipient}!
+          intro: "%{manager} ippowstja messaġġi ġodda fil-konverżazzjoni ġdida f’isem %{group}. Ikklikkja hawn biex tarahom:"
+          outro: Uża decidim!
+          subject: "%{manager} bagħat messaġġi ġodda bħala %{group}"
+        new_conversation:
+          greeting: Il-ġurnata t-tajba, %{recipient}!
+          intro: "%{sender} beda konverżazzjoni ġdida miegħek. Ikklikkja hawn biex taraha:"
+          outro: Uża decidim!
+          subject: "%{sender} beda konverżazzjoni miegħek"
+        new_group_conversation:
+          admin_in_group: Dan qed tirċevih għax inti amministratur fi %{group}.
+          greeting: Il-ġurnata t-tajba, %{recipient}!
+          intro: "%{sender} beda konverżazzjoni ġdida mal-grupp %{group}. Ikklikkja hawn biex taraha:"
+          outro: Uża decidim!
+          subject: "%{sender} beda konverżazzjoni ma’ %{group}"
+        new_group_message:
+          admin_in_group: Dan qed tirċevih għax inti amministratur fi %{group}.
+          greeting: Il-ġurnata t-tajba, %{recipient}!
+          intro: "%{sender} ippowstja messaġġi ġodda f’konverżazzjoni mal-grupp %{group}. Ikklikkja hawn biex taraha:"
+          outro: Uża decidim!
+          subject: "%{group} għandu messaġġi ġodda mingħand %{sender}"
+        new_message:
+          greeting: Il-ġurnata t-tajba, %{recipient}!
+          intro: "%{sender} ippowstja messaġġi ġodda fil-konverżazzjoni tiegħek. Ikklikkja hawn biex tarahom:"
+          outro: Uża decidim!
+          subject: Għandek messaġġi ġodda mingħand %{sender}
+      conversations:
+        add_conversation_users:
+          add_max_users: 'Żid l-utenti fil-konverżazzjoni: massimu ta’ 9 utenti'
+          add_users_placeholder: Fittex...
+          modal_title: Konverżazzjoni ġdida
+          no_results: L-ebda riżultat
+          participant_with_disabled_message_reception: Dan il-parteċipant iddiżattiva l-wasla tal-messaġġi
+        conversation:
+          show: Uri konverżazzjoni ma’ %{sender}
+        create:
+          error: Il-konverżazzjoni ma bdietx. Erġa' pprova aktar tard
+        index:
+          ago: ilu
+          close: Agħlaq il-kaxxa ż-żgħira
+          from: Mingħand
+          groups: Il-gruppi tiegħi
+          last_message: L-aħħar messaġġ
+          new_conversation: Konverżazzjoni ġdida
+          next: Li jmiss
+          no_conversations: Għad m’għandek l-ebda konverżazzjoni
+          title: Konverżazzjonijiet
+        reply:
+          placeholder: It-tweġiba tiegħek...
+          send: Ibgħat
+          title: Wieġeb
+        show:
+          back: Lura għall-konverżazzjonijiet kollha
+          chat_with: Konverżazzjoni ma’
+          not_allowed: Dan l-utent ma jaċċettax aktar messaġġi diretti.
+          title: Konverżazzjoni ma’ %{usernames}
+        start:
+          send: Ibgħat
+          title: Ibda konverżazzjoni
+        update:
+          error: Il-messaġġ ma ntbagħatx. Erġa' pprova aktar tard
+    metrics:
+      download:
+        csv: Niżżel id-data (csv)
+      followers:
+        description: Numru ta’ parteċipanti li jsegwu dan l-ispazju ta’ parteċipazzjoni
+        object: segwaċi
+        title: Segwaċi
+      participants:
+        description: Numru ta’ parteċipanti attivi fl-organizzazzjoni
+        object: parteċipanti
+        title: Parteċipanti
+      users:
+        description: Numru ta’ parteċipanti fl-organizzazzjoni
+        object: parteċipanti
+        title: Parteċipanti
+    newsletter_mailer:
+      newsletter:
+        note: Irċevejt din l-email għax int abbonat għall-bullettini fi %{organization_name}. Tista’ tibdel il-konfigurazzjonijiet tiegħek <a href="%{link}">fil-paġna tan-notifiki tiegħek</a>.
+        see_on_website: Ma tistax tara din l-email sew? Araha <a href="%{link}" target="_blank">fis-sit</a>.
+        unsubscribe: Biex tagħżel li ma tirċevix dan it-tip ta’ email, <a href="%{link}" target="_blank" class="unsubscribe">Iddiżabbona</a>.
+    newsletter_templates:
+      basic_only_text:
+        body_preview: 'Test għall-kontenut prinċipali finta: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla nisl tellus. Donec sed mi dui. Sed efficitur libero a felis tempor sollicitudin. Nullam vestibulum fringilla felis, id efficitur lorem sagittis et. Vivamus aliquam maximus velit vel dapibus. Mauris pellentesque, enim eu varius lacinia, risus ante rutrum ipsum, non lobortis augue lorem quis urna. Aenean et malesuada arcu.'
+        name: Bażiku (test biss)
+      basic_only_text_settings_form:
+        body: Kontenut prinċipali
+        interpolations_hint: 'Ħjiel: Tista’ tuża "%{name}” fi kwalunkwe post fil-kontenut prinċipali jew fis-suġġett u tiġi sostitwita bl-isem tar-riċevitur.'
+      image_text_cta:
+        body_preview: 'Test għall-kontenut prinċipali finta: Maecenas ac nisl vitae lectus pretium facilisis. Etiam facilisis sem nibh, sit amet rutrum mi aliquam nec. Sed id urna at nisl pretium mollis eu vel velit. Proin vitae suscipit urna, sed faucibus urna. Pellentesque id libero vulputate ipsum scelerisque suscipit. Nam aliquam sodales mi sit amet cursus. Donec mattis faucibus purus. Aenean tincidunt porta lorem ac commodo. Vestibulum in mollis mi. Morbi eros erat, cursus ut tortor sit amet, imperdiet dapibus arcu. Suspendisse id egestas enim. In eget magna sed enim efficitur elementum sit amet aliquam quam. Donec fermentum metus eget urna luctus pulvinar.'
+        cta_text_preview: Test tas-Sejħa għal Azzjoni
+        introduction_preview: 'Test għall-introduzzjoni finta: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla nisl tellus. Donec sed mi dui. Sed efficitur libero a felis tempor sollicitudin. Nullam vestibulum fringilla felis, id efficitur lorem sagittis et. Vivamus aliquam maximus velit vel dapibus. Mauris pellentesque, enim eu varius lacinia, risus ante rutrum ipsum, non lobortis augue lorem quis urna. Aenean et malesuada arcu.'
+        name: Immaġni, test u buttuna Sejħa għal Azzjoni
+      image_text_cta_settings_form:
+        body: Kontenut prinċipali
+        cta_text: Test tal-buttuna Sejħa għal Azzjoni
+        cta_url: URL tal-buttuna Sejħa għal Azzjoni
+        interpolations_hint: 'Ħjiel: Tista’ tuża "%{name}” fi kwalunkwe post fl-introduzzjoni, fil-kontenut prinċipali, fit-test tas-CTA jew fis-suġġett u tiġi sostitwita bl-isem tar-riċevitur.'
+        introduction: Introduzzjoni
+        main_image: Immaġni ewlenija
+    newsletters:
+      unsubscribe:
+        check_subscription: Jekk tixtieq tibdel il-preferenzi tiegħek, tista’ tagħmel hekk <a href="%{link}" target="_blank">fil-paġna tal-konfigurazzjoni</a>
+        error: Kien hemm problema biex tiddiżabbona
+        success: Ġejt diżabbonat.
+        token_error: Il-link skadiet.
+        unsubscribe: Iddiżabbona
+    newsletters_opt_in:
+      unathorized: Jiddispjaċina, din il-link m’għadhiex disponibbli
+      update:
+        error: Ġrat xi ħaġa ħażina
+        success: Il-konfigurazzjonijiet tal-bullettin ġew aġġornati
+    newsletters_opt_in_mailer:
+      notify:
+        body_1: L-ipproċessar tad-data personali u l-protezzjoni tagħha qed isiru dejjem aktar importanti għalina lkoll. Bir-Regolament Ġenerali l-ġdid dwar il-Protezzjoni tad-Data (GDPR) tal-25 ta’ Mejju 2018, l-individwi għandhom kontroll aħjar fuq id-data personali tagħhom. Għal din ir-raġuni għandna bżonn l-“OK” tiegħek biex inkomplu nibagħtu informazzjoni rilevanti dwar l-attivitajiet tal-%{organization_name}.
+        body_2: 'Kif tista’ tagħtina l-kunsens tiegħek? Kemm tikklikkja l-buttuna li ġejja:'
+        body_3: B’dan il-kunsens se tkun tista’ tkompli tirċievi informazzjoni dwar is-servizzi tal-pjattaforma. Jekk, għall-kuntrarju, ma nirċivux konferma pożittiva min-naħa tiegħek, ma nibqgħux nibagħtulek il-messaġġi tagħna. Jekk tikkonferma li tixtieq tibqa’ infurmat, dejjem ikollok l-għażla li tikkanċella fi kwalunkwe mument.
+        button: Iva, nixtieq inkompli nirċievi l-informazzjoni rilevanti
+        greetings: Insellmulek, <br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
+        hello: Insellmulek,
+        subject: Trid tibqa’ tirċievi informazzjoni rilevanti dwar %{organization_name}?
+    notifications:
+      no_notifications: Għad ma kien hemm l-ebda notifika.
+    notifications_settings:
+      show:
+        allow_public_contact: Ippermetti lil kulħadd jibgħatli messaġġ dirett, anke jekk ma nsegwihomx.
+        direct_messages: Irċievi messaġġi diretti mingħand kulħadd
+        email_on_notification: Nixtieq nirċievi email kull darba li nirċievi notifika.
+        everything_followed: Kulma nsegwi.
+        newsletter_notifications: Nixtieq nirċievi n-Newsletters
+        newsletters: Newslatters
+        own_activity: L-attività tiegħi stess, bħal meta xi ħadd jikkummenta fil-proposta tiegħi jew isemmini.
+        receive_notifications_about: Irrid nirċievi notifiki dwar
+        send_notifications_by_email: Ibgħat in-notifiki bl-email
+        update_notifications_settings: Issejvja t-tibdiliet
+      update:
+        error: Kien hemm problema biex jiġu aġġornati il-konfigurazzjonijiet tan-notifiki tiegħek.
+        success: Il-konfigurazzjonijiet tan-notifiki tiegħek ġew aġġornati.
+    open_data:
+      not_available_yet: Il-fajls tad-Data Miftuħa għadhom mhumiex disponibbli, jekk jogħġbok erġa’ pprova minn hawn u ftit minuti oħra.
+    own_user_groups:
+      index:
+        pending: Pendenti
+        rejected: Miċħud
+        verified: Ivverifikat
+    pad_iframe:
+      disclaimer: Il-kontenut ta’ din il-pad huwa miktub mill-utenti rreġistrati u jesprimi l-opinjonijiet tagħhom. %{organization} ma tistax tinżamm responsabbli għall-kontenut tiegħu.
+      explanation: Uża din il-pad biex tieħu n-noti waqt il-laqgħa biex wara jkun aktar faċli li tniżżel il-minuti.
+      pad: Pad
+    pages:
+      home:
+        extended:
+          debates: Dibattiti
+          debates_explanation: Iddibatti u ddiskuti, aqsam il-fehmiet tiegħek u saħħaħ is-suġġetti rilevanti.
+          how_to_participate: Kif nieħu sehem fi proċess?
+          meetings: Laqgħat
+          meetings_explanation: Skopri fejn u meta tkun tista’ tipparteċipa f’laqgħat pubbliċi.
+          more_info: Aktar informazzjoni dwar %{resource_name}
+          proposals: Ideat
+          proposals_explanation: Oħloq l-ideat, agħti sostenn lil dawk eżistenti u ppromwovi l-bidliet li tixtieq tara.
+        footer_sub_hero:
+          footer_sub_hero_body: Ejjew nibnu soċjetà aktar miftuħa, trasparenti u kollaborattiva.<br /> Ingħaqad, ipparteċipa u ddeċiedi.
+          footer_sub_hero_headline: Merħba fil-pjattaforma parteċipatorja ta’ %{organization}.
+          register: Reġistru
+        hero:
+          participate: Ipparteċipa
+          welcome: Merħba fl-%{organization}!
+        metrics:
+          headline: Metriċi
+        statistics:
+          answers_count: Stħarriġiet Kompluti
+          assemblies_count: Assembleji
+          comments_count: Kummenti
+          conferences_count: Konferenzi
+          debates_count: Dibattiti
+          endorsements_count: Approvazzjonijiet
+          headline: X'qed jiġri fil-Konferenza dwar il-Futur tal-Ewropa?
+          meetings_count: Avvenimenti
+          orders_count: Voti
+          pages_count: Paġni
+          posts_count: Powsts
+          processes_count: Suġġetti
+          projects_count: Proġetti
+          proposals_accepted: Proposti Aċċettati
+          proposals_count: Ideat
+          results_count: Riżultati
+          surveys_count: Stħarriġ
+          users_count: Parteċipanti tal-pjattaforma *
+          users_count_explain: "(*) Numru ta’ parteċipanti rreġistrati fuq il-Pjattaforma."
+          votes_count: Voti
+        sub_hero:
+          register: Reġistru
+      index:
+        read_more: Aqra aktar
+        standalone_pages: Paġni
+        subheading: Innaviga fil-paġni tal-għajnuna ta’ %{name}
+        title: Għajnuna
+        topics: Is-suġġetti tagħna
+      participatory_space:
+        metrics:
+          headline: Metriċi
+          link: Uri l-metriċi kollha
+      terms_and_conditions:
+        accept:
+          error: Kien hemm problema biex jiġu aċċettati t-termini u l-kundizzjonijiet.
+          success: Tajjeb! Aċċettajt it-termini u l-kundizzjonijiet.
+        form:
+          agreement: Naqbel ma’ dawn it-termini
+          legend: Aqbel mat-termini u l-kundizzjonijiet tal-użu
+        refuse:
+          modal_body: Jekk tirrifjuta, mhux se tkun tista’ tuża l-pjattaforma, tista’ <a href="%{data_portability_path}">tniżżel id-data tiegħek</a> u/jew <a href="%{delete_path}">tħassar il-kont tiegħek</a>.
+          modal_btn_continue: Aċċetta t-termini u kompli
+          modal_btn_exit: Neżaminahom iktar tard
+          modal_button: Irrifjuta t-termini
+          modal_close: Agħlaq il-kaxxa ż-żgħira
+          modal_title: Verament tirrifjuta t-Termini u l-Kundizzjonijiet aġġornati?
+        required_review:
+          alert: Aġġornajna t-Termini tas-Servizz tagħna, jekk jogħġbok eżaminahom.
+          body: Ħu ftit ħin biex teżamina l-aġġornamenti għat-Termini tas-Servizzi tagħna. Inkella mhux se tkun tista’ tuża l-pjattaforma.
+          title: 'Meħtieġa: Eżamina l-aġġornamenti tat-termini tas-servizz tagħna'
+    participatory_space_private_users:
+      not_allowed: Ma tistax tara dan il-kontenut
+    profile:
+      deleted: Parteċipant imħassar
+      view: Ara
+    profiles:
+      default_officialization_text_for_user_groups: Dan il-grupp huwa vverifikat pubblikament, u ismu ġie vverifikat li jikkorrispondi mal-isem reali tiegħu
+      default_officialization_text_for_users: Dan il-parteċipant jiġi vverifikat pubblikament, ismu jew ir-rwol tiegħu ġie vverifikat li jikkorrispondi mal-isem u r-rwol reali tiegħu
+      show:
+        activity: L-Attività Tiegħi
+        badges: Badges
+        conversations: Il-Konverżazzjonijiet Privati tiegħi
+        followers: Segwaċi
+        following: Qed issegwi
+        groups: Gruppi
+        members: Membri
+        officialized: Parteċipant uffiċjali
+        timeline: Kronoloġija
+        view_full_profile: Ara l-profil kollu
+      sidebar:
+        badges:
+          info: Il-badges jinkisbu billi twettaq attività speċifika fil-pjattaforma.
+          title: Badges
+      user:
+        confirmation_instructions_sent: L-istruzzjonijiet għall-konferma tal-email intbagħtu
+        create_user_group: Oħloq grupp
+        edit_profile: Editja l-kont
+        edit_user_group: Editja l-profil tal-grupp
+        fill_in_email_to_confirm_it: Imla l-email tal-grupp tiegħek biex tikkonfermah
+        invite_user: Stieden parteċipant
+        join_user_group: Itlob biex tingħaqad mal-grupp
+        leave_user_group: Ħalli l-grupp
+        manage_user_group_admins: Ġestixxi l-amministraturi
+        manage_user_group_users: Ġestixxi l-membri
+        resend_email_confirmation_instructions: Erġa’ ibgħat l-istruzzjonijiet għall-konferma tal-email
+    reported_mailer:
+      hide:
+        hello: Insellmulek %{name},
+        manage_moderations: Ġestixxi l-moderazzjonijiet
+        report_html: <p>Il-<a href="%{url}">kontenut</a> li ġej inħeba awtomatikament.</p>
+        subject: Riżorsa nħbiet awtomatikament
+      report:
+        authors: Awturi
+        content: Kontenut irrapportat
+        date: Irrapportati fi
+        details: Dettalji
+        hello: Insellmulek %{name},
+        manage_moderations: Ġestixxi l-moderazzjonijiet
+        participatory_space: Spazju parteċipatorju
+        reason: Raġuni
+        report_html: <p>Il-<a href="%{url}">kontenut</a> li ġej ġie rrapportat.</p>
+        subject: Ġiet irrapportata riżorsa
+    reports:
+      create:
+        error: Sar żball waqt li kien qed jinħoloq ir-rapport. Jekk jogħġbok, erġa' pprova.
+        success: Ir-rapport inħoloq u se jiġi rivedut minn amministratur.
+    resource_endorsements:
+      create:
+        error: Kien hemm problema waqt l-azzjoni tal-approvazzjoni.
+    scopes:
+      global: Kamp ta’ applikazzjoni globali
+      picker:
+        cancel: Ikkanċella
+        change: Biddel il-kamp ta’ applikazzjoni magħżul
+        choose: Agħżel
+        currently_selected: Kamp ta’ applikazzjoni magħżul bħalissa
+        title: Agħżel %{field}
+      prompt: Agħżel kamp ta’ applikazzjoni
+      scopes: Kampijiet ta’ applikazzjoni
+      scopes_picker_input:
+        select_scope: 'Agħżel kamp ta’ applikazzjoni (bħalissa: %{current})'
+    search:
+      results: Riżultati tat-tiftixa
+      results_found_for_term: '%{count} Riżultat(i) għat-tiftixa: "%{term}"'
+      term_input_placeholder: Fittex
+    searches:
+      filters:
+        back: Lura għar-riżultati
+        jump_to: 'Mur:'
+        state:
+          active: Attivi
+          all: Kollha
+          future: Futur
+          past: Passat
+      filters_small_view:
+        close_modal: Agħlaq il-kaxxa ż-żgħira
+        filter: Iffiltra
+        filter_by: Iffiltra skont
+        unfold: Iftaħ
+      results:
+        results:
+          few: "%{count} riżultati"
+          many: "%{count} riżultati"
+          one: "%{count} riżultat"
+          other: "%{count} riżultati"
+        view_all: Ara (%{count}) kollha
+    shared:
+      confirm_modal:
+        cancel: Ikkanċella
+        close_modal: Agħlaq il-kaxxa ż-żgħira
+        ok: OK
+        title: Ikkonferma
+      embed_modal:
+        close_window: Agħlaq it-tieqa
+        embed: Jekk jogħġbok ippejstja dan il-kodiċi fil-paġna tiegħek
+        embed_link: Inkorpora
+      extended_navigation_bar:
+        more: Aktar
+        unfold: Iftaħ
+      filter_form_help:
+        help: Iffiltra t-tfittxija tiegħek hawn taħt
+        skip: Aqbeż għar-riżultati
+      flag_modal:
+        already_reported: Dan il-kontenut diġà ġie rrappurtat u se jiġi rivedut minn amministratur.
+        close: Agħlaq
+        description: Dan kontenut mhux xieraq?
+        does_not_belong: Fih attività illegali, theddid ta’ suwiċidju, informazzjoni personali, jew xi ħaġa oħra li ma taħsibx li tappartjeni fi %{organization_name}.
+        offensive: Fih razziżmu, sessiżmu, tgħajjir, attakki personali, theddid ta’ mewt, talbiet ta’ suwiċidju jew kwalunkwe forma ta’ diskors ta’ mibegħda.
+        report: Irrapporta
+        spam: Fih clickbait, reklamar, scams jew script bots.
+        title: Irrapporta kontenut mhux xieraq
+      floating_help:
+        close: Agħlaq l-għajnuna
+        help: Għajnuna
+      follow_button:
+        sign_in_before_follow: Jekk jogħġbok illoggja qabel ma twettaq din l-azzjoni
+      login_modal:
+        close_modal: Agħlaq il-kaxxa ż-żgħira
+        please_sign_in: Illoggja
+        sign_up: Irreġistra
+      participatory_space_filters:
+        filters:
+          areas: Żoni ġeografiċi
+          select_an_area: Agħżel żona ġeografika
+      reference:
+        reference: 'Referenza: %{reference}'
+      represent_user_group:
+        represent_user_group: Nirrappreżenta grupp
+        select_user_group: Agħżel grupp
+      results_per_page:
+        label: 'Riżultati f''kull paġna:'
+        title: Agħżel in-numru ta' riżultati f'kull paġna
+      share_modal:
+        close_window: Agħlaq it-tieqa
+        share: Aqsam
+        share_link: Aqsam
+    tags:
+      filter_results_for_category: 'Iffiltra r-riżultati għall-kategorija: %{resource}'
+      filter_results_for_scope: 'Iffiltra r-riżultati għall-kamp ta’ applikazzjoni: %{resource}'
+    translation_bar:
+      help_text: "<strong>Twissija:</strong> It-traduzzjonijiet awtomatiċi jistgħu ma jkunux 100% preċiżi."
+      show_original: Uri t-test oriġinali
+      show_translated: Uri t-test tradott awtomatikament
+    user_activity:
+      index:
+        no_activities_warning: Dan il-parteċipant għad ma kellu l-ebda attività.
+    user_contact_disabled: Dan il-parteċipant ma jaċċettax aktar messaġġi diretti.
+    user_conversations:
+      create:
+        error: Il-messaġġ ma setax jinħoloq. Erġa' pprova aktar tard
+        existing_error: Il-messaġġ ma setax jinħoloq. Il-konverżazzjoni diġà teżisti, jekk jogħġbok erġa’ pprova issa.
+        success: Il-konverżazzjoni bdiet!
+      index:
+        add_max_users: 'Żid l-utenti fil-konverżazzjoni: massimu ta’ 9 utenti'
+        add_users_placeholder: Fittex...
+        close: Agħlaq
+        conversations_info: Il-konverżazzjonijiet huma privati. ħadd iktar ma jista’ jarahom. Tista’ tinbeda konverżazzjoni ma’ kwalunkwe parteċipant jew grupp irreġistrat fil-pjattaforma.
+        from: Mingħand
+        last_message: L-aħħar messaġġ
+        modal_title: Konverżazzjoni ġdida
+        new_conversation: Konverżazzjoni ġdida
+        next: Li jmiss
+        no_conversations_warning: Għad m’hemm l-ebda konverżazzjoni.
+        no_results: L-ebda riżultat
+        participant_with_disabled_message_reception: Dan il-parteċipant iddiżattiva l-wasla tal-messaġġi
+        time_ago: "%{time} ilu"
+      new:
+        title: Ibda konverżazzjoni
+      reply:
+        placeholder: It-tweġiba tiegħek...
+        send: Ibgħat
+        title_reply: Wieġeb
+      show:
+        not_allowed: Dan l-utent ma jaċċettax aktar messaġġi diretti.
+        title: Konverżazzjoni ma’ %{usernames}
+      update:
+        error: Il-messaġġ ma ntbagħatx. Erġa' pprova aktar tard
+    user_interests:
+      show:
+        my_interests: L-interessi tiegħi
+        no_scopes: Din l-organizzazzjoni għad m’għandha l-ebda kamp ta’ applikazzjoni!
+        select_your_interests: Agħżel is-suġġetti li jinteressawk biex tirċievi avvenimenti relatati magħhom fit-tab tal-Kronoloġija fil-profil tiegħek.
+        update_my_interests: Aġġorna l-interessi tiegħi
+      update:
+        error: Kien hemm problema biex jiġu aġġornati l-interessi tiegħek.
+        success: L-interessi tiegħek ġew aġġornati.
+    version:
+      show:
+        back_to_resource: Mur lura
+        changes_at_title: Bidliet fi "%{title}”
+        number_of_versions: Verżjonijiet
+        show_all_versions: Uri l-verżjonijiet kollha
+        version_author: Awtur tal-verżjonijiet
+        version_created_at: Verżjoni maħluqa fi
+        version_number: Numru tal-verżjoni
+        version_number_out_of_total: "%{current_version} minn %{total_count}"
+    version_author:
+      show:
+        deleted: Parteċipant imħassar
+    versions:
+      resource_version:
+        of_versions: "(ta’ %{number})"
+        see_other_versions: ara verżjonijiet oħrajn
+        version: Numru tal-verżjoni %{number}
+    versions_list:
+      show:
+        back_to_resource: Mur lura
+        changes_at_title: Bidliet fi "%{title}”
+        number_of_versions: Verżjonijiet
+        title: Verżjonijiet
+    versions_list_item:
+      show:
+        version_index: Verżjoni %{index}
+    welcome_notification:
+      default_body: <p>Insellmulek {{name}}, grazzi talli ngħaqadt ma’ {{organization}} u merħba!</p><ul><li>Jekk trid tieħu idea malajr ta’ x’tista’ tagħmel hawnhekk, ara <a href="{{help_url}}">s-sezzjoni</a> Għajnuna.</li><li>Wara li tkun qrajtha tirċievi l-ewwel badge tiegħek. Din hija <a href="{{badges_url}}">lista tal-badges kollha</a> li tista’ tikseb inti u tieħu sehem fi {{organization}}</li><li>Tal-aħħar iżda mhux tal-inqas, ingħaqad ma’ nies oħrajn, aqsam l-esperjenza li tinvolvi ruħek u tieħu sehem fi {{organization}}. Oħloq ideat, kummenti, iddibatti, aħseb dwar kif tista’ tikkontribwixxi għall-ġid komuni, ipprovdi argumenti biex tikkonvinċi, isma’ u aqra biex tikkonvinċi ruħek, esprimi l-ideat tiegħek b’mod konkret u dirett, wieġeb bil-paċenzja u b’mod deċiżiv, iddefendi l-ideat tiegħek u żomm moħħok miftuħ biex tikkollabora u tingħaqad mal-ideat ta’ persuni oħrajn.</li></ul>
+      default_subject: Grazzi talli ngħaqadt ma’ {{organization}}!
+    wizard_step_form:
+      wizard_aside:
+        back: Lura
+      wizard_header:
+        see_steps: ara l-passi
+        step_of: Pass %{current_step} minn %{total_steps}
+  devise:
+    confirmations:
+      confirmed: L-indirizz tal-email tiegħek ġie kkonfermat.
+      new:
+        resend_confirmation_instructions: Erġa’ ibgħat l-istruzzjonijiet għall-konferma
+      send_instructions: Se tirċievi email bl-istruzzjonijiet dwar kif tikkonferma l-indirizz tal-email tiegħek minn hawn u ftit minuti oħra.
+      send_paranoid_instructions: Jekk l-indirizz tal-email tiegħek jeżisti fil-bażi tad-data tagħna, se tirċievi email bl-istruzzjonijiet dwar kif tikkonferma l-indirizz tal-email tiegħek minn hawn u ftit minuti oħra.
+    failure:
+      already_authenticated: Inti diġà lloggjat.
+      inactive: Il-kont tiegħek għadu mhux attivat.
+      invalid: "%{authentication_keys} jew password invalida."
+      invited: Għandek stedina pendenti, aċċettaha biex tiffinalizza l-ħolqien tal-kont tiegħek.
+      last_attempt: Għandek tentattiv ieħor qabel ma l-kont tiegħek jiġi llokkjat.
+      locked: Il-kont tiegħek illokkjat.
+      not_found_in_database: "%{authentication_keys} jew password invalida."
+      timeout: Is-sessjoni tiegħek skadiet. Jekk jogħġbok erġa’ lloggja biex tkompli.
+      unauthenticated: Trid tilloggja jew tirreġistra qabel tkompli.
+    invitations:
+      edit:
+        header: Lesti l-ħolqien tal-kont tiegħek
+        nickname_help: L-identifikatur tiegħek f’%{organization}.
+        submit_button: Issejvja
+        subtitle: Jekk taċċetta l-istedina jekk jogħġbok issettja l-identifikatur u l-password tiegħek.
+      invitation_removed: L-istedina tiegħek tneħħiet.
+      invitation_token_invalid: It-token tal-istedina pprovdut mhuwiex validu!
+      new:
+        header: Ibgħat l-istedina
+        submit_button: Ibgħat stedina
+      no_invitations_remaining: Ma fadal l-ebda stedina
+      send_instructions: Intbagħtet email ta’ stedina lil %{email}.
+      updated: Il-password tiegħek ġiet issettjata. Issa inti lloggjat.
+      updated_not_active: Il-password tiegħek ġiet issettjata.
+    mailer:
+      confirmation_instructions:
+        action: Ikkonferma l-kont tiegħi
+        greeting: Merħba %{recipient}!
+        instruction: 'Tista’ tikkonferma l-kont tal-email tiegħek permezz tal-link ta’ hawn taħt:'
+        subject: Istruzzjonijiet ta’ konferma
+      email_changed:
+        greeting: Insellmulek %{recipient}!
+        message: Qed nikkuntattjawk biex ninfurmawk li l-email tiegħek qed tinbidel għal %{email}.
+        subject: L-email Inbidlet
+      invitation_instructions:
+        accept: Ilqa’ l-istedina
+        accept_until: Din l-istedina se tgħodd fi %{due_date}.
+        decline: Irrifjuta l-istedina
+        hello: Insellmulek %{email},
+        ignore: Jekk ma tridx tilqa’ l-istedina, injora din l-email.<br /> Il-kont tiegħek ma jinħoloqx sakemm ma tidħolx fil-link ta’ hawn fuq u tissettja l-identifikatur u l-password tiegħek.
+        invited_you_as_admin: "%{invited_by} stiednek bħala amministratur ta’ %{application}. Tista’ taċċettaha permezz tal-links ta’ hawn taħt."
+        invited_you_as_private_user: "%{invited_by} stiednek bħala parteċipant privat ta’ %{application}. Tista’ taċċettaha permezz tal-links ta’ hawn taħt."
+        someone_invited_you: Xi ħadd stiednek għal %{application}. Tista’ taċċettaha permezz tal-links ta’ hawn taħt.
+        someone_invited_you_as_admin: Xi ħadd stiednek bħala amministratur ta’ %{application}, tista’ taċċettaha permezz tal-link ta’ hawn taħt.
+        someone_invited_you_as_private_user: Xi ħadd stiednek bħala parteċipant privat ta’ %{application}, tista’ taċċettaha permezz tal-link ta’ hawn taħt.
+        subject: Istruzzjonijiet għall-istedina
+      invite_admin:
+        subject: Ġejt mistieden iġġestixxi lil %{organization}
+      invite_collaborator:
+        subject: Ġejt mistieden tikkollabora dwar %{organization}
+      invite_private_user:
+        subject: Ġejt mistieden għal proċess parteċipatorju privat dwar %{organization}
+      organization_admin_invitation_instructions:
+        subject: Ġejt mistieden iġġestixxi lil %{organization}
+      password_change:
+        greeting: Insellmulek %{recipient}!
+        message: Qed nikkuntattjawk biex ninfurmawk li l-password tiegħek inbidlet.
+        subject: Il-password inbidlet
+      reset_password_instructions:
+        action: Ibdel il-password tiegħi
+        greeting: Insellmulek %{recipient}!
+        instruction: Xi ħadd talab link biex tibdel il-password tiegħek, u dan tista’ tagħmlu permezz tal-link ta’ hawn taħt.
+        instruction_2: Jekk ma tlabthiex int, injora din l-email.
+        instruction_3: Il-password tiegħek mhix se tinbidel sakemm ma taċċessax il-link ta’ hawn fuq u toħloq waħda ġdida.
+        subject: Irrisettja l-istruzzjonijiet tal-password
+      unlock_instructions:
+        action: Żblokka l-kont tiegħi
+        greeting: Insellmulek %{recipient}!
+        instruction: 'Ikklikkja l-link ta’ hawn taħt biex tiżblokka l-kont tiegħek:'
+        message: Il-kont tiegħek ġie llokkjat minħabba ammont eċċessiv ta’ tentattivi ta’ lloggjar li ma rnexxewx.
+        subject: Istruzzjonijiet għall-iżblukkar
+    omniauth_callbacks:
+      failure: Ma stajtx tiġi awtentikat(a) minn %{kind} minħabba "%{reason}".
+      success: Ġejt awtentikat(a) mill-kont %{kind}.
+      user:
+        disabled: M’għadux possibbli li tirreġistra fil-Pjattaforma. Il-kontributi għall-Konferenza dwar il-Futur tal-Ewropa ntemmu fid-9 ta’ Mejju 2022.
+    passwords:
+      edit:
+        change_my_password: Ibdel il-password tiegħi
+        change_your_password: Ibdel il-password tiegħek
+        confirm_new_password: Ikkonferma l-password il-ġdida
+        new_password: Password ġdida
+        password_help: "%{minimun_characters} karattri minimi, ma jridux ikunu komuni wisq (eż. 123456) u jridu jkunu differenti mill-identifikatur tiegħek u mill-email tiegħek."
+      new:
+        forgot_your_password: Insejt il-password tiegħek?
+        send_me_reset_password_instructions: Ibgħat l-istruzzjonijiet biex nirrisettja l-password
+      no_token: Ma tistax taċċessa din il-paġna jekk ma tiġix minn email ta’ rrisettjar tal-password. Jekk ġej minn email ta’ rrisettjar tal-password, żgura li użajt il-URL sħiħ ipprovdut.
+      send_instructions: Se tirċievi email bl-istruzzjonijiet dwar kif tirrisettja l- password tiegħek minn hawn u ftit minuti oħra.
+      send_paranoid_instructions: Jekk l-indirizz tal-email tiegħek jeżisti fil-bażi tad-data tagħna, se tirċievi link biex tirkupra l-password fl-indirizz tal-email tiegħek minn hawn u ftit minuti oħra.
+      updated: Il-password tiegħek inbidlet. Issa inti lloggjat.
+      updated_not_active: Il-password tiegħek inbidlet.
+    registrations:
+      destroyed: Il-kont tiegħek ġie kkanċellat. Nittamaw li nerġgħu narawk dalwaqt.
+      edit:
+        are_you_sure: Żgur?
+        cancel_my_account: Ikkanċella l-kont tiegħi
+        currently_waiting_confirmation_for_email: 'Bħalissa qed tistenna konferma għal: %{email}'
+        leave_blank_if_you_don_t_want_to_change_it: ħalliha vojta jekk ma tridx tibdilha
+        title: Editja %{resource}
+        unhappy: Skuntent?
+        update: Aġġorna
+        we_need_your_current_password_to_confirm_your_changes: għandna bżonn il-password attwali tiegħek biex nikkonfermaw il-bidliet tiegħek
+      new:
+        sign_up: Irreġistra
+      signed_up: Merħba! Ġejt irreġistrat.
+      signed_up_but_inactive: Ġejt irreġistrat. Madankollu, ma stajniex indaħħluk minħabba li l-kont tiegħek għadu mhux attivat.
+      signed_up_but_locked: Ġejt irreġistrat. Madankollu, ma stajniex indaħħluk minħabba li l-kont tiegħek illokkjat.
+      signed_up_but_unconfirmed: Intbagħat messaġġ b’link ta’ konferma fl-indirizz tal-email tiegħek. Segwi l-link biex tattiva l-kont tiegħek.
+      update_needs_confirmation: Aġġornajt il-kont tiegħek, iżda rridu nivverifikaw l-indirizz tal-email il-ġdid tiegħek. Jekk jogħġbok ivverifika l-email tiegħek u segwi l-link tal-konferma biex tikkonferma l-indirizz tal-email il-ġdid tiegħek.
+      updated: Il-kont tiegħek ġie aġġornat.
+    sessions:
+      already_signed_out: Ma għadekx illoggjat.
+      new:
+        sign_in: Illoggja
+      signed_in: Inti lloggjat.
+      signed_out: Ma għadekx illoggjat.
+    shared:
+      links:
+        back: Lura
+        didn_t_receive_confirmation_instructions: Ma rċevejthomx l-istruzzjonijiet ta’ konferma?
+        didn_t_receive_unlock_instructions: Ma rċevejthomx l-istruzzjonijiet għall-iżblukkar?
+        forgot_your_password: Insejt il-password tiegħek?
+        sign_in: Illoggja
+        sign_in_with_provider: Illoggja bil-%{provider}
+        sign_up: Irreġistra
+      minimum_password_length:
+        few: "(%{count} karattri minimu)"
+        many: "(%{count} karattri minimu)"
+        one: "(%{count} karattru minimu)"
+        other: "(%{count} karattri minimu)"
+    unlocks:
+      new:
+        resend_unlock_instructions: Erġa’ ibgħat l-istruzzjonijiet għall-iżblukkar
+      send_instructions: Se tirċievi email bl-istruzzjonijiet dwar kif tiżblokka l-kont tiegħek minn hawn u ftit minuti oħra.
+      send_paranoid_instructions: Jekk l-indirizz tal-email tiegħek jeżisti, se tirċievi email bl-istruzzjonijiet dwar kif tiżblokkah minn hawn u ftit minuti oħra.
+      unlocked: Il-kont tiegħek ġie żblukkat. Illoggja biex tkompli.
+  doorkeeper:
+    scopes:
+      public: L-informazzjoni pubblika tiegħek.
+  errors:
+    messages:
+      already_confirmed: kien diġà kkonfermat, ipprova lloggja
+      confirmation_period_expired: jeħtieġ li jiġi kkonfermat fi żmien %{period}, itlob waħda ġdida
+      content_type_whitelist_error: it-tip ta’ fajl mhux validu
+      cycle_detected: il-kamp ta’ applikazzjoni prinċipali ma jistax ikun wieħed mill-kampijiet ta’ applikazzjoni li joħorġu minnu
+      expired: skadiet, itlob waħda ġdida
+      file_size_is_less_than_or_equal_to: id-daqs tal-fajl irid ikun %{count} jew inqas
+      invalid_time_zone: mhijiex żona tal-ħin valida
+      long_words: fih kliem twil wisq (aktar minn 35 karattru)
+      must_start_with_caps: irid jibda b’ittra kapitali
+      nesting_too_deep: ma tistax tkun ġo sottokategorija
+      not_found: ma setax jinstab. Irreġistrajt qabel?
+      not_locked: ma kienx illokkjat
+      not_saved:
+        few: 'Kien hemm diversi żbalji waqt il-proċess tat-talba tiegħek:'
+        many: 'Kien hemm diversi żbalji waqt il-proċess tat-talba tiegħek:'
+        one: 'Kien hemm żball waqt il-proċess tat-talba tiegħek:'
+        other: 'Kien hemm diversi żbalji waqt il-proċess tat-talba tiegħek:'
+      too_many_marks: qed tuża wisq marki tal-punteġġatura konsekuttivi (eż. ! u ?)
+      too_much_caps: qed tuża wisq ittri kapitali (aktar minn 25 % tat-test)
+      too_short: qasira wisq (inqas minn 15-il karattru)
+  forms:
+    correct_errors: Hemm żbalji fil-formola, jekk jogħġbok biex tkompli kkoreġihom.
+    length_validator:
+      minimum:
+        few: Jekk jogħġbok daħħal mill-inqas %{count} karattri
+        many: Jekk jogħġbok daħħal mill-inqas %{count} karattri
+        one: minimu ta’ karattru %{count}
+        other: Jekk jogħġbok daħħal mill-inqas %{count} karattri
+        two: Jekk jogħġbok daħħal mill-inqas %{count} karattri
+    required: Kamp tad-data meħtieġ
+    required_explanation: "* Il-kampijiet tad-data meħtieġa huma mmarkati b’asterisk"
+  invisible_captcha:
+    sentence_for_humans: Jekk int bniedem, injora dan il-kamp tad-data
+    timestamp_error_message: Jiddispjaċina, għaġġilt wisq! Jekk jogħġbok erġa’ ibgħat.
+  layouts:
+    decidim:
+      cookie_warning:
+        description_html: Dan is-sit juża l-cookies. Billi tkompli tibbrawżja s-sit, tkun qed taqbel mal-użu tal-cookies tagħna. %{link}.
+        link_label: Skopri aktar dwar il-cookies
+        ok: Naqbel
+      edit_link:
+        edit: Editja
+      footer:
+        cc_by_license: Liċenzja tal-Creative Commons
+        decidim_logo: Logo tad-Decidim
+        download_open_data: Niżżel fajls tad-Data Miftuħa
+        made_with_open_source: Is-sit sar b’<a target="_blank" href="https://github.com/decidim/decidim">software bla ħlas</a>.
+      header:
+        close_menu: Agħlaq il-menù
+        navigation: Navigazzjoni
+        sign_in: Illoggja
+        sign_up: Irreġistra
+      impersonation_warning:
+        close_session: Agħlaq is-sessjoni
+        description_html: Qed tiġġestixxi l-parteċipant <b>%{user_name}</b>.
+        expire_time_html: Is-sessjoni tiegħek se tiskadi <b><span class="minutes">%{minutes}</span> minuti</b> oħra.
+      language_chooser:
+        choose_language: Agħżel lingwa
+      notifications_dashboard:
+        mark_all_as_read: Immarka kollox bħala moqri
+        mark_as_read: Immarka bħala moqri
+      social_media_links:
+        facebook: "%{organization} fuq Facebook"
+        github: "%{organization} fuq GitHub"
+        instagram: "%{organization} fuq Instagram"
+        twitter: "%{organization} fuq Twitter"
+        youtube: "%{organization} fuq YouTube"
+      user_menu:
+        account: 'Kont tal-utent: %{name}'
+        admin_dashboard: Dashboard tal-amministratur
+        conversations: Konverżazzjonijiet
+        notifications: In-Notifiki Tiegħi
+        profile: Il-konfigurazzjoni tal-Kont Tiegħi
+        public_profile: Il-profil pubbliku tiegħi
+        sign_out: Oħroġ
+      user_profile:
+        account: Il-Kont Tiegħi
+        authorizations: Awtorizzazzjonijiet
+        delete_my_account: Ħassar il-kont tiegħi
+        my_data: Id-data tiegħi
+        my_interests: L-interessi tiegħi
+        notifications_settings: In-notifiki tiegħi
+        title: Konfigurazzjonijiet tal-parteċipanti
+        user_groups: Gruppi
+      widget:
+        see_more: Ara aktar
+  locale:
+    name: Malti
+  password_validator:
+    domain_included_in_password: simili wisq għal dan l-isem tad-dominju
+    email_included_in_password: simili wisq għall-email tiegħek
+    fallback: mhix valida
+    name_included_in_password: simili wisq għal ismek
+    not_enough_unique_characters: ma fihiex biżżejjed karattri uniċi
+    password_not_allowed: mhix permessa
+    password_too_common: komuni wisq
+    password_too_long: twila wisq
+    password_too_short: qasira wisq
+  social_share_button:
+    delicious: Delicious
+    douban: Douban
+    email: Email
+    facebook: Facebook
+    google_bookmark: Google Bookmark
+    google_plus: Google+
+    hacker_news: Hacker News
+    linkedin: Linkedin
+    pinterest: Pinterest
+    qq: Qzone
+    reddit: Reddit
+    share_to: Ixxerja fuq %{name}
+    telegram: Telegram
+    tumblr: Tumblr
+    twitter: Twitter
+    vkontakte: Vkontakte
+    wechat: WeChat
+    wechat_footer: Iftaħ il-WeChat tiegħek, ikklikkja l-buttuna “Discover” imbagħad ikklikkja l-menù "Scan QR Code”.
+    weibo: Sina Weibo
+    whatsapp_app: WhatsApp
+    whatsapp_web: WhatsApp
+    xing: Xing
+  versions:
+    directions:
+      left: Tħassiriet
+      right: Żidiet
+    dropdown:
+      choose_diff_view_html: 'Modalità ta’ viżwalizzazzjoni HTML:'
+      choose_diff_view_mode: 'Modalità ta’ viżwalizzazzjoni biex tqabbel:'
+      option_escaped: Escaped
+      option_split: Maġenb xulxin
+      option_unescaped: Unescaped
+      option_unified: Unifikati
+  views:
+    pagination:
+      first: "&laquo; L-ewwel"
+      first_title: Link għall-ewwel paġna
+      last: L-aħħar &raquo;
+      last_title: Link għall-aħħar paġna
+      next: Li jmiss &rsaquo;
+      next_title: Link għall-paġna li jmiss
+      pagination: Ippaġnar
+      previous: "&lsaquo; Ta' qabel"
+      previous_title: Link għall-paġna ta’ qabel
+      title: 'Numru tal-paġna:'

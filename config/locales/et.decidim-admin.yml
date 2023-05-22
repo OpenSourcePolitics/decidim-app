@@ -1,0 +1,834 @@
+---
+et:
+  activemodel:
+    attributes:
+      area:
+        area_type: Piirkonna tüüp
+        name: Nimi
+        organization: Organisatsioon
+      area_type:
+        name: Nimi
+        organization: Organisatsioon
+        plural: Mitmus
+      attachment:
+        attachment_collection_id: Kaust
+        description: Kirjeldus
+        file: Fail
+        title: Manuse või pildi nimi
+      attachment_collection:
+        description: Kirjeldus
+        name: Nimi
+      category:
+        description: Kirjeldus
+        name: Nimi
+        parent_id: Ülemüksus
+      component:
+        name: Nimi
+        published_at: Avaldati
+        weight: Kaal
+      id: ID
+      newsletter:
+        body: Sisu
+        subject: Teema
+      organization:
+        address: SMTP hostinimi
+        alert_color: Hoiatusteade
+        badges_enabled: Luba tunnustusmärgid
+        comments_max_length: Kommentaari maksimaalne pikkus (vaikeväärtuse valimiseks jätke väljale 0)
+        cta_button_path: Tegevuskutse nupu tee
+        cta_button_text: Tegevuskutse nupu tekst
+        customize_welcome_notification: Tervitusteate kohandamine
+        default_locale: Vaikeasukoht
+        description: Kirjeldus
+        enable_omnipresent_banner: Kuva läbiv reklaamiriba
+        facebook_handler: Facebooki haldusriist
+        favicon: Ikoon
+        from: Saatja meiliaadress
+        github_handler: GitHubi haldusriist
+        header_snippets: Päiselõiked
+        highlight_alternative_color: Esiletõstmine, teine võimalus
+        highlight_color: Esiletõstmine
+        highlighted_content_banner_action_subtitle: Tegevusnupu alapealkiri
+        highlighted_content_banner_action_title: Tegevusnupu pealkiri
+        highlighted_content_banner_action_url: Tegevusnupu URL
+        highlighted_content_banner_enabled: Kuva esiletõstetud sisu reklaamiriba
+        highlighted_content_banner_image: Pilt
+        highlighted_content_banner_short_description: Lühikirjeldus
+        highlighted_content_banner_title: Pealkiri
+        instagram_handler: Instagrami haldusriist
+        logo: Logo
+        machine_translation_display_priority: Masintõlke kuvamise järjekord
+        machine_translation_display_priority_original: Algne tekst esimesena
+        machine_translation_display_priority_translation: Tõlgitud tekst esimesena
+        name: Nimi
+        official_img_footer: Ametlik jaluselogo
+        official_img_header: Ametlik päiselogo
+        official_url: Ametlik organisatsiooni URL
+        omnipresent_banner_short_description: Lühikirjeldus
+        omnipresent_banner_title: Pealkiri
+        omnipresent_banner_url: URL
+        password: Salasõna
+        port: Port
+        primary_color: Esmane
+        reference_prefix: Viiteesliide
+        rich_text_editor_in_public_views: Luba osalejatele rikasteksti redaktori kasutamine
+        secondary_color: Teisene
+        send_welcome_notification: Saada tervitusteade
+        show_statistics: Kuva statistika
+        success_color: Edenemine
+        time_zone: Ajavöönd
+        tos_version: Teenusetingimused
+        twitter_handler: Twitteri haldusriist
+        user_groups_enabled: Luba rühmad
+        user_name: Kasutajanimi
+        warning_color: Hoiatus
+        welcome_notification_body: Tervitusteate sisu
+        welcome_notification_subject: Tervitusteate teema
+        youtube_handler: YouTube'i haldusriist
+      scope:
+        code: Kood
+        name: Nimi
+        organization: Organisatsioon
+        parent_id: Ülemüksus
+        scope_type: Kohaldamisala tüüp
+        scope_type_id: Kohaldamisala tüüp
+      scope_type:
+        name: Nimi
+        organization: Organisatsioon
+        plural: Mitmus
+      static_page:
+        changed_notably: Tehtud on olulisi muudatusi.
+        content: Sisu
+        organization: Organisatsioon
+        show_in_footer: Kuva jaluses
+        slug: URL-komponent
+        title: Pealkiri
+        weight: Kaal
+      static_page_topic:
+        description: Kirjeldus
+        show_in_footer: Kuva jaluses
+        title: Pealkiri
+        weight: Kaal
+      user_group_csv_verification:
+        file: Fail
+    errors:
+      models:
+        organization:
+          attributes:
+            official_img_footer:
+              allowed_file_content_types: Sobimatu pildifail
+            official_img_header:
+              allowed_file_content_types: Sobimatu pildifail
+  activerecord:
+    attributes:
+      decidim/static_page:
+        content: Sisu
+        slug: URL-komponent
+        title: Pealkiri
+      doorkeeper/application:
+        authorize_url: Autoriseeri URL
+        client_id: Kliendi ID
+        client_secret: Kliendi salakood
+        organization_name: Organisatsiooni nimi
+        organization_url: Organisatsiooni URL
+        redirect_uri: Ümbersuunamise URI
+        site: Veebisait
+  decidim:
+    admin:
+      actions:
+        add: Lisa
+        browse: Sirvi
+        export: Ekspordi
+        manage: Halda
+        new: Uus %{name}
+        per_page: Lehe kohta
+        permissions: Õigused
+        reject: Lükka tagasi
+        share: Jaga
+        verify: Kinnita
+      admin_terms_of_use:
+        accept:
+          error: Administraatori kasutustingimustega nõustumise kinnitamisel tekkis viga.
+          success: Suurepärane! Olete administraatori kasutustingimustega nõustumise kinnitanud.
+        actions:
+          accept: Nõustun nende administraatori kasutustingimustega
+          are_you_sure: Kas olete kindel, et soovite administraatori kasutustingimustega nõustumisest keelduda?
+          refuse: Keeldu administraatori kasutustingimustega nõustumisest
+          title: Nõustu kasutustingimustega
+        required_review:
+          alert: 'Nõutav: Tutvuge administraatori kasutustingimustega'
+          callout: Palume teil tutvuda administraatori kasutustingimustega. Vastasel juhul ei saa te platvormi hallata.
+          cta: Tutvuge nendega kohe.
+        title: Administraatori kasutustingimused
+      area_types:
+        create:
+          error: Uue piirkonnatüübi loomisel tekkis probleem.
+          success: Piirkonnatüüp on loodud.
+        destroy:
+          success: Piirkonnatüüp on eemaldatud
+        edit:
+          title: Muuda piirkonnatüüpi
+          update: Värskenda
+        new:
+          create: Loo piirkonnatüüp
+          title: Uus piirkonnatüüp
+        update:
+          error: Selle piirkonnatüübi värskendamisel tekkis probleem.
+          success: Piirkonnatüüp on värskendatud
+      areas:
+        create:
+          error: Uue piirkonna loomisel tekkis probleem.
+          success: Piirkond on loodud.
+        destroy:
+          has_spaces: Piirkonnaga on seotud osalusruumid. Kustutamiseks ei tohi sellel sõltuvussuhteid olla.
+          success: Piirkond on eemaldatud
+        edit:
+          title: Muuda piirkonda
+          update: Värskenda
+        new:
+          create: Loo piirkond
+          title: Uus piirkond
+        no_areas: Piirkonnavalikuid pole
+        update:
+          error: Selle piirkonna värskendamisel tekkis probleem.
+          success: Piirkond on värskendatud
+      attachment_collections:
+        create:
+          error: Uue kausta loomisel tekkis probleem.
+          success: Kaust on loodud.
+        destroy:
+          success: Kaust on kustutatud.
+        edit:
+          title: Muuda kausta
+          update: Värskenda
+        index:
+          attachment_collection_used: Seda kausta ei saa eemaldada, kuna seda kasutatakse.
+          attachment_collections_title: Manusekaustad
+        new:
+          create: Loo
+          title: Uus kaust
+        update:
+          error: Selle kausta värskendamisel tekkis probleem.
+          success: Kaust on värskendatud.
+      attachments:
+        create:
+          error: Uue manuse loomisel tekkis probleem.
+          success: Manus on loodud.
+        destroy:
+          success: Manus on kustutatud.
+        edit:
+          title: Muuda manust
+          update: Värskenda
+        index:
+          attachments_title: Manused
+        new:
+          create: Loo manus
+          title: Uus manus
+        update:
+          error: Selle manuse värskendamisel tekkis probleem.
+          success: Manus on värskendatud.
+      autocomplete:
+        no_results: Tulemusi ei leitud
+        search_prompt: Otsimiseks tippige vähemalt kolm tähemärki
+      categories:
+        create:
+          error: Selle kategooria loomisel tekkis probleem.
+          success: Kategooria on loodud.
+        destroy:
+          error: Selle kategooria kustutamisel tekkis probleem. Kustutage esmalt kõik alamkategooriad. Veenduge, et sellesse kategooriasse ei kuulu ühtegi üksust, ja proovige siis uuesti.
+          success: Kategooria on kustutatud.
+        edit:
+          title: Muuda kategooriat
+          update: Värskenda
+        index:
+          categories_title: Kategooriad
+          category_used: Seda kategooriat ei saa eemaldada, kuna see on kasutuses.
+        new:
+          create: Loo kategooria
+          title: Uus kategooria
+        update:
+          error: Selle kategooria värskendamisel tekkis probleem.
+          success: Kategooria on värskendatud.
+      component_permissions:
+        update:
+          error: Selle komponendiga seotud lubade värskendamisel tekkis probleem.
+          success: Load on värskendatud.
+      components:
+        create:
+          error: Selle komponendi loomisel tekkis probleem.
+          success: Komponent on loodud.
+        destroy:
+          error: Selle komponendi kustutamisel tekkis probleem.
+          success: Komponent on kustutatud.
+        edit:
+          title: Muuda komponenti
+          update: Värskenda
+        form:
+          default_step_settings: Etapi vaikeseaded
+          global_settings: Üldseaded
+          step_settings: Etapi seaded
+        index:
+          add: Lisa komponent
+          headers:
+            actions: Toimingud
+            name: Komponendi nimi
+            type: Komponendi tüüp
+        new:
+          add: Lisa komponent
+          title: 'Lisa komponent: %{name}'
+        publish:
+          success: Komponent on avaldatud.
+        title: Komponendid
+        unpublish:
+          success: Komponendi avaldamine on peatatud.
+        update:
+          error: Selle komponendi värskendamisel tekkis probleem.
+          success: Komponent on värskendatud.
+      dashboard:
+        show:
+          view_more_logs: Kuva veel logisid
+          welcome: Tere tulemast Decidimi administraatoripaneelile.
+      exports:
+        export_as: "%{name} vormingus %{export_format}"
+        notice: Teie eksporditoiming on pooleli. Kui see on lõpetatud, saate meili.
+      filters:
+        category_id_eq:
+          label: Kategooria
+        officialized_at_null:
+          label: Olek
+          values:
+            'false': Ametlikult volitatud
+            'true': Ametlikult volitamata
+        private_space_eq:
+          label: Privaatne
+          values:
+            'false': Avalik
+            'true': Privaatne
+        published_at_null:
+          label: Avaldatud
+          values:
+            'false': Avaldatud
+            'true': Avaldamata
+        scope_id_eq:
+          label: Kohaldamisala
+        search_label: Otsing
+        search_placeholder:
+          name_or_nickname_or_email_cont: Otsige üksust %{collection} meili, nime või hüüdnime alusel.
+          title_cont: Otsige üksust %{collection} pealkirja/nime alusel.
+        state_eq:
+          label: Olek
+      help_sections:
+        error: Abijaotiste värskendamisel tekkis probleem
+        form:
+          save: Salvesta
+        success: Abijaotised on värskendatud
+      impersonatable_users:
+        index:
+          filter:
+            all: Kõik
+            managed: Hallatav
+            not_managed: Mittehallatav
+          filter_by: Filtrimisalus
+          impersonate: Seo isikuga
+          impersonate_new_managed_user: Halda uut osalejat
+          managed: Hallatav
+          name: Nimi
+          needs_authorization_warning: Selle organisatsiooni jaoks tuleb lubada vähemalt üks autoriseerimine.
+          not_managed: Mittehallatav
+          promote: Eduta
+          search: Otsing
+          status: Olek
+          view_logs: Kuva logid
+      impersonations:
+        close_session:
+          error: Osaleja haldamise seansi lõpetamisel tekkis probleem.
+          success: Isikuga sidumise seanss on lõpule viidud.
+        create:
+          error: Osaleja haldamisel tekkis probleem.
+          success: Hallatav osaleja on loodud.
+        form:
+          authorization_method: Autoriseerimismeetod
+          name: Nimi
+          reason: Põhjus
+        new:
+          impersonate: Seo isikuga
+          impersonate_existing_managed_user: Halda osalejat „%{name}“
+          impersonate_existing_user: Halda osalejat „%{name}“
+          impersonate_new_managed_user: Halda uut osalejat
+      logs:
+        logs_list:
+          no_logs_yet: Logisid veel ei ole
+      managed_users:
+        promotion:
+          error: Selle hallatava osaleja edutamisel tekkis probleem.
+          success: Hallatavat osalejat on edutatud.
+        promotions:
+          new:
+            explanation: Hallatavad osalejad saab edutada standardosalejateks. See tähendab, et nad kutsutakse rakendust kasutama ja te ei saa neid enam hallata. Kutsutud osaleja saab teie kutse vastu võtmiseks meili.
+            new_managed_user_promotion: Uus hallatava kasutaja edutamine
+            promote: Eduta
+      menu:
+        admin_log: Administraatori tegevuste logi
+        admins: Administraatorid
+        appearance: Välisilme
+        area_types: Piirkonnatüübid
+        areas: Piirkonnad
+        configuration: Konfiguratsioon
+        dashboard: Töölaud
+        help_sections: Abijaotised
+        homepage: Avaleht
+        impersonations: Isikuga sidumised
+        newsletters: Uudiskirjad
+        participants: Osalejad
+        scope_types: Kohaldamisala tüübid
+        scopes: Kohaldamisalad
+        settings: Seaded
+        static_pages: Lehed
+        user_groups: Rühmad
+        users: Osalejad
+      metrics:
+        metrics:
+          see_more_metrics: Kuva veel mõõdikuid
+      models:
+        area:
+          fields:
+            area_type: Piirkonna tüüp
+            name: Nimi
+        area_type:
+          fields:
+            name: Nimi
+            plural: Mitmus
+        attachment:
+          fields:
+            collection: Kaust
+            content_type: Tüüp
+            file_size: Suurus
+            title: Pealkiri
+          name: Manus
+        attachment_collection:
+          name: Kaust
+        category:
+          name: Kategooria
+        impersonation_log:
+          fields:
+            admin: Administraator
+            ended_at: Lõppes
+            expired_at: Aegus
+            reason: Põhjus
+            started_at: Algas
+            user: Osaleja
+        newsletter:
+          fields:
+            created_at: Loodi
+            progress: Edenemisseis
+            sent_at: Saadeti
+            sent_to: Saaja
+            subject: Teema
+          name: Uudiskiri
+        participatory_space_private_user:
+          name: Osalusruumi privaatne osaleja
+        scope:
+          fields:
+            name: Nimi
+            scope_type: Kohaldamisala tüüp
+        scope_type:
+          fields:
+            name: Nimi
+            plural: Mitmus
+        share_token:
+          fields:
+            created_at: Loodi
+            expires_at: Aegub
+            last_used_at: Viimati kasutati
+            times_used: Kasutuskordi
+            token: Luba
+            user: Looja
+        static_page:
+          fields:
+            created_at: Loodi
+            title: Pealkiri
+        user:
+          fields:
+            created_at: Loomise kuupäev
+            email: Meil
+            last_sign_in_at: Viimase sisselogimise kuupäev
+            name: Nimi
+            role: Roll
+            roles:
+              admin: Administraator
+              user_manager: Osaleja haldur
+          name: Osaleja
+        user_group:
+          fields:
+            actions: Toimingud
+            created_at: Loodi
+            document_number: Dokumendi number
+            name: Nimi
+            phone: Telefon
+            state: Olek
+            users_count: Osalejate arv
+      moderations:
+        index:
+          title: Modereerimised
+        report:
+          reasons:
+            does_not_belong: Pole asjakohane
+            offensive: Solvav
+            spam: Rämpspost
+      newsletter_templates:
+        index:
+          preview_template: Eelvaade
+          title: Uudiskirja mallid
+          use_template: Kasuta seda malli
+        show:
+          preview: 'Malli eelvaade: %{template_name}'
+          use_template: Kasuta seda malli
+      newsletters:
+        create:
+          error: Selle uudiskirja loomisel tekkis probleem.
+          success: Uudiskiri on loodud. Vaadake see enne saatmist üle.
+        deliver:
+          error: Selle uudiskirja edastamisel tekkis probleem.
+          success: Uudiskiri on edastatud.
+        destroy:
+          error_already_sent: 'Uudiskirja ei saa kustutada: See on juba saadetud.'
+          success: Uudiskiri on kustutatud.
+        edit:
+          save_and_preview: Salvesta ja kuva eelvaade
+          title: Muuda uudiskirja
+        index:
+          all: kõik
+          all_users: Kõik kasutajad
+          and: ja
+          confirm_delete: Kas olete kindel, et soovite selle uudiskirja kustutada?
+          followers: jälgijad
+          has_been_sent_to: 'Saadeti järgmisele saajale:'
+          no_scopes: Kohaldamisalasid pole
+          not_sent: Saatmata
+          participants: osalejad
+          segmented_to: 'Segmentimisalus %{subject}:'
+          subscribed_count: 'Tellitud:'
+          title: Uudiskirjad
+        new:
+          save: Salvesta
+          title: Uus uudiskiri
+        select_recipients_to_deliver:
+          all_spaces: Kõik
+          all_users_help: Uudiskiri saadetakse kõigile kinnitatud kasutajatele.
+          confirm_deliver: Kas olete kindel, et soovite selle uudiskirja edastada? Seda toimingut ei saa tühistada.
+          deliver: Edasta uudiskiri
+          followers_help: Uudiskiri saadetakse kõigile kinnitatud kasutajatele, kes jälgivad mõnd valitud osalusruumi.
+          none: Mitte ükski
+          participants_help: Uudiskiri saadetakse kõigile kinnitatud kasutajatele, kes on mõnes valitud osalusruumis osalenud.
+          recipients_count: Uudiskiri saadeti <strong id='recipients_count'>%{count}</strong> kasutajale.
+          scopes_help: Uudiskiri saadetakse kasutajatele, kelle konto jaotises „Minu huvivaldkonnad“ on mõni valitud kohaldamisaladest aktiveeritud.
+          select_scopes: Filtreeri nende kasutajate alusel, kelle konto jaotises „Minu huvivaldkonnad“ on mõni valitud kohaldamisaladest aktiveeritud.
+          select_spaces: Valige osalemisruumid uudiskirja segmendipõhiseks levitamiseks
+          select_users: Valige, millistele kasutajatele uudiskiri saadetakse
+          send_to_all_users: Saada kõigile kasutajatele
+          send_to_followers: Saada jälgijatele
+          send_to_participants: Saada osalejatele
+          title: Valige edastamiseks saajad
+          warning: "<strong>NB!</strong> See uudiskiri saadetakse ainult neile kasutajatele, kes on aktiveerinud oma teateseadetes seade <em>„Soovin saada uudiskirju“</em>."
+        send:
+          no_recipients: Selle valiku jaoks saajaid pole
+        show:
+          preview: Eelvaade
+          select_recipients_to_deliver: Valige edastamiseks saajad
+          subject: Teema
+        update:
+          error: Selle uudiskirja värskendamisel tekkis probleem.
+          success: Uudiskiri on värskendatud. Vaadake see enne saatmist üle.
+      officializations:
+        create:
+          success: Osaleja on ametlikult volitatud
+        destroy:
+          success: Osaleja ametlikud volitused on tühistatud
+        index:
+          actions: Toimingud
+          badge: Tunnustusmärk
+          created_at: Loodi
+          name: Nimi
+          nickname: Hüüdnimi
+          not_officialized: Ametlikult volitamata
+          officialize: Volita ametlikult
+          officialized: Ametlikult volitatud
+          reofficialize: Volita ametlikult uuesti
+          show_email: Kuva meiliaadress
+          status: Olek
+          unofficialize: Tühista ametlikud volitused
+        new:
+          badge: Ametlike volituste märk
+          officialize: Volita ametlikult
+          title: Volita ametlikult osaleja „%{name}“
+        show_email_modal:
+          close_modal: Sulge modaalaken
+          description: Kui soovite osalejaga otse ühendust võtta, klõpsake nuppu „Kuva meiliaadress“. See toiming logitakse.
+          email_address: Meiliaadress
+          full_name: Täisnimi
+          hidden: peidetud
+          show: Kuva
+          title: Kuva osaleja meiliaadress
+      organization:
+        edit:
+          title: Muuda organisatsiooni
+          update: Värskenda
+        form:
+          rich_text_editor_in_public_views_help: Mõnel tekstialal saavad osalejad lisada rikastekstiredaktorit kasutades HTML-sildid.
+          social_handlers: Sotsiaalvõrgustikud
+          url: URL
+        update:
+          error: Selle organisatsiooni värskendamisel tekkis probleem.
+          success: Organisatsioon on värskendatud.
+      organization_appearance:
+        edit:
+          update: Värskenda
+        form:
+          colors:
+            colors_title: Organisatsiooni värvid
+            header_snippets_help: Seda välja saate kasutada HTML-päisesse elementide lisamiseks. Enim kasutatakse võimalust integreerida kolmandate isikute teenused, mis nõuavad teataval määral täiendava JavaScripti või CSSi koodi kirjutamist. Samuti saate selle abil lisada HTMLile täiendavaid metasilte. Arvestage, et seda esitatakse üksnes avalikel lehtedel (mitte administraatorijaotises).
+          cta_button_path_help: 'Saate määrata (üle kirjutada), kuhu teie avalehe tegevuskutse nupu link suunab. Kasutage siin osalisi teid, mitte täielikke URLe. Lubatud on tähed, numbrid, kriipsud ja kaldkriipsud ning alguses peab olema täht. Tegevuskutse nupp kuvatakse avalehel tervitusteksti ja kirjelduse vahel. Näide: %{url}'
+          cta_button_text_help: Saate avalehe tegevuskutse nupu teksti üle kirjutada oma organisatsiooni iga keeleversiooni jaoks. Kui seda pole määratud, kasutatakse vaikeväärtust. Tegevuskutse nupp kuvatakse avalehel tervitusteksti ja kirjelduse vahel.
+          homepage_appearance_title: Kodulehe välisilme muutmine
+          homepage_highlighted_content_banner_title: Esiletõstetud sisu reklaamiriba
+          images:
+            layout_appearance_title: Kujunduse paigutuse muutmine
+            preview: Eelvaade
+          omnipresent_banner_appearance_title: Läbiva reklaamiriba muutmine
+      organization_homepage:
+        edit:
+          active_content_blocks: Aktiveeritud sisuplokid
+          inactive_content_blocks: Aktiveerimata sisuplokid
+      organization_homepage_content_blocks:
+        edit:
+          update: Värskenda
+      participatory_space_private_users:
+        create:
+          error: Selle osalusruumi jaoks privaatse osaleja lisamisel tekkis probleem.
+          success: Osalusruumi privaatse osaleja juurdepääsuõigus on loodud.
+        destroy:
+          error: Selle osalusruumi privaatse osaleja kustutamisel tekkis probleem.
+          success: Osalusruumi privaatse osaleja juurdepääsuõigus on tühistatud.
+        index:
+          import_via_csv: Impordi CSV-failiga
+          title: Osalusruumi privaatne osaleja
+        new:
+          create: Loo
+          title: Osalusruumi uus privaatne osaleja.
+      participatory_space_private_users_csv_imports:
+        create:
+          invalid: CSV-faili lugemisel tekkis probleem.
+          success: CSV-fail laaditi üles. Saadame osalejatele meili teel kutse. See võib pisut aega võtta.
+        new:
+          explanation: Laadige oma CSV-fail üles. Selles failis peab olema kaks päiselahtrita veergu, millest esimeses on osalusruumi lisatavate kasutajate meiliaadressid ja teises (viimases) nende nimed.
+          title: Laadige oma CSV-fail üles
+          upload: Laadi üles
+      resource_permissions:
+        edit:
+          submit: Esita
+          title: Muuda lube
+        update:
+          success: Load on värskendatud.
+      scope_types:
+        create:
+          error: Uue kohaldamisala tüübi loomisel tekkis probleem.
+          success: Kohaldamisala tüüp on loodud.
+        destroy:
+          success: Kohaldamisala tüüp on kustutatud
+        edit:
+          title: Muuda kohaldamisala tüüpi
+          update: Värskenda
+        new:
+          create: Loo kohaldamisala tüüp
+          title: Uus kohaldamisala
+        update:
+          error: Selle kohaldamisala tüübi värskendamisel tekkis probleem.
+          success: Kohaldamisala tüüp on värskendatud
+      scopes:
+        create:
+          error: Uue kohaldamisala loomisel tekkis probleem.
+          success: Kohaldamisala on loodud.
+        destroy:
+          success: Kohaldamisala on kustutatud
+        edit:
+          title: Muuda kohaldamisala
+          update: Värskenda
+        new:
+          create: Loo kohaldamisala
+          title: Uus kohaldamisala
+        no_scopes: Sellel tasemel kohaldamisalasid pole.
+        update:
+          error: Selle kohaldamisala värskendamisel tekkis probleem.
+          success: Kohaldamisala on värskendatud
+      share_tokens:
+        actions:
+          confirm_destroy: Kas olete kindel, et soovite selle loa kustutada?
+          destroy: Kustuta
+          share: Jaga
+        destroy:
+          error: Selle loa kustutamisel tekkis probleem.
+          success: Luba on kustutatud.
+        share_tokens:
+          empty: Aktiivseid lube ei ole
+          help: Neid lube kasutatakse selleks, et seda avaldamata ressurssi mistahes kasutajale avalikult jagada. Ressursi avaldamise korral need peidetakse. Jagatavale URLile liikumiseks klõpsake loa jagamise ikoonil.
+          title: Jaga lube
+      shared:
+        gallery:
+          add_images: Lisa pildid
+          delete_image: Kustuta pilt
+          gallery_legend: Lisa pildigalerii (valikuline)
+      static_page_topics:
+        create:
+          error: Uue teema loomisel tekkis probleem.
+          success: Teema on loodud.
+        destroy:
+          success: Teema on kustutatud
+        edit:
+          title: Muuda teemat
+          update: Värskenda teemat
+        new:
+          create: Loo teema
+          title: Uus teema
+        update:
+          error: Selle teema värskendamisel tekkis probleem.
+          success: Teema on värskendatud
+      static_pages:
+        actions:
+          view: Kuva avalik leht
+        create:
+          error: Uue lehe loomisel tekkis probleem.
+          success: Leht on loodud.
+        destroy:
+          success: Leht on kustutatud
+        edit:
+          changed_notably_help: Märgistamise korral palutakse osalejal uute tingimustega nõustuda.
+          title: Muuda lehte
+          update: Värskenda
+        form:
+          none: Mitte ükski
+          slug_help: 'Kasutage siin osalisi teid, mitte täielikke URLe. Lubatud on tähed, numbrid, kriipsud ja kaldkriipsud ning alguses peab olema täht. Näide: %{url}'
+        index:
+          last_notable_change: Viimane oluline muudatus
+        new:
+          create: Loo leht
+          title: Uus leht
+        topic:
+          destroy: Eemalda teema
+          edit: Muuda teemat
+          empty: Selle teema all lehti pole
+          without_topic: Teemata lehed
+        update:
+          error: Selle lehe värskendamisel tekkis probleem.
+          success: Leht on värskendatud
+      titles:
+        admin_log: Administraatorilogi
+        area_types: Piirkonnatüübid
+        areas: Piirkonnad
+        authorization_workflows: Kinnitusmeetodid
+        dashboard: Töölaud
+        impersonatable_users: Hallatavad osalejad
+        impersonations: Osalejate haldamine
+        metrics: Mõõdikud
+        participants: Osalejad
+        scope_types: Kohaldamisala tüübid
+        scopes: Kohaldamisalad
+        static_pages: Lehed
+        statistics: Tegevus
+        user_groups: Rühmad
+        users: Osalejad
+      user_group:
+        csv_verify:
+          invalid: CSV-faili lugemisel tekkis probleem.
+          success: CSV-fail laaditi üles. Kontrollime, kas rühmad vastavad kriteeriumidele. See võib pisut aega võtta.
+        reject:
+          invalid: Selle rühma tagasilükkamisel tekkis probleem.
+          success: Rühm on tagasi lükatud
+        verify:
+          invalid: Selle rühma kinnitamisel tekkis probleem.
+          success: Rühm on kinnitatud
+      user_groups:
+        index:
+          filter:
+            all: Kõik
+            pending: Ootel
+            rejected: Tagasi lükatud
+            verified: Kinnitatud
+          filter_by: Filtrimisalus
+          search: Otsing
+          state:
+            pending: Ootel
+            rejected: Tagasi lükatud
+            verified: Kinnitatud
+          verify_via_csv: Kinnita CSV-faili abil
+      user_groups_csv_verifications:
+        new:
+          explanation: Laadige oma CSV-fail üles. Selle faili esimeses (päiselahtrita) veerus peavad olema teie organisatsiooni rühmade ametlikud meiliaadressid. Valideeritakse ainult need rühmad, kelle meiliaadressid on kinnitatud ja esitatud CSV-failis.
+          title: Laadige oma CSV-fail üles
+          upload: Laadi üles
+      users:
+        create:
+          error: Selle administraatori kutsumisel tekkis probleem.
+          success: Osalejale on kutse saadetud.
+        destroy:
+          error: Selle administraatori kustutamisel tekkis probleem.
+          success: Osaleja ei ole enam administraator.
+        form:
+          email: Meil
+          name: Nimi
+          role: Roll
+        new:
+          create: Kutsu
+          title: Kutsu osaleja administraatorina
+      users_statistics:
+        users_count:
+          admins: Administraatorid
+          last_day: Viimane päev
+          last_month: Viimane kuu
+          last_week: Viimane nädal
+          no_users_count_statistics_yet: Kasutajate arvu statistikat veel ei ole
+          participants: Osalejad
+      view_public_page: Kuva avalik leht
+    forms:
+      errors:
+        impersonate_user:
+          reason: Mittehallatava osaleja haldamise korral peate esitama põhjuse
+    moderations:
+      actions:
+        hidden: Peidetud
+        hide: Peida
+        not_hidden: Nähtaval
+        title: Toimingud
+        unhide: Too nähtavale
+        unreport: Tühista sobimatusteade
+      admin:
+        reportable:
+          hide:
+            invalid: Ressursi peitmisel tekkis probleem.
+            success: Ressurss peideti.
+          unhide:
+            invalid: Ressursi nähtavale toomisel tekkis probleem.
+            success: Ressurss toodi nähtavale.
+          unreport:
+            invalid: Ressursi sobimatusteate tühistamisel tekkis probleem.
+            success: Ressursi sobimatusteade tühistati.
+      models:
+        moderation:
+          fields:
+            hidden_at: Peideti
+            report_count: Arv
+            reportable: Teates osutatud sisu asukoht
+            reported_content_url: Teates osutatud sisu URL
+            reports: Teatamise põhjus
+            visit_url: Mine URLile
+  errors:
+    messages:
+      invalid_json: Sobimatu JSON
+  layouts:
+    decidim:
+      admin:
+        newsletters:
+          title: Uudiskirjad
+        settings:
+          title: Seaded
+        users:
+          title: Osalejad
