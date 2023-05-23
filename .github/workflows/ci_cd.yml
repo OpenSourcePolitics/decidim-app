@@ -10,7 +10,7 @@ env:
   NODE_VERSION: 16.9.1
   RUBYOPT: '-W:no-deprecated'
   # Set locales available for i18n tasks
-  ENFORCED_LOCALES: "en,fr,bg,cs,da,el,et,ga,hr,it,mt,sl"
+  ENFORCED_LOCALES: "en,fr"
   AVAILABLE_LOCALES: "en,fr,bg,cs,da,el,et,ga,hr,it,mt,sl"
 
 jobs:
