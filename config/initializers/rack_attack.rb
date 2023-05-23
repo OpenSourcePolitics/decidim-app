@@ -9,10 +9,6 @@ require "decidim-app/rack_attack/fail2ban"
 Rack::Attack.enabled = DecidimApp::RackAttack.rack_enabled?
 return unless Rack::Attack.enabled
 
-DecidimApp::Config.trusted_proxies.each do |ip|
-  Rack::Attack.safelist_ip(ip)
-end
-
 # Remove the original throttle from decidim-core
 # see https://github.com/decidim/decidim/blob/release/0.26-stable/decidim-core/config/initializers/rack_attack.rb#L19
 DecidimApp::RackAttack::Throttling.deactivate_decidim_throttling! do
