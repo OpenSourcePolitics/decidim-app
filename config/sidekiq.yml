@@ -25,7 +25,7 @@
       class: PreloadOpenDataJob
       queue: scheduled
     DetectSpamUsers:
-      cron: '0 0 8 * * *' # Run at 08:00
+      cron: '0 <%= Random.rand(0..59) %> <%= Random.rand(6..8) %> * * *' # Run randomly between 06:00 and 08:59
       class: Decidim::SpamDetection::MarkUsersJob
       queue: scheduled
     Backup:
