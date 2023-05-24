@@ -7,6 +7,9 @@ DECIDIM_BRANCH = "release/#{DECIDIM_VERSION}-stable"
 
 ruby RUBY_VERSION
 
+# Many gems depend on environment variables, so we load them as soon as possible
+gem "dotenv-rails", require: "dotenv/rails-now"
+
 # Core gems
 gem "decidim", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-conferences", "~> #{DECIDIM_VERSION}.0"
@@ -30,7 +33,6 @@ gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publ
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", "~> 1.4"
-gem "dotenv-rails"
 gem "faker", "~> 2.14"
 gem "fog-aws"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
