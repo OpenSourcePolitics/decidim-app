@@ -1,5 +1,8 @@
 # Overrides 🍰
 
+## Proposal's draft (Decidim awesome overrides 0.26.7)
+* `app/views/decidim/proposals/collaborative_drafts/_edit_form_fields.html.erb`
+
 ## Deployment's related properties for API
 * `app/api/deployment_type.rb`
 * `app/api/query_extensions.rb`

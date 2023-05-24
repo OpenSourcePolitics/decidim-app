@@ -79,6 +79,7 @@ search:
 
 translation:
   deepl_api_key: <%= ENV["DEEPL_API_KEY"] %>
+  deepl_host: https://api-free.deepl.com
 
 # Do not consider these keys missing:
 ignore_missing:
