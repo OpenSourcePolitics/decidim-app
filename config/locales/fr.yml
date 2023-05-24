@@ -142,6 +142,9 @@ fr:
         create:
           error: Il y a eu un problème lors de la création de ces brouillons collaboratifs
           success: Brouillon collaboratif créé avec succès.
+        edit:
+          attachment_legend: "(Facultatif) Ajouter une pièce jointe"
+          select_a_category: Veuillez sélectionner une catégorie
         show:
           back: Retour
           edit: Modifier un brouillon collaboratif
