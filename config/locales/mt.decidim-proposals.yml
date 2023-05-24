@@ -1,0 +1,907 @@
+---
+mt:
+  activemodel:
+    attributes:
+      collaborative_draft:
+        address: Indirizz
+        body: Kontenut prinċipali
+        category_id: Kategorija
+        decidim_scope_id: Kamp ta’ applikazzjoni
+        has_address: Għandu indirizz
+        scope_id: Kamp ta’ applikazzjoni
+        state: Stat
+        title: Titlu
+        user_group_id: Oħloq abbozz kollaborattiv bħala
+      proposal:
+        address: Indirizz
+        answer: Tweġiba
+        answered_at: Imwieġba fi
+        automatic_hashtags: Hashtags miżjuda awtomatikament
+        body: Kontenut prinċipali
+        category_id: Kategorija
+        decidim_scope_id: Kamp ta’ applikazzjoni
+        has_address: Għandu indirizz
+        scope_id: Kamp ta’ applikazzjoni
+        state: Stat
+        suggested_hashtags: Hashtags issuġġeriti
+        title: Titlu
+        user_group_id: Oħloq proposta bħala
+      proposal_answer:
+        answer: Tweġiba
+      proposals_copy:
+        copy_proposals: Nifhem li dan se jimporta l-proposti kollha mill-komponent magħżul għal dak attwali u li din l-azzjoni ma tistax titreġġa’ lura.
+        origin_component_id: Komponent biex tikkopja l-proposti minnu
+      proposals_import:
+        import_proposals: Importa l-proposti
+        keep_authors: Żomm l-awturi oriġinali
+      valuation_assignment:
+        admin_log:
+          valuator_role_id: Isem l-istimatur
+    errors:
+      models:
+        participatory_text:
+          attributes:
+            document:
+              invalid_document_type: 'Tip ta’ dokument invalidu. Il-formati aċċettati huma: %{valid_mime_types}'
+        proposal:
+          attributes:
+            attachment:
+              needs_to_be_reattached: Jeħtieġ li jerġa’ jinhemeż
+            body:
+              cant_be_equal_to_template: ma jistgħux ikunu daqs il-mudell
+              identical: U t-titlu ma jistax ikun identiku
+            title:
+              identical: U l-kontenut prinċipali ma jistax ikun identiku
+    models:
+      decidim/proposals/accepted_proposal_event: Il-proposta aċċettata
+      decidim/proposals/admin/update_proposal_category_event: Il-kategorija tal-proposta nbidlet
+      decidim/proposals/admin/update_proposal_scope_event: Il-kamp ta’ applikazzjoni tal-proposta nbidel
+      decidim/proposals/creation_enabled_event: Il-ħolqien ta’ proposta attivat
+      decidim/proposals/endorsing_enabled_event: L-approvazzjoni tal-proposta attivata
+      decidim/proposals/evaluating_proposal_event: Il-proposta qed tiġi evalwata
+      decidim/proposals/proposal_mentioned_event: Il-proposta ssemmiet
+      decidim/proposals/publish_proposal_event: Il-proposta ġiet ippubblikata
+      decidim/proposals/rejected_proposal_event: Il-proposta ġiet miċħuda
+      decidim/proposals/voting_enabled_event: Il-votazzjoni tal-proposta attivata
+  activerecord:
+    models:
+      decidim/proposals/collaborative_draft:
+        few: Abbozzi kollaborattivi
+        many: Abbozzi kollaborattivi
+        one: Abbozz kollaborattiv
+        other: Abbozzi kollaborattivi
+      decidim/proposals/proposal:
+        few: Proposti
+        many: Proposti
+        one: Proposta
+        other: Proposti
+      decidim/proposals/proposal_note:
+        few: Noti
+        many: Noti
+        one: Nota
+        other: Noti
+      decidim/proposals/proposal_vote:
+        few: Appoġġi
+        many: Appoġġi
+        one: Appoġġ
+        other: Appoġġi
+  decidim:
+    admin:
+      filters:
+        proposals:
+          category_id_eq:
+            label: Kategoriji
+          is_emendation_true:
+            label: Tip
+            values:
+              'false': Proposti
+              'true': Emendi
+          scope_id_eq:
+            label: Kamp ta’ applikazzjoni
+          state_eq:
+            label: Stat
+            values:
+              accepted: Aċċettat
+              evaluating: Qed tiġi evalwata
+              published: Ippubblikat
+              rejected: Miċħud
+              validating: Validazzjoni teknika
+              withdrawn: Irtirata
+          state_null:
+            label: Stat
+            values:
+              'true': Mhux imwieġba
+          valuator_role_ids_has:
+            label: Assenjata lill-istimatur
+        search_placeholder:
+          id_string_or_title_cont: Fittex %{collection} skont l-ID jew it-titlu.
+    components:
+      proposals:
+        actions:
+          amend: Emenda
+          create: Oħloq
+          endorse: Approva
+          vote: Sostenn
+          withdraw: Irtira
+        name: Ideat
+        settings:
+          global:
+            allow_card_image: Ippermetti l-immaġni tal-kard
+            amendments_enabled: Emendi attivati
+            amendments_enabled_help: Jekk attiva, ikkonfigura l-elementi tal-Emenda għal kull pass.
+            amendments_wizard_help_text: Test tal-għajnuna tal-Wizard tal-emendi
+            announcement: Tħabbira
+            attachments_allowed: Ippermetti l-hemżiet
+            can_accumulate_supports_beyond_threshold: Tista’ takkumula sostenji iktar mil-livell minimu
+            collaborative_drafts_enabled: Abbozzi kollaborattivi attivati
+            comments_enabled: Kummenti attivati
+            comments_max_length: Tul massimu tal-kummenti (Ħallih 0 għall-valur prestabbilit)
+            geocoding_enabled: Ġeokodifikazzjoni attivata
+            minimum_votes_per_user: Sostenji minimi għal kull utent
+            new_proposal_body_template: Mudell ġdid tal-kontenut prinċipali tal-proposta
+            new_proposal_body_template_help: Tista’ tiddefinixxi t-test mimli minn qabel li se jkollhom il-Proposti l-ġodda
+            new_proposal_help_text: Test ta’ għajnuna għal proposta ġdida
+            official_proposals_enabled: Proposti uffiċjali attivati
+            participatory_texts_enabled: Testi parteċipatorji attivati
+            participatory_texts_enabled_readonly: Ma tistax tinteraġixxi ma’ din il-konfigurazzjoni jekk hemm proposti eżistenti. Oħloq “Komponent tal-Proposti” ġdid jekk tixtieq tattiva dan l-element jew warrab il-proposti kollha importati fil-menù “Testi Parteċipatorji” jekk tixtieq tiddiżattivah.
+            proposal_answering_enabled: It-tweġib għall-proposta attivat
+            proposal_edit_before_minutes: L-ideat jistgħu jiġu editjati mill-awturi qabel ma jgħaddu daqstant minuti
+            proposal_length: Tul massimu tal-kontenut prinċipali tal-proposta
+            proposal_limit: Limitu tal-proposta għal kull parteċipant
+            proposal_wizard_step_1_help_text: Test tal-għajnuna tal-pass “Oħloq” tal-wizard tal-proposta
+            proposal_wizard_step_2_help_text: Test tal-għajnuna tal-pass “Qabbel” tal-wizard tal-proposta
+            proposal_wizard_step_3_help_text: Irrevedi
+            proposal_wizard_step_4_help_text: Test tal-għajnuna tal-pass “Ippubblika” tal-wizard tal-proposta
+            resources_permissions_enabled: Jistgħu jiġu stabbiliti permessi ta’ azzjoni għal kull proposta
+            threshold_per_proposal: Livell minimu għal kull proposta
+            vote_limit: Limitu ta’ sostenn għal kull parteċipant
+          step:
+            amendment_creation_enabled: Ħolqien tal-emendi attivat
+            amendment_creation_enabled_help: Il-parteċipant jista’ jemenda l-proposti.
+            amendment_promotion_enabled: Promozzjoni tal-emendi attivata
+            amendment_promotion_enabled_help: L-awturi tal-emanda se jkunu jistgħu jippromwovu l-Proposta tal-emenda miċħuda.
+            amendment_reaction_enabled: Reazzjoni għall-emendi attivata
+            amendment_reaction_enabled_help: L-awturi tal-proposta se jkunu jistgħu jaċċettaw jew jirrifjutaw l-emendi tal-Parteċipant.
+            amendments_visibility: Viżibbiltà tal-emendi
+            amendments_visibility_choices:
+              all: L-emendi huma viżibbli għal kulħadd
+              participants: L-emendi huma viżibbli għall-awturi tagħhom biss
+            amendments_visibility_help: Jekk tintgħażel l-opzjoni “L-emendi huma viżibbli għall-awturi tagħhom biss”, il-parteċipant irid jilloggja biex jara l-emendi li jkunu saru.
+            announcement: Tħabbira
+            answers_with_costs: Attiva l-ispejjeż fuq it-tweġibiet tal-proposta
+            automatic_hashtags: Hashtags miżjuda mal-proposti kollha
+            comments_blocked: Kummenti mblukkati
+            creation_enabled: Il-ħolqien ta’ proposta attivat
+            endorsements_blocked: Approvazzjonijiet imblukkati
+            endorsements_enabled: Approvazzjonijiet attivati
+            proposal_answering_enabled: It-tweġib għall-proposta attivat
+            publish_answers_immediately: Ippubblika t-tweġibiet tal-proposta minnufih
+            suggested_hashtags: Hashtags issuġġeriti lill-parteċipanti għall-proposti l-ġodda
+            votes_blocked: Sostenji mblukkati
+            votes_enabled: Sostenji attivati
+            votes_hidden: Sostenji moħbija (jekk is-sostenji jkunu attivati, jekk timmarkaha taħbi n-numru ta’ sostenji)
+    events:
+      proposals:
+        admin:
+          proposal_note_created:
+            email_intro: Xi ħadd ħalla nota fuq il-proposta "%{resource_title}". Mur araha fil-<a href="%{admin_proposal_info_url}">panel amministrattiv</a>
+            email_outro: Irċevejt din in-notifika minħabba li tista’ tivvaluta l- proposta.
+            email_subject: Xi ħadd ħalla nota fuq il-proposta %{resource_title}.
+            notification_title: Xi ħadd ħalla nota fuq il-proposta <a href="%{resource_path}">%{resource_title}</a>. Mur araha fil-<a href="%{admin_proposal_info_path}">panel amministrattiv</a>
+        collaborative_draft_access_accepted:
+          email_intro: '%{requester_name} ġie aċċettat biex jingħata aċċess bħala kontributur tal-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>.'
+          email_outro: Irċevejt din in-notifika għax inti kollaboratur ta’ <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: "%{requester_name} ġie aċċettat biex jingħata aċċess bħala kontributur ta’ %{resource_title}."
+          notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> ġie <strong>aċċettat biex jingħata aċċess bħala kontributur</strong> tal-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>.
+        collaborative_draft_access_rejected:
+          email_intro: '%{requester_name} ġie miċħud l-aċċess bħala kontributur tal-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>.'
+          email_outro: Irċevejt din in-notifika għax inti kollaboratur ta’ <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: "%{requester_name} ġie miċħud l-aċċess bħala kontributur tal-abbozz kollaborattiv %{resource_title}."
+          notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> ġie <strong> miċħud l-aċċess bħala kontributur</strong> tal-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>.
+        collaborative_draft_access_requested:
+          email_intro: '%{requester_name} talbet l-aċċess bħala kontributur. Tista’ <strong>taċċetta jew tiċħad it-talba</strong> mill-paġna kollaborattiva tal-abbozz ta’ <a href="%{resource_path}">%{resource_title}</a>.'
+          email_outro: Irċevejt din in-notifika għax inti kollaboratur ta’ <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: "%{requester_name} talab l-aċċess biex tikkontribwixxi għal %{resource_title}."
+          notification_title: <a href="%{requester_path}">%{requester_name} %{requester_nickname}</a> talab l-aċċess biex jikkontribwixxi għall-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>. Jekk jogħġbok <strong>aċċetta jew iċħad it-talba</strong>.
+        collaborative_draft_access_requester_accepted:
+          email_intro: Ġejt aċċettat biex tingħata aċċess bħala kontributur tal-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>.
+          email_outro: Irċevejt din in-notifika għax tlabt li ssir kollaboratur ta’ <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: Ġejt aċċettat bħala kontributur ta’ %{resource_title}.
+          notification_title: Ġejt <strong>aċċettat biex tingħata aċċess bħala kontributur</strong> tal-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>.
+        collaborative_draft_access_requester_rejected:
+          email_intro: Ġejt miċħud l-aċċess bħala kontributur tal-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>.
+          email_outro: Irċevejt din in-notifika għax tlabt li ssir kollaboratur ta’ <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: Ġejt miċħud bħala kontributur ta’ %{resource_title}.
+          notification_title: Ġejt <strong>miċħud l-aċċess bħala kontributur</strong> tal-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>.
+        collaborative_draft_withdrawn:
+          email_intro: <a href="%{author_path}">%{author_name} %{author_nickname}</a> irtira l-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>.
+          email_outro: Irċevejt din in-notifika għax inti kollaboratur ta’ <a href="%{resource_path}">%{resource_title}</a>.
+          email_subject: "%{author_name} %{author_nickname} irtira l-abbozz kollaborattiv %{resource_title}."
+          notification_title: <a href="%{author_path}">%{author_name} %{author_nickname}</a> <strong>irtira</strong> l-abbozz kollaborattiv <a href="%{resource_path}">%{resource_title}</a>.
+        creation_enabled:
+          email_intro: 'Issa tista’ toħloq ideat ġodda fi %{participatory_space_title}! Ibda ipparteċipa f’din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi %{participatory_space_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: L-ideat issa huma disponibbli fi %{participatory_space_title}
+          notification_title: Issa tista’ tressaq ideat ġodda <a href="%{resource_path}"> </a> fi <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+        endorsing_enabled:
+          email_intro: 'Tista’ tapprova l-ideat fi %{participatory_space_title}! Ibda ipparteċipa f’din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi %{participatory_space_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: Bdew l-approvazzjonijiet tal-ideat għal %{participatory_space_title}
+          notification_title: Issa tista’ tapprova ideat ġodda <a href="%{resource_path}"> </a> fi <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+        proposal_accepted:
+          affected_user:
+            email_intro: 'L-idea tiegħek "%{resource_title}" ġiet aċċettata. Tista’ taqra t-tweġiba f’din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax inti awtur ta’ "%{resource_title}".
+            email_subject: L-idea tiegħek ġiet aċċettata
+            notification_title: L-idea tiegħek <a href="%{resource_path}">%{resource_title}</a> ġiet aċċettata.
+          follower:
+            email_intro: 'L-idea "%{resource_title}" ġiet aċċettata. Tista’ taqra t-tweġiba f’din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax qed issegwi "%{resource_title}". Tista’ ma tibqax issegwiha permezz tal-link preċedenti.
+            email_subject: Idea li qed issegwi ġiet aċċettata
+            notification_title: L-idea <a href="%{resource_path}">%{resource_title}</a> ġiet aċċettata.
+        proposal_evaluating:
+          affected_user:
+            email_intro: 'L-idea tiegħek "%{resource_title}" bħalissa qed tiġi evalwata. Tista’ tara hemmx tweġiba f’din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax inti awtur ta’ "%{resource_title}".
+            email_subject: L-idea tiegħek qed tiġi evalwata
+            notification_title: L-idea tiegħek <a href="%{resource_path}">%{resource_title}</a> qed tiġi evalwata.
+          follower:
+            email_intro: 'L-idea "%{resource_title}" bħalissa qed tiġi evalwata. Tista’ tara hemmx tweġiba f’din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax qed issegwi "%{resource_title}". Tista’ ma tibqax issegwiha permezz tal-link preċedenti.
+            email_subject: Idea li qed issegwi qed tiġi evalwata
+            notification_title: L-idea <a href="%{resource_path}">%{resource_title}</a> qed tiġi evalwata.
+        proposal_mentioned:
+          email_intro: '- L-idea tiegħek "%{mentioned_proposal_title}" issemmiet <a href="%{resource_url}">in this space</a> fil-kummenti.'
+          email_outro: Irċevejt din in-notifika għax inti awtur ta’ "%{resource_title}".
+          email_subject: '- L-idea tiegħek "%{mentioned_proposal_title}" issemmiet'
+          notification_title: '- L-idea tiegħek "%{mentioned_proposal_title}" issemmiet <a href="%{resource_path}">in this space</a> fil-kummenti.'
+        proposal_published:
+          email_intro: '- %{author_name} %{author_nickname}, li qed issegwi, ippubblika idea ġdida msejħa "%{resource_title}". Mur araha u kkontribwixxi:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi lil %{author_nickname}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: '- Idea ġdida "%{resource_title}" ta’ %{author_nickname}'
+          notification_title: '- L-idea <a href="%{resource_path}">%{resource_title}</a> ġiet ippubblikata minn <a href="%{author_path}">%{author_name} %{author_nickname}</a>.'
+        proposal_published_for_space:
+          email_intro: '- L-idea "%{resource_title}" żdiedet ma’ "%{participatory_space_title}" li qed issegwi.'
+          email_outro: Irċevejt din in-notifika għax qed issegwi "%{participatory_space_title}". Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: '- Idea ġdida "%{resource_title}" żdiedet ma’ %{participatory_space_title}'
+          notification_title: '- L-idea <a href="%{resource_path}">%{resource_title}</a> żdiedet ma’ %{participatory_space_title}'
+        proposal_rejected:
+          affected_user:
+            email_intro: 'L-idea tiegħek "%{resource_title}" ġiet miċħuda. Tista’ taqra t-tweġiba f’din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax inti awtur ta’ "%{resource_title}".
+            email_subject: L-idea tiegħek ġiet miċħuda
+            notification_title: L-idea tiegħek <a href="%{resource_path}">%{resource_title}</a> ġiet miċħuda.
+          follower:
+            email_intro: 'L-idea "%{resource_title}" ġiet miċħuda. Tista’ taqra t-tweġiba f’din il-paġna:'
+            email_outro: Irċevejt din in-notifika għax qed issegwi "%{resource_title}". Tista’ ma tibqax issegwiha permezz tal-link preċedenti.
+            email_subject: Idea li qed issegwi ġiet miċħuda
+            notification_title: L-idea <a href="%{resource_path}">%{resource_title}</a> ġiet miċħuda.
+        proposal_update_category:
+          email_intro: 'Amministratur aġġorna l-kategorija tal-idea tiegħek "%{resource_title}", mur araha f’din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax inti l-awtur tal-idea.
+          email_subject: Il-kategorija tal-idea %{resource_title} ġiet aġġornata
+          notification_title: Il-kategorija tal-idea <a href="%{resource_path}">%{resource_title}</a> ġiet aġġornata minn amministratur.
+        proposal_update_scope:
+          email_intro: 'Amministratur aġġorna l-kamp ta’ applikazzjoni tal-idea tiegħek"%{resource_title}", mur araha f’din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax inti l-awtur tal-idea.
+          email_subject: Il-kamp ta’ applikazzjoni tal-idea %{resource_title} ġie aġġornat
+          notification_title: Il-kamp ta' applikazzjoni tal-proposta <a href="%{resource_path}">%{resource_title}</a> ġie aġġornat minn amministratur.
+        voting_enabled:
+          email_intro: 'Tista’ tagħti s-sostenn lill-ideat fi %{participatory_space_title}! Ibda pparteċipa f’din il-paġna:'
+          email_outro: Irċevejt din in-notifika għax qed issegwi %{participatory_space_title}. Tista’ tieqaf tirċievi n-notifiki billi tikklikkja fuq il-link preċedenti.
+          email_subject: Is-sostenn għall-idea għal %{participatory_space_title} beda
+          notification_title: Issa tista’ tibda <a href="%{resource_path}">tagħti s-sostenn lill-proposti</a> fi <a href="%{participatory_space_url}">%{participatory_space_title}</a>
+    gamification:
+      badges:
+        accepted_proposals:
+          description: Din il-badge tingħata meta tipparteċipa b’mod attiv b’ideat ġodda li jiġu aċċettati.
+          description_another: 'Numru ta’ ideat aċċettati li kellu dan il-parteċipant: %{score}.'
+          description_own: 'Numru ta’ ideat li kellek aċċettati: %{score}.'
+          name: Ideat aċċettati
+          next_level_in: Wassal biex %{score} ideat oħra jiġu aċċettati biex tilħaq il-livell li jmiss!
+          unearned_another: Dan il-parteċipant għad ma kellu l-ebda idea aċċettata.
+          unearned_own: Għadu ma kellek l-ebda idea aċċettata.
+        proposal_votes:
+          description: Din il-badge tingħata meta tagħti s-sostenn tiegħek lill-ideat tal-oħrajn.
+          description_another: 'Numru ta’ ideat li dan il-parteċipant tahom is-sostenn tiegħu: %{score}.'
+          description_own: 'Numru ta’ ideat li tajthom is-sostenn tiegħek: %{score}.'
+          name: Sostenji tal-idea
+          next_level_in: Agħti s-sostenn tiegħek lil %{score} ideat oħra biex tilħaq il-livell li jmiss!
+          unearned_another: Dan il-parteċipant għadu ma ta s-sostenn tiegħu lill-ebda idea.
+          unearned_own: Għadek ma tajt is-sostenn tiegħek lill-ebda idea.
+        proposals:
+          description: Din il-badge tingħata meta tipparteċipa b’mod attiv b’ideat ġodda.
+          description_another: Dan il-parteċipant ħoloq %{score} idea(t).
+          description_own: Ħloqt %{score} idea(t).
+          name: Ideat
+          next_level_in: Oħloq %{score} ideat oħra biex tilħaq il-livell li jmiss!
+          unearned_another: Dan il-parteċipant għadu ma ħoloq l-ebda idea.
+          unearned_own: Għadek ma ħloqt l-ebda idea.
+    metrics:
+      accepted_proposals:
+        description: Numru ta’ proposti aċċettati
+        object: ideat
+        title: Proposti aċċettati
+      endorsements:
+        description: Numru ta’ approvazzjonijiet għall-proposti
+        object: approvazzjonijiet
+        title: Approvazzjonijiet
+      proposals:
+        description: Numru ta’ proposti
+        object: ideat
+        title: Ideat
+      votes:
+        description: Numru ta’ sostenji għall-proposti
+        object: sostenji
+        title: Sostenji
+    participatory_processes:
+      participatory_process_groups:
+        highlighted_proposals:
+          proposals: Proposti
+    participatory_spaces:
+      highlighted_proposals:
+        see_all: Ara l-ideat kollha (%{count})
+    proposals:
+      actions:
+        answer_proposal: Wieġeb il-proposta
+        edit_proposal: Editja idea
+        import: Importa minn komponent ieħor
+        new: Idea ġdida
+        participatory_texts: Testi parteċipatorji
+        show: Uri idea
+        title: Azzjonijiet
+      admin:
+        exports:
+          comments: Kummenti
+          proposals: Proposti
+        models:
+          proposal:
+            name: Proposta
+        participatory_texts:
+          bulk-actions:
+            are_you_sure: Żgur li tixtieq twarrab l-abbozz tat-test parteċipatorju kollu?
+            discard_all: Warrab kollox
+            import_doc: Importa dokument
+          discard:
+            success: L-abbozzi tat-testi parteċipatorji kollha twarrbu.
+          import:
+            invalid: Il-formola hija invalida!
+            invalid_file: Il-fajl fih xi żball, jekk jogħġbok ipprova editja l-kontenut tal-fajl u erġa’ tellgħu.
+            success: Proset, It-taqsimiet li ġejjin ġew ikkonvertiti fi proposti. Issa tista’ tirrevedihom u taġġustahom qabel ma tippubblikahom.
+          index:
+            info_1: It-taqsimiet li ġejjin ġew ikkonvertiti fi proposti. Issa tista’ tirrevedihom u taġġustahom qabel ma tippubblikahom.
+            publish_document: Ippubblika d-dokument
+            save_draft: Issejvja l-abbozz
+            title: Ara preview tat-test parteċipatorju
+          new_import:
+            bottom_hint: "(Se tkun tista’ tara preview u tissortja t-taqsimiet tad-dokument)"
+            document_legend: 'Żid dokument ta’ inqas minn 2MB, kull taqsima sa profondità ta’ 3 livelli tiġi analizzata u ttrasformata fi Proposta. Il-formati sostnuti huma: %{valid_mime_types}'
+            title: Żid dokument
+            upload_document: Tella’ dokument
+          publish:
+            invalid: Il-proposti ma setgħux jiġu ppubblikati
+            success: Il-proposti kollha ġew ippubblikati
+          sections:
+            article: "<em>Artikolu</em>"
+            section: "<em>Taqsima:</em> <strong>%{title}</strong>"
+            sub-section: "<em>Sottotaqsima:</em> %{title}"
+          update:
+            success: It-test parteċipatorju ġie aġġornat.
+        proposal_answers:
+          form:
+            accepted: Aċċettat
+            answer_proposal: Tweġiba
+            evaluating: Qed tiġi evalwata
+            rejected: Miċħud
+            title: Tweġiba għall-proposta %{title}
+        proposal_notes:
+          create:
+            error: Kien hemm problema biex tinħoloq din in-nota tal-proposta
+            success: In-nota tal-proposta inħolqot
+          form:
+            note: Nota
+            submit: Issottometti
+          leave_your_note: Ħalli n-nota tiegħek
+          title: Noti privati
+        proposals:
+          answer:
+            invalid: Kien hemm problema biex din il-proposta tiġi mwieġba
+            success: Il-proposta ġiet imwieġba
+          create:
+            invalid: Kien hemm problema biex tinħoloq din il-proposta
+            success: Il-proposta nħolqot
+          edit:
+            title: Aġġorna l-proposta
+            update: Aġġorna
+          form:
+            attachment_legend: "(Fakultattiv) Żid hemża"
+            created_in_meeting: Din il-proposta ġejja minn laqgħa
+            select_a_category: Agħżel kategorija
+            select_a_meeting: Agħżel laqgħa
+          index:
+            actions: Azzjonijiet
+            assign_to_valuator: Assenja lill-istimatur
+            assign_to_valuator_button: Assenja
+            cancel: Ikkanċella
+            change_category: Ibdel il-kategorija
+            change_scope: Ibdel il-kamp ta’ applikazzjoni
+            merge: Għaqqad f’ieħor ġdid
+            merge_button: Għaqqad
+            publish: Ippubblika
+            publish_answers: Ippubblika t-tweġibiet
+            select_component: Agħżel komponent
+            selected: magħżul
+            split: Aqsam il-proposti
+            split_button: Aqsam
+            title: Proposti
+            unassign_from_valuator: Neħħi minn stimatur
+            unassign_from_valuator_button: Neħħi
+            update: Aġġorna
+            update_scope_button: Aġġorna l-Kamp ta’ Applikazzjoni
+          new:
+            create: Oħloq
+            title: Oħloq proposta
+          publish_answers:
+            number_of_proposals: It-tweġibiet għal %{number} proposti se jiġu ppubblikati.
+            select_a_proposal: Agħżel proposta
+          show:
+            amendments_count: Għadd tal-emendi
+            assigned_valuators: Stimaturi assenjati
+            authors: Awturi
+            body: Kontenut prinċipali
+            comments_count: Għadd ta’ kummenti
+            comments_negative_count: Kontra
+            comments_neutral_count: Newtrali
+            comments_positive_count: Favur
+            created_at: Data meta nħoloq
+            documents: Dokumenti
+            endorsements_count: Għadd ta’ approvazzjonijiet
+            endorsements_ranking: Klassifikazzjoni skont l-approvazzjonijiet
+            endorsers: Sostenituri
+            photos: Ritratti
+            proposals: Proposti
+            ranking: "%{ranking} minn %{total}"
+            related_meetings: Laqgħat relatati
+            remove_assignment: Neħħi l-assenjazzjoni
+            remove_assignment_confirmation: Żgur li trid tneħħi l-istimatur minn din il-proposta?
+            valuators: Stimaturi
+            votes_count: Għadd tas-sostenji
+            votes_ranking: Klassifikazzjoni skont is-sostenji
+          update_category:
+            invalid: 'Dawn il-proposti diġà kellhom il-kategorija %{subject_name}: %{proposals}.'
+            select_a_category: Agħżel kategorija
+            select_a_proposal: Agħżel proposta
+            success: 'Il-proposti ġew aġġornati għall-kategorija %{subject_name}: %{proposals}.'
+          update_scope:
+            invalid: 'Dawn il-proposti diġà kellhom il-kamp ta'' applikazzjoni %{subject_name}: %{proposals}.'
+            select_a_proposal: Agħżel proposta
+            select_a_scope: Agħżel kamp ta' applikazzjoni
+            success: 'Il-proposti ġew aġġornati għall-kamp ta'' applikazzjoni %{subject_name}: %{proposals}.'
+        proposals_imports:
+          create:
+            invalid: Kien hemm problema biex jiġu importati l-proposti
+            success: 'Numru ta’ proposti li ġew importati: %{number}'
+          new:
+            create: Importa l-proposti
+            no_components: Ma hemm l-ebda komponent ieħor ta’ proposti f’dan l-ispazju parteċipatorju biex il-proposti jiġu importati minnu.
+            select_component: Jekk jogħġbok agħżel komponent
+            select_states: Ivverifika l-istatus tal-proposti għall-importazzjoni
+        proposals_merges:
+          create:
+            invalid: Kien hemm problema biex jingħaqdu l-proposti magħżulin.
+            success: Il-proposti ngħaqdu f’waħda ġdida.
+        proposals_splits:
+          create:
+            invalid: Kien hemm problema biex jinqasmu l-proposti magħżulin.
+            success: Il-proposti nqasmu f’oħrajn ġodda.
+        valuation_assignments:
+          create:
+            invalid: Kien hemm żball biex jiġu assenjati l-proposti lil stimatur
+            success: Il-proposti ġew assenjati lil stimatur
+          delete:
+            invalid: Kien hemm żball biex jitneħħa l-assenjar tal-proposti minn stimatur
+            success: Stimatur tneħħietlu l-assenjazzjoni tal-proposti
+      admin_log:
+        proposal:
+          answer: "%{user_name} wieġeb il-proposta %{resource_name} fl-ispazju %{space_name}"
+          create: "%{user_name} ħoloq il-proposta %{resource_name} fl-ispazju %{space_name} bħala proposta uffiċjali"
+          publish_answer: "%{user_name} ippubblika t-tweġiba għall-proposta %{resource_name} fl-ispazju %{space_name}"
+          update: "%{user_name} aġġorna l-proposta uffiċjali %{resource_name} fl-ispazju %{space_name}"
+        proposal_note:
+          create: "%{user_name} ħalla nota privata fuq il-proposta %{resource_name} fl-ispazju %{space_name}"
+        valuation_assignment:
+          create: "%{user_name} assenja l-proposta %{resource_name} lil stimatur"
+          delete: "%{user_name} neħħa l-assenjazzjoni ta’ stimatur mill-proposta %{proposal_title}"
+      answers:
+        accepted: Aċċettat
+        evaluating: Qed tiġi evalwata
+        not_answered: Mhux imwieġba
+        rejected: Miċħud
+        withdrawn: Irtirata
+      application_helper:
+        filter_category_values:
+          all: Kollha
+        filter_origin_values:
+          all: Kollha
+          meetings: Avvenimenti
+          official: Uffiċjali
+          participants: Ċittadini
+          user_groups: Gruppi
+        filter_scope_values:
+          all: Kollha
+        filter_state_values:
+          accepted: Aċċettat
+          all: Kollha
+          evaluating: Qed tiġi evalwata
+          not_answered: Mhux imwieġba
+          rejected: Miċħud
+        filter_type_values:
+          all: Kollha
+          amendments: Emendi
+          proposals: Ideat
+      collaborative_drafts:
+        collaborative_draft:
+          publish:
+            error: Kien hemm problema biex jiġi ppubblikat l-abbozz kollaborattiv.
+            irreversible_action_modal:
+              body: Wara li l-abbozz ġie ppubblikat bħala proposta, l-abbozz ma jkunx jista’ jiġi editjat aktar. Il-proposta mhix se taċċetta awturi jew kontribuzzjonijiet ġodda.
+              cancel: Ikkanċella
+              ok: Ippubblika bħala Proposta
+              title: L-azzjoni li ġejja hija irriversibbli
+            success: Abbozz kollaborattiv ippubblikat bħala proposta.
+          view_collaborative_draft: Ara l-Abbozz Kollaborattiv
+          withdraw:
+            error: Kien hemm problema biex jingħalaq l-abbozz kollaborattiv.
+            irreversible_action_modal:
+              body: Wara li l-abbozz ġie ppubblikat, l-abbozz ma jkunx jibqa’ jista’ jiġi editjat. L-abbozz mhux se jaċċetta awturi jew kontribuzzjonijiet ġodda.
+              cancel: Ikkanċella
+              ok: Irtira l-abbozz kollaborattiv
+              title: L-azzjoni li ġejja hija irriversibbli
+            success: L-abbozz kollaborattiv ġie rtirat.
+        compare:
+          mine_is_different: L-abbozz kollaborattiv tiegħi huwa differenti
+          no_similars_found: Proset! Ma nstab l-ebda abbozz kollaborattiv simili
+          title: Abbozzi kollaborattivi simili
+        complete:
+          send: Ibgħat
+          title: Lesti l-abbozz kollaborattiv tiegħek
+        count:
+          drafts_count:
+            few: "%{count} abbozzi kollaborattivi"
+            many: "%{count} abbozzi kollaborattivi"
+            one: "%{count} abbozz kollaborattiv"
+            other: "%{count} abbozzi kollaborattivi"
+        create:
+          error: Kien hemm problema biex jinħoloq dan l-abbozz kollaborattiv
+          success: Inħoloq abbozz kollaborattiv.
+        edit:
+          attachment_legend: "(Fakultattiv) Żid hemża"
+          back: Lura
+          select_a_category: Agħżel kategorija
+          send: Ibgħat
+          title: Editja abbozz kollaborattiv
+        filters:
+          all: Kollha
+          amendment: Emendi
+          category: Kategorija
+          open: Miftuħa
+          published: Ippubblikat
+          related_to: Relatat ma'
+          scope: Kamp ta’ applikazzjoni
+          search: Fittex
+          state: Status
+          withdrawn: Irtirata
+        filters_small_view:
+          close_modal: Agħlaq il-kaxxa ż-żgħira
+          filter: Iffiltra
+          filter_by: Iffiltra skont
+          unfold: Iftaħ
+        new:
+          send: Kompli
+          title: Oħloq l-abbozz kollaborattiv tiegħek
+        new_collaborative_draft_button:
+          new_collaborative_draft: Abbozz kollaborattiv ġdid
+        orders:
+          label: 'Organizza l-abbozzi skont:'
+          most_contributed: L-aktar ikkontribwiti
+          random: Mod każwali
+          recent: Reċenti
+        requests:
+          accepted_request:
+            error: Ma setax jiġi aċċettat bħala kollaboratur, jekk jogħġbok erġa’ pprova aktar tard.
+            success: "@%{user} ġie aċċettat bħala kollaboratur"
+          access_requested:
+            error: It-talba tiegħek ma setgħetx titlesta, jekk jogħġbok erġa' pprova aktar tard.
+            success: It-talba tiegħek biex tikkollabora ntbagħtet
+          collaboration_requests:
+            accept_request: Aċċetta
+            reject_request: Iċħad
+            title: Talbiet ta’ kollaborazzjoni
+          rejected_request:
+            error: Ma setax jiġi miċħud bħala kollaboratur, jekk jogħġbok erġa’ pprova aktar tard.
+            success: "@%{user} ġie miċħud bħala kollaboratur"
+        show:
+          back: Lura
+          edit: Editja abbozz kollaborattiv
+          final_proposal: proposta finali
+          final_proposal_help_text: Dan l-abbozz tlesta. Iċċekkja l-proposta finali
+          hidden_authors_count:
+            few: u %{count} persuni oħra
+            many: u %{count} persuni oħra
+            one: u %{count} persuna oħra
+            other: u %{count} persuni oħra
+          info-message: Dan huwa <strong>abbozz kollaborattiv</strong> għal proposta. Dan ifisser li tista’ tgħin lill-awturi tagħhom ifasslu l-proposta billi tuża t-taqsima tal-kummenti hawn taħt jew ttejjibha direttament billi titlob aċċess biex teditjaha. Ladarba l-awturi jagħtuk l-aċċess, tkun tista’ tagħmel bidliet f’dan l-abbozz.
+          publish: Ippubblika
+          publish_info: Ippubblika din il-verżjoni tal-abbozz jew
+          published_proposal: proposta ppubblikata
+          request_access: Itlob aċċess
+          requested_access: Aċċess mitlub
+          version_history: ara l-istorja tal-verżjoni għal din il-proposta
+          withdraw: irtira l-abbozz
+        states:
+          open: Miftuħa
+          published: Ippubblikat
+          withdrawn: Irtirata
+        update:
+          error: Kien hemm problema biex jiġi ssejvjat l-abbozz kollaborattiv.
+          success: Abbozz kollaborattiv aġġornat.
+          title: Editja abbozz kollaborattiv
+        wizard_aside:
+          back: Lura
+          back_from_collaborative_draft: Lura għall-abbozzi kollaborattivi
+          back_from_step_1: Lura għall-abbozzi kollaborattivi
+          back_from_step_2: Lura għall-abbozzi kollaborattivi
+          back_from_step_3: Lura għat-tqabbil tal-abbozzi kollaborattivi
+          back_from_step_4: Lura għall-editjar tal-abbozz
+          info: Qed toħloq <strong>abbozz kollaborattiv</strong>.
+        wizard_steps:
+          current_step: Pass attwali
+          see_steps: ara l-passi
+          step_1: Oħloq l-abbozz kollaborattiv tiegħek
+          step_2: Qabbel mal-abbozzi kollaborattivi
+          step_3: Lesti l-abbozz kollaborattiv tiegħek
+          step_of: Pass %{current_step_num} minn %{total_steps}
+          title: Passi għall-ħolqien ta’ abbozz kollaborattiv
+      create:
+        error: Kien hemm problema biex tiġi ssejvjata l-proposta.
+        success: Il-proposta nħolqot. Issejvjat bħala Abbozz.
+      destroy_draft:
+        error: Kien hemm problema biex jitħassar l-abbozz kollaborattiv.
+        success: L-abbozz tal-idea tħassar.
+      last_activity:
+        new_proposal_at_html: "<span>Idea ġdida fi %{link}</span>"
+      models:
+        collaborative_draft:
+          fields:
+            authors: Awturi
+            comments: Kummenti
+            contributions: Kontribuzzjonijiet
+        proposal:
+          fields:
+            category: Kategorija
+            comments: Kummenti
+            id: ID
+            notes: Noti
+            official_proposal: Proposta uffiċjali
+            published_answer: Tweġiba ppubblikata
+            published_at: Ippubblikat fi
+            scope: Kamp ta’ applikazzjoni
+            state: Status
+            title: Titlu
+            valuator: Stimatur
+            valuators: Stimaturi
+            votes: Voti
+      new:
+        limit_reached: ma tistax toħloq proposti ġodda peress li qbiżt il-limitu.
+      participatory_text_proposal:
+        alternative_title: Bħalissa ma hemm l-ebda test parteċipatorju
+        buttons:
+          amend: Emenda
+          comment: Kumment
+          comments: Kummenti
+      proposal_votes:
+        create:
+          error: Kien hemm problema biex jingħata sostenn lill-proposta.
+      proposals:
+        compare:
+          continue: Kompli
+          no_similars_found: Proset! Ma nstabet l-ebda idea simili
+          title: Qabbel ma’ ideat simili
+        complete:
+          send: Ibgħat
+          title: Lesti l-idea tiegħek
+        count:
+          proposals_count:
+            few: "%{count} Ideat"
+            many: "%{count}-il Idea"
+            one: "%{count} Idea"
+            other: "%{count} ideat"
+        edit:
+          attachment_legend: "(Fakultattiv) Żid stampa"
+          back: Lura
+          select_a_category: Agħżel kategorija
+          send: Ara l-preview
+          title: Editja l-proposta
+        edit_draft:
+          discard: Warrab dan l-abbozz
+          discard_confirmation: Żgur trid twarrab dan l-abbozz tal-idea?
+          send: Preview
+          title: Editja l-Abbozz tal-Idea
+        filters:
+          activity: Ideat
+          all: Kollha
+          amendment_type: Tip
+          category: Kategorija
+          my_proposals: L-ideat tiegħi
+          origin: Oriġini
+          related_to: Relatati
+          scope: Kamp ta’ applikazzjoni
+          search: Ideat
+          state: Kategorija
+          type: Tip
+          voted: Mogħtija s-sostenn
+        filters_small_view:
+          close_modal: Agħlaq il-kaxxa ż-żgħira
+          filter: Iffiltra
+          filter_by: Idea
+          unfold: Iftaħ
+        index:
+          click_here: Ikklikkja hawn
+          collaborative_drafts_list: Aċċessa l-abbozzi kollaborattivi
+          new_proposal: Idea ġdida
+          see_all: Ara l-ideat kollha
+          see_all_withdrawn: Ara l-ideat irtirati kollha
+          text_banner: Qed tara l-lista ta’ ideat irtirati mill-awturi tagħhom. %{go_back_link} biex tmur lura għall-indiċi tal-ideat.
+          view_proposal: Ara l-proposta
+        linked_proposals:
+          proposal_votes:
+            few: appoġġi
+            many: appoġġi
+            one: appoġġ
+            other: appoġġi
+        new:
+          send: Kompli
+          title: Oħloq il-Proposta Tiegħek
+        orders:
+          label: Qiegħed l-ideat fl-ordni ta'
+          most_commented: L-aktar ikkummentati
+          most_endorsed: L-aktar approvati
+          most_followed: L-aktar segwiti
+          most_voted: L-aktar li ngħataw sostenn
+          random: Mod każwali
+          recent: L-aktar reċenti
+          with_more_authors: B’aktar awturi
+        participatory_texts:
+          index:
+            document_index: Indiċi tad-dokument
+          view_index:
+            see_index: Ara l-indiċi
+        preview:
+          modify: Immodifika l-idea tiegħek
+          proposal_edit_before_minutes:
+            few: Se jkollok %{count} minuta addizzjonali biex teditja wara li tippubblikaha jekk xorta jkollok bżonn tagħmel bidliet.
+            many: Se jkollok %{count} minuta addizzjonali biex teditja wara li tippubblikaha jekk xorta jkollok bżonn tagħmel bidliet.
+            one: Se jkollok %{count} minuta addizzjonali biex teditja wara li tippubblikaha jekk xorta jkollok bżonn tagħmel bidliet.
+            other: Se jkollok %{count} minuta addizzjonali biex teditja wara li tippubblikaha jekk xorta jkollok bżonn tagħmel bidliet.
+          publish: Ippubblika
+          title: Ippubblika l-idea tiegħek
+        proposal:
+          creation_date: 'Ħolqien: %{date}'
+          view_proposal: Ara l-proposta
+        proposals:
+          empty: Għad m'hemm l-ebda idea
+          empty_filters: Ma hemm l-ebda idea b’dawn il-kriterji
+        show:
+          answer: Tweġiba
+          back_to: Lura għal
+          back_to_list: Lura għal-lista
+          changes_at_title: Emenda għal "%{title}”
+          comments: Kummenti
+          edit_proposal: Editja idea
+          endorsements_list: Approvata minn
+          estimated_cost: Spiża stmata
+          hidden_endorsers_count:
+            few: u %{count} persuni oħra
+            many: u %{count} persuni oħra
+            one: u %{count} persuna oħra
+            other: u %{count} persuni oħra
+          link_to_collaborative_draft_help_text: Din il-proposta hija r-riżultat ta’ abbozz kollaborattiv. Irrevedi l-istorja
+          link_to_collaborative_draft_text: Ara l-abbozz kollaborattiv
+          link_to_promoted_emendation_help_text: Din il-proposta hija emenda promossa
+          link_to_promoted_emendation_text: Ara l-emenda miċħuda.
+          link_to_proposal_from_emendation_help_text: Din hija emenda miċħuda
+          link_to_proposal_from_emendation_text: Ara l-Idea
+          proposal_accepted_reason: 'Din il-proposta ġiet aċċettata għax:'
+          proposal_in_evaluation_reason: Din il-proposta qed tiġi evalwata
+          proposal_rejected_reason: 'Din il-proposta ġiet miċħuda għax:'
+          read_less: Aqra anqas
+          read_more: Aqra aktar
+          report: Irrapporta
+          withdraw_btn_hint: Innota li l-idea xorta se tidher fil-lista ta’ ideat irtirati, u mhux se titħassar b’mod permanenti.
+          withdraw_confirmation_html: Żgur li trid tirtira din l-idea?<br><br><strong>Din l-azzjoni ma tistax tiġi kkanċellata!</strong>
+          withdraw_proposal: Irtira l-idea
+        tags:
+          changed_from: "(mibdul minn <u>%{previous_name}</u> minn amministratur)"
+        update:
+          title: Aġġorna l-idea
+        vote_button:
+          already_voted: Diġà mogħtija s-sostenn
+          already_voted_hover: Irtira s-sostenn
+          maximum_votes_reached: Il-limitu tas-sostenn intlaħaq
+          no_votes_remaining: Ma fadal l-ebda sostenn
+          vote: Sostenn
+          votes_blocked: Sostenji diżattivati
+        votes_count:
+          count:
+            few: Appoġġi
+            many: Appoġġi
+            one: Appoġġ
+            other: Appoġġi
+          most_popular_proposal: L-aktar idea popolari
+          need_more_votes: Teħtieġ aktar sostenji
+        voting_rules:
+          can_accumulate_supports_beyond_threshold:
+            description: "- Kull idea tista’ takkumula aktar minn %{limit} approvazzjoni."
+          minimum_votes_per_user:
+            description: 'Minimu ta'' sostenji li trid tqassam fost il-proposti differenti: %{votes}.'
+            given_enough_votes: Tajt biżżejjed sostenji.
+            supports_remaining: Trid tagħti s-sostenn lil %{remaining_votes} proposti oħra biex is-sostenji tiegħek jiġu kkunsidrati.
+          proposal_limit:
+            description: 'Massimu ta'' proposti li tista’ toħloq: %{limit}.'
+          threshold_per_proposal:
+            description: "- Sabiex jiġu vvalidati, jeħtieġ li l-ideat jilħqu %{limit} approvazzjonijiiet;"
+          title: 'L-approvazzjonijiet huma soġġetti għar-regoli li ġejjin:'
+          vote_limit:
+            description: "- Tista’ tapprova sa %{limit} ideat;"
+            left: Li fadal
+            votes: Sostenji
+        wizard_aside:
+          back: Lura
+          back_from_step_1: Mur lura għall-proposti
+          back_from_step_2: Mur lura għall-proposti
+          back_from_step_3: Lura għat-tqabbil tal-ideat
+          back_from_step_4: Lura għall-editjar tal-abbozz
+          info: Qed toħloq <strong>proposta</strong>.
+        wizard_steps:
+          current_step: Pass attwali
+          see_steps: ara l-passi
+          step_1: Oħloq il-proposta tiegħek
+          step_2: Qabbel
+          step_3: Iffinalizza
+          step_4: Ippubblika l-proposta tiegħek
+          step_of: Pass %{current_step_num} minn %{total_steps}
+          title: Passi għall-ħolqien tal-proposta
+      proposals_picker:
+        choose_proposals: Agħżel ideat
+        close: Agħlaq
+        more_proposals: Hemm %{number} proposti oħra. Irfina t-tiftixa tiegħek biex tillokalizzahom.
+        no_proposals: L-ebda idea ma taqbel mal-kriterji tat-tiftix tiegħek jew ma hemm l-ebda idea.
+      publish:
+        error: Kien hemm problema bil-pubblikazzjoni tal-idea.
+        success: L-idea ġiet ippubblikata.
+      publish_answers:
+        success: It-tweġibiet tal-proposti ġew ippubblikati.
+      update:
+        error: Kien hemm problema biex tiġi ssejvjata l-proposta.
+        success: L-idea ġiet aġġornata.
+      update_draft:
+        error: Kien hemm problema biex jiġi ssejvjat l-abbozz kollaborattiv.
+        success: L-idea ġiet aġġornata.
+      versions:
+        collaborative_drafts:
+          back_to_resource: Mur Lura għall-abbozz kollaborattiv
+        index:
+          title: Verżjonijiet
+        proposals:
+          back_to_resource: Mur lura għall-proposta
+      withdraw:
+        errors:
+          has_supports: Din il-proposta ma tistax tiġi rtirata minħabba li diġà għandha s-sostenji.
+    resource_links:
+      copied_from_component:
+        proposal_proposal: Ideat relatati
+      included_projects:
+        project_result: 'Ir-riżultati li jidhru f’dan il-proġett:'
+      included_proposals:
+        proposal_project: 'Proposta li tidher f’dawn il-proġetti:'
+        proposal_result: 'Proposta li tidher f’dawn ir-riżultati:'

@@ -1,0 +1,144 @@
+---
+et:
+  activemodel:
+    attributes:
+      oauth_application:
+        name: OAuth-rakenduse nimi
+        organization_logo: Organisatsiooni logo (ruudukujuline)
+        organization_name: Organisatsioon
+        organization_url: Organisatsiooni URL
+        redirect_uri: Ümbersuunamise URI
+    errors:
+      models:
+        oauth_application:
+          attributes:
+            redirect_uri:
+              must_be_ssl: Ümbersuunamise URI peab olema SSL-URI
+  decidim:
+    system:
+      actions:
+        confirm_destroy: Kas olete kindel, et soovite selle kustutada?
+        destroy: Kustuta
+        edit: Muuda
+        new: Uus
+        save: Salvesta
+        title: Toimingud
+      admins:
+        create:
+          error: Uue administraatori kirje loomisel tekkis probleem.
+          success: Administraator on loodud
+        destroy:
+          success: Administraator on kustutatud
+        edit:
+          title: Muuda administraatorit
+          update: Värskenda
+        index:
+          title: Administraatorid
+        new:
+          create: Loo
+          title: Uus administraator
+        update:
+          error: Selle administraatorikirje värskendamisel tekkis probleem.
+          success: Administraatorikirje on värskendatud
+      default_pages:
+        placeholders:
+          content: Palume lisada tähenduslikku sisu staatilise lehele %{page} administraatori töölaual.
+          title: Lehe %{page} vaikepealkiri
+      menu:
+        admins: Administraatorid
+        dashboard: Töölaud
+        oauth_applications: OAuth-rakendused
+        organizations: Organisatsioonid
+      models:
+        admin:
+          fields:
+            created_at: Loodi
+            email: Meil
+          name: Administraator
+          validations:
+            email_uniqueness: selle meiliaadressiga administraator on juba olemas
+        oauth_application:
+          fields:
+            created_at: Loodi
+            name: OAuth-rakenduse nimi
+            organization_name: Organisatsioon
+          name: OAuth-rakendus
+        organization:
+          actions:
+            save_and_invite: Loo organisatsioon ja kutsu administraator
+          fields:
+            created_at: Loodi
+            name: Nimi
+            omniauth_settings: Omniauthi seaded
+            smtp_settings: SMTP seaded
+          name: Organisatsioon
+      oauth_applications:
+        create:
+          error: Selle rakenduse loomisel tekkis probleem.
+          success: Rakendus on loodud.
+        destroy:
+          error: Selle rakenduse kustutamisel tekkis probleem.
+          success: Rakendus on kustutatud.
+        edit:
+          save: Salvesta
+          title: Muuda rakendust
+        form:
+          select_organization: Valige organisatsioon
+        index:
+          confirm_delete: Kas olete kindel, et soovite selle rakenduse kustutada?
+          title: OAuth-rakendused
+        new:
+          save: Salvesta
+          title: Uus rakendus
+        update:
+          error: Selle rakenduse värskendamisel tekkis probleem.
+          success: Rakendus on värskendatud.
+      organizations:
+        create:
+          error: Uue organisatsiooni loomisel tekkis probleem.
+          success: Organisatsioon on loodud.
+        edit:
+          secondary_hosts_hint: Sisestage kõik eraldi reale
+        index:
+          title: Organisatsioonid
+        new:
+          reference_prefix_hint: Viiteesliidet kasutatakse üksikute ressursside tuvastamiseks kogu organisatsiooni ulatuses
+          secondary_hosts_hint: Sisestage kõik eraldi reale
+          title: Uus organisatsioon
+        omniauth_settings:
+          decidim:
+            client_id: Kliendi ID
+            client_secret: Kliendi salakood
+            site_url: Saidi URL
+          enabled: Lubatud
+          enabled_by_default: See pakkuja on vaikimisi lubatud. Seda saab muuta, kuid mitte keelata.
+          facebook:
+            app_id: Rakenduse ID
+            app_secret: Rakenduse salakood
+          google_oauth2:
+            client_id: Kliendi ID
+            client_secret: Kliendi salakood
+          icon: Ikoon
+          icon_path: Ikooni tee
+          twitter:
+            api_key: API võti
+            api_secret: API salakood
+        smtp_settings:
+          instructions:
+            from_label: 'Meilisõnumi saatjana kuvatakse: „teie-organisatsiooni-nimi <your-organization@your-provider.org>“. Jätke väli tühjaks, kui soovite kasutada saatja meiliaadressi (from_email) sildina'
+          placeholder:
+            from_email: teie-organisatsioon@teie-teenusepakkuja.org
+            from_label: teie-organisatsiooni-nimi
+        update:
+          error: Selle organisatsiooni värskendamisel tekkis probleem.
+          success: Organisatsiooni on värskendatud.
+        users_registration_mode:
+          disabled: Juurdepääs on võimalik vaid väliste kontode kaudu
+          enabled: Luba osalejatel registreeruda ja sisse logida
+          existing: Ära luba osalejatel registreeruda, kuid luba olemasolevatel osalejatel sisse logida
+      shared:
+        notices:
+          no_organization_warning_html: Alustamiseks peate looma organisatsiooni. Enne jätkamist lugege kindlasti juhendit %{guide}.
+          our_getting_started_guide: meie alustusjuhend
+      titles:
+        dashboard: Töölaud

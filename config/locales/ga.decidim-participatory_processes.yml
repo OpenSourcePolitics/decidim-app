@@ -1,0 +1,72 @@
+---
+ga:
+  activerecord:
+    models:
+      decidim/participatory_process:
+        few: Ábhar
+        many: nÁbhar
+        one: Ábhar
+        other: Ábhar
+        two: Ábhar
+  decidim:
+    menu:
+      processes: Ábhair
+    participatory_processes:
+      content_blocks:
+        highlighted_processes:
+          name: Ábhair sa spotsolas
+      index:
+        title: Ábhair
+      last_activity:
+        new_participatory_process: Ábhar nua
+      pages:
+        home:
+          highlighted_processes:
+            active_processes: Ábhair
+            see_all_processes: Féach ar gach ábhar
+      participatory_processes:
+        filters:
+          counters:
+            active:
+              few: Ábhar atá faoi thrácht againn
+              many: nÁbhar atá faoi thrácht againn
+              one: Ábhar amháin atá faoi thrácht againn
+              other: Ábhar atá faoi thrácht againn
+              two: 2 ábhar atá faoi thrácht againn
+            all:
+              few: "%{count} ábhar"
+              many: "%{count} n-ábhar"
+              one: Ábhar amháin
+              other: "%{count} n-ábhar"
+              two: 2 ábhar
+            past:
+              few: "%{count} ábhar roimhe seo"
+              many: "%{count} n-ábhar roimhe seo"
+              one: Ábhar amháin roimhe seo
+              other: "%{count} ábhar roimhe seo"
+              two: 2 ábhar roimhe seo
+            upcoming:
+              few: "%{count} ábhar atá ar na bacáin"
+              many: "%{count} n-ábhar atá ar na bacáin"
+              one: Ábhar amháin atá ar na bacáin
+              other: "%{count} ábhar atá ar na bacáin"
+              two: 2 ábhar atá ar na bacáin
+          explanations:
+            no_active: Níl aon ábhar gníomhach ann
+      statistics:
+        endorsements_count: Léirithe Tacaíochta
+        followers_count: Leantóir
+        headline: Cad atá ag tarlú faoin ábhar seo?
+        meetings_count: Imeachtaí
+        processes_count: Ábhair
+        proposals_count: Smaointe
+  layouts:
+    decidim:
+      participatory_processes:
+        participatory_process:
+          more_info_about: Tuilleadh eolais faoin ábhar seo %{resource_name}
+          take_part_in: Glac páirt san ábhar seo %{resource_name}
+        promoted_process:
+          more_info_about: Tuilleadh eolais faoin ábhar dar teideal %{resource_name}
+      process_navigation:
+        process_menu_item: Faoin Ábhar Seo

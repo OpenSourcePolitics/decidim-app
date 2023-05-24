@@ -1,0 +1,832 @@
+---
+sl:
+  activemodel:
+    attributes:
+      area:
+        area_type: Vrsta območja
+        name: Ime
+        organization: Organizacija
+      area_type:
+        name: Ime
+        organization: Organizacija
+        plural: Množina
+      attachment:
+        attachment_collection_id: Mapa
+        description: Opis
+        file: Datoteka
+        title: Ime priloge ali slike
+      attachment_collection:
+        description: Opis
+        name: Ime
+      category:
+        description: Opis
+        name: Ime
+        parent_id: Nadrejeni element
+      component:
+        name: Ime
+        published_at: Objavljeno ob
+        weight: Teža
+      id: ID
+      newsletter:
+        body: Telo
+        subject: Zadeva
+      organization:
+        address: Ime gostitelja SMTP
+        alert_color: Opozorilo
+        badges_enabled: Omogoči značke
+        comments_max_length: Največja dolžina komentarjev (za privzeto vrednost pusti 0)
+        cta_button_path: Pot gumba za poziv k ukrepanju
+        cta_button_text: Besedilo gumba za poziv k ukrepanju
+        customize_welcome_notification: Prilagodi pozdravno sporočilo
+        default_locale: Privzeta območna nastavitev
+        description: Opis
+        enable_omnipresent_banner: Prikaži vseprisotno pasico
+        facebook_handler: Upravljalnik omrežja Facebook
+        favicon: Ikona
+        from: Iz elektronskega naslova
+        github_handler: Upravljalnik storitve GitHub
+        header_snippets: Izrezki glave
+        highlight_alternative_color: Označevanje, alternativno
+        highlight_color: Označevanje
+        highlighted_content_banner_action_subtitle: Podnaslov interaktivnega gumba
+        highlighted_content_banner_action_title: Naslov interaktivnega gumba
+        highlighted_content_banner_action_url: URL interaktivnega gumba
+        highlighted_content_banner_enabled: Prikaži pasico označene vsebine
+        highlighted_content_banner_image: Slika
+        highlighted_content_banner_short_description: Kratek opis
+        highlighted_content_banner_title: Naslov
+        instagram_handler: Upravljalnik omrežja Instagram
+        logo: Logotip
+        machine_translation_display_priority: Prednost prikaza strojnega prevoda
+        machine_translation_display_priority_original: Najprej izvirno besedilo
+        machine_translation_display_priority_translation: Najprej prevedeno besedilo
+        name: Ime
+        official_img_footer: Noga uradnega logotipa
+        official_img_header: Glava uradnega logotipa
+        official_url: Uradni URL organizacije
+        omnipresent_banner_short_description: Kratek opis
+        omnipresent_banner_title: Naslov
+        omnipresent_banner_url: URL
+        password: Geslo
+        port: Vrata
+        primary_color: Primarna
+        reference_prefix: Predpona sklica
+        rich_text_editor_in_public_views: Omogoči urejevalnik obogatenega besedila za udeležence
+        secondary_color: Sekundarna
+        send_welcome_notification: Pošlji pozdravno sporočilo
+        show_statistics: Prikaži statistiko
+        success_color: Postopek uspešen
+        time_zone: Časovni pas
+        tos_version: Različica pogojev uporabe
+        twitter_handler: Upravljalnik omrežja Twitter
+        user_groups_enabled: Omogoči skupine
+        user_name: Uporabniško ime
+        warning_color: Opozorilo
+        welcome_notification_body: Telo pozdravnega sporočila
+        welcome_notification_subject: Zadeva pozdravnega sporočila
+        youtube_handler: Upravljalnik omrežja YouTube
+      scope:
+        code: Koda
+        name: Ime
+        organization: Organizacija
+        parent_id: Nadrejeni element
+        scope_type: Vrsta področja
+        scope_type_id: Vrsta področja
+      scope_type:
+        name: Ime
+        organization: Organizacija
+        plural: Množina
+      static_page:
+        changed_notably: Prišlo je do znatnih sprememb.
+        content: Vsebina
+        organization: Organizacija
+        show_in_footer: Pokaži v nogi
+        slug: Polje dinamičnih podatkov URL
+        title: Naslov
+        weight: Teža
+      static_page_topic:
+        description: Opis
+        show_in_footer: Pokaži v nogi
+        title: Naslov
+        weight: Teža
+      user_group_csv_verification:
+        file: Datoteka
+    errors:
+      models:
+        organization:
+          attributes:
+            official_img_footer:
+              allowed_file_content_types: Neveljavna slikovna datoteka
+            official_img_header:
+              allowed_file_content_types: Neveljavna slikovna datoteka
+  activerecord:
+    attributes:
+      decidim/static_page:
+        content: Vsebina
+        slug: Polje dinamičnih podatkov URL
+        title: Naslov
+      doorkeeper/application:
+        authorize_url: Dovoli URL
+        client_id: ID odjemalca
+        client_secret: Skrivnost odjemalca
+        organization_name: Ime organizacije
+        organization_url: URL organizacije
+        redirect_uri: Preusmeritveni URI
+        site: Spletišče
+  decidim:
+    admin:
+      actions:
+        add: Dodaj
+        browse: Brskaj
+        export: Izvozi
+        manage: Upravljaj
+        new: Novo %{name}
+        per_page: Na stran
+        permissions: Dovoljenja
+        reject: Zavrni
+        share: Deli
+        verify: Preveri
+      admin_terms_of_use:
+        accept:
+          error: Pri sprejemu pogojev uporabe za skrbnika je prišlo do napake.
+          success: Super! Sprejeli ste pogoje uporabe za skrbnika.
+        actions:
+          accept: Strinjam se s pogoji uporabe za skrbnika.
+          are_you_sure: Ali res želite zavrniti pogoje uporabe za skrbnika?
+          refuse: Zavrni pogoje za skrbnika
+          title: Sprejmi pogoje uporabe
+        required_review:
+          alert: 'Obvezno: Preglejte naše pogoje uporabe za skrbnika.'
+          callout: Vzemite si čas za pregled pogojev uporabe za skrbnika. V nasprotnem primeru ne boste mogli opravljati nalog skrbnika platforme.
+          cta: Preglejte jih zdaj.
+        title: Pogoji uporabe za skrbnika
+      area_types:
+        create:
+          error: Pri ustvarjanju nove vrste območja se je pojavila težava.
+          success: Vrsta območja je bila uspešno ustvarjena.
+        destroy:
+          success: Vrsta območja je bila uspešno uničena.
+        edit:
+          title: Uredi vrsto območja
+          update: Posodobi
+        new:
+          create: Ustvari vrsto območja
+          title: Nova vrsta območja
+        update:
+          error: Pri posodobitvi te vrste območja se je pojavila težava.
+          success: Vrsta območja je bila uspešno posodobljena.
+      areas:
+        create:
+          error: Pri ustvarjanju novega območja se je pojavila težava.
+          success: Območje je bilo uspešno ustvarjeno.
+        destroy:
+          has_spaces: Območje ima odvisne prostore, za izbris ne sme imeti odvisnosti.
+          success: Območje je bilo uspešno uničeno.
+        edit:
+          title: Uredi območje
+          update: Posodobi
+        new:
+          create: Ustvari območje
+          title: Novo območje
+        no_areas: Ni območij
+        update:
+          error: Pri posodobitvi tega območja se je pojavila težava.
+          success: Območje je bilo uspešno posodobljeno.
+      attachment_collections:
+        create:
+          error: Pri ustvarjanju nove mape se je pojavila težava.
+          success: Mapa je bila uspešno ustvarjena.
+        destroy:
+          success: Mapa je bila uspešno uničena.
+        edit:
+          title: Uredi mapo
+          update: Posodobi
+        index:
+          attachment_collection_used: Mape ni mogoče odstraniti, ker je še v uporabi.
+          attachment_collections_title: Mape priloge
+        new:
+          create: Ustvari
+          title: Nova mapa
+        update:
+          error: Pri posodobitvi te mape se je pojavila težava.
+          success: Mapa je bila uspešno posodobljena.
+      attachments:
+        create:
+          error: Pri ustvarjanju nove priloge se je pojavila težava.
+          success: Priloga je bila uspešno ustvarjena.
+        destroy:
+          success: Priloga je bila uspešno uničena.
+        edit:
+          title: Uredi prilogo
+          update: Posodobi
+        index:
+          attachments_title: Priloge
+        new:
+          create: Ustvari prilogo
+          title: Nova priloga
+        update:
+          error: Pri posodobitvi te priloge se je pojavila težava.
+          success: Priloga je bila uspešno posodobljena.
+      autocomplete:
+        no_results: Ni rezultatov
+        search_prompt: Za iskanje vnesite vsaj tri znake.
+      categories:
+        create:
+          error: Pri ustvarjanju te kategorije se je pojavila težava.
+          success: Kategorija je bila uspešno ustvarjena.
+        destroy:
+          error: Pri brisanju te kategorije se je pojavila težava. Najprej izbrišite vse podkategorije in se prepričajte, da nobena druga entiteta ne spada v to kategorijo, ter poskusite znova.
+          success: Kategorija je bila uspešno izbrisana.
+        edit:
+          title: Uredi kategorijo
+          update: Posodobi
+        index:
+          categories_title: Kategorije
+          category_used: Kategorije ni mogoče odstraniti, ker je še v uporabi.
+        new:
+          create: Ustvari kategorijo
+          title: Nova kategorija
+        update:
+          error: Pri posodobitvi te kategorije se je pojavila težava.
+          success: Kategorija je bila uspešno posodobljena.
+      component_permissions:
+        update:
+          error: Pri posodobitvi dovoljenj te komponente se je pojavila težava.
+          success: Dovoljenja so bila uspešno posodobljena.
+      components:
+        create:
+          error: Pri ustvarjanju te komponente se je pojavila težava.
+          success: Komponenta je bila uspešno ustvarjena.
+        destroy:
+          error: Pri uničenju te komponente se je pojavila težava.
+          success: Komponenta je bila uspešno izbrisana.
+        edit:
+          title: Uredi komponento
+          update: Posodobi
+        form:
+          default_step_settings: Privzete nastavitve koraka
+          global_settings: Globalne nastavitve
+          step_settings: Nastavitve koraka
+        index:
+          add: Dodaj komponento
+          headers:
+            actions: Dejanja
+            name: Ime komponente
+            type: Vrsta komponente
+        new:
+          add: Dodaj komponento
+          title: 'Dodaj komponento: %{name}'
+        publish:
+          success: Komponenta je bila uspešno objavljena.
+        title: Komponente
+        unpublish:
+          success: Komponenta je bila uspešno umaknjena.
+        update:
+          error: Pri posodobitvi te komponente se je pojavila težava.
+          success: Komponenta je bila uspešno posodobljena.
+      dashboard:
+        show:
+          view_more_logs: Prikaži več dnevnikov
+          welcome: Dobrodošli v skrbniško ploščo Decidim.
+      exports:
+        export_as: "%{name} kot %{export_format}"
+        notice: Vaš izvoz je trenutno v teku. Ko bo končan, boste prejeli elektronsko pošto.
+      filters:
+        category_id_eq:
+          label: Kategorija
+        officialized_at_null:
+          label: Stanje
+          values:
+            'false': Potrjeno kot uradno
+            'true': Ni potrjeno kot uradno.
+        private_space_eq:
+          label: Zasebno
+          values:
+            'false': Javno
+            'true': Zasebno
+        published_at_null:
+          label: Objavljeno
+          values:
+            'false': Objavljeno
+            'true': Umaknjeno
+        scope_id_eq:
+          label: Področje
+        search_label: Išči
+        search_placeholder:
+          name_or_nickname_or_email_cont: Išči %{collection} po elektronskem naslovu, imenu ali vzdevku.
+          title_cont: Išči %{collection} po naslovu.
+        state_eq:
+          label: Stanje
+      help_sections:
+        error: Pri posodobitvi oddelkov za pomoč se je pojavila težava.
+        form:
+          save: Shrani
+        success: Oddelki za pomoč so bili uspešno posodobljeni.
+      impersonatable_users:
+        index:
+          filter:
+            all: Vse
+            managed: Upravljano
+            not_managed: Ni upravljano.
+          filter_by: Filtriraj po
+          impersonate: Poosebi
+          impersonate_new_managed_user: Upravljaj novega udeleženca
+          managed: Upravljano
+          name: Ime
+          needs_authorization_warning: Za to organizacijo morate omogočiti vsaj eno pooblastilo.
+          not_managed: Ni upravljano.
+          promote: Promoviraj
+          search: Išči
+          view_logs: Prikaži dnevnike
+      impersonations:
+        close_session:
+          error: Pri zapiranju trenutne seje upravljanja udeležencev se je pojavila težava.
+          success: Trenutna seja poosebljanja je bila uspešno končana.
+        create:
+          error: Pri upravljanju udeleženca se je pojavila težava.
+          success: Upravljani udeleženec je bil uspešno ustvarjen.
+        form:
+          authorization_method: Metoda pooblastitve
+          name: Ime
+          reason: Razlog
+        new:
+          impersonate: Poosebi
+          impersonate_existing_managed_user: Upravljaj udeleženca "%{name}"
+          impersonate_existing_user: Upravljaj udeleženca "%{name}"
+          impersonate_new_managed_user: Upravljaj novega udeleženca
+      logs:
+        logs_list:
+          no_logs_yet: Trenutno še ni dnevnikov.
+      managed_users:
+        promotion:
+          error: Pri promoviranju upravljanega udeleženca se je pojavila težava.
+          success: Upravljani udeleženec je bil uspešno promoviran.
+        promotions:
+          new:
+            explanation: Upravljani udeleženci se lahko promovirajo v standardne udeležence. To pomeni, da bodo povabljeni v aplikacijo in jih ne boste več mogli upravljati. Povabljeni udeleženec bo prejel elektronsko pošto, naj sprejme vaše povabilo.
+            new_managed_user_promotion: Nova promocija upravljanega udeleženca
+            promote: Promoviraj
+      menu:
+        admin_log: Dnevnik dejavnosti skrbnika
+        admins: Skrbniki
+        appearance: Videz
+        area_types: Vrste območij
+        areas: Območja
+        configuration: Konfiguracija
+        dashboard: Nadzorna plošča
+        help_sections: Oddelki za pomoč
+        homepage: Domača stran
+        impersonations: Poosebljanja
+        newsletters: Glasila
+        participants: Udeleženci
+        scope_types: Vrste področij
+        scopes: Področja
+        settings: Nastavitve
+        static_pages: Strani
+        user_groups: Skupine
+        users: Udeleženci
+      metrics:
+        metrics:
+          see_more_metrics: Prikaži več metrike
+      models:
+        area:
+          fields:
+            area_type: Vrsta območja
+            name: Ime
+        area_type:
+          fields:
+            name: Ime
+            plural: Množina
+        attachment:
+          fields:
+            collection: Mapa
+            content_type: Vrsta
+            file_size: Velikost
+            title: Naslov
+          name: Priloga
+        attachment_collection:
+          name: Mapa
+        category:
+          name: Kategorija
+        impersonation_log:
+          fields:
+            admin: Skrbnik
+            ended_at: Končano ob
+            expired_at: Poteklo ob
+            reason: Razlog
+            started_at: Začeto ob
+            user: Udeleženec
+        newsletter:
+          fields:
+            created_at: Ustvarjeno ob
+            progress: Napredek
+            sent_at: Poslano ob
+            sent_to: Naslovnik
+            subject: Zadeva
+          name: Glasilo
+        participatory_space_private_user:
+          name: Zasebni udeleženec participativnega prostora
+        scope:
+          fields:
+            name: Ime
+            scope_type: Vrsta področja
+        scope_type:
+          fields:
+            name: Ime
+            plural: Množina
+        share_token:
+          fields:
+            created_at: Ustvarjeno ob
+            expires_at: Poteče ob
+            last_used_at: Zadnjič uporabljeno
+            times_used: Število uporab
+            token: Žeton
+            user: Ustvaril
+        static_page:
+          fields:
+            created_at: Ustvarjeno ob
+            title: Naslov
+        user:
+          fields:
+            created_at: Ustvarjeno dne
+            email: E-naslov
+            last_sign_in_at: Datum zadnjega vpisa
+            name: Ime
+            role: Vloga
+            roles:
+              admin: Skrbnik
+              user_manager: Upravitelj udeležencev
+          name: Udeleženec
+        user_group:
+          fields:
+            actions: Dejanja
+            created_at: Ustvarjeno ob
+            document_number: Številka dokumenta
+            name: Ime
+            phone: Telefon
+            state: Stanje
+            users_count: Število udeležencev
+      moderations:
+        index:
+          title: Moderiranja
+        report:
+          reasons:
+            does_not_belong: Ne spada sem.
+            offensive: Žaljivo
+            spam: Neželena e-pošta
+      newsletter_templates:
+        index:
+          preview_template: Predogled
+          title: Predloge glasil
+          use_template: Uporabi to predlogo
+        show:
+          preview: 'Predogled predloge: %{template_name}'
+          use_template: Uporabi to predlogo
+      newsletters:
+        create:
+          error: Pri ustvarjanju tega glasila se je pojavila težava.
+          success: Glasilo je bilo uspešno ustvarjeno. Pred pošiljanjem ga preglejte.
+        deliver:
+          error: Pri dostavljanju tega glasila se je pojavila težava.
+          success: Glasilo je bilo uspešno dostavljeno.
+        destroy:
+          error_already_sent: 'Glasila ni mogoče uničiti: Bilo je že poslano.'
+          success: Glasilo je bilo uspešno uničeno.
+        edit:
+          save_and_preview: Shrani in omogoči predogled
+          title: Uredi glasilo
+        index:
+          all: vse
+          all_users: Vsi uporabniki
+          and: in
+          confirm_delete: Ali res želite izbrisati to glasilo?
+          followers: sledilci
+          has_been_sent_to: 'Poslano:'
+          no_scopes: Ni področij
+          not_sent: Ni poslano
+          participants: udeleženci
+          segmented_to: 'Segmentirano v %{subject}:'
+          subscribed_count: 'Naročniki:'
+          title: Glasila
+        new:
+          save: Shrani
+          title: Novo glasilo
+        select_recipients_to_deliver:
+          all_spaces: Vse
+          all_users_help: Pošlje glasilo vsem potrjenim uporabnikom.
+          confirm_deliver: Ali res želite dostaviti to glasilo? Dejanja ni mogoče preklicati.
+          deliver: Dostavi glasilo
+          followers_help: Pošlje glasilo vsem potrjenim uporabnikom, ki sledijo vsem izbranim participativnim prostorom na seznamu.
+          none: Brez
+          participants_help: Pošlje glasilo vsem potrjenim uporabnikom, ki so sodelovali v katerem koli od izbranih participativnih prostorov na seznamu.
+          recipients_count: To glasilo bo poslano <strong id='recipients_count'>%{count}</strong> uporabnikom.
+          scopes_help: Pošlje glasilo uporabnikom, ki imajo katero koli izbrano področje aktivirano v nastavitvah svojega računa "Moji interesi".
+          select_scopes: Filtriraj za uporabnike, ki so aktivirali katero koli izbrano področje v nastavitvah svojega računa Moji interesi.
+          select_spaces: Izberi prostore za segmentiranje glasila
+          select_users: Izberite, katerim uporabnikom želite poslati glasilo.
+          send_to_all_users: Pošlji vsem uporabnikom
+          send_to_followers: Pošlji sledilcem
+          send_to_participants: Pošlji udeležencem
+          title: Izberi prejemnike za dostavo
+          warning: "<strong>Pozor:</strong> To glasilo bo poslano samo uporabnikom, ki so v svojih nastavitvah glasil aktivirali <em>Želim prejemati glasila</em>."
+        send:
+          no_recipients: Za ta izbor ni prejemnikov.
+        show:
+          preview: Predogled
+          select_recipients_to_deliver: Izberi prejemnike za dostavo
+          subject: Zadeva
+        update:
+          error: Pri posodobitvi tega glasila se je pojavila težava.
+          success: Glasilo je bilo uspešno posodobljeno. Pred pošiljanjem ga preglejte.
+      officializations:
+        create:
+          success: Udeleženec je bil uspešno potrjen kot uraden.
+        destroy:
+          success: Udeleženec je bil uspešno potrjen kot neuraden.
+        index:
+          actions: Dejanja
+          badge: Značka
+          created_at: Ustvarjeno ob
+          name: Ime
+          nickname: Vzdevek
+          not_officialized: Ni potrjeno kot uradno.
+          officialize: Potrdi kot uradno
+          officialized: Potrjeno kot uradno
+          reofficialize: Ponovno potrdi kot uradno
+          show_email: Prikaži elektronski naslov
+          unofficialize: Potrdi kot neuradnega
+        new:
+          badge: Značka uradne potrditve
+          officialize: Potrdi kot uradno
+          title: Potrdi udeleženca "%{name}« kot uradnega
+        show_email_modal:
+          close_modal: Zapri modalno okno
+          description: Če morate neposredno stopiti v stik z udeležencem, lahko kliknete gumb Prikaži za elektronski naslov. To dejanje bo vpisano v dnevnik.
+          email_address: Elektronski naslov
+          full_name: Ime in priimek
+          hidden: skrito
+          show: Prikaži
+          title: Prikaži elektronski naslov udeleženca
+      organization:
+        edit:
+          title: Uredi organizacijo
+          update: Posodobi
+        form:
+          rich_text_editor_in_public_views_help: V nekaterih delih besedila bodo udeleženci lahko vstavljali nekatere oznake HTML z urejevalnikom obogatenega besedila.
+          social_handlers: Družbeno
+          url: URL
+        update:
+          error: Pri posodobitvi te organizacije se je pojavila težava.
+          success: Organizacija je bila uspešno posodobljena.
+      organization_appearance:
+        edit:
+          update: Posodobi
+        form:
+          colors:
+            colors_title: Barve organizacije
+            header_snippets_help: S tem poljem dodajajte stvari v glavo HTML. Najpogostejša uporaba je vključitev storitev tretje stranke, za katere so potrebni dodaten javaskript ali prekrivni slogi (CSS). Lahko ga uporabite tudi za dodajanje dodatnih metaoznak v HTML. Upoštevajte, da bo to prikazano le na javnih straneh in ne v oddelku skrbnika.
+          cta_button_path_help: 'Lahko prepišete povezavo gumba za poziv k ukrepanju na domači strani. Tu uporabite delne poti, ne polnih URL-jev. Sprejema črke, številke, črte in poševnice, mora pa se začeti s črko. Gumb za poziv k ukrepanju je prikazan na domači strani med pozdravnim besedilom in opisom. Primer: %{url}'
+          cta_button_text_help: Lahko prepišete besedilo gumba za poziv k ukrepanju na domači strani za vsak jezik, ki je na voljo v vaši organizaciji. Če ni določeno, se uporabi privzeta vrednost. Gumb za poziv k ukrepanju je prikazan na domači strani med pozdravnim besedilom in opisom.
+          homepage_appearance_title: Uredi videz domače strani
+          homepage_highlighted_content_banner_title: Pasica označene vsebine
+          images:
+            layout_appearance_title: Uredi videz postavitve
+            preview: Predogled
+          omnipresent_banner_appearance_title: Uredi vseprisotno pasico
+      organization_homepage:
+        edit:
+          active_content_blocks: Aktivni bloki vsebine
+          inactive_content_blocks: Neaktivni bloki vsebine
+      organization_homepage_content_blocks:
+        edit:
+          update: Posodobi
+      participatory_space_private_users:
+        create:
+          error: Pri dodajanju zasebnega udeleženca za ta participativni prostor se je pojavila težava.
+          success: Dostop zasebnega udeleženca do participativnega prostora je bil uspešno ustvarjen.
+        destroy:
+          error: Pri brisanju zasebnega udeleženca za ta participativni prostor se je pojavila težava.
+          success: Dostop zasebnega udeleženca do participativnega prostora je bil uspešno uničen.
+        index:
+          import_via_csv: Uvozi prek csv
+          title: Zasebni udeleženec participativnega prostora
+        new:
+          create: Ustvari
+          title: Nov zasebni udeleženec participativnega prostora.
+      participatory_space_private_users_csv_imports:
+        create:
+          invalid: Pri branju datoteke CSV se je pojavila težava.
+          success: Datoteka CSV je bila uspešno naložena, udeležencem pošiljamo povabilo po elektronski pošti. To lahko traja nekaj časa.
+        new:
+          explanation: Naložite svojo datoteko CSV. Imeti mora dva stolpca z elektronskim naslovom v prvem stolpcu datoteke in imenom v zadnjem stolpcu datoteke (elektronski naslov, ime) uporabnikov, ki jih želite dodati v participativni prostor, brez glav.
+          title: Naložite svojo datoteko CSV.
+          upload: Naloži
+      resource_permissions:
+        edit:
+          submit: Pošlji
+          title: Uredi dovoljenja
+        update:
+          success: Dovoljenja so bila uspešno posodobljena.
+      scope_types:
+        create:
+          error: Pri ustvarjanju nove vrste področja se je pojavila težava.
+          success: Vrsta področja je bila uspešno ustvarjena.
+        destroy:
+          success: Vrsta področja je bila uspešno uničena.
+        edit:
+          title: Uredi vrsto področja
+          update: Posodobi
+        new:
+          create: Ustvari vrsto področja
+          title: Novo področje
+        update:
+          error: Pri posodobitvi te vrste področja se je pojavila težava.
+          success: Vrsta področja je bila uspešno posodobljena.
+      scopes:
+        create:
+          error: Pri ustvarjanju novega področja se je pojavila težava.
+          success: Področje je bilo uspešno ustvarjeno.
+        destroy:
+          success: Področje je bilo uspešno uničeno
+        edit:
+          title: Uredi področje
+          update: Posodobi
+        new:
+          create: Ustvari področje
+          title: Novo področje
+        no_scopes: Na tej ravni ni področij.
+        update:
+          error: Pri posodobitvi tega področja se je pojavila težava.
+          success: Področje je bilo uspešno posodobljeno.
+      share_tokens:
+        actions:
+          confirm_destroy: Ali res želite izbrisati ta žeton?
+          destroy: Izbriši
+          share: Deli
+        destroy:
+          error: Pri uničenju tega žetona se je pojavila težava.
+          success: Žeton je bil uspešno uničen.
+        share_tokens:
+          empty: Ni aktivnih žetonov
+          help: Ti žetoni se uporabljajo za javno deljenje tega neobjavljenega vira s katerim koli uporabnikom. Ko bo vir objavljen, bodo skriti. Če želite obiskati URL, ki ga je mogoče deliti z drugimi, kliknite ikono žetona za deljenje z drugimi.
+          title: Deli žetone
+      shared:
+        gallery:
+          add_images: Dodaj slike
+          delete_image: Izbriši sliko
+          gallery_legend: Dodaj galerijo slik (izbirno)
+      static_page_topics:
+        create:
+          error: Pri ustvarjanju nove teme se je pojavila težava.
+          success: Tema je bila uspešno ustvarjena.
+        destroy:
+          success: Tema je bila uspešno uničena.
+        edit:
+          title: Uredi temo
+          update: Posodobi temo
+        new:
+          create: Ustvari temo
+          title: Nova tema
+        update:
+          error: Pri posodobitvi te teme se je pojavila težava.
+          success: Tema je bila uspešno posodobljena.
+      static_pages:
+        actions:
+          view: Ogled javne strani
+        create:
+          error: Pri ustvarjanju nove strani se je pojavila težava.
+          success: Stran je bila uspešno ustvarjena.
+        destroy:
+          success: Stran je bila uspešno uničena.
+        edit:
+          changed_notably_help: Če bodo udeleženci preverjeni, bodo pozvani, naj sprejmejo nove pogoje.
+          title: Uredi stran
+          update: Posodobi
+        form:
+          none: Brez
+          slug_help: 'Tu uporabite delne poti, ne polnih URL-jev. Sprejema črke, številke, črte in poševnice, mora pa se začeti s črko. Primer: %{url}'
+        index:
+          last_notable_change: Zadnja večja sprememba
+        new:
+          create: Ustvari stran
+          title: Nova stran
+        topic:
+          destroy: Odstrani temo
+          edit: Uredi temo
+          empty: Pod to temo ni strani
+          without_topic: Strani brez teme
+        update:
+          error: Pri posodobitvi te strani se je pojavila težava.
+          success: Stran je bila uspešno posodobljena.
+      titles:
+        admin_log: Skrbniški dnevnik
+        area_types: Vrste območij
+        areas: Območja
+        authorization_workflows: Metode preverjanja
+        dashboard: Nadzorna plošča
+        impersonatable_users: Udeleženci, ki jih je mogoče upravljati
+        impersonations: Upravljanje udeležencev
+        metrics: Metrika
+        participants: Udeleženci
+        scope_types: Vrste področij
+        scopes: Področja
+        static_pages: Strani
+        statistics: Dejavnost
+        user_groups: Skupine
+        users: Udeleženci
+      user_group:
+        csv_verify:
+          invalid: Pri branju datoteke CSV se je pojavila težava.
+          success: Datoteka CSV je bila uspešno naložena, preverjamo skupine, ki ustrezajo merilom. To lahko traja nekaj časa.
+        reject:
+          invalid: Pri zavrnitvi te skupine se je pojavila težava.
+          success: Skupina je bila uspešno zavrnjena.
+        verify:
+          invalid: Pri preverjanju te skupine se je pojavila težava.
+          success: Skupina je bila uspešno preverjena.
+      user_groups:
+        index:
+          filter:
+            all: Vse
+            pending: V obravnavi
+            rejected: Zavrnjeno
+            verified: Preverjeno
+          filter_by: Filtriraj po
+          search: Išči
+          state:
+            pending: V obravnavi
+            rejected: Zavrnjeno
+            verified: Preverjeno
+          verify_via_csv: Preveri prek CSV
+      user_groups_csv_verifications:
+        new:
+          explanation: Naložite svojo datoteko CSV. V prvi vrstici datoteke mora imeti uradne elektronske naslove skupin v vaši organizaciji, brez glav. Potrjene bodo samo skupine, ki so potrdile svoj elektronski naslov in katerih elektronski naslov se pojavlja v datoteki CSV.
+          title: Naložite svojo datoteko CSV.
+          upload: Naloži
+      users:
+        create:
+          error: Pri pošiljanju povabila temu skrbniku se je pojavila težava.
+          success: Udeleženec je bil uspešno povabljen.
+        destroy:
+          error: Pri izbrisu tega skrbnika se je pojavila težava.
+          success: Udeleženec ni več skrbnik.
+        form:
+          email: E-naslov
+          name: Ime
+          role: Vloga
+        new:
+          create: Povabi
+          title: Povabi udeleženca kot skrbnika
+      users_statistics:
+        users_count:
+          admins: Skrbniki
+          last_day: Zadnji dan
+          last_month: Zadnji mesec
+          last_week: Zadnji teden
+          no_users_count_statistics_yet: Statistike o številu uporabnikov še ni.
+          participants: Udeleženci
+      view_public_page: Ogled javne strani
+    forms:
+      errors:
+        impersonate_user:
+          reason: Za upravljanje neupravljanega udeleženca morate navesti razlog.
+    moderations:
+      actions:
+        hidden: Skrito
+        hide: Skrij
+        not_hidden: Ni skrito
+        title: Dejanja
+        unhide: Odkrij
+        unreport: Odstrani naznanitev
+      admin:
+        reportable:
+          hide:
+            invalid: Pri skritju tega vira se je pojavila težava.
+            success: Vir je bil uspešno skrit.
+          unhide:
+            invalid: Pri odkritju tega vira se je pojavila težava.
+            success: Vir je bil uspešno odkrit.
+          unreport:
+            invalid: Pri odstranitvi naznanitve tega vira se je pojavila težava.
+            success: Vir je bil uspešno naznanjen.
+      models:
+        moderation:
+          fields:
+            hidden_at: Skrito dne
+            report_count: Število
+            reportable: Se naznani
+            reported_content_url: URL naznanjene vsebine
+            reports: Naznanitve
+            visit_url: Obišči URL
+  errors:
+    messages:
+      invalid_json: Neveljaven JSON
+  layouts:
+    decidim:
+      admin:
+        newsletters:
+          title: Glasila
+        settings:
+          title: Nastavitve
+        users:
+          title: Udeleženci

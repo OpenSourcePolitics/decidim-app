@@ -1,0 +1,1587 @@
+---
+da:
+  activemodel:
+    attributes:
+      account:
+        delete_reason: Begrundelse for at slette din konto
+      common:
+        created_at: Oprettet kl.
+      group:
+        about: Mere om
+        avatar: Avatar
+        document_number: Dokumentnummer
+        email: E-mail
+        name: Navn
+        nickname: Tilnavn
+        phone: Telefon
+      report:
+        details: Supplerende bemærkninger
+      user:
+        about: Mere om
+        email: Din e-mailadresse
+        name: Dit navn
+        nickname: Tilnavn
+        password: Password
+        password_confirmation: Bekræft dit password
+        personal_url: Personlig URL
+        remove_avatar: Fjern avatar
+    models:
+      decidim/attachment_created_event: Tillæg
+      decidim/component_published_event: Aktiv komponent
+      decidim/demoted_membership: Ikke længere en gruppe admin
+      decidim/gamification/badge_earned_event: Optjent badge
+      decidim/gamification/level_up_event: Du er blevet hævet et trin
+      decidim/join_request_accepted_event: Deltag i en anmodning
+      decidim/join_request_rejected_event: Deltag i en ansøgning, som er afvist
+      decidim/profile_updated_event: Profil opdateret
+      decidim/promote_to_admin: Forfremmet til gruppe bem
+      decidim/removed_from_group: Fjernet fra gruppe
+      decidim/resource_endorsed_event: Genopblussen med angivelse
+  activerecord:
+    attributes:
+      decidim/user:
+        current_password: Nuværende password
+        email: E-mail
+        name: Tilnavn
+        password: Password
+        password_confirmation: Bekræftelse af password
+        remember_me: Husk mig
+    models:
+      decidim/amendment:
+        one: Ændring
+        other: Ændringer
+      decidim/endorsement:
+        one: Godkendelse
+        other: Anbefalinger
+      decidim/user:
+        one: Deltager
+        other: Deltagere
+      decidim/user_group:
+        one: Gruppe
+        other: Grupper
+  booleans:
+    'false': Nej
+    'true': Ja
+  carrierwave:
+    errors:
+      general: Fejl ved behandling af fejl
+      image_too_big: Billedet er for stort
+  decidim:
+    accessibility:
+      external_link: Eksternt link
+      logo: "%{organization}s officielle logo"
+      skip_button: Gå til hovedindholdet
+    account:
+      data_portability_export:
+        file_no_exists: Filen findes ikke
+        notice: Du er nu i gang med at downloade dine data. Du vil modtage en e-mail, når den er færdig.
+      delete:
+        alert: Denne handling kan ikke fortrydes. Hvis du sletter din konto, kan du ikke logge ind med dine brugeroplysninger. Med sletningen af din konto bliver dine bidrag anonymiseret. Du vil stadig kunne oprette en ny konto, men disse bidrag vil ikke blive knyttet til den.
+        confirm:
+          close: Luk vindue
+          ok: Ja, jeg ønsker at slette min konto
+          question: Er du sikker på, at du vil slette din konto?
+          title: Slet min konto
+        explanation: Udfyld venligst årsagen til, at du ønsker at slette din konto (valgfrit).
+      destroy:
+        error: Der var et problem med at slette din konto.
+        success: Din konto blev slettet.
+      show:
+        change_password: Skift password
+        update_account: Opdater konto
+      update:
+        error: Der var et problem med at opdatere din konto.
+        success: Din konto blev opdateret.
+        success_with_email_confirmation: Din konto blev opdateret. Du får en e-mail til at bekræfte din nye e-mailadresse.
+    admin:
+      actions:
+        cancel: Annuller
+    admin_log:
+      area:
+        create: "%{user_name} oprettede %{resource_name}-området"
+        delete: "%{user_name} slettede %{resource_name}-området"
+        update: "%{user_name} opdatede %{resource_name}-området"
+      component:
+        create: "%{user_name} tilføjede %{resource_name}-komponenten til %{space_name}-rummet"
+        delete: "%{user_name} fjernede %{resource_name}-komponenten fra %{space_name}-rummet"
+        publish: "%{user_name} offentliggjorde %{resource_name}-komponenten i %{space_name}-rummet"
+        unpublish: "%{user_name} afpublicerede %{resource_name}-komponenten fra %{space_name}-rummet"
+      moderation:
+        hide: "%{user_name} skjulte en ressource af typen %{resource_type} i %{space_name}-rummet"
+        unreport: "%{user_name} afindberettede en ressource af typen %{resource_type} i %{space_name}-rummet"
+      newsletter:
+        create: "%{user_name} oprettede %{resource_name}-nyhedsbrevet"
+        delete: "%{user_name} sltetede %{resource_name}-nyhedsbrevet"
+        deliver: "%{user_name} leverede %{resource_name}-nyhedsbrevet"
+        update: "%{user_name} opdaterede %{resource_name}-nyhedsbrevet"
+      oauth_application:
+        create: "%{user_name} oprettede %{resource_name}-OAuth-applikationen"
+        delete: "%{user_name} slettede %{resource_name}-OAuth-applikationen"
+        update: "%{user_name} opdatede %{resource_name}-OAuth-applikationen"
+      organization:
+        update: "%{user_name} opdatede organisationsindstillingerne"
+      participatory_space_private_user:
+        create: "%{user_name} inviterede %{resource_name} til at blive privat deltager"
+        create_via_csv: "%{user_name} inviterede %{resource_name} via csv til at blive privat deltager"
+        delete: "%{user_name} fjernede deltageren %{resource_name} som privat deltager"
+      scope:
+        create: "%{user_name} oprettede %{resource_name} området"
+        create_with_parent: "%{user_name} oprettede %{resource_name} området i %{parent_scope} området"
+        delete: "%{user_name} oprettede %{resource_name} området"
+        delete_with_parent: "%{user_name} slettede %{resource_name} området i %{parent_scope} området"
+        update: "%{user_name} slettede %{resource_name} området"
+        update_with_parent: "%{user_name} slettede %{resource_name} området i %{parent_scope} området"
+      static_page:
+        create: "%{user_name} slettede %{resource_name} den statiske side"
+        delete: "%{user_name} slettede %{resource_name} den statiske side"
+        update: "%{user_name} opdaterede %{resource_name} den den statiske side"
+      user:
+        invite: "%{user_name} inviterede deltageren %{resource_name} med rollen: %{role}"
+        officialize: "%{user_name} officialicerede deltageren %{resource_name}"
+        remove_from_admin: "%{user_name} fjernede deltageren %{resource_name} med rollen: %{role}"
+        show_email: "%{user_name} genoprettede deltagerens e-mail %{resource_name}"
+        unofficialize: "%{user_name} afofficialiserede deltageren %{resource_name}"
+      user_group:
+        reject: "%{user_name} afviste %{resource_name} gruppeverifikationen"
+        verify: "%{user_name} verificerede gruppen %{resource_name}"
+        verify_via_csv: "%{user_name} verificerede gruppen %{resource_name} via en CSV-fil"
+    admin_terms_of_use:
+      default_body: "<h2>ADMIN TERMS OF USE</h2><p>Vi går ud fra, at du har modtaget den sædvanlige forelæsning fra den lokale systemadministrator. Det kan normalt koges ned til disse tre ting:</p><ol><li>Respekt for andres datasikkerhed.</li><li>Tænk, før du klikker.</li><li>Med stor magt følger stort ansvar.</li></ol>"
+    alert:
+      dismiss: Forkast underretning
+    amendments:
+      accepted:
+        error: Der opstod en fejl ved accepten af ændringsforslaget.
+        success: Ændringen er accepteret.
+      amendable:
+        amended_by: Ændret af
+        button: Ændring af %{model_name}
+        error: Der er sket en fejl ved ændringen af denne ressource.
+        help_text: Forbedring af denne %{model_name} ved at ændre dens %{amendable_fields}
+        promote_button: Fremme af %{model_name}
+        promote_confirm_text: Er du sikker på, at du vil fremme denne tekstrettelse?
+        promote_help_text: Du kan fremme denne tekstrettelse og offentliggøre den som uafhængig %{model_name}
+        section_heading: Ændringer (%{count})
+      compare_draft:
+        continue: Fortsæt
+        no_similars_found: Ingen lignende tekstrettelser fundet.
+        title: Lignende tekstrettelser
+      created:
+        error: Der opstod en fejl ved udarbejdelsen af ændringsforslaget.
+        success: Ændringsforslag er blevet oprettet.
+      destroy_draft:
+        error: Der var et problem med at slette ændringsforslaget.
+        success: Ændringsforslag blev slettet.
+      edit_draft:
+        discard: Kasser dette udkast
+        discard_confirmation: Er du sikker på, at du vil kassere dette ændringsforslag?
+        send: Forhåndsvisning
+        title: Rediger ændringsforslag
+      emendation:
+        actions:
+          button_accept: Godkend
+          button_reject: Afvis
+          help_text: Gennemgå ændringerne og accepter eller forkast dette ændringsforslag. En underretning vil blive sendt til dets forfatter (e).
+        announcement:
+          accepted: |-
+            Dette ændringsforslag til %{amendable_type} %{proposal_link}
+            accepteret <strong>%{date}</strong>.
+          evaluating: |-
+            Dette ændringsforslag til %{amendable_type} %{proposal_link}
+            evalueres.
+          promoted: Forfremmet til en %{amendable_type}.
+          rejected: Dette ændringsforslag til %{amendable_type} %{proposal_link} blev afvist den <strong>%{date}</strong>.
+          withdrawn: |-
+            Dette ændringsforslag til %{amendable_type} %{proposal_link}
+            er trukket tilbage af forslagsstilleren.
+      new:
+        amendment_author: Ændringsforlag
+        send: Opretter
+        title: Opret ændringsforslag
+      preview_draft:
+        modify: Ændre
+        publish: Offentliggør
+        title: Offentliggør ændringsforslag
+      promoted:
+        error: Der var et problem med at offentliggøre ændringsforslaget som et nyt forslag
+        success: Ændringen er blevet offentliggjort som et nyt forslag
+      publish_draft:
+        error: Der var et problem med offentliggørelsen af ændringsforslaget.
+        success: Ændringsforslaget blev offentliggjort.
+      rejected:
+        error: Der var et problem med at forkste dette ændringsforslag, så prøv igen senere.
+        success: Ændringen blevet forkastet.
+      review:
+        back: Tilbage
+        heading: Tage ændringen op til fornyet overvejelse
+        help_text: Du gennemgår en ændring i %{model_name}
+        send: Acceptér ændringsforslag
+      update_draft:
+        error: Der var et problem med at opdatere ændringsforslaget.
+        success: Ændringsforslaget blev opdateret.
+      withdraw:
+        error: Der opstod en fejl, da ændringsforslaget blev trukket tilbage.
+        success: Ændringen er trukket tilbage
+      wizard_step_form:
+        steps:
+          '1': Opret din ændring
+          '2': Sammenlign din ændring
+          '3': Færdiggør dit ændringsforslag
+          '4': Offentliggør dit ændringsforslag
+    anonymous_user: Anonymt
+    application:
+      collection:
+        documents:
+          one: Dokument
+          other: Dokumenter
+      document:
+        download: Download fil
+      documents:
+        related_documents: Vil du vide mere?
+      photos:
+        related_photos: Relaterede medier
+    author:
+      avatar: Avatar
+      comments:
+        one: bemærkning
+        other: bemærkninger
+      endorsements:
+        one: anbefaling
+        other: anbefalinger
+    authorization_handlers:
+      another_dummy_authorization_handler:
+        explanation: Bliv verificeret ved at indtaste et pasnummer, der begyn med "A"
+        fields:
+          passport_number: Pas-nummer
+          postal_code: Postnummer
+        name: Andre eksempler på godkendelse
+      dummy_authorization_handler:
+        explanation: Bliv verificeret ved at indføre et dokumentnummer, der slutter med "X"
+        fields:
+          allowed_postal_codes: Tilladte postnumre (separeret ved komma)
+          allowed_scope_id: Tilladt anvendelsesområde
+          document_number: Dokumentnummer
+          postal_code: Postnummer
+          scope_id: Omfang
+        name: Eksempel på godkendelse
+      dummy_authorization_workflow:
+        name: Workflow for dummy med henblik på godkendelse
+      errors:
+        duplicate_authorization: En deltager er allerede godkendt med de samme data.
+      expired_at: Udløb kl. %{timestamp}
+      expires_at: Udløber kl. %{timestamp}
+      foo_authorization:
+        fields:
+          bar: Bjælke
+          foo: Foo
+        name: Foo-godkendelse
+      granted_at: Givet kl. %{timestamp}
+      renew: Forny verifikation
+      sms:
+        explanation: Indsend dit mobiltelefonnummer, så vi kan tjekke din identitet.
+        name: Kode ved sms
+      started_at: Startet kl. %{timestamp}
+    authorization_modals:
+      content:
+        expired:
+          authorize: Gengodkende med "%{authorization}"
+          explanation: Din tilladelse er udløbet. For at kunne udføre denne handling skal du have en ny tilladelse med "%{authorization}".
+          title: Godkendelse udløbet
+        incomplete:
+          cancel: Annuller
+          explanation: 'Selv om du i øjeblikket er godkendt med "%{authorization}”, er det nødvendigt, at du lader dig gengodkende, fordi vi mangler følgende data:'
+          invalid_field: "%{field}"
+          reauthorize: Gengodkendelse
+          title: Gengodkend venligst
+        missing:
+          authorize: Godkend "%{authorization}"
+          explanation: For at kunne udføre denne handling skal du have en godkendelse med "%{authorization}".
+          title: Godkendelse påkrævet
+        pending:
+          explanation: For at kunne udføre denne handling skal du have en godkendelse med "%{authorization}", men din godkendelse verserer stadig.
+          resume: Tjek din "%{authorization}" godkendelsesstatus
+          title: Godkendlesen verserer stadig
+        unauthorized:
+          explanation: Beklager, du kan ikke udføre denne handling, da nogle af dine godkendelsesdata ikke er overensstemmende.
+          invalid_field: "%{field} værdi %{value} er ikke gyldig."
+          ok: OK
+          title: Ikke godkendt
+        unconfirmed:
+          confirmation_instructions: 'Hvis du ikke har modtaget en bekræftelsesinstruktioner, kan du anmode om dem igen:'
+          explanation_html: For at kunne udføre denne handling skal du have godkendelse, inden du gør det, skal du bekræfte din e-mail <strong>%{email}</strong>.
+          request_confirmation_instructions: Anmod om bekræftelsesinstrukser
+          title: Bekræft din e-mail
+      show:
+        close_modal: Luk modal
+    collapsible_list:
+      hidden_elements_count:
+        one: og %{count} mere
+        other: og %{count} mere
+      see_less: "(se mindre)"
+      see_more: "(se mere)"
+    components:
+      component_order_selector:
+        no_content: Vi kunne ikke finde noget indhold med disse kriterier
+        order:
+          all_types: Alle typer
+          collaborative_draft: Samarbejdsudkast
+          comment: Bemærkning
+          debate: Debat
+          initiative: Initiativ
+          meeting: Arrangementer
+          post: Indlæg
+          proposal: Idéer
+          question: Spørgsmål
+        title: 'Vis:'
+      dummy:
+        actions:
+          bar: Bjælke
+          foo: Foo
+        name: Dummy-komponent
+        settings:
+          global:
+            amendments_enabled: Ændringer aktiveret
+            comments_enabled: Bemærkninger aktiveret
+            comments_max_length: Bemærkninger max. længde
+            dummy_global_attribute_1: Dummy-attribut 1
+            dummy_global_attribute_2: Dummy-attribut 2
+            dummy_global_translatable_text: Dummy-oversættelig tekst
+            enable_pads_creation: Aktiver oprettelse af pads
+            resources_permissions_enabled: Ressourstilladelser aktiveret
+          step:
+            amendment_creation_enabled: Oprettelse af ændringer aktiveret
+            amendment_promotion_enabled: Fremme af ændringer aktiveret
+            amendment_reaction_enabled: Ændringsreaktion aktiveret
+            amendments_visibility: Ændringssynlighed
+            comments_blocked: Bemærkninger blokeret
+            dummy_step_attribute_1: Dummy-trinattribut 1
+            dummy_step_attribute_2: Dummy-trinattribut 2
+            dummy_step_translatable_text: Dummy-trinoversættelig tekst
+    contact: Kontakt
+    content_blocks:
+      footer_sub_hero:
+        name: Sidefod under hero banner
+      hero:
+        name: Hero billede
+      hero_settings_form:
+        background_image: Baggrundsbillede
+        welcome_text: Velkomsttekst
+      highlighted_content_banner:
+        name: Fremhævet indholdsbanner
+      how_to_participate:
+        name: Hvordan deltager man
+      html:
+        html_content: HTML-indhold
+        name: HTML-blok
+      last_activity:
+        name: Seneste aktivitet
+        title: Seneste aktivitet (eller aktiviteter)
+        view_all: Vis alle
+      metrics:
+        name: Organisationsparametre
+      stats:
+        name: Organisationsstatistikker
+      sub_hero:
+        name: Banner under hero
+    core:
+      actions:
+        login_before_access: Log ind med din konto før adgang
+        unauthorized: Du skal være logget ind for at udføre denne handling.
+    data_portability:
+      export:
+        ready: Klar
+      show:
+        download_data: Download data
+        download_data_description: En fil med alle de oplysninger, der er forbundet med din konto, vil blive sendt til <strong>%{user_email}</strong>. E-mailen vil indeholde en .zip-fil og en adgangskode til at åbne den.<br/><br/>For at unzippe filen skal du bruge <a href="https://www.7-zip.org/">7-Zip</a> (til Windows) eller <a href="https://www.keka.io/">Keka</a> (til MacOS). Hvis du bruger Linux, er programmet oftest installeret som standard. Ellers kan du bruge <a href="https://gitlab.gnome.org/GNOME/file-roller">File Roller</a> eller <a href="https://peazip.github.io">PeaZip</a>).
+        request_data: Anmod om dine oplysninger
+    datepicker:
+      help_text: 'Forventet format: %{datepicker_format}'
+    devise:
+      omniauth_registrations:
+        create:
+          email_already_exists: En anden konto bruger samme e-mailadresse
+        new:
+          complete_profile: Fuldstændig profil
+          nickname_help: Dit kaldenavn i %{organization}
+          sign_up: Færdiggør din profil
+          subtitle: Udfyld nedenstående formular for at færdiggøre tilmeldingen
+          username_help: Offentligt navn, der vises på dine indlæg. For at garantere anonymiteten kan det være et hvilket som helst navn.
+      registrations:
+        new:
+          already_have_an_account?: Har du allerede en konto?
+          newsletter: Få tilsendt et nyhedsbrev med relevante oplysninger
+          newsletter_title: Kontakttilladelse
+          nickname_help: Dit kaldenavn i %{organization}
+          password_help: "%{minimun_characters}, minimum antal tegn, må ikke være alt for almindeligt (f.eks. 123456) og skal være forskelligt fra dit kaldenavn og din e-mailadresse."
+          sign_in: Log på
+          sign_up: Log på
+          sign_up_as:
+            legend: Tilmeld dig som
+          subtitle: Deltage i drøftelser og støt forslag.
+          terms: betingelserne for anvendelse
+          tos_agreement: Ved at tilmelde dig accepterer du %{link}.
+          tos_title: Servicevilkår
+          username_help: Offentligt navn, der vises på dine indlæg. For at garantere anonymiteten kan det være et hvilket som helst navn.
+      sessions:
+        new:
+          are_you_new?: Nyt på platformen?
+          register: Opret en konto
+          sign_in_disabled: Du kan få adgang med en ekstern konto
+          sign_up_disabled: Tilmelding er deaktiveret, du kan bruge en eksisterende konto til at få adgang
+      shared:
+        newsletter_modal:
+          buttons:
+            check: Kontrollér og fortsæt
+            close_modal: Luk modal
+            uncheck: Hold markeringen væk
+          notice: |-
+            <p>Hej, er du sikker på, at du ikke vil modtage et nyhedsbrev?<br> Overvej igen at markere afkrydsningsfeltet for nyhedsbrevet nedenfor.<br> Det er meget vigtigt for os, at du kan modtage lejlighedsvise e-mails
+            for at modtage vigtige meddelelser, du kan altid ændre dette på din
+            siden med meddelelsesindstillinger.</p><p> Hvis du ikke markerer afkrydsningsfeltet, går du muligvis glip af oplysninger
+            om nye deltagelsesmuligheder på platformen.<br> Hvis du stadig vil undgå at modtage nyhedsbreve, forstår vi fuldt ud
+            din beslutning.</p>
+            <p>Tak fordi du læste dette!</p>
+          title: Meddelelser om nyhedsbrev
+        omniauth_buttons:
+          or: Eller
+    doorkeeper:
+      authorizations:
+        new:
+          authorize: Tilladelse til anvendelse
+          by_organization_link_html: <small class="heading-small">by %{link}</small>
+          cancel: Annuller
+          connect_your_account_html: Forbind din konto ved at tilmelde dig til <strong>%{organization}</strong>
+          publish_content: Offentliggør indhold
+          see_email: Se din e-mail
+          see_name: Se dit navn
+          see_username: Se dit kaldenavn
+          this_application_will_be_able_to: 'Denne ansøgning vil kunne:'
+          this_application_will_not_be_able_to: 'Ansøgningen vil ikke kunne:'
+          update_profile: Opdater din profil
+          wants_to_use_your_account_html: "<strong>%{application_name}</strong> ønsker at bruge din konto"
+    endorsable:
+      endorsements: Anbefalinger
+      endorsements_count: Antal enbefalinger
+    endorsement_buttons_cell:
+      already_endorsed: Anbefalet
+      endorse: Anbefal
+    endorsements:
+      identities:
+        done: Færdig
+        select_identity: Vælg identitet
+    errors:
+      internal_server_error:
+        title: Der var et problem med vores server
+        try_later: Prøv venligst igen senere.
+      not_found:
+        back_home: Gå tilbage
+        content_doesnt_exist: Adressen er forkert eller er blevet fjernet.
+        title: Den side, du søger efter, kan ikke findes
+    events:
+      amendments:
+        amendment_accepted:
+          affected_user:
+            email_intro: 'En ændring er blevet accepteret for %{amendable_title}. Du kan se det fra denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du er forfatter til %{amendable_title}.
+            email_subject: Accepteret ændring for %{amendable_title} for %{emendation_author_nickname}
+            notification_title: <a href="%{emendation_path}">Ændringen</a> oprettet af <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> er blevet accepteret for <a href="%{amendable_path}">%{amendable_title}</a>.
+          follower:
+            email_intro: 'En ændring er blevet accepteret for %{amendable_title}. Du kan se det fra denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du følger %{amendable_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+            email_subject: Accepteret ændring for %{amendable_title} fra %{emendation_author_nickname}
+            notification_title: <a href="%{emendation_path}">Ændringen</a> oprettet af <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> er blevet accepteret for <a href="%{amendable_path}">%{amendable_title}</a>.
+        amendment_created:
+          affected_user:
+            email_intro: 'Der er blevet indført en ny ændring for %{amendable_title} Du kan se det fra denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du er forfatter til %{amendable_title}.
+            email_subject: Ny ændring til %{amendable_title}
+            notification_title: Der er oprettet en ny ændring for <a href="%{amendable_path}">%{amendable_title}</a>.
+          follower:
+            email_intro: 'Der er blevet indført en ny ændring for %{amendable_title} Du kan se det fra denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du følger %{amendable_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+            email_subject: Ny ændring til %{amendable_title}
+            notification_title: Der er oprettet en ny ændring for <a href="%{amendable_path}">%{amendable_title}</a>.
+        amendment_promoted:
+          affected_user:
+            email_intro: 'En forkastet ændring til %{amendable_title} er blevet offentliggjort som en ny %{amendable_type}. Du kan se det fra denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du er forfatter til %{amendable_title}.
+            email_subject: En ændring fra %{emendation_author_nickname} er blevet offentliggjort som en ny %{amendable_type}
+            notification_title: En <a href="%{emendation_path}">forkastet ændring</a> for <a href="%{amendable_path}">%{amendable_title}</a> er blevet offentliggjort som en ny %{amendable_type} by <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.
+          follower:
+            email_intro: 'En forkastet ændring til %{amendable_title} er blevet offentliggjort som en ny %{amendable_type}. Du kan se det fra denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du følger %{amendable_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+            email_subject: En ændring fra %{emendation_author_nickname} er blevet offentliggjort som en ny %{amendable_type}
+            notification_title: En <a href="%{emendation_path}">forkastet ændring</a> for <a href="%{amendable_path}">%{amendable_title}</a> er blevet offentliggjort som en ny %{amendable_type} by <a href="%{emendation_author_path}">%{emendation_author_nickname}</a>.
+        amendment_rejected:
+          affected_user:
+            email_intro: 'En ændring er blevet forkastet for %{amendable_title}. Du kan se det fra denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du er forfatter til %{amendable_title}.
+            email_subject: Forkastet ændring for %{amendable_title} fra %{emendation_author_nickname}
+            notification_title: <a href="%{emendation_path}">Ændringen</a> oprettet af <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> er blevet forkastet for <a href="%{amendable_path}">%{amendable_title}</a>.
+          follower:
+            email_intro: 'En ændring er blevet forkastet for %{amendable_title}. Du kan se det fra denne side:'
+            email_outro: Du har modtaget denne underretning, fordi du følger %{amendable_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+            email_subject: Forkastet ændring for %{amendable_title} fra %{emendation_author_nickname}
+            notification_title: <a href="%{emendation_path}">Ændringen</a> oprettet af <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> er blevet forkastet for <a href="%{amendable_path}">%{amendable_title}</a>.
+      attachments:
+        attachment_created:
+          email_intro: 'Et nyt dokument er blevet føjet til %{resource_title}. Du kan se det fra denne side:'
+          email_outro: Du har modtaget denne underretning, fordi du følger %{resource_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: En opdatering til %{resource_title}
+          notification_title: Et<a href="%{resource_path}">nyt dokument</a> er blevet føjet til <a href="%{attached_to_url}">%{resource_title}</a>
+      components:
+        component_published:
+          email_intro: "%{resource_title}-komponenten er nu aktiv for %{participatory_space_title}. Du kan se det fra denne side:"
+          email_outro: Du har modtaget denne underretning, fordi du følger %{participatory_space_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: En opdatering til %{participatory_space_title}
+          notification_title: '%{resource_title}-komponenten er nu aktiv for <a href="%{resource_path}">%{participatory_space_title}</a>'
+      email_event:
+        email_greeting: Hej %{user_name},
+        email_intro: 'Der er sket en opdatering af "%{resource_title}". Du kan se det fra denne side:'
+        email_outro: Du har modtaget denne underretning, fordi du følger "%{resource_title}". Du kan holde op med at følge den fra det tidligere link.
+        email_subject: En opdatering til %{resource_title}
+      gamification:
+        badge_earned:
+          email_intro: Tillykke! Du er blevet tildelt badget <a href="%{resource_path}">%{badge_name} </a> (niveau%{current_level}).
+          email_outro: Du har modtaget denne underretning, fordi du har været aktiv på vores websted.
+          email_subject: 'Du har fået en ny badge: %{badge_name}!'
+          notification_title: Tillykke! Du har optjent retten til <a href="%{resource_path}">%{badge_name}-badgen</a> (level %{current_level}).
+        level_up:
+          email_intro: Tillykke! Du har nået niveau %{current_level} af <a href="%{resource_url}">%{badge_name} badge</a>!
+          email_outro: Du har modtaget denne underretning, fordi du har været aktiv på vores websted.
+          email_subject: Du har nået niveau %{current_level} af %{badge_name}-badgen!
+          notification_title: Tillykke! Du har nået niveau %{current_level} af <a href="%{resource_path}">%{badge_name} badgen</a>!
+      groups:
+        demoted_membership:
+          email_intro: En admin af gruppen <a href="%{resource_url}">%{user_group_name}</a> har fjernet dine administratorrettigheder til denne gruppe.
+          email_outro: Du har modtaget denne underretning, fordi du er medlem af denne gruppe.
+          email_subject: Du er ikke længere admin for %{user_group_name}-gruppen!
+          notification_title: Du er ikke længere admin af <a href="%{resource_path}">%{user_group_name}</a> group.
+        invited_to_group:
+          email_intro: En admin i <a href="%{resource_url}">%{user_group_name}</a>-gruppen har opfordret dig til at tilslutte sig den.
+          email_outro: Du har modtaget denne underrening, fordi du er blevet inviteret til en gruppe. Kontrollér grupperne i din profil for at godkende den.
+          email_subject: Du er blevet inviteret til at deltage i %{user_group_name}-gruppen!
+          notification_title: Du er blevet inviteret til at deltage i <a href="%{resource_path}">%{user_group_name}</a>-gruppen. Tjek <a href="%{groups_profile_tab_path}">gruppe-siden</a> i din profil for at godkende den!
+        join_request_accepted:
+          email_intro: Tillykke! En admin af <a href="%{resource_url}">%{user_group_name}</a>-gruppen har accepteret din anmodning om at tilslutte sig den.
+          email_outro: Du har modtaget denne meddelelse, fordi din anmodning om optagelse er blevet opdateret.
+          email_subject: Du er blevet accepteret på vegne af %{user_group_name} group!
+          notification_title: Du er blevet accepteret i <a href="%{resource_path}">%{user_group_name}</a>-gruppen.
+        join_request_created:
+          email_intro: En person har ansøgt om at blive medlem af %{user_group_name}-gruppen. Du kan acceptere eller afvise det fra <a href="%{resource_url}">gruppemedlemsiden</a>.
+          email_outro: Du har modtaget denne underretning, fordi du kan administrere gruppen %{user_group_name}.
+          email_subject: En person har ansøgt om at blive medlem af %{user_group_name}-gruppen!
+          notification_title: En person har ansøgt om at blive medlem af %{user_group_name}-gruppen. Du kan acceptere eller afvise det fra <a href="%{resource_path}">gruppemedlemsiden</a>.
+        join_request_rejected:
+          email_intro: En adminaf <a href="%{resource_url}">%{user_group_name}</a> har afvist din anmodning om at deltage i den.
+          email_outro: Du har modtaget denne underretning, fordi din anmodning om optagelse er blevet opdateret.
+          email_subject: Din anmodning om at blive medlem af "%{user_group_name}"-gruppen er blevet afvist!
+          notification_title: Din anmodning om at blive medlem af <a href="%{resource_path}">%{user_group_name}</a>-gruppen er blevet afvist!
+        promoted_to_admin:
+          email_intro: En admin af <a href="%{resource_url}">%{user_group_name}</a>-gruppen har givet dig admin-rettigheder til den gruppe.
+          email_outro: Du har modtaget denne underretning, fordi du er medlem af denne gruppe.
+          email_subject: Du er nu admin i "%{user_group_name}"-gruppen.
+          notification_title: Du er nu admin i <a href="%{resource_path}">%{user_group_name}</a>-gruppen.
+        removed_from_group:
+          email_intro: En admin i <a href="%{resource_url}">%{user_group_name}</a>gruppen har fjernet dig fra den.
+          email_outro: Du har modtaget denne underretning, fordi du var medlem af denne gruppe.
+          email_subject: Du er fjernet fra "%{user_group_name}"-gruppen.
+          notification_title: Du er fjernet fra <a href="%{resource_path}">%{user_group_name}</a> gruppen.
+        user_group_created:
+          email_intro: Der er oprettet en ny brugergruppe med navnet %{user_group_name}. Du kan nu verificere den på <a href="%{groups_admin_url}">admin-panel</a>.
+          email_outro: Du har modtaget denne underretning, fordi du er admin på platformen.
+          email_subject: Der er oprettet en ny brugergruppe
+          notification_title: '%{user_group_name}-brugergruppen er blevet oprettet. Du kan nu verificere den på <a href="%{groups_admin_path}">admin-panel</a>.'
+        user_group_updated:
+          email_intro: En brugergruppe med navnet %{user_group_name} har opdateret sin profil og lader stå uverificeret. Du kan nu verificere den på <a href="%{groups_admin_url}">admin-panel</a>.
+          email_outro: Du har modtaget denne underretning, fordi du er admin på platformen.
+          email_subject: En brugergruppe har opdateret sin profil
+          notification_title: '%{user_group_name}-brugergruppen har opdateret sin profil og efterlader den uverificeret. Du kan nu verificere den på <a href="%{groups_admin_path}">admin-panel</a>.'
+      notification_event:
+        notification_title: Et begivenhed fandt sted på <a href="%{resource_path}">%{resource_title}</a>.
+      resource_endorsed:
+        email_intro: '%{endorser_name} %{endorser_nickname}, som du følger, har netop anbefalet "%{resource_title}", og vi tror, den kan være af interesse for dig. Tjek det ud og bidrag:'
+        email_outro: Du har modtaget denne underretning, fordi du følger %{endorser_nickname}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+        email_subject: "%{endorser_nickname} har foretaget en ny påtegning"
+        notification_title: <a href="%{resource_path}">%{resource_title}</a> %{resource_type} er blevet anbefalet af <a href="%{endorser_path}">%{endorser_name} %{endorser_nickname}</a>.
+      users:
+        profile_updated:
+          email_intro: <a href="%{resource_url}">profile page</a> of %{name} (%{nickname}), som du følger, er blevet opdateret.
+          email_outro: Du har modtaget denne anmeldelse, fordi du følger %{nickname}. Du kan standse modtagelsen af meddelelser ved at følge det foregående link.
+          email_subject: "%{nickname} ajourført profil"
+          notification_title: <a href="%{resource_path}">Profilsiden</a> af %{name} (%{nickname}), som du følger, er blevet opdateret.
+    export_mailer:
+      data_portability_export:
+        click_button: 'Klik på det følgende link for at downloade dine oplysninger.<br/>Filen vil være tilgængelig indtil %{date}.<br/>Du skal bruge <a href="https://www.7-zip.org/">7-Zip</a> (til Windows), <a href="https://www.keka.io/en/">Keka</a> (til MacOS) eller <a href="https://peazip.github.io">PeaZip</a> (til Linux) for at åbne den. Adgangskode: %{password}'
+        download: Download
+      export:
+        ready: Der er vedlagt en zip version af din eksport.
+      subject: Din eksport "%{name}” er klar
+    filters:
+      linked_classes:
+        all: Alle
+        collaborative_draft: Samarbejdsudkast
+        dummy_resource: Dummy-ressourcer
+        meeting: Arrangementer
+        project: Projekter
+        proposal: Idé
+        result: Resultater
+    fingerprint:
+      check: Kontroller fingeraftryk
+      explanation: Nedenstående tekst er en forkortet, hashed gengivelse af dette indhold. Det er nyttigt at sikre, at indholdet ikke er blevet ændret, da en enkelt ændring ville resultere i en helt anden værdi.
+      online_calculator_name: MD5 regnemaskine online
+      replicate_help: Dette fingeraftryk beregnes ved hjælp af hash-algoritmen SHA256. For selv at kopiere den kan du bruge en %{online_calculator_link} og kopirere og indsætte kildedata.
+      source: Kilde
+      title: Fingeraftryk
+      value: Værdi
+    followers:
+      followers_count:
+        one: "%{count} følger"
+        other: "%{count} følgere"
+      no_followers: Ingen følgere endnu.
+    following:
+      no_followings: Følger ikke nogen eller noget endnu.
+    follows:
+      create:
+        button: Følg
+        error: Der var et problem med at følge denne ressource.
+        participatory_space: Følger allerede <span class="show-for-sr">%{resource_name}</span>
+      destroy:
+        button: Følg ikke længere
+        error: Der var et problem med at holde op med at følge denne ressource.
+    forms:
+      current_file: Nuværende fil
+      current_image: Nuværende billede
+      default_image: Standardbillede
+      errors:
+        decidim/user:
+          password: Passwordet er for kort.
+          password_confirmation: Passwordbekræftelse skal svare til passwordet.
+        error: Der er en fejl på dette område.
+      file_help:
+        file:
+          explanation: 'Vejledning:'
+          message_1: Skal være et billede eller et dokument.
+          message_2: For billeder, brug fortrinsvis landscape-billede, tjenesten beskærer billedet.
+        image:
+          explanation: 'Vejledning til billede:'
+          message_1: Fortrinsvis landscape-billede, som ikke har nogen tekst.
+          message_2: Tjenesten beskærer billedet.
+      file_validation:
+        allowed_file_extensions: 'Tilladte filtypenavne: %{extensions}'
+        max_file_size: 'Maksimal filstørrelse: %{megabytes}MB'
+      remove_this_file: Fjern denne fil
+    gamification:
+      all_badges_link: Se alle tilgængelige badges.
+      badges:
+        followers:
+          conditions: At være aktiv og følge andre mennesker vil helt sikkert få andre til at følge dig.
+          description: Denne badge gives, når du når et bestemt antal følgere. %{organization_name} er et socialt og politisk netværk, væv dit net for at kommunikere med andre mennesker på platformen.
+          description_another: Denne deltager har %{score} følgere.
+          description_own: "%{score} folk følger dig."
+          name: Følgere
+          next_level_in: Få %{score} flere mennesker til at følge dig for at nå det næste niveau!
+          unearned_another: Denne deltager har endnu ingen følgere.
+          unearned_own: Du har endnu ingen følgere.
+        index:
+          badge_title: "%{name} badge"
+          how: Hvordan du kan optjene det
+          page_description: Badges er anerkendelser af deltagernes handlinger og fremskridt på platformen. Når du begynder at opdage, deltage og interagere på platformen, optjener du forskellige badges. Her er listen over badges og nogle måder, du kan optjene dem på.
+          title: Badges
+        invitations:
+          conditions: |-
+            Brug linket "inviter venner" på din brugerside til at invitere dine venner
+            Tilpas, hvis du vil, den besked, du sender
+            Du kommer op på næste niveau ved at udsende invitationer og få dem registreret.
+          description: Denne badge gives, når du har inviteret nogle mennesker, og de har brugt lidt tid på at registrere sig i %{organization_name} og blive deltagere. Tak fordi du gjorde %{organization_name} kendt for andre og hjælper med at udbrede samfundet!
+          description_another: Denne deltager har inviteret %{score} mennesker.
+          description_own: Du har inviteret %{score} mennesker
+          name: Invitationer
+          next_level_in: Inviter %{score} flere mennesker for at nå det næste niveau!
+          unearned_another: Denne deltager har endnu ikke inviteret nogen.
+          unearned_own: Du har endnu ikke inviteret nogen.
+      description: Badges er anerkendelser af deltagernes handlinger og fremskridt på platformen. Når du begynder at opdage, deltage og interagere på platformen, optjener du forskellige badges.
+      level: Niveau %{level}
+      reached_top: Du har nået det øverste niveau for dette badge.
+    group_admins:
+      actions:
+        are_you_sure: Er du sikker? Dette fjerner ikke deltageren fra gruppen.
+        demote_admin: Fjern admin
+      demote:
+        error: Der opstod et problem med at fjerne denne deltager fra administratorlisten
+        success: Deltageren blev fjernet fra admin
+      index:
+        current_admins: 'Nuværende adminis:'
+        manage_admins: Administrer adminis
+    group_invites:
+      accept:
+        error: Der var et problem med at acceptere denne invitation
+        success: Invitationen blev accepteret
+      accept_invitation: Accepter
+      accept_or_reject_group_invitations: 'Følgende grupper har inviteret dig til at slutte sig til dem. Accepter eller afvis deres anmodninger:'
+      index:
+        invite: Inviter
+        invite_user: Inviter en deltager
+      invite:
+        error: Der var et problem med at invitere denne deltager
+        success: Deltager inviteret
+      reject:
+        error: Der var et problem med at afvise denne invitation
+        success: Invitationen blev afvist
+      reject_invitation: Afvis
+    group_members:
+      accept:
+        error: Der opstod et problem med at acceptere denne anmodning om tilslutning
+        success: Anmodning om tilslutning blev accepteret
+      actions:
+        are_you_sure: Er du sikker?
+        promote_to_admin: Lav admin
+        remove_from_group: Fjern deltager
+      index:
+        current_members_without_admins: 'Nuværende medlemmer (uden admins):'
+        manage_members: Administrer medlemmer
+      promote:
+        error: Der var et problem med at fremme denne deltager
+        success: Deltager fremmet
+      reject:
+        error: Der opstod et problem med at afvise denne anmodning om tilslutning
+        success: Anmodning om tilslutning afvist
+      remove:
+        error: Der opstod et problem med at fjerne denne deltager fra gruppen
+        success: Deltageren blev fjernet fra gruppen
+    groups:
+      actions:
+        are_you_sure: Er du sikker?
+      create:
+        error: Der opstod et problem med at oprette gruppen
+        success: Gruppen blev oprettet
+      edit:
+        edit_user_group: Rediger gruppe
+        update_user_group: Opdater gruppe
+      form:
+        document_number_help: Brug ikke bindestreger eller mellemrum
+        email_help: E-mail til din organisation, forening, kollektiv, gruppe osv.
+        fill_in_for_verification: 'Udfyld disse felter, hvis du vil have din gruppe verificeret:'
+        name_help: Navn på din organisation, forening, kollektiv, gruppe osv.
+        nickname_help: Kaldenavn på din organisation, forening, kollektiv, gruppe osv. Brug ikke mellemrum eller accenter.
+        phone_help: Brug ikke bindestreger eller mellemrum
+      join:
+        error: Der var et problem med at deltage i gruppen
+        success: Anmodning om tilslutning oprettet. En admin vil gennemgå din anmodning, inden du bliver accepteret i gruppen.
+      leave:
+        error: Der var et problem med at forlade i gruppen
+        success: Gruppen blev opgivet.
+      members:
+        accept_or_reject_join_requests: 'Følgende brugere har ansøgt om at deltage i denne gruppe. Accepter eller afvis deres anmodninger:'
+        accept_request: Accepter
+        reject_request: Afvis
+      new:
+        create_user_group: Opret gruppe
+        new_user_group: Ny gruppe
+        subtitle: Opret en gruppe og inviter andre brugere til at deltage for at deltage på et kollektivt niveau.
+      no_user_groups: Tilhører ikke nogen gruppe endnu.
+      roles:
+        admin: Administrator
+        creator: Opretter
+        member: Medlem
+      update:
+        error: Der var et problem med at opdatere gruppen
+        success: Gruppen opdateret
+    help:
+      main_topic:
+        default_page:
+          content: "<p>I %{organization} kan du deltage i og træffe afgørelse om forskellige emner gennem de rum, du ser i topmenuen: Processer, forsamlinger, initiativer, konsultationer.</p><p> Inden for hvert finder du forskellige muligheder for at deltage: fremsætte forslag - individuelt eller sammen med andre - deltage i debatter, prioritere projekter, der skal gennemføres, deltage i fysiske møder og andre handlinger.</p>\n"
+          title: Hvad kan jeg gøre i %{organization}?
+        description: Læs mere om %{organization}
+        title: Generel hjælp
+    last_activities:
+      activities:
+        no_activities_warning: Ingen aktivitet
+      all: Alle aktivitetstyper
+      index:
+        last_activity: Seneste aktivitet
+        resource_type: Type
+    log:
+      base_presenter:
+        create: "%{user_name} oprettede %{resource_name}"
+        create_with_space: "%{user_name} oprettede %{resource_name} i %{space_name}"
+        delete: "%{user_name} slettede %{resource_name}"
+        delete_with_space: "%{user_name} slettede %{resource_name} i %{space_name}"
+        unknown_action: "%{user_name} udførte en handling på %{resource_name}"
+        unknown_action_with_space: "%{user_name} udførte en handling på %{resource_name} i %{space_name}"
+        update: "%{user_name} opdaterede %{resource_name}"
+        update_with_space: "%{user_name} opdaterede %{resource_name} i %{space_name}"
+      value_types:
+        area_presenter:
+          not_found: 'Området blev ikke fundet i databasen (ID: %{id})'
+        area_type_presenter:
+          not_found: 'Områdetypen blev ikke fundet i databasen (ID: %{id})'
+        scope_presenter:
+          not_found: 'Området blev ikke fundet i databasen (ID: %{id})'
+        scope_type_presenter:
+          not_found: 'Områdetypen blev ikke fundet i databasen (ID: %{id})'
+    managed_users:
+      expired_session: Den aktuelle administrationssession for en deltager er udløbet.
+    map:
+      dynamic:
+        screen_reader_explanation: Det følgende element er et kort, der præsenterer elementerne på denne side som kortpunkter. Elementet kan bruges med en skærmlæser, men det kan være svært at forstå.
+        skip_button: Spring kort over
+      static:
+        latlng_text: 'breddegrad: %{latitude}, længdegrad: %{longitude}'
+        map_service_brand: OpenStreetMap
+    members:
+      no_members: Denne gruppe har endnu ingen medlemmer.
+    menu:
+      help: Om konferencen
+      processes: Emner
+    messaging:
+      conversation_mailer:
+        comanagers_new_conversation:
+          admin_in_group: Du modtager dette, fordi du er admin i %{group}.
+          greeting: Hej, %{recipient}!
+          intro: "%{manager} har startet en ny samtale på vegne af %{group}. Klik her for at se den:"
+          outro: Nyd decidim!
+          subject: "%{manager} har startet en ny samtale på vegne af %{group}"
+        comanagers_new_message:
+          admin_in_group: Du modtager dette, fordi du er admin i %{group}.
+          greeting: Hej, %{recipient}!
+          intro: "%{manager} har lagt ny meddelelser i en samtale på vegne af %{group}. Klik her for at se dem:"
+          outro: Nyd decidim!
+          subject: "%{manager} har sendt en ny meddelelser som d %{group}"
+        new_conversation:
+          greeting: Hej, %{recipient}!
+          intro: "%{sender} har startet en ny samtale på vegne af. Klik her for at se den:"
+          outro: Nyd decidim!
+          subject: "%{sender} har startet en samtale med dig"
+        new_group_conversation:
+          admin_in_group: Du modtager dette, fordi du er admin i %{group}.
+          greeting: Hej, %{recipient}!
+          intro: "%{sender} har startet en ny samtale me gruppen %{group} Klik her for at se den:"
+          outro: Nyd decidim!
+          subject: "%{sender} har startet en samtale med %{group}"
+        new_group_message:
+          admin_in_group: Du modtager dette, fordi du er admin i %{group}.
+          greeting: Hej, %{recipient}!
+          intro: "%{sender} har lagt ny meddelelser i en samtale på vegne af %{group}. Klik her for at se den:"
+          outro: Nyd decidim!
+          subject: "%{group} har nye beskeder fra %{sender}"
+        new_message:
+          greeting: Hej, %{recipient}!
+          intro: "%{sender} har sendt nye beskeder i din samtale. Klik her for at se dem:"
+          outro: Nyd decidim!
+          subject: Du har nye beskeder fra %{sender}
+      conversations:
+        add_conversation_users:
+          add_max_users: 'Føj brugere til samtale: Maks. 9 brugere'
+          add_users_placeholder: Søg...
+          modal_title: Ny samtale
+          no_results: Ingen resultater
+          participant_with_disabled_message_reception: Denne deltager har deaktiveret modtagelse af meddelelser
+        conversation:
+          show: Vis samtale med %{sender}
+        create:
+          error: Samtalen er ikke startet. Prøv igen senere
+        index:
+          ago: siden
+          close: Luk modal
+          from: Fra
+          groups: Mine grupper
+          last_message: Sidste besked
+          new_conversation: Ny samtale
+          next: Næste
+          no_conversations: Du har ingen samtaler endnu
+          title: Samtaler
+        reply:
+          placeholder: Dit svar...
+          send: Sende
+          title: Svar
+        show:
+          back: Tilbage til alle samtaler
+          chat_with: Samtale med
+          not_allowed: Denne bruger accepterer ikke flere direkte beskeder.
+          title: Samtale med %{usernames}
+        start:
+          send: Send
+          title: Start en samtale
+        update:
+          error: Besked ikke sendt. Prøv igen senere
+    metrics:
+      download:
+        csv: Download data (csv)
+      followers:
+        description: Antal deltagere, der følger dette deltagelsesrum
+        object: følgere
+        title: Følgere
+      participants:
+        description: Antal aktive deltagere i organisationen
+        object: deltagere
+        title: Deltagere
+      users:
+        description: Antal deltagere i organisationen
+        object: deltagere
+        title: Deltagere
+    newsletter_mailer:
+      newsletter:
+        note: Du modtog denne e-mail, fordi du abonnerer på nyhedsbreve vedrørende %{organization_name}. Du kan ændre dine indstillinger på din <a href="%{link}">notifications page</a>.
+        see_on_website: Kan du ikke se denne e-mail korrekt? Se den på <a href="%{link}" target="_blank">webstedet</a>.
+        unsubscribe: For at fravælge at modtage denney type e-mail <a href="%{link}" target="_blank" class="unsubscribe">skal du framelde dig</a>.
+    newsletter_templates:
+      basic_only_text:
+        body_preview: 'Dummy-tekst til brødtekst: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla nisl tellus. Donec sed mi dui. Sed efficitur libero a felis tempor sollicitudin. Nullam vestibulum fringilla felis, id efficitur lorem sagittis et. Vivamus aliquam maximus velit vel dapibus. Mauris pellentesque, enim eu varius lacinia, risus ante rutrum ipsum, non lobortis augue lorem quis urna. Aenean et malesuada arcu.'
+        name: Grundlæggende (kun tekst)
+      basic_only_text_settings_form:
+        body: Brødtekst
+        interpolations_hint: 'Tip: Du kan bruge "%{name}" overalt i brødteksten eller emnet, og de vil blive erstattet af modtagerens navn.'
+      image_text_cta:
+        body_preview: 'Dummy-tekst til brødtekst: Maecenas ac nisl vitae lectus pretium facilisis. Etiam facilisis sem nibh, sit amet rutrum mi aliquam nec. Sed id urna at nisl pretium mollis eu vel velit. Proin vitae suscipit urna, sed faucibus urna. Pellentesque id libero vulputate ipsum scelerisque suscipit. Nam aliquam sodales mi sit amet cursus. Donec mattis faucibus purus. Aenean tincidunt porta lorem ac commodo. Vestibulum in mollis mi. Morbi eros erat, cursus ut tortor sit amet, imperdiet dapibus arcu. Suspendisse id egestas enim. In eget magna sed enim efficitur elementum sit amet aliquam quam. Donec fermentum metus eget urna luctus pulvinar.'
+        cta_text_preview: Handlingstekst
+        introduction_preview: 'Dummy tekst til introduktion: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla nisl tellus. Donec sed mi dui. Sed efficitur libero a felis tempor sollicitudin. Nullam vestibulum fringilla felis, id efficitur lorem sagittis et. Vivamus aliquam maximus velit vel dapibus. Mauris pellentesque, enim eu varius lacinia, risus ante rutrum ipsum, non lobortis augue lorem quis urna. Aenean et malesuada arcu.'
+        name: Billede-, tekst- og handlingsknap
+      image_text_cta_settings_form:
+        body: Brødtekst
+        cta_text: Tekst til handlingsknap
+        cta_url: URL til handlingsknap
+        interpolations_hint: 'Tip: Du kan bruge "%{name}" hvor som helst i introduktionen, brødteksten, CTA-teksten eller emnet, og de vil blive erstattet af modtagerens navn.'
+        introduction: Introduktion
+        main_image: Hovedbillede
+    newsletters:
+      unsubscribe:
+        check_subscription: Hvis du vil ændre dine præferencer, kan du gøre det på <a href="%{link}" target="_blank">konfigurationsside</a>
+        error: Der var et problem ved afmelding
+        success: Afmelding gennemført.
+        token_error: Linket er udløbet.
+        unsubscribe: Aameld
+    newsletters_opt_in:
+      unathorized: Beklager, dette link er ikke længere tilgængeligt
+      update:
+        error: Der skete noget forkert
+        success: Indstillingerne for nyhedsbrevet blev opdateret
+    newsletters_opt_in_mailer:
+      notify:
+        body_1: Behandlingen af personoplysninger og beskyttelse af dem bliver stadig vigtigere for os alle. Med den nye generelle databeskyttelsesforordning (GDPR) af 25. maj 2018 har enkeltpersoner bedre kontrol over deres personlige data. Af denne grund har vi brug for dit "OK" for at fortsætte med at sende relevante oplysninger om aktiviteterne i %{organization_name}.
+        body_2: 'Hvordan kan du give os dit samtykke? Du skal blot klikke på følgende knap:'
+        body_3: Med dette samtykke vil du kunne fortsætte med at modtage oplysninger om platformens tjenester. Hvis vi derimod ikke modtager en positiv bekræftelse fra din side, stopper vi med at sende vores meddelelser. Hvis du bekræfter, at du blive ved med at modtager information, har du altid mulighed for at annullere når som helst.
+        button: Ja, jeg vil fortsætte med at modtage relevante oplysninger
+        greetings: Med venlig hilsen,<br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>
+        hello: Hej,
+        subject: Vil du fortsætte med at modtage relevante oplysninger om %{organization_name}?
+    notifications:
+      no_notifications: Ingen meddelelser endnu.
+    notifications_settings:
+      show:
+        allow_public_contact: Tillad enhver at sende mig en direkte meddelelser, selvom jeg ikke følger dem.
+        direct_messages: Modtag direkte meddelelser fra alle
+        email_on_notification: Jeg ønsker at modtage en e-mail, hver gang jeg modtager en underretning.
+        everything_followed: Alt, hvad jeg følger.
+        newsletter_notifications: Jeg ønsker at modtage nyhedsbreve
+        newsletters: Nyhedsbreve
+        own_activity: Min egen aktivitet, f.eks. når nogen kommenterer mit forslag eller nævner mig
+        receive_notifications_about: Jeg vil gerne have underretning om
+        send_notifications_by_email: Send underretninger via e-mail
+        update_notifications_settings: Gem ændringer
+      update:
+        error: Der var et problem med at opdatere dine underretningsindtillinger.
+        success: Dine underretningsindtillinger blev opdateret.
+    open_data:
+      not_available_yet: Open Data-filerne er endnu ikke tilgængelige. Prøv igen om et par minutter.
+    own_user_groups:
+      index:
+        pending: Afventer
+        rejected: Afvist
+        verified: Verificeret
+    pad_iframe:
+      disclaimer: Indholdet af denne pad er skrevet af registrerede brugere og udtrykker deres meninger. %{organization} kan ikke holdes ansvarlig for dets indhold.
+      explanation: Brug denne pad til sammen at tage noter under mødet, så det er lettere at skrive referat bagefter.
+      pad: Pad
+    pages:
+      home:
+        extended:
+          debates: Debatter
+          debates_explanation: Debatter og diskuter, del dine synspunkter og berig de relevante emner.
+          how_to_participate: Hvordan deltager jeg i et forløb?
+          meetings: Møder
+          meetings_explanation: Find ud af, hvor og hvornår du kan deltage i offentlige møder.
+          more_info: Flere oplysninger om %{resource_name}
+          proposals: Idéer
+          proposals_explanation: Opret idéer, støt eksisterende idéer og slå et slag for de forandringer, du gerne vil se.
+        footer_sub_hero:
+          footer_sub_hero_body: Lad os opbygge et mere åbent, gennemsigtigt og samarbejde samfund.<br /> Tilslut dig, deltag og bestem.
+          footer_sub_hero_headline: Velkommen til %{organization}s deltagelsesplatform.
+          register: Tilmeld
+        hero:
+          participate: Deltage
+          welcome: Velkommen til %{organization}!
+        metrics:
+          headline: Parametre
+        statistics:
+          answers_count: Afsluttede undersøgelser
+          assemblies_count: Forsamlinger
+          comments_count: Bemærkninger
+          conferences_count: Konferencer
+          debates_count: Debatter
+          endorsements_count: Anbefalinger
+          headline: Hvad sker der på konferencen om Europas fremtid?
+          meetings_count: Arrangementer
+          orders_count: Afstemninger
+          pages_count: Sider
+          posts_count: Indlæg
+          processes_count: Emner
+          projects_count: Projekter
+          proposals_accepted: Accepterede forslag
+          proposals_count: Idéer
+          results_count: Resultater
+          surveys_count: Undersøgelser
+          users_count: Platformens deltagere *
+          users_count_explain: "(*) Antallet af deltagere, der er registreret på platformen."
+          votes_count: Afstemninger
+        sub_hero:
+          register: Tilmeld
+      index:
+        read_more: Læs mere
+        standalone_pages: Sider
+        subheading: Naviger gennem hjælpesiderne for %{name}
+        title: Hjælp
+        topics: Vores emner
+      participatory_space:
+        metrics:
+          headline: Parametre
+          link: Vis alle parametre
+      terms_and_conditions:
+        accept:
+          error: Der opstod et problem med at acceptere betingelserne.
+          success: Fint! Du har accepteret betingelserne.
+        form:
+          agreement: Jeg er enig i disse vilkår
+          legend: Accepter brugsbetingelserne
+        refuse:
+          modal_body: Hvis du nægter, vil du ikke kunne bruge platformen, du kan <a href="%{data_portability_path}">downloade dine data</a> og/eller <a href="%{delete_path}">slette din konto</a>.
+          modal_btn_continue: Accepter vilkårene og fortsæt
+          modal_btn_exit: Jeg gennemgår det senere
+          modal_button: Afvis vilkårene
+          modal_close: Luk modal
+          modal_title: Afviser du virkelig de opdaterede betingelser?
+        required_review:
+          alert: Vi har opdateret vores servicevilkår. Gennemgå dem.
+          body: Brug et øjeblik på at gennemgå opdateringer til vores servicevilkår. Ellers vil du ikke kunne bruge platformen.
+          title: 'Påkrævet: Gennemgå opdateringer til vores servicevilkår'
+    participatory_space_private_users:
+      not_allowed: Du har ikke tilladelse til at se dette indhold
+    profile:
+      deleted: Deltager slettet
+      view: Se
+    profiles:
+      default_officialization_text_for_user_groups: Denne gruppe er offentligt verificeret, dens navn er blevet verofoceret og svarer til dens rigtige navn
+      default_officialization_text_for_users: Denne deltager er offentligt verificeret, hans/hendes navn eller stilling er verificeret og svarer til hans/hendes rigtige navn og stilling
+      show:
+        activity: Min aktivitet
+        badges: Badges
+        conversations: Mine private samtaler
+        followers: Følgere
+        following: Følger
+        groups: Grupper
+        members: Medlem
+        officialized: Officiel deltager
+        timeline: Tidslinje
+        view_full_profile: Vis hele profilen
+      sidebar:
+        badges:
+          info: Badges optjenes ved at gennemføre nærmere bestemt aktivitet på platformen.
+          title: Badges
+      user:
+        confirmation_instructions_sent: E-mail-bekræftelsesinstruktioner sendt
+        create_user_group: Opret gruppe
+        edit_profile: Rediger konto
+        edit_user_group: Rediger gruppeprofil
+        fill_in_email_to_confirm_it: Venligst udfyld din gruppes e-mail for at bekræfte den
+        invite_user: Invitater deltager
+        join_user_group: Anmodning om at deltage i gruppen
+        leave_user_group: Forlad gruppe
+        manage_user_group_admins: Administrer adminis
+        manage_user_group_users: Administrer medlemmer
+        resend_email_confirmation_instructions: Send e-mail-bekræftelsesinstruktioner igen
+    reported_mailer:
+      hide:
+        hello: Hej %{name},
+        manage_moderations: Administrer moderationer
+        report_html: <p>Følgende <a href="%{url}">indhold</a> er skjult automatisk.</p>
+        subject: En ressource er blevet skjult automatisk
+      report:
+        authors: Forfattere
+        content: Rapporteret indhold
+        date: Rapporteret den
+        details: Oplysninger
+        hello: Hej %{name},
+        manage_moderations: Administrer moderationer
+        participatory_space: Deltagelsesrum
+        reason: Grund
+        report_html: <p>Følgende <a href="%{url}">indhold</a> er skjult automatisk.</p>
+        subject: En ressource er blevet rapporteret
+    reports:
+      create:
+        error: Der opstod en fejl under oprettelsen af rapporten. Du bedes prøve det igen.
+        success: Rapporten blev oprettet, og den vil blive gennemgået af en administrator.
+    resource_endorsements:
+      create:
+        error: Der var et problem under anbefalingshandlingen.
+    scopes:
+      global: Globalt omfang
+      picker:
+        cancel: Annuller
+        change: Skift det valgte omfang
+        choose: Vælg
+        currently_selected: Aktuelt valgt omfang
+        title: Vælg %{field}
+      prompt: Vælg et område
+      scopes: Omfang
+      scopes_picker_input:
+        select_scope: 'Vælg et område: (I øjeblikket:: %{current})'
+    search:
+      results: Søg resultater
+      results_found_for_term: '%{count} Resultater for søgningen: "%{term}"'
+      term_input_placeholder: Søg
+    searches:
+      filters:
+        back: Tilbage til resultater
+        jump_to: 'Hop til:'
+        state:
+          active: Aktiv
+          all: Alle
+          future: Fremtidige
+          past: Tidligere
+      filters_small_view:
+        close_modal: Luk modal
+        filter: Filtrer
+        filter_by: Filtrer efter
+        unfold: Fold ud
+      results:
+        results:
+          one: "%{count} resultat"
+          other: "%{count} resultater"
+        view_all: Se alle (%{count})
+    shared:
+      confirm_modal:
+        cancel: Annuller
+        close_modal: Luk modal
+        ok: OK
+        title: Bekræft
+      embed_modal:
+        close_window: Luk vindue
+        embed: Indsæt denne kode på din side
+        embed_link: Indlejr
+      extended_navigation_bar:
+        more: Mere
+        unfold: Fold ud
+      filter_form_help:
+        help: Filtrér din søgning nedenfor
+        skip: Gå til resultater
+      flag_modal:
+        already_reported: Dette indhold er allerede rapporteret, og det vil blive gennemgået af en administrator.
+        close: Luk
+        description: Er dette indhold upassende?
+        does_not_belong: Indeholder ulovlig aktivitet, selvmordstrusler, personlige oplysninger eller noget andet, som du mener ikke hører hjemme i %{organization_name}.
+        offensive: Indeholder racisme, sexisme, bagtalelse, personlige angreb, dødstrusler, selvmordsanmodninger eller hadtale i enhver form.
+        report: Rapporter
+        spam: Indeholder clickbait, reklame, svindel eller script-bots.
+        title: Rapporter upassende indhold
+      floating_help:
+        close: Luk hjælp
+        help: Hjælp
+      follow_button:
+        sign_in_before_follow: Log ind, inden du udfører denne handling
+      login_modal:
+        close_modal: Luk modal
+        please_sign_in: Log ind
+        sign_up: Tilmeld
+      participatory_space_filters:
+        filters:
+          areas: Områder
+          select_an_area: Vælg et område
+      reference:
+        reference: 'Reference: %{reference}'
+      represent_user_group:
+        represent_user_group: Jeg repræsenterer en gruppe
+        select_user_group: Vælg en gruppe
+      results_per_page:
+        label: 'Resultater pr. side:'
+        title: Vælg antal resultater pr. side
+      share_modal:
+        close_window: Luk vindue
+        share: Del
+        share_link: Del link
+    tags:
+      filter_results_for_category: 'Filtrer resultater for kategori: %{resource}'
+      filter_results_for_scope: 'Filtrer resultater for omfang: %{resource}'
+    translation_bar:
+      help_text: "<strong>Advarsel:</strong> Automatiske oversættelser er ikke altid 100 % korrekte."
+      show_original: Vis original tekst
+      show_translated: Vis automatisk oversat tekst
+    user_activity:
+      index:
+        no_activities_warning: Denne deltager har ikke haft nogen aktivitet endnu.
+    user_contact_disabled: Denne deltager accepterer ikke direkte meddelelser.
+    user_conversations:
+      create:
+        error: Meddelelsen kunne ikke oprettes. Prøv igen senere
+        existing_error: Meddelelsen kunne ikke oprettes. Samtalen findes allerede, prøv igen nu.
+        success: Samtalen startet!
+      index:
+        add_max_users: 'Føj brugere til samtale: Maks. 9 brugere'
+        add_users_placeholder: Søg...
+        close: Luk
+        conversations_info: Samtalerne er private, ingen andre kan se dem. En samtale kan startes med enhver deltager eller gruppe, der er registreret på platformen.
+        from: Fra
+        last_message: Sidste besked
+        modal_title: Ny samtale
+        new_conversation: Ny samtale
+        next: Næste
+        no_conversations_warning: Der er endnu ingen samtaler.
+        no_results: Ingen resultater
+        participant_with_disabled_message_reception: Denne deltager har deaktiveret modtagelse af meddelelser
+        time_ago: "%{time} siden"
+      new:
+        title: Start en samtale
+      reply:
+        placeholder: Dit svar...
+        send: Send
+        title_reply: Svar
+      show:
+        not_allowed: Denne bruger accepterer ikke flere direkte beskeder.
+        title: Samtale med %{usernames}
+      update:
+        error: Besked ikke sendt. Prøv igen senere
+    user_interests:
+      show:
+        my_interests: Mine interesser
+        no_scopes: Denne gruppe har endnu intet formål!
+        select_your_interests: Vælg de emner, du er interesseret i at deltage i, for at modtage oplysninger om arrangementer i tidslinjen for din profil.
+        update_my_interests: Opdater mine interesser
+      update:
+        error: Der var et problem med at opdatere dine interesser.
+        success: Dine interesser er blevet opdateret.
+    version:
+      show:
+        back_to_resource: Gå tilbage
+        changes_at_title: Ændringer på "%{title}"
+        number_of_versions: Versioner
+        show_all_versions: Vis alle versioner
+        version_author: Versions forfatter
+        version_created_at: Version oprettet kl
+        version_number: Version nummer
+        version_number_out_of_total: "%{current_version} ud af %{total_count}"
+    version_author:
+      show:
+        deleted: Slettet deltager
+    versions:
+      resource_version:
+        of_versions: "(af %{number})"
+        see_other_versions: se andre versioner
+        version: Version nummer %{number}
+    versions_list:
+      show:
+        back_to_resource: Gå tilbage
+        changes_at_title: Ændringer på "%{title}"
+        number_of_versions: Versioner
+        title: Versioner
+    versions_list_item:
+      show:
+        version_index: Version %{index}
+    welcome_notification:
+      default_body: <p>Hej {{name}}, tak, fordi du tilmelder dig {{organization}}, og velkommen!</p><ul><li>Hvis du vil have en idé om, hvad du kan gøre her, kan du kigge på hjælpesiderne <a href="{{help_url}}"></a>.</li><li>Når du har læst dem, får du dit første badge. Her er en <a href="{{badges_url}}">liste over alle de badges</a>, du kan få, når du deltager i {{organization}}</li><li>Sidst men ikke mindst, skab kontakt til andre og del oplevelsen af en aktiv deltagelse i {{organization}}. Skab idéer, kommentarer og debat, tænk over, hvordan du kan bidrage til alles bedste, fremsæt argumenter for at overbevise, lyt og læs for selv at blive overbevist, udtryk dine idéer på en konkret og direkte måde, udvis tålmodighed og beslutsomhed, forsvar dine idéer og vær åben for at samarbejde og slutte dig til andre personers idéer.</li></ul>
+      default_subject: Tak for tilmelding til {{organization}}!
+    wizard_step_form:
+      wizard_aside:
+        back: Tilbage
+      wizard_header:
+        see_steps: se trin
+        step_of: Trin %{current_step} af %{total_steps}
+  devise:
+    confirmations:
+      confirmed: Din e-mail-adresse er blevet bekræftet.
+      new:
+        resend_confirmation_instructions: Send bekræftelsesinstruktioner igen
+      send_instructions: Du modtager en e-mail med instruktioner til, hvordan du bekræfter din e-mailadresse om få minutter.
+      send_paranoid_instructions: Hvis din e-mail-adresse findes i vores database, modtager du en e-mail med instruktioner til, hvordan du bekræfter din e-mailadresse på få minutter.
+    failure:
+      already_authenticated: Du er allerede logget ind.
+      inactive: Din konto er ikke aktiveret endnu.
+      invalid: Ugyldig %{authentication_keys} eller password.
+      invited: Du har en ventende invitation, accepter den for at afslutte oprettelsen af din konto.
+      last_attempt: Du har endnu et forsøg, før din konto bliver låst.
+      locked: Din konto er låst.
+      not_found_in_database: Ugyldigt %{authentication_keys} eller password.
+      timeout: Din session udløb. Log ind igen for at fortsætte.
+      unauthenticated: Du skal logge ind eller tilmelde dig, før du kan fortsætte.
+    invitations:
+      edit:
+        header: Afslut oprettelsen af din konto
+        nickname_help: Dit kaldenavn i %{organization}.
+        submit_button: Gem
+        subtitle: Hvis du accepterer invitationen, bedes du indstille dit kaldenavn og adgangskode.
+      invitation_removed: Din invitation blev fjernet.
+      invitation_token_invalid: Invitationstokenet er ikke gyldigt!
+      new:
+        header: Send invitation
+        submit_button: Send en invitation
+      no_invitations_remaining: Ingen invitationer tilbage
+      send_instructions: En invitation til e-mail er sendt til %{email}.
+      updated: Din adgangskode blev indstillet. Du er nu logget ind.
+      updated_not_active: Din adgangskode blev indstillet.
+    mailer:
+      confirmation_instructions:
+        action: Bekræft min konto
+        greeting: Velkommen %{recipient}!
+        instruction: 'Du kan bekræfte din e-mail-konto via nedenstående link:'
+        subject: Bekræftelsesinstruktioner
+      email_changed:
+        greeting: Hej %{recipient}!
+        message: Vi kontakter dig for at underrette dig om, at din e-mail ændres til %{email}.
+        subject: E-mail ændret
+      invitation_instructions:
+        accept: Accepter invitationen
+        accept_until: Denne invitation bortfalder om %{due_date}.
+        decline: Afvis invitation
+        hello: Hej %{email},
+        ignore: |-
+          Hvis du ikke vil acceptere invitationen, skal du ignorere denne e-mail.<br />
+          Din konto oprettes først, før du åbner linket ovenfor og indstiller dit kaldenavn og adgangskode.
+        invited_you_as_admin: "%{invited_by} har inviteret dig som administrator af %{application}. Du kan acceptere det via nedenstående link."
+        invited_you_as_private_user: "%{invited_by} har inviteret dig som privat deltager i %{application}. Du kan acceptere det via nedenstående link."
+        someone_invited_you: Nogen har inviteret dig til %{application}. Du kan acceptere det via nedenstående link.
+        someone_invited_you_as_admin: Nogen har inviteret dig som administrator af %{application}, du kan acceptere det via nedenstående link.
+        someone_invited_you_as_private_user: Nogen har inviteret dig som privat deltager i %{application}, du kan acceptere det via nedenstående link.
+        subject: Invitationssinstruktioner
+      invite_admin:
+        subject: Du er blevet inviteret til at administrere %{organization}
+      invite_collaborator:
+        subject: Du er blevet inviteret til at samarbejde om %{organization}
+      invite_private_user:
+        subject: Du er blevet inviteret til en privat deltagelsesproces på %{organization}
+      organization_admin_invitation_instructions:
+        subject: Du er blevet inviteret til at administrere %{organization}
+      password_change:
+        greeting: Hej %{recipient}!
+        message: Vi kontakter dig for at underrette dig om, at din adgangskode er blevet ændret.
+        subject: Adgangskode ændret
+      reset_password_instructions:
+        action: Skift min adgangskode
+        greeting: Hej %{recipient}!
+        instruction: Nogen har anmodet om et link for at ændre din adgangskode, og du kan gøre dette via nedenstående link.
+        instruction_2: Hvis du ikke har anmodet om dette, skal du ignorere denne e-mail.
+        instruction_3: Din adgangskode ændres ikke, før du åbner linket ovenfor og opretter en ny.
+        subject: Nulstil adgangskodeinstruktioner
+      unlock_instructions:
+        action: Lås min konto op
+        greeting: Hej %{recipient}!
+        instruction: 'Klik på nedenstående link for at låse din konto op:'
+        message: Din konto er blevet låst på grund af et for stort antal mislykkede loginforsøg.
+        subject: Lås instruktioner op
+    omniauth_callbacks:
+      failure: Kunne ikke godkende dig fra %{kind} pågrund af "%{reason}".
+      success: Godkendt fra %{kind}-konto.
+      user:
+        disabled: Det er ikke længere muligt at registrere sig på platformen. Perioden for indsendelse af bidrag til konferencen om Europas fremtid udløb den 9. maj 2022.
+    passwords:
+      edit:
+        change_my_password: Skift min adgangskode
+        change_your_password: Skift din adgangskode
+        confirm_new_password: Bekræft ny adgangskode
+        new_password: Ny adgangskope
+        password_help: "%{minimun_characters}, minimum antal tegn, må ikke være alt for almindeligt (f.eks. 123456) og skal være forskelligt fra dit kaldenavn og din e-mailadresse."
+      new:
+        forgot_your_password: Glemt din adgangskode?
+        send_me_reset_password_instructions: Send mig instruktioner om nulstilling af adgangskode
+      no_token: Du kan ikke få adgang til denne side uden at komme fra en e-mail med nulstilling af adgangskode. Hvis du kommer fra en e-mail med nulstilling af adgangskode, skal du sørge for at bruge den fulde angivne URL.
+      send_instructions: Du modtager en e-mail med instruktioner om, hvordan du nulstiller din adgangskode om få minutter.
+      send_paranoid_instructions: Hvis din e-mail-adresse findes i vores database, modtager du et link til gendannelse af adgangskode på din e-mail-adresse om få minutter.
+      updated: Din adgamgskode er blevet ændret. Du er nu logget ind.
+      updated_not_active: Din adgamgskode er blevet ændret.
+    registrations:
+      destroyed: Din konto er blevet annulleret. Vi håber at se dig snart igen.
+      edit:
+        are_you_sure: Er du sikker?
+        cancel_my_account: Annuller min konto
+        currently_waiting_confirmation_for_email: 'Afventer i øjeblikket bekræftelse på: %{email}'
+        leave_blank_if_you_don_t_want_to_change_it: lad det være tomt, hvis du ikke vil ændre det
+        title: Rediger %{resource}
+        unhappy: Utilfreds?
+        update: Opdater
+        we_need_your_current_password_to_confirm_your_changes: vi har brug for din nuværende adgangskode for at bekræfte dine ændringer
+      new:
+        sign_up: Tilmeld
+      signed_up: Velkommen! Du har tilmeldt dig.
+      signed_up_but_inactive: Du har tilmeldt dig. Vi kunne dog ikke logge dig på, fordi din konto endnu ikke er aktiveret.
+      signed_up_but_locked: Du har tilmeldt dig. Vi kunne dog ikke logge på dig, fordi din konto er låst.
+      signed_up_but_unconfirmed: En besked med et bekræftelseslink er sendt til din e-mailadresse. Følg linket for at aktivere din konto.
+      update_needs_confirmation: Du har opdateret din konto, men vi skal bekræfte din nye e-mail-adresse. Kontroller din e-mail og følg bekræftelseslinket for at bekræfte din nye e-mail-adresse.
+      updated: Din konto er blevet opdateret.
+    sessions:
+      already_signed_out: Logget ud.
+      new:
+        sign_in: Log ind
+      signed_in: Logget ind.
+      signed_out: Logget ud.
+    shared:
+      links:
+        back: Tilbage
+        didn_t_receive_confirmation_instructions: Har du ikke modtget bekræftelsesinstruktioner?
+        didn_t_receive_unlock_instructions: Har du ikke modtaget oplåsningsinstruktioner?
+        forgot_your_password: Glemt din adgangskode?
+        sign_in: Log ind
+        sign_in_with_provider: Log ind med %{provider}
+        sign_up: Tilmeld
+      minimum_password_length:
+        one: "(%{count} karakterminimum)"
+        other: "(%{count} karakterminimum)"
+    unlocks:
+      new:
+        resend_unlock_instructions: Send oplåsningsinstruktioner igen
+      send_instructions: Du modtager en e-mail med instruktioner til, hvordan du låser din konto op om få minutter.
+      send_paranoid_instructions: Hvis din konto findes, modtager du en e-mail med instruktioner til, hvordan du låser den op om få minutter.
+      unlocked: Din konto er blevet låst op. gLog ind for at fortsætte.
+  doorkeeper:
+    scopes:
+      public: Din offentlige information.
+  errors:
+    messages:
+      already_confirmed: var allerede bekræftet, prøv at logge ind
+      confirmation_period_expired: skal bekræftes inden for %{period}, bed om en ny
+      content_type_whitelist_error: filtypen er ikke gyldig
+      cycle_detected: et omfangs moder kan ikke være en af dets døtre
+      expired: er udløbet, bed om en ny
+      file_size_is_less_than_or_equal_to: filstørrelse skal være mindre end eller lig med %{count}
+      invalid_time_zone: er ikke en gyldig tidszone
+      long_words: Indeholder ord, der er for lange (over 35 tegn)
+      must_start_with_caps: skal starte med et stort bogstav
+      nesting_too_deep: må ikke være inde i en underkategori
+      not_found: kunne ikke findes. Har du tilmeldt dig tidligere?
+      not_locked: var ikke låst
+      not_saved:
+        one: 'Der har været en fejl under behandlingen af din anmodning:'
+        other: 'Der var flere fejl under behandlingen af din anmodning:'
+      too_many_marks: der bruges for mange på hinanden følgende punkttegn (f.eks. !’er og ?’er)
+      too_much_caps: der bruges for mange store bogstaver (over 25% af teksten)
+      too_short: er for kort (under 15 tegn)
+  forms:
+    correct_errors: Der er fejl i formularen. ret dem for at fortsætte.
+    length_validator:
+      minimum:
+        few: Indtast venligst mindst %{count} tegn
+        many: Indtast venligst mindst %{count} tegn
+        one: mindst %{count} tegn
+        other: Indtast venligst mindst %{count} tegn
+        two: Indtast venligst mindst %{count} tegn
+    required: Krævet folt
+    required_explanation: "* Påkrævede felter er markeret med en stjerne"
+  invisible_captcha:
+    sentence_for_humans: Hvis du er menneske, bedes du ignorere dette felt
+    timestamp_error_message: Undskyld, det var for hurtigt! Du bedes sende igen.
+  layouts:
+    decidim:
+      cookie_warning:
+        description_html: Dette websted bruger cookies. Ved at fortsætte med at browse webstedet accepterer du vores brug af cookies. %{link}.
+        link_label: Få mere at vide om cookies
+        ok: Jeg er enig
+      edit_link:
+        edit: Rediger
+      footer:
+        cc_by_license: Creative Commons License
+        decidim_logo: Decidim Logo
+        download_open_data: Download Open Data-filer
+        made_with_open_source: Websted lavet med <a target="_blank" href="https://github.com/decidim/decidim">free software</a>.
+      header:
+        close_menu: Luk menu
+        navigation: Navigation
+        sign_in: Log ind
+        sign_up: Tilmeld
+      impersonation_warning:
+        close_session: Luk session
+        description_html: Du administrerer deltageren <b>%{user_name}</b>.
+        expire_time_html: Din session udløber om <b><span class="minutes">%{minutes}</span> minutes</b>.
+      language_chooser:
+        choose_language: Vælg sprog
+      notifications_dashboard:
+        mark_all_as_read: Markér alle som læst
+        mark_as_read: Markér som læst
+      social_media_links:
+        facebook: "%{organization} på Facebook"
+        github: "%{organization} påat GitHub"
+        instagram: "%{organization} på Instagram"
+        twitter: "%{organization} på Twitter"
+        youtube: "%{organization} på YouTube"
+      user_menu:
+        account: 'Brugerkonto: %{name}'
+        admin_dashboard: Admin-dashboardet
+        conversations: Samtaler
+        notifications: Mine meddelelser
+        profile: Mine kontoindstillinger
+        public_profile: Min offentlige profil
+        sign_out: Log ud
+      user_profile:
+        account: Min konto
+        authorizations: Tilladelser
+        delete_my_account: Slet min konto
+        my_data: Mine data
+        my_interests: Mine interesser
+        notifications_settings: Mine meddelelser
+        title: Deltagerindstillinger
+        user_groups: Grupper
+      widget:
+        see_more: Se mere
+  locale:
+    name: dansk
+  password_validator:
+    domain_included_in_password: ligner dette domænenavn for meget
+    email_included_in_password: ligner din e-mail for meget
+    fallback: er ikke gyldig
+    name_included_in_password: ligner dit navn for meget
+    not_enough_unique_characters: har ikke tilstrækkelig mange unikke tegn
+    password_not_allowed: er ikke tilladt
+    password_too_common: er for almindeligt
+    password_too_long: er for langt
+    password_too_short: er for kort
+  social_share_button:
+    delicious: Delicious
+    douban: Douban
+    email: E-mail
+    facebook: Facebook
+    google_bookmark: Google bogmærke
+    google_plus: Google+
+    hacker_news: Hacker News
+    linkedin: Linkedin
+    pinterest: Pinterest
+    qq: Qzone
+    reddit: Reddit
+    share_to: Del til %{name}
+    telegram: Telegram
+    tumblr: Tumblr
+    twitter: Twitter
+    vkontakte: Vkontakte
+    wechat: WeChat
+    wechat_footer: Åbn din WeChat, klik på knappen "Discover", og klik derefter på menuen "Scan QR-kode".
+    weibo: Sina Weibo
+    whatsapp_app: WhatsApp
+    whatsapp_web: WhatsApp
+    xing: Xing
+  versions:
+    directions:
+      left: Sletninger
+      right: Tilføjelser
+    dropdown:
+      choose_diff_view_html: 'HTML-visningstilstand:'
+      choose_diff_view_mode: 'Sammenlign visningstilstand:'
+      option_escaped: Escaped
+      option_split: Side-by-side
+      option_unescaped: Unescaped
+      option_unified: Unified
+  views:
+    pagination:
+      first: "&laquo; Første"
+      first_title: Link til første side
+      last: Sidste &raquo;
+      last_title: Link til den sidste side
+      next: Næste &rsaquo;
+      next_title: Link til den næste side
+      pagination: Paginering
+      previous: "&lsaquo; Forrige"
+      previous_title: Link til den næste side
+      title: 'Sidenummer:'

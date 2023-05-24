@@ -1,0 +1,61 @@
+---
+da:
+  activemodel:
+    models:
+      decidim/surveys/closed_survey_event: Undersøgelse sluttede
+      decidim/surveys/opened_survey_event: Undersøgelsen startede
+  activerecord:
+    models:
+      decidim/surveys/survey:
+        one: Undersøgelse
+        other: Undersøgelser
+      decidim/surveys/survey_answer:
+        one: Svar
+        other: Svar
+  decidim:
+    components:
+      surveys:
+        actions:
+          answer: Svar
+        name: Undersøgelse
+        settings:
+          global:
+            announcement: Meddelelse
+            clean_after_publish: Slet svar, når undersøgelsen offentliggøres
+          step:
+            allow_answers: Tillad svar
+            allow_unregistered: Tillad uregistrerede brugere at besvare undersøgelsen
+            allow_unregistered_help: Hvis det er aktivt, kræves der ikke login for at besvare undersøgelsen. Dette kan føre til dårlige eller upålidelige data, og de vil være mere sårbare over for automatiske angreb. Brug med forsigtighed!
+            announcement: Meddelelse
+    events:
+      surveys:
+        survey_closed:
+          email_intro: Undersøgelsen %{resource_title} i %{participatory_space_title} er blevet lukket.
+          email_outro: Du har modtaget denne underretning, fordi du følger %{participatory_space_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: En undersøgelse er afsluttet i %{participatory_space_title}
+          notification_title: Undersøgelsen <a href="%{resource_path}">%{resource_title}</a> i <a href="%{participatory_space_url}">%{participatory_space_title}</a> er afsluttet.
+        survey_opened:
+          email_intro: 'Undersøgelsen %{resource_title} i %{participatory_space_title} er nu åben. Du kan deltage i den fra denne side:'
+          email_outro: Du har modtaget denne underretning, fordi du følger %{participatory_space_title}. Du kan standse modtagelsen af underretninger ved at følge det foregående link.
+          email_subject: En ny undersøgelse i %{participatory_space_title}
+          notification_title: Undersøgelsen <a href="%{resource_path}">%{resource_title}</a> i <a href="%{participatory_space_url}">%{participatory_space_title}</a> er afsluttet.
+    metrics:
+      survey_answers:
+        description: Antal undersøgelser besvaret af deltagerne
+        object: svar på undersøgelser
+        title: Svar på undersøgelser
+    surveys:
+      admin:
+        exports:
+          survey_user_answers: Undersøgelsesdeltagerens svar
+        surveys:
+          update:
+            invalid: Der var et problem med at gemme undersøgelsen.
+            success: Undersøgelsen blev gemt.
+      last_activity:
+        new_survey_at_html: "<span>Ny undersøgelse i %{link}</span>"
+      surveys:
+        answer:
+          invalid: Der var et problem med at Svaret undersøtelsen.
+          spam_detected: Der var et problem med at svare i formularen. Måske har du været for hurtig, kan du prøve igen?
+          success: Undersøgelsen blev besvaret.

@@ -1,0 +1,26 @@
+---
+hr:
+  decidim:
+    admin_log:
+      page:
+        update: "%{user_name} je ažurirao stranicu %{resource_name} u prostoru %{space_name}"
+    components:
+      pages:
+        name: Stranica
+        settings:
+          global:
+            announcement: Objava
+          step:
+            announcement: Objava
+    pages:
+      admin:
+        models:
+          components:
+            body: Tekst
+        pages:
+          edit:
+            save: Ažuriraj
+            title: Uređivanje stranice
+          update:
+            invalid: Došlo je do problema pri spremanju stranice.
+            success: Stranica je uspješno spremljena.

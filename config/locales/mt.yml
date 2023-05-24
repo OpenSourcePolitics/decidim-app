@@ -1,0 +1,244 @@
+---
+mt:
+  activemodel:
+    attributes:
+      close_meeting:
+        proposals: Ideat
+      constraint:
+        subject_id: Suġġett
+      meeting:
+        cofe_charter_html: Naqbel mal-<a href="%{url}" target="_blank">Karta</a> tal-Konferenza dwar il-Futur tal-Ewropa
+        online_meeting_url: URL tal-laqgħa online
+        registration_url: URL tar-reġistrazzjoni
+      user:
+        language_preference: Preferenza tal-lingwa
+        user_name: Identifikatur tal-utent
+  activerecord:
+    models:
+      decidim/proposals/proposal/other: Idea
+  date:
+    abbr_month_names:
+    - 
+    - Jann
+    - Fra
+    - Mar
+    - Apr
+    - Mej
+    - Ġun
+    - Lul
+    - Aww
+    - Set
+    - Ott
+    - Nov
+    - Diċ
+    month_names:
+    - 
+    - Jannar
+    - Frar
+    - Marzu
+    - April
+    - Mej
+    - Ġunju
+    - Lulju
+    - Awwissu
+    - Settembru
+    - Ottubru
+    - Novembru
+    - Diċembru
+  decidim:
+    account:
+      show:
+        available_locales_helper: Il-lingwa li biha tirċievi notifiki bl-email.
+    comments:
+      comments:
+        create:
+          quota_exceeded: Quota exceeded
+        delete:
+          error: Il-kumment ma setax jitħassar.
+        update:
+          error: Kien hemm problema biex jiġi aġġornat il-kumment.
+    components:
+      comment:
+        confirm_destroy: Inti żgur li trid tħassar dan il-kumment?
+        delete: Ħassar
+        deleted_at: Kumment imħassar fil- %{date}
+        edit: Editja
+        edited: Editjat
+      edit_comment_modal_form:
+        close: Agħlaq
+        form:
+          body:
+            label: Kumment
+            placeholder: Dan x'taħseb dwaru?
+          submit: Ibgħat
+        title: Editja l-kumment tiegħek
+      meetings:
+        settings:
+          global:
+            cofe_charter_url: URL tal-Karta tal-CoFE
+    events:
+      reports:
+        resource_hidden:
+          notification_title: 'Moderatur neħħa %{resource_type} tiegħek għax ġiet irrapportata bħala %{report_reasons}.</br><i>%{resource_content}</i></br>Ara l-ispjegazzjoni hawn taħt:'
+    first_created_meeting_mailer:
+      notify:
+        boost_instructions: Irridu niżguraw li kull Ewropew li jixtieq, ikun jista’ jikkontribwixxi għad-dibattitu dwar il-futur komuni tagħna. Għalhekk, nistednuk ukoll ixxerred il-kelma u tirrakkomanda li sħabek, il-membri tal-familja tiegħek u ċittadini oħra simili jirreġistraw fuq il-pjattaforma, jattendu avvenimenti, u jsemmgħu l-opinjonijiet tagħhom.
+        email_greeting: Għażiż %{user_name},
+        email_intro: Grazzi tal-interess u l-parteċipazzjoni tiegħek fil-Konferenza dwar il-Ġejjieni tal-Ewropa. Għandna l-pjaċir ninfurmawk li l-avveniment %{link} tiegħek ġie ippubblikat b’suċċess u issa huwa viżibbli għaċ-ċittadini mill-Ewropa kollha.
+        email_outro: L-interess u l-parteċipazzjoni tiegħek fil-Konferenza dwar il-Ġejjieni tal-Ewropa huma apprezzati ħafna u jekk jogħġbok toqgħodx lura milli tikkuntattjana jekk ikollok xi mistoqsijiet.
+        email_signature: Tislijiet,<br>It-Tim tal-Moderazzjoni
+        more_info: 'Għal aktar dettalji, jekk jogħġbok ikkonsulta "%{title}": %{link}'
+        subject: Grazzi talli kkontribwejt għall-Konferenza dwar il-Ġejjieni tal-Ewropa billi ħloqt avveniment
+    first_published_proposal_mailer:
+      notify:
+        boost_instructions: 'Issaħħaħ il-viżibbiltà tal-idea tiegħek billi taqsamha fuq il-midja soċjali:'
+        email_greeting: Għażiż %{user_name},
+        email_intro: Grazzi tal-interess u l-parteċipazzjoni tiegħek fil-Konferenza dwar il-Ġejjieni tal-Ewropa. Għandna l-pjaċir ninfurmawk li l-idea %{link} tiegħek ġiet ippubblikata b’suċċess u issa hija viżibbli għaċ-ċittadini mill-Ewropa kollha.
+        email_outro: Irridu niżguraw li kull Ewropew li jixtieq, ikun jista’ jikkontribwixxi għad-dibattitu dwar il-futur komuni tagħna. Għalhekk, nistednuk ukoll ixxerred il-kelma u tirrakkomanda li sħabek, il-membri tal-familja tiegħek u ċittadini oħra simili jirreġistraw fuq il-pjattaforma, jattendu avvenimenti, u jsemmgħu l-opinjonijiet tagħhom.
+        email_signature: Tislijiet,<br>It-Tim tal-Moderazzjoni
+        share_facebook: Aqsam fuq Facebook
+        share_telegram: Aqsam fuq Telegram
+        share_twitter: Aqsam fuq Twitter
+        share_whats_app: Aqsam fuq WhatsApp
+        subject: Grazzi talli tajt kontribut għall-Konferenza dwar il-Ġejjieni tal-Ewropa billi ssottomettejt idea
+    forms:
+      meetings:
+        attendees_count_help_text: Tinsiex tinkludi l-għadd totali ta’ parteċipanti fl-avveniment tiegħek. Sew jekk preżenti personalment, ibridu, jew online, huwa importanti li nkunu nafu kemm hemm nies involuti.
+    gamification:
+      badges:
+        accepted_proposals:
+          conditions:
+            '0': Agħżel l-ispazju ta’ parteċipazzjoni tal-interess tiegħek bis-sottomissjoni għall-ideat attivata
+            '1': Ipprova ssottometti ideat li jistgħu jitwettqu. B’dan il-mod ikun aktar probabbli li jiġu aċċettati.
+        attended_meetings:
+          conditions:
+            '0': Irreġistra għall-avvenimenti li tixtieq tattendi
+        proposal_votes:
+          conditions:
+            '0': Ibbrawżja u qatta’ ftit ħin taqra l-ideat ta’ nies oħrajn
+            '1': Agħti sostenn għall-ideat li jogħġbuk jew li ssibhom interessanti
+        proposals:
+          conditions:
+            '0': Agħżel l-ispazju ta’ parteċipazzjoni tal-interess tiegħek bis-sottomissjoni għall-ideat attivata
+            '1': Oħloq idea ġdida
+    meetings:
+      actions:
+        hide: Aħbi
+        unhide: Uri
+      admin:
+        meetings:
+          edit:
+            title: Editja l-Aveniment
+          form:
+            select_a_meeting_type: Agħżel tip ta’ avveniment
+      directory:
+        meetings:
+          index:
+            subheading1: Semma’ leħnek u aqsam l ideat tiegħek bil-mezz ta' avvenimenti online jew f'avvenimenti fil-madwar tiegħek fejn tista tattendi personalment.
+      extra:
+        filters:
+          all: Kollha
+          closed: Avvenimenti b’rapport
+          meeting_report: Rapporti tal-avveniment
+          pending: Avvenimenti b’rapport pendenti
+      last_activity:
+        meeting_updated_at_html: "<span>Avveniment aġġornat fi %{link}</span>"
+      meeting_closes:
+        edit:
+          close: Agħlaq l-avveniment
+          title: Agħlaq l-avveniment
+      meetings:
+        filters:
+          activity: L-attività tiegħi
+          all: Kollha
+          my_meetings: L-avvenimenti tiegħi
+          type: Tipi ta’ avvenimenti
+          type_values:
+            all: Kollha
+            hybrid: Iż-żewġ kategoriji
+        form:
+          select_a_meeting_type: Jekk jogħġbok agħżel it-tip ta’ laqgħa
+          select_a_registration_type: Jekk jogħġbok agħżel it-tip ta’ reġistrazzjoni
+        index:
+          click_here: Ikklikkja hawn
+        online_meeting_link:
+          online_event: Mur fis-sit web tal-avveniment
+        show:
+          close_meeting: Agħlaq l-avveniment
+          with_meeting_report: Rapport tal-avveniment disponibbli
+      models:
+        meeting:
+          fields:
+            citizen_meeting: Avveniment taċ-Ċittadini
+            group_meeting: Avveniment ta’ Grupp
+      registration_type:
+        on_different_platform: Fuq pjattaforma differenti
+        registration_disabled: Reġistrazzjoni diżattivata
+      type_of_meeting:
+        hybrid: It-tnejn
+        in_person: Wiċċ imb wiċċ
+        online: Online
+    pages:
+      tabbed:
+        unfold: Iftaħ
+    participatory_spaces:
+      highlighted_meetings:
+        see_all_button: Ara kollox
+        see_all_count: "(ara %{count} kollha)"
+      highlighted_proposals:
+        see_all_button: Ara kollox
+        see_all_count: "(ara %{count} kollha)"
+    proposals:
+      content_blocks:
+        highlighted_proposals:
+          proposals: Ideat
+      proposals:
+        edit:
+          gallery_legend: "(Fakultattiv) Żid immaġni mal-karta tal-idea"
+        index:
+          heading: Aqsam idea magħna
+          subheading1: Minbarra li taqsam l-ideat tiegħek stess, tista’ ssib ukoll ideat oħra minn madwar l-Ewropa. Ingħaqad fid-diskussjoni billi tħalli kumment, jew ivvota għal ideat li jogħġbuk biex aktar nies ikunu jistgħu jsibuhom.
+        preview:
+          announcement_body: Għandek iċ-ċans tirrevedi u timmodifika l-idea tiegħek. Ladarba l-idea tiegħek tkun lesta, ikklikkja fuq “Ippubblika” u din tidher fuq il-pjattaforma.
+          announcement_title: "<b>Għad fadal l-aħħar pass qabel tkun tista’ tippubblika l-idea tiegħek.</b>"
+    shared:
+      flag_user_modal:
+        does_not_belong: Tippromwovi attività illegali, theddid ta’ suwiċidju, informazzjoni personali, jew xi ħaġa oħra li ma taħsibx li tappartjeni hawnhekk.
+        offensive: Tippromwovi razziżmu, sessiżmu, tgħajjir, attakki personali, theddid ta’ mewt, talbiet ta’ suwiċidju jew kwalunkwe forma ta’ diskors ta’ mibegħda.
+        spam: Tippromwovi clickbait, reklamar, scams jew script bots.
+    statistics:
+      answers_count: Tweġibiet
+      comments_count: Kummenti
+      debates_count: Dibattiti
+      endorsements_count: Approvazzjonijiet
+      followers_count: Segwaċi
+      headline: Statistika
+      meetings_count: Avvenimenti
+      no_stats: Għad m’hemm l-ebda statistika.
+      orders_count: Sostenji
+      pages_count: Paġni
+      participants_count: Parteċipanti
+      processes_count: Suġġetti
+      projects_count: Proġetti
+      proposals_count: Ideat
+      results_count: Riżultati
+      supports_count: Sostenji
+      surveys_count: Stħarriġ
+      users_count: Parteċipanti
+    verifications:
+      dummy_authorization:
+        extra_explanation:
+          postal_codes:
+            few: 'Il-parteċipazzjoni hija limitata għall-parteċipanti bi kwalunkwe wieħed mill-kodiċijiet postali li ġejjin: %{postal_codes}.'
+            many: 'Il-parteċipazzjoni hija limitata għall-parteċipanti bi kwalunkwe wieħed mill-kodiċijiet postali li ġejjin: %{postal_codes}.'
+  layouts:
+    decidim:
+      language_chooser:
+        close: Agħlaq
+        eu_languages: Il-lingwi uffiċjali tal-UE
+        select_your_language: Agħżel il-lingwa tiegħek
+      user:
+        logged_in: Illoggjat(a)
+        logged_in_as: Illoggjat(a) bħala %{user}
+      wrapper:
+        unfold: Iftaħ

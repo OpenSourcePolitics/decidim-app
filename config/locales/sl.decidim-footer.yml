@@ -1,0 +1,80 @@
+---
+sl:
+  decidim:
+    footer_links:
+      common:
+        items:
+          about_this_site: O spletišču
+          cookies: Piškotki
+          language_policy: Jezikovna politika
+          legal_notice: Pravno obvestilo
+          sitemap: Zemljevid spletišča
+      contact_the_eu:
+        items:
+          call_us: Pokličite nas <a href="tel:0080067891011">00 800 6 7 8 9 10 11</a>
+          contact_form: Pišite nam s <a href="https://europa.eu/european-union/contact/write-to-us_sl">kontaktnim obrazcem</a>
+          meet_us: Obiščite nas v <a href="https://europa.eu/european-union/contact/meet-us_sl">lokalni pisarni EU</a>
+          other_telephone: Pokličite druge <a href="https://europa.eu/european-union/contact/call-us_sl">telefonske številke</a>
+        title: Kontaktirajte EU
+      eu_institution:
+        items:
+          agencies:
+            label: Agencije
+            url: https://europa.eu/european-union/about-eu/agencies_sl
+          central_bank:
+            label: Evropska centralna banka (ECB)
+            url: https://www.ecb.europa.eu/home/languagepolicy/html/index.sl.html
+          commission:
+            label: Evropska komisija
+            url: http://ec.europa.eu/index_sl.htm
+          council:
+            label: Evropski svet
+            url: http://www.consilium.europa.eu/sl/european-council/
+          council_eu:
+            label: Svet Evropske unije
+            url: http://www.consilium.europa.eu/sl/home/
+          court_of_auditors:
+            label: Evropsko računsko sodišče
+            url: http://www.eca.europa.eu/sl
+          court_of_justice:
+            label: Sodišče Evropske unije
+            url: http://curia.europa.eu/jcms/jcms/j_6/sl/
+          data_protection_supervisor:
+            label: Evropski nadzornik za varstvo podatkov
+            url: https://secure.edps.europa.eu/EDPSWEB/edps/EDPS?lang=sl
+          dpb:
+            label: Evropski odbor za varstvo podatkov
+            url: https://edpb.europa.eu/edpb_sl
+          economic_social_committee:
+            label: Evropski ekonomsko-socialni odbor
+            url: http://www.eesc.europa.eu/?i=portal.sl.home
+          eu_regional_comittee:
+            label: Evropski odbor regij
+            url: http://cor.europa.eu/sl/
+          external_action_service:
+            label: Evropska služba za zunanje delovanje
+            url: https://eeas.europa.eu/headquarters/headquarters-homepage_en
+          investment_bank:
+            label: Evropska investicijska banka (EIB)
+            url: https://www.eib.org/en/index.htm
+          ombudsman:
+            label: Evropski varuh človekovih pravic
+            url: https://www.ombudsman.europa.eu/sl/home
+          parliament:
+            label: Evropski parlament
+            url: http://www.europarl.europa.eu/portal/sl
+          pou:
+            label: Urad za publikacije Evropske unije
+            url: https://op.europa.eu/sl/home
+          pso:
+            label: Evropski urad za izbor osebja
+            url: https://epso.europa.eu/home_sl
+        title: Institucije EU
+      social_media:
+        items:
+          search_channels:
+            label: Poiščite nas na družbenih medijih EU
+            url: https://europa.eu/european-union/contact/social-networks_sl
+        title: Naše strani na družbenih omrežjih
+    footer_menu:
+      organization: Konferenca o prihodnosti Evrope

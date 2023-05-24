@@ -1,0 +1,44 @@
+---
+da:
+  activemodel:
+    attributes:
+      dummy_resource:
+        created_at: Oprettet kl.
+        decidim_scope_id: Omfang
+        field: Mit felt
+        start_date: Startdato
+        title: Betegnelse
+        translatable_text: Oversættelig tekst
+        updated_at: Opdateret kl
+  decidim:
+    components:
+      dummy:
+        settings:
+          global:
+            readonly_attribute: Læskun-attribut
+            test_choices:
+              a: A valg
+              b: B valg
+              c: C valg
+          step:
+            endorsements_blocked: Anbefalinger blokeret
+            endorsements_enabled: Anbefalinger aktiveret
+            readonly_step_attribute: Læskun-trinattribut
+    gamification:
+      badges:
+        test:
+          conditions: Brug et testmiljø til decidim.
+          description: Deltagerne får dette badge ved at oprette test.
+          description_another: Denne deltager har oprettet %{score} test.
+          description_own: Du har oprettet %{score} test.
+          name: Test
+          next_level_in: Opret %{score} flere test for at nå det næste niveau!
+          unearned_another: Denne deltager har ikke oprettet nogen test endnu.
+          unearned_own: Du har ikke oprettet nogen test endnu.
+    participatory_processes:
+      statistics:
+        dummies_count_high: Høj
+        dummies_count_medium: Middel
+    resource_links:
+      test_link:
+        dummy_resource_dummy: Relateret dummy

@@ -1,0 +1,80 @@
+---
+mt:
+  decidim:
+    footer_links:
+      common:
+        items:
+          about_this_site: Dwar dan is-sit
+          cookies: Cookies
+          language_policy: Politika lingwistika
+          legal_notice: Avviż legali
+          sitemap: Mappa tas-sit
+      contact_the_eu:
+        items:
+          call_us: Ċemplilna <a href="tel:0080067891011">00 800 6 7 8 9 10 11</a>
+          contact_form: Iltaqa’ magħna <a href="https://europa.eu/european-union/contact/write-to-us_mt">f’uffiċċju lokali tal-UE</a>
+          meet_us: Iktbilna permezz <a href="https://europa.eu/european-union/contact/meet-us_mt">tal-formola ta’ kuntatt tagħna</a>
+          other_telephone: Uża alternattivi <a href="https://europa.eu/european-union/contact/call-us_mt">telefoniċi oħra</a>
+        title: Ikkuntattja lill-UE
+      eu_institution:
+        items:
+          agencies:
+            label: Aġenziji
+            url: https://europa.eu/european-union/about-eu/agencies_mt
+          central_bank:
+            label: Il-Bank Ċentrali Ewropew (BĊE)
+            url: https://www.ecb.europa.eu/home/languagepolicy/html/index.mt.html
+          commission:
+            label: Il-Kummissjoni Ewropea
+            url: http://ec.europa.eu/index_mt.htm
+          council:
+            label: Il-Kunsill Ewropew
+            url: http://www.consilium.europa.eu/mt/european-council/
+          council_eu:
+            label: Il-Kunsill tal-Unjoni Ewropea
+            url: http://www.consilium.europa.eu/mt/home/
+          court_of_auditors:
+            label: Il-Qorti Ewropea tal-Awdituri (QEA)
+            url: http://www.eca.europa.eu/mt
+          court_of_justice:
+            label: Il-Qorti tal-Ġustizzja tal-Unjoni Ewropea (QtĠ-UE)
+            url: http://curia.europa.eu/jcms/jcms/j_6/mt/
+          data_protection_supervisor:
+            label: Kontrollur Ewropew għall-Protezzjoni tad-Data (KEPD)
+            url: https://secure.edps.europa.eu/EDPSWEB/edps/EDPS?lang=mt
+          dpb:
+            label: Il-Bord Ewropew għall-Protezzjoni tad-Data
+            url: https://edpb.europa.eu/edpb_mt
+          economic_social_committee:
+            label: Il-Kumitat Ekonomiku u Soċjali Ewropew (KESE)
+            url: http://www.eesc.europa.eu/?i=portal.mt.home
+          eu_regional_comittee:
+            label: Il-Kumitat tar-Reġjuni tal-Unjoni Ewropea (KtR)
+            url: http://cor.europa.eu/mt/
+          external_action_service:
+            label: Is-Servizz Ewropew għall-Azzjoni Esterna (SEAE)
+            url: http://eeas.europa.eu/index_en.htm
+          investment_bank:
+            label: Il-Bank Ewropew tal-Investiment (BEI)
+            url: https://www.eib.org/en/index.htm
+          ombudsman:
+            label: L-Ombudsman Ewropew
+            url: https://www.ombudsman.europa.eu/mt/home
+          parliament:
+            label: Il-Parlament Ewropew
+            url: http://www.europarl.europa.eu/portal/mt
+          pou:
+            label: l-Uffiċċju tal-Pubblikazzjonijiet tal-Unjoni Ewropea
+            url: https://op.europa.eu/mt/home
+          pso:
+            label: L-Uffiċċju Ewropew għas-Selezzjoni tal-Persunal
+            url: https://epso.europa.eu/home_mt
+        title: Istituzzjonijiet tal-UE
+      social_media:
+        items:
+          search_channels:
+            label: Fittex kanali tal-midja soċjali tal-UE
+            url: https://europa.eu/european-union/contact/social-networks_mt
+        title: Sib kont tal-midja soċjali fuq l-UE
+    footer_menu:
+      organization: Konferenza dwar il-futur tal-Ewropa

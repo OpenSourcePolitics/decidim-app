@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Locales", type: :system do
   describe "switching locales" do
-    let(:organization) { create(:organization, available_locales: %w(en fr)) }
+    let(:organization) { create(:organization, available_locales: %w(fr en)) }
 
     before do
       switch_to_host(organization.host)

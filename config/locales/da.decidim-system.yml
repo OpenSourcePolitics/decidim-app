@@ -1,0 +1,143 @@
+---
+da:
+  activemodel:
+    attributes:
+      oauth_application:
+        name: OAuth-applikationsnavn
+        organization_logo: Organisationens logo (firkantet)
+        organization_name: Organisation
+        organization_url: Organisations URL
+        redirect_uri: Omdiriger URI
+    errors:
+      models:
+        oauth_application:
+          attributes:
+            redirect_uri:
+              must_be_ssl: Omdirigerings-URI skal være en SSL URI
+  decidim:
+    system:
+      actions:
+        confirm_destroy: Er du sikker på, at du vil slette dette?
+        destroy: Slet
+        edit: Rediger
+        new: Ny
+        save: Gem
+        title: Handlinger
+      admins:
+        create:
+          error: Der var et problem med at oprette en ny admin.
+          success: Admin blev oprettet
+        destroy:
+          success: Admin blev slettet
+        edit:
+          title: Rediger admin
+          update: Opdater
+        index:
+          title: Admins
+        new:
+          create: Opret
+          title: Ny admin
+        update:
+          error: Der var et problem med opdatering af denne admin.
+          success: Admin blev opdateret
+      default_pages:
+        placeholders:
+          content: Føj meningsfuldt indhold til den statiske side %{page} på admin-dashboardet.
+          title: Standardtitel for %{page}
+      menu:
+        admins: Admins
+        dashboard: Dashboard
+        oauth_applications: OAuth-applikationer
+        organizations: Organisationer
+      models:
+        admin:
+          fields:
+            created_at: Oprettet kl.
+            email: E-mail
+          validations:
+            email_uniqueness: en anden admin med samme e-mail findes allerede
+        oauth_application:
+          fields:
+            created_at: Oprettet kl.
+            name: OAuth Application Name
+            organization_name: Organisation
+          name: OAuth-applikationer
+        organization:
+          actions:
+            save_and_invite: Opret organisation og inviter admin
+          fields:
+            created_at: Oprettet kl.
+            name: Navn
+            omniauth_settings: Omniauth-indstillinger
+            smtp_settings: SMTP-indstillinger
+          name: Organisation
+      oauth_applications:
+        create:
+          error: Der var et problem med at oprette denne ansøgning.
+          success: Ansøgning oprettet.
+        destroy:
+          error: Der var et problem med at slette denne ansøgning.
+          success: Ansøgning slettet.
+        edit:
+          save: Gem
+          title: Rediger ansøgning
+        form:
+          select_organization: Vælg en organisation
+        index:
+          confirm_delete: Er du sikker på, at du vil slette denne ansøgning?
+          title: OAuth-applikationer
+        new:
+          save: Gem
+          title: Ny ansøgning
+        update:
+          error: Der var et problem med at opdatere denne ansøgning.
+          success: Ansøgning opdateret.
+      organizations:
+        create:
+          error: Der var et problem med at oprette en ny organisation.
+          success: Organisation blev oprettet.
+        edit:
+          secondary_hosts_hint: Indtast hver enkelt af dem i en ny linje
+        index:
+          title: Organisationer
+        new:
+          reference_prefix_hint: Referencepræfikset bruges til entydigt at identificere ressourcer på tværs af hele organisationen
+          secondary_hosts_hint: Indtast hver enkelt af dem i en ny linje
+          title: Ny organisation
+        omniauth_settings:
+          decidim:
+            client_id: Klient-id
+            client_secret: Klienthemmelighed
+            site_url: Websteds-URL
+          enabled: Aktiveret
+          enabled_by_default: Denne udbyder er aktiveret som standard. Den kan redigeres, men ikke deaktiveres.
+          facebook:
+            app_id: App-id
+            app_secret: App-hemmelighed
+          google_oauth2:
+            client_id: Klient-id
+            client_secret: Klienthemmelighed
+          icon: Ikon
+          icon_path: Ikonsti
+          twitter:
+            api_key: API-nøgle
+            api_secret: API-hemmelighed
+        smtp_settings:
+          instructions:
+            from_label: 'E-mail-afsender vil være: "din organisations navn<your-organization@your-provider.org>". Lad stå tomt for at bruge ”fra_e-mail” som etiket'
+          placeholder:
+            from_email: your-organization@your-provider.org
+            from_label: din organisations navn
+        update:
+          error: Der var et problem med at opdatere denne organisation.
+          success: Organisation blev opdateret.
+        users_registration_mode:
+          disabled: Adgang kan kun ske med eksterne konti
+          enabled: Tillad deltagere at registrere sig og logge ind
+          existing: Tillad ikke deltagere at registrere sig, men tillad eksisterende deltagere at logge ind
+      shared:
+        notices:
+          no_organization_warning_html: Du skal oprette en organisation for at komme i gang. Sørg for at læse %{guide}, inden du fortsætter.
+          our_getting_started_guide: vores startvejledning
+      titles:
+        dashboard: Dashboard

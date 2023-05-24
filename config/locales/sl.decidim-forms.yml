@@ -1,0 +1,167 @@
+---
+sl:
+  activemodel:
+    attributes:
+      answer:
+        body: Odgovor
+      question:
+        max_choices: Največje število izbir
+        question_type: Vrsta
+      questionnaire_question:
+        mandatory: Obvezno
+    errors:
+      models:
+        answer:
+          attributes:
+            choices:
+              missing: in nedokončano
+              too_many: jih je preveč
+        questionnaire:
+          request_invalid: Pri upravljanju te zahteve se je pojavila napaka. Poskusite znova.
+  decidim:
+    forms:
+      admin:
+        models:
+          components:
+            description: Opis
+            tos: Pogoji storitve
+        questionnaires:
+          actions:
+            back: Nazaj na vprašanja
+            show: Pokaži odzive
+          answer_option:
+            answer_option: Možnost odgovora
+            free_text: Prosto besedilo
+            remove: Odstrani
+            statement: Izjava
+          answers:
+            actions:
+              back: Nazaj na odzive
+              export: Izvozi
+              show: Pokaži odgovore
+            empty: Ni še odgovorov
+            export:
+              answer:
+                title: 'Odziv #%{number}'
+            index:
+              title: "%{total} skupnih odgovorov"
+            show:
+              title: 'Odgovor #%{number}'
+          display_condition:
+            answer_option: Možnost odgovora
+            condition_question: Vprašanje
+            condition_type: Pogoj
+            condition_types:
+              answered: Odgovorjeno
+              equal: Enako
+              match: Vključuje besedilo
+              not_answered: Brez odgovora
+              not_equal: Ni enako
+            condition_value: Besedilo je vključeno.
+            display_condition: Prikaži pogoj
+            mandatory: Ta pogoj mora biti vedno izpolnjen, ne glede na status drugih pogojev.
+            remove: Odstrani
+            save_warning: Ne pozabite shraniti obrazca, preden konfigurirate pogoje prikaza.
+            select_answer_option: Izberi možnost odgovora
+            select_condition_question: Izberi vprašanje
+            select_condition_type: Izberi vrsto pogoja
+          edit:
+            save: Shrani
+            title: Uredi vprašalnik
+          form:
+            add_question: Dodaj vprašanje
+            add_separator: Dodaj separator
+            already_answered_warning: Nekateri uporabniki so že odgovorili na obrazec, zato ne morete spreminjati njegovih vprašanj.
+            collapse: Strni vsa vprašanja
+            expand: Razširi vsa vprašanja
+            preview: Predogled
+            title: Uredi obrazec
+            unpublished_warning: Obrazec ni objavljen. Vprašanja na njem lahko spremenite, vendar boste s tem izbrisali trenutne odgovore.
+          matrix_row:
+            matrix_row: Vrstica
+            remove: Odstrani
+            statement: Izjava
+          question:
+            add_answer_option: Dodaj možnost odgovora
+            add_display_condition: Dodaj pogoj prikaza
+            add_display_condition_info: Shranite obrazec, da konfigurirate pogoje prikaza.
+            add_matrix_row: Dodaj vrstico
+            any: Vse
+            collapse: Strni
+            description: Opis
+            down: Dol
+            expand: Razširi
+            question: Vprašanje
+            remove: Odstrani
+            statement: Izjava
+            up: Gor
+          separator:
+            down: Dol
+            remove: Odstrani
+            up: Gor
+          update:
+            invalid: Pri shranjevanju obrazca se je pojavila težava.
+            success: Obrazec je bil uspešno shranjen.
+      errors:
+        answer:
+          body: Telo ne sme biti prazno.
+      files:
+        extension_whitelist: 'Sprejemljive oblike:'
+      images:
+        dimensions_info: 'Tej sliki bo:'
+        processors:
+          resize_and_pad: Spremenjena in povečana velikost
+          resize_to_fit: Spremenjena velikost
+      question_types:
+        long_answer: Dolg odgovor
+        matrix_multiple: Matrica (več možnosti)
+        matrix_single: Matrica (ena možnost)
+        multiple_option: Več možnosti
+        short_answer: Kratek odgovor
+        single_option: Ena možnost
+        sorting: Razvrščanje
+      questionnaires:
+        answer:
+          invalid: Pri izpolnjevanju obrazca se je pojavila težava.
+          max_choices_alert: Izbranih je preveč možnosti
+          success: Obrazec je uspešno izpolnjen.
+        question:
+          max_choices: 'Največje št. izbir: %{n}'
+        show:
+          answer_questionnaire:
+            anonymous_user_message: <a href="%{sign_in_link}">Prijavite se s svojim računom</a> ali <a href="%{sign_up_link}">prijavite se</a> za izpolnitev obrazca.
+            title: Izpolni obrazec
+          current_step: Korak %{step}
+          of_total_steps: od %{total_steps}
+          questionnaire_answered:
+            body: Ta obrazec ste že izpolnili.
+            title: Že izpolnjen
+          questionnaire_closed:
+            body: Obrazec je zaprt in ga ni mogoče izpolniti.
+            title: Obrazec zaprt
+          questionnaire_for_private_users:
+            body: Obrazec je na voljo samo za zasebne uporabnike.
+            title: Obrazec zaprt
+          questionnaire_js_disabled:
+            body: Nekatere funkcije tega obrazca bodo onemogočene. Če želite izboljšati svojo izkušnjo, v brskalniku omogočite JavaScript.
+            title: JavaScript je onemogočen.
+          questionnaire_not_published:
+            body: Ta obrazec še ni objavljen.
+          tos_agreement: S sodelovanjem sprejemate pogoje storitve.
+      step_navigation:
+        show:
+          are_you_sure: Tega dejanja ni mogoče razveljaviti in svojih odgovorov ne boste mogli urejati. Ali ste prepričani?
+          back: Nazaj
+          continue: Nadaljuj
+          submit: Pošlji
+      user_answers_serializer:
+        body: Odgovor
+        completion: Zaključek
+        created_at: Odgovorjeno ob
+        id: ID številka odgovora
+        ip_hash: Zgoščena vrednost IP
+        question: Vprašanje
+        registered: Registriran
+        session_token: Identifikator uporabnika
+        unregistered: Neregistriran
+        user_status: Status uporabnika

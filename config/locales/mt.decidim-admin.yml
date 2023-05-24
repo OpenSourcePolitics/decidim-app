@@ -1,0 +1,819 @@
+---
+mt:
+  activemodel:
+    attributes:
+      area:
+        area_type: Tip ta’ żona ġeografika
+        name: Isem
+        organization: Organizzazzjoni
+      area_type:
+        name: Isem
+        organization: Organizzazzjoni
+        plural: Plural
+      attachment:
+        attachment_collection_id: Fowlder
+        description: Deskrizzjoni
+        file: Fajl
+        title: Isem l-hemża jew l-immaġni
+      attachment_collection:
+        description: Deskrizzjoni
+        name: Isem
+      category:
+        description: Deskrizzjoni
+        name: Isem
+        parent_id: Proġett prinċipali
+      component:
+        name: Isem
+        published_at: Ippubblikat fi
+        weight: Ordni
+      id: ID
+      newsletter:
+        body: Kontenut prinċipali
+        subject: Suġġett
+      organization:
+        address: Hostname tal-SMTP
+        alert_color: Twissija
+        badges_enabled: Attiva l-badges
+        comments_max_length: Tul massimu tal-kummenti (Ħallih 0 għall-valur prestabbilit)
+        cta_button_path: Indirizz tal-buttuna Sejħa għal Azzjoni
+        cta_button_text: Test tal-buttuna Sejħa għal Azzjoni
+        customize_welcome_notification: Ippersonalizza n-notifika ta’ merħba
+        default_locale: Lingwa prestabbilita
+        description: Deskrizzjoni
+        enable_omnipresent_banner: Uri strixxun omnipreżenti
+        facebook_handler: Ġestjonarju tal-Facebook
+        favicon: Ikona
+        from: Mill-indirizz tal-email
+        github_handler: Ġestjonarju tal-GitHub
+        header_snippets: Snippets tal-headers
+        highlight_alternative_color: Highlight, alternattiva
+        highlight_color: Enfasi
+        highlighted_content_banner_action_subtitle: Sottotitlu tal-buttuna azzjoni
+        highlighted_content_banner_action_title: Titlu tal-buttuna azzjoni
+        highlighted_content_banner_action_url: URL tal-buttuna azzjoni
+        highlighted_content_banner_enabled: Uri l-istrixxun tal-kontenut iħħajlajtjat
+        highlighted_content_banner_image: Immaġni
+        highlighted_content_banner_short_description: Deskrizzjoni qasira
+        highlighted_content_banner_title: Titlu
+        instagram_handler: Ġestjonarju tal-Instagram
+        logo: Logo
+        machine_translation_display_priority: Prijorità tal-wiri tat-traduzzjoni awtomatika
+        machine_translation_display_priority_original: L-ewwel it-test oriġinali
+        machine_translation_display_priority_translation: L-ewwel it-test tradott
+        name: Isem
+        official_img_footer: Footer tal-logo uffiċjali
+        official_img_header: Header tal-logo uffiċjali
+        official_url: URL tal-organizzazzjoni uffiċjali
+        omnipresent_banner_short_description: Deskrizzjoni qasira
+        omnipresent_banner_title: Titlu
+        omnipresent_banner_url: URL
+        password: Password
+        port: Port
+        primary_color: Primarju
+        reference_prefix: Prefiss ta’ referenza
+        rich_text_editor_in_public_views: Attiva r-rich text editor għall-parteċipanti
+        secondary_color: Sekondarju
+        send_welcome_notification: Ibgħat in-notifika ta’ merħba
+        show_statistics: Uri l-istatistika
+        success_color: Suċċess
+        time_zone: Żona tal-Ħin
+        tos_version: Verżjoni tat-termini tas-servizz
+        twitter_handler: Ġestjonarju tat-Twitter
+        user_groups_enabled: Attiva l-gruppi
+        user_name: Identifikatur tal-utent
+        warning_color: Twissija
+        welcome_notification_body: Kontenut prinċipali tan-notifika ta’ merħba
+        welcome_notification_subject: Suġġett tan-notifika ta’ merħba
+        youtube_handler: Ġestjonarju tal-YouTube
+      scope:
+        code: Kodiċi
+        name: Isem
+        organization: Organizzazzjoni
+        parent_id: Proġett prinċipali
+        scope_type: Tip ta’ kamp ta’ applikazzjoni
+        scope_type_id: Tip ta’ kamp ta’ applikazzjoni
+      scope_type:
+        name: Isem
+        organization: Organizzazzjoni
+        plural: Plural
+      static_page:
+        changed_notably: Kien hemm bidliet notevoli.
+        content: Kontenut
+        organization: Organizzazzjoni
+        show_in_footer: Uri fil-footer
+        slug: slug tal-URL
+        title: Titlu
+        weight: Ordni
+      static_page_topic:
+        description: Deskrizzjoni
+        show_in_footer: Uri fil-footer
+        title: Titlu
+        weight: Ordni
+      user_group_csv_verification:
+        file: Fajl
+    errors:
+      models:
+        organization:
+          attributes:
+            official_img_footer:
+              allowed_file_content_types: Fajl tal-immaġni invalidu
+            official_img_header:
+              allowed_file_content_types: Fajl tal-immaġni invalidu
+  activerecord:
+    attributes:
+      decidim/static_page:
+        content: Kontenut
+        slug: slug tal-URL
+        title: Titlu
+      doorkeeper/application:
+        authorize_url: Awtorizza l-URL
+        client_id: ID tal-Klijent
+        client_secret: Sigriet tal-Klijent
+        organization_name: Isem l-Organizzazzjoni
+        organization_url: Il-URL tal-organizzazzjoni
+        redirect_uri: URI ridirett
+        site: Sit web
+  decidim:
+    admin:
+      actions:
+        add: Żid
+        browse: Ibbrawżja
+        export: Esporta
+        manage: Ġestixxi
+        new: "%{name} ġdid"
+        per_page: Għal kull paġna
+        permissions: Permessi
+        reject: Iċħad
+        share: Ixxerja
+        verify: Ivverifika
+      admin_terms_of_use:
+        accept:
+          error: Kien hemm żball waqt li kienu qed jiġu aċċettati t-termini tal-użu għall-amministraturi.
+          success: Tajjeb! Aċċettajt it-termini tal-użu għall-amministraturi.
+        actions:
+          accept: Naqbel ma’ dawn it-termini għall-amministraturi
+          are_you_sure: Żgur li trid tirrifjuta t-termini għall-amministraturi?
+          refuse: Irrifjuta t-termini għall-amministraturi
+          title: Aqbel mat-termini u l-kundizzjonijiet tal-użu
+        required_review:
+          alert: 'Meħtieġa: Eżamina t-termini tal-użu tagħna għall-amministraturi'
+          callout: Ħu ftit ħin biex teżamina t-Termini tal-Użu għall-Amministraturi. Inkella mhux se tkun tista’ tamministra l-pjattaforma.
+          cta: Eżaminahom issa.
+        title: It-Termini tal-Użu għall-Amministraturi
+      area_types:
+        create:
+          error: Kien hemm problema biex jinħoloq tip ta’ żona ġeografika ġdida.
+          success: It-tip ta’ żona ġeografika nħoloq.
+        destroy:
+          success: It-tip ta’ żona ġeografika nqered
+        edit:
+          title: Editja t-tip ta’ żona ġeografika
+          update: Aġġorna
+        new:
+          create: Oħloq tip ta’ żona ġeografika
+          title: Tip ta’ żona ġeografika ġdid
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ dan it-tip ta’ żona ġeografika.
+          success: It-tip ta’ żona ġeografika ġie aġġornat
+      areas:
+        create:
+          error: Kien hemm problema biex tinħoloq żona ġeografika ġdida.
+          success: Iż-żona ġeografika nħolqot.
+        destroy:
+          has_spaces: Iż-żona ġeografika għandha spazji dipendenti, biex titħassar ma jridx ikollha dipendenzi.
+          success: Iż-żona ġeografika nqerdet
+        edit:
+          title: Editja ż-żona ġeografika
+          update: Aġġorna
+        new:
+          create: Oħloq żona ġeografika
+          title: Żona ġeografika ġdida
+        no_areas: L-ebda Żona ġeografika
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ din iż-żona ġeografika.
+          success: Iż-żona ġeografika ġiet aġġornata
+      attachment_collections:
+        create:
+          error: Kien hemm problema biex jinħoloq fowlder ġdid.
+          success: Il-fowlder inħoloq.
+        destroy:
+          success: Il-fowlder inqered.
+        edit:
+          title: Editja l-fowlder
+          update: Aġġorna
+        index:
+          attachment_collection_used: Dan il-fowlder ma jistax jitneħħa minħabba li qed jintuża.
+          attachment_collections_title: Fowlders għall-hemżiet
+        new:
+          create: Oħloq
+          title: Fowlder ġdid
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ dan il-fowlder.
+          success: Il-fowlder ġie aġġornat.
+      attachments:
+        create:
+          error: Kien hemm problema biex tinħoloq hemża ġdida.
+          success: L-hemża nħolqot.
+        destroy:
+          success: L-hemża inqerdet.
+        edit:
+          title: Editja l-hemża
+          update: Aġġorna
+        index:
+          attachments_title: Hemżiet
+        new:
+          create: Oħloq hemża
+          title: Hemża ġdida
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ din l-hemża.
+          success: L-hemża ġiet aġġornata.
+      autocomplete:
+        no_results: Ma nstab l-ebda riżultat
+        search_prompt: Ittajpja mill-inqas tliet karattri biex tfittex
+      categories:
+        create:
+          error: Kien hemm problema biex tinħoloq din il-kategorija.
+          success: Il-kategorija nħolqot.
+        destroy:
+          error: Kien hemm problema biex titħassar din il-kategorija. L-ewwel ħassar is-sottokategoriji kollha, kun ċert li l-ebda entità oħra ma tappartjeni għal din il-kategorija u erġa’ pprova.
+          success: Il-kategorija tħassret.
+        edit:
+          title: Editja l-kategorija
+          update: Aġġorna
+        index:
+          categories_title: Kategoriji
+          category_used: Din il-kategorija ma tistax titneħħa għax qed tintuża.
+        new:
+          create: Oħloq kategorija
+          title: Kategorija ġdida
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ din il-kategorija.
+          success: Il-kategorija ġiet aġġornata.
+      component_permissions:
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ dan il-komponent.
+          success: Il-permessi ġew aġġornati.
+      components:
+        create:
+          error: Kien hemm problema biex jinħoloq dan il-komponent.
+          success: Il-komponent inħoloq.
+        destroy:
+          error: Kien hemm problema biex jinqered dan il-komponent.
+          success: Il-komponent tħassar.
+        edit:
+          title: Editja l-komponent
+          update: Aġġorna
+        form:
+          default_step_settings: Konfigurazzjonijiet tal-passi prestabbiliti
+          global_settings: Konfigurazzjonijiet globali
+          step_settings: Konfigurazzjonijiet tal-passi
+        index:
+          add: Żid komponent
+          headers:
+            actions: Azzjonijiet
+            name: Isem il-komponent
+            type: Tip ta' komponent
+        new:
+          add: Żid komponent
+          title: 'Żid komponent: %{name}'
+        publish:
+          success: Il-komponent ġie ppubblikat.
+        title: Komponenti
+        unpublish:
+          success: Il-komponent tneħħa mill-pubblikazzjoni.
+        update:
+          error: Kien hemm problema fl-aġġornament ta’ dan il-komponent.
+          success: Il-komponent ġie aġġornat.
+      dashboard:
+        show:
+          view_more_logs: Ara aktar logs
+          welcome: Merħba fid-Decidim Admin Panel.
+      exports:
+        export_as: "%{name} bħala %{export_format}"
+        notice: L-esportazzjoni tiegħek tinsab għaddejja. Se tirċievi email meta tkun lesta.
+      filters:
+        category_id_eq:
+          label: Kategorija
+        filter_label: Iffiltra
+        officialized_at_null:
+          label: Stat
+          values:
+            'false': Uffiċjalizzat
+            'true': Mhux uffiċjalizzat
+        private_space_eq:
+          label: Privat
+          values:
+            'false': Pubbliku
+            'true': Privat
+        published_at_null:
+          label: Ippubblikat
+          values:
+            'false': Ippubblikat
+            'true': Imneħħi mill-pubblikazzjoni
+        scope_id_eq:
+          label: Kamp ta’ applikazzjoni
+        search_label: Fittex
+        search_placeholder:
+          name_or_nickname_or_email_cont: Fittex %{collection} bl-email, bl-isem jew bl-identifikatur tal-utent.
+          title_cont: Fittex %{collection} skont it-titlu.
+        state_eq:
+          label: Stat
+      help_sections:
+        error: Kien hemm problema bl-aġġornament tas-sezzjonijiet tal-għajnuna
+        form:
+          save: Issejvja
+        success: Is-sezzjonijiet tal-għajnuna ġew aġġornati
+      impersonatable_users:
+        index:
+          filter:
+            all: Kollha
+            managed: Ġestiti
+            not_managed: Mhux ġestiti
+          filter_by: Iffiltra skont
+          impersonate: Impersonifika
+          impersonate_new_managed_user: Ġestixxi parteċipant ġdid
+          managed: Ġestiti
+          name: Isem
+          needs_authorization_warning: Teħtieġ mill-inqas awtorizzazzjoni waħda attivata għal din l-organizzazzjoni.
+          not_managed: Mhux ġestiti
+          promote: Ippromwovi
+          search: Fittex
+          view_logs: Ara l-logs
+      impersonations:
+        close_session:
+          error: Kien hemm problema biex tingħalaq is-sessjoni attwali ta’ ġestjoni tal-parteċipanti.
+          success: Is-sessjoni ta’ impersonifikazzjoni attwali ntemmet.
+        create:
+          error: Kien hemm problema fil-ġestjoni tal-parteċipant.
+          success: Il-parteċipant ġestit inħoloq.
+        form:
+          authorization_method: Metodu ta’ awtorizzazzjoni
+          name: Isem
+          reason: Raġuni
+        new:
+          impersonate: Impersonifika
+          impersonate_existing_managed_user: Ġestixxi l-parteċipant “%{name}”
+          impersonate_existing_user: Ġestixxi l-parteċipant “%{name}”
+          impersonate_new_managed_user: Ġestixxi parteċipant ġdid
+      logs:
+        logs_list:
+          no_logs_yet: Għad m’hemmx logs
+      managed_users:
+        promotion:
+          error: Kien hemm problema fil-promozzjoni tal-parteċipant ġestit.
+          success: Il-parteċipant ġestit ġie promoss.
+        promotions:
+          new:
+            explanation: Il-parteċipanti ġestiti jistgħu jiġu promossi għal parteċipanti standard. Dan ifisser li se jiġu mistiedna għall-applikazzjoni u ma tkunx tista’ terġa’ ġġestihom. Il-parteċipant mistieden se jirċievi email biex jaċċetta l-istedina tiegħek.
+            new_managed_user_promotion: Promozzjoni ta’ parteċipant ġestit ġdid
+            promote: Ippromwovi
+      menu:
+        admin_log: Log tal-attività tal-amministratur
+        admins: Amministraturi
+        appearance: Dehra
+        area_types: Tipi ta’ żoni ġeografiċi
+        areas: Żoni ġeografiċi
+        configuration: Konfigurazzjoni
+        help_sections: Sezzjonijiet tal-għajnuna
+        homepage: Paġna ewlenija
+        impersonations: Impersonifikazzjonijiet
+        newsletters: Newslatters
+        participants: Parteċipanti
+        scope_types: Tipi ta’ kampijiet ta’ applikazzjoni
+        scopes: Kampijiet ta’ applikazzjoni
+        settings: Konfigurazzjonijiet
+        static_pages: Paġni
+        user_groups: Gruppi
+        users: Parteċipanti
+      metrics:
+        metrics:
+          see_more_metrics: Ara aktar metriċi
+      models:
+        area:
+          fields:
+            area_type: Tip ta’ żona ġeografika
+            name: Isem
+        area_type:
+          fields:
+            name: Isem
+        attachment:
+          fields:
+            collection: Fowlder
+            content_type: Tip
+            file_size: Daqs
+            title: Titlu
+          name: Hemża
+        attachment_collection:
+          name: Fowlder
+        category:
+          name: Kategorija
+        impersonation_log:
+          fields:
+            admin: Amministratur
+            ended_at: Intemm fi
+            expired_at: Skada fi
+            reason: Raġuni
+            started_at: Beda fi
+            user: Parteċipant
+        newsletter:
+          fields:
+            created_at: Inħoloq fi
+            sent_at: Intbagħat fi
+            sent_to: Intbagħat lil
+            subject: Suġġett
+          name: Bullettin
+        participatory_space_private_user:
+          name: Parteċipant privat għal spazju parteċipatorju
+        scope:
+          fields:
+            name: Isem
+            scope_type: Tip ta’ kamp ta’ applikazzjoni
+        scope_type:
+          fields:
+            name: Isem
+        share_token:
+          fields:
+            created_at: Inħoloq fi
+            expires_at: Jiskadi fi
+            last_used_at: L-aħħar li ntuża
+            times_used: Drabi li ntuża
+            user: Inħoloq minn
+        static_page:
+          fields:
+            created_at: Inħoloq fi
+            title: Titlu
+        user:
+          fields:
+            created_at: Data meta nħoloq
+            last_sign_in_at: Data tal-aħħar illoggjar
+            name: Isem
+            role: Rwol
+            roles:
+              admin: Amministratur
+              user_manager: Ġestjonarju tal-parteċipanti
+          name: Parteċipant
+        user_group:
+          fields:
+            actions: Azzjonijiet
+            created_at: Inħoloq fi
+            document_number: Numru tad-dokument
+            name: Isem
+            phone: Telefown
+            state: Stat
+            users_count: Għadd ta’ parteċipanti
+      moderations:
+        index:
+          title: Moderazzjonijiet
+        report:
+          reasons:
+            does_not_belong: Ma jappartjenix
+            offensive: Offensiv
+      newsletter_templates:
+        index:
+          title: Mudelli tal-bullettini
+          use_template: Uża dan il-mudell
+        show:
+          preview: 'Mudell tal-preview: %{template_name}'
+          use_template: Uża dan il-mudell
+      newsletters:
+        create:
+          error: Kien hemm problema biex jinħoloq dan il-bullettin.
+          success: Il-bullettin inħoloq. Irrevedih qabel ma tibagħtu.
+        deliver:
+          error: Kien hemm problema biex jintbagħat il-bullettin.
+          success: Il-bullettin intbagħat.
+        destroy:
+          error_already_sent: 'Ma tistax teqred il-bullettin: Diġà ntbagħat.'
+          success: Il-bullettin inqered.
+        edit:
+          save_and_preview: Issejvja u ara l-preview
+          title: Editja l-bullettin
+        index:
+          all: kollha
+          all_users: L-utenti kollha
+          and: u
+          confirm_delete: Żgur trid tħassar dan il-bullettin?
+          followers: segwaċi
+          has_been_sent_to: 'Intbagħat lil:'
+          no_scopes: L-ebda kamp ta’ applikazzjoni
+          not_sent: Mhux mibgħut
+          participants: parteċipanti
+          segmented_to: 'Issegmentat għal %{subject}:'
+          subscribed_count: 'Abbonat:'
+          title: Bullettini
+        new:
+          save: Issejvja
+          title: Bullettin ġdid
+        select_recipients_to_deliver:
+          all_spaces: Kollha
+          all_users_help: Tibgħat bullettin lill-utenti kkonfermati kollha.
+          confirm_deliver: Żgur trid tibgħat dan il-bullettin? Din l-azzjoni ma tistax titreġġa' lura.
+          deliver: Ibgħat il-bullettin
+          followers_help: Tibgħat il-bullettin lill-utenti kkonfermati kollha li jsegwu kwalunkwe spazju parteċipatorju magħżul fil-lista.
+          none: L-ebda
+          participants_help: Tibgħat il-bullettin lill-utenti kkonfermati kollha li jkunu pparteċipaw fi kwalunkwe spazju parteċipatorju magħżul fil-lista.
+          recipients_count: Dan il-bullettin se jintbagħat lil <strong id='recipients_count'>%{count}</strong> utent(i).
+          scopes_help: Tibgħat il-bullettin lill-utenti li għandhom kwalunkwe wieħed mill-kampijiet ta’ applikazzjoni magħżulin attivati fil-konfigurazzjoni ta’ “L-Interessi Tiegħi” tal-kont tagħhom.
+          select_scopes: Iffiltra għall-utenti li jkunu attivaw kwalunkwe kamp ta’ applikazzjoni magħżul fil-konfigurazzjoni ta’ L-Interessi Tiegħi tal-kont tagħhom.
+          select_spaces: Agħżel l-ispazji biex tissegmenta l-bullettin
+          select_users: Agħżel lil liema utenti tixtieq li tibgħat il-bullettin
+          send_to_all_users: Ibgħat lill-utenti kollha
+          send_to_followers: Ibgħat lis-segwaċi
+          send_to_participants: Ibgħat lill-parteċipanti
+          title: Agħżel ir-riċevituri li trid li jintbagħtilhom
+          warning: "<strong>Attenti:</strong> Dan il-bullettin se jintbagħat biss lill-utenti li attivaw <em>Nixtieq nirċievi l-bullettini</em> fil-konfigurazzjonijiet tan-notifiki tagħhom."
+        send:
+          no_recipients: L-ebda riċevitur għal din l-għażla
+        show:
+          select_recipients_to_deliver: Agħżel ir-riċevituri li trid li jintbagħtilhom
+          subject: Suġġett
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ dan il-bullettin.
+          success: Il-bullettin ġie aġġornat. Irrevedih qabel ma tibagħtu.
+      officializations:
+        create:
+          success: Il-parteċipant ġie uffiċjalizzat
+        destroy:
+          success: Il-parteċipant tneħħa minn uffiċjalizzat
+        index:
+          actions: Azzjonijiet
+          created_at: Inħoloq fi
+          name: Isem
+          nickname: Identifikatur
+          not_officialized: Mhux uffiċjalizzat
+          officialize: Uffiċjalizza
+          officialized: Uffiċjalizzat
+          reofficialize: Uffiċjalizza mill-ġdid
+          show_email: Uri l-indirizz tal-email
+          unofficialize: Neħħi minn uffiċjalizzat
+        new:
+          badge: Badge ta’ uffiċjalizzazzjoni
+          officialize: Uffiċjalizza
+          title: Uffiċjalizza l-parteċipant "%{name}”
+        show_email_modal:
+          close_modal: Agħlaq il-kaxxa ż-żgħira
+          description: Jekk ikollok bżonn tikkuntattja parteċipant direttament tista’ tikklikkja fuq il-buttuna Uri biex tara l-indirizz tal-email. Din l-azzjoni se tiġi rreġistrata.
+          email_address: Indirizz tal-email
+          full_name: Isem sħiħ
+          hidden: moħbi
+          show: Uri
+          title: Uri l-indirizz tal-email tal-parteċipant
+      organization:
+        edit:
+          title: Editja l-organizzazzjoni
+          update: Aġġorna
+        form:
+          rich_text_editor_in_public_views_help: F’xi partijiet tat-test, il-parteċipanti se jkunu jistgħu jdaħħlu xi tags tal-HTML billi jużaw ir-rich text editor.
+          social_handlers: Midja Soċjali
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ din l-organizzazzjoni.
+          success: L-organizzazzjoni ġiet aġġornata.
+      organization_appearance:
+        edit:
+          update: Aġġorna
+        form:
+          colors:
+            colors_title: Kuluri tal-organizzazzjoni
+            header_snippets_help: Uża dan il-kamp tad-data biex iżżid l-affarijiet mal-HTML head. L-aktar użu komuni huwa l-integrazzjoni ta’ servizzi ta’ partijiet terzi li jeħtieġu xi JavaScript jew CSS addizzjonali. Barra minn hekk, tista’ tużah biex iżżid meta tags addizzjonali mal-HTML. Innota li dan se jidher biss f’paġni pubbliċi, mhux fis-sezzjoni tal-amministratur.
+          cta_button_path_help: 'Tista’ tikteb fuq fejn twasslek il-buttuna Sejħa għal Azzjoni fil-paġna ewlenija. Uża indirizzi parzjali, mhux URLs sħaħ hawnhekk. Jaċċetta ittri, numri, singijiet u slashes, u jrid jibda b’ittra. Il-buttuna Sejħa għal Azzjoni tidher fil-paġna ewlenija bejn it-test ta’ merħba u d-deskrizzjoni. Eżempju: %{url}'
+          cta_button_text_help: Tista’ tikteb fuq it-test tal-buttuna Sejħa għal Azzjoni fil-paġna ewlenija għal kull lingwa disponibbli fl-organizzazzjoni tiegħek. Jekk ma jiġix issettjat, jintuża l-valur prestabbilit. Il-buttuna Sejħa għal Azzjoni tidher fil-paġna ewlenija bejn it-test ta’ merħba u d-deskrizzjoni.
+          homepage_appearance_title: Editja d-dehra tal-paġna ewlenija
+          homepage_highlighted_content_banner_title: Strixxun tal-kontenut iħħajlajtjat
+          images:
+            layout_appearance_title: Editja d-dehra tal-layout
+          omnipresent_banner_appearance_title: Editja strixxun omnipreżenti
+      organization_homepage:
+        edit:
+          active_content_blocks: Blokok ta’ kontenut attiv
+          inactive_content_blocks: Blokok ta’ kontenut inattiv
+      organization_homepage_content_blocks:
+        edit:
+          update: Aġġorna
+      participatory_space_private_users:
+        create:
+          error: Kien hemm problema biex jinżdied parteċipant privat għal dan l-ispazju parteċipatorju.
+          success: L-aċċess għall-parteċipant privat għal spazju parteċipatorju inħoloq.
+        destroy:
+          error: Kien hemm problema biex jitħassar parteċipant privat għal dan l-ispazju parteċipatorju.
+          success: L-aċċess tal-parteċipanti privati għall-ispazju parteċipatorju inqered.
+        index:
+          import_via_csv: Importa permezz tas-csv
+          title: Parteċipant privat għal spazju parteċipatorju
+        new:
+          create: Oħloq
+          title: Parteċipant privat għal Spazju Parteċipatorju ġdid.
+      participatory_space_private_users_csv_imports:
+        create:
+          invalid: Kien hemm problema biex jinqara l-fajl CSV.
+          success: Il-fajl CSV tela’, qed nibagħtu email ta’ stedina lill-parteċipanti. Dan jista’ jieħu ż-żmien.
+        new:
+          explanation: Tella’ l-fajl CSV tiegħek. Dan irid ikollu żewġ kolonni bl-email fl-ewwel kolonna tal-fajl u l-isem fl-aħħar kolonna tal-fajl (email, isem) tal-utenti li tixtieq iżżid fl-ispazju parteċipatorju, mingħajr headers.
+          title: Tella’ l-fajl CSV tiegħek
+          upload: Tella'
+      resource_permissions:
+        edit:
+          submit: Issottometti
+          title: Editja l-permessi
+        update:
+          success: Il-permessi ġew aġġornati.
+      scope_types:
+        create:
+          error: Kien hemm problema biex jinħoloq tip ta’ kamp ta’ applikazzjoni ġdid.
+          success: It-tip ta’ kamp ta' applikazzjoni inħoloq.
+        destroy:
+          success: It-tip ta’ kamp ta’ applikazzjoni nqered
+        edit:
+          title: Editja t-tip ta’ kamp ta’ applikazzjoni
+          update: Aġġorna
+        new:
+          create: Oħloq tip ta’ kamp ta’ applikazzjoni
+          title: Kamp ta’ applikazzjoni ġdid
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ dan it-tip ta’ kamp ta’ applikazzjoni.
+          success: It-tip ta’ kamp ta' applikazzjoni ġie aġġornat
+      scopes:
+        create:
+          error: Kien hemm problema biex jinħoloq kamp ta’ applikazzjoni ġdid.
+          success: Il-kamp ta' applikazzjoni nħoloq.
+        destroy:
+          success: Il-kamp ta’ applikazzjoni nqered
+        edit:
+          title: Editja l-kamp ta’ applikazzjoni
+          update: Aġġorna
+        new:
+          create: Oħloq kamp ta’ applikazzjoni
+          title: Kamp ta’ applikazzjoni ġdid
+        no_scopes: L-ebda kamp ta’ applikazzjoni f’dan il-livell.
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ dan il-kamp ta’ applikazzjoni.
+          success: Il-kamp ta' applikazzjoni ġie aġġornat
+      share_tokens:
+        actions:
+          confirm_destroy: Żgur trid tħassar dan it-token?
+          destroy: Ħassar
+          share: Ixxerja
+        destroy:
+          error: Kien hemm problema biex jinqered it-token.
+          success: It-token inqered.
+        share_tokens:
+          empty: M’hemmx tokens attivi
+          help: Dawn it-tokens jintużaw biex din ir-riżorsa mhux ippubblikata tiġi xxerjata ma’ kwalunkwe utent. Dawn se jkunu moħbija meta tiġi ppubblikata r-riżorsa. Ikklikkja l-ikona tal-ixxerjar tat-token biex iżżur il-URL li jista’ jiġi xxerjat.
+          title: Tokens tal-ixxerjar
+      shared:
+        gallery:
+          add_images: Żid immaġnijiet
+          delete_image: Ħassar Immaġni
+          gallery_legend: Żid gallerija ta’ immaġnijiet (Fakultattiva)
+      static_page_topics:
+        create:
+          error: Kien hemm problema biex jinħoloq suġġett ġdid.
+          success: Is-suġġett inħoloq.
+        destroy:
+          success: Is-suġġett inqered
+        edit:
+          title: Editja s-suġġett
+          update: Aġġorna s-suġġett
+        new:
+          create: Oħloq suġġett
+          title: Suġġett ġdid
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ dan is-suġġett.
+          success: Is-suġġett ġie aġġornat
+      static_pages:
+        actions:
+          view: Ara l-paġna pubblika
+        create:
+          error: Kien hemm problema biex tinħoloq paġna ġdida.
+          success: Il-paġna nħolqot.
+        destroy:
+          success: Il-paġna nqerdet
+        edit:
+          changed_notably_help: Jekk tkun immarkata, il-parteċipanti jiġu nnotifikati biex jaċċettaw it-termini u l-kundizzjonijiet il-ġodda.
+          title: Editja l-paġna
+          update: Aġġorna
+        form:
+          none: L-ebda
+          slug_help: 'Uża indirizzi parzjali, mhux URLs sħaħ hawnhekk. Jaċċetta ittri, numri, singijiet u slashes, u jrid jibda b’ittra. Eżempju: %{url}'
+        index:
+          last_notable_change: L-aħħar bidla notevoli
+        new:
+          create: Oħloq paġna
+          title: Paġna ġdida
+        topic:
+          destroy: Neħħi s-suġġett
+          edit: Editja s-suġġett
+          empty: Ma hemm l-ebda paġna taħt dan is-suġġett
+          without_topic: Paġni mingħajr suġġett
+        update:
+          error: Kien hemm problema bl-aġġornament ta’ dan il-paġna.
+          success: Il-paġna ġiet aġġornata
+      titles:
+        admin_log: Log tal-amministratur
+        area_types: Tipi ta’ żoni ġeografiċi
+        areas: Żoni ġeografiċi
+        authorization_workflows: Metodi ta' verifika
+        impersonatable_users: Parteċipanti ġestjonabbli
+        impersonations: Ġestjoni tal-parteċipanti
+        metrics: Metriċi
+        participants: Parteċipanti
+        scope_types: Tipi ta’ kampijiet ta’ applikazzjoni
+        scopes: Kampijiet ta’ applikazzjoni
+        static_pages: Paġni
+        statistics: Attività
+        user_groups: Gruppi
+        users: Parteċipanti
+      user_group:
+        csv_verify:
+          invalid: Kien hemm problema biex jinqara l-fajl CSV.
+          success: Il-fajl CSV tela’, qed nivverifikaw il-gruppi li jaqblu mal-kriterji. Dan jista’ jieħu ż-żmien.
+        reject:
+          invalid: Kien hemm problema biċ-ċaħda ta’ dan il-grupp.
+          success: Il-grupp ġie miċħud
+        verify:
+          invalid: Kien hemm problema bil-verifika ta’ dan il-grupp.
+          success: Il-grupp ġie vverifikat
+      user_groups:
+        index:
+          filter:
+            all: Kollha
+            pending: Pendenti
+            rejected: Miċħud
+            verified: Ivverifikat
+          filter_by: Iffiltra skont
+          search: Fittex
+          state:
+            pending: Pendenti
+            rejected: Miċħud
+            verified: Ivverifikat
+          verify_via_csv: Ivverifika permezz tas-CSV
+      user_groups_csv_verifications:
+        new:
+          explanation: Tella’ l-fajl CSV tiegħek. Irid ikollu l-emails uffiċjali tal-gruppi fl-organizzazzjoni tiegħek fl-ewwel kolonna tal-fajl, mingħajr headers. Se jiġu vvalidati biss il-gruppi li kkonfermaw l-email tagħhom u li għandhom email li tidher fil-fajl CSV.
+          title: Tella’ l-fajl CSV tiegħek
+          upload: Tella'
+      users:
+        create:
+          error: Kien hemm problema biex jiġi mistieden dan l-amministratur.
+          success: Il-parteċipant ġie mistieden.
+        destroy:
+          error: Kien hemm problema biex jitħassar dan l-amministratur.
+          success: Il-parteċipant m’għadux amministratur.
+        form:
+          name: Isem
+          role: Rwol
+        new:
+          create: Stieden
+          title: Stieden parteċipant bħala amministratur
+      users_statistics:
+        users_count:
+          admins: Amministraturi
+          last_day: L-aħħar jum
+          last_month: L-aħħar xahar
+          last_week: L-aħħar ġimgħa
+          no_users_count_statistics_yet: Għad m’hemm l-ebda statistika dwar l-għadd tal-utenti
+          participants: Parteċipanti
+      view_public_page: Ara l-paġna pubblika
+    forms:
+      errors:
+        impersonate_user:
+          reason: Trid tipprovdi raġuni meta tiġġestixxi parteċipant mhux ġestit
+    moderations:
+      actions:
+        hidden: Moħbi
+        hide: Aħbi
+        not_hidden: Mhux moħbi
+        title: Azzjonijiet
+        unhide: Ikxef
+        unreport: Neħħi r-rapport
+      admin:
+        reportable:
+          hide:
+            invalid: Kien hemm problema biex tinħeba r-riżorsa.
+            success: Ir-riżorsa nħbiet.
+          unhide:
+            invalid: Kien hemm problema biex tinkixef ir-riżorsa.
+            success: Ir-riżorsa nkixfet.
+          unreport:
+            invalid: Kien hemm problema biex jitneħħa r-rapport tar-riżorsa.
+            success: Ir-riżorsa tneħħielha r-rapport.
+      models:
+        moderation:
+          fields:
+            hidden_at: Moħbi fi
+            report_count: Għadd
+            reportable: Rapportabbli
+            reported_content_url: URL tal-kontenut irrapportat
+            reports: Rapporti
+            visit_url: Żur URL
+  errors:
+    messages:
+      invalid_json: JSON invalidu
+  layouts:
+    decidim:
+      admin:
+        newsletters:
+          title: Bullettini
+        settings:
+          title: Konfigurazzjonijiet
+        users:
+          title: Parteċipanti
