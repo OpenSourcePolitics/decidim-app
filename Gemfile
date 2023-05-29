@@ -7,6 +7,9 @@ DECIDIM_BRANCH = "release/#{DECIDIM_VERSION}-stable"
 
 ruby RUBY_VERSION
 
+# Many gems depend on environment variables, so we load them as soon as possible
+gem "dotenv-rails", require: "dotenv/rails-now"
+
 # Core gems
 gem "decidim", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-conferences", "~> #{DECIDIM_VERSION}.0"

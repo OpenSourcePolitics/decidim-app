@@ -1,0 +1,143 @@
+---
+el:
+  activemodel:
+    attributes:
+      oauth_application:
+        name: Όνομα εφαρμογής OAuth
+        organization_logo: Λογότυπο οργανισμού (τετράγωνο)
+        organization_name: Οργανισμός
+        organization_url: URL οργανισμού
+        redirect_uri: URI ανακατεύθυνσης
+    errors:
+      models:
+        oauth_application:
+          attributes:
+            redirect_uri:
+              must_be_ssl: Το URI ανακατεύθυνσης πρέπει να είναι URI SSL
+  decidim:
+    system:
+      actions:
+        confirm_destroy: Είστε βέβαιοι ότι θέλετε να το διαγράψετε;
+        destroy: Διαγραφή
+        edit: Επεξεργασία
+        new: Νέο
+        save: Αποθήκευση
+        title: Ενέργειες
+      admins:
+        create:
+          error: Παρουσιάστηκε πρόβλημα κατά τη δημιουργία νέου διαχειριστή.
+          success: Ο διαχειριστής δημιουργήθηκε με επιτυχία
+        destroy:
+          success: Ο διαχειριστής διαγράφηκε με επιτυχία
+        edit:
+          title: Επεξεργασία διαχειριστή
+          update: Επικαιροποίηση
+        index:
+          title: Διαχειριστές
+        new:
+          create: Δημιουργία
+          title: Νέος διαχειριστής
+        update:
+          error: Παρουσιάστηκε πρόβλημα κατά την επικαιροποίηση του διαχειριστή.
+          success: Ο διαχειριστής επικαιροποιήθηκε με επιτυχία
+      default_pages:
+        placeholders:
+          content: Προσθέστε ουσιαστικό περιεχόμενο στη στατική σελίδα %{page} στον πίνακα εργαλείων διαχείρισης.
+          title: Προεπιλεγμένος τίτλος για %{page}
+      menu:
+        admins: Διαχειριστές
+        dashboard: Πίνακας εργαλείων
+        oauth_applications: Εφαρμογές OAuth
+        organizations: Οργανισμοί
+      models:
+        admin:
+          fields:
+            created_at: Δημιουργήθηκε στις
+          name: Διαχειριστής
+          validations:
+            email_uniqueness: υπάρχει ήδη άλλος διαχειριστής με το ίδιο email
+        oauth_application:
+          fields:
+            created_at: Δημιουργήθηκε στις
+            name: Όνομα εφαρμογής OAuth
+            organization_name: Οργανισμός
+          name: Εφαρμογή OAuth
+        organization:
+          actions:
+            save_and_invite: Δημιουργία οργανισμού και πρόσκληση διαχειριστή
+          fields:
+            created_at: Δημιουργήθηκε στις
+            name: Όνομα
+            omniauth_settings: Ρυθμίσεις Omniauth
+            smtp_settings: Ρυθμίσεις SMTP
+          name: Οργανισμός
+      oauth_applications:
+        create:
+          error: Παρουσιάστηκε πρόβλημα κατά τη δημιουργία αυτής της εφαρμογής.
+          success: Η εφαρμογή δημιουργήθηκε με επιτυχία.
+        destroy:
+          error: Παρουσιάστηκε πρόβλημα κατά τη διαγραφή αυτής της εφαρμογής.
+          success: Η εφαρμογή διαγράφηκε με επιτυχία.
+        edit:
+          save: Αποθήκευση
+          title: Επεξεργασία εφαρμογής
+        form:
+          select_organization: Επιλέξτε οργανισμό
+        index:
+          confirm_delete: Είστε βέβαιοι ότι θέλετε να διαγράψετε την εφαρμογή;
+          title: Εφαρμογές OAuth
+        new:
+          save: Αποθήκευση
+          title: Νέα αίτηση
+        update:
+          error: Παρουσιάστηκε πρόβλημα κατά την επικαιροποίηση αυτής της εφαρμογής.
+          success: Η εφαρμογή επικαιροποιήθηκε με επιτυχία.
+      organizations:
+        create:
+          error: Παρουσιάστηκε πρόβλημα κατά τη δημιουργία νέου οργανισμού.
+          success: Ο οργανισμός δημιουργήθηκε με επιτυχία
+        edit:
+          secondary_hosts_hint: Εισαγάγετε κάθε έναν από αυτούς σε μια νέα γραμμή
+        index:
+          title: Οργανισμοί
+        new:
+          reference_prefix_hint: Το πρόθεμα αναφοράς χρησιμοποιείται για τον μοναδικό προσδιορισμό των πόρων σε ολόκληρο τον οργανισμό
+          secondary_hosts_hint: Εισαγάγετε κάθε έναν από αυτούς σε μια νέα γραμμή
+          title: Νέος οργανισμός
+        omniauth_settings:
+          decidim:
+            client_id: Αναγνωριστικό προγράμματος-πελάτη
+            client_secret: Μυστικός κωδικός προγράμματος-πελάτη
+            site_url: URL ιστότοπου
+          enabled: Ενεργοποιημένος
+          enabled_by_default: Αυτός ο πάροχος είναι ενεργοποιημένος από προεπιλογή. Είναι δυνατή η επεξεργασία, αλλά όχι η απενεργοποίησή του.
+          facebook:
+            app_id: Αναγνωριστικό εφαρμογής
+            app_secret: Μυστικός κωδικός εφαρμογής
+          google_oauth2:
+            client_id: Αναγνωριστικό προγράμματος-πελάτη
+            client_secret: Μυστικός κωδικός προγράμματος-πελάτη
+          icon: Εικονίδιο
+          icon_path: Διαδρομή εικονιδίου
+          twitter:
+            api_key: Κλειδί API
+            api_secret: Μυστικός κωδικός API
+        smtp_settings:
+          instructions:
+            from_label: 'Ο αποστολέας email θα είναι: "το-όνομα-του-οργανισμού-σας <ο-οργανισμός-σας@ο-πάροχός-σας.org>". Αφήστε το κενό για να χρησιμοποιήσετε το ''from_email'' ως ετικέτα'
+          placeholder:
+            from_email: ο-οργανισμός-σας@ο-πάροχός-σας.org
+            from_label: το-όνομα-του-οργανισμού-σας
+        update:
+          error: Παρουσιάστηκε πρόβλημα κατά την επικαιροποίηση αυτού του οργανισμού.
+          success: Ο οργανισμός επικαιροποιήθηκε με επιτυχία
+        users_registration_mode:
+          disabled: Η πρόσβαση είναι εφικτή μόνο με εξωτερικούς λογαριασμούς
+          enabled: Να επιτρέπεται στους συμμετέχοντες να εγγραφούν και να συνδεθούν
+          existing: Να μην επιτρέπεται στους συμμετέχοντες να εγγραφούν, αλλά να επιτρέπεται στους υπάρχοντες συμμετέχοντες να συνδεθούν
+      shared:
+        notices:
+          no_organization_warning_html: Πρέπει να δημιουργήσετε έναν οργανισμό για να ξεκινήσετε. Βεβαιωθείτε ότι έχετε διαβάσει τον οδηγό %{guide} προτού συνεχίσετε.
+          our_getting_started_guide: ο οδηγός έναρξης χρήσης μας
+      titles:
+        dashboard: Πίνακας εργαλείων

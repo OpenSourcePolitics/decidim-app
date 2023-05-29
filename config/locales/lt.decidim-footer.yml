@@ -1,0 +1,80 @@
+---
+lt:
+  decidim:
+    footer_links:
+      common:
+        items:
+          about_this_site: Apie šią svetainę
+          cookies: Slapukai
+          language_policy: Kalbų politika
+          legal_notice: Teisinis pranešimas
+          sitemap: Svetainės struktūra
+      contact_the_eu:
+        items:
+          call_us: Skambinkite mums telefonu <a href="tel:0080067891011">00 800 6 7 8 9 10 11</a>
+          contact_form: Rašykite e. paštu naudodamiesi <a href="https://europa.eu/european-union/contact/write-to-us_lt">kontaktine forma</a>
+          meet_us: Susitikite su mumis <a href="https://europa.eu/european-union/contact/meet-us_lt">vietiniame ES biure</a>
+          other_telephone: Pasinaudokite kitomis <a href="https://europa.eu/european-union/contact/call-us_lt">telefoninio ryšio</a> galimybėmis
+        title: Kontaktai
+      eu_institution:
+        items:
+          agencies:
+            label: Agentūros
+            url: https://europa.eu/european-union/about-eu/agencies_lt
+          central_bank:
+            label: Europos Centrinis Bankas (ECB)
+            url: https://www.ecb.europa.eu/home/languagepolicy/html/index.lt.html
+          commission:
+            label: Europos Komisija
+            url: http://ec.europa.eu/index_lt.htm
+          council:
+            label: Europos Vadovų Taryba
+            url: http://www.consilium.europa.eu/lt/european-council/
+          council_eu:
+            label: Europos Sąjungos Taryba
+            url: http://www.consilium.europa.eu/lt/home/
+          court_of_auditors:
+            label: Europos Audito Rūmai
+            url: http://www.eca.europa.eu/lt
+          court_of_justice:
+            label: Europos Sąjungos Teisingumo Teismas
+            url: http://curia.europa.eu/jcms/jcms/j_6/lt/
+          data_protection_supervisor:
+            label: Europos duomenų apsaugos priežiūros pareigūnas (EDAPP)
+            url: https://secure.edps.europa.eu/EDPSWEB/edps/EDPS?lang=lt
+          dpb:
+            label: Eiropas Datu aizsardzības kolēģija
+            url: https://edpb.europa.eu/edpb_lt
+          economic_social_committee:
+            label: Europos ekonomikos ir socialinių reikalų komitetas (EESRK)
+            url: http://www.eesc.europa.eu/?i=portal.lt.home
+          eu_regional_comittee:
+            label: Europos regionų komitetas
+            url: http://cor.europa.eu/lt/
+          external_action_service:
+            label: Europos išorės veiksmų tarnyba (EIVT)
+            url: http://eeas.europa.eu/index_lt.htm
+          investment_bank:
+            label: Europos investicijų bankas (EIB)
+            url: https://www.eib.org/en/index.htm
+          ombudsman:
+            label: Europos ombudsmenas
+            url: https://www.ombudsman.europa.eu/lt/home
+          parliament:
+            label: Europos Parlamentas
+            url: http://www.europarl.europa.eu/portal/lt/
+          pou:
+            label: Europos Sąjungos leidinių biuras
+            url: https://op.europa.eu/lt/home
+          pso:
+            label: Europos personalo atrankos tarnyba
+            url: https://epso.europa.eu/home_lt
+        title: ES institucijоs
+      social_media:
+        items:
+          search_channels:
+            label: ES socialinės žiniasklaidos kanalai
+            url: https://europa.eu/european-union/contact/social-networks_lt
+        title: Socialinės žiniasklaidos paskyros paieška
+    footer_menu:
+      organization: Konferencija dėl Europos ateities

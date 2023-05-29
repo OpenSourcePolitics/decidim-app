@@ -1,0 +1,54 @@
+---
+mt:
+  activemodel:
+    attributes:
+      dummy_resource:
+        created_at: Inħolqot fi
+        decidim_scope_id: Kamp ta’ applikazzjoni
+        field: Il-kamp tad-data tiegħi
+        start_date: Data tal-bidu
+        title: Titlu
+        translatable_text: Test traduċibbli
+        updated_at: Aġġornat fi
+  decidim:
+    components:
+      dummy:
+        settings:
+          global:
+            readonly_attribute: Attribut għall-qari biss
+            test: Test A
+            test_choices:
+              a: Għażla A
+              b: Għażla B
+              c: Għażla C
+          step:
+            endorsements_blocked: Approvazzjonijiet imblukkati
+            endorsements_enabled: Approvazzjonijiet attivati
+            readonly_step_attribute: Pass tal-attribut għall-qari biss
+    dummy:
+      admin:
+        exports:
+          dummies: Finet
+    gamification:
+      badges:
+        test:
+          conditions: Uża ambjent tat-test għal decidim.
+          description: Il-parteċipanti jiksbu din il-badge billi joħolqu t-testijiet.
+          description_another: Dan il-parteċipant ħoloq %{score} test(ijiet).
+          description_own: Ħloqt %{score} test(ijiet).
+          name: Testijiet
+          next_level_in: Oħloq %{score} testijiet oħra biex tilħaq il-livell li jmiss!
+          unearned_another: Dan il-parteċipant għadu ma ħoloq l-ebda test.
+          unearned_own: Għadek ma ħloqt l-ebda test.
+    pages:
+      home:
+        statistics:
+          dummies_count_high: Finet għoljin
+          dummies_count_medium: Finet medji
+    participatory_processes:
+      statistics:
+        dummies_count_high: Għoljin
+        dummies_count_medium: Medji
+    resource_links:
+      test_link:
+        dummy_resource_dummy: Finta relatata

@@ -1,0 +1,80 @@
+---
+cs:
+  decidim:
+    footer_links:
+      common:
+        items:
+          about_this_site: O těchto stránkách
+          cookies: Cookies
+          language_policy: Jazyková politika
+          legal_notice: Právní upozornění
+          sitemap: Mapa stránek
+      contact_the_eu:
+        items:
+          call_us: Zavolejte nám na linku <a href="tel:0080067891011">00 800 6 7 8 9 10 11</a>
+          contact_form: Napište nám pomocí <a href="https://europa.eu/european-union/contact/write-to-us_cs">kontaktního formuláře</a>
+          meet_us: Přijďte osobně do <a href="https://europa.eu/european-union/contact/meet-us_cs">nejbližší kanceláře EU</a>
+          other_telephone: Kontaktujte nás na <a href="https://europa.eu/european-union/contact/call-us_cs">jiném čísle</a>
+        title: Jak kontaktovat EU
+      eu_institution:
+        items:
+          agencies:
+            label: Agentury
+            url: https://europa.eu/european-union/about-eu/agencies_cs
+          central_bank:
+            label: Evropská centrální banka (ECB)
+            url: https://www.ecb.europa.eu/home/languagepolicy/html/index.cs.html
+          commission:
+            label: Evropská komise
+            url: https://ec.europa.eu/info/index_cs
+          council:
+            label: Evropská rada
+            url: http://www.consilium.europa.eu/cs/european-council/
+          council_eu:
+            label: Rada Evropské unie
+            url: http://www.consilium.europa.eu/cs/home/
+          court_of_auditors:
+            label: Evropský účetní dvůr (EÚD)
+            url: http://www.eca.europa.eu/cs
+          court_of_justice:
+            label: Soudní dvůr Evropské unie
+            url: http://curia.europa.eu/jcms/jcms/j_6/cs/
+          data_protection_supervisor:
+            label: Evropský inspektor ochrany údajů
+            url: https://secure.edps.europa.eu/EDPSWEB/edps/EDPS?lang=cs
+          dpb:
+            label: Evropský sbor pro ochranu osobních údajů
+            url: https://edpb.europa.eu/edpb_cs
+          economic_social_committee:
+            label: Evropský hospodářský a sociální výbor (EHSV)
+            url: http://www.eesc.europa.eu/?i=portal.cs.home
+          eu_regional_comittee:
+            label: Evropský výbor regionů
+            url: https://cor.europa.eu/cs
+          external_action_service:
+            label: Evropská služba pro vnější činnost (ESVČ)
+            url: https://eeas.europa.eu/headquarters/headquarters-homepage_en
+          investment_bank:
+            label: Evropská investiční banka (EIB)
+            url: https://www.eib.org/en/index.htm
+          ombudsman:
+            label: Evropský veřejný ochránce práv
+            url: https://www.ombudsman.europa.eu/cs/home
+          parliament:
+            label: Evropský parlament
+            url: http://www.europarl.europa.eu/portal/cs
+          pou:
+            label: Úřad pro publikace Evropské unie
+            url: https://op.europa.eu/cs/home
+          pso:
+            label: Úřad pro výběr personálu Evropských společenství
+            url: https://epso.europa.eu/home_cs
+        title: Orgány EU
+      social_media:
+        items:
+          search_channels:
+            label: Vyhledávání informačních kanálů EU v sociálních médiích
+            url: https://europa.eu/european-union/contact/social-networks_cs
+        title: Vyhledat účet na sociálních médiích
+    footer_menu:
+      organization: Konference o budoucnosti Evropy

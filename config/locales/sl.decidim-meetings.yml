@@ -1,0 +1,550 @@
+---
+sl:
+  activemodel:
+    attributes:
+      agenda:
+        description: Opis
+        duration: Trajanje
+        title: Naslov
+      close_meeting:
+        attendees_count: Število udeležencev
+        attending_organizations: Seznam sodelujočih organizacij
+        closing_report: Poročilo
+        contributions_count: Število prispevkov
+        proposal_ids: Predlogi, ustvarjeni na sestanku
+      meeting:
+        address: Naslov
+        available_slots: Razpoložljiva mesta za ta sestanek
+        decidim_category_id: Kategorija
+        decidim_scope_id: Področje
+        decidim_user_group_id: Skupina uporabnikov
+        description: Opis
+        end_time: Končni čas
+        location: Lokacija
+        location_hints: Namigi o lokaciji
+        organizer_gid: Ustvari kot
+        organizer_id: Organizator
+        private_meeting: Zasebni sestanek
+        registration_form_enabled: Obrazec za registracijo je omogočen.
+        registration_terms: Pogoji za prijavo
+        registration_type: Vrsta prijave
+        registrations_enabled: Registracije so omogočene.
+        start_time: Začetni čas
+        title: Naslov
+        transparent: Pregledno
+        type_of_meeting: Vrsta
+      minutes:
+        audio_url: Avdio URL
+        description: Opis
+        video_url: Video URL
+        visible: Je viden
+    errors:
+      models:
+        form:
+          attributes:
+            description:
+              blank: Vnesite vrednost.
+        meeting:
+          attributes:
+            address:
+              invalid: Naslov je neveljaven. Navedite poštno številko in državo.
+            cofe_charter:
+              accepted: Strinjajte se z zgornjimi pogoji
+        meeting_agenda:
+          attributes:
+            base:
+              too_many_minutes: Trajanje postavk presega trajanje sestanka za %{count} minut.
+              too_many_minutes_child: Trajanje podrejenih postavk presega trajanje dnevnega reda nadrejenih postavk "%{parent_title}" za %{count} minut.
+        meeting_registration_invite:
+          attributes:
+            email:
+              already_invited: Ta e-račun je že povabljen.
+    models:
+      decidim/meetings/close_meeting_event: Sestanek končan
+      decidim/meetings/create_meeting_event: Sestanek
+      decidim/meetings/meeting_registrations_enabled_event: Registracije so omogočene.
+      decidim/meetings/meeting_registrations_over_percentage_event: Registracije prek omejitve
+      decidim/meetings/upcoming_meeting_event: Prihajajoči sestanek
+      decidim/meetings/update_meeting_event: Sestanek je posodobljen.
+  activerecord:
+    models:
+      decidim/meetings/meeting:
+        few: Sestanki
+        one: Dogodek
+        other: Dogodki
+        two: Sestanka
+      decidim/meetings/minutes:
+        few: Zapisniki
+        one: Zapisnik
+        other: Zapisnikov
+        two: Zapisnika
+      decidim/meetings/registration:
+        few: Registracije
+        one: Registracija
+        other: Registracij
+        two: Registraciji
+  decidim:
+    admin:
+      meeting_copies:
+        create:
+          error: Pri podvojitvi tega sestanka se je pojavila težava.
+          success: Sestanek je bil uspešno podvojen.
+        new:
+          copy: Kopiraj
+          select: Izberite podatke, ki jih želite podvojiti.
+          title: Podvoji sestanek
+    components:
+      meetings:
+        actions:
+          join: Pridruži se
+        name: Dogodki, ki trenutno potekajo
+        settings:
+          global:
+            announcement: Obvestilo
+            comments_enabled: Komentarji so omogočeni.
+            comments_max_length: Največja dolžina komentarjev (za privzeto vrednost pusti 0)
+            creation_enabled_for_participants: Udeleženci lahko ustvarijo sestanke.
+            default_registration_terms: Privzeti pogoji za registracijo
+            enable_pads_creation: Omogoči ustvarjanje tablic
+            resources_permissions_enabled: Za vsak sestanek je mogoče določiti dovoljenja za ukrepe.
+          step:
+            announcement: Obvestilo
+            comments_blocked: Komentarji so blokirani.
+            creation_enabled_for_participants: Ustvarjanje sestanka s strani udeležencev je omogočeno.
+            creation_enabled_for_user_groups: Ustvarjanje sestanka s strani skupin uporabnikov je omogočeno.
+    events:
+      meetings:
+        meeting_closed:
+          affected_user:
+            email_intro: 'Vaš dogodek "%{resource_title}" je bil zaključen. Zaključne ugotovitve si lahko preberete na tej strani:'
+            email_outro: To obvestilo ste prejeli, ker ste organizirali dogodek "%{resource_title}".
+            email_subject: Dogodek "%{resource_title}" je bil zaključen
+            notification_title: Dogodek <a href="%{resource_path}">%{resource_title}</a> je bil zaprt.
+          follower:
+            email_intro: 'Dogodek "%{resource_title}" je bil zaključen. Zaključne ugotovitve si lahko preberete na tej strani:'
+            email_outro: To obvestilo ste prejeli, ker sledite dogodku "%{resource_title}". Odsleditev je mogoča s prejšnje povezave.
+            email_subject: Dogodek "%{resource_title}" je bil zaključen.
+            notification_title: Dogodek <a href="%{resource_path}">%{resource_title}</a> je bil zaključen.
+        meeting_created:
+          email_intro: Dogodek "%{resource_title}" je bil dodan v "%{participatory_space_title}", ki mu sledite.
+          email_outro: To obvestilo ste prejeli, ker sledite "%{participatory_space_title}". Odsleditev je mogoča s prejšnje povezave.
+          email_subject: Nov dogodek je bil dodan v %{participatory_space_title}.
+          notification_title: Dogodek <a href="%{resource_path}">%{resource_title}</a> je bil dodan v %{participatory_space_title}.
+        meeting_registration_confirmed:
+          notification_title: Vaša registracija za dogodek <a href="%{resource_url}">%{resource_title}</a> je bila potrjena. Vaša registracijska koda je %{registration_code}.
+        meeting_registrations_over_percentage:
+          email_intro: Dodeljena mesta za dogodek "%{resource_title}" presegajo %{percentage}%.
+          email_outro: To obvestilo ste prejeli, ker ste skrbnik participativnega prostora dogodka.
+          email_subject: Dodeljena mesta za dogodek "%{resource_title}" presegajo %{percentage}%.
+          notification_title: Dodeljena mesta za <a href="%{resource_path}">%{resource_title}</a> dogodek presegajo %{percentage}%.
+        meeting_updated:
+          email_intro: 'Dogodek "%{resource_title}" je bil posodobljen. Novo različico lahko preberete na njegovi strani:'
+          email_outro: To obvestilo ste prejeli, ker sledite dogodku "%{resource_title}". Odsleditev je mogoča s prejšnje povezave.
+          email_subject: Dogodek "%{resource_title}" je bil posodobljen.
+          notification_title: Dogodek<a href="%{resource_path}">%{resource_title}</a> je bil posodobljen.
+        registration_code_validated:
+          email_intro: Vaša registracijska koda "%{registration_code}" za sestanek "%{resource_title}" je bila potrjena.
+          email_outro: To obvestilo ste prejeli, ker je bila vaša registracijska koda za sestanek "%{resource_title}" potrjena.
+          email_subject: Vaša registracijska koda "%{registration_code}" za sestanek "%{resource_title}" je bila potrjena
+          notification_title: Vaša registracijska koda "%{registration_code}" za sestanek<a href="%{resource_path}">%{resource_title}</a> je bila potrjena.
+        registrations_enabled:
+          email_intro: 'Dogodek "%{resource_title}" je omogočil registracije. Lahko se registrirate na tej strani:'
+          email_outro: To obvestilo ste prejeli, ker sledite dogodku "%{resource_title}". Odsleditev je mogoča s prejšnje povezave.
+          email_subject: Dogodek "%{resource_title}" je omogočil registracije.
+          notification_title: Dogodek <a href="%{resource_path}">%{resource_title}</a> je omogočil registracije.
+        upcoming_meeting:
+          email_intro: Dogodek "%{resource_title}" se bo začel čez manj kot 48 ur.
+          email_outro: To obvestilo ste prejeli, ker sledite dogodku "%{resource_title}". Odsleditev je mogoča s prejšnje povezave.
+          email_subject: Dogodek "%{resource_title}" se bo začel čez manj kot 48 ur.
+          notification_title: Dogodek<a href="%{resource_path}">%{resource_title}</a> se bo začel čez manj kot 48 ur.
+    forms:
+      errors:
+        meeting:
+          address: Vnesite vrednost.
+          end_time: Vnesite datum.
+          location: Vnesite vrednost.
+          registration_type: Izberite možnost.
+          start_time: Vnesite datum.
+          title: Vnesite vrednost.
+          type_of_meeting: Izberite možnost.
+    gamification:
+      badges:
+        attended_meetings:
+          description: Ta značka se podeli, ko se udeležite več osebnih dogodkov.
+          description_another: Ta udeleženec se je udeležil %{score} sestankov.
+          description_own: Udeležili ste se sestankov %{score}.
+          name: Udeležba na dogodkih
+          next_level_in: Udeležite se še %{score} dogodkov, da dosežete naslednjo raven!
+          unearned_another: Ta udeleženec se še ni udeležil nobenega sestanka.
+          unearned_own: Niste se še udeležili nobenega sestanka.
+    meetings:
+      actions:
+        agenda: Dnevni red
+        attachment_collections: Mape
+        attachments: Priloge
+        close: Zapri
+        confirm_destroy: Ali res želite izbrisati ta sestanek?
+        destroy: Izbriši
+        edit: Uredi
+        invalid_destroy:
+          proposals_count:
+            few: 'Sestanka ni mogoče uničiti, ker so z njim povezani %{count} predlogi:'
+            one: 'Sestanka ni mogoče uničiti, ker je z njim povezan %{count} predlog:'
+            other: 'Sestanka ni mogoče uničiti, ker je z njim povezanih %{count} predlogov:'
+            two: 'Sestanka ni mogoče uničiti, ker sta z njim povezana %{count} predloga:'
+        minutes: Zapisniki
+        new: Nov sestanek
+        preview: Predogled
+        registrations: Registracije
+        title: Dejanja
+      admin:
+        agenda:
+          agenda_item:
+            add_agenda_item_child: Dodaj podtočko dnevnega reda
+            agenda_item: Točka dnevnega reda
+            agenda_item_children: Podtočke dnevnega reda
+            down: Dol
+            remove: Odstrani
+            up: Gor
+          agenda_item_child:
+            agenda_item_child: Podtočka dnevnega reda
+            down: Dol
+            remove: Odstrani
+            up: Gor
+          create:
+            invalid: Pri ustvarjanju tega dnevnega reda se je pojavila težava.
+            success: Dnevni red je bil uspešno ustvarjen.
+          edit:
+            title: Uredi dnevni red
+            update: Posodobi
+          form:
+            add_agenda_item: Dodaj točko dnevnega reda
+            agenda_items: Točke dnevnega reda
+            end_date: Končni datum
+            start_date: Začetni datum
+          new:
+            create: Ustvari
+            title: Nov dnevni red
+          update:
+            invalid: Pri posodabljanju tega dnevnega reda se je pojavila težava.
+            success: Dnevni red je bil uspešno posodobljen.
+        exports:
+          meetings: Sestanki
+          registrations: Registracije
+        invite_join_meeting_mailer:
+          invite:
+            decline: Zavrni povabilo
+            invited_you_to_join_a_meeting: "%{invited_by} vas je povabil, da se pridružite sestanku na %{application}. Povabilo lahko zavrnete ali sprejmete prek spodnjih povezav."
+            join: Pridružite se sestanku '%{meeting_title}'
+        invites:
+          create:
+            error: Pri vabilu temu udeležencu, naj se pridruži sestanku, se je pojavila težava.
+            success: Udeleženec je bil uspešno povabljen, naj se pridruži sestanku.
+          form:
+            attendee_type: Vrsta sodelujočega
+            existing_user: Obstoječ udeleženec
+            invite: Povabi
+            invite_explanation: Udeleženec bo povabljen, naj se pridruži sestanku in tudi organizaciji.
+            non_user: Udeleženec ne obstaja.
+            select_user: Izberi udeleženca
+          index:
+            filter:
+              accepted: Sprejeto
+              all: Vse
+              rejected: Zavrnjeno
+              sent: Poslano
+            filter_by: Filtriraj po
+            invite_attendee: Povabi sodelujočega
+            invites: Povabi
+            registrations_disabled: Sodelujočega ne morete povabiti, ker so registracije onemogočene.
+            search: Iskanje
+        meeting_closes:
+          edit:
+            close: Zapri
+            title: Zapri sestanek
+        meetings:
+          close:
+            invalid: Pri zapiranju tega sestanka se je pojavila težava.
+            success: Sestanek je bil uspešno zaprt.
+          create:
+            invalid: Pri ustvarjanju tega sestanka se je pojavila težava.
+            success: Sestanek je bil uspešno ustvarjen.
+          destroy:
+            success: Sestanek je bil uspešno izbrisan.
+          edit:
+            update: Posodobi
+          form:
+            address_help: 'Naslov: uporabljen s strani aplikacije Geocoder za iskanje lokacije'
+            location_help: 'Lokacija: sporočilo, namenjeno uporabnikom, ki nakazuje kraj srečanja ob'
+            location_hints_help: 'Namigi o lokaciji: dodatne informacije Primer: pritličje stavbe'
+          index:
+            title: Sestanki
+          new:
+            create: Objavi svoj dogodek
+            title: Ustvari sestanek
+          service:
+            description: Opis
+            down: Dol
+            remove: Odstrani
+            service: Storitev
+            title: Naslov
+            up: Gor
+          services:
+            add_service: Dodaj storitev
+            services: Storitve
+          update:
+            invalid: Pri posodobitvi tega sestanka se je pojavila težava.
+            success: Sestanek je bil uspešno posodobljen.
+        minutes:
+          create:
+            invalid: Pri ustvarjanju tega zapisnika se je pojavila težava.
+            success: Zapisnik je bil uspešno ustvarjen.
+          edit:
+            update: Posodobi
+          new:
+            create: Ustvari
+            title: Ustvari zapisnik
+          update:
+            invalid: Pri posodabljanju tega zapisnika se je pojavila težava.
+            success: Zapisnik je bil uspešno posodobljen.
+        models:
+          meeting:
+            name: Sestanek
+        registrations:
+          edit:
+            save: Shrani
+            validate: Potrdi
+            validate_registration_code: Potrdi registracijsko kodo
+          form:
+            available_slots_help: Pustite na 0, če imate na voljo neomejena mesta.
+            invites: Povabila
+            recommendation_message: Zaradi zasebnosti priporočamo, da ta vpisni obrazec izbrišete, ko ga ne potrebujete več. Privzeto je to 3 mesece po koncu sestanka.
+            registration_form: Obrazec za registracijo
+            reserved_slots_help: Pustite 0, če nimate rezerviranih mest.
+            reserved_slots_less_than: Biti mora manjši ali enak %{count}.
+            title: Registracije
+          update:
+            invalid: Pri shranjevanju nastavitev za registracijo se je pojavila težava.
+            success: Nastavitve za registracijo sestankov so bile uspešno shranjene.
+          validate_registration_code:
+            invalid: Ta registracijska koda je neveljavna.
+            success: Registracijska koda je uspešno potrjena.
+      admin_log:
+        invite:
+          create: "%{user_name} je povabil %{attendee_name}, da se pridruži sestanku %{resource_name} v prostoru %{space_name}."
+          deleted: "%{user_name} je preklical povabilo %{attendee_name}, da se pridruži sestanku %{resource_name} v prostoru %{space_name}."
+          update: "%{user_name} je povabil %{attendee_name}, da se pridruži sestanku %{resource_name} v prostoru %{space_name}."
+        meeting:
+          close: "%{user_name} je zaprl sestanek %{resource_name} v prostoru %{space_name}."
+          create: "%{user_name} je ustvaril sestanek %{resource_name} v prostoru %{space_name}."
+          delete: "%{user_name} je izbrisal sestanek %{resource_name} v prostoru %{space_name}."
+          export_registrations: "%{user_name} je izvozil registracije sestanka %{resource_name} v prostoru %{space_name}."
+          update: "%{user_name} je posodobil sestanek %{resource_name} v prostoru %{space_name}."
+          value_types:
+            organizer_presenter:
+              not_found: 'Organizatorja v podatkovni zbirki ni bilo mogoče najti (številka ID: %{id})'
+        minutes:
+          create: "%{user_name} je ustvaril zapisnik sestanka %{resource_name} v prostoru %{space_name}."
+          update: "%{user_name} je posodobil zapisnik sestanka %{resource_name} v prostoru %{space_name}."
+      calendar_modal:
+        calendar_url: URL koledarja
+        close_window: Zapri okno
+        export_calendar: Izvozi koledar
+      close_meeting_reminder_mailer:
+        close_meeting_reminder:
+          body: 'zahvaljujemo se vam za sodelovanje na Konferenci o prihodnosti Evrope z organizacijo dogodka <a href=''%{meeting_path}''>''%{meeting_title}''</a>. Upamo, da ste dogodek uspešno izvedli in da je sledila živahna razprava. Prosimo vas, da dodate poročilo o dogodku, tako da na strani dogodka izberete gumb „Close Event“ (Zaključi dogodek). <br><br>Z objavo poročila o dogodku se zagotavlja, da lahko državljani dostopajo do zamisli, izmenjanih na vašem dogodku, in da se te zamisli lahko upoštevajo pri analizi, kar omogoča ustrezne povratne informacije in nadaljnje spremljanje. <br><br>V poročilo bi bilo koristno vključiti informacije o vrsti dogodka (npr. participativna delavnica, dogodek na prostem, svetovna kavarna), številu udeležencev in njihovem demografskem ozadju (npr. starost, spol), glavnih temah razprave in predloženih zamislih, argumentih, ki so pripeljale do njih, pa tudi o splošnem vzdušju in pričakovanem nadaljnjem spremljanju. <br><br>Pri izpolnjevanju poročila o dogodku navedite število udeležencev v namenskem polju. Vabimo vas tudi, da zamisli z dogodka povežete z zamislimi, ki so že bile objavljene na platformi. <br><br>To je pomembno za analizo. Več informacij je na voljo v Vodniku za organizatorje dogodkov: <a href=''https://futureu.europa.eu/pages/our-guides?locale=sl''>https://futureu.europa.eu/pages/our-guides</a>. <br><br><b>Opozarjamo vas, da po zaključku Konference o prihodnosti Evrope 9. maja ne bo več mogoče objavljati poročil o dogodkih.</b> <br><br>Zelo smo veseli vašega sodelovanja in v primeru kakršnih koli vprašanj smo vam na voljo.'
+          greetings: Lep pozdrav, <br/>ekipa moderatorjev<br/>
+          hello: Spoštovani %{username},
+      conference_venues: Lokacija konference
+      content_blocks:
+        upcoming_events:
+          name: Pretekli dogodki
+          upcoming_events: Prihajajoči dogodki
+          view_all_events: Prikaži vse
+      directory:
+        meetings:
+          index:
+            all: Vse
+            date: Datum
+            meetings: Dogodki, ki trenutno potekajo
+            past: Pretekli
+            search: Išči
+            space_type: Participativni prostor
+            upcoming: Prihajajoči
+      last_activity:
+        new_meeting_at_html: Nov dogodek
+      mailer:
+        invite_join_meeting_mailer:
+          invite:
+            subject: Vabilo k pridružitvi na sestanek
+        registration_mailer:
+          confirmation:
+            subject: Registracija vašega dogodka je bila potrjena.
+      maps:
+        legend: Vrste dogodkov
+      meeting:
+        not_allowed: Nimate dovoljenja za ogled tega sestanka.
+      meetings:
+        count:
+          meetings_count:
+            few: "%{count} dogodkov"
+            one: "%{count} dogodek"
+            other: "%{count} dogodkov"
+            two: "%{count} dogodka"
+        create:
+          invalid: Pri ustvarjanju tega sestanka se je pojavila težava.
+          success: Dogodek ste uspešno ustvarili.
+        edit:
+          back: Nazaj
+          title: Uredi svoj dogodek
+          update: Posodobi
+        filters:
+          category: Kategorija
+          date: Datum
+          date_values:
+            all: Vsi
+            past: Pretekli
+            upcoming: Prihajajoči
+          origin: 'Organiziral/-a:'
+          origin_values:
+            all: Vsi
+            official: Države članice in institucije EU
+            participants: Drugi
+            user_groups: Skupine
+          scope: Področje
+          search: Iskanje
+        filters_small_view:
+          close_modal: Zapri modalno okno
+          filter: Filtriraj
+          filter_by: Filtriraj po
+          unfold: Razgrni
+        form:
+          address_help: 'Navesti morate poštni naslov, četudi gre za spletni dogodek, da bi bil vaš dogodek prikazan na zemljevidu. Naslov sta lahko že sama poštna številka in država. Primer: „Rue de la Loi 200, 1000 Bruselj, Belgija“.'
+          create_as: Ustvari dogodek kot
+          location_help: 'Navesti morate kraj sestanka. Primer: „konferenčna soba Jean Monnet“; „videokonferenčna povezava“.'
+          location_hints_help: 'Navedete lahko več podatkov, kako do tja. Primer: „peljite se z linijo podzemne železnice št. 5 do postaje Schuman“.'
+          online_meeting_url_help: Navesti morate podrobnejšo predstavitev svojega dogodka ali videokonferenčno povezavo. Ne pozabite vključiti https:// na začetku povezave.
+          registration_type_help: Za svoj dogodek lahko uporabite zunanji sistem za prijavo.
+          registration_url_help: Navesti morate povezavo do svoje registracijske storitve. Ne pozabite vključiti http:// ali https:// na začetku povezave.
+          select_a_category: Izberite kategorijo
+        index:
+          new_meeting: Nov dogodek
+          see_all: Glej vse dogodke
+          see_all_withdrawn: Prikaži vse umaknjene predloge.
+          text_banner: Ogledujete si seznam dogodkov, ki so jih avtorji umaknili. %{go_back_link} za vrnitev na kazalo dogodkov.
+        meeting_minutes:
+          meeting_minutes: Zapisnik sestanka
+          related_information: Povezane informacije
+        meetings:
+          no_meetings_warning: Noben dogodek se ne ujema z vašimi iskalnimi merili ali pa ni načrtovanih dogodkov.
+          upcoming_meetings_warning: Trenutno ni načrtovanih dogodkov, tukaj pa lahko najdete naštete vse pretekle dogodke.
+        new:
+          back: Nazaj
+          create: Ustvari
+          title: Ustvarite svoj dogodek
+        registration_confirm:
+          cancel: Prekliči
+          confirm: Potrdi
+        show:
+          attendees: Število udeležencev
+          back: Nazaj na seznam
+          contributions: Število prispevkov
+          date: Datum
+          edit_meeting: Uredi dogodek
+          going: V teku
+          join: Pridruži se dogodku
+          meeting_report: Poročilo o dogodku
+          no_slots_available: Mesta niso na voljo.
+          organizations: Sodelujoče organizacije
+          registration_code_help_text: Vaša registracijska koda
+          registration_state:
+            validated: POTRJENA
+            validation_pending: ČAKA NA POTRDITEV
+          remaining_slots:
+            few: "%{count} preostala mesta"
+            one: "%{count} preostalo mesto"
+            other: "%{count} preostalih mest"
+            two: "%{count} preostali mesti"
+          view: Prikaži
+          withdraw_btn_hint: Če si premislite, lahko dogodek umaknete. Dogodek ni izbrisan, prikazan bo na seznamu umaknjenih dogodkov.
+          withdraw_confirmation_html: Ali ste prepričani, da želite umakniti ta dogodek?<br><br><strong>Tega dejanja ni mogoče preklicati!</strong>
+          withdraw_meeting: Umakni dogodek
+        update:
+          invalid: Pri posodabljanju sestanka se je pojavila težava.
+          success: Sestanek ste uspešno posodobili.
+      meetings_map:
+        view_meeting: Prikaži dogodek
+      models:
+        invite:
+          fields:
+            email: E-naslov
+            name: Ime
+            sent_at: Poslano ob
+            status: Status
+          status:
+            accepted: Sprejeto (%{at})
+            rejected: Zavrnjeno (%{at})
+            sent: Poslano
+        meeting:
+          fields:
+            closed: Zaprto
+            end_time: Končni datum
+            map: Zemljevid
+            official_meeting: Države članice in institucije EU
+            start_time: Začetni datum
+            title: Naslov
+      read_more: "(več informacij)"
+      registration_mailer:
+        confirmation:
+          confirmed_html: Vaša registracija za dogodek <a href="%{url}">%{title}</a> je bila potrjena.
+          details: Podrobnosti o dogodku najdete v priponki.
+          registration_code: Vaša registracijska koda je %{code}.
+      registrations:
+        create:
+          invalid: Pri pridružitvi temu sestanku se je pojavila težava.
+          success: Uspešno ste se pridružili dogodku. Ker ste se registrirali za ta dogodek, boste obveščeni o posodobitvah.
+        decline_invitation:
+          invalid: Pri zavrnitvi povabila se je pojavila težava.
+          success: Povabilo ste uspešno odklonili.
+        destroy:
+          invalid: Pri zapuščanju tega sestanka se je pojavila težava.
+          success: Sestanek ste uspešno zapustili.
+      types:
+        private_meeting: Zasebni sestanek
+        transparent: Pregledno
+      versions:
+        back_to_resource: Nazaj na dogodek
+    metrics:
+      meetings:
+        description: Število ustvarjenih sestankov
+        object: sestanki
+        title: Sestanki
+    participatory_processes:
+      participatory_process_groups:
+        highlighted_meetings:
+          past_meetings: Pretekli sestanki
+          upcoming_meetings: Prihajajoči sestanki
+    participatory_spaces:
+      highlighted_meetings:
+        past_meetings: Pretekli dogodki
+        see_all: Glej vse dogodke (%{count})
+        upcoming_meetings: Prihajajoči dogodki
+      upcoming_meeting_for_card:
+        upcoming_meeting: Prihajajoči sestanek
+    resource_links:
+      meetings_through_proposals:
+        meeting_result: Povezani dogodki
+        result_meeting: Povezani dogodki
+      proposals_from_meeting:
+        meeting_proposal: Povezane zamisli
+        proposal_meeting: Povezani dogodki
+  devise:
+    mailer:
+      join_meeting:
+        subject: Vabilo k pridružitvi na sestanek
+  errors:
+    messages:
+      after: Izberite datum po %{date}.
+      after_or_equal_to: Izberite datum po ali enak %{date}.
+      before: Izberite datum pred %{date}.
+      before_or_equal_to: Izberite datum pred ali enak %{date}.

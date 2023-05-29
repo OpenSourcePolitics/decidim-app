@@ -145,6 +145,9 @@ en:
         new:
           add_file: Add file
           edit_file: Edit file
+        edit:
+          attachment_legend: "(Optional) Add an attachment"
+          select_a_category: Please select a category
         show:
           back: Back
           edit: Edit collaborative draftss
