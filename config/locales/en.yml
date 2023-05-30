@@ -142,12 +142,12 @@ en:
         create:
           error: There was a problem creating this collaborative drafts
           success: Collaborative draft successfully created.
-        new:
-          add_file: Add file
-          edit_file: Edit file
         edit:
           attachment_legend: "(Optional) Add an attachment"
           select_a_category: Please select a category
+        new:
+          add_file: Add file
+          edit_file: Edit file
         show:
           back: Back
           edit: Edit collaborative draftss
