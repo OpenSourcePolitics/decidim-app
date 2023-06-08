@@ -145,6 +145,9 @@ fr:
         edit:
           attachment_legend: "(Facultatif) Ajouter une pièce jointe"
           select_a_category: Veuillez sélectionner une catégorie
+        new:
+          add_file: Ajouter le fichier
+          edit_file: Editer le fichier
         show:
           back: Retour
           edit: Modifier un brouillon collaboratif
