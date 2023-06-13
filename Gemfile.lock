@@ -58,9 +58,9 @@ GIT
       deface (~> 1.9)
 
 GIT
-  remote: https://github.com/mainio/decidim-module-term_customizer.git
-  revision: f0d720710822f1231ea249dd71f978143d38a6c4
-  branch: release/0.26-stable
+  remote: https://github.com/armandfardeau/decidim-module-term_customizer.git
+  revision: 63170f69b51bb7e7f60f20856e944ae1357f4dc7
+  branch: fix/precompile-on-docker-0.26
   specs:
     decidim-term_customizer (0.26.0)
       decidim-admin (~> 0.26.0)
