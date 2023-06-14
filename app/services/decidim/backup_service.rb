@@ -91,10 +91,10 @@ module Decidim
     end
 
     def backup_uploads
-      if File.exist?("public/uploads")
-        file = generate_backup_file_path("uploads", "tar.bz2")
+      if File.exist?("storage")
+        file = generate_backup_file_path("storage", "tar.bz2")
 
-        cmd = "tar -jcf #{file} --exclude='public/uploads/tmp' public/uploads"
+        cmd = "tar -jcf #{file} storage"
 
         execute_backup_command(file, cmd)
       else
