@@ -94,6 +94,24 @@ describe "Answer a survey", type: :system do
     end
   end
 
+  context "when survey contains images" do
+    let!(:description) do
+      {
+        "en" => "<p>Survey's content</p><img src=\"#{image_url}\" /><iframe src=\"#{image_url}\"></iframe>",
+        "ca" => "<p>Contingut de l'enquesta</p><img src=\"#{image_url}\" /><iframe src=\"#{image_url}\"></iframe>",
+        "es" => "<p>Contenido de la encuesta</p><img src=\"#{image_url}\" /><iframe src=\"#{image_url}\"></iframe>"
+      }
+    end
+    let(:image_url) { "https://decidim.org/assets/decidim/logo-2x-1b6d1f7f7d3f5d7d3f5d7d3f5d7d3f5d7d3f5d7d3f5d7d3f5d7d3f5d7d3f5d.png" }
+    let(:router) { Decidim::EngineRouter.main_proxy(component) }
+
+    it "shows image" do
+      visit_component
+      expect(page).to have_selector("img[src='#{image_url}']")
+      expect(page).to have_selector("iframe[src='#{image_url}']")
+    end
+  end
+
   context "when survey has action log entry" do
     let!(:action_log) { create(:action_log, user: user, organization: component.organization, resource: survey, component: component, participatory_space: component.participatory_space, visibility: "all") }
     let(:router) { Decidim::EngineRouter.main_proxy(component) }
