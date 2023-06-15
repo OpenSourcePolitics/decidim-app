@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "json"
 
 describe Decidim::BackupService do
   subject { described_class.new(options) }
