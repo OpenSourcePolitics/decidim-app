@@ -58,7 +58,7 @@ module Decidim
 
     def create_backup_dir
       backup_dir = Rails.root.join(@options[:backup_dir])
-      return [Rails.root.join(backup_dir)] if File.exist?(backup_dir)
+      return [Rails.root.join(backup_dir).to_s] if File.exist?(backup_dir)
 
       FileUtils.mkdir_p(backup_dir)
     end

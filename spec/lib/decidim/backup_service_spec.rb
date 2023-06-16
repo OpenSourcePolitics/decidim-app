@@ -81,7 +81,7 @@ describe Decidim::BackupService do
 
       context "when directory already exists" do
         before do
-          FileUtils.mkdir(backup_dir)
+          FileUtils.mkdir_p(backup_dir)
         end
 
         it "returns true" do
@@ -147,7 +147,7 @@ describe Decidim::BackupService do
     let(:file_path) { "#{backup_dir}/test_file.txt" }
 
     before do
-      FileUtils.mkdir(backup_dir)
+      FileUtils.mkdir_p(backup_dir)
       File.write(file_path, "")
     end
 
@@ -164,7 +164,7 @@ describe Decidim::BackupService do
     end
   end
 
-  describe "available_space" do
+  describe "#available_space" do
     before do
       allow(Sys::Filesystem).to receive(:stat).and_return(Struct.new(:block_size, :blocks_available).new(4096, 256_000_000))
     end
@@ -174,14 +174,19 @@ describe Decidim::BackupService do
     end
   end
 
-  describe "has_enough_disk_space?"
-  it "returns true" do
-    expect(subject.send(:has_enough_disk_space?)).to be_truthy
+  describe "#has_enough_disk_space?" do
+    before do
+      allow(Sys::Filesystem).to receive(:stat).and_return(Struct.new(:block_size, :blocks_available).new(4096, 256_000_000))
+    end
+
+    it "returns true" do
+      expect(subject.send(:has_enough_disk_space?)).to be_truthy
+    end
   end
 
   describe "#generate_timestamp_file" do
     before do
-      FileUtils.mkdir(backup_dir)
+      FileUtils.mkdir_p(backup_dir)
     end
 
     after do
@@ -204,12 +209,26 @@ describe Decidim::BackupService do
   end
 
   describe "#create_backup_dir" do
+    before do
+      FileUtils.remove_dir(backup_dir) if File.directory?(backup_dir)
+    end
+
     after do
       FileUtils.remove_dir(backup_dir) if File.directory?(backup_dir)
     end
 
     it "returns backup_dir" do
       expect(subject.create_backup_dir).to eq([Rails.root.join(backup_dir).to_s])
+    end
+
+    context "when file already exists" do
+      before do
+        FileUtils.mkdir_p(backup_dir)
+      end
+
+      it "returns backup_dir" do
+        expect(subject.create_backup_dir).to eq([Rails.root.join(backup_dir).to_s])
+      end
     end
   end
 
