@@ -35,6 +35,7 @@ class K8SOrganizationExporter
   end
 
   def retrieve_active_storage_files
+    # TODO: ../scaleway.config is hardcoded here, should be a parameter
     @logger.info("retrieving active storage files from bucket #{bucket_name} into #{organization_export_path}/buckets/#{resource_name}--de")
     system("rclone copy scw-storage:#{bucket_name} #{organization_export_path}/buckets/#{resource_name}--de --config ../scaleway.config --progress --copy-links")
   end
@@ -50,6 +51,7 @@ class K8SOrganizationExporter
   end
 
   def exporting_env_vars
+    # TODO: Shouldn't we export this to a k8s secret?
     @logger.info("exporting env variables to #{organization_export_path}/manifests/#{resource_name}--de.yml")
     File.write("#{organization_export_path}/manifests/#{resource_name}-config.yml",
                YAML.dump(env_vars.merge!(smtp_settings).merge!(omniauth_settings)))
@@ -67,7 +69,7 @@ class K8SOrganizationExporter
 
   def env_vars
     @env_vars ||= Dotenv.parse(".env")
-                        .reject! { |key, _value| FORBIDDEN_ENVIRONMENT_KEYS.include?(key) }
+                        .reject { |key, _value| FORBIDDEN_ENVIRONMENT_KEYS.include?(key) }
   end
 
   def omniauth_settings
@@ -88,7 +90,7 @@ class K8SOrganizationExporter
 
   def organization_columns
     # TODO: Understand why JSON is used in this case
-    org_columns_sql = "SELECT row_to_json(o,true) FROM (SELECT #{ORGANIZATION_COLUMNS} FROM decidim_@organizations WHERE id=#{@organization.id}) AS o;"
+    org_columns_sql = "SELECT row_to_json(o,true) FROM (SELECT #{ORGANIZATION_COLUMNS} FROM decidim_organizations WHERE id=#{@organization.id}) AS o;"
     org_columns_record = ActiveRecord::Base.connection.execute(org_columns_sql)
     JSON.parse(org_columns_record.first["row_to_json"])
   end

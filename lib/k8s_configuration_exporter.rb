@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "logger_with_stdout"
+require "k8s_organization_exporter"
 
 class K8SConfigurationExporter
   def initialize(image, enable_sync)
@@ -9,7 +10,6 @@ class K8SConfigurationExporter
     @organizations = Decidim::Organization.all
     @export_path = "tmp/k8s-migration"
     @logger = LoggerWithStdout.new("log/#{hostname}-k8s-export-#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
-    @hostname = `hostname`.strip.parameterize
     @database_name = Rails.configuration.database_configuration[Rails.env]["database"]
   end
 
@@ -24,16 +24,16 @@ class K8SConfigurationExporter
     @logger.info("-------------------------")
     @organizations.find_each do |organization|
       @logger.info("exporting organization with host #{organization.host}")
-      K8SOrganizationExporter.export!(organization, @logger, @export_path, @hostname)
+      K8SOrganizationExporter.export!(organization, @logger, @export_path, hostname)
     end
 
     perform_sync
   end
 
   def clean_migration_directory
-    logger.info("cleaning migration directory #{@export_path}")
+    @logger.info("cleaning migration directory #{@export_path}")
     FileUtils.rm_rf(@export_path)
-    logger.info("creating migration directory #{@export_path}")
+    @logger.info("creating migration directory #{@export_path}")
     FileUtils.mkdir_p(@export_path)
   end
 
@@ -46,5 +46,9 @@ class K8SConfigurationExporter
     else
       @logger.info("NOT syncing export to bucket #{@hostname}-migration because ENABLE_SYNC is missing or false")
     end
+  end
+
+  def hostname
+    @hostname ||= `hostname`.strip.parameterize
   end
 end

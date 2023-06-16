@@ -36,7 +36,7 @@ module ActiveStorage
     end
 
     def provider_to_service(provider)
-      raise "Unknown provider #{provider}" unless active_storage_configurations.key?(provider)
+      raise "Unknown provider #{provider}" unless active_storage_configurations.has_key?(provider)
 
       ActiveStorage::Service.configure(provider, active_storage_configurations)
     end
