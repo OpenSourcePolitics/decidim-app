@@ -147,7 +147,7 @@ module Decidim
 
     private
 
-     # We are wrapping this in a method to be able to stub it in tests
+    # We are wrapping this in a method to be able to stub it in tests
     def git_file_list
       %w(.git/HEAD .git/ORIG_HEAD).concat(git_delta).select { |file| File.exist? file }
     end

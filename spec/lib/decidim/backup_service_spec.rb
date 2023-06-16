@@ -13,7 +13,8 @@ describe Decidim::BackupService do
       disk_space_limit: disk_space_limit,
       s3sync: s3sync,
       s3retention: s3retention,
-      keep_local_files: keep_local_files
+      keep_local_files: keep_local_files,
+      db_conf: db_conf
     }
   end
   let(:keep_local_files) { true }
@@ -23,6 +24,14 @@ describe Decidim::BackupService do
   let(:timestamp_in_filename) { true }
   let(:backup_dir) { "tmp/test/backup" }
   let(:disk_space_limit) { 256 }
+  let(:db_conf) do
+    {
+      host: "123.domain.org",
+      username: "postgres",
+      password: "mysecretpassword",
+      database: "decidim_test"
+    }
+  end
 
   describe "#check_scope?" do
     context "with valid scope" do
@@ -120,7 +129,7 @@ describe Decidim::BackupService do
     it "stores the file path" do
       s = subject
       expect(subject.send(:execute_backup_command, file_path, cmd)).to eq(true)
-      expect(s.instance_variable_get(:@local_files)).to eq(["tmp/backup/dummy.ext"])
+      expect(s.instance_variable_get(:@local_files)).to eq([file_path])
     end
 
     context "when command failed" do
@@ -205,10 +214,12 @@ describe Decidim::BackupService do
   end
 
   describe "#backup_database" do
+    let(:expected_file_path) { "tmp/test/backup/decidim-backup-db-2023-06-15-114630.dump" }
+
     before do
       # rubocop:disable RSpec/SubjectStub
-      allow(subject).to receive(:generate_backup_file_path).with("db", "dump").and_return("tmp/test/backup/decidim-backup-db-2023-06-15-114630.dump")
-      allow(subject).to receive(:execute_backup_command).with("tmp/test/backup/decidim-backup-db-2023-06-15-114630.dump", "pg_dump -Fc -p '5432' -d 'osp_app_test' -f 'tmp/test/backup/decidim-backup-db-2023-06-15-114630.dump'").and_return(true)
+      allow(subject).to receive(:generate_backup_file_path).with("db", "dump").and_return(expected_file_path)
+      allow(subject).to receive(:execute_backup_command).with(expected_file_path, "PGPASSWORD=#{db_conf[:password]} pg_dump -Fc -h '#{db_conf[:host]}' -U '#{db_conf[:username]}' -d '#{db_conf[:database]}' -f '#{expected_file_path}'").and_return(true)
       # rubocop:enable RSpec/SubjectStub
     end
 
@@ -230,11 +241,13 @@ describe Decidim::BackupService do
   end
 
   describe "#backup_uploads" do
+    let(:expected_file_path) { "tmp/test/backup/decidim-backup-storage-2023-06-15-140432.tar.bz2" }
+
     before do
       # rubocop:disable RSpec/SubjectStub
       allow(subject).to receive(:file_exists?).with("storage").and_return(true)
-      allow(subject).to receive(:generate_backup_file_path).with("storage", "tar.bz2").and_return("tmp/test/backup/decidim-backup-storage-2023-06-15-140432.tar.bz2")
-      allow(subject).to receive(:execute_backup_command).with("tmp/test/backup/decidim-backup-storage-2023-06-15-140432.tar.bz2", "tar -jcf tmp/test/backup/decidim-backup-storage-2023-06-15-140432.tar.bz2 storage").and_return(true)
+      allow(subject).to receive(:generate_backup_file_path).with("storage", "tar.bz2").and_return(expected_file_path)
+      allow(subject).to receive(:execute_backup_command).with(expected_file_path, "tar -jcf #{expected_file_path} storage").and_return(true)
       # rubocop:enable RSpec/SubjectStub
     end
 
@@ -256,12 +269,15 @@ describe Decidim::BackupService do
   end
 
   describe "#backup_git" do
+    let(:expected_file_path) { "tmp/test/backup/decidim-backup-git-2023-06-15-142721.tar.bz2" }
+    let(:expected_git_file_list) { %w(.git/HEAD .git/ORIG_HEAD dummy.rb dummy2.rb) }
+
     before do
       # rubocop:disable RSpec/SubjectStub
       allow(subject).to receive(:file_exists?).with(".git").and_return(true)
-      allow(subject).to receive(:git_file_list).and_return([".git/HEAD", ".git/ORIG_HEAD", "dummy.rb", "dummy2.rb"])
-      allow(subject).to receive(:generate_backup_file_path).with("git", "tar.bz2").and_return("tmp/test/backup/decidim-backup-git-2023-06-15-142721.tar.bz2")
-      allow(subject).to receive(:execute_backup_command).with("tmp/test/backup/decidim-backup-git-2023-06-15-142721.tar.bz2", "tar -jcf tmp/test/backup/decidim-backup-git-2023-06-15-142721.tar.bz2 .git/HEAD .git/ORIG_HEAD dummy.rb dummy2.rb").and_return(true)
+      allow(subject).to receive(:git_file_list).and_return(expected_git_file_list)
+      allow(subject).to receive(:generate_backup_file_path).with("git", "tar.bz2").and_return(expected_file_path)
+      allow(subject).to receive(:execute_backup_command).with(expected_file_path, "tar -jcf #{expected_file_path} #{expected_git_file_list.join(" ")}").and_return(true)
       # rubocop:enable RSpec/SubjectStub
     end
 
@@ -283,11 +299,13 @@ describe Decidim::BackupService do
   end
 
   describe "#backup_env" do
+    let(:expected_file_path) { "tmp/test/backup/decidim-backup-env-2023-06-15-143803.tar.bz2" }
+
     before do
       # rubocop:disable RSpec/SubjectStub
       allow(subject).to receive(:file_exists?).with(".env").and_return(true)
-      allow(subject).to receive(:generate_backup_file_path).with("env", "tar.bz2").and_return("tmp/test/backup/decidim-backup-env-2023-06-15-143803.tar.bz2")
-      allow(subject).to receive(:execute_backup_command).with("tmp/test/backup/decidim-backup-env-2023-06-15-143803.tar.bz2", "tar -jcf tmp/test/backup/decidim-backup-env-2023-06-15-143803.tar.bz2 .env").and_return(true)
+      allow(subject).to receive(:generate_backup_file_path).with("env", "tar.bz2").and_return(expected_file_path)
+      allow(subject).to receive(:execute_backup_command).with(expected_file_path, "tar -jcf #{expected_file_path} .env").and_return(true)
       # rubocop:enable RSpec/SubjectStub
     end
 
