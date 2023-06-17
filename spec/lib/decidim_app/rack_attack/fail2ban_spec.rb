@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe DecidimApp::RackAttack::Fail2ban do
-  describe "#enabled?" do
+  describe ".enabled?" do
     it "returns true" do
       expect(described_class).to be_enabled
     end
@@ -19,7 +19,7 @@ describe DecidimApp::RackAttack::Fail2ban do
     end
   end
 
-  describe "#unauthorized_path?" do
+  describe ".unauthorized_path?" do
     let(:path) { "SELECT" }
 
     it "returns true" do
