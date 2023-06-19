@@ -45,6 +45,7 @@ class K8SConfigurationExporter
       system("rclone copy #{@export_path} scw-migration:#{@hostname}-migration --config ../scaleway.config --progress --copy-links")
     else
       @logger.info("NOT syncing export to bucket #{@hostname}-migration because ENABLE_SYNC is missing or false")
+      true
     end
   end
 
