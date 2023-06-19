@@ -31,8 +31,10 @@ module ActiveStorage
       end
     end
 
+    private
+
     def active_storage_configurations
-      @active_storage_configurations ||= Rails.configuration.active_storage.service_configurations
+      @active_storage_configurations ||= Rails.configuration.active_storage.service_configurations.with_indifferent_access
     end
 
     def provider_to_service(provider)
