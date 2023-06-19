@@ -10,7 +10,6 @@ class K8SConfigurationExporter
     @organizations = Decidim::Organization.all
     @export_path = "tmp/k8s-migration"
     @logger = LoggerWithStdout.new("log/#{hostname}-k8s-export-#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
-    @database_name = Rails.configuration.database_configuration[Rails.env]["database"]
   end
 
   def self.export!(image, enable_sync)
@@ -24,7 +23,7 @@ class K8SConfigurationExporter
     @logger.info("-------------------------")
     @organizations.find_each do |organization|
       @logger.info("exporting organization with host #{organization.host}")
-      K8SOrganizationExporter.export!(organization, @logger, @export_path, hostname)
+      K8sOrganizationExporter.export!(organization, @logger, @export_path, hostname, @image)
     end
 
     perform_sync

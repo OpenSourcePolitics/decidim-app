@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class K8SOrganizationExporter
+class K8sOrganizationExporter
   FORBIDDEN_ENVIRONMENT_KEYS = %w(BACKUP_ENABLED
                                   BACKUP_S3SYNC_ENABLED
                                   BACKUP_S3SYNC_ACCESS_KEY
@@ -13,17 +13,19 @@ class K8SOrganizationExporter
                             users_registration_mode
                             force_users_to_authenticate_before_access_organization
                             available_authorizations
-                            file_upload_settings).join(", ").freeze
+                            file_upload_settings).freeze
 
-  def initialize(organization, logger, export_path, hostname)
+  def initialize(organization, logger, export_path, hostname, image)
     @organization = organization
     @logger = logger
     @export_path = export_path
     @hostname = hostname
+    @image = image
+    @database_name = Rails.configuration.database_configuration[Rails.env]["database"]
   end
 
-  def self.export!(organization, logger, export_path, hostname)
-    new(organization, logger, export_path, hostname).export!
+  def self.export!(organization, logger, export_path, hostname, image)
+    new(organization, logger, export_path, hostname, image).export!
   end
 
   def export!
@@ -54,7 +56,7 @@ class K8SOrganizationExporter
     # TODO: Shouldn't we export this to a k8s secret?
     @logger.info("exporting env variables to #{organization_export_path}/manifests/#{resource_name}--de.yml")
     File.write("#{organization_export_path}/manifests/#{resource_name}-config.yml",
-               YAML.dump(env_vars.merge!(smtp_settings).merge!(omniauth_settings)))
+               YAML.dump(all_env_vars))
   end
 
   def creating_directories
@@ -67,14 +69,24 @@ class K8SOrganizationExporter
     FileUtils.mkdir_p("#{organization_export_path}/postgres")
   end
 
+  def all_env_vars
+    env_vars.merge!(smtp_settings).merge!(omniauth_settings)
+  end
+
   def env_vars
     @env_vars ||= Dotenv.parse(".env")
                         .reject { |key, _value| FORBIDDEN_ENVIRONMENT_KEYS.include?(key) }
   end
 
   def omniauth_settings
+    return {} unless @organization.omniauth_settings
+
     @organization.omniauth_settings.each_with_object({}) do |(key, value), hash|
-      hash[key.upcase] = Decidim::OmniauthProvider.value_defined?(value) ? Decidim::AttributeEncryptor.decrypt(value) : nil
+      hash[key.upcase] = if Decidim::OmniauthProvider.value_defined?(value)
+                           decrypt(value)
+                         else
+                           value
+                         end
     end
   end
 
@@ -89,8 +101,7 @@ class K8SOrganizationExporter
   end
 
   def organization_columns
-    # TODO: Understand why JSON is used in this case
-    org_columns_sql = "SELECT row_to_json(o,true) FROM (SELECT #{ORGANIZATION_COLUMNS} FROM decidim_organizations WHERE id=#{@organization.id}) AS o;"
+    org_columns_sql = "SELECT row_to_json(o,true) FROM (SELECT #{ORGANIZATION_COLUMNS.join(", ")} FROM decidim_organizations WHERE id=#{@organization.id}) AS o;"
     org_columns_record = ActiveRecord::Base.connection.execute(org_columns_sql)
     JSON.parse(org_columns_record.first["row_to_json"])
   end
@@ -124,7 +135,7 @@ class K8SOrganizationExporter
   end
 
   def resource_name
-    @resource_name ||= "#{@hostname}--#{@organization_slug}"
+    @resource_name ||= "#{@hostname}--#{organization_slug}"
   end
 
   def bucket_name
@@ -133,5 +144,13 @@ class K8SOrganizationExporter
 
   def organization_slug
     @organization_slug ||= @organization.host.parameterize(separator: "_", preserve_case: true)
+  end
+
+  private
+
+  def decrypt(value)
+    Decidim::AttributeEncryptor.decrypt(value)
+  rescue ActiveSupport::MessageEncryptor::InvalidMessage
+    value
   end
 end
