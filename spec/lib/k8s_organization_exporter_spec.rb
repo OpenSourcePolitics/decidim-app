@@ -20,6 +20,8 @@ describe K8sOrganizationExporter do
     }
   end
 
+  let(:database_name) { Rails.configuration.database_configuration[Rails.env]["database"] }
+
   describe ".export!" do
     it "calls the right methods" do
       # rubocop:disable RSpec/AnyInstance
@@ -54,7 +56,7 @@ describe K8sOrganizationExporter do
   describe "#dumping_database" do
     it "dumps the database" do
       # rubocop:disable RSpec/SubjectStub
-      expect(subject).to receive(:system).with("pg_dump -Fc osp_app_test > #{export_path}/#{hostname}--#{organization_host}/postgres/#{hostname}--#{organization_host}--de.dump")
+      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{hostname}--#{organization_host}/postgres/#{hostname}--#{organization_host}--de.dump")
       # rubocop:enable RSpec/SubjectStub
       subject.dumping_database
     end

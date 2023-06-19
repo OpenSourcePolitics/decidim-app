@@ -12,7 +12,7 @@ describe "rake k8s:export_configuration", type: :task do
 
   it "invokes the configuration exporter" do
     with_modified_env IMAGE: image, ENABLE_SYNC: enable_sync.to_s do
-      expect(K8SConfigurationExporter).to receive(:export!).with(image, enable_sync).and_return(true)
+      expect(K8sConfigurationExporter).to receive(:export!).with(image, enable_sync).and_return(true)
 
       task.execute
     end
