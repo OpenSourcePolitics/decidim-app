@@ -10,6 +10,6 @@ namespace :k8s do
 
     raise "You must specify a docker image, usage: bundle exec rails decidim:k8s:export_configuration IMAGE=<image_ref> [ENABLE_SYNC=true]" if image.blank?
 
-    K8SConfigurationExporter.export!(image, enable_sync)
+    K8sConfigurationExporter.export!(image, enable_sync)
   end
 end

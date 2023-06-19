@@ -3,12 +3,13 @@
 require "logger_with_stdout"
 require "k8s_organization_exporter"
 
-class K8SConfigurationExporter
+class K8sConfigurationExporter
+  EXPORT_PATH = Rails.root.join("tmp/k8s-migration")
+
   def initialize(image, enable_sync)
     @image = image
     @enable_sync = enable_sync
     @organizations = Decidim::Organization.all
-    @export_path = "tmp/k8s-migration"
     @logger = LoggerWithStdout.new("log/#{hostname}-k8s-export-#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
   end
 
@@ -23,17 +24,17 @@ class K8SConfigurationExporter
     @logger.info("-------------------------")
     @organizations.find_each do |organization|
       @logger.info("exporting organization with host #{organization.host}")
-      K8sOrganizationExporter.export!(organization, @logger, @export_path, hostname, @image)
+      K8sOrganizationExporter.export!(organization, @logger, EXPORT_PATH, hostname, @image)
     end
 
     perform_sync
   end
 
   def clean_migration_directory
-    @logger.info("cleaning migration directory #{@export_path}")
-    FileUtils.rm_rf(@export_path)
-    @logger.info("creating migration directory #{@export_path}")
-    FileUtils.mkdir_p(@export_path)
+    @logger.info("cleaning migration directory #{EXPORT_PATH}")
+    FileUtils.rm_rf(EXPORT_PATH)
+    @logger.info("creating migration directory #{EXPORT_PATH}")
+    FileUtils.mkdir_p(EXPORT_PATH)
   end
 
   def perform_sync
@@ -41,7 +42,7 @@ class K8SConfigurationExporter
       @logger.info("Cleaning bucket #{@hostname}-migration")
       system("rclone delete scw-migration:#{@hostname}-migration --rmdirs --config ../scaleway.config")
       @logger.info("Syncing export to bucket #{@hostname}-migration")
-      system("rclone copy #{@export_path} scw-migration:#{@hostname}-migration --config ../scaleway.config --progress --copy-links")
+      system("rclone copy #{EXPORT_PATH} scw-migration:#{@hostname}-migration --config ../scaleway.config --progress --copy-links")
     else
       @logger.info("NOT syncing export to bucket #{@hostname}-migration because ENABLE_SYNC is missing or false")
       true
@@ -49,6 +50,12 @@ class K8SConfigurationExporter
   end
 
   def hostname
-    @hostname ||= `hostname`.strip.parameterize
+    # Socket.gethostname returns a string with ASCII-8BIT encoding, which is not compatible with parameterize
+    # We need to force the encoding to UTF-8 before calling parameterize on it
+    # We need to dup the string because force_encoding returns a new string and the original is frozen
+    @hostname ||= Socket.gethostname
+                        .dup
+                        .force_encoding("UTF-8")
+                        .parameterize
   end
 end
