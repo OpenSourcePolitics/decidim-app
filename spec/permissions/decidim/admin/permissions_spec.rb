@@ -12,7 +12,6 @@ describe Decidim::Admin::Permissions do
   let(:registrations_enabled) { true }
   let(:action) do
     { scope: :admin, action: action_name, subject: action_subject }
-    { scope: :admin, action: action_name, subject: action_subject }
   end
   let(:action_name) { :foo }
   let(:action_subject) { :bar }
@@ -210,7 +209,7 @@ describe Decidim::Admin::Permissions do
       before do
         allow(organization)
           .to receive(:available_authorizations)
-                .and_return(authorizations)
+          .and_return(authorizations)
       end
 
       context "when organization available authorizations are empty" do
