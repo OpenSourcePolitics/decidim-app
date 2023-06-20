@@ -36,6 +36,7 @@ module Decidim
           allow! if read_metrics_action?
           allow! if static_page_action?
           allow! if organization_action?
+          allow! if templates_action?
           allow! if user_action?
 
           allow! if permission_action.subject == :category
@@ -66,6 +67,11 @@ module Decidim
 
       def user_manager?
         user && !user.admin? && user.role?("user_manager")
+      end
+
+      def templates_action?
+        permission_action.subject == :templates &&
+          permission_action.action == :read
       end
 
       def read_admin_dashboard_action?
