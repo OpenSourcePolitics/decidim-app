@@ -49,15 +49,6 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
-  remote: https://github.com/alecslupu-pfa/decidim-module-gallery
-  revision: 41136a1da89f846a8d5a697a5e9d8d86128d286f
-  specs:
-    decidim-gallery (0.0.2)
-      decidim-admin (~> 0.26.0)
-      decidim-core (~> 0.26.0)
-      deface (~> 1.9)
-
-GIT
   remote: https://github.com/armandfardeau/decidim-module-term_customizer.git
   revision: 63170f69b51bb7e7f60f20856e944ae1357f4dc7
   branch: fix/precompile-on-docker-0.26
@@ -393,6 +384,10 @@ GEM
       decidim-core (= 0.26.7)
       wicked_pdf (~> 2.1)
       wkhtmltopdf-binary (~> 0.12)
+    decidim-gallery (0.0.1)
+      decidim-admin (~> 0.26.0)
+      decidim-core (~> 0.26.0)
+      deface (~> 1.9)
     decidim-generators (0.26.7)
       decidim-core (= 0.26.7)
     decidim-meetings (0.26.7)
@@ -1012,7 +1007,7 @@ DEPENDENCIES
   decidim-decidim_awesome
   decidim-dev (~> 0.26.0)
   decidim-friendly_signup!
-  decidim-gallery!
+  decidim-gallery
   decidim-homepage_interactive_map!
   decidim-ludens!
   decidim-phone_authorization_handler!
