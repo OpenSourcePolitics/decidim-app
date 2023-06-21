@@ -72,7 +72,7 @@ describe SentrySetup do
     end
 
     context "when server_metadata is not available" do
-      let(:server_metadata) { nil }
+      let(:server_metadata) { {} }
 
       it "returns nil" do
         expect(subject.send(:hostname)).to be_nil
@@ -82,10 +82,10 @@ describe SentrySetup do
 
   describe ".server_metadata" do
     context "when metadata are non-existent" do
-      let(:server_metadata) { nil }
+      let(:server_metadata) { {} }
 
       it "returns nil" do
-        expect(subject.send(:server_metadata)).to be_nil
+        expect(subject.send(:server_metadata)).to eq({})
       end
     end
 
