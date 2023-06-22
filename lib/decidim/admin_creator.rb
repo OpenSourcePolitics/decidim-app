@@ -15,7 +15,8 @@ module Decidim
     def create!
       super
 
-      Decidim::User.create!(@attributes.merge({ tos_agreement: "1", admin: true }))
+      Decidim::User.find_or_initialize_by(email: @attributes[:email])
+                   .update!(@attributes.merge({ tos_agreement: "1", admin: true }))
     end
 
     def self.env_organization_or_first(organization_id)
