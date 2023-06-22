@@ -49,9 +49,9 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
-  remote: https://github.com/mainio/decidim-module-term_customizer.git
-  revision: f0d720710822f1231ea249dd71f978143d38a6c4
-  branch: release/0.26-stable
+  remote: https://github.com/armandfardeau/decidim-module-term_customizer.git
+  revision: 63170f69b51bb7e7f60f20856e944ae1357f4dc7
+  branch: fix/precompile-on-docker-0.26
   specs:
     decidim-term_customizer (0.26.0)
       decidim-admin (~> 0.26.0)
@@ -384,6 +384,10 @@ GEM
       decidim-core (= 0.26.7)
       wicked_pdf (~> 2.1)
       wkhtmltopdf-binary (~> 0.12)
+    decidim-gallery (0.0.1)
+      decidim-admin (~> 0.26.0)
+      decidim-core (~> 0.26.0)
+      deface (~> 1.9)
     decidim-generators (0.26.7)
       decidim-core (= 0.26.7)
     decidim-meetings (0.26.7)
@@ -425,6 +429,12 @@ GEM
       declarative-option (< 0.2.0)
     declarative-option (0.1.0)
     deepl-rb (2.5.3)
+    deface (1.9.0)
+      actionview (>= 5.2)
+      nokogiri (>= 1.6)
+      polyglot
+      railties (>= 5.2)
+      rainbow (>= 2.1.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.9.2)
@@ -692,6 +702,7 @@ GEM
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    polyglot (0.3.5)
     premailer (1.21.0)
       addressable
       css_parser (>= 1.12.0)
@@ -996,6 +1007,7 @@ DEPENDENCIES
   decidim-decidim_awesome
   decidim-dev (~> 0.26.0)
   decidim-friendly_signup!
+  decidim-gallery
   decidim-homepage_interactive_map!
   decidim-ludens!
   decidim-phone_authorization_handler!

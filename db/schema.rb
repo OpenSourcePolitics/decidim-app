@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_06_122933) do
+ActiveRecord::Schema.define(version: 2023_06_12_152044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -814,6 +814,23 @@ ActiveRecord::Schema.define(version: 2023_04_06_122933) do
     t.index ["position"], name: "index_decidim_forms_questions_on_position"
   end
 
+  create_table "decidim_gallery_gallery_items", force: :cascade do |t|
+    t.jsonb "title"
+    t.bigint "decidim_component_id"
+    t.string "decidim_author_type", null: false
+    t.integer "decidim_author_id", null: false
+    t.integer "decidim_user_group_id"
+    t.datetime "published_at"
+    t.jsonb "data", default: {}
+    t.integer "weight", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_gallery_gallery_items_on_decidim_author"
+    t.index ["decidim_component_id"], name: "index_decidim_gallery_gallery_items_on_decidim_component_id"
+    t.index ["decidim_user_group_id"], name: "index_decidim_gallery_gallery_items_on_decidim_user_group_id"
+    t.index ["published_at"], name: "index_decidim_gallery_gallery_items_on_published_at"
+  end
+
   create_table "decidim_gamification_badge_scores", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "badge_name", null: false
@@ -1615,6 +1632,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_122933) do
     t.boolean "show_in_footer", default: false, null: false
     t.bigint "topic_id"
     t.boolean "allow_public_access", default: false, null: false
+    t.integer "gallery_id", default: 0
     t.index ["decidim_organization_id"], name: "index_decidim_static_pages_on_decidim_organization_id"
     t.index ["topic_id"], name: "index_decidim_static_pages_on_topic_id"
   end
