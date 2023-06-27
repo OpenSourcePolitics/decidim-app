@@ -34,6 +34,7 @@ You can find below an exhaustive list of modules with their repository links and
 | [decidim-phone_authorization_handler](https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler) | ✅      |Module allowing gathering phone number on a particular participant action|
 | [decidim-spam_detection](https://github.com/OpenSourcePolitics/decidim-spam_detection)              | ✅      |Module adding a spam detection algorithm that runs periodically detecting spam accounts|
 | [decidim-term_customizer](https://github.com/mainio/decidim-module-term_customizer)             | ✅      |Module allowing the change of translated strings |
+| [decidim-gallery](https://github.com/alecslupu-pfa/decidim-module-gallery)| ✅      |Module allowing the creation of galleries |
 
 
 Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
