@@ -82,7 +82,7 @@ class K8sOrganizationExporter
     {
       apiVersion: "v1",
       kind: "Secret",
-      metadata:{
+      metadata: {
         name: "#{resource_name}-custom-env"
       },
       stringData: env_vars.merge!(smtp_settings).merge!(omniauth_settings).to_json
@@ -98,11 +98,11 @@ class K8sOrganizationExporter
     {
       apiVersion: "v1",
       kind: "Secret",
-      metadata:{
+      metadata: {
         name: "#{resource_name}--de"
       },
       stringData: {
-        SECRET_KEY_BASE: "#{Dotenv.parse(".env")['SECRET_KEY_BASE']}"
+        SECRET_KEY_BASE: (Dotenv.parse(".env")["SECRET_KEY_BASE"]).to_s
       }
     }.deep_stringify_keys
   end
@@ -147,9 +147,9 @@ class K8sOrganizationExporter
         host: @organization.host,
         additionalHosts: @organization.secondary_hosts,
         organization: { id: organization_columns["id"] },
-        locale:{
+        locale: {
           default: organization_columns["default_locale"],
-          available: organization_columns["available_locales"],
+          available: organization_columns["available_locales"]
         },
         usersRegistrationMode: organization_columns["users_registration_mode"],
         forceUsersToAuthenticateBeforeAccessOrganization: organization_columns["force_users_to_authenticate_before_access_organization"],
@@ -172,7 +172,7 @@ class K8sOrganizationExporter
   end
 
   def resource_name
-    @resource_name ||= "#{@hostname}"
+    @resource_name ||= @hostname.to_s
   end
 
   def bucket_name

@@ -47,7 +47,7 @@ describe K8sOrganizationExporter do
   describe "#retrieve_active_storage_files" do
     it "retrieves the active storage files" do
       # rubocop:disable RSpec/SubjectStub
-      expect(subject).to receive(:system).with("rclone copy scw-storage: #{export_path}/#{hostname}--#{organization_host}/buckets/#{hostname}--#{organization_host}--de --config ../scaleway.config --progress --copy-links")
+      expect(subject).to receive(:system).with("rclone copy scw-storage: #{export_path}/#{hostname}/buckets/#{hostname}--de --config ../scaleway.config --progress --copy-links")
       # rubocop:enable RSpec/SubjectStub
       subject.retrieve_active_storage_files
     end
@@ -56,7 +56,7 @@ describe K8sOrganizationExporter do
   describe "#dumping_database" do
     it "dumps the database" do
       # rubocop:disable RSpec/SubjectStub
-      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{hostname}--#{organization_host}/postgres/#{hostname}--#{organization_host}--de.dump")
+      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{hostname}/postgres/#{hostname}--de.dump")
       # rubocop:enable RSpec/SubjectStub
       subject.dumping_database
     end
@@ -65,7 +65,7 @@ describe K8sOrganizationExporter do
   describe "#exporting_configuration" do
     before do
       FileUtils.rm_rf(export_path)
-      FileUtils.mkdir_p("#{export_path}/#{hostname}--#{organization_host}")
+      FileUtils.mkdir_p("#{export_path}/#{hostname}")
     end
 
     after do
@@ -74,14 +74,14 @@ describe K8sOrganizationExporter do
 
     it "exports the configuration" do
       subject.exporting_configuration
-      expect(File).to exist("#{export_path}/#{hostname}--#{organization_host}/application.yml")
+      expect(File).to exist("#{export_path}/#{hostname}/application.yml")
     end
   end
 
   describe "#exporting_env_vars" do
     before do
       FileUtils.rm_rf(export_path)
-      FileUtils.mkdir_p("#{export_path}/#{hostname}--#{organization_host}/manifests")
+      FileUtils.mkdir_p("#{export_path}/#{hostname}/manifests")
     end
 
     after do
@@ -90,7 +90,8 @@ describe K8sOrganizationExporter do
 
     it "exports the env vars" do
       subject.exporting_env_vars
-      expect(File).to exist("#{export_path}/#{hostname}--#{organization_host}/manifests/#{hostname}--#{organization_host}-config.yml")
+      expect(File).to exist("#{export_path}/#{hostname}/manifests/#{hostname}-custom-env.yml")
+      expect(File).to exist("#{export_path}/#{hostname}/manifests/#{hostname}--de.yml")
     end
   end
 
@@ -105,19 +106,19 @@ describe K8sOrganizationExporter do
 
     it "creates the directories" do
       subject.creating_directories
-      expect(Dir.glob("#{export_path}/**/*").map(&File.method(:basename))).to match_array(["#{hostname}--#{organization_host}", "buckets", "#{hostname}--#{organization_host}--de", "postgres", "manifests"])
+      expect(Dir.glob("#{export_path}/**/*").map(&File.method(:basename))).to match_array([hostname, "buckets", "#{hostname}--de", "postgres", "manifests"])
     end
   end
 
   describe "#organization_export_path" do
     it "returns the organization export path" do
-      expect(subject.organization_export_path).to eq(Rails.root.join("#{export_path}/#{hostname}--#{organization_host}").to_s)
+      expect(subject.organization_export_path).to eq(Rails.root.join("#{export_path}/#{hostname}").to_s)
     end
   end
 
   describe "#resource_name" do
     it "returns the resource name" do
-      expect(subject.resource_name).to eq("#{hostname}--#{organization_host}")
+      expect(subject.resource_name).to eq(hostname.to_s)
     end
   end
 
@@ -128,12 +129,6 @@ describe K8sOrganizationExporter do
 
     it "returns the bucket name" do
       expect(subject.bucket_name).to eq("bucket-foobar")
-    end
-  end
-
-  describe "#organization_slug" do
-    it "returns the organization slug" do
-      expect(subject.organization_slug).to eq(organization_host)
     end
   end
 
@@ -151,11 +146,11 @@ describe K8sOrganizationExporter do
     end
 
     it "returns the correct metadata" do
-      expect(subject.organization_settings["metadata"]).to eq({ "name" => "#{hostname}--#{organization_host}" })
+      expect(subject.organization_settings["metadata"]).to eq({ "name" => hostname.to_s })
     end
 
     it "returns the correct spec" do
-      expect(subject.organization_settings["spec"].keys).to eq(%w(image host additionalHosts organization timeZone envFrom))
+      expect(subject.organization_settings["spec"].keys).to match_array(%w(image host additionalHosts organization locale usersRegistrationMode forceUsersToAuthenticateBeforeAccessOrganization availableAuthorizations fileUploadSettings timeZone envFrom))
     end
 
     it "returns the correct image" do
@@ -168,7 +163,7 @@ describe K8sOrganizationExporter do
     end
 
     it "returns the correct organization" do
-      expect(subject.organization_settings["spec"]["organization"].keys).to eq(described_class::ORGANIZATION_COLUMNS)
+      expect(subject.organization_settings["spec"]["organization"].keys).to eq(["id"])
     end
 
     it "returns the correct time zone" do
@@ -176,7 +171,7 @@ describe K8sOrganizationExporter do
     end
 
     it "returns the correct envFrom" do
-      expect(subject.organization_settings["spec"]["envFrom"]).to eq([{ "secretRef" => { "name" => "#{hostname}--#{organization_host}-config" } }])
+      expect(subject.organization_settings["spec"]["envFrom"]).to eq([{ "secretRef" => { "name" => "#{hostname}-custom-env" } }])
     end
   end
 
@@ -277,7 +272,9 @@ describe K8sOrganizationExporter do
 
   describe "#all_env_vars" do
     it "returns the env vars" do
-      expect(subject.all_env_vars.keys).to match_array(%w(SMTP_FROM SMTP_USER_NAME SMTP_PORT SMTP_ADDRESS SMTP_PASSWORD OMNIAUTH_SETTINGS_FACEBOOK_ENABLED OMNIAUTH_SETTINGS_FACEBOOK_APP_ID OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET))
+      expect(subject.all_env_vars.keys).to match_array(%w(apiVersion kind metadata stringData))
+      expect(subject.all_env_vars["metadata"]["name"]).to eq("#{hostname}-custom-env")
+      expect(JSON.parse(subject.all_env_vars["stringData"]).keys).to match_array(%w(RAILS_ENV RAILS_SERVE_STATIC_FILES SMTP_FROM SMTP_USER_NAME SMTP_PORT SMTP_ADDRESS SMTP_PASSWORD OMNIAUTH_SETTINGS_FACEBOOK_ENABLED OMNIAUTH_SETTINGS_FACEBOOK_APP_ID OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET))
     end
   end
 end

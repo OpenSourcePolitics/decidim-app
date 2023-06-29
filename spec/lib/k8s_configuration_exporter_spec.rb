@@ -4,7 +4,7 @@ require "spec_helper"
 require "k8s_configuration_exporter"
 
 describe K8sConfigurationExporter do
-  subject { described_class.new(image, enable_sync) }
+  subject { described_class.new(image) }
 
   let(:organization) { create(:organization) }
   let(:image) { "registry.gitlab.com/my-image" }
@@ -18,29 +18,6 @@ describe K8sConfigurationExporter do
   describe "#hostname" do
     it "returns the hostname" do
       expect(subject.hostname).to eq("123-123-123-123")
-    end
-  end
-
-  describe "#perform_sync" do
-    it "syncs the export to the bucket" do
-      # rubocop:disable RSpec/SubjectStub
-      expect(subject).to receive(:system).with("rclone delete scw-migration:123-123-123-123-migration --rmdirs --config ../scaleway.config")
-      expect(subject).to receive(:system).with("rclone copy #{described_class::EXPORT_PATH} scw-migration:123-123-123-123-migration --config ../scaleway.config --progress --copy-links")
-      # rubocop:enable RSpec/SubjectStub
-
-      subject.perform_sync
-    end
-
-    context "when enable_sync is false" do
-      let(:enable_sync) { false }
-
-      it "does not sync the export to the bucket" do
-        # rubocop:disable RSpec/SubjectStub
-        expect(subject).not_to receive(:system)
-        # rubocop:enable RSpec/SubjectStub
-
-        subject.perform_sync
-      end
     end
   end
 
@@ -67,7 +44,7 @@ describe K8sConfigurationExporter do
       expect_any_instance_of(described_class).to receive(:export!)
       # rubocop:enable RSpec/AnyInstance
 
-      described_class.export!(image, enable_sync)
+      described_class.export!(image)
     end
   end
 end
