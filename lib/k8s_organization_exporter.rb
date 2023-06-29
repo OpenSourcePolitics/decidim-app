@@ -6,7 +6,14 @@ class K8sOrganizationExporter
                                   BACKUP_S3SYNC_ACCESS_KEY
                                   BACKUP_S3SYNC_SECRET_KEY
                                   BACKUP_S3SYNC_BUCKET
-                                  BACKUP_S3RETENTION_ENABLED).freeze
+                                  BACKUP_S3RETENTION_ENABLED
+                                  DEFAULT_LOCALE
+                                  AVAILABLE_LOCALES
+                                  FORCE_SSL
+                                  SCALEWAY_ID
+                                  SCALEWAY_TOKEN
+                                  SCALEWAY_BUCKET_NAME
+                                  SECRET_KEY_BASE).freeze
   ORGANIZATION_COLUMNS = %w(id
                             default_locale
                             available_locales
@@ -55,8 +62,10 @@ class K8sOrganizationExporter
   def exporting_env_vars
     # TODO: Shouldn't we export this to a k8s secret?
     @logger.info("exporting env variables to #{organization_export_path}/manifests/#{resource_name}--de.yml")
-    File.write("#{organization_export_path}/manifests/#{resource_name}-config.yml",
+    File.write("#{organization_export_path}/manifests/#{resource_name}-custom-env.yml",
                YAML.dump(all_env_vars))
+    File.write("#{organization_export_path}/manifests/#{resource_name}--de.yml",
+               YAML.dump(secret_key_base_env_var))
   end
 
   def creating_directories
@@ -70,12 +79,32 @@ class K8sOrganizationExporter
   end
 
   def all_env_vars
-    env_vars.merge!(smtp_settings).merge!(omniauth_settings)
+    {
+      apiVersion: "v1",
+      kind: "Secret",
+      metadata:{
+        name: "#{resource_name}-custom-env"
+      },
+      stringData: @env_vars.merge!(smtp_settings).merge!(omniauth_settings).to_json
+    }.deep_stringify_keys
   end
 
   def env_vars
     @env_vars ||= Dotenv.parse(".env")
                         .reject { |key, _value| FORBIDDEN_ENVIRONMENT_KEYS.include?(key) }
+  end
+
+  def secret_key_base_env_var
+    {
+      apiVersion: "v1",
+      kind: "Secret",
+      metadata:{
+        name: "#{resource_name}--de"
+      },
+      stringData: {
+        SECRET_KEY_BASE: "#{Dotenv.parse(".env")['SECRET_KEY_BASE']}"
+      }
+    }.deep_stringify_keys
   end
 
   def omniauth_settings
@@ -117,12 +146,20 @@ class K8sOrganizationExporter
         image: @image,
         host: @organization.host,
         additionalHosts: @organization.secondary_hosts,
-        organization: organization_columns,
+        organization: { id: organization_columns["id"] },
+        locale:{
+          default: organization_columns["default_locale"],
+          available: organization_columns["available_locales"],
+        },
+        usersRegistrationMode: organization_columns["users_registration_mode"],
+        forceUsersToAuthenticateBeforeAccessOrganization: organization_columns["force_users_to_authenticate_before_access_organization"],
+        availableAuthorizations: organization_columns["available_authorizations"],
+        fileUploadSettings: organization_columns["file_upload_settings"],
         timeZone: @organization.time_zone,
         envFrom: [
           {
             secretRef: {
-              name: "#{resource_name}-config"
+              name: "#{resource_name}-custom-env"
             }
           }
         ]
@@ -135,15 +172,11 @@ class K8sOrganizationExporter
   end
 
   def resource_name
-    @resource_name ||= "#{@hostname}--#{organization_slug}"
+    @resource_name ||= "#{@hostname}"
   end
 
   def bucket_name
     @bucket_name ||= env_vars["SCALEWAY_BUCKET_NAME"]
-  end
-
-  def organization_slug
-    @organization_slug ||= @organization.host.parameterize(separator: "_", preserve_case: true)
   end
 
   private
