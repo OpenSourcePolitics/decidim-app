@@ -44,4 +44,9 @@ namespace :decidim_app do
     puts "Running db:migrate"
     Rake::Task["db:migrate"].invoke
   end
+
+  desc "Create external install with path='path/to/external_install_configuration.yml'"
+  task external_install: :environment do
+    DecidimApp::K8s::Manager.install(ENV["path"])
+  end
 end
