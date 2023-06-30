@@ -14,7 +14,7 @@ organizations:
       - en
       - fr
     default_locale: fr
-    reference_prefix: ""
+    reference_prefix: "JKR"
     users_registration_mode: "enabled"
     file_upload_settings:
       allowed_file_extensions:
@@ -93,7 +93,7 @@ organizations:
       - en
       - fr
     default_locale: fr
-    reference_prefix: ""
+    reference_prefix: "JKR"
     users_registration_mode: "enabled"
     file_upload_settings:
       allowed_file_extensions:

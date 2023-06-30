@@ -18,5 +18,17 @@ describe DecidimApp::K8s::Manager do
 
       subject.run
     end
+
+    context "when configuration is invalid" do
+      before do
+        # rubocop:disable RSpec/AnyInstance
+        allow_any_instance_of(DecidimApp::K8s::Configuration).to receive(:valid?).and_return(false)
+        # rubocop:enable RSpec/AnyInstance
+      end
+
+      it "raises runtime error" do
+        expect { subject.run }.to raise_error(RuntimeError)
+      end
+    end
   end
 end

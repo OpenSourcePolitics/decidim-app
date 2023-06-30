@@ -1,64 +1,69 @@
 # frozen_string_literal: true
 
+require "decidim-app/k8s/manager"
+
 module DecidimApp
   module K8s
     module Commands
       class Organization
+        include Decidim::FormFactory
+
         def self.run(configuration, default_admin_configuration)
           new(configuration, default_admin_configuration).run
         end
 
         def initialize(configuration, default_admin_configuration)
           @configuration = configuration
-          @default_admin_email = default_admin_configuration["name"]
-          @default_admin_name = default_admin_configuration["email"]
+          @default_admin_name = default_admin_configuration["name"]
+          @default_admin_email = default_admin_configuration["email"]
         end
 
         def run
-          K8s::Manager.logger.info("Installing organization : '#{@configuration["name"]}'")
-
           if existing_organization
-            K8s::Manager.logger.info("Organization #{organization} already exist")
-            install
+            K8s::Manager.logger.info("Organization #{@configuration["name"]} already exist")
+
+            update
           else
-            update(existing_organization)
+            K8s::Manager.logger.info("Installing organization : '#{@configuration["name"]}'")
+
+            install
           end
         end
 
         def install
-          form = form(RegisterOrganizationForm).from_params(
+          form = form(Decidim::System::RegisterOrganizationForm).from_params(
             @configuration.merge(
               "organization_admin_email" => @default_admin_email,
               "organization_admin_name" => @default_admin_name
             )
           )
 
-          RegisterOrganization.call(form) do
+          Decidim::System::RegisterOrganization.call(form) do
             on(:ok) do
-              K8s::Manager.logger.info("Organization #{organization} created")
-              update(existing_organization)
+              K8s::Manager.logger.info("Organization #{form.name} created")
+              update
             end
 
             on(:invalid) do
-              K8s::Manager.logger.info("Organization #{organization} could not be created")
-              form.errors.full_messages.each do |error|
+              K8s::Manager.logger.info("Organization #{form.name} could not be created")
+              form.tap(&:valid?).errors.messages.each do |error|
                 K8s::Manager.logger.info(error)
               end
             end
           end
         end
 
-        def update(existing_organization)
-          form = form(UpdateOrganizationForm).from_params(@configuration)
+        def update
+          form = form(Decidim::System::UpdateOrganizationForm).from_params(@configuration.merge(id: existing_organization.id))
 
-          UpdateOrganization.call(existing_organization.id, form) do
+          Decidim::System::UpdateOrganization.call(existing_organization.id, form) do
             on(:ok) do
-              K8s::Manager.logger.info("Organization #{@configuration["name"]} updated")
+              K8s::Manager.logger.info("Organization #{form.name} updated")
             end
 
             on(:invalid) do
-              K8s::Manager.logger.info("Organization #{@configuration["name"]} could not be updated")
-              form.errors.full_messages.each do |error|
+              K8s::Manager.logger.info("Organization #{form.name} could not be updated")
+              form.tap(&:valid?).errors.messages.each do |error|
                 K8s::Manager.logger.info(error)
               end
             end
