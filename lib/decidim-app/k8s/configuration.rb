@@ -20,9 +20,9 @@ module DecidimApp
       def errors
         return [] if valid?
 
-        instance_variables.map do |variable|
-          "#{variable} is required"
-        end
+        instance_variables.select { |variable| instance_variable_get(variable).nil? }
+                          .map { |variable| "#{variable.to_s.gsub("@", "")} is required" }
+                          .join(", ")
       end
     end
   end
