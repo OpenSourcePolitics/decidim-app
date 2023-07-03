@@ -85,7 +85,7 @@ class K8sOrganizationExporter
       metadata: {
         name: "#{resource_name}-custom-env"
       },
-      stringData: env_vars.merge!(smtp_settings).merge!(omniauth_settings).to_json
+      stringData: env_vars.merge!(smtp_settings).merge!(omniauth_settings)
     }.deep_stringify_keys
   end
 
