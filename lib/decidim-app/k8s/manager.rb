@@ -23,11 +23,11 @@ module DecidimApp
       def run
         raise "Invalid configuration: #{@configuration.errors}" unless @configuration.valid?
 
-        # create_system_admin
+        Commands::SystemAdmin.run(@configuration.system_admin)
         @configuration.organizations.each do |organization|
           Commands::Organization.run(organization, @configuration.default_admin)
         end
-        # install_default_admin
+        Commands::Admin.run(@configuration.system_admin)
       end
     end
   end

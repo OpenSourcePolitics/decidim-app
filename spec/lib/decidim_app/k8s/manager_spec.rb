@@ -4,6 +4,8 @@ require "spec_helper"
 
 require "decidim-app/k8s/manager"
 require "decidim-app/k8s/commands/organization"
+require "decidim-app/k8s/commands/system_admin"
+require "decidim-app/k8s/commands/admin"
 
 describe DecidimApp::K8s::Manager do
   subject { described_class.new(configuration_path) }
@@ -14,7 +16,9 @@ describe DecidimApp::K8s::Manager do
 
   describe "run" do
     it "runs the installation" do
+      expect(DecidimApp::K8s::Commands::SystemAdmin).to receive(:run).once
       expect(DecidimApp::K8s::Commands::Organization).to receive(:run).twice
+      expect(DecidimApp::K8s::Commands::Admin).to receive(:run).once
 
       subject.run
     end
