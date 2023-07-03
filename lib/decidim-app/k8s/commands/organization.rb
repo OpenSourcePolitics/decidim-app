@@ -51,6 +51,8 @@ module DecidimApp
               end
             end
           end
+
+          existing_organization
         end
 
         def update
@@ -68,6 +70,8 @@ module DecidimApp
               end
             end
           end
+
+          existing_organization
         end
 
         def existing_organization

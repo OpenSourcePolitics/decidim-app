@@ -16,7 +16,7 @@ module DecidimApp
 
         def run
           Decidim::System::Admin.find_or_initialize_by(email: @configuration["email"])
-                                .update!(@configuration)
+                                .tap { |system_admin| system_admin.update!(@configuration) }
         end
       end
     end

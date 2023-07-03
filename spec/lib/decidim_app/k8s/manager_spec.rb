@@ -18,7 +18,7 @@ describe DecidimApp::K8s::Manager do
     it "runs the installation" do
       expect(DecidimApp::K8s::Commands::SystemAdmin).to receive(:run).once
       expect(DecidimApp::K8s::Commands::Organization).to receive(:run).twice
-      expect(DecidimApp::K8s::Commands::Admin).to receive(:run).once
+      expect(DecidimApp::K8s::Commands::Admin).to receive(:run).twice
 
       subject.run
     end

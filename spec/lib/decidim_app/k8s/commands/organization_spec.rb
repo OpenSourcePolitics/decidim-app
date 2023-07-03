@@ -55,15 +55,19 @@ describe DecidimApp::K8s::Commands::Organization do
 
   describe "run" do
     it "creates the organization" do
-      expect { subject.run }.to change(Decidim::Organization, :count).by(1)
+      expect do
+        expect(subject.run).to be_a(Decidim::Organization)
+      end.to change(Decidim::Organization, :count).by(1)
     end
+  end
 
-    context "when organization already exists" do
-      let!(:organization) { create(:organization, host: organization_configuration["host"]) }
+  context "when organization already exists" do
+    let!(:organization) { create(:organization, host: organization_configuration["host"]) }
 
-      it "updates the organization" do
-        expect { subject.run }.not_to change(Decidim::Organization, :count)
-      end
+    it "updates the organization" do
+      expect do
+        expect(subject.run).to be_a(Decidim::Organization)
+      end.not_to change(Decidim::Organization, :count)
     end
   end
 end
