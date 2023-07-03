@@ -49,12 +49,12 @@ class K8sOrganizationExporter
     @logger.info("dumping database #{@database_name} to #{organization_export_path}/postgres/#{resource_name}--de.dump")
     system("pg_dump -Fc #{@database_name} > #{organization_export_path}/postgres/#{resource_name}--de.dump")
   end
-  
+
   def exporting_configuration
     @logger.info("exporting application configuration to #{organization_export_path}/application.yml")
     File.write("#{organization_export_path}/application.yml", YAML.dump(organization_settings))
   end
-  
+
   def exporting_env_vars
     @logger.info("exporting env variables to #{organization_export_path}/manifests/#{resource_name}-custom-env.yml")
     File.write("#{organization_export_path}/manifests/#{resource_name}-custom-env.yml",
