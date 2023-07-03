@@ -1,5 +1,4 @@
 system_admin:
-  name: "System Admin"
   email: "system@example.org"
   password: "password123456"
 default_admin:

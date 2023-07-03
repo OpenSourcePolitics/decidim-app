@@ -15,7 +15,8 @@ module DecidimApp
         end
 
         def run
-
+          Decidim::System::Admin.find_or_initialize_by(email: @configuration["email"])
+                                .update!(@configuration)
         end
       end
     end
