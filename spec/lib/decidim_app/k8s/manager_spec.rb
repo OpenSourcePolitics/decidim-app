@@ -8,11 +8,7 @@ require "decidim-app/k8s/commands/system_admin"
 require "decidim-app/k8s/commands/admin"
 
 describe DecidimApp::K8s::Manager do
-  subject { described_class.new(configuration_path) }
-
-  let(:configuration_path) { "spec/fixtures/k8s_configuration_example.yml" }
-  let(:organization_configuration) { YAML.safe_load(File.read(configuration_path))["organizations"].first }
-  let(:default_admin_configuration) { YAML.safe_load(File.read(configuration_path))["default_admin"] }
+  subject { described_class.new("spec/fixtures/k8s_configuration_example.yml") }
 
   describe "run" do
     it "runs the installation" do
@@ -25,6 +21,7 @@ describe DecidimApp::K8s::Manager do
 
     context "when configuration is invalid" do
       before do
+        allow(YAML).to receive(:load_file).and_return({})
         # rubocop:disable RSpec/AnyInstance
         allow_any_instance_of(DecidimApp::K8s::Configuration).to receive(:valid?).and_return(false)
         # rubocop:enable RSpec/AnyInstance

@@ -3,6 +3,7 @@ system_admin:
   password: "password123456"
 default_admin:
   name: "Admin user"
+  nickname: "admin"
   email: "admin@example.org"
   password: "password123456"
 organizations:

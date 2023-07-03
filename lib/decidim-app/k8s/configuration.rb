@@ -5,10 +5,11 @@ module DecidimApp
     class Configuration
       attr_reader :organizations, :system_admin, :default_admin
 
-      def initialize(parsed_yaml)
-        @organizations = parsed_yaml["organizations"].is_a?(Hash) ? [parsed_yaml["organizations"]] : parsed_yaml["organizations"]
-        @system_admin = parsed_yaml["system_admin"]
-        @default_admin = parsed_yaml["default_admin"]
+      def initialize(path)
+        @parsed_configuration = YAML.load_file(path).deep_symbolize_keys
+        @organizations = set_organizations
+        @system_admin = @parsed_configuration[:system_admin]
+        @default_admin = @parsed_configuration[:default_admin]
       end
 
       def valid?
@@ -23,6 +24,12 @@ module DecidimApp
         instance_variables.select { |variable| instance_variable_get(variable).nil? }
                           .map { |variable| "#{variable.to_s.gsub("@", "")} is required" }
                           .join(", ")
+      end
+
+      private
+
+      def set_organizations
+        @parsed_configuration[:organizations].is_a?(Hash) ? [@parsed_configuration[:organizations]] : @parsed_configuration[:organizations]
       end
     end
   end

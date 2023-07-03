@@ -14,17 +14,17 @@ module DecidimApp
 
         def initialize(configuration, default_admin_configuration)
           @configuration = configuration
-          @default_admin_name = default_admin_configuration["name"]
-          @default_admin_email = default_admin_configuration["email"]
+          @default_admin_name = default_admin_configuration[:name]
+          @default_admin_email = default_admin_configuration[:email]
         end
 
         def run
           if existing_organization
-            K8s::Manager.logger.info("Organization #{@configuration["name"]} already exist")
+            K8s::Manager.logger.info("Organization #{@configuration[:name]} already exist")
 
             update
           else
-            K8s::Manager.logger.info("Installing organization : '#{@configuration["name"]}'")
+            K8s::Manager.logger.info("Installing organization : '#{@configuration[:name]}'")
 
             install
           end
@@ -33,8 +33,8 @@ module DecidimApp
         def install
           form = form(Decidim::System::RegisterOrganizationForm).from_params(
             @configuration.merge(
-              "organization_admin_email" => @default_admin_email,
-              "organization_admin_name" => @default_admin_name
+              organization_admin_email: @default_admin_email,
+              organization_admin_name: @default_admin_name
             )
           )
 
@@ -56,7 +56,8 @@ module DecidimApp
         end
 
         def update
-          form = form(Decidim::System::UpdateOrganizationForm).from_params(@configuration.merge(id: existing_organization.id))
+          mapped_attributes = form(Decidim::System::UpdateOrganizationForm).from_model(existing_organization).attributes_with_values
+          form = form(Decidim::System::UpdateOrganizationForm).from_params(mapped_attributes.merge(@configuration, id: existing_organization.id))
 
           Decidim::System::UpdateOrganization.call(existing_organization.id, form) do
             on(:ok) do
@@ -71,11 +72,11 @@ module DecidimApp
             end
           end
 
-          existing_organization
+          existing_organization.reload
         end
 
         def existing_organization
-          Decidim::Organization.find_by(name: @configuration["name"]) || Decidim::Organization.find_by(host: @configuration["host"])
+          Decidim::Organization.find_by(name: @configuration[:name]) || Decidim::Organization.find_by(host: @configuration[:host])
         end
       end
     end

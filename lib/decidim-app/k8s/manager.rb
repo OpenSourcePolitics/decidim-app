@@ -9,7 +9,7 @@ module DecidimApp
   module K8s
     class Manager
       def initialize(path)
-        @configuration = Configuration.new(YAML.safe_load(File.read(path)))
+        @configuration = Configuration.new(path)
       end
 
       def self.run(path)
@@ -28,7 +28,6 @@ module DecidimApp
           organization = Commands::Organization.run(organization, @configuration.default_admin)
           Commands::Admin.run(@configuration.system_admin, organization)
         end
-
       end
     end
   end
