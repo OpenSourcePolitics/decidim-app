@@ -11,7 +11,8 @@ module Decidim
     def create!
       super
 
-      Decidim::System::Admin.create!(@attributes)
+      Decidim::System::Admin.find_or_initialize_by(email: @attributes[:email])
+                            .update!(@attributes)
     end
   end
 end
