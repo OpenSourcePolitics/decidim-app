@@ -17,7 +17,7 @@ describe DecidimApp::K8s::Configuration do
 
       it "returns an array" do
         expect(subject.organizations).to be_a(Array)
-        expect(subject.organizations).to eq([{ :my_organization => "decidim" }])
+        expect(subject.organizations).to eq([{ my_organization: "decidim" }])
       end
     end
 
