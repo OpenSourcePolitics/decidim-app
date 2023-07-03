@@ -22,7 +22,7 @@ class K8sOrganizationExporter
                             available_authorizations
                             file_upload_settings).freeze
 
-  def initialize(organization, logger, export_path, hostname, image)
+  def initialize(organization, logger, export_path, hostname, image="")
     @organization = organization
     @logger = logger
     @export_path = export_path
@@ -35,43 +35,37 @@ class K8sOrganizationExporter
     new(organization, logger, export_path, hostname, image).export!
   end
 
+  def self.dumping_database(organization, logger, export_path, hostname)
+    new(organization, logger, export_path, hostname).dumping_database
+  end
+
   def export!
     creating_directories
     exporting_env_vars
     exporting_configuration
-    dumping_database
-    retrieve_active_storage_files
-  end
-
-  def retrieve_active_storage_files
-    # TODO: ../scaleway.config is hardcoded here, should be a parameter
-    @logger.info("retrieving active storage files from bucket #{bucket_name} into #{organization_export_path}/buckets/#{resource_name}--de")
-    system("rclone copy scw-storage:#{bucket_name} #{organization_export_path}/buckets/#{resource_name}--de --config ../scaleway.config --progress --copy-links")
   end
 
   def dumping_database
     @logger.info("dumping database #{@database_name} to #{organization_export_path}/postgres/#{resource_name}--de.dump")
     system("pg_dump -Fc #{@database_name} > #{organization_export_path}/postgres/#{resource_name}--de.dump")
   end
-
+  
   def exporting_configuration
     @logger.info("exporting application configuration to #{organization_export_path}/application.yml")
     File.write("#{organization_export_path}/application.yml", YAML.dump(organization_settings))
   end
-
+  
   def exporting_env_vars
-    # TODO: Shouldn't we export this to a k8s secret?
-    @logger.info("exporting env variables to #{organization_export_path}/manifests/#{resource_name}--de.yml")
+    @logger.info("exporting env variables to #{organization_export_path}/manifests/#{resource_name}-custom-env.yml")
     File.write("#{organization_export_path}/manifests/#{resource_name}-custom-env.yml",
                YAML.dump(all_env_vars))
+    @logger.info("exporting env variables to #{organization_export_path}/manifests/#{resource_name}--de.yml")
     File.write("#{organization_export_path}/manifests/#{resource_name}--de.yml",
                YAML.dump(secret_key_base_env_var))
   end
 
   def creating_directories
     @logger.info("creating organization directories")
-    @logger.info("#{organization_export_path}/buckets/#{resource_name}--de")
-    FileUtils.mkdir_p("#{organization_export_path}/buckets/#{resource_name}--de")
     @logger.info("#{organization_export_path}/manifests")
     FileUtils.mkdir_p("#{organization_export_path}/manifests")
     @logger.info("#{organization_export_path}/postgres")
@@ -140,7 +134,8 @@ class K8sOrganizationExporter
       apiVersion: "apps.libre.sh/v1alpha1",
       kind: "Decidim",
       metadata: {
-        name: resource_name
+        name: resource_name,
+        namespace: namespace
       },
       spec: {
         image: @image,
@@ -168,15 +163,15 @@ class K8sOrganizationExporter
   end
 
   def organization_export_path
-    @organization_export_path ||= "#{@export_path}/#{resource_name}"
+    @organization_export_path ||= "#{@export_path}/#{namespace}--#{resource_name}"
   end
 
   def resource_name
-    @resource_name ||= @hostname.to_s
+    @resource_name ||= @hostname.split('.').first
   end
 
-  def bucket_name
-    @bucket_name ||= env_vars["SCALEWAY_BUCKET_NAME"]
+  def namespace
+    @namespace ||= @hostname.split('.',2).last.gsub(".", "-")
   end
 
   private
