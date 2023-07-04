@@ -6,8 +6,6 @@ module DecidimApp
   module K8s
     module Commands
       class Organization
-        include Decidim::FormFactory
-
         def self.run(configuration, default_admin_configuration)
           new(configuration, default_admin_configuration).run
         end
@@ -31,7 +29,7 @@ module DecidimApp
         end
 
         def install
-          form = form(Decidim::System::RegisterOrganizationForm).from_params(
+          form = Decidim::System::RegisterOrganizationForm.from_params(
             @configuration.merge(
               organization_admin_email: @default_admin_email,
               organization_admin_name: @default_admin_name
@@ -56,8 +54,8 @@ module DecidimApp
         end
 
         def update
-          mapped_attributes = form(Decidim::System::UpdateOrganizationForm).from_model(existing_organization).attributes_with_values
-          form = form(Decidim::System::UpdateOrganizationForm).from_params(mapped_attributes.merge(@configuration, id: existing_organization.id))
+          mapped_attributes = Decidim::System::UpdateOrganizationForm.from_model(existing_organization).attributes_with_values
+          form = Decidim::System::UpdateOrganizationForm.from_params(mapped_attributes.merge(@configuration, id: existing_organization.id))
 
           Decidim::System::UpdateOrganization.call(existing_organization.id, form) do
             on(:ok) do

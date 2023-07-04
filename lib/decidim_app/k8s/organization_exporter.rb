@@ -4,25 +4,25 @@ module DecidimApp
   module K8s
     class OrganizationExporter
       FORBIDDEN_ENVIRONMENT_KEYS = %w(BACKUP_ENABLED
-                                    BACKUP_S3SYNC_ENABLED
-                                    BACKUP_S3SYNC_ACCESS_KEY
-                                    BACKUP_S3SYNC_SECRET_KEY
-                                    BACKUP_S3SYNC_BUCKET
-                                    BACKUP_S3RETENTION_ENABLED
-                                    DEFAULT_LOCALE
-                                    AVAILABLE_LOCALES
-                                    FORCE_SSL
-                                    SCALEWAY_ID
-                                    SCALEWAY_TOKEN
-                                    SCALEWAY_BUCKET_NAME
-                                    SECRET_KEY_BASE).freeze
+                                      BACKUP_S3SYNC_ENABLED
+                                      BACKUP_S3SYNC_ACCESS_KEY
+                                      BACKUP_S3SYNC_SECRET_KEY
+                                      BACKUP_S3SYNC_BUCKET
+                                      BACKUP_S3RETENTION_ENABLED
+                                      DEFAULT_LOCALE
+                                      AVAILABLE_LOCALES
+                                      FORCE_SSL
+                                      SCALEWAY_ID
+                                      SCALEWAY_TOKEN
+                                      SCALEWAY_BUCKET_NAME
+                                      SECRET_KEY_BASE).freeze
       ORGANIZATION_COLUMNS = %w(id
-                              default_locale
-                              available_locales
-                              users_registration_mode
-                              force_users_to_authenticate_before_access_organization
-                              available_authorizations
-                              file_upload_settings).freeze
+                                default_locale
+                                available_locales
+                                users_registration_mode
+                                force_users_to_authenticate_before_access_organization
+                                available_authorizations
+                                file_upload_settings).freeze
 
       def initialize(organization, logger, export_path, image = "")
         @organization = organization

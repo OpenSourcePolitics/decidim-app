@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 require "decidim_app/k8s/manager"
+require "decidim/core"
 
 module DecidimApp
   module K8s
     module Commands
       class Admin
-        include Decidim::FormFactory
-
         def self.run(configuration, organization)
           new(configuration, organization).run
         end
@@ -18,12 +17,12 @@ module DecidimApp
         end
 
         def run
-          mapped_attributes = form(Decidim::AccountForm).from_model(existing_admin)
-                                                        .attributes_with_values
-                                                        .except(:avatar)
-          form = form(Decidim::AccountForm).from_params(mapped_attributes.merge(admin_params))
-                                           .with_context(current_user: existing_admin,
-                                                         current_organization: @organization)
+          mapped_attributes = Decidim::AccountForm.from_model(existing_admin)
+                                                  .attributes_with_values
+                                                  .except(:avatar)
+          form = Decidim::AccountForm.from_params(mapped_attributes.merge(admin_params))
+                                     .with_context(current_user: existing_admin,
+                                                   current_organization: @organization)
 
           Decidim::UpdateAccount.call(existing_admin, form) do
             on(:ok) do
