@@ -47,7 +47,7 @@ module K8s
 
     def dumping_database
       @logger.info("dumping database #{@database_name} to #{organization_export_path}/postgres/#{resource_name}--de.dump")
-      system("pg_dump -Fc #{@database_name} > #{organization_export_path}/postgres/#{resource_name}--#{@organization.host}--de.dump")
+      system("pg_dump -Fc #{@database_name} > #{organization_export_path}/postgres/#{resource_name}--de.dump")
     end
 
     def exporting_configuration
