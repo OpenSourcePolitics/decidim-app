@@ -28,7 +28,7 @@ module DecidimApp
         Commands::SystemAdmin.run(@configuration.system_admin)
         @configuration.organizations.each do |organization|
           organization = Commands::Organization.run(organization, @configuration.default_admin)
-          Commands::Admin.run(@configuration.system_admin, organization)
+          Commands::Admin.run(@configuration.default_admin, organization)
         end
       end
     end
