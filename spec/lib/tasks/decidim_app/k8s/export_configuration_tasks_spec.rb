@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "rake k8s:export_configuration", type: :task do
+describe "rake decidim_app:k8s:export_configuration", type: :task do
   let(:image) { "dummy-image" }
 
   it "preloads the Rails environment" do
@@ -11,7 +11,7 @@ describe "rake k8s:export_configuration", type: :task do
 
   it "invokes the configuration exporter" do
     with_modified_env IMAGE: image do
-      expect(K8sConfigurationExporter).to receive(:export!).with(image).and_return(true)
+      expect(K8s::ConfigurationExporter).to receive(:export!).with(image).and_return(true)
 
       task.execute
     end

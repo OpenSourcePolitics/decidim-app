@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "rake decidim_app:upgrade", type: :task do
+describe "rake decidim_app:k8s:upgrade", type: :task do
   it "preloads the Rails environment" do
     expect(task.prerequisites).to include "environment"
   end

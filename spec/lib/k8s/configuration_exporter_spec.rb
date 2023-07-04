@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "k8s_configuration_exporter"
+require "k8s/configuration_exporter"
 
-describe K8sConfigurationExporter do
+describe K8s::ConfigurationExporter do
   subject { described_class.new(image) }
 
   let(:organization) { create(:organization) }
@@ -21,7 +21,7 @@ describe K8sConfigurationExporter do
 
   describe "#export!" do
     it "exports the organizations" do
-      expect(K8sOrganizationExporter).to receive(:export!).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH, image).and_return(true)
+      expect(K8s::OrganizationExporter).to receive(:export!).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH, image).and_return(true)
 
       subject.export!
     end
