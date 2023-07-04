@@ -33,6 +33,19 @@ namespace :decidim_app do
       Rake::Task["db:migrate"].invoke
     end
 
+    desc "usage: bundle exec rails k8s:dump_db"
+    task dump_db: :environment do
+      K8s::OrganizationExporter.dump_db
+    end
+
+    desc "usage: bundle exec rails k8s:export_configuration IMAGE=<docker_image_ref>"
+    task export_configuration: :environment do
+      image = ENV["IMAGE"]
+      raise "You must specify a docker image, usage: bundle exec rails k8s:export_configuration IMAGE=<image_ref>" if image.blank?
+
+      K8s::ConfigurationExporter.export!(image)
+    end
+
     desc "Create external install with path='path/to/external_install_configuration.yml'"
     task external_install: :environment do
       DecidimApp::K8s::Manager.install(ENV["path"])

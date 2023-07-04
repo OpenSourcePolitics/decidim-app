@@ -7,6 +7,7 @@ require "decidim/rails"
 require "action_cable/engine"
 # require "action_mailbox/engine"
 # require "action_text/engine"
+require_relative "../lib/active_storage/downloadable"
 
 # TODO : add missing dep to decidim-initiatives/lib/decidim/initiatives/engine.rb
 # require "wicked_pdf"
@@ -38,6 +39,10 @@ module DevelopmentApp
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.to_prepare do
+      ActiveStorage::Blob.include ActiveStorage::Downloadable
+    end
 
     config.after_initialize do
       require "extends/controllers/decidim/devise/sessions_controller_extends"
