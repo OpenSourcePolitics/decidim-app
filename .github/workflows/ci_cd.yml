@@ -4,10 +4,14 @@ on: [push]
 env:
   CI: "true"
   SIMPLECOV: "true"
+  RSPEC_FORMAT: "documentation"
   RUBY_VERSION: 2.7.5
   RAILS_ENV: test
   NODE_VERSION: 16.9.1
   RUBYOPT: '-W:no-deprecated'
+  # Set locales available for i18n tasks
+  ENFORCED_LOCALES: "en,fr"
+  AVAILABLE_LOCALES: "en,fr"
 
 jobs:
   todo:
@@ -55,9 +59,6 @@ jobs:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
-      RAILS_ENV: test
-      # Set locales available for i18n tasks
-      ENFORCED_LOCALES: "en,fr"
     steps:
       - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
         if: "github.ref != 'refs/heads/master' || github.ref != 'refs/heads/develop'"
@@ -123,9 +124,6 @@ jobs:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
-      RAILS_ENV: test
-      # Set locales available for i18n tasks
-      ENFORCED_LOCALES: "en,fr"
     steps:
       - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
         if: "github.ref != 'refs/heads/master' || github.ref != 'refs/heads/develop'"
@@ -191,7 +189,7 @@ jobs:
     steps:
       - uses: OpenSourcePolitics/build-and-test-images-action@master
         with:
-          registry: ${{ vars.REGISTRY }}
+          registry: ${{ vars.REGISTRY_ENDPOINT }}
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
           image_name: ${{ vars.IMAGE_NAME }}
           tag: ${{ github.ref }}
@@ -241,7 +239,7 @@ jobs:
           key: ${{ secrets.ANSIBLE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/staging.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
-  build_and_push_image:
+  build_and_push_image_dev:
     name: Build and push image to Registry
     if: "github.ref == 'refs/heads/develop'"
     needs: [lint, tests, system_tests, test_build]
@@ -249,8 +247,34 @@ jobs:
     steps:
       - uses: OpenSourcePolitics/build-and-push-images-action@master
         with:
-          registry: ${{ vars.REGISTRY }}
+          registry: ${{ vars.REGISTRY_ENDPOINT }}
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
           password: ${{ secrets.TOKEN }}
           image_name: ${{ vars.IMAGE_NAME }}
           tag: "develop"
+  generate_release:
+    name: Generate release
+    needs: [lint, tests, system_tests, test_build]
+    if: "github.ref == 'refs/heads/master'"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mathieudutour/github-tag-action@v6.1
+        name: Bump version and push tag
+        id: tag_version
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ncipollo/release-action@v1
+        name: Create a GitHub release
+        with:
+          generateReleaseNotes: true
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+      - uses: OpenSourcePolitics/build-and-push-images-action@master
+        with:
+          registry: ${{ vars.REGISTRY_ENDPOINT }}
+          namespace: ${{ vars.REGISTRY_NAMESPACE }}
+          password: ${{ secrets.TOKEN }}
+          image_name: ${{ vars.IMAGE_NAME }}
+          tag: ${{ steps.tag_version.outputs.new_tag }}

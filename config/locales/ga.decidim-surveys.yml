@@ -1,0 +1,6 @@
+---
+ga:
+  decidim:
+    surveys:
+      last_activity:
+        new_survey_at_html: "<span>Suirbhé nua faoi %{link}</span>"

@@ -1,0 +1,169 @@
+---
+mt:
+  activemodel:
+    attributes:
+      answer:
+        body: Tweġiba
+      question:
+        max_choices: Numru massimu ta' għażliet
+        question_type: Tip
+      questionnaire_question:
+        mandatory: Obbligatorju
+    errors:
+      models:
+        answer:
+          attributes:
+            choices:
+              missing: mhumiex kompluti
+              too_many: huma wisq
+        questionnaire:
+          request_invalid: Kien hemm żball fl-ipproċessar tat-talba. Erġa’ pprova
+  decidim:
+    forms:
+      admin:
+        models:
+          components:
+            description: Deskrizzjoni
+            tos: Termini tas-servizzi
+        questionnaires:
+          actions:
+            back: Lura għall-mistoqsijiet
+            show: Uri t-tweġibiet
+          answer_option:
+            answer_option: Possibbiltà għat-tweġiba
+            free_text: Test liberu
+            remove: Neħħi
+            statement: Dikjarazzjoni
+          answers:
+            actions:
+              back: Lura għat-tweġibiet
+              export: Esporta
+              show: Uri t-tweġibiet
+            empty: Għad ma hemmx tweġibiet
+            export:
+              answer:
+                title: 'Tweġiba #%{number}'
+            export_response:
+              title: tweġibiet_tal-utent_għall-istħarriġ_%{token}
+            index:
+              title: 'total ta’ tweġibiet: %{total}'
+            show:
+              title: 'Tweġiba #%{number}'
+          display_condition:
+            answer_option: Possibbiltà għat-tweġiba
+            condition_question: Mistoqsija
+            condition_type: Kundizzjoni
+            condition_types:
+              answered: Imwieġba
+              equal: Ugwali
+              match: Tinkludi t-test
+              not_answered: Mhux imwieġba
+              not_equal: Mhux ugwali
+            condition_value: Inkludiet it-test
+            display_condition: Uri l-kundizzjoni
+            mandatory: Din il-kundizzjoni trid tiġi ssodisfata dejjem irrispettivament mill-istatus tal-kundizzjonijiet l-oħrajn
+            remove: Neħħi
+            save_warning: Ftakar tissejvja l-formola qabel ma tikkonfigura l-kundizzjonijiet tal-wiri
+            select_answer_option: Agħżel tweġiba possibbli
+            select_condition_question: Agħżel mistoqsija
+            select_condition_type: Agħżel tip ta’ kundizzjoni
+          edit:
+            save: Issejvja
+            title: Editja l-kwestjonarju
+          form:
+            add_question: Żid mistoqsija
+            add_separator: Żid separatur
+            already_answered_warning: Il-formola diġà twieġbet minn xi utenti u għalhekk ma tistax timmodifika l-mistoqsijiet tagħha.
+            collapse: Ikkollassa l-mistoqsijiet kollha
+            expand: Espandi l-mistoqsijiet kollha
+            title: Editja l-formola
+            unpublished_warning: Il-formola mhijiex ippubblikata. Tista’ timmodifika l-mistoqsijiet tagħha, iżda dan iħassar it-tweġibiet attwali.
+          matrix_row:
+            matrix_row: Ringiela
+            remove: Neħħi
+            statement: Dikjarazzjoni
+          question:
+            add_answer_option: Żid tweġiba possibbli
+            add_display_condition: Żid kundizzjoni tal-wiri
+            add_display_condition_info: Issejvja l-formola biex tikkonfigura l-kundizzjonijiet tal-wiri
+            add_matrix_row: Żid ringiela
+            any: Kwalunkwe
+            collapse: Ikkollassa
+            description: Deskrizzjoni
+            down: "’L isfel"
+            expand: Espandi
+            question: Mistoqsija
+            remove: Neħħi
+            statement: Dikjarazzjoni
+            up: "’Il fuq"
+          separator:
+            down: "’L isfel"
+            remove: Neħħi
+            separator: Separatur
+            up: "’Il fuq"
+          update:
+            invalid: Kien hemm problema biex tiġi ssejvjata l-formola.
+            success: Il-formoli ġew issejvjati.
+      errors:
+        answer:
+          body: Il-kontenut prinċipali ma jistax jitħalla vojt
+      files:
+        extension_whitelist: 'Formats aċċettati:'
+      images:
+        dimensions_info: 'Din l-immaġni se:'
+        processors:
+          resize_and_pad: Jinbidlilha d-daqs u tiġi padded
+          resize_to_fit: Jinbidlilha d-daqs biex toqgħod
+      question_types:
+        long_answer: Tweġiba twila
+        matrix_multiple: Matriċi (Possibbiltajiet multipli)
+        matrix_single: Matriċi (Possibbiltà waħda)
+        multiple_option: Possibbiltà multipla
+        short_answer: Tweġiba qasira
+        single_option: Possibbiltà waħda
+        sorting: Issortjar
+      questionnaires:
+        answer:
+          invalid: Kien hemm problema biex titwieġeb il-formola.
+          max_choices_alert: Hemm wisq possibbiltajiet magħżula
+          success: Il-formola ġiet imwieġba.
+        question:
+          max_choices: 'Għażliet massimi: %{n}'
+        show:
+          answer_questionnaire:
+            anonymous_user_message: <a href="%{sign_in_link}">Illoggja bil-kont tiegħek</a> jew <a href="%{sign_up_link}">irreġistra</a> biex twieġeb il-formola.
+            title: Wieġeb il-formola
+          current_step: Pass %{step}
+          of_total_steps: minn %{total_steps}
+          questionnaire_answered:
+            body: Diġà weġibt din il-formola.
+            title: Diġà mwieġba
+          questionnaire_closed:
+            body: Il-formola magħluqa u ma tistax titwieġeb.
+            title: Formola magħluqa
+          questionnaire_for_private_users:
+            body: Il-formola hija disponibbli għall-utenti privati biss
+            title: Formola magħluqa
+          questionnaire_js_disabled:
+            body: Xi wħud mill-elementi ta’ din il-formola se jiġu diżattivati. Biex ittejjeb l-esperjenza tiegħek, jekk jogħġbok attiva l-JavaScript fil-brawżer tiegħek.
+            title: Il-JavaScript huwa diżattivat
+          questionnaire_not_published:
+            body: Din il-formola għadha mhix ippubblikata.
+          tos_agreement: Billi tipparteċipa taċċetta t-Termini ta’ Servizz tagħha
+      step_navigation:
+        show:
+          are_you_sure: Din l-azzjoni ma tistax titreġġa’ lura u mhux se tkunx tista’ teditja t-tweġibiet tiegħek. Żgur?
+          back: Lura
+          continue: Kompli
+          submit: Issottometti
+      user_answers_serializer:
+        body: Tweġiba
+        completion: Mili
+        created_at: Imwieġba fi
+        id: ID tat-tweġiba
+        ip_hash: IP Hash
+        question: Mistoqsija
+        registered: Irreġistrata
+        session_token: Identifikatur tal-utent
+        unregistered: Mhux irreġistrata
+        user_status: Status tal-Utent

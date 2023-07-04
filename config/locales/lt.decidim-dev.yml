@@ -1,0 +1,56 @@
+---
+lt:
+  activemodel:
+    attributes:
+      dummy_resource:
+        created_at: Sukurta
+        decidim_scope_id: Sritis
+        field: Mano laukas
+        start_date: Pradžios data
+        title: Pavadinimas
+        translatable_text: Verčiamas tekstas
+        updated_at: Atnaujinta
+  decidim:
+    components:
+      dummy:
+        settings:
+          global:
+            readonly_attribute: Tik skaitomas atributas
+            test: Bandymas
+            test_choices:
+              a: A pasirinkimas
+              b: B pasirinkimas
+              c: C pasirinkimas
+          step:
+            endorsements_blocked: Pritarimai užblokuoti
+            endorsements_enabled: Pritarimai aktyvinti
+            readonly_step_attribute: Tik skaitomas veiksmo atributas
+    dummy:
+      admin:
+        exports:
+          dummies: Fiktyvūs elementai
+    gamification:
+      badges:
+        test:
+          conditions: "„Decidim“ naudokite bandymo aplinką"
+          description: Dalyviai šį ženklelį pelno kurdami testus.
+          description_another: Šis dalyvis sukūrė %{score} testus (-ų).
+          description_own: Jūs sukūrėte %{score} testus (-ų).
+          name: Bandymai
+          next_level_in: Parenkite dar %{score} testus (-ų) ir pasiekite kitą lygį!
+          unearned_another: Šis dalyvis dar nesukūrė jokių testų.
+          unearned_own: Jūs dar nesukūrėte jokių testų.
+    pages:
+      home:
+        statistics:
+          bar: Juosta
+          dummies_count_high: Daug fiktyvių elementų
+          dummies_count_medium: Vidutiniškai fiktyvių elementų
+          foo: Bet kas
+    participatory_processes:
+      statistics:
+        dummies_count_high: Daug
+        dummies_count_medium: Vidurkis
+    resource_links:
+      test_link:
+        dummy_resource_dummy: Susijęs fiktyvus elementas

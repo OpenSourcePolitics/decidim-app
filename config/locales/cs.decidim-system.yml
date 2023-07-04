@@ -1,0 +1,144 @@
+---
+cs:
+  activemodel:
+    attributes:
+      oauth_application:
+        name: Název aplikace OAuth
+        organization_logo: Logo organizace (čtverec)
+        organization_name: Organizace
+        organization_url: URL adresa organizace
+        redirect_uri: Přesměrování URI
+    errors:
+      models:
+        oauth_application:
+          attributes:
+            redirect_uri:
+              must_be_ssl: Přesměrování URI musí být SSL URI
+  decidim:
+    system:
+      actions:
+        confirm_destroy: Opravdu to chcete smazat?
+        destroy: Smazat
+        edit: Upravit
+        new: Nové
+        save: Uložit
+        title: Akce
+      admins:
+        create:
+          error: Při vytváření nového správce došlo k problému.
+          success: Správce byl úspěšně vytvořen
+        destroy:
+          success: Správce byl úspěšně smazán
+        edit:
+          title: Upravit správce
+          update: Aktualizovat
+        index:
+          title: Správci
+        new:
+          create: Vytvořit
+          title: Nový správce
+        update:
+          error: Při aktualizaci tohoto správce došlo k problému.
+          success: Správce byl úspěšně aktualizován
+      default_pages:
+        placeholders:
+          content: Na statickou stránku %{page} v administrátorském panelu přidejte smysluplný obsah.
+          title: Standardní název pro stránku %{page}
+      menu:
+        admins: Správci
+        dashboard: Panel
+        oauth_applications: Aplikace OAuth
+        organizations: Organizace
+      models:
+        admin:
+          fields:
+            created_at: Vytvořeno
+            email: E-mail
+          name: Správce
+          validations:
+            email_uniqueness: jiný správce se stejným e-mailem již existuje
+        oauth_application:
+          fields:
+            created_at: Vytvořeno
+            name: Název aplikace OAuth
+            organization_name: Organizace
+          name: Aplikace OAuth
+        organization:
+          actions:
+            save_and_invite: Vytvořit organizaci a pozvat správce
+          fields:
+            created_at: Vytvořeno
+            name: Jméno
+            omniauth_settings: Nastavení Omniauth
+            smtp_settings: Nastavení SMTP
+          name: Organizace
+      oauth_applications:
+        create:
+          error: Při vytváření této aplikace došlo k problému.
+          success: Aplikace byla úspěšně vytvořena.
+        destroy:
+          error: Při mazání této aplikace došlo k problému.
+          success: Aplikace byla úspěšně smazána.
+        edit:
+          save: Uložit
+          title: Upravit aplikaci
+        form:
+          select_organization: Zvolit organizaci
+        index:
+          confirm_delete: Opravdu chcete smazat tuto aplikaci?
+          title: Aplikace OAuth
+        new:
+          save: Uložit
+          title: Nová aplikace
+        update:
+          error: Při aktualizaci této aplikace došlo k problému.
+          success: Aplikace byla úspěšně aktualizována.
+      organizations:
+        create:
+          error: Při vytváření nové organizace došlo k problému.
+          success: Organizace byla úspěšně vytvořena.
+        edit:
+          secondary_hosts_hint: Každou vložte do nového řádku
+        index:
+          title: Organizace
+        new:
+          reference_prefix_hint: Referenční předpona se používá k jedinečné identifikaci zdrojů napříč všemi organizacemi
+          secondary_hosts_hint: Každou vložte do nového řádku
+          title: Nová organizace
+        omniauth_settings:
+          decidim:
+            client_id: ID klienta
+            client_secret: Tajný klíč klienta
+            site_url: URL adresa stránky
+          enabled: Povoleno
+          enabled_by_default: Tento poskytovatel je standardně povolen. Může být editován, ale ne blokován.
+          facebook:
+            app_id: ID aplikace
+            app_secret: Tajný klíč aplikace
+          google_oauth2:
+            client_id: ID klienta
+            client_secret: Tajný klíč klienta
+          icon: Ikona
+          icon_path: Cesta k ikoně
+          twitter:
+            api_key: API klíč
+            api_secret: Tajný klíč API
+        smtp_settings:
+          instructions:
+            from_label: 'Odesílatel e-mailu bude: "nazev-vasi-organizace <vase-organizace@vas-poskytovatel.org>". Nechte prázdné, aby bylo možné pole ''from_email'' použít jako štítek'
+          placeholder:
+            from_email: vase-organizace@vas-poskytovatel.org
+            from_label: nazev-vasi-organizace
+        update:
+          error: Při aktualizaci této organizace došlo k problému.
+          success: Organizace byla úspěšně aktualizována.
+        users_registration_mode:
+          disabled: Přístup může být umožněn pouze prostřednictvím externích účtů
+          enabled: Umožnit účastníkům registraci a přihlášení
+          existing: Neumožnit účastníkům registraci, ale umožnit stávajícím účastníkům přihlášení
+      shared:
+        notices:
+          no_organization_warning_html: Abyste mohli začít, je potřeba vytvořit organizaci. Než začnete, přečtěte si návod %{guide}.
+          our_getting_started_guide: náš návod pro začátečníky
+      titles:
+        dashboard: Panel

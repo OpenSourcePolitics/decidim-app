@@ -1,0 +1,10 @@
+---
+ga:
+  activerecord:
+    models:
+      decidim/assembly:
+        other: Painéal Saoránach Eorpach
+  decidim:
+    assemblies:
+      statistics:
+        proposals_count: Smaointe

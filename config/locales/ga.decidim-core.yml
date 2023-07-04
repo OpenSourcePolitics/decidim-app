@@ -1,0 +1,139 @@
+---
+ga:
+  activemodel:
+    attributes:
+      user:
+        email: Ríomhphost
+        name: Ainm
+  decidim:
+    account:
+      delete:
+        alert: Ní féidir an gníomh seo a chur ar ceal. Má scriosann tú do chuntas ní bheidh tú in ann logáil isteach le d’fhaisnéis aitheantais. Is údar gan ainm a bheidh luaite leis an méid atá scríofa agat féin má scriostar do chuntas. Beidh tú fós in ann cuntas nua a chruthú, ach ní bheidh an obair sin nasctha leis.
+    application:
+      documents:
+        related_documents: Tuilleadh eolais uait?
+      photos:
+        related_photos: Meáin ghaolmhara
+    components:
+      component_order_selector:
+        order:
+          meeting: Imeacht
+          proposal: Smaoineamh
+    content_blocks:
+      last_activity:
+        title: An Ghníomhaíocht/na Gníomhaíochtaí is Déanaí
+    core:
+      actions:
+        unauthorized: Is gá logáil isteach chun an gníomh seo a dhéanamh.
+    data_portability:
+      show:
+        download_data_description: Seolfar comhad ina mbeidh an t-eolas go léir a bhaineann le do chuntas chuig <strong>%{user_email}</strong>. Sa ríomhphost sin beidh comhad .zip agus pasfhocal chun é a oscailt.<br/><br/>Chun an comhad a dhízipeáil, beidh <a href="https://www.7-zip.org/">7-Zip</a> ag teastáil uait (le haghaidh Windows) nó <a href="https://www.keka.io/">Keka</a>ag teastáil uait (le haghaidh MacOS). Más é Linux a úsáideann tú, formhór an ama beidh sé suiteáilte agat mar réamhshocrú. Mura bhfuil, is féidir úsáid a bhaint as <a href="https://gitlab.gnome.org/GNOME/file-roller">File Roller</a> nó <a href="https://peazip.github.io">PeaZip</a>.
+        request_data: Do chuid sonraí a iarraidh
+    export_mailer:
+      data_portability_export:
+        click_button: 'Cliceáil ar an nasc a leanas chun do chuid sonraí a íoslódáil.<br/>Beidh an comhad ar fáil go dtí%{date}.<br/>Chun é a oscailt, beidh <a href="https://www.7-zip.org/">7-Zip</a> (le haghaidh Windows), <a href="https://www.keka.io/en/">Keka</a> (le haghaidh MacOS) nó <a href="https://peazip.github.io">PeaZip</a> (le haghaidh Linux) ag teastáil. Pasfhocal: %{password}'
+    filters:
+      linked_classes:
+        all: Gach
+        meeting: Imeachtaí
+        proposal: Smaointe
+    follows:
+      create:
+        button: Lean
+      destroy:
+        button: Á leanúint
+    menu:
+      help: Faoin gComhdháil
+    messaging:
+      conversations:
+        add_conversation_users:
+          add_users_placeholder: Cuardaigh
+        index:
+          title: Mo teachtaireachtaí
+    notifications_settings:
+      show:
+        everything_followed: Gach rud a leanaim.
+        own_activity: Mo ghníomhaíocht féin, nuair a dhéanann duine trácht ar smaoineamh liom nó nuair a luaitear mé, abair
+    pages:
+      home:
+        extended:
+          meetings: Imeachtaí
+          proposals: Smaointe
+          proposals_explanation: Cruthaigh smaointe, tacaigh le cinn atá ann cheana féin agus cuir chun cinn na hathruithe is mian leatsa a fheiceáil.
+        statistics:
+          headline: Cad atá ag tarlú ag an gComhdháil ar Thodhchaí na hEorpa?
+          meetings_count: Imeachtaí
+          processes_count: Ábhair
+          proposals_count: Smaointe
+          users_count: Rannpháirtithe an Ardáin *
+          users_count_explain: "(*) Líon na rannpháirtithe atá cláraithe leis an Ardán."
+      index:
+        title: An Chomhdháil
+        topics: Ár n-ábhair
+    profiles:
+      show:
+        activity: Mo Ghníomhaíocht
+        conversations: Mo Chomhráite Príobháideacha
+        following: Á leanúint
+      user:
+        edit_profile: Cuir an cuntas in eagar
+    search:
+      term_input_placeholder: Cuardaigh
+    searches:
+      filters:
+        state:
+          all: Gach
+    shared:
+      embed_modal:
+        embed_link: Leabaigh
+      filter_form_help:
+        help: Déan scagadh ar do chuardach thíos
+        skip: Léim go torthaí
+      login_modal:
+        please_sign_in: Logáil isteach
+      reference:
+        reference: 'Tagairt: %{reference}'
+      results_per_page:
+        label: Taispeáin
+      share_modal:
+        share: Roinn
+        share_link: Roinn
+    translation_bar:
+      help_text: "<strong>Rabhadh:</strong> D’fhéadfadh sé nach mbeidh na haistriúcháin uathoibríocha 100% cruinn."
+      show_translated: Taispeáin an téacs aistrithe go huathoibríoch
+    versions:
+      resource_version:
+        see_other_versions: Féach na leaganacha eile
+    welcome_notification:
+      default_body: '<p>A {{name}}, a chara, go raibh maith agat as a bheith páirteach le {{organization}} agus fáilte romhat!</p><ul><li>Más mian leat tuairim a fháil den mhéid is féidir leat a dhéanamh anseo, is féidir leat súil a chaitheamh sa Rannóg <a href="{{help_url}}">Cabhrach</a>.</li><li>Nuair a bheidh sin léite agat gheobhaidh tú do chéad suaitheantas. Seo liosta de na <a href="{{badges_url}}">suaitheantais</a> go léir is féidir leat a fháil agus tú ag glacadh páirte in {{organization}}</li><li>Agus an meall mór ar deireadh: téigh i bpáirt le daoine eile agus comhroinn leo an taithí atá agat de bheith rannpháirteach agus gníomhach in {{organization}}. Cruthaigh smaointe agus nótaí tráchta, téigh i mbun díospóireachta, déan do mhachnamh ar an gcaoi le rannchuidiú leis an leas coiteann, tabhair argóintí chun dul i gcion ar dhaoine, éist agus léigh ábhar a rachaidh i gcion ort féin, cuir do chuid smaointe in iúl ar bhealach praiticiúil díreach, tabhair freagraí go foighneach diongbháilte agus bíodh meon oscailte agat chun a bheith ag obair i gcomhar le daoine eile agus rannpháirteach sna smaointe atá acu.</li></ul>'
+  devise:
+    failure:
+      unauthenticated: Logáil isteach le do chuntas chun do nóta tráchta a chur leis
+    omniauth_callbacks:
+      failure: 'Níorbh fhéidir tú a fhíordheimhniú ó EU Login ar an gcúis seo: "%{reason}".'
+      success: Rinneadh tú a fhíordheimhniú ó EU Login.
+      user:
+        disabled: Ní féidir clárú leis an Ardán a thuilleadh. An 9 Bealtaine 2022 an lá deiridh a glacadh le haighneachtaí maidir leis an gComhdháil ar Thodhchaí na hEorpa.
+  forms:
+    length_validator:
+      minimum:
+        few: Iontráil carachtair %{count} ar a laghad
+        many: Iontráil carachtair %{count} ar a laghad
+        two: Iontráil carachtair %{count} ar a laghad
+    required_explanation: "* Tá réiltín leis na réimsí atá riachtanach"
+  layouts:
+    decidim:
+      header:
+        sign_in: Logáil isteach
+      user_menu:
+        conversations: Mo teachtaireachtaí
+        notifications: Mo Chuid Fógraí
+        profile: Socruithe ‘Mo Chuntas’
+        public_profile: Mo phróifíl poiblí
+        sign_out: Logáil amach
+      user_profile:
+        account: Mo Chuntas
+        delete_my_account: Scrios mo chuntas
+        my_data: Mo Chuid Sonraí
+        notifications_settings: Mo chuid fógraí
+        title: Socruithe an Rannpháirtí

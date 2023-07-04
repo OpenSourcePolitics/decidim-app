@@ -1,0 +1,543 @@
+---
+da:
+  activemodel:
+    attributes:
+      agenda:
+        description: Beskrivelse
+        duration: Varighed
+        title: Betegnelse
+      close_meeting:
+        attendees_count: Antal deltagere
+        attending_organizations: Liste over organisationer, der deltog
+        closing_report: Indberet
+        contributions_count: Antal bidrag
+        proposal_ids: Forslag oprettet på mødet
+      meeting:
+        address: Adresse
+        available_slots: Ledige pladser til dette møde
+        decidim_category_id: Kategori
+        decidim_scope_id: Omfang
+        decidim_user_group_id: Brugergruppe
+        description: Beskrivelse
+        end_time: Sluttidspunkt
+        location: Sted
+        location_hints: Tip om sted
+        organizer_gid: Opret som
+        organizer_id: Arrangør
+        private_meeting: Privat møde
+        registration_form_enabled: Registreringsformular aktiveret
+        registration_terms: Registreringsbetingelser
+        registration_type: Registreringstype
+        registrations_enabled: Registreringer aktiveret
+        start_time: Starttidspunkt
+        title: Betegnelse
+        transparent: Gennemsigtig
+        type_of_meeting: Type
+      minutes:
+        audio_url: Audio url
+        description: Beskrivelse
+        video_url: Video url
+        visible: Er synlig
+    errors:
+      models:
+        form:
+          attributes:
+            description:
+              blank: Angiv en værdi.
+        meeting:
+          attributes:
+            address:
+              invalid: Adressen er ugyldig. Angiv venligst et postnummer og land.
+            cofe_charter:
+              accepted: Accepter venligst ovenstående betingelser
+        meeting_agenda:
+          attributes:
+            base:
+              too_many_minutes: Emnernes varighed overstiger mødets varighed med %{count} minutter
+              too_many_minutes_child: Varigheden af emne-døtrene overstiger dagsordensemnet "%{parent_title}" forældrevarighed med %{count} minutter
+        meeting_registration_invite:
+          attributes:
+            email:
+              already_invited: Denne e-mailkonto er allerede blevet inviteret
+    models:
+      decidim/meetings/close_meeting_event: Mødet lukket
+      decidim/meetings/create_meeting_event: Møde
+      decidim/meetings/meeting_registrations_enabled_event: Registreringer aktiveret
+      decidim/meetings/meeting_registrations_over_percentage_event: Registreringer over grænsen
+      decidim/meetings/upcoming_meeting_event: Kommende møde
+      decidim/meetings/update_meeting_event: Møde opdateret
+  activerecord:
+    models:
+      decidim/meetings/meeting:
+        one: Arrangement
+        other: Arrangementer
+      decidim/meetings/minutes:
+        one: Referater
+        other: Referater
+      decidim/meetings/registration:
+        one: Registrering
+        other: Registrering
+  decidim:
+    admin:
+      meeting_copies:
+        create:
+          error: Der var et problem med at dublikere dette møde.
+          success: Mødet blev duplikeret.
+        new:
+          copy: Kopi
+          select: Vælg hvilke data, du vil kopiere
+          title: Duplikatmøde
+    components:
+      meetings:
+        actions:
+          join: Tilslut dig
+        name: Arrangementer, der finder sted nu
+        settings:
+          global:
+            announcement: Meddelelse
+            comments_enabled: Bemærkninger aktiveret
+            comments_max_length: Bemærkninger maks. længde (lad 0 være standardværdi)
+            creation_enabled_for_participants: Deltagerne kan oprette møder
+            default_registration_terms: Standard registreringsbetingelser
+            enable_pads_creation: Aktiver oprettelse af pads
+            resources_permissions_enabled: Handlingstilladelser kan indstilles for hvert møde
+          step:
+            announcement: Meddelelse
+            comments_blocked: Bemærkninger blokeret
+            creation_enabled_for_participants: Mødeoprettelse ved deltagere aktiveret
+            creation_enabled_for_user_groups: Mødeoprettelse ved brugergrupper aktiveret
+    events:
+      meetings:
+        meeting_closed:
+          affected_user:
+            email_intro: 'Dit arrangement "%{resource_title}" er blevet lukket. Du kan læse konklusionerne fra dets side:'
+            email_outro: Du har modtaget denne meddelelse, fordi du organiserede arrangementet "%{resource_title}".
+            email_subject: Arrangementet "%{resource_title}" er blevet lukket
+            notification_title: Arrangementet<a href="%{resource_path}">%{resource_title}</a> er blevet lukket.
+          follower:
+            email_intro: 'Arrangementet "%{resource_title}" er blevet lukket Du kan læse konklusionerne fra dets side:'
+            email_outro: Du har modtaget denne meddelelse, fordi du følger arrangementet "%{resource_title}". Du kan holde op med at følge det fra det tidligere link.
+            email_subject: Arrangementet "%{resource_title}" er blevet lukket
+            notification_title: Arrangementet<a href="%{resource_path}">%{resource_title}</a> er blevet lukket.
+        meeting_created:
+          email_intro: Arrangementet "%{resource_title}" er blevet føjet til "%{participatory_space_title}", som du følger.
+          email_outro: Du har modtaget denne underretning, fordi du følger "%{participatory_space_title}". Du kan holde op med at følge det fra det tidligere link.
+          email_subject: Nyt arrangement føjet til %{participatory_space_title}
+          notification_title: Arrangementet <a href="%{resource_path}">%{resource_title}</a> er blevet føjet til %{participatory_space_title}
+        meeting_registration_confirmed:
+          notification_title: Din tilmelding til arrangementet <a href="%{resource_url}">%{resource_title}</a> er blevet bekræftet. Din registreringskode er %{registration_code}.
+        meeting_registrations_over_percentage:
+          email_intro: De tildelte pladser til arrangementet "%{resource_title}" er over %{percentage}%.
+          email_outro: Du har modtaget denne meddelelse, fordi du er admin i arrangementets deltagelsesrum.
+          email_subject: De tildelte pladser til arrangementet "%{resource_title}" er over %{percentage}%
+          notification_title: De tildelte pladser til arrangementet <a href="%{resource_path}">%{resource_title}</a> er over %{percentage}%.
+        meeting_updated:
+          email_intro: 'Arrangementet "%{resource_title}" er blevet opdateret Du kan læse den nye version på dets side:'
+          email_outro: Du har modtaget denne meddelelse, fordi du følger arrangementet "%{resource_title}". Du kan holde op med at følge det fra det tidligere link.
+          email_subject: Arrangementet "%{resource_title}" er blevet opdateret
+          notification_title: Arrangementet <a href="%{resource_path}">%{resource_title}</a> er blevet opdateret.
+        registration_code_validated:
+          email_intro: Din registreringskode "%{registration_code}" til mødet "%{resource_title}" er blevet valideret.
+          email_outro: Du har modtaget denne underretning, fordi din registreringskode til "%{resource_title}"-mødet er blevet valideret.
+          email_subject: Din registreringskode "%{registration_code}" til mødet "%{resource_title}" er blevet valideret
+          notification_title: Din registreringskode "%{registration_code}" til mødet <a href="%{resource_path}">%{resource_title}</a> er blevet valideret.
+        registrations_enabled:
+          email_intro: 'Arrangementet "%{resource_title}" er blevet åbnet for tilmeldinger. Du kan registrere dig på dets side:'
+          email_outro: Du har modtaget denne meddelelse, fordi du følger arrangementet "%{resource_title}". Du kan holde op med at følge det fra det tidligere link.
+          email_subject: Arrangementet "%{resource_title}" er blevet åbnet for tilmeldinger.
+          notification_title: Arrangementet <a href="%{resource_path}">%{resource_title}</a> er blevet åbnet for tilmeldinger.
+        upcoming_meeting:
+          email_intro: Arrangementet "%{resource_title}" starter om mindre end 48 timer.
+          email_outro: Du har modtaget denne meddelelse, fordi du følger arrangementet "%{resource_title}". Du kan holde op med at følge det fra det tidligere link.
+          email_subject: Arrangementet "%{resource_title}" starter om mindre end 48 timer.
+          notification_title: Arrangementet <a href="%{resource_path}">%{resource_title}</a> starter om mindre end 48 timer.
+    forms:
+      errors:
+        meeting:
+          address: Angiv en værdi.
+          end_time: Angiv en dato.
+          location: Angiv en værdi.
+          registration_type: Vælg en mulighed
+          start_time: Angiv en dato.
+          title: Angiv en værdi.
+          type_of_meeting: Vælg en mulighed
+    gamification:
+      badges:
+        attended_meetings:
+          description: Dette badge gives, når du deltager i flere fysiske arrangementer.
+          description_another: Denne deltager har deltaget i %{score} møder.
+          description_own: Du har deltaget i %{score} møder.
+          name: Arrangementer, du har deltaget i
+          next_level_in: Deltag i %{score} flere arrangementer for at nå det næste niveau!
+          unearned_another: Denne deltager har endnu ikke deltaget i nogen møder.
+          unearned_own: Du har endnu ikke deltaget i nogen møder.
+    meetings:
+      actions:
+        agenda: Dagsorden
+        attachment_collections: Mapper
+        attachments: Vedhæftede filer
+        close: Luk
+        confirm_destroy: Er du sikker på, at du vil slette dette møde?
+        destroy: Slet
+        edit: Rediger
+        invalid_destroy:
+          proposals_count:
+            one: 'Mødet kan ikke slettes, fordi der er %{count} forslag forbundet med det:'
+            other: 'Mødet kan ikke slettes, fordi der er %{count} forslag forbundet med det:'
+        minutes: Referater
+        new: Nyt møde
+        preview: Forhåndsvisning
+        registrations: Registrering
+        title: Handlinger
+      admin:
+        agenda:
+          agenda_item:
+            add_agenda_item_child: Tilføj underpunkt på dagsorden
+            agenda_item: Dagsordenspunkt
+            agenda_item_children: Underpunkt på dagsorden
+            down: Ned
+            remove: Fjern
+            up: Op
+          agenda_item_child:
+            agenda_item_child: Underpunkt på dagsorden
+            down: Ned
+            remove: Fjern
+            up: Op
+          create:
+            invalid: Der var et problem med at oprette denne dagsorden
+            success: Dagsorden oprettet
+          edit:
+            title: Rediger dagsorden
+            update: Opdater
+          form:
+            add_agenda_item: Tilføj underpunkt på dagsorden
+            agenda_items: Dagsordenspunkter
+            end_date: Slutdato
+            start_date: Startdato
+          new:
+            create: Opret
+            title: Ny dagsorden
+          update:
+            invalid: Der var et problem med at opdatere denne dagsorden
+            success: Dagsorden oprettet
+        exports:
+          meetings: Møder
+          registrations: Registrering
+        invite_join_meeting_mailer:
+          invite:
+            decline: Afvis invitation
+            invited_you_to_join_a_meeting: "%{invited_by} har inviteret dig som administrator af %{application}. Du kan afslå eller acceptere det via nedenstående link."
+            join: Deltag i mødet ”%{meeting_title}”
+        invites:
+          create:
+            error: Der opstod et problem med at invitere deltageren til at deltage i mødet.
+            success: Deltager blev inviteret til at deltage i mødet.
+          form:
+            attendee_type: Deltagertype
+            existing_user: Eksisterende deltager
+            invite: Inviter
+            invite_explanation: Deltageren vil blive inviteret til at deltage i mødet og også til at tilslutte sig organisationen.
+            non_user: Ikke-eksisterende deltager
+            select_user: Vælg deltager
+          index:
+            filter:
+              accepted: Accepter
+              all: Alle
+              rejected: Afvist
+              sent: Sendt
+            filter_by: Filtrer efter
+            invite_attendee: Inviter deltager
+            invites: Inviterer
+            registrations_disabled: Du kan ikke invitere en deltager, fordi registreringerne er deaktiveret.
+            search: Søg
+        meeting_closes:
+          edit:
+            close: Luk
+            title: Luk mødet
+        meetings:
+          close:
+            invalid: Der var et problem med at lukke dette møde
+            success: Mødet blev lukket
+          create:
+            invalid: Der var et problem med at oprette dette møde
+            success: Mødet blev oprettet
+          destroy:
+            invalid:
+              proposals_count:
+                one: Mødet kan ikke slettes, fordi der er %{count} forslag forbundet med det
+                other: Mødet kan ikke slettes, fordi der er %{count} forslag forbundet med det
+            success: Mødet blev slettet
+          edit:
+            update: Opdater
+          form:
+            address_help: 'Adresse: bruges af Geocoder til at finde placeringen'
+            location_help: 'Placering: besked rettet til brugerne, der viser det sted, hvor man skal mødes'
+            location_hints_help: 'Tip om placering: Supplerende info. Eksempel: Etage i bygningen'
+          index:
+            title: Møder
+          new:
+            create: Offentliggør dit arrangement
+            title: Opret møde
+          service:
+            description: Beskrivelse
+            down: Ned
+            remove: Fjern
+            title: Betegnelse
+            up: Op
+          services:
+            add_service: Tilføj service
+          update:
+            invalid: Der var et problem med at opdatere dette møde
+            success: Mødet blev opdateret
+        minutes:
+          create:
+            invalid: Der var et problem med at oprette dette referat
+            success: Referater blev oprettet
+          edit:
+            update: Opdater
+          new:
+            create: Opret
+            title: Opret referater
+          update:
+            invalid: Der var et problem med at opdatere dette referat
+            success: Referatet blev oprettet
+        models:
+          meeting:
+            name: Møde
+        registrations:
+          edit:
+            save: Gem
+            validate: Bekræft
+            validate_registration_code: Bekræft registreringskode
+          form:
+            available_slots_help: Lad det stå på 0, hvis du har ubegrænsede slots til rådighed.
+            invites: Invitationer
+            recommendation_message: Af hensyn til databeskyttelsn anbefaler vi, at du sletter denne registreringsformular, når du ikke længere har brug for den. Dette er som standard 3 måneder efter, at mødet er afsluttet.
+            registration_form: Registreringsformular
+            registrations_count:
+              one: Der har været %{count} registrering.
+              other: Der har været %{count} registreringer.
+            reserved_slots_help: Lad det stå på 0, hvis du ikke har reserverede slots
+            reserved_slots_less_than: Skal være mindre end eller lig med %{count}
+            title: Registreringer
+          update:
+            invalid: Der var et problem med at gemme registreringsindstillingerne.
+            success: Indstillinger for møderegistreringer blev gemt.
+          validate_registration_code:
+            invalid: Denne registreringskode er ugyldig.
+            success: Registreringskoden blev valideret.
+      admin_log:
+        invite:
+          create: "%{user_name} inviterede %{attendee_name} til at deltage i %{resource_name}-møde på %{space_name}-rummet"
+          deleted: "%{user_name} afinviterede %{attendee_name} til at deltage i %{resource_name}-møde på %{space_name}-rummet"
+          update: "%{user_name} inviterede %{attendee_name} til at deltage i %{resource_name}-møde på %{space_name}-rummet"
+        meeting:
+          close: "%{user_name} lukkede %{resource_name} mødet på %{space_name}-rummet"
+          create: "%{user_name} oprettet %{resource_name} mødet på %{space_name}-rummet"
+          delete: "%{user_name} slettede %{resource_name} mødet på %{space_name}-rummet"
+          export_registrations: "%{user_name} eksporterede registreringerne fra %{resource_name} mødet på %{space_name}-rummet"
+          update: "%{user_name} opdaterede %{resource_name} mødet på %{space_name}-rummet"
+          value_types:
+            organizer_presenter:
+              not_found: 'Arrangøren blev ikke fundet i databasen (ID: %{id})'
+        minutes:
+          create: "%{user_name} oprettede referatet fra %{resource_name} mødet på %{space_name}-rummet"
+          update: "%{user_name} opdaterede referatet fra %{resource_name} mødet på %{space_name}-rummet"
+      calendar_modal:
+        calendar_url: Kalender-URL
+        close_window: Luk vindue
+        export_calendar: Eksporter kalender
+      close_meeting_reminder_mailer:
+        close_meeting_reminder:
+          body: 'Tak for din deltagelse i konferencen om Europas fremtid, hvor du organiserede arrangementet <a href=''%{meeting_path}''>''%{meeting_title}''</a>. Vi håber, at dit arrangement var en succes, og at der var gang i diskussionen! Vi opfordrer dit til at tilføje din rapport om arrangementet ved at klikke på knappen ''Luk arrangement'' på arrangementssiden. <br><br>Ved at dele en rapport om arrangementet sikrer du, at borgere har adgang til idéer, der blev udvekslet på dit arrangement, og at der kan tages højde for disse idéer under analysen, så der bliver mulighed for at give korrekt feedback og følge ordentligt op på arrangementet. <br><br>I rapporten vil det være nyttigt at medtage oplysninger om typen af arrangement (f.eks. deltagelsesbaseret workshop, åbent rum, verdenscafé), antallet af deltagere og deres demografiske baggrund (f.eks. alder og køn), de vigtigste emner og idéer, der blev drøftet og foreslået, de argumenter, der førte til dem, samt den generelle stemning og den forventede opfølgning. <br><br>Husk at angive antallet af deltagere i det særlige felt, når du udfylder din rapport om arrangementet. Vi opfordrer dig også til at knytte idéer, der kom frem under arrangementet, til de idéer, der allerede er offentliggjort på platformen. <br><br>Dette er vigtigt for analysen. Du kan finde yderligere oplysninger i ''Vejledning til arrangører af arrangementer'': <a href=''https://futureu.europa.eu/pages/our-guides?locale=da''>https://futureu.europa.eu/pages/our-guides</a>. <br><br><b>Bemærk venligst, at det ikke længere vil være muligt at offentliggøre rapporter om arrangementer efter afslutningen af konferencen om Europas fremtid den 9. maj.</b> <br><br>Vi sætter stor pris på, at du har valgt at deltage. Hvis du har spørgsmål, er du velkommen til at kontakte os.'
+          greetings: Venlig hilsen<br/>Moderatorteamet<br/>
+          hello: Kære %{username},
+      conference_venues: Konferencesteder
+      content_blocks:
+        upcoming_events:
+          name: Tidligere arrangementer
+          upcoming_events: Kommende arrangementer
+          view_all_events: Se alle
+      directory:
+        meetings:
+          index:
+            all: Alle
+            date: Dato
+            meetings: Arrangementer, der finder sted nu
+            past: Tidligere
+            search: Søg
+            space_type: Deltagelsesrum
+            upcoming: Kommende
+      last_activity:
+        new_meeting_at_html: Nyt arrangement
+      mailer:
+        invite_join_meeting_mailer:
+          invite:
+            subject: Invitation til at deltage i et møde
+        registration_mailer:
+          confirmation:
+            subject: Registreringen af dit arrangement er blevet bekræftet
+      maps:
+        legend: Typer af arrangementer
+      meeting:
+        not_allowed: Du har ikke tilladelse til at se dette indhold
+      meetings:
+        count:
+          meetings_count:
+            one: "%{count} arrangement"
+            other: "%{count} arrangementer"
+        create:
+          invalid: Der var et problem med at oprette dette møde.
+          success: Du har oprettet arrangementet.
+        edit:
+          back: Tilbage
+          title: Rediger dit arrangement
+          update: Opdater
+        filters:
+          category: Kategori
+          date: Dato
+          date_values:
+            all: Alle
+            past: Tidligere
+            upcoming: Kommende
+          origin: Organiseret af
+          origin_values:
+            all: Alle
+            official: Medlemsstater & EU-institutioner
+            participants: Andre
+            user_groups: Grupper
+          scope: Omfang
+          search: Søg
+        filters_small_view:
+          close_modal: Luk modal
+          filter: Filtrer
+          filter_by: Filtrer efter
+          unfold: Fold ud
+        form:
+          address_help: 'Selv om der er tale om et onlinearrangement, skal du angive en postadresse. Ellers kommer dit arrangement ikke med på kortet. Du kan nøjes med at angive postnummer og land. Eksempel: "Rue de la Loi 200, 1000 Bruxelles, Belgien"'
+          create_as: Opret arrangement som
+          location_help: 'Du skal angive mødested. Eksempel: "Jean Monnet-konferencesalen" eller "Se linket til videokonferencen".'
+          location_hints_help: 'Du kan forklare deltagerne, hvordan de kommer dertil. Eksempel: "Tag metrolinje 5 til Schuman".'
+          online_meeting_url_help: Du skal tilføje et link til en mere detaljeret beskrivelse af dit arrangement eller et link til at følge videokonferencen online. Husk at indsætte https:// i starten af linket.
+          registration_type_help: Du kan bruge et eksternt registreringssystem til dit arrangement.
+          registration_url_help: Du skal angive et link til din registreringstjeneste. Husk at indsætte http:// eller https:// i starten af linket.
+          select_a_category: Vælg en kategori
+        index:
+          new_meeting: Nyt arrangement
+          see_all: Se alle arrangementer
+          see_all_withdrawn: Se alle tilbagetrukne arrangementer
+          text_banner: Arrangementer, som er blevet trukket tilbage. %{go_back_link} for at gå tilbage til oversigten over arrangementer.
+        meeting_minutes:
+          meeting_minutes: Mødereferat
+          related_information: Relateret information
+        meetings:
+          no_meetings_warning: Intet arrangement matcher dine søgekriterier, eller der er ikke planlagt noget arrangement.
+          upcoming_meetings_warning: Der er i øjeblikket ingen kommende arrangementer, men du kan finde alle tidligere arrangementer her.
+        new:
+          back: Tilbage
+          create: Opret
+          title: Opret dit arrangement
+        registration_confirm:
+          cancel: Annuller
+          confirm: Bekræft
+        show:
+          attendees: Antal deltagere
+          back: Tilbage til listen
+          contributions: Antal bidrag
+          date: Dato
+          edit_meeting: Rediger arrangement
+          going: Kommer
+          join: Deltag i arrangement
+          meeting_report: Rapport om arrangementet
+          no_slots_available: Ingen ledige slots
+          organizations: Deltagende organisationer
+          registration_code_help_text: Din registreringskode
+          registration_state:
+            validated: VALIDERET
+            validation_pending: VALIDERING AFVENTER
+          remaining_slots:
+            one: "%{count} slot tilbage"
+            other: "%{count} slots tilbage"
+          view: Se
+          withdraw_btn_hint: Du kan trække dit arrangement tilbage, hvis du skifter mening. Arrangementet slettes ikke, men vil fremgå af listen over tilbagetrukne arrangementer.
+          withdraw_confirmation_html: Er du sikker på, at du vil trække dette arrangement tilbage?<br><br><strong>Denne handling kan ikke annulleres!</strong>
+          withdraw_meeting: Træk arrangement tilbage
+        update:
+          invalid: Der var et problem med at opdatere mødet.
+          success: Du har opdateret mødet.
+      meetings_map:
+        view_meeting: Se arrangement
+      models:
+        invite:
+          fields:
+            email: E-mail
+            name: Navn
+            sent_at: Sendt kl.
+            status: Status
+          status:
+            accepted: Accepteret (%{at})
+            rejected: Afvist (%{at})
+            sent: Sendt
+        meeting:
+          fields:
+            closed: Lukket
+            end_time: Slutdato
+            map: Kort
+            official_meeting: Medlemsstater & EU-institutioner
+            start_time: Startdato
+            title: Betegnelse
+      read_more: "(læs mere)"
+      registration_mailer:
+        confirmation:
+          confirmed_html: Din tilmelding til arrangementet <a href="%{url}">%{title}</a> er blevet bekræftet.
+          details: Du finder nærmere oplysninger om arrangementet i vedhæftede fil.
+          registration_code: Din registreringskode er %{code}.
+      registrations:
+        create:
+          invalid: Der var et problem med at tilmelde sig dette møde.
+          success: Du er tilmeldt arrangementet. Da du har tilmeldt dig dette arrangement, vil du blive underrettet om opdateringer.
+        decline_invitation:
+          invalid: Der var et problem i forbindelse med invitationen.
+          success: Du har afvist invitationen.
+        destroy:
+          invalid: Der var et problem med at forlade dette møde.
+          success: Du har forladt mødet.
+      types:
+        private_meeting: Privat møde
+        transparent: Gennemsigtig
+      versions:
+        back_to_resource: Gå tilbage til arrangementet
+    metrics:
+      meetings:
+        description: Antal møder oprettet
+        object: møder
+        title: Møder
+    participatory_processes:
+      participatory_process_groups:
+        highlighted_meetings:
+          past_meetings: Tidligere møder
+          upcoming_meetings: Kommende møder
+    participatory_spaces:
+      highlighted_meetings:
+        past_meetings: Tidligere arrangementer
+        see_all: Se alle arrangementer (%{count})
+        upcoming_meetings: Kommende arrangementer
+      upcoming_meeting_for_card:
+        upcoming_meeting: Kommende møde
+    resource_links:
+      meetings_through_proposals:
+        meeting_result: Relaterede arrangementer
+        result_meeting: Relaterede arrangementer
+      proposals_from_meeting:
+        meeting_proposal: Relaterede idéer
+        proposal_meeting: Relaterede arrangementer
+  devise:
+    mailer:
+      join_meeting:
+        subject: Invitation til at deltage i et møde
+  errors:
+    messages:
+      after: Vælg en dato efter %{date}.
+      after_or_equal_to: Vælg en dato efter eller lig med %{date}.
+      before: Vælg en dato før %{date}.
+      before_or_equal_to: Vælg en dato før eller lig med %{date}.

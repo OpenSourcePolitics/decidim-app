@@ -124,6 +124,7 @@ en:
           success: You have updated the meeting successfully.
     omniauth:
       france_connect:
+        explanation: Explanation
         external:
           link: https://franceconnect.gouv.fr/
           text: What is FranceConnect ?
@@ -141,6 +142,12 @@ en:
         create:
           error: There was a problem creating this collaborative drafts
           success: Collaborative draft successfully created.
+        edit:
+          attachment_legend: "(Optional) Add an attachment"
+          select_a_category: Please select a category
+        new:
+          add_file: Add file
+          edit_file: Edit file
         show:
           back: Back
           edit: Edit collaborative draftss
@@ -221,6 +228,7 @@ en:
     shared:
       links:
         forgot_your_password: Forgot your password
+        sign_in_with_france_connect: Sign in with france connect
   faker:
     address:
       country_code:

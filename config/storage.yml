@@ -8,7 +8,7 @@ local:
 
 scaleway:
   service: S3
-  endpoint: https://s3.fr-par.scw.cloud
+  endpoint: https://<%= Rails.application.secrets.dig(:scaleway, :endpoint) %>
   access_key_id: <%= Rails.application.secrets.dig(:scaleway, :id) %>
   secret_access_key: <%= Rails.application.secrets.dig(:scaleway, :token) %>
   region: fr-par

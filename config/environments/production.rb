@@ -38,7 +38,13 @@ Rails.application.configure do
   # in production, you'll want to set this to :public so that files are served
   # unfortunately, this is not working with the current version of ActiveStorage
   # TODO: Update rails version and switch to public:true from active_storage
-  config.active_storage.service_urls_expire_in = ENV.fetch("SERVICE_URLS_EXPIRE_IN", 100.years)
+  config.active_storage.service_urls_expire_in = ENV.fetch("SERVICE_URLS_EXPIRE_IN") do
+    if Rails.application.secrets.dig(:scaleway, :id).blank?
+      "120000"
+    else
+      "1"
+    end
+  end.to_i.weeks
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
@@ -66,7 +72,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   config.active_job.queue_adapter = :sidekiq
-  # see confguration for sidekiq in `config/sidekiq.yml`
+  # see configuration for sidekiq in `config/sidekiq.yml`
   # config.active_job.queue_name_prefix = "development_app_#{Rails.env}"
 
   config.action_mailer.perform_caching = false

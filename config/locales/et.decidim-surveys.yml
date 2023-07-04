@@ -1,0 +1,61 @@
+---
+et:
+  activemodel:
+    models:
+      decidim/surveys/closed_survey_event: Uuring lõppes
+      decidim/surveys/opened_survey_event: Uuring algas
+  activerecord:
+    models:
+      decidim/surveys/survey:
+        one: Uuring
+        other: Uuringud
+      decidim/surveys/survey_answer:
+        one: Vastus
+        other: Vastused
+  decidim:
+    components:
+      surveys:
+        actions:
+          answer: Vastus
+        name: Uuring
+        settings:
+          global:
+            announcement: Teadaanne
+            clean_after_publish: Kustuta uuringuküsimustiku avaldamisel vastused
+          step:
+            allow_answers: Luba vastused
+            allow_unregistered: Luba registreerimata kasutajatel uuringuküsimustele vastata
+            allow_unregistered_help: Kui see seade on valitud, ei nõuta uuringuküsimustiku täitmiseks sisselogimist. Selle tulemuseks võivad olla puudulikud või ebausaldusväärsed andmed ja see teeb uuringu automaatsete rünnakute suhtes haavamaks. Kasutada ettevaalikult!
+            announcement: Teadaanne
+    events:
+      surveys:
+        survey_closed:
+          email_intro: Osalusruumi %{participatory_space_title} uuring %{resource_title} lõpetati.
+          email_outro: Saite selle teate, kuna jälgite osalusruumi %{participatory_space_title}. Teadetest saate loobuda eeltoodud linki kasutades.
+          email_subject: Osalusruumi %{participatory_space_title} uuring on lõppenud
+          notification_title: Uuring <a href="%{resource_path}">%{resource_title}</a> osalusruumis<a href="%{participatory_space_url}">%{participatory_space_title}</a> on lõppenud.
+        survey_opened:
+          email_intro: 'Osalusruumi %{participatory_space_title} uuring %{resource_title} on nüüd alanud. Saate selles osaleda järgmise lehe kaudu:'
+          email_outro: Saite selle teate, kuna jälgite osalusruumi %{participatory_space_title}. Teadetest saate loobuda eeltoodud linki kasutades.
+          email_subject: Uus uuring osalusruumis %{participatory_space_title}
+          notification_title: Osalusruumi <a href="%{participatory_space_url}">%{participatory_space_title}</a> uuring <a href="%{resource_path}">%{resource_title}</a> on nüüd alanud.
+    metrics:
+      survey_answers:
+        description: Osalejate vastustega uuringute arv
+        object: uuringute vastused
+        title: Uuringute vastused
+    surveys:
+      admin:
+        exports:
+          survey_user_answers: Uuringus osalenute vastused
+        surveys:
+          update:
+            invalid: Uuringu salvestamisel tekkis probleem.
+            success: Uuring on salvestatud.
+      last_activity:
+        new_survey_at_html: "<span>Uus uuring lehel %{link}</span>"
+      surveys:
+        answer:
+          invalid: Uuringuküsimustele vastamisel tekkis probleem.
+          spam_detected: Vastusevormi täitmisel tekkis probleem. Võimalik, et olite liiga kiire. Proovige uuesti.
+          success: Uuringuküsimustele on vastatud.

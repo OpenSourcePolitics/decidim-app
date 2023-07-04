@@ -1,0 +1,1590 @@
+---
+et:
+  activemodel:
+    attributes:
+      account:
+        delete_reason: Konto kustutamise põhjus
+      common:
+        created_at: Loodi
+      group:
+        about: Teave
+        avatar: Avatar
+        document_number: Dokumendi number
+        email: Meil
+        name: Nimi
+        nickname: Hüüdnimi
+        phone: Telefon
+      report:
+        details: Lisakommentaarid
+      user:
+        about: Teave
+        email: Teie meiliaadress
+        name: Teie nimi
+        nickname: Hüüdnimi
+        password: Salasõna
+        password_confirmation: Kinnitage oma salasõna
+        personal_url: Isiklik URL
+        remove_avatar: Eemalda avatar
+    models:
+      decidim/attachment_created_event: Manus
+      decidim/component_published_event: Aktiivne komponent
+      decidim/demoted_membership: Pole enam rühma administraator
+      decidim/gamification/badge_earned_event: Teenitud tunnustusmärk
+      decidim/gamification/level_up_event: Teid on edutatud kõrgemale tasemele
+      decidim/join_request_accepted_event: Liitumistaotlus võeti vastu
+      decidim/join_request_rejected_event: Liitumistaotlus lükati tagasi
+      decidim/profile_updated_event: Profiil on värskendatud
+      decidim/promote_to_admin: Edutatud rühma administraatoriks
+      decidim/removed_from_group: Rühmast eemaldatud
+      decidim/resource_endorsed_event: Ressurss kinnitatud
+  activerecord:
+    attributes:
+      decidim/user:
+        current_password: Praegune salasõna
+        email: Meil
+        name: Hüüdnimi
+        password: Salasõna
+        password_confirmation: Salasõna kinnitus
+        remember_me: Jäta mind meelde
+    models:
+      decidim/amendment:
+        one: Muudatusettepanek
+        other: Muudatusettepanekud
+      decidim/endorsement:
+        one: Kinnitus
+        other: Kinnitused
+      decidim/user:
+        one: Osaleja
+        other: Osalejad
+      decidim/user_group:
+        one: Rühm
+        other: Rühmad
+  booleans:
+    'false': Ei
+    'true': Jah
+  carrierwave:
+    errors:
+      general: Pildi töötlemisel tekkis viga
+      image_too_big: See pilt on liiga suur
+  decidim:
+    accessibility:
+      external_link: Välislink
+      logo: Organisatsiooni %{organization} ametlik logo
+      skip_button: Otse põhisisu juurde
+    account:
+      data_portability_export:
+        file_no_exists: Faili ei ole
+        notice: Teie andmete allalaadimine on pooleli. Kui see on lõpetatud, saate meili.
+      delete:
+        alert: See toiming on jäädav. Kui kustutate oma konto, ei saa te enam sisse logida. Teie konto kustutamine muudab teie vastused anonüümseks. Teil on siiski võimalik luua uus konto, kuid need panused ei ole uue kontoga seotud.
+        confirm:
+          close: Sulge aken
+          ok: Jah, soovin oma konto kustutada
+          question: Kas olete kindel, et soovite oma konto kustutada?
+          title: Kustuta minu konto
+        explanation: Palume lisada konto kustutamise põhjuse (valikuline).
+      destroy:
+        error: Teie konto kustutamisel tekkis probleem
+        success: Teie konto on kustutatud.
+      show:
+        change_password: Muuda salasõna
+        update_account: Värskenda kontot
+      update:
+        error: Teie konto värskendamisel tekkis probleem.
+        success: Teie konto on värskendatud.
+        success_with_email_confirmation: Teie konto on värskendatud. Saate oma uue meiliaadressi kinnitamiseks meilisõnumi.
+    admin:
+      actions:
+        cancel: Tühista
+    admin_log:
+      area:
+        create: Kasutaja %{user_name} lõi piirkonna %{resource_name}
+        delete: Kasutaja %{user_name} kustutas piirkonna %{resource_name}
+        update: Kasutaja %{user_name} värskendas piirkonda %{resource_name}
+      component:
+        create: Kasutaja %{user_name} lisas osalusruumi %{space_name} komponendi %{resource_name}
+        delete: Kasutaja %{user_name} eemaldas osalusruumist %{space_name} komponendi %{resource_name}
+        publish: Kasutaja %{user_name} avaldas osalusruumis %{space_name} komponendi %{resource_name}
+        unpublish: Kasutaja %{user_name} peatas osalusruumis %{space_name} komponendi %{resource_name} avaldamise
+      moderation:
+        hide: Kasutaja %{user_name} peitis osalusruumis %{space_name} tüübi %{resource_type} ressursi
+        unreport: Kasutaja %{user_name} tühistas osalusruumis %{space_name} tüübi %{resource_type} ressursi sobimatusteate
+      newsletter:
+        create: Kasutaja %{user_name} lõi uudiskirja %{resource_name}
+        delete: Kasutaja %{user_name} kustutas uudiskirja %{resource_name}
+        deliver: Kasutaja %{user_name} edastas uudiskirja %{resource_name}
+        update: Kasutaja %{user_name} värskendas uudiskirja %{resource_name}
+      oauth_application:
+        create: Kasutaja %{user_name} lõi OAuth-rakenduse %{resource_name}
+        delete: Kasutaja %{user_name} kustutas OAuth-rakenduse %{resource_name}
+        update: Kasutaja %{user_name} värskendas OAuth-rakendust %{resource_name}
+      organization:
+        update: Kasutaja %{user_name} värskendas organisatsiooni seadeid
+      participatory_space_private_user:
+        create: Kasutaja %{user_name} kutsus osaleja %{resource_name} privaatseks osalejaks
+        create_via_csv: Kasutaja %{user_name} kutsus osaleja %{resource_name} CSV-faili kasutades privaatseks osalejaks
+        delete: Kasutaja %{user_name} eemaldas osaleja %{resource_name} privaatse osalejana
+      scope:
+        create: Kasutaja %{user_name} lõi kohaldamisala %{resource_name}
+        create_with_parent: Kasutaja %{user_name} lõi kohaldamisala %{resource_name} kohaldamisala ülemüksuses %{parent_scope}
+        delete: Kasutaja %{user_name} kustutas kohaldamisala %{resource_name}
+        delete_with_parent: Kasutaja %{user_name} kustutas kohaldamisala %{resource_name} kohaldamisala ülemüksusest %{parent_scope}
+        update: Kasutaja %{user_name} värskendas kohaldamisala %{resource_name}
+        update_with_parent: Kasutaja %{user_name} värskendas kohaldamisala %{resource_name} kohaldamisala ülemüksuses %{parent_scope}
+      static_page:
+        create: Kasutaja %{user_name} lõi staatilise lehe %{resource_name}
+        delete: Kasutaja %{user_name} kustutas staatilise lehe %{resource_name}
+        update: Kasutaja %{user_name} värskendas staatilist lehte %{resource_name}
+      user:
+        invite: 'Kasutaja %{user_name} kutsus osaleja %{resource_name} järgmise rolliga: %{role}'
+        officialize: Kasutaja %{user_name} volitas ametlikult osaleja %{resource_name}
+        remove_from_admin: 'Kasutaja %{user_name} eemaldas osaleja %{resource_name}, kellel oli järgmine roll: %{role}'
+        show_email: Kasutaja %{user_name} laadis osaleja %{resource_name} meili
+        unofficialize: Kasutaja %{user_name} tühistas osaleja %{resource_name} ametlikud volitused
+      user_group:
+        reject: Kasutaja %{user_name} lükkas rühma %{resource_name} kinnitustaotluse tagasi
+        verify: Kasutaja %{user_name} kinnitas rühma %{resource_name}
+        verify_via_csv: Kasutaja %{user_name} kinnitas rühma %{resource_name} CSV-faili kasutades
+    admin_terms_of_use:
+      default_body: "<h2>ADMINISTRAATORI KASUTUSTINGIMUSED</h2><p>Usutavasti olete kohalikult süsteemiadministraatorilt saanud tavapärased juhtnöörid. Tavaliselt taandub see kolmele peamisele põhimõttele.</p><ol><li>Teiste privaatsusest tuleb lugu pidada.</li><li>Enne klõpsamist tuleb mõelda.</li><li>Suurte volitustega kaasneb suur vastutus.</li></ol>"
+    alert:
+      dismiss: Eemalda teade
+    amendments:
+      accepted:
+        error: Muudatusettepaneku vastuvõtmisel tekkis viga.
+        success: Muudatusettepanek on vastu võetud.
+      amendable:
+        amended_by: Muudatusettepaneku tegi
+        button: Muuda üksust %{model_name}
+        error: Selle ressursi muutmisel tekkis viga.
+        help_text: Täiusta üksust %{model_name}, muutes selle välju %{amendable_fields}
+        promote_button: Eduta tasemele %{model_name}
+        promote_confirm_text: Kas olete kindel, et soovite seda muudatust edutada?
+        promote_help_text: 'Saate seda muudatust edutada ja avaldada selle järgmise iseseisva üksusena: %{model_name}'
+        section_heading: Muudatusettepanekud (%{count})
+      compare_draft:
+        continue: Jätka
+        no_similars_found: Sarnaseid muudatusi ei leitud.
+        title: Sarnased muudatused
+      created:
+        error: Muudatusettepaneku loomisel tekkis viga.
+        success: Muudatusettepanek on loodud.
+      destroy_draft:
+        error: Muudatusettepaneku kustutamisel tekkis probleem.
+        success: Muudatusettepanek kustutati.
+      edit_draft:
+        discard: Loobu sellest muudatusettepanekust
+        discard_confirmation: Kas olete kindel, et soovite sellest muudatusettepanekust loobuda?
+        send: Eelvaade
+        title: Muuda muudatusettepanekut
+      emendation:
+        actions:
+          button_accept: Võta vastu
+          button_reject: Lükka tagasi
+          help_text: Vaadake muudatused üle ja võtke muudatusettepanek vastu või lükake see tagasi. Selle autori(te)le saadetakse teade.
+        announcement:
+          accepted: |-
+            Ettepaneku %{amendable_type} %{proposal_link} muudatusettepanek
+            võeti vastu <strong>%{date}</strong>.
+          evaluating: |-
+            Ettepaneku %{amendable_type} %{proposal_link}
+            muudatusettepanekuthinnatakse.
+          promoted: Edutatud tasemele %{amendable_type}.
+          rejected: Üksuse %{amendable_type} %{proposal_link} muudatusettepanek lükati kuupäeval <strong>%{date}</strong> tagasi.
+          withdrawn: |-
+            Ettepaneku %{amendable_type} %{proposal_link}
+            muudatusettepanekuvõttis autor tagasi.
+      new:
+        amendment_author: Muudatusettepaneku autor
+        send: Loo
+        title: Loo muudatusettepanek
+      preview_draft:
+        modify: Muuda
+        publish: Avalda
+        title: Avalda muudatusettepanek
+      promoted:
+        error: Muudatusettepaneku uue ettepanekuna avaldamisel tekkis probleem
+        success: Muudatusettepanek avaldati uue ettepanekuna
+      publish_draft:
+        error: Muudatusettepaneku avaldamisel tekkis probleem.
+        success: Muudatusettepanek avaldati.
+      rejected:
+        error: Selle muudatusettepaneku tagasilükkamisel tekkis probleem, proovige hiljem uuesti
+        success: Muudatusettepanek on tagasi lükatud
+      review:
+        back: Tagasi
+        heading: Muudatusettepaneku läbivaatus
+        help_text: Vaatate üle üksuse %{model_name} muudatusettepanekut
+        send: Võta muudatusettepanek vastu
+      update_draft:
+        error: Muudatusettepaneku värskendamisel tekkis probleem.
+        success: Muudatusettepanek on värskendatud.
+      withdraw:
+        error: Muudatusettepaneku tagasivõtmisel tekkis viga
+        success: Muudatusettepanek võeti tagasi
+      wizard_step_form:
+        steps:
+          '1': Looge oma muudatusettepanek
+          '2': Võrrelge oma muudatusettepanekut
+          '3': Vormistage oma muudatusettepanek lõpuni
+          '4': Avaldage oma muudatusettepanek
+    anonymous_user: Anonüümne
+    application:
+      collection:
+        documents:
+          one: Dokument
+          other: Dokumendid
+      document:
+        download: Laadi fail alla
+      documents:
+        related_documents: Soovite lisateavet?
+      photos:
+        related_photos: Seotud meedia
+    author:
+      avatar: Avatar
+      comments:
+        one: kommentaar
+        other: kommentaarid
+      endorsements:
+        one: kinnitus
+        other: kinnitused
+    authorization_handlers:
+      another_dummy_authorization_handler:
+        explanation: Esitage kinnitamiseks passinumber, mis algab tähega „A“
+        fields:
+          passport_number: Passi number
+          postal_code: Sihtnumber
+        name: Kinnitamisprotsessi näide
+      dummy_authorization_handler:
+        explanation: Esitage kinnitamiseks dokumendinumber, mis lõppeb tähega „X“
+        fields:
+          allowed_postal_codes: Lubatud sihtnumbrid (komaeraldusega)
+          allowed_scope_id: Lubatud kohaldamisala
+          document_number: Dokumendi number
+          postal_code: Sihtnumber
+          scope_id: Kohaldamisala
+        name: Kinnitamisprotsessi näide
+      dummy_authorization_workflow:
+        name: Kinnitamisprotsessi töövoo näide
+      errors:
+        duplicate_authorization: Osaleja on juba samade andmete alusel autoriseeritud.
+      expired_at: Aegus %{timestamp}
+      expires_at: Aegub %{timestamp}
+      foo_authorization:
+        fields:
+          bar: Funktsioonikutse „bar“
+          foo: Funktsioonikutse „foo“
+        name: Foo autoriseerimine
+      granted_at: Kinnitati %{timestamp}
+      renew: Uuenda kinnitust
+      sms:
+        explanation: Esitage oma mobiilinumber, et saaksime teie isikusamasust kontrollida.
+        name: Kood SMSiga
+      started_at: 'Algus: %{timestamp}'
+    authorization_modals:
+      content:
+        expired:
+          authorize: Autoriseeri uuesti meetodiga „%{authorization}“
+          explanation: Teie kinnitus on aegunud. Selle toimingu tegemiseks tuleb teid uuesti autoriseerida meetodiga „%{authorization}“.
+          title: Kinnitus on aegunud
+        incomplete:
+          cancel: Tühista
+          explanation: 'Kuigi teid on meetodiga „%{authorization}“ autoriseeritud, tuleb teid uuesti autoriseerida, kuna meil puuduvad järgmised andmed:'
+          invalid_field: "%{field}"
+          reauthorize: Uuesti kinnitamine
+          title: Kinnitage uuesti
+        missing:
+          authorize: Autoriseeri meetodiga „%{authorization}“
+          explanation: Selle toimingu tegemiseks tuleb teid enne autoriseerida meetodiga „%{authorization}“.
+          title: Autoriseerimine on nõutav
+        pending:
+          explanation: Selle toimingu tegemiseks tuleb teid enne autoriseerida meetodiga „%{authorization}“, kuid teie autoriseerimisprotsess on veel pooleli
+          resume: Kontrollige oma autoriseerimise „%{authorization}“ edenemisseisu
+          title: Autoriseerimisprotsess on pooleli
+        unauthorized:
+          explanation: Kahjuks ei saa te seda toimingut teha, kuna mõned teie autoriseerimisandmed ei kattu.
+          invalid_field: Välja %{field} väärtus %{value} on sobimatu.
+          ok: OK
+          title: Autoriseerimata
+        unconfirmed:
+          confirmation_instructions: Kui te pole kinnitamisjuhiseid saanud, saate need uuesti taotleda.
+          explanation_html: Selle toimingu tegemiseks tuleb teid autoriseerida, kuid esmalt peate kinnitama oma meiliaadressi <strong>%{email}</strong>.
+          request_confirmation_instructions: Esita kinnitamisjuhiste taotlus
+          title: Kinnitage oma meiliaadress
+      show:
+        close_modal: Sulge modaalaken
+    collapsible_list:
+      hidden_elements_count:
+        one: ja veel %{count}
+        other: ja veel %{count}
+      see_less: "(kuva vähem)"
+      see_more: "(kuva rohkem)"
+    components:
+      component_order_selector:
+        no_content: Nendele kriteeriumidele vastavat sisu ei leitud
+        order:
+          all_types: Kõik tüübid
+          collaborative_draft: Koostöökavand
+          comment: Kommentaar
+          debate: Arutelu
+          initiative: Algatus
+          meeting: Üritused
+          post: Postita
+          proposal: Ideed
+          question: Küsimus
+        title: 'Kuva:'
+      dummy:
+        actions:
+          bar: Funktsioonikutse „bar“
+          foo: Funktsioonikutse „foo“
+        name: 'Näide: komponent'
+        settings:
+          global:
+            amendments_enabled: Muudatusettepanekud lubatud
+            comments_enabled: Kommentaarid lubatud
+            comments_max_length: Kommentaaride maksimaalne pikkus
+            dummy_global_attribute_1: 'Näide: atribuut 1'
+            dummy_global_attribute_2: 'Näide: atribuut 2'
+            dummy_global_translatable_text: 'Näide: tõlgitav tekst'
+            enable_pads_creation: Luba märkmike loomine
+            resources_permissions_enabled: Ressursside load lubatud
+          step:
+            amendment_creation_enabled: Muudatusettepaneku loomine lubatud
+            amendment_promotion_enabled: Muudatusettepaneku edutamine lubatud
+            amendment_reaction_enabled: Muudatusettepanekule reageerimine lubatud
+            amendments_visibility: Muudatusettepaneku nähtavus
+            comments_blocked: Kommenteerimine pole lubatud
+            dummy_step_attribute_1: 'Näide: etapp, atribuut 1'
+            dummy_step_attribute_2: 'Näide: etapp, atribuut 2'
+            dummy_step_translatable_text: 'Näide: etapp, tõlgitav tekst'
+    contact: Võta ühendust
+    content_blocks:
+      footer_sub_hero:
+        name: Jaluse teine reklaamiriba
+      hero:
+        name: Tunnuspilt
+      hero_settings_form:
+        background_image: Taustapilt
+        welcome_text: Tervitussõnad
+      highlighted_content_banner:
+        name: Esiletõstetud sisu reklaamiriba
+      how_to_participate:
+        name: Kuidas osaleda?
+      html:
+        html_content: HTML-sisu
+        name: HTML-plokk
+      last_activity:
+        name: Viimane tegevus
+        title: Viimane tegevus (või tegevused)
+        view_all: Kuva kõik
+      metrics:
+        name: Organisatsiooni mõõdikud
+      stats:
+        name: Organisatsiooni statistika
+      sub_hero:
+        name: Teine reklaamiriba
+    core:
+      actions:
+        login_before_access: Juurdepääsu saamiseks logige oma kontoga sisse
+        unauthorized: Peate selle toimingu tegemiseks sisse logima.
+    data_portability:
+      export:
+        ready: Valmis
+      show:
+        download_data: Laadi andmed alla
+        download_data_description: 'Teie kontoga seotud vajalikku teavet sisaldav fail saadetakse meiliaadressile <strong>%{user_email}</strong>. See e-kiri sisaldab zip-faili ja selle avamiseks vajalikku salasõna.<br/><br/>Faili lahtipakkimiseks vajate: <a href="https://www.7-zip.org/">7-Zip</a> (Windows) või <a href="https://www.keka.io/">Keka</a> (MacOS). Kui kasutate Linuxit, siis tavaliselt on see vaikimisi installitud. Vastasel juhul võite kasutada rakendusi <a href="https://gitlab.gnome.org/GNOME/file-roller">File Roller</a> või <a href="https://peazip.github.io">PeaZip</a>.'
+        request_data: Esita oma andmetaotlus
+    datepicker:
+      help_text: 'Eeldatud vorming: %{datepicker_format}'
+    devise:
+      omniauth_registrations:
+        create:
+          email_already_exists: Teine konto kasutab sama meiliaadressi
+        new:
+          complete_profile: Vormistage profiil lõpuni
+          nickname_help: Teie alias organisatsioonis %{organization}
+          sign_up: Vormistage oma profiil lõpuni
+          subtitle: Registreerimise lõpule viimiseks täitke järgmine vorm
+          username_help: Teie postitustega kuvatav avalik nimi. Anonüümsuse tagamise eesmärgil võib teil olla mis tahes nimi.
+      registrations:
+        new:
+          already_have_an_account?: Kas teil on juba konto?
+          newsletter: Saate aeg-ajalt asjakohast teavet sisaldavaid uudiskirju
+          newsletter_title: Ühenduse võtmise luba
+          nickname_help: Teie alias organisatsioonis %{organization}
+          password_help: Minimaalselt %{minimun_characters} tähemärki; ei tohi olla liiga tavaline (nt 123456) ning peab erinema teie hüüdnimest ja meiliaadressist.
+          sign_in: Logi sisse
+          sign_up: Loo konto
+          sign_up_as:
+            legend: Loo konto kui
+          subtitle: Looge konto, et osaleda aruteludes ja toetada ettepanekuid.
+          terms: kasutustingimused
+          tos_agreement: 'Konto loomisega kinnitate, et nõustute järgmisega: %{link}.'
+          tos_title: Teenusetingimused
+          username_help: Teie postitustega kuvatav avalik nimi. Anonüümsuse tagamise eesmärgil võib teil olla mis tahes nimi.
+      sessions:
+        new:
+          are_you_new?: Kasutate platvormi esimest korda?
+          register: Looge konto
+          sign_in_disabled: Saate siseneda välise kontoga
+          sign_up_disabled: Konto loomine pole lubatud, saate siseneda olemasolevat kontot kasutades
+      shared:
+        newsletter_modal:
+          buttons:
+            check: Märgista ja jätka
+            close_modal: Sulge modaalaken
+            uncheck: Jäta märgistamata
+          notice: |-
+            <p>Tere! Kas olete kindel, et ei soovi uudiskirju saada?<br>
+            Mõelge veelkord järele, kas soovite alloleva uudiskirja märkeruudu märgistada.<br>
+            Meie jaoks on väga oluline, et saaksite meilt aeg-ajalt teabemeile,
+            milles edastame olulisi teadaandeid. Saate seda seadet hiljem alati muuta oma konto
+            teateseadete lehel.</p>
+            <p>Kui te ruutu praegu ei märgista, võite jääda ilma tähtsast teabest
+            platvormil osalemise uute võimaluste kohta.<br>
+            Kui otsustate sellest hoolimata uudiskirjadest loobuda,
+            mõistame teid samuti.</p>
+            <p>Täname tähelepanu eest!</p>
+          title: Uudiskirja puudutavad teated
+        omniauth_buttons:
+          or: või
+    doorkeeper:
+      authorizations:
+        new:
+          authorize: Autoriseeri rakendus
+          by_organization_link_html: '<small class="heading-small">: %{link}</small>'
+          cancel: Tühista
+          connect_your_account_html: Ühendage oma konto, logides sisse organisatsiooni <strong>%{organization}</strong>
+          publish_content: Teie eest sisu avaldamine
+          see_email: Teie meiliaadressi nägemine
+          see_name: Teie nime nägemine
+          see_username: Teie hüüdnime nägemine
+          this_application_will_be_able_to: 'Sellel rakendusel on lubatud järgmine:'
+          this_application_will_not_be_able_to: 'Sellel rakendusel pole lubatud järgmine:'
+          update_profile: Teie profiili värskendamine
+          wants_to_use_your_account_html: "<strong>%{application_name}</strong> soovib kasutada teie kontot"
+    endorsable:
+      endorsements: Kinnitused
+      endorsements_count: Kinnituste arv
+    endorsement_buttons_cell:
+      already_endorsed: Kinnitatud
+      endorse: Kinnita
+    endorsements:
+      identities:
+        done: Valmis
+        select_identity: Valige identiteet
+    errors:
+      internal_server_error:
+        title: Meie serveriga seoses tekkis probleem
+        try_later: Proovige hiljem uuesti.
+      not_found:
+        back_home: Tagasi avalehele
+        content_doesnt_exist: Aadress pole õige või see on eemaldatud.
+        title: Teie otsitud lehte ei leitud
+    events:
+      amendments:
+        amendment_accepted:
+          affected_user:
+            email_intro: 'Üksuse %{amendable_title} muudatusettepanek võeti vastu. Näete seda järgmisel lehel:'
+            email_outro: Saite selle teate, kuna olete üksuse „%{amendable_title}“ autor.
+            email_subject: Üksuse %{amendable_title} muudatusettepanek autorilt %{emendation_author_nickname} on vastu võetud
+            notification_title: <a href="%{emendation_path}">Muudatusettepanek</a>, mille autor <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> üksuse <a href="%{amendable_path}">%{amendable_title}</a> muutmiseks esitas, on vastu võetud.
+          follower:
+            email_intro: 'Üksuse %{amendable_title} muudatusettepanek võeti vastu. Näete seda järgmisel lehel:'
+            email_outro: Saite selle teate, kuna jälgite üksust %{amendable_title}. Teadetest saate loobuda eeltoodud linki kasutades.
+            email_subject: Üksuse %{amendable_title} muudatusettepanek autorilt %{emendation_author_nickname} on vastu võetud
+            notification_title: <a href="%{emendation_path}">Muudatusettepanek</a>, mille autor <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> üksuse <a href="%{amendable_path}">%{amendable_title}</a> muutmiseks esitas, on vastu võetud.
+        amendment_created:
+          affected_user:
+            email_intro: 'Üksuse %{amendable_title} jaoks loodi uus muudatusettepanek. Näete seda järgmisel lehel:'
+            email_outro: Saite selle teate, kuna olete üksuse „%{amendable_title}“ autor.
+            email_subject: Üksuse %{amendable_title} uus muudatusettepanek
+            notification_title: Üksuse <a href="%{amendable_path}">%{amendable_title}</a> jaoks loodi uus muudatusettepanek.
+          follower:
+            email_intro: 'Üksuse %{amendable_title} jaoks loodi uus muudatusettepanek. Näete seda järgmisel lehel:'
+            email_outro: Saite selle teate, kuna jälgite üksust %{amendable_title}. Teadetest saate loobuda eeltoodud linki kasutades.
+            email_subject: Üksuse %{amendable_title} uus muudatusettepanek
+            notification_title: Üksuse <a href="%{amendable_path}">%{amendable_title}</a> jaoks loodi uus muudatusettepanek.
+        amendment_promoted:
+          affected_user:
+            email_intro: 'Üksuse %{amendable_title} tagasilükatud muudatusettepanek on avaldatud uue üksusega %{amendable_type}. Näete seda järgmisel lehel:'
+            email_outro: Saite selle teate, kuna olete üksuse „%{amendable_title}“ autor.
+            email_subject: Autori %{emendation_author_nickname} muudatusettepanek on avaldatud uue üksusena %{amendable_type}
+            notification_title: Autor <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> avaldas üksust <a href="%{amendable_path}">%{amendable_title}</a> puudutava<a href="%{emendation_path}">tagasilükatud muudatusettepaneku</a> uue üksusena %{amendable_type}.
+          follower:
+            email_intro: 'Üksuse %{amendable_title} tagasilükatud muudatusettepanek on avaldatud uue üksusega %{amendable_type}. Näete seda järgmisel lehel:'
+            email_outro: Saite selle teate, kuna jälgite üksust %{amendable_title}. Teadetest saate loobuda eeltoodud linki kasutades.
+            email_subject: Autori %{emendation_author_nickname} muudatusettepanek on avaldatud uue üksusena %{amendable_type}
+            notification_title: Autor <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> avaldas üksust <a href="%{amendable_path}">%{amendable_title}</a> puudutava<a href="%{emendation_path}">tagasilükatud muudatusettepaneku</a> uue üksusena %{amendable_type}.
+        amendment_rejected:
+          affected_user:
+            email_intro: 'Üksuse %{amendable_title} muudatusettepanek lükati tagasi. Näete seda järgmisel lehel:'
+            email_outro: Saite selle teate, kuna olete üksuse „%{amendable_title}“ autor.
+            email_subject: Üksuse %{amendable_title} muudatusettepanek autorilt %{emendation_author_nickname} on tagasi lükatud
+            notification_title: <a href="%{emendation_path}">Muudatusettepanek</a>, mille autor <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> üksuse <a href="%{amendable_path}">%{amendable_title}</a> jaoks esitas, on tagasi lükatud.
+          follower:
+            email_intro: 'Üksuse %{amendable_title} muudatusettepanek lükati tagasi. Näete seda järgmisel lehel:'
+            email_outro: Saite selle teate, kuna jälgite üksust %{amendable_title}. Teadetest saate loobuda eeltoodud linki kasutades.
+            email_subject: Üksuse %{amendable_title} muudatusettepanek autorilt %{emendation_author_nickname} on tagasi lükatud
+            notification_title: <a href="%{emendation_path}">Muudatusettepanek</a>, mille autor <a href="%{emendation_author_path}">%{emendation_author_nickname}</a> üksuse <a href="%{amendable_path}">%{amendable_title}</a> jaoks esitas, on tagasi lükatud.
+      attachments:
+        attachment_created:
+          email_intro: 'Üksusesse %{resource_title} lisati uus dokument. Näete seda järgmisel lehel:'
+          email_outro: Saite selle teate, kuna jälgite üksust %{resource_title}. Teadetest saate loobuda eeltoodud linki kasutades.
+          email_subject: Ettepanekut %{resource_title} on värskendatud
+          notification_title: Üksusesse <a href="%{attached_to_url}">%{resource_title}</a> lisati<a href="%{resource_path}">uus dokument</a>.
+      components:
+        component_published:
+          email_intro: 'Komponent %{resource_title} on nüüd osalusruumis %{participatory_space_title} aktiivne. Näete seda järgmisel lehel:'
+          email_outro: Saite selle teate, kuna jälgite osalusruumi %{participatory_space_title}. Teadetest saate loobuda eeltoodud linki kasutades.
+          email_subject: Osalusruumi %{participatory_space_title} on värskendatud
+          notification_title: Komponent %{resource_title} on nüüd osalusruumis <a href="%{resource_path}">%{participatory_space_title}</a> aktiivne
+      email_event:
+        email_greeting: Tere, %{user_name}!
+        email_intro: 'Üksust „%{resource_title}“ on värskendatud. Näete seda järgmisel lehel:'
+        email_outro: Saite selle teate, kuna jälgite üksust „%{resource_title}“. Jälgimise lõpetamiseks kasutage eeltoodud linki.
+        email_subject: Ettepanekut %{resource_title} on värskendatud
+      gamification:
+        badge_earned:
+          email_intro: Õnnitleme! Olete teeninud tunnustusmärgi <a href="%{resource_path}">%{badge_name} </a>(tase %{current_level}).
+          email_outro: Saite selle teate, kuna tegite meie veebisaidil toimingu.
+          email_subject: 'Teenisite uue tunnustusmärgi: %{badge_name}!'
+          notification_title: Õnnitleme! Olete teeninud <a href="%{resource_path}">tunnustusmärgi %{badge_name}</a> (tase %{current_level}).
+        level_up:
+          email_intro: Õnnitleme! Olete teeninud taseme %{current_level} <a href="%{resource_url}"> tunnustusmärgi %{badge_name}</a>!
+          email_outro: Saite selle teate, kuna tegite meie veebisaidil toimingu.
+          email_subject: Olete teeninud taseme %{current_level} tunnustusmärgi %{badge_name}!
+          notification_title: Õnnitleme! Olete teeninud taseme %{current_level} <a href="%{resource_path}"> tunnustusmärgi %{badge_name}</a>!
+      groups:
+        demoted_membership:
+          email_intro: Kasutajarühma <a href="%{resource_url}">%{user_group_name}</a> administraator võttis teilt selle rühma administraatoriõigused.
+          email_outro: Saite selle teate, kuna olete selle rühma liige.
+          email_subject: Te ei ole enam kasutajarühma %{user_group_name} administraator.
+          notification_title: Te ei ole enam kasutajarühma <a href="%{resource_path}">%{user_group_name}</a> administraator.
+        invited_to_group:
+          email_intro: Kasutajarühma <a href="%{resource_url}">%{user_group_name}</a> administraator saatis teile liitumiskutse.
+          email_outro: Saite selle teate, kuna teid on kutsutud liituma rühmaga. Selle vastuvõtmiseks avage oma profiilil rühmade jaotis.
+          email_subject: Teid on kutsutud liituma kasutajarühmaga %{user_group_name}!
+          notification_title: Teid on kutsutud liituma kasutajarühmaga <a href="%{resource_path}">%{user_group_name}</a>. Selle vastuvõtmiseks avage oma profiilil <a href="%{groups_profile_tab_path}">rühmade leht</a>.
+        join_request_accepted:
+          email_intro: Õnnitleme! Kasutajarühma <a href="%{resource_url}">%{user_group_name}</a> administraator on teie liitumistaotluse vastu võtnud.
+          email_outro: Saite selle teate, kuna teie liitumistaotluse olekut on värskendatud.
+          email_subject: Teid on kasutajarühma %{user_group_name} vastu võetud!
+          notification_title: Teid on kasutajarühma <a href="%{resource_path}">%{user_group_name}</a> vastu võetud.
+        join_request_created:
+          email_intro: Keegi esitas kasutajarühmaga %{user_group_name} liitumise taotluse. Saate selle vastu võtta või tagasi lükata <a href="%{resource_url}">rühma liikmete lehel</a>.
+          email_outro: Saite selle teate, kuna saate hallata kasutajarühma %{user_group_name}.
+          email_subject: Keegi esitas kasutajarühmaga %{user_group_name} liitumise taotluse!
+          notification_title: Keegi esitas kasutajarühmaga %{user_group_name} liitumise taotluse. Saate selle vastu võtta või tagasi lükata <a href="%{resource_path}">rühma liikmete lehel</a>.
+        join_request_rejected:
+          email_intro: Kasutajarühma <a href="%{resource_url}">%{user_group_name}</a> administraator on teie liitumistaotluse tagasi lükanud.
+          email_outro: Saite selle teate, kuna teie liitumistaotluse olekut on värskendatud.
+          email_subject: Teie kasutajarühmaga %{user_group_name} liitumise taotlus lükati tagasi!
+          notification_title: Teie kasutajarühmaga <a href="%{resource_path}">%{user_group_name}</a> liitumise taotlus lükati tagasi.
+        promoted_to_admin:
+          email_intro: Kasutajarühma <a href="%{resource_url}">%{user_group_name}</a> administraator andis teile selle rühma administraatoriõigused.
+          email_outro: Saite selle teate, kuna olete selle rühma liige.
+          email_subject: Olete nüüd kasutajarühma %{user_group_name} administraator!
+          notification_title: Olete nüüd kasutajarühma <a href="%{resource_path}">%{user_group_name}</a> administraator.
+        removed_from_group:
+          email_intro: Kasutajarühma <a href="%{resource_url}">%{user_group_name}</a> administraator on teid rühmast eemaldanud.
+          email_outro: Saite selle teate, kuna olite selle rühma liige.
+          email_subject: Teid on kasutajarühmast %{user_group_name} eemaldatud!
+          notification_title: Teid on kasutajarühmast <a href="%{resource_path}">%{user_group_name}</a> eemaldatud.
+        user_group_created:
+          email_intro: Uus kasutajarühm nimega %{user_group_name} on loodud. Saate selle nüüd <a href="%{groups_admin_url}">administraatoripaneelil</a> kinnitada.
+          email_outro: Saite selle teate, kuna olete platvormi administraator.
+          email_subject: Loodi uus kasutajarühm
+          notification_title: Loodi uus kasutajarühm %{user_group_name}. Saate selle nüüd <a href="%{groups_admin_path}">administraatoripaneelil</a> kinnitada.
+        user_group_updated:
+          email_intro: Kasutajarühm nimega %{user_group_name} värskendas oma profiili, kuid jättis selle kinnitamata. Saate selle nüüd <a href="%{groups_admin_url}">administraatoripaneelil</a> kinnitada.
+          email_outro: Saite selle teate, kuna olete platvormi administraator.
+          email_subject: Kasutajarühm värskendas oma profiili
+          notification_title: Kasutajarühm %{user_group_name} värskendas oma profiili, kuid jättis selle kinnitamata. Saate selle nüüd <a href="%{groups_admin_path}">administraatoripaneelil</a> kinnitada.
+      notification_event:
+        notification_title: Üksuses <a href="%{resource_path}">%{resource_title}</a> oli sündmus.
+      resource_endorsed:
+        email_intro: 'Kasutaja %{endorser_name} %{endorser_nickname}, keda jälgite, kinnitas just üksuse „%{resource_title}“ ja me usume, et see pakub teile huvi. Tutvuge lähemalt ja andke oma panus:'
+        email_outro: Saite selle teate, kuna jälgite kasutajat %{endorser_nickname}. Teadetest saate loobuda eeltoodud linki kasutades.
+        email_subject: Kasutaja %{endorser_nickname} on andnud uue kinnituse
+        notification_title: Üksusele <a href="%{resource_path}">%{resource_title}</a> %{resource_type} andis kinnituse kasutaja <a href="%{endorser_path}">%{endorser_name} %{endorser_nickname}</a>.
+      users:
+        profile_updated:
+          email_intro: Teie jälgitava kasutaja %{name} (hüüdnimi %{nickname}) <a href="%{resource_url}">profiililehte</a> on värskendatud.
+          email_outro: Saite selle teate, kuna jälgite kasutajat %{nickname}. Teadetest saate loobuda eeltoodud linki kasutades.
+          email_subject: Kasutaja %{nickname} värskendas oma profiili
+          notification_title: Teie jälgitava kasutaja %{name} (hüüdnimi %{nickname}) <a href="%{resource_path}">profiililehte</a> on värskendatud.
+    export_mailer:
+      data_portability_export:
+        click_button: 'Klõpsake järgmisel lingil, et oma andmed alla laadida.<br/>Fail on kättesaadav kuni %{date}.<br/>Teil läheb selle avamiseks vaja: <a href="https://www.7-zip.org/">7-Zip</a> (Windows), <a href="https://www.keka.io/en/">Keka</a> (MacOS) või <a href="https://peazip.github.io">PeaZip</a> (Linux). Salasõna: %{password}'
+        download: Laadi alla
+      export:
+        ready: Manuses on teie ekspordifailid kokkupakituna.
+      subject: Teie ekspordipakk „%{name}“ on valmis
+    filters:
+      linked_classes:
+        all: Kõik
+        collaborative_draft: Koostöökavand
+        dummy_resource: 'Näide: ressursid'
+        meeting: Üritused
+        project: Projektid
+        proposal: Idee
+        result: Tulemused
+    fingerprint:
+      check: Kontrolli sõrmejälge
+      explanation: Allesitatud tekstijupp on selle sisu lühem, räsitud versioon. Oluline on tagada, et sisu ei oleks muudetud, kuna mistahes muudatuse tulemusena saadaks täiesti teine väärtus.
+      online_calculator_name: MD5 kalkulaator veebis
+      replicate_help: See sõrmejälg kalkuleeritakse SHA256 räsialgoritmi abil. Kui soovite selle ise uuesti luua, saate kasutada veebikalkulaatorit %{online_calculator_link} ning allikaandmed kopeerida ja kleepida.
+      source: Allikas
+      title: Sõrmejälg
+      value: Väärtus
+    followers:
+      followers_count:
+        one: "%{count} jälgija"
+        other: "%{count} jälgijat"
+      no_followers: Jälgijaid veel pole.
+    following:
+      no_followings: Ei jälgi veel kedagi ega midagi.
+    follows:
+      create:
+        button: Jälgi
+        error: Selle ressursi jälgimise alustamisel tekkis probleem.
+        participatory_space: Te juba jälgite ressurssi <span class="show-for-sr">%{resource_name}</span>
+      destroy:
+        button: Lõpetan jälgimise
+        error: Selle ressursi jälgimise lõpetamisel tekkis probleem.
+    forms:
+      current_file: Praegune fail
+      current_image: Praegune pilt
+      default_image: Vaikepilt
+      errors:
+        decidim/user:
+          password: Salasõna on liiga lühike.
+          password_confirmation: Salasõna kinnitamiseks peab sisestama sama salasõna.
+        error: Sellel väljal tekkis viga.
+      file_help:
+        file:
+          explanation: 'Failijuhised:'
+          message_1: peab olema pilt või dokument.
+          message_2: Kasutage võimaluse korral horisontaalpaigutusega pilti. Teenus kärbib pilti.
+        image:
+          explanation: 'Pildijuhised:'
+          message_1: soovitavalt horisontaalpaigutusega pilt, millel pole teksti.
+          message_2: Teenus kärbib pilti.
+      file_validation:
+        allowed_file_extensions: 'Lubatud faililaiendid: %{extensions}'
+        max_file_size: 'Maksimaalne failisuurus: %{megabytes}MB'
+      remove_this_file: Eemalda see fail
+    gamification:
+      all_badges_link: Kuva kõik saadaolevad tunnustusmärgid.
+      badges:
+        followers:
+          conditions: Kui olete aktiivne ja jälgite teisi inimesi, hakkavad teised kindlasti teidki jälgima.
+          description: See tunnustusmärk antakse siis, kui teil koguneb teatud arv jälgijaid. %{organization_name} on sotsiaalne ja poliitiline võrgustik. Saate luua endale veebivõrgustiku, mille kaudu teiste inimestega platvormil suhelda.
+          description_another: Sellel osalejal on %{score} jälgija(t).
+          description_own: Teid jälgib %{score} inimene/inimest.
+          name: Jälgijad
+          next_level_in: Järgmisele tasemele jõudmiseks peate koguma veel %{score} jälgija(t).
+          unearned_another: Sellel osalejal pole veel jälgijaid.
+          unearned_own: Teil pole veel jälgijaid.
+        index:
+          badge_title: Tunnustusmärk %{name}
+          how: Kuidas seda teenida?
+          page_description: Tunnustusmärgid antakse osalejale tema platvormil tehtavate toimingute ja edusammude tunnustamiseks. Platvormil toimuvaga tutvumise, selles osalemise ja seotud suhtluse käigus hakkate teenima erinevaid tunnustusmärke. Siin on tunnustusmärkide loend ja teave nende teenimise võimaluste kohta.
+          title: Tunnustusmärgid
+        invitations:
+          conditions: |-
+            Sõprade kutsumiseks kasutage oma kasutajalehel linki „Kutsu sõpru“
+            Soovi korral saate saadetavat sõnumit kohandada
+            Järgmisele tasemele jõudmiseks peate saatma kutseid ja kutsutuid registreerima innustama.
+          description: See tunnustusmärk antakse siis, kui olete kutsunud teisi inimesi, kes on end seejärel organisatsioonis %{organization_name} registreerinud ja osalejateks hakanud. Aitäh, et levitate sõna organisatsiooni %{organization_name} kohta ja aitate kogukonda kasvatada!
+          description_another: See osaleja on kutsunud %{score} inimese/inimest.
+          description_own: Olete kutsunud %{score} inimese/inimest.
+          name: Kutsed
+          next_level_in: Järgmisele tasemele jõudmiseks peate kutsuma veel %{score} inimese/inimest.
+          unearned_another: See osaleja pole veel kedagi kutsunud.
+          unearned_own: Te pole veel kedagi kutsunud.
+      description: Tunnustusmärgid antakse osalejale tema platvormil tehtavate toimingute ja edusammude tunnustamiseks. Platvormil toimuvaga tutvumise, selles osalemise ja seotud suhtluse käigus hakkate teenima erinevaid tunnustusmärke.
+      level: Tase %{level}
+      reached_top: Olete jõudnud selle tunnustusmärgi kõrgeimale tasemele.
+    group_admins:
+      actions:
+        are_you_sure: Kas olete kindel? Sellega osalejat rühmast ei eemaldata.
+        demote_admin: Eemalda administraator
+      demote:
+        error: Selle osaleja administraatorite loendist eemaldamisel tekkis probleem
+        success: Osaleja on administraatorina eemaldatud
+      index:
+        current_admins: 'Praegused administraatorid:'
+        manage_admins: Administraatorite haldamine
+    group_invites:
+      accept:
+        error: Kutse vastuvõtmisel tekkis probleem
+        success: Kutse on vastu võetud
+      accept_invitation: Võta vastu
+      accept_or_reject_group_invitations: 'Järgmised rühmad on kutsunud teid liituma. Võtke nende taotlused vastu või lükake need tagasi:'
+      index:
+        invite: Kutsu
+        invite_user: Kutsu osaleja
+      invite:
+        error: Selle osaleja kutsumisel tekkis probleem
+        success: Osalejale on kutse saadetud
+      reject:
+        error: Selle kutse tagasilükkamisel tekkis probleem
+        success: Kutse on tagasi lükatud
+      reject_invitation: Lükka tagasi
+    group_members:
+      accept:
+        error: Selle liitumistaotluse vastuvõtmisel tekkis probleem
+        success: Liitumistaotlus on vastu võetud
+      actions:
+        are_you_sure: Kas olete kindel?
+        promote_to_admin: Määra administraatoriks
+        remove_from_group: Eemalda osaleja
+      index:
+        current_members_without_admins: 'Praegused liikmed (ilma administraatoriteta):'
+        manage_members: Liikmete haldamine
+      promote:
+        error: Selle osaleja edutamisel tekkis probleem
+        success: Osaleja on nüüd edutatud
+      reject:
+        error: Selle liitumistaotluse tagasilükkamisel tekkis probleem
+        success: Liitumistaotlus on tagasi lükatud
+      remove:
+        error: Selle osaleja rühmast eemaldamisel tekkis probleem
+        success: Osaleja on rühmast eemaldatud
+    groups:
+      actions:
+        are_you_sure: Kas olete kindel?
+      create:
+        error: Rühma loomisel tekkis probleem
+        success: Rühm on loodud
+      edit:
+        edit_user_group: Muuda rühma
+        update_user_group: Värskenda rühma
+      form:
+        document_number_help: Ärge kasutage kriipse ega tühikuid
+        email_help: Teie organisatsiooni, ühingu, kollektiivi, rühma jne meiliaadress.
+        fill_in_for_verification: 'Kui soovite oma rühma kinnitada, täitke need väljad:'
+        name_help: Teie organisatsiooni, ühingu, kollektiivi, rühma jne nimi.
+        nickname_help: Teie organisatsiooni, ühingu, kollektiivi, rühma jne hüüdnimi. Ärge kasutage tühikuid ega diakriitilisi märke.
+        phone_help: Ärge kasutage kriipse ega tühikuid
+      join:
+        error: Rühmaga liitumisel tekkis probleem
+        success: Liitumistaotlus on loodud. Enne rühma vastu võtmist vaatab administraator teie taotluse üle.
+      leave:
+        error: Rühmast lahkumisel tekkis probleem
+        success: Rühmast lahkumine õnnestus.
+      members:
+        accept_or_reject_join_requests: 'Järgmised kasutajad on esitanud selle rühmaga liitumise taotluse. Võtke nende taotlused vastu või lükake need tagasi:'
+        accept_request: Võta vastu
+        reject_request: Lükka tagasi
+      new:
+        create_user_group: Loo rühm
+        new_user_group: Uus rühm
+        subtitle: Looge rühm ja kutsuge teisi kasutajaid liituma, et osaleda kollektiivselt.
+      no_user_groups: Ei kuulu veel ühtegi rühma.
+      roles:
+        admin: Administraator
+        creator: Looja
+        member: Liige
+      update:
+        error: Rühma värskendamisel tekkis probleem
+        success: Rühm on värskendatud
+    help:
+      main_topic:
+        default_page:
+          content: "<p>Organisatsioonis %{organization} saate osaleda eri teemadega seotud protsessides ja nende üle otsustamisel ülamenüüs esitatud osalusruumide kaudu: protsessid, assambleed, algatused, konsultatsioonid.</p> <p>Igas ruumis pakutakse teile erinevaid osalusvõimalusi: saate teha ettepanekuid (eraldi või koos teistega), osaleda aruteludes, prioriseerida kavandatavate projektide elluviimist, osaleda näost näkku kohtumistel ja teha muid toiminguid.</p>\n"
+          title: Mida saan organisatsioonis %{organization} teha?
+        description: Lisateave organisatsiooni %{organization} kohta
+        title: Üldine abi
+    last_activities:
+      activities:
+        no_activities_warning: Tegevusi pole
+      all: Kõik tegevustüübid
+      index:
+        last_activity: Viimane tegevus
+        resource_type: Tüüp
+    log:
+      base_presenter:
+        create: Kasutaja %{user_name} lõi üksuse %{resource_name}
+        create_with_space: Kasutaja %{user_name} lõi osalusruumis %{space_name} üksuse %{resource_name}
+        delete: Kasutaja %{user_name} kustutas üksuse %{resource_name}
+        delete_with_space: Kasutaja %{user_name} kustutas osalusruumis %{space_name} üksuse %{resource_name}
+        unknown_action: Kasutaja %{user_name} tegi üksuses %{resource_name} mõned toimingud
+        unknown_action_with_space: Kasutaja %{user_name} tegi osalusruumi %{space_name} üksuses %{resource_name} mõned toimingud
+        update: Kasutaja %{user_name} värskendas üksust %{resource_name}
+        update_with_space: Kasutaja %{user_name} värskendas osalusruumis %{space_name} üksust %{resource_name}
+      value_types:
+        area_presenter:
+          not_found: 'Piirkonda andmebaasist ei leitud (ID: %{id})'
+        area_type_presenter:
+          not_found: 'Piirkonna tüüpi andmebaasist ei leitud (ID: %{id})'
+        scope_presenter:
+          not_found: 'Kohaldamisala andmebaasist ei leitud (ID: %{id})'
+        scope_type_presenter:
+          not_found: 'Kohaldamisala tüüpi andmebaasist ei leitud (ID: %{id})'
+    managed_users:
+      expired_session: Osaleja administreerimisseanss on aegunud.
+    map:
+      dynamic:
+        screen_reader_explanation: Järgmine element on kaart, kus selle lehe üksused on esitatud kaardipunktidena. Elementi saab kasutada ekraanilugeriga, kuid see võib olla siis raskesti mõistetav.
+        skip_button: Jäta kaart vahele
+      static:
+        latlng_text: 'laiuskraad: %{latitude}, pikkuskraad: %{longitude}'
+        map_service_brand: OpenStreetMap
+    members:
+      no_members: Sellel rühmal pole veel liikmeid.
+    menu:
+      help: Konverentsist
+      processes: Teemad
+    messaging:
+      conversation_mailer:
+        comanagers_new_conversation:
+          admin_in_group: Saite selle teate, kuna olete rühma %{group} administraator.
+          greeting: Tere, %{recipient}!
+          intro: 'Haldur %{manager} alustas rühma %{group} nimel uut vestlust. Vaatamiseks klõpsake siin:'
+          outro: Head Decidimi kasutamist!
+          subject: Haldur %{manager} alustas rühmas %{group} uut vestlust
+        comanagers_new_message:
+          admin_in_group: Saite selle teate, kuna olete rühma %{group} administraator.
+          greeting: Tere, %{recipient}!
+          intro: 'Haldur %{manager} postitas vestluses rühma %{group} nimel uusi sõnumeid. Nende vaatamiseks klõpsake siin:'
+          outro: Head Decidimi kasutamist!
+          subject: Haldur %{manager} saatis rühma %{group} nimel uusi sõnumeid
+        new_conversation:
+          greeting: Tere, %{recipient}!
+          intro: 'Saatja %{sender} alustas teiega uut vestlust. Vaatamiseks klõpsake siin:'
+          outro: Head Decidimi kasutamist!
+          subject: Saatja %{sender} alustas teiega vestlust
+        new_group_conversation:
+          admin_in_group: Saite selle teate, kuna olete rühma %{group} administraator.
+          greeting: Tere, %{recipient}!
+          intro: 'Saatja %{sender} alustas rühmaga %{group} uut vestlust. Vaatamiseks klõpsake siin:'
+          outro: Head Decidimi kasutamist!
+          subject: Saatja %{sender} alustas vestlust rühmaga %{group}
+        new_group_message:
+          admin_in_group: Saite selle teate, kuna olete rühma %{group} administraator.
+          greeting: Tere, %{recipient}!
+          intro: 'Haldur %{sender} postitas rühmaga %{group} peetavas vestluses uusi sõnumeid. Vaatamiseks klõpsake siin:'
+          outro: Head Decidimi kasutamist!
+          subject: Rühmal %{group} on uued sõnumid saatjalt %{sender}
+        new_message:
+          greeting: Tere, %{recipient}!
+          intro: 'Kasutaja %{sender} postitas teie vestluses uusi sõnumeid. Nende vaatamiseks klõpsake siin:'
+          outro: Head Decidimi kasutamist!
+          subject: Teil on uued sõnumid saatjalt %{sender}
+      conversations:
+        add_conversation_users:
+          add_max_users: 'Lisa vestlusesse kasutajaid: kuni 9 kasutajat'
+          add_users_placeholder: Otsing
+          modal_title: Uus vestlus
+          no_results: Tulemusi pole
+          participant_with_disabled_message_reception: See osaleja sõnumeid vastu ei võta
+        conversation:
+          show: Kuva vestlus kasutajaga %{sender}
+        create:
+          error: Vestlus ei ole alanud. Proovige hiljem uuesti
+        index:
+          ago: tagasi
+          close: Sulge modaalaken
+          from: Saatja
+          groups: Minu rühmad
+          last_message: Viimane sõnum
+          new_conversation: Uus vestlus
+          next: Järgmine
+          no_conversations: Teil pole veel vestlusi
+          title: Vestlused
+        reply:
+          placeholder: Teie vastus
+          send: Saada
+          title: Vastus
+        show:
+          back: Tagasi kõigi vestluste lehele
+          chat_with: Vestlus kasutajaga
+          not_allowed: See kasutaja enam otsesõnumeid vastu ei võta.
+          title: Vestlus kasutajatega %{usernames}
+        start:
+          send: Saada
+          title: Alusta vestlust
+        update:
+          error: Sõnum on saatmata. Proovige hiljem uuesti
+    metrics:
+      download:
+        csv: Laadi andmed alla (CSV)
+      followers:
+        description: Seda osalusruumi jälgivate osalejate arv
+        object: jälgijad
+        title: Jälgijad
+      participants:
+        description: Organisatsiooni aktiivsete osalejate arv
+        object: osalejad
+        title: Osalejad
+      users:
+        description: Organisatsiooni osalejate arv
+        object: osalejad
+        title: Osalejad
+    newsletter_mailer:
+      newsletter:
+        note: Saite selle meili, kuna tellisite organisatsiooni %{organization_name} uudiskirjad. Saate oma seadeid muuta <a href="%{link}">teadete lehelt</a>.
+        see_on_website: Kas seda meilisõnumit ei ole korralikult kuvatud? Vaadake seda <a href="%{link}" target="_blank">veebisaidil</a>.
+        unsubscribe: Sellist tüüpi meilide saamisest loobumiseks <a href="%{link}" target="_blank" class="unsubscribe">tühistage tellimus</a>.
+    newsletter_templates:
+      basic_only_text:
+        body_preview: 'Sisuosa näitetekst: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla nisl tellus. Donec sed mi dui. Sed efficitur libero a felis tempor sollicitudin. Nullam vestibulum fringilla felis, id efficitur lorem sagittis et. Vivamus aliquam maximus velit vel dapibus. Mauris pellentesque, enim eu varius lacinia, risus ante rutrum ipsum, non lobortis augue lorem quis urna. Aenean et malesuada arcu.'
+        name: Lihtne (ainult tekst)
+      basic_only_text_settings_form:
+        body: Sisu
+        interpolations_hint: 'Vihje: Saate kasutada sisu- ja teemaväljal koodi „%{name}“ ning see asendatakse saaja nimega.'
+      image_text_cta:
+        body_preview: 'Sisuosa näitetekst: Maecenas ac nisl vitae lectus pretium facilisis. Etiam facilisis sem nibh, sit amet rutrum mi aliquam nec. Sed id urna at nisl pretium mollis eu vel velit. Proin vitae suscipit urna, sed faucibus urna. Pellentesque id libero vulputate ipsum scelerisque suscipit. Nam aliquam sodales mi sit amet cursus. Donec mattis faucibus purus. Aenean tincidunt porta lorem ac commodo. Vestibulum in mollis mi. Morbi eros erat, cursus ut tortor sit amet, imperdiet dapibus arcu. Suspendisse id egestas enim. In eget magna sed enim efficitur elementum sit amet aliquam quam. Donec fermentum metus eget urna luctus pulvinar.'
+        cta_text_preview: Tegevuskutse nupu tekst
+        introduction_preview: 'Sissejuhatuse näitetekst: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque fringilla nisl tellus. Donec sed mi dui. Sed efficitur libero a felis tempor sollicitudin. Nullam vestibulum fringilla felis, id efficitur lorem sagittis et. Vivamus aliquam maximus velit vel dapibus. Mauris pellentesque, enim eu varius lacinia, risus ante rutrum ipsum, non lobortis augue lorem quis urna. Aenean et malesuada arcu.'
+        name: Pilt, tekst ja tegevuskutse nupp
+      image_text_cta_settings_form:
+        body: Sisu
+        cta_text: Tegevuskutse nupu tekst
+        cta_url: Tegevuskutse nupu URL
+        interpolations_hint: 'Vihje: Saate kasutada sissejuhatuses, sisuosas, tegevuskutse tekstis või teemaväljal teile sobivas kohas koodi „%{name}“ ning see asendatakse saaja nimega.'
+        introduction: Sissejuhatus
+        main_image: Peamine pilt
+    newsletters:
+      unsubscribe:
+        check_subscription: Kui soovite oma eelistusi muuta, saate seda teha <a href="%{link}" target="_blank">konfigureerimislehel</a>
+        error: Tellimuse tühistamisel tekkis probleem
+        success: Teie tellimus on tühistatud.
+        token_error: Link on aegunud.
+        unsubscribe: Tühista tellimus
+    newsletters_opt_in:
+      unathorized: Kahjuks ei ole see link enam kättesaadav
+      update:
+        error: Midagi läks valesti
+        success: Uudiskirja seadeid värskendati
+    newsletters_opt_in_mailer:
+      notify:
+        body_1: Isikuandmete töötlemine ja nende kaitse tagamine muutub meie kõigi jaoks üha tähtsamaks. Uue, 25. mai 2018. aasta isikuandmete kaitse üldmäärusega (GDPR) tagatakse üksikisikutele suurem kontroll nende isikuandmete kasutamise üle. Seega vajame teie nõusolekut, et võiksime teile ka edaspidi organisatsiooni %{organization_name} tegevuste kohta asjakohast teavet saata.
+        body_2: 'Kuidas saate meile oma nõusoleku anda? Klõpsake lihtsalt järgmisel nupul:'
+        body_3: See nõusolek võimaldab teil saada ka edaspidi teavet platvormi teenuste kohta. Kui te meile nõusolekut ei anna, lõpetame teile oma sõnumite saatmise. Kui kinnitate, et soovite ka edaspidi teavet saada, jääb teil siiski alati võimalus oma nõusolek tagasi võtta.
+        button: Jah, soovin ka edaspidi asjakohast teavet saada
+        greetings: Tere, <br/>%{organization_name}<br/><a href="%{organization_url}">%{organization_url}</a>!
+        hello: Tere!
+        subject: Kas soovite ka edaspidi saada asjakohast teavet organisatsiooni %{organization_name} kohta?
+    notifications:
+      no_notifications: Teateid veel ei ole.
+    notifications_settings:
+      show:
+        allow_public_contact: Luban kõigil mulle otsesõnumeid saata, isegi kui ma neid ei jälgi.
+        direct_messages: Luban kõigil mulle otsesõnumeid saata
+        email_on_notification: Soovin iga teate saamise korral meilisõnumi saada.
+        everything_followed: Kõik, mida jälgin
+        newsletter_notifications: Soovin saada uudiskirju
+        newsletters: Uudiskirjad
+        own_activity: Minuga seotud tegevused, näiteks kui keegi kommenteerib minu ettepanekut või mainib mind.
+        receive_notifications_about: Soovin saada teateid järgmise kohta
+        send_notifications_by_email: Saada teated meiliga
+        update_notifications_settings: Salvesta muudatused
+      update:
+        error: Teie teateseadete värskendamisel tekkis probleem.
+        success: Teie teateseadeid värskendati.
+    open_data:
+      not_available_yet: Avatud andmete failid pole veel saadaval, proovige mõne minuti pärast uuesti.
+    own_user_groups:
+      index:
+        pending: Ootel
+        rejected: Tagasi lükatud
+        verified: Kinnitatud
+    pad_iframe:
+      disclaimer: Selle märkmiku sisu on kirjutanud registreeritud kasutajad ja see väljendab nende arvamusi. %{organization} selle sisu eest vastutust ei võta.
+      explanation: Kasutage seda märkmikku koosoleku ajal ühiselt märkmete tegemiseks, et hilisemat protokolli kirjutamist lihtsamaks teha.
+      pad: Märkmik
+    pages:
+      home:
+        extended:
+          debates: Arutelud
+          debates_explanation: Saate arutelusid pidada, oma vaateid tutvustada ja teemakäsitlusi rikastada.
+          how_to_participate: Kuidas saan protsessis osaleda?
+          meetings: Koosolekud
+          meetings_explanation: Lugege, kus ja millal saate avalikel koosolekutel osaleda.
+          more_info: 'Lisateave järgmise kohta: %{resource_name}'
+          proposals: Ideed
+          proposals_explanation: Saate luua oma ideid ja toetada teiste omi ning aidata seeläbi viia ellu muudatusi, mida näha soovite.
+        footer_sub_hero:
+          footer_sub_hero_body: Loome ühiselt avatuma, läbipaistvama ja koostööd soodustava ühiskonna.<br /> Liituge, võtke osa ja otsustage!
+          footer_sub_hero_headline: Tere tulemast organisatsiooni %{organization} osalusplatvormile!
+          register: Registreeri
+        hero:
+          participate: Võtke osa
+          welcome: Tere tulemast organisatsiooni %{organization}!
+        metrics:
+          headline: Mõõdikud
+        statistics:
+          answers_count: Tehtud uuringud
+          assemblies_count: Assambleed
+          comments_count: Kommentaarid
+          conferences_count: Konverentsid
+          debates_count: Arutelud
+          endorsements_count: Kinnitused
+          headline: Mis toimub Euroopa tuleviku teemalise konverentsi raames?
+          meetings_count: Üritused
+          orders_count: Hääled
+          pages_count: Lehed
+          posts_count: Postitused
+          processes_count: Teemad
+          projects_count: Projektid
+          proposals_accepted: Vastuvõetud ettepanekud
+          proposals_count: Ideed
+          results_count: Tulemused
+          surveys_count: Uuringud
+          users_count: Platvormil registreeritud osalejad *
+          users_count_explain: "(*) Platvormil registreeritud osalejate arv."
+          votes_count: Hääled
+        sub_hero:
+          register: Registreeri
+      index:
+        read_more: Kuva rohkem
+        standalone_pages: Lehed
+        subheading: Sirvige üksuse %{name} abilehti
+        title: Abi
+        topics: Meie teemad
+      participatory_space:
+        metrics:
+          headline: Mõõdikud
+          link: Kuva kõik mõõdikud
+      terms_and_conditions:
+        accept:
+          error: Tingimustega nõustumise kinnitamisel tekkis probleem.
+          success: Suurepärane! Olete kinnitanud tingimustega nõustumise.
+        form:
+          agreement: Nõustun nende tingimustega
+          legend: Nõustu kasutustingimustega
+        refuse:
+          modal_body: Kui te nõusolekut ei anna, siis ei saa te platvormi kasutada. Saate<a href="%{data_portability_path}">oma andmed alla laadida</a> ja/või <a href="%{delete_path}">oma konto kustutada</a>.
+          modal_btn_continue: Nõustu tingimustega ja jätka
+          modal_btn_exit: Vaatan selle üle hiljem
+          modal_button: Keeldu tingimustega nõustumast
+          modal_close: Sulge modaalaken
+          modal_title: Kas olete kindel, et soovite värskendatud tingimustega nõustumisest keelduda?
+        required_review:
+          alert: Värskendasime oma teenusetingimusi ja palume teil need üle vaadata.
+          body: Palume teil tutvuda meie värskendatud teenusetingimustega. Vastasel juhul ei saa te platvormi kasutada.
+          title: 'Nõutav: Tutvuge meie värskendatud teenusetingimustega'
+    participatory_space_private_users:
+      not_allowed: Teil ei ole selle sisu vaatamiseks luba
+    profile:
+      deleted: Osaleja kustutati
+      view: Kuva
+    profiles:
+      default_officialization_text_for_user_groups: See rühm on avalikult kinnitatud, nime tegelikkusele vastavust on kontrollitud
+      default_officialization_text_for_users: See osaleja on avalikult kinnitatud, tema nime või rolli tegelikkusele vastavust on kontrollitud
+      show:
+        activity: Tegevus
+        badges: Tunnustusmärgid
+        conversations: Minu eravestlused
+        followers: Jälgijad
+        following: Jälgin
+        groups: Rühmad
+        members: Liikmed
+        officialized: Ametlike volitustega osaleja
+        timeline: Ajatelg
+        view_full_profile: Kuva kogu profiil
+      sidebar:
+        badges:
+          info: Tunnustusmärke teenitakse platvormil kindlate toimingute tegemise eest.
+          title: Tunnustusmärgid
+      user:
+        confirmation_instructions_sent: Meiliaadressi kinnitamise juhised on saadetud
+        create_user_group: Loo rühm
+        edit_profile: Muuda kontot
+        edit_user_group: Muuda rühmaprofiili
+        fill_in_email_to_confirm_it: Selle kinnitamiseks lisage oma rühma meiliaadress
+        invite_user: Kutsu osaleja
+        join_user_group: Esita rühmaga liitumise taotlus
+        leave_user_group: Lahku rühmast
+        manage_user_group_admins: Administraatorite haldamine
+        manage_user_group_users: Liikmete haldamine
+        resend_email_confirmation_instructions: Saada meiliaadressi kinnitamise juhised uuesti
+    reported_mailer:
+      hide:
+        hello: Tere, %{name}!
+        manage_moderations: Halda modereerimisi
+        report_html: <p>Järgmine <a href="%{url}">sisu</a> peideti automaatselt.</p>
+        subject: Ressurss on automaatselt peidetud
+      report:
+        authors: Autorid
+        content: Teatatud sisu
+        date: Teatatud
+        details: Üksikasjad
+        hello: Tere, %{name}!
+        manage_moderations: Halda modereerimisi
+        participatory_space: Osalusruum
+        reason: Põhjus
+        report_html: <p>Järgmise <a href="%{url}">sisu</a> kohta on esitatud teade.</p>
+        subject: Ressursi kohta on edastatud (sobimatusele osutav) teade
+    reports:
+      create:
+        error: Teate loomisel tekkis tõrge. Proovige uuesti.
+        success: Teade on loodud ja administraator vaatab selle üle.
+    resource_endorsements:
+      create:
+        error: Selle kinnitustoimingu käigus tekkis probleem.
+    scopes:
+      global: Üleilmne kohaldamisala
+      picker:
+        cancel: Tühista
+        change: Muuda kohaldamisala
+        choose: Valige
+        currently_selected: Praegu valitud kohaldamisala
+        title: Valige %{field}
+      prompt: Valige kohaldamisala
+      scopes: Kohaldamisalad
+      scopes_picker_input:
+        select_scope: 'Valige kohaldamisala (praegu: %{current})'
+    search:
+      results: Otsingutulemused
+      results_found_for_term: "%{count} tulemus(t) otsingule: „%{term}“"
+      term_input_placeholder: Otsing
+    searches:
+      filters:
+        back: Tagasi tulemuste lehele
+        jump_to: 'Edasi järgmisesse jaotisesse:'
+        state:
+          active: Aktiivsed
+          all: Kõik
+          future: Eelseisvad
+          past: Möödunud
+      filters_small_view:
+        close_modal: Sulge modaalaken
+        filter: Filter
+        filter_by: Filtrimisalus
+        unfold: Ava
+      results:
+        results:
+          one: "%{count} tulemus"
+          other: "%{count} tulemust"
+        view_all: Kuva kõik (%{count})
+    shared:
+      confirm_modal:
+        cancel: Tühista
+        close_modal: Sulge modaalaken
+        ok: OK
+        title: Kinnita
+      embed_modal:
+        close_window: Sulge aken
+        embed: Kleepige see kood oma lehele
+        embed_link: Manusta
+      extended_navigation_bar:
+        more: Rohkem
+        unfold: Ava
+      filter_form_help:
+        help: Filtreeri otsingut allpool
+        skip: Otse tulemuste lehele
+      flag_modal:
+        already_reported: Sellest sisust on juba teatatud ja administraator vaatab selle üle.
+        close: Sulge
+        description: Kas see sisu on sobimatu?
+        does_not_belong: Hõlmab ebaseaduslikku tegevust, enesetapuähvardusi, isiklikku teavet või midagi muud, mis pole organisatsioonis %{organization_name} lubatud/asjakohane.
+        offensive: 'Sisu hõlmab järgmist: rassism, seksism, solvangud, isiklikud rünnakud, tapmisähvardused, enesetapule õhutamine või mis tahes kujul vihakõne.'
+        report: Teata
+        spam: Hõlmab klõpsusööta, reklaame, petuskeeme või skriptiroboteid.
+        title: Teata sobimatust sisust
+      floating_help:
+        close: Sulge abiaken
+        help: Abi
+      follow_button:
+        sign_in_before_follow: Enne selle toimingu tegemist logige sisse
+      login_modal:
+        close_modal: Sulge modaalaken
+        please_sign_in: Palun logige sisse
+        sign_up: Loo konto
+      participatory_space_filters:
+        filters:
+          areas: Piirkonnad
+          select_an_area: Valige piirkond
+      reference:
+        reference: 'Viide: %{reference}'
+      represent_user_group:
+        represent_user_group: Esindan rühma
+        select_user_group: Valige rühm
+      results_per_page:
+        label: 'Tulemusi lehe kohta:'
+        title: Valige, kui palju tulemusi ühel lehel kuvatakse
+      share_modal:
+        close_window: Sulge aken
+        share: Jaga
+        share_link: Jaga linki
+    tags:
+      filter_results_for_category: 'Filtreeri tulemusi kategooria alusel: %{resource}'
+      filter_results_for_scope: 'Filtreeri tulemusi ulatuse alusel: %{resource}'
+    translation_bar:
+      help_text: "<strong>Hoiatus:</strong> masintõlge ei pruugi olla 100% täpne."
+      show_original: Kuva algne tekst
+      show_translated: Kuva automaatselt tõlgitud tekst
+    user_activity:
+      index:
+        no_activities_warning: See osaleja pole veel toiminguid teinud.
+    user_contact_disabled: Sellele osalejale ei saa otsesõnumeid saata.
+    user_conversations:
+      create:
+        error: Sõnumit ei saanud luua. Proovige hiljem uuesti
+        existing_error: Sõnumit ei saanud luua. Vestlus on juba loodud, proovige nüüd uuesti.
+        success: Vestlus on alanud!
+      index:
+        add_max_users: 'Lisa vestlusesse kasutajaid: kuni 9 kasutajat'
+        add_users_placeholder: Otsing
+        close: Sulge
+        conversations_info: Vestlused on privaatsed, keegi teine neid ei näe. Vestluse võib alustada iga platvormil registreeritud osaleja või rühm.
+        from: Saatja
+        last_message: Viimane sõnum
+        modal_title: Uus vestlus
+        new_conversation: Uus vestlus
+        next: Järgmine
+        no_conversations_warning: Vestlusi veel pole.
+        no_results: Tulemusi pole
+        participant_with_disabled_message_reception: See osaleja sõnumeid vastu ei võta
+        time_ago: "%{time} tagasi"
+      new:
+        title: Alusta vestlust
+      reply:
+        placeholder: Teie vastus
+        send: Saada
+        title_reply: Vastus
+      show:
+        not_allowed: See kasutaja enam otsesõnumeid vastu ei võta.
+        title: Vestlus kasutajatega %{usernames}
+      update:
+        error: Sõnum on saatmata. Proovige hiljem uuesti
+    user_interests:
+      show:
+        my_interests: Minu huvivaldkonnad
+        no_scopes: Organisatsiooni jaoks pole veel kohaldamisala määratletud!
+        select_your_interests: Valige teemad, mis teid huvitavad. Siis kuvatakse nendega seotud üritused teie profiili ajatelje vahekaardil.
+        update_my_interests: Värskenda minu huvivaldkondi
+      update:
+        error: Teie huvivaldkondade värskendamisel tekkis probleem.
+        success: Teie huvivaldkonnad on värskendatud.
+    version:
+      show:
+        back_to_resource: Tagasi
+        changes_at_title: Muudatused üksuses „%{title}“
+        number_of_versions: Versioonid
+        show_all_versions: Kuva kõik versioonid
+        version_author: Versiooni autor
+        version_created_at: Versioon loodi
+        version_number: Versiooni number
+        version_number_out_of_total: "%{current_version} / %{total_count}"
+    version_author:
+      show:
+        deleted: Kustutatud osaleja
+    versions:
+      resource_version:
+        of_versions: "(kokku %{number})"
+        see_other_versions: kuva teised versioonid
+        version: 'Versiooni number: %{number}'
+    versions_list:
+      show:
+        back_to_resource: Tagasi
+        changes_at_title: Muudatused üksuses „%{title}“
+        number_of_versions: Versioonid
+        title: Versioonid
+    versions_list_item:
+      show:
+        version_index: Versioon %{index}
+    welcome_notification:
+      default_body: <p>Tere, {{name}}! {{organization}} – aitäh sellega liitumast ja tere tulemast!</p><ul><li>Kui soovite saada kiiresti ülevaate sellest, mida siin teha saate, heitke pilk meie <a href="{{help_url}}">abilehele</a>.</li><li>Kui olete selle läbi lugenud, saate oma esimese tunnustusmärgi. Siin on <a href="{{badges_url}}">loend tunnustusmärkidest, mida on</a> võimalik organisatsiooni {{organization}}</li><li>tegevustes osalemise eest saada. Ühtlasi kutsume teid üles teistega ühinema ning nendega organisatsiooni {{organization}} protsessides kaasalöömise kogemust jagama. Saate luua ideid, lisada kommentaare, osaleda aruteludes, mõelda põhjalikult selle üle, kuidas panustada ühiskondliku heaolu tagamisse, esitada teiste veenmiseks argumente, kuulata ja lugeda teiste argumente enda veenmiseks, väljendada oma ideid konkreetsel ja otsesel viisil, vastata kannatlikul ja otsustaval moel, kaitsta oma ideid ning hoida avatud meelt, mis soodustab koostööd ning teiste inimeste ideede toetamist.</li></ul>
+      default_subject: Täname, et liitusite organisatsiooniga {{organization}}!
+    wizard_step_form:
+      wizard_aside:
+        back: Tagasi
+      wizard_header:
+        see_steps: kuva etapid
+        step_of: 'Etapp: %{current_step} / %{total_steps}'
+  devise:
+    confirmations:
+      confirmed: Teie meiliaadress on kinnitatud.
+      new:
+        resend_confirmation_instructions: Saada kinnitusjuhised uuesti
+      send_instructions: Saate paari minuti jooksul meili, millest leiate meiliaadressi kinnitamise juhised.
+      send_paranoid_instructions: Kui teie meiliaadress on meie andmebaasis olemas, saate paari minuti jooksul meili, millest leiate meiliaadressi kinnitamise juhised.
+    failure:
+      already_authenticated: Olete juba sisse logitud.
+      inactive: Teie konto pole veel aktiveeritud.
+      invalid: "%{authentication_keys} või salasõna pole õige."
+      invited: Teile on saadetud kutse. Oma konto lõpuni loomiseks võtke see vastu.
+      last_attempt: Teil on jäänud veel üks katse. Kui see ebaõnnestub, siis teie konto lukustatakse.
+      locked: Teie konto on lukustatud.
+      not_found_in_database: "%{authentication_keys} või salasõna pole õige."
+      timeout: Teie seanss on aegunud. Jätkamiseks logige uuesti sisse.
+      unauthenticated: Jätkamiseks peate sisse logima või konto looma (registreeruma).
+    invitations:
+      edit:
+        header: Looge oma konto lõpuni
+        nickname_help: Teie hüüdnimi organisatsioonis %{organization}.
+        submit_button: Salvesta
+        subtitle: Kui võtate kutse vastu, määrake endale hüüdnimi ja salasõna.
+      invitation_removed: Teie kutse eemaldati.
+      invitation_token_invalid: Antud kutseluba ei ole kehtiv!
+      new:
+        header: Saada kutse
+        submit_button: Saada kutse
+      no_invitations_remaining: Rohkem kutseid pole
+      send_instructions: Meiliaadressil %{email} saadeti meilikutse.
+      updated: Teie salasõna on määratud. Olete nüüd sisse logitud.
+      updated_not_active: Teie salasõna on määratud.
+    mailer:
+      confirmation_instructions:
+        action: Kinnita minu konto
+        greeting: Tere tulemast, %{recipient}!
+        instruction: 'Saate oma meilikonto kinnitada, kasutades allolevat linki:'
+        subject: Kinnitamisjuhised
+      email_changed:
+        greeting: Tere, %{recipient}!
+        message: 'Teavitame teid teie meiliaadressi asendamisest järgmisega: %{email}'
+        subject: Meiliaadress muudetud
+      invitation_instructions:
+        accept: Võta kutse vastu
+        accept_until: Selle kutse tähtaeg on %{due_date}.
+        decline: Lükka kutse tagasi
+        hello: Tere, %{email}!
+        ignore: |-
+          Kui te kutset vastu võtta ei soovi, jätke see kiri tähelepanuta.<br />
+          Teie kontot ei looda enne, kui ülaltoodud lingi kaudu sisse logite ning omale hüüdnime ja salasõna määrate.
+        invited_you_as_admin: Kasutaja %{invited_by} kutsus teid rakenduse %{application} administraatoriks. Saate selle vastu võtta allolevat linki kasutades.
+        invited_you_as_private_user: Kasutaja %{invited_by} kutsus teid rakenduse %{application} privaatseks osalejaks. Saate selle vastu võtta allolevat linki kasutades.
+        someone_invited_you: Keegi on kutsunud teid kasutama rakendust %{application}. Saate selle vastu võtta allolevat linki kasutades.
+        someone_invited_you_as_admin: Keegi on kutsunud teid rakenduse %{application} administraatoriks. Saate kutse vastu võtta allolevat linki kasutades.
+        someone_invited_you_as_private_user: Keegi on kutsunud teid rakenduse %{application} privaatseks osalejaks. Saate kutse vastu võtta allolevat linki kasutades.
+        subject: Kutsega seotud juhised
+      invite_admin:
+        subject: Teid on kutsutud haldama organisatsiooni %{organization}
+      invite_collaborator:
+        subject: Teid on kutsutud organisatsiooni %{organization} koostööpartneriks.
+      invite_private_user:
+        subject: Teid on kutsutud liituma organisatsiooni %{organization} privaatse osalusprotsessiga
+      organization_admin_invitation_instructions:
+        subject: Teid on kutsutud haldama organisatsiooni %{organization}
+      password_change:
+        greeting: Tere, %{recipient}!
+        message: Teavitame teid teie salasõna muutmisest.
+        subject: Salasõna on muudetud
+      reset_password_instructions:
+        action: Muuda minu salasõna
+        greeting: Tere, %{recipient}!
+        instruction: Keegi on esitanud teie salasõna muutmise taotluse. Saate salasõna muuta allolevat linki kasutades.
+        instruction_2: Kui te seda ei taotlenud, jätke see meilisõnum tähelepanuta.
+        instruction_3: Salasõna muutmiseks peate kasutama ülaltoodud linki ja selle kaudu uue salasõna looma.
+        subject: Salasõna lähtestamise juhised
+      unlock_instructions:
+        action: Ava minu konto
+        greeting: Tere, %{recipient}!
+        instruction: 'Teie konto avamiseks klõpsake alltoodud lingil:'
+        message: Teie konto suleti, kuna nurjunud sisselogimisi oli liiga palju.
+        subject: Avamisjuhised
+    omniauth_callbacks:
+      success: Autentimine konto %{kind} kaudu õnnestus.
+      user:
+        disabled: Platvormil ei ole end enam võimalik registreerida. Euroopa tuleviku konverentsi panuste tegemine lõppes 9. mail 2022.
+    passwords:
+      edit:
+        change_my_password: Muuda minu salasõna
+        change_your_password: Muutke oma salasõna
+        confirm_new_password: Kinnita uus salasõna
+        new_password: Uus salasõna
+        password_help: Minimaalselt %{minimun_characters} tähemärki; ei tohi olla liiga tavaline (nt 123456) ning peab erinema teie hüüdnimest ja meiliaadressist.
+      new:
+        forgot_your_password: Kas olete oma salasõna unustanud?
+        send_me_reset_password_instructions: Saada mulle salasõna lähtestamise juhised
+      no_token: Sellele lehele pääsete praegu vaid salasõna lähtestamise meili kaudu. Kui tulite siia salasõna lähtestamise meili kaudu, siis kontrollige, kas kasutasite täielikku URLi.
+      send_instructions: Saate paari minuti jooksul meili, millest leiate salasõna lähtestamise juhised.
+      send_paranoid_instructions: Kui teie meiliaadress on meie andmebaasis olemas, saadetakse mõne minuti jooksul teie meiliaadressile salasõna taastamise link.
+      updated: Teie salasõna on muudetud Olete nüüd sisse logitud.
+      updated_not_active: Teie salasõna on muudetud
+    registrations:
+      destroyed: Teie konto on tühistatud. Loodame teid peagi jälle näha.
+      edit:
+        are_you_sure: Kas olete kindel?
+        cancel_my_account: Tühista minu konto
+        currently_waiting_confirmation_for_email: 'Praegu oodatakse kinnitust järgmisele: %{email}'
+        leave_blank_if_you_don_t_want_to_change_it: kui te ei soovi seda muuta, jätke väli tühjaks
+        title: Muuda üksust %{resource}
+        unhappy: Pole rahul?
+        update: Värskenda
+        we_need_your_current_password_to_confirm_your_changes: teie muudatuste kinnitamiseks vajame teie praegust salasõna
+      new:
+        sign_up: Loo konto
+      signed_up: Tere tulemast! Kasutaja on loodud.
+      signed_up_but_inactive: Kasutaja on loodud. Me ei saanud teid siiski sisse logida, kuna teie konto on veel aktiveerimata.
+      signed_up_but_locked: Kasutaja on loodud. Me ei saanud teid siiski sisse logida, kuna teie konto on lukustatud.
+      signed_up_but_unconfirmed: Teie meiliaadressile saadeti kinnituslinki sisaldav sõnum. Konto aktiveerimiseks järgige lingil esitatud juhiseid.
+      update_needs_confirmation: Teie konto on värskendatud, kuid peame veel kinnitama teie uue meiliaadressi. Avage teile saadetud meil ja järgige uue meiliaadressi kinnitamiseks kinnituslingil toodud juhiseid.
+      updated: Teie konto on värskendatud.
+    sessions:
+      already_signed_out: Teid logiti välja.
+      new:
+        sign_in: Logi sisse
+      signed_in: Olete sisse logitud.
+      signed_out: Teid logiti välja.
+    shared:
+      links:
+        back: Tagasi
+        didn_t_receive_confirmation_instructions: Kas te pole kinnitamisjuhiseid saanud?
+        didn_t_receive_unlock_instructions: Kas te pole avamisjuhiseid saanud?
+        forgot_your_password: Kas olete oma salasõna unustanud?
+        sign_in: Logi sisse
+        sign_in_with_provider: Logi sisse kontoga %{provider}
+        sign_up: Loo konto
+      minimum_password_length:
+        one: "(minimaalselt %{count} tähemärki)"
+        other: "(minimaalselt %{count} tähemärki)"
+    unlocks:
+      new:
+        resend_unlock_instructions: Saada avamisjuhised uuesti
+      send_instructions: Saate paari minuti jooksul meili, millest leiate konto avamise juhised.
+      send_paranoid_instructions: Kui konto on olemas, saate paari minuti jooksul meili, millest leiate selle avamise juhised.
+      unlocked: Teie konto on avatud. Jätkamiseks logige sisse.
+  doorkeeper:
+    scopes:
+      public: Teie avalik teave.
+  errors:
+    messages:
+      already_confirmed: juba kinnitati, proovige sisse logida
+      confirmation_period_expired: tuleb kinnitada perioodi %{period} jooksul, esitage uus taotlus
+      content_type_whitelist_error: failitüüp on sobimatu
+      cycle_detected: ulatuse ülemüksus ei saa olla üks tema allüksustest
+      expired: on aegunud, taotlege uus
+      file_size_is_less_than_or_equal_to: faili suurus võib olla kuni %{count}
+      invalid_time_zone: ajavöönd on sobimatu
+      long_words: sisaldab sõnu, mis on liiga pikad (üle 35 tähemärgi)
+      must_start_with_caps: peab algama suurtähega
+      nesting_too_deep: ei tohi kuuluda alamkategooriasse
+      not_found: ei leitud. Kas olete varem registreerunud?
+      not_locked: ei olnud lukustatud
+      not_saved:
+        one: 'Teie taotluse töötlemisel tekkis tõrge:'
+        other: 'Teie taotluse töötlemisel tekkis mitu viga:'
+      too_many_marks: kasutab liiga palju järjestikuseid kirjavahemärke (nt ! ja ?)
+      too_much_caps: sisaldab liiga palju suurtähti (üle 25% tekstist)
+      too_short: on liiga lühike (alla 15 tähemärgi)
+  forms:
+    correct_errors: Vormis on vigu, jätkamiseks peate need parandama.
+    length_validator:
+      minimum:
+        few: Palun sisestage vähemalt %{count} tähemärki
+        many: Palun sisestage vähemalt %{count} tähemärki
+        one: vähemalt %{count} tähemärk
+        other: Palun sisestage vähemalt %{count} tähemärki
+        two: Palun sisestage vähemalt %{count} tähemärki
+    required: Nõutav väli
+    required_explanation: "* Tärniga tähistatud väljad tuleb kindlasti täita"
+  invisible_captcha:
+    sentence_for_humans: Kui olete inimene, jätke see väli tähelepanuta
+    timestamp_error_message: Vabandage, see käis liiga kiiresti. Esitage uuesti.
+  layouts:
+    decidim:
+      cookie_warning:
+        description_html: Saidil kasutatakse küpsiseid. Saidi sirvimise jätkamisega kinnitate, et nõustute meie küpsiste kasutamisega. %{link}.
+        link_label: Lisateave küpsiste kohta
+        ok: Olen nõus
+      edit_link:
+        edit: Muuda
+      footer:
+        cc_by_license: Creative Commonsi litsents
+        decidim_logo: Decidimi logo
+        download_open_data: Laadi alla avatud andmete fail
+        made_with_open_source: Veebisait on loodud <a target="_blank" href="https://github.com/decidim/decidim">tasuta tarkvara</a> kasutades.
+      header:
+        close_menu: Sulge menüü
+        navigation: Navigeerimine
+        sign_in: Logi sisse
+        sign_up: Loo konto
+      impersonation_warning:
+        close_session: Lõpeta seanss
+        description_html: Haldate osalejat <b>%{user_name}</b>.
+        expire_time_html: Teie seanss aegub <b><span class="minutes">%{minutes}</span> minuti pärast</b>.
+      language_chooser:
+        choose_language: Valige keel
+      notifications_dashboard:
+        mark_all_as_read: Märgi kõik loetuks
+        mark_as_read: Märgi loetuks
+      social_media_links:
+        facebook: "%{organization} Facebookis"
+        github: "%{organization} GitHubis"
+        instagram: "%{organization} Instagramis"
+        twitter: "%{organization} Twitteris"
+        youtube: "%{organization} YouTube'is"
+      user_menu:
+        account: 'Kasutajakonto: %{name}'
+        admin_dashboard: Administraatori töölaud
+        conversations: Vestlused
+        notifications: Minu teated
+        profile: Minu konto seaded
+        public_profile: Minu avalik profiil
+        sign_out: Logi välja
+      user_profile:
+        account: Minu konto
+        authorizations: Autoriseerimised
+        delete_my_account: Kustuta minu konto
+        my_data: Minu andmed
+        my_interests: Minu huvivaldkonnad
+        notifications_settings: Minu teated
+        title: Osalejaseaded
+        user_groups: Rühmad
+      widget:
+        see_more: Kuva rohkem
+  locale:
+    name: eesti
+  password_validator:
+    domain_included_in_password: on domeeninimega liiga sarnane
+    email_included_in_password: on teie meiliaadressiga liiga sarnane
+    fallback: on sobimatu
+    name_included_in_password: on teie nimega liiga sarnane
+    not_enough_unique_characters: ei sisalda piisavalt kordumatuid tähemärke
+    password_not_allowed: pole lubatud
+    password_too_common: on liiga levinud
+    password_too_long: on liiga pikk
+    password_too_short: on liiga lühike
+  social_share_button:
+    delicious: Delicious
+    douban: Douban
+    email: Meil
+    facebook: Facebook
+    google_bookmark: Google Bookmark
+    google_plus: Google+
+    hacker_news: Hacker News
+    linkedin: LinkedIn
+    pinterest: Pinterest
+    qq: Qzone
+    reddit: Reddit
+    share_to: Jaga kasutajale %{name}
+    telegram: Telegram
+    tumblr: Tumblr
+    twitter: Twitter
+    vkontakte: Vkontakte
+    wechat: WeChat
+    wechat_footer: Avage oma WeChat, klõpsake nuppu „Discover“ („Uuri“) ja siis menüüd „Scan QR Code“ („Skanni QR-kood“).
+    weibo: Sina Weibo
+    whatsapp_app: WhatsApp
+    whatsapp_web: WhatsApp
+    xing: Xing
+  versions:
+    directions:
+      left: Kustutatud üksused
+      right: Lisatud üksused
+    dropdown:
+      choose_diff_view_html: 'HTML-vaade:'
+      choose_diff_view_mode: 'Võrdlusvaade:'
+      option_escaped: Kodeeritud (escaped)
+      option_split: Kõrvuti
+      option_unescaped: Kodeerimata (unescaped)
+      option_unified: Ühendatud
+  views:
+    pagination:
+      first: "&laquo; Esimene"
+      first_title: Link esimesele lehele
+      last: Viimane &raquo;
+      last_title: Link viimasele lehele
+      next: Järgmine &rsaquo;
+      next_title: Link järgmisele lehele
+      pagination: Lehtede nummerdamine
+      previous: "&lsaquo; Eelvaade"
+      previous_title: Link eelmisele lehele
+      title: 'Lehe number:'

@@ -1,0 +1,6 @@
+---
+cs:
+  decidim:
+    content_blocks:
+      news_block:
+        name: Aktuální zprávy

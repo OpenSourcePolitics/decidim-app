@@ -1,0 +1,246 @@
+---
+lt:
+  activemodel:
+    attributes:
+      close_meeting:
+        proposals: Idėjos
+      constraint:
+        subject_id: Tema
+      meeting:
+        cofe_charter_html: Pritariu <a href="%{url}" target="_blank"></a> Konferencijos dėl Europos ateities chartijai
+        online_meeting_url: Virtualaus posėdžio URL
+        registration_url: Registracijos URL
+      user:
+        eu_login_department_number: Departamentas
+        eu_login_organisation: Organizacija
+        language_preference: Kalbos pasirinkimas
+        user_name: Naudotojo vardas
+  activerecord:
+    models:
+      decidim/proposals/proposal/other: Idėja
+  date:
+    abbr_month_names:
+    - 
+    - Sau.
+    - Vas.
+    - Kov.
+    - Bal.
+    - Geg.
+    - Bir.
+    - Lie.
+    - Rugp.
+    - Rugs.
+    - Spa.
+    - Lap.
+    - Gru.
+    month_names:
+    - 
+    - Sausis
+    - Vasaris
+    - Kovas
+    - Balandis
+    - Gegužė
+    - Birželis
+    - Liepa
+    - Rugpjūtis
+    - Rugsėjis
+    - Spalis
+    - Lapkritis
+    - Gruodis
+  decidim:
+    account:
+      show:
+        available_locales_helper: Kalba, kuria gausite el. pašto pranešimus.
+    comments:
+      comments:
+        create:
+          quota_exceeded: Viršyta kvota
+        delete:
+          error: Komentaro nebuvo galima ištrinti.
+        update:
+          error: Atnaujinant komentarą iškilo problema.
+    components:
+      comment:
+        confirm_destroy: Ar tikrai norite ištrinti šį komentarą?
+        delete: Ištrinti
+        deleted_at: Komentaras ištrintas %{date}
+        edit: Keisti
+        edited: Pakeista
+      edit_comment_modal_form:
+        close: Uždaryti
+        form:
+          body:
+            label: Komentuoti
+            placeholder: Kokia jūsų nuomonė?
+          submit: Siųsti
+        title: Keisti savo komentarą
+      meetings:
+        settings:
+          global:
+            cofe_charter_url: Konferencijos dėl Europos ateities chartijos URL
+    events:
+      reports:
+        resource_hidden:
+          notification_title: 'Diskusijos vedėjas pašalino jūsų %{resource_type} dėl šio pranešimo: %{report_reasons}.</br><i>%{resource_content}</i></br>Žr. Toliau pateikiamą paaiškinimą:'
+    first_created_meeting_mailer:
+      notify:
+        boost_instructions: Norime užtikrinti, kad kiekvienas diskusijoje apie mūsų bendrą ateitį norintis dalyvauti europietis galėtų joje dalyvauti. Todėl taip pat kviečiame jus skleisti informaciją ir rekomenduoti savo draugams, šeimos nariams ir kitiems piliečiams užsiregistruoti platformoje, dalyvauti renginiuose ir pareikšti savo nuomonę.
+        email_greeting: Gerb. %{user_name},
+        email_intro: Dėkojame, kad domitės Konferencija dėl Europos ateities ir joje dalyvaujate. Džiaugiamės galėdami pranešti, kad jūsų renginys %{link} buvo sėkmingai paskelbtas ir dabar matomas visos Europos piliečiams.
+        email_outro: Jūsų domėjimasis Konferencija dėl Europos ateities ir dalyvavimas joje yra labai vertinami, todėl nedvejodami kreipkitės į mus, jei kiltų klausimų.
+        email_signature: Pagarbiai<br>Moderatorių grupė
+        more_info: 'Daugiau informacijos rasite mūsų puslapyje "%{title}": %{link}.'
+        subject: Dėkojame, kad dalyvaujate Konferencijoje dėl Europos ateities ir sukūrėte renginį.
+    first_published_proposal_mailer:
+      notify:
+        boost_instructions: 'Didinkite savo idėjos matomumą dalydamiesi ja socialiniuose tinkluose:'
+        email_greeting: Gerb. %{user_name},
+        email_intro: Dėkojame, kad domitės Konferencija dėl Europos ateities ir joje dalyvaujate. Džiaugiamės galėdami pranešti, kad jūsų idėja %{link} buvo sėkmingai paskelbta ir dabar matoma visos Europos piliečiams.
+        email_outro: Norime užtikrinti, kad kiekvienas diskusijoje apie mūsų bendrą ateitį norintis dalyvauti europietis galėtų joje dalyvauti. Todėl taip pat kviečiame jus skleisti informaciją ir rekomenduoti savo draugams, šeimos nariams ir kitiems piliečiams užsiregistruoti platformoje, dalyvauti renginiuose ir pareikšti savo nuomonę.
+        email_signature: Pagarbiai<br>Moderatorių grupė
+        share_facebook: Dalytis tinkle „Facebook“
+        share_telegram: Dalytis tinkle „Telegram“
+        share_twitter: Dalytis tinkle „Twitter“
+        share_whats_app: Dalytis programėlėje „WhatsApp“
+        subject: Dėkojame, kad dalyvaujate Konferencijoje dėl Europos ateities ir pateikėte idėją.
+    forms:
+      meetings:
+        attendees_count_help_text: 'Nepamirškite nurodyti bendro savo renginio dalyvių skaičiaus. Kad ir kokiu būdu žmonės dalyvautų: asmeniškai, mišriomis priemonėmis arba internetu, mums svarbu žinoti bendrą dalyvių skaičių.'
+    gamification:
+      badges:
+        accepted_proposals:
+          conditions:
+            '0': Pasirinkite jus dominančią dalyvavimo erdvę, kurioje įjungta idėjų teikimo funkcija.
+            '1': Pabandykite pateikti idėjų, kurias būtų galima įgyvendinti. Tokiu atveju, labiau tikėtina, kad jos bus priimtos.
+        attended_meetings:
+          conditions:
+            '0': Registruokitės į renginius, kuriuose norite dalyvauti.
+        proposal_votes:
+          conditions:
+            '0': Naršykite ir praleiskite šiek tiek laiko skaitydami kitų žmonių idėjas.
+            '1': Paremkite jums patinkančias arba įdomias idėjas.
+        proposals:
+          conditions:
+            '0': Pasirinkite jus dominančią dalyvavimo erdvę, kurioje įjungta idėjų teikimo funkcija.
+            '1': Sukurti naują idėją
+    meetings:
+      actions:
+        hide: Paslėpti
+        unhide: Rodyti
+      admin:
+        meetings:
+          edit:
+            title: Keisti renginį
+          form:
+            select_a_meeting_type: Pasirinkite renginio rūšį.
+      directory:
+        meetings:
+          index:
+            subheading1: Išsakykite savo nuomonę ir dalykitės savo idėjomis šalia jūsų vykstančiuose virtualiuose ir gyvuose renginiuose.
+      extra:
+        filters:
+          all: Visi
+          closed: Renginiai, kurių ataskaitos parengtos
+          meeting_report: Renginių ataskaitos
+          pending: Renginiai, kurių ataskaitos neparengtos
+      last_activity:
+        meeting_updated_at_html: "<span>Renginys atnaujintas, žr. %{link}</span>"
+      meeting_closes:
+        edit:
+          close: Baigti renginį
+          title: Baigti renginį
+      meetings:
+        filters:
+          activity: Mano veikla
+          all: Visa
+          my_meetings: Mano posėdžiai
+          type: Renginių tipai
+          type_values:
+            all: Visi
+            hybrid: Rengiamas gyvai ir virtualiai
+            online: Virtualūs
+        form:
+          select_a_meeting_type: Pasirinkite renginio rūšį
+          select_a_registration_type: Pasirinkite registracijos rūšį
+        index:
+          click_here: Spauskite čia
+        online_meeting_link:
+          online_event: Eiti į renginiui skirtą interneto svetainę
+        show:
+          close_meeting: Baigti renginį
+          with_meeting_report: Pateikta renginio ataskaita
+      models:
+        meeting:
+          fields:
+            citizen_meeting: Piliečių renginys
+            group_meeting: Grupės renginys
+      registration_type:
+        on_different_platform: Kitoje platformoje
+        registration_disabled: Registracija panaikinta
+      type_of_meeting:
+        hybrid: Rengiamas gyvai ir virtualus
+        in_person: Gyvi
+        online: Virtualus
+    pages:
+      tabbed:
+        unfold: Išskleisti
+    participatory_spaces:
+      highlighted_meetings:
+        see_all_button: Peržiūrėti viską
+        see_all_count: "(žiūrėti visus %{count})"
+      highlighted_proposals:
+        see_all_button: Peržiūrėti viską
+        see_all_count: "(žiūrėti visus %{count})"
+    proposals:
+      content_blocks:
+        highlighted_proposals:
+          proposals: Idėjos
+      proposals:
+        edit:
+          gallery_legend: "(Neprivaloma) Prie idėjos kortelės pridėti paveikslėlį"
+        index:
+          heading: Dalinkitės idėja su mumis
+          subheading1: Galite ne tik dalytis savo idėjomis, bet taip pat susipažinti su kitomis idėjomis iš visos Europos. Prisijunkite prie diskusijos ir palikite komentarą arba balsuokite už patikusias idėjas, kad su jomis susipažintų daugiau žmonių.
+        preview:
+          announcement_body: Galite peržiūrėti ir pakeisti savo idėją. Kai jūsų idėja bus paruošta, spustelėkite „Paskelbti“ ir ji pasirodys platformoje.
+          announcement_title: "<b>Prieš paskelbiant savo idėją reikia atlikti paskutinį žingsnį.</b>"
+    shared:
+      flag_user_modal:
+        does_not_belong: Pateikiamas turinys skatina neteisėtą veiklą, grasinimus nusižudyti, atskleidžia asmeninę informaciją arba tai, ko, jūsų nuomone, čia pateikti negalima.
+        offensive: Pateikiamas turinys skatina rasizmą, seksizmą, įžeidinėjimus, išpuolius prieš asmenį, grasinimus nužudyti, įvykdyti savižudybę ar bet kokio pavidalo neapykantos retoriką.
+        spam: Pateikiamas turinys prisideda prie antraštinio masalo, reklamos, apgavysčių ar yra programinis robotas.
+    statistics:
+      answers_count: Atsakymai
+      comments_count: Komentarai
+      debates_count: Diskusijos
+      endorsements_count: Pritarimai
+      followers_count: Sekėjai
+      headline: Kas dabar vyksta šia tema?
+      meetings_count: Renginiai
+      no_stats: Statistinių duomenų dar nėra.
+      orders_count: Parama
+      pages_count: Puslapiai
+      participants_count: Dalyviai
+      processes_count: Temos
+      projects_count: Projektai
+      proposals_count: Idėjos
+      results_count: Rezultatai
+      supports_count: Parama
+      surveys_count: Apklausos
+      users_count: Dalyviai
+    verifications:
+      dummy_authorization:
+        extra_explanation:
+          postal_codes:
+            few: 'Dalyvauti gali tik tie dalyviai, kurių pašto kodas yra vienas iš šių pašto kodų: %{postal_codes}.'
+  layouts:
+    decidim:
+      language_chooser:
+        close: Uždaryti
+        eu_languages: ES oficialiosios kalbos
+        select_your_language: Pasirinkti kalbą
+      user:
+        logged_in: Prisijungęs
+        logged_in_as: Prisijungęs kaip %{user}
+      wrapper:
+        unfold: Išskleisti

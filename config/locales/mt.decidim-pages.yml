@@ -1,0 +1,33 @@
+---
+mt:
+  activerecord:
+    models:
+      decidim/pages/page:
+        few: Paġni
+        many: Paġni
+        one: Paġna
+        other: Paġni
+  decidim:
+    admin_log:
+      page:
+        update: "%{user_name} aġġorna l-paġna %{resource_name} fi %{space_name}"
+    components:
+      pages:
+        name: Paġna
+        settings:
+          global:
+            announcement: Tħabbira
+          step:
+            announcement: Tħabbira
+    pages:
+      admin:
+        models:
+          components:
+            body: Kontenut prinċipali
+        pages:
+          edit:
+            save: Aġġorna
+            title: Editja l-paġna
+          update:
+            invalid: Kien hemm problema biex tiġi ssejvjata l-paġna.
+            success: Il-paġna ġiet issejvjata.

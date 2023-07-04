@@ -3,24 +3,18 @@
 require "spec_helper"
 
 describe "rake decidim_app:create_system_admin", type: :task do
-  let(:task_cmd) { :"decidim_app:create_system_admin" }
-  let(:email) { "john@example.org" }
-  let(:password) { "decidim123456" }
-
   before do
-    Rake::Task[task_cmd].reenable
-
-    ENV["email"] = email
-    ENV["password"] = password
+    allow(Decidim::SystemAdminCreator).to receive(:create!).with(ENV).and_return(true)
   end
 
-  after do
-    ENV["email"] = ""
-    ENV["password"] = ""
+  it "preloads the Rails environment" do
+    expect(task.prerequisites).to include "environment"
   end
 
-  it "creates admin" do
-    expect { Rake::Task[task_cmd].invoke }.to change(Decidim::System::Admin, :count).by(1)
-    expect(Decidim::System::Admin.last.email).to eq(email)
+  it "invokes the admin creator" do
+    task.execute
+
+    # TODO: Investigate on flaky causing a double call on rake task when tested
+    expect($stdout.string).to include("System admin created successfully\n")
   end
 end

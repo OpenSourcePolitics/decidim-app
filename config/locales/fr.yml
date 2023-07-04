@@ -124,6 +124,7 @@ fr:
           success: La rencontre a été mise à jour avec succès.
     omniauth:
       france_connect:
+        explanation: FranceConnect est la solution proposée par l’État pour sécuriser et simplifier la connexion à vos services en ligne.
         external:
           link: https://franceconnect.gouv.fr/
           text: Qu'est-ce-que FranceConnect ?
@@ -141,6 +142,12 @@ fr:
         create:
           error: Il y a eu un problème lors de la création de ces brouillons collaboratifs
           success: Brouillon collaboratif créé avec succès.
+        edit:
+          attachment_legend: "(Facultatif) Ajouter une pièce jointe"
+          select_a_category: Veuillez sélectionner une catégorie
+        new:
+          add_file: Ajouter le fichier
+          edit_file: Editer le fichier
         show:
           back: Retour
           edit: Modifier un brouillon collaboratif
@@ -221,6 +228,7 @@ fr:
     shared:
       links:
         forgot_your_password: Mot de passe oublié ?
+        sign_in_with_france_connect: FranceConnect
   faker:
     address:
       country_code:
@@ -241,7 +249,7 @@ fr:
         made_with_open_source: Site réalisé par <a target="_blank" href="https://opensourcepolitics.eu">Open Source Politics</a> grâce au <a target="_blank" href="https://github.com/decidim/decidim">logiciel libre Decidim</a>.
   rack_attack:
     too_many_requests:
-      message: Il semblerait que vous fassiez trop de requêtes sur notre serveur, votre connexion a ete ralentie.
+      message: Il semblerait que vous fassiez trop de requetes sur notre serveur, votre connexion a ete ralentie.
       time: 'Vous pourrez naviguer de nouveau sur notre plateforme dans :'
       time_unit: seconds
       title: Thank you for your participation on %{organization_name}
