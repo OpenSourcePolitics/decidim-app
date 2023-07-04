@@ -4,13 +4,14 @@ require "spec_helper"
 require "k8s_organization_exporter"
 
 describe K8sOrganizationExporter do
-  subject { described_class.new(organization, logger, export_path, hostname, image) }
+  subject { described_class.new(organization, logger, export_path, image) }
 
-  let(:organization) { create(:organization, host: organization_host.gsub("_", "."), omniauth_settings: omniauth_settings) }
+  let(:organization) { create(:organization, host: organization_host, omniauth_settings: omniauth_settings) }
   let(:logger) { Logger.new($stdout) }
   let(:export_path) { Rails.root.join("tmp/test_export") }
-  let(:hostname) { "my-hostname" }
-  let(:organization_host) { "my-host_org" }
+  let(:organization_host) { "my-host.domain.org" }
+  let(:hostname) { "my-host" }
+  let(:name_space) { "domain-org" }
   let(:image) { "my-image" }
   let(:omniauth_settings) do
     {
@@ -26,7 +27,7 @@ describe K8sOrganizationExporter do
     it "calls the right methods" do
       # rubocop:disable RSpec/AnyInstance
       expect_any_instance_of(described_class).to receive(:export!)
-      described_class.export!(organization, logger, export_path, hostname, image)
+      described_class.export!(organization, logger, export_path, image)
       # rubocop:enable RSpec/AnyInstance
     end
   end
@@ -37,26 +38,15 @@ describe K8sOrganizationExporter do
       expect(subject).to receive(:creating_directories)
       expect(subject).to receive(:exporting_env_vars)
       expect(subject).to receive(:exporting_configuration)
-      expect(subject).to receive(:dumping_database)
-      expect(subject).to receive(:retrieve_active_storage_files)
       # rubocop:enable RSpec/SubjectStub
       subject.export!
-    end
-  end
-
-  describe "#retrieve_active_storage_files" do
-    it "retrieves the active storage files" do
-      # rubocop:disable RSpec/SubjectStub
-      expect(subject).to receive(:system).with("rclone copy scw-storage: #{export_path}/#{hostname}/buckets/#{hostname}--de --config ../scaleway.config --progress --copy-links")
-      # rubocop:enable RSpec/SubjectStub
-      subject.retrieve_active_storage_files
     end
   end
 
   describe "#dumping_database" do
     it "dumps the database" do
       # rubocop:disable RSpec/SubjectStub
-      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{hostname}/postgres/#{hostname}--de.dump")
+      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--#{organization.host}--de.dump")
       # rubocop:enable RSpec/SubjectStub
       subject.dumping_database
     end
@@ -65,7 +55,7 @@ describe K8sOrganizationExporter do
   describe "#exporting_configuration" do
     before do
       FileUtils.rm_rf(export_path)
-      FileUtils.mkdir_p("#{export_path}/#{hostname}")
+      FileUtils.mkdir_p("#{export_path}/#{name_space}--#{hostname}")
     end
 
     after do
@@ -74,14 +64,14 @@ describe K8sOrganizationExporter do
 
     it "exports the configuration" do
       subject.exporting_configuration
-      expect(File).to exist("#{export_path}/#{hostname}/application.yml")
+      expect(File).to exist("#{export_path}/#{name_space}--#{hostname}/application.yml")
     end
   end
 
   describe "#exporting_env_vars" do
     before do
       FileUtils.rm_rf(export_path)
-      FileUtils.mkdir_p("#{export_path}/#{hostname}/manifests")
+      FileUtils.mkdir_p("#{export_path}/#{name_space}--#{hostname}/manifests")
     end
 
     after do
@@ -90,8 +80,8 @@ describe K8sOrganizationExporter do
 
     it "exports the env vars" do
       subject.exporting_env_vars
-      expect(File).to exist("#{export_path}/#{hostname}/manifests/#{hostname}-custom-env.yml")
-      expect(File).to exist("#{export_path}/#{hostname}/manifests/#{hostname}--de.yml")
+      expect(File).to exist("#{export_path}/#{name_space}--#{hostname}/manifests/#{hostname}-custom-env.yml")
+      expect(File).to exist("#{export_path}/#{name_space}--#{hostname}/manifests/#{hostname}--de.yml")
     end
   end
 
@@ -106,29 +96,19 @@ describe K8sOrganizationExporter do
 
     it "creates the directories" do
       subject.creating_directories
-      expect(Dir.glob("#{export_path}/**/*").map(&File.method(:basename))).to match_array([hostname, "buckets", "#{hostname}--de", "postgres", "manifests"])
+      expect(Dir.glob("#{export_path}/**/*").map(&File.method(:basename))).to match_array(["#{name_space}--#{hostname}", "postgres", "manifests"])
     end
   end
 
   describe "#organization_export_path" do
     it "returns the organization export path" do
-      expect(subject.organization_export_path).to eq(Rails.root.join("#{export_path}/#{hostname}").to_s)
+      expect(subject.organization_export_path).to eq(Rails.root.join("#{export_path}/#{name_space}--#{hostname}").to_s)
     end
   end
 
   describe "#resource_name" do
     it "returns the resource name" do
-      expect(subject.resource_name).to eq(hostname.to_s)
-    end
-  end
-
-  describe "#bucket_name" do
-    before do
-      allow(Dotenv).to receive(:parse).with(".env").and_return({ "SCALEWAY_BUCKET_NAME" => "bucket-foobar" })
-    end
-
-    it "returns the bucket name" do
-      expect(subject.bucket_name).to eq("bucket-foobar")
+      expect(subject.resource_name).to eq(hostname)
     end
   end
 
@@ -146,7 +126,8 @@ describe K8sOrganizationExporter do
     end
 
     it "returns the correct metadata" do
-      expect(subject.organization_settings["metadata"]).to eq({ "name" => hostname.to_s })
+      expect(subject.organization_settings["metadata"]).to eq({ "name" => hostname,
+                                                                "namespace" => name_space })
     end
 
     it "returns the correct spec" do
@@ -274,7 +255,7 @@ describe K8sOrganizationExporter do
     it "returns the env vars" do
       expect(subject.all_env_vars.keys).to match_array(%w(apiVersion kind metadata stringData))
       expect(subject.all_env_vars["metadata"]["name"]).to eq("#{hostname}-custom-env")
-      expect(JSON.parse(subject.all_env_vars["stringData"]).keys).to match_array(%w(RAILS_ENV RAILS_SERVE_STATIC_FILES SMTP_FROM SMTP_USER_NAME SMTP_PORT SMTP_ADDRESS SMTP_PASSWORD OMNIAUTH_SETTINGS_FACEBOOK_ENABLED OMNIAUTH_SETTINGS_FACEBOOK_APP_ID OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET))
+      expect(subject.all_env_vars["stringData"].keys).to match_array(%w(RAILS_ENV RAILS_SERVE_STATIC_FILES SMTP_FROM SMTP_USER_NAME SMTP_PORT SMTP_ADDRESS SMTP_PASSWORD OMNIAUTH_SETTINGS_FACEBOOK_ENABLED OMNIAUTH_SETTINGS_FACEBOOK_APP_ID OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET))
     end
   end
 end

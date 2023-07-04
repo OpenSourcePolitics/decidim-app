@@ -22,21 +22,20 @@ class K8sOrganizationExporter
                             available_authorizations
                             file_upload_settings).freeze
 
-  def initialize(organization, logger, export_path, hostname, image="")
+  def initialize(organization, logger, export_path, image = "")
     @organization = organization
     @logger = logger
     @export_path = export_path
-    @hostname = hostname
     @image = image
     @database_name = Rails.configuration.database_configuration[Rails.env]["database"]
   end
 
-  def self.export!(organization, logger, export_path, hostname, image)
-    new(organization, logger, export_path, hostname, image).export!
+  def self.export!(organization, logger, export_path, image)
+    new(organization, logger, export_path, image).export!
   end
 
-  def self.dumping_database(organization, logger, export_path, hostname)
-    new(organization, logger, export_path, hostname).dumping_database
+  def self.dumping_database(organization, logger, export_path)
+    new(organization, logger, export_path).dumping_database
   end
 
   def export!
@@ -47,7 +46,7 @@ class K8sOrganizationExporter
 
   def dumping_database
     @logger.info("dumping database #{@database_name} to #{organization_export_path}/postgres/#{resource_name}--de.dump")
-    system("pg_dump -Fc #{@database_name} > #{organization_export_path}/postgres/#{resource_name}--de.dump")
+    system("pg_dump -Fc #{@database_name} > #{organization_export_path}/postgres/#{resource_name}--#{@organization.host}--de.dump")
   end
 
   def exporting_configuration
@@ -135,7 +134,7 @@ class K8sOrganizationExporter
       kind: "Decidim",
       metadata: {
         name: resource_name,
-        namespace: namespace
+        namespace: name_space
       },
       spec: {
         image: @image,
@@ -163,15 +162,15 @@ class K8sOrganizationExporter
   end
 
   def organization_export_path
-    @organization_export_path ||= "#{@export_path}/#{namespace}--#{resource_name}"
+    @organization_export_path ||= "#{@export_path}/#{name_space}--#{resource_name}"
   end
 
   def resource_name
-    @resource_name ||= @hostname.split('.').first
+    @resource_name ||= @organization.host.split(".").first
   end
 
-  def namespace
-    @namespace ||= @hostname.split('.',2).last.gsub(".", "-")
+  def name_space
+    @name_space ||= @organization.host.split(".", 2).last.gsub(".", "-")
   end
 
   private

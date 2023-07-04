@@ -9,17 +9,6 @@ describe K8sConfigurationExporter do
   let(:organization) { create(:organization) }
   let(:image) { "registry.gitlab.com/my-image" }
   let(:enable_sync) { true }
-  let(:hostname) { "123.123.123.123" }
-
-  before do
-    allow(Socket).to receive(:gethostname).and_return(hostname)
-  end
-
-  describe "#hostname" do
-    it "returns the hostname" do
-      expect(subject.hostname).to eq("123-123-123-123")
-    end
-  end
 
   describe "#clean_migration_directory" do
     it "cleans the migration directory" do
@@ -32,7 +21,7 @@ describe K8sConfigurationExporter do
 
   describe "#export!" do
     it "exports the organizations" do
-      expect(K8sOrganizationExporter).to receive(:export!).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH, "123-123-123-123", image).and_return(true)
+      expect(K8sOrganizationExporter).to receive(:export!).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH, image).and_return(true)
 
       subject.export!
     end
