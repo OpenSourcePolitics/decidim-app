@@ -28,13 +28,11 @@ namespace :decidim do
 
     namespace :surveys do
       desc "List surveys related to deleted component"
-      # TODO: Add tests
       task orphans: :environment do
         Decidim::SurveysService.new(verbose: true).orphans
       end
 
       desc "Delete surveys related to deleted component"
-      # TODO: Add tests
       task clean: :environment do
         Decidim::SurveysService.new(verbose: true).clear
       end
