@@ -49,7 +49,7 @@ namespace :decidim_app do
 
     desc "usage: bundle exec rails k8s:dump_db"
     task dump_db: :environment do
-      K8s::OrganizationExporter.dump_db
+      K8s::ConfigurationExporter.dump_db
     end
 
     desc "usage: bundle exec rails k8s:export_configuration IMAGE=<docker_image_ref>"
