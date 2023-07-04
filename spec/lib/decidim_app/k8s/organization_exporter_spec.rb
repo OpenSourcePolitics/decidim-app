@@ -46,7 +46,7 @@ describe DecidimApp::K8s::OrganizationExporter do
   describe "#dumping_database" do
     it "dumps the database" do
       # rubocop:disable RSpec/SubjectStub
-      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--#{organization.host}--de.dump")
+      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--de.dump")
       # rubocop:enable RSpec/SubjectStub
       subject.dumping_database
     end
