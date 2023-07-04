@@ -9,7 +9,7 @@ describe "rake decidim_app:k8s:external_install", type: :task do
 
   it "calls db:migrate" do
     with_modified_env path: "dummy_path" do
-      expect(DecidimApp::K8s::Manager).to receive(:install).with("dummy_path")
+      expect(DecidimApp::K8s::Manager).to receive(:run).with("dummy_path")
 
       task.execute
     end
