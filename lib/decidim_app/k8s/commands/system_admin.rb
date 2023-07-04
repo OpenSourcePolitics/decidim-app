@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "decidim-app/k8s/manager"
+require "decidim_app/k8s/manager"
 
 module DecidimApp
   module K8s

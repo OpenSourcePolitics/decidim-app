@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "k8s/organization_exporter"
+require "decidim_app/k8s/organization_exporter"
 
-describe K8s::OrganizationExporter do
+describe DecidimApp::K8s::OrganizationExporter do
   subject { described_class.new(organization, logger, export_path, image) }
 
   let(:organization) { create(:organization, host: organization_host, omniauth_settings: omniauth_settings) }

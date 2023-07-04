@@ -11,7 +11,7 @@ describe "rake decidim_app:k8s:export_configuration", type: :task do
 
   it "invokes the configuration exporter" do
     with_modified_env IMAGE: image do
-      expect(K8s::ConfigurationExporter).to receive(:export!).with(image).and_return(true)
+      expect(DecidimApp::K8s::ConfigurationExporter).to receive(:export!).with(image).and_return(true)
 
       task.execute
     end

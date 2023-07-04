@@ -2,8 +2,8 @@
 
 require "yaml"
 
-require "decidim-app/k8s/configuration"
-require "decidim-app/k8s/commands/organization"
+require "decidim_app/k8s/configuration"
+require "decidim_app/k8s/commands/organization"
 
 module DecidimApp
   module K8s

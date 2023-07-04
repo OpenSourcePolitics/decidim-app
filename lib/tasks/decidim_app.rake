@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require "decidim_app/k8s/configuration_exporter"
+require "decidim_app/k8s/organization_exporter"
+require "decidim_app/k8s/manager"
+
 namespace :decidim_app do
   desc "Setup Decidim-app"
   task setup: :environment do
@@ -35,7 +39,7 @@ namespace :decidim_app do
 
     desc "usage: bundle exec rails k8s:dump_db"
     task dump_db: :environment do
-      K8s::ConfigurationExporter.dump_db
+      DecidimApp::K8s::ConfigurationExporter.dump_db
     end
 
     desc "usage: bundle exec rails k8s:export_configuration IMAGE=<docker_image_ref>"
@@ -43,7 +47,7 @@ namespace :decidim_app do
       image = ENV["IMAGE"]
       raise "You must specify a docker image, usage: bundle exec rails k8s:export_configuration IMAGE=<image_ref>" if image.blank?
 
-      K8s::ConfigurationExporter.export!(image)
+      DecidimApp::K8s::ConfigurationExporter.export!(image)
     end
 
     desc "Create external install with path='path/to/external_install_configuration.yml'"

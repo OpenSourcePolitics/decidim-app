@@ -2,10 +2,10 @@
 
 require "spec_helper"
 
-require "decidim-app/k8s/manager"
-require "decidim-app/k8s/commands/organization"
-require "decidim-app/k8s/commands/system_admin"
-require "decidim-app/k8s/commands/admin"
+require "decidim_app/k8s/manager"
+require "decidim_app/k8s/commands/organization"
+require "decidim_app/k8s/commands/system_admin"
+require "decidim_app/k8s/commands/admin"
 
 describe DecidimApp::K8s::Manager do
   subject { described_class.new("spec/fixtures/k8s_configuration_example.yml") }

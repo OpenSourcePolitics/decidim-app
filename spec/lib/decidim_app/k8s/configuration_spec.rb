@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "decidim-app/k8s/configuration"
+require "decidim_app/k8s/configuration"
 
 describe DecidimApp::K8s::Configuration do
   subject { described_class.new(configuration_path) }

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-require "decidim-app/k8s/commands/system_admin"
+require "decidim_app/k8s/commands/system_admin"
 
 describe DecidimApp::K8s::Commands::SystemAdmin do
   subject { described_class.new(default_system_admin_configuration) }

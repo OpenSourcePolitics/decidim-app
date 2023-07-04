@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "k8s/configuration_exporter"
+require "decidim_app/k8s/configuration_exporter"
 
-describe K8s::ConfigurationExporter do
+describe DecidimApp::K8s::ConfigurationExporter do
   subject { described_class.new(image) }
 
   let(:organization) { create(:organization) }
@@ -21,7 +21,7 @@ describe K8s::ConfigurationExporter do
 
   describe "#export!" do
     it "exports the organizations" do
-      expect(K8s::OrganizationExporter).to receive(:export!).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH, image).and_return(true)
+      expect(DecidimApp::K8s::OrganizationExporter).to receive(:export!).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH, image).and_return(true)
 
       subject.export!
     end
