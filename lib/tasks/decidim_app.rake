@@ -23,17 +23,19 @@ namespace :decidim_app do
     # :nocov:
   end
 
-  # This task is used to upgrade your decidim-app to the latest version
-  # Meant to be used in a CI/CD pipeline or a k8s job/operator
-  # You can add your own customizations here
-  desc "Upgrade decidim-app"
-  task upgrade: :environment do
-    puts "Running db:migrate"
-    Rake::Task["db:migrate"].invoke
-  end
+  namespace :k8s do
+    # This task is used to upgrade your decidim-app to the latest version
+    # Meant to be used in a CI/CD pipeline or a k8s job/operator
+    # You can add your own customizations here
+    desc "Upgrade decidim-app"
+    task upgrade: :environment do
+      puts "Running db:migrate"
+      Rake::Task["db:migrate"].invoke
+    end
 
-  desc "Create external install with path='path/to/external_install_configuration.yml'"
-  task external_install: :environment do
-    DecidimApp::K8s::Manager.install(ENV["path"])
+    desc "Create external install with path='path/to/external_install_configuration.yml'"
+    task external_install: :environment do
+      DecidimApp::K8s::Manager.install(ENV["path"])
+    end
   end
 end
