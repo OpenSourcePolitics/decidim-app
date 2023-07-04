@@ -4,6 +4,8 @@ require "yaml"
 
 require "decidim_app/k8s/configuration"
 require "decidim_app/k8s/commands/organization"
+require "decidim_app/k8s/commands/admin"
+require "decidim_app/k8s/commands/system_admin"
 
 module DecidimApp
   module K8s
