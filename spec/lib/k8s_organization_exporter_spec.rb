@@ -252,6 +252,14 @@ describe K8sOrganizationExporter do
   end
 
   describe "#all_env_vars" do
+    before do
+      allow(Dotenv).to receive(:parse).with(".env").and_return(returned_environment_variables)
+    end
+
+    let(:returned_environment_variables) do
+      { RAILS_ENV: "production", RAILS_SERVE_STATIC_FILES: "1" }
+    end
+
     it "returns the env vars" do
       expect(subject.all_env_vars.keys).to match_array(%w(apiVersion kind metadata stringData))
       expect(subject.all_env_vars["metadata"]["name"]).to eq("#{hostname}-custom-env")
