@@ -1,5 +1,13 @@
 name: "CI/CD"
-on: [push]
+on:
+  push:
+    branches:
+      - develop
+      - master
+  pull_request:
+    branches:
+      - "*"
+
 
 env:
   CI: "true"
@@ -47,7 +55,7 @@ jobs:
     services:
       postgres:
         image: postgres:11
-        ports: ["5432:5432"]
+        ports: [ "5432:5432" ]
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -89,7 +97,7 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
-      - run:  bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
+      - run: bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
         name: Upload coverage
@@ -112,7 +120,7 @@ jobs:
     services:
       postgres:
         image: postgres:11
-        ports: ["5432:5432"]
+        ports: [ "5432:5432" ]
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -154,7 +162,7 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
-      - run:  bundle exec rake "test:run[include, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
+      - run: bundle exec rake "test:run[include, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
         name: Upload coverage
@@ -199,7 +207,7 @@ jobs:
           database_host: ${{ env.DATABASE_HOST }}
   deploy_develop:
     if: "github.ref == 'refs/heads/develop'"
-    needs: [lint, tests, system_tests, test_build]
+    needs: [ lint, tests, system_tests, test_build ]
     name: Deploy develop branch on develop instance
     runs-on: ubuntu-latest
     steps:
@@ -213,7 +221,7 @@ jobs:
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/develop.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
   deploy_rc:
     if: "github.ref == 'refs/heads/rc'"
-    needs: [lint, tests, system_tests, test_build]
+    needs: [ lint, tests, system_tests, test_build ]
     name: Deploy rc branch on RC instance
     runs-on: ubuntu-latest
     steps:
@@ -227,7 +235,7 @@ jobs:
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/rc.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
   deploy_staging:
     if: "github.ref == 'refs/heads/master'"
-    needs: [lint, tests, system_tests, test_build]
+    needs: [ lint, tests, system_tests, test_build ]
     name: Deploy staging branch on staging instance
     runs-on: ubuntu-latest
     steps:
@@ -242,7 +250,7 @@ jobs:
   build_and_push_image_dev:
     name: Build and push image to Registry
     if: "github.ref == 'refs/heads/develop'"
-    needs: [lint, tests, system_tests, test_build]
+    needs: [ lint, tests, system_tests, test_build ]
     runs-on: ubuntu-latest
     steps:
       - uses: OpenSourcePolitics/build-and-push-images-action@master
@@ -254,7 +262,7 @@ jobs:
           tag: "develop"
   generate_release:
     name: Generate release
-    needs: [lint, tests, system_tests, test_build]
+    needs: [ lint, tests, system_tests, test_build ]
     if: "github.ref == 'refs/heads/master'"
     runs-on: ubuntu-latest
     steps:
