@@ -34,6 +34,8 @@ module DecidimApp
               form.tap(&:valid?).errors.messages.each do |error|
                 K8s::Manager.logger.info(error)
               end
+
+              raise "Admin user #{form.nickname} could not be updated"
             end
           end
 

@@ -10,7 +10,7 @@ require "decidim_app/k8s/commands/admin"
 describe DecidimApp::K8s::Manager do
   subject { described_class.new("spec/fixtures/k8s_configuration_example.yml") }
 
-  describe "run" do
+  describe "#run" do
     it "runs the installation" do
       expect(DecidimApp::K8s::Commands::SystemAdmin).to receive(:run).once
       expect(DecidimApp::K8s::Commands::Organization).to receive(:run).twice
@@ -30,6 +30,16 @@ describe DecidimApp::K8s::Manager do
       it "raises runtime error" do
         expect { subject.run }.to raise_error(RuntimeError)
       end
+    end
+  end
+
+  describe ".run" do
+    it "runs the installation" do
+      # rubocop:disable RSpec/AnyInstance
+      expect_any_instance_of(described_class).to receive(:run).once
+      # rubocop:enable RSpec/AnyInstance
+
+      described_class.run("spec/fixtures/k8s_configuration_example.yml")
     end
   end
 end

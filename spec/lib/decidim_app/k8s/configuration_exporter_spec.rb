@@ -6,7 +6,7 @@ require "decidim_app/k8s/configuration_exporter"
 describe DecidimApp::K8s::ConfigurationExporter do
   subject { described_class.new(image) }
 
-  let(:organization) { create(:organization) }
+  let!(:organization) { create(:organization) }
   let(:image) { "registry.gitlab.com/my-image" }
   let(:enable_sync) { true }
 
@@ -27,6 +27,14 @@ describe DecidimApp::K8s::ConfigurationExporter do
     end
   end
 
+  describe "#dump_db!" do
+    it "exports the organizations" do
+      expect(DecidimApp::K8s::OrganizationExporter).to receive(:dumping_database).with(organization, subject.instance_variable_get(:@logger), described_class::EXPORT_PATH).and_return(true)
+
+      subject.dump_db
+    end
+  end
+
   describe ".export!" do
     it "creates a new instance and calls export!" do
       # rubocop:disable RSpec/AnyInstance
@@ -34,6 +42,16 @@ describe DecidimApp::K8s::ConfigurationExporter do
       # rubocop:enable RSpec/AnyInstance
 
       described_class.export!(image)
+    end
+  end
+
+  describe ".dump_db" do
+    it "creates a new instance and calls dumping_database!" do
+      # rubocop:disable RSpec/AnyInstance
+      expect_any_instance_of(described_class).to receive(:dump_db)
+      # rubocop:enable RSpec/AnyInstance
+
+      described_class.dump_db
     end
   end
 end

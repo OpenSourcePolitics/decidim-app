@@ -24,6 +24,8 @@ module DecidimApp
             system_admin.tap(&:valid?).errors.messages.each do |error|
               K8s::Manager.logger.info(error)
             end
+
+            raise "System admin user #{system_admin.email} could not be updated"
           end
 
           system_admin.reload

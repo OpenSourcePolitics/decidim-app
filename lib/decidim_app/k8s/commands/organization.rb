@@ -47,6 +47,8 @@ module DecidimApp
               form.tap(&:valid?).errors.messages.each do |error|
                 K8s::Manager.logger.info(error)
               end
+
+              raise "Organization #{form.name} could not be created"
             end
           end
 
@@ -56,7 +58,6 @@ module DecidimApp
         def update
           mapped_attributes = Decidim::System::UpdateOrganizationForm.from_model(existing_organization).attributes_with_values
           form = Decidim::System::UpdateOrganizationForm.from_params(mapped_attributes.merge(@configuration, id: existing_organization.id))
-
           Decidim::System::UpdateOrganization.call(existing_organization.id, form) do
             on(:ok) do
               K8s::Manager.logger.info("Organization #{form.name} updated")
@@ -67,6 +68,8 @@ module DecidimApp
               form.tap(&:valid?).errors.messages.each do |error|
                 K8s::Manager.logger.info(error)
               end
+
+              raise "Organization #{form.name} could not be updated"
             end
           end
 
