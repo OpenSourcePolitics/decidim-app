@@ -97,6 +97,7 @@ ignore_missing:
  - decidim.editor_images.create.success
  - decidim.forms.questionnaires.question.max_choices
  - activemodel.errors.models.questionnaire.request_invalid
+ - decidim.admin.menu.admin_accountability
 
 # Consider these keys used:
 ignore_unused:
@@ -124,4 +125,4 @@ ignore_unused:
   - decidim.account.destroy.success
   - decidim.account.destroy.error
   - decidim.proposals.collaborative_drafts.new.*
-
+  - decidim.admin.menu.admin_accountability
