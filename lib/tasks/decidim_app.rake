@@ -50,8 +50,8 @@ namespace :decidim_app do
       DecidimApp::K8s::ConfigurationExporter.export!(image)
     end
 
-    desc "Create external install with path='path/to/external_install_configuration.yml'"
-    task external_install: :environment do
+    desc "Create install or reload install with path='path/to/external_install_configuration.yml'"
+    task external_install_or_reload: :environment do
       DecidimApp::K8s::Manager.run(ENV["path"])
     end
   end
