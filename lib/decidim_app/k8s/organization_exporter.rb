@@ -80,13 +80,14 @@ module DecidimApp
           metadata: {
             name: "#{resource_name}-custom-env"
           },
-          stringData: env_vars.merge!(smtp_settings).merge!(omniauth_settings)
+          stringData: env_vars.merge(smtp_settings).merge(omniauth_settings)
         }.deep_stringify_keys
       end
 
       def env_vars
         @env_vars ||= Dotenv.parse(".env")
                             .reject { |key, _value| FORBIDDEN_ENVIRONMENT_KEYS.include?(key) }
+                            .transform_values(&:to_s)
       end
 
       def secret_key_base_env_var

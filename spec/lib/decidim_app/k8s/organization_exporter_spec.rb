@@ -174,7 +174,8 @@ describe DecidimApp::K8s::OrganizationExporter do
     let(:allowed_env_vars) do
       {
         "FOO" => "bar",
-        "BAR" => "baz"
+        "BAR" => "baz",
+        "DUMMY" => 3
       }
     end
 
@@ -191,7 +192,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     end
 
     it "returns the env vars" do
-      expect(subject.env_vars).to eq(allowed_env_vars)
+      expect(subject.env_vars).to eq({ "FOO" => "bar", "BAR" => "baz", "DUMMY" => "3" })
     end
 
     context "when the .env file is empty" do
