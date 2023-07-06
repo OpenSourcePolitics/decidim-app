@@ -106,13 +106,13 @@ module DecidimApp
       def omniauth_settings
         return {} unless @organization.omniauth_settings
 
-        @organization.omniauth_settings.each_with_object({}) do |(key, value), hash|
-          hash[key.upcase] = if Decidim::OmniauthProvider.value_defined?(value)
-                               decrypt(value)
-                             else
-                               value
-                             end
+        settings = @organization.omniauth_settings
+                                .deep_dup
+                                .each_with_object({}) do |(key, value), hash|
+          hash[key.upcase] = Decidim::OmniauthProvider.value_defined?(value) ? decrypt(value) : value
         end
+
+        settings.deep_transform_values(&:to_s)
       end
 
       def smtp_settings
@@ -120,9 +120,11 @@ module DecidimApp
         settings["password"] = Decidim::AttributeEncryptor.decrypt(settings["encrypted_password"])
         settings.delete("encrypted_password")
 
-        settings.transform_keys do |key|
+        settings = settings.transform_keys do |key|
           "SMTP_#{key.upcase}"
         end
+
+        settings.deep_transform_values(&:to_s)
       end
 
       def organization_columns

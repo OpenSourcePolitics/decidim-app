@@ -216,7 +216,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     it "returns the decrypted omniauth settings" do
       expect(subject.omniauth_settings).to match("OMNIAUTH_SETTINGS_FACEBOOK_APP_ID" => "app_id_123456",
                                                  "OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET" => "app_secret_123456",
-                                                 "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => true)
+                                                 "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => "true")
     end
 
     context "when the omniauth settings are not present" do
@@ -247,7 +247,7 @@ describe DecidimApp::K8s::OrganizationExporter do
       it "returns the omniauth settings as it" do
         expect(subject.omniauth_settings).to match("OMNIAUTH_SETTINGS_FACEBOOK_APP_ID" => "wrongly_encrypted_app_id_123456",
                                                    "OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET" => "wrongly_encrypted_app_secret_123456",
-                                                   "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => true)
+                                                   "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => "true")
       end
     end
   end
