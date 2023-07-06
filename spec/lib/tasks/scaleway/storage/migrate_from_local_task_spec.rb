@@ -7,7 +7,7 @@ describe "rake scaleway:storage:migrate_from_local", type: :task do
     expect(task.prerequisites).to include "environment"
   end
 
-  it "invokes the admin creator" do
+  it "invokes the migrator" do
     expect(ActiveStorage::Migrator).to receive(:migrate!).with(:local, :scaleway).and_return(true)
 
     task.execute

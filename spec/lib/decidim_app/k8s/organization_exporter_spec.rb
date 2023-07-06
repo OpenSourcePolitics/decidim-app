@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "k8s/organization_exporter"
+require "decidim_app/k8s/organization_exporter"
 
-describe K8s::OrganizationExporter do
+describe DecidimApp::K8s::OrganizationExporter do
   subject { described_class.new(organization, logger, export_path, image) }
 
   let(:organization) { create(:organization, host: organization_host, omniauth_settings: omniauth_settings) }
@@ -46,7 +46,7 @@ describe K8s::OrganizationExporter do
   describe "#dumping_database" do
     it "dumps the database" do
       # rubocop:disable RSpec/SubjectStub
-      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--de.dump")
+      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--#{organization.host}--de.dump")
       # rubocop:enable RSpec/SubjectStub
       subject.dumping_database
     end
