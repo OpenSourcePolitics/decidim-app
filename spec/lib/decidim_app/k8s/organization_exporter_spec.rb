@@ -182,7 +182,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     let(:forbidden_env_vars) do
       {
         "BACKUP_S3SYNC_BUCKET" => "bucket-1216",
-        "RACK_ATTACK_ENABLED" => 1
+        "ENABLE_RACK_ATTACK" => 1
       }
     end
 
@@ -193,7 +193,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     end
 
     it "returns the env vars" do
-      expect(subject.env_vars).to eq({ "FOO" => "bar", "BAR" => "baz", "DUMMY" => "3", "RACK_ATTACK_ENABLED" => "0" })
+      expect(subject.env_vars).to eq({ "FOO" => "bar", "BAR" => "baz", "DUMMY" => "3", "ENABLE_RACK_ATTACK" => "0" })
     end
 
     context "when the .env file is empty" do
@@ -202,7 +202,7 @@ describe DecidimApp::K8s::OrganizationExporter do
       end
 
       it "returns an empty hash" do
-        expect(subject.env_vars).to eq({ "RACK_ATTACK_ENABLED" => "0" })
+        expect(subject.env_vars).to eq({ "ENABLE_RACK_ATTACK" => "0" })
       end
     end
   end
@@ -265,7 +265,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     it "returns the env vars" do
       expect(subject.all_env_vars.keys).to match_array(%w(apiVersion kind metadata stringData))
       expect(subject.all_env_vars["metadata"]["name"]).to eq("#{hostname}-custom-env")
-      expect(subject.all_env_vars["stringData"].keys).to match_array(%w(RACK_ATTACK_ENABLED RAILS_ENV RAILS_SERVE_STATIC_FILES SMTP_FROM SMTP_USER_NAME SMTP_PORT SMTP_ADDRESS SMTP_PASSWORD OMNIAUTH_SETTINGS_FACEBOOK_ENABLED OMNIAUTH_SETTINGS_FACEBOOK_APP_ID OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET))
+      expect(subject.all_env_vars["stringData"].keys).to match_array(%w(ENABLE_RACK_ATTACK RAILS_ENV RAILS_SERVE_STATIC_FILES SMTP_FROM SMTP_USER_NAME SMTP_PORT SMTP_ADDRESS SMTP_PASSWORD OMNIAUTH_SETTINGS_FACEBOOK_ENABLED OMNIAUTH_SETTINGS_FACEBOOK_APP_ID OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET))
     end
   end
 end

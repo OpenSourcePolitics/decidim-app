@@ -16,10 +16,10 @@ module DecidimApp
                                       SCALEWAY_TOKEN
                                       SCALEWAY_BUCKET_NAME
                                       SECRET_KEY_BASE
-                                      RACK_ATTACK_ENABLED).freeze
+                                      ENABLE_RACK_ATTACK).freeze
 
       DEFAULT_ENVIRONMENT_VARIABLES = {
-        "RACK_ATTACK_ENABLED" => 0
+        "ENABLE_RACK_ATTACK" => 0
       }.freeze
 
       ORGANIZATION_COLUMNS = %w(id
