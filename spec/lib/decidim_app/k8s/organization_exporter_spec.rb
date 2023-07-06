@@ -174,13 +174,15 @@ describe DecidimApp::K8s::OrganizationExporter do
     let(:allowed_env_vars) do
       {
         "FOO" => "bar",
-        "BAR" => "baz"
+        "BAR" => "baz",
+        "DUMMY" => 3
       }
     end
 
     let(:forbidden_env_vars) do
       {
-        "BACKUP_S3SYNC_BUCKET" => "bucket-1216"
+        "BACKUP_S3SYNC_BUCKET" => "bucket-1216",
+        "ENABLE_RACK_ATTACK" => 1
       }
     end
 
@@ -191,7 +193,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     end
 
     it "returns the env vars" do
-      expect(subject.env_vars).to eq(allowed_env_vars)
+      expect(subject.env_vars).to eq({ "FOO" => "bar", "BAR" => "baz", "DUMMY" => "3", "ENABLE_RACK_ATTACK" => "0" })
     end
 
     context "when the .env file is empty" do
@@ -200,7 +202,7 @@ describe DecidimApp::K8s::OrganizationExporter do
       end
 
       it "returns an empty hash" do
-        expect(subject.env_vars).to eq({})
+        expect(subject.env_vars).to eq({ "ENABLE_RACK_ATTACK" => "0" })
       end
     end
   end
@@ -215,7 +217,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     it "returns the decrypted omniauth settings" do
       expect(subject.omniauth_settings).to match("OMNIAUTH_SETTINGS_FACEBOOK_APP_ID" => "app_id_123456",
                                                  "OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET" => "app_secret_123456",
-                                                 "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => true)
+                                                 "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => "true")
     end
 
     context "when the omniauth settings are not present" do
@@ -246,7 +248,7 @@ describe DecidimApp::K8s::OrganizationExporter do
       it "returns the omniauth settings as it" do
         expect(subject.omniauth_settings).to match("OMNIAUTH_SETTINGS_FACEBOOK_APP_ID" => "wrongly_encrypted_app_id_123456",
                                                    "OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET" => "wrongly_encrypted_app_secret_123456",
-                                                   "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => true)
+                                                   "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => "true")
       end
     end
   end
@@ -263,7 +265,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     it "returns the env vars" do
       expect(subject.all_env_vars.keys).to match_array(%w(apiVersion kind metadata stringData))
       expect(subject.all_env_vars["metadata"]["name"]).to eq("#{hostname}-custom-env")
-      expect(subject.all_env_vars["stringData"].keys).to match_array(%w(RAILS_ENV RAILS_SERVE_STATIC_FILES SMTP_FROM SMTP_USER_NAME SMTP_PORT SMTP_ADDRESS SMTP_PASSWORD OMNIAUTH_SETTINGS_FACEBOOK_ENABLED OMNIAUTH_SETTINGS_FACEBOOK_APP_ID OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET))
+      expect(subject.all_env_vars["stringData"].keys).to match_array(%w(ENABLE_RACK_ATTACK RAILS_ENV RAILS_SERVE_STATIC_FILES SMTP_FROM SMTP_USER_NAME SMTP_PORT SMTP_ADDRESS SMTP_PASSWORD OMNIAUTH_SETTINGS_FACEBOOK_ENABLED OMNIAUTH_SETTINGS_FACEBOOK_APP_ID OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET))
     end
   end
 end

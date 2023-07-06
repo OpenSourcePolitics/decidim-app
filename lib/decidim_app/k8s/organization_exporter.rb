@@ -15,7 +15,13 @@ module DecidimApp
                                       SCALEWAY_ID
                                       SCALEWAY_TOKEN
                                       SCALEWAY_BUCKET_NAME
-                                      SECRET_KEY_BASE).freeze
+                                      SECRET_KEY_BASE
+                                      ENABLE_RACK_ATTACK).freeze
+
+      DEFAULT_ENVIRONMENT_VARIABLES = {
+        "ENABLE_RACK_ATTACK" => 0
+      }.freeze
+
       ORGANIZATION_COLUMNS = %w(id
                                 default_locale
                                 available_locales
@@ -80,13 +86,15 @@ module DecidimApp
           metadata: {
             name: "#{resource_name}-custom-env"
           },
-          stringData: env_vars.merge!(smtp_settings).merge!(omniauth_settings)
+          stringData: env_vars.merge(smtp_settings).merge(omniauth_settings)
         }.deep_stringify_keys
       end
 
       def env_vars
         @env_vars ||= Dotenv.parse(".env")
                             .reject { |key, _value| FORBIDDEN_ENVIRONMENT_KEYS.include?(key) }
+                            .merge(DEFAULT_ENVIRONMENT_VARIABLES)
+                            .transform_values(&:to_s)
       end
 
       def secret_key_base_env_var
@@ -105,13 +113,13 @@ module DecidimApp
       def omniauth_settings
         return {} unless @organization.omniauth_settings
 
-        @organization.omniauth_settings.each_with_object({}) do |(key, value), hash|
-          hash[key.upcase] = if Decidim::OmniauthProvider.value_defined?(value)
-                               decrypt(value)
-                             else
-                               value
-                             end
+        settings = @organization.omniauth_settings
+                                .deep_dup
+                                .each_with_object({}) do |(key, value), hash|
+          hash[key.upcase] = Decidim::OmniauthProvider.value_defined?(value) ? decrypt(value) : value
         end
+
+        settings.deep_transform_values(&:to_s)
       end
 
       def smtp_settings
@@ -119,9 +127,11 @@ module DecidimApp
         settings["password"] = Decidim::AttributeEncryptor.decrypt(settings["encrypted_password"])
         settings.delete("encrypted_password")
 
-        settings.transform_keys do |key|
+        settings = settings.transform_keys do |key|
           "SMTP_#{key.upcase}"
         end
+
+        settings.deep_transform_values(&:to_s)
       end
 
       def organization_columns
