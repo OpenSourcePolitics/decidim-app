@@ -8,7 +8,6 @@
 .idea
 .github
 .rubocop*
-.overloads
 .erb-lint.yml
 .env-example
 .env

@@ -69,20 +69,6 @@ namespace :decidim do
   end
 end
 
-class LoggerWithStdout < Logger
-  def initialize(*)
-    super
-
-    # rubocop:disable Lint/NestedMethodDefinition
-    def @logdev.write(msg)
-      super
-
-      puts msg
-    end
-    # rubocop:enable Lint/NestedMethodDefinition
-  end
-end
-
 # RailsMigrations deals with migrations of the project
 class RailsMigrations
   attr_accessor :fetch_all

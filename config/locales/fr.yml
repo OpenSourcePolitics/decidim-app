@@ -10,6 +10,8 @@ fr:
         private_space: Espace privé
   decidim:
     admin:
+      menu:
+        admin_accountability: Admin accountability
       participatory_space_private_users:
         create:
           error: Erreur
@@ -249,7 +251,7 @@ fr:
         made_with_open_source: Site réalisé par <a target="_blank" href="https://opensourcepolitics.eu">Open Source Politics</a> grâce au <a target="_blank" href="https://github.com/decidim/decidim">logiciel libre Decidim</a>.
   rack_attack:
     too_many_requests:
-      message: Il semblerait que vous fassiez trop de requêtes sur notre serveur, votre connexion a ete ralentie.
+      message: Il semblerait que vous fassiez trop de requetes sur notre serveur, votre connexion a ete ralentie.
       time: 'Vous pourrez naviguer de nouveau sur notre plateforme dans :'
       time_unit: seconds
       title: Thank you for your participation on %{organization_name}
