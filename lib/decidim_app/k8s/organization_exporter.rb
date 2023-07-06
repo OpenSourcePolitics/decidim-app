@@ -15,7 +15,13 @@ module DecidimApp
                                       SCALEWAY_ID
                                       SCALEWAY_TOKEN
                                       SCALEWAY_BUCKET_NAME
-                                      SECRET_KEY_BASE).freeze
+                                      SECRET_KEY_BASE
+                                      RACK_ATTACK_ENABLED).freeze
+
+      DEFAULT_ENVIRONMENT_VARIABLES = {
+        "RACK_ATTACK_ENABLED" => 0
+      }.freeze
+
       ORGANIZATION_COLUMNS = %w(id
                                 default_locale
                                 available_locales
@@ -87,6 +93,7 @@ module DecidimApp
       def env_vars
         @env_vars ||= Dotenv.parse(".env")
                             .reject { |key, _value| FORBIDDEN_ENVIRONMENT_KEYS.include?(key) }
+                            .merge(DEFAULT_ENVIRONMENT_VARIABLES)
                             .transform_values(&:to_s)
       end
 
