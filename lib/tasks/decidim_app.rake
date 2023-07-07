@@ -52,6 +52,8 @@ namespace :decidim_app do
 
     desc "Create install or reload install with path='path/to/external_install_configuration.yml'"
     task external_install_or_reload: :environment do
+      raise "You must specify a path to an external install configuration, path='path/to/external_install_configuration.yml'" if ENV["path"].blank? || !File.exist?(ENV["path"])
+
       DecidimApp::K8s::Manager.run(ENV["path"])
     end
   end
