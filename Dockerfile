@@ -28,7 +28,7 @@ COPY . .
 
 RUN bundle exec bootsnap precompile --gemfile app/ lib/ config/ bin/ db/ && \
     bundle exec rails assets:precompile && \
-    bundle exec rails deface:precompile
+    DEFACE_ENABLED=true bundle exec rails deface:precompile
 
 # Configure endpoint.
 COPY ./entrypoint.sh /usr/bin/
