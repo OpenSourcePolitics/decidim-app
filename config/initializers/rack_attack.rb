@@ -17,9 +17,6 @@ DecidimApp::RackAttack::Throttling.deactivate_decidim_throttling! do
 end
 
 Rack::Attack.throttled_response_retry_after_header = true
-# By default use the memory store for inspecting requests
-# Better to use MemCached or Redis in production mode
-Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new if !ENV["MEMCACHEDCLOUD_SERVERS"] || Rails.env.test?
 
 Rack::Attack.throttled_responder = lambda do |request|
   rack_logger = Logger.new(Rails.root.join("log/rack_attack.log"))
