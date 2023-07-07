@@ -28,6 +28,15 @@ namespace :decidim_app do
   end
 
   namespace :k8s do
+    # This task is used to install your decidim-app to the latest version
+    # Meant to be used in a CI/CD pipeline or a k8s job/operator
+    # You can add your own customizations here
+    desc "Install decidim-app"
+    task install: :environment do
+      puts "Running db:migrate"
+      Rake::Task["db:migrate"].invoke
+    end
+
     # This task is used to upgrade your decidim-app to the latest version
     # Meant to be used in a CI/CD pipeline or a k8s job/operator
     # You can add your own customizations here
