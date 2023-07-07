@@ -10,7 +10,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
   let(:secondary_hosts) { ["www.example.org"] }
   let(:target) { "https://#{secondary_hosts.first}" }
   let(:response_code) { 301 }
-  let(:response_headers) { { "location" => host } }
+  let(:response_headers) { { "location" => "https://#{host}" } }
 
   before do
     # Our system checks for redirection then returns the host
@@ -46,11 +46,19 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
     end
 
     context "when the host is not valid" do
-      let(:target) { "https://nothing.org" }
-      let(:response_code) { 404 }
+      context "when it is not a valid url" do
+        it "returns nil" do
+          expect(subject.get_redirection_target(123)).to eq(nil)
+        end
+      end
 
-      it "returns nil" do
-        expect(subject.get_redirection_target("nothing.org")).to eq(nil)
+      context "when it does not exist" do
+        let(:target) { "https://nothing.org" }
+        let(:response_code) { 404 }
+
+        it "returns nil" do
+          expect(subject.get_redirection_target("nothing.org")).to eq(nil)
+        end
       end
     end
 
@@ -58,13 +66,13 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
       let(:target) { "https://redirection.org" }
       let(:response_headers) { { "location" => "another_redirection.org" } }
 
-      it "raises an exception" do
-        expect { subject.get_redirection_target("redirection.org", 1) }.to raise_error(RuntimeError, "Secondary host another_redirection.org is not valid because of too many redirections")
+      it "returns nil" do
+        expect(subject.get_redirection_target("redirection.org", 1)).to eq(nil)
       end
     end
 
     context "when the host is not valid because of a socket error" do
-      [Errno::ECONNREFUSED, SocketError].each do |error|
+      [Errno::ECONNREFUSED, SocketError, Errno::EHOSTUNREACH].each do |error|
         it "returns nil" do
           stub_request(:get, target).to_raise(error)
           expect(subject.get_redirection_target(secondary_hosts.first)).to eq(nil)
