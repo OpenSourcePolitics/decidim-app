@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require "uri"
+require "net/http"
+require "decidim_app/k8s/secondary_hosts_checker"
+
 module DecidimApp
   module K8s
     class OrganizationExporter
@@ -151,7 +155,7 @@ module DecidimApp
           spec: {
             image: @image,
             host: @organization.host,
-            additionalHosts: @organization.secondary_hosts,
+            additionalHosts: DecidimApp::K8s::SecondaryHostsChecker.valid_secondary_hosts(host: @organization.host, secondary_hosts: @organization.secondary_hosts),
             organization: { id: organization_columns["id"] },
             locale: {
               default: organization_columns["default_locale"],

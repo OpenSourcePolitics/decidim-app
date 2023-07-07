@@ -10,6 +10,7 @@ describe DecidimApp::K8s::OrganizationExporter do
   let(:logger) { Logger.new($stdout) }
   let(:export_path) { Rails.root.join("tmp/test_export") }
   let(:organization_host) { "my-host.domain.org" }
+  let(:organization_secondary_host) { "www.my-host.domain.org" }
   let(:hostname) { "my-host" }
   let(:name_space) { "domain-org" }
   let(:image) { "my-image" }
@@ -22,6 +23,12 @@ describe DecidimApp::K8s::OrganizationExporter do
   end
 
   let(:database_name) { Rails.configuration.database_configuration[Rails.env]["database"] }
+
+  before do
+    organization.update!(secondary_hosts: [organization_secondary_host])
+    allow(DecidimApp::K8s::SecondaryHostsChecker).to receive(:valid_secondary_hosts).with(host: organization_host, secondary_hosts: [organization_secondary_host])
+                                                                                    .and_return([organization_secondary_host])
+  end
 
   describe ".export!" do
     it "calls the right methods" do
@@ -139,8 +146,8 @@ describe DecidimApp::K8s::OrganizationExporter do
     end
 
     it "returns the correct host and secondary hosts" do
-      expect(subject.organization_settings["spec"]["host"]).to eq(organization.host)
-      expect(subject.organization_settings["spec"]["additionalHosts"]).to eq(organization.secondary_hosts)
+      expect(subject.organization_settings["spec"]["host"]).to eq(organization_host)
+      expect(subject.organization_settings["spec"]["additionalHosts"]).to eq([organization_secondary_host])
     end
 
     it "returns the correct organization" do
@@ -162,7 +169,20 @@ describe DecidimApp::K8s::OrganizationExporter do
                                                    "available_authorizations" => [],
                                                    "available_locales" => %w(en fr),
                                                    "default_locale" => "en",
-                                                   "file_upload_settings" => { "allowed_content_types" => { "admin" => %w(image/* application/vnd.oasis.opendocument application/vnd.ms-* application/msword application/vnd.ms-word application/vnd.openxmlformats-officedocument application/vnd.oasis.opendocument application/pdf application/rtf text/plain), "default" => ["image/*", "application/pdf", "application/rtf", "text/plain"] }, "allowed_file_extensions" => { "admin" => %w(jpg jpeg gif png bmp pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots), "default" => %w(jpg jpeg gif png bmp pdf rtf txt), "image" => %w(jpg jpeg gif png bmp ico) }, "maximum_file_size" => { "avatar" => 5, "default" => 10 } },
+                                                   "file_upload_settings" => {
+                                                     "allowed_content_types" => {
+                                                       "admin" => %w(image/* application/vnd.oasis.opendocument application/vnd.ms-* application/msword application/vnd.ms-word application/vnd.openxmlformats-officedocument application/vnd.oasis.opendocument application/pdf application/rtf text/plain),
+                                                       "default" => %w(image/* application/pdf application/rtf text/plain)
+                                                     },
+                                                     "allowed_file_extensions" => {
+                                                       "admin" => %w(jpg jpeg gif png bmp pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots),
+                                                       "default" => %w(jpg jpeg gif png bmp pdf rtf txt),
+                                                       "image" => %w(jpg jpeg gif png bmp ico)
+                                                     },
+                                                     "maximum_file_size" => {
+                                                       "avatar" => 5, "default" => 10
+                                                     }
+                                                   },
                                                    "force_users_to_authenticate_before_access_organization" => false,
                                                    "id" => organization.id,
                                                    "users_registration_mode" => 0
