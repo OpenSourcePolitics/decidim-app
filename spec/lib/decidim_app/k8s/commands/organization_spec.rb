@@ -44,6 +44,14 @@ describe DecidimApp::K8s::Commands::Organization do
         port: 8080,
         authentication: "plain",
         enable_starttls_auto: true
+      },
+      omniauth_settings: {
+        publik: {
+          enabled: "true",
+          client_id: "12345",
+          client_secret: "12345",
+          site_url: "https://example.com/"
+        }
       }
     }
   end
@@ -115,7 +123,7 @@ describe DecidimApp::K8s::Commands::Organization do
         expect(maximum_file_size["default"]).to eq(9)
 
         smtp_settings = organization.reload.smtp_settings
-        expect(smtp_settings.keys).to match_array(%w(from from_email from_label user_name password address port authentication enable_starttls_auto encrypted_password))
+        expect(smtp_settings.keys).to match_array(%w(from from_email from_label user_name address port authentication enable_starttls_auto encrypted_password))
         expect(smtp_settings["from"]).to eq("OSP Decidim <ne-pas-repondre@example.org>")
         expect(smtp_settings["from_email"]).to eq("ne-pas-repondre@example.org")
         expect(smtp_settings["from_label"]).to eq("OSP Decidim")
@@ -125,6 +133,13 @@ describe DecidimApp::K8s::Commands::Organization do
         expect(smtp_settings["authentication"]).to eq("plain")
         expect(smtp_settings["enable_starttls_auto"]).to eq(true)
         expect(Decidim::AttributeEncryptor.decrypt(smtp_settings["encrypted_password"])).to eq("password")
+
+        omniauth_settings = organization.reload.omniauth_settings
+        expect(omniauth_settings.keys).to match_array(%w(omniauth_settings_publik_client_id omniauth_settings_publik_client_secret omniauth_settings_publik_site_url omniauth_settings_publik_enabled))
+        expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_client_id"])).to eq("12345")
+        expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_client_secret"])).to eq("12345")
+        expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_site_url"])).to eq("https://example.com/")
+        expect(omniauth_settings["omniauth_settings_publik_enabled"]).to eq(true)
       end
 
       context "when organization is invalid" do

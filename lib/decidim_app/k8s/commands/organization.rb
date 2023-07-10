@@ -85,14 +85,18 @@ module DecidimApp
         end
 
         def update_params
-          params = existing_organization_attributes.deep_merge(@configuration).merge(id: existing_organization.id)
+          params = existing_organization_attributes.deep_merge(
+            @configuration.except(:smtp_settings, :omniauth_settings)
+          ).merge(id: existing_organization.id)
 
           @configuration.fetch(:smtp_settings, {}).each do |key, value|
             params.merge!(key => value)
           end
 
-          @configuration.fetch(:omniauth_settings, {}).each do |key, value|
-            params.merge!(key => value)
+          @configuration.fetch(:omniauth_settings, {}).each do |provider, config|
+            config.each do |key, value|
+              params.merge!("omniauth_settings_#{provider}_#{key}" => value)
+            end
           end
 
           params[:encrypted_password] = nil if @configuration.dig(:smtp_settings, :password).present?
