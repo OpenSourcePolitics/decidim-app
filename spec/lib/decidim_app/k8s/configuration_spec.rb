@@ -23,7 +23,10 @@ describe DecidimApp::K8s::Configuration do
 
     it "returns the organization configuration" do
       expect(subject.organizations).to be_a(Array)
-      expect(subject.organizations.first).to eq(configuration[:organizations].first)
+      expect(subject.organizations.first[:name]).to eq(configuration[:organizations].first[:name])
+      expect(subject.organizations.last[:name]).to eq(configuration[:organizations].last[:name])
+
+      expect(subject.organizations.first[:secondary_hosts]).to eq(configuration[:organizations].first[:secondary_hosts].join("\n"))
     end
   end
 

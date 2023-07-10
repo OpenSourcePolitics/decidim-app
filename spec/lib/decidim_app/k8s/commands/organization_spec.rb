@@ -9,28 +9,29 @@ describe DecidimApp::K8s::Commands::Organization do
 
   let(:reference_prefix) { "JKR" }
   let(:users_registration_mode) { "enabled" }
+  let(:secondary_hosts) { %w[osp.example.org osp.decidim.example] }
   let(:organization_configuration) do
     {
       name: "OSP Decidim",
       host: "decidim.example.org",
-      secondary_hosts: "osp.example.org,osp.decidim.example",
+      secondary_hosts: secondary_hosts.join("\n"),
       available_locales: %w(en fr),
       default_locale: "fr",
       reference_prefix: reference_prefix,
       users_registration_mode: users_registration_mode,
       file_upload_settings: {
         allowed_file_extensions: {
-          admin: %w(jpeg jpg gif png bmp pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots),
-          image: %w(jpg jpeg gif png bmp ico),
-          default: %w(jpg jpeg gif png bmp pdf rtf txt)
+          admin: "dummy,foo,bar",
+          image: "dummy,foo,bar",
+          default: "dummy,foo,bar"
         },
         allowed_content_types: {
-          admin: %w(image/* application/vnd.oasis.opendocument application/vnd.ms-* application/msword application/vnd.ms-word application/vnd.openxmlformats-officedocument application/vnd.oasis.opendocument application/pdf application/rtf text/plain),
-          default: %w(image/* application/pdf application/rtf text/plain)
+          admin: "dummy/*",
+          default: "dummy/*"
         },
         maximum_file_size: {
-          avatar: 5,
-          default: 10
+          avatar: 3,
+          default: 9
         }
       },
       smtp_settings: {
@@ -60,6 +61,16 @@ describe DecidimApp::K8s::Commands::Organization do
       expect do
         expect(subject.run).to be_a(Decidim::Organization)
       end.to change(Decidim::Organization, :count).by(1).and change(Decidim::User, :count).by(1)
+
+      organization = Decidim::Organization.last
+
+      expect(organization.name).to eq(organization_configuration[:name])
+      expect(organization.host).to eq(organization_configuration[:host])
+      expect(organization.secondary_hosts).to eq(secondary_hosts)
+      expect(organization.available_locales).to eq(organization_configuration[:available_locales])
+      expect(organization.default_locale).to eq(organization_configuration[:default_locale])
+      expect(organization.reference_prefix).to eq(organization_configuration[:reference_prefix])
+      expect(organization.users_registration_mode).to eq(organization_configuration[:users_registration_mode])
     end
 
     context "when organization is invalid" do
@@ -79,6 +90,40 @@ describe DecidimApp::K8s::Commands::Organization do
         end.to not_change(Decidim::Organization, :count).and not_change(Decidim::User, :count)
 
         expect(organization.reload.users_registration_mode).to eq(organization_configuration[:users_registration_mode])
+        expect(organization.reload.name).to eq(organization_configuration[:name])
+        expect(organization.reload.host).to eq(organization_configuration[:host])
+        expect(organization.reload.secondary_hosts).to eq(secondary_hosts)
+        expect(organization.reload.users_registration_mode).to eq(organization_configuration[:users_registration_mode])
+
+        file_upload_settings = organization.reload.file_upload_settings
+        expect(file_upload_settings.keys).to match_array(%w(allowed_file_extensions allowed_content_types maximum_file_size))
+
+        allowed_file_extensions = file_upload_settings["allowed_file_extensions"]
+        expect(allowed_file_extensions.keys).to match_array(%w(admin image default))
+        expect(allowed_file_extensions["admin"]).to match_array(["dummy", "foo", "bar"])
+        expect(allowed_file_extensions["image"]).to match_array(["dummy", "foo", "bar"])
+        expect(allowed_file_extensions["default"]).to match_array(["dummy", "foo", "bar"])
+
+        expect(file_upload_settings["allowed_content_types"].keys).to match_array(%w(admin default))
+        allowed_content_types = file_upload_settings["allowed_content_types"]
+        expect(allowed_content_types["admin"]).to match_array(["dummy/*"])
+        expect(allowed_content_types["default"]).to match_array(["dummy/*"])
+
+        expect(file_upload_settings["maximum_file_size"].keys).to match_array(%w(avatar default))
+        maximum_file_size = file_upload_settings["maximum_file_size"]
+        expect(maximum_file_size["avatar"]).to eq(3)
+        expect(maximum_file_size["default"]).to eq(9)
+
+        smtp_settings = organization.reload.smtp_settings
+        expect(smtp_settings.keys).to match_array(%w(from from_email from_label user_name password address port authentication enable_starttls_auto encrypted_password))
+        expect(smtp_settings["from"]).to eq("OSP Decidim <ne-pas-repondre@example.org>")
+        expect(smtp_settings["from_email"]).to eq("ne-pas-repondre@example.org")
+        expect(smtp_settings["from_label"]).to eq("OSP Decidim")
+        expect(smtp_settings["user_name"]).to eq("example")
+        expect(smtp_settings["address"]).to eq("address.smtp.org")
+        expect(smtp_settings["port"]).to eq(8080)
+        expect(smtp_settings["authentication"]).to eq("plain")
+        expect(smtp_settings["enable_starttls_auto"]).to eq(true)
       end
 
       context "when organization is invalid" do

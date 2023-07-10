@@ -5,6 +5,10 @@ module DecidimApp
     class Configuration
       attr_reader :organizations, :system_admin, :default_admin
 
+      TRANSFORMS = {
+        secondary_hosts: ->(value) { value.join("\n") }
+      }.freeze
+
       def initialize(path)
         @parsed_configuration = YAML.load_file(path).deep_symbolize_keys
         @organizations = set_organizations
@@ -29,7 +33,13 @@ module DecidimApp
       private
 
       def set_organizations
-        @parsed_configuration[:organizations].is_a?(Hash) ? [@parsed_configuration[:organizations]] : @parsed_configuration[:organizations]
+        organizations = @parsed_configuration[:organizations].is_a?(Hash) ? [@parsed_configuration[:organizations]] : @parsed_configuration[:organizations]
+
+        organizations&.map do |organization|
+          organization.each_with_object({}) do |(key, value), hash|
+            hash[key] = TRANSFORMS[key] ? TRANSFORMS[key].call(value) : value
+          end
+        end
       end
     end
   end

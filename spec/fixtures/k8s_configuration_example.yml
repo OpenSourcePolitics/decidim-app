@@ -9,7 +9,9 @@ default_admin:
 organizations:
   - name: "OSP Decidim"
     host: decidim.osp.example
-    secondary_hosts: 'osp.example.org,osp.decidim.example'
+    secondary_hosts:
+      - osp.example.org
+      - osp.decidim.example
     available_locales:
       - en
       - fr
@@ -88,7 +90,9 @@ organizations:
       enable_starttls_auto: true
   - name: "OSP Decidim 2"
     host: second.osp.example
-    secondary_hosts: 'second.example.org,second.decidim.example'
+    secondary_hosts:
+     - second.example.org
+     - second.decidim.example
     available_locales:
       - en
       - fr
