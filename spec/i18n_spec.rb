@@ -8,7 +8,7 @@ describe "I18n sanity" do
     ENV["ENFORCED_LOCALES"].presence || Decidim.available_locales.map(&:to_s).join(",")
   end
 
-  let(:i18n) { I18n::Tasks::BaseTask.new({ locales: locales.split(",") }) }
+  let(:i18n) { I18n::Tasks::BaseTask.new(locales: %w(en fr)) }
   let(:missing_keys) { i18n.missing_keys }
   let(:unused_keys) { i18n.unused_keys }
   let(:non_normalized_paths) { i18n.non_normalized_paths }

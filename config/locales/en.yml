@@ -32,31 +32,6 @@ en:
       osp_authorization_workflow:
         name: Authorization procedure
     budgets:
-      actions:
-        confirm_destroy: Are you sure you want to delete this project?
-        destroy: Delete
-        edit: Edit
-        edit_projects: Manage projects
-        new: New %{name}
-        preview: Preview
-        title: Actions
-      admin:
-        budgets:
-          index:
-            finished_orders: Finished votes
-            pending_orders: Pending votes
-            title: Budgets
-            users_with_finished_orders: Users with finished votes
-            users_with_pending_orders: Users with pending votes
-        models:
-          budget:
-            name: Budget
-      models:
-        budget:
-          fields:
-            name: Name
-            projects_count: Projects count
-            total_budget: Total budget
       projects:
         count:
           projects_count:
@@ -109,44 +84,16 @@ en:
           ok_text: Warning, this password is the one of your local account and in no case the one of the account you use through FranceConnect. It will only be used when you log in with your email address rather than via FranceConnect.
     proposals:
       collaborative_drafts:
-        collaborative_draft:
-          publish:
-            error: There was a problem publishing the collaborative draft.
-            success: Collaborative draft published successfully as a proposal.
-          withdraw:
-            error: There was a problem closing the collaborative draft.
-            success: Collaborative draft withdrawn successfully.
-        create:
-          error: There was a problem creating this collaborative drafts
-          success: Collaborative draft successfully created.
         edit:
           attachment_legend: "(Optional) Add an attachment"
           select_a_category: Please select a category
         new:
           add_file: Add file
           edit_file: Edit file
-        show:
-          back: Back
-          edit: Edit collaborative draftss
-          info-message: This is a <strong>collaborative draft</strong> for a proposal. This means that you can help their authors to shape the proposal using the comment section below or improve it directly by requesting access to edit it. Once the authors grant you access, you'll be able to make changes to this draft.
-          publish_info: Publish this version of the draft or
-          requested_access: Access requested
-        update:
-          error: There was a problem saving the collaborative draft.
-          success: Collaborative draft successfully updated.
-        wizard_aside:
-          back_from_collaborative_draft: Back to collaborative drafts
-          info: You are creating a <strong>collaborative draft</strong>.
       index:
         collaborative_drafts_list: Collaborative drafts list
         new_proposal: New proposal
         view_proposal: View proposal
-      models:
-        collaborative_draft:
-          fields:
-            authors: Authors
-            comments: Comments
-            contributions: Contributions
     scopes:
       global: Global
       picker:
