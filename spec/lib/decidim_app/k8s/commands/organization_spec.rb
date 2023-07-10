@@ -124,6 +124,7 @@ describe DecidimApp::K8s::Commands::Organization do
         expect(smtp_settings["port"]).to eq(8080)
         expect(smtp_settings["authentication"]).to eq("plain")
         expect(smtp_settings["enable_starttls_auto"]).to eq(true)
+        expect(Decidim::AttributeEncryptor.decrypt(smtp_settings["encrypted_password"])).to eq("password")
       end
 
       context "when organization is invalid" do

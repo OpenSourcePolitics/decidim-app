@@ -95,6 +95,8 @@ module DecidimApp
             params.merge!(key => value)
           end
 
+          params[:encrypted_password] = nil if @configuration.dig(:smtp_settings, :password).present?
+
           params
         end
       end

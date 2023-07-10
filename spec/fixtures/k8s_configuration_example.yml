@@ -88,11 +88,17 @@ organizations:
       port: 8080
       authentication: plain
       enable_starttls_auto: true
+    omniauth_settings_facebook_enabled: "1"
+    omniauth_settings_facebook_app_id: "123"
+    omniauth_settings_facebook_app_secret: "secret133"
+    omniauth_settings_twitter_enabled: "0"
+    omniauth_settings_twitter_api_key: "456"
+    omniauth_settings_twitter_api_secret: "secret456"
   - name: "OSP Decidim 2"
     host: second.osp.example
     secondary_hosts:
-     - second.example.org
-     - second.decidim.example
+      - second.example.org
+      - second.decidim.example
     available_locales:
       - en
       - fr
@@ -169,3 +175,9 @@ organizations:
       port: 8080
       authentication: plain
       enable_starttls_auto: true
+    omniauth_settings_facebook_enabled: "1"
+    omniauth_settings_facebook_app_id: "123"
+    omniauth_settings_facebook_app_secret: "secret133"
+    omniauth_settings_twitter_enabled: "0"
+    omniauth_settings_twitter_api_key: "456"
+    omniauth_settings_twitter_api_secret: "secret456"
