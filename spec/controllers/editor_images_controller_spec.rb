@@ -68,7 +68,6 @@ module Decidim
 
         context "when file is not valid" do
           it "doesn't create an editor image and returns an error message" do
-            byebug
             expect do
               post :create, params: invalid_params
             end.not_to(change(Decidim::EditorImage, :count))
