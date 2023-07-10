@@ -5,8 +5,18 @@ module DecidimApp
     class Configuration
       attr_reader :organizations, :system_admin, :default_admin
 
+      TRANSFORMS_METHODS = {
+        to_string_separated_by_new_line: ->(value) { value.join("\n") },
+        to_string_separated_by_comma: ->(value) { value.join(",") }
+      }.freeze
+
       TRANSFORMS = {
-        secondary_hosts: ->(value) { value.join("\n") }
+        secondary_hosts: :to_string_separated_by_new_line,
+        file_upload_settings_allowed_file_extensions_admin: :to_string_separated_by_comma,
+        file_upload_settings_allowed_file_extensions_image: :to_string_separated_by_comma,
+        file_upload_settings_allowed_file_extensions_default: :to_string_separated_by_comma,
+        file_upload_settings_allowed_content_types_admin: :to_string_separated_by_comma,
+        file_upload_settings_allowed_content_types_default: :to_string_separated_by_comma
       }.freeze
 
       def initialize(path)
@@ -35,10 +45,31 @@ module DecidimApp
       def set_organizations
         organizations = @parsed_configuration[:organizations].is_a?(Hash) ? [@parsed_configuration[:organizations]] : @parsed_configuration[:organizations]
 
-        organizations&.map do |organization|
-          organization.each_with_object({}) do |(key, value), hash|
-            hash[key] = TRANSFORMS[key] ? TRANSFORMS[key].call(value) : value
-          end
+        organizations&.map { |organization| deep_transform(organization) } || []
+      end
+
+      # Transforms the keys based on the TRANSFORMS present
+      # Return a new hash with the transformed keys
+      # Example:
+      # To match against { file_upload_settings: { allowed_file_extensions: { admin } } }
+      # file_upload_settings_allowed_file_extensions_admin: ->(value) { value.join(",") }
+      def deep_transform(hash, prefix = "")
+        hash.each_with_object({}) do |(key, value), new_hash|
+          match_key = prefix.present? ? "#{prefix}_#{key}".to_sym : key
+
+          new_hash[key] = if value.is_a?(Hash)
+                            deep_transform(value, match_key)
+                          else
+                            transform(match_key, value)
+                          end
+        end
+      end
+
+      def transform(match_key, value)
+        if TRANSFORMS[match_key]
+          TRANSFORMS_METHODS[TRANSFORMS[match_key]].call(value)
+        else
+          value
         end
       end
     end

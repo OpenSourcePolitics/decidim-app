@@ -23,10 +23,17 @@ describe DecidimApp::K8s::Configuration do
 
     it "returns the organization configuration" do
       expect(subject.organizations).to be_a(Array)
-      expect(subject.organizations.first[:name]).to eq(configuration[:organizations].first[:name])
-      expect(subject.organizations.last[:name]).to eq(configuration[:organizations].last[:name])
+      expect(subject.organizations.first[:name]).to eq("OSP Decidim")
+      expect(subject.organizations.last[:name]).to eq("OSP Decidim 2")
 
-      expect(subject.organizations.first[:secondary_hosts]).to eq(configuration[:organizations].first[:secondary_hosts].join("\n"))
+      expect(subject.organizations.first[:secondary_hosts]).to eq("osp.example.org\nosp.decidim.example")
+
+      file_upload_settings = subject.organizations.first[:file_upload_settings]
+      expect(file_upload_settings[:allowed_file_extensions][:admin]).to eq("jpeg,jpg,gif,png,bmp,pdf,doc,docx,xls,xlsx,ppt,pptx,ppx,rtf,txt,odt,ott,odf,otg,ods,ots")
+      expect(file_upload_settings[:allowed_file_extensions][:image]).to eq("jpg,jpeg,gif,png,bmp,ico")
+      expect(file_upload_settings[:allowed_file_extensions][:default]).to eq("jpg,jpeg,gif,png,bmp,pdf,rtf,txt")
+      expect(file_upload_settings[:allowed_content_types][:admin]).to eq("image/*,application/vnd.oasis.opendocument,application/vnd.ms-*,application/msword,application/vnd.ms-word,application/vnd.openxmlformats-officedocument,application/vnd.oasis.opendocument,application/pdf,application/rtf,text/plain")
+      expect(file_upload_settings[:allowed_content_types][:default]).to eq("image/*,application/pdf,application/rtf,text/plain")
     end
   end
 

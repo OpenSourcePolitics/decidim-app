@@ -9,7 +9,7 @@ describe DecidimApp::K8s::Commands::Organization do
 
   let(:reference_prefix) { "JKR" }
   let(:users_registration_mode) { "enabled" }
-  let(:secondary_hosts) { %w[osp.example.org osp.decidim.example] }
+  let(:secondary_hosts) { %w(osp.example.org osp.decidim.example) }
   let(:organization_configuration) do
     {
       name: "OSP Decidim",
@@ -100,9 +100,9 @@ describe DecidimApp::K8s::Commands::Organization do
 
         allowed_file_extensions = file_upload_settings["allowed_file_extensions"]
         expect(allowed_file_extensions.keys).to match_array(%w(admin image default))
-        expect(allowed_file_extensions["admin"]).to match_array(["dummy", "foo", "bar"])
-        expect(allowed_file_extensions["image"]).to match_array(["dummy", "foo", "bar"])
-        expect(allowed_file_extensions["default"]).to match_array(["dummy", "foo", "bar"])
+        expect(allowed_file_extensions["admin"]).to match_array(%w(dummy foo bar))
+        expect(allowed_file_extensions["image"]).to match_array(%w(dummy foo bar))
+        expect(allowed_file_extensions["default"]).to match_array(%w(dummy foo bar))
 
         expect(file_upload_settings["allowed_content_types"].keys).to match_array(%w(admin default))
         allowed_content_types = file_upload_settings["allowed_content_types"]
