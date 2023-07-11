@@ -9,7 +9,9 @@ default_admin:
 organizations:
   - name: "OSP Decidim"
     host: decidim.osp.example
-    secondary_hosts: 'osp.example.org,osp.decidim.example'
+    secondary_hosts:
+      - osp.example.org
+      - osp.decidim.example
     available_locales:
       - en
       - fr
@@ -86,9 +88,16 @@ organizations:
       port: 8080
       authentication: plain
       enable_starttls_auto: true
+    publik:
+      enabled: true
+      client_id: 12345
+      client_secret: 12345
+      site_url: https://example.com/
   - name: "OSP Decidim 2"
     host: second.osp.example
-    secondary_hosts: 'second.example.org,second.decidim.example'
+    secondary_hosts:
+      - second.example.org
+      - second.decidim.example
     available_locales:
       - en
       - fr
@@ -165,3 +174,9 @@ organizations:
       port: 8080
       authentication: plain
       enable_starttls_auto: true
+    omniauth_settings:
+      publik:
+        enabled: true
+        client_id: 12345
+        client_secret: 12345
+        site_url: https://example.com/
