@@ -27,8 +27,15 @@ module DecidimApp
 
         Commands::SystemAdmin.run(@configuration.system_admin)
         @configuration.organizations.each do |organization|
-          organization = Commands::Organization.run(organization, @configuration.default_admin)
-          Commands::Admin.run(@configuration.default_admin, organization)
+           Commands::Organization.call(organization, @configuration.default_admin) do
+            on(:ok, status, organization) do
+              byebug
+              Commands::Admin.run(@configuration.default_admin, organization)
+            end
+            on(:invalid, status) do
+              puts "FUUUUUUUUUUU"
+            end
+          end
         end
       end
     end

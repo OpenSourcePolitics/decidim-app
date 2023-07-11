@@ -5,32 +5,32 @@ require "decidim_app/k8s/manager"
 module DecidimApp
   module K8s
     module Commands
-      class Organization
-        def self.run(configuration, default_admin_configuration)
-          new(configuration, default_admin_configuration).run
+      class Organization < Rectify::Command
+        attr_accessor :status
+
+        def initialize(organization, default_admin)
+          @organization = organization
+          @default_admin_name = default_admin[:name]
+          @default_admin_email = default_admin[:email]
+          @status = {}
+          @topic = :organization
         end
 
-        def initialize(configuration, default_admin_configuration)
-          @configuration = configuration
-          @default_admin_name = default_admin_configuration[:name]
-          @default_admin_email = default_admin_configuration[:email]
-        end
-
-        def run
+        def call
           if existing_organization
-            K8s::Manager.logger.info("Organization #{@configuration[:name]} already exist")
-
             update
           else
-            K8s::Manager.logger.info("Installing organization : '#{@configuration[:name]}'")
-
             install
           end
+
+          return broadcast(:invalid, @status, nil) if @status.any? { |_, status| status[:status] != :ok }
+
+          broadcast(:ok, @status, existing_organization.reload)
         end
 
         def install
           form = Decidim::System::RegisterOrganizationForm.from_params(
-            @configuration.merge(
+            @organization.merge(
               organization_admin_email: @default_admin_email,
               organization_admin_name: @default_admin_name
             )
@@ -38,21 +38,14 @@ module DecidimApp
 
           Decidim::System::RegisterOrganization.call(form) do
             on(:ok) do
-              K8s::Manager.logger.info("Organization #{form.name} created")
+              register_status(:create, :ok)
               update
             end
 
             on(:invalid) do
-              K8s::Manager.logger.info("Organization #{form.name} could not be created")
-              form.tap(&:valid?).errors.messages.each do |error|
-                K8s::Manager.logger.info(error)
-              end
-
-              raise "Organization #{form.name} could not be created"
+              register_status(:create, :invalid, form.tap(&:valid?).errors.messages)
             end
           end
-
-          existing_organization
         end
 
         def update
@@ -60,46 +53,43 @@ module DecidimApp
 
           Decidim::System::UpdateOrganization.call(existing_organization.id, form) do
             on(:ok) do
-              K8s::Manager.logger.info("Organization #{form.name} updated")
+              register_status(:update, :ok)
             end
 
             on(:invalid) do
-              K8s::Manager.logger.info("Organization #{form.name} could not be updated")
-              form.tap(&:valid?).errors.messages.each do |error|
-                K8s::Manager.logger.info(error)
-              end
-
-              raise "Organization #{form.name} could not be updated"
+              register_status(:update, :invalid, form.tap(&:valid?).errors.messages)
             end
           end
+        end
 
-          existing_organization.reload
+        def register_status(action, status, messages = [])
+          @status.deep_merge!(@topic => { action => { status: status, messages: messages }})
         end
 
         def existing_organization
-          Decidim::Organization.find_by(name: @configuration[:name]) || Decidim::Organization.find_by(host: @configuration[:host])
+          Decidim::Organization.find_by(name: @organization[:name]) || Decidim::Organization.find_by(host: @organization[:host])
         end
 
-        def existing_organization_attributes
+        def existing_organization_attrs
           Decidim::System::UpdateOrganizationForm.from_model(existing_organization).attributes_with_values.deep_symbolize_keys
         end
 
         def update_params
-          params = existing_organization_attributes.deep_merge(
-            @configuration.except(:smtp_settings, :omniauth_settings)
+          params = existing_organization_attrs.deep_merge(
+            @organization.except(:smtp_settings, :omniauth_settings)
           ).merge(id: existing_organization.id)
 
-          @configuration.fetch(:smtp_settings, {}).each do |key, value|
+          @organization.fetch(:smtp_settings, {}).each do |key, value|
             params.merge!(key => value)
           end
 
-          @configuration.fetch(:omniauth_settings, {}).each do |provider, config|
+          @organization.fetch(:omniauth_settings, {}).each do |provider, config|
             config.each do |key, value|
               params.merge!("omniauth_settings_#{provider}_#{key}" => value)
             end
           end
 
-          params[:encrypted_password] = nil if @configuration.dig(:smtp_settings, :password).present?
+          params[:encrypted_password] = nil if @organization.dig(:smtp_settings, :password).present?
 
           params
         end

@@ -64,10 +64,10 @@ describe DecidimApp::K8s::Commands::Organization do
     }
   end
 
-  describe "#run" do
+  describe "#call" do
     it "creates the organization" do
       expect do
-        expect(subject.run).to be_a(Decidim::Organization)
+        expect(subject.call).to be_a(::Rectify::Command)
       end.to change(Decidim::Organization, :count).by(1).and change(Decidim::User, :count).by(1)
 
       organization = Decidim::Organization.last
@@ -84,8 +84,14 @@ describe DecidimApp::K8s::Commands::Organization do
     context "when organization is invalid" do
       let(:reference_prefix) { nil }
 
-      it "raises an error" do
-        expect { subject.run }.to raise_error(RuntimeError, "Organization #{organization_configuration[:name]} could not be created")
+      it "broadcasts invalid" do
+        broadcast = subject.call
+        expect(broadcast.status).to eq({ organization: {
+                                         create: {
+                                           status: :invalid,
+                                           messages: { reference_prefix: ["can't be blank"] }
+                                         }
+                                       } })
       end
     end
 
@@ -94,7 +100,7 @@ describe DecidimApp::K8s::Commands::Organization do
 
       it "updates the organization" do
         expect do
-          expect(subject.run).to be_a(Decidim::Organization)
+          expect(subject.call).to be_a(::Rectify::Command)
         end.to not_change(Decidim::Organization, :count).and not_change(Decidim::User, :count)
 
         expect(organization.reload.users_registration_mode).to eq(organization_configuration[:users_registration_mode])
@@ -145,20 +151,26 @@ describe DecidimApp::K8s::Commands::Organization do
       context "when organization is invalid" do
         let(:users_registration_mode) { "invalid" }
 
-        it "raises an error" do
-          expect { subject.run }.to raise_error(RuntimeError, "Organization #{organization_configuration[:name]} could not be updated")
+        it "broadcasts invalid" do
+          broadcast = subject.call
+          expect(broadcast.status).to eq({ organization: {
+            update: {
+              status: :invalid,
+              messages: { users_registration_mode: ["is not included in the list"] }
+            }
+          } })
         end
       end
     end
   end
 
-  describe ".run" do
+  describe ".call" do
     it "creates the organization" do
       # rubocop:disable RSpec/AnyInstance
-      expect_any_instance_of(described_class).to receive(:run).once
+      expect_any_instance_of(described_class).to receive(:call).once
       # rubocop:enable RSpec/AnyInstance
 
-      described_class.run(organization_configuration, default_admin_configuration)
+      described_class.call(organization_configuration, default_admin_configuration)
     end
   end
 end
