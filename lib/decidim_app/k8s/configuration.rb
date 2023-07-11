@@ -66,11 +66,9 @@ module DecidimApp
       end
 
       def transform(match_key, value)
-        if TRANSFORMS[match_key]
-          TRANSFORMS_METHODS[TRANSFORMS[match_key]].call(value)
-        else
-          value
-        end
+        return value unless TRANSFORMS[match_key]
+
+        TRANSFORMS_METHODS[TRANSFORMS[match_key]].call(value)
       end
     end
   end
