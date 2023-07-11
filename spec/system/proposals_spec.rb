@@ -4,6 +4,8 @@ require "spec_helper"
 
 describe "Proposals", type: :system do
   include ActionView::Helpers::TextHelper
+  include Decidim::TranslatableAttributes
+
   include_context "with a component"
   let(:manifest_name) { "proposals" }
 
@@ -170,7 +172,7 @@ describe "Proposals", type: :system do
         click_link proposal_title
 
         comments.each do |comment|
-          expect(page).to have_content(comment.body.values.first)
+          expect(page).to have_content(translated_attribute(comment.body))
         end
       end
     end
@@ -592,7 +594,7 @@ describe "Proposals", type: :system do
 
       it "finds the correct proposal" do
         within "form.new_filter" do
-          find("input[name='filter[search_text]']", match: :first).set("lorem")
+          find("input[name='filter[search_text_cont]']", match: :first).set("lorem")
           find("*[type=submit]").click
         end
 
