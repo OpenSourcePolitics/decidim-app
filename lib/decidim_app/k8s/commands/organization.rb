@@ -56,8 +56,8 @@ module DecidimApp
         end
 
         def update
-          mapped_attributes = Decidim::System::UpdateOrganizationForm.from_model(existing_organization).attributes_with_values
-          form = Decidim::System::UpdateOrganizationForm.from_params(mapped_attributes.merge(@configuration, id: existing_organization.id))
+          form = Decidim::System::UpdateOrganizationForm.from_params(update_params)
+
           Decidim::System::UpdateOrganization.call(existing_organization.id, form) do
             on(:ok) do
               K8s::Manager.logger.info("Organization #{form.name} updated")
@@ -78,6 +78,30 @@ module DecidimApp
 
         def existing_organization
           Decidim::Organization.find_by(name: @configuration[:name]) || Decidim::Organization.find_by(host: @configuration[:host])
+        end
+
+        def existing_organization_attributes
+          Decidim::System::UpdateOrganizationForm.from_model(existing_organization).attributes_with_values.deep_symbolize_keys
+        end
+
+        def update_params
+          params = existing_organization_attributes.deep_merge(
+            @configuration.except(:smtp_settings, :omniauth_settings)
+          ).merge(id: existing_organization.id)
+
+          @configuration.fetch(:smtp_settings, {}).each do |key, value|
+            params.merge!(key => value)
+          end
+
+          @configuration.fetch(:omniauth_settings, {}).each do |provider, config|
+            config.each do |key, value|
+              params.merge!("omniauth_settings_#{provider}_#{key}" => value)
+            end
+          end
+
+          params[:encrypted_password] = nil if @configuration.dig(:smtp_settings, :password).present?
+
+          params
         end
       end
     end
