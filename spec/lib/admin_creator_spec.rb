@@ -9,7 +9,7 @@ module Decidim
     let(:name) { "John Doe" }
     let(:nickname) { "JD" }
     let(:email) { "john@example.org" }
-    let(:password) { "decidim123456" }
+    let(:password) { "decidim123456789" }
     let(:organization_id) { organization.id.to_s }
 
     let(:environment) do
