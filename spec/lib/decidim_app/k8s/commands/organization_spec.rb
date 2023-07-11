@@ -101,51 +101,74 @@ describe DecidimApp::K8s::Commands::Organization do
       it "updates the organization" do
         expect do
           expect(subject.call).to be_a(::Rectify::Command)
-        end.to not_change(Decidim::Organization, :count).and not_change(Decidim::User, :count)
+        end.to not_change(Decidim::Organization, :count)
 
-        expect(organization.reload.users_registration_mode).to eq(organization_configuration[:users_registration_mode])
-        expect(organization.reload.name).to eq(organization_configuration[:name])
-        expect(organization.reload.host).to eq(organization_configuration[:host])
-        expect(organization.reload.secondary_hosts).to eq(secondary_hosts)
-        expect(organization.reload.users_registration_mode).to eq(organization_configuration[:users_registration_mode])
+      end
 
-        file_upload_settings = organization.reload.file_upload_settings
-        expect(file_upload_settings.keys).to match_array(%w(allowed_file_extensions allowed_content_types maximum_file_size))
+      it "does not update the Decidim::User" do
+        expect do
+          expect(subject.call).to be_a(::Rectify::Command)
+        end.to not_change(Decidim::User, :count)
+      end
 
-        allowed_file_extensions = file_upload_settings["allowed_file_extensions"]
-        expect(allowed_file_extensions.keys).to match_array(%w(admin image default))
-        expect(allowed_file_extensions["admin"]).to match_array(%w(dummy foo bar))
-        expect(allowed_file_extensions["image"]).to match_array(%w(dummy foo bar))
-        expect(allowed_file_extensions["default"]).to match_array(%w(dummy foo bar))
+      describe "organization attributes" do
+        before do
+          subject.call
+        end
 
-        expect(file_upload_settings["allowed_content_types"].keys).to match_array(%w(admin default))
-        allowed_content_types = file_upload_settings["allowed_content_types"]
-        expect(allowed_content_types["admin"]).to match_array(["dummy/*"])
-        expect(allowed_content_types["default"]).to match_array(["dummy/*"])
+        it "updates organization attributes" do
+          expect(organization.reload.users_registration_mode).to eq(organization_configuration[:users_registration_mode])
+          expect(organization.reload.name).to eq(organization_configuration[:name])
+          expect(organization.reload.host).to eq(organization_configuration[:host])
+          expect(organization.reload.secondary_hosts).to eq(secondary_hosts)
+          expect(organization.reload.users_registration_mode).to eq(organization_configuration[:users_registration_mode])
+        end
 
-        expect(file_upload_settings["maximum_file_size"].keys).to match_array(%w(avatar default))
-        maximum_file_size = file_upload_settings["maximum_file_size"]
-        expect(maximum_file_size["avatar"]).to eq(3)
-        expect(maximum_file_size["default"]).to eq(9)
+        it "updates the file_upload_settings" do
+          file_upload_settings = organization.reload.file_upload_settings
+          expect(file_upload_settings.keys).to match_array(%w(allowed_file_extensions allowed_content_types maximum_file_size))
 
-        smtp_settings = organization.reload.smtp_settings
-        expect(smtp_settings.keys).to match_array(%w(from from_email from_label user_name address port authentication enable_starttls_auto encrypted_password))
-        expect(smtp_settings["from"]).to eq("OSP Decidim <ne-pas-repondre@example.org>")
-        expect(smtp_settings["from_email"]).to eq("ne-pas-repondre@example.org")
-        expect(smtp_settings["from_label"]).to eq("OSP Decidim")
-        expect(smtp_settings["user_name"]).to eq("example")
-        expect(smtp_settings["address"]).to eq("address.smtp.org")
-        expect(smtp_settings["port"]).to eq(8080)
-        expect(smtp_settings["authentication"]).to eq("plain")
-        expect(smtp_settings["enable_starttls_auto"]).to eq(true)
-        expect(Decidim::AttributeEncryptor.decrypt(smtp_settings["encrypted_password"])).to eq("password")
+          allowed_file_extensions = file_upload_settings["allowed_file_extensions"]
+          expect(allowed_file_extensions.keys).to match_array(%w(admin image default))
+          expect(allowed_file_extensions["admin"]).to match_array(%w(dummy foo bar))
+          expect(allowed_file_extensions["image"]).to match_array(%w(dummy foo bar))
+          expect(allowed_file_extensions["default"]).to match_array(%w(dummy foo bar))
 
-        omniauth_settings = organization.reload.omniauth_settings
-        expect(omniauth_settings.keys).to match_array(%w(omniauth_settings_publik_client_id omniauth_settings_publik_client_secret omniauth_settings_publik_site_url omniauth_settings_publik_enabled))
-        expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_client_id"])).to eq("12345")
-        expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_client_secret"])).to eq("12345")
-        expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_site_url"])).to eq("https://example.com/")
-        expect(omniauth_settings["omniauth_settings_publik_enabled"]).to eq(true)
+          expect(file_upload_settings["allowed_content_types"].keys).to match_array(%w(admin default))
+          allowed_content_types = file_upload_settings["allowed_content_types"]
+          expect(allowed_content_types["admin"]).to match_array(["dummy/*"])
+          expect(allowed_content_types["default"]).to match_array(["dummy/*"])
+
+          expect(file_upload_settings["maximum_file_size"].keys).to match_array(%w(avatar default))
+          maximum_file_size = file_upload_settings["maximum_file_size"]
+          expect(maximum_file_size["avatar"]).to eq(3)
+          expect(maximum_file_size["default"]).to eq(9)
+
+        end
+
+        it "updates the smtp_settings" do
+          smtp_settings = organization.reload.smtp_settings
+          expect(smtp_settings.keys).to match_array(%w(from from_email from_label user_name address port authentication enable_starttls_auto encrypted_password))
+          expect(smtp_settings["from"]).to eq("OSP Decidim <ne-pas-repondre@example.org>")
+          expect(smtp_settings["from_email"]).to eq("ne-pas-repondre@example.org")
+          expect(smtp_settings["from_label"]).to eq("OSP Decidim")
+          expect(smtp_settings["user_name"]).to eq("example")
+          expect(smtp_settings["address"]).to eq("address.smtp.org")
+          expect(smtp_settings["port"]).to eq(8080)
+          expect(smtp_settings["authentication"]).to eq("plain")
+          expect(smtp_settings["enable_starttls_auto"]).to eq(true)
+          expect(Decidim::AttributeEncryptor.decrypt(smtp_settings["encrypted_password"])).to eq("password")
+        end
+
+        it "updates the omniauth_settings" do
+          omniauth_settings = organization.reload.omniauth_settings
+          expect(omniauth_settings.keys).to match_array(%w(omniauth_settings_publik_client_id omniauth_settings_publik_client_secret omniauth_settings_publik_site_url omniauth_settings_publik_enabled))
+          expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_client_id"])).to eq("12345")
+          expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_client_secret"])).to eq("12345")
+          expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_site_url"])).to eq("https://example.com/")
+          expect(omniauth_settings["omniauth_settings_publik_enabled"]).to eq(true)
+        end
+
       end
 
       context "when organization is invalid" do
