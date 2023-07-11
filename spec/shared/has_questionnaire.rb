@@ -571,6 +571,7 @@ shared_examples_for "has questionnaire" do
           :questionnaire_question,
           questionnaire: questionnaire,
           question_type: "sorting",
+          mandatory: true,
           options: [
             { "body" => { "en" => "chocolate" } },
             { "body" => { "en" => "like" } },
