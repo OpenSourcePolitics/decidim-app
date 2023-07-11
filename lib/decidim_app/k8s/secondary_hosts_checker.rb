@@ -22,7 +22,7 @@ module DecidimApp
         url = URI(host)
         host = (url.host || url.path)
         req = Net::HTTP::Get.new("/")
-        response = Net::HTTP.start(host, 443, use_ssl: true) { |http| http.request(req) }
+        response = Net::HTTP.start(host, 80) { |http| http.request(req) }
 
         case response
         when Net::HTTPSuccess
