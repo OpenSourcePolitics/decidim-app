@@ -7,11 +7,9 @@ describe Decidim::RepairNicknameService do
 
   let!(:users) { create_list(:user, 10) }
 
-  describe "#run" do
-    subject { described_class.run }
-
+  describe "#execute" do
     it "returns empty array" do
-      expect(subject).to be_empty
+      expect(subject.execute).to be_empty
     end
 
     context "when invalid nicknames" do
@@ -23,7 +21,7 @@ describe Decidim::RepairNicknameService do
       end
 
       it "returns array of invalid user IDs" do
-        expect(subject).to eq([invalid.id])
+        expect(subject.execute).to eq([invalid.id])
       end
     end
   end
@@ -31,6 +29,19 @@ describe Decidim::RepairNicknameService do
   describe "#ok?" do
     it "returns true" do
       expect(subject).to be_ok
+    end
+  end
+
+  describe "#invalid_users" do
+    let(:invalid) { build :user }
+
+    before do
+      invalid.nickname = "Décidim"
+      invalid.save!(validate: false)
+    end
+
+    it "returns array of invalid users" do
+      expect(subject.invalid_users).to eq([invalid])
     end
   end
 end

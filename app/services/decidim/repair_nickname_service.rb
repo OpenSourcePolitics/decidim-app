@@ -2,8 +2,6 @@
 
 module Decidim
   class RepairNicknameService
-    def initialize; end
-
     def self.run
       new.execute
     end
@@ -15,7 +13,11 @@ module Decidim
     end
 
     def ok?
-      users.blank?
+      invalid_users.blank?
+    end
+
+    def invalid_users
+      @invalid_users ||= Decidim::User.where.not("nickname ~* ?", "^[\\w-]+$")
     end
 
     private
@@ -23,7 +25,7 @@ module Decidim
     # Update each users with new nickname
     # Returns Array of updated User ID
     def update_nicknames!
-      @users.map do |user|
+      invalid_users.map do |user|
         user.nickname = valid_nickname_for(user)
 
         user.id if user.save!
@@ -35,11 +37,6 @@ module Decidim
       sanitized = user.nickname.codepoints.map { |ascii_code| ascii_to_valid_char(ascii_code) }.join
 
       "#{sanitized}#{user.id}"
-    end
-
-    # Find users with nicknames containing invalid chars
-    def users
-      @users ||= Decidim::User.where.not("nickname ~* ?", "^[\\w-]+$")
     end
 
     # Check for a given ascii code if it is included in valid_ascii_code list
