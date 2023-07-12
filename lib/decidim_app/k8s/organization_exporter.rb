@@ -127,8 +127,8 @@ module DecidimApp
       end
 
       def smtp_settings
-        settings = @organization.smtp_settings.deep_dup
-        settings["password"] = Decidim::AttributeEncryptor.decrypt(settings["encrypted_password"])
+        settings = @organization.smtp_settings.deep_dup || {}
+        settings["password"] = settings["encrypted_password"] ? Decidim::AttributeEncryptor.decrypt(settings["encrypted_password"]) : nil
         settings.delete("encrypted_password")
 
         settings = settings.transform_keys do |key|
