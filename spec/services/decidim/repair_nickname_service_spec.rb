@@ -22,6 +22,19 @@ describe Decidim::RepairNicknameService do
 
       it "returns array of invalid user IDs" do
         expect(subject.execute).to eq([invalid.id])
+        expect(invalid.reload.nickname).to eq("Decidim")
+      end
+
+      context "when the fixed item would match an existing nickname" do
+
+        before do
+          create(:user, nickname: "Decidim")
+        end
+
+        it "returns array of invalid user IDs" do
+          expect(subject.execute).to eq([invalid.id])
+          expect(invalid.reload.nickname).to eq("Decidim#{invalid.id}")
+        end
       end
     end
   end
@@ -41,7 +54,7 @@ describe Decidim::RepairNicknameService do
     end
 
     it "returns array of invalid users" do
-      expect(subject.invalid_users).to eq([invalid])
+      expect(subject.invalid_users).to eq([[invalid, "Decidim"]])
     end
   end
 end
