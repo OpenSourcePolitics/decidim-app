@@ -144,4 +144,10 @@ Rails.application.configure do
   # are known to cause issue with moderation due to expiration
   # Setting this to 100 years should be enough
   config.global_id.expires_in = 100.years
+
+  config.ssl_options = {
+    redirect: {
+      exclude: ->(request) { /health_check|sidekiq_alive/.match?(request.path) }
+    }
+  }
 end
