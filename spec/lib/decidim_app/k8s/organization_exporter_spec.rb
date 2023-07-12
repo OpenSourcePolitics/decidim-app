@@ -231,6 +231,16 @@ describe DecidimApp::K8s::OrganizationExporter do
     it "returns the smtp settings" do
       expect(subject.smtp_settings).to eq({ "SMTP_ADDRESS" => "smtp.example.org", "SMTP_FROM" => "test@example.org", "SMTP_PASSWORD" => "demo", "SMTP_PORT" => "25", "SMTP_USER_NAME" => "test" })
     end
+
+    context "when smtp settings are not present" do
+      before do
+        organization.update!(smtp_settings: nil)
+      end
+
+      it "returns empty smtp settings" do
+        expect(subject.smtp_settings).to eq({})
+      end
+    end
   end
 
   describe "#omniauth_settings" do
