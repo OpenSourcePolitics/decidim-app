@@ -8,9 +8,9 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
 
   let(:host) { "example.org" }
   let(:secondary_hosts) { ["www.example.org"] }
-  let(:target) { "https://#{secondary_hosts.first}" }
+  let(:target) { "http://#{secondary_hosts.first}" }
   let(:response_code) { 301 }
-  let(:response_headers) { { "location" => "https://#{host}" } }
+  let(:response_headers) { { "location" => "http://#{host}" } }
 
   before do
     # Our system checks for redirection then returns the host
@@ -23,11 +23,11 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
                                     }).to_return(status: response_code, body: "", headers: response_headers)
 
     # Second request to get the host
-    stub_request(:get, "https://#{host}/").with(headers: {
-                                                  "Accept" => "*/*",
-                                                  "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-                                                  "User-Agent" => "Ruby"
-                                                }).to_return(status: 200, body: "", headers: {})
+    stub_request(:get, "http://#{host}/").with(headers: {
+                                                 "Accept" => "*/*",
+                                                 "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+                                                 "User-Agent" => "Ruby"
+                                               }).to_return(status: 200, body: "", headers: {})
   end
 
   describe ".get_redirection_target" do
@@ -36,7 +36,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
     end
 
     context "when the host is not a redirection" do
-      let(:target) { "https://#{host}" }
+      let(:target) { "http://#{host}" }
       let(:response_headers) { {} }
       let(:response_code) { 200 }
 
@@ -53,7 +53,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
       end
 
       context "when it does not exist" do
-        let(:target) { "https://nothing.org" }
+        let(:target) { "http://nothing.org" }
         let(:response_code) { 404 }
 
         it "returns nil" do
@@ -63,7 +63,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
     end
 
     context "when the host is not valid because of too many redirections" do
-      let(:target) { "https://redirection.org" }
+      let(:target) { "http://redirection.org" }
       let(:response_headers) { { "location" => "another_redirection.org" } }
 
       it "returns nil" do
@@ -87,7 +87,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
     end
 
     context "when host is not valid" do
-      let(:target) { "https://nothing.org" }
+      let(:target) { "http://nothing.org" }
       let(:response_code) { 404 }
 
       it "returns false" do
@@ -102,7 +102,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
     end
 
     context "when there are invalid secondary hosts" do
-      let(:target) { "https://nothing.org" }
+      let(:target) { "http://nothing.org" }
       let(:response_code) { 404 }
 
       it "returns an empty array" do
