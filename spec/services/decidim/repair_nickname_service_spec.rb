@@ -26,7 +26,6 @@ describe Decidim::RepairNicknameService do
       end
 
       context "when the fixed item would match an existing nickname" do
-
         before do
           create(:user, nickname: "Decidim")
         end

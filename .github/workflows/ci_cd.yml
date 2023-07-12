@@ -89,8 +89,6 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v1.0.1
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
       - run:  bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
