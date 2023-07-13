@@ -29,11 +29,10 @@ module DecidimApp
         @configuration.organizations.each do |organization|
            Commands::Organization.call(organization, @configuration.default_admin) do
             on(:ok, status, organization) do
-              byebug
               Commands::Admin.run(@configuration.default_admin, organization)
             end
             on(:invalid, status) do
-              puts "FUUUUUUUUUUU"
+              puts "invalid state"
             end
           end
         end

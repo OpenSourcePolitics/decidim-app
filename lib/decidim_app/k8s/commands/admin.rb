@@ -6,17 +6,18 @@ require "decidim/core"
 module DecidimApp
   module K8s
     module Commands
-      class Admin
-        def self.run(configuration, organization)
-          new(configuration, organization).run
-        end
+      class Admin < Rectify::Command
+        attr_accessor :status
 
         def initialize(configuration, organization)
           @configuration = configuration
           @organization = organization
+
+          @status = {}
+          @topic = :admin_user
         end
 
-        def run
+        def call
           mapped_attributes = Decidim::AccountForm.from_model(existing_admin)
                                                   .attributes_with_values
                                                   .except(:avatar)
@@ -26,20 +27,21 @@ module DecidimApp
 
           Decidim::UpdateAccount.call(existing_admin, form) do
             on(:ok) do
-              K8s::Manager.logger.info("Admin user #{form.nickname} updated")
+              register_status(:update, :ok)
             end
 
             on(:invalid) do
-              K8s::Manager.logger.info("Admin user #{form.nickname} could not be updated")
-              form.tap(&:valid?).errors.messages.each do |error|
-                K8s::Manager.logger.info(error)
-              end
-
-              raise "Admin user #{form.nickname} could not be updated"
+              register_status(:update, :invalid, form.tap(&:valid?).errors.messages)
             end
           end
 
-          existing_admin.reload
+          return broadcast(:invalid, @status, nil) if @status.any? { |_, status| status[:status] != :ok }
+
+          broadcast(:ok, @status, existing_admin.reload)
+        end
+
+        def register_status(action, status, messages = [])
+          @status.deep_merge!(@topic => { action => { status: status, messages: messages }})
         end
 
         def existing_admin

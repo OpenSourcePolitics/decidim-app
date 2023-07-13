@@ -6,6 +6,8 @@ module DecidimApp
   module K8s
     module Commands
       class Organization < Rectify::Command
+        # callback: :repair_search, if: -> { locales_changed? }
+
         attr_accessor :status
 
         def initialize(organization, default_admin)
