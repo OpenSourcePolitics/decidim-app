@@ -44,8 +44,8 @@ describe "rake decidim:repair:nickname", type: :task do
       expect(invalid_user3.reload.nickname).to eq("foo-bar_fooo")
       expect(invalid_user4.reload.nickname).to eq("foobarfoo")
       expect(invalid_user5.reload.nickname).to eq("foobarfoo_bar")
-      expect(invalid_user6.reload.nickname).to eq("foobar#{invalid_user_6.id}")
-      expect(invalid_user7.reload.nickname).to eq("foobar#{invalid_user_7.id}")
+      expect(invalid_user6.reload.nickname).to eq("foobar#{invalid_user6.id}")
+      expect(invalid_user7.reload.nickname).to eq("foobar#{invalid_user7.id}")
       expect(valid_user.reload.nickname).to eq("Azerty_Uiop123")
     end
   end
