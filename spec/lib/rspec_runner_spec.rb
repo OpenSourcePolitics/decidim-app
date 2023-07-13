@@ -21,7 +21,7 @@ module Decidim
       end
 
       it "executes the rspec command on the correct files" do
-        expect(subject.run).to eq(nil)
+        expect(subject.run).to be_nil
       end
     end
 

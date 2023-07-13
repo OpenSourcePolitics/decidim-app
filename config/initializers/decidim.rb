@@ -98,7 +98,7 @@ Decidim.configure do |config|
     }
   end
 
-  config.base_uploads_path = "#{ENV["HEROKU_APP_NAME"]}/" if ENV["HEROKU_APP_NAME"].present?
+  config.base_uploads_path = "#{ENV.fetch("HEROKU_APP_NAME", nil)}/" if ENV["HEROKU_APP_NAME"].present?
 
   # Machine Translation Configuration
   #

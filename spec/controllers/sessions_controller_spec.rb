@@ -120,7 +120,7 @@ module Decidim
         context "when France Connect is enabled" do
           let(:organization) { create(:organization, omniauth_settings: omniauth_settings) }
           let(:omniauth_settings) do
-            { "omniauth_settings_france_connect_enabled": true }
+            { omniauth_settings_france_connect_enabled: true }
           end
 
           before do

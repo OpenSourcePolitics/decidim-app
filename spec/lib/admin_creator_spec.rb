@@ -24,7 +24,7 @@ module Decidim
 
     it "creates admin" do
       expect { described_class.create!(environment) }.to change(Decidim::User, :count).by(1)
-      expect(Decidim::User.last.admin).to eq(true)
+      expect(Decidim::User.last.admin).to be(true)
       expect(Decidim::User.last.nickname).to eq(nickname)
       expect(Decidim::User.last.organization).to eq(organization)
       expect(Decidim::User.last.email).to eq(email)
@@ -35,7 +35,7 @@ module Decidim
 
       it "creates admins with first organization" do
         expect { described_class.create!(environment) }.to change(Decidim::User, :count).by(1)
-        expect(Decidim::User.last.admin).to eq(true)
+        expect(Decidim::User.last.admin).to be(true)
         expect(Decidim::User.last.nickname).to eq(nickname)
         expect(Decidim::User.last.organization).to eq(organization)
         expect(Decidim::User.last.email).to eq(email)
