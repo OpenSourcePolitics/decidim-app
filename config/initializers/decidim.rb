@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "decidim-app/config"
+require "decidim_app/config"
 require "decidim/dev/dummy_translator"
 
 Decidim.configure do |config|

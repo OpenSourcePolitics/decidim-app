@@ -76,7 +76,7 @@ describe "Registration", type: :system do
 
     before do
       allow(Rails).to receive(:cache).and_return(memory_store)
-      Rack::Attack.enabled = true
+      DecidimApp::RackAttack.apply_configuration
       Rack::Attack.reset!
 
       visit decidim_friendly_signup.confirmation_codes_path(confirmation_token: confirmation_token)

@@ -6,18 +6,23 @@ services:
       - pg-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+  memcached:
+    image: memcached
+    ports:
+      - "11211:11211"
   redis:
     image: redis
     ports:
-      - 6379:6379
+      - "6379:6379"
     volumes:
       - redis-data:/var/lib/redis/data
   sidekiq:
     build:
       context: .
-    command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
+    command: [ "bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml" ]
     environment:
       - REDIS_URL=redis://redis:6379
+      - MEMCACHE_SERVERS=memcached:11211
     depends_on:
       - app
     links:
@@ -34,13 +39,15 @@ services:
       - DATABASE_USERNAME=postgres
       - DECIDIM_HOST=0.0.0.0
       - REDIS_URL=redis://redis:6379
+      - MEMCACHE_SERVERS=memcached:11211
     ports:
       - 3000:3000
     depends_on:
       - database
       - redis
+      - memcached
 
 volumes:
-  node_modules: {}
-  pg-data: {}
-  redis-data: {}
+  node_modules: { }
+  pg-data: { }
+  redis-data: { }

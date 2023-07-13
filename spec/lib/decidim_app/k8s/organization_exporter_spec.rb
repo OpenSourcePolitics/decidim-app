@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "k8s/organization_exporter"
+require "decidim_app/k8s/organization_exporter"
 
-describe K8s::OrganizationExporter do
+describe DecidimApp::K8s::OrganizationExporter do
   subject { described_class.new(organization, logger, export_path, image) }
 
   let(:organization) { create(:organization, host: organization_host, omniauth_settings: omniauth_settings) }
   let(:logger) { Logger.new($stdout) }
   let(:export_path) { Rails.root.join("tmp/test_export") }
   let(:organization_host) { "my-host.domain.org" }
+  let(:organization_secondary_host) { "www.my-host.domain.org" }
   let(:hostname) { "my-host" }
   let(:name_space) { "domain-org" }
   let(:image) { "my-image" }
@@ -22,6 +23,12 @@ describe K8s::OrganizationExporter do
   end
 
   let(:database_name) { Rails.configuration.database_configuration[Rails.env]["database"] }
+
+  before do
+    organization.update!(secondary_hosts: [organization_secondary_host])
+    allow(DecidimApp::K8s::SecondaryHostsChecker).to receive(:valid_secondary_hosts).with(host: organization_host, secondary_hosts: [organization_secondary_host])
+                                                                                    .and_return([organization_secondary_host])
+  end
 
   describe ".export!" do
     it "calls the right methods" do
@@ -139,8 +146,8 @@ describe K8s::OrganizationExporter do
     end
 
     it "returns the correct host and secondary hosts" do
-      expect(subject.organization_settings["spec"]["host"]).to eq(organization.host)
-      expect(subject.organization_settings["spec"]["additionalHosts"]).to eq(organization.secondary_hosts)
+      expect(subject.organization_settings["spec"]["host"]).to eq(organization_host)
+      expect(subject.organization_settings["spec"]["additionalHosts"]).to eq([organization_secondary_host])
     end
 
     it "returns the correct organization" do
@@ -162,7 +169,20 @@ describe K8s::OrganizationExporter do
                                                    "available_authorizations" => [],
                                                    "available_locales" => %w(en fr),
                                                    "default_locale" => "en",
-                                                   "file_upload_settings" => { "allowed_content_types" => { "admin" => %w(image/* application/vnd.oasis.opendocument application/vnd.ms-* application/msword application/vnd.ms-word application/vnd.openxmlformats-officedocument application/vnd.oasis.opendocument application/pdf application/rtf text/plain), "default" => ["image/*", "application/pdf", "application/rtf", "text/plain"] }, "allowed_file_extensions" => { "admin" => %w(jpg jpeg gif png bmp pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots), "default" => %w(jpg jpeg gif png bmp pdf rtf txt), "image" => %w(jpg jpeg gif png bmp ico) }, "maximum_file_size" => { "avatar" => 5, "default" => 10 } },
+                                                   "file_upload_settings" => {
+                                                     "allowed_content_types" => {
+                                                       "admin" => %w(image/* application/vnd.oasis.opendocument application/vnd.ms-* application/msword application/vnd.ms-word application/vnd.openxmlformats-officedocument application/vnd.oasis.opendocument application/pdf application/rtf text/plain),
+                                                       "default" => %w(image/* application/pdf application/rtf text/plain)
+                                                     },
+                                                     "allowed_file_extensions" => {
+                                                       "admin" => %w(jpg jpeg gif png bmp pdf doc docx xls xlsx ppt pptx ppx rtf txt odt ott odf otg ods ots),
+                                                       "default" => %w(jpg jpeg gif png bmp pdf rtf txt),
+                                                       "image" => %w(jpg jpeg gif png bmp ico)
+                                                     },
+                                                     "maximum_file_size" => {
+                                                       "avatar" => 5, "default" => 10
+                                                     }
+                                                   },
                                                    "force_users_to_authenticate_before_access_organization" => false,
                                                    "id" => organization.id,
                                                    "users_registration_mode" => 0
@@ -174,13 +194,15 @@ describe K8s::OrganizationExporter do
     let(:allowed_env_vars) do
       {
         "FOO" => "bar",
-        "BAR" => "baz"
+        "BAR" => "baz",
+        "DUMMY" => 3
       }
     end
 
     let(:forbidden_env_vars) do
       {
-        "BACKUP_S3SYNC_BUCKET" => "bucket-1216"
+        "BACKUP_S3SYNC_BUCKET" => "bucket-1216",
+        "ENABLE_RACK_ATTACK" => 1
       }
     end
 
@@ -191,7 +213,7 @@ describe K8s::OrganizationExporter do
     end
 
     it "returns the env vars" do
-      expect(subject.env_vars).to eq(allowed_env_vars)
+      expect(subject.env_vars).to eq({ "FOO" => "bar", "BAR" => "baz", "DUMMY" => "3", "ENABLE_RACK_ATTACK" => "0" })
     end
 
     context "when the .env file is empty" do
@@ -200,7 +222,7 @@ describe K8s::OrganizationExporter do
       end
 
       it "returns an empty hash" do
-        expect(subject.env_vars).to eq({})
+        expect(subject.env_vars).to eq({ "ENABLE_RACK_ATTACK" => "0" })
       end
     end
   end
@@ -209,13 +231,23 @@ describe K8s::OrganizationExporter do
     it "returns the smtp settings" do
       expect(subject.smtp_settings).to eq({ "SMTP_ADDRESS" => "smtp.example.org", "SMTP_FROM" => "test@example.org", "SMTP_PASSWORD" => "demo", "SMTP_PORT" => "25", "SMTP_USER_NAME" => "test" })
     end
+
+    context "when smtp settings are not present" do
+      before do
+        organization.update!(smtp_settings: nil)
+      end
+
+      it "returns empty smtp settings" do
+        expect(subject.smtp_settings).to eq({})
+      end
+    end
   end
 
   describe "#omniauth_settings" do
     it "returns the decrypted omniauth settings" do
       expect(subject.omniauth_settings).to match("OMNIAUTH_SETTINGS_FACEBOOK_APP_ID" => "app_id_123456",
                                                  "OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET" => "app_secret_123456",
-                                                 "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => true)
+                                                 "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => "true")
     end
 
     context "when the omniauth settings are not present" do
@@ -246,7 +278,7 @@ describe K8s::OrganizationExporter do
       it "returns the omniauth settings as it" do
         expect(subject.omniauth_settings).to match("OMNIAUTH_SETTINGS_FACEBOOK_APP_ID" => "wrongly_encrypted_app_id_123456",
                                                    "OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET" => "wrongly_encrypted_app_secret_123456",
-                                                   "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => true)
+                                                   "OMNIAUTH_SETTINGS_FACEBOOK_ENABLED" => "true")
       end
     end
   end
@@ -263,7 +295,7 @@ describe K8s::OrganizationExporter do
     it "returns the env vars" do
       expect(subject.all_env_vars.keys).to match_array(%w(apiVersion kind metadata stringData))
       expect(subject.all_env_vars["metadata"]["name"]).to eq("#{hostname}-custom-env")
-      expect(subject.all_env_vars["stringData"].keys).to match_array(%w(RAILS_ENV RAILS_SERVE_STATIC_FILES SMTP_FROM SMTP_USER_NAME SMTP_PORT SMTP_ADDRESS SMTP_PASSWORD OMNIAUTH_SETTINGS_FACEBOOK_ENABLED OMNIAUTH_SETTINGS_FACEBOOK_APP_ID OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET))
+      expect(subject.all_env_vars["stringData"].keys).to match_array(%w(ENABLE_RACK_ATTACK RAILS_ENV RAILS_SERVE_STATIC_FILES SMTP_FROM SMTP_USER_NAME SMTP_PORT SMTP_ADDRESS SMTP_PASSWORD OMNIAUTH_SETTINGS_FACEBOOK_ENABLED OMNIAUTH_SETTINGS_FACEBOOK_APP_ID OMNIAUTH_SETTINGS_FACEBOOK_APP_SECRET))
     end
   end
 end

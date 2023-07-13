@@ -62,13 +62,7 @@ Rails.application.configure do
   config.log_tags = [:request_id]
 
   # Use a different cache store in production.
-  config.cache_store = if ENV["MEMCACHEDCLOUD_SERVERS"].present?
-                         [:dalli_store, ENV["MEMCACHEDCLOUD_SERVERS"].split(","), {
-                           username: ENV["MEMCACHEDCLOUD_USERNAME"], password: ENV["MEMCACHEDCLOUD_PASSWORD"]
-                         }]
-                       else
-                         :mem_cache_store
-                       end
+  config.cache_store = :mem_cache_store, ENV.fetch("MEMCACHE_SERVERS", "localhost:11211")
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   config.active_job.queue_adapter = :sidekiq
@@ -150,4 +144,10 @@ Rails.application.configure do
   # are known to cause issue with moderation due to expiration
   # Setting this to 100 years should be enough
   config.global_id.expires_in = 100.years
+
+  config.ssl_options = {
+    redirect: {
+      exclude: ->(request) { /health_check|sidekiq_alive/.match?(request.path) }
+    }
+  }
 end
