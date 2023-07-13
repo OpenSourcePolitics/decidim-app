@@ -288,6 +288,9 @@ Style/HashEachMethods:
 Style/HashLikeCase:
   MinBranchesCount: 5
 
+Style/OpenStructUse:
+  Enabled: false
+
 # Indentation of `when`.
 Layout/CaseIndentation:
   EnforcedStyle: case
