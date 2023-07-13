@@ -1,4 +1,4 @@
-FROM ruby:2.7.5
+FROM ruby:3.0.2
 
 ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy
