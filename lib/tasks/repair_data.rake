@@ -56,7 +56,7 @@ end
 
 def ask_for_permission(logger, users_count)
   logger.info("[decidim:repair:nickname] :: Do you want to update these #{users_count} users ?")
-  return true if ENV["REPAIR_NICKNAME_FORCE"] == "1"
+  return true if ENV.fetch("REPAIR_NICKNAME_FORCE", nil) == "1"
 
   logger.info("[decidim:repair:nickname] :: prepend REPAIR_NICKNAME_FORCE=1 to your command to update")
 
@@ -64,10 +64,10 @@ def ask_for_permission(logger, users_count)
 end
 
 def ascii_to_valid_char(id)
-  letters = ("A".."Z").to_a.join("").codepoints
-  letters += ("a".."z").to_a.join("").codepoints
-  digits = ("0".."9").to_a.join("").codepoints
-  special_chars = %w(- _).join("").codepoints
+  letters = ("A".."Z").to_a.join.codepoints
+  letters += ("a".."z").to_a.join.codepoints
+  digits = ("0".."9").to_a.join.codepoints
+  special_chars = %w(- _).join.codepoints
 
   valid_ascii_code = letters + digits + special_chars
 

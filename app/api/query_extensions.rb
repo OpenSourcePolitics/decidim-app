@@ -6,6 +6,6 @@ module QueryExtensions
   end
 
   def deployment
-    OpenStruct.new
+    Struct.new
   end
 end

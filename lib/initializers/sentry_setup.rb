@@ -15,8 +15,8 @@ module SentrySetup
         config.traces_sample_rate = sample_rate.to_f
       end
 
-      Sentry.set_tags('server.hostname': hostname) if hostname.present?
-      Sentry.set_tags('server.ip': ip) if ip.present?
+      Sentry.set_tags("server.hostname": hostname) if hostname.present?
+      Sentry.set_tags("server.ip": ip) if ip.present?
     end
 
     private

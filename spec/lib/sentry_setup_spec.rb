@@ -16,9 +16,9 @@ describe SentrySetup do
 
   let(:server_metadata) do
     JSON.dump({
-                "hostname": "my_hostname",
-                "public_ip": {
-                  "address": "123.123.123.123"
+                hostname: "my_hostname",
+                public_ip: {
+                  address: "123.123.123.123"
                 }
               })
   end

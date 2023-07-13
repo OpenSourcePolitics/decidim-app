@@ -19,7 +19,7 @@ shared_examples "on/off account passwords" do
         expect(page).to have_content("successfully")
       end
 
-      expect(user.reload.valid_password?("sekritpass123")).to eq(true)
+      expect(user.reload.valid_password?("sekritpass123")).to be(true)
     end
   end
 
@@ -55,7 +55,7 @@ shared_examples "on/off account passwords" do
         expect(page).to have_content("successfully")
       end
 
-      expect(user.reload.valid_password?("sekritpass123")).to eq(true)
+      expect(user.reload.valid_password?("sekritpass123")).to be(true)
     end
   end
 end

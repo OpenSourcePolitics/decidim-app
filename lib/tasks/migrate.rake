@@ -187,7 +187,7 @@ class MigrationsFixer
 
   # Build osp-app path and returns osp-app path ending with '/*'
   def osp_app_path
-    osp_app_path ||= File.expand_path(ENV["MIGRATIONS_PATH"])
+    osp_app_path ||= File.expand_path(ENV.fetch("MIGRATIONS_PATH", nil))
     if osp_app_path.end_with?("/")
       osp_app_path
     else
