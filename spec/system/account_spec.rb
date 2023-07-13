@@ -12,6 +12,5 @@ describe "Registration", type: :system do
     login_as user, scope: :user
   end
 
-  #TODO: reenable the test when friendly sign up is bumped
-  #it_behaves_like "on/off account passwords"
+  it_behaves_like "on/off account passwords"
 end

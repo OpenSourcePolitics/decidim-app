@@ -37,8 +37,8 @@ shared_examples "on/off account passwords" do
         find("*[type=submit]").click
       end
 
-      within_flash_messages do
-        expect(page).to have_content("There was a problem updating your account.")
+      within "#passwordChange" do
+        expect(page).to have_content("There's an error in this field.")
       end
     end
 
