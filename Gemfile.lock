@@ -8,8 +8,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git
-  revision: 52f079043d6f6d8506608be5fcc9daa6060e537a
-  branch: bump/0_27
+  revision: ae96439a7db7158c3fdaa83de29793aefdc1c34a
+  branch: release/0.27-stable
   specs:
     decidim-friendly_signup (0.4.4)
       decidim-core (~> 0.27)
