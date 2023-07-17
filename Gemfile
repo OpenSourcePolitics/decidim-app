@@ -32,6 +32,7 @@ gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", "~> 1.4"
 gem "deepl-rb", require: "deepl"
+gem "deface"
 gem "dotenv-rails", "~> 2.7"
 gem "faker", "~> 2.14"
 gem "fog-aws"
