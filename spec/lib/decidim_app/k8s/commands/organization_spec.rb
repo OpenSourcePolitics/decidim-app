@@ -86,12 +86,13 @@ describe DecidimApp::K8s::Commands::Organization do
 
       it "broadcasts invalid" do
         broadcast = subject.call
-        expect(broadcast.status).to eq({ organization: {
-                                         create: {
-                                           status: :invalid,
-                                           messages: { reference_prefix: ["can't be blank"] }
-                                         }
-                                       } })
+
+        expect(broadcast.status_registry).to eq({ organization: {
+                                                  created: {
+                                                    status: :invalid,
+                                                    messages: { reference_prefix: ["can't be blank"] }
+                                                  }
+                                                } })
       end
     end
 
@@ -102,7 +103,6 @@ describe DecidimApp::K8s::Commands::Organization do
         expect do
           expect(subject.call).to be_a(::Rectify::Command)
         end.to not_change(Decidim::Organization, :count)
-
       end
 
       it "does not update the Decidim::User" do
@@ -143,7 +143,6 @@ describe DecidimApp::K8s::Commands::Organization do
           maximum_file_size = file_upload_settings["maximum_file_size"]
           expect(maximum_file_size["avatar"]).to eq(3)
           expect(maximum_file_size["default"]).to eq(9)
-
         end
 
         it "updates the smtp_settings" do
@@ -168,7 +167,6 @@ describe DecidimApp::K8s::Commands::Organization do
           expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_site_url"])).to eq("https://example.com/")
           expect(omniauth_settings["omniauth_settings_publik_enabled"]).to eq(true)
         end
-
       end
 
       context "when organization is invalid" do
@@ -176,24 +174,14 @@ describe DecidimApp::K8s::Commands::Organization do
 
         it "broadcasts invalid" do
           broadcast = subject.call
-          expect(broadcast.status).to eq({ organization: {
-            update: {
-              status: :invalid,
-              messages: { users_registration_mode: ["is not included in the list"] }
-            }
-          } })
+          expect(broadcast.status_registry).to eq({ organization: {
+                                                    updated: {
+                                                      status: :invalid,
+                                                      messages: { users_registration_mode: ["is not included in the list"] }
+                                                    }
+                                                  } })
         end
       end
-    end
-  end
-
-  describe ".call" do
-    it "creates the organization" do
-      # rubocop:disable RSpec/AnyInstance
-      expect_any_instance_of(described_class).to receive(:call).once
-      # rubocop:enable RSpec/AnyInstance
-
-      described_class.call(organization_configuration, default_admin_configuration)
     end
   end
 end

@@ -12,11 +12,29 @@ describe DecidimApp::K8s::Manager do
 
   describe "#run" do
     it "runs the installation" do
-      expect(DecidimApp::K8s::Commands::SystemAdmin).to receive(:run).once
-      expect(DecidimApp::K8s::Commands::Organization).to receive(:run).twice
-      expect(DecidimApp::K8s::Commands::Admin).to receive(:run).twice
+      expect(DecidimApp::K8s::Commands::SystemAdmin).to receive(:call).once.and_call_original
+      expect(DecidimApp::K8s::Commands::Organization).to receive(:call).twice.and_call_original
+      expect(DecidimApp::K8s::Commands::Admin).to receive(:call).twice.and_call_original
 
       subject.run
+    end
+
+    {
+      system_admin: {},
+      organizations: [{}],
+      default_admin: { name: "Admin user", nickname: "#123456", email: "admin@example.org" }
+    }.each do |method, config|
+      context "when #{method} is invalid" do
+        before do
+          # rubocop:disable RSpec/AnyInstance
+          allow_any_instance_of(DecidimApp::K8s::Configuration).to receive(method).and_return(config)
+          # rubocop:enable RSpec/AnyInstance
+        end
+
+        it "raises runtime error" do
+          expect { subject.run }.to raise_error(RuntimeError)
+        end
+      end
     end
 
     context "when configuration is invalid" do

@@ -1,21 +1,17 @@
 # frozen_string_literal: true
 
-require "decidim_app/k8s/manager"
+require "decidim_app/k8s/command"
 
 module DecidimApp
   module K8s
     module Commands
-      class Organization < Rectify::Command
-        # callback: :repair_search, if: -> { locales_changed? }
-
-        attr_accessor :status
+      class Organization < DecidimApp::K8s::Command
+        register_topic :organization
 
         def initialize(organization, default_admin)
           @organization = organization
           @default_admin_name = default_admin[:name]
           @default_admin_email = default_admin[:email]
-          @status = {}
-          @topic = :organization
         end
 
         def call
@@ -25,9 +21,7 @@ module DecidimApp
             install
           end
 
-          return broadcast(:invalid, @status, nil) if @status.any? { |_, status| status[:status] != :ok }
-
-          broadcast(:ok, @status, existing_organization.reload)
+          broadcast_status(existing_organization)
         end
 
         def install
@@ -40,12 +34,13 @@ module DecidimApp
 
           Decidim::System::RegisterOrganization.call(form) do
             on(:ok) do
-              register_status(:create, :ok)
+              register_status(:created, :ok)
+
               update
             end
 
             on(:invalid) do
-              register_status(:create, :invalid, form.tap(&:valid?).errors.messages)
+              register_status(:created, :invalid, form.tap(&:valid?).errors.messages)
             end
           end
         end
@@ -55,21 +50,17 @@ module DecidimApp
 
           Decidim::System::UpdateOrganization.call(existing_organization.id, form) do
             on(:ok) do
-              register_status(:update, :ok)
+              register_status(:updated, :ok)
             end
 
             on(:invalid) do
-              register_status(:update, :invalid, form.tap(&:valid?).errors.messages)
+              register_status(:updated, :invalid, form.tap(&:valid?).errors.messages)
             end
           end
         end
 
-        def register_status(action, status, messages = [])
-          @status.deep_merge!(@topic => { action => { status: status, messages: messages }})
-        end
-
         def existing_organization
-          Decidim::Organization.find_by(name: @organization[:name]) || Decidim::Organization.find_by(host: @organization[:host])
+          @existing_organization ||= (Decidim::Organization.find_by(name: @organization[:name]) || Decidim::Organization.find_by(host: @organization[:host]))
         end
 
         def existing_organization_attrs

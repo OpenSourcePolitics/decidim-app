@@ -1,34 +1,33 @@
 # frozen_string_literal: true
 
-require "decidim_app/k8s/manager"
+require "decidim_app/k8s/command"
 
 module DecidimApp
   module K8s
     module Commands
-      class SystemAdmin
-        def self.run(configuration)
-          new(configuration).run
-        end
+      class SystemAdmin < DecidimApp::K8s::Command
+        register_topic :system_admin
 
         def initialize(configuration)
           @configuration = configuration
         end
 
-        def run
-          system_admin = Decidim::System::Admin.find_or_initialize_by(email: @configuration[:email])
+        def call
+          install_or_update
 
+          broadcast_status(system_admin)
+        end
+
+        def install_or_update
           if system_admin.update(@configuration)
-            K8s::Manager.logger.info("System admin user #{system_admin.email} updated")
+            register_status(:updated, :ok)
           else
-            K8s::Manager.logger.info("System admin user #{system_admin.email} could not be updated")
-            system_admin.tap(&:valid?).errors.messages.each do |error|
-              K8s::Manager.logger.info(error)
-            end
-
-            raise "System admin user #{system_admin.email} could not be updated"
+            register_status(:updated, :invalid, system_admin.tap(&:valid?).errors.messages)
           end
+        end
 
-          system_admin.reload
+        def system_admin
+          @system_admin ||= Decidim::System::Admin.find_or_initialize_by(email: @configuration[:email])
         end
       end
     end

@@ -7,8 +7,13 @@ require "decidim_app/k8s/commands/admin"
 describe DecidimApp::K8s::Commands::Admin do
   subject { described_class.new(default_admin_configuration, organization) }
 
-  let!(:admin) { create(:user, email: default_admin_configuration[:email], name: "Jane Doe", organization: organization) }
-
+  let!(:admin) do
+    create(:user,
+           email: default_admin_configuration[:email],
+           password: "excruciating_flaky_123456",
+           name: "Jane Doe",
+           organization: organization)
+  end
   let(:organization) { create(:organization) }
   let(:name) { "John Doe" }
   let(:default_admin_configuration) do
@@ -23,7 +28,7 @@ describe DecidimApp::K8s::Commands::Admin do
   describe "#run" do
     it "updates the admin" do
       expect do
-        expect(subject.run).to be_a(Decidim::User)
+        expect(subject.call).to be_a(::Rectify::Command)
       end.not_to change(Decidim::User, :count)
 
       expect(admin.reload.name).to eq(default_admin_configuration[:name])
@@ -32,19 +37,16 @@ describe DecidimApp::K8s::Commands::Admin do
     context "when admin is invalid" do
       let(:name) { nil }
 
-      it "raises an error" do
-        expect { subject.run }.to raise_error(RuntimeError, "Admin user #{default_admin_configuration[:nickname]} could not be updated")
+      it "broadcasts invalid" do
+        broadcast = subject.call
+
+        expect(broadcast.status_registry).to eq({ admin: {
+                                                  updated: {
+                                                    status: :invalid,
+                                                    messages: { name: ["can't be blank"] }
+                                                  }
+                                                } })
       end
-    end
-  end
-
-  describe ".run" do
-    it "runs the installation" do
-      # rubocop:disable RSpec/AnyInstance
-      expect_any_instance_of(described_class).to receive(:run).once
-      # rubocop:enable RSpec/AnyInstance
-
-      described_class.run(default_admin_configuration, organization)
     end
   end
 end

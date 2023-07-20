@@ -1,51 +1,53 @@
 # frozen_string_literal: true
 
-require "decidim_app/k8s/manager"
+require "decidim_app/k8s/command"
 require "decidim/core"
 
 module DecidimApp
   module K8s
     module Commands
-      class Admin < Rectify::Command
-        attr_accessor :status
+      class Admin < DecidimApp::K8s::Command
+        register_topic :admin
 
         def initialize(configuration, organization)
           @configuration = configuration
           @organization = organization
-
-          @status = {}
-          @topic = :admin_user
         end
 
         def call
-          mapped_attributes = Decidim::AccountForm.from_model(existing_admin)
-                                                  .attributes_with_values
-                                                  .except(:avatar)
-          form = Decidim::AccountForm.from_params(mapped_attributes.merge(admin_params))
+          install_or_update
+
+          broadcast_status(existing_admin)
+        end
+
+        def install_or_update
+          form = Decidim::AccountForm.from_params(update_params)
                                      .with_context(current_user: existing_admin,
                                                    current_organization: @organization)
 
           Decidim::UpdateAccount.call(existing_admin, form) do
             on(:ok) do
-              register_status(:update, :ok)
+              register_status(:updated, :ok)
             end
 
             on(:invalid) do
-              register_status(:update, :invalid, form.tap(&:valid?).errors.messages)
+              register_status(:updated, :invalid, form.tap(&:valid?).errors.messages)
             end
           end
-
-          return broadcast(:invalid, @status, nil) if @status.any? { |_, status| status[:status] != :ok }
-
-          broadcast(:ok, @status, existing_admin.reload)
-        end
-
-        def register_status(action, status, messages = [])
-          @status.deep_merge!(@topic => { action => { status: status, messages: messages }})
         end
 
         def existing_admin
           @existing_admin ||= Decidim::User.find_by(email: @configuration[:email], organization: @organization).tap(&:skip_confirmation!)
+        end
+
+        def existing_admin_attributes
+          Decidim::AccountForm.from_model(existing_admin)
+                              .attributes_with_values
+                              .except(:avatar)
+        end
+
+        def update_params
+          existing_admin_attributes.merge(admin_params)
         end
 
         def admin_params
