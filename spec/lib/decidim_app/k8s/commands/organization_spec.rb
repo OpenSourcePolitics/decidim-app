@@ -66,11 +66,31 @@ describe DecidimApp::K8s::Commands::Organization do
 
   describe "#call" do
     it "creates the organization" do
+      listener = double("Listener")
+      subject.subscribe(listener)
+      allow(listener).to receive(:ok)
+
       expect do
-        expect(subject.call).to be_a(::Rectify::Command)
+        expect { subject.call }.to broadcast(:ok)
       end.to change(Decidim::Organization, :count).by(1).and change(Decidim::User, :count).by(1)
 
-      organization = Decidim::Organization.last
+      organization = Decidim::Organization.last.reload
+
+      expect(listener).to have_received(:ok).with(
+        {
+          organization: {
+            created: {
+              status: :ok,
+              messages: []
+            },
+            updated: {
+              status: :ok,
+              messages: []
+            }
+          }
+        },
+        organization
+      )
 
       expect(organization.name).to eq(organization_configuration[:name])
       expect(organization.host).to eq(organization_configuration[:host])
@@ -82,17 +102,30 @@ describe DecidimApp::K8s::Commands::Organization do
     end
 
     context "when organization is invalid" do
-      let(:reference_prefix) { nil }
+      let(:users_registration_mode) { "invalid" }
 
       it "broadcasts invalid" do
-        broadcast = subject.call
+        listener = double("Listener")
+        expect(listener).to receive(:invalid).with(
+          {
+            organization: {
+              created: {
+                status: :invalid,
+                messages: {
+                  users_registration_mode: [
+                    "is not included in the list"
+                  ]
+                }
+              }
+            }
+          },
+          nil
+        )
+        subject.subscribe(listener)
 
-        expect(broadcast.status_registry).to eq({ organization: {
-                                                  created: {
-                                                    status: :invalid,
-                                                    messages: { reference_prefix: ["can't be blank"] }
-                                                  }
-                                                } })
+        expect do
+          expect { subject.call }.to broadcast(:invalid)
+        end.not_to change(Decidim::Organization, :count)
       end
     end
 
@@ -100,14 +133,42 @@ describe DecidimApp::K8s::Commands::Organization do
       let!(:organization) { create(:organization, host: organization_configuration[:host], users_registration_mode: :disabled) }
 
       it "updates the organization" do
+        listener = double("Listener")
+        expect(listener).to receive(:ok).with(
+          {
+            organization: {
+              updated: {
+                status: :ok,
+                messages: []
+              }
+            }
+          },
+          organization.reload
+        )
+        subject.subscribe(listener)
+
         expect do
           expect(subject.call).to be_a(::Rectify::Command)
         end.to not_change(Decidim::Organization, :count)
       end
 
       it "does not update the Decidim::User" do
+        listener = double("Listener")
+        expect(listener).to receive(:ok).with(
+          {
+            organization: {
+              updated: {
+                status: :ok,
+                messages: []
+              }
+            }
+          },
+          organization.reload
+        )
+        subject.subscribe(listener)
+
         expect do
-          expect(subject.call).to be_a(::Rectify::Command)
+          expect { subject.call }.to broadcast(:ok)
         end.to not_change(Decidim::User, :count)
       end
 
@@ -173,13 +234,27 @@ describe DecidimApp::K8s::Commands::Organization do
         let(:users_registration_mode) { "invalid" }
 
         it "broadcasts invalid" do
-          broadcast = subject.call
-          expect(broadcast.status_registry).to eq({ organization: {
-                                                    updated: {
-                                                      status: :invalid,
-                                                      messages: { users_registration_mode: ["is not included in the list"] }
-                                                    }
-                                                  } })
+          listener = double("Listener")
+          expect(listener).to receive(:invalid).with(
+            {
+              organization: {
+                updated: {
+                  status: :invalid,
+                  messages: {
+                    users_registration_mode: [
+                      "is not included in the list"
+                    ]
+                  }
+                }
+              }
+            },
+            nil
+          )
+          subject.subscribe(listener)
+
+          expect do
+            expect { subject.call }.to broadcast(:invalid)
+          end.not_to change(Decidim::Organization, :count)
         end
       end
     end

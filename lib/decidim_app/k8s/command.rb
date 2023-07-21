@@ -32,6 +32,10 @@ module DecidimApp
 
         broadcast(:ok, status_registry, model.reload)
       end
+
+      def errors_for(form)
+        form.tap(&:valid?).errors.messages.transform_values(&:uniq)
+      end
     end
   end
 end

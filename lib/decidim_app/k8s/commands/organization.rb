@@ -40,7 +40,7 @@ module DecidimApp
             end
 
             on(:invalid) do
-              register_status(:created, :invalid, form.tap(&:valid?).errors.messages)
+              register_status(:created, :invalid, errors_for(form))
             end
           end
         end
@@ -54,7 +54,7 @@ module DecidimApp
             end
 
             on(:invalid) do
-              register_status(:updated, :invalid, form.tap(&:valid?).errors.messages)
+              register_status(:updated, :invalid, errors_for(form))
             end
           end
         end

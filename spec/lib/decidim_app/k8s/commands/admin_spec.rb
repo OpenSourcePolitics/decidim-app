@@ -27,8 +27,22 @@ describe DecidimApp::K8s::Commands::Admin do
 
   describe "#run" do
     it "updates the admin" do
+      listener = double("Listener")
+      expect(listener).to receive(:ok).with(
+        {
+          admin: {
+            updated: {
+              status: :ok,
+              messages: []
+            }
+          }
+        },
+        admin.reload
+      )
+      subject.subscribe(listener)
+
       expect do
-        expect(subject.call).to be_a(::Rectify::Command)
+        expect { subject.call }.to broadcast(:ok)
       end.not_to change(Decidim::User, :count)
 
       expect(admin.reload.name).to eq(default_admin_configuration[:name])
@@ -38,14 +52,25 @@ describe DecidimApp::K8s::Commands::Admin do
       let(:name) { nil }
 
       it "broadcasts invalid" do
-        broadcast = subject.call
+        listener = double("Listener")
+        expect(listener).to receive(:invalid).with(
+          {
+            admin: {
+              updated: {
+                status: :invalid,
+                messages: {
+                  name: ["can't be blank"]
+                }
+              }
+            }
+          },
+          nil
+        )
+        subject.subscribe(listener)
 
-        expect(broadcast.status_registry).to eq({ admin: {
-                                                  updated: {
-                                                    status: :invalid,
-                                                    messages: { name: ["can't be blank"] }
-                                                  }
-                                                } })
+        expect do
+          expect { subject.call }.to broadcast(:invalid)
+        end.not_to change(Decidim::User, :count)
       end
     end
   end
