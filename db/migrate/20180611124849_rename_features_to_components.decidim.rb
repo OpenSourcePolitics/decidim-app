@@ -20,11 +20,8 @@ class RenameFeaturesToComponents < ActiveRecord::Migration[5.1]
       rename_index :decidim_components, "index_decidim_features_on_decidim_participatory_space", "index_decidim_components_on_decidim_participatory_space"
     end
 
-    # rubocop:disable Rails/SkipsModelValidations
     Version.where(item_type: "Decidim::Feature").update_all(item_type: "Decidim::Component")
     ActionLog.where(resource_type: "Decidim::Feature").update_all(resource_type: "Decidim::Component")
-    # rubocop:enable Rails/SkipsModelValidations
-
     ActionLog.find_each do |log|
       new_extra = log.extra.dup
       next if new_extra["component"].present?
