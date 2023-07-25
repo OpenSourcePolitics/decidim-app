@@ -40,6 +40,7 @@ services:
       - DECIDIM_HOST=0.0.0.0
       - REDIS_URL=redis://redis:6379
       - MEMCACHE_SERVERS=memcached:11211
+      - RAILS_SERVE_STATIC_FILES=true
     ports:
       - 3000:3000
     depends_on:
