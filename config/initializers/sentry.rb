@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-require "initializers/sentry_setup"
+require "decidim_app/sentry_setup"
 
 SentrySetup.init
