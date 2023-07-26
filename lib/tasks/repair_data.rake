@@ -18,5 +18,22 @@ namespace :decidim do
 
       logger.info("Operation terminated")
     end
+
+    desc "Check for malformed comments body and repair them if needed"
+    task comments: :environment do
+      logger = Logger.new($stdout)
+      logger.info("Checking all comments...")
+
+      updated_comments_ids = Decidim::RepairCommentsService.run
+
+      if updated_comments_ids.blank?
+        logger.info("No comments updated")
+      else
+        logger.info("#{updated_comments_ids} comments updated")
+        logger.info("Updated comments ID : #{updated_comments_ids.join(",")}")
+      end
+
+      logger.info("Operation terminated")
+    end
   end
 end
