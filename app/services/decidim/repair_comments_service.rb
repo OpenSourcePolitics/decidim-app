@@ -19,12 +19,16 @@ module Decidim
     end
 
     def invalid_comments
-      @invalid_comments ||= Decidim::Comments::Comment.all.map do |comment|
+      return @invalid_comments if @invalid_comments
+
+      invalid_comments = []
+      Decidim::Comments::Comment.find_each do |comment|
         next if translated_attribute(comment.body).is_a?(String)
 
         comment.body.delete("machine_translations")
-        [comment, comment.body.values.first]
-      end.compact
+        invalid_comments << [comment, comment.body.values.first]
+      end
+      @invalid_comments = invalid_comments
     end
 
     private
