@@ -35,5 +35,9 @@ namespace :decidim do
 
       logger.info("Operation terminated")
     end
+
+    task url_in_content: :environment do
+      Decidim::RepairUrlInContentService.run
+    end
   end
 end
