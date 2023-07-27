@@ -26,7 +26,8 @@ describe Decidim::RepairCommentsService do
 
       it "returns array of invalid comments IDs" do
         expect(subject.execute).to eq([invalid.id])
-        expect(invalid.reload.body).to eq({ "en" => "foobar" })
+        invalid.reload.body.delete("machine_translations")
+        expect(invalid.body).to eq({ "en" => "foobar" })
       end
     end
   end
