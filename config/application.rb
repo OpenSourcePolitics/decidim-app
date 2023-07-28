@@ -19,7 +19,7 @@ Bundler.require(*Rails.groups)
 module DevelopmentApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 6.0
     config.time_zone = "Europe/Paris" unless Rails.env.test?
     config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml").to_s]
 
