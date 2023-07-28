@@ -27,6 +27,9 @@ module DevelopmentApp
     # DON'T FORGET to ALSO set this in `config/initializers/carrierwave.rb`
     config.action_mailer.asset_host = "https://#{Rails.application.secrets[:asset_host]}/" if Rails.application.secrets[:asset_host].present?
 
+    # TODO: Investigate why we need to set this
+    Rails.application.config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob"
+
     config.backup = config_for(:backup).deep_symbolize_keys
 
     config.action_dispatch.default_headers = {
