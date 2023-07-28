@@ -76,7 +76,7 @@ module Decidim
 
     def schema
       models.index_with do |model|
-        model.columns.select { |column| COLUMN_TYPES.include?(column.type) }
+        model.columns.select { |column| column.type.in?(COLUMN_TYPES) }
       end
     end
 
