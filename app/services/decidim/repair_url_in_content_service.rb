@@ -31,17 +31,16 @@ module Decidim
       return false if @endpoint.blank?
 
       schema.each do |model, columns|
-        columns.each do |column|
-          records(model, column).each do |record|
-            puts "Updating #{model}##{record.id}##{column.name}"
-            old_content = record.send(column.name)
-            new_content = clean_content(record.send(column.name))
+        # TODO: Move columns inside records method
+        records(model, columns).each do |record|
+          puts "Updating #{model}##{record.id}##{column.name}"
+          old_content = record.send(column.name)
+          new_content = clean_content(record.send(column.name))
 
-            puts "Old content: #{old_content}"
-            puts "New content: #{new_content}"
+          puts "Old content: #{old_content}"
+          puts "New content: #{new_content}"
 
-            record.update!(column.name => new_content)
-          end
+          record.update!(column.name => new_content)
         end
       end
     end
@@ -70,8 +69,9 @@ module Decidim
       ActiveStorage::Blob.find(id).service_url
     end
 
-    def records(model, column)
-      model.where("#{column.name}::text LIKE ?", "%#{@endpoint}%")
+    # TODO: Chain where clauses
+    def records(model, columns)
+      columns.map { |col| model.where("#{col.name}::text LIKE ?", "%#{@endpoint}%") }.reduce(&:or)
     end
 
     def schema

@@ -6,7 +6,7 @@ describe Decidim::RepairUrlInContentService do
   subject { described_class.run(endpoint) }
 
   let(:endpoint) { "s3.decidim.org" }
-  let(:connection_tables) { ["schema_migrations", "decidim_comments_comments", "decidim_proposals_proposals", "ar_internal_metadata"] }
+  let(:connection_tables) { %w(schema_migrations decidim_comments_comments decidim_proposals_proposals ar_internal_metadata) }
 
   context "when endpoint is blank" do
     let(:endpoint) { nil }
