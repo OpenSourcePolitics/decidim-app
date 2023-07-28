@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 module Decidim
+  # Looks for any occurence of "OLD_URL" in every database columns of type COLUMN_TYPES
+  # For each field containing OLD_URL:
+  #   - Looks for the current ActiveStorage::Blob with the given filename
+  #   - Find the blob's service_url
+  #   - Replace OLD_URL with the blob's service_url in text
+  #   - Update the column
+  # Context:
+  # After S3 assets migration with rake task "bundle exec rake scaleway:storage:migrate_from_local", every linked documents URL were well updated.
+  # However every links added to text fields redirecting to an uploaded file were outdated and still redirects to the old S3 bucket
   class RepairUrlInContentService
     COLUMN_TYPES = [:string, :jsonb, :text].freeze
     OLD_URL = "https://villeurbanne-prod-storage.s3.fr-par.scw.cloud"
