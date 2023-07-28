@@ -3,7 +3,7 @@
 # This migration comes from decidim_meetings (originally 20181107175558)
 
 class AddQuestionnaireToExistingMeetings < ActiveRecord::Migration[5.2]
-  class Decidim::Meetings::Meeting < ApplicationRecord
+  class Decidim::Meetings::Meeting
     self.table_name = :decidim_meetings_meetings
 
     include Decidim::Forms::HasQuestionnaire
