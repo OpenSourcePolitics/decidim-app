@@ -1,21 +1,26 @@
 # frozen_string_literal: true
 
 module Decidim
-  # Looks for any occurence of "OLD_URL" in every database columns of type COLUMN_TYPES
-  # For each field containing OLD_URL:
+  # Looks for any occurence of "@endpoint" in every database columns of type COLUMN_TYPES
+  # For each field containing @endpoint:
   #   - Looks for the current ActiveStorage::Blob with the given filename
   #   - Find the blob's service_url
-  #   - Replace OLD_URL with the blob's service_url in text
+  #   - Replace the @endpoint with the blob's service_url in text
   #   - Update the column
   # Context:
   # After S3 assets migration with rake task "bundle exec rake scaleway:storage:migrate_from_local", every linked documents URL were well updated.
   # However every links added to text fields redirecting to an uploaded file were outdated and still redirects to the old S3 bucket
   class RepairUrlInContentService
     COLUMN_TYPES = [:string, :jsonb, :text].freeze
-    OLD_URL = "https://villeurbanne-prod-storage.s3.fr-par.scw.cloud"
 
-    def self.run
-      new.run
+    # @param [String] endpoint
+    def self.run(endpoint)
+      new(endpoint).run
+    end
+
+    # @param [String] endpoint
+    def initialize(endpoint)
+      @endpoint = endpoint
     end
 
     def run
@@ -23,6 +28,7 @@ module Decidim
       # For each model, find all records that have a column of type string jsonb or text
       # For each record, replace all urls contained in content with the new url
       # Save the record
+      return false if @endpoint.blank?
 
       schema.each do |model, columns|
         columns.each do |column|
@@ -44,7 +50,7 @@ module Decidim
       content.transform_values do |value|
         Nokogiri::HTML(value).tap do |doc|
           doc.css("a").each do |link|
-            next unless link["href"].include?(OLD_URL)
+            next unless link["href"].include?(@endpoint)
 
             puts "Replacing #{link["href"]} with #{link["href"]}"
             link["href"] = new_link(link["href"])
@@ -65,7 +71,7 @@ module Decidim
     end
 
     def records(model, column)
-      model.where("#{column.name}::text LIKE ?", "%#{OLD_URL}%")
+      model.where("#{column.name}::text LIKE ?", "%#{@endpoint}%")
     end
 
     def schema
@@ -74,6 +80,7 @@ module Decidim
       end
     end
 
+    # @return [Decidim::Models]
     def models
       ActiveRecord::Base.connection.tables.map do |table|
         next unless table.starts_with?("decidim_")
