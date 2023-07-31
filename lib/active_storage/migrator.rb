@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "logger_with_stdout"
+require "parallel"
 
 # inspired from https://www.stefanwienert.de/blog/2018/11/05/active-storage-migrate-between-providers-from-local-to-amazon/
 module ActiveStorage
@@ -19,14 +20,14 @@ module ActiveStorage
       ActiveStorage::Blob.service = @source_service
 
       @logger.info "#{ActiveStorage::Blob.count} Blobs to go..."
-      ActiveStorage::Blob.find_each do |blob|
+      ::Parallel.each(ActiveStorage::Blob.all, in_processes: 10) do |blob|
         @logger.info "migrating blob #{blob.key}"
         blob.open do |tf|
           checksum = blob.checksum
           @destination_service.upload(blob.key, tf, checksum: checksum)
         end
-      rescue ActiveStorage::FileNotFoundError
-        @logger.error "FileNotFoundError #{blob.key}"
+      rescue ActiveStorage::FileNotFoundError, ActiveStorage::IntegrityError => e
+        @logger.error "#{e} #{blob.key}"
         next
       end
     end
