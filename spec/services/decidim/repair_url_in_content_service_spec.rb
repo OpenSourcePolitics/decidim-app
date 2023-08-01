@@ -23,32 +23,8 @@ describe Decidim::RepairUrlInContentService do
       allow(ActiveRecord::Base.connection).to receive(:tables).and_return(connection_tables)
     end
 
-    it "only returns Decidim objects" do
-      expect(subject.models).to eq([Decidim::Comments::Comment, Decidim::Proposals::Proposal])
-    end
-  end
-
-  describe "#schema" do
-    subject { described_class.new(endpoint) }
-
-    let(:table_models) { [Decidim::Comments::Comment, Decidim::Proposals::Proposal, Decidim::Organization, Decidim::Authorization] }
-
-    before do
-      allow(subject).to receive(:models).and_return(table_models)
-    end
-
-    it "returns a Hash as models => Array of PostgreSQL::Column" do
-      expect(subject.schema).to be_a Hash
-      expect(subject.schema.values.first).to be_a(Array)
-      expect(subject.schema.values.first.first).to be_a(ActiveRecord::ConnectionAdapters::PostgreSQL::Column)
-    end
-
-    context "when table_models contains Decidim::Proposal" do
-      let(:table_models) { [Decidim::Proposals::Proposal] }
-
-      it "values contains columns with type string, jsonb and text" do
-        expect(subject.schema.values.first.map(&:type).uniq).to match([:string, :jsonb, :text])
-      end
+    it "only returns Decidim objects as String" do
+      expect(subject.models).to eq(["Decidim::Comments::Comment", "Decidim::Proposals::Proposal"])
     end
   end
 end

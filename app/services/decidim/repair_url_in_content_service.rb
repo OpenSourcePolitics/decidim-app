@@ -30,9 +30,8 @@ module Decidim
       # Save the record
       return false if @endpoint.blank?
 
-      schema.each do |model, columns|
-        # TODO: Move columns inside records method
-        records(model, columns).each do |record|
+      models.each do |model|
+        records_for(model).each do |record|
           puts "Updating #{model}##{record.id}##{column.name}"
           old_content = record.send(column.name)
           new_content = clean_content(record.send(column.name))
@@ -44,6 +43,35 @@ module Decidim
         end
       end
     end
+
+    def records_for(model)
+      model = model.safe_constantize
+      model.columns.map do |col|
+        next unless col.type.in?(COLUMN_TYPES)
+
+        model.where("#{col.name}::text LIKE ?", "%#{@endpoint}%")
+      end.compact.reduce(&:or)
+    rescue NameError
+      Rails.application.logger.warn "Model #{model} does not exist"
+      []
+    rescue StandardError => e
+      Rails.application.logger.warn "Error while updating #{model}: #{e.message}"
+      []
+    end
+
+    # @return [Decidim::Models]
+    def models
+      ActiveRecord::Base.connection.tables.map do |table|
+        next unless table.starts_with?("decidim_")
+
+        table.tr("_", "/").classify
+      end.compact
+    end
+
+    def blobs
+      @blobs ||= ActiveStorage::Blob.pluck(:filename, :id)
+    end
+
 
     def clean_content(content)
       content.transform_values do |value|
@@ -69,28 +97,5 @@ module Decidim
       ActiveStorage::Blob.find(id).service_url
     end
 
-    # TODO: Chain where clauses
-    def records(model, columns)
-      columns.map { |col| model.where("#{col.name}::text LIKE ?", "%#{@endpoint}%") }.reduce(&:or)
-    end
-
-    def schema
-      models.index_with do |model|
-        model.columns.select { |column| column.type.in?(COLUMN_TYPES) }
-      end
-    end
-
-    # @return [Decidim::Models]
-    def models
-      ActiveRecord::Base.connection.tables.map do |table|
-        next unless table.starts_with?("decidim_")
-
-        table.tr("_", "/").classify.safe_constantize
-      end.compact
-    end
-
-    def blobs
-      @blobs ||= ActiveStorage::Blob.pluck(:filename, :id)
-    end
   end
 end
