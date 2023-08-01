@@ -59,7 +59,7 @@ module Decidim
       []
     end
 
-    # @return [Decidim::Models]
+    # @return [String]
     def models
       ActiveRecord::Base.connection.tables.map do |table|
         next unless table.starts_with?("decidim_")

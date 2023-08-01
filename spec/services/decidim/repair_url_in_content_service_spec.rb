@@ -27,4 +27,18 @@ describe Decidim::RepairUrlInContentService do
       expect(subject.models).to eq(["Decidim::Comments::Comment", "Decidim::Proposals::Proposal"])
     end
   end
+
+  describe "#records_for" do
+    subject { described_class.new(endpoint).records_for(model) }
+
+    let(:model) { "Decidim::Comments::Comment" }
+    let(:comment_1) { create(:comment, body: invalid_body_comment) }
+    let(:comment_2) { create(:comment) }
+    let(:invalid_body_comment) { { en: "Here is a not valid comment https://#{endpoint}/example" } }
+
+    it "returns all records that have a column of type string jsonb or text" do
+      expect(subject).to include(comment_1)
+      expect(subject).not_to include(comment_2)
+    end
+  end
 end
