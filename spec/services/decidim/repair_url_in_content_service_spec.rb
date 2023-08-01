@@ -40,5 +40,13 @@ describe Decidim::RepairUrlInContentService do
       expect(subject).to include(comment_1)
       expect(subject).not_to include(comment_2)
     end
+
+    context "when model cannot be constantized" do
+      let(:model) { "Decidim::Comments::NotExistingModel" }
+
+      it "returns an empty array" do
+        expect(subject).to eq([])
+      end
+    end
   end
 end

@@ -46,14 +46,13 @@ module Decidim
 
     def records_for(model)
       model = model.safe_constantize
+      return [] unless model.respond_to?(:columns)
+
       model.columns.map do |col|
         next unless col.type.in?(COLUMN_TYPES)
 
         model.where("#{col.name}::text LIKE ?", "%#{@endpoint}%")
       end.compact.reduce(&:or)
-    rescue NameError
-      Rails.application.logger.warn "Model #{model} does not exist"
-      []
     rescue StandardError => e
       Rails.application.logger.warn "Error while updating #{model}: #{e.message}"
       []
