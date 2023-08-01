@@ -32,12 +32,12 @@ module Decidim
 
       models.each do |model|
         records_for(model).each do |record|
-          puts "Updating #{model}##{record.id}##{column.name}"
+          Rails.application.logger :info, "Updating #{model}##{record.id}##{column.name}"
           old_content = record.send(column.name)
           new_content = clean_content(record.send(column.name))
 
-          puts "Old content: #{old_content}"
-          puts "New content: #{new_content}"
+          Rails.application.logger :info, "Old content: #{old_content}"
+          Rails.application.logger :info, "New content: #{new_content}"
 
           record.update!(column.name => new_content)
         end
@@ -72,14 +72,13 @@ module Decidim
       @blobs ||= ActiveStorage::Blob.pluck(:filename, :id)
     end
 
-
     def clean_content(content)
       content.transform_values do |value|
         Nokogiri::HTML(value).tap do |doc|
           doc.css("a").each do |link|
             next unless link["href"].include?(@endpoint)
 
-            puts "Replacing #{link["href"]} with #{link["href"]}"
+            Rails.application.logger :info, "Replacing #{link["href"]} with #{link["href"]}"
             link["href"] = new_link(link["href"])
           end
         end.css("body").inner_html
@@ -96,6 +95,5 @@ module Decidim
 
       ActiveStorage::Blob.find(id).service_url
     end
-
   end
 end
