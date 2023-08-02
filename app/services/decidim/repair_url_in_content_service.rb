@@ -44,25 +44,31 @@ module Decidim
         @logger.info "Found #{records.count} records to update for #{model}"
         records.each do |record|
           columns = model.columns.select { |column| column.type.in? COLUMN_TYPES }
-          columns.each do |column|
-            current_content = record.send(column.name)
-
-            next unless current_content.to_s.include?(@deprecated_endpoint)
-
-            @logger.info "Updating #{model}##{record.id}.#{column.name}"
-            new_content = clean_content(record.send(column.name))
-
-            @logger.info "Old content: #{current_content}"
-            @logger.info "New content: #{new_content}"
-
-            if new_content.to_s.include?(@deprecated_endpoint)
-              @logger.warn "New content '#{model}##{record.id}.#{column.name}' still contains deprecated endpoint #{@deprecated_endpoint}"
-              next
-            end
-
-            record.update!(column.name => new_content)
-          end
+          update_each_column_for_record(record, columns)
         end
+      end
+    end
+
+    # @param [Object] record
+    # @param [[ActiveRecord::ConnectionAdapters::PostgreSQL::Column]] columns
+    # @return record | nil
+    def update_each_column_for_record(record, columns)
+      columns.each do |column|
+        current_content = record.send(column.name)
+        next unless current_content.to_s.include?(@deprecated_endpoint)
+
+        @logger.info "Updating ##{record.class}##{record.id}.#{column.name}"
+        new_content = clean_content(record.send(column.name))
+
+        @logger.info "Old content: #{current_content}"
+        @logger.info "New content: #{new_content}"
+
+        if new_content.to_s.include?(@deprecated_endpoint)
+          @logger.warn "New content '#{record.class}##{record.id}.#{column.name}' still contains deprecated endpoint #{@deprecated_endpoint}"
+          next
+        end
+
+        record.update!(column.name => new_content)
       end
     end
 
