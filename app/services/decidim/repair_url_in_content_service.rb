@@ -20,6 +20,7 @@ module Decidim
 
     # @param [String] deprecated_endpoint
     def initialize(deprecated_endpoint)
+      @logger = LoggerWithStdout.new("log/db-repair_url-#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
       @deprecated_endpoint = deprecated_endpoint
     end
 
@@ -41,11 +42,11 @@ module Decidim
 
             next unless current_content.to_s.include?(@deprecated_endpoint)
 
-            # Rails.application.logger :info, "Updating #{model}##{record.id}##{column.name}"
+            @logger.info "Updating #{model}##{record.id}##{column.name}"
             new_content = clean_content(record.send(column.name))
 
-            # Rails.application.logger :info, "Old content: #{old_content}"
-            # Rails.application.logger :info, "New content: #{new_content}"
+            @logger.info "Old content: #{old_content}"
+            @logger.info "New content: #{new_content}"
 
             record.update!(column.name => new_content)
           end
@@ -60,7 +61,7 @@ module Decidim
         model.where("#{col.name}::text LIKE ?", "%#{@deprecated_endpoint}%")
       end.compact.reduce(&:or)
     rescue StandardError => e
-      # Rails.application.logger.warn "Error while updating #{model}: #{e.message}"
+      @logger.warn "Error while updating #{model}: #{e.message}"
       []
     end
 
@@ -83,7 +84,7 @@ module Decidim
           doc.css("a").each do |link|
             next unless link["href"].include?(@deprecated_endpoint)
 
-            # Rails.application.logger :info, "Replacing #{link["href"]} with #{link["href"]}"
+            @logger.info "Replacing #{link["href"]} with #{link["href"]}"
             link["href"] = new_link(link["href"])
           end
         end.css("body").inner_html
