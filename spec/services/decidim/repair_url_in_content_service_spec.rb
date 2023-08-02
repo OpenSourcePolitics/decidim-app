@@ -14,12 +14,14 @@ describe Decidim::RepairUrlInContentService do
   let(:deprecated_url) { "https://#{deprecated_endpoint}/xxxx?response-content-disposition=inline%3Bfilename%3D\"BuPa23_reglement-interieur.pdf\"%3Bfilename*%3DUTF-8''BuPa23_r%25C3%25A8glement-int%25C3%25A9rieur.pdf&response-content-type=application%2Fpdf" }
   let(:valid_url) { "https://#{valid_endpoint}/xxxx?response-content-disposition=inline%3Bfilename%3D\"BuPa23_reglement-interieur.pdf\"%3Bfilename*%3DUTF-8''BuPa23_r%25C3%25A8glement-int%25C3%25A9rieur.pdf&response-content-type=application%2Fpdf" }
 
+  # rubocop:disable RSpec/AnyInstance
   before do
     allow(ActiveRecord::Base.connection).to receive(:tables).and_return(connection_tables)
     allow(Decidim::RepairUrlInContentService).to receive(:models).and_return(["Decidim::Comments::Comment", "Decidim::Proposals::Proposal"])
     allow_any_instance_of(Decidim::RepairUrlInContentService).to receive(:blobs).and_return([["BuPa23_reglement-interieur.pdf", comment_1.id]])
     allow_any_instance_of(Decidim::RepairUrlInContentService).to receive(:find_service_url_for_blob).with(comment_1.id).and_return(valid_url)
   end
+  # rubocop:enable RSpec/AnyInstance
 
   it "updates values from comments" do
     expect do
