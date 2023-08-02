@@ -44,15 +44,32 @@ module Decidim
         @logger.info "Found #{records.count} records to update for #{model}"
         records.each do |record|
           columns = model.columns.select { |column| column.type.in? COLUMN_TYPES }
-          update_each_column_for_record(record, columns)
+          record = update_each_column(record, columns)
+
+          save_record!(record)
         end
+      end
+    end
+
+    def save_record!(record)
+      if record.invalid?
+        @logger.warn "Invalid record #{record.class}##{record.id}: #{record.errors.full_messages.join(", ")}"
+        return
+      end
+
+      if record.has_changes_to_save?
+        record.class.transaction do
+          record.save!
+        end
+      else
+        @logger.info "No changes to save for #{record.class}##{record.id}"
       end
     end
 
     # @param [Object] record
     # @param [[ActiveRecord::ConnectionAdapters::PostgreSQL::Column]] columns
     # @return record | nil
-    def update_each_column_for_record(record, columns)
+    def update_each_column(record, columns)
       columns.each do |column|
         current_content = record.send(column.name)
         next unless current_content.to_s.include?(@deprecated_endpoint)
@@ -68,8 +85,10 @@ module Decidim
           next
         end
 
-        record.update!(column.name => new_content)
+        record.write_attribute(:"#{column.name}", new_content)
       end
+
+      record
     end
 
     def records_for(model)
