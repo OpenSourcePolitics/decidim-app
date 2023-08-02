@@ -14,6 +14,18 @@ GIT
       decidim-core (~> 0.26.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
+  revision: 4e6b7a1a5fcfa0661ba93d1bedb2e09da66d5326
+  branch: release/0.26-stable
+  specs:
+    decidim-homepage_interactive_map (2.0.0)
+      decidim-admin (>= 0.25.0, < 0.27)
+      decidim-core (>= 0.25.0, < 0.27)
+      decidim-dev (>= 0.25.0, < 0.27)
+      rgeo (~> 2.4)
+      rgeo-proj4 (~> 3.1)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
   revision: 488cc8827845ec1c5266aa499df2ebf9b20e02a3
   branch: release/0.26-stable
@@ -781,6 +793,9 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.5)
+    rgeo (2.4.0)
+    rgeo-proj4 (3.1.1)
+      rgeo (~> 2.0)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -994,6 +1009,7 @@ DEPENDENCIES
   decidim-dev (~> 0.26.0)
   decidim-friendly_signup!
   decidim-gallery
+  decidim-homepage_interactive_map!
   decidim-ludens!
   decidim-phone_authorization_handler!
   decidim-spam_detection
