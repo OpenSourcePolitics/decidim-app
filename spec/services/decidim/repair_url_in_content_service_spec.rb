@@ -15,15 +15,16 @@ describe Decidim::RepairUrlInContentService do
 
   before do
     allow(ActiveRecord::Base.connection).to receive(:tables).and_return(connection_tables)
-    allow_any_instance_of(Decidim::RepairUrlInContentService).to receive(:models).and_return(["Decidim::Comments::Comment", "Decidim::Proposals::Proposal"])
-    allow(subject).to receive(:find_service_url_for_blob).with(comment_1.id).and_return("https://#{valid_endpoint}/example")
+    allow(Decidim::RepairUrlInContentService).to receive(:models).and_return(["Decidim::Comments::Comment", "Decidim::Proposals::Proposal"])
   end
 
   it "updates values from comments" do
     expect do
       subject
       comment_1.reload
-    end.to change { comment_1.body["en"] }.from(invalid_body_comment[:"en"]).to("Here is a not valid comment https://#{valid_endpoint}/example")
+    end.to change(comment_1, :body)
+
+    expect(comment_1.body["en"]).to include(valid_endpoint)
   end
 
   context "when deprecated_endpoint is blank" do

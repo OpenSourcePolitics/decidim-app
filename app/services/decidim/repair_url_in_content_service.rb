@@ -12,6 +12,7 @@ module Decidim
   # However every links added to text fields redirecting to an uploaded file were outdated and still redirects to the old S3 bucket
   class RepairUrlInContentService
     COLUMN_TYPES = [:string, :jsonb, :text].freeze
+    DEFAULT_LOGGER = Rails.logger
 
     # @param [String] deprecated_endpoint
     def self.run(deprecated_endpoint)
@@ -19,8 +20,8 @@ module Decidim
     end
 
     # @param [String] deprecated_endpoint
-    def initialize(deprecated_endpoint)
-      @logger = LoggerWithStdout.new("log/db-repair_url-#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
+    def initialize(deprecated_endpoint, logger = nil)
+      @logger = logger || DEFAULT_LOGGER
       @deprecated_endpoint = deprecated_endpoint
     end
 
@@ -35,7 +36,12 @@ module Decidim
         model = model.safe_constantize
         next unless model.respond_to?(:columns)
 
-        records_for(model).each do |record|
+        @logger.info("Checking model #{model} for deprecated endpoints #{@deprecated_endpoint}")
+        records = records_for model
+        next if records.blank?
+
+        @logger.info "Found #{records.count} records to update for #{model}"
+        records.each do |record|
           columns = model.columns.select { |column| column.type.in? COLUMN_TYPES }
           columns.each do |column|
             current_content = record.send(column.name)
@@ -45,7 +51,7 @@ module Decidim
             @logger.info "Updating #{model}##{record.id}##{column.name}"
             new_content = clean_content(record.send(column.name))
 
-            @logger.info "Old content: #{old_content}"
+            @logger.info "Old content: #{current_content}"
             @logger.info "New content: #{new_content}"
 
             record.update!(column.name => new_content)
@@ -61,7 +67,7 @@ module Decidim
         model.where("#{col.name}::text LIKE ?", "%#{@deprecated_endpoint}%")
       end.compact.reduce(&:or)
     rescue StandardError => e
-      @logger.warn "Error while updating #{model}: #{e.message}"
+      @logger.warn "Error while fetching records from #{model}: #{e.message}"
       []
     end
 
