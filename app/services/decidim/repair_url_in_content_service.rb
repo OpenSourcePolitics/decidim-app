@@ -14,6 +14,7 @@ module Decidim
     COLUMN_TYPES = [:string, :jsonb, :text].freeze
     DEFAULT_LOGGER = Rails.logger
 
+    # TODO: must work with image src
     # @param [String] deprecated_endpoint
     def self.run(deprecated_endpoint)
       new(deprecated_endpoint).run
@@ -48,11 +49,16 @@ module Decidim
 
             next unless current_content.to_s.include?(@deprecated_endpoint)
 
-            @logger.info "Updating #{model}##{record.id}##{column.name}"
+            @logger.info "Updating #{model}##{record.id}.#{column.name}"
             new_content = clean_content(record.send(column.name))
 
             @logger.info "Old content: #{current_content}"
             @logger.info "New content: #{new_content}"
+
+            if new_content.to_s.include?(@deprecated_endpoint)
+              @logger.warn "New content '#{model}##{record.id}.#{column.name}' still contains deprecated endpoint #{@deprecated_endpoint}"
+              next
+            end
 
             record.update!(column.name => new_content)
           end
@@ -100,10 +106,7 @@ module Decidim
     def new_link(link)
       uri = URI.parse(link)
       filename = CGI.parse(uri.query)["response-content-disposition"].first.match(/filename=("?)(.+)\1/)[2]
-
-      _filename, id = blobs.select do |blob, _id|
-        ActiveSupport::Inflector.transliterate(blob) == filename
-      end.first
+      _filename, id = blobs.select { |blob, _id| ActiveSupport::Inflector.transliterate(blob) == filename }.first
 
       find_service_url_for_blob(id)
     end
