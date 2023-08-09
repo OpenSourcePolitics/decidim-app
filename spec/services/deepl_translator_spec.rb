@@ -13,7 +13,7 @@ describe DeeplTranslator do
   let(:source_locale) { "en" }
 
   before do
-    stub_request(:get, "https://api.deepl.com/v2/languages").with(
+    stub_request(:get, "https://translator.example.org/v2/languages").with(
       headers: {
         "Accept" => "*/*",
         "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
@@ -177,7 +177,7 @@ describe DeeplTranslator do
                                                }
                                              ]), headers: {})
 
-    stub_request(:post, "https://api.deepl.com/v2/translate").with(
+    stub_request(:post, "https://translator.example.org/v2/translate").with(
       body: { "source_lang" => "en", "target_lang" => "es", "text" => "This is a comment" },
       headers: {
         "Accept" => "*/*",
