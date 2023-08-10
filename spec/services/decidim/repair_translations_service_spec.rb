@@ -50,4 +50,10 @@ describe Decidim::RepairTranslationsService do
       subject.run
     end
   end
+
+  describe ".run" do
+    it "calls run" do
+      expect(described_class.run).to be_a(Array)
+    end
+  end
 end

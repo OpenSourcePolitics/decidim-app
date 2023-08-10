@@ -2,14 +2,22 @@
 
 module Decidim
   class RepairTranslationsService
-    def self.run
-      new.run
+    def initialize(logger: nil)
+      @logger = logger || Rails.logger
+    end
+
+    def self.run(logger: nil)
+      new(logger: logger).run
     end
 
     def run
+      @logger.info("Found #{translatable_resources.size} translatable resources")
       updated_resources = []
       translatable_resources.each do |resources|
+        @logger.info("Checking #{resources}...")
+        @logger.info("Found #{resources.count} resources")
         resources.find_each do |resource|
+          @logger.info("Checking #{resource}...")
           updated_resources << [resource.class, resource.id] if repair_translations(resource)
         end
       end
@@ -34,7 +42,7 @@ module Decidim
     end
 
     def translatable_resources
-      Decidim.resource_manifests.map(&:model_class).select do |resource|
+      @translatable_resources ||= Decidim.resource_manifests.map(&:model_class).select do |resource|
         resource.respond_to?(:translatable_fields_list)
       end
     end
