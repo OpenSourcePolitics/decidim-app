@@ -12,17 +12,16 @@ module Decidim
   # However every links added to text fields redirecting to an uploaded file were outdated and still redirects to the old S3 bucket
   class RepairUrlInContentService
     COLUMN_TYPES = [:string, :jsonb, :text].freeze
-    DEFAULT_LOGGER = Rails.logger
 
     # TODO: must work with image src
     # @param [String] deprecated_endpoint
-    def self.run(deprecated_endpoint)
-      new(deprecated_endpoint).run
+    def self.run(deprecated_endpoint, logger = nil)
+      new(deprecated_endpoint, logger).run
     end
 
     # @param [String] deprecated_endpoint
     def initialize(deprecated_endpoint, logger = nil)
-      @logger = logger || DEFAULT_LOGGER
+      @logger = logger || Rails.logger
       @deprecated_endpoint = deprecated_endpoint
     end
 

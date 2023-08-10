@@ -44,6 +44,8 @@ namespace :decidim_app do
     task upgrade: :environment do
       puts "Running db:migrate"
       Rake::Task["db:migrate"].invoke
+      puts "Running decidim:repaire:url_in_content"
+      Rake::Task["decidim:repair:url_in_content"].invoke
     end
 
     desc "usage: bundle exec rails k8s:dump_db"
