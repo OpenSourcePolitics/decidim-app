@@ -27,4 +27,14 @@ describe "rake decidim:repair:url_in_content", type: :task do
       task.execute
     end
   end
+
+  context "when env variable is not set" do
+    ["", nil].each do |value|
+      it "raises an error" do
+        with_modified_env DEPRECATED_OBJECTSTORE_S3_HOST: value do
+          expect { task.execute }.to raise_error(ArgumentError)
+        end
+      end
+    end
+  end
 end

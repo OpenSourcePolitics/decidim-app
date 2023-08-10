@@ -37,7 +37,11 @@ namespace :decidim do
     end
 
     task url_in_content: :environment do
-      Decidim::RepairUrlInContentService.run(ENV["DEPRECATED_OBJECTSTORE_S3_HOST"])
+      deprecated_objectstore_s3_host = ENV["DEPRECATED_OBJECTSTORE_S3_HOST"]
+
+      raise ArgumentError, "DEPRECATED_OBJECTSTORE_S3_HOST env variable is not set" if deprecated_objectstore_s3_host.blank?
+
+      Decidim::RepairUrlInContentService.run(deprecated_objectstore_s3_host)
     end
   end
 end
