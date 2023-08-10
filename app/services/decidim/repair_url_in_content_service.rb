@@ -34,7 +34,6 @@ module Decidim
       return false if @deprecated_endpoint.blank?
 
       models.each do |model|
-        model = model.safe_constantize
         next unless model.respond_to?(:columns)
 
         @logger.info("Checking model #{model} for deprecated endpoints #{@deprecated_endpoint}")
@@ -102,12 +101,11 @@ module Decidim
       []
     end
 
-    # @return [String]
     def models
       ActiveRecord::Base.connection.tables.map do |table|
         next unless table.starts_with?("decidim_")
 
-        table.tr("_", "/").classify
+        classify_model(table)
       end.compact
     end
 
@@ -145,6 +143,25 @@ module Decidim
     rescue URI::InvalidURIError
       @logger.warn "Invalid URI for blob #{blob_id}"
       nil
+    end
+
+    # Because of the way decidim models are named, we need to try to find the model by subbing _ with / and then classify it
+    # For example "decidim_comments_comments" becomes "Decidim::CommentsComment", then "Decidim::Comments::Comment"
+    # This helps us find models that are namespaced
+    # @param [String] table
+    def classify_model(table)
+      if table.include?("_")
+        new_table = table.sub("_", "/")
+        model = new_table.classify.safe_constantize
+
+        return model if model
+
+        classify_model(new_table)
+      else
+        @logger.warn "Could not find model for table #{table}"
+
+        nil
+      end
     end
   end
 end

@@ -71,8 +71,8 @@ describe Decidim::RepairUrlInContentService do
       allow(ActiveRecord::Base.connection).to receive(:tables).and_return(connection_tables)
     end
 
-    it "only returns Decidim objects as String" do
-      expect(subject.models).to eq(["Decidim::Comments::Comment", "Decidim::Proposals::Proposal"])
+    it "returns models" do
+      expect(subject.models).to eq([Decidim::Comments::Comment, Decidim::Proposals::Proposal])
     end
   end
 
