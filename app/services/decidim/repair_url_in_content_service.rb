@@ -13,16 +13,17 @@ module Decidim
   class RepairUrlInContentService
     COLUMN_TYPES = [:string, :jsonb, :text].freeze
 
-    # TODO: must work with image src
     # @param [String] deprecated_endpoint
+    # @param [ActiveSupport::Logger] logger
     def self.run(deprecated_endpoint, logger = nil)
       new(deprecated_endpoint, logger).run
     end
 
     # @param [String] deprecated_endpoint
+    # @param [ActiveSupport::Logger] logger
     def initialize(deprecated_endpoint, logger = nil)
       @logger = logger || Rails.logger
-      @deprecated_endpoint = deprecated_endpoint
+      @deprecated_endpoint = deprecated_endpoint&.gsub(%r{https?://}, "")
     end
 
     def run
@@ -120,8 +121,12 @@ module Decidim
           doc.css("a").each do |link|
             next unless link["href"].include?(@deprecated_endpoint)
 
-            @logger.info "Replacing #{link["href"]} with #{link["href"]}"
-            link["href"] = new_link(link["href"])
+            new_link = new_link(link["href"])
+
+            next unless new_link
+
+            @logger.info "Replacing #{link["href"]} with #{new_link}"
+            link["href"] = new_link
           end
         end.css("body").inner_html
       end
@@ -137,6 +142,9 @@ module Decidim
 
     def find_service_url_for_blob(blob_id)
       ActiveStorage::Blob.find(blob_id).service_url
+    rescue URI::InvalidURIError
+      @logger.warn "Invalid URI for blob #{blob_id}"
+      nil
     end
   end
 end

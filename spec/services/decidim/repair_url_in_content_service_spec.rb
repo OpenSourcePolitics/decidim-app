@@ -23,31 +23,44 @@ describe Decidim::RepairUrlInContentService do
   end
   # rubocop:enable RSpec/AnyInstance
 
-  it "updates values from comments" do
-    expect do
-      subject
-      comment_1.reload
-    end.to change(comment_1, :body)
-
-    expect(comment_1.body["en"]).to include(valid_endpoint)
-  end
-
-  context "when deprecated_endpoint is blank" do
-    let(:deprecated_endpoint) { nil }
-
-    it "returns false" do
-      expect(subject).to be_falsey
-    end
-  end
-
-  context "when resource text is not HTML" do
-    let(:invalid_body_comment) { { en: "Here is a not valid comment with #{deprecated_url}" } }
-
-    it "does not update resources" do
+  describe "#run" do
+    it "updates values from comments" do
       expect do
         subject
         comment_1.reload
-      end.not_to change(comment_1, :body)
+      end.to change(comment_1, :body)
+
+      expect(comment_1.body["en"]).to include(valid_endpoint)
+    end
+
+    context "when new link is nil" do
+      let(:valid_url) { nil }
+
+      it "does not update resources" do
+        expect do
+          subject
+          comment_1.reload
+        end.not_to change(comment_1, :body)
+      end
+    end
+
+    context "when deprecated_endpoint is blank" do
+      let(:deprecated_endpoint) { nil }
+
+      it "returns false" do
+        expect(subject).to be_falsey
+      end
+    end
+
+    context "when resource text is not HTML" do
+      let(:invalid_body_comment) { { en: "Here is a not valid comment with #{deprecated_url}" } }
+
+      it "does not update resources" do
+        expect do
+          subject
+          comment_1.reload
+        end.not_to change(comment_1, :body)
+      end
     end
   end
 
