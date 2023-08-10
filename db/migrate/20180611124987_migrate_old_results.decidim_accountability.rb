@@ -26,7 +26,6 @@ class MigrateOldResults < ActiveRecord::Migration[5.1]
   def up
     return unless ActiveRecord::Base.connection.data_source_exists? :decidim_results_results
 
-    # rubocop:disable Rails/SkipsModelValidations
     OldResult.find_each do |old_result|
       Result.create!(
         id: old_result.id,
@@ -51,5 +50,4 @@ class MigrateOldResults < ActiveRecord::Migration[5.1]
 
     drop_table :decidim_results_results
   end
-  # rubocop:enable Rails/SkipsModelValidations
 end

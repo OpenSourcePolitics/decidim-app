@@ -2,6 +2,7 @@
 
 require "sentry-ruby"
 require "json"
+require "decidim_app/sentry_setup"
 
 module SentrySetup
   class << self
