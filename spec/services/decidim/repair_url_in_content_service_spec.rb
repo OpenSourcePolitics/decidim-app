@@ -15,8 +15,8 @@ describe Decidim::RepairUrlInContentService do
 
   # rubocop:disable RSpec/AnyInstance
   before do
-    allow_any_instance_of(Decidim::RepairUrlInContentService).to receive(:blobs).and_return([["BuPa23_reglement-interieur.pdf", invalid_resource1.id]])
-    allow_any_instance_of(Decidim::RepairUrlInContentService).to receive(:find_service_url_for_blob).with(invalid_resource1.id).and_return(valid_url)
+    allow_any_instance_of(Decidim::ContentFixer).to receive(:blobs).and_return([["BuPa23_reglement-interieur.pdf", invalid_resource1.id]])
+    allow_any_instance_of(Decidim::ContentFixer).to receive(:find_service_url_for_blob).with(invalid_resource1.id).and_return(valid_url)
   end
   # rubocop:enable RSpec/AnyInstance
 

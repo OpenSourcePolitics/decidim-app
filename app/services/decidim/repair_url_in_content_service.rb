@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "decidim/content_fixer"
+
 module Decidim
   # Looks for any occurence of "@deprecated_endpoint" in every database columns of type COLUMN_TYPES
   # For each field containing @deprecated_endpoint:
@@ -12,7 +14,6 @@ module Decidim
   # However every links added to text fields redirecting to an uploaded file were outdated and still redirects to the old S3 bucket
   class RepairUrlInContentService
     COLUMN_TYPES = [:string, :jsonb, :text].freeze
-    TAGS_TO_FIX = ["a", "img"].freeze
 
     # @param [String] deprecated_endpoint
     # @param [Logger] logger
@@ -75,7 +76,7 @@ module Decidim
         next unless current_content.to_s.include?(@deprecated_endpoint)
 
         @logger.info "Updating ##{record.class}##{record.id}.#{column.name}"
-        new_content = clean_content(current_content)
+        new_content = Decidim::ContentFixer.repair(current_content, @deprecated_endpoint, @logger)
 
         @logger.info "Old content: #{current_content}"
         @logger.info "New content: #{new_content}"
@@ -108,54 +109,6 @@ module Decidim
 
         classify_model(table)
       end.compact
-    end
-
-    def blobs
-      @blobs ||= ActiveStorage::Blob.pluck(:filename, :id)
-    end
-
-    def clean_content(content)
-      content.transform_values do |value|
-        Nokogiri::HTML(value).tap do |doc|
-          TAGS_TO_FIX.each do |tag|
-            replace_urls(doc, tag)
-          end
-        end.css("body").inner_html
-      end
-    end
-
-    def replace_urls(doc, tag)
-      attribute = tag == "img" ? "src" : "href"
-
-      doc.css(tag).each do |source|
-        next unless source[attribute].include?(@deprecated_endpoint)
-
-        new_source = new_source(source[attribute])
-
-        next unless new_source
-
-        @logger.info "Replacing #{source[attribute]} with #{new_source}"
-        source[attribute] = new_source
-      end
-    end
-
-    def new_source(source)
-      uri = URI.parse(source)
-      filename = if source.include?("response-content-disposition")
-                   CGI.parse(uri.query)["response-content-disposition"].first.match(/filename=("?)(.+)\1/)[2]
-                 else
-                   uri.path.split("/").last
-                 end
-      _filename, id = blobs.select { |blob, _id| ActiveSupport::Inflector.transliterate(blob) == filename }.first
-
-      find_service_url_for_blob(id)
-    end
-
-    def find_service_url_for_blob(blob_id)
-      ActiveStorage::Blob.find(blob_id).service_url
-    rescue URI::InvalidURIError
-      @logger.warn "Invalid URI for blob #{blob_id}"
-      nil
     end
 
     # Because of the way decidim models are named, we need to try to find the model by subbing _ with / and then classify it
