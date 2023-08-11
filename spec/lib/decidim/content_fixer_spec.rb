@@ -13,20 +13,14 @@ describe Decidim::ContentFixer do
   let(:invalid_body_comment) { { en: "<p>Here is a not valid comment with <a href='#{deprecated_url}'>Link text</a></p>" } }
   let(:content) { "<p>Here is a not valid comment with <a href='#{deprecated_url}'>Link text</a></p>" }
   let(:deprecated_url) { "https://#{deprecated_endpoint}/xxxx?response-content-disposition=inline%3Bfilename%3D\"BuPa23_reglement-interieur.pdf\"%3Bfilename*%3DUTF-8''BuPa23_r%25C3%25A8glement-int%25C3%25A9rieur.pdf&response-content-type=application%2Fpdf" }
-  let(:valid_url) { "https://#{valid_endpoint}/xxxx?response-content-disposition=inline%3Bfilename%3D\"BuPa23_reglement-interieur.pdf\"%3Bfilename*%3DUTF-8''BuPa23_r%25C3%25A8glement-int%25C3%25A9rieur.pdf&response-content-type=application%2Fpdf" }
-  let(:valid_endpoint) { "s3.valid.org" }
-  let(:doc) { Nokogiri::HTML(content) }
-
-  before do
-    allow(ActiveStorage::Blob).to receive(:pluck).with(:filename, :id).and_return([["BuPa23_reglement-interieur.pdf", invalid_resource.id]])
-    allow(ActiveStorage::Blob).to receive(:find).with(invalid_resource.id).and_return(double(service_url: valid_url))
-  end
+  let!(:blob) { ActiveStorage::Blob.create_after_upload!(filename: "BuPa23_reglement-interieur.pdf", io: File.open("spec/fixtures/BuPa23_reglement-interieur.pdf"), content_type: "application/pdf") }
+  let(:blob_path) { Rails.application.routes.url_helpers.rails_blob_path(ActiveStorage::Blob.find(blob.id), only_path: true) }
 
   describe "#repair" do
     it "returns the repaired content" do
       replaced_content = subject.repair
 
-      expect(replaced_content).to include(valid_endpoint)
+      expect(replaced_content).to include(blob_path)
       expect(replaced_content).not_to include(deprecated_endpoint)
     end
 
@@ -36,7 +30,7 @@ describe Decidim::ContentFixer do
       it "returns the repaired content" do
         replaced_content = subject.repair
 
-        expect(replaced_content[:en]).to include(valid_endpoint)
+        expect(replaced_content[:en]).to include(blob_path)
         expect(replaced_content[:en]).not_to include(deprecated_endpoint)
       end
     end
@@ -47,7 +41,7 @@ describe Decidim::ContentFixer do
       it "returns the repaired content" do
         replaced_content = subject.repair
 
-        expect(replaced_content.first).to include(valid_endpoint)
+        expect(replaced_content.first).to include(blob_path)
         expect(replaced_content.first).not_to include(deprecated_endpoint)
       end
     end
@@ -66,7 +60,7 @@ describe Decidim::ContentFixer do
       replaced_content = subject.find_and_replace(content)
 
       expect(replaced_content).to start_with("<p")
-      expect(replaced_content).to include(valid_endpoint)
+      expect(replaced_content).to include(blob_path)
       expect(replaced_content).not_to include(deprecated_endpoint)
     end
 
@@ -77,7 +71,7 @@ describe Decidim::ContentFixer do
         replaced_content = subject.find_and_replace(content)
 
         expect(replaced_content).to start_with("<img")
-        expect(replaced_content).to include(valid_endpoint)
+        expect(replaced_content).to include(blob_path)
         expect(replaced_content).not_to include(deprecated_endpoint)
       end
     end
@@ -89,7 +83,7 @@ describe Decidim::ContentFixer do
         replaced_content = subject.find_and_replace(content)
 
         expect(replaced_content).not_to start_with("<p")
-        expect(replaced_content).to include(valid_endpoint)
+        expect(replaced_content).to include(blob_path)
         expect(replaced_content).not_to include(deprecated_endpoint)
       end
     end
@@ -97,14 +91,14 @@ describe Decidim::ContentFixer do
 
   describe "#new_source" do
     it "returns the new source for the given url" do
-      expect(subject.new_source(deprecated_url)).to eq(valid_url)
+      expect(subject.new_source(deprecated_url)).to eq(blob_path)
     end
 
     context "when url is not a direct link" do
       let(:deprecated_url) { "https://#{deprecated_endpoint}/rails/active_storage/representations/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBY3c9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0dd7fba2bf600153aca7a8ada9d0b568010c7d1c/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9TY21WemFYcGxYM1J2WDJacGRGc0hNR2tCN1E9PSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--4e2c28b6f31f9da4a43a726c999148c0062324fa/BuPa23_reglement-interieur.pdf" }
 
       it "returns the new source for the given url" do
-        expect(subject.new_source(deprecated_url)).to eq(valid_url)
+        expect(subject.new_source(deprecated_url)).to eq(blob_path)
       end
     end
 
@@ -119,7 +113,7 @@ describe Decidim::ContentFixer do
 
   describe "#blobs" do
     it "returns an array filename and id" do
-      expect(subject.blobs).to eq([["BuPa23_reglement-interieur.pdf", invalid_resource.id]])
+      expect(subject.blobs).to eq([[blob.filename.to_s, blob.id]])
     end
   end
 
@@ -139,7 +133,7 @@ describe Decidim::ContentFixer do
 
   describe "#find_service_url_for_blob" do
     it "returns the service url for the given blob" do
-      expect(subject.find_service_url_for_blob(invalid_resource.id)).to eq(valid_url)
+      expect(subject.find_service_url_for_blob(blob.id)).to eq(blob_path)
     end
   end
 end

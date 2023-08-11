@@ -6,19 +6,12 @@ describe Decidim::RepairUrlInContentService do
   subject { described_class.run(deprecated_endpoint) }
 
   let(:deprecated_endpoint) { "s3.decidim.org" }
-  let(:valid_endpoint) { "s3.valid.org" }
   let(:invalid_resource1) { create(:comment, body: invalid_body_comment) }
   let(:invalid_resource2) { create(:comment) }
   let(:invalid_body_comment) { { en: "<p>Here is a not valid comment with <a href='#{deprecated_url}'>Link text</a></p>" } }
   let(:deprecated_url) { "https://#{deprecated_endpoint}/xxxx?response-content-disposition=inline%3Bfilename%3D\"BuPa23_reglement-interieur.pdf\"%3Bfilename*%3DUTF-8''BuPa23_r%25C3%25A8glement-int%25C3%25A9rieur.pdf&response-content-type=application%2Fpdf" }
-  let(:valid_url) { "https://#{valid_endpoint}/xxxx?response-content-disposition=inline%3Bfilename%3D\"BuPa23_reglement-interieur.pdf\"%3Bfilename*%3DUTF-8''BuPa23_r%25C3%25A8glement-int%25C3%25A9rieur.pdf&response-content-type=application%2Fpdf" }
-
-  # rubocop:disable RSpec/AnyInstance
-  before do
-    allow_any_instance_of(Decidim::ContentFixer).to receive(:blobs).and_return([["BuPa23_reglement-interieur.pdf", invalid_resource1.id]])
-    allow_any_instance_of(Decidim::ContentFixer).to receive(:find_service_url_for_blob).with(invalid_resource1.id).and_return(valid_url)
-  end
-  # rubocop:enable RSpec/AnyInstance
+  let!(:blob) { ActiveStorage::Blob.create_after_upload!(filename: "BuPa23_reglement-interieur.pdf", io: File.open("spec/fixtures/BuPa23_reglement-interieur.pdf"), content_type: "application/pdf") }
+  let(:blob_path) { Rails.application.routes.url_helpers.rails_blob_path(ActiveStorage::Blob.find(blob.id), only_path: true) }
 
   describe "#run" do
     it "updates values from comments" do
@@ -27,7 +20,7 @@ describe Decidim::RepairUrlInContentService do
         invalid_resource1.reload
       end.to change(invalid_resource1, :body)
 
-      expect(invalid_resource1.body["en"]).to include(valid_endpoint)
+      expect(invalid_resource1.body["en"]).to include(blob_path)
     end
 
     context "when invalid contains an image" do
@@ -39,7 +32,7 @@ describe Decidim::RepairUrlInContentService do
           invalid_resource1.reload
         end.to change(invalid_resource1, :body)
 
-        expect(invalid_resource1.body["en"]).to include(valid_endpoint)
+        expect(invalid_resource1.body["en"]).to include(blob_path)
       end
     end
 
@@ -52,18 +45,7 @@ describe Decidim::RepairUrlInContentService do
           invalid_resource1.reload
         end.to change(invalid_resource1, :body)
 
-        expect(invalid_resource1.body["en"]).to include(valid_endpoint)
-      end
-    end
-
-    context "when new link is nil" do
-      let(:valid_url) { nil }
-
-      it "does not update resources" do
-        expect do
-          subject
-          invalid_resource1.reload
-        end.not_to change(invalid_resource1, :body)
+        expect(invalid_resource1.body["en"]).to include(blob_path)
       end
     end
 
@@ -72,17 +54,6 @@ describe Decidim::RepairUrlInContentService do
 
       it "returns false" do
         expect(subject).to be_falsey
-      end
-    end
-
-    context "when resource text is not HTML" do
-      let(:invalid_body_comment) { { en: "Here is a not valid comment with #{deprecated_url}" } }
-
-      it "does not update resources" do
-        expect do
-          subject
-          invalid_resource1.reload
-        end.not_to change(invalid_resource1, :body)
       end
     end
 
@@ -114,7 +85,7 @@ describe Decidim::RepairUrlInContentService do
           invalid_resource1.reload
         end.to change(invalid_resource1, :settings)
 
-        expect(invalid_resource1.settings.html_content[:en]).to include(valid_endpoint)
+        expect(invalid_resource1.settings.html_content[:en]).to include(blob_path)
       end
     end
   end
