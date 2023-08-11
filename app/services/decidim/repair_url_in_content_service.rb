@@ -89,11 +89,6 @@ module Decidim
           @logger.info "Old content: #{current_content}"
           @logger.info "New content: #{new_content}"
 
-          if new_content.to_s.include?(@deprecated_endpoint)
-            @logger.warn "New content '#{record.class}##{record.id}.#{column.name}' still contains deprecated endpoint #{@deprecated_endpoint}"
-            next
-          end
-
           write_attribute(record, column, new_content)
         else
           # If the column is a settings object, we need to update each of its attributes using a recursive call
