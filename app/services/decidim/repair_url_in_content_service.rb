@@ -14,13 +14,13 @@ module Decidim
     COLUMN_TYPES = [:string, :jsonb, :text].freeze
 
     # @param [String] deprecated_endpoint
-    # @param [ActiveSupport::Logger] logger
+    # @param [Logger] logger
     def self.run(deprecated_endpoint, logger = nil)
       new(deprecated_endpoint, logger).run
     end
 
     # @param [String] deprecated_endpoint
-    # @param [ActiveSupport::Logger] logger
+    # @param [Logger] logger
     def initialize(deprecated_endpoint, logger = nil)
       @logger = logger || Rails.logger
       @deprecated_endpoint = deprecated_endpoint&.gsub(%r{https?://}, "")

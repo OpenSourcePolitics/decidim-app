@@ -22,7 +22,7 @@ describe "rake decidim:repair:url_in_content", type: :task do
 
   it "calls the service" do
     with_modified_env DEPRECATED_OBJECTSTORE_S3_HOST: deprecated_objectstore_s3_host do
-      expect(Decidim::RepairUrlInContentService).to receive(:run).with(deprecated_objectstore_s3_host).and_return(true)
+      expect(Decidim::RepairUrlInContentService).to receive(:run).with(deprecated_objectstore_s3_host, any_args).and_return(true)
 
       task.execute
     end

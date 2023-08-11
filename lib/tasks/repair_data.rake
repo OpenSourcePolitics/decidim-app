@@ -58,7 +58,7 @@ namespace :decidim do
 
       raise ArgumentError, "DEPRECATED_OBJECTSTORE_S3_HOST env variable is not set" if deprecated_objectstore_s3_host.blank?
 
-      Decidim::RepairUrlInContentService.run(deprecated_objectstore_s3_host)
+      Decidim::RepairUrlInContentService.run(deprecated_objectstore_s3_host, Logger.new($stdout))
     end
   end
 end
