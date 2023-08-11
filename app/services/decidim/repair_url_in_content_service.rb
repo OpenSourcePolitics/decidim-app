@@ -67,29 +67,57 @@ module Decidim
       end
     end
 
+    # In some cases, the column returns a settings object,
+    # therefore we need to update each of its attributes before saving the column
     # @param [Object] record
     # @param [[ActiveRecord::ConnectionAdapters::PostgreSQL::Column]] columns
     # @return record | nil
     def update_each_column(record, columns)
       columns.each do |column|
-        current_content = record.send(column.name)
-        next unless current_content.to_s.include?(@deprecated_endpoint)
+        current_content = current_content_for(record, column)
+        next if current_content.blank?
 
-        @logger.info "Updating ##{record.class}##{record.id}.#{column.name}"
-        new_content = Decidim::ContentFixer.repair(current_content, @deprecated_endpoint, @logger)
+        column_name = column.try(:name) ? column.name : column
 
-        @logger.info "Old content: #{current_content}"
-        @logger.info "New content: #{new_content}"
+        @logger.info "Updating ##{[record.class, record.try(:id), column_name].compact.join("# ")}"
 
-        if new_content.to_s.include?(@deprecated_endpoint)
-          @logger.warn "New content '#{record.class}##{record.id}.#{column.name}' still contains deprecated endpoint #{@deprecated_endpoint}"
-          next
+        if current_content.is_a?(Hash) || current_content.is_a?(Array) || current_content.is_a?(String)
+          next unless current_content.to_s.include?(@deprecated_endpoint)
+
+          new_content = Decidim::ContentFixer.repair(current_content, @deprecated_endpoint, @logger)
+
+          @logger.info "Old content: #{current_content}"
+          @logger.info "New content: #{new_content}"
+
+          if new_content.to_s.include?(@deprecated_endpoint)
+            @logger.warn "New content '#{record.class}##{record.id}.#{column.name}' still contains deprecated endpoint #{@deprecated_endpoint}"
+            next
+          end
+
+          write_attribute(record, column, new_content)
+        else
+          # If the column is a settings object, we need to update each of its attributes using a recursive call
+          write_attribute(record, column, update_each_column(current_content, current_content.instance_variables))
         end
-
-        record.write_attribute(:"#{column.name}", new_content)
       end
 
       record
+    end
+
+    def write_attribute(record, column, value)
+      if column.try(:name)
+        record.write_attribute(:"#{column.name}", value)
+      else
+        record.instance_variable_set(column, value)
+      end
+    end
+
+    def current_content_for(record, column)
+      if column.try(:name)
+        record.send(column.name)
+      else
+        record.instance_variable_get(column)
+      end
     end
 
     def records_for(model)
