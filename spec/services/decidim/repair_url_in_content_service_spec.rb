@@ -46,6 +46,19 @@ describe Decidim::RepairUrlInContentService do
       end
     end
 
+    context "when deprecated url is not a direct link" do
+      let(:deprecated_url) { "https://#{deprecated_endpoint}/rails/active_storage/representations/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBY3c9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0dd7fba2bf600153aca7a8ada9d0b568010c7d1c/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9TY21WemFYcGxYM1J2WDJacGRGc0hNR2tCN1E9PSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--4e2c28b6f31f9da4a43a726c999148c0062324fa/BuPa23_reglement-interieur.pdf" }
+
+      it "updates values from comments" do
+        expect do
+          subject
+          comment_1.reload
+        end.to change(comment_1, :body)
+
+        expect(comment_1.body["en"]).to include(valid_endpoint)
+      end
+    end
+
     context "when new link is nil" do
       let(:valid_url) { nil }
 

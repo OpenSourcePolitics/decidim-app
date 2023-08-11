@@ -141,7 +141,11 @@ module Decidim
 
     def new_source(source)
       uri = URI.parse(source)
-      filename = CGI.parse(uri.query)["response-content-disposition"].first.match(/filename=("?)(.+)\1/)[2]
+      filename = if source.include?("response-content-disposition")
+                   CGI.parse(uri.query)["response-content-disposition"].first.match(/filename=("?)(.+)\1/)[2]
+                 else
+                   uri.path.split("/").last
+                 end
       _filename, id = blobs.select { |blob, _id| ActiveSupport::Inflector.transliterate(blob) == filename }.first
 
       find_service_url_for_blob(id)
