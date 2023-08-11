@@ -27,7 +27,9 @@ module Decidim
           find_and_replace(value)
         end
       else
-        raise "Unsupported type #{content.class}"
+        @logger.warn("Unsupported type #{@content.class}")
+
+        nil
       end
     end
 
@@ -70,6 +72,9 @@ module Decidim
       _filename, id = blobs.select { |blob, _id| ActiveSupport::Inflector.transliterate(blob) == filename }.first
 
       find_service_url_for_blob(id)
+    rescue URI::InvalidURIError
+      @logger.warn "Invalid URI for #{source}"
+      nil
     end
 
     def find_service_url_for_blob(blob_id)
