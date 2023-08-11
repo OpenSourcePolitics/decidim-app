@@ -34,13 +34,15 @@ module Decidim
     end
 
     def find_and_replace(content)
-      wrapper = wrapped_in_paragraph?(content) ? "body" : "p"
+      wrapper = nokogiri_will_wrap_with_p?(content) ? "p" : "body"
 
-      Nokogiri::HTML(content).tap do |doc|
-        TAGS_TO_FIX.each do |tag|
-          replace_urls(doc, tag)
-        end
-      end.css(wrapper).inner_html
+      doc = Nokogiri::HTML(content)
+
+      TAGS_TO_FIX.each do |tag|
+        replace_urls(doc, tag)
+      end
+
+      doc.css(wrapper).inner_html
     end
 
     def blobs
@@ -78,14 +80,11 @@ module Decidim
     end
 
     def find_service_url_for_blob(blob_id)
-      ActiveStorage::Blob.find(blob_id).service_url
-    rescue URI::InvalidURIError
-      @logger.warn "Invalid URI for blob #{blob_id}"
-      nil
+      Rails.application.routes.url_helpers.rails_blob_path(ActiveStorage::Blob.find(blob_id), only_path: true)
     end
 
-    def wrapped_in_paragraph?(content)
-      content.include?("<p>")
+    def nokogiri_will_wrap_with_p?(content)
+      !content.start_with?("<")
     end
   end
 end

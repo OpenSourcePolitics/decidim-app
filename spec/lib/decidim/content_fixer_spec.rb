@@ -61,12 +61,11 @@ describe Decidim::ContentFixer do
     end
   end
 
-  describe "#replace_urls" do
+  describe "#find_and_replace" do
     it "replaces the deprecated url with the new url" do
-      subject.replace_urls(doc, "a")
+      replaced_content = subject.find_and_replace(content)
 
-      replaced_content = doc.css("body").inner_html
-
+      expect(replaced_content).to start_with("<p")
       expect(replaced_content).to include(valid_endpoint)
       expect(replaced_content).not_to include(deprecated_endpoint)
     end
@@ -75,10 +74,21 @@ describe Decidim::ContentFixer do
       let(:content) { "<img src='#{deprecated_url}'/>" }
 
       it "replaces the deprecated url with the new url" do
-        subject.replace_urls(doc, "img")
+        replaced_content = subject.find_and_replace(content)
 
-        replaced_content = doc.css("body").inner_html
+        expect(replaced_content).to start_with("<img")
+        expect(replaced_content).to include(valid_endpoint)
+        expect(replaced_content).not_to include(deprecated_endpoint)
+      end
+    end
 
+    context "when content in not wrapped in a paragraph" do
+      let(:content) { "Here is a not valid comment with <a href='#{deprecated_url}'>Link text</a>" }
+
+      it "replaces the deprecated url with the new url" do
+        replaced_content = subject.find_and_replace(content)
+
+        expect(replaced_content).not_to start_with("<p")
         expect(replaced_content).to include(valid_endpoint)
         expect(replaced_content).not_to include(deprecated_endpoint)
       end
@@ -115,14 +125,14 @@ describe Decidim::ContentFixer do
 
   describe "#wrapped_in_paragraph?" do
     it "returns true if content is wrapped in a paragraph" do
-      expect(subject.wrapped_in_paragraph?(content)).to eq(true)
+      expect(subject.nokogiri_will_wrap_with_p?(content)).to eq(false)
     end
 
     context "when content is not wrapped in a paragraph" do
-      let(:content) { "<a href='#{deprecated_url}'>Link text</a>" }
+      let(:content) { "My link is <a href='#{deprecated_url}'>Link text</a>" }
 
       it "returns false" do
-        expect(subject.wrapped_in_paragraph?(content)).to eq(false)
+        expect(subject.nokogiri_will_wrap_with_p?(content)).to eq(true)
       end
     end
   end
