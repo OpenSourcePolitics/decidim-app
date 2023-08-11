@@ -7,19 +7,16 @@ describe Decidim::RepairUrlInContentService do
 
   let(:deprecated_endpoint) { "s3.decidim.org" }
   let(:valid_endpoint) { "s3.valid.org" }
-  let(:connection_tables) { %w(schema_migrations decidim_comments_comments decidim_proposals_proposals ar_internal_metadata) }
-  let(:comment_1) { create(:comment, body: invalid_body_comment) }
-  let(:comment_2) { create(:comment) }
+  let(:invalid_resource1) { create(:comment, body: invalid_body_comment) }
+  let(:invalid_resource2) { create(:comment) }
   let(:invalid_body_comment) { { en: "<p>Here is a not valid comment with <a href='#{deprecated_url}'>Link text</a></p>" } }
   let(:deprecated_url) { "https://#{deprecated_endpoint}/xxxx?response-content-disposition=inline%3Bfilename%3D\"BuPa23_reglement-interieur.pdf\"%3Bfilename*%3DUTF-8''BuPa23_r%25C3%25A8glement-int%25C3%25A9rieur.pdf&response-content-type=application%2Fpdf" }
   let(:valid_url) { "https://#{valid_endpoint}/xxxx?response-content-disposition=inline%3Bfilename%3D\"BuPa23_reglement-interieur.pdf\"%3Bfilename*%3DUTF-8''BuPa23_r%25C3%25A8glement-int%25C3%25A9rieur.pdf&response-content-type=application%2Fpdf" }
 
   # rubocop:disable RSpec/AnyInstance
   before do
-    allow(ActiveRecord::Base.connection).to receive(:tables).and_return(connection_tables)
-    allow(Decidim::RepairUrlInContentService).to receive(:models).and_return(["Decidim::Comments::Comment", "Decidim::Proposals::Proposal"])
-    allow_any_instance_of(Decidim::RepairUrlInContentService).to receive(:blobs).and_return([["BuPa23_reglement-interieur.pdf", comment_1.id]])
-    allow_any_instance_of(Decidim::RepairUrlInContentService).to receive(:find_service_url_for_blob).with(comment_1.id).and_return(valid_url)
+    allow_any_instance_of(Decidim::RepairUrlInContentService).to receive(:blobs).and_return([["BuPa23_reglement-interieur.pdf", invalid_resource1.id]])
+    allow_any_instance_of(Decidim::RepairUrlInContentService).to receive(:find_service_url_for_blob).with(invalid_resource1.id).and_return(valid_url)
   end
   # rubocop:enable RSpec/AnyInstance
 
@@ -27,10 +24,10 @@ describe Decidim::RepairUrlInContentService do
     it "updates values from comments" do
       expect do
         subject
-        comment_1.reload
-      end.to change(comment_1, :body)
+        invalid_resource1.reload
+      end.to change(invalid_resource1, :body)
 
-      expect(comment_1.body["en"]).to include(valid_endpoint)
+      expect(invalid_resource1.body["en"]).to include(valid_endpoint)
     end
 
     context "when invalid contains an image" do
@@ -39,10 +36,10 @@ describe Decidim::RepairUrlInContentService do
       it "updates values from comments" do
         expect do
           subject
-          comment_1.reload
-        end.to change(comment_1, :body)
+          invalid_resource1.reload
+        end.to change(invalid_resource1, :body)
 
-        expect(comment_1.body["en"]).to include(valid_endpoint)
+        expect(invalid_resource1.body["en"]).to include(valid_endpoint)
       end
     end
 
@@ -52,10 +49,10 @@ describe Decidim::RepairUrlInContentService do
       it "updates values from comments" do
         expect do
           subject
-          comment_1.reload
-        end.to change(comment_1, :body)
+          invalid_resource1.reload
+        end.to change(invalid_resource1, :body)
 
-        expect(comment_1.body["en"]).to include(valid_endpoint)
+        expect(invalid_resource1.body["en"]).to include(valid_endpoint)
       end
     end
 
@@ -65,8 +62,8 @@ describe Decidim::RepairUrlInContentService do
       it "does not update resources" do
         expect do
           subject
-          comment_1.reload
-        end.not_to change(comment_1, :body)
+          invalid_resource1.reload
+        end.not_to change(invalid_resource1, :body)
       end
     end
 
@@ -84,8 +81,40 @@ describe Decidim::RepairUrlInContentService do
       it "does not update resources" do
         expect do
           subject
-          comment_1.reload
-        end.not_to change(comment_1, :body)
+          invalid_resource1.reload
+        end.not_to change(invalid_resource1, :body)
+      end
+    end
+
+    context "when resource is a ContentBlock" do
+      let(:invalid_resource1) { create(:content_block, manifest_name: :html, scope_name: :homepage) }
+      let(:invalid_html_content) { "<p><a href='#{deprecated_url}'><img src='#{deprecated_url}'/></a></p>" }
+
+      let(:settings) do
+        Decidim.available_locales.each_with_object({}) do |locale, hash|
+          hash["html_content_#{locale}"] = invalid_html_content
+        end
+      end
+
+      before do
+        form = Decidim::Admin::ContentBlockForm.from_params(
+          {
+            content_block: {
+              settings: settings,
+              images: {}
+            }
+          }
+        )
+        Decidim::Admin::UpdateContentBlock.new(form, invalid_resource1, invalid_resource1.scope_name).call
+      end
+
+      it "updates values from content blocks" do
+        expect do
+          subject
+          invalid_resource1.reload
+        end.to change(invalid_resource1, :settings)
+
+        expect(invalid_resource1.settings.html_content[:en]).to include(valid_endpoint)
       end
     end
   end
@@ -93,12 +122,14 @@ describe Decidim::RepairUrlInContentService do
   describe "#models" do
     subject { described_class.new(deprecated_endpoint) }
 
-    before do
-      allow(ActiveRecord::Base.connection).to receive(:tables).and_return(connection_tables)
-    end
-
     it "returns models" do
-      expect(subject.models).to eq([Decidim::Comments::Comment, Decidim::Proposals::Proposal])
+      [
+        Decidim::Comments::Comment,
+        Decidim::Proposals::Proposal,
+        Decidim::ContentBlock
+      ].each do |model|
+        expect(subject.models).to include(model)
+      end
     end
   end
 
@@ -108,8 +139,8 @@ describe Decidim::RepairUrlInContentService do
     let(:model) { Decidim::Comments::Comment }
 
     it "returns all records that have a column of type string jsonb or text" do
-      expect(subject).to include(comment_1)
-      expect(subject).not_to include(comment_2)
+      expect(subject).to include(invalid_resource1)
+      expect(subject).not_to include(invalid_resource2)
     end
 
     it "generates a unique SQL query" do

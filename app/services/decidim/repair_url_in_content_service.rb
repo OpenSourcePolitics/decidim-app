@@ -75,7 +75,7 @@ module Decidim
         next unless current_content.to_s.include?(@deprecated_endpoint)
 
         @logger.info "Updating ##{record.class}##{record.id}.#{column.name}"
-        new_content = clean_content(record.send(column.name))
+        new_content = clean_content(current_content)
 
         @logger.info "Old content: #{current_content}"
         @logger.info "New content: #{new_content}"
