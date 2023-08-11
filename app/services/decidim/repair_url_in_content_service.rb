@@ -12,6 +12,7 @@ module Decidim
   # However every links added to text fields redirecting to an uploaded file were outdated and still redirects to the old S3 bucket
   class RepairUrlInContentService
     COLUMN_TYPES = [:string, :jsonb, :text].freeze
+    TAGS_TO_FIX = ["a", "img"].freeze
 
     # @param [String] deprecated_endpoint
     # @param [Logger] logger
@@ -116,22 +117,30 @@ module Decidim
     def clean_content(content)
       content.transform_values do |value|
         Nokogiri::HTML(value).tap do |doc|
-          doc.css("a").each do |link|
-            next unless link["href"].include?(@deprecated_endpoint)
-
-            new_link = new_link(link["href"])
-
-            next unless new_link
-
-            @logger.info "Replacing #{link["href"]} with #{new_link}"
-            link["href"] = new_link
+          TAGS_TO_FIX.each do |tag|
+            replace_urls(doc, tag)
           end
         end.css("body").inner_html
       end
     end
 
-    def new_link(link)
-      uri = URI.parse(link)
+    def replace_urls(doc, tag)
+      attribute = tag == "img" ? "src" : "href"
+
+      doc.css(tag).each do |source|
+        next unless source[attribute].include?(@deprecated_endpoint)
+
+        new_source = new_source(source[attribute])
+
+        next unless new_source
+
+        @logger.info "Replacing #{source[attribute]} with #{new_source}"
+        source[attribute] = new_source
+      end
+    end
+
+    def new_source(source)
+      uri = URI.parse(source)
       filename = CGI.parse(uri.query)["response-content-disposition"].first.match(/filename=("?)(.+)\1/)[2]
       _filename, id = blobs.select { |blob, _id| ActiveSupport::Inflector.transliterate(blob) == filename }.first
 

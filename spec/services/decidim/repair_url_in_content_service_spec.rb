@@ -33,6 +33,19 @@ describe Decidim::RepairUrlInContentService do
       expect(comment_1.body["en"]).to include(valid_endpoint)
     end
 
+    context "when invalid contains an image" do
+      let(:invalid_body_comment) { { en: "<p>Here is a not valid comment with <img src='#{deprecated_url}'/></p>" } }
+
+      it "updates values from comments" do
+        expect do
+          subject
+          comment_1.reload
+        end.to change(comment_1, :body)
+
+        expect(comment_1.body["en"]).to include(valid_endpoint)
+      end
+    end
+
     context "when new link is nil" do
       let(:valid_url) { nil }
 
