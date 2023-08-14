@@ -59,13 +59,20 @@ module DecidimApp
       def dumping_database
         @logger.info("dumping database #{@database_configuration[:database]} to #{organization_export_path}/postgres/#{resource_name}--de.dump")
 
-        cmd = "pg_dump -Fc"
+        dump_format = "c"
+        dump_extension = "dump"
+        if @database_configuration[:host].present?
+          dump_format = "p"
+          dump_extension = "sql"
+        end
+
+        cmd = "pg_dump -F#{dump_format}"
         cmd += " -h '#{@database_configuration[:host]}'" if @database_configuration[:host].present?
         cmd += " -p '#{@database_configuration[:port]}'" if @database_configuration[:port].present?
         cmd += " -U '#{@database_configuration[:username]}'" if @database_configuration[:username].present?
         cmd = "PGPASSWORD=#{@database_configuration[:password]} #{cmd}" if @database_configuration[:password].present?
         cmd += " -d '#{@database_configuration[:database]}'" if @database_configuration[:database].present?
-        cmd += " -f #{organization_export_path}/postgres/#{resource_name}--de.dump"
+        cmd += " -f #{organization_export_path}/postgres/#{resource_name}--de.#{dump_extension}"
 
         system(cmd)
       end

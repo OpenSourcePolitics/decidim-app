@@ -54,13 +54,20 @@ describe DecidimApp::K8s::OrganizationExporter do
     it "dumps the database" do
       # rubocop:disable RSpec/SubjectStub
 
-      cmd = "pg_dump -Fc"
+      dump_format = "c"
+      dump_extension = "dump"
+      if @database_configuration[:host].present?
+        dump_format = "p"
+        dump_extension = "sql"
+      end
+
+      cmd = "pg_dump -F#{dump_format}"
       cmd += " -h '#{database_configuration[:host]}'" if database_configuration[:host].present?
       cmd += " -p '#{database_configuration[:port]}'" if database_configuration[:port].present?
       cmd += " -U '#{database_configuration[:username]}'" if database_configuration[:username].present?
       cmd = "PGPASSWORD=#{database_configuration[:password]} #{cmd}" if database_configuration[:password].present?
       cmd += " -d '#{database_configuration[:database]}'" if database_configuration[:database].present?
-      cmd += " -f #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--de.dump"
+      cmd += " -f #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--de.#{dump_extension}"
 
       expect(subject).to receive(:system).with(cmd)
       # rubocop:enable RSpec/SubjectStub
