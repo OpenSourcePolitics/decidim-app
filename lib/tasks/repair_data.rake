@@ -39,18 +39,22 @@ namespace :decidim do
     desc "Add all missing translation for translatable resources"
     task translations: :environment do
       logger = Logger.new($stdout)
-      logger.info("Checking all translatable resources...")
+      if Decidim.enable_machine_translations
+        logger.info("Checking all translatable resources...")
 
-      updated_resources_ids = Decidim::RepairTranslationsService.run(logger: logger)
+        updated_resources_ids = Decidim::RepairTranslationsService.run(logger: logger)
 
-      if updated_resources_ids.blank?
-        logger.info("No resources updated")
+        if updated_resources_ids.blank?
+          logger.info("No resources updated")
+        else
+          logger.info("#{updated_resources_ids.count} resources enqueue for translation")
+          logger.info("Enqueued resources : #{updated_resources_ids.join(", ")}")
+        end
+
+        logger.info("Operation terminated")
       else
-        logger.info("#{updated_resources_ids.count} resources enqueue for translation")
-        logger.info("Enqueued resources : #{updated_resources_ids.join(", ")}")
+        logger.warn("Machine translation is not enabled")
       end
-
-      logger.info("Operation terminated")
     end
 
     task url_in_content: :environment do
