@@ -83,7 +83,7 @@ jobs:
         id: cache-hash
         run: |
           echo "::set-output name=hash::$(bundle exec rake test:assets_hash)"
-      - uses: OpenSourcePolitics/cache-precompile-action@master
+      - uses: OpenSourcePolitics/cache-precompile-action@develop
         with:
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
       - run: mkdir -p ./spec/tmp/screenshots
@@ -148,7 +148,7 @@ jobs:
         id: cache-hash
         run: |
           echo "::set-output name=hash::$(bundle exec rake test:assets_hash)"
-      - uses: OpenSourcePolitics/cache-precompile-action@master
+      - uses: OpenSourcePolitics/cache-precompile-action@develop
         with:
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
       - run: mkdir -p ./spec/tmp/screenshots
