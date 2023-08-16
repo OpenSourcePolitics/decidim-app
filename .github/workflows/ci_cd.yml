@@ -88,11 +88,7 @@ jobs:
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
-
-      # TODO: Use latest version
       - uses: nanasess/setup-chromedriver@v2
-        with:
-          chromedriver-version: "114.0.5735.90"
       - run:  bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
@@ -157,10 +153,7 @@ jobs:
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
-      # TODO: Use latest version
       - uses: nanasess/setup-chromedriver@v2
-        with:
-          chromedriver-version: "114.0.5735.90"
       - run:  bundle exec rake "test:run[include, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
