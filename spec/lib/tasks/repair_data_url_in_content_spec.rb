@@ -32,7 +32,9 @@ describe "rake decidim:repair:url_in_content", type: :task do
     ["", nil].each do |value|
       it "raises an error" do
         with_modified_env deprecated_hosts: value do
-          expect { task.execute }.to raise_error(ArgumentError)
+          expect(Decidim::RepairUrlInContentService).not_to receive(:run)
+
+          task.execute
         end
       end
     end
