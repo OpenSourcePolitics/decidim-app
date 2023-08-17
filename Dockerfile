@@ -1,4 +1,4 @@
-FROM ruby:2.7.5
+FROM ruby:2.7.5-alpine as builder
 
 ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy
@@ -6,15 +6,8 @@ ENV RAILS_ENV=production \
 WORKDIR /app
 
 # Install NodeJS
-RUN --mount=type=cache,target=/var/cache/apt \
-    curl https://deb.nodesource.com/setup_16.x | bash && \
-    apt install -y nodejs && \
-    apt update && \
-    npm install -g npm@8.19.2 && \
-    npm install --global yarn && \
-    apt install -y libicu-dev postgresql-client && \
-    gem install bundler:2.2.17 && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache --update nodejs yarn tzdata git icu-dev libpq-dev build-base proj proj-dev postgresql-client && \
+    gem install bundler:2.4.9
 
 COPY Gemfile* ./
 RUN bundle config set --local without 'development test' && bundle install
@@ -30,10 +23,20 @@ RUN bundle exec bootsnap precompile --gemfile app/ lib/ config/ bin/ db/ && \
     bundle exec rails assets:precompile && \
     bundle exec rails deface:precompile
 
-# Configure endpoint.
-COPY ./entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
+RUN rm -rf node_modules tmp/cache vendor/bundle spec
 
+FROM ruby:2.7.5-alpine as runner
+
+ENV RAILS_ENV=production \
+    SECRET_KEY_BASE=dummy
+
+RUN apk add --no-cache --update icu-dev tzdata postgresql-client proj proj-dev  && \
+    gem install bundler:2.4.9
+
+WORKDIR /app
+
+COPY --from=builder /usr/local/bundle /usr/local/bundle
+COPY --from=builder /app /app
+
+EXPOSE 3000
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
