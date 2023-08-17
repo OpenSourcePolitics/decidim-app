@@ -15,7 +15,7 @@ RUN bundle config set --local without 'development test' && bundle install
 COPY package* ./
 COPY yarn.lock .
 COPY packages packages
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 COPY . .
 
@@ -23,12 +23,19 @@ RUN bundle exec bootsnap precompile --gemfile app/ lib/ config/ bin/ db/ && \
     bundle exec rails assets:precompile && \
     bundle exec rails deface:precompile
 
-RUN rm -rf node_modules tmp/cache vendor/bundle spec
+RUN rm -rf node_modules tmp/cache vendor/bundle spec \
+    && rm -rf /usr/local/bundle/cache/*.gem \
+    && find /usr/local/bundle/gems/ -name "*.c" -delete \
+    && find /usr/local/bundle/gems/ -name "*.o" -delete \
+    && find /usr/local/bundle/gems/ -type d -name "spec" -prune -exec rm -rf {} \; \
+    && find /usr/local/bundle/gems/ -type d -name "test" -prune -exec rm -rf {} \; \
+    && rm -rf log/*.log
 
 FROM ruby:2.7.5-alpine as runner
 
 ENV RAILS_ENV=production \
-    SECRET_KEY_BASE=dummy
+    SECRET_KEY_BASE=dummy \
+    RAILS_LOG_TO_STDOUT=true
 
 RUN apk add --no-cache --update icu-dev tzdata postgresql-client proj proj-dev  && \
     gem install bundler:2.4.9
