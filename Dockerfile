@@ -28,7 +28,6 @@ RUN rm -rf node_modules tmp/cache vendor/bundle spec \
     && find /usr/local/bundle/gems/ -name "*.c" -delete \
     && find /usr/local/bundle/gems/ -name "*.o" -delete \
     && find /usr/local/bundle/gems/ -type d -name "spec" -prune -exec rm -rf {} \; \
-    && find /usr/local/bundle/gems/ -type d -name "test" -prune -exec rm -rf {} \; \
     && rm -rf log/*.log
 
 FROM ruby:2.7.5-alpine as runner
