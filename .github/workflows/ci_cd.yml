@@ -252,18 +252,6 @@ jobs:
           password: ${{ secrets.TOKEN }}
           image_name: ${{ vars.IMAGE_NAME }}
           tag: "develop"
-  # TODO: remove this step when we have a slim image
-  build_and_push_image_slim:
-    name: Build and push image to Registry
-    runs-on: ubuntu-latest
-    steps:
-      - uses: OpenSourcePolitics/build-and-push-images-action@master
-        with:
-          registry: ${{ vars.REGISTRY_ENDPOINT }}
-          namespace: ${{ vars.REGISTRY_NAMESPACE }}
-          password: ${{ secrets.TOKEN }}
-          image_name: ${{ vars.IMAGE_NAME }}
-          tag: "slim"
   generate_release:
     name: Generate release
     needs: [lint, tests, system_tests, test_build]
