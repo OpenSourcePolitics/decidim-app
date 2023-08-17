@@ -35,5 +35,39 @@ namespace :decidim do
 
       logger.info("Operation terminated")
     end
+
+    desc "Add all missing translation for translatable resources"
+    task translations: :environment do
+      logger = Logger.new($stdout)
+      if Decidim.enable_machine_translations
+        logger.info("Checking all translatable resources...")
+
+        updated_resources_ids = Decidim::RepairTranslationsService.run(logger: logger)
+
+        if updated_resources_ids.blank?
+          logger.info("No resources updated")
+        else
+          logger.info("#{updated_resources_ids.count} resources enqueue for translation")
+          logger.info("Enqueued resources : #{updated_resources_ids.join(", ")}")
+        end
+
+        logger.info("Operation terminated")
+      else
+        logger.warn("Machine translation is not enabled")
+      end
+    end
+
+    task url_in_content: :environment do
+      logger = Logger.new($stdout)
+      deprecated_hosts = ENV["DEPRECATED_OBJECTSTORE_S3_HOSTS"].to_s.split(",").map(&:strip)
+
+      if deprecated_hosts.blank?
+        logger.warn("DEPRECATED_OBJECTSTORE_S3_HOSTS env variable is not set")
+      else
+        deprecated_hosts.each do |host|
+          Decidim::RepairUrlInContentService.run(host, logger)
+        end
+      end
+    end
   end
 end
