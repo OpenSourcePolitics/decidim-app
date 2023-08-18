@@ -203,8 +203,7 @@ jobs:
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: host.docker.internal
     steps:
-      # TODO: Switch to master
-      - uses: OpenSourcePolitics/build-and-test-images-action@develop
+      - uses: OpenSourcePolitics/build-and-test-images-action@master
         with:
           registry: ${{ vars.REGISTRY_ENDPOINT }}
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
