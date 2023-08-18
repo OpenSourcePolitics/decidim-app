@@ -6,7 +6,7 @@ ENV RAILS_ENV=production \
 WORKDIR /app
 
 # Install NodeJS
-RUN apk add --no-cache --update nodejs yarn tzdata git icu-dev libpq-dev build-base proj proj-dev postgresql-client && \
+RUN apk add --no-cache --update nodejs yarn tzdata git icu-dev libpq-dev build-base proj proj-dev postgresql-client imagemagick && \
     gem install bundler:2.4.9
 
 COPY Gemfile* ./
@@ -36,7 +36,7 @@ ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy \
     RAILS_LOG_TO_STDOUT=true
 
-RUN apk add --no-cache --update icu-dev tzdata postgresql-client proj proj-dev  && \
+RUN apk add --no-cache --update icu-dev tzdata postgresql-client proj proj-dev imagemagick  && \
     gem install bundler:2.4.9
 
 WORKDIR /app
