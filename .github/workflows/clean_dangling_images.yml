@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build and push Docker image
-        uses: OpenSourcePolitics/delete-images-action@v1
+        uses: OpenSourcePolitics/delete-images-action@master
         with:
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
           scw_access_key: ${{ secrets.ACCESS_TOKEN }}
