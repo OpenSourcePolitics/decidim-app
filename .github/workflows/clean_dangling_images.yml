@@ -5,10 +5,13 @@ jobs:
     if: github.event.ref_type == 'branch'
     runs-on: ubuntu-latest
     steps:
-      - uses: OpenSourcePolitics/delete-images-action@master
+      - name: Build and push Docker image
+        uses: OpenSourcePolitics/delete-images-action@v1
         with:
-          registry: ${{ vars.REGISTRY_ENDPOINT }}
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
-          password: ${{ secrets.TOKEN }}
+          scw_access_key: ${{ secrets.ACCESS_TOKEN }}
+          scw_secret_key: ${{ secrets.TOKEN }}
+          scw_default_project_id: ${{ secrets.SCW_PROJECT_ID }}
+          scw_default_organization_id: ${{ secrets.SCW_ORGANIZATION_ID }}
           image_name: ${{ vars.IMAGE_NAME }}
           tag: ${{ github.event.ref }}
