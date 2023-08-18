@@ -22,7 +22,7 @@ describe DecidimApp::K8s::OrganizationExporter do
     }
   end
 
-  let(:database_name) { Rails.configuration.database_configuration[Rails.env]["database"] }
+  let(:database_configuration) { Rails.configuration.database_configuration[Rails.env].deep_symbolize_keys }
 
   before do
     organization.update!(secondary_hosts: [organization_secondary_host])
@@ -53,7 +53,16 @@ describe DecidimApp::K8s::OrganizationExporter do
   describe "#dumping_database" do
     it "dumps the database" do
       # rubocop:disable RSpec/SubjectStub
-      expect(subject).to receive(:system).with("pg_dump -Fc #{database_name} > #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--de.dump")
+
+      cmd = "pg_dump -Fc"
+      cmd += " -h '#{database_configuration[:host]}'" if database_configuration[:host].present?
+      cmd += " -p '#{database_configuration[:port]}'" if database_configuration[:port].present?
+      cmd += " -U '#{database_configuration[:username]}'" if database_configuration[:username].present?
+      cmd = "PGPASSWORD=#{database_configuration[:password]} #{cmd}" if database_configuration[:password].present?
+      cmd += " -d '#{database_configuration[:database]}'" if database_configuration[:database].present?
+      cmd += " -f #{export_path}/#{name_space}--#{hostname}/postgres/#{hostname}--de.dump"
+
+      expect(subject).to receive(:system).with(cmd)
       # rubocop:enable RSpec/SubjectStub
       subject.dumping_database
     end
@@ -230,6 +239,16 @@ describe DecidimApp::K8s::OrganizationExporter do
   describe "#smtp_settings" do
     it "returns the smtp settings" do
       expect(subject.smtp_settings).to eq({ "SMTP_ADDRESS" => "smtp.example.org", "SMTP_FROM" => "test@example.org", "SMTP_PASSWORD" => "demo", "SMTP_PORT" => "25", "SMTP_USER_NAME" => "test" })
+    end
+
+    context "when smtp settings are not present" do
+      before do
+        organization.update!(smtp_settings: nil)
+      end
+
+      it "returns empty smtp settings" do
+        expect(subject.smtp_settings).to eq({})
+      end
     end
   end
 

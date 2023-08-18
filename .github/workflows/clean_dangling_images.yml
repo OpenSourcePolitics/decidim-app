@@ -1,0 +1,17 @@
+name: Branch Deleted
+on: delete
+jobs:
+  clean_dangling_images:
+    if: github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and push Docker image
+        uses: OpenSourcePolitics/delete-images-action@master
+        with:
+          namespace: ${{ vars.REGISTRY_NAMESPACE }}
+          scw_access_key: ${{ secrets.ACCESS_TOKEN }}
+          scw_secret_key: ${{ secrets.TOKEN }}
+          scw_default_project_id: ${{ secrets.SCW_PROJECT_ID }}
+          scw_default_organization_id: ${{ secrets.SCW_ORGANIZATION_ID }}
+          image_name: ${{ vars.IMAGE_NAME }}
+          tag: ${{ github.event.ref }}

@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
-  revision: 3bbd5fff51fbfa94ff6e784baa73af190b1c679d
+  revision: 4e6b7a1a5fcfa0661ba93d1bedb2e09da66d5326
   branch: release/0.26-stable
   specs:
     decidim-homepage_interactive_map (2.0.0)
@@ -384,7 +384,7 @@ GEM
       decidim-core (= 0.26.7)
       wicked_pdf (~> 2.1)
       wkhtmltopdf-binary (~> 0.12)
-    decidim-gallery (0.0.2)
+    decidim-gallery (0.0.4)
       decidim-admin (~> 0.26.0)
       decidim-core (~> 0.26.0)
       deface (~> 1.9)
@@ -485,7 +485,7 @@ GEM
       railties (>= 3.0.0)
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
-    faraday (2.7.9)
+    faraday (2.7.10)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-follow_redirects (0.3.0)
@@ -711,7 +711,7 @@ GEM
       actionmailer (>= 3)
       net-smtp
       premailer (~> 1.7, >= 1.7.9)
-    public_suffix (5.0.1)
+    public_suffix (5.0.3)
     puma (5.6.5)
       nio4r (~> 2.0)
     raabro (1.4.0)

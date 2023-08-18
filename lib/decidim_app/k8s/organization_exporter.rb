@@ -39,7 +39,7 @@ module DecidimApp
         @logger = logger
         @export_path = export_path
         @image = image
-        @database_name = Rails.configuration.database_configuration[Rails.env]["database"]
+        @database_configuration = Rails.configuration.database_configuration[Rails.env].deep_symbolize_keys
       end
 
       def self.export!(organization, logger, export_path, image)
@@ -57,8 +57,17 @@ module DecidimApp
       end
 
       def dumping_database
-        @logger.info("dumping database #{@database_name} to #{organization_export_path}/postgres/#{resource_name}--de.dump")
-        system("pg_dump -Fc #{@database_name} > #{organization_export_path}/postgres/#{resource_name}--de.dump")
+        @logger.info("dumping database #{@database_configuration[:database]} to #{organization_export_path}/postgres/#{resource_name}--de.dump")
+
+        cmd = "pg_dump -Fc"
+        cmd += " -h '#{@database_configuration[:host]}'" if @database_configuration[:host].present?
+        cmd += " -p '#{@database_configuration[:port]}'" if @database_configuration[:port].present?
+        cmd += " -U '#{@database_configuration[:username]}'" if @database_configuration[:username].present?
+        cmd = "PGPASSWORD=#{@database_configuration[:password]} #{cmd}" if @database_configuration[:password].present?
+        cmd += " -d '#{@database_configuration[:database]}'" if @database_configuration[:database].present?
+        cmd += " -f #{organization_export_path}/postgres/#{resource_name}--de.dump"
+
+        system(cmd)
       end
 
       def exporting_configuration
@@ -127,8 +136,8 @@ module DecidimApp
       end
 
       def smtp_settings
-        settings = @organization.smtp_settings.deep_dup
-        settings["password"] = Decidim::AttributeEncryptor.decrypt(settings["encrypted_password"])
+        settings = @organization.smtp_settings.deep_dup || {}
+        settings["password"] = Decidim::AttributeEncryptor.decrypt(settings["encrypted_password"]) if settings["encrypted_password"].present?
         settings.delete("encrypted_password")
 
         settings = settings.transform_keys do |key|

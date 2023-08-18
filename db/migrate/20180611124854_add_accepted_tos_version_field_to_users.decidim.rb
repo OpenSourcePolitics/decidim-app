@@ -15,9 +15,7 @@ class AddAcceptedTosVersionFieldToUsers < ActiveRecord::Migration[5.1]
   def up
     add_column :decidim_users, :accepted_tos_version, :datetime
     Organization.find_each do |organization|
-      # rubocop:disable Rails/SkipsModelValidations
       organization.users.update_all(accepted_tos_version: organization.tos_version)
-      # rubocop:enable Rails/SkipsModelValidations
     end
   end
 

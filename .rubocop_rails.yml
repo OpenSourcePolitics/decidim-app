@@ -87,6 +87,8 @@ Rails/ScopeArgs:
 
 Rails/SkipsModelValidations:
   Enabled: true
+  Exclude:
+    - db/migrate/*.rb
 
 Rails/Validation:
   Include:
