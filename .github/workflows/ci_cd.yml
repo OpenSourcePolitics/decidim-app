@@ -187,7 +187,8 @@ jobs:
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: host.docker.internal
     steps:
-      - uses: OpenSourcePolitics/build-and-test-images-action@master
+      # TODO: Switch to master
+      - uses: OpenSourcePolitics/build-and-test-images-action@develop
         with:
           registry: ${{ vars.REGISTRY_ENDPOINT }}
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
@@ -197,6 +198,8 @@ jobs:
           database_username: ${{ env.DATABASE_USERNAME }}
           database_password: ${{ env.DATABASE_PASSWORD }}
           database_host: ${{ env.DATABASE_HOST }}
+          # We don't want to upload the image to the registry if the build fails, but we don't care when on a PR for speed reasons
+          push: ${{ github.ref != 'refs/heads/develop' || github.ref != 'refs/heads/master' }}
   deploy_develop:
     if: "github.ref == 'refs/heads/develop'"
     needs: [lint, tests, system_tests, test_build]
@@ -240,9 +243,9 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/staging.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
   build_and_push_image_dev:
-    if: "github.ref != 'refs/heads/master'"
+    if: "github.ref == 'refs/heads/develop'"
     name: Build and push image to Registry
-    needs: [lint, tests, system_tests, test_build]
+    needs: [ lint, tests, system_tests, test_build ]
     runs-on: ubuntu-latest
     steps:
       - uses: OpenSourcePolitics/build-and-push-images-action@master
