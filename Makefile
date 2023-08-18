@@ -27,9 +27,9 @@ login:
 	docker login $(REGISTRY) -u nologin -p $(SCW_SECRET_TOKEN)
 
 build-classic:
-	docker build -t $(IMAGE_NAME):$(VERSION) .
+	docker buildx build -t $(IMAGE_NAME):$(VERSION) . --platform linux/amd64
 build-scw:
-	docker build -t $(TAG) .
+	docker buildx build -t $(TAG) . --platform linux/amd64
 push:
 	@make build-scw
 	@make login
