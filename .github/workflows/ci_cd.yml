@@ -198,6 +198,7 @@ jobs:
           database_username: ${{ env.DATABASE_USERNAME }}
           database_password: ${{ env.DATABASE_PASSWORD }}
           database_host: ${{ env.DATABASE_HOST }}
+          # We don't want to upload the image to the registry if the build fails, but we don't care when on a PR for speed reasons
           push: "github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'"
   deploy_develop:
     if: "github.ref == 'refs/heads/develop'"
