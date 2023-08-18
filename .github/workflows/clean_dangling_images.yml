@@ -1,0 +1,14 @@
+name: Branch Deleted
+on: delete
+jobs:
+  clean_dangling_images:
+    if: github.event.ref_type == 'branch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: OpenSourcePolitics/delete-images-action@master
+        with:
+          registry: ${{ vars.REGISTRY_ENDPOINT }}
+          namespace: ${{ vars.REGISTRY_NAMESPACE }}
+          password: ${{ secrets.TOKEN }}
+          image_name: ${{ vars.IMAGE_NAME }}
+          tag: ${{ github.event.ref }}
