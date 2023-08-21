@@ -12,9 +12,12 @@ RUN --mount=type=cache,target=/var/cache/apt \
     apt update && \
     npm install -g npm@8.19.2 && \
     npm install --global yarn && \
-    apt install -y libicu-dev postgresql-client && \
+    apt install -y libicu-dev postgresql-client libjemalloc2 && \
     gem install bundler:2.2.17 && \
     rm -rf /var/lib/apt/lists/*
+
+ENV LD_PRELOAD="libjemalloc.so.2" \
+    MALLOC_CONF="background_thread:true,metadata_thp:auto,dirty_decay_ms:5000,muzzy_decay_ms:5000,narenas:2"
 
 COPY Gemfile* ./
 RUN bundle config set --local without 'development test' && bundle install
