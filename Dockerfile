@@ -36,8 +36,11 @@ ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy \
     RAILS_LOG_TO_STDOUT=true
 
-RUN apk add --no-cache --update icu-dev tzdata postgresql-client proj proj-dev imagemagick  && \
-    gem install bundler:2.4.9
+RUN apk add --no-cache --update libjemalloc2 icu-dev tzdata postgresql-client proj proj-dev imagemagick  && \
+    gem install bundler:2.4.9 \
+
+ENV LD_PRELOAD="libjemalloc.so.2" \
+        MALLOC_CONF="background_thread:true,metadata_thp:auto,dirty_decay_ms:5000,muzzy_decay_ms:5000,narenas:2"
 
 WORKDIR /app
 
