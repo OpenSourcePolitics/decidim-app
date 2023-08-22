@@ -135,5 +135,11 @@ describe Decidim::ContentFixer do
     it "returns the service url for the given blob" do
       expect(subject.find_service_url_for_blob(blob.id)).to eq(blob_path)
     end
+
+    context "when blob is not found" do
+      it "returns nil" do
+        expect(subject.find_service_url_for_blob(blob.id + 1)).to eq(nil)
+      end
+    end
   end
 end
