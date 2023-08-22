@@ -34,6 +34,8 @@ module Decidim
     end
 
     def find_and_replace(content)
+      return if content.nil?
+
       wrapper = nokogiri_will_wrap_with_p?(content) ? "p" : "body"
 
       doc = Nokogiri::HTML(content)
