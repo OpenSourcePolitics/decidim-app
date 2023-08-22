@@ -87,6 +87,14 @@ describe Decidim::ContentFixer do
         expect(replaced_content).not_to include(deprecated_endpoint)
       end
     end
+
+    context "when content is nil" do
+      let(:content) { nil }
+
+      it "returns an empty string" do
+        expect(subject.find_and_replace(content)).to eq(nil)
+      end
+    end
   end
 
   describe "#new_source" do
