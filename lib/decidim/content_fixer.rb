@@ -81,7 +81,6 @@ module Decidim
 
     def find_service_url_for_blob(blob_id)
       Rails.application.routes.url_helpers.rails_blob_path(ActiveStorage::Blob.find(blob_id), only_path: true)
-
     rescue ActiveRecord::RecordNotFound
       @logger.warn "Blob #{blob_id} not found"
       nil
