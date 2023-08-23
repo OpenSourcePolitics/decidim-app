@@ -87,6 +87,14 @@ describe Decidim::ContentFixer do
         expect(replaced_content).not_to include(deprecated_endpoint)
       end
     end
+
+    context "when content is nil" do
+      let(:content) { nil }
+
+      it "returns an empty string" do
+        expect(subject.find_and_replace(content)).to eq(nil)
+      end
+    end
   end
 
   describe "#new_source" do
@@ -134,6 +142,12 @@ describe Decidim::ContentFixer do
   describe "#find_service_url_for_blob" do
     it "returns the service url for the given blob" do
       expect(subject.find_service_url_for_blob(blob.id)).to eq(blob_path)
+    end
+
+    context "when blob is not found" do
+      it "returns nil" do
+        expect(subject.find_service_url_for_blob(blob.id + 1)).to eq(nil)
+      end
     end
   end
 end
