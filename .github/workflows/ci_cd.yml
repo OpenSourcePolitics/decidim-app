@@ -37,6 +37,22 @@ jobs:
         with:
           ruby_version: ${{ env.RUBY_VERSION }}
           node_version: ${{ env.NODE_VERSION }}
+  zeitwerk:
+    name: Check for Zeitwerk errors
+    runs-on: ubuntu-latest
+    if: "!startsWith(github.head_ref, 'chore/l10n')"
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - name: Create db
+        run: |
+          bundle exec rails zeitwerk:check
   tests:
     strategy:
       fail-fast: false
@@ -88,7 +104,7 @@ jobs:
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
-      - uses: nanasess/setup-chromedriver@v1.0.1
+      - uses: nanasess/setup-chromedriver@v2
       - run:  bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
@@ -153,7 +169,7 @@ jobs:
           key: asset-cache-${{ runner.os }}-${{ steps.cache-hash.outputs.hash }}
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
-      - uses: nanasess/setup-chromedriver@v1.0.1
+      - uses: nanasess/setup-chromedriver@v2
       - run:  bundle exec rake "test:run[include, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
@@ -197,6 +213,8 @@ jobs:
           database_username: ${{ env.DATABASE_USERNAME }}
           database_password: ${{ env.DATABASE_PASSWORD }}
           database_host: ${{ env.DATABASE_HOST }}
+          # We don't want to upload the image to the registry if the build fails, but we don't care when on a PR for speed reasons
+          push: ${{ github.ref != 'refs/heads/develop' || github.ref != 'refs/heads/master' }}
   deploy_develop:
     if: "github.ref == 'refs/heads/develop'"
     needs: [lint, tests, system_tests, test_build]
@@ -240,9 +258,9 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/staging.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
   build_and_push_image_dev:
-    name: Build and push image to Registry
     if: "github.ref == 'refs/heads/develop'"
-    needs: [lint, tests, system_tests, test_build]
+    name: Build and push image to Registry
+    needs: [ lint, tests, system_tests, test_build ]
     runs-on: ubuntu-latest
     steps:
       - uses: OpenSourcePolitics/build-and-push-images-action@master
@@ -251,7 +269,7 @@ jobs:
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
           password: ${{ secrets.TOKEN }}
           image_name: ${{ vars.IMAGE_NAME }}
-          tag: "develop"
+          tag: ${{ github.ref }}
   generate_release:
     name: Generate release
     needs: [lint, tests, system_tests, test_build]

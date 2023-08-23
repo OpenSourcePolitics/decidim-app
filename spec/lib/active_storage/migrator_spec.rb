@@ -67,7 +67,7 @@ describe ActiveStorage::Migrator do
     let(:blob) { ActiveStorage::Blob.create_and_upload!(io: File.open(Rails.root.join("spec/test_assets/logo_asset.png")), filename: "logo_asset.png") }
 
     before do
-      allow(ActiveStorage::Blob).to receive(:find_each).and_yield(blob)
+      allow(::Parallel).to receive(:each).with(ActiveStorage::Blob.all, in_processes: 10).and_yield(blob)
     end
 
     it "migrates the blobs" do
@@ -83,7 +83,19 @@ describe ActiveStorage::Migrator do
       end
 
       it "logs the error" do
-        expect(subject.instance_variable_get(:@logger)).to receive(:error).with("FileNotFoundError #{blob.key}")
+        expect(subject.instance_variable_get(:@logger)).to receive(:error).with("ActiveStorage::FileNotFoundError #{blob.key}")
+
+        subject.migrate!
+      end
+    end
+
+    context "when the blob doesn't have integrity" do
+      before do
+        allow(blob).to receive(:open).and_raise(ActiveStorage::IntegrityError)
+      end
+
+      it "logs the error" do
+        expect(subject.instance_variable_get(:@logger)).to receive(:error).with("ActiveStorage::IntegrityError #{blob.key}")
 
         subject.migrate!
       end

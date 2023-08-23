@@ -23,6 +23,8 @@ services:
     environment:
       - REDIS_URL=redis://redis:6379
       - MEMCACHE_SERVERS=memcached:11211
+      - DATABASE_HOST=database
+      - DATABASE_USERNAME=postgres
     depends_on:
       - app
     links:
@@ -40,6 +42,8 @@ services:
       - DECIDIM_HOST=0.0.0.0
       - REDIS_URL=redis://redis:6379
       - MEMCACHE_SERVERS=memcached:11211
+      - RAILS_SERVE_STATIC_FILES=true
+      - RAILS_LOG_TO_STDOUT=true
     ports:
       - 3000:3000
     depends_on:
