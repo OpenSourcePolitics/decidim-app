@@ -16,6 +16,7 @@ gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-cache_cleaner"
 gem "decidim-decidim_awesome"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git", branch: DECIDIM_BRANCH
+# TODO: Bump to 0.27.0 when released
 # gem "decidim-gallery"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
 gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens.git", branch: DECIDIM_BRANCH

@@ -389,15 +389,11 @@ GEM
       decidim-core (= 0.27.3)
       wicked_pdf (~> 2.1)
       wkhtmltopdf-binary (~> 0.12)
-    decidim-gallery (0.0.2)
-      decidim-admin (~> 0.26.0)
-      decidim-core (~> 0.26.0)
-      deface (~> 1.9)
-    decidim-generators (0.26.7)
-      decidim-core (= 0.26.7)
-    decidim-meetings (0.26.7)
-      decidim-core (= 0.26.7)
-      decidim-forms (= 0.26.7)
+    decidim-generators (0.27.3)
+      decidim-core (= 0.27.3)
+    decidim-meetings (0.27.3)
+      decidim-core (= 0.27.3)
+      decidim-forms (= 0.27.3)
       icalendar (~> 2.5)
     decidim-pages (0.27.3)
       decidim-core (= 0.27.3)
@@ -652,6 +648,8 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.13.4-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.4-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.4-x86_64-linux)
@@ -1008,6 +1006,7 @@ GEM
     zeitwerk (2.6.8)
 
 PLATFORMS
+  arm64-darwin-22
   x86_64-darwin-21
   x86_64-linux
 
