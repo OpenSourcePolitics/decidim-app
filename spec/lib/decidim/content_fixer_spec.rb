@@ -50,7 +50,7 @@ describe Decidim::ContentFixer do
       let(:content) { 1 }
 
       it "raises an error" do
-        expect(subject.repair).to eq(nil)
+        expect(subject.repair).to be_nil
       end
     end
   end
@@ -92,7 +92,7 @@ describe Decidim::ContentFixer do
       let(:content) { nil }
 
       it "returns an empty string" do
-        expect(subject.find_and_replace(content)).to eq(nil)
+        expect(subject.find_and_replace(content)).to be_nil
       end
     end
   end
@@ -114,7 +114,7 @@ describe Decidim::ContentFixer do
       let(:deprecated_url) { nil }
 
       it "returns nil" do
-        expect(subject.new_source(deprecated_url)).to eq(nil)
+        expect(subject.new_source(deprecated_url)).to be_nil
       end
     end
   end
@@ -127,14 +127,14 @@ describe Decidim::ContentFixer do
 
   describe "#wrapped_in_paragraph?" do
     it "returns true if content is wrapped in a paragraph" do
-      expect(subject.nokogiri_will_wrap_with_p?(content)).to eq(false)
+      expect(subject.nokogiri_will_wrap_with_p?(content)).to be(false)
     end
 
     context "when content is not wrapped in a paragraph" do
       let(:content) { "My link is <a href='#{deprecated_url}'>Link text</a>" }
 
       it "returns false" do
-        expect(subject.nokogiri_will_wrap_with_p?(content)).to eq(true)
+        expect(subject.nokogiri_will_wrap_with_p?(content)).to be(true)
       end
     end
   end
@@ -146,7 +146,7 @@ describe Decidim::ContentFixer do
 
     context "when blob is not found" do
       it "returns nil" do
-        expect(subject.find_service_url_for_blob(blob.id + 1)).to eq(nil)
+        expect(subject.find_service_url_for_blob(blob.id + 1)).to be_nil
       end
     end
   end
