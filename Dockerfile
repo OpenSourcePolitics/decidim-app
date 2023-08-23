@@ -6,7 +6,7 @@ ENV RAILS_ENV=production \
 WORKDIR /app
 
 # TODO: Use repository version of jemalloc when available
-RUN apk add --no-cache --update nodejs yarn tzdata git icu-dev libpq-dev build-base proj proj-dev postgresql-client imagemagick && \
+RUN apk add --no-cache --update nodejs yarn tzdata git icu-dev libpq build-base proj proj-dev postgresql-client imagemagick && \
     gem install bundler:2.4.9
 
 COPY Gemfile* ./
