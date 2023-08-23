@@ -37,6 +37,22 @@ jobs:
         with:
           ruby_version: ${{ env.RUBY_VERSION }}
           node_version: ${{ env.NODE_VERSION }}
+  zeitwerk:
+    name: Check for Zeitwerk errors
+    runs-on: ubuntu-latest
+    if: "!startsWith(github.head_ref, 'chore/l10n')"
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - name: Create db
+        run: |
+          bundle exec rails zeitwerk:check
   tests:
     strategy:
       fail-fast: false
