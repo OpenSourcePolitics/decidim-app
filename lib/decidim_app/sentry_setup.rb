@@ -14,6 +14,18 @@ module SentrySetup
         config.breadcrumbs_logger = [:active_support_logger, :http_logger]
 
         config.traces_sample_rate = sample_rate.to_f
+
+        config.traces_sampler = lambda do |sampling_context|
+          transaction_context = sampling_context[:transaction_context]
+          op = transaction_context[:op]
+          transaction_name = transaction_context[:name]
+
+          if op =~ /http/ && transaction_name == "/health_check"
+            0.0
+          else
+            sample_rate.to_f
+          end
+        end
       end
 
       Sentry.set_tags('server.hostname': hostname) if hostname.present?
