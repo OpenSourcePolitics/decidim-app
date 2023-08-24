@@ -1,4 +1,4 @@
-FROM rg.fr-par.scw.cloud/decidim-app-base/decidim-app-base:3.0.2-alpine-jemalloc as builder
+FROM rg.fr-par.scw.cloud/decidim-app-base/decidim-app-base:3.0.5-alpine-jemalloc as builder
 
 ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy
@@ -30,7 +30,7 @@ RUN rm -rf node_modules tmp/cache vendor/bundle spec \
     && find /usr/local/bundle/gems/ -type d -name "spec" -prune -exec rm -rf {} \; \
     && rm -rf log/*.log
 
-FROM ruby:2.7.5-alpine as runner
+FROM ruby:3.0.5-alpine as runner
 
 ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy \
