@@ -10,7 +10,8 @@ RUN apk add --no-cache --update nodejs yarn tzdata git icu-dev postgresql-dev g+
     gem install bundler:2.4.9
 
 COPY Gemfile* ./
-RUN bundle config set --local without 'development test' && bundle install
+RUN bundle config set --local without 'development test' && bundle install || exit 0
+RUN cat /usr/local/bundle/extensions/x86_64-linux-musl/3.0.0/seven_zip_ruby-1.3.0/mkmf.log && exit 2
 
 COPY package* ./
 COPY yarn.lock .

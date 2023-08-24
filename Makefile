@@ -29,7 +29,7 @@ login:
 build-classic:
 	docker buildx build -t $(IMAGE_NAME):$(VERSION) . --platform linux/amd64
 build-scw:
-	docker buildx build -t $(TAG) . --platform linux/amd64
+	docker build -t $(TAG) .
 push:
 	@make build-scw
 	@make login
