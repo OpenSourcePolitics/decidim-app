@@ -7,6 +7,14 @@ GIT
       decidim-core (~> 0.27.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git
+  revision: 6d5fffaa09ea10024f7072ab77ee63861125300a
+  branch: release/0.27-stable
+  specs:
+    decidim-extended_socio_demographic_authorization_handler (0.27.0)
+      decidim-core (~> 0.27)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git
   revision: ae96439a7db7158c3fdaa83de29793aefdc1c34a
   branch: release/0.27-stable
@@ -1008,6 +1016,7 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
+  x86_64-darwin-20
   x86_64-darwin-21
   x86_64-linux
 
@@ -1024,6 +1033,7 @@ DEPENDENCIES
   decidim-conferences (~> 0.27.0)
   decidim-decidim_awesome
   decidim-dev (~> 0.27.0)
+  decidim-extended_socio_demographic_authorization_handler!
   decidim-friendly_signup!
   decidim-homepage_interactive_map!
   decidim-ludens!
@@ -1065,4 +1075,4 @@ RUBY VERSION
    ruby 3.0.2p107
 
 BUNDLED WITH
-   2.4.9
+   2.3.19
