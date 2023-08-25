@@ -15,7 +15,8 @@ gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 # External Decidim gems
 gem "decidim-cache_cleaner"
 gem "decidim-decidim_awesome"
-gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git", branch: DECIDIM_BRANCH
+gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
+                                                                branch: DECIDIM_BRANCH
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git", branch: DECIDIM_BRANCH
 # TODO: Bump to 0.27.0 when released
 # gem "decidim-gallery"
