@@ -1,17 +1,20 @@
-FROM rg.fr-par.scw.cloud/decidim-app-base/decidim-app-base:3.0.2-alpine-jemalloc as builder
+FROM ruby:3.0.2-slim as builder
 
 ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy
 
 WORKDIR /app
 
-# TODO: Use repository version of jemalloc when available
-RUN apk add --no-cache --update nodejs yarn tzdata git icu-dev postgresql-dev g++ build-base proj proj-dev postgresql-client imagemagick && \
+RUN apt-get update && \
+    apt-get -y install libpq-dev curl git libicu-dev build-essential && \
+    curl https://deb.nodesource.com/setup_16.x | bash && \
+    apt-get install -y nodejs  && \
+    npm install --global yarn && \
     gem install bundler:2.4.9
 
 COPY Gemfile* ./
-RUN bundle config set --local without 'development test' && bundle install || exit 0
-RUN cat /usr/local/bundle/extensions/x86_64-linux-musl/3.0.0/seven_zip_ruby-1.3.0/mkmf.log && exit 2
+RUN bundle config set --local without 'development test' && \
+    bundle install -j"$(nproc)"
 
 COPY package* ./
 COPY yarn.lock .
@@ -31,22 +34,22 @@ RUN rm -rf node_modules tmp/cache vendor/bundle spec \
     && find /usr/local/bundle/gems/ -type d -name "spec" -prune -exec rm -rf {} \; \
     && rm -rf log/*.log
 
-FROM ruby:2.7.5-alpine as runner
+FROM ruby:3.0.2-slim as runner
 
 ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy \
     RAILS_LOG_TO_STDOUT=true
 
-RUN apk add --no-cache --update icu-dev tzdata postgresql-client proj proj-dev imagemagick  && \
+RUN apt update && \
+    apt install -y postgresql-client imagemagick libproj-dev proj-bin libjemalloc2 && \
     gem install bundler:2.4.9
 
 WORKDIR /app
 
-COPY --from=builder /usr/local/lib/libjemalloc.so.2 /usr/local/lib/
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY --from=builder /app /app
 
-ENV LD_PRELOAD=/usr/local/lib/libjemalloc.so.2 \
+ENV LD_PRELOAD="libjemalloc.so.2" \
     MALLOC_CONF="background_thread:true,metadata_thp:auto,dirty_decay_ms:5000,muzzy_decay_ms:5000,narenas:2"
 
 EXPOSE 3000
