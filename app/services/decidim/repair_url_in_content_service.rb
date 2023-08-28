@@ -100,7 +100,7 @@ module Decidim
     end
 
     def write_attribute(record, column, value)
-      if column.try(:name)
+      if column.try(:name) && record.respond_to?(:"#{column.name}=")
         record.write_attribute(:"#{column.name}", value)
       else
         record.instance_variable_set(column, value)
@@ -108,7 +108,7 @@ module Decidim
     end
 
     def current_content_for(record, column)
-      if column.try(:name)
+      if column.try(:name) && record.respond_to?(column.name)
         record.send(column.name)
       else
         record.instance_variable_get(column)
