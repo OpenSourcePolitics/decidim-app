@@ -34,6 +34,8 @@ module Decidim
     end
 
     def find_and_replace(content)
+      return content unless content.is_a?(String) && content.include?(@deprecated_endpoint)
+
       wrapper = nokogiri_will_wrap_with_p?(content) ? "p" : "body"
 
       doc = Nokogiri::HTML(content)
@@ -81,6 +83,9 @@ module Decidim
 
     def find_service_url_for_blob(blob_id)
       Rails.application.routes.url_helpers.rails_blob_path(ActiveStorage::Blob.find(blob_id), only_path: true)
+    rescue ActiveRecord::RecordNotFound
+      @logger.warn "Blob #{blob_id} not found"
+      nil
     end
 
     def nokogiri_will_wrap_with_p?(content)
