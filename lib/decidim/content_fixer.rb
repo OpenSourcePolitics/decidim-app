@@ -14,27 +14,27 @@ module Decidim
       new(content, deprecated_endpoint, logger).repair
     end
 
-    def repair
-      case @content
-      when Hash
-        @content.transform_values do |value|
-          find_and_replace(value)
+    def repair(content = @content)
+      if content.is_a?(Hash)
+        content.transform_values { |value| repair(value) }
+      elsif content.is_a?(Array)
+        content.map { |value| repair(value) }
+      elsif content.respond_to?(:value_before_type_cast)
+        content.tap do |c|
+          c.instance_variable_set(:@value_before_type_cast, repair(c.value_before_type_cast))
+          c.instance_variable_set(:@value, repair(c.value))
         end
-      when String
-        find_and_replace(@content)
-      when Array
-        @content.map do |value|
-          find_and_replace(value)
-        end
+      elsif content.is_a?(String)
+        find_and_replace(content)
       else
-        @logger.warn("Unsupported type #{@content.class}")
+        @logger.warn("Unsupported type #{content.class}")
 
-        nil
+        content
       end
     end
 
     def find_and_replace(content)
-      return if content.nil?
+      return content unless content.is_a?(String) && content.include?(@deprecated_endpoint)
 
       wrapper = nokogiri_will_wrap_with_p?(content) ? "p" : "body"
 

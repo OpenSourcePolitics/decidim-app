@@ -49,8 +49,8 @@ describe Decidim::ContentFixer do
     context "when content is not a string, hash or array" do
       let(:content) { 1 }
 
-      it "raises an error" do
-        expect(subject.repair).to be_nil
+      it "returns content" do
+        expect(subject.repair).to eq(1)
       end
     end
   end
@@ -93,6 +93,14 @@ describe Decidim::ContentFixer do
 
       it "returns an empty string" do
         expect(subject.find_and_replace(content)).to be_nil
+      end
+    end
+
+    context "when content is an integer" do
+      let(:content) { 1 }
+
+      it "returns an empty string" do
+        expect(subject.find_and_replace(content)).to eq(1)
       end
     end
   end
