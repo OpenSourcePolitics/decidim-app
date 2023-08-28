@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git
-  revision: 6d5fffaa09ea10024f7072ab77ee63861125300a
+  revision: adec5e66cd07b5e5fdce5562453a7e8d6de88013
   branch: release/0.27-stable
   specs:
     decidim-extended_socio_demographic_authorization_handler (0.27.0)
