@@ -115,7 +115,7 @@ describe Decidim::RepairUrlInContentService do
     end
 
     it "generates a unique SQL query" do
-      expect(subject.to_sql).to eq("SELECT \"decidim_comments_comments\".* FROM \"decidim_comments_comments\" WHERE (((((decidim_commentable_type::text LIKE '%#{deprecated_endpoint}%') OR (decidim_root_commentable_type::text LIKE '%#{deprecated_endpoint}%')) OR (decidim_author_type::text LIKE '%#{deprecated_endpoint}%')) OR (body::text LIKE '%#{deprecated_endpoint}%')) OR (decidim_participatory_space_type::text LIKE '%#{deprecated_endpoint}%'))")
+      expect(subject.to_sql).to eq("SELECT \"decidim_comments_comments\".* FROM \"decidim_comments_comments\" WHERE (decidim_commentable_type::text LIKE '%s3.decidim.org%' OR decidim_root_commentable_type::text LIKE '%s3.decidim.org%' OR decidim_author_type::text LIKE '%s3.decidim.org%' OR body::text LIKE '%s3.decidim.org%' OR decidim_participatory_space_type::text LIKE '%s3.decidim.org%')")
     end
 
     context "when model cannot be constantized" do
