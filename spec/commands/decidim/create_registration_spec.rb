@@ -42,7 +42,7 @@ module Decidim
 
         describe "when the form is not valid" do
           before do
-            expect(form).to receive(:invalid?).and_return(true)
+            allow(form).to receive(:invalid?).and_return(true)
           end
 
           it "broadcasts invalid" do
@@ -67,9 +67,9 @@ module Decidim
               expect do
                 command.call
                 user.reload
-              end.to change(User, :count).by(0)
-                                         .and broadcast(:invalid)
-                .and change(user.reload, :invitation_token)
+              end.not_to change(User, :count)
+                 .and broadcast(:invalid)
+                 .and change(user.reload, :invitation_token)
               expect(ActionMailer::MailDeliveryJob).to have_been_enqueued.on_queue("mailers")
             end
           end
@@ -104,7 +104,7 @@ module Decidim
             it "creates a user with no newsletter notifications" do
               expect do
                 command.call
-                expect(User.last.newsletter_notifications_at).to eq(nil)
+                expect(User.last.newsletter_notifications_at).to be_nil
               end.to change(User, :count).by(1)
             end
           end
