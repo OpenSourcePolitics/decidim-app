@@ -34,7 +34,7 @@ module Decidim
     end
 
     def find_and_replace(content)
-      return if content.nil?
+      return content unless content.is_a?(String) && content.include?(@deprecated_endpoint)
 
       wrapper = nokogiri_will_wrap_with_p?(content) ? "p" : "body"
 
