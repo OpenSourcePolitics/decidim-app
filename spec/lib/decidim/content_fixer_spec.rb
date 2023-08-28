@@ -95,6 +95,14 @@ describe Decidim::ContentFixer do
         expect(subject.find_and_replace(content)).to be_nil
       end
     end
+
+    context "when content is an integer" do
+      let(:content) { 1 }
+
+      it "returns an empty string" do
+        expect(subject.find_and_replace(content)).to eq(1)
+      end
+    end
   end
 
   describe "#new_source" do
