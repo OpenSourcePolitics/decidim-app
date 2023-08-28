@@ -10,7 +10,7 @@ describe Decidim::RepairUrlInContentService do
   let(:invalid_resource2) { create(:comment) }
   let(:invalid_body_comment) { { en: "<p>Here is a not valid comment with <a href='#{deprecated_url}'>Link text</a></p>" } }
   let(:deprecated_url) { "https://#{deprecated_endpoint}/xxxx?response-content-disposition=inline%3Bfilename%3D\"BuPa23_reglement-interieur.pdf\"%3Bfilename*%3DUTF-8''BuPa23_r%25C3%25A8glement-int%25C3%25A9rieur.pdf&response-content-type=application%2Fpdf" }
-  let!(:blob) { ActiveStorage::Blob.create_after_upload!(filename: "BuPa23_reglement-interieur.pdf", io: File.open("spec/fixtures/BuPa23_reglement-interieur.pdf"), content_type: "application/pdf") }
+  let!(:blob) { ActiveStorage::Blob.create_and_upload!(filename: "BuPa23_reglement-interieur.pdf", io: File.open("spec/fixtures/BuPa23_reglement-interieur.pdf"), content_type: "application/pdf") }
   let(:blob_path) { Rails.application.routes.url_helpers.rails_blob_path(ActiveStorage::Blob.find(blob.id), only_path: true) }
 
   describe "#run" do
@@ -85,7 +85,7 @@ describe Decidim::RepairUrlInContentService do
           invalid_resource1.reload
         end.to change(invalid_resource1, :settings)
 
-        expect(invalid_resource1.settings.html_content[:en]).to include(blob_path)
+        expect(invalid_resource1.settings.html_content["en"]).to include(blob_path)
       end
     end
   end

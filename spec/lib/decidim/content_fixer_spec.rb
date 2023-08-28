@@ -50,7 +50,7 @@ describe Decidim::ContentFixer do
       let(:content) { 1 }
 
       it "raises an error" do
-        expect(subject.repair).to be_nil
+        expect(subject.repair).to eq(1)
       end
     end
   end
