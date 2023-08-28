@@ -49,7 +49,7 @@ describe Decidim::ContentFixer do
     context "when content is not a string, hash or array" do
       let(:content) { 1 }
 
-      it "raises an error" do
+      it "returns content" do
         expect(subject.repair).to eq(1)
       end
     end
