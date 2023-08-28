@@ -52,18 +52,16 @@ shared_examples "on/off invitation instant_validation on nickname" do
   end
 
   context "when use_instant_validation is active" do
-    it "hides nickname and user can register" do
+    it "hides nickname and user can register", :slow do
       visit last_email_link
 
       within ".new_user" do
         fill_in :invitation_user_nickname, with: "mynickname"
         fill_in :invitation_user_password, with: "mynickname12345"
-        sleep 0.3
 
         expect(page).to have_content("The password you have entered is too similar to your nickname")
 
         fill_in :invitation_user_nickname, with: "existing"
-        sleep 0.3
         expect(page).to have_content("Has already been taken")
       end
     end
