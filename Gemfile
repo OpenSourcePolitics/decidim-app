@@ -16,6 +16,7 @@ gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 # External Decidim gems
 gem "decidim-cache_cleaner"
 gem "decidim-decidim_awesome"
+gem "decidim-extra_user_fields", git: "https://github.com/armandfardeau/decidim-module-extra_user_fields", branch: "fix/remove-virtus-recitfy"
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
                                                                 branch: DECIDIM_BRANCH
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"

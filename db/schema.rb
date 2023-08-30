@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_24_135807) do
+ActiveRecord::Schema.define(version: 2023_08_30_154806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -1331,6 +1331,7 @@ ActiveRecord::Schema.define(version: 2023_08_24_135807) do
     t.boolean "delete_inactive_users", default: false, null: false
     t.integer "delete_inactive_users_email_after"
     t.integer "delete_inactive_users_after"
+    t.jsonb "extra_user_fields", default: {"enabled"=>false}
     t.index ["host"], name: "index_decidim_organizations_on_host", unique: true
     t.index ["name"], name: "index_decidim_organizations_on_name", unique: true
   end
