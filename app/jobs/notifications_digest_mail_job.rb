@@ -6,7 +6,6 @@ class NotificationsDigestMailJob < ApplicationJob
   queue_as :scheduled
 
   def perform(frequency)
-    byebug
     Decidim::NotificationsDigest.notifications_digest(frequency)
   end
 end
