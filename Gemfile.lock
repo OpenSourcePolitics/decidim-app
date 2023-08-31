@@ -57,9 +57,9 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
-  remote: https://github.com/mainio/decidim-module-term_customizer.git
-  revision: f1a8ed5c79079acc97ca109f0e5935ce0f6acd05
-  branch: develop
+  remote: https://github.com/armandfardeau/decidim-module-term_customizer.git
+  revision: 5c2b648e07c5fd51e2598256886895b9a83d698c
+  branch: fix/precompile-on-docker
   specs:
     decidim-term_customizer (0.27.0)
       decidim-admin (~> 0.27.0)
@@ -1088,7 +1088,7 @@ DEPENDENCIES
   web-console (= 4.0.4)
 
 RUBY VERSION
-   ruby 3.0.2p107
+   ruby 3.0.6p216
 
 BUNDLED WITH
    2.4.9
