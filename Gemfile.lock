@@ -57,16 +57,6 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
-  remote: https://github.com/armandfardeau/decidim-module-extra_user_fields
-  revision: 737848d673778838422fa93135901d5f1876ec1b
-  branch: fix/remove-virtus-recitfy
-  specs:
-    decidim-extra_user_fields (0.27.2)
-      country_select (~> 4.0)
-      decidim-core (>= 0.27.0, < 0.28)
-      deface (~> 1.5)
-
-GIT
   remote: https://github.com/mainio/decidim-module-term_customizer.git
   revision: f1a8ed5c79079acc97ca109f0e5935ce0f6acd05
   branch: develop
@@ -74,6 +64,16 @@ GIT
     decidim-term_customizer (0.27.0)
       decidim-admin (~> 0.27.0)
       decidim-core (~> 0.27.0)
+
+GIT
+  remote: https://github.com/paulinebessoles/decidim-module-extra_user_fields
+  revision: 430933c63c5788fa19e223a455f602fc22f28ec4
+  branch: feat/add_tests_0_27
+  specs:
+    decidim-extra_user_fields (0.27.2)
+      country_select (~> 4.0)
+      decidim-core (>= 0.27.0, < 0.28)
+      deface (~> 1.5)
 
 GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
