@@ -251,7 +251,6 @@ GEM
     commonmarker (0.23.10)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
-    connection_pool (2.4.0)
     countries (3.1.0)
       i18n_data (~> 0.11.0)
       sixarm_ruby_unaccent (~> 1.1)
@@ -593,7 +592,6 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
     i18n_data (0.11.0)
-    icalendar (2.8.0)
     icalendar (2.9.0)
       ice_cube (~> 0.16)
     ice_cube (0.16.4)
@@ -1072,8 +1070,8 @@ DEPENDENCIES
   decidim-conferences (~> 0.27.0)
   decidim-decidim_awesome
   decidim-dev (~> 0.27.0)
-  decidim-extra_user_fields!
   decidim-extended_socio_demographic_authorization_handler!
+  decidim-extra_user_fields!
   decidim-friendly_signup!
   decidim-homepage_interactive_map!
   decidim-initiatives (~> 0.27.0)
