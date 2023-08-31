@@ -18,6 +18,7 @@ gem "decidim-cache_cleaner"
 gem "decidim-decidim_awesome"
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
                                                                 branch: DECIDIM_BRANCH
+gem "decidim-extra_user_fields", git: "https://github.com/paulinebessoles/decidim-module-extra_user_fields", branch: "feat/add_tests_0_27"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 # TODO: Bump to 0.27.0 when released
 # gem "decidim-gallery"
