@@ -1,4 +1,4 @@
-FROM ruby:3.0.2-slim as builder
+FROM ruby:3.0.6-slim as builder
 
 ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy
