@@ -50,7 +50,7 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - name: Create db
+      - name: Check for Zeitwerk errors
         run: |
           bundle exec rails zeitwerk:check
   tests:
