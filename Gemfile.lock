@@ -16,9 +16,9 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git
-  revision: e4a9120039f374936eb010b2431b3548a9ee0661
+  revision: 9b8ece180ca97bf97c5d401a42a79b1dc4b8b536
   specs:
-    decidim-friendly_signup (0.4.4)
+    decidim-friendly_signup (0.4.5)
       decidim-core (~> 0.27)
 
 GIT
@@ -67,7 +67,7 @@ GIT
 
 GIT
   remote: https://github.com/paulinebessoles/decidim-module-extra_user_fields
-  revision: 3ef412a2c6e60624b45307f1f8005fb5149b7891
+  revision: 8ccefabbf65dddb6e8dad26496daf320839fcd29
   branch: feat/add_tests_0_27
   specs:
     decidim-extra_user_fields (0.27.2)
@@ -686,8 +686,6 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.13.4-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.4-x86_64-linux)
-      racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
       snaky_hash (~> 2.0)
@@ -1049,8 +1047,7 @@ GEM
     zeitwerk (2.6.11)
 
 PLATFORMS
-  x86_64-darwin-20
-  x86_64-linux
+  x86_64-darwin-22
 
 DEPENDENCIES
   activejob-uniqueness
@@ -1109,4 +1106,4 @@ RUBY VERSION
    ruby 3.0.6p216
 
 BUNDLED WITH
-   2.4.9
+   2.2.33
