@@ -67,7 +67,7 @@ GIT
 
 GIT
   remote: https://github.com/paulinebessoles/decidim-module-extra_user_fields
-  revision: 8ccefabbf65dddb6e8dad26496daf320839fcd29
+  revision: 8fea55957c88073242026175d78aa4a0633e68e8
   branch: feat/add_tests_0_27
   specs:
     decidim-extra_user_fields (0.27.2)
