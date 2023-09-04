@@ -34,7 +34,7 @@ RUN rm -rf node_modules tmp/cache vendor/bundle spec \
     && find /usr/local/bundle/gems/ -type d -name "spec" -prune -exec rm -rf {} \; \
     && rm -rf log/*.log
 
-FROM ruby:3.0.2-slim as runner
+FROM ruby:3.0.6-slim as runner
 
 ENV RAILS_ENV=production \
     SECRET_KEY_BASE=dummy \
