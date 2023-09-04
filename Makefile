@@ -81,3 +81,9 @@ stop:
 delete:
 	@make stop
 	docker volume prune
+
+local-dev:
+	docker-compose -f docker-compose.dev.yml up -d
+	@make create-database
+	@make run-migrations
+	@make create-seeds
