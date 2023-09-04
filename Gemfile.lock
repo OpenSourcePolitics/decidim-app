@@ -16,9 +16,9 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git
-  revision: e4a9120039f374936eb010b2431b3548a9ee0661
+  revision: 9b8ece180ca97bf97c5d401a42a79b1dc4b8b536
   specs:
-    decidim-friendly_signup (0.4.4)
+    decidim-friendly_signup (0.4.5)
       decidim-core (~> 0.27)
 
 GIT
@@ -64,6 +64,16 @@ GIT
     decidim-term_customizer (0.27.0)
       decidim-admin (~> 0.27.0)
       decidim-core (~> 0.27.0)
+
+GIT
+  remote: https://github.com/paulinebessoles/decidim-module-extra_user_fields
+  revision: 8fea55957c88073242026175d78aa4a0633e68e8
+  branch: feat/add_tests_0_27
+  specs:
+    decidim-extra_user_fields (0.27.2)
+      country_select (~> 4.0)
+      decidim-core (>= 0.27.0, < 0.28)
+      deface (~> 1.5)
 
 GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
@@ -151,7 +161,7 @@ GEM
     ast (2.4.2)
     attr_required (1.0.1)
     aws-eventstream (1.2.0)
-    aws-partitions (1.813.0)
+    aws-partitions (1.814.0)
     aws-sdk-core (3.181.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -241,10 +251,17 @@ GEM
     commonmarker (0.23.10)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
+    countries (3.1.0)
+      i18n_data (~> 0.11.0)
+      sixarm_ruby_unaccent (~> 1.1)
+      unicode_utils (~> 1.4)
+    country_select (4.0.0)
+      countries (~> 3.0)
+      sort_alphabetical (~> 1.0)
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    css_parser (1.14.0)
+    css_parser (1.15.0)
       addressable
     dalli (3.2.5)
     date (3.3.3)
@@ -574,6 +591,7 @@ GEM
       rails-i18n
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
+    i18n_data (0.11.0)
     icalendar (2.9.0)
       ice_cube (~> 0.16)
     ice_cube (0.16.4)
@@ -935,12 +953,15 @@ GEM
       simplecov (~> 0.19)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
+    sixarm_ruby_unaccent (1.2.2)
     smart_properties (1.17.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
     social-share-button (1.2.4)
       coffee-rails
+    sort_alphabetical (1.1.0)
+      unicode_utils (>= 1.2.2)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -971,6 +992,7 @@ GEM
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
     unicode-display_width (2.4.2)
+    unicode_utils (1.4.0)
     valid_email2 (2.3.1)
       activemodel (>= 3.2)
       mail (~> 2.5)
@@ -1003,7 +1025,7 @@ GEM
     webfinger (1.2.0)
       activesupport
       httpclient (>= 2.4)
-    webmock (3.19.0)
+    webmock (3.19.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -1052,6 +1074,7 @@ DEPENDENCIES
   decidim-decidim_awesome
   decidim-dev (~> 0.27.0)
   decidim-extended_socio_demographic_authorization_handler!
+  decidim-extra_user_fields!
   decidim-friendly_signup!
   decidim-homepage_interactive_map!
   decidim-initiatives (~> 0.27.0)
@@ -1094,4 +1117,4 @@ RUBY VERSION
    ruby 3.0.6p216
 
 BUNDLED WITH
-   2.4.9
+   2.2.33

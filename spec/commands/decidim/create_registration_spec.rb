@@ -94,7 +94,15 @@ module Decidim
               organization: organization,
               accepted_tos_version: organization.tos_version,
               locale: form.current_locale,
-              password_updated_at: an_instance_of(ActiveSupport::TimeWithZone)
+              password_updated_at: an_instance_of(ActiveSupport::TimeWithZone),
+              extended_data: {
+                country: nil,
+                date_of_birth: nil,
+                gender: nil,
+                location: nil,
+                phone_number: nil,
+                postal_code: nil
+              }
             ).and_call_original
 
             expect { command.call }.to change(User, :count).by(1)
