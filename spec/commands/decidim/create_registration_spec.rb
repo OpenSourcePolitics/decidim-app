@@ -101,7 +101,7 @@ module Decidim
                 gender: nil,
                 location: nil,
                 phone_number: nil,
-                postal_code: nil,
+                postal_code: nil
               }
             ).and_call_original
 
