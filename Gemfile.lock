@@ -57,6 +57,16 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
+  remote: https://github.com/PopulateTools/decidim-module-extra_user_fields.git
+  revision: 0fee03bf94dce989d36153cfa2b973c388172fc3
+  branch: extra-fields-0-27
+  specs:
+    decidim-extra_user_fields (0.27.2)
+      country_select (~> 4.0)
+      decidim-core (>= 0.27.0, < 0.28)
+      deface (~> 1.5)
+
+GIT
   remote: https://github.com/armandfardeau/decidim-module-term_customizer.git
   revision: 5c2b648e07c5fd51e2598256886895b9a83d698c
   branch: fix/precompile-on-docker
@@ -64,16 +74,6 @@ GIT
     decidim-term_customizer (0.27.0)
       decidim-admin (~> 0.27.0)
       decidim-core (~> 0.27.0)
-
-GIT
-  remote: https://github.com/paulinebessoles/decidim-module-extra_user_fields
-  revision: 8fea55957c88073242026175d78aa4a0633e68e8
-  branch: feat/add_tests_0_27
-  specs:
-    decidim-extra_user_fields (0.27.2)
-      country_select (~> 4.0)
-      decidim-core (>= 0.27.0, < 0.28)
-      deface (~> 1.5)
 
 GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
