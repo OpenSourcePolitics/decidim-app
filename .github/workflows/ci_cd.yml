@@ -219,7 +219,7 @@ jobs:
   build_and_push_image_dev:
     if: "contains('
       refs/heads/develop
-      refs/heads/rc/', github.ref)"
+      refs/heads/rc-', github.ref)"
     name: Build and push image to Registry
     needs: [ lint, tests, system_tests, test_build ]
     runs-on: ubuntu-latest
