@@ -216,48 +216,6 @@ jobs:
           database_host: ${{ env.DATABASE_HOST }}
           # We don't want to upload the image to the registry if the build fails, but we don't care when on a PR for speed reasons
           push: ${{ github.ref != 'refs/heads/develop' || github.ref != 'refs/heads/master' }}
-  deploy_develop:
-    if: "github.ref == 'refs/heads/develop'"
-    needs: [lint, tests, system_tests, test_build]
-    name: Deploy develop branch on develop instance
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Ansible playbook
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.ANSIBLE_HOST }}
-          username: ${{ secrets.ANSIBLE_USERNAME }}
-          key: ${{ secrets.ANSIBLE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/develop.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
-  deploy_rc:
-    if: "github.ref == 'refs/heads/rc'"
-    needs: [lint, tests, system_tests, test_build]
-    name: Deploy rc branch on RC instance
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Ansible playbook
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.ANSIBLE_HOST }}
-          username: ${{ secrets.ANSIBLE_USERNAME }}
-          key: ${{ secrets.ANSIBLE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/rc.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
-  deploy_staging:
-    if: "github.ref == 'refs/heads/master'"
-    needs: [lint, tests, system_tests, test_build]
-    name: Deploy staging branch on staging instance
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Ansible playbook
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.ANSIBLE_HOST }}
-          username: ${{ secrets.ANSIBLE_USERNAME }}
-          key: ${{ secrets.ANSIBLE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/staging.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
   build_and_push_image_dev:
     if: "github.ref == 'refs/heads/develop'"
     name: Build and push image to Registry
