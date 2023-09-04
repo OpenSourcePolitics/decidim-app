@@ -217,7 +217,7 @@ jobs:
           # We don't want to upload the image to the registry if the build fails, but we don't care when on a PR for speed reasons
           push: ${{ github.ref != 'refs/heads/develop' || github.ref != 'refs/heads/master' }}
   build_and_push_image_dev:
-    if: "github.ref != 'refs/heads/develop'"
+    if: "github.ref == 'refs/heads/develop'"
     name: Build and push image to Registry
     needs: [ lint, zeitwerk, tests, system_tests, test_build ]
     runs-on: ubuntu-latest
