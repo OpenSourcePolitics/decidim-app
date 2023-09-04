@@ -4,7 +4,7 @@ on: [ workflow_dispatch ]
 env:
   CI: "true"
   SIMPLECOV: "true"
-  RUBY_VERSION: 3.0.2
+  RUBY_VERSION: 3.0.6
   RAILS_ENV: test
   NODE_VERSION: 16.9.1
   RUBYOPT: '-W:no-deprecated'
