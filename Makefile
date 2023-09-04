@@ -44,7 +44,7 @@ create-database:
 run-migrations:
 	docker-compose run app bundle exec rails db:migrate
 create-seeds:
-	docker-compose run app bundle exec rails db:seed
+	docker-compose exec -e RAILS_ENV=development app /bin/bash -c '/usr/local/bundle/bin/bundle exec rake db:seed'
 
 # Database commands 
 restore-dump:
@@ -69,21 +69,12 @@ start-clean-decidim:
 	@make run-migrations
 	@make start
 
-# Utils commands
-rails-console:
-	docker exec -it decidim-app_app_1 rails c
-connect-app:
-	docker exec -it decidim-app_app_1 bash
+teardown:
+	docker-compose down -v --rmi all
 
-# Stop and delete commands
-stop:
-	docker-compose down
-delete:
-	@make stop
-	docker volume prune
-
+# TODO: Fix seeds for local-dev make command
 local-dev:
 	docker-compose -f docker-compose.dev.yml up -d
 	@make create-database
 	@make run-migrations
-	@make create-seeds
+	#@make create-seeds
