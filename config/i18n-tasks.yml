@@ -98,6 +98,7 @@ ignore_missing:
  - decidim.forms.questionnaires.question.max_choices
  - activemodel.errors.models.questionnaire.request_invalid
  - decidim.admin.menu.admin_accountability
+ - layouts.decidim.footer.download_open_data
 
 # Consider these keys used:
 ignore_unused:
