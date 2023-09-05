@@ -151,4 +151,6 @@ Rails.application.configure do
       exclude: ->(request) { /health_check|sidekiq_alive/.match?(request.path) }
     }
   }
+
+  config.deface.enabled = ENV['DEFACE_ENABLED'] == 'true'
 end
