@@ -152,5 +152,5 @@ Rails.application.configure do
     }
   }
 
-  config.deface.enabled = ENV['DEFACE_ENABLED'] == 'true'
+  config.deface.enabled = ENV.fetch("DEFACE_ENABLED", nil) == "true"
 end
