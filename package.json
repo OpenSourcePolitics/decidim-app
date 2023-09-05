@@ -24,6 +24,7 @@
     "leaflet-svgicon": "^0.0.2",
     "leaflet.featuregroup.subgroup": "^1.0.2",
     "leaflet.markercluster": "^1.5.3",
+    "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^15.1.0",
     "postcss-loader": "^7.3.0",
     "proj4leaflet": "^1.0.2",
