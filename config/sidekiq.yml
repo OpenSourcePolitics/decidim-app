@@ -32,3 +32,13 @@
       cron: '0 0 4 * * *' # Run at 04:00
       class: BackupJob
       queue: backups
+    SendNotificationMailDaily:
+      cron: '0 5 0 * * *' # Run at 00:05
+      class: NotificationsDigestMailJob
+      queue: mailers
+      args: :daily
+    SendNotificationMailWeekly:
+      cron: '0 5 0 * * 6' # Run at 00:05 on Saturday
+      class: NotificationsDigestMailJob
+      queue: mailers
+      args: :weekly

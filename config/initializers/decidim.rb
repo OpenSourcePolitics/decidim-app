@@ -98,7 +98,7 @@ Decidim.configure do |config|
     }
   end
 
-  config.base_uploads_path = "#{ENV["HEROKU_APP_NAME"]}/" if ENV["HEROKU_APP_NAME"].present?
+  config.base_uploads_path = "#{ENV.fetch("HEROKU_APP_NAME", nil)}/" if ENV["HEROKU_APP_NAME"].present?
 
   # Machine Translation Configuration
   #
@@ -106,31 +106,6 @@ Decidim.configure do |config|
   config.enable_machine_translations = Rails.application.secrets.translator[:enabled]
   config.machine_translation_service = "DeeplTranslator"
   config.machine_translation_delay = Rails.application.secrets.translator[:delay]
-end
-
-Decidim.module_eval do
-  autoload :ReminderRegistry, "decidim/reminder_registry"
-  autoload :ReminderManifest, "decidim/reminder_manifest"
-  autoload :ManifestMessages, "decidim/manifest_messages"
-
-  def self.reminders_registry
-    @reminders_registry ||= Decidim::ReminderRegistry.new
-  end
-end
-
-Decidim.reminders_registry.register(:orders) do |reminder_registry|
-  reminder_registry.generator_class_name = "Decidim::Budgets::OrderReminderGenerator"
-  reminder_registry.form_class_name = "Decidim::Budgets::Admin::OrderReminderForm"
-  reminder_registry.command_class_name = "Decidim::Budgets::Admin::CreateOrderReminders"
-
-  reminder_registry.settings do |settings|
-    settings.attribute :reminder_times, type: :array, default: [2.hours, 1.week, 2.weeks]
-  end
-
-  reminder_registry.messages do |msg|
-    msg.set(:title) { |count: 0| I18n.t("decidim.budgets.admin.reminders.orders.title", count: count) }
-    msg.set(:description) { I18n.t("decidim.budgets.admin.reminders.orders.description") }
-  end
 end
 
 Rails.application.config.i18n.available_locales = Decidim.available_locales

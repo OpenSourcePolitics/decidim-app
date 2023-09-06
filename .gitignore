@@ -95,3 +95,5 @@ yarn-debug.log*
 .yarn-integrity
 .idea
 coverage/
+public/sw.js*
+app/compiled_views/

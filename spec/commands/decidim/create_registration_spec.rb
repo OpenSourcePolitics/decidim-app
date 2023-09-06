@@ -42,7 +42,7 @@ module Decidim
 
         describe "when the form is not valid" do
           before do
-            expect(form).to receive(:invalid?).and_return(true)
+            allow(form).to receive(:invalid?).and_return(true)
           end
 
           it "broadcasts invalid" do
@@ -63,15 +63,17 @@ module Decidim
               clear_enqueued_jobs
             end
 
+            # rubocop:disable RSpec/ChangeByZero
             it "receives the invitation email again" do
               expect do
                 command.call
                 user.reload
               end.to change(User, :count).by(0)
-                                         .and broadcast(:invalid)
-                .and change(user.reload, :invitation_token)
+                 .and broadcast(:invalid)
+                 .and change(user.reload, :invitation_token)
               expect(ActionMailer::MailDeliveryJob).to have_been_enqueued.on_queue("mailers")
             end
+            # rubocop:enable RSpec/ChangeByZero
           end
         end
 
@@ -89,10 +91,18 @@ module Decidim
               password_confirmation: form.password_confirmation,
               tos_agreement: form.tos_agreement,
               newsletter_notifications_at: form.newsletter_at,
-              email_on_notification: true,
               organization: organization,
               accepted_tos_version: organization.tos_version,
-              locale: form.current_locale
+              locale: form.current_locale,
+              password_updated_at: an_instance_of(ActiveSupport::TimeWithZone),
+              extended_data: {
+                country: nil,
+                date_of_birth: nil,
+                gender: nil,
+                location: nil,
+                phone_number: nil,
+                postal_code: nil
+              }
             ).and_call_original
 
             expect { command.call }.to change(User, :count).by(1)
@@ -104,7 +114,7 @@ module Decidim
             it "creates a user with no newsletter notifications" do
               expect do
                 command.call
-                expect(User.last.newsletter_notifications_at).to eq(nil)
+                expect(User.last.newsletter_notifications_at).to be_nil
               end.to change(User, :count).by(1)
             end
           end
