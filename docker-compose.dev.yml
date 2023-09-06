@@ -47,6 +47,7 @@ services:
       - FORCE_SSL="0"
       - LETTER_OPENER_ENABLED="true"
       - SEED=true
+      - DEFACE_ENABLED=false
     ports:
       - 3000:3000
     depends_on:

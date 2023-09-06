@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-ludens.git
-  revision: ef88d556cf788135ceab7986a89b929e3722321b
+  revision: ca4c3266f64d8414030be63e2824c4d23c1f8d9c
   branch: release/0.27-stable
   specs:
     decidim-ludens (1.0.0)
