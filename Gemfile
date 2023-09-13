@@ -21,12 +21,14 @@ gem "decidim-extended_socio_demographic_authorization_handler", git: "https://gi
 gem "decidim-extra_user_fields", git: "https://github.com/PopulateTools/decidim-module-extra_user_fields.git", branch: "extra-fields-0-27"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 # TODO: Bump to 0.27.0 when released
-# gem "decidim-gallery"
+gem "decidim-gallery", git: "https://github.com/alecslupu-pfa/decidim-module-gallery", branch: "main"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
 gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens.git", branch: DECIDIM_BRANCH
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: DECIDIM_BRANCH
 gem "decidim-spam_detection"
 gem "decidim-term_customizer", git: "https://github.com/armandfardeau/decidim-module-term_customizer.git", branch: "fix/precompile-on-docker"
+gem "decidim-survey_multiple_answers", git: "https://github.com/alecslupu-pfa/decidim-module-survey_multiple_answers", branch: "main"
+
 
 # Omniauth gems
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
