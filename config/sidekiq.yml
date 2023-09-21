@@ -13,6 +13,8 @@
   - metrics
   - vote_reminder
   - reminders
+  - active_storage_analysis
+  - active_storage_purge
 
 :scheduler:
   :schedule:
