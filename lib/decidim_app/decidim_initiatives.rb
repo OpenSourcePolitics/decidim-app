@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DecidimApp
   class DecidimInitiatives
     def self.decidim_initiatives_enabled?
@@ -28,15 +30,15 @@ module DecidimApp
     def self.similarity_threshold
       Rails.application.secrets.dig(:decidim, :initiatives, :similarity_threshold).presence || 0.25
     end
-    
+
     def self.similarity_limit
       Rails.application.secrets.dig(:decidim, :initiatives, :similarity_limit).presence || 5
     end
-    
+
     def self.minimum_committee_members
       Rails.application.secrets.dig(:decidim, :initiatives, :minimum_committee_members).presence || 2
     end
-    
+
     def self.default_signature_time_period_length
       Rails.application.secrets.dig(:decidim, :initiatives, :default_signature_time_period_length).presence || 120
     end
@@ -55,23 +57,23 @@ module DecidimApp
     def self.first_notification_percentage
       Rails.application.secrets.dig(:decidim, :initiatives, :first_notification_percentage).presence || 33
     end
-    
+
     def self.second_notification_percentage
       Rails.application.secrets.dig(:decidim, :initiatives, :second_notification_percentage).presence || 66
     end
-    
+
     def self.stats_cache_expiration_time
       Rails.application.secrets.dig(:decidim, :initiatives, :stats_cache_expiration_time).to_i.minutes
     end
-    
+
     def self.max_time_in_validating_state
       Rails.application.secrets.dig(:decidim, :initiatives, :max_time_in_validating_state).to_i.days
     end
-    
+
     def self.print_enabled?
       Rails.application.secrets.dig(:decidim, :initiatives, :print_enabled).present?
     end
-    
+
     def self.do_not_require_authorization?
       Rails.application.secrets.dig(:decidim, :initiatives, :do_not_require_authorization).present?
     end
