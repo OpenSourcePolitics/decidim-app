@@ -63,11 +63,11 @@ module DecidimApp
     end
 
     def self.stats_cache_expiration_time
-      Rails.application.secrets.dig(:decidim, :initiatives, :stats_cache_expiration_time).to_i.minutes
+      Rails.application.secrets.dig(:decidim, :initiatives, :stats_cache_expiration_time).minutes
     end
 
     def self.max_time_in_validating_state
-      Rails.application.secrets.dig(:decidim, :initiatives, :max_time_in_validating_state).to_i.days
+      Rails.application.secrets.dig(:decidim, :initiatives, :max_time_in_validating_state).days
     end
 
     def self.print_enabled?
