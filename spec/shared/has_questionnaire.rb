@@ -232,6 +232,7 @@ shared_examples_for "has questionnaire" do
       end
     end
 
+    # rubocop:disable RSpec/RepeatedExampleGroupDescription
     describe "leaving a blank question (with js)" do
       context "when one non multiple choice question is mandatory" do
         include_context "when a non multiple choice question is mandatory"
@@ -273,6 +274,7 @@ shared_examples_for "has questionnaire" do
         end
       end
     end
+    # rubocop:enable RSpec/RepeatedExampleGroupDescription
 
     describe "leaving a blank multiple choice question" do
       let!(:question) do
@@ -571,6 +573,7 @@ shared_examples_for "has questionnaire" do
           :questionnaire_question,
           questionnaire: questionnaire,
           question_type: "sorting",
+          mandatory: true,
           options: [
             { "body" => { "en" => "chocolate" } },
             { "body" => { "en" => "like" } },

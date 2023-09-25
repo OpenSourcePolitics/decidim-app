@@ -10,7 +10,7 @@ shared_examples "on/off sign in passwords" do
       expect(page).to have_field("session_user_password")
       expect(page).not_to have_field("session_user_password_confirmation")
       expect(page).to have_css(".user-password")
-      expect(page).to have_css(".user-password title", visible: :hidden, text: "Show password")
+      expect(page).to have_css(".user-password title", text: "Show password")
     end
   end
 

@@ -67,7 +67,7 @@ shared_examples "on/off confirmation codes" do
 
       expect(page).to have_content("Resend confirmation instructions")
 
-      expect(user.reload.confirmed?).to eq(false)
+      expect(user.reload.confirmed?).to be(false)
     end
   end
 end
@@ -87,7 +87,7 @@ shared_examples "on/off standard confirmation" do
         expect(page).to have_content("A message with a code has been sent to your email address")
       end
 
-      expect(user.reload.confirmed?).to eq(false)
+      expect(user.reload.confirmed?).to be(false)
 
       expect(last_email.subject).to include(code.to_s)
       expect(last_email.subject).to include(organization.name)

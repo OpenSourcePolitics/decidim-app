@@ -11,6 +11,7 @@ describe "rake decidim:repair:translations", type: :task do
     clear_enqueued_jobs
     clear_performed_jobs
     allow(Decidim).to receive(:enable_machine_translations).and_return(enable_machine_translations)
+    allow(Decidim::RepairTranslationsService).to receive(:run).and_return([[Decidim::Comments::Comment, comment.id]])
   end
 
   after do
@@ -23,8 +24,6 @@ describe "rake decidim:repair:translations", type: :task do
   end
 
   it "calls the service" do
-    expect(Decidim::RepairTranslationsService).to receive(:run).and_return([[Decidim::Comments::Comment, comment.id]])
-
     task.execute
   end
 

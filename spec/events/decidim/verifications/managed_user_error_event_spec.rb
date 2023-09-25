@@ -7,6 +7,7 @@ describe Decidim::Verifications::ManagedUserErrorEvent do
 
   let(:event_name) { "decidim.events.verifications.managed_user_error_event" }
   let(:resource) { create :conflict }
+  let(:organization_host) { "#{resource.current_user.organization.host}:#{Capybara.server_port}" }
 
   describe "resource_title" do
     it "is generated correctly" do
@@ -22,7 +23,7 @@ describe Decidim::Verifications::ManagedUserErrorEvent do
 
   describe "resource_url" do
     it "is generated correctly" do
-      expect(subject.resource_url).to eq("http://#{resource.current_user.organization.host}/profiles/#{resource.current_user.nickname}")
+      expect(subject.resource_url).to eq("http://#{organization_host}/profiles/#{resource.current_user.nickname}")
     end
   end
 

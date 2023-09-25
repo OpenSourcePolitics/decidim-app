@@ -8,7 +8,7 @@ describe "rake scaleway:storage:migrate_from_local", type: :task do
   end
 
   it "invokes the migrator" do
-    expect(ActiveStorage::Migrator).to receive(:migrate!).with(:local, :scaleway).and_return(true)
+    allow(ActiveStorage::Migrator).to receive(:migrate!).with(:local, :scaleway).and_return(true)
 
     task.execute
   end

@@ -22,19 +22,22 @@ It includes **official modules** supported by the community and **community-base
 
 You can find below an exhaustive list of modules with their repository links and latest version available :
 
-| Decidim Module                      | Version |             Brief description                                    |
-|-------------------------------------|---------|------------------------------------------------------------------|
-| decidim-core                        | v0.26.2 |
-| decidim-conferences                 | v0.26.2 |
-| [decidim-cache_cleaner](https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner)               | ✅      |Allow admins to clear cache of the application in the back-office|
-| [decidim-decidim_awesome](https://github.com/decidim-ice/decidim-module-decidim_awesome)             | ✅      |An awesome module that allows (among others) : adding extra-fields for proposals creation, fullscreen iframe component, image in rich text editor, customs redirections etc. |
-| [decidim-friendly_signup](https://github.com/OpenSourcePolitics/decidim-module-friendly_signup)             | ✅      |Module that drastically simplify the registration process of users by deleting some registration fields|
-| [decidim-homepage_interactive_map](https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map)    | ✅      |Module that allow the adding of a content-block on the homepage diplaying a map of assemblies in order to allow geo-located participation |
-| [decidim-ludens](https://github.com/OpenSourcePolitics/decidim-ludens)                      | ✅      |Gamified tutorial in the admin back-office to help admins understand how Decidim works|
-| [decidim-phone_authorization_handler](https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler) | ✅      |Module allowing gathering phone number on a particular participant action|
-| [decidim-spam_detection](https://github.com/OpenSourcePolitics/decidim-spam_detection)              | ✅      |Module adding a spam detection algorithm that runs periodically detecting spam accounts|
-| [decidim-term_customizer](https://github.com/mainio/decidim-module-term_customizer)             | ✅      |Module allowing the change of translated strings |
-| [decidim-gallery](https://github.com/alecslupu-pfa/decidim-module-gallery)| ✅      |Module allowing the creation of galleries |
+| Decidim Module                                                                                                          | Version | Brief description                                                                                                                                                            |
+|-------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| decidim-core                                                                                                            | v0.27.4 |
+| decidim-conferences                                                                                                     | v0.27.4 |
+| decidim-initiatives                                                                                                     | v0.27.4 |
+| decidim-templates                                                                                                       | v0.27.4 |
+| [decidim-cache_cleaner](https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner)                             | ✅       | Allow admins to clear cache of the application in the back-office                                                                                                            |
+| [decidim-decidim_awesome](https://github.com/decidim-ice/decidim-module-decidim_awesome)                                | ✅       | An awesome module that allows (among others) : adding extra-fields for proposals creation, fullscreen iframe component, image in rich text editor, customs redirections etc. |
+| [decidim-friendly_signup](https://github.com/OpenSourcePolitics/decidim-module-friendly_signup)                         | ✅       | Module that drastically simplify the registration process of users by deleting some registration fields                                                                      |
+| [decidim-homepage_interactive_map](https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map)       | ✅       | Module that allow the adding of a content-block on the homepage diplaying a map of assemblies in order to allow geo-located participation                                    |
+| [decidim-ludens](https://github.com/OpenSourcePolitics/decidim-ludens)                                                  | ✅       | Gamified tutorial in the admin back-office to help admins understand how Decidim works                                                                                       |
+| [decidim-phone_authorization_handler](https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler) | ✅       | Module allowing gathering phone number on a particular participant action                                                                                                    |
+| [decidim-spam_detection](https://github.com/OpenSourcePolitics/decidim-spam_detection)                                  | ✅       | Module adding a spam detection algorithm that runs periodically detecting spam accounts                                                                                      |
+| [decidim-term_customizer](https://github.com/mainio/decidim-module-term_customizer)                                     | ✅       | Module allowing the change of translated strings                                                                                                                             |
+| [decidim-gallery](https://github.com/alecslupu-pfa/decidim-module-gallery)                                              | ✅       | Module allowing the creation of galleries                                                                                                                                    |
+| [decidim-extra_user_fields](https://github.com/PopulateTools/decidim-module-extra_user_fields)                                                | ✅       | Module allowing the creation of new fields in users form                                                                                                                     |
 
 
 Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).

@@ -4,7 +4,7 @@ require "decidim/dev"
 Decidim::Dev.dummy_app_path = File.expand_path(Rails.root.to_s)
 require "decidim/dev/test/base_spec_helper"
 
-Dir.glob("./spec/support/**/*.rb").sort.each { |f| require f }
+Dir.glob("./spec/support/**/*.rb").each { |f| require f }
 
 RSpec.configure do |config|
   config.formatter = ENV.fetch("RSPEC_FORMAT", "progress").to_sym

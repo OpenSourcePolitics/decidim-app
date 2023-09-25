@@ -54,7 +54,6 @@ module DecidimApp
           @admin_params ||= {
             password_confirmation: @configuration[:password],
             tos_agreement: "1",
-            email_on_notification: existing_admin.email_on_notification || true,
             newsletter_notifications_at: existing_admin.confirmed_at || Time.zone.now,
             admin_terms_accepted_at: existing_admin.confirmed_at || Time.zone.now,
             confirmed_at: existing_admin.confirmed_at || Time.zone.now

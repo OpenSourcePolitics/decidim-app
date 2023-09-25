@@ -10,7 +10,7 @@ module Decidim
     it "parses the options" do
       expect(subject.instance_variable_get(:@assets_patterns)).to eq(%w(Gemfile* package* yarn* app/assets/**/* app/packs/**/* vendor/**/* packages/**/* lib/assets/**/*))
       expect(subject.instance_variable_get(:@included_extensions)).to eq(%w(lock Gemfile gemspec json js mjs jsx ts tsx gql graphql bmp gif jpeg jpg png tiff ico avif webp eot otf ttf woff woff2 svg md odt))
-      expect(subject.instance_variable_get(:@output)).to eq(true)
+      expect(subject.instance_variable_get(:@output)).to be(true)
       expect(subject.instance_variable_get(:@output_path)).to eq("tmp/assets_manifest.json")
     end
 

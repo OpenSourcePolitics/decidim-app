@@ -116,6 +116,7 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.lograge.enabled = true
+  config.lograge.ignore_actions = ["HealthCheck::HealthCheckController#index"]
   config.lograge.formatter = Lograge::Formatters::Json.new
   config.lograge.custom_options = lambda do |event|
     {
@@ -150,4 +151,6 @@ Rails.application.configure do
       exclude: ->(request) { /health_check|sidekiq_alive/.match?(request.path) }
     }
   }
+
+  config.deface.enabled = ENV.fetch("DEFACE_ENABLED", nil) == "true"
 end

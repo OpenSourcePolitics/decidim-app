@@ -52,10 +52,10 @@ module Decidim
     #   Returns the corresponding char
     # Else returns nil
     def ascii_to_valid_char(id)
-      letters = ("A".."Z").to_a.join("").codepoints
-      letters += ("a".."z").to_a.join("").codepoints
-      digits = ("0".."9").to_a.join("").codepoints
-      special_chars = %w(- _).join("").codepoints
+      letters = ("A".."Z").to_a.join.codepoints
+      letters += ("a".."z").to_a.join.codepoints
+      digits = ("0".."9").to_a.join.codepoints
+      special_chars = %w(- _).join.codepoints
 
       valid_ascii_code = letters + digits + special_chars
 

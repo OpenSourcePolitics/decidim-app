@@ -2,29 +2,31 @@
 
 source "https://rubygems.org"
 
-DECIDIM_VERSION = "0.26"
-DECIDIM_BRANCH = "release/#{DECIDIM_VERSION}-stable"
+DECIDIM_VERSION = "0.27"
+DECIDIM_BRANCH = "release/#{DECIDIM_VERSION}-stable".freeze
 
 ruby RUBY_VERSION
-
-# Many gems depend on environment variables, so we load them as soon as possible
-gem "dotenv-rails", require: "dotenv/rails-now"
 
 # Core gems
 gem "decidim", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-conferences", "~> #{DECIDIM_VERSION}.0"
+gem "decidim-initiatives", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 
 # External Decidim gems
 gem "decidim-cache_cleaner"
 gem "decidim-decidim_awesome"
+gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
+                                                                branch: DECIDIM_BRANCH
+gem "decidim-extra_user_fields", git: "https://github.com/PopulateTools/decidim-module-extra_user_fields.git", branch: "extra-fields-0-27"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
-gem "decidim-gallery"
+# TODO: Bump to 0.27.0 when released
+# gem "decidim-gallery"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
 gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens.git", branch: DECIDIM_BRANCH
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: DECIDIM_BRANCH
 gem "decidim-spam_detection"
-gem "decidim-term_customizer", git: "https://github.com/armandfardeau/decidim-module-term_customizer.git", branch: "fix/precompile-on-docker-0.26"
+gem "decidim-term_customizer", git: "https://github.com/armandfardeau/decidim-module-term_customizer.git", branch: "fix/precompile-on-docker"
 
 # Omniauth gems
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
@@ -35,6 +37,8 @@ gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", "~> 1.4"
 gem "deepl-rb", require: "deepl"
+gem "deface"
+gem "dotenv-rails", "~> 2.7"
 gem "faker", "~> 2.14"
 gem "fog-aws"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
