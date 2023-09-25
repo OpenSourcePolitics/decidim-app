@@ -2,7 +2,7 @@
 
 module DecidimApp
   module K8s
-    class Command < Rectify::Command
+    class Command < Decidim::Command
       attr_writer :status_registry
 
       def self.register_topic(topic)
