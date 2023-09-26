@@ -67,6 +67,16 @@ GIT
       deface (~> 1.5)
 
 GIT
+  remote: https://github.com/alecslupu-pfa/decidim-module-survey_multiple_answers
+  revision: 3ad0ec275fd00ff09a542a15335259960b522d46
+  specs:
+    decidim-survey_multiple_answers (0.0.1)
+      decidim-admin (>= 0.26.0, < 0.28.0)
+      decidim-core (>= 0.26.0, < 0.28.0)
+      decidim-forms (>= 0.26.0, < 0.28.0)
+      decidim-surveys (>= 0.26.0, < 0.28.0)
+
+GIT
   remote: https://github.com/armandfardeau/decidim-module-term_customizer.git
   revision: 5c2b648e07c5fd51e2598256886895b9a83d698c
   branch: fix/precompile-on-docker
@@ -1082,6 +1092,7 @@ DEPENDENCIES
   decidim-ludens!
   decidim-phone_authorization_handler!
   decidim-spam_detection
+  decidim-survey_multiple_answers!
   decidim-templates (~> 0.27.0)
   decidim-term_customizer!
   deepl-rb

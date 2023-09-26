@@ -42,6 +42,8 @@ module DevelopmentApp
 
     config.to_prepare do
       ActiveStorage::Blob.include ActiveStorage::Downloadable
+      require "extends/helpers/decidim/forms/application_helper_extends"
+      require "extends/cells/decidim/forms/step_navigation_cell_extends"
     end
 
     config.after_initialize do
