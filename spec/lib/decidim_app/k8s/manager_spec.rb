@@ -10,6 +10,20 @@ require "decidim_app/k8s/commands/admin"
 describe DecidimApp::K8s::Manager do
   subject { described_class.new("spec/fixtures/k8s_configuration_example.yml") }
 
+  describe "#logger" do
+    it "returns a logger" do
+      expect(subject).to respond_to(:logger)
+      expect(subject.logger).to be_a(LoggerWithStdout)
+    end
+  end
+
+  describe "Manager#logger" do
+    it "returns a logger" do
+      expect(described_class).to respond_to(:logger)
+      expect(described_class.logger).to be_a(LoggerWithStdout)
+    end
+  end
+
   describe "#run" do
     it "runs the installation" do
       expect(DecidimApp::K8s::Commands::SystemAdmin).to receive(:call).once.and_call_original

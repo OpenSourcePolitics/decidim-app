@@ -69,7 +69,11 @@ module DecidimApp
       end
 
       def logger
-        @logger ||= LoggerWithStdout.new("log/decidim-app-k8s.log")
+        @logger ||= self.class.logger
+      end
+
+      def self.logger
+        LoggerWithStdout.new("log/decidim-app-k8s.log")
       end
 
       def log_status(status_registry)
