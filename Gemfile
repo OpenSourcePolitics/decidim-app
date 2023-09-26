@@ -25,6 +25,7 @@ gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: DECIDIM_BRANCH
 gem "decidim-spam_detection"
 gem "decidim-term_customizer", git: "https://github.com/armandfardeau/decidim-module-term_customizer.git", branch: "fix/precompile-on-docker-0.26"
+gem "decidim-survey_multiple_answers", git: "https://github.com/alecslupu-pfa/decidim-module-survey_multiple_answers"
 
 # Omniauth gems
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
