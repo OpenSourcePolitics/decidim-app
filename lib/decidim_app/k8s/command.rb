@@ -9,6 +9,10 @@ module DecidimApp
         @topic = topic
       end
 
+      def logger
+        @logger ||= DecidimApp::K8s::Manager.logger
+      end
+
       def topic
         raise "Topic not registered" unless self.class.instance_variable_defined?(:@topic)
 
