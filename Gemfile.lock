@@ -68,7 +68,8 @@ GIT
 
 GIT
   remote: https://github.com/alecslupu-pfa/decidim-module-survey_multiple_answers
-  revision: 3ad0ec275fd00ff09a542a15335259960b522d46
+  revision: 700e8a4c2deb9d716d0944d2776406477ac9b13f
+  branch: fix/multiple-answers
   specs:
     decidim-survey_multiple_answers (0.0.1)
       decidim-admin (>= 0.26.0, < 0.28.0)
