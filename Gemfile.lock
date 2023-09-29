@@ -410,6 +410,11 @@ GEM
       decidim-proposals (= 0.26.7)
     decidim-spam_detection (3.1.0)
       decidim-core (~> 0.26.0)
+    decidim-survey_multiple_answers (0.26.0)
+      decidim-admin (>= 0.26.0, < 0.28.0)
+      decidim-core (>= 0.26.0, < 0.28.0)
+      decidim-forms (>= 0.26.0, < 0.28.0)
+      decidim-surveys (>= 0.26.0, < 0.28.0)
     decidim-surveys (0.26.7)
       decidim-core (= 0.26.7)
       decidim-forms (= 0.26.7)
@@ -1013,6 +1018,7 @@ DEPENDENCIES
   decidim-ludens!
   decidim-phone_authorization_handler!
   decidim-spam_detection
+  decidim-survey_multiple_answers (~> 0.26.0)
   decidim-templates (~> 0.26.0)
   decidim-term_customizer!
   deepl-rb
