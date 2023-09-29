@@ -83,73 +83,50 @@ describe Decidim::Proposals::Import::ProposalAnswerCreator do
       expect(log.action).to eq("answer")
     end
 
+    shared_examples "it notifies follower" do
+      it "returns broadcast :ok" do
+        expect(subject.finish!).to eq({ ok: [] })
+      end
+
+      context "and notifies followers" do
+        before do
+          allow(::Decidim::Proposals::Admin::NotifyProposalAnswer).to receive(:call).with(proposal, expected_state)
+        end
+
+        it "notifies followers" do
+          subject.finish!
+          expect(::Decidim::Proposals::Admin::NotifyProposalAnswer).to have_received(:call)
+        end
+      end
+    end
+
     context "when proposal state changes" do
       context "when proposal had already a state" do
         let!(:proposal) { create(:proposal, :evaluating, component: component) }
         let(:state) { "accepted" }
+        let(:expected_state) { "evaluating" }
 
-        it "returns broadcast :ok" do
-          expect(subject.finish!).to eq({ ok: [] })
-        end
-
-        context "and notifies followers" do
-          before do
-            allow(::Decidim::Proposals::Admin::NotifyProposalAnswer).to receive(:call).with(proposal, "evaluating")
-          end
-
-          it "notifies followers" do
-            subject.finish!
-            expect(::Decidim::Proposals::Admin::NotifyProposalAnswer).to have_received(:call)
-          end
-        end
+        include_examples "it notifies follower"
       end
 
       context "when proposal had no state" do
         let!(:proposal) { create(:proposal, :not_answered, component: component) }
         let(:state) { "accepted" }
+        let(:expected_state) { "" }
 
-        it "returns broadcast :ok" do
-          expect(subject.finish!).to eq({ ok: [] })
-        end
-
-        context "and notifies followers" do
-          before do
-            allow(::Decidim::Proposals::Admin::NotifyProposalAnswer).to receive(:call).with(proposal, "")
-          end
-
-          it "notifies followers" do
-            subject.finish!
-            expect(::Decidim::Proposals::Admin::NotifyProposalAnswer).to have_received(:call)
-          end
-        end
+        include_examples "it notifies follower"
       end
 
       context "when proposal was just created and had a state set to nil" do
-        let!(:proposal) { create(:proposal, component: component) }
+        let!(:proposal) { create(:proposal, component: component, state: nil) }
         let(:state) { "accepted" }
+        let(:expected_state) { "" }
 
-        before do
-          proposal.update(state: nil)
-        end
-
-        it "returns broadcast :ok" do
-          expect(subject.finish!).to eq({ ok: [] })
-        end
-
-        context "and notifies followers" do
-          before do
-            allow(::Decidim::Proposals::Admin::NotifyProposalAnswer).to receive(:call).with(proposal, "")
-          end
-
-          it "notifies followers" do
-            subject.finish!
-            expect(::Decidim::Proposals::Admin::NotifyProposalAnswer).to have_received(:call)
-          end
-        end
+        include_examples "it notifies follower"
       end
     end
 
-    context "when proposal does not exists" do
+    context "when proposal does not exist" do
       let(:data) do
         {
           id: 99_999_999,
