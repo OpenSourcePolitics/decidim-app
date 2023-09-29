@@ -1018,7 +1018,7 @@ DEPENDENCIES
   decidim-ludens!
   decidim-phone_authorization_handler!
   decidim-spam_detection
-  decidim-survey_multiple_answers (~> 0.26.0)
+  decidim-survey_multiple_answers
   decidim-templates (~> 0.26.0)
   decidim-term_customizer!
   deepl-rb

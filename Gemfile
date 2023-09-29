@@ -24,8 +24,8 @@ gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolit
 gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens.git", branch: DECIDIM_BRANCH
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: DECIDIM_BRANCH
 gem "decidim-spam_detection"
+gem "decidim-survey_multiple_answers"
 gem "decidim-term_customizer", git: "https://github.com/armandfardeau/decidim-module-term_customizer.git", branch: "fix/precompile-on-docker-0.26"
-gem 'decidim-survey_multiple_answers', '~> 0.26.0'
 
 # Omniauth gems
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
