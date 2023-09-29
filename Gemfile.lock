@@ -49,6 +49,17 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
+  remote: https://github.com/alecslupu-pfa/decidim-module-survey_multiple_answers
+  revision: 700e8a4c2deb9d716d0944d2776406477ac9b13f
+  branch: fix/multiple-answers
+  specs:
+    decidim-survey_multiple_answers (0.0.1)
+      decidim-admin (>= 0.26.0, < 0.28.0)
+      decidim-core (>= 0.26.0, < 0.28.0)
+      decidim-forms (>= 0.26.0, < 0.28.0)
+      decidim-surveys (>= 0.26.0, < 0.28.0)
+
+GIT
   remote: https://github.com/armandfardeau/decidim-module-term_customizer.git
   revision: 63170f69b51bb7e7f60f20856e944ae1357f4dc7
   branch: fix/precompile-on-docker-0.26
@@ -1051,7 +1062,7 @@ DEPENDENCIES
   web-console (= 4.0.4)
 
 RUBY VERSION
-   ruby 2.7.5p203
+   ruby 3.0.6p216
 
 BUNDLED WITH
    2.4.9
