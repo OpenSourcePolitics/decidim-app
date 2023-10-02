@@ -19,6 +19,15 @@ Decidim.configure do |config|
   # Timeout session
   config.expire_session_after = ENV.fetch("DECIDIM_SESSION_TIMEOUT", 180).to_i.minutes
 
+  # Admin admin password configurations
+  Rails.application.secrets.dig(:decidim, :admin_password, :strong).tap do |strong_pw|
+    # When the strong password is not configured, default to true
+    config.admin_password_strong = strong_pw.nil? ? true : strong_pw.present?
+  end
+  config.admin_password_expiration_days = Rails.application.secrets.dig(:decidim, :admin_password, :expiration_days)
+  config.admin_password_min_length = Rails.application.secrets.dig(:decidim, :admin_password, :min_length)
+  config.admin_password_repetition_times = Rails.application.secrets.dig(:decidim, :admin_password, :repetition_times)
+
   config.maximum_attachment_height_or_width = 6000
 
   # Whether SSL should be forced or not (only in production).
