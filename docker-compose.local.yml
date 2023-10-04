@@ -44,7 +44,7 @@ services:
       - RAILS_SERVE_STATIC_FILES=true
       - RAILS_LOG_TO_STDOUT=true
       - FORCE_SSL="0"
-      - LETTER_OPENER_ENABLED="true"
+      - LETTER_OPENER_ENABLED="1"
       - SEED=true
       - DEFACE_ENABLED=false
     ports:

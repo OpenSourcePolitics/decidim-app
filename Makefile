@@ -7,7 +7,7 @@ local-prod:
 run:
 	#@make -i teardown
 	@make generate-certificate
-	docker-compose -f docker-compose.local.yml up -d --build
+	docker-compose -f docker-compose.local.yml up -d
 	@make create-database
 	@make run-migrations
 	@make create-seeds
@@ -40,7 +40,7 @@ run-migrations:
 	docker-compose run app bundle exec rails db:migrate
 # Create seeds
 create-seeds:
-	docker-compose exec app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/bundle exec rake db:schema:load db:seed'
+	docker-compose -f docker-compose.local.yml exec app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/bundle exec rake db:schema:load db:seed'
 # Restore dump
 restore-dump:
 	bundle exec rake restore_dump
