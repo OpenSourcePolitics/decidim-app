@@ -4,15 +4,23 @@ local-prod:
 
 # Starts with development configuration
 # TODO: Fix seeds for local-dev make command
-local-dev:
-	docker-compose -f docker-compose.dev.yml up -d
+run:
+	@make -i teardown
+	@make generate-certificate
+	docker-compose -f docker-compose.local.yml up --build -d
 	@make create-database
 	@make run-migrations
-	#@make create-seeds
+	@make create-seeds
+
+certificate:
+	mkdir -p -- ./certificate-https-local
+
+generate-certificate: certificate
+	openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=FR/ST=France/L=Paris/O=OpenSourcePolitics/CN=opensourcepolitics.eu" -keyout ./certificate-https-local/key.pem -out ./certificate-https-local/cert.pem
 
 # Stops containers and remove volumes
 teardown:
-	docker-compose down -v --rmi all
+	docker-compose down --rmi all
 
 # Starts containers and restore dump
 local-restore:
@@ -20,6 +28,7 @@ local-restore:
 	@make -i restore-dump
 	@make run-migrations
 	@make start
+	@make create-seeds
 
 # Create database
 create-database:
@@ -29,7 +38,7 @@ run-migrations:
 	docker-compose run app bundle exec rails db:migrate
 # Create seeds
 create-seeds:
-	docker-compose exec -e RAILS_ENV=development app /bin/bash -c '/usr/local/bundle/bin/bundle exec rake db:seed'
+	docker-compose exec app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/bundle exec rake db:schema:load db:seed'
 # Restore dump
 restore-dump:
 	bundle exec rake restore_dump
