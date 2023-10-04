@@ -1,7 +1,7 @@
 version: '3'
 services:
   database:
-    image: postgres:15-alpine
+    image: postgres
     volumes:
       - pg-data:/var/lib/postgresql/data
     environment:
@@ -46,6 +46,7 @@ services:
       - MEMCACHE_SERVERS=memcached:11211
       - RAILS_SERVE_STATIC_FILES=true
       - RAILS_LOG_TO_STDOUT=true
+      - FORCE_SSL="0"
       - LETTER_OPENER_ENABLED="true"
       - SEED=true
       - DEFACE_ENABLED=false
