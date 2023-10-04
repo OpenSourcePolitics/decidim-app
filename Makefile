@@ -5,9 +5,9 @@ local-prod:
 # Starts with development configuration
 # TODO: Fix seeds for local-dev make command
 run:
-	@make -i teardown
+	#@make -i teardown
 	@make generate-certificate
-	docker-compose -f docker-compose.local.yml up --build -d
+	docker-compose -f docker-compose.local.yml up -d --build
 	@make create-database
 	@make run-migrations
 	@make create-seeds
@@ -16,7 +16,9 @@ certificate:
 	mkdir -p -- ./certificate-https-local
 
 generate-certificate: certificate
-	openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=FR/ST=France/L=Paris/O=OpenSourcePolitics/CN=opensourcepolitics.eu" -keyout ./certificate-https-local/key.pem -out ./certificate-https-local/cert.pem
+	@if [ ! -f "./certificate-https-local/cert.pem" ]; then \
+		openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=FR/ST=France/L=Paris/O=OpenSourcePolitics/CN=opensourcepolitics.eu" -keyout ./certificate-https-local/key.pem -out ./certificate-https-local/cert.pem; \
+	fi
 
 # Stops containers and remove volumes
 teardown:
