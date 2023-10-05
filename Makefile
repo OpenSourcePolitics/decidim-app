@@ -30,3 +30,12 @@ create-seeds:
 # Restore dump
 restore-dump:
 	bundle exec rake restore_dump
+
+shell:
+	docker-compose -f docker-compose.local.yml exec app /bin/bash
+
+restart:
+	docker-compose -f docker-compose.local.yml up -d
+
+status:
+	docker-compose -f docker-compose.local.yml ps
