@@ -49,7 +49,6 @@ services:
       - DEFACE_ENABLED=false
     ports:
       - 3000:3000
-    command: bundle exec rails server -b "ssl://0.0.0.0:3000?key=/app/certificate-https-local/key.pem&cert=/app/certificate-https-local/cert.pem"
     depends_on:
       - database
       - redis

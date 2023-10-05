@@ -47,9 +47,6 @@ RUN apt-get update -q && \
 
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY --from=builder /app /app
-COPY entrypoint.local.sh /app/entrypoint.sh
-
-RUN chmod +x /app/entrypoint.sh
 
 EXPOSE 3000
-ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=/app/certificate-https-local/key.pem&cert=/app/certificate-https-local/cert.pem"]
