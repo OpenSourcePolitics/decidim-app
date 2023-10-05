@@ -47,9 +47,9 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "puma", ">= 5.5.1"
 gem "rack-attack", "~> 6.6"
 gem "sys-filesystem"
+gem "letter_opener_web", "~> 1.3"
 
 group :development do
-  gem "letter_opener_web", "~> 1.3"
   gem "listen", "~> 3.1"
   gem "rubocop-faker"
   gem "spring", "~> 2.0"
