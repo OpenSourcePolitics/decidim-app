@@ -44,6 +44,7 @@ Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md)
 
 ## 🚀 Getting started
 - See our [installation guide](./docs/GETTING_STARTED.md) to run a decidim-app by OSP locally
+- See our [Docker installation guide](./docs/GETTING_STARTED_DOCKER.md) to run a decidim-app by OSP locally with Docker
 - See our [homepage interactive map module](./docs/HOMEPAGE_INTERACTIVE_MAP.md) to configure module (OSX/Ubuntu)
 
 ## 👋 Contributing
