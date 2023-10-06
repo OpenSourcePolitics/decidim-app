@@ -39,3 +39,6 @@ restart:
 
 status:
 	docker-compose -f docker-compose.local.yml ps
+
+logs:
+	docker-compose -f docker-compose.local.yml logs app

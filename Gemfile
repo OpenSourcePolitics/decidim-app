@@ -42,12 +42,12 @@ gem "dotenv-rails", "~> 2.7"
 gem "faker", "~> 2.14"
 gem "fog-aws"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
+gem "letter_opener_web", "~> 1.3"
 gem "nokogiri", "1.13.4"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "puma", ">= 5.5.1"
 gem "rack-attack", "~> 6.6"
 gem "sys-filesystem"
-gem "letter_opener_web", "~> 1.3"
 
 group :development do
   gem "listen", "~> 3.1"
