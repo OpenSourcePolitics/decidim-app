@@ -414,6 +414,10 @@ GEM
       decidim-core (= 0.27.4)
       wicked_pdf (~> 2.1)
       wkhtmltopdf-binary (~> 0.12)
+    decidim-gallery (0.26.0)
+      decidim-admin (>= 0.26.0, < 0.28.0)
+      decidim-core (>= 0.26.0, < 0.28.0)
+      deface (~> 1.9)
     decidim-generators (0.27.4)
       decidim-core (= 0.27.4)
     decidim-initiatives (0.27.4)
@@ -1077,6 +1081,7 @@ DEPENDENCIES
   decidim-extended_socio_demographic_authorization_handler!
   decidim-extra_user_fields!
   decidim-friendly_signup!
+  decidim-gallery
   decidim-homepage_interactive_map!
   decidim-initiatives (~> 0.27.0)
   decidim-ludens!
