@@ -19,6 +19,8 @@ If you haven't already, come find the Decidim community in [Matrix](https://app.
 * Once all checks are green (GG!), please mark your PR as "Ready for review".
 * Ensure the PR description clearly describes the problem and solution. Include the relevant issue number if applicable.
 
+The [contributing to code](./CONTRIBUTING_TO_CODE.md) documentation contains notes and examples on the tools we use.
+
 ## Do you intend to add a new feature or change an existing one?
 *  🇫🇷 Please create a new feature proposal on our french open roadmap [here](https://club.decidim.opensourcepolitics.eu/assemblies/feuille-de-route/f/232/)
 * 🌎 Create a proposal on the [Meta.decidim platform](https://meta.decidim.org/processes/roadmap/f/122/), to see if it can be accepted in the core of the software
