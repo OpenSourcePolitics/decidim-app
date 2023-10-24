@@ -52,6 +52,23 @@ describe SentrySetup do
     end
   end
 
+  describe "#sample_trace" do
+    let(:transaction_name) { "/some_page" }
+    let(:context) { { transaction_context: { op: "http", name: transaction_name } } }
+
+    context "when transaction is about the health check" do
+      let(:transaction_name) { "/health_check" }
+
+      it "returns 0" do
+        expect(subject.send(:sample_trace, context)).to eq 0.0
+      end
+    end
+
+    it "returns a Float" do
+      expect(subject.send(:sample_trace, context)).to be_a Float
+    end
+  end
+
   describe ".ip" do
     it "returns the ip" do
       expect(subject.send(:ip)).to eq("123.123.123.123")
