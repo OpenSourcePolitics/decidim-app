@@ -7,7 +7,7 @@ ENV RAILS_ENV=production \
 WORKDIR /app
 
 RUN apt-get update -q && \
-    apt-get install -yq libpq-dev curl git libicu-dev build-essential && \
+    apt-get install -yq libpq-dev curl git libicu-dev build-essential openssl && \
     curl https://deb.nodesource.com/setup_16.x | bash && \
     apt-get install -y nodejs && \
     apt-get clean && \
@@ -16,17 +16,21 @@ RUN apt-get update -q && \
     gem install bundler:2.4.9
 
 COPY Gemfile Gemfile.lock ./
-RUN bundle config set --local without 'test' && \
+RUN bundle config set --local without 'development test' && \
     bundle install -j"$(nproc)"
 
 COPY package.json yarn.lock ./
 COPY packages packages
-RUN yarn install --frozen-lockfile
+RUN yarn install --frozen-lock
 
 COPY . .
+
 RUN bundle exec bootsnap precompile --gemfile app/ lib/ config/ bin/ db/ && \
     bundle exec rails deface:precompile && \
-    bundle exec bin/webpack
+    bundle exec rails assets:precompile
+
+run mkdir certificate-https-local
+RUN openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=FR/ST=France/L=Paris/O=decidim/CN=decidim.eu" -keyout ./certificate-https-local/key.pem -out ./certificate-https-local/cert.pem;
 
 # Runner Stage
 FROM ruby:3.0.6-slim as runner

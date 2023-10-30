@@ -1,17 +1,9 @@
 run: up
 	@make create-seeds
 
-up: generate-certificate
+up:
 	docker-compose -f docker-compose.local.yml up --build -d
 	@make setup-database
-
-certificate:
-	mkdir -p -- ./certificate-https-local
-
-generate-certificate: certificate
-	@if [ ! -f "./certificate-https-local/cert.pem" ]; then \
-		openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=FR/ST=France/L=Paris/O=OpenSourcePolitics/CN=opensourcepolitics.eu" -keyout ./certificate-https-local/key.pem -out ./certificate-https-local/cert.pem; \
-	fi
 
 # Stops containers and remove volumes
 teardown:
