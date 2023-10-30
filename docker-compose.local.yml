@@ -35,10 +35,15 @@ services:
       - SEED=true
       - DEFACE_ENABLED=false
       - QUESTION_CAPTCHA_HOST=
+      - ENABLE_RACK_ATTACK=0
+      - PUMA_MIN_THREADS=5
+      - PUMA_MAX_THREADS=5
+      - PUMA_WORKERS=4
+      - PUMA_PRELOAD_APP=true
     depends_on:
       - app
     volumes:
-      - .:/app
+      - shared-volume:/app
     links:
       - database
       - redis
@@ -60,8 +65,13 @@ services:
       - SEED=true
       - DEFACE_ENABLED=false
       - QUESTION_CAPTCHA_HOST=
+      - ENABLE_RACK_ATTACK=0
+      - PUMA_MIN_THREADS=5
+      - PUMA_MAX_THREADS=5
+      - PUMA_WORKERS=4
+      - PUMA_PRELOAD_APP=true
     volumes:
-      - .:/app
+      - shared-volume:/app
     ports:
       - 3000:3000
     depends_on:
@@ -70,6 +80,6 @@ services:
       - memcached
 
 volumes:
-  app-data: { }
+  shared-volume: { }
   pg-data: { }
   redis-data: { }
