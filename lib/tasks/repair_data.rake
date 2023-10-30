@@ -57,6 +57,7 @@ namespace :decidim do
       end
     end
 
+    desc 'Replaces "@deprecated_endpoint" in every database columns with the right blob URL'
     task url_in_content: :environment do
       logger = Logger.new($stdout)
       deprecated_hosts = ENV["DEPRECATED_OBJECTSTORE_S3_HOSTS"].to_s.split(",").map(&:strip)
