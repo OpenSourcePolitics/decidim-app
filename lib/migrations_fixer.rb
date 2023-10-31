@@ -72,7 +72,7 @@ class MigrationsFixer
 Fix migrations issue when switching from osp-app to decidim-app. Rake task will automatically save already passed migrations from current project that are marked as 'down'.
 Then it will try to migrate each 'down' version, if it fails, it automatically note as 'up'
 
-Parametes:
+Parameters:
 * MIGRATIONS_PATH - String [Relative or absolute path] : Pass to previous decidim project
 
 Example: bundle exec rake decidim:db:migrate MIGRATIONS_PATH='../osp-app/db/migrate'
