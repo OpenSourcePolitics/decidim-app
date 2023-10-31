@@ -38,7 +38,7 @@ class MigrationsFixer
       @logger.error("You must specify ENV var 'MIGRATIONS_PATH'")
 
       @logger.fatal(helper)
-      exit 2
+      validation_failed
     end
   end
 
@@ -46,7 +46,7 @@ class MigrationsFixer
   def validate_osp_app_path
     unless File.directory?(osp_app_path)
       @logger.fatal("Directory '#{osp_app_path}' not found, aborting task...")
-      exit 2
+      validation_failed
     end
   end
 
@@ -57,7 +57,7 @@ class MigrationsFixer
       @logger.error("Please see absolute path '#{File.expand_path(@migrations_path)}'")
 
       @logger.fatal("Please ensure the migration path is correctly defined.")
-      exit 2
+      validation_failed
     end
   end
 
@@ -79,5 +79,9 @@ Example: bundle exec rake decidim:db:migrate MIGRATIONS_PATH='../osp-app/db/migr
 or
 bundle exec rake decidim:db:migrate MIGRATIONS_PATH='/Users/toto/osp-app/db/migrate'
 "
+  end
+
+  def validation_failed
+    raise "Invalid configuration, aborting"
   end
 end
