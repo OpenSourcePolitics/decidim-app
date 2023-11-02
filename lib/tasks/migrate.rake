@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :nocov:
 namespace :decidim do
   namespace :db do
     desc "Migrate Database"
@@ -68,3 +69,4 @@ namespace :decidim do
     end
   end
 end
+# :nocov:
