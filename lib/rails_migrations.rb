@@ -20,7 +20,7 @@ class RailsMigrations
   def down
     @down ||= @fetch_all&.map do |migration_ary|
       migration_ary if migration_ary&.first == "down"
-    end.compact
+    end&.compact
   end
 
   # Refresh all migrations according to DB
@@ -37,7 +37,7 @@ class RailsMigrations
 
   # Returns all migration present in DB but with no migration files defined
   def not_found
-    @not_found ||= @fetch_all&.map { |_, version, name| version if name.include?("NO FILE") }.compact
+    @not_found ||= @fetch_all&.map { |_, version, name| version if name.include?("NO FILE") }&.compact
   end
 
   # returns all versions marked as 'down' but already passed in past
@@ -46,7 +46,7 @@ class RailsMigrations
   def versions_down_but_already_passed
     needed_migrations = already_accepted_migrations&.map do |migration|
       Dir.glob("#{@migration_fixer.migrations_path}/*#{migration_name_for(migration)}")
-    end.flatten!
+    end&.flatten!
 
     needed_migrations&.map { |filename| migration_version_for(filename) }
   end
@@ -73,7 +73,7 @@ class RailsMigrations
       osp_app = Dir.glob("#{@migration_fixer.osp_app_path}*")&.select { |path| path if path.include?(migration) }
 
       osp_app.first if osp_app.present?
-    end.compact
+    end&.compact
   end
 
   # Fetch all migrations statuses
