@@ -76,6 +76,7 @@ describe "Registration", type: :system do
 
     before do
       allow(Rails).to receive(:cache).and_return(memory_store)
+      DecidimApp::RackAttack.enable_rack_attack!
       DecidimApp::RackAttack.apply_configuration
       Rack::Attack.reset!
 
@@ -88,7 +89,7 @@ describe "Registration", type: :system do
     end
 
     after do
-      Rack::Attack.enabled = false
+      DecidimApp::RackAttack.disable_rack_attack!
     end
 
     it "throttles after 5 attempts per minute" do
