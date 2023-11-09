@@ -34,6 +34,15 @@ GIT
       rgeo-proj4 (~> 3.1)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git
+  revision: 54050b317815bff1edaad3d26744a941be1d31bf
+  branch: fix/email_with_precompile
+  specs:
+    decidim-term_customizer (0.27.0)
+      decidim-admin (~> 0.27.0)
+      decidim-core (~> 0.27.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
   revision: 79f2a5f6c3357d63f92423a2b173893f4c4d06d8
   branch: release/0.27-stable
@@ -65,15 +74,6 @@ GIT
       country_select (~> 4.0)
       decidim-core (>= 0.27.0, < 0.28)
       deface (~> 1.5)
-
-GIT
-  remote: https://github.com/armandfardeau/decidim-module-term_customizer.git
-  revision: 5c2b648e07c5fd51e2598256886895b9a83d698c
-  branch: fix/precompile-on-docker
-  specs:
-    decidim-term_customizer (0.27.0)
-      decidim-admin (~> 0.27.0)
-      decidim-core (~> 0.27.0)
 
 GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
