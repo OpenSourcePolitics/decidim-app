@@ -23,7 +23,7 @@ Also, you should be automatically redirected to https://localhost:3000/system be
 ### Setup a seeded DecidimApp
 
 1. Clone repository
-2. Create a `.env` file from `.env.example` and fill it with your own values
+2. Create a `.env` file from `.env-example` and fill it with your own values
 3. Start the application with `make run`
 
 Once containers are deployed, you should be able to visit : https://localhost:3000/ without being redirected !
