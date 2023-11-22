@@ -1043,7 +1043,7 @@ GEM
     websocket-extensions (0.1.5)
     wicked (1.4.0)
       railties (>= 3.0.7)
-    wicked_pdf (2.7.0)
+    wicked_pdf (2.6.3)
       activesupport
     wisper (2.0.1)
     wisper-rspec (1.1.0)
