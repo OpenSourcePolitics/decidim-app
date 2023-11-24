@@ -148,7 +148,7 @@ Rails.application.configure do
 
   config.ssl_options = {
     redirect: {
-      exclude: ->(request) { /health_check|sidekiq_alive/.match?(request.path) }
+      exclude: ->(request) { /health_check/.match?(request.path) }
     }
   }
 
