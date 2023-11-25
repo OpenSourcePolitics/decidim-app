@@ -9,8 +9,7 @@ require "action_cable/engine"
 # require "action_text/engine"
 require_relative "../lib/active_storage/downloadable"
 
-# TODO : add missing dep to decidim-initiatives/lib/decidim/initiatives/engine.rb
-# require "wicked_pdf"
+require "wicked_pdf"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -49,6 +48,7 @@ module DevelopmentApp
     config.after_initialize do
       require "extends/controllers/decidim/devise/sessions_controller_extends"
       require "extends/controllers/decidim/editor_images_controller_extends"
+      require "extends/services/decidim/iframe_disabler_extends"
 
       Decidim::GraphiQL::Rails.config.tap do |config|
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe

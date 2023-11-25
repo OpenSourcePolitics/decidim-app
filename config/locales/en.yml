@@ -60,6 +60,12 @@ en:
           email_outro: Check the <a href="%{conflicts_path}">Verifications's conflicts list</a> and contact the participant to verify their details and solve the issue.
           email_subject: Failed verification attempt against a managed participant
           notification_title: The participant <a href="%{resource_path}">%{resource_title}</a> has tried to verify themself with the data of the managed participant <a href="%{managed_user_path}">%{managed_user_name}</a>.
+    initiatives:
+      pages:
+        home:
+          highlighted_initiatives:
+            active_initiatives: Active initiatives
+            see_all_initiatives: See all initiatives
     meetings:
       directory:
         meetings:
