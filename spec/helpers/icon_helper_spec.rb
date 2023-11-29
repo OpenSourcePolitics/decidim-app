@@ -102,6 +102,22 @@ module Decidim
           end
         end
 
+        context "when the resource is a comment" do
+          let(:resource) { build :comment }
+
+          it "renders a comment icon" do
+            expect(result).to include("svg#icon-comment-square")
+          end
+        end
+
+        context "when the resource is an initiative" do
+          let(:resource) { build :initiative }
+
+          it "renders an initiative icon" do
+            expect(result).to include("svg#icon-initiatives")
+          end
+        end
+
         context "and in other cases" do
           let(:resource) { "Something" }
 
