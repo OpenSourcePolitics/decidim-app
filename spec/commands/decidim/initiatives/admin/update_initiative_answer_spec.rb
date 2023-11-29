@@ -18,22 +18,22 @@ module Decidim
               it "notifies the followers for extension and answer" do
                 expect(Decidim::EventsManager)
                   .to receive(:publish)
-                        .with(
-                          event: "decidim.events.initiatives.initiative_extended",
-                          event_class: Decidim::Initiatives::ExtendInitiativeEvent,
-                          resource: initiative,
-                          followers: [follower]
-                        )
-                        .ordered
+                  .with(
+                    event: "decidim.events.initiatives.initiative_extended",
+                    event_class: Decidim::Initiatives::ExtendInitiativeEvent,
+                    resource: initiative,
+                    followers: [follower]
+                  )
+                  .ordered
                 expect(Decidim::EventsManager)
                   .to receive(:publish)
-                        .with(
-                          event: "decidim.events.initiatives.initiative_answered",
-                          event_class: Decidim::Initiatives::AnswerInitiativeEvent,
-                          resource: initiative,
-                          followers: [follower]
-                        )
-                        .ordered
+                  .with(
+                    event: "decidim.events.initiatives.initiative_answered",
+                    event_class: Decidim::Initiatives::AnswerInitiativeEvent,
+                    resource: initiative,
+                    followers: [follower]
+                  )
+                  .ordered
 
                 command.call
               end
@@ -69,8 +69,8 @@ module Decidim
 
           it "broadcasts invalid" do
             expect(initiative).to receive(:valid?)
-                                    .at_least(:once)
-                                    .and_return(false)
+              .at_least(:once)
+              .and_return(false)
             expect { command.call }.to broadcast :invalid
           end
         end
