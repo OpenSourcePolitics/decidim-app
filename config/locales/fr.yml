@@ -50,6 +50,12 @@ fr:
           email_outro: Vous avez reçu cette notification parce que vous avez commencé à voter sur la concertation "%{participatory_space_title}"
           email_subject: Votre vote est toujours en attente sur la concertation %{participatory_space_title}
           notification_title: Votre vote pour le budget <a href="%{resource_path}">%{resource_title}</a> attend d'être finalisé sur la concertation %{participatory_space_title}
+      initiatives:
+        initiative_answered:
+          email_intro: La pétition "%{resource_title}" a reçu une réponse.
+          email_outro: Vous avez reçu cette notification parce que vous suivez la pétition "%{resource_title}".
+          email_subject: La pétition "%{resource_title}" a reçu une réponse.
+          notification_title: La pétition <a href="%{resource_path}">%{resource_title}</a> a reçu une réponse.
       users:
         user_officialized:
           email_intro: Le participant %{name} (%{nickname}) a été officialisé.
