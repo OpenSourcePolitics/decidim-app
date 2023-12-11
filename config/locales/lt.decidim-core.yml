@@ -1504,19 +1504,6 @@ lt:
     timestamp_error_message: Atsiprašome, tai per greita! Pateikite dar kartą
   layouts:
     decidim:
-      decidim_awesome:
-        awesome_config:
-          amendments: Änderungsvorschläge
-          autosaved_error: Automatisches Speichern fehlgeschlagen
-          autosaved_retrieved: Text automatisch wiederhergestellt
-          autosaved_success: Text automatisch gespeichert
-          categories: Kategorien
-          drag_and_drop_image: Sie können Bilder per Drag & Drop ins Textfeld ziehen.
-          hashtags: Hashtags
-          items: Items
-          meetings: Veranstaltungen
-          proposals: Vorschläge
-          select_deselect_all: Alles auswählen / Auswahl aufheben
       cookie_warning:
         description_html: Šioje svetainėje naudojami slapukai. Toliau naršydami svetainėje sutinkate, kad būtų naudojami slapukai. %{link}.
         link_label: Daugiau informacijos apie slapukus
