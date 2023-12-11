@@ -62,7 +62,7 @@ mt:
             offensive: Fih razziżmu, sessiżmu, tgħajjir, attakki personali, theddid ta’ mewt, talbiet ta’ suwiċidju jew kwalunkwe forma ta’ diskors ta’ mibegħda.
             spam: Fih clickbait, reklamar, scams jew script bots.
           title: Irrapporta kontenut mhux xieraq
-        show_replies: Uri %{replies_count} tweġiba/iet
+        show_replies: Uri %{count} tweġiba/iet
         single_comment_link_title: Ikseb link
       comment_order_selector:
         order:

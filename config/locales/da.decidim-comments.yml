@@ -58,7 +58,7 @@ da:
             offensive: Indeholder racisme, sexisme, bagtalelse, personlige angreb, dødstrusler, selvmordsanmodninger eller hadtale i enhver form.
             spam: Indeholder kliklokkemad, reklamer, svindelnumre eller script-bots.
           title: Indberetning af upassende indhold
-        show_replies: Vis %{replies_count} svar
+        show_replies: Vis %{count} svar
         single_comment_link_title: Hent link
       comment_order_selector:
         order:
