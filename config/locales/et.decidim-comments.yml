@@ -58,7 +58,7 @@ et:
             offensive: 'Sisu hõlmab järgmist: rassism, seksism, solvangud, isiklikud rünnakud, tapmisähvardused, enesetapule õhutamine või mis tahes kujul vihakõne.'
             spam: Hõlmab klõpsusööta, reklaame, petuskeeme või skriptiroboteid.
           title: Teata sobimatust sisust
-        show_replies: Kuva %{replies_count} vastust
+        show_replies: Kuva %{count} vastust
         single_comment_link_title: Saa link
       comment_order_selector:
         order:

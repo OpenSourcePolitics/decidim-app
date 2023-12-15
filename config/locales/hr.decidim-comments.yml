@@ -50,7 +50,7 @@ hr:
             offensive: Sadržava rasizam, seksizam, uvrede, osobne napade, prijetnje smrću, zahtjeve za samoubojstvo ili bilo koji oblik govora mržnje.
             spam: Sadržava poveznice mamce, reklame, prijevare ili skriptne botove.
           title: Prijavi neprimjereni sadržaj
-        show_replies: 'Prikaži odgovora: %{replies_count}'
+        show_replies: 'Prikaži odgovora: %{count}'
         single_comment_link_title: Poveznica
       comment_order_selector:
         order:

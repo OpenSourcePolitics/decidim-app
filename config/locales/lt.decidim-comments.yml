@@ -62,7 +62,7 @@ lt:
             offensive: Pateikiamas turinys yra rasizmo ir seksizmo apraiška, įžeidinėjimai, išpuoliai prieš asmenį, grasinimai nužudyti, raginimai įvykdyti savižudybę ar bet kokio pavidalo neapykantos retorika.
             spam: Pateikiamas antraštinis masalas, reklama, apgavystės ar programinis robotas.
           title: Pranešti apie netinkamą turinį
-        show_replies: Rydyti %{replies_count} atsakymus
+        show_replies: Rydyti %{count} atsakymus
         single_comment_link_title: Gauti nuorodą
       comment_order_selector:
         order:
