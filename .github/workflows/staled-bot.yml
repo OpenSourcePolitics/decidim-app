@@ -1,0 +1,11 @@
+name: 'Close stale issues and PRs'
+on:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stale bot Action
+        uses: OpenSourcePolitics/staled-bot@master
