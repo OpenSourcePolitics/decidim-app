@@ -995,6 +995,7 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
+  arm64-darwin-21
   arm64-darwin-22
   x86_64-darwin-20
   x86_64-darwin-21
@@ -1056,4 +1057,4 @@ RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.4.22
+   2.4.9
