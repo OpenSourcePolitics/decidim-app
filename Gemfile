@@ -11,9 +11,9 @@ ruby RUBY_VERSION
 gem "dotenv-rails", require: "dotenv/rails-now"
 
 # Core gems
-gem "decidim", "~> #{DECIDIM_VERSION}.0"
-gem "decidim-conferences", "~> #{DECIDIM_VERSION}.0"
-gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
+gem "decidim", git: "https://github.com/decidim/decidim", branch: DECIDIM_BRANCH
+gem "decidim-conferences", git: "https://github.com/decidim/decidim", branch: DECIDIM_BRANCH
+gem "decidim-templates", git: "https://github.com/decidim/decidim", branch: DECIDIM_BRANCH
 
 # External Decidim gems
 gem "decidim-cache_cleaner"
@@ -58,7 +58,7 @@ group :development, :test do
   gem "brakeman", "~> 5.1"
   gem "byebug", "~> 11.0", platform: :mri
   gem "climate_control", "~> 1.2"
-  gem "decidim-dev", "~> #{DECIDIM_VERSION}.0"
+  gem "decidim-dev", git: "https://github.com/decidim/decidim", branch: DECIDIM_BRANCH
   gem "parallel_tests"
 end
 
