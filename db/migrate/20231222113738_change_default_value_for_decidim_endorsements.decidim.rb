@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from decidim (originally 20231027142329)
 
 class ChangeDefaultValueForDecidimEndorsements < ActiveRecord::Migration[6.0]
