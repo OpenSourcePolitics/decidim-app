@@ -16,6 +16,41 @@ module Decidim
         request.env["decidim.current_organization"] = organization
       end
 
+      context "when GET new" do
+        let(:current_user) { create(:user, :confirmed, organization: organization) }
+        let(:authorization_handler) { "dummy_authorization_handler" }
+        let(:committee_request_path) { "/initiatives/#{initiative.id}/committee_requests/new" }
+
+        before do
+          allow(controller).to receive(:current_initiative).and_return(initiative)
+          allow(controller).to receive(:current_user).and_return(current_user)
+          allow(controller).to receive(:authorized?).and_return(authorized)
+          allow(initiative).to receive(:document_number_authorization_handler).and_return(authorization_handler)
+        end
+
+        context "when not authorized" do
+          let(:authorized) { false }
+
+          it "redirects to authorization root path" do
+            allow(controller).to receive(:new_initiative_committee_request_path).with(initiative).and_return(committee_request_path)
+
+            get :new, params: { initiative_slug: initiative.slug }
+
+            expect(response).to have_http_status(:found)
+          end
+        end
+
+        context "when authorized" do
+          let(:authorized) { true }
+
+          it "does not redirect" do
+            get :new, params: { initiative_slug: initiative.slug }
+
+            expect(response).to have_http_status(:ok)
+          end
+        end
+      end
+
       context "when GET spawn" do
         let(:user) { create(:user, :confirmed, organization: organization) }
 
