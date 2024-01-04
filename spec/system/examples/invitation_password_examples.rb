@@ -20,7 +20,7 @@ shared_examples "on/off invitation passwords" do
       end
 
       expect(page).to have_content("Dashboard")
-      expect(page).to have_current_path "/admin/"
+      expect(page).to have_current_path "/admin/admin_terms/show"
     end
   end
 
@@ -53,7 +53,7 @@ shared_examples "on/off invitation passwords" do
       end
 
       expect(page).to have_content("Dashboard")
-      expect(page).to have_current_path "/admin/"
+      expect(page).to have_current_path "/admin/admin_terms/show"
     end
   end
 end
