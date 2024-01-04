@@ -32,6 +32,7 @@ module Decidim
           let(:authorized) { false }
 
           it "redirects to authorization root path" do
+            allow(controller).to receive(:authorized?).with(current_user).and_return(false)
             allow(controller).to receive(:new_initiative_committee_request_path).with(initiative).and_return(committee_request_path)
 
             get :new, params: { initiative_slug: initiative.slug }
@@ -58,6 +59,8 @@ module Decidim
           let(:authorized) { true }
 
           it "does not redirect" do
+            allow(controller).to receive(:authorized?).with(current_user).and_return(true)
+
             get :new, params: { initiative_slug: initiative.slug }
 
             expect(response).to have_http_status(:ok)
