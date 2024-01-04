@@ -84,7 +84,7 @@ shared_examples "on/off registration passwords" do
         check :registration_user_newsletter
         find("*[type=submit]").click
 
-        expect(page).to have_content("doesn't match Password")
+        expect(page).to have_content("does not match Password")
 
         fill_in :registration_user_password, with: "DfyvHn425mYAy2HL"
         fill_in :registration_user_password_confirmation, with: "DfyvHn425mYAy2HL"
