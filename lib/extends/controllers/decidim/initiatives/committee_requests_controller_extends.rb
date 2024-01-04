@@ -4,9 +4,13 @@ module CommitteeRequestsControllerExtends
   def new
     return if authorized?(current_user)
 
-    authorization_method = Decidim::Verifications::Adapter.from_element(current_initiative.document_number_authorization_handler)
-    redirect_url = new_initiative_committee_request_path(current_initiative)
-    redirect_to authorization_method.root_path(redirect_url: redirect_url)
+    if current_user.nil?
+      redirect_to decidim.new_user_session_path
+    else
+      authorization_method = Decidim::Verifications::Adapter.from_element(current_initiative.document_number_authorization_handler)
+      redirect_url = new_initiative_committee_request_path(current_initiative)
+      redirect_to authorization_method.root_path(redirect_url: redirect_url)
+    end
   end
 
   private

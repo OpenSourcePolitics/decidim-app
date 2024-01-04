@@ -40,6 +40,20 @@ module Decidim
           end
         end
 
+        context "when not logged in" do
+          let(:current_user) { nil }
+          let(:authorized) { false }
+
+          it "redirects to login page" do
+            allow(controller).to receive(:new_initiative_committee_request_path).with(initiative).and_return(committee_request_path)
+
+            get :new, params: { initiative_slug: initiative.slug }
+
+            expect(response).to have_http_status(:found)
+            expect(URI.parse(response.location).path).to eq("/users/sign_in")
+          end
+        end
+
         context "when authorized" do
           let(:authorized) { true }
 
