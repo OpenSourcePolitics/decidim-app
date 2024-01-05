@@ -38,6 +38,11 @@ module DevelopmentApp
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.to_prepare do
+      require "extends/helpers/decidim/forms/application_helper_extends"
+      require "extends/cells/decidim/forms/step_navigation_cell_extends"
+    end
+
     config.after_initialize do
       require "extends/controllers/decidim/devise/sessions_controller_extends"
       require "extends/controllers/decidim/editor_images_controller_extends"

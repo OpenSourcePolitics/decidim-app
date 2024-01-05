@@ -105,6 +105,8 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v2
+        with:
+          chromedriver-version: 119.0.6045.105
       - run:  bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
@@ -171,6 +173,8 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v2
+        with:
+          chromedriver-version: 119.0.6045.105
       - run:  bundle exec rake "test:run[include, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
