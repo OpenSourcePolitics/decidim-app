@@ -97,3 +97,4 @@ yarn-debug.log*
 coverage/
 public/sw.js*
 app/compiled_views/
+certificate-https-local/

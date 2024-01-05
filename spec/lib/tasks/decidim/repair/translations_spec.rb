@@ -36,4 +36,36 @@ describe "rake decidim:repair:translations", type: :task do
       task.execute
     end
   end
+
+  describe "logging" do
+    let!(:logger) { Logger.new($stdout) }
+
+    before do
+      # Stub the logger
+      allow(logger).to receive(:info)
+      allow(Logger).to receive(:new).and_return(logger)
+
+      allow(Decidim::RepairTranslationsService).to receive(:run).and_return updated_resources_ids
+    end
+
+    context "when no nickname was repaired" do
+      let(:updated_resources_ids) { [] }
+
+      it "logs a message" do
+        task.execute
+
+        expect(logger).to have_received(:info).with("No resources updated")
+      end
+    end
+
+    context "when some nicknames were repaired" do
+      let(:updated_resources_ids) { [1, 2, 3] }
+
+      it "logs a message" do
+        task.execute
+
+        expect(logger).to have_received(:info).with("Enqueued resources : 1, 2, 3")
+      end
+    end
+  end
 end

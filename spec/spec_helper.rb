@@ -9,6 +9,7 @@ Dir.glob("./spec/support/**/*.rb").each { |f| require f }
 RSpec.configure do |config|
   config.formatter = ENV.fetch("RSPEC_FORMAT", "progress").to_sym
   config.include EnvironmentVariablesHelper
+  config.include SkipIfUndefinedHelper
 
   config.before do
     # Initializers configs

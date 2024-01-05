@@ -7,13 +7,13 @@ namespace :decidim do
       logger = Logger.new($stdout)
       logger.info("Checking all nicknames...")
 
-      udpated_user_ids = Decidim::RepairNicknameService.run
+      updated_user_ids = Decidim::RepairNicknameService.run
 
-      if udpated_user_ids.blank?
+      if updated_user_ids.blank?
         logger.info("No users updated")
       else
-        logger.info("#{udpated_user_ids.count} users updated")
-        logger.info("Updated users ID : #{udpated_user_ids.join(", ")}")
+        logger.info("#{updated_user_ids.count} users updated")
+        logger.info("Updated users ID : #{updated_user_ids.join(", ")}")
       end
 
       logger.info("Operation terminated")
@@ -30,7 +30,7 @@ namespace :decidim do
         logger.info("No comments updated")
       else
         logger.info("#{updated_comments_ids} comments updated")
-        logger.info("Updated comments ID : #{updated_comments_ids.join(",")}")
+        logger.info("Updated comments ID : #{updated_comments_ids.join(", ")}")
       end
 
       logger.info("Operation terminated")
@@ -57,6 +57,7 @@ namespace :decidim do
       end
     end
 
+    desc 'Replaces "@deprecated_endpoint" in every database columns with the right blob URL'
     task url_in_content: :environment do
       logger = Logger.new($stdout)
       deprecated_hosts = ENV["DEPRECATED_OBJECTSTORE_S3_HOSTS"].to_s.split(",").map(&:strip)
