@@ -68,6 +68,37 @@ module Decidim
         end
       end
 
+      context "when authorized? is called" do
+        let(:current_user) { create(:user, :confirmed, organization: organization) }
+        let(:authorization_handler) { "dummy_authorization_handler" }
+
+        before do
+          allow(controller).to receive(:current_initiative).and_return(initiative)
+          allow(controller).to receive(:current_user).and_return(current_user)
+          allow(initiative).to receive(:document_number_authorization_handler).and_return(authorization_handler)
+        end
+
+        context "when authorized" do
+          it "returns true" do
+            allow(controller).to receive(:authorized?).with(current_user).and_return(true)
+
+            result = controller.send(:authorized?, current_user)
+
+            expect(result).to be(true)
+          end
+        end
+
+        context "when not authorized" do
+          it "returns false" do
+            allow(controller).to receive(:authorized?).with(current_user).and_return(false)
+
+            result = controller.send(:authorized?, current_user)
+
+            expect(result).to be(false)
+          end
+        end
+      end
+
       context "when GET spawn" do
         let(:user) { create(:user, :confirmed, organization: organization) }
 
