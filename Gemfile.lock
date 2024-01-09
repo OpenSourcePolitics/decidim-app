@@ -150,6 +150,13 @@ GEM
     activerecord (6.1.7.6)
       activemodel (= 6.1.7.6)
       activesupport (= 6.1.7.6)
+    activerecord-session_store (2.1.0)
+      actionpack (>= 6.1)
+      activerecord (>= 6.1)
+      cgi (>= 0.3.6)
+      multi_json (~> 1.11, >= 1.11.2)
+      rack (>= 2.0.8, < 4)
+      railties (>= 6.1)
     activestorage (6.1.7.6)
       actionpack (= 6.1.7.6)
       activejob (= 6.1.7.6)
@@ -244,6 +251,7 @@ GEM
     cells-rails (0.1.5)
       actionpack (>= 5.0)
       cells (>= 4.1.6, < 5.0.0)
+    cgi (0.4.1)
     charlock_holmes (0.7.7)
     chef-utils (18.3.0)
       concurrent-ruby
@@ -1069,6 +1077,7 @@ PLATFORMS
 
 DEPENDENCIES
   activejob-uniqueness
+  activerecord-session_store
   aws-sdk-s3
   bootsnap (~> 1.4)
   brakeman (~> 5.1)

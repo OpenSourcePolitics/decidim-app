@@ -54,5 +54,12 @@ module DevelopmentApp
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
       end
     end
+
+    if ENV["RAILS_SESSION_STORE"] == "active_record"
+      initializer "session cookie domain", after: "Expire sessions" do
+        Rails.application.config.session_store :active_record_store, key: "_decidim_session", expire_after: Decidim.config.expire_session_after
+        ActiveRecord::SessionStore::Session.serializer = :hybrid
+      end
+    end
   end
 end
