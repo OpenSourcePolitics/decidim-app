@@ -55,7 +55,7 @@ module DevelopmentApp
       end
     end
 
-    if ENV["RAILS_SESSION_STORE"] == "active_record"
+    if ENV.fetch("RAILS_SESSION_STORE", "") == "active_record"
       initializer "session cookie domain", after: "Expire sessions" do
         Rails.application.config.session_store :active_record_store, key: "_decidim_session", expire_after: Decidim.config.expire_session_after
         ActiveRecord::SessionStore::Session.serializer = :hybrid
