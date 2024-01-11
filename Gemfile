@@ -35,6 +35,7 @@ gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publ
 
 # Default
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
+gem "activerecord-session_store"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", "~> 1.4"
 gem "deepl-rb", require: "deepl"
