@@ -2,6 +2,8 @@
 fr:
   activemodel:
     attributes:
+      initiative:
+        offline_votes_for_scope: Signatures en personne pour %{scope_name}
       osp_authorization_handler:
         birthday: Date de naissance
         document_number: Numéro unique
@@ -69,6 +71,12 @@ fr:
           email_subject: Un utilisateur a tenté de se faire vérifier avec les données d'un utilisateur représenté
           notification_title: Le participant <a href="%{resource_path}">%{resource_title}</a> a tenté de se faire vérifier avec les données de l'utilisateur représenté <a href="%{managed_user_path}">%{managed_user_name}</a>.
     initiatives:
+      admin:
+        initiatives:
+          form:
+            attachments: Pièces jointes
+            settings: Paramètres
+            title: Informations générales
       pages:
         home:
           highlighted_initiatives:
