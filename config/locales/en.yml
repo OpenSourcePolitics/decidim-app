@@ -2,6 +2,8 @@
 en:
   activemodel:
     attributes:
+      initiative:
+        offline_votes_for_scope: In-person signatures for %{scope_name}
       osp_authorization_handler:
         birthday: Birthday
         document_number: Unique number
@@ -67,6 +69,12 @@ en:
           email_subject: Failed verification attempt against a managed participant
           notification_title: The participant <a href="%{resource_path}">%{resource_title}</a> has tried to verify themself with the data of the managed participant <a href="%{managed_user_path}">%{managed_user_name}</a>.
     initiatives:
+      admin:
+        initiatives:
+          form:
+            attachments: Attachments
+            settings: Settings
+            title: General information
       pages:
         home:
           highlighted_initiatives:

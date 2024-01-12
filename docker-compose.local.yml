@@ -40,6 +40,7 @@ services:
       - PUMA_MAX_THREADS=5
       - PUMA_WORKERS=4
       - PUMA_PRELOAD_APP=true
+      - RAILS_SESSION_STORE=active_record
     depends_on:
       - app
     volumes:
@@ -70,6 +71,7 @@ services:
       - PUMA_MAX_THREADS=5
       - PUMA_WORKERS=4
       - PUMA_PRELOAD_APP=true
+      - RAILS_SESSION_STORE=active_record
     volumes:
       - shared-volume:/app
     ports:
