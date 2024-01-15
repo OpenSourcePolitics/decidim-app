@@ -127,3 +127,6 @@ ignore_unused:
   - decidim.proposals.collaborative_drafts.new.*
   - decidim.admin.menu.admin_accountability
   - decidim.anonymous_user
+  - decidim.events.initiatives.initiative_answered.*
+  - decidim.initiatives.pages.home.highlighted_initiatives.*
+

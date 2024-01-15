@@ -40,4 +40,16 @@ describe Decidim::ActionLogService do
       end.to change(Decidim::ActionLog, :count).from(10).to(0)
     end
   end
+
+  describe "#orphans_for" do
+    context "when the class does not exist" do
+      it "logs the error" do
+        logger = Logger.new($stdout)
+        allow(logger).to receive(:warn)
+        described_class.new(logger: logger).send(:orphans_for, "NonExistingClass")
+
+        expect(logger).to have_received(:warn).with("Skipping class : NonExistingClass")
+      end
+    end
+  end
 end

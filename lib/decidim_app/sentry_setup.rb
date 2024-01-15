@@ -15,17 +15,7 @@ module SentrySetup
 
         config.traces_sample_rate = sample_rate.to_f
 
-        config.traces_sampler = lambda do |sampling_context|
-          transaction_context = sampling_context[:transaction_context]
-          op = transaction_context[:op]
-          transaction_name = transaction_context[:name]
-
-          if op =~ /http/ && transaction_name == "/health_check"
-            0.0
-          else
-            sample_rate.to_f
-          end
-        end
+        config.traces_sampler = ->(sampling_context) { sample_trace(sampling_context) }
       end
 
       Sentry.set_tags("server.hostname": hostname) if hostname.present?
@@ -33,6 +23,18 @@ module SentrySetup
     end
 
     private
+
+    def sample_trace(sampling_context)
+      transaction_context = sampling_context[:transaction_context]
+      op = transaction_context[:op]
+      transaction_name = transaction_context[:name]
+
+      if op =~ /http/ && transaction_name == "/health_check"
+        0.0
+      else
+        sample_rate.to_f
+      end
+    end
 
     def server_metadata
       JSON.parse(`scw-metadata-json`)
