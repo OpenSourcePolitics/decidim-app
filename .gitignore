@@ -98,3 +98,5 @@ coverage/
 public/sw.js*
 app/compiled_views/
 certificate-https-local/
+
+.DS_Store
