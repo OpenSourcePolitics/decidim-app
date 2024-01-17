@@ -15,6 +15,7 @@
   - reminders
   - active_storage_analysis
   - active_storage_purge
+  - initiatives
 
 :scheduler:
   :schedule:
@@ -44,3 +45,15 @@
       class: NotificationsDigestMailJob
       queue: mailers
       args: :weekly
+    CheckPublishedInitiatives:
+      cron: '0 1 * * *'
+      class: CheckPublishedInitiatives
+      queue: initiatives
+    CheckValidatingInitiatives:
+      cron: '0 1 * * *'
+      class: CheckValidatingInitiatives
+      queue: initiatives
+    NotifyProgressInitiatives:
+      cron: '0 1 * * *'
+      class: NotifyProgressInitiatives
+      queue: initiatives
