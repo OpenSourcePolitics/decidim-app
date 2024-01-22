@@ -26,8 +26,8 @@ RUN yarn install --frozen-lock
 COPY . .
 
 RUN bundle exec bootsnap precompile --gemfile app/ lib/ config/ bin/ db/ && \
-    bundle exec rails deface:precompile && \
-    bundle exec rails assets:precompile
+    bundle exec rails assets:precompile && \
+    bundle exec rails deface:precompile
 
 run mkdir certificate-https-local
 RUN openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=FR/ST=France/L=Paris/O=decidim/CN=decidim.eu" -keyout ./certificate-https-local/key.pem -out ./certificate-https-local/cert.pem;
