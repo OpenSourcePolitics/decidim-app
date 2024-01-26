@@ -5,6 +5,17 @@ require "spec_helper"
 describe DecidimApp::DecidimInitiatives do
   subject { described_class }
 
+  describe ".apply_configuration" do
+    it "sets the configuration values" do
+      skip_if_undefined "Decidim::Initiatives", "decidim-initiatives"
+
+      allow(Decidim::Initiatives).to receive(:configure)
+      subject.apply_configuration
+
+      expect(Decidim::Initiatives).to have_received(:configure)
+    end
+  end
+
   describe "#creation_enabled?" do
     it "returns true" do
       expect(subject).to be_creation_enabled
@@ -109,6 +120,21 @@ describe DecidimApp::DecidimInitiatives do
     end
   end
 
+  describe ".default_components" do
+    it "handles empty array string" do
+      allow(Rails.application.secrets).to receive(:dig).with(:decidim, :initiatives, :default_components).and_return(["[]"])
+
+      expect(subject.default_components).to eq []
+    end
+
+    it "returns the configured value" do
+      expected = ["a", 1, true]
+      allow(Rails.application.secrets).to receive(:dig).with(:decidim, :initiatives, :default_components).and_return(expected)
+
+      expect(subject.default_components).to eq expected
+    end
+  end
+
   describe "#first_notification_percentage" do
     context "when rails secret '25'" do
       before do
@@ -193,6 +219,50 @@ describe DecidimApp::DecidimInitiatives do
 
       it "returns 60 days" do
         expect(subject.max_time_in_validating_state).to eq(60.days)
+      end
+    end
+  end
+
+  describe ".print_enabled?" do
+    context "when rails secret has a value" do
+      [10, true, "hello"].each do |value|
+        it "returns false for '#{value}'" do
+          allow(Rails.application.secrets).to receive(:dig).with(:decidim, :initiatives, :print_enabled).and_return(value)
+
+          expect(subject.print_enabled?).to be true
+        end
+      end
+    end
+
+    context "when rails secret has no value" do
+      [false, nil, ""].each do |value|
+        it "returns false for '#{value}'" do
+          allow(Rails.application.secrets).to receive(:dig).with(:decidim, :initiatives, :print_enabled).and_return(value)
+
+          expect(subject.print_enabled?).to be false
+        end
+      end
+    end
+  end
+
+  describe ".do_not_require_authorization?" do
+    context "when rails secret has a value" do
+      [10, true, "hello"].each do |value|
+        it "returns false for '#{value}'" do
+          allow(Rails.application.secrets).to receive(:dig).with(:decidim, :initiatives, :do_not_require_authorization).and_return(value)
+
+          expect(subject.do_not_require_authorization?).to be true
+        end
+      end
+    end
+
+    context "when rails secret has no value" do
+      [false, nil, ""].each do |value|
+        it "returns false for '#{value}'" do
+          allow(Rails.application.secrets).to receive(:dig).with(:decidim, :initiatives, :do_not_require_authorization).and_return(value)
+
+          expect(subject.do_not_require_authorization?).to be false
+        end
       end
     end
   end

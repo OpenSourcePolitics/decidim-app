@@ -7,7 +7,6 @@ require "decidim/rails"
 require "action_cable/engine"
 # require "action_mailbox/engine"
 # require "action_text/engine"
-require_relative "../lib/active_storage/downloadable"
 
 require "wicked_pdf"
 
@@ -40,16 +39,27 @@ module DevelopmentApp
     # the framework and any gems in your application.
 
     config.to_prepare do
-      ActiveStorage::Blob.include ActiveStorage::Downloadable
+      require "extends/helpers/decidim/forms/application_helper_extends"
+      require "extends/cells/decidim/forms/step_navigation_cell_extends"
     end
 
     config.after_initialize do
       require "extends/controllers/decidim/devise/sessions_controller_extends"
       require "extends/controllers/decidim/editor_images_controller_extends"
       require "extends/services/decidim/iframe_disabler_extends"
+      require "extends/helpers/decidim/icon_helper_extends"
+      require "extends/commands/decidim/initiatives/admin/update_initiative_answer_extends"
+      require "extends/controllers/decidim/initiatives/committee_requests_controller_extends"
 
       Decidim::GraphiQL::Rails.config.tap do |config|
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
+      end
+    end
+
+    if ENV.fetch("RAILS_SESSION_STORE", "") == "active_record"
+      initializer "session cookie domain", after: "Expire sessions" do
+        Rails.application.config.session_store :active_record_store, key: "_decidim_session", expire_after: Decidim.config.expire_session_after
+        ActiveRecord::SessionStore::Session.serializer = :hybrid
       end
     end
   end

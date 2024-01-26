@@ -69,6 +69,38 @@ module Decidim
       end
     end
 
+    describe "#for" do
+      context "with missing arguments" do
+        it "fails without pattern" do
+          expect do
+            described_class.for nil, mask, slice
+          end.to raise_error("Missing pattern")
+        end
+
+        it "fails without mask" do
+          expect do
+            described_class.for pattern, nil, slice
+          end.to raise_error("Missing mask")
+        end
+
+        it "fails without slice" do
+          expect do
+            described_class.for pattern, mask, nil
+          end.to raise_error("Missing slice")
+        end
+      end
+
+      context "with all the arguments" do
+        # This is tightly coupled with the implementation
+        it "runs the suite" do
+          allow(described_class).to receive(:new).and_return subject
+          allow(subject).to receive(:run).and_return "__success__"
+
+          expect(described_class.for(pattern, mask, slice)).to eq "__success__"
+        end
+      end
+    end
+
     describe "#sliced_files" do
       before do
         allow(Dir).to receive(:glob).and_return(files)
