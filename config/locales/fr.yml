@@ -75,6 +75,8 @@ fr:
         initiatives:
           form:
             attachments: Pièces jointes
+            new:
+              warning: Les initiatives types créées seront directement visibles par les utilisateurs. <br> Veuillez vous assurer que les informations sont correctes avant de les créer. <br> <em>Une fois le premier type d'initiative créé, cela ne pourra plus être modifié.</em>
             settings: Paramètres
             title: Informations générales
       pages:
