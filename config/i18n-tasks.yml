@@ -99,6 +99,7 @@ ignore_missing:
  - activemodel.errors.models.questionnaire.request_invalid
  - decidim.admin.menu.admin_accountability
  - layouts.decidim.footer.download_open_data
+ - decidim.initiatives.admin.initiatives_types.new.{title,create}
 
 # Consider these keys used:
 ignore_unused:

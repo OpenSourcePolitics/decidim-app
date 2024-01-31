@@ -1,0 +1,13 @@
+<% add_decidim_page_title(t(".title")) %>
+<h2 class="process-title-summary">
+  <%= t ".title" %>
+</h2>
+
+<%= decidim_form_for(@form, html: { class: "form new_initiatives_types" }) do |f| %>
+  <%= render partial: "form", object: f %>
+
+  <p class="callout warning"><%== t("decidim.initiatives.admin.initiatives.form.new.warning") %></p>
+  <div class="button--double form-general-submit">
+    <%= f.submit t(".create") %>
+  </div>
+<% end %>
