@@ -14,6 +14,15 @@ GIT
       decidim-core (~> 0.26.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git
+  revision: a105c5815be7f1ca18cd827b5a475318ada08dfb
+  branch: release/0.26-stable
+  specs:
+    decidim-half_signup (0.26.0)
+      countries (~> 5.1, >= 5.1.2)
+      decidim-core (~> 0.26.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
   revision: 4e6b7a1a5fcfa0661ba93d1bedb2e09da66d5326
   branch: release/0.26-stable
@@ -24,6 +33,15 @@ GIT
       decidim-dev (>= 0.25.0, < 0.27)
       rgeo (~> 2.4)
       rgeo-proj4 (~> 3.1)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-ptp.git
+  revision: 6148a817251256d6f536f1f3478c8be895a518b0
+  branch: feature/0.26/zip-code-voting
+  specs:
+    decidim-budgets_booth (0.26.0)
+      decidim-budgets (~> 0.26.0)
+      decidim-core (~> 0.26.0)
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
@@ -228,6 +246,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
+    countries (5.7.1)
+      unaccent (~> 0.3)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -564,7 +584,7 @@ GEM
       bindata
       faraday (~> 2.0)
       faraday-follow_redirects
-    jwt (2.7.1)
+    jwt (2.5.0)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -938,6 +958,7 @@ GEM
     tzinfo (1.2.11)
       thread_safe (~> 0.1)
     uber (0.1.0)
+    unaccent (0.4.0)
     unicode-display_width (1.8.0)
     valid_email2 (2.3.1)
       activemodel (>= 3.2)
@@ -1011,12 +1032,14 @@ DEPENDENCIES
   climate_control (~> 1.2)
   dalli
   decidim (~> 0.26.0)
+  decidim-budgets_booth!
   decidim-cache_cleaner
   decidim-conferences (~> 0.26.0)
   decidim-decidim_awesome
   decidim-dev (~> 0.26.0)
   decidim-friendly_signup!
   decidim-gallery
+  decidim-half_signup!
   decidim-homepage_interactive_map!
   decidim-ludens!
   decidim-phone_authorization_handler!

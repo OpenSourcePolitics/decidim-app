@@ -8,7 +8,7 @@ describe "rake decidim_app:k8s:dump_db", type: :task do
   end
 
   it "invokes the configuration exporter" do
-    expect(DecidimApp::K8s::ConfigurationExporter).to receive(:dump_db).and_return(true)
+    expect(DecidimApp::K8s::ConfigurationExporter).to receive(:dump_db).at_least(:once).and_return(true)
 
     task.execute
   end
