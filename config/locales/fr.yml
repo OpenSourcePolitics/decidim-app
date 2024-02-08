@@ -2,6 +2,8 @@
 fr:
   activemodel:
     attributes:
+      attachment:
+        documents: ajouter un document
       initiative:
         offline_votes_for_scope: Signatures en personne pour %{scope_name}
       osp_authorization_handler:
