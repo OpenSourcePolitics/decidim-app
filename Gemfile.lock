@@ -26,6 +26,16 @@ GIT
       rgeo-proj4 (~> 3.1)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers
+  revision: 65ea83227f99d0f3d6237f98334ecc914a2a5597
+  specs:
+    decidim-survey_multiple_answers (0.26.2)
+      decidim-admin (>= 0.26.0, < 0.28.0)
+      decidim-core (>= 0.26.0, < 0.28.0)
+      decidim-forms (>= 0.26.0, < 0.28.0)
+      decidim-surveys (>= 0.26.0, < 0.28.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
   revision: 488cc8827845ec1c5266aa499df2ebf9b20e02a3
   branch: release/0.26-stable
@@ -411,11 +421,6 @@ GEM
       decidim-proposals (= 0.26.7)
     decidim-spam_detection (3.1.0)
       decidim-core (~> 0.26.0)
-    decidim-survey_multiple_answers (0.26.1)
-      decidim-admin (>= 0.26.0, < 0.28.0)
-      decidim-core (>= 0.26.0, < 0.28.0)
-      decidim-forms (>= 0.26.0, < 0.28.0)
-      decidim-surveys (>= 0.26.0, < 0.28.0)
     decidim-surveys (0.26.7)
       decidim-core (= 0.26.7)
       decidim-forms (= 0.26.7)
@@ -1021,7 +1026,7 @@ DEPENDENCIES
   decidim-ludens!
   decidim-phone_authorization_handler!
   decidim-spam_detection
-  decidim-survey_multiple_answers
+  decidim-survey_multiple_answers!
   decidim-templates (~> 0.26.0)
   decidim-term_customizer!
   deepl-rb
@@ -1057,4 +1062,4 @@ RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.4.9
+   2.4.22
