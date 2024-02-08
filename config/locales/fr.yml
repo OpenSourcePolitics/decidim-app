@@ -12,6 +12,8 @@ fr:
         postal_code: Code postal
       participatory_process:
         private_space: Espace privé
+      participatory_space_private_user_csv_import:
+        file: importer un fichier d'utilisateurs
   decidim:
     admin:
       menu:
