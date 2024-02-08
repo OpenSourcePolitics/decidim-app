@@ -36,12 +36,12 @@
       class: BackupJob
       queue: backups
     SendNotificationMailDaily:
-      cron: '0 5 0 * * *' # Run at 00:05
+      cron: '0 0 7 * * *' # Run at 07:00AM every days
       class: NotificationsDigestMailJob
       queue: mailers
       args: :daily
     SendNotificationMailWeekly:
-      cron: '0 5 0 * * 6' # Run at 00:05 on Saturday
+      cron: '0 0 8 * * 2' # Run at 08:00AM on Tuesday
       class: NotificationsDigestMailJob
       queue: mailers
       args: :weekly
