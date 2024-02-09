@@ -2,6 +2,8 @@
 en:
   activemodel:
     attributes:
+      attachment:
+        documents: add a document
       initiative:
         offline_votes_for_scope: In-person signatures for %{scope_name}
       osp_authorization_handler:
@@ -10,6 +12,8 @@ en:
         postal_code: Postal code
       participatory_process:
         private_space: Private space
+      participatory_space_private_user_csv_import:
+        file: importing file
   decidim:
     admin:
       participatory_space_private_users:

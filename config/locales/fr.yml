@@ -2,6 +2,8 @@
 fr:
   activemodel:
     attributes:
+      attachment:
+        documents: ajouter un document
       initiative:
         offline_votes_for_scope: Signatures en personne pour %{scope_name}
       osp_authorization_handler:
@@ -10,6 +12,8 @@ fr:
         postal_code: Code postal
       participatory_process:
         private_space: Espace privé
+      participatory_space_private_user_csv_import:
+        file: importer un fichier d'utilisateurs
   decidim:
     admin:
       menu:

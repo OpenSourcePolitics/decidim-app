@@ -130,4 +130,6 @@ ignore_unused:
   - decidim.anonymous_user
   - decidim.events.initiatives.initiative_answered.*
   - decidim.initiatives.pages.home.highlighted_initiatives.*
+  - activemodel.attributes.attachment.documents
+  - activemodel.attributes.participatory_space_private_user_csv_import.file
 
