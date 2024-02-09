@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_12_152044) do
+ActiveRecord::Schema.define(version: 2024_02_06_102830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -341,6 +341,7 @@ ActiveRecord::Schema.define(version: 2023_06_12_152044) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "decidim_scope_id"
+    t.string "main_image"
     t.index ["decidim_component_id"], name: "index_decidim_budgets_budgets_on_decidim_component_id"
     t.index ["decidim_scope_id"], name: "index_decidim_budgets_budgets_on_decidim_scope_id"
   end
@@ -380,6 +381,18 @@ ActiveRecord::Schema.define(version: 2023_06_12_152044) do
     t.integer "follows_count", default: 0, null: false
     t.index ["decidim_budgets_budget_id"], name: "index_decidim_budgets_projects_on_decidim_budgets_budget_id"
     t.index ["decidim_scope_id"], name: "index_decidim_budgets_projects_on_decidim_scope_id"
+  end
+
+  create_table "decidim_budgets_user_data", force: :cascade do |t|
+    t.jsonb "metadata"
+    t.boolean "affirm_statements_are_correct", default: false
+    t.bigint "decidim_component_id", null: false
+    t.bigint "decidim_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["decidim_component_id", "decidim_user_id"], name: "decidim_budgets_user_data_unique_user_and_component", unique: true
+    t.index ["decidim_component_id"], name: "index_decidim_budgets_user_data_on_decidim_component_id"
+    t.index ["decidim_user_id"], name: "index_decidim_budgets_user_data_on_decidim_user_id"
   end
 
   create_table "decidim_calendar_external_events", force: :cascade do |t|
@@ -836,6 +849,16 @@ ActiveRecord::Schema.define(version: 2023_06_12_152044) do
     t.string "badge_name", null: false
     t.integer "value", default: 0, null: false
     t.index ["user_id"], name: "index_decidim_gamification_badge_scores_on_user_id"
+  end
+
+  create_table "decidim_half_signup_auth_settings", force: :cascade do |t|
+    t.boolean "enable_partial_sms_signup", default: false
+    t.boolean "enable_partial_email_signup", default: false
+    t.string "slug"
+    t.bigint "decidim_organization_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["decidim_organization_id"], name: "index_half_signup_auth_settings_on_organization_id"
   end
 
   create_table "decidim_hashtags", force: :cascade do |t|
@@ -1792,6 +1815,8 @@ ActiveRecord::Schema.define(version: 2023_06_12_152044) do
     t.boolean "email_on_moderations", default: true
     t.integer "follows_count", default: 0, null: false
     t.boolean "enable_ludens"
+    t.string "phone_number"
+    t.string "phone_country"
     t.index ["confirmation_token"], name: "index_decidim_users_on_confirmation_token", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_users_on_decidim_organization_id"
     t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false) AND ((type)::text = 'Decidim::User'::text))"
@@ -1922,6 +1947,7 @@ ActiveRecord::Schema.define(version: 2023_06_12_152044) do
   add_foreign_key "decidim_debates_debates", "decidim_scopes"
   add_foreign_key "decidim_editor_images", "decidim_organizations"
   add_foreign_key "decidim_editor_images", "decidim_users", column: "decidim_author_id"
+  add_foreign_key "decidim_half_signup_auth_settings", "decidim_organizations"
   add_foreign_key "decidim_identities", "decidim_organizations"
   add_foreign_key "decidim_newsletters", "decidim_users", column: "author_id"
   add_foreign_key "decidim_participatory_process_steps", "decidim_participatory_processes"
