@@ -20,11 +20,11 @@
 :scheduler:
   :schedule:
     CalculateAllMetrics:
-      cron: '0 9 0 * * *' # Run at 00:09
+      cron: '0 <%= Random.rand(9..59) %> <%= Random.rand(0..4) %> * * *' # Run randomly between 00:09 and 04:59
       class: CalculateAllMetricsJob
       queue: scheduled
     PreloadOpenData:
-      cron: '0 0 1 * * *' # Run at 01:00
+      cron: '0 <%= Random.rand(10..59) %> <%= Random.rand(0..4) %> * * *' # Run randomly between 00:10 and 04:59
       class: PreloadOpenDataJob
       queue: scheduled
     DetectSpamUsers:
@@ -32,7 +32,7 @@
       class: Decidim::SpamDetection::MarkUsersJob
       queue: scheduled
     Backup:
-      cron: '0 0 4 * * *' # Run at 04:00
+      cron: '0 <%= Random.rand(0..59) %> <%= Random.rand(2..3) %> * * *' # Run randomly between 02:00 and 03:59
       class: BackupJob
       queue: backups
     SendNotificationMailDaily:
