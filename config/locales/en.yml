@@ -75,12 +75,12 @@ en:
     initiatives:
       admin:
         initiatives:
-          index:
-            warning: Initiatives are not used for now. When you create an initiative type, it will be displayed in front-office.
           form:
             attachments: Attachments
             settings: Settings
             title: General information
+          index:
+            warning: Initiatives are not used for now. When you create an initiative type, it will be displayed in front-office.
       pages:
         home:
           highlighted_initiatives:
