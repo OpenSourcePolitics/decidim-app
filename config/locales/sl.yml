@@ -22,7 +22,7 @@ sl:
       decidim/proposals/proposal/other: Zamisel
   date:
     abbr_month_names:
-    - 
+    -
     - Jan
     - Feb
     - Mar
@@ -36,7 +36,7 @@ sl:
     - Nov
     - Dec
     month_names:
-    - 
+    -
     - Januar
     - Februar
     - Marec

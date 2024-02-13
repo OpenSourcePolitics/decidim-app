@@ -20,7 +20,7 @@ et:
       decidim/proposals/proposal/other: Idee
   date:
     abbr_month_names:
-    - 
+    -
     - jaan.
     - veebr.
     - märts
@@ -34,7 +34,7 @@ et:
     - nov.
     - dets.
     month_names:
-    - 
+    -
     - jaanuar
     - veebruar
     - märts

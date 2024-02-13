@@ -20,7 +20,7 @@ el:
       decidim/proposals/proposal/other: Ιδέα
   date:
     abbr_month_names:
-    - 
+    -
     - Ιαν
     - Φεβ
     - Μάρ
@@ -34,7 +34,7 @@ el:
     - Νοέ
     - Δεκ
     month_names:
-    - 
+    -
     - Ιανουάριος
     - Φεβρουάριος
     - Μάρτιος

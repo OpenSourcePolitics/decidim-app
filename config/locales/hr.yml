@@ -20,7 +20,7 @@ hr:
       decidim/proposals/proposal/other: Ideja
   date:
     abbr_month_names:
-    - 
+    -
     - Sij.
     - Velj.
     - Ožu.
@@ -34,7 +34,7 @@ hr:
     - Stu.
     - Pro.
     month_names:
-    - 
+    -
     - Siječanj
     - Veljača
     - Ožujak
