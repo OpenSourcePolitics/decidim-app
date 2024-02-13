@@ -18,7 +18,7 @@ bg:
       decidim/proposals/proposal/other: Идея
   date:
     abbr_month_names:
-    -
+    - 
     - Ян
     - Фев
     - Март
@@ -32,7 +32,7 @@ bg:
     - Ноем
     - Дек
     month_names:
-    -
+    - 
     - Януари
     - Февруари
     - Март

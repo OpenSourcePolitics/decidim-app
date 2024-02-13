@@ -21,7 +21,7 @@ ga:
         created_at: Postáladh é an
   date:
     abbr_month_names:
-    -
+    - 
     - Ean
     - Feabh
     - Márta
@@ -35,7 +35,7 @@ ga:
     - Samh
     - Noll
     month_names:
-    -
+    - 
     - Eanáir
     - Feabhra
     - Márta

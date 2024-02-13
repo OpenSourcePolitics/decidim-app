@@ -77,12 +77,12 @@ fr:
     initiatives:
       admin:
         initiatives:
+          index:
+            warning: L'espace Initiative n'est pas utilisé. Pour activer les initiatives, veuillez contacter l'administrateur.
           form:
             attachments: Pièces jointes
             settings: Paramètres
             title: Informations générales
-          index:
-            warning: L'espace Initiative n'est pas utilisé. Pour activer les initiatives, veuillez contacter l'administrateur.
       pages:
         home:
           highlighted_initiatives:

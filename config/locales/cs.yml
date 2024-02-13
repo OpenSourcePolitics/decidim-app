@@ -22,7 +22,7 @@ cs:
       decidim/proposals/proposal/other: Nápad
   date:
     abbr_month_names:
-    -
+    - 
     - led
     - únor
     - bře
@@ -36,7 +36,7 @@ cs:
     - list
     - pros
     month_names:
-    -
+    - 
     - leden
     - únor
     - březen

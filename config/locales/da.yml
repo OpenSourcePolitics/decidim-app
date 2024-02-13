@@ -19,7 +19,7 @@ da:
       decidim/proposals/proposal/other: Idé
   date:
     abbr_month_names:
-    -
+    - 
     - Jan
     - Feb
     - Mar
@@ -33,7 +33,7 @@ da:
     - Nov
     - Dec
     month_names:
-    -
+    - 
     - Januar
     - Februar
     - Marts
