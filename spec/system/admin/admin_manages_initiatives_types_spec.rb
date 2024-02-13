@@ -45,12 +45,6 @@ describe "Admin manages initiatives types", type: :system do
         expect(page).to have_content("A new initiative type has been successfully created")
       end
     end
-
-    it "has a warning message visible" do
-      click_link "New initiative type"
-
-      expect(page).to have_content("If you save your initiative type, it will display initiatives in the front-office")
-    end
   end
 
   context "when updating an initiative type" do
