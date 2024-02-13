@@ -34,3 +34,6 @@ status:
 
 logs:
 	docker-compose -f docker-compose.local.yml logs app
+
+rebuild:
+	docker-compose -f docker-compose.local.yml up --build -d
