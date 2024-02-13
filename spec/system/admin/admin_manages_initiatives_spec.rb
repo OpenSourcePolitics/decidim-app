@@ -139,6 +139,7 @@ describe "Admin manages initiatives", type: :system do
         expect(page).to have_content("Initiatives are not used for now. When you create an initiative type, it will be displayed in front-office.")
       end
     end
+
     it_behaves_like "paginating a collection"
   end
 end
