@@ -1,6 +1,6 @@
 <% add_decidim_page_title(t("decidim.admin.titles.initiatives")) %>
 
-<% if @initiatives.count.positive? %>
+<% unless @initiatives.count.positive? %>
   <p class="callout warning"><%== t("decidim.initiatives.admin.initiatives.index.warning") %></p>
 <% end %>
 <div class="card with-overflow" id="initiatives">

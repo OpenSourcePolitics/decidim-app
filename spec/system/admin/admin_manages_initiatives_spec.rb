@@ -132,10 +132,12 @@ describe "Admin manages initiatives", type: :system do
     end
 
     context "when no initiatives" do
-      it "displays a warning message" do
+      before do
         Decidim::Initiative.destroy_all
         visit decidim_admin_initiatives.initiatives_path
+      end
 
+      it "displays a warning message" do
         expect(page).to have_content("Initiatives are not used for now. When you create an initiative type, it will be displayed in front-office.")
       end
     end
