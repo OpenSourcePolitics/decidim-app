@@ -82,7 +82,7 @@ fr:
             settings: Paramètres
             title: Informations générales
           index:
-            warning: L'espace Initiative n'est pas utilisé. Pour activer les initiatives, veuillez contacter l'administrateur.
+            warning: Attention, lorsque vous créez un type de pétition, ce dernier est automatiquement visible pour les utilisateurs.
       pages:
         home:
           highlighted_initiatives:
