@@ -75,8 +75,7 @@ describe "Locales", type: :system do
     context "with a signed in user" do
       let(:user) { create(:user, :confirmed, locale: "fr", organization: organization) }
 
-      it "uses the user's locale" do
-        # Make sure the user is authenticated
+      it "displays content based on user's locale" do
         expect(page).not_to have_content("Sign in")
         expect(page).not_to have_content("S'identifier")
         expect(page).to have_content("Accueil")
