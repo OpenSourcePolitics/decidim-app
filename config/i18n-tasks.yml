@@ -100,6 +100,11 @@ ignore_missing:
  - decidim.admin.menu.admin_accountability
  - layouts.decidim.footer.download_open_data
  - decidim.initiatives.admin.initiatives_types.new.{title,create}
+ - decidim.initiatives.admin.initiatives.index.*
+ - decidim.initiatives.actions.answer
+ - decidim.admin.titles.initiatives
+ - decidim.admin.models.initiatives.fields.*
+ - decidim.admin.actions.configure
 
 # Consider these keys used:
 ignore_unused:
