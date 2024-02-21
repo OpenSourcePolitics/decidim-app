@@ -53,7 +53,7 @@ module DevelopmentApp
       require "extends/models/decidim/budgets/project_extend"
 
       Decidim::GraphiQL::Rails.config.tap do |config|
-        config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
+        config.initial_query = "{\n  deployment {\n    decidim_version\n  }\n}".html_safe
       end
     end
 
