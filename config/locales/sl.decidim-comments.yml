@@ -62,7 +62,7 @@ sl:
             offensive: Vsebuje rasizem, seksizem, obrekovanje, osebne napade, grožnje s smrtjo, prošnje za samomor ali kakršne koli oblike sovražnega govora.
             spam: Vsebuje klikvabe, oglaševanje, prevare ali skriptne bote.
           title: Naznani neprimerno vsebino
-        show_replies: Pokaži %{replies_count} odgovorov
+        show_replies: Pokaži %{count} odgovorov
         single_comment_link_title: Pokaži povezavo
       comment_order_selector:
         order:
