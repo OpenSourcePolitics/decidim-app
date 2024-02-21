@@ -2,12 +2,18 @@
 fr:
   activemodel:
     attributes:
+      attachment:
+        documents: ajouter un document
+      initiative:
+        offline_votes_for_scope: Signatures en personne pour %{scope_name}
       osp_authorization_handler:
         birthday: Date de naissance
         document_number: Numéro unique
         postal_code: Code postal
       participatory_process:
         private_space: Espace privé
+      participatory_space_private_user_csv_import:
+        file: importer un fichier d'utilisateurs
   decidim:
     admin:
       menu:
@@ -50,6 +56,12 @@ fr:
           email_outro: Vous avez reçu cette notification parce que vous avez commencé à voter sur la concertation "%{participatory_space_title}"
           email_subject: Votre vote est toujours en attente sur la concertation %{participatory_space_title}
           notification_title: Votre vote pour le budget <a href="%{resource_path}">%{resource_title}</a> attend d'être finalisé sur la concertation %{participatory_space_title}
+      initiatives:
+        initiative_answered:
+          email_intro: La pétition "%{resource_title}" a reçu une réponse.
+          email_outro: Vous avez reçu cette notification parce que vous suivez la pétition "%{resource_title}".
+          email_subject: La pétition "%{resource_title}" a reçu une réponse.
+          notification_title: La pétition <a href="%{resource_path}">%{resource_title}</a> a reçu une réponse.
       users:
         user_officialized:
           email_intro: Le participant %{name} (%{nickname}) a été officialisé.
@@ -63,6 +75,14 @@ fr:
           email_subject: Un utilisateur a tenté de se faire vérifier avec les données d'un utilisateur représenté
           notification_title: Le participant <a href="%{resource_path}">%{resource_title}</a> a tenté de se faire vérifier avec les données de l'utilisateur représenté <a href="%{managed_user_path}">%{managed_user_name}</a>.
     initiatives:
+      admin:
+        initiatives:
+          form:
+            attachments: Pièces jointes
+            settings: Paramètres
+            title: Informations générales
+          index:
+            warning: Attention, lorsque vous créez un type de pétition, ce dernier est automatiquement visible pour les utilisateurs.
       pages:
         home:
           highlighted_initiatives:

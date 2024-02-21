@@ -1,4 +1,5 @@
 :concurrency: 5
+:max_retries: 5
 :queues:
   - mailers
   - default
@@ -15,15 +16,16 @@
   - reminders
   - active_storage_analysis
   - active_storage_purge
+  - initiatives
 
 :scheduler:
   :schedule:
     CalculateAllMetrics:
-      cron: '0 9 0 * * *' # Run at 00:09
+      cron: '0 <%= Random.rand(9..59) %> <%= Random.rand(0..4) %> * * *' # Run randomly between 00:09 and 04:59
       class: CalculateAllMetricsJob
       queue: scheduled
     PreloadOpenData:
-      cron: '0 0 1 * * *' # Run at 01:00
+      cron: '0 <%= Random.rand(10..59) %> <%= Random.rand(0..4) %> * * *' # Run randomly between 00:10 and 04:59
       class: PreloadOpenDataJob
       queue: scheduled
     DetectSpamUsers:
@@ -31,16 +33,28 @@
       class: Decidim::SpamDetection::MarkUsersJob
       queue: scheduled
     Backup:
-      cron: '0 0 4 * * *' # Run at 04:00
+      cron: '0 <%= Random.rand(0..59) %> <%= Random.rand(2..3) %> * * *' # Run randomly between 02:00 and 03:59
       class: BackupJob
       queue: backups
     SendNotificationMailDaily:
-      cron: '0 5 0 * * *' # Run at 00:05
+      cron: '0 0 7 * * *' # Run at 07:00AM every days
       class: NotificationsDigestMailJob
       queue: mailers
       args: :daily
     SendNotificationMailWeekly:
-      cron: '0 5 0 * * 6' # Run at 00:05 on Saturday
+      cron: '0 0 8 * * 2' # Run at 08:00AM on Tuesday
       class: NotificationsDigestMailJob
       queue: mailers
       args: :weekly
+    CheckPublishedInitiatives:
+      cron: '0 1 * * *'
+      class: CheckPublishedInitiatives
+      queue: initiatives
+    CheckValidatingInitiatives:
+      cron: '0 1 * * *'
+      class: CheckValidatingInitiatives
+      queue: initiatives
+    NotifyProgressInitiatives:
+      cron: '0 1 * * *'
+      class: NotifyProgressInitiatives
+      queue: initiatives

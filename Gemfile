@@ -18,14 +18,14 @@ gem "decidim-cache_cleaner"
 gem "decidim-decidim_awesome"
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
                                                                 branch: DECIDIM_BRANCH
-gem "decidim-extra_user_fields", git: "https://github.com/PopulateTools/decidim-module-extra_user_fields.git", branch: "extra-fields-0-27"
+gem "decidim-extra_user_fields", git: "https://github.com/PopulateTools/decidim-module-extra_user_fields.git", branch: "release/0.27-stable"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
-# TODO: Bump to 0.27.0 when released
-# gem "decidim-gallery"
+gem "decidim-gallery", git: "https://github.com/OpenSourcePolitics/decidim-module-gallery.git", branch: "fix/nokogiri_deps"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
 gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens.git", branch: DECIDIM_BRANCH
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: DECIDIM_BRANCH
 gem "decidim-spam_detection"
+gem "decidim-survey_multiple_answers", git: "https://github.com/alecslupu-pfa/decidim-module-survey_multiple_answers"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "fix/email_with_precompile"
 
 # Omniauth gems
@@ -34,6 +34,7 @@ gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publ
 
 # Default
 gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
+gem "activerecord-session_store"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", "~> 1.4"
 gem "deepl-rb", require: "deepl"
@@ -42,6 +43,7 @@ gem "dotenv-rails", "~> 2.7"
 gem "faker", "~> 2.14"
 gem "fog-aws"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
+gem "letter_opener_web", "~> 1.3"
 gem "nokogiri", "1.13.4"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "puma", ">= 5.5.1"
@@ -49,7 +51,6 @@ gem "rack-attack", "~> 6.6"
 gem "sys-filesystem"
 
 group :development do
-  gem "letter_opener_web", "~> 1.3"
   gem "listen", "~> 3.1"
   gem "rubocop-faker"
   gem "spring", "~> 2.0"
@@ -74,6 +75,5 @@ group :production do
   gem "sentry-ruby"
   gem "sentry-sidekiq"
   gem "sidekiq", "~> 6.0"
-  gem "sidekiq_alive", "~> 2.2"
   gem "sidekiq-scheduler", "~> 5.0"
 end

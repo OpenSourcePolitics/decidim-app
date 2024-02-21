@@ -1,35 +1,39 @@
-# Starts with production configuration
-local-prod:
-	docker-compose up -d
+run: up
+	@make create-seeds
 
-# Starts with development configuration
-# TODO: Fix seeds for local-dev make command
-local-dev:
-	docker-compose -f docker-compose.dev.yml up -d
-	@make create-database
-	@make run-migrations
-	#@make create-seeds
+up:
+	docker-compose -f docker-compose.local.yml up --build -d
+	@make setup-database
 
 # Stops containers and remove volumes
 teardown:
-	docker-compose down -v --rmi all
+	docker-compose -f docker-compose.local.yml down -v --rmi all
 
-# Starts containers and restore dump
-local-restore:
-	@make create-database
-	@make -i restore-dump
-	@make run-migrations
-	@make start
-
-# Create database
 create-database:
-	docker-compose run app bundle exec rails db:create
-# Run migrations
-run-migrations:
-	docker-compose run app bundle exec rails db:migrate
+	docker-compose -f docker-compose.local.yml exec app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/bundle exec rake db:create'
+
+setup-database: create-database
+	docker-compose -f docker-compose.local.yml exec app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/bundle exec rake db:migrate'
+
 # Create seeds
 create-seeds:
-	docker-compose exec -e RAILS_ENV=development app /bin/bash -c '/usr/local/bundle/bin/bundle exec rake db:seed'
+	docker-compose -f docker-compose.local.yml exec app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/bundle exec rake db:schema:load db:seed'
+
 # Restore dump
 restore-dump:
 	bundle exec rake restore_dump
+
+shell:
+	docker-compose -f docker-compose.local.yml exec app /bin/bash
+
+restart:
+	docker-compose -f docker-compose.local.yml up -d
+
+status:
+	docker-compose -f docker-compose.local.yml ps
+
+logs:
+	docker-compose -f docker-compose.local.yml logs app
+
+rebuild:
+	docker-compose -f docker-compose.local.yml up --build -d

@@ -2,12 +2,18 @@
 en:
   activemodel:
     attributes:
+      attachment:
+        documents: add a document
+      initiative:
+        offline_votes_for_scope: In-person signatures for %{scope_name}
       osp_authorization_handler:
         birthday: Birthday
         document_number: Unique number
         postal_code: Postal code
       participatory_process:
         private_space: Private space
+      participatory_space_private_user_csv_import:
+        file: importing file
   decidim:
     admin:
       participatory_space_private_users:
@@ -48,6 +54,12 @@ en:
           email_outro: You have received this notification because you are participating in "%{participatory_space_title}"
           email_subject: Your vote is still pending in %{participatory_space_title}
           notification_title: The vote on budget <a href="%{resource_path}">%{resource_title}</a> is still waiting for your confirmation in %{participatory_space_title}
+      initiatives:
+        initiative_answered:
+          email_intro: The initiative "%{resource_title}" has been answered.
+          email_outro: You have received this notification because you are following the initiative "%{resource_title}".
+          email_subject: Initiative "%{resource_title}" has been answered
+          notification_title: The initiative <a href="%{resource_path}">%{resource_title}</a> has been answered.
       users:
         user_officialized:
           email_intro: Participant %{name} (%{nickname}) has been officialized.
@@ -61,6 +73,14 @@ en:
           email_subject: Failed verification attempt against a managed participant
           notification_title: The participant <a href="%{resource_path}">%{resource_title}</a> has tried to verify themself with the data of the managed participant <a href="%{managed_user_path}">%{managed_user_name}</a>.
     initiatives:
+      admin:
+        initiatives:
+          form:
+            attachments: Attachments
+            settings: Settings
+            title: General information
+          index:
+            warning: Initiatives are not used for now. When you create an initiative type, it will be displayed in front-office.
       pages:
         home:
           highlighted_initiatives:
