@@ -98,6 +98,13 @@ ignore_missing:
  - decidim.forms.questionnaires.question.max_choices
  - activemodel.errors.models.questionnaire.request_invalid
  - decidim.admin.menu.admin_accountability
+ - layouts.decidim.footer.download_open_data
+ - decidim.initiatives.admin.initiatives_types.new.{title,create}
+ - decidim.initiatives.admin.initiatives.index.*
+ - decidim.initiatives.actions.answer
+ - decidim.admin.titles.initiatives
+ - decidim.admin.models.initiatives.fields.*
+ - decidim.admin.actions.configure
 
 # Consider these keys used:
 ignore_unused:
@@ -120,9 +127,14 @@ ignore_unused:
   - decidim.system.organizations.omniauth_settings.publik.*
   - decidim.verifications.authorizations.create.*
   - decidim.verifications.authorizations.first_login.actions.*
-  - decidim.budgets.admin.reminders.orders.*
   - rack_attack.too_many_requests.*
   - decidim.account.destroy.success
   - decidim.account.destroy.error
   - decidim.proposals.collaborative_drafts.new.*
   - decidim.admin.menu.admin_accountability
+  - decidim.anonymous_user
+  - decidim.events.initiatives.initiative_answered.*
+  - decidim.initiatives.pages.home.highlighted_initiatives.*
+  - activemodel.attributes.attachment.documents
+  - activemodel.attributes.participatory_space_private_user_csv_import.file
+

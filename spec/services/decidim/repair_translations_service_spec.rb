@@ -24,7 +24,9 @@ describe Decidim::RepairTranslationsService do
                                                                      Decidim::Sortitions::Sortition,
                                                                      Decidim::Blogs::Post,
                                                                      Decidim::Conference,
-                                                                     Decidim::Comments::Comment
+                                                                     Decidim::Comments::Comment,
+                                                                     Decidim::Initiative,
+                                                                     Decidim::InitiativesType
                                                                    ])
       expect(subject.send(:translatable_resources)).not_to include(Decidim::DummyResources::CoauthorableDummyResource)
     end

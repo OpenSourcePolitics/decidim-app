@@ -44,7 +44,7 @@ namespace :decidim_app do
     task upgrade: :environment do
       puts "Running db:migrate"
       Rake::Task["db:migrate"].invoke
-      puts "Running decidim:repaire:url_in_content"
+      puts "Running decidim:repair:url_in_content"
       Rake::Task["decidim:repair:url_in_content"].invoke
       puts "Running decidim:repair:translations"
       Rake::Task["decidim:repair:translations"].invoke
@@ -57,7 +57,7 @@ namespace :decidim_app do
 
     desc "usage: bundle exec rails k8s:export_configuration IMAGE=<docker_image_ref>"
     task export_configuration: :environment do
-      image = ENV["IMAGE"]
+      image = ENV.fetch("IMAGE", nil)
       raise "You must specify a docker image, usage: bundle exec rails k8s:export_configuration IMAGE=<image_ref>" if image.blank?
 
       DecidimApp::K8s::ConfigurationExporter.export!(image)
@@ -65,9 +65,11 @@ namespace :decidim_app do
 
     desc "Create install or reload install with path='path/to/external_install_configuration.yml'"
     task external_install_or_reload: :environment do
-      raise "You must specify a path to an external install configuration, path='path/to/external_install_configuration.yml'" if ENV["path"].blank? || !File.exist?(ENV["path"])
+      raise "You must specify a path to an external install configuration, path='path/to/external_install_configuration.yml'" if ENV["path"].blank? || !File.exist?(ENV.fetch(
+                                                                                                                                                                      "path", nil
+                                                                                                                                                                    ))
 
-      DecidimApp::K8s::Manager.run(ENV["path"])
+      DecidimApp::K8s::Manager.run(ENV.fetch("path", nil))
     end
   end
 end

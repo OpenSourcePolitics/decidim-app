@@ -13,6 +13,7 @@ scaleway:
   secret_access_key: <%= Rails.application.secrets.dig(:scaleway, :token) %>
   region: fr-par
   bucket: <%= Rails.application.secrets.dig(:scaleway, :bucket_name) %>
+  force_path_style: true
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:

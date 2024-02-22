@@ -94,6 +94,9 @@ Rails/Validation:
   Include:
     - app/models/**/*.rb
 
+Rails/CompactBlank:
+  Enabled: false
+
 Rails/BulkChangeTable:
   Exclude:
     - db/**/*

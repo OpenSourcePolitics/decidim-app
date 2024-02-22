@@ -197,12 +197,12 @@ namespace :import do
                      Logger.new("log/import-user-#{Time.zone.now.strftime "%Y-%m-%d-%H:%M:%S"}.log")
                    end
 
-    display_help unless ENV["FILE"] && ENV["ORG"] && ENV["ADMIN"] && ENV["PROCESS"]
-    @file = ENV["FILE"]
+    display_help unless ENV.fetch("FILE", nil) && ENV.fetch("ORG", nil) && ENV.fetch("ADMIN", nil) && ENV.fetch("PROCESS", nil)
+    @file = ENV.fetch("FILE", nil)
     @org = ENV["ORG"].to_i
     @admin = ENV["ADMIN"].to_i
     @process = ENV["PROCESS"].to_i
-    @auth_handler = ENV["AUTH_HANDLER"]
+    @auth_handler = ENV.fetch("AUTH_HANDLER", nil)
 
     validate_input
 

@@ -16,6 +16,7 @@ AllCops:
     - "vendor/**/*"
     - "node_modules/**/*"
     - "db/schema.rb"
+    - "db/migrate/*.rb"
     - "bin/*"
   # Default formatter will be used if no -f/--format option is given.
   DefaultFormatter: progress
@@ -67,12 +68,7 @@ AllCops:
   # If a value is specified for TargetRubyVersion then it is used.
   # Else if .ruby-version exists and it contains an MRI version it is used.
   # Otherwise we fallback to the oldest officially supported Ruby version (2.0).
-  TargetRubyVersion: 2.7
-
-  RSpec:
-    Patterns:
-      - "(?:^|/)spec/"
-      - "(?:^|/)test/"
+  TargetRubyVersion: 3.0
 
 Lint/SafeNavigationChain:
   Exclude:
@@ -286,6 +282,9 @@ Style/HashEachMethods:
 
 Style/HashLikeCase:
   MinBranchesCount: 5
+
+Style/OpenStructUse:
+  Enabled: false
 
 # Indentation of `when`.
 Layout/CaseIndentation:
@@ -1272,10 +1271,11 @@ RSpec/NamedSubject:
   Enabled: false
 
 RSpec/RepeatedExampleGroupDescription:
-  Enabled: false
+  Enabled: true
 
 RSpec/RepeatedExampleGroupBody:
-  Enabled: false
+  Enabled: true
+
 RSpec/VerifiedDoubles:
   Enabled: false
 

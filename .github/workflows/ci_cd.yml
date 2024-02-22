@@ -5,7 +5,7 @@ env:
   CI: "true"
   SIMPLECOV: "true"
   RSPEC_FORMAT: "documentation"
-  RUBY_VERSION: 2.7.5
+  RUBY_VERSION: 3.0.6
   RAILS_ENV: test
   NODE_VERSION: 16.9.1
   RUBYOPT: '-W:no-deprecated'
@@ -37,6 +37,22 @@ jobs:
         with:
           ruby_version: ${{ env.RUBY_VERSION }}
           node_version: ${{ env.NODE_VERSION }}
+  zeitwerk:
+    name: Check for Zeitwerk errors
+    runs-on: ubuntu-latest
+    if: "!startsWith(github.head_ref, 'chore/l10n')"
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - name: Check for Zeitwerk errors
+        run: |
+          bundle exec rails zeitwerk:check
   tests:
     strategy:
       fail-fast: false
@@ -105,6 +121,7 @@ jobs:
           path: ./tmp/assets_manifest.json
   system_tests:
     strategy:
+      fail-fast: false
       matrix:
         slice: [ "0-4", "1-4", "2-4", "3-4" ]
     name: System tests
@@ -197,52 +214,12 @@ jobs:
           database_username: ${{ env.DATABASE_USERNAME }}
           database_password: ${{ env.DATABASE_PASSWORD }}
           database_host: ${{ env.DATABASE_HOST }}
-  deploy_develop:
-    if: "github.ref == 'refs/heads/develop'"
-    needs: [lint, tests, system_tests, test_build]
-    name: Deploy develop branch on develop instance
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Ansible playbook
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.ANSIBLE_HOST }}
-          username: ${{ secrets.ANSIBLE_USERNAME }}
-          key: ${{ secrets.ANSIBLE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/develop.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
-  deploy_rc:
-    if: "github.ref == 'refs/heads/rc'"
-    needs: [lint, tests, system_tests, test_build]
-    name: Deploy rc branch on RC instance
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Ansible playbook
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.ANSIBLE_HOST }}
-          username: ${{ secrets.ANSIBLE_USERNAME }}
-          key: ${{ secrets.ANSIBLE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/rc.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
-  deploy_staging:
-    if: "github.ref == 'refs/heads/master'"
-    needs: [lint, tests, system_tests, test_build]
-    name: Deploy staging branch on staging instance
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Ansible playbook
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.ANSIBLE_HOST }}
-          username: ${{ secrets.ANSIBLE_USERNAME }}
-          key: ${{ secrets.ANSIBLE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: ansible-playbook -u ${{ secrets.ANSIBLE_USERNAME }} --private-key="~/.ssh/ansible-deploy/ansible-deploy" -i /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/inventories/staging.yml /home/${{ secrets.ANSIBLE_USERNAME }}/ansible/decidim/playbooks/update_decidim_app.yml
+          # We don't want to upload the image to the registry if the build fails, but we don't care when on a PR for speed reasons
+          push: ${{ github.ref != 'refs/heads/develop' || github.ref != 'refs/heads/master' }}
   build_and_push_image_dev:
-    name: Build and push image to Registry
     if: "github.ref == 'refs/heads/develop'"
-    needs: [lint, tests, system_tests, test_build]
+    name: Build and push image to Registry
+    needs: [ lint, zeitwerk, tests, system_tests, test_build ]
     runs-on: ubuntu-latest
     steps:
       - uses: OpenSourcePolitics/build-and-push-images-action@master
@@ -251,7 +228,7 @@ jobs:
           namespace: ${{ vars.REGISTRY_NAMESPACE }}
           password: ${{ secrets.TOKEN }}
           image_name: ${{ vars.IMAGE_NAME }}
-          tag: "develop"
+          tag: ${{ github.ref }}
   generate_release:
     name: Generate release
     needs: [lint, tests, system_tests, test_build]

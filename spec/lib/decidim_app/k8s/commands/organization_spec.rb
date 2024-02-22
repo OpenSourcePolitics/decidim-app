@@ -131,7 +131,7 @@ describe DecidimApp::K8s::Commands::Organization do
         expect(smtp_settings["address"]).to eq("address.smtp.org")
         expect(smtp_settings["port"]).to eq(8080)
         expect(smtp_settings["authentication"]).to eq("plain")
-        expect(smtp_settings["enable_starttls_auto"]).to eq(true)
+        expect(smtp_settings["enable_starttls_auto"]).to be(true)
         expect(Decidim::AttributeEncryptor.decrypt(smtp_settings["encrypted_password"])).to eq("password")
 
         omniauth_settings = organization.reload.omniauth_settings
@@ -139,7 +139,7 @@ describe DecidimApp::K8s::Commands::Organization do
         expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_client_id"])).to eq("12345")
         expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_client_secret"])).to eq("12345")
         expect(Decidim::AttributeEncryptor.decrypt(omniauth_settings["omniauth_settings_publik_site_url"])).to eq("https://example.com/")
-        expect(omniauth_settings["omniauth_settings_publik_enabled"]).to eq(true)
+        expect(omniauth_settings["omniauth_settings_publik_enabled"]).to be(true)
       end
 
       context "when organization is invalid" do

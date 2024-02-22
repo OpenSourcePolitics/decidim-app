@@ -48,7 +48,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
     context "when the host is not valid" do
       context "when it is not a valid url" do
         it "returns nil" do
-          expect(subject.get_redirection_target(123)).to eq(nil)
+          expect(subject.get_redirection_target(123)).to be_nil
         end
       end
 
@@ -57,7 +57,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
         let(:response_code) { 404 }
 
         it "returns nil" do
-          expect(subject.get_redirection_target("nothing.org")).to eq(nil)
+          expect(subject.get_redirection_target("nothing.org")).to be_nil
         end
       end
     end
@@ -67,7 +67,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
       let(:response_headers) { { "location" => "another_redirection.org" } }
 
       it "returns nil" do
-        expect(subject.get_redirection_target("redirection.org", 1)).to eq(nil)
+        expect(subject.get_redirection_target("redirection.org", 1)).to be_nil
       end
     end
 
@@ -75,7 +75,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
       [Errno::ECONNREFUSED, SocketError, Errno::EHOSTUNREACH].each do |error|
         it "returns nil" do
           stub_request(:get, target).to_raise(error)
-          expect(subject.get_redirection_target(secondary_hosts.first)).to eq(nil)
+          expect(subject.get_redirection_target(secondary_hosts.first)).to be_nil
         end
       end
     end
@@ -83,7 +83,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
 
   describe ".valid_secondary_host?" do
     it "returns true if the host is valid" do
-      expect(subject.valid_secondary_host?(host, secondary_hosts.first)).to eq(true)
+      expect(subject.valid_secondary_host?(host, secondary_hosts.first)).to be(true)
     end
 
     context "when host is not valid" do
@@ -91,7 +91,7 @@ describe DecidimApp::K8s::SecondaryHostsChecker do
       let(:response_code) { 404 }
 
       it "returns false" do
-        expect(subject.valid_secondary_host?(host, "nothing.org")).to eq(false)
+        expect(subject.valid_secondary_host?(host, "nothing.org")).to be(false)
       end
     end
   end

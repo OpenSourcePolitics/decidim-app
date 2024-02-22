@@ -128,7 +128,7 @@ describe Decidim::BackupService do
 
     it "stores the file path" do
       s = subject
-      expect(subject.send(:execute_backup_command, file_path, cmd)).to eq(true)
+      expect(subject.send(:execute_backup_command, file_path, cmd)).to be(true)
       expect(s.instance_variable_get(:@local_files)).to eq([file_path])
     end
 
@@ -137,7 +137,7 @@ describe Decidim::BackupService do
 
       it "doesn't stores the file path" do
         s = subject
-        expect(subject.send(:execute_backup_command, file_path, cmd)).to eq(false)
+        expect(subject.send(:execute_backup_command, file_path, cmd)).to be(false)
         expect(s.instance_variable_get(:@local_files)).to eq([])
       end
     end
@@ -351,10 +351,10 @@ describe Decidim::BackupService do
 
       it "calls all backup methods" do
         # rubocop:disable RSpec/SubjectStub
-        expect(subject).to receive(:backup_database).and_return(true)
-        expect(subject).to receive(:backup_uploads).and_return(true)
-        expect(subject).to receive(:backup_git).and_return(true)
-        expect(subject).to receive(:backup_env).and_return(true)
+        allow(subject).to receive(:backup_database).and_return(true)
+        allow(subject).to receive(:backup_uploads).and_return(true)
+        allow(subject).to receive(:backup_git).and_return(true)
+        allow(subject).to receive(:backup_env).and_return(true)
         # rubocop:enable RSpec/SubjectStub
         subject.create_backup_export
       end
@@ -365,7 +365,7 @@ describe Decidim::BackupService do
 
       it "calls backup_database method" do
         # rubocop:disable RSpec/SubjectStub
-        expect(subject).to receive(:backup_database).and_return(true)
+        allow(subject).to receive(:backup_database).and_return(true)
         expect(subject).not_to receive(:backup_uploads)
         expect(subject).not_to receive(:backup_git)
         expect(subject).not_to receive(:backup_env)
@@ -380,7 +380,7 @@ describe Decidim::BackupService do
       it "calls backup_uploads method" do
         # rubocop:disable RSpec/SubjectStub
         expect(subject).not_to receive(:backup_database)
-        expect(subject).to receive(:backup_uploads).and_return(true)
+        allow(subject).to receive(:backup_uploads).and_return(true)
         expect(subject).not_to receive(:backup_git)
         expect(subject).not_to receive(:backup_env)
         # rubocop:enable RSpec/SubjectStub
@@ -395,7 +395,7 @@ describe Decidim::BackupService do
         # rubocop:disable RSpec/SubjectStub
         expect(subject).not_to receive(:backup_database)
         expect(subject).not_to receive(:backup_uploads)
-        expect(subject).to receive(:backup_git).and_return(true)
+        allow(subject).to receive(:backup_git).and_return(true)
         expect(subject).not_to receive(:backup_env)
         # rubocop:enable RSpec/SubjectStub
         subject.create_backup_export
@@ -409,7 +409,7 @@ describe Decidim::BackupService do
           expect(subject).not_to receive(:backup_database)
           expect(subject).not_to receive(:backup_uploads)
           expect(subject).not_to receive(:backup_git)
-          expect(subject).to receive(:backup_env).and_return(true)
+          allow(subject).to receive(:backup_env).and_return(true)
           # rubocop:enable RSpec/SubjectStub
           subject.create_backup_export
         end
@@ -436,7 +436,7 @@ describe Decidim::BackupService do
         let(:s3sync) { true }
 
         it "returns true" do
-          expect(Decidim::S3SyncService).to receive(:run).and_return(true)
+          allow(Decidim::S3SyncService).to receive(:run).and_return(true)
           # rubocop:disable RSpec/SubjectStub
           expect(subject).not_to receive(:clean_local_files)
           # rubocop:enable RSpec/SubjectStub
@@ -448,7 +448,7 @@ describe Decidim::BackupService do
         let(:s3retention) { true }
 
         it "returns true" do
-          expect(Decidim::S3RetentionService).to receive(:run).and_return(true)
+          allow(Decidim::S3RetentionService).to receive(:run).and_return(true)
           # rubocop:disable RSpec/SubjectStub
           expect(subject).not_to receive(:clean_local_files)
           # rubocop:enable RSpec/SubjectStub
@@ -461,7 +461,7 @@ describe Decidim::BackupService do
 
         it "returns true" do
           # rubocop:disable RSpec/SubjectStub
-          expect(subject).to receive(:clean_local_files).and_return(true)
+          allow(subject).to receive(:clean_local_files).and_return(true)
           # rubocop:enable RSpec/SubjectStub
           expect(subject.execute).to be_truthy
         end

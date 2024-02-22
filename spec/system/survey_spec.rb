@@ -107,7 +107,10 @@ describe "Answer a survey", type: :system do
 
     it "shows image" do
       visit_component
+      # click_link "Change cookie settings"
+      # click_button "Accept all"
       expect(page).to have_selector("img[src='#{image_url}']")
+      # With cookie banner iframe is deactivated
       expect(page).to have_selector("iframe[src='#{image_url}']")
     end
   end

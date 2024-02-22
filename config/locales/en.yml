@@ -2,26 +2,24 @@
 en:
   activemodel:
     attributes:
+      attachment:
+        documents: add a document
+      initiative:
+        offline_votes_for_scope: In-person signatures for %{scope_name}
       osp_authorization_handler:
         birthday: Birthday
         document_number: Unique number
         postal_code: Postal code
       participatory_process:
         private_space: Private space
+      participatory_space_private_user_csv_import:
+        file: importing file
   decidim:
     admin:
       participatory_space_private_users:
         create:
           error: Error
           success: Success
-      reminders:
-        create:
-          error: There was a problem creating reminders.
-          success:
-            one: "%{count} user will be reminded."
-            other: "%{count} users will be reminded."
-        new:
-          submit: Send
     amendments:
       emendation:
         announcement:
@@ -40,51 +38,11 @@ en:
       osp_authorization_workflow:
         name: Authorization procedure
     budgets:
-      actions:
-        confirm_destroy: Are you sure you want to delete this project?
-        destroy: Delete
-        edit: Edit
-        edit_projects: Manage projects
-        new: New %{name}
-        preview: Preview
-        title: Actions
-      admin:
-        budgets:
-          index:
-            finished_orders: Finished votes
-            pending_orders: Pending votes
-            title: Budgets
-            users_with_finished_orders: Users with finished votes
-            users_with_pending_orders: Users with pending votes
-        models:
-          budget:
-            name: Budget
-        reminders:
-          orders:
-            description: Users will receive an email with links to the budgets where they have pending order.
-            title:
-              one: You are about to send an email reminder to %{count} user
-              other: You are about to send an email reminder to %{count} users
-      models:
-        budget:
-          fields:
-            name: Name
-            projects_count: Projects count
-            total_budget: Total budget
       projects:
         count:
           projects_count:
             one: 1 project
             other: "%{count} projects"
-      vote_reminder_mailer:
-        vote_reminder:
-          email_budgets: 'Areas where you have an unfinished vote:'
-          email_intro: You have started the participatory budgeting vote, but have not completed it.
-          email_link: Go to continue voting
-          email_outro: Please remember to complete the vote. To vote, you must first select the proposal or proposals you want to vote on and then confirm your vote with the "Vote" button.
-          email_subject:
-            one: You have an unfinished vote in the participatory budgeting vote
-            other: You have unfinished votes in the participatory budgeting vote
     devise:
       sessions:
         new:
@@ -96,6 +54,12 @@ en:
           email_outro: You have received this notification because you are participating in "%{participatory_space_title}"
           email_subject: Your vote is still pending in %{participatory_space_title}
           notification_title: The vote on budget <a href="%{resource_path}">%{resource_title}</a> is still waiting for your confirmation in %{participatory_space_title}
+      initiatives:
+        initiative_answered:
+          email_intro: The initiative "%{resource_title}" has been answered.
+          email_outro: You have received this notification because you are following the initiative "%{resource_title}".
+          email_subject: Initiative "%{resource_title}" has been answered
+          notification_title: The initiative <a href="%{resource_path}">%{resource_title}</a> has been answered.
       users:
         user_officialized:
           email_intro: Participant %{name} (%{nickname}) has been officialized.
@@ -108,6 +72,20 @@ en:
           email_outro: Check the <a href="%{conflicts_path}">Verifications's conflicts list</a> and contact the participant to verify their details and solve the issue.
           email_subject: Failed verification attempt against a managed participant
           notification_title: The participant <a href="%{resource_path}">%{resource_title}</a> has tried to verify themself with the data of the managed participant <a href="%{managed_user_path}">%{managed_user_name}</a>.
+    initiatives:
+      admin:
+        initiatives:
+          form:
+            attachments: Attachments
+            settings: Settings
+            title: General information
+          index:
+            warning: Initiatives are not used for now. When you create an initiative type, it will be displayed in front-office.
+      pages:
+        home:
+          highlighted_initiatives:
+            active_initiatives: Active initiatives
+            see_all_initiatives: See all initiatives
     meetings:
       directory:
         meetings:
@@ -132,44 +110,16 @@ en:
           ok_text: Warning, this password is the one of your local account and in no case the one of the account you use through FranceConnect. It will only be used when you log in with your email address rather than via FranceConnect.
     proposals:
       collaborative_drafts:
-        collaborative_draft:
-          publish:
-            error: There was a problem publishing the collaborative draft.
-            success: Collaborative draft published successfully as a proposal.
-          withdraw:
-            error: There was a problem closing the collaborative draft.
-            success: Collaborative draft withdrawn successfully.
-        create:
-          error: There was a problem creating this collaborative drafts
-          success: Collaborative draft successfully created.
         edit:
           attachment_legend: "(Optional) Add an attachment"
           select_a_category: Please select a category
         new:
           add_file: Add file
           edit_file: Edit file
-        show:
-          back: Back
-          edit: Edit collaborative draftss
-          info-message: This is a <strong>collaborative draft</strong> for a proposal. This means that you can help their authors to shape the proposal using the comment section below or improve it directly by requesting access to edit it. Once the authors grant you access, you'll be able to make changes to this draft.
-          publish_info: Publish this version of the draft or
-          requested_access: Access requested
-        update:
-          error: There was a problem saving the collaborative draft.
-          success: Collaborative draft successfully updated.
-        wizard_aside:
-          back_from_collaborative_draft: Back to collaborative drafts
-          info: You are creating a <strong>collaborative draft</strong>.
       index:
         collaborative_drafts_list: Collaborative drafts list
         new_proposal: New proposal
         view_proposal: View proposal
-      models:
-        collaborative_draft:
-          fields:
-            authors: Authors
-            comments: Comments
-            contributions: Contributions
     scopes:
       global: Global
       picker:

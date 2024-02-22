@@ -16,9 +16,9 @@ describe SentrySetup do
 
   let(:server_metadata) do
     JSON.dump({
-                "hostname": "my_hostname",
-                "public_ip": {
-                  "address": "123.123.123.123"
+                hostname: "my_hostname",
+                public_ip: {
+                  address: "123.123.123.123"
                 }
               })
   end
@@ -49,6 +49,23 @@ describe SentrySetup do
       it "is not configured" do
         expect(sentry).not_to receive(:init)
       end
+    end
+  end
+
+  describe "#sample_trace" do
+    let(:transaction_name) { "/some_page" }
+    let(:context) { { transaction_context: { op: "http", name: transaction_name } } }
+
+    context "when transaction is about the health check" do
+      let(:transaction_name) { "/health_check" }
+
+      it "returns 0" do
+        expect(subject.send(:sample_trace, context)).to eq 0.0
+      end
+    end
+
+    it "returns a Float" do
+      expect(subject.send(:sample_trace, context)).to be_a Float
     end
   end
 
