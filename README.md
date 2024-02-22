@@ -39,7 +39,6 @@ You can find below an exhaustive list of modules with their repository links and
 | [decidim-gallery](https://github.com/alecslupu-pfa/decidim-module-gallery)                                              | ✅       | Module allowing the creation of galleries                                                                                                                                    |
 | [decidim-extra_user_fields](https://github.com/PopulateTools/decidim-module-extra_user_fields)                                                | ✅       | Module allowing the creation of new fields in users form                                                                                                                     |
 
-
 Some non-official customizations can be found see [OVERLOADS.MD](./OVERLOADS.md).
 
 ## 🚀 Getting started
