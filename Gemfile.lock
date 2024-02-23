@@ -721,6 +721,8 @@ GEM
     nio4r (2.7.0)
     nokogiri (1.13.4-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.4-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.4-x86_64-linux)
       racc (~> 1.4)
     oauth (1.1.0)
