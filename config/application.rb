@@ -43,13 +43,19 @@ module DevelopmentApp
       require "extends/cells/decidim/forms/step_navigation_cell_extends"
     end
 
+    if Rails.application.secrets.dig(:decidim, :initiatives, :creation_enabled)
+      require "decidim/initiatives"
+      Rails.application.config.after_initialize do
+        require "extends/commands/decidim/initiatives/admin/update_initiative_answer_extends"
+        require "extends/controllers/decidim/initiatives/committee_requests_controller_extends"
+      end
+    end
+
     config.after_initialize do
       require "extends/controllers/decidim/devise/sessions_controller_extends"
       require "extends/controllers/decidim/editor_images_controller_extends"
       require "extends/services/decidim/iframe_disabler_extends"
       require "extends/helpers/decidim/icon_helper_extends"
-      require "extends/commands/decidim/initiatives/admin/update_initiative_answer_extends"
-      require "extends/controllers/decidim/initiatives/committee_requests_controller_extends"
       require "extends/models/decidim/budgets/project_extend"
 
       Decidim::GraphiQL::Rails.config.tap do |config|
