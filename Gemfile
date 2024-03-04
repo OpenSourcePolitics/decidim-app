@@ -18,7 +18,7 @@ gem "decidim-cache_cleaner"
 gem "decidim-decidim_awesome"
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
                                                                 branch: DECIDIM_BRANCH
-gem "decidim-extra_user_fields", git: "https://github.com/PopulateTools/decidim-module-extra_user_fields.git", branch: "release/0.27-stable"
+gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "release/0.27-stable"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 gem "decidim-gallery", git: "https://github.com/OpenSourcePolitics/decidim-module-gallery.git", branch: "fix/nokogiri_deps"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
