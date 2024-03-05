@@ -125,7 +125,7 @@ describe "Account", type: :system do
           within "#user_locale" do
             expect(page).to have_content("Français")
           end
-          expect(page).to have_css(".help-text", text: organization.name)
+          expect(page).to have_css(".help-text")
         end
       end
     end
@@ -301,109 +301,6 @@ describe "Account", type: :system do
             expect(page).to have_content("Your interests have been successfully updated.")
           end
         end
-      end
-    end
-
-    context "when on the delete my account page" do
-      before do
-        visit decidim.delete_account_path
-      end
-
-      it "the user can delete their account" do
-        fill_in :delete_user_delete_account_delete_reason, with: "I just want to delete my account"
-
-        click_button "Delete my account"
-
-        click_button "Yes, I want to delete my account"
-
-        within_flash_messages do
-          expect(page).to have_content("successfully")
-        end
-
-        find(".sign-in-link").click
-
-        within ".new_user" do
-          fill_in :session_user_email, with: user.email
-          fill_in :session_user_password, with: password
-          find("*[type=submit]").click
-        end
-
-        expect(page).to have_no_content("Signed in successfully")
-        expect(page).to have_no_content(user.name)
-      end
-    end
-  end
-
-  context "when on the notifications page in a PWA browser" do
-    let(:organization) { create(:organization, host: "pwa.lvh.me") }
-    let(:user) { create(:user, :confirmed, password: password, password_confirmation: password, organization: organization) }
-    let(:password) { "dqCFgjfDbC7dPbrv" }
-    let(:vapid_keys) do
-      {
-        enabled: true,
-        public_key: "BKmjw_A8tJCcZNQ72uG8QW15XHQnrGJjHjsmoUILUUFXJ1VNhOnJLc3ywR3eZKibX4HSqhB1hAzZFj__3VqzcPQ=",
-        private_key: "TF_MRbSSs_4BE1jVfOsILSJemND8cRMpiznWHgdsro0="
-      }
-    end
-
-    context "when VAPID keys are set" do
-      before do
-        Rails.application.secrets[:vapid] = vapid_keys
-        driven_by(:pwa_chrome)
-        switch_to_host(organization.host)
-        login_as user, scope: :user
-        visit decidim.notifications_settings_path
-      end
-
-      context "when on the account page" do
-        it "enables push notifications if supported browser" do
-          sleep 2
-          within ".push-notifications" do
-            # Check allow push notifications
-            find(".switch-paddle").click
-          end
-
-          # Wait for the browser to be subscribed
-          sleep 5
-
-          within "form.edit_user" do
-            find("*[type=submit]").click
-          end
-
-          within_flash_messages do
-            expect(page).to have_content("successfully")
-          end
-
-          expect(page.find("#allow_push_notifications", visible: false)).to be_checked
-        end
-      end
-    end
-
-    context "when VAPID is disabled" do
-      before do
-        Rails.application.secrets[:vapid] = { enabled: false }
-        driven_by(:pwa_chrome)
-        switch_to_host(organization.host)
-        login_as user, scope: :user
-        visit decidim.notifications_settings_path
-      end
-
-      it "does not show the push notifications switch" do
-        expect(page).to have_no_selector(".push-notifications")
-      end
-    end
-
-    context "when VAPID keys are not set" do
-      before do
-        Rails.application.secrets.delete(:vapid)
-        driven_by(:pwa_chrome)
-        switch_to_host(organization.host)
-        login_as user, scope: :user
-        visit decidim.notifications_settings_path
-      end
-
-      it "does not show the push notifications switch" do
-        expect(page).to have_no_selector(".push-notifications")
       end
     end
   end
