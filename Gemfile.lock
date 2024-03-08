@@ -15,6 +15,16 @@ GIT
       decidim-core (~> 0.27)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
+  revision: 0716b8d9e89db89ff3b182ad1bb63e92b952d39c
+  branch: release/0.27-stable
+  specs:
+    decidim-extra_user_fields (0.27.2)
+      country_select (~> 4.0)
+      decidim-core (>= 0.27.0, < 0.28)
+      deface (~> 1.5)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git
   revision: 1a054faf964cc6ed07f1bec47cb92f0083a5bcb4
   specs:
@@ -83,16 +93,6 @@ GIT
     omniauth-publik (0.1.1)
       omniauth (~> 2.0)
       omniauth-oauth2 (>= 1.7.2, < 2.0)
-
-GIT
-  remote: https://github.com/PopulateTools/decidim-module-extra_user_fields.git
-  revision: ef262d6619ef254de1379278f56c4c6af789e54c
-  branch: release/0.27-stable
-  specs:
-    decidim-extra_user_fields (0.27.2)
-      country_select (~> 4.0)
-      decidim-core (>= 0.27.0, < 0.28)
-      deface (~> 1.5)
 
 GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
@@ -720,6 +720,8 @@ GEM
       net-protocol
     nio4r (2.7.0)
     nokogiri (1.13.4-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.4-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.4-x86_64-linux)
       racc (~> 1.4)
