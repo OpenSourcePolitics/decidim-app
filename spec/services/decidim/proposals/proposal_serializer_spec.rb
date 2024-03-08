@@ -9,19 +9,34 @@ module Decidim
         described_class.new(proposal)
       end
 
-      let!(:proposal) { create(:proposal, :accepted, body: body) }
+      let!(:organization) do
+        create(:organization, available_authorizations: ["phone_authorization_handler"])
+      end
+
+      let!(:proposal) { create(:proposal, :accepted) }
       let!(:category) { create(:category, participatory_space: component.participatory_space) }
       let!(:scope) { create(:scope, organization: component.participatory_space.organization) }
       let(:participatory_process) { component.participatory_space }
       let(:component) { proposal.component }
 
       let!(:meetings_component) { create(:component, manifest_name: "meetings", participatory_space: participatory_process) }
-      let(:meetings) { create_list(:meeting, 2, :published, component: meetings_component) }
+      let(:meetings) { create_list(:meeting, 2, component: meetings_component) }
 
       let!(:proposals_component) { create(:component, manifest_name: "proposals", participatory_space: participatory_process) }
-      let(:other_proposals) { create_list(:proposal, 2, component: proposals_component) }
-      let(:body) { Decidim::Faker::Localized.localized { ::Faker::Lorem.sentences(number: 3).join("\n") } }
 
+      let!(:authorization) do
+        create(
+          :authorization,
+          id: 1,
+          name: "phone_authorization_handler",
+          user: proposal.creator_author,
+          metadata: {
+            phone_number: "0644444444"
+          }
+        )
+      end
+
+      let(:other_proposals) { create_list(:proposal, 2, component: proposals_component) }
       let(:expected_answer) do
         answer = proposal.answer
         Decidim.available_locales.each_with_object({}) do |locale, result|
@@ -65,24 +80,12 @@ module Decidim
           expect(serialized).to include(body: proposal.body)
         end
 
-        it "serializes the address" do
-          expect(serialized).to include(address: proposal.address)
-        end
-
-        it "serializes the latitude" do
-          expect(serialized).to include(latitude: proposal.latitude)
-        end
-
-        it "serializes the longitude" do
-          expect(serialized).to include(longitude: proposal.longitude)
-        end
-
         it "serializes the amount of supports" do
           expect(serialized).to include(supports: proposal.proposal_votes_count)
         end
 
         it "serializes the amount of comments" do
-          expect(serialized).to include(comments: proposal.comments_count)
+          expect(serialized).to include(comments: proposal.comments.count)
         end
 
         it "serializes the date of creation" do
@@ -133,13 +136,58 @@ module Decidim
           expect(serialized[:related_proposals].first).to match(%r{http.*/proposals})
         end
 
-        it "serializes if proposal is_amend" do
-          expect(serialized).to include(is_amend: proposal.emendation?)
+        it "doesn't serialize author's data" do
+          expect(serialized).not_to include(:author)
         end
 
-        it "serializes the original proposal" do
-          expect(serialized[:original_proposal]).to include(title: proposal&.amendable&.title)
-          expect(serialized[:original_proposal][:url]).to be_nil || include("http", proposal.id.to_s)
+        context "when admin exports proposal" do
+          subject do
+            described_class.new(proposal, false)
+          end
+
+          let(:serialized) { subject.serialize }
+
+          it "serializes author" do
+            expect(serialized).to include(:author)
+          end
+
+          it "data in author are not empty" do
+            expect(serialized[:author][:name]).not_to be_empty
+            expect(serialized[:author][:nickname]).not_to be_empty
+            expect(serialized[:author][:email]).not_to be_empty
+            expect(serialized[:author][:phone_number]).not_to be_empty
+          end
+
+          context "when proposal was created by admin from backoffice" do
+            let!(:admin) { create(:user, :admin) }
+
+            before do
+              proposal.coauthorships.clear
+              proposal.add_coauthor(proposal.organization)
+            end
+
+            it "serializes author" do
+              expect(serialized).to include(:author)
+            end
+
+            it "author's data are empty" do
+              expect(serialized[:author][:name]).to be_empty
+              expect(serialized[:author][:nickname]).to be_empty
+              expect(serialized[:author][:email]).to be_empty
+              expect(serialized[:author][:phone_number]).to be_empty
+            end
+          end
+
+          context "when there is no authorization for user" do
+            let(:authorization) { nil }
+
+            it "author's phone number should be empty" do
+              expect(serialized[:author][:name]).not_to be_empty
+              expect(serialized[:author][:nickname]).not_to be_empty
+              expect(serialized[:author][:email]).not_to be_empty
+              expect(serialized[:author][:phone_number]).to be_empty
+            end
+          end
         end
 
         context "with proposal having an answer" do
@@ -147,79 +195,6 @@ module Decidim
 
           it "serializes the answer" do
             expect(serialized).to include(answer: expected_answer)
-          end
-        end
-
-        context "with rich text proposal body" do
-          let(:image) { "<img src=\"logo.png\" #{alt_attribute} width=\"407\">" }
-          let(:alt_attribute) { "alt=\"Logo alt attribute\"" }
-          let(:body_content) do
-            <<~TEXT
-              <h2>This is my "heading 2" title</h2>
-              <p>A "normal" description below Heading 2</p>
-              <p><br></p>
-              <h3>Now this is my "heading 3"</h3>
-              <p><br></p>
-              <ul>
-              <li>This is my first option</li>
-              <li>This is my second option</li>
-              <li>This is my third option</li>
-              </ul>
-              <p><br></p>
-              <p>And below an uploaded image</p>
-              <p>#{image}</p>
-              <p><br></p>
-              <p><code>Here is code block</code></p>
-            TEXT
-          end
-          let(:body) do
-            {
-              "en" => body_content,
-              "machine_translation" => {
-                "es" => body_content,
-                "ca" => body_content
-              }
-            }
-          end
-
-          it "serializes the body without HTML tags" do
-            expected_body = <<~TEXT.chomp
-              ----------------------------
-              This is my "heading 2" title
-              ----------------------------
-
-              A "normal" description below Heading 2
-
-              Now this is my "heading 3"
-              --------------------------
-
-              * This is my first option
-              * This is my second option
-              * This is my third option
-
-              And below an uploaded image
-
-              Logo alt attribute
-
-              Here is code block
-            TEXT
-
-            expect(serialized[:body]["en"]).to eq(expected_body)
-            expect(serialized[:body]["en"]).to include("Logo alt attribute")
-            expect(serialized[:body]["machine_translation"]["es"]).to eq(expected_body)
-            expect(serialized[:body]["machine_translation"]["es"]).to include("Logo alt attribute")
-            expect(serialized[:body]["machine_translation"]["ca"]).to eq(expected_body)
-            expect(serialized[:body]["machine_translation"]["ca"]).to include("Logo alt attribute")
-          end
-
-          context "and image is uploaded without 'alt' attribute" do
-            let(:alt_attribute) { "" }
-
-            it "serializes the body without image" do
-              expect(serialized[:body]["en"]).not_to include("Logo alt attribute")
-              expect(serialized[:body]["machine_translation"]["es"]).not_to include("Logo alt attribute")
-              expect(serialized[:body]["machine_translation"]["ca"]).not_to include("Logo alt attribute")
-            end
           end
         end
       end
