@@ -140,4 +140,5 @@ ignore_unused:
   - decidim.initiatives.pages.home.highlighted_initiatives.*
   - activemodel.attributes.attachment.documents
   - activemodel.attributes.participatory_space_private_user_csv_import.file
+  - decidim.forms.user_answers_serializer.{email,name}
 
