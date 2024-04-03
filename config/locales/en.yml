@@ -114,9 +114,6 @@ en:
           ok_text: Warning, this password is the one of your local account and in no case the one of the account you use through FranceConnect. It will only be used when you log in with your email address rather than via FranceConnect.
     proposals:
       collaborative_drafts:
-        edit:
-          attachment_legend: "(Optional) Add an attachment"
-          select_a_category: Please select a category
         new:
           add_file: Add file
           edit_file: Edit file
