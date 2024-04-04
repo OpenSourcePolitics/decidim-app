@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
-  revision: 0716b8d9e89db89ff3b182ad1bb63e92b952d39c
+  revision: bc26f39233d3216d80fd62d23cbc2e9831173be4
   branch: release/0.27-stable
   specs:
     decidim-extra_user_fields (0.27.2)
@@ -73,8 +73,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
-  revision: 79f2a5f6c3357d63f92423a2b173893f4c4d06d8
-  branch: release/0.27-stable
+  revision: 80e376ec674dad17812a3ee1e542a3bc88461add
+  branch: chore/update-initializer
   specs:
     decidim-phone_authorization_handler (1.0.0)
       decidim-core (~> 0.27)
