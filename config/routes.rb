@@ -10,36 +10,44 @@ Rails.application.routes.draw do
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development? || ENV.fetch("ENABLE_LETTER_OPENER", "0") == "1"
 
-  mount Decidim::Core::Engine => "/"
+  if ENV["REDIRECT_ALL_ROUTES_TO"].present?
+    match "/" => redirect(ENV["REDIRECT_ALL_ROUTES_TO"], status: 302), via: :all
+    match "*path" => redirect(ENV["REDIRECT_ALL_ROUTES_TO"], status: 302), via: :all
+  else
+    mount Decidim::Core::Engine => "/"
+  end
+
   # mount Decidim::Map::Engine => '/map'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
 
-Decidim::Assemblies::AdminEngine.class_eval do
-  routes do
-    scope "/assemblies/:assembly_slug" do
-      resources :components do
-        resources :reminders, only: [:new, :create]
+if ENV["REDIRECT_ALL_ROUTES_TO"].blank?
+  Decidim::Assemblies::AdminEngine.class_eval do
+    routes do
+      scope "/assemblies/:assembly_slug" do
+        resources :components do
+          resources :reminders, only: [:new, :create]
+        end
       end
     end
   end
-end
 
-Decidim::Conferences::AdminEngine.class_eval do
-  routes do
-    scope "/conferences/:conference_slug" do
-      resources :components do
-        resources :reminders, only: [:new, :create]
+  Decidim::Conferences::AdminEngine.class_eval do
+    routes do
+      scope "/conferences/:conference_slug" do
+        resources :components do
+          resources :reminders, only: [:new, :create]
+        end
       end
     end
   end
-end
 
-Decidim::ParticipatoryProcesses::AdminEngine.class_eval do
-  routes do
-    scope "/participatory_processes/:participatory_process_slug" do
-      resources :components do
-        resources :reminders, only: [:new, :create]
+  Decidim::ParticipatoryProcesses::AdminEngine.class_eval do
+    routes do
+      scope "/participatory_processes/:participatory_process_slug" do
+        resources :components do
+          resources :reminders, only: [:new, :create]
+        end
       end
     end
   end
