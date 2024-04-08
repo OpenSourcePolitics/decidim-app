@@ -96,7 +96,7 @@ GIT
 
 GIT
   remote: https://github.com/alecslupu-pfa/decidim-budget_category_voting.git
-  revision: 9c5e4835ca104e73ed6e3680d839383bbd54cade
+  revision: 96e1c331ff887ee8bb6a6a82c7921755134c385b
   branch: release/0.27-stable
   specs:
     decidim-budget_category_voting (0.27.5)
@@ -303,7 +303,7 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
-    css_parser (1.16.0)
+    css_parser (1.17.1)
       addressable
     dalli (3.2.8)
     date (3.3.4)
@@ -875,7 +875,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
     rainbow (3.1.1)
-    rake (13.2.0)
+    rake (13.2.1)
     ransack (2.4.2)
       activerecord (>= 5.2.4)
       activesupport (>= 5.2.4)
