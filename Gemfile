@@ -16,6 +16,7 @@ gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 # External Decidim gems
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
 gem "decidim-cache_cleaner"
+gem "decidim-category_enhanced", "~> 0.0.1"
 gem "decidim-decidim_awesome"
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
                                                                 branch: DECIDIM_BRANCH

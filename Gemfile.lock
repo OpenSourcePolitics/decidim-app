@@ -1118,6 +1118,7 @@ DEPENDENCIES
   decidim (~> 0.27.0)
   decidim-budget_category_voting!
   decidim-cache_cleaner
+  decidim-category_enhanced (~> 0.0.1)
   decidim-conferences (~> 0.27.0)
   decidim-decidim_awesome
   decidim-dev (~> 0.27.0)
