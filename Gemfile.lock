@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
-  revision: 0716b8d9e89db89ff3b182ad1bb63e92b952d39c
+  revision: bc26f39233d3216d80fd62d23cbc2e9831173be4
   branch: release/0.27-stable
   specs:
     decidim-extra_user_fields (0.27.2)
@@ -73,8 +73,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
-  revision: 79f2a5f6c3357d63f92423a2b173893f4c4d06d8
-  branch: release/0.27-stable
+  revision: 80e376ec674dad17812a3ee1e542a3bc88461add
+  branch: chore/update-initializer
   specs:
     decidim-phone_authorization_handler (1.0.0)
       decidim-core (~> 0.27)
@@ -95,6 +95,18 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
+  remote: https://github.com/alecslupu-pfa/decidim-budget_category_voting.git
+  revision: 96e1c331ff887ee8bb6a6a82c7921755134c385b
+  branch: release/0.27-stable
+  specs:
+    decidim-budget_category_voting (0.27.5)
+      decidim-admin (~> 0.27.0)
+      decidim-budgets (~> 0.27.0)
+      decidim-category_enhanced (~> 0.0.1)
+      decidim-core (~> 0.27.0)
+      deface (>= 1.9)
+
+GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
   revision: bc33600db7a2d16ce3cdc1f8369d0d7e7c4245b5
   specs:
@@ -107,40 +119,40 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (6.1.7.6)
-      actionpack (= 6.1.7.6)
-      activesupport (= 6.1.7.6)
+    actioncable (6.1.7.7)
+      actionpack (= 6.1.7.7)
+      activesupport (= 6.1.7.7)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailbox (6.1.7.6)
-      actionpack (= 6.1.7.6)
-      activejob (= 6.1.7.6)
-      activerecord (= 6.1.7.6)
-      activestorage (= 6.1.7.6)
-      activesupport (= 6.1.7.6)
+    actionmailbox (6.1.7.7)
+      actionpack (= 6.1.7.7)
+      activejob (= 6.1.7.7)
+      activerecord (= 6.1.7.7)
+      activestorage (= 6.1.7.7)
+      activesupport (= 6.1.7.7)
       mail (>= 2.7.1)
-    actionmailer (6.1.7.6)
-      actionpack (= 6.1.7.6)
-      actionview (= 6.1.7.6)
-      activejob (= 6.1.7.6)
-      activesupport (= 6.1.7.6)
+    actionmailer (6.1.7.7)
+      actionpack (= 6.1.7.7)
+      actionview (= 6.1.7.7)
+      activejob (= 6.1.7.7)
+      activesupport (= 6.1.7.7)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (6.1.7.6)
-      actionview (= 6.1.7.6)
-      activesupport (= 6.1.7.6)
+    actionpack (6.1.7.7)
+      actionview (= 6.1.7.7)
+      activesupport (= 6.1.7.7)
       rack (~> 2.0, >= 2.0.9)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actiontext (6.1.7.6)
-      actionpack (= 6.1.7.6)
-      activerecord (= 6.1.7.6)
-      activestorage (= 6.1.7.6)
-      activesupport (= 6.1.7.6)
+    actiontext (6.1.7.7)
+      actionpack (= 6.1.7.7)
+      activerecord (= 6.1.7.7)
+      activestorage (= 6.1.7.7)
+      activesupport (= 6.1.7.7)
       nokogiri (>= 1.8.5)
-    actionview (6.1.7.6)
-      activesupport (= 6.1.7.6)
+    actionview (6.1.7.7)
+      activesupport (= 6.1.7.7)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
@@ -148,17 +160,17 @@ GEM
     active_link_to (1.0.5)
       actionpack
       addressable
-    activejob (6.1.7.6)
-      activesupport (= 6.1.7.6)
+    activejob (6.1.7.7)
+      activesupport (= 6.1.7.7)
       globalid (>= 0.3.6)
     activejob-uniqueness (0.3.1)
       activejob (>= 4.2, < 7.2)
       redlock (>= 2.0, < 3)
-    activemodel (6.1.7.6)
-      activesupport (= 6.1.7.6)
-    activerecord (6.1.7.6)
-      activemodel (= 6.1.7.6)
-      activesupport (= 6.1.7.6)
+    activemodel (6.1.7.7)
+      activesupport (= 6.1.7.7)
+    activerecord (6.1.7.7)
+      activemodel (= 6.1.7.7)
+      activesupport (= 6.1.7.7)
     activerecord-session_store (2.1.0)
       actionpack (>= 6.1)
       activerecord (>= 6.1)
@@ -166,14 +178,14 @@ GEM
       multi_json (~> 1.11, >= 1.11.2)
       rack (>= 2.0.8, < 4)
       railties (>= 6.1)
-    activestorage (6.1.7.6)
-      actionpack (= 6.1.7.6)
-      activejob (= 6.1.7.6)
-      activerecord (= 6.1.7.6)
-      activesupport (= 6.1.7.6)
+    activestorage (6.1.7.7)
+      actionpack (= 6.1.7.7)
+      activejob (= 6.1.7.7)
+      activerecord (= 6.1.7.7)
+      activesupport (= 6.1.7.7)
       marcel (~> 1.0)
       mini_mime (>= 1.1.0)
-    activesupport (6.1.7.6)
+    activesupport (6.1.7.7)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -242,7 +254,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    carrierwave (2.2.5)
+    carrierwave (2.2.6)
       activemodel (>= 5.0.0)
       activesupport (>= 5.0.0)
       addressable (~> 2.6)
@@ -291,7 +303,7 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
-    css_parser (1.16.0)
+    css_parser (1.17.1)
       addressable
     dalli (3.2.8)
     date (3.3.4)
@@ -346,6 +358,10 @@ GEM
       decidim-core (= 0.27.4)
     decidim-cache_cleaner (1.0.4)
       decidim-core (~> 0.26)
+    decidim-category_enhanced (0.0.1)
+      decidim-admin (~> 0.27.0)
+      decidim-core (~> 0.27.0)
+      deface (>= 1.9)
     decidim-comments (0.27.4)
       decidim-core (= 0.27.4)
       redcarpet (~> 3.5, >= 3.5.1)
@@ -543,7 +559,7 @@ GEM
     escape_utils (1.3.0)
     et-orbi (1.2.7)
       tzinfo
-    excon (0.109.0)
+    excon (0.110.0)
     execjs (2.9.1)
     extended-markdown-filter (0.7.0)
       html-pipeline (~> 2.9)
@@ -610,7 +626,7 @@ GEM
     html_tokenizer (0.0.7)
     htmlentities (4.3.4)
     httpclient (2.8.3)
-    i18n (1.14.1)
+    i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.37)
       activesupport (>= 4.0.2)
@@ -641,7 +657,7 @@ GEM
       bindata
       faraday (~> 2.0)
       faraday-follow_redirects
-    jwt (2.8.0)
+    jwt (2.8.1)
       base64
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
@@ -683,7 +699,7 @@ GEM
       net-imap
       net-pop
       net-smtp
-    marcel (1.0.2)
+    marcel (1.0.4)
     matrix (0.4.2)
     mdl (0.13.0)
       kramdown (~> 2.3)
@@ -694,10 +710,10 @@ GEM
     method_source (1.0.0)
     mime-types (3.5.2)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2024.0206)
+    mime-types-data (3.2024.0305)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
-    minitest (5.22.2)
+    minitest (5.22.3)
     mixlib-cli (2.1.8)
     mixlib-config (3.0.27)
       tomlrb
@@ -716,9 +732,9 @@ GEM
       net-protocol
     net-protocol (0.2.2)
       timeout
-    net-smtp (0.4.0.1)
+    net-smtp (0.5.0)
       net-protocol
-    nio4r (2.7.0)
+    nio4r (2.7.1)
     nokogiri (1.13.4-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.13.4-x86_64-darwin)
@@ -744,11 +760,11 @@ GEM
       rack-protection
     omniauth-facebook (5.0.0)
       omniauth-oauth2 (~> 1.2)
-    omniauth-google-oauth2 (1.1.1)
+    omniauth-google-oauth2 (1.1.2)
       jwt (>= 2.0)
-      oauth2 (~> 2.0.6)
+      oauth2 (~> 2.0)
       omniauth (~> 2.0)
-      omniauth-oauth2 (~> 1.8.0)
+      omniauth-oauth2 (~> 1.8)
     omniauth-oauth (1.2.0)
       oauth
       omniauth (>= 1.0, < 3)
@@ -793,7 +809,7 @@ GEM
       activerecord (>= 5.2)
       activesupport (>= 5.2)
     polyglot (0.3.5)
-    premailer (1.22.0)
+    premailer (1.23.0)
       addressable
       css_parser (>= 1.12.0)
       htmlentities (>= 4.0.0)
@@ -801,12 +817,12 @@ GEM
       actionmailer (>= 3)
       net-smtp
       premailer (~> 1.7, >= 1.7.9)
-    public_suffix (5.0.4)
+    public_suffix (5.0.5)
     puma (5.6.8)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.7.3)
-    rack (2.2.8)
+    rack (2.2.9)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
     rack-cors (1.1.1)
@@ -824,20 +840,20 @@ GEM
       rack
     rack-test (2.1.0)
       rack (>= 1.3)
-    rails (6.1.7.6)
-      actioncable (= 6.1.7.6)
-      actionmailbox (= 6.1.7.6)
-      actionmailer (= 6.1.7.6)
-      actionpack (= 6.1.7.6)
-      actiontext (= 6.1.7.6)
-      actionview (= 6.1.7.6)
-      activejob (= 6.1.7.6)
-      activemodel (= 6.1.7.6)
-      activerecord (= 6.1.7.6)
-      activestorage (= 6.1.7.6)
-      activesupport (= 6.1.7.6)
+    rails (6.1.7.7)
+      actioncable (= 6.1.7.7)
+      actionmailbox (= 6.1.7.7)
+      actionmailer (= 6.1.7.7)
+      actionpack (= 6.1.7.7)
+      actiontext (= 6.1.7.7)
+      actionview (= 6.1.7.7)
+      activejob (= 6.1.7.7)
+      activemodel (= 6.1.7.7)
+      activerecord (= 6.1.7.7)
+      activestorage (= 6.1.7.7)
+      activesupport (= 6.1.7.7)
       bundler (>= 1.15.0)
-      railties (= 6.1.7.6)
+      railties (= 6.1.7.7)
       sprockets-rails (>= 2.0.0)
     rails-controller-testing (1.0.5)
       actionpack (>= 5.0.1.rc1)
@@ -852,14 +868,14 @@ GEM
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 7)
-    railties (6.1.7.6)
-      actionpack (= 6.1.7.6)
-      activesupport (= 6.1.7.6)
+    railties (6.1.7.7)
+      actionpack (= 6.1.7.7)
+      activesupport (= 6.1.7.7)
       method_source
       rake (>= 12.2)
       thor (~> 1.0)
     rainbow (3.1.1)
-    rake (13.1.0)
+    rake (13.2.1)
     ransack (2.4.2)
       activerecord (>= 5.2.4)
       activesupport (>= 5.2.4)
@@ -937,7 +953,7 @@ GEM
     ruby-progressbar (1.13.0)
     ruby-vips (2.2.1)
       ffi (~> 1.12)
-    rubyXL (3.4.25)
+    rubyXL (3.4.26)
       nokogiri (>= 1.10.8)
       rubyzip (>= 1.3.0)
     ruby_http_client (3.5.5)
@@ -1014,7 +1030,7 @@ GEM
     temple (0.10.3)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
-    thor (1.3.0)
+    thor (1.3.1)
     thread_safe (0.3.6)
     tilt (2.3.0)
     timeout (0.4.1)
@@ -1034,7 +1050,7 @@ GEM
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
-    version_gem (1.1.3)
+    version_gem (1.1.4)
     virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -1100,7 +1116,9 @@ DEPENDENCIES
   climate_control (~> 1.2)
   dalli
   decidim (~> 0.27.0)
+  decidim-budget_category_voting!
   decidim-cache_cleaner
+  decidim-category_enhanced (~> 0.0.1)
   decidim-conferences (~> 0.27.0)
   decidim-decidim_awesome
   decidim-dev (~> 0.27.0)
