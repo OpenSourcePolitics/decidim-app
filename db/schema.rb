@@ -366,8 +366,8 @@ ActiveRecord::Schema.define(version: 2024_04_22_140311) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "decidim_scope_id"
-    t.string "main_image"
     t.json "category_budget_rules", default: []
+    t.string "main_image"
     t.index ["decidim_component_id"], name: "index_decidim_budgets_budgets_on_decidim_component_id"
     t.index ["decidim_scope_id"], name: "index_decidim_budgets_budgets_on_decidim_scope_id"
   end
@@ -1476,12 +1476,10 @@ ActiveRecord::Schema.define(version: 2024_04_22_140311) do
     t.boolean "show_metrics", default: true
     t.integer "weight", default: 1, null: false
     t.integer "follows_count", default: 0, null: false
-    t.string "emitter", default: "0"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
     t.boolean "display_linked_assemblies", default: false
-    t.text "emitter_name"
     t.bigint "decidim_participatory_process_type_id"
     t.index ["decidim_area_id"], name: "index_decidim_participatory_processes_on_decidim_area_id"
     t.index ["decidim_organization_id", "slug"], name: "index_unique_process_slug_and_organization", unique: true
@@ -1709,7 +1707,6 @@ ActiveRecord::Schema.define(version: 2024_04_22_140311) do
     t.string "code", null: false
     t.integer "part_of", default: [], null: false, array: true
     t.jsonb "geojson"
-    t.integer "weight", default: 0
     t.index ["decidim_organization_id", "code"], name: "index_decidim_scopes_on_decidim_organization_id_and_code", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_scopes_on_decidim_organization_id"
     t.index ["parent_id"], name: "index_decidim_scopes_on_parent_id"
@@ -1768,16 +1765,6 @@ ActiveRecord::Schema.define(version: 2024_04_22_140311) do
     t.index ["mounted_engine_name"], name: "index_decidim_short_links_on_mounted_engine_name"
     t.index ["route_name"], name: "index_decidim_short_links_on_route_name"
     t.index ["target_type", "target_id"], name: "index_decidim_short_links_on_target"
-  end
-
-  create_table "decidim_sms_twilio_deliveries", force: :cascade do |t|
-    t.string "from"
-    t.string "to"
-    t.string "body"
-    t.string "sid"
-    t.string "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "decidim_sortitions_sortitions", force: :cascade do |t|
@@ -1974,7 +1961,6 @@ ActiveRecord::Schema.define(version: 2024_04_22_140311) do
     t.integer "following_count", default: 0, null: false
     t.integer "followers_count", default: 0, null: false
     t.string "notification_types", default: "all", null: false
-    t.jsonb "registration_metadata"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
@@ -1987,7 +1973,6 @@ ActiveRecord::Schema.define(version: 2024_04_22_140311) do
     t.boolean "email_on_moderations", default: true
     t.integer "follows_count", default: 0, null: false
     t.boolean "enable_ludens"
-    t.datetime "warning_date"
     t.jsonb "notification_settings", default: {}
     t.string "notifications_sending_frequency", default: "daily"
     t.datetime "digest_sent_at"
