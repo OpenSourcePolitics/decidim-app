@@ -14,7 +14,7 @@ module Decidim
       @url = ENV.fetch("SMS_GATEWAY_URL", nil)
       @username = ENV.fetch("SMS_GATEWAY_USERNAME", nil)
       @password = ENV.fetch("SMS_GATEWAY_PASSWORD", nil)
-      @message = I18n.t("sms_verification_workflow.message", code: code, platform: ENV.fetch("SMS_GATEWAY_PLATFORM", @organization_name ))
+      @message = I18n.t("sms_verification_workflow.message", code: code, platform: ENV.fetch("SMS_GATEWAY_PLATFORM", @organization_name))
       @type = "sms"
     end
 
