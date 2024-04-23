@@ -91,7 +91,7 @@ Decidim.configure do |config|
   #   end
   # end
   #
-  # config.sms_gateway_service = 'Decidim::Verifications::Sms::ExampleGateway'
+  config.sms_gateway_service = "Decidim::SmsGatewayService"
 
   # Etherpad configuration
   #

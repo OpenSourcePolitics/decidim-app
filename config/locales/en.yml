@@ -204,3 +204,5 @@ en:
       time: 'You will be able to navigate on our website in :'
       time_unit: seconds
       title: Thank you for your participation on %{organization_name}
+  sms_verification_workflow:
+    message: 'Hello, here is the code to authenticate yourself on the %{platform} platform: %{code}'
