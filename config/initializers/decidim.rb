@@ -69,6 +69,7 @@ Decidim.configure do |config|
   # take over user accounts.
   #
   config.enable_html_header_snippets = true
+  config.sms_gateway_service = "Decidim::Verifications::Sms::ExampleGateway"
 
   # SMS gateway configuration
   #

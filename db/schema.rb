@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_04_060339) do
+ActiveRecord::Schema.define(version: 2024_04_24_162059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -367,6 +367,7 @@ ActiveRecord::Schema.define(version: 2024_04_04_060339) do
     t.datetime "updated_at", null: false
     t.bigint "decidim_scope_id"
     t.json "category_budget_rules", default: []
+    t.string "main_image"
     t.index ["decidim_component_id"], name: "index_decidim_budgets_budgets_on_decidim_component_id"
     t.index ["decidim_scope_id"], name: "index_decidim_budgets_budgets_on_decidim_scope_id"
   end
@@ -406,6 +407,18 @@ ActiveRecord::Schema.define(version: 2024_04_04_060339) do
     t.integer "follows_count", default: 0, null: false
     t.index ["decidim_budgets_budget_id"], name: "index_decidim_budgets_projects_on_decidim_budgets_budget_id"
     t.index ["decidim_scope_id"], name: "index_decidim_budgets_projects_on_decidim_scope_id"
+  end
+
+  create_table "decidim_budgets_user_data", force: :cascade do |t|
+    t.jsonb "metadata"
+    t.boolean "affirm_statements_are_correct", default: false
+    t.bigint "decidim_component_id", null: false
+    t.bigint "decidim_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["decidim_component_id", "decidim_user_id"], name: "decidim_budgets_user_data_unique_user_and_component", unique: true
+    t.index ["decidim_component_id"], name: "index_decidim_budgets_user_data_on_decidim_component_id"
+    t.index ["decidim_user_id"], name: "index_decidim_budgets_user_data_on_decidim_user_id"
   end
 
   create_table "decidim_calendar_external_events", force: :cascade do |t|
@@ -914,6 +927,16 @@ ActiveRecord::Schema.define(version: 2024_04_04_060339) do
     t.string "badge_name", null: false
     t.integer "value", default: 0, null: false
     t.index ["user_id"], name: "index_decidim_gamification_badge_scores_on_user_id"
+  end
+
+  create_table "decidim_half_signup_auth_settings", force: :cascade do |t|
+    t.boolean "enable_partial_sms_signup", default: false
+    t.boolean "enable_partial_email_signup", default: false
+    t.string "slug"
+    t.bigint "decidim_organization_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["decidim_organization_id"], name: "index_half_signup_auth_settings_on_organization_id"
   end
 
   create_table "decidim_hashtags", force: :cascade do |t|
@@ -1595,6 +1618,23 @@ ActiveRecord::Schema.define(version: 2024_04_04_060339) do
     t.index ["decidim_proposal_id"], name: "decidim_proposals_proposal_note_proposal"
   end
 
+  create_table "decidim_proposals_proposal_states", force: :cascade do |t|
+    t.jsonb "title"
+    t.jsonb "description"
+    t.jsonb "announcement_title"
+    t.string "token", null: false
+    t.boolean "system", default: false, null: false
+    t.bigint "decidim_component_id", null: false
+    t.integer "proposals_count", default: 0, null: false
+    t.boolean "default", default: false, null: false
+    t.boolean "answerable", default: false, null: false
+    t.boolean "notifiable", default: false, null: false
+    t.boolean "gamified", default: false, null: false
+    t.json "include_in_stats", default: {}, null: false
+    t.string "css_class"
+    t.index ["decidim_component_id"], name: "index_decidim_proposals_proposal_states_on_decidim_component_id"
+  end
+
   create_table "decidim_proposals_proposal_votes", id: :serial, force: :cascade do |t|
     t.integer "decidim_proposal_id", null: false
     t.integer "decidim_author_id", null: false
@@ -1792,6 +1832,16 @@ ActiveRecord::Schema.define(version: 2024_04_04_060339) do
     t.index ["mounted_engine_name"], name: "index_decidim_short_links_on_mounted_engine_name"
     t.index ["route_name"], name: "index_decidim_short_links_on_route_name"
     t.index ["target_type", "target_id"], name: "index_decidim_short_links_on_target"
+  end
+
+  create_table "decidim_sms_twilio_deliveries", force: :cascade do |t|
+    t.string "from"
+    t.string "to"
+    t.string "body"
+    t.string "sid"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "decidim_sortitions_sortitions", force: :cascade do |t|
@@ -2005,6 +2055,8 @@ ActiveRecord::Schema.define(version: 2024_04_04_060339) do
     t.datetime "digest_sent_at"
     t.datetime "password_updated_at"
     t.string "previous_passwords", default: [], array: true
+    t.string "phone_number"
+    t.string "phone_country"
     t.index ["confirmation_token"], name: "index_decidim_users_on_confirmation_token", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_users_on_decidim_organization_id"
     t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false) AND ((type)::text = 'Decidim::User'::text))"
