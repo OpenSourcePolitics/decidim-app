@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_24_162059) do
+ActiveRecord::Schema.define(version: 2024_04_26_092405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -735,56 +735,6 @@ ActiveRecord::Schema.define(version: 2024_04_24_162059) do
     t.index ["decidim_scope_id"], name: "index_decidim_debates_debates_on_decidim_scope_id"
     t.index ["decidim_user_group_id"], name: "index_decidim_debates_debates_on_decidim_user_group_id"
     t.index ["endorsements_count"], name: "idx_decidim_debates_debates_on_endorsemnts_count"
-  end
-
-  create_table "decidim_dummy_resources_coauthorable_dummy_resources", force: :cascade do |t|
-    t.jsonb "translatable_text"
-    t.string "title"
-    t.string "body"
-    t.text "address"
-    t.float "latitude"
-    t.float "longitude"
-    t.datetime "published_at"
-    t.integer "coauthorships_count", default: 0, null: false
-    t.integer "endorsements_count", default: 0, null: false
-    t.integer "comments_count", default: 0, null: false
-    t.bigint "decidim_component_id"
-    t.bigint "decidim_category_id"
-    t.bigint "decidim_scope_id"
-    t.string "reference"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "decidim_dummy_resources_dummy_resources", force: :cascade do |t|
-    t.jsonb "translatable_text"
-    t.jsonb "title"
-    t.string "body"
-    t.text "address"
-    t.float "latitude"
-    t.float "longitude"
-    t.datetime "published_at"
-    t.integer "coauthorships_count", default: 0, null: false
-    t.integer "endorsements_count", default: 0, null: false
-    t.integer "comments_count", default: 0, null: false
-    t.integer "follows_count", default: 0, null: false
-    t.bigint "decidim_component_id"
-    t.integer "decidim_author_id"
-    t.string "decidim_author_type"
-    t.integer "decidim_user_group_id"
-    t.bigint "decidim_category_id"
-    t.bigint "decidim_scope_id"
-    t.string "reference"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "decidim_dummy_resources_nested_dummy_resources", force: :cascade do |t|
-    t.jsonb "translatable_text"
-    t.string "title"
-    t.bigint "dummy_resource_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "decidim_editor_images", force: :cascade do |t|
@@ -1618,23 +1568,6 @@ ActiveRecord::Schema.define(version: 2024_04_24_162059) do
     t.index ["decidim_proposal_id"], name: "decidim_proposals_proposal_note_proposal"
   end
 
-  create_table "decidim_proposals_proposal_states", force: :cascade do |t|
-    t.jsonb "title"
-    t.jsonb "description"
-    t.jsonb "announcement_title"
-    t.string "token", null: false
-    t.boolean "system", default: false, null: false
-    t.bigint "decidim_component_id", null: false
-    t.integer "proposals_count", default: 0, null: false
-    t.boolean "default", default: false, null: false
-    t.boolean "answerable", default: false, null: false
-    t.boolean "notifiable", default: false, null: false
-    t.boolean "gamified", default: false, null: false
-    t.json "include_in_stats", default: {}, null: false
-    t.string "css_class"
-    t.index ["decidim_component_id"], name: "index_decidim_proposals_proposal_states_on_decidim_component_id"
-  end
-
   create_table "decidim_proposals_proposal_votes", id: :serial, force: :cascade do |t|
     t.integer "decidim_proposal_id", null: false
     t.integer "decidim_author_id", null: false
@@ -1832,16 +1765,6 @@ ActiveRecord::Schema.define(version: 2024_04_24_162059) do
     t.index ["mounted_engine_name"], name: "index_decidim_short_links_on_mounted_engine_name"
     t.index ["route_name"], name: "index_decidim_short_links_on_route_name"
     t.index ["target_type", "target_id"], name: "index_decidim_short_links_on_target"
-  end
-
-  create_table "decidim_sms_twilio_deliveries", force: :cascade do |t|
-    t.string "from"
-    t.string "to"
-    t.string "body"
-    t.string "sid"
-    t.string "status"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "decidim_sortitions_sortitions", force: :cascade do |t|
@@ -2198,6 +2121,7 @@ ActiveRecord::Schema.define(version: 2024_04_24_162059) do
   add_foreign_key "decidim_debates_debates", "decidim_scopes"
   add_foreign_key "decidim_editor_images", "decidim_organizations"
   add_foreign_key "decidim_editor_images", "decidim_users", column: "decidim_author_id"
+  add_foreign_key "decidim_half_signup_auth_settings", "decidim_organizations"
   add_foreign_key "decidim_identities", "decidim_organizations"
   add_foreign_key "decidim_initiatives_settings", "decidim_organizations"
   add_foreign_key "decidim_newsletters", "decidim_users", column: "author_id"
