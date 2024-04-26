@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_04_060339) do
+ActiveRecord::Schema.define(version: 2024_03_05_083819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -366,7 +366,6 @@ ActiveRecord::Schema.define(version: 2024_04_04_060339) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "decidim_scope_id"
-    t.json "category_budget_rules", default: []
     t.index ["decidim_component_id"], name: "index_decidim_budgets_budgets_on_decidim_component_id"
     t.index ["decidim_scope_id"], name: "index_decidim_budgets_budgets_on_decidim_scope_id"
   end
