@@ -23,7 +23,7 @@ module Decidim
             current_user: user,
             current_organization: organization,
             current_component: nil,
-            initiative: initiative,
+            initiative: initiative
           }
         end
 
@@ -54,7 +54,7 @@ module Decidim
               context "when there are no votes" do
                 it "returns the correct offline_votes" do
                   scope_name = scope.scope_name["en"]
-                  expected = { initiative.scope.id.to_s.to_sym => [0, { "ca" => scope_name, "en" => scope_name, "es" => scope_name, "fr"=> scope_name} ] }
+                  expected = { initiative.scope.id.to_s.to_sym => [0, { "ca" => scope_name, "en" => scope_name, "es" => scope_name, "fr" => scope_name }] }
                   expect(subject.offline_votes).to eq expected
                 end
               end
@@ -64,7 +64,7 @@ module Decidim
 
                 it "returns the correct offline_votes" do
                   scope_name = scope.scope_name["en"]
-                  expected = { initiative.scope.id.to_s.to_sym => ["100", { "ca" => scope_name, "en" => scope_name, "es" => scope_name, "fr"=> scope_name }] }
+                  expected = { initiative.scope.id.to_s.to_sym => ["100", { "ca" => scope_name, "en" => scope_name, "es" => scope_name, "fr" => scope_name }] }
                   expect(subject.offline_votes).to eq expected
                 end
               end
@@ -105,7 +105,7 @@ module Decidim
             let(:state) { "validating" }
 
             context "and user current_user is admin" do
-              let(:user) { create(:user, :admin, organization: organization ) }
+              let(:user) { create(:user, :admin, organization: organization) }
 
               it { is_expected.to be(true) }
             end
