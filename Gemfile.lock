@@ -73,8 +73,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
-  revision: 80e376ec674dad17812a3ee1e542a3bc88461add
-  branch: chore/update-initializer
+  revision: a3e77fb29e9a19793b3ff8b5d2273d41fac0919b
+  branch: release/0.27-stable
   specs:
     decidim-phone_authorization_handler (1.0.0)
       decidim-core (~> 0.27)
@@ -1104,6 +1104,7 @@ PLATFORMS
   x86_64-darwin-20
   x86_64-darwin-21
   x86_64-darwin-22
+  x86_64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
