@@ -141,4 +141,7 @@ ignore_unused:
   - activemodel.attributes.attachment.documents
   - activemodel.attributes.participatory_space_private_user_csv_import.file
   - decidim.forms.user_answers_serializer.{email,name}
+  - decidim.newsletters.unsubscribe.success
+  - decidim.newsletters.unsubscribe.error
+  - decidim.newsletters.unsubscribe.token_error
 
