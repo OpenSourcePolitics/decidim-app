@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git
-  revision: 9bc2c4928185b9e775b3bad3921f9ae00b49acca
+  revision: fdf312eeb94535364c8cdf98da1cccab88861746
   specs:
     decidim-friendly_signup (0.4.5)
       decidim-core (~> 0.27)
@@ -73,8 +73,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
-  revision: 80e376ec674dad17812a3ee1e542a3bc88461add
-  branch: chore/update-initializer
+  revision: a3e77fb29e9a19793b3ff8b5d2273d41fac0919b
+  branch: release/0.27-stable
   specs:
     decidim-phone_authorization_handler (1.0.0)
       decidim-core (~> 0.27)
@@ -1101,6 +1101,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  arm64-darwin-23
   x86_64-darwin-20
   x86_64-darwin-21
   x86_64-darwin-22
