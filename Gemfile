@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 DECIDIM_VERSION = "0.27"
 DECIDIM_BRANCH = "release/#{DECIDIM_VERSION}-stable".freeze
-DECIDIM_ANONYMOUS_PROPOSALS_VERSION = { git: "https://github.com/PopulateTools/decidim-module-anonymous_proposals", branch: "anonymous_proposals_for_registered_users" }
+DECIDIM_ANONYMOUS_PROPOSALS_VERSION = { git: "https://github.com/PopulateTools/decidim-module-anonymous_proposals", branch: "anonymous_proposals_for_registered_users" }.freeze
 
 ruby RUBY_VERSION
 
@@ -15,6 +15,7 @@ gem "decidim-initiatives", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 
 # External Decidim gems
+gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
 gem "decidim-cache_cleaner"
 gem "decidim-category_enhanced", "~> 0.0.1"
@@ -30,7 +31,6 @@ gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePo
 gem "decidim-spam_detection"
 gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "fix/email_with_precompile"
-gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 
 # Omniauth gems
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
