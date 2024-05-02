@@ -35,6 +35,7 @@ namespace :decidim_app do
     task install: :environment do
       puts "Running db:migrate"
       Rake::Task["db:migrate"].invoke
+      Rake::Task["decidim_anonymous_proposals:generate_anonymous_group"].invoke
     end
 
     # This task is used to upgrade your decidim-app to the latest version
@@ -48,6 +49,7 @@ namespace :decidim_app do
       Rake::Task["decidim:repair:url_in_content"].invoke
       puts "Running decidim:repair:translations"
       Rake::Task["decidim:repair:translations"].invoke
+      Rake::Task["decidim_anonymous_proposals:generate_anonymous_group"].invoke
     end
 
     desc "usage: bundle exec rails k8s:dump_db"
