@@ -108,6 +108,9 @@ ignore_missing:
  - decidim.account.email_change.*
  - decidim.account.show.*
  - layouts.decidim.user_menu.profile
+ - decidim.newsletters.unsubscribe.success
+ - decidim.newsletters.unsubscribe.error
+ - decidim.newsletters.unsubscribe.token_error
 
 # Consider these keys used:
 ignore_unused:
