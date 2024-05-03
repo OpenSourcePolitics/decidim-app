@@ -86,6 +86,7 @@ module Decidim
             expect(User).to receive(:create!).with(
               name: form.name,
               nickname: form.nickname,
+              notifications_sending_frequency: "daily",
               email: form.email,
               password: form.password,
               password_confirmation: form.password_confirmation,
@@ -101,7 +102,9 @@ module Decidim
                 gender: nil,
                 location: nil,
                 phone_number: nil,
-                postal_code: nil
+                postal_code: nil,
+                statutory_representative_email: nil,
+                underage: nil
               }
             ).and_call_original
 

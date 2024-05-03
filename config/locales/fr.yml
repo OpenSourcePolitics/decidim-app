@@ -74,6 +74,10 @@ fr:
           email_outro: Vérifiez la <a href="%{conflicts_path}">Liste de conflits des vérifications</a> et contactez les participants pour vérifier leurs renseignements et résoudre le problème.
           email_subject: Un utilisateur a tenté de se faire vérifier avec les données d'un utilisateur représenté
           notification_title: Le participant <a href="%{resource_path}">%{resource_title}</a> a tenté de se faire vérifier avec les données de l'utilisateur représenté <a href="%{managed_user_path}">%{managed_user_name}</a>.
+    forms:
+      user_answers_serializer:
+        email: Email
+        name: Nom
     initiatives:
       admin:
         initiatives:
@@ -112,9 +116,6 @@ fr:
           ok_text: Attention, ce mot de passe est celui de votre compte local et en aucun cas celui du compte que vous utilisez au travers de FranceConnect. Il vous servira uniquement lorsque vous vous connecterez avec votre adresse mail plutôt que via FranceConnect.
     proposals:
       collaborative_drafts:
-        edit:
-          attachment_legend: "(Facultatif) Ajouter une pièce jointe"
-          select_a_category: Veuillez sélectionner une catégorie
         new:
           add_file: Ajouter le fichier
           edit_file: Editer le fichier

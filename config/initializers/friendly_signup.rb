@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+return unless defined?(Decidim::FriendlySignup)
+
 Decidim::FriendlySignup.configure do |config|
   # Override password views or leave the originals (default is true):
   config.override_passwords = ENV.fetch("FRIENDLY_SIGNUP_OVERRIDE_PASSWORDS", "1") == "1"

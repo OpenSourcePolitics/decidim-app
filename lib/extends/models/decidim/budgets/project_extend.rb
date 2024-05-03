@@ -5,6 +5,17 @@ module ProjectExtends
   extend ActiveSupport::Concern
 
   included do
+    delegate :visible?, to: :budget
+
+    searchable_fields({
+                        scope_id: :decidim_scope_id,
+                        participatory_space: { component: :participatory_space },
+                        A: :title,
+                        D: :description,
+                        datetime: :created_at
+                      },
+                      index_on_create: ->(project) { project.visible? },
+                      index_on_update: ->(project) { project.visible? })
     def self.ordered_ids(ids)
       # Make sure each ID in the matching text has a "," character as their
       # delimiter. Otherwise e.g. ID 2 would match ID "26" in the original

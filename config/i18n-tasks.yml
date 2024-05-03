@@ -105,6 +105,9 @@ ignore_missing:
  - decidim.admin.titles.initiatives
  - decidim.admin.models.initiatives.fields.*
  - decidim.admin.actions.configure
+ - decidim.account.email_change.*
+ - decidim.account.show.*
+ - layouts.decidim.user_menu.profile
 
 # Consider these keys used:
 ignore_unused:
@@ -137,4 +140,5 @@ ignore_unused:
   - decidim.initiatives.pages.home.highlighted_initiatives.*
   - activemodel.attributes.attachment.documents
   - activemodel.attributes.participatory_space_private_user_csv_import.file
+  - decidim.forms.user_answers_serializer.{email,name}
 

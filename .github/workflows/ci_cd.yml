@@ -10,8 +10,8 @@ env:
   NODE_VERSION: 16.9.1
   RUBYOPT: '-W:no-deprecated'
   # Set locales available for i18n tasks
-  ENFORCED_LOCALES: "en,fr"
-  AVAILABLE_LOCALES: "en,fr"
+  ENFORCED_LOCALES: "en,fr,ca,es"
+  AVAILABLE_LOCALES: "en,fr,ca,es"
 
 jobs:
   todo:
@@ -107,8 +107,8 @@ jobs:
       - uses: nanasess/setup-chromedriver@v2
       - run:  bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
-      - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
-        name: Upload coverage
+      #- run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
+      #  name: Upload coverage
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -173,8 +173,8 @@ jobs:
       - uses: nanasess/setup-chromedriver@v2
       - run:  bundle exec rake "test:run[include, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
-      - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
-        name: Upload coverage
+      #- run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
+      #  name: Upload coverage
       - uses: actions/upload-artifact@v3
         if: always()
         with:
