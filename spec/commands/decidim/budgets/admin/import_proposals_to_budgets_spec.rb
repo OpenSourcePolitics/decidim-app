@@ -36,7 +36,6 @@ module Decidim
               valid?: true
             )
           end
-
           let(:default_budget) { 1000 }
           let(:command) { described_class.new(form) }
 
