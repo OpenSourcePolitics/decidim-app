@@ -23,9 +23,9 @@ module Decidim
           let!(:parent_scope) { create(:scope, organization: organization) }
           let!(:scope_one) { create(:scope, organization: organization, parent: parent_scope) }
           let!(:scope_two) { create(:scope, organization: organization, parent: parent_scope) }
-          let(:scope) { nil }
+          let!(:scope) { parent_scope }
           let!(:form) do
-            instance_double(
+            double(
               ProjectImportProposalsForm,
               origin_component: proposal.component,
               current_component: current_component,
@@ -36,12 +36,14 @@ module Decidim
               valid?: true
             )
           end
+
           let(:default_budget) { 1000 }
           let(:command) { described_class.new(form) }
 
-          context "when parent_scope" do
-            let(:scope) { parent_scope }
-
+          context "when parent_scope is selected" do
+            before do
+              allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(parent_scope.id)
+            end
             context "and parent_scope has no children" do
               it "creates one project from parent proposal" do
                 proposal.update(decidim_scope_id: parent_scope.id)
@@ -65,9 +67,10 @@ module Decidim
             end
           end
 
-          context "when child_scope" do
-            let(:scope) { scope_one }
-
+          context "when child_scope is selected" do
+            before do
+              allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(scope_one.id)
+            end
             it "creates one project from child proposal" do
               proposal.update(decidim_scope_id: parent_scope.id)
               first_proposal.update(decidim_scope_id: scope_one.id, component: proposal.component)
