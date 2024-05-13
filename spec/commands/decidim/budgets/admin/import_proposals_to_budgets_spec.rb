@@ -39,47 +39,48 @@ module Decidim
           let(:default_budget) { 1000 }
           let(:command) { described_class.new(form) }
 
-          context "when scope is enabled in budget config and equal to parent_scope"
-          context "and parent_scope is selected in the form" do
-            before do
-              allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(parent_scope.id)
+          context "when scope is enabled in budget config and equal to parent_scope" do
+            context "and parent_scope is selected in the form" do
+              before do
+                allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(parent_scope.id)
+              end
+
+              context "and parent_scope has no children" do
+                it "creates one project from parent proposal" do
+                  proposal.update(decidim_scope_id: parent_scope.id)
+                  expect do
+                    command.call
+                  end.to change { Project.where(budget: budget).count }.by(1)
+                  expect(Project.last.title).to eq(proposal.title)
+                end
+              end
+
+              context "and parent_scope has children" do
+                it "creates projects from children proposals and parent proposal" do
+                  proposal.update(decidim_scope_id: parent_scope.id)
+                  first_proposal.update(decidim_scope_id: scope_one.id, component: proposal.component)
+                  second_proposal.update(decidim_scope_id: scope_two.id, component: proposal.component)
+                  expect do
+                    command.call
+                  end.to change { Project.where(budget: budget).count }.by(3)
+                  expect(Project.last(3).map(&:title)).to include(proposal.title, first_proposal.title, second_proposal.title)
+                end
+              end
             end
 
-            context "and parent_scope has no children" do
-              it "creates one project from parent proposal" do
+            context "when child_scope is selected in the form" do
+              before do
+                allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(scope_one.id)
+              end
+
+              it "creates one project from child proposal" do
                 proposal.update(decidim_scope_id: parent_scope.id)
+                first_proposal.update(decidim_scope_id: scope_one.id, component: proposal.component)
                 expect do
                   command.call
                 end.to change { Project.where(budget: budget).count }.by(1)
-                expect(Project.last.title).to eq(proposal.title)
+                expect(Project.last.title).to eq(first_proposal.title)
               end
-            end
-
-            context "and parent_scope has children" do
-              it "creates projects from children proposals and parent proposal" do
-                proposal.update(decidim_scope_id: parent_scope.id)
-                first_proposal.update(decidim_scope_id: scope_one.id, component: proposal.component)
-                second_proposal.update(decidim_scope_id: scope_two.id, component: proposal.component)
-                expect do
-                  command.call
-                end.to change { Project.where(budget: budget).count }.by(3)
-                expect(Project.last(3).map(&:title)).to include(proposal.title, first_proposal.title, second_proposal.title)
-              end
-            end
-          end
-
-          context "when child_scope is selected in the form" do
-            before do
-              allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(scope_one.id)
-            end
-
-            it "creates one project from child proposal" do
-              proposal.update(decidim_scope_id: parent_scope.id)
-              first_proposal.update(decidim_scope_id: scope_one.id, component: proposal.component)
-              expect do
-                command.call
-              end.to change { Project.where(budget: budget).count }.by(1)
-              expect(Project.last.title).to eq(first_proposal.title)
             end
           end
 
