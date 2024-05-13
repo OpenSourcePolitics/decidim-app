@@ -44,6 +44,7 @@ module Decidim
             before do
               allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(parent_scope.id)
             end
+
             context "and parent_scope has no children" do
               it "creates one project from parent proposal" do
                 proposal.update(decidim_scope_id: parent_scope.id)
@@ -71,6 +72,7 @@ module Decidim
             before do
               allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(scope_one.id)
             end
+
             it "creates one project from child proposal" do
               proposal.update(decidim_scope_id: parent_scope.id)
               first_proposal.update(decidim_scope_id: scope_one.id, component: proposal.component)
