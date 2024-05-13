@@ -39,7 +39,8 @@ module Decidim
           let(:default_budget) { 1000 }
           let(:command) { described_class.new(form) }
 
-          context "when parent_scope is selected" do
+          context "when scope is enabled in budget config and equal to parent_scope"
+          context "and parent_scope is selected in the form" do
             before do
               allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(parent_scope.id)
             end
@@ -67,7 +68,7 @@ module Decidim
             end
           end
 
-          context "when child_scope is selected" do
+          context "when child_scope is selected in the form" do
             before do
               allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(scope_one.id)
             end
@@ -79,6 +80,21 @@ module Decidim
                 command.call
               end.to change { Project.where(budget: budget).count }.by(1)
               expect(Project.last.title).to eq(first_proposal.title)
+            end
+          end
+
+          context "when scope is not enabled in budget config" do
+            before do
+              allow_any_instance_of(Decidim::Budgets::Admin::ImportProposalsToBudgets).to receive(:selected_scope_id).and_return(nil)
+            end
+
+            it "creates as many projects as accepted proposals" do
+              proposal.update(decidim_scope_id: parent_scope.id)
+              first_proposal.update(decidim_scope_id: scope_one.id, component: proposal.component)
+              expect do
+                command.call
+              end.to change { Project.where(budget: budget).count }.by(2)
+              expect(Project.last(2).map(&:title)).to include(proposal.title, first_proposal.title)
             end
           end
         end
