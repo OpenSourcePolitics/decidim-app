@@ -2,7 +2,7 @@
 # This migration comes from decidim_budgets_booth (originally 20230303144938)
 
 class CreateDecidimBudgetsUserData < ActiveRecord::Migration[6.1]
-  def change
+  def up
     create_table :decidim_budgets_user_data do |t|
       t.jsonb :metadata
       t.boolean :affirm_statements_are_correct, default: false
