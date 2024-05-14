@@ -51,6 +51,7 @@ module DevelopmentApp
       require "extends/commands/decidim/initiatives/admin/update_initiative_answer_extends"
       require "extends/controllers/decidim/initiatives/committee_requests_controller_extends"
       require "extends/models/decidim/budgets/project_extend"
+      require "extends/controllers/decidim/newsletters_controller_extends"
 
       Decidim::GraphiQL::Rails.config.tap do |config|
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe

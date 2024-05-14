@@ -3714,9 +3714,9 @@
     "jake" "^10.8.5"
 
 "electron-to-chromium@^1.4.668":
-  "integrity" "sha512-tRbzkaRI5gbUn5DEvF0dV4TQbMZ5CLkWeTAXmpC9IrYT+GE+x76i9p+o3RJ5l9XmdQlI1pPhVtE9uNcJJ0G0EA=="
-  "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.745.tgz"
-  "version" "1.4.745"
+  "integrity" "sha512-VWqjOlPZn70UZ8FTKUOkUvBLeTQ0xpty66qV0yJcAGY2/CthI4xyW9aEozRVtuwv3Kpf5xTesmJUcPwuJmgP4A=="
+  "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.748.tgz"
+  "version" "1.4.748"
 
 "element-matches-polyfill@^1.0.0":
   "integrity" "sha512-6xnaB9NpWYmSgWP1/njuCanX1nopjVZRvSivd9cX7cfURGdldeT46g+3ph1pfNNiiPvHLjfhUk/8HXQkbcu7ng=="
@@ -6374,10 +6374,10 @@
   dependencies:
     "postcss-value-parser" "^4.2.0"
 
-"postcss-custom-properties@^13.3.7":
-  "integrity" "sha512-0N9F/GUCr/D0IazjzHahyYW2bQVDT6qDtEudiGHAhMd3XqhfM3VmfYVlkc/40DOhsPtngSNb54/Ctu8msvFOvQ=="
-  "resolved" "https://registry.npmjs.org/postcss-custom-properties/-/postcss-custom-properties-13.3.7.tgz"
-  "version" "13.3.7"
+"postcss-custom-properties@^13.3.8":
+  "integrity" "sha512-OP9yj4yXxYOiW2n2TRpnE7C0yePvBiZb72S22mZVNzZEObdTYFjNaX6oZO4R4E8Ie9RmC/Jxw8EKYSbLrC1EFA=="
+  "resolved" "https://registry.npmjs.org/postcss-custom-properties/-/postcss-custom-properties-13.3.8.tgz"
+  "version" "13.3.8"
   dependencies:
     "@csstools/cascade-layer-name-parser" "^1.0.9"
     "@csstools/css-parser-algorithms" "^2.6.1"
@@ -6688,9 +6688,9 @@
     "postcss-value-parser" "^4.2.0"
 
 "postcss-preset-env@^6.7.0", "postcss-preset-env@^9.1.3":
-  "integrity" "sha512-AjQ5ZgrVJVL8Ja7UxIlbyHUN5knkdk6L0JxxV7KDZU4S5WfJjRNgvWlU7Xq7CMyRZSjHZBmLDOsBKIL9WStPyw=="
-  "resolved" "https://registry.npmjs.org/postcss-preset-env/-/postcss-preset-env-9.5.8.tgz"
-  "version" "9.5.8"
+  "integrity" "sha512-W+WgDH1MOWLT3Fsvknd45pzGMQ8Sp3fmt94Pxeik3Zkqfhw2XUDF8FehfV3Naxw4l/NrKPWLtltPJYVnpjMmfw=="
+  "resolved" "https://registry.npmjs.org/postcss-preset-env/-/postcss-preset-env-9.5.9.tgz"
+  "version" "9.5.9"
   dependencies:
     "@csstools/postcss-cascade-layers" "^4.0.4"
     "@csstools/postcss-color-function" "^3.0.14"
@@ -6733,7 +6733,7 @@
     "postcss-color-hex-alpha" "^9.0.4"
     "postcss-color-rebeccapurple" "^9.0.3"
     "postcss-custom-media" "^10.0.4"
-    "postcss-custom-properties" "^13.3.7"
+    "postcss-custom-properties" "^13.3.8"
     "postcss-custom-selectors" "^7.1.8"
     "postcss-dir-pseudo-class" "^8.0.1"
     "postcss-double-position-gradients" "^5.0.6"
@@ -7466,6 +7466,11 @@
   "integrity" "sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg=="
   "resolved" "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
   "version" "2.1.2"
+
+"sass-embedded-darwin-arm64@1.62.0":
+  "integrity" "sha512-bYEM6DY7kteOd/aJXUisiavm8B1acRhpIn+rhzKZeTn87kUW5RzZv2nKaSmb1vUd4ZptDGaJ144qz/d20rnogQ=="
+  "resolved" "https://registry.npmjs.org/sass-embedded-darwin-arm64/-/sass-embedded-darwin-arm64-1.62.0.tgz"
+  "version" "1.62.0"
 
 "sass-embedded-darwin-x64@1.62.0":
   "integrity" "sha512-2sBQ4uWjZbf8TKXF8Aq7N0p5V2tKUr4zX9gQAiKvm1NBYwsW22+m8D34heOWu50ikpIxebvt7i/z7hafH5kzKg=="
