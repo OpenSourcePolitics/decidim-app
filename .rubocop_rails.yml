@@ -104,3 +104,6 @@ Rails/BulkChangeTable:
 RSpec/MultipleMemoizedHelpers:
   Exclude:
     - spec/**/**
+
+RSpec/AnyInstance:
+  Enabled: false

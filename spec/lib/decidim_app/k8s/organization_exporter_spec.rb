@@ -32,10 +32,8 @@ describe DecidimApp::K8s::OrganizationExporter do
 
   describe ".export!" do
     it "calls the right methods" do
-      # rubocop:disable RSpec/AnyInstance
       expect_any_instance_of(described_class).to receive(:export!)
       described_class.export!(organization, logger, export_path, image)
-      # rubocop:enable RSpec/AnyInstance
     end
   end
 
