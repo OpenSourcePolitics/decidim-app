@@ -41,12 +41,10 @@ describe "DeploymentType" do
         "User-Agent" => "Ruby"
       }
     ).to_return(status: 200, body: github_response, headers: {})
-    # rubocop:disable RSpec/AnyInstance
     allow_any_instance_of(DeploymentType).to receive(:`).with("git ls-remote --get-url").and_return(repo_name)
     allow_any_instance_of(DeploymentType).to receive(:`).with("git rev-parse HEAD").and_return("220fd7b6f8701816c60c0610d5a62a59b962b231")
     allow_any_instance_of(DeploymentType).to receive(:`).with("git rev-parse --abbrev-ref HEAD").and_return("master")
     allow_any_instance_of(DeploymentType).to receive(:`).with("git status --porcelain").and_return("")
-    # rubocop:enable RSpec/AnyInstance
   end
 
   describe "valid query" do
