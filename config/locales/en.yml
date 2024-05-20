@@ -112,6 +112,9 @@ en:
           text: What is FranceConnect ?
         forgot_password:
           ok_text: Warning, this password is the one of your local account and in no case the one of the account you use through FranceConnect. It will only be used when you log in with your email address rather than via FranceConnect.
+    participatory_processes:
+      show:
+        local_area: Organization area
     proposals:
       collaborative_drafts:
         new:
@@ -204,3 +207,5 @@ en:
       time: 'You will be able to navigate on our website in :'
       time_unit: seconds
       title: Thank you for your participation on %{organization_name}
+  sms_verification_workflow:
+    message: 'Hello, here is the code to authenticate yourself on the %{platform} platform: %{code}'

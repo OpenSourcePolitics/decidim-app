@@ -69,6 +69,7 @@ Decidim.configure do |config|
   # take over user accounts.
   #
   config.enable_html_header_snippets = true
+  config.sms_gateway_service = "Decidim::Verifications::Sms::ExampleGateway"
 
   # SMS gateway configuration
   #
@@ -91,7 +92,7 @@ Decidim.configure do |config|
   #   end
   # end
   #
-  # config.sms_gateway_service = 'Decidim::Verifications::Sms::ExampleGateway'
+  config.sms_gateway_service = Rails.application.secrets.dig(:decidim, :sms_gateway_service) if Rails.application.secrets.dig(:decidim, :sms_gateway_service).present?
 
   # Etherpad configuration
   #
@@ -115,6 +116,9 @@ Decidim.configure do |config|
   config.enable_machine_translations = Rails.application.secrets.translator[:enabled]
   config.machine_translation_service = "DeeplTranslator"
   config.machine_translation_delay = Rails.application.secrets.translator[:delay]
+
+  # newsletter unsubscribe link timeout
+  config.newsletters_unsubscribe_timeout = Rails.application.secrets.dig(:decidim, :newsletters_unsubscribe_timeout)
 end
 
 Rails.application.config.i18n.available_locales = Decidim.available_locales

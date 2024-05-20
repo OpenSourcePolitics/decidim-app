@@ -114,6 +114,9 @@ fr:
           text: Qu'est-ce-que FranceConnect ?
         forgot_password:
           ok_text: Attention, ce mot de passe est celui de votre compte local et en aucun cas celui du compte que vous utilisez au travers de FranceConnect. Il vous servira uniquement lorsque vous vous connecterez avec votre adresse mail plutôt que via FranceConnect.
+    participatory_processes:
+      show:
+        local_area: Espace d'organisation
     proposals:
       collaborative_drafts:
         new:
@@ -206,3 +209,5 @@ fr:
       time: 'Vous pourrez naviguer de nouveau sur notre plateforme dans :'
       time_unit: seconds
       title: Thank you for your participation on %{organization_name}
+  sms_verification_workflow:
+    message: Bonjour, %{code} est le code pour vous authentifier sur la plateforme %{platform}
