@@ -35,3 +35,22 @@ RSpec.configure do |config|
     end
   end
 end
+
+def bundler_gem_path(gem_name)
+  spec = Bundler.rubygems.find_name(gem_name).first
+  spec.full_gem_path
+rescue Gem::LoadError
+  nil
+end
+
+def fixture_asset(name)
+  fixture_path = bundler_gem_path("decidim-budgets_importer")
+  return "" if fixture_path.blank?
+
+  File.expand_path(File.join(fixture_path, "spec", "fixtures", "files", name))
+end
+
+# Public: Returns a file for testing, just like file fields expect it
+def fixture_test_file(filename, content_type)
+  Rack::Test::UploadedFile.new(fixture_asset(filename), content_type)
+end

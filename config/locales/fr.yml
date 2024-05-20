@@ -14,6 +14,12 @@ fr:
         private_space: Espace privé
       participatory_space_private_user_csv_import:
         file: importer un fichier d'utilisateurs
+    errors:
+      models:
+        assembly:
+          attributes:
+            document:
+              invalid_document_type: Le type de document n'est pas valide
   decidim:
     admin:
       menu:
