@@ -148,4 +148,5 @@ ignore_unused:
   - decidim.newsletters.unsubscribe.success
   - decidim.newsletters.unsubscribe.error
   - decidim.newsletters.unsubscribe.token_error
+  - decidim.half_signup.quick_auth.sms_verification.text_message
 
