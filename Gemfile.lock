@@ -63,7 +63,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-ptp.git
-  revision: 18c7422633b743ff6fe63e1dda90bb3480d741a8
+  revision: 025a22755afc4ca3cec4c6fef65adebe1b26110c
   specs:
     decidim-budgets_booth (0.27.0)
       decidim-budgets (~> 0.27.0)
