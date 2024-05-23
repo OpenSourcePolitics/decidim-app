@@ -7,13 +7,13 @@ module Decidim
   class SmsGatewayService
     attr_reader :mobile_phone_number, :code
 
-    def initialize(mobile_phone_number, code, sms_gateway_context)
+    def initialize(mobile_phone_number, code, sms_gateway_context = {})
       @mobile_phone_number = mobile_phone_number
       @code = code
       @organization_name = sms_gateway_context[:organization]&.name
-      @url = ENV.fetch("SMS_GATEWAY_URL", nil)
-      @username = ENV.fetch("SMS_GATEWAY_USERNAME", nil)
-      @password = ENV.fetch("SMS_GATEWAY_PASSWORD", nil)
+      @url = fetch_configuration(:url)
+      @username = fetch_configuration(:username)
+      @password = fetch_configuration(:password)
       @message = sms_message
       @type = "sms"
     end
@@ -32,7 +32,18 @@ module Decidim
     def sms_message
       return code if code.to_s.length > Decidim::HalfSignup.auth_code_length
 
-      I18n.t("sms_verification_workflow.message", code: code, platform: ENV.fetch("SMS_GATEWAY_PLATFORM", @organization_name))
+      platform = fetch_configuration(:platform, required: false).presence || @organization_name
+      I18n.t("sms_verification_workflow.message", code: code, platform: platform)
+    end
+
+    def fetch_configuration(key, required: true)
+      value = Rails.application.secrets.dig(:decidim, :sms_gateway, key.to_sym)
+      if required && value.blank?
+        Rails.logger.error "Decidim::SmsGatewayService is missing a configuration value for :#{key}, " \
+                           "please check Rails.application.secrets(\"decidim.sms_gateway.#{key}\") " \
+                           "or environment variable SMS_GATEWAY_#{key.to_s.upcase}"
+      end
+      value
     end
   end
 end
