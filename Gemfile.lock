@@ -49,8 +49,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git
-  revision: cec7c1f329777a1a011214346c7a957475fa7679
-  branch: feature/half_signup_and_budgets_booth
+  revision: 560f2ef0c3c448ea828505e5bbc089d917ddf13c
+  branch: main
   specs:
     decidim-half_signup (0.27.0)
       countries (~> 5.1, >= 5.1.2)
@@ -1117,6 +1117,7 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
+  arm64-darwin-21
   arm64-darwin-22
   arm64-darwin-23
   x86_64-darwin-20
