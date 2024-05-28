@@ -14,7 +14,7 @@ gem "decidim-initiatives", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 
 # Load Budgets Booth to avoid errors
-gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp", branch: "fix/javascript_category_compat"
+gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp"
 
 # External Decidim gems
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
