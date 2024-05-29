@@ -17,7 +17,7 @@ gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
 gem "decidim-cache_cleaner"
 gem "decidim-category_enhanced", "~> 0.0.1"
-gem "decidim-decidim_awesome"
+gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: "main"
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
                                                                 branch: DECIDIM_BRANCH
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "release/0.27-stable"

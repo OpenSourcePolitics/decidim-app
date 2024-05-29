@@ -107,6 +107,17 @@ GIT
       deface (>= 1.9)
 
 GIT
+  remote: https://github.com/decidim-ice/decidim-module-decidim_awesome
+  revision: 058af7db47737e3ca108ac8e08efd5ec55d67a44
+  branch: main
+  specs:
+    decidim-decidim_awesome (0.10.2)
+      decidim-admin (>= 0.26.0, < 0.28)
+      decidim-core (>= 0.26.0, < 0.28)
+      deface (>= 1.5)
+      sassc (~> 2.3)
+
+GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
   revision: bc33600db7a2d16ce3cdc1f8369d0d7e7c4245b5
   specs:
@@ -424,11 +435,6 @@ GEM
     decidim-debates (0.27.4)
       decidim-comments (= 0.27.4)
       decidim-core (= 0.27.4)
-    decidim-decidim_awesome (0.10.2)
-      decidim-admin (>= 0.26.0, < 0.28)
-      decidim-core (>= 0.26.0, < 0.28)
-      deface (>= 1.5)
-      sassc (~> 2.3)
     decidim-dev (0.27.4)
       axe-core-rspec (~> 4.1.0)
       byebug (~> 11.0)
@@ -1100,6 +1106,7 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
+  arm64-darwin-21
   arm64-darwin-22
   arm64-darwin-23
   x86_64-darwin-20
@@ -1121,7 +1128,7 @@ DEPENDENCIES
   decidim-cache_cleaner
   decidim-category_enhanced (~> 0.0.1)
   decidim-conferences (~> 0.27.0)
-  decidim-decidim_awesome
+  decidim-decidim_awesome!
   decidim-dev (~> 0.27.0)
   decidim-extended_socio_demographic_authorization_handler!
   decidim-extra_user_fields!
