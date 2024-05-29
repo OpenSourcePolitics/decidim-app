@@ -42,12 +42,16 @@ namespace :decidim_app do
     # You can add your own customizations here
     desc "Upgrade decidim-app"
     task upgrade: :environment do
-      puts "Running db:migrate"
+      puts "Running upgrade db:migrate"
       Rake::Task["db:migrate"].invoke
       puts "Running decidim:repair:url_in_content"
       Rake::Task["decidim:repair:url_in_content"].invoke
       puts "Running decidim:repair:translations"
       Rake::Task["decidim:repair:translations"].invoke
+    rescue StandardError => e
+      puts "Ignoring error: #{e.message}"
+      puts "Running decidim:db:migrate"
+      Rake::Task["decidim:db:migrate"].invoke
     end
 
     desc "usage: bundle exec rails k8s:dump_db"
