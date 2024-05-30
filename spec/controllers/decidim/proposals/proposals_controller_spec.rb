@@ -22,6 +22,37 @@ module Decidim
         request.env["decidim.current_component"] = component
       end
 
+      describe "default_filter_scope_params" do
+        let!(:component) { create(:proposal_component) }
+
+        context "when component has no scopes" do
+          it "returns all" do
+            expect(controller.instance_eval { default_filter_scope_params }).to eq("all")
+          end
+        end
+
+        context "when component has scope" do
+          let(:scope) { create(:scope, organization: component.organization) }
+
+          context "and no subscope" do
+            it "returns an array containing all and scope id" do
+              component.update!(settings: { scopes_enabled: true, scope_id: scope.id })
+              expect(controller.instance_eval { default_filter_scope_params }).to eq(["all", scope.id.to_s])
+            end
+          end
+
+          context "and subscopes" do
+            let!(:subscope_one) { create(:scope, organization: component.organization, parent: scope) }
+            let!(:subscope_two) { create(:scope, organization: component.organization, parent: scope) }
+
+            it "returns an array containing all and scope id and subscopes ids" do
+              component.update!(settings: { scopes_enabled: true, scope_id: scope.id })
+              expect(controller.instance_eval { default_filter_scope_params }).to eq(["all", scope.id.to_s, subscope_one.id.to_s, subscope_two.id.to_s])
+            end
+          end
+        end
+      end
+
       describe "GET index" do
         context "when participatory texts are disabled" do
           let(:component) { create(:proposal_component, :with_geocoding_enabled) }
