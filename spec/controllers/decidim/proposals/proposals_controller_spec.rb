@@ -43,7 +43,7 @@ module Decidim
 
           context "and subscopes" do
             let!(:subscope_one) { create(:scope, organization: component.organization, parent: scope) }
-            let!(:subscope_two) { create(:scope, organization: component.organization, parent: scope) }
+            let!(:subscope_two) { create(:scope, organization: component.organization, parent: subscope_one) }
 
             it "returns an array containing all and scope id and subscopes ids" do
               component.update!(settings: { scopes_enabled: true, scope_id: scope.id })
