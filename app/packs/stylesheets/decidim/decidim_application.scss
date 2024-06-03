@@ -27,3 +27,19 @@ a[title="Find out more about cookies"]{
   color: #000000;
   text-decoration: underline;
 }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Optionally for IE, if you want to cover older versions of Edge */
+input[type="number"] {
+  -ms-appearance: textfield;
+}
