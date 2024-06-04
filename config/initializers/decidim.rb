@@ -92,7 +92,7 @@ Decidim.configure do |config|
   #   end
   # end
   #
-  config.sms_gateway_service = Rails.application.secrets.dig(:decidim, :sms_gateway_service) if Rails.application.secrets.dig(:decidim, :sms_gateway_service).present?
+  config.sms_gateway_service = Rails.application.secrets.dig(:decidim, :sms_gateway, :service)
 
   # Etherpad configuration
   #
