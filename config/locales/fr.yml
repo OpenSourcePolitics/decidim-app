@@ -126,10 +126,12 @@ fr:
         new:
           add_file: Ajouter le fichier
           edit_file: Editer le fichier
-      index:
-        collaborative_drafts_list: Accéder aux brouillons collaboratifs
-        new_proposal: Nouvelle proposition
-        view_proposal: Voir la proposition
+      proposals:
+        index:
+          collaborative_drafts_list: Accéder aux brouillons collaboratifs
+          new_proposal: Nouvelle proposition
+        map-proposals:
+          view_proposal: Voir la proposition
     scopes:
       global: Portée générale
       picker:
