@@ -1,3 +1,4 @@
+
 var $proposals = $('#proposals');
 var $proposalsCount = $('#proposals-count');
 var $orderFilterInput = $('.order_filter');
@@ -12,36 +13,54 @@ var $dropdownMenu = $('.dropdown.menu', $proposals);
 $dropdownMenu.foundation();
 
 $(() => {
-    // Load the map controller factory method in the document.ready handler to
-    // allow overriding it by any script that is loaded before the document is
-    // ready.
-    let $mapElements = $("[data-decidim-map]");
-    if ($mapElements.length < 1 && $("#map").length > 0) {
-        throw new Error(
-            "DEPRECATION: Please update your maps customizations or include 'decidim/map/legacy.js' for legacy support!"
-        );
-    }
+    const map = L.map('map')
+    const mapInfos = JSON.parse(document.querySelector('#map').dataset.decidimMap);
+    const markers = mapInfos["markers"]
 
-    $mapElements.each((_i, el) => {
-        const $map = $(el);
-        let mapId = $map.attr("id");
-        if (!mapId) {
-            mapId = `map-${Math.random().toString(36).substr(2, 9)}`;
-            $map.attr("id", mapId);
-        }
-        const mapConfig = $map.data("decidim-map");
-        const ctrl = window.Decidim.createMapController(mapId, mapConfig);
-        const map = ctrl.load();
+    const layer = L.tileLayer.here(mapInfos.tileLayer)
+    layer.addTo(map)
 
-        $map.data("map", map);
-        $map.data("map-controller", ctrl);
+    const markerClusters = new L.MarkerClusterGroup();
+    map.addLayer(markerClusters);
 
-        $map.trigger("configure.decidim", [map, mapConfig]);
+    $.template(
+      mapInfos.popupTemplateId,
+      $(`#${mapInfos.popupTemplateId}`).html()
+    );
 
-        ctrl.start();
+    const bounds = new L.LatLngBounds(
+      markers.map(
+        (marker) => [marker.latitude, marker.longitude]
+      )
+    );
 
-        // Indicates the map is loaded with the map objects initialized and ready
-        // to be used.
-        $map.trigger("ready.decidim", [map, mapConfig]);
+    markers.forEach(function(marker){
+        let mark = new L.Marker([marker.latitude, marker.longitude], {
+            icon: new L.DivIcon.SVGIcon.DecidimIcon({fillColor: mapInfos.markerColor, iconSize: L.point(28, 36)}),
+            keyboard: true,
+            title: marker.title
+        });
+        let node = document.createElement("div");
+        $.tmpl(mapInfos.popupTemplateId, marker).appendTo(node);
+        mark.bindPopup(node, {
+            maxwidth: 640,
+            minWidth: 500,
+            keepInView: true,
+            className: "map-info"
+        }).openPopup();
+        markerClusters.addLayer(mark)
     });
+
+    const size = map.getSize();
+    if (size.y >= 400 && size.x >= 400) {
+        map.fitBounds(bounds, { padding: [100, 100] });
+    } else if (size.y >= 120 && size.x >= 120) {
+        map.fitBounds(bounds, { padding: [30, 30] });
+    } else {
+        map.fitBounds(bounds);
+    }
 });
+
+
+
+
