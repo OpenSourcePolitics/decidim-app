@@ -47,3 +47,8 @@ external:
 	docker-compose -f docker-compose.local.yml exec app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/bundle exec rails runner "puts Decidim::Organization.first.update(host: \"$(IP)\")"'; \
 	echo "Decidim organization host updated to $(IP)"; \
 	echo "App is now accessible at https://$(IP):3000";
+
+rebuild:
+	docker-compose -f docker-compose.local.yml down
+	docker volume rm decidim-app_shared-volume || true
+	@make up
