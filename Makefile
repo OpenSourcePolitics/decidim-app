@@ -1,11 +1,12 @@
 run: up
 	@make create-seeds
 
-up:
-	docker build . -f Dockerfile.local -t decidim-app-app:latest
-	docker build . -f Dockerfile.local -t decidim-app-sidekiq:latest
+up: build
 	docker-compose -f docker-compose.local.yml up -d
 	@make setup-database
+
+build:
+	docker build . -f Dockerfile.local -t decidim-app:latest
 
 # Stops containers and remove volumes
 teardown:
@@ -36,6 +37,3 @@ status:
 
 logs:
 	docker-compose -f docker-compose.local.yml logs app
-
-rebuild:
-	docker-compose -f docker-compose.local.yml up --build -d

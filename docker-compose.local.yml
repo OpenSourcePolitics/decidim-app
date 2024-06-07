@@ -17,9 +17,7 @@ services:
     volumes:
       - redis-data:/var/lib/redis/data
   sidekiq:
-    build:
-      context: .
-      dockerfile: Dockerfile.local
+    image: decidim-app:latest
     command: [ "bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml" ]
     environment:
       - DATABASE_HOST=database
@@ -49,9 +47,7 @@ services:
       - database
       - redis
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile.local
+    image: decidim-app:latest
     environment:
       - DATABASE_HOST=database
       - DATABASE_USERNAME=postgres
