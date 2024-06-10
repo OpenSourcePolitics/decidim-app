@@ -87,7 +87,7 @@ fr:
     half_signup:
       quick_auth:
         sms_verification:
-          text_message: Bonjour, %{verification} est le code pour vous authentifier sur la plateforme
+          text_message: Bonjour, %{verification} est le code pour voter sur participons.marseille.fr. Votez et faites voter vos voisins pour les projets du 1er Budget participatif marseillais !
     initiatives:
       admin:
         initiatives:
