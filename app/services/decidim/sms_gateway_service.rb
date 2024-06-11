@@ -8,6 +8,8 @@ module Decidim
     attr_reader :mobile_phone_number, :code
 
     def initialize(mobile_phone_number, code, sms_gateway_context = {})
+      Rails.logger.debug { "#{mobile_phone_number} - #{code}" }
+
       @mobile_phone_number = mobile_phone_number
       @code = code
       @organization_name = sms_gateway_context[:organization]&.name

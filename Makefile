@@ -2,7 +2,9 @@ run: up
 	@make create-seeds
 
 up:
-	docker-compose -f docker-compose.local.yml up --build -d
+	docker build . -f Dockerfile.local -t decidim-app-app:latest
+	docker build . -f Dockerfile.local -t decidim-app-sidekiq:latest
+	docker-compose -f docker-compose.local.yml up -d
 	@make setup-database
 
 # Stops containers and remove volumes
