@@ -76,4 +76,41 @@ namespace :decidim_app do
       DecidimApp::K8s::Manager.run(ENV.fetch("path", nil))
     end
   end
+
+  namespace :budgets do
+    # This task is used to send a reminder by sms to voters who haven't finished their
+    # vote for a budget. When you launch the task, you have to pass the id of the budget
+    # in a variable in terminal
+    desc "send a reminder to vote for budget"
+    task send_sms_reminder: :environment do
+      if ENV.fetch("BUDGET_ID").nil?
+        p "You need to provide a budget ID"
+        next
+      end
+
+      users_ids = Decidim::Budgets::Order.where(decidim_budgets_budget_id: ENV.fetch("BUDGET_ID"))
+                                         .pending
+                                         &.pluck(:decidim_user_id)
+      if users_ids.empty?
+        p "no pending votes"
+        next
+      end
+      users = Decidim::User.where(id: users_ids)
+                           .where.not(phone_number: nil)
+                           .where.not(phone_country: nil)
+      if users.blank?
+        p "no pending votes from users with phone_number"
+        next
+      end
+      file_name = "tmp/send_sms_reminder_#{Time.current.year}_#{Time.current.month}_#{Time.current.day}_#{Time.current.min}.csv"
+      CSV.open(file_name, "wb", col_sep: ";") do |csv|
+        users.each do |user|
+          csv << ["#{user.phone_country}#{user.phone_number}", "Votre vote au budget participatif n'est pas terminé. Pour le terminer, reconnectez-vous sur ecrivons.angers.fr"]
+        end
+      end
+
+      p "users ids: #{users.ids}"
+      p "csv done at #{file_name}"
+    end
+  end
 end
