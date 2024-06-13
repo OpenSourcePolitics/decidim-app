@@ -38,6 +38,8 @@ en:
       osp_authorization_workflow:
         name: Authorization procedure
     budgets:
+      order_reminder:
+        text_message: Your vote is still pending for the participatory budget. Please reconnect to %{organization_host} to confirm it
       projects:
         count:
           projects_count:
