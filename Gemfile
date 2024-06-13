@@ -36,6 +36,7 @@ gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decid
 
 # Omniauth gems
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
+gem "omniauth_openid_connect"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik"
 
 # Default
