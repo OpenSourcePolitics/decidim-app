@@ -10,10 +10,10 @@ Decidim.configure do |config|
   # Change these lines to set your preferred locales
   if Rails.env.production?
     config.default_locale = ENV.fetch("DEFAULT_LOCALE", "fr").to_sym
-    config.available_locales = ENV.fetch("AVAILABLE_LOCALES", "fr").split(",").map(&:to_sym)
+    config.available_locales = ENV.fetch("AVAILABLE_LOCALES", "fr,sk").split(",").map(&:to_sym)
   else
     config.default_locale = ENV.fetch("DEFAULT_LOCALE", "en").to_sym
-    config.available_locales = ENV.fetch("AVAILABLE_LOCALES", "en,fr,ca,es").split(",").map(&:to_sym)
+    config.available_locales = ENV.fetch("AVAILABLE_LOCALES", "en,fr,ca,es,sk").split(",").map(&:to_sym)
   end
 
   # Timeout session
