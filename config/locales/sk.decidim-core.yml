@@ -592,6 +592,8 @@ sk:
         role_assigned:
           email_intro: Boli ste pozvaný do procesu  "%{resource_title}" ako %{role}.
           email_outro: Kliknutím na link uvedený vyššie sa dostanete priamo do participatívneho procesu "%{resource_title}".
+          email_subject: Boli ste pozvaný do procesu  "%{resource_title}" ako %{role}.
+          notification_title: Boli ste pozvaný do procesu  <a href="%{resource_url}">%{resource_title}</a> ako %{role}.
     export_mailer:
       data_portability_export:
         download: Stiahnutie
