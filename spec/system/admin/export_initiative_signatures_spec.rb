@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Admin export initiatives' signature" do
+describe "Admin export initiatives' signature", type: :system do
   include_context "when admins initiative"
 
   let!(:votes) { create_list(:initiative_user_vote, 5, initiative: initiative) }
@@ -20,8 +20,8 @@ describe "Admin export initiatives' signature" do
     end
 
     click_link "Export PDF of signatures"
-    within "#confirm-modal-content" do
-      click_button "OK"
+    within ".confirm-modal-footer" do
+      click_on "OK"
     end
 
     expect(File.basename(download_path)).to include("votes_#{initiative.id}.pdf")
