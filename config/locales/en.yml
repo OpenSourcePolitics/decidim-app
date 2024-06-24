@@ -134,12 +134,10 @@ en:
         new:
           add_file: Add file
           edit_file: Edit file
-      proposals:
-        index:
-          collaborative_drafts_list: Collaborative drafts list
-          new_proposal: New proposal
-        map-proposals:
-          view_proposal: View proposal
+      index:
+        collaborative_drafts_list: Collaborative drafts list
+        new_proposal: New proposal
+        view_proposal: View proposal
     scopes:
       global: Global
       picker:
