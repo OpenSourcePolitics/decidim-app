@@ -111,6 +111,13 @@ ignore_missing:
  - decidim.newsletters.unsubscribe.success
  - decidim.newsletters.unsubscribe.error
  - decidim.newsletters.unsubscribe.token_error
+ - decidim.admin.actions.destroy
+ - decidim.admin.autocomplete.search_prompt
+ - decidim.term_customizer.menu.term_customizer
+ - decidim.term_customizer.admin.titles.add_multiple_translations
+ - decidim.term_customizer.admin.actions.*
+ - decidim.term_customizer.admin.add_translations.index.*
+ - decidim.term_customizer.admin.models.translations.fields.*
 
 # Consider these keys used:
 ignore_unused:
