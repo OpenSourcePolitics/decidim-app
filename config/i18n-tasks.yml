@@ -104,10 +104,14 @@ ignore_missing:
  - decidim.initiatives.actions.answer
  - decidim.admin.titles.initiatives
  - decidim.admin.models.initiatives.fields.*
+ - decidim.admin.models.initiatives_votes.*
  - decidim.admin.actions.configure
  - decidim.account.email_change.*
  - decidim.account.show.*
  - layouts.decidim.user_menu.profile
+ - decidim.newsletters.unsubscribe.success
+ - decidim.newsletters.unsubscribe.error
+ - decidim.newsletters.unsubscribe.token_error
 
 # Consider these keys used:
 ignore_unused:
@@ -141,4 +145,9 @@ ignore_unused:
   - activemodel.attributes.attachment.documents
   - activemodel.attributes.participatory_space_private_user_csv_import.file
   - decidim.forms.user_answers_serializer.{email,name}
+  - decidim.participatory_processes.show.local_area
+  - decidim.newsletters.unsubscribe.success
+  - decidim.newsletters.unsubscribe.error
+  - decidim.newsletters.unsubscribe.token_error
+  - decidim.half_signup.quick_auth.sms_verification.text_message
 

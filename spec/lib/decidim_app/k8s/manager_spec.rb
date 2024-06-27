@@ -22,9 +22,7 @@ describe DecidimApp::K8s::Manager do
     context "when configuration is invalid" do
       before do
         allow(YAML).to receive(:load_file).and_return({})
-        # rubocop:disable RSpec/AnyInstance
         allow_any_instance_of(DecidimApp::K8s::Configuration).to receive(:valid?).and_return(false)
-        # rubocop:enable RSpec/AnyInstance
       end
 
       it "raises runtime error" do
@@ -35,10 +33,7 @@ describe DecidimApp::K8s::Manager do
 
   describe ".run" do
     it "runs the installation" do
-      # rubocop:disable RSpec/AnyInstance
       expect_any_instance_of(described_class).to receive(:run).once
-      # rubocop:enable RSpec/AnyInstance
-
       described_class.run("spec/fixtures/k8s_configuration_example.yml")
     end
   end

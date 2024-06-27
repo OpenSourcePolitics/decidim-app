@@ -40,10 +40,7 @@ describe DecidimApp::K8s::Commands::Admin do
 
   describe ".run" do
     it "runs the installation" do
-      # rubocop:disable RSpec/AnyInstance
       expect_any_instance_of(described_class).to receive(:run).once
-      # rubocop:enable RSpec/AnyInstance
-
       described_class.run(default_admin_configuration, organization)
     end
   end

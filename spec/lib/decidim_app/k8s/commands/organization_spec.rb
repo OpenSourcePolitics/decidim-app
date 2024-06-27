@@ -154,10 +154,7 @@ describe DecidimApp::K8s::Commands::Organization do
 
   describe ".run" do
     it "creates the organization" do
-      # rubocop:disable RSpec/AnyInstance
       expect_any_instance_of(described_class).to receive(:run).once
-      # rubocop:enable RSpec/AnyInstance
-
       described_class.run(organization_configuration, default_admin_configuration)
     end
   end
