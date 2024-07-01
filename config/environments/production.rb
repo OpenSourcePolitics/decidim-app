@@ -59,6 +59,10 @@ Rails.application.configure do
   # The available log levels are: :debug, :info, :warn, :error, :fatal, and :unknown
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "warn").to_sym
 
+  # Highlight code that triggered database queries in logs.
+  # Display SQL requests for local docker production mode
+  config.active_record.verbose_query_logs = ENV.fetch("RAILS_LOG_LEVEL", "warn") == "debug"
+
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
 

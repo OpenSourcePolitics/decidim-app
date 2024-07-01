@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "net/http/post/multipart"
 require "decidim_app/k8s/configuration_exporter"
 require "decidim_app/k8s/organization_exporter"
 require "decidim_app/k8s/manager"
@@ -42,12 +43,16 @@ namespace :decidim_app do
     # You can add your own customizations here
     desc "Upgrade decidim-app"
     task upgrade: :environment do
-      puts "Running db:migrate"
+      puts "Running upgrade db:migrate"
       Rake::Task["db:migrate"].invoke
       puts "Running decidim:repair:url_in_content"
       Rake::Task["decidim:repair:url_in_content"].invoke
       puts "Running decidim:repair:translations"
       Rake::Task["decidim:repair:translations"].invoke
+    rescue StandardError => e
+      puts "Ignoring error: #{e.message}"
+      puts "Running decidim:db:migrate"
+      Rake::Task["decidim:db:migrate"].invoke
     end
 
     desc "usage: bundle exec rails k8s:dump_db"
@@ -70,6 +75,73 @@ namespace :decidim_app do
                                                                                                                                                                     ))
 
       DecidimApp::K8s::Manager.run(ENV.fetch("path", nil))
+    end
+  end
+
+  namespace :budgets do
+    # This task is used to send a reminder by sms to voters who haven't finished their
+    # vote for a budget. When you launch the task, you have to pass the id of the budget
+    # in a variable in terminal
+    desc "send a reminder to vote for budget"
+    task send_sms_reminder: :environment do
+      if (budget_id = ENV.fetch("BUDGET_ID")).nil?
+        p "You need to provide a budget ID"
+        next
+      end
+
+      if (budget = Decidim::Budgets::Budget.find_by(id: budget_id)).nil?
+        p "Budget with id #{budget_id} not found"
+        next
+      end
+
+      organization = budget.organization
+
+      users_ids = Decidim::Budgets::Order.where(budget: budget)
+                                         .pending
+                                         &.pluck(:decidim_user_id)
+      if users_ids.empty?
+        p "no pending votes"
+        next
+      end
+      users = Decidim::User.where(id: users_ids).where.not(phone_number: nil, phone_country: nil)
+
+      if users.blank?
+        p "no pending votes from users with phone number"
+        next
+      end
+
+      filename = "send_sms_reminder_#{Time.current.year}_#{Time.current.month}_#{Time.current.day}_#{Time.current.min}.csv"
+      message = I18n.t("decidim.budgets.order_reminder.text_message", locale: organization.default_locale, organization_host: organization.host)
+
+      file = Tempfile.new(filename)
+      CSV.open(file, "w", col_sep: ";") do |csv|
+        users.each do |user|
+          csv << ["#{user.phone_country}#{user.phone_number}", message]
+        end
+      end
+      file.rewind
+
+      p "users ids: #{users.ids}"
+      p "csv done at #{filename}"
+
+      api_url = Rails.application.secrets.dig(:decidim, :sms_gateway, :bulk_url)
+      username = Rails.application.secrets.dig(:decidim, :sms_gateway, :username)
+      password = Rails.application.secrets.dig(:decidim, :sms_gateway, :password)
+
+      url = URI(api_url)
+      request = Net::HTTP::Post::Multipart.new(url, {
+                                                 u: username,
+                                                 p: password,
+                                                 f: "sms",
+                                                 c: "Reminder",
+                                                 file: UploadIO.new(file, "text/csv", filename)
+                                               })
+
+      response = Net::HTTP.start(url.hostname, url.port, use_ssl: true) do |https| # pay attention to use_ssl if you need it
+        https.request(request)
+      end
+
+      p "API response is #{response.body}"
     end
   end
 end

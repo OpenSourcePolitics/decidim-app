@@ -104,6 +104,7 @@ ignore_missing:
  - decidim.initiatives.actions.answer
  - decidim.admin.titles.initiatives
  - decidim.admin.models.initiatives.fields.*
+ - decidim.admin.models.initiatives_votes.*
  - decidim.admin.actions.configure
  - decidim.account.email_change.*
  - decidim.account.show.*
