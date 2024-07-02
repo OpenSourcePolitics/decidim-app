@@ -223,4 +223,10 @@ namespace :import do
 
     Rails.logger.close
   end
+
+  task pps: :environment do
+    organization = ENV["ORGANIZATION_ID"].presence || Decidim::Organization.first
+    path = ENV["CSV_FILE"].presence || "tmp/links.csv"
+    DrupalJob.perform_later(organization: organization, path: path)
+  end
 end
