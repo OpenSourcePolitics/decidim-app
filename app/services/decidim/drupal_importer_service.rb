@@ -12,18 +12,18 @@ module Decidim
     end
 
     def initialize(**args)
-      Rails.logger.debug "Rake(import:pps)> initializing..."
+      Rails.logger.warn "Rake(import:pps)> initializing..."
       @path = args[:path]
       @organization = args[:organization]
       @dev = true
     end
 
     def execute
-      Rails.logger.debug "Rake(import:pps)> executing..."
+      Rails.logger.warn "Rake(import:pps)> executing..."
       rows = CSV.read(@path, headers: true)
 
       if rows.blank?
-        Rails.logger.debug "Rake(import:pps)> No rows found"
+        Rails.logger.warn "Rake(import:pps)> No rows found"
         return
       end
 
@@ -95,15 +95,15 @@ module Decidim
         rescue ActiveRecord::RecordInvalid => e
           case e.message
           when /Validation failed: Title has already been taken/
-            Rails.logger.debug "Rake(import:pps)> Attachment already exists"
+            Rails.logger.warn "Rake(import:pps)> Attachment already exists"
           when /Validation failed: File file size must be less than or equal to/, /File la taille du fichier doit être inférieure ou égale/
             org = attachment[:attached_to].organization
             limit = ActiveSupport::NumberHelper::NumberToHumanSizeConverter.convert(org.maximum_upload_size, {})
             human_filesize = ActiveSupport::NumberHelper::NumberToHumanSizeConverter.convert(attachment[:file][:io].size, {})
-            Rails.logger.debug { "Rake(import:pps)>  Attachment file size too big for '#{attachment[:name]}': #{human_filesize}" }
-            Rails.logger.debug { "Rake(import:pps)>  Max: #{limit} current: #{human_filesize}" }
+            Rails.logger.warn { "Rake(import:pps)>  Attachment file size too big for '#{attachment[:name]}': #{human_filesize}" }
+            Rails.logger.warn { "Rake(import:pps)>  Max: #{limit} current: #{human_filesize}" }
           else
-            Rails.logger.debug { "Rake(import:pps)>  Error: '#{e.message}'" }
+            Rails.logger.warn { "Rake(import:pps)>  Error: '#{e.message}'" }
           end
 
           drupal_page&.add_error(
@@ -135,7 +135,7 @@ module Decidim
         drupal_page&.save_csv_resume!
         next
       end
-      Rails.logger.debug "Rake(import:pps)> terminated"
+      Rails.logger.warn "Rake(import:pps)> terminated"
     end
 
     private
@@ -162,7 +162,7 @@ module Decidim
       component = Decidim::Component.find_by(name: "BILANS & DÉCISIONS", manifest_name: "pages", participatory_space: pp)
       return if component.present?
 
-      Decidim::Component.create!(
+      component = Decidim::Component.create!(
         name: "BILANS & DÉCISIONS",
         manifest_name: "pages",
         participatory_space: pp,
@@ -176,9 +176,8 @@ module Decidim
       )
 
       Decidim::Pages::Page.create!(
-        body: { "fr" => "Bilans" },
-        decidim_component: component,
-        published_at: Time.zone.now
+        body: { "fr" => "." },
+        component: component
       )
     end
 
@@ -370,6 +369,7 @@ module Decidim
     end
 
     def save_json_resume!
+      Dir.mkdir("tmp/drupal_import") unless File.exist?("tmp/drupal_import")
       Dir.mkdir("tmp/drupal_import/#{@md5}") unless File.exist?("tmp/drupal_import/#{@md5}")
       File.write("tmp/drupal_import/#{@md5}/#{@md5}.json", JSON.pretty_generate(attributes))
     end

@@ -225,7 +225,10 @@ namespace :import do
   end
 
   task pps: :environment do
-    organization = ENV["ORGANIZATION_ID"].presence || Decidim::Organization.first
+    host = ENV["ORGANIZATION_HOST"].presence || Decidim::Organization.first.host
+    organization = Decidim::Organization.find_by(host: host)
+    raise "Organization not found for '#{host}'" unless organization
+
     path = ENV["CSV_FILE"].presence || "tmp/links.csv"
     DrupalJob.perform_later(organization: organization, path: path)
   end
