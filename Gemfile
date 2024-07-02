@@ -14,17 +14,21 @@ gem "decidim-conferences", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-initiatives", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 
+# Load Budgets Booth to avoid errors
+gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp"
+
 # External Decidim gems
 gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
 gem "decidim-cache_cleaner"
 gem "decidim-category_enhanced", "~> 0.0.1"
-gem "decidim-decidim_awesome"
+gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: "main"
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
                                                                 branch: DECIDIM_BRANCH
-gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "release/0.27-stable"
+gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "temp/twilio-compatibility-0.27"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 gem "decidim-gallery", git: "https://github.com/OpenSourcePolitics/decidim-module-gallery.git", branch: "fix/nokogiri_deps"
+gem "decidim-half_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git", branch: "feature/half_signup_and_budgets_booth"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
 gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens.git", branch: DECIDIM_BRANCH
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: "release/0.27-stable"
@@ -48,6 +52,7 @@ gem "faker", "~> 2.14"
 gem "fog-aws"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
 gem "letter_opener_web", "~> 1.3"
+gem "multipart-post"
 gem "nokogiri", "1.13.4"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "puma", ">= 5.5.1"
@@ -60,7 +65,7 @@ group :development do
   gem "rubocop-faker"
   gem "spring", "~> 2.0"
   gem "spring-watcher-listen", "~> 2.0"
-  gem "web-console", "4.0.4"
+  gem "web-console", "~> 4.1"
 end
 
 group :development, :test do

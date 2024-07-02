@@ -17,8 +17,8 @@ module UserAnswersSerializerExtends
 
     def user_data(answer)
       {
-        answer_translated_attribute_name(:email) => answer.user&.email.presence || "",
-        answer_translated_attribute_name(:name) => answer.user&.name || ""
+        answer_translated_attribute_name(:email) => answer&.user&.email.presence || "",
+        answer_translated_attribute_name(:name) => answer&.user&.name || ""
       }
     end
 
