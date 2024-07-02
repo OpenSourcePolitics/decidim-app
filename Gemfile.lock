@@ -1184,6 +1184,7 @@ DEPENDENCIES
   omniauth-france_connect!
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
+  omniauth_openid_connect
   parallel_tests
   puma (>= 5.5.1)
   rack-attack (~> 6.6)

@@ -138,6 +138,7 @@ ignore_unused:
   - decidim.scopes.global
   - decidim.scopes.picker.*
   - decidim.system.organizations.omniauth_settings.{france_connect, france_connect_profile, france_connect_uid}.*
+  - decidim.system.organizations.omniauth_settings.openid_connect.*
   - decidim.system.organizations.omniauth_settings.publik.*
   - decidim.verifications.authorizations.create.*
   - decidim.verifications.authorizations.first_login.actions.*
@@ -157,4 +158,5 @@ ignore_unused:
   - decidim.newsletters.unsubscribe.error
   - decidim.newsletters.unsubscribe.token_error
   - decidim.half_signup.quick_auth.sms_verification.text_message
+
 
