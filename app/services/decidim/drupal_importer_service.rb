@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Decidim
   class DrupalImporterService
     def self.run(**args)
@@ -5,18 +7,18 @@ module Decidim
     end
 
     def initialize(**args)
-      puts "initializing..."
+      Rails.logger.debug "initializing..."
       @path = args[:path]
       @organization = args[:organization]
       @dev = true
     end
 
     def execute
-      puts "executing..."
+      Rails.logger.debug "executing..."
       rows = CSV.read(@path, headers: true)
 
       if rows.blank?
-        puts "No rows found"
+        Rails.logger.debug "No rows found"
         return
       end
 
@@ -39,7 +41,8 @@ module Decidim
             meta_scope: { "fr" => "" },
             developer_group: { "fr" => drupal_page.drupal_organization.presence || "Bordeaux Métropole" },
             start_date: Time.zone.now,
-            end_date: Time.zone.now + 1.minute)
+            end_date: 1.minute.from_now
+          )
         end
 
         meeting = create_meeting!(@organization, pp)
@@ -81,20 +84,21 @@ module Decidim
               filename: attachment.dig(:file, :filename),
               content_type: attachment.dig(:file, :content_type),
               metadata: attachment.dig(:file, :metadata)
-            ))
+            )
+          )
 
         rescue ActiveRecord::RecordInvalid => e
           case e.message
           when /Validation failed: Title has already been taken/
-            puts "Attachment already exists"
+            Rails.logger.debug "Attachment already exists"
           when /Validation failed: File file size must be less than or equal to/, /File la taille du fichier doit être inférieure ou égale/
             org = attachment[:attached_to].organization
             limit = ActiveSupport::NumberHelper::NumberToHumanSizeConverter.convert(org.maximum_upload_size, {})
             human_filesize = ActiveSupport::NumberHelper::NumberToHumanSizeConverter.convert(attachment[:file][:io].size, {})
-            puts "Attachment file size too big for '#{attachment[:name]}': #{human_filesize}"
-            puts "Max: #{limit} current: #{human_filesize}"
+            Rails.logger.debug { "Attachment file size too big for '#{attachment[:name]}': #{human_filesize}" }
+            Rails.logger.debug { "Max: #{limit} current: #{human_filesize}" }
           else
-            puts "Error: '#{e.message}'"
+            Rails.logger.debug { "Error: '#{e.message}'" }
           end
 
           drupal_page&.add_error(
@@ -126,7 +130,7 @@ module Decidim
         drupal_page&.save_csv_resume!
         next
       end
-      puts "terminated"
+      Rails.logger.debug "terminated"
     end
 
     private
@@ -169,8 +173,8 @@ module Decidim
       Decidim::Pages::Page.create!(
         body: { "fr" => "Bilans" },
         decidim_component: component,
-        published_at: Time.zone.now,
-        )
+        published_at: Time.zone.now
+      )
     end
 
     def create_proposal!(org, pp)
@@ -193,7 +197,8 @@ module Decidim
   end
 
   class DrupalPage
-    attr_reader :url, :slug, :md5, :nokogiri_document, :title, :description, :short_description, :drupal_node_id, :thematique, :pdf_attachments, :participatory_process_url, :decidim_participatory_process_id, :errors, :drupal_type, :drupal_author, :drupal_organization, :drupal_thematique
+    attr_reader :url, :slug, :md5, :nokogiri_document, :title, :description, :short_description, :drupal_node_id, :thematique, :pdf_attachments, :participatory_process_url,
+                :decidim_participatory_process_id, :errors, :drupal_type, :drupal_author, :drupal_organization, :drupal_thematique
 
     def self.scrape(**args)
       new(**args).scrape
@@ -236,7 +241,7 @@ module Decidim
         description: @description,
         short_description: @short_description,
         pdf_attachments: @pdf_attachments,
-        errors: @errors,
+        errors: @errors
       }
     end
 
@@ -305,13 +310,13 @@ module Decidim
     def set_pdf_attachments
       unique_links = []
       @pdf_attachments = @nokogiri_document.css("a.doc-name").map do |link|
-        next if link['href'].blank?
-        next unless link['href'].include?(".pdf")
+        next if link["href"].blank?
+        next unless link["href"].include?(".pdf")
         next if link.text.blank?
-        next if unique_links.include?(link['href'])
+        next if unique_links.include?(link["href"])
 
-        unique_links << link['href']
-        { title: link.text&.strip, href: link['href'] }
+        unique_links << link["href"]
+        { title: link.text&.strip, href: link["href"] }
       end.compact.uniq
     end
 
@@ -340,7 +345,7 @@ module Decidim
     end
 
     def set_drupal_node_id
-      @short_url = @nokogiri_document.css("link[rel='shortlink']").attr('href').value
+      @short_url = @nokogiri_document.css("link[rel='shortlink']").attr("href").value
       @drupal_node_id = @short_url&.split("/")&.last || 0
     end
 
@@ -360,7 +365,7 @@ module Decidim
     end
 
     def save_json_resume!
-      Dir.mkdir("tmp/drupal_import/#{@md5}") unless File.exists?("tmp/drupal_import/#{@md5}")
+      Dir.mkdir("tmp/drupal_import/#{@md5}") unless File.exist?("tmp/drupal_import/#{@md5}")
       File.write("tmp/drupal_import/#{@md5}/#{@md5}.json", JSON.pretty_generate(attributes))
     end
 
@@ -378,8 +383,8 @@ module Decidim
     def save!
       return if @html.blank?
 
-      Dir.mkdir("tmp/drupal_import") unless File.exists?("tmp/drupal_import")
-      Dir.mkdir("tmp/drupal_import/#{@md5}") unless File.exists?("tmp/drupal_import/#{@md5}")
+      Dir.mkdir("tmp/drupal_import") unless File.exist?("tmp/drupal_import")
+      Dir.mkdir("tmp/drupal_import/#{@md5}") unless File.exist?("tmp/drupal_import/#{@md5}")
       File.write("tmp/drupal_import/#{@md5}/#{@md5}.html", @html)
     end
   end
