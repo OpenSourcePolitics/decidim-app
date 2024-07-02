@@ -81,7 +81,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git
-  revision: bfb4ba25dcfe504c9c9d7afd376c04c28cb23ce8
+  revision: 27f4f3f805b59571451f4d911620edbac762bb66
   branch: fix/email_with_precompile
   specs:
     decidim-term_customizer (0.27.0)
