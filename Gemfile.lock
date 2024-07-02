@@ -81,7 +81,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git
-  revision: bfb4ba25dcfe504c9c9d7afd376c04c28cb23ce8
+  revision: 27f4f3f805b59571451f4d911620edbac762bb66
   branch: fix/email_with_precompile
   specs:
     decidim-term_customizer (0.27.0)
@@ -110,6 +110,15 @@ GIT
     omniauth-publik (0.1.1)
       omniauth (~> 2.0)
       omniauth-oauth2 (>= 1.7.2, < 2.0)
+
+GIT
+  remote: https://github.com/PopulateTools/decidim-module-anonymous_proposals
+  revision: b44a938500716dbfd99e8615769045701137c82e
+  branch: anonymous_proposals_for_registered_users
+  specs:
+    decidim-anonymous_proposals (0.27.0)
+      decidim-core (>= 0.27.0)
+      deface (~> 1.5)
 
 GIT
   remote: https://github.com/alecslupu-pfa/decidim-budget_category_voting.git
@@ -1139,6 +1148,7 @@ DEPENDENCIES
   climate_control (~> 1.2)
   dalli
   decidim (~> 0.27.0)
+  decidim-anonymous_proposals!
   decidim-budget_category_voting!
   decidim-budgets_booth!
   decidim-cache_cleaner
@@ -1174,6 +1184,7 @@ DEPENDENCIES
   omniauth-france_connect!
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
+  omniauth_openid_connect
   parallel_tests
   puma (>= 5.5.1)
   rack-attack (~> 6.6)

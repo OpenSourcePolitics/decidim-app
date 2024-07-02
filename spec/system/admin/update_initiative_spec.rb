@@ -112,7 +112,7 @@ describe "User prints the initiative", type: :system do
 
             expect(page).to have_css("label[for='initiative_decidim_scope_id']")
             expect(page).to have_css("#initiative_decidim_scope_id")
-            expect(page).to have_css("option[value='#{initiative_scope.id}'][selected='selected']")
+            expect(page).to have_css("option[value='#{initiative_scope.decidim_scopes_id}'][selected='selected']")
             expect(page).to have_css("label[for='initiative_signature_type']")
             expect(page).to have_css("#initiative_signature_type")
             expect(page).to have_css("option[value='#{initiative.signature_type}'][selected='selected']")

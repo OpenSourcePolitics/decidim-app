@@ -112,6 +112,13 @@ ignore_missing:
  - decidim.newsletters.unsubscribe.success
  - decidim.newsletters.unsubscribe.error
  - decidim.newsletters.unsubscribe.token_error
+ - decidim.admin.actions.destroy
+ - decidim.admin.autocomplete.search_prompt
+ - decidim.term_customizer.menu.term_customizer
+ - decidim.term_customizer.admin.titles.add_multiple_translations
+ - decidim.term_customizer.admin.actions.*
+ - decidim.term_customizer.admin.add_translations.index.*
+ - decidim.term_customizer.admin.models.translations.fields.*
 
 # Consider these keys used:
 ignore_unused:
@@ -131,6 +138,7 @@ ignore_unused:
   - decidim.scopes.global
   - decidim.scopes.picker.*
   - decidim.system.organizations.omniauth_settings.{france_connect, france_connect_profile, france_connect_uid}.*
+  - decidim.system.organizations.omniauth_settings.openid_connect.*
   - decidim.system.organizations.omniauth_settings.publik.*
   - decidim.verifications.authorizations.create.*
   - decidim.verifications.authorizations.first_login.actions.*
@@ -150,4 +158,5 @@ ignore_unused:
   - decidim.newsletters.unsubscribe.error
   - decidim.newsletters.unsubscribe.token_error
   - decidim.half_signup.quick_auth.sms_verification.text_message
+
 

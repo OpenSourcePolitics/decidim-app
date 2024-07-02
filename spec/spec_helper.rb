@@ -16,6 +16,7 @@ Capybara.register_driver :headless_chrome do |app|
                     "--window-size=1920,1080"
                   end
   options.args << "--ignore-certificate-errors" if ENV["TEST_SSL"]
+  options.add_preference("intl.accept_languages", "en-GB")
   Capybara::Selenium::Driver.new(
     app,
     browser: :chrome,
