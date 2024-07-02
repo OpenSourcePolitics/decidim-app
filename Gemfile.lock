@@ -112,6 +112,15 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
+  remote: https://github.com/PopulateTools/decidim-module-anonymous_proposals
+  revision: b44a938500716dbfd99e8615769045701137c82e
+  branch: anonymous_proposals_for_registered_users
+  specs:
+    decidim-anonymous_proposals (0.27.0)
+      decidim-core (>= 0.27.0)
+      deface (~> 1.5)
+
+GIT
   remote: https://github.com/alecslupu-pfa/decidim-budget_category_voting.git
   revision: e059d392d6468a0fff556a458589685a047032d6
   branch: release/0.27-stable
@@ -1139,6 +1148,7 @@ DEPENDENCIES
   climate_control (~> 1.2)
   dalli
   decidim (~> 0.27.0)
+  decidim-anonymous_proposals!
   decidim-budget_category_voting!
   decidim-budgets_booth!
   decidim-cache_cleaner
