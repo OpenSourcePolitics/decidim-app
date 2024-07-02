@@ -55,7 +55,6 @@ namespace :decidim_app do
       puts "Ignoring error: #{e.message}"
       puts "Running decidim:db:migrate"
       Rake::Task["decidim:db:migrate"].invoke
-      Rake::Task["decidim_anonymous_proposals:generate_anonymous_group"].invoke
     end
 
     desc "usage: bundle exec rails k8s:dump_db"
