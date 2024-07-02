@@ -39,6 +39,8 @@ services:
       - PUMA_PRELOAD_APP=true
       - RAILS_SESSION_STORE=active_record
       - GEOCODER_LOOKUP_API_KEY=${GEOCODER_LOOKUP_API_KEY}
+      - DEFAULT_LOCALE=${DEFAULT_LOCALE}
+      - AVAILABLE_LOCALES=${AVAILABLE_LOCALES}
     depends_on:
       - app
     volumes:
@@ -69,6 +71,8 @@ services:
       - PUMA_PRELOAD_APP=true
       - RAILS_SESSION_STORE=active_record
       - GEOCODER_LOOKUP_API_KEY=${GEOCODER_LOOKUP_API_KEY}
+      - DEFAULT_LOCALE=${DEFAULT_LOCALE}
+      - AVAILABLE_LOCALES=${AVAILABLE_LOCALES}
     volumes:
       - shared-volume:/app
     ports:
