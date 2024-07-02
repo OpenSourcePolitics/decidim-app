@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Security/Open
+# rubocop:disable Naming/AccessorMethodName
+# rubocop:disable Lint/SafeNavigationChain
 module Decidim
   class DrupalImporterService
     def self.run(**args)
@@ -7,18 +12,18 @@ module Decidim
     end
 
     def initialize(**args)
-      Rails.logger.debug "initializing..."
+      Rails.logger.debug "Rake(import:pps)> initializing..."
       @path = args[:path]
       @organization = args[:organization]
       @dev = true
     end
 
     def execute
-      Rails.logger.debug "executing..."
+      Rails.logger.debug "Rake(import:pps)> executing..."
       rows = CSV.read(@path, headers: true)
 
       if rows.blank?
-        Rails.logger.debug "No rows found"
+        Rails.logger.debug "Rake(import:pps)> No rows found"
         return
       end
 
@@ -90,15 +95,15 @@ module Decidim
         rescue ActiveRecord::RecordInvalid => e
           case e.message
           when /Validation failed: Title has already been taken/
-            Rails.logger.debug "Attachment already exists"
+            Rails.logger.debug "Rake(import:pps)> Attachment already exists"
           when /Validation failed: File file size must be less than or equal to/, /File la taille du fichier doit être inférieure ou égale/
             org = attachment[:attached_to].organization
             limit = ActiveSupport::NumberHelper::NumberToHumanSizeConverter.convert(org.maximum_upload_size, {})
             human_filesize = ActiveSupport::NumberHelper::NumberToHumanSizeConverter.convert(attachment[:file][:io].size, {})
-            Rails.logger.debug { "Attachment file size too big for '#{attachment[:name]}': #{human_filesize}" }
-            Rails.logger.debug { "Max: #{limit} current: #{human_filesize}" }
+            Rails.logger.debug { "Rake(import:pps)>  Attachment file size too big for '#{attachment[:name]}': #{human_filesize}" }
+            Rails.logger.debug { "Rake(import:pps)>  Max: #{limit} current: #{human_filesize}" }
           else
-            Rails.logger.debug { "Error: '#{e.message}'" }
+            Rails.logger.debug { "Rake(import:pps)>  Error: '#{e.message}'" }
           end
 
           drupal_page&.add_error(
@@ -130,7 +135,7 @@ module Decidim
         drupal_page&.save_csv_resume!
         next
       end
-      Rails.logger.debug "terminated"
+      Rails.logger.debug "Rake(import:pps)> terminated"
     end
 
     private
@@ -389,3 +394,8 @@ module Decidim
     end
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Security/Open
+# rubocop:enable Naming/AccessorMethodName
+# rubocop:enable Lint/SafeNavigationChain
