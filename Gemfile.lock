@@ -1,4 +1,18 @@
 GIT
+  remote: https://git.octree.ch/decidim/decidim-module-geo
+  revision: a634bf1db912bbb657f2b352dedb00958fe91289
+  specs:
+    decidim-decidim_geo (0.2.3)
+      activerecord-postgis-adapter (>= 6.0)
+      decidim-admin (>= 0.26, < 0.28)
+      decidim-core (>= 0.26, < 0.28)
+      deface (>= 1.8.1)
+      ffi-geos (~> 2.4)
+      rgeo (>= 3.0)
+      rgeo-geojson (>= 1.0)
+      rgeo-shapefile (>= 1.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-ludens.git
   revision: ca4c3266f64d8414030be63e2824c4d23c1f8d9c
   branch: release/0.27-stable
@@ -48,18 +62,6 @@ GIT
     decidim-half_signup (0.27.0)
       countries (~> 5.1, >= 5.1.2)
       decidim-core (~> 0.27.0)
-
-GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
-  revision: dd685166fdf953a11bd6a9e0dac56feca3bd0708
-  branch: release/0.27-stable
-  specs:
-    decidim-homepage_interactive_map (2.0.0)
-      decidim-admin (>= 0.25.0, < 0.28)
-      decidim-core (>= 0.25.0, < 0.28)
-      decidim-dev (>= 0.25.0, < 0.28)
-      rgeo (~> 2.4)
-      rgeo-proj4 (~> 3.1)
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-ptp.git
@@ -208,6 +210,9 @@ GEM
     activerecord (6.1.7.7)
       activemodel (= 6.1.7.7)
       activesupport (= 6.1.7.7)
+    activerecord-postgis-adapter (7.1.1)
+      activerecord (~> 6.1)
+      rgeo-activerecord (~> 7.0.0)
     activerecord-session_store (2.1.0)
       actionpack (>= 6.1)
       activerecord (>= 6.1)
@@ -348,6 +353,8 @@ GEM
     db-query-matchers (0.10.0)
       activesupport (>= 4.0, < 7)
       rspec (~> 3.0)
+    dbf (4.3.2)
+      csv
     decidim (0.27.4)
       decidim-accountability (= 0.27.4)
       decidim-admin (= 0.27.4)
@@ -607,6 +614,8 @@ GEM
     faraday-net_http (3.1.0)
       net-http
     ffi (1.16.3)
+    ffi-geos (2.4.0)
+      ffi (>= 1.0.0)
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
@@ -928,9 +937,15 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.6)
-    rgeo (2.4.0)
-    rgeo-proj4 (3.1.1)
-      rgeo (~> 2.0)
+    rgeo (3.0.1)
+    rgeo-activerecord (7.0.1)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
+    rgeo-geojson (2.1.1)
+      rgeo (>= 1.0.0)
+    rgeo-shapefile (3.1.0)
+      dbf (~> 4.0)
+      rgeo (>= 1.0)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -1155,13 +1170,13 @@ DEPENDENCIES
   decidim-category_enhanced (~> 0.0.1)
   decidim-conferences (~> 0.27.0)
   decidim-decidim_awesome!
+  decidim-decidim_geo!
   decidim-dev (~> 0.27.0)
   decidim-extended_socio_demographic_authorization_handler!
   decidim-extra_user_fields!
   decidim-friendly_signup!
   decidim-gallery!
   decidim-half_signup!
-  decidim-homepage_interactive_map!
   decidim-initiatives (~> 0.27.0)
   decidim-ludens!
   decidim-phone_authorization_handler!
