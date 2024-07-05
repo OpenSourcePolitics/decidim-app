@@ -223,4 +223,13 @@ namespace :import do
 
     Rails.logger.close
   end
+
+  task pps: :environment do
+    host = ENV["ORGANIZATION_HOST"].presence || Decidim::Organization.first.host
+    organization = Decidim::Organization.find_by(host: host)
+    raise "Organization not found for '#{host}'" unless organization
+
+    path = ENV["CSV_FILE"].presence || "tmp/links.csv"
+    DrupalJob.perform_later(organization: organization, path: path)
+  end
 end

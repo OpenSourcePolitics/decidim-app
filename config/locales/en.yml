@@ -16,6 +16,8 @@ en:
         file: importing file
   decidim:
     admin:
+      exports:
+        notice: Your export is currently in progress. You'll receive an email when it's complete.
       participatory_space_private_users:
         create:
           error: Error
@@ -38,6 +40,8 @@ en:
       osp_authorization_workflow:
         name: Authorization procedure
     budgets:
+      order_reminder:
+        text_message: Your vote is still pending for the participatory budget. Please reconnect to %{organization_host} to confirm it
       projects:
         count:
           projects_count:
@@ -83,17 +87,23 @@ en:
     initiatives:
       admin:
         initiatives:
+          edit:
+            success: The initiative has been sent to technical validation
           form:
             attachments: Attachments
             settings: Settings
             title: General information
           index:
             warning: Initiatives are not used for now. When you create an initiative type, it will be displayed in front-office.
+          update:
+            error: An error has occurred
+            success: The initiative has been successfully updated
       pages:
         home:
           highlighted_initiatives:
             active_initiatives: Active initiatives
             see_all_initiatives: See all initiatives
+      unavailable_scope: Unavailable scope
     meetings:
       directory:
         meetings:

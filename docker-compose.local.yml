@@ -1,4 +1,3 @@
-version: '3'
 services:
   database:
     image: postgres
@@ -17,9 +16,7 @@ services:
     volumes:
       - redis-data:/var/lib/redis/data
   sidekiq:
-    build:
-      context: .
-      dockerfile: Dockerfile.local
+    image: decidim-app:latest
     command: [ "bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml" ]
     environment:
       - DATABASE_HOST=database
@@ -41,6 +38,9 @@ services:
       - PUMA_WORKERS=4
       - PUMA_PRELOAD_APP=true
       - RAILS_SESSION_STORE=active_record
+      - GEOCODER_LOOKUP_API_KEY=${GEOCODER_LOOKUP_API_KEY}
+      - DEFAULT_LOCALE=${DEFAULT_LOCALE}
+      - AVAILABLE_LOCALES=${AVAILABLE_LOCALES}
     depends_on:
       - app
     volumes:
@@ -49,9 +49,7 @@ services:
       - database
       - redis
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile.local
+    image: decidim-app:latest
     environment:
       - DATABASE_HOST=database
       - DATABASE_USERNAME=postgres
@@ -72,6 +70,9 @@ services:
       - PUMA_WORKERS=4
       - PUMA_PRELOAD_APP=true
       - RAILS_SESSION_STORE=active_record
+      - GEOCODER_LOOKUP_API_KEY=${GEOCODER_LOOKUP_API_KEY}
+      - DEFAULT_LOCALE=${DEFAULT_LOCALE}
+      - AVAILABLE_LOCALES=${AVAILABLE_LOCALES}
     volumes:
       - shared-volume:/app
     ports:

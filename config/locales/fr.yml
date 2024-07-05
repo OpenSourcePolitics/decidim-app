@@ -16,6 +16,8 @@ fr:
         file: importer un fichier d'utilisateurs
   decidim:
     admin:
+      exports:
+        notice: Votre exportation est en cours. Vous recevrez un e-mail quand elle sera terminée.
       menu:
         admin_accountability: Admin accountability
       participatory_space_private_users:
@@ -40,6 +42,8 @@ fr:
       osp_authorization_workflow:
         name: Procédure d'autorisation
     budgets:
+      order_reminder:
+        text_message: Votre vote au budget participatif n'est pas terminé. Pour le terminer, reconnectez-vous sur %{organization_host}
       projects:
         count:
           projects_count:
@@ -85,17 +89,23 @@ fr:
     initiatives:
       admin:
         initiatives:
+          edit:
+            success: La pétition a été envoyée à la validation technique
           form:
             attachments: Pièces jointes
             settings: Paramètres
             title: Informations générales
           index:
             warning: Attention, lorsque vous créez un type de pétition, ce dernier est automatiquement visible pour les utilisateurs.
+          update:
+            error: Une erreur est survenue
+            success: La pétition a été mise à jour avec succès
       pages:
         home:
           highlighted_initiatives:
             active_initiatives: Pétitions actives
             see_all_initiatives: Voir toutes les pétitions
+      unavailable_scope: Portée indisponible
     meetings:
       directory:
         meetings:
