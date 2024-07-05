@@ -44,6 +44,7 @@ module DevelopmentApp
     end
 
     config.after_initialize do
+      require "extends/controllers/decidim/devise_controllers_extends"
       require "extends/controllers/decidim/devise/sessions_controller_extends"
       require "extends/controllers/decidim/editor_images_controller_extends"
       require "extends/services/decidim/iframe_disabler_extends"
@@ -55,6 +56,8 @@ module DevelopmentApp
       require "extends/commands/decidim/budgets/admin/import_proposals_to_budgets_extends"
       require "extends/controllers/decidim/newsletters_controller_extends"
       require "extends/controllers/decidim/proposals/proposals_controller_extends"
+
+      require "extends/controllers/decidim/devise/omniauth_registrations_controller_extends"
 
       Decidim::GraphiQL::Rails.config.tap do |config|
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe

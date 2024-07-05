@@ -7,3 +7,5 @@ require "extends/lib/decidim/proposals/imports/proposal_answer_creator_extends"
 
 require "decidim/exporters/serializer"
 require "extends/lib/decidim/forms/user_answers_serializer_extend"
+
+require "extends/omniauth/strategies/openid_connect_extends"
