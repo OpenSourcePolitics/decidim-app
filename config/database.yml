@@ -17,17 +17,28 @@
 # On Linux, the 'host: "localhost"' line below should be commented out to avoid 'password required' error.
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV.fetch("DATABASE_HOST") { "" } %>
-  port: <%= ENV.fetch("DATABASE_PORT") { "5432" } %>
-  username: <%= ENV.fetch("DATABASE_USERNAME") { "" } %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") { "" } %>
-  database: <%= ENV.fetch("DATABASE_NAME") { "osp_app" } %>
-  prepared_statements: <%= ENV.fetch("DATABASE_PREPARED_STATEMENTS") { true } %>
+  primary:
+    adapter: postgresql
+    encoding: unicode
+    # For details on connection pooling, see rails configuration guide
+    # http://guides.rubyonrails.org/configuring.html#database-pooling
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    host: <%= ENV.fetch("DATABASE_HOST") { "" } %>
+    port: <%= ENV.fetch("DATABASE_PORT") { "5432" } %>
+    username: <%= ENV.fetch("DATABASE_USERNAME") { "" } %>
+    password: <%= ENV.fetch("DATABASE_PASSWORD") { "" } %>
+    database: <%= ENV.fetch("DATABASE_NAME") { "osp_app" } %>
+    prepared_statements: <%= ENV.fetch("DATABASE_PREPARED_STATEMENTS") { true } %>
+  drupal:
+    adapter: mysql2
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    encoding: utf8
+    host: <%= ENV.fetch("DRUPAL_DATABASE_HOST") { "" } %>
+    port: <%= ENV.fetch("DRUPAL_DATABASE_PORT") { "3306" } %>
+    username: <%= ENV.fetch("DRUPAL_DATABASE_USERNAME") { "" } %>
+    password: <%= ENV.fetch("DRUPAL_DATABASE_PASSWORD") { "" } %>
+    database: <%= ENV.fetch("DRUPAL_DATABASE_NAME") { "" } %>
+    database_tasks: false
 
 development:
   <<: *default

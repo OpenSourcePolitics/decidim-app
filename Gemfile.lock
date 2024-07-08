@@ -757,6 +757,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.4.1)
     mustache (1.1.1)
+    mysql2 (0.5.6)
     net-http (0.4.1)
       uri
     net-imap (0.4.11)
@@ -1183,6 +1184,7 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   multipart-post
+  mysql2
   nokogiri (= 1.13.4)
   omniauth-france_connect!
   omniauth-publik!
