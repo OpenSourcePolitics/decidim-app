@@ -1,6 +1,7 @@
 GIT
-  remote: https://git.octree.ch/decidim/decidim-module-geo
-  revision: a634bf1db912bbb657f2b352dedb00958fe91289
+  remote: https://git.octree.ch/decidim/decidim-module-geo.git
+  revision: 592c0154ff351625fba1923cd715078a17261609
+  branch: v0.2.4
   specs:
     decidim-decidim_geo (0.2.3)
       activerecord-postgis-adapter (>= 6.0)
