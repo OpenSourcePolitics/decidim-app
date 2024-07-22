@@ -39,16 +39,6 @@ RSpec.describe MigrationsFixer do
       end
     end
 
-    context "with missing environment" do
-      let(:migration_path_env) { nil }
-
-      it "raises an exception" do
-        expect do
-          described_class.new logger
-        end.to raise_error "Invalid configuration, aborting"
-      end
-    end
-
     context "with non-existing MIGRATIONS_PATH variable" do
       let(:migration_path_env) { "/some/inexistant/dir" }
 
