@@ -15,6 +15,10 @@ services:
       - "6379:6379"
     volumes:
       - redis-data:/var/lib/redis/data
+  redis_second:
+    image: redis
+    ports:
+      - "8080:8080"
   sidekiq:
     image: decidim-app:latest
     command: [ "bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml" ]
@@ -48,6 +52,39 @@ services:
     links:
       - database
       - redis
+  sidekiq_second:
+    image: decidim-app:latest
+    command: [ "bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml" ]
+    environment:
+      - DATABASE_HOST=database
+      - DATABASE_USERNAME=postgres
+      - DECIDIM_HOST=localhost
+      - REDIS_URL=redis_second://redis_second:8080
+      - MEMCACHE_SERVERS=memcached:11211
+      - RAILS_SERVE_STATIC_FILES=true
+      - RAILS_LOG_TO_STDOUT=true
+      - ASSET_HOST=localhost:3000
+      - FORCE_SSL=1
+      - ENABLE_LETTER_OPENER=1
+      - SEED=true
+      - DEFACE_ENABLED=false
+      - QUESTION_CAPTCHA_HOST=
+      - ENABLE_RACK_ATTACK=0
+      - PUMA_MIN_THREADS=5
+      - PUMA_MAX_THREADS=5
+      - PUMA_WORKERS=4
+      - PUMA_PRELOAD_APP=true
+      - RAILS_SESSION_STORE=active_record
+      - GEOCODER_LOOKUP_API_KEY=${GEOCODER_LOOKUP_API_KEY}
+      - DEFAULT_LOCALE=${DEFAULT_LOCALE}
+      - AVAILABLE_LOCALES=${AVAILABLE_LOCALES}
+    depends_on:
+      - app
+    volumes:
+      - shared-volume:/app
+    links:
+      - database
+      - redis_second
   app:
     image: decidim-app:latest
     environment:
