@@ -1,5 +1,5 @@
-:concurrency: 5
-:max_retries: 5
+:concurrency: <%= ENV.fetch("SIDEKIQ_CONCURRENCY", 1) %>
+:max_retries: <%= ENV.fetch("SIDEKIQ_MAX_RETRIES", 2) %>
 :queues:
   - mailers
   - default
