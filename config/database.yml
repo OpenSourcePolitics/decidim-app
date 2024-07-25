@@ -17,7 +17,7 @@
 # On Linux, the 'host: "localhost"' line below should be commented out to avoid 'password required' error.
 #
 default: &default
-  adapter: postgresql
+  adapter: postgis
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
@@ -78,7 +78,7 @@ test:
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
 #
-#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
+#   DATABASE_URL="postgis://myuser:mypass@localhost/somedatabase"
 #
 # You can use this database configuration with:
 #
