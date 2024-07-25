@@ -54,6 +54,7 @@ module DevelopmentApp
       require "extends/forms/decidim/initiatives/admin/initiative_form_extends"
       require "extends/commands/decidim/budgets/admin/import_proposals_to_budgets_extends"
       require "extends/controllers/decidim/newsletters_controller_extends"
+      require "extends/commands/decidim/admin/destroy_participatory_space_private_user_extends"
       require "extends/controllers/decidim/proposals/proposals_controller_extends"
 
       Decidim::GraphiQL::Rails.config.tap do |config|

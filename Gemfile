@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 DECIDIM_VERSION = "0.27"
 DECIDIM_BRANCH = "release/#{DECIDIM_VERSION}-stable".freeze
+DECIDIM_ANONYMOUS_PROPOSALS_VERSION = { git: "https://github.com/PopulateTools/decidim-module-anonymous_proposals", branch: "anonymous_proposals_for_registered_users" }.freeze
 
 ruby RUBY_VERSION
 
@@ -17,6 +18,7 @@ gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp"
 
 # External Decidim gems
+gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
 gem "decidim-cache_cleaner"
 gem "decidim-category_enhanced", "~> 0.0.1"
@@ -36,6 +38,7 @@ gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decid
 
 # Omniauth gems
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
+gem "omniauth_openid_connect"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik"
 
 # Default

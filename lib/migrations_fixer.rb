@@ -16,13 +16,12 @@ class MigrationsFixer
     raise "Undefined logger" if @logger.blank?
 
     validate_migration_path
-    validate_env_vars
     validate_osp_app_path
   end
 
   # Build osp-app path and returns osp-app path ending with '/*'
   def osp_app_path
-    osp_app_path ||= File.expand_path(ENV.fetch("MIGRATIONS_PATH", nil))
+    osp_app_path ||= File.expand_path(ENV.fetch("MIGRATIONS_PATH", "db/migrate"))
     if osp_app_path.end_with?("/")
       osp_app_path
     else
@@ -31,16 +30,6 @@ class MigrationsFixer
   end
 
   private
-
-  # Ensure MIGRATIONS_PATH is correctly set
-  def validate_env_vars
-    if ENV["MIGRATIONS_PATH"].blank?
-      @logger.error("You must specify ENV var 'MIGRATIONS_PATH'")
-
-      @logger.fatal(helper)
-      validation_failed
-    end
-  end
 
   # Ensure osp_app path exists
   def validate_osp_app_path
