@@ -62,6 +62,7 @@ gem "sys-filesystem"
 gem "wicked_pdf", "2.6.3"
 
 gem "mysql2"
+gem "composite_primary_keys"
 
 group :development do
   gem "listen", "~> 3.1"
