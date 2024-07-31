@@ -86,6 +86,13 @@ fr:
         name: Nom
     half_signup:
       quick_auth:
+        another_method: Utiliser une autre méthode
+        back: Retour au compte
+        sms:
+          cgu: conditions générales d'utilisation
+          click_here: Cliquez ici pour retrouver l'intégralité des
+          enter_phone: 'Veuillez saisir votre numéro de téléphone :'
+          instruction: Dans le cadre de votre vote au Budget Participatif, votre numéro de téléphone est uniquement utilisé pour vérifier et sécuriser votre participation, sans qu'aucun compte ne soit créé. Il ne sera pas réutilisé à d'autres fins par la Ville de Marseille.
         sms_verification:
           text_message: Bonjour, %{verification} est le code pour voter sur participons.marseille.fr. Votez et faites voter vos voisins pour les projets du 1er Budget participatif marseillais !
     initiatives:

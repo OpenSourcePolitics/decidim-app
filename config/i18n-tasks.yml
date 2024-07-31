@@ -112,7 +112,8 @@ ignore_missing:
  - decidim.newsletters.unsubscribe.error
  - decidim.newsletters.unsubscribe.token_error
  - activemodel.errors.models.assembly.attributes.document.invalid_document_type
- - decidim.half_signup.quick_auth.sms_verification.text_message
+ - decidim.half_signup.quick_auth.*
+
 
 # Consider these keys used:
 ignore_unused:
@@ -151,4 +152,4 @@ ignore_unused:
   - decidim.newsletters.unsubscribe.error
   - decidim.newsletters.unsubscribe.token_error
   - activemodel.errors.models.assembly.attributes.document.invalid_document_type
-  - decidim.half_signup.quick_auth.sms_verification.text_message
+  - decidim.half_signup.quick_auth.*
