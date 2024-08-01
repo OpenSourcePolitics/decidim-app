@@ -1,0 +1,28 @@
+<div class="content">
+  <div class="wrapper">
+    <div class="row">
+      <div class="columns small-12 smallmedium-10 medium-8 large-6 small-centered margin-bottom-3" id="select-wrapper">
+        <div class="card">
+          <div class="card__content">
+            <h2 class="text-center"><%= t(".enter_phone") %></h2>
+            <p class="text-center"><%= t("instruction", scope:"decidim.half_signup.quick_auth.sms") %></p>
+            <p class="text-center"><%= t("click_here", scope:"decidim.half_signup.quick_auth.sms") %> <a href="/pages/terms-and-conditions"><%= t("cgu", scope:"decidim.half_signup.quick_auth.sms") %></a></p>
+            <%= decidim_form_for(@form, url: users_quick_auth_verification_path, method: :post) do |form| %>
+              <%= render partial: "phone_form", locals: { form: form } %>
+            <% end %>
+            <% if handlers_count > 1 && !current_user %>
+              <p class="text-center">
+                <%= link_to t("another_method", scope:"decidim.half_signup.quick_auth"), decidim_half_signup.users_quick_auth_path, class: "text-center" %>
+              </p>
+            <% end %>
+            <% if current_user.present? %>
+              <p class="text-center">
+                <%= link_to t("back", scope:"decidim.half_signup.quick_auth"), decidim.account_path, class: "text-center" %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
