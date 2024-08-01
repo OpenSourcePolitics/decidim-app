@@ -103,8 +103,8 @@ Rails.application.configure do
       openssl_verify_mode: "none"
     }
 
+    # related to https://github.com/ruby/net-smtp/pull/73
     config.action_mailer.smtp_settings.merge!(user_name: Rails.application.secrets.smtp_username) if Rails.application.secrets.smtp_username.present?
-
     config.action_mailer.smtp_settings.merge!(password: Rails.application.secrets.smtp_password) if Rails.application.secrets.smtp_password.present?
 
     if Rails.application.secrets.sendgrid
