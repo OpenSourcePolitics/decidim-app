@@ -61,8 +61,8 @@ gem "rack-attack", "~> 6.6"
 gem "sys-filesystem"
 gem "wicked_pdf", "2.6.3"
 
-gem "mysql2"
 gem "composite_primary_keys"
+gem "mysql2"
 
 group :development do
   gem "listen", "~> 3.1"

@@ -103,14 +103,9 @@ Rails.application.configure do
       openssl_verify_mode: "none"
     }
 
+    config.action_mailer.smtp_settings.merge!(user_name: Rails.application.secrets.smtp_username) if Rails.application.secrets.smtp_username.present?
 
-    if Rails.application.secrets.smtp_username.present?
-      config.action_mailer.smtp_settings.merge!(user_name: Rails.application.secrets.smtp_username)
-    end
-
-    if Rails.application.secrets.smtp_password.present?
-      config.action_mailer.smtp_settings.merge!(password: Rails.application.secrets.smtp_password)
-    end
+    config.action_mailer.smtp_settings.merge!(password: Rails.application.secrets.smtp_password) if Rails.application.secrets.smtp_password.present?
 
     if Rails.application.secrets.sendgrid
       config.action_mailer.default_options = {
