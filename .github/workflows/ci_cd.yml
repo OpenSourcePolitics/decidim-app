@@ -88,11 +88,6 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - run: |
-          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{env.CHROME_VERSION}}-1_amd64.deb
-          sudo dpkg -i /tmp/chrome.deb
-          rm /tmp/chrome.deb
-          name: Install Chrome version ${{ env.CHROME_VERSION }}
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -164,6 +159,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
+      - run: |
+          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{env.CHROME_VERSION}}-1_amd64.deb
+          sudo dpkg -i /tmp/chrome.deb
+          rm /tmp/chrome.deb
+        name: Install Chrome version ${{ env.CHROME_VERSION }}
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
       - name: Create db
