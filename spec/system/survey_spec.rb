@@ -1,4 +1,4 @@
-# # frozen_string_literal: true
+# frozen_string_literal: true
 
 # Waiting for backport: https://github.com/decidim/decidim/pull/13283
 # require "spec_helper"
