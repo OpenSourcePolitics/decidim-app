@@ -295,7 +295,7 @@ describe "Participatory Processes", type: :system do
     let!(:meetings_component) { create(:component, :unpublished, participatory_space: participatory_process, manifest_name: :meetings) }
 
     before do
-      create_list(:proposal, 3, component: proposals_component)
+      create_list(:extended_proposal, 3, component: proposals_component)
       allow(Decidim).to receive(:component_manifests).and_return([proposals_component.manifest, meetings_component.manifest])
     end
 

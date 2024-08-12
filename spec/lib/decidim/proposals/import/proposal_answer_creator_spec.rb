@@ -5,7 +5,7 @@ require "spec_helper"
 describe Decidim::Proposals::Import::ProposalAnswerCreator do
   subject { described_class.new(data, context) }
 
-  let(:proposal) { create(:proposal, state: state, component: component) }
+  let(:proposal) { create(:extended_proposal, state: state, component: component) }
   let!(:moment) { Time.current }
   let(:data) do
     {
@@ -56,7 +56,7 @@ describe Decidim::Proposals::Import::ProposalAnswerCreator do
     end
 
     context "with an emendation" do
-      let!(:amendable) { create(:proposal, component: component) }
+      let!(:amendable) { create(:extended_proposal, component: component) }
       let!(:amendment) { create(:amendment, amendable: amendable, emendation: proposal, state: "evaluating") }
 
       it "does not produce a record" do
@@ -102,7 +102,7 @@ describe Decidim::Proposals::Import::ProposalAnswerCreator do
 
     context "when proposal state changes" do
       context "when proposal had already a state" do
-        let!(:proposal) { create(:proposal, :evaluating, component: component) }
+        let!(:proposal) { create(:extended_proposal, :evaluating, component: component) }
         let(:state) { "accepted" }
         let(:expected_state) { "evaluating" }
 
@@ -110,7 +110,7 @@ describe Decidim::Proposals::Import::ProposalAnswerCreator do
       end
 
       context "when proposal had no state" do
-        let!(:proposal) { create(:proposal, :not_answered, component: component) }
+        let!(:proposal) { create(:extended_proposal, :not_answered, component: component) }
         let(:state) { "accepted" }
         let(:expected_state) { "" }
 
@@ -118,7 +118,7 @@ describe Decidim::Proposals::Import::ProposalAnswerCreator do
       end
 
       context "when proposal was just created and had a state set to nil" do
-        let!(:proposal) { create(:proposal, component: component, state: nil) }
+        let!(:proposal) { create(:extended_proposal, component: component, state: nil) }
         let(:state) { "accepted" }
         let(:expected_state) { "" }
 
