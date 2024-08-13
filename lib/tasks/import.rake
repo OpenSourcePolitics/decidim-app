@@ -230,7 +230,7 @@ namespace :import do
     raise "Organization not found for '#{host}'" unless organization
 
     path = ENV["CSV_FILE"].presence || "tmp/links.csv"
-    DrupalJob.perform_later(organization: organization, path: path)
+    DrupalJob.perform_now(organization: organization, path: path)
   end
 
   namespace :bdx do
@@ -249,6 +249,15 @@ namespace :import do
 
       path = ENV["CSV_FILE"].presence || "tmp/drupal_import/resume.csv"
       DrupalImportProposalJob.perform_now(organization: organization, path: path)
+    end
+
+    task meetings: :environment do
+      host = ENV["ORGANIZATION_HOST"].presence || Decidim::Organization.first.host
+      organization = Decidim::Organization.find_by(host: host)
+      raise "Organization not found for '#{host}'" unless organization
+
+      path = ENV["CSV_FILE"].presence || "tmp/drupal_import/resume.csv"
+      DrupalImportMeetingJob.perform_now(organization: organization, path: path)
     end
   end
 end
