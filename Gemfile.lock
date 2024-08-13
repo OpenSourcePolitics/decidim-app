@@ -132,6 +132,14 @@ GIT
       deface (>= 1.9)
 
 GIT
+  remote: https://github.com/armandfardeau/decidim-module-budgets_paper_ballots
+  revision: 5a24fd62b48fea1b6349cefab65941cd5be1f512
+  specs:
+    decidim-budgets_paper_ballots (0.27.0)
+      decidim-budgets (>= 0.27.0)
+      decidim-core (>= 0.27.0)
+
+GIT
   remote: https://github.com/sgruhier/foundation_rails_helper.git
   revision: bc33600db7a2d16ce3cdc1f8369d0d7e7c4245b5
   specs:
@@ -1143,6 +1151,7 @@ DEPENDENCIES
   decidim-budget_category_voting!
   decidim-budgets_booth!
   decidim-budgets_importer!
+  decidim-budgets_paper_ballots!
   decidim-cache_cleaner
   decidim-category_enhanced (~> 0.0.1)
   decidim-conferences (~> 0.27.0)
