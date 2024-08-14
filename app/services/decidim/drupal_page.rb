@@ -1,7 +1,12 @@
+# frozen_string_literal: true
+
 module Decidim
   class DrupalPage
-    attr_reader :url, :slug, :md5, :nokogiri_document, :title, :description, :calendars, :short_description, :drupal_node_id, :thematique, :pdf_attachments, :participatory_process_url,
-                :decidim_participatory_process_id, :errors, :drupal_type, :drupal_author, :drupal_organization, :drupal_thematique
+    attr_reader :url, :slug, :md5, :nokogiri_document,
+                :title, :description, :calendars, :short_description,
+                :drupal_node_id, :thematique, :pdf_attachments, :participatory_process_url,
+                :decidim_participatory_process_id, :errors, :drupal_type, :drupal_author,
+                :drupal_organization, :drupal_thematique
 
     def self.scrape(**args)
       new(**args).scrape

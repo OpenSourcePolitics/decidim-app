@@ -50,8 +50,8 @@ module Decidim
         if row_valid?(row)
           errors_comments_count = @errors_comments.size
           import_process_comments_to_proposals(row)
-          errors_comments_count = @errors_comments.size - errors_comments_count          
-          if errors_comments_count > 0
+          errors_comments_count = @errors_comments.size - errors_comments_count
+          if errors_comments_count.positive?
             @logger.warn { "Rake(import:bdx:proposals)> CSV row for #{row["url"]} has errors" }
             @errors.push(row.merge({ error: "#{errors_comments_count} found on this process. see 'errors--import-bdx-proposals--comments' CSV for details" }))
           end
@@ -92,8 +92,8 @@ module Decidim
       end
 
       source_records.each do |record|
-        find_or_create_default_anonymous_user if record.uid == 0
-        if record.pid == 0 
+        find_or_create_default_anonymous_user if record.uid.zero?
+        if record.pid.zero?
           create_proposal(target_component, record)
         else
           create_comment_on_proposal(create_import_reference(record.pid), record)
@@ -132,8 +132,8 @@ module Decidim
     end
 
     def create_comment_on_proposal(reference, record)
-      proposal = Decidim::Proposals::Proposal.find_by_reference!(reference)
-      comment = Decidim::Comments::Comment.new(
+      proposal = Decidim::Proposals::Proposal.find_by!(reference: reference)
+      Decidim::Comments::Comment.new(
         commentable: proposal,
         root_commentable: proposal,
         author: record.user,
@@ -166,7 +166,7 @@ module Decidim
     end
 
     def create_import_reference(pid)
-      "BMDP-PROP-" + pid.to_s
+      "BMDP-PROP-#{pid}"
     end
 
     def integer_to_datetime(value)

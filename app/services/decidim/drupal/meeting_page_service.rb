@@ -1,8 +1,13 @@
+# frozen_string_literal: true
+
 module Decidim
   module Drupal
     class MeetingPageService < Decidim::DrupalPage
-      attr_reader :url, :slug, :md5, :nokogiri_document, :title, :description, :calendars, :short_description, :drupal_node_id, :thematique, :pdf_attachments, :participatory_process_url,
-                  :decidim_participatory_process_id, :errors, :drupal_type, :drupal_author, :drupal_organization, :drupal_thematique, :address, :location, :date
+      attr_reader :url, :slug, :md5, :nokogiri_document,
+                  :title, :description, :calendars, :short_description,
+                  :drupal_node_id, :thematique, :pdf_attachments, :participatory_process_url,
+                  :decidim_participatory_process_id, :errors, :drupal_type,
+                  :drupal_author, :drupal_organization, :drupal_thematique, :address, :location, :date
 
       def attributes
         {
@@ -55,11 +60,11 @@ module Decidim
       end
 
       def set_date
-        @date = Date.today # Default date to today
+        @date = Time.zone.today # Default date to today
         date = @nokogiri_document.css("div.date.datedebut").children.to_s.strip
         return if date.blank?
 
-        date = date.split(" ")
+        date = date.split
         months = {
           "janvier" => "01",
           "février" => "02",
@@ -74,7 +79,7 @@ module Decidim
           "novembre" => "11",
           "décembre" => "12"
         }
-        date = date[2] + "-" + months[date[1]] + "-" + date[0]
+        date = "#{date[2]}-#{months[date[1]]}-#{date[0]}"
 
         @date = Date.parse(date).strftime("%d-%m-%Y")
       end

@@ -2,9 +2,8 @@
 
 module Decidim
   class DrupalMeetingsImporterService
-
     ERRORS = OpenStruct.new(
-      INVALID_ROWS: "No data found for node",
+      INVALID_ROWS: "No data found for node"
     )
     def self.run(**args)
       new(**args).execute
@@ -21,6 +20,10 @@ module Decidim
       @author = @organization
     end
 
+    # rubcop:disable Metrics/CyclomaticComplexity
+    # rubcop:disable Metrics/PerceivedComplexity
+    # rubcop:disable Metrics/CyclomaticComplexity
+    #
     def execute
       @logger.warn "Rake(import:bdx:meetings)> executing..."
 
@@ -42,20 +45,10 @@ module Decidim
           next
         end
 
-        meeting_component, participatory_space = get_attr_for(row)
-
-        puts meeting_component.name
-        puts participatory_space.title
+        meeting_component = get_attr_for(row)
 
         drupal_page = Decidim::DrupalPage.scrape(url: row["url"])
         raise if drupal_page.errors.present?
-
-        # Here we have related meeting and PP
-        # We must scrap the meetings url
-        # And create a decidim meeting for each one
-
-        # For each drupal_page calendar
-        # Create a decidim meeting
 
         drupal_page.calendars.each do |url|
           meeting_page = Decidim::Drupal::MeetingPageService.scrape(url: url)
@@ -64,20 +57,18 @@ module Decidim
           next if meeting_page.errors.present?
 
           meeting = Decidim::Meetings::Meeting.new(
-            title:  { "fr" => meeting_page.title },
+            title: { "fr" => meeting_page.title },
             description: { "fr" => meeting_page.description },
             start_time: advance_time(meeting_page.date, 12),
             end_time: advance_time(meeting_page.date, 14),
             component: meeting_component,
             published_at: advance_time(meeting_page.date, 10),
-            location: {"fr" => meeting_page.location },
+            location: { "fr" => meeting_page.location },
             address: meeting_page.address,
             author: @author,
-            closed_at: advance_time(meeting_page.date, 14),
+            closed_at: advance_time(meeting_page.date, 14)
           )
           meeting.save!
-
-          [meeting, meeting_page]
         end
       rescue StandardError => e
         @logger.warn { "Rake(import:bdx:meetings)>  #{e.class}: '#{e.message}'" }
@@ -92,6 +83,9 @@ module Decidim
       write_csv_error_comment_file if @errors_comments.present?
       @logger.warn "Rake(import:bdx:meetings)> terminated"
     end
+    # rubcop:disable Metrics/CyclomaticComplexity
+    # rubcop:disable Metrics/PerceivedComplexity
+    # rubcop:disable Metrics/CyclomaticComplexity
 
     private
 
@@ -99,7 +93,7 @@ module Decidim
       Date.parse(date) + hours_int.hours
     rescue StandardError => e
       @logger.warn { "Rake(import:bdx:meetings)>  #{e.class}: '#{e.message}'" }
-      Date.today
+      Time.zone.today
     end
 
     def get_attr_for(row)
@@ -107,15 +101,11 @@ module Decidim
       meeting_component = Decidim::Component.find_by!(manifest_name: "meetings", id: row["decidim_meeting_id"])
       participatory_space = Decidim::ParticipatoryProcess.find(row["decidim_participatory_process_id"])
 
-      if meeting_component.blank?
-        @logger.warn "Rake(import:bdx:meetings)> No component found for node #{root_node_id}"
-      end
+      @logger.warn "Rake(import:bdx:meetings)> No component found for node #{root_node_id}" if meeting_component.blank?
 
-      if participatory_space.blank?
-        @logger.warn "Rake(import:bdx:meetings)> No participatory space found for node #{root_node_id}"
-      end
+      @logger.warn "Rake(import:bdx:meetings)> No participatory space found for node #{root_node_id}" if participatory_space.blank?
 
-      [meeting_component, participatory_space]
+      meeting_component
     end
 
     def row_valid?(row)

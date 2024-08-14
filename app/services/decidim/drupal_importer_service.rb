@@ -3,8 +3,6 @@
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Security/Open
-# rubocop:disable Naming/AccessorMethodName
-# rubocop:disable Lint/SafeNavigationChain
 module Decidim
   class DrupalImporterService
     def self.run(**args)
@@ -203,5 +201,3 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Security/Open
-# rubocop:enable Naming/AccessorMethodName
-# rubocop:enable Lint/SafeNavigationChain
