@@ -230,7 +230,7 @@ namespace :import do
     raise "Organization not found for '#{host}'" unless organization
 
     path = ENV["CSV_FILE"].presence || "tmp/links.csv"
-    DrupalJob.perform_now(organization: organization, path: path)
+    DrupalJob.perform_later(organization: organization, path: path)
   end
 
   namespace :bdx do
@@ -240,7 +240,7 @@ namespace :import do
       raise "Organization not found for '#{host}'" unless organization
 
       limit = ENV["LIMIT"].presence
-      DrupalImportUserJob.perform_now(organization: organization, limit: limit)
+      DrupalImportUserJob.perform_later(organization: organization, limit: limit)
     end
     task proposals: :environment do
       host = ENV["ORGANIZATION_HOST"].presence || Decidim::Organization.first.host
@@ -248,7 +248,7 @@ namespace :import do
       raise "Organization not found for '#{host}'" unless organization
 
       path = ENV["CSV_FILE"].presence || "tmp/drupal_import/resume.csv"
-      DrupalImportProposalJob.perform_now(organization: organization, path: path)
+      DrupalImportProposalJob.perform_later(organization: organization, path: path)
     end
 
     task meetings: :environment do
@@ -257,7 +257,7 @@ namespace :import do
       raise "Organization not found for '#{host}'" unless organization
 
       path = ENV["CSV_FILE"].presence || "tmp/drupal_import/resume.csv"
-      DrupalImportMeetingJob.perform_now(organization: organization, path: path)
+      DrupalImportMeetingJob.perform_later(organization: organization, path: path)
     end
   end
 end
