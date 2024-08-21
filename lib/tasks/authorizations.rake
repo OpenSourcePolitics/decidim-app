@@ -7,6 +7,6 @@ namespace :authorizations do
 
     raise "No data found for authorization handler name '#{name}'" unless Decidim::Authorization.exists?(name: name)
 
-    AuthorizationDataToUserDataJob.perform_now(name: name)
+    AuthorizationDataToUserDataJob.perform_later(name: name)
   end
 end
