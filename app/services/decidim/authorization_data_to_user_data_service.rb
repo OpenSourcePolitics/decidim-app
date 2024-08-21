@@ -12,7 +12,7 @@ module Decidim
     end
 
     def execute
-      Decidim::Authorization.where(filter).each do |authorization|
+      Decidim::Authorization.find_each(filter) do |authorization|
         authorization.user.update(extended_data: authorization.user.extended_data.merge({ @name.to_s => authorization.metadata }))
       end
     end
