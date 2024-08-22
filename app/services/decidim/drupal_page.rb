@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Naming/AccessorMethodName
+# rubocop:disable Lint/SafeNavigationChain
 module Decidim
   class DrupalPage
     attr_reader :url, :slug, :md5, :nokogiri_document,
@@ -146,11 +148,13 @@ module Decidim
       end.compact.first&.text&.split("\n")&.map(&:strip).second.gsub("  ", " ")
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def set_drupal_thematique
       @drupal_thematique = @nokogiri_document.css(".attr-list li")&.map do |li|
         li if li.text.include?("Thématique :")
       end.compact.first&.text&.split("\n")&.map(&:strip)&.second&.gsub("  ", " ")
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     def set_drupal_organization
       @drupal_organization = @nokogiri_document.css(".attr-list li")&.map do |li|
@@ -215,3 +219,5 @@ module Decidim
     end
   end
 end
+# rubocop:enable Naming/AccessorMethodName
+# rubocop:enable Lint/SafeNavigationChain

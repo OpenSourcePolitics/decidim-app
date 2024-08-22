@@ -6,7 +6,7 @@ ENV RAILS_ENV=production \
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get -y install libpq-dev curl git libicu-dev build-essential && \
+    apt-get -y install libpq-dev curl git libicu-dev build-essential mysql-devel && \
     curl https://deb.nodesource.com/setup_16.x | bash && \
     apt-get install -y nodejs  && \
     npm install --global yarn && \

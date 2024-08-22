@@ -20,10 +20,8 @@ module Decidim
       @author = @organization
     end
 
-    # rubcop:disable Metrics/CyclomaticComplexity
-    # rubcop:disable Metrics/PerceivedComplexity
-    # rubcop:disable Metrics/CyclomaticComplexity
-    #
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/PerceivedComplexity
     def execute
       @logger.warn "Rake(import:bdx:meetings)> executing..."
 
@@ -83,9 +81,8 @@ module Decidim
       write_csv_error_comment_file if @errors_comments.present?
       @logger.warn "Rake(import:bdx:meetings)> terminated"
     end
-    # rubcop:disable Metrics/CyclomaticComplexity
-    # rubcop:disable Metrics/PerceivedComplexity
-    # rubcop:disable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/PerceivedComplexity
 
     private
 

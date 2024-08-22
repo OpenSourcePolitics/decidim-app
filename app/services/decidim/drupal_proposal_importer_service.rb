@@ -79,7 +79,7 @@ module Decidim
 
     def import_process_comments_to_proposals(row)
       root_node_id = row["drupal_node_id"]
-      target_process = Decidim::ParticipatoryProcess.find(row["decidim_participatory_process_id"])
+      # target_process = Decidim::ParticipatoryProcess.find(row["decidim_participatory_process_id"])
       target_component = Decidim::Component.find_by!(manifest_name: "proposals", id: row["decidim_proposal_id"])
 
       source_records = select_comments_from_external_db(root_node_id)
