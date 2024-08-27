@@ -36,7 +36,7 @@ describe "Proposals", type: :system do
 
   context "when viewing a single proposal" do
     let!(:component) do
-      create(:proposal_component,
+      create(:extended_proposal_component,
              manifest: manifest,
              participatory_space: participatory_process,
              settings: {
@@ -45,7 +45,7 @@ describe "Proposals", type: :system do
              })
     end
 
-    let!(:proposals) { create_list(:proposal, 3, component: component) }
+    let!(:proposals) { create_list(:extended_proposal, 3, component: component) }
     let!(:proposal) { proposals.first }
 
     it_behaves_like "accessible page" do
@@ -68,7 +68,7 @@ describe "Proposals", type: :system do
     end
 
     context "when process is not related to any scope" do
-      let!(:proposal) { create(:proposal, component: component, scope: scope) }
+      let!(:proposal) { create(:extended_proposal, component: component, scope: scope) }
 
       it "can be filtered by scope" do
         visit_component
@@ -78,7 +78,7 @@ describe "Proposals", type: :system do
     end
 
     context "when process is related to a child scope" do
-      let!(:proposal) { create(:proposal, component: component, scope: scope) }
+      let!(:proposal) { create(:extended_proposal, component: component, scope: scope) }
       let(:participatory_process) { scoped_participatory_process }
 
       it "does not show the scope name" do
@@ -90,7 +90,7 @@ describe "Proposals", type: :system do
 
     context "when it is an official proposal" do
       let(:content) { generate_localized_title }
-      let!(:official_proposal) { create(:proposal, :official, body: content, component: component) }
+      let!(:official_proposal) { create(:extended_proposal, :official, body: content, component: component) }
       let!(:official_proposal_title) { translated(official_proposal.title) }
 
       before do
@@ -106,7 +106,7 @@ describe "Proposals", type: :system do
     end
 
     context "when rich text editor is enabled for participants" do
-      let!(:proposal) { create(:proposal, body: content, component: component) }
+      let!(:proposal) { create(:extended_proposal, body: content, component: component) }
 
       before do
         organization.update(rich_text_editor_in_public_views: true)
@@ -118,7 +118,7 @@ describe "Proposals", type: :system do
     end
 
     context "when rich text editor is NOT enabled for participants" do
-      let!(:proposal) { create(:proposal, body: content, component: component) }
+      let!(:proposal) { create(:extended_proposal, body: content, component: component) }
 
       before do
         visit_component
@@ -130,12 +130,12 @@ describe "Proposals", type: :system do
 
     context "when it is a proposal with image" do
       let!(:component) do
-        create(:proposal_component,
+        create(:extended_proposal_component,
                manifest: manifest,
                participatory_space: participatory_process)
       end
 
-      let!(:proposal) { create(:proposal, component: component) }
+      let!(:proposal) { create(:extended_proposal, component: component) }
       let!(:image) { create(:attachment, attached_to: proposal) }
 
       it "shows the card image" do
@@ -148,7 +148,7 @@ describe "Proposals", type: :system do
 
     context "when it is an official meeting proposal" do
       include_context "with rich text editor content"
-      let!(:proposal) { create(:proposal, :official_meeting, body: content, component: component) }
+      let!(:proposal) { create(:extended_proposal, :official_meeting, body: content, component: component) }
 
       before do
         visit_component
@@ -163,7 +163,7 @@ describe "Proposals", type: :system do
     end
 
     context "when a proposal has comments" do
-      let(:proposal) { create(:proposal, component: component) }
+      let(:proposal) { create(:extended_proposal, component: component) }
       let(:author) { create(:user, :confirmed, organization: component.organization) }
       let!(:comments) { create_list(:comment, 3, commentable: proposal) }
 
@@ -180,7 +180,7 @@ describe "Proposals", type: :system do
     context "when a proposal has costs" do
       let!(:proposal) do
         create(
-          :proposal,
+          :extended_proposal,
           :accepted,
           :with_answer,
           component: component,
@@ -210,7 +210,7 @@ describe "Proposals", type: :system do
     end
 
     context "when a proposal has been linked in a meeting" do
-      let(:proposal) { create(:proposal, component: component) }
+      let(:proposal) { create(:extended_proposal, component: component) }
       let(:meeting_component) do
         create(:component, manifest_name: :meetings, participatory_space: proposal.component.participatory_space)
       end
@@ -229,7 +229,7 @@ describe "Proposals", type: :system do
     end
 
     context "when a proposal has been linked in a result" do
-      let(:proposal) { create(:proposal, component: component) }
+      let(:proposal) { create(:extended_proposal, component: component) }
       let(:accountability_component) do
         create(:component, manifest_name: :accountability, participatory_space: proposal.component.participatory_space)
       end
@@ -248,7 +248,7 @@ describe "Proposals", type: :system do
     end
 
     context "when a proposal is in evaluation" do
-      let!(:proposal) { create(:proposal, :with_answer, :evaluating, component: component) }
+      let!(:proposal) { create(:extended_proposal, :with_answer, :evaluating, component: component) }
 
       it "shows a badge and an answer" do
         visit_component
@@ -264,7 +264,7 @@ describe "Proposals", type: :system do
     end
 
     context "when a proposal has been rejected" do
-      let!(:proposal) { create(:proposal, :with_answer, :rejected, component: component) }
+      let!(:proposal) { create(:extended_proposal, :with_answer, :rejected, component: component) }
 
       it "shows the rejection reason" do
         visit_component
@@ -284,7 +284,7 @@ describe "Proposals", type: :system do
     end
 
     context "when a proposal has been accepted" do
-      let!(:proposal) { create(:proposal, :with_answer, :accepted, component: component) }
+      let!(:proposal) { create(:extended_proposal, :with_answer, :accepted, component: component) }
 
       it "shows the acceptance reason" do
         visit_component
@@ -300,7 +300,7 @@ describe "Proposals", type: :system do
     end
 
     context "when the proposal answer has not been published" do
-      let!(:proposal) { create(:proposal, :accepted_not_published, component: component) }
+      let!(:proposal) { create(:extended_proposal, :accepted_not_published, component: component) }
 
       it "shows the acceptance reason" do
         visit_component
@@ -331,11 +331,11 @@ describe "Proposals", type: :system do
 
   context "when a proposal has been linked in a project" do
     let(:component) do
-      create(:proposal_component,
+      create(:extended_proposal_component,
              manifest: manifest,
              participatory_space: participatory_process)
     end
-    let(:proposal) { create(:proposal, component: component) }
+    let(:proposal) { create(:extended_proposal, component: component) }
     let(:budget_component) do
       create(:component, manifest_name: :budgets, participatory_space: proposal.component.participatory_space)
     end
@@ -355,8 +355,8 @@ describe "Proposals", type: :system do
 
   context "when listing proposals in a participatory process" do
     shared_examples_for "a random proposal ordering" do
-      let!(:lucky_proposal) { create(:proposal, component: component) }
-      let!(:unlucky_proposal) { create(:proposal, component: component) }
+      let!(:lucky_proposal) { create(:extended_proposal, component: component) }
+      let!(:unlucky_proposal) { create(:extended_proposal, component: component) }
       let!(:lucky_proposal_title) { translated(lucky_proposal.title) }
       let!(:unlucky_proposal_title) { translated(unlucky_proposal.title) }
 
@@ -376,11 +376,11 @@ describe "Proposals", type: :system do
     end
 
     it "lists all the proposals" do
-      create(:proposal_component,
+      create(:extended_proposal_component,
              manifest: manifest,
              participatory_space: participatory_process)
 
-      create_list(:proposal, 3, component: component)
+      create_list(:extended_proposal, 3, component: component)
 
       visit_component
       expect(page).to have_css(".card--proposal", count: 3)
@@ -393,7 +393,7 @@ describe "Proposals", type: :system do
     end
 
     context "when comments have been moderated" do
-      let(:proposal) { create(:proposal, component: component) }
+      let(:proposal) { create(:extended_proposal, component: component) }
       let(:author) { create(:user, :confirmed, organization: component.organization) }
       let!(:comments) { create_list(:comment, 3, commentable: proposal) }
       let!(:moderation) { create :moderation, reportable: comments.first, hidden_at: 1.day.ago }
@@ -415,20 +415,20 @@ describe "Proposals", type: :system do
 
     context "when voting phase is over" do
       let!(:component) do
-        create(:proposal_component,
+        create(:extended_proposal_component,
                :with_votes_blocked,
                manifest: manifest,
                participatory_space: participatory_process)
       end
 
       let!(:most_voted_proposal) do
-        proposal = create(:proposal, component: component)
+        proposal = create(:extended_proposal, component: component)
         create_list(:proposal_vote, 3, proposal: proposal)
         proposal
       end
       let!(:most_voted_proposal_title) { translated(most_voted_proposal.title) }
 
-      let!(:less_voted_proposal) { create(:proposal, component: component) }
+      let!(:less_voted_proposal) { create(:extended_proposal, component: component) }
       let!(:less_voted_proposal_title) { translated(less_voted_proposal.title) }
 
       before { visit_component }
@@ -447,7 +447,7 @@ describe "Proposals", type: :system do
 
     context "when voting is disabled" do
       let!(:component) do
-        create(:proposal_component,
+        create(:extended_proposal_component,
                :with_votes_disabled,
                manifest: manifest,
                participatory_space: participatory_process)
@@ -458,7 +458,7 @@ describe "Proposals", type: :system do
       end
 
       it "shows only links to full proposals" do
-        create_list(:proposal, 2, component: component)
+        create_list(:extended_proposal, 2, component: component)
 
         visit_component
 
@@ -470,7 +470,7 @@ describe "Proposals", type: :system do
 
     context "when there are a lot of proposals" do
       before do
-        create_list(:proposal, Decidim::Paginable::OPTIONS.first + 5, component: component)
+        create_list(:extended_proposal, Decidim::Paginable::OPTIONS.first + 5, component: component)
       end
 
       it "paginates them" do
@@ -506,14 +506,14 @@ describe "Proposals", type: :system do
 
     context "when ordering by 'most_voted'" do
       let!(:component) do
-        create(:proposal_component,
+        create(:extended_proposal_component,
                :with_votes_enabled,
                manifest: manifest,
                participatory_space: participatory_process)
       end
-      let!(:most_voted_proposal) { create(:proposal, component: component) }
+      let!(:most_voted_proposal) { create(:extended_proposal, component: component) }
       let!(:votes) { create_list(:proposal_vote, 3, proposal: most_voted_proposal) }
-      let!(:less_voted_proposal) { create(:proposal, component: component) }
+      let!(:less_voted_proposal) { create(:extended_proposal, component: component) }
 
       it_behaves_like "ordering proposals by selected option", "Most supported" do
         let(:first_proposal) { most_voted_proposal }
@@ -522,8 +522,8 @@ describe "Proposals", type: :system do
     end
 
     context "when ordering by 'recent'" do
-      let!(:older_proposal) { create(:proposal, component: component, created_at: 1.month.ago) }
-      let!(:recent_proposal) { create(:proposal, component: component) }
+      let!(:older_proposal) { create(:extended_proposal, component: component, created_at: 1.month.ago) }
+      let!(:recent_proposal) { create(:extended_proposal, component: component) }
 
       it_behaves_like "ordering proposals by selected option", "Recent" do
         let(:first_proposal) { recent_proposal }
@@ -532,9 +532,9 @@ describe "Proposals", type: :system do
     end
 
     context "when ordering by 'most_followed'" do
-      let!(:most_followed_proposal) { create(:proposal, component: component) }
+      let!(:most_followed_proposal) { create(:extended_proposal, component: component) }
       let!(:follows) { create_list(:follow, 3, followable: most_followed_proposal) }
-      let!(:less_followed_proposal) { create(:proposal, component: component) }
+      let!(:less_followed_proposal) { create(:extended_proposal, component: component) }
 
       it_behaves_like "ordering proposals by selected option", "Most followed" do
         let(:first_proposal) { most_followed_proposal }
@@ -543,9 +543,9 @@ describe "Proposals", type: :system do
     end
 
     context "when ordering by 'most_commented'" do
-      let!(:most_commented_proposal) { create(:proposal, component: component, created_at: 1.month.ago) }
+      let!(:most_commented_proposal) { create(:extended_proposal, component: component, created_at: 1.month.ago) }
       let!(:comments) { create_list(:comment, 3, commentable: most_commented_proposal) }
-      let!(:less_commented_proposal) { create(:proposal, component: component) }
+      let!(:less_commented_proposal) { create(:extended_proposal, component: component) }
 
       it_behaves_like "ordering proposals by selected option", "Most commented" do
         let(:first_proposal) { most_commented_proposal }
@@ -554,13 +554,13 @@ describe "Proposals", type: :system do
     end
 
     context "when ordering by 'most_endorsed'" do
-      let!(:most_endorsed_proposal) { create(:proposal, component: component, created_at: 1.month.ago) }
+      let!(:most_endorsed_proposal) { create(:extended_proposal, component: component, created_at: 1.month.ago) }
       let!(:endorsements) do
         3.times.collect do
           create(:endorsement, resource: most_endorsed_proposal, author: build(:user, organization: organization))
         end
       end
-      let!(:less_endorsed_proposal) { create(:proposal, component: component) }
+      let!(:less_endorsed_proposal) { create(:extended_proposal, component: component) }
 
       it_behaves_like "ordering proposals by selected option", "Most endorsed" do
         let(:first_proposal) { most_endorsed_proposal }
@@ -569,9 +569,9 @@ describe "Proposals", type: :system do
     end
 
     context "when ordering by 'with_more_authors'" do
-      let!(:most_authored_proposal) { create(:proposal, component: component, created_at: 1.month.ago) }
+      let!(:most_authored_proposal) { create(:extended_proposal, component: component, created_at: 1.month.ago) }
       let!(:coauthorships) { create_list(:coauthorship, 3, coauthorable: most_authored_proposal) }
-      let!(:less_authored_proposal) { create(:proposal, component: component) }
+      let!(:less_authored_proposal) { create(:extended_proposal, component: component) }
 
       it_behaves_like "ordering proposals by selected option", "With more authors" do
         let(:first_proposal) { most_authored_proposal }
@@ -582,9 +582,9 @@ describe "Proposals", type: :system do
     context "when searching proposals" do
       let!(:proposals) do
         [
-          create(:proposal, title: "Lorem ipsum dolor sit amet", component: component),
-          create(:proposal, title: "Donec vitae convallis augue", component: component),
-          create(:proposal, title: "Pellentesque habitant morbi", component: component)
+          create(:extended_proposal, title: "Lorem ipsum dolor sit amet", component: component),
+          create(:extended_proposal, title: "Donec vitae convallis augue", component: component),
+          create(:extended_proposal, title: "Pellentesque habitant morbi", component: component)
         ]
       end
 
@@ -603,14 +603,14 @@ describe "Proposals", type: :system do
     end
 
     context "when paginating" do
-      let!(:collection) { create_list :proposal, collection_size, component: component }
+      let!(:collection) { create_list :extended_proposal, collection_size, component: component }
       let!(:resource_selector) { ".card--proposal" }
 
       it_behaves_like "a paginated resource"
     end
 
     context "when component is not commentable" do
-      let!(:resources) { create_list(:proposal, 3, component: component) }
+      let!(:resources) { create_list(:extended_proposal, 3, component: component) }
 
       it_behaves_like "an uncommentable component"
     end

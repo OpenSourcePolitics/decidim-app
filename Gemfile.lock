@@ -133,6 +133,16 @@ GIT
       deface (>= 1.9)
 
 GIT
+  remote: https://github.com/alecslupu-pfa/decidim-module-custom_proposal_states
+  revision: 66bc4d1a9f00eb66356e583365597e737e1d6917
+  branch: release/0.27-stable
+  specs:
+    decidim-custom_proposal_states (0.27.5)
+      decidim-core (~> 0.27)
+      decidim-proposals (~> 0.27)
+      deface (>= 1.9)
+
+GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome
   revision: 058af7db47737e3ca108ac8e08efd5ec55d67a44
   branch: main
@@ -1154,6 +1164,7 @@ DEPENDENCIES
   decidim-cache_cleaner
   decidim-category_enhanced (~> 0.0.1)
   decidim-conferences (~> 0.27.0)
+  decidim-custom_proposal_states!
   decidim-decidim_awesome!
   decidim-dev (~> 0.27.0)
   decidim-extended_socio_demographic_authorization_handler!

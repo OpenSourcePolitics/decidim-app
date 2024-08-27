@@ -13,7 +13,7 @@ module Decidim
         create(:organization, available_authorizations: ["phone_authorization_handler"])
       end
 
-      let!(:proposal) { create(:proposal, :accepted) }
+      let!(:proposal) { create(:extended_proposal, :accepted) }
       let!(:category) { create(:category, participatory_space: component.participatory_space) }
       let!(:scope) { create(:scope, organization: component.participatory_space.organization) }
       let(:participatory_process) { component.participatory_space }
@@ -22,7 +22,7 @@ module Decidim
       let!(:meetings_component) { create(:component, manifest_name: "meetings", participatory_space: participatory_process) }
       let(:meetings) { create_list(:meeting, 2, component: meetings_component) }
 
-      let!(:proposals_component) { create(:component, manifest_name: "proposals", participatory_space: participatory_process) }
+      let!(:proposals_component) { create(:extended_proposal_component, manifest_name: "proposals", participatory_space: participatory_process) }
 
       let!(:authorization) do
         create(
@@ -191,7 +191,7 @@ module Decidim
         end
 
         context "with proposal having an answer" do
-          let!(:proposal) { create(:proposal, :with_answer) }
+          let!(:proposal) { create(:extended_proposal, :with_answer) }
 
           it "serializes the answer" do
             expect(serialized).to include(answer: expected_answer)
