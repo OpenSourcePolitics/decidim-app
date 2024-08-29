@@ -91,11 +91,15 @@ jobs:
       - run: |
           sudo apt-get update
           sudo apt-get install -y libu2f-udev
+          sudo apt-get remove -y google-chrome-stable
           sudo apt-get purge -y google-chrome-stable
+          sudo rm -rf /opt/google/chrome
+          sudo rm /usr/bin/google-chrome
+          sudo rm /usr/local/bin/google-chrome
           wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{env.CHROME_VERSION}}-1_amd64.deb
           sudo dpkg -i /tmp/chrome.deb
           sudo apt-mark hold google-chrome-stable
-          google-chrome --version
+          /opt/google/chrome/chrome --version
           rm /tmp/chrome.deb
         name: Install Chrome version ${{ env.CHROME_VERSION }}
       - uses: actions/setup-node@v3
