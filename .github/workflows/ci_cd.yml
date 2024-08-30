@@ -6,7 +6,6 @@ env:
   SIMPLECOV: "true"
   RSPEC_FORMAT: "documentation"
   RUBY_VERSION: 3.0.6
-  CHROME_VERSION: 126.0.6478.182
   RAILS_ENV: test
   NODE_VERSION: 16.9.1
   RUBYOPT: '-W:no-deprecated'
@@ -88,11 +87,6 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - run: |
-          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{env.CHROME_VERSION}}-1_amd64.deb
-          sudo dpkg -i /tmp/chrome.deb
-          rm /tmp/chrome.deb
-        name: Install Chrome version ${{ env.CHROME_VERSION }}
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -111,8 +105,6 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v2
-        with:
-          chromedriver-version: ${{ env.CHROME_VERSION }}
       - run:  bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       # - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
@@ -179,8 +171,6 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
       - uses: nanasess/setup-chromedriver@v2
-        with:
-          chromedriver-version: ${{ env.CHROME_VERSION }}
       - run:  bundle exec rake "test:run[include, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
         name: RSpec
       # - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
