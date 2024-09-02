@@ -17,6 +17,7 @@ fr:
   decidim:
     admin:
       exports:
+        export_as: "%{name} au format %{export_format}"
         notice: Votre exportation est en cours. Vous recevrez un e-mail quand elle sera terminée.
       menu:
         admin_accountability: Admin accountability
@@ -132,6 +133,10 @@ fr:
       show:
         local_area: Espace d'organisation
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Propositions avec champs privés
+          proposal_comments: Commentaires
       collaborative_drafts:
         new:
           add_file: Ajouter le fichier

@@ -17,6 +17,7 @@ en:
   decidim:
     admin:
       exports:
+        export_as: "%{name} as %{export_format}"
         notice: Your export is currently in progress. You'll receive an email when it's complete.
       participatory_space_private_users:
         create:
@@ -130,6 +131,10 @@ en:
       show:
         local_area: Organization area
     proposals:
+      admin:
+        exports:
+          awesome_private_proposals: Proposals with private fields
+          proposal_comments: Comments
       collaborative_drafts:
         new:
           add_file: Add file

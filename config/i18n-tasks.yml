@@ -125,6 +125,7 @@ ignore_unused:
   - faker.*
   - activemodel.attributes.osp_authorization_handler.*
   - activemodel.attributes.participatory_process.private_space
+  - decidim.admin.exports.export_as
   - decidim.amendments.emendation.announcement.evaluating
   - decidim.authorization_handlers.osp_authorization_handler.{explanation, name}
   - decidim.authorization_handlers.osp_authorization_handler.fields.*
@@ -135,6 +136,8 @@ ignore_unused:
   - decidim.meetings.meeting.not_allowed
   - decidim.meetings.directory.meetings.index.all
   - decidim.meetings.meetings.{create, update}.{invalid, success}
+  - decidim.proposals.admin.exports.awesome_private_proposals
+  - decidim.proposals.admin.exports.proposal_comments
   - decidim.scopes.global
   - decidim.scopes.picker.*
   - decidim.system.organizations.omniauth_settings.{france_connect, france_connect_profile, france_connect_uid}.*

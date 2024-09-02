@@ -11,7 +11,7 @@ module Decidim
       let!(:admin) { create(:user, :admin, organization: organization) }
       let!(:admin_of_the_process) { create(:user, organization: organization) }
       let!(:participatory_process) { create(:participatory_process, organization: organization) }
-      let(:proposal) { create(:proposal) }
+      let(:proposal) { create(:extended_proposal) }
       let(:collection) { [proposal] } # Use an array with the instance_double
       let(:export_manifest) do
         instance_double(
