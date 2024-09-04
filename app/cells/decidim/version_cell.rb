@@ -34,7 +34,11 @@ module Decidim
     end
 
     def i18n_version_number_out_of_total
-      i18n("version_number_out_of_total", current_version: sanitize(index.first), total_count: versioned_resource.versions.count)
+      i18n("version_number_out_of_total", current_version: sanitized_version_number, total_count: versioned_resource.versions.count)
+    end
+
+    def sanitized_version_number
+      sanitize(index.to_s[0])
     end
 
     def i18n_show_all_versions
