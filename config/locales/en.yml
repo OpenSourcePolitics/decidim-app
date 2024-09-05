@@ -143,6 +143,12 @@ en:
         collaborative_drafts_list: Collaborative drafts list
         new_proposal: New proposal
         view_proposal: View proposal
+      update:
+        error: There was a problem saving the idea.
+        success: Idea successfully updated.
+      update_draft:
+        error: There was a problem saving the idea.
+        success: Idea draft successfully updated.
     scopes:
       global: Global
       picker:

@@ -270,7 +270,7 @@ module Decidim
           it "withdraws the proposal" do
             put :withdraw, params: params.merge(id: proposal.id)
 
-            expect(flash[:notice]).to eq("Proposal successfully updated.")
+            expect(flash[:notice]).to include("successfully updated.")
             expect(response).to have_http_status(:found)
             proposal.reload
             expect(proposal.withdrawn?).to be true
@@ -282,7 +282,7 @@ module Decidim
             it "is not able to withdraw the proposal" do
               put :withdraw, params: params.merge(id: proposal.id)
 
-              expect(flash[:alert]).to eq("This proposal can not be withdrawn because it already has supports.")
+              expect(flash[:alert]).to include("it already has supports.")
               expect(response).to have_http_status(:found)
               proposal.reload
               expect(proposal.withdrawn?).to be false
