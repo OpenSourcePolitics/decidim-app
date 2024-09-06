@@ -12,7 +12,7 @@ describe Decidim::VersionCell, type: :cell do
   let!(:assembly) { create(:assembly, :published, slug: "introduction-transfer") }
   let!(:component) { create(:component, manifest_name: "meetings", participatory_space: assembly) }
   let!(:meeting) { create(:meeting, :published, title: { en: "Meeting test" }, component: component) }
-  let!(:version) { PaperTrail::Version.create!(item: meeting, event: "update", object_changes: "number: 2'%3Cmarquee%20onstart=alert(1)%3Ex") }
+  let!(:version) { PaperTrail::Version.create!(item: meeting, event: "update", object_changes: "number: 2") }
   let(:index) { "2'%3Cmarquee%20onstart=alert(1)%3Ex" }
   let(:versions_path) { "/assemblies/#{assembly.slug}/f/24/meetings/#{meeting.id}/versions/#{index}" }
 
