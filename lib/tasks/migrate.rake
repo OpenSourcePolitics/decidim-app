@@ -8,7 +8,7 @@ namespace :decidim do
   namespace :db do
     desc "Migrate Database"
     task migrate: :environment do
-      logger = LoggerWithStdout.new("log/db-migrations-#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
+      logger = ::LoggerWithStdout.new("log/db-migrations-#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
 
       migration_fixer = MigrationsFixer.new(logger)
       rails_migrations = RailsMigrations.new(migration_fixer)

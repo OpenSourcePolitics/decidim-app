@@ -10,7 +10,7 @@ module Decidim
     end
 
     def initialize(**args)
-      @logger = LoggerWithStdout.new("log/import-bdx-meetings--#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
+      @logger = ::LoggerWithStdout.new("log/import-bdx-meetings--#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
       @logger.warn "Rake(import:bdx:meetings)> initializing..."
       @organization = args[:organization]
       @path = args[:path]

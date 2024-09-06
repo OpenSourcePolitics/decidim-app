@@ -19,7 +19,7 @@ module Decidim
     end
 
     def initialize(**args)
-      @logger = LoggerWithStdout.new("log/import-bdx-proposals--#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
+      @logger = ::LoggerWithStdout.new("log/import-bdx-proposals--#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
       @logger.warn "Rake(import:bdx:proposals)> initializing..."
       @organization = args[:organization]
       @path = args[:path]
@@ -111,7 +111,7 @@ module Decidim
     end
 
     def select_comments_from_external_db(nid)
-      Drupal::Comment.where(nid: nid, status: 1).order(pid: :ASC)
+      ::Drupal::Comment.where(nid: nid, status: 1).order(pid: :ASC)
     end
 
     def create_proposal(component, record)

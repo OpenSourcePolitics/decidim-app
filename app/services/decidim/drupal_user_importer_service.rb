@@ -19,7 +19,7 @@ module Decidim
     end
 
     def initialize(**args)
-      @logger = LoggerWithStdout.new("log/import-bdx-users--#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
+      @logger = ::LoggerWithStdout.new("log/import-bdx-users--#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
       @logger.warn "Rake(import:bdx:users)> initializing..."
       @organization = args[:organization]
       @limit = args[:limit]
@@ -80,7 +80,7 @@ module Decidim
     private
 
     def select_users_from_external_db
-      Drupal::User.select(COLUMNS).where.not(mail: [nil, ""]).limit(@limit)
+      ::Drupal::User.select(COLUMNS).where.not(mail: [nil, ""]).limit(@limit)
     end
 
     def existing_user?(data)

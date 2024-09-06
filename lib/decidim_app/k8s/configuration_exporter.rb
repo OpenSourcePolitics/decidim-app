@@ -11,7 +11,7 @@ module DecidimApp
       def initialize(image = "")
         @image = image
         @organizations = Decidim::Organization.all
-        @logger = LoggerWithStdout.new("log/k8s-export-#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
+        @logger = ::LoggerWithStdout.new("log/k8s-export-#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
       end
 
       def self.dump_db
