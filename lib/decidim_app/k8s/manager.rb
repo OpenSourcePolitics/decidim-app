@@ -7,6 +7,8 @@ require "decidim_app/k8s/commands/organization"
 require "decidim_app/k8s/commands/system_admin"
 require "decidim_app/k8s/commands/admin"
 
+require "logger_with_stdout"
+
 module DecidimApp
   module K8s
     class Manager

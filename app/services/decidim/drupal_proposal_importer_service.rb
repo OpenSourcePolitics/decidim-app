@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "logger_with_stdout"
+
 module Decidim
   class DrupalProposalImporterService
     COLUMNS = %w(

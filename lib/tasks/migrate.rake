@@ -2,6 +2,7 @@
 
 require "migrations_fixer"
 require "rails_migrations"
+require "logger_with_stdout"
 
 # :nocov:
 namespace :decidim do
