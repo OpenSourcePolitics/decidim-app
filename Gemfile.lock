@@ -70,6 +70,15 @@ GIT
       decidim-core (~> 0.27.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-simple_proposal
+  revision: 0ba2624660c093fa8813f40803cfa278e59fae0d
+  branch: release/0.27-stable
+  specs:
+    decidim-simple_proposal (0.27.0)
+      decidim-core (~> 0.27.0)
+      decidim-proposals (~> 0.27.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers
   revision: 65ea83227f99d0f3d6237f98334ecc914a2a5597
   specs:
@@ -1176,6 +1185,7 @@ DEPENDENCIES
   decidim-initiatives (~> 0.27.0)
   decidim-ludens!
   decidim-phone_authorization_handler!
+  decidim-simple_proposal!
   decidim-spam_detection
   decidim-survey_multiple_answers!
   decidim-templates (~> 0.27.0)
