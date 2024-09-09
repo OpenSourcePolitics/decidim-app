@@ -38,7 +38,7 @@ module Decidim
     end
 
     def sanitized_version_number
-      sanitize(index.to_s[0])
+      sanitize(index[0])
     end
 
     def i18n_show_all_versions
