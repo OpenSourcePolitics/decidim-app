@@ -104,17 +104,17 @@ shared_examples_for "has questionnaire" do
       end
     end
 
-    # it "requires confirmation when exiting mid-answering" do
-    #   visit questionnaire_public_path
+    it "requires confirmation when exiting mid-answering" do
+      visit questionnaire_public_path
 
-    #   fill_in question.body["en"], with: "My first answer"
+      fill_in question.body["en"], with: "My first answer"
 
-    #   dismiss_page_unload do
-    #     page.find(".logo-wrapper a").click
-    #   end
+      dismiss_page_unload do
+        page.find(".logo-wrapper a").click
+      end
 
-    #   expect(page).to have_current_path questionnaire_public_path
-    # end
+      expect(page).to have_current_path questionnaire_public_path
+    end
 
     context "when the questionnaire has already been answered by someone else" do
       let!(:question) do
