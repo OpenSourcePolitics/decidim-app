@@ -29,7 +29,7 @@ gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/dec
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 gem "decidim-gallery", git: "https://github.com/OpenSourcePolitics/decidim-module-gallery.git", branch: "fix/nokogiri_deps"
 gem "decidim-half_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git", branch: "fix/sign-in-link-if-disabled"
-gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
+gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: "fix/geojson-parsing"
 gem "decidim-ludens", git: "https://github.com/OpenSourcePolitics/decidim-ludens.git", branch: DECIDIM_BRANCH
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: "release/0.27-stable"
 gem "decidim-spam_detection"
