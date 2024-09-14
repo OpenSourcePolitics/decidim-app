@@ -1,11 +1,10 @@
 # frozen_string_literal: true
-#
+
 module Decidim
   module Templates
     module Admin
-      # This controller is added to fit the route "/questionnaire_template/questionnaire/answer_options(.:format)"
-      # and avoid error "uninitialized constant Decidim::Templates::Admin::QuestionnairesController
-      #                  Did you mean? Decidim::Templates::Admin::QuestionnaireTemplatesController"
+      # This controller is added to match the route "/questionnaire_template/questionnaire/answer_options(.:format)" in decidim-templates
+      # TO DO : delete it when the correction on route is integrated
       class QuestionnairesController < Admin::ApplicationController
         include Decidim::Forms::Admin::Concerns::HasQuestionnaire
 
