@@ -46,6 +46,8 @@ fr:
       osp_authorization_workflow:
         name: Procédure d'autorisation
     budgets:
+      order_reminder:
+        text_message: Votre vote au budget participatif n'est pas terminé. Pour le terminer, reconnectez-vous sur %{organization_host}
       projects:
         count:
           projects_count:
