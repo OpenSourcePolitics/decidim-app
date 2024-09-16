@@ -21,15 +21,16 @@ describe "Admin adds display condition to template's questionniaire question", t
 
     visit decidim_admin_templates.edit_questionnaire_path(template.id)
     # expand question two
-    click_on("[data-toggle^=questionnaire_question_#{question_two.id}-question-card]")
-    within "#questionnaire_question_#{question_two.id}-field" do
+    save_and_open_page
+    find("[data-toggle$=button--expand-question-questionnaire_question_#{question_two.id}]").click
+    #within "#questionnaire_question_#{question_two.id}-field" do
       # add display condition
-      click_on(".add-display-condition")
+      find(".add-display-condition").click
       # select question
-      select translated(question_one.body), from: "#questionnaire_questions_#{question_two.id}_display_conditions_questionnaire-display-condition-id_decidim_condition_question_id"
+      select translated(question_one.body), from: "questionnaire[questions][#{question_two.id}][display_conditions][questionnaire-display-condition-id][decidim_condition_question_id]"
       # select equal
-      select "Equal", from: "#questionnaire_questions_#{question_two.id}_display_conditions_questionnaire-display-condition-id_condition_type"
-    end
+      select "Equal", from: "questionnaire[questions][#{question_two.id}][display_conditions][questionnaire-display-condition-id][condition_type]"
+    #end
     # validate we have the 2 answer options from question one in the select
     select = find("#questionnaire_questions_#{question_two.id}_display_conditions_questionnaire-display-condition-id_decidim_answer_option_id")
     expect(select).to have_content(translated(question_one.answer_options.first.body))
