@@ -30,8 +30,9 @@ describe "Admin adds display condition to template's questionniaire question", t
       # select equal
       select "Equal", from: "#questionnaire_questions_#{question_two.id}_display_conditions_questionnaire-display-condition-id_condition_type"
     end
-    # validate we have the 2 answer options from question one
-    expect(page).to include(translated(question_one.answer_options.first.body))
-    expect(page).to include(translated(question_one.answer_options.last.body))
+    # validate we have the 2 answer options from question one in the select
+    select = find("#questionnaire_questions_#{question_two.id}_display_conditions_questionnaire-display-condition-id_decidim_answer_option_id")
+    expect(select).to have_content(translated(question_one.answer_options.first.body))
+    expect(select).to have_content(translated(question_one.answer_options.last.body))
   end
 end
