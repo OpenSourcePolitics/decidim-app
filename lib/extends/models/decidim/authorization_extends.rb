@@ -6,7 +6,7 @@ module AuthorizationExtends
 
   included do
     after_commit :export_to_user_extended_data, if: proc { |authorization|
-      Rails.application.secrets.dig(:decidim, :export_data_to_userdata_enabled_for).split(",").include?(authorization.name)
+      Rails.application.secrets.dig(:decidim, :export_data_to_userdata_enabled_for)&.split(",")&.include?(authorization.name)
     }
 
     def export_to_user_extended_data
