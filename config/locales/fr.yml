@@ -51,6 +51,8 @@ fr:
           projects_count:
             one: 1 projet
             other: "%{count} projets"
+        order_reminder:
+          text_message: Votre vote au budget participatif n'est pas terminé. Pour le terminer, reconnectez-vous sur %{organization_host}
     devise:
       sessions:
         new:
