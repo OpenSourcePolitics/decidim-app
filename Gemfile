@@ -27,6 +27,7 @@ gem "bootsnap", "~> 1.4"
 gem "puma", ">= 6.3.1"
 
 gem "spring"
+gem "dotenv-rails", "~> 2.7"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri

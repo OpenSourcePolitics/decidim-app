@@ -330,6 +330,10 @@ GEM
     doorkeeper (5.7.1)
       railties (>= 5)
     doorkeeper-i18n (4.0.1)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erb_lint (0.4.0)
       activesupport
       better_html (>= 2.0.1)
@@ -805,6 +809,7 @@ DEPENDENCIES
   decidim-surveys!
   decidim-system!
   decidim-verifications!
+  dotenv-rails (~> 2.7)
   flamegraph
   letter_opener_web (~> 2.0)
   listen (~> 3.1)
