@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-ludens.git
-  revision: ca4c3266f64d8414030be63e2824c4d23c1f8d9c
-  branch: release/0.27-stable
-  specs:
-    decidim-ludens (1.0.0)
-      decidim-core (~> 0.27.0)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git
   revision: adec5e66cd07b5e5fdce5562453a7e8d6de88013
   branch: release/0.27-stable
@@ -1183,7 +1175,6 @@ DEPENDENCIES
   decidim-half_signup!
   decidim-homepage_interactive_map!
   decidim-initiatives (~> 0.27.0)
-  decidim-ludens!
   decidim-phone_authorization_handler!
   decidim-simple_proposal!
   decidim-spam_detection
