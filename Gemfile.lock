@@ -787,11 +787,22 @@ DEPENDENCIES
   brakeman (~> 6.1)
   bullet
   byebug (~> 11.0)
+  decidim-accountability!
   decidim-admin!
+  decidim-api!
+  decidim-assemblies!
+  decidim-blogs!
+  decidim-budgets!
   decidim-comments!
   decidim-core!
+  decidim-debates!
   decidim-dev!
+  decidim-forms!
+  decidim-meetings!
+  decidim-pages!
   decidim-participatory_processes!
+  decidim-proposals!
+  decidim-surveys!
   decidim-system!
   decidim-verifications!
   flamegraph
