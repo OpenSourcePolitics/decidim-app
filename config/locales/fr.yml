@@ -47,7 +47,7 @@ fr:
         name: Procédure d'autorisation
     budgets:
       order_reminder:
-        text_message: Votre vote au budget participatif n'est pas terminé. Pour le terminer, reconnectez-vous sur %{organization_host}
+        text_message: Votre vote au Budget participatif marseillais n'est pas terminé. Pour le valider, reconnectez-vous sur %{organization_host}
       projects:
         count:
           projects_count:
