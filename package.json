@@ -1,5 +1,5 @@
 {
-  "name": "decidim-development-app",
+  "name": "decidim-lite",
   "private": true,
   "dependencies": {
     "@decidim/browserslist-config": "file:packages/browserslist-config",
