@@ -7,14 +7,6 @@ GIT
       decidim-core (~> 0.27.0)
 
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-module-cleaner.git
-  revision: 88f3903ab218a45a14d9389354076b73d4aed53b
-  branch: rc/3.1.1
-  specs:
-    decidim-cleaner (3.1.1)
-      decidim-core (~> 0.27.0)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git
   revision: adec5e66cd07b5e5fdce5562453a7e8d6de88013
   branch: release/0.27-stable
@@ -1168,7 +1160,6 @@ DEPENDENCIES
   decidim-budgets_booth!
   decidim-cache_cleaner
   decidim-category_enhanced (~> 0.0.1)
-  decidim-cleaner!
   decidim-conferences (~> 0.27.0)
   decidim-decidim_awesome!
   decidim-dev (~> 0.27.0)

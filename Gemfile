@@ -21,8 +21,8 @@ gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp"
 gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
 gem "decidim-cache_cleaner"
-gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "rc/3.1.1"
 gem "decidim-category_enhanced", "~> 0.0.1"
+# gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "rc/3.1.1"
 gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: "main"
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
                                                                 branch: DECIDIM_BRANCH
@@ -54,8 +54,8 @@ gem "faker", "~> 2.14"
 gem "fog-aws"
 gem "foundation_rails_helper", git: "https://github.com/sgruhier/foundation_rails_helper.git"
 gem "letter_opener_web", "~> 1.3"
-gem "net-smtp", "~> 0.4.0"
 gem "multipart-post"
+gem "net-smtp", "~> 0.4.0"
 gem "nokogiri", "1.13.4"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "puma", ">= 5.5.1"
