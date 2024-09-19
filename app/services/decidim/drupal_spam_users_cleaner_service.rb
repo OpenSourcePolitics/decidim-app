@@ -5,7 +5,15 @@ require "logger_with_stdout"
 module Decidim
   class DrupalSpamUsersCleanerService
     AUTHORIZED_SITES = %w(
-      bordeaux
+      bordeaux-metropole
+      eelv
+      bordeaux-bastide
+      injs-bordeaux.org
+      bordeaux-tradition.com
+      u-bordeaux-montaigne.fr
+      apprentus.fr
+      metrobordeaux.fr
+      www.theshifters.org
       linkedin.com
       lafab-bm.fr
       naturjalles.over-blog.com
