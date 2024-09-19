@@ -45,6 +45,8 @@ group :development do
 end
 
 group :production do
+  gem "sidekiq", "~> 6.0"
+  gem "sidekiq-scheduler", "~> 5.0"
 end
 
 group :development do
