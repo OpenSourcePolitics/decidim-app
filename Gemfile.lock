@@ -228,6 +228,9 @@ GEM
     activejob (7.0.8.4)
       activesupport (= 7.0.8.4)
       globalid (>= 0.3.6)
+    activejob-uniqueness (0.3.2)
+      activejob (>= 4.2, < 7.3)
+      redlock (>= 2.0, < 3)
     activemodel (7.0.8.4)
       activesupport (= 7.0.8.4)
     activerecord (7.0.8.4)
@@ -623,6 +626,10 @@ GEM
       ffi (~> 1.0)
     redcarpet (3.6.0)
     redis (4.8.1)
+    redis-client (0.22.2)
+      connection_pool
+    redlock (2.0.6)
+      redis-client (>= 0.14.1, < 1.0.0)
     regexp_parser (2.9.2)
     reline (0.5.10)
       io-console (~> 0.5)
@@ -804,6 +811,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activejob-uniqueness
   bootsnap (~> 1.4)
   brakeman (~> 6.1)
   bullet

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-
-return unless const_defined?(Sidekiq)
+return unless defined?(Sidekiq)
 
 Rails.logger.warn "Configuring Sidekiq..."
 
