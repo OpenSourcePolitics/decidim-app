@@ -1,5 +1,5 @@
-:concurrency: <%= Rails.application.secrets.dig(:sidekiq, :sidekiq_concurrency) %>
-:max_retries: <%= Rails.application.secrets.dig(:sidekiq, :sidekiq_max_retries) %>
+:concurrency: <%= Rails.application.secrets.dig(:sidekiq, :concurrency) %>
+:max_retries: <%= Rails.application.secrets.dig(:sidekiq, :max_retries) %>
 :queues:
   - mailers
   - default
