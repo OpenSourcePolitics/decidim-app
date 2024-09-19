@@ -5,6 +5,7 @@
     "@decidim/browserslist-config": "file:packages/browserslist-config",
     "@decidim/core": "file:packages/core",
     "@decidim/webpacker": "file:packages/webpacker",
+    "graphql": "^16.9.0",
     "graphql-ws": "^5.16.0"
   },
   "version": "0.1.0",
