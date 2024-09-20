@@ -1,4 +1,6 @@
 # Overrides 🍰
+* `app/cells/decidim/version_cell.rb`
+This override the default `VersionCell` from `decidim-core`, by adding sanitization for `version_number` to prevent XSS attacks.
 
 ## Proposal's draft (Decidim awesome overrides 0.26.7)
 * `app/views/decidim/proposals/collaborative_drafts/_edit_form_fields.html.erb`

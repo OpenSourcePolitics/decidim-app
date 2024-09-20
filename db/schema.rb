@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_26_092405) do
+ActiveRecord::Schema.define(version: 2024_09_16_143432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -1568,6 +1568,23 @@ ActiveRecord::Schema.define(version: 2024_04_26_092405) do
     t.index ["decidim_proposal_id"], name: "decidim_proposals_proposal_note_proposal"
   end
 
+  create_table "decidim_proposals_proposal_states", force: :cascade do |t|
+    t.jsonb "title"
+    t.jsonb "description"
+    t.jsonb "announcement_title"
+    t.string "token", null: false
+    t.boolean "system", default: false, null: false
+    t.bigint "decidim_component_id", null: false
+    t.integer "proposals_count", default: 0, null: false
+    t.boolean "default", default: false, null: false
+    t.boolean "answerable", default: false, null: false
+    t.boolean "notifiable", default: false, null: false
+    t.boolean "gamified", default: false, null: false
+    t.json "include_in_stats", default: {}, null: false
+    t.string "css_class"
+    t.index ["decidim_component_id"], name: "index_decidim_proposals_proposal_states_on_decidim_component_id"
+  end
+
   create_table "decidim_proposals_proposal_votes", id: :serial, force: :cascade do |t|
     t.integer "decidim_proposal_id", null: false
     t.integer "decidim_author_id", null: false
@@ -1609,11 +1626,14 @@ ActiveRecord::Schema.define(version: 2024_04_26_092405) do
     t.jsonb "body"
     t.integer "comments_count", default: 0, null: false
     t.integer "follows_count", default: 0, null: false
+    t.integer "decidim_proposals_proposal_state_id", null: false
+    t.datetime "deleted_at"
     t.index "md5((body)::text)", name: "decidim_proposals_proposal_body_search"
     t.index "md5((title)::text)", name: "decidim_proposals_proposal_title_search"
     t.index ["created_at"], name: "index_decidim_proposals_proposals_on_created_at"
     t.index ["decidim_component_id"], name: "index_decidim_proposals_proposals_on_decidim_component_id"
     t.index ["decidim_scope_id"], name: "index_decidim_proposals_proposals_on_decidim_scope_id"
+    t.index ["deleted_at"], name: "index_decidim_proposals_proposals_on_deleted_at"
     t.index ["proposal_votes_count"], name: "index_decidim_proposals_proposals_on_proposal_votes_count"
     t.index ["state"], name: "index_decidim_proposals_proposals_on_state"
   end
@@ -1972,7 +1992,6 @@ ActiveRecord::Schema.define(version: 2024_04_26_092405) do
     t.integer "block_id"
     t.boolean "email_on_moderations", default: true
     t.integer "follows_count", default: 0, null: false
-    t.boolean "enable_ludens"
     t.jsonb "notification_settings", default: {}
     t.string "notifications_sending_frequency", default: "daily"
     t.datetime "digest_sent_at"
@@ -2063,12 +2082,6 @@ ActiveRecord::Schema.define(version: 2024_04_26_092405) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
-  create_table "participative_actions_completed", force: :cascade do |t|
-    t.string "decidim_participative_action", null: false
-    t.bigint "decidim_user_id", null: false
-    t.index ["decidim_user_id"], name: "index_participative_actions_completed_on_decidim_user_id"
-  end
-
   create_table "request_environment_rules", id: :serial, force: :cascade do |t|
     t.integer "redirect_rule_id", null: false
     t.string "environment_key_name", null: false
@@ -2130,6 +2143,7 @@ ActiveRecord::Schema.define(version: 2024_04_26_092405) do
   add_foreign_key "decidim_participatory_processes", "decidim_organizations"
   add_foreign_key "decidim_participatory_processes", "decidim_participatory_process_types"
   add_foreign_key "decidim_participatory_processes", "decidim_scope_types"
+  add_foreign_key "decidim_proposals_proposals", "decidim_proposals_proposal_states"
   add_foreign_key "decidim_reminder_deliveries", "decidim_reminders"
   add_foreign_key "decidim_reminder_records", "decidim_reminders"
   add_foreign_key "decidim_reminders", "decidim_components"
@@ -2156,5 +2170,4 @@ ActiveRecord::Schema.define(version: 2024_04_26_092405) do
   add_foreign_key "oauth_access_tokens", "decidim_users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_applications", "decidim_organizations"
-  add_foreign_key "participative_actions_completed", "decidim_users"
 end

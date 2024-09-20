@@ -6,7 +6,7 @@ describe Decidim::RepairTranslationsService do
   subject { described_class.new }
 
   let!(:comments) { create_list(:comment, 10) }
-  let!(:proposals) { create_list(:proposal, 10) }
+  let!(:proposals) { create_list(:extended_proposal, 10) }
 
   describe "#translatable_resources" do
     it "returns all translatable resources" do

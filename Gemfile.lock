@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-ludens.git
-  revision: ca4c3266f64d8414030be63e2824c4d23c1f8d9c
-  branch: release/0.27-stable
-  specs:
-    decidim-ludens (1.0.0)
-      decidim-core (~> 0.27.0)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git
   revision: adec5e66cd07b5e5fdce5562453a7e8d6de88013
   branch: release/0.27-stable
@@ -42,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git
-  revision: 661bfe02e51d1cd4f16df1eb483d932494d5df1f
+  revision: 5bee2b5422e4131f933ad854ab872e049dcf7b54
   branch: feature/half_signup_and_budgets_booth
   specs:
     decidim-half_signup (0.27.0)
@@ -68,6 +60,15 @@ GIT
     decidim-budgets_booth (0.27.0)
       decidim-budgets (~> 0.27.0)
       decidim-core (~> 0.27.0)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-simple_proposal
+  revision: 0ba2624660c093fa8813f40803cfa278e59fae0d
+  branch: release/0.27-stable
+  specs:
+    decidim-simple_proposal (0.27.0)
+      decidim-core (~> 0.27.0)
+      decidim-proposals (~> 0.27.0)
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers
@@ -130,6 +131,16 @@ GIT
       decidim-budgets (~> 0.27.0)
       decidim-category_enhanced (~> 0.0.1)
       decidim-core (~> 0.27.0)
+      deface (>= 1.9)
+
+GIT
+  remote: https://github.com/alecslupu-pfa/decidim-module-custom_proposal_states
+  revision: 66bc4d1a9f00eb66356e583365597e737e1d6917
+  branch: release/0.27-stable
+  specs:
+    decidim-custom_proposal_states (0.27.5)
+      decidim-core (~> 0.27)
+      decidim-proposals (~> 0.27)
       deface (>= 1.9)
 
 GIT
@@ -1154,6 +1165,7 @@ DEPENDENCIES
   decidim-cache_cleaner
   decidim-category_enhanced (~> 0.0.1)
   decidim-conferences (~> 0.27.0)
+  decidim-custom_proposal_states!
   decidim-decidim_awesome!
   decidim-dev (~> 0.27.0)
   decidim-extended_socio_demographic_authorization_handler!
@@ -1163,8 +1175,8 @@ DEPENDENCIES
   decidim-half_signup!
   decidim-homepage_interactive_map!
   decidim-initiatives (~> 0.27.0)
-  decidim-ludens!
   decidim-phone_authorization_handler!
+  decidim-simple_proposal!
   decidim-spam_detection
   decidim-survey_multiple_answers!
   decidim-templates (~> 0.27.0)

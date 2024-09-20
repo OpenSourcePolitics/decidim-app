@@ -5,7 +5,7 @@ require "spec_helper"
 describe Decidim::Proposals::Import::ProposalAnswerCreator do
   subject { described_class.new(data, context) }
 
-  let(:proposal) { create(:proposal, state: state, component: component) }
+  let(:proposal) { create(:extended_proposal, state: state, component: component) }
   let!(:moment) { Time.current }
   let(:data) do
     {
@@ -25,7 +25,7 @@ describe Decidim::Proposals::Import::ProposalAnswerCreator do
     }
   end
   let(:participatory_process) { create :participatory_process, organization: organization }
-  let(:component) { create :component, manifest_name: :proposals, participatory_space: participatory_process }
+  let(:component) { create :extended_proposal_component, participatory_space: participatory_process }
   let(:state) { %w(evaluating accepted rejected).sample }
 
   describe "#resource_klass" do
@@ -51,12 +51,12 @@ describe Decidim::Proposals::Import::ProposalAnswerCreator do
       expect(record).to be_a(Decidim::Proposals::Proposal)
       expect(record.id).to eq(data[:id])
       expect(record.answer["en"]).to eq(data[:"answer/en"])
-      expect(record[:state]).to eq(data[:state])
+      expect(record.state).to eq(data[:state])
       expect(record.answered_at).to be >= (moment)
     end
 
     context "with an emendation" do
-      let!(:amendable) { create(:proposal, component: component) }
+      let!(:amendable) { create(:extended_proposal, component: component) }
       let!(:amendment) { create(:amendment, amendable: amendable, emendation: proposal, state: "evaluating") }
 
       it "does not produce a record" do
@@ -83,46 +83,23 @@ describe Decidim::Proposals::Import::ProposalAnswerCreator do
       expect(log.action).to eq("answer")
     end
 
-    shared_examples "it notifies follower" do
+    context "when proposal state changes" do
+      let!(:proposal) { create(:extended_proposal, :evaluating, component: component) }
+      let(:state) { "accepted" }
+
       it "returns broadcast :ok" do
         expect(subject.finish!).to eq({ ok: [] })
       end
 
       context "and notifies followers" do
         before do
-          allow(::Decidim::Proposals::Admin::NotifyProposalAnswer).to receive(:call).with(proposal, expected_state)
+          allow(::Decidim::Proposals::Admin::NotifyProposalAnswer).to receive(:call).with(proposal, proposal.proposal_state)
         end
 
         it "notifies followers" do
           subject.finish!
           expect(::Decidim::Proposals::Admin::NotifyProposalAnswer).to have_received(:call)
         end
-      end
-    end
-
-    context "when proposal state changes" do
-      context "when proposal had already a state" do
-        let!(:proposal) { create(:proposal, :evaluating, component: component) }
-        let(:state) { "accepted" }
-        let(:expected_state) { "evaluating" }
-
-        include_examples "it notifies follower"
-      end
-
-      context "when proposal had no state" do
-        let!(:proposal) { create(:proposal, :not_answered, component: component) }
-        let(:state) { "accepted" }
-        let(:expected_state) { "" }
-
-        include_examples "it notifies follower"
-      end
-
-      context "when proposal was just created and had a state set to nil" do
-        let!(:proposal) { create(:proposal, component: component, state: nil) }
-        let(:state) { "accepted" }
-        let(:expected_state) { "" }
-
-        include_examples "it notifies follower"
       end
     end
 

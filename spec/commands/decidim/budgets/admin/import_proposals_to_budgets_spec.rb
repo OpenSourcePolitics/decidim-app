@@ -7,9 +7,9 @@ module Decidim
     module Admin
       describe ImportProposalsToBudgets do
         describe "call" do
-          let!(:proposal) { create(:proposal, :accepted) }
-          let!(:first_proposal) { create(:proposal, :accepted) }
-          let!(:second_proposal) { create(:proposal, :accepted) }
+          let!(:proposal) { create(:extended_proposal, :accepted) }
+          let!(:first_proposal) { create(:extended_proposal, :accepted) }
+          let!(:second_proposal) { create(:extended_proposal, :accepted) }
           let!(:current_component) do
             create(
               :component,
