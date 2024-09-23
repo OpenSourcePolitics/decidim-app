@@ -16,10 +16,12 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules\//,
+        resolve: {fullySpecified: false},
         loader: "esbuild-loader"
       },
       {
         test: /\.(graphql|gql)$/,
+        resolve: {fullySpecified: false},
         loader: "graphql-tag/loader"
       },
       {
