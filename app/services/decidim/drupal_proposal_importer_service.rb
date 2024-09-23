@@ -139,7 +139,7 @@ module Decidim
         commentable: proposal,
         root_commentable: proposal,
         author: record.user,
-        body: translated_attribute("en", record.body)
+        body: translated_attribute(@locale, record.body)
       })
     end
 
