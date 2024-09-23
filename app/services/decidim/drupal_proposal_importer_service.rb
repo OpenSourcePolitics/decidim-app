@@ -94,12 +94,25 @@ module Decidim
       end
 
       source_records.each do |record|
-        find_or_create_default_anonymous_user if record.uid.zero?
-        if record.pid.zero?
-          create_proposal(target_component, record)
-        else
-          create_comment_on_proposal(create_import_reference(record.pid), record)
+        
+        if record.user.nil?
+          @logger.warn { "Rake(import:bdx:proposals)> user with drupal uid #{record.uid} not found" }
+          @errors_comments.push(record.as_json.merge({ error: "user with drupal uid #{record.uid} not found" }))
         end
+
+        if record.uid.zero? || record.user.nil?
+          record.user = anonymous_user
+        end
+        
+        if record.pid.zero?
+          create_proposal(target_component, record) unless existing_proposal?(create_import_reference(record.cid)) 
+        else
+          create_comment_on_proposal(create_import_reference(record.pid), record) unless existing_comment?(create_import_reference(record.pid), record) 
+        end
+      rescue ActiveRecord::RecordNotFound => e 
+        @logger.warn { "Rake(import:bdx:proposals)>  #{e.class}: '#{e.message}' with reference #{create_import_reference(record.pid)}" }
+        @errors_comments.push(record.as_json.merge({ error: "#{e.class}: #{e.message} with reference #{create_import_reference(record.pid)}" }))
+        next
       rescue StandardError => e
         @logger.warn { "Rake(import:bdx:proposals)>  #{e.class}: '#{e.message}'" }
         @errors_comments.push(record.as_json.merge({ error: "#{e.class}: #{e.message}" }))
@@ -114,6 +127,20 @@ module Decidim
 
     def select_comments_from_external_db(nid)
       ::Drupal::Comment.where(nid: nid, status: 1).order(pid: :ASC)
+    end
+
+    def existing_proposal?(reference)
+      Decidim::Proposals::Proposal.exists?(reference: reference)
+    end
+
+    def existing_comment?(reference, record)
+      proposal = Decidim::Proposals::Proposal.find_by!(reference: reference)
+      Decidim::Comments::Comment.exists?({
+        commentable: proposal,
+        root_commentable: proposal,
+        author: record.user,
+        body: translated_attribute("en", record.body)
+      })
     end
 
     def create_proposal(component, record)
@@ -146,7 +173,7 @@ module Decidim
       @created += 1
     end
 
-    def find_or_create_default_anonymous_user
+    def anonymous_user
       user ||= Decidim::User.where("extended_data::jsonb @> :drupal", drupal: { drupal: { uid: 0 } }.to_json).first
       if user.nil?
         user = Decidim::User.create!(

@@ -44,6 +44,10 @@ module Decidim
       end
 
       rows.each do |row|
+
+        # fix name with "@"" and "."
+        row["fixed-name"] = row["name"].gsub(/@/,"-a-").gsub(/\./,"--")
+
         if existing_user?(row)
           update_existing_user!(row)
         elsif valid_email?(row["mail"])
@@ -54,11 +58,11 @@ module Decidim
 
       rescue ActiveRecord::RecordInvalid => e
         case e.message
-        when /Validation failed: Password is too similar to your email/
+        when /Validation failed: Password is too similar to your email/, /La validation a échoué : Mot de passe est trop similaire à votre email/
           @logger.warn { "Rake(import:bdx:users)>  #{e.class}: '#{e.message}' => #{row["mail"]}" }
           create_anonymous_user!(row)
-        when /Validation failed: Nickname is invalid/
-          @logger.warn { "Rake(import:bdx:users)>  #{e.class}: '#{e.message}' => #{nicknamize(row["name"])}" }
+        when /Validation failed: Nickname is invalid/, /La validation a échoué : Pseudonyme n'est pas valide/, /La validation a échoué : Nickname n'est pas valide/
+          @logger.warn { "Rake(import:bdx:users)>  #{e.class}: '#{e.message}' => #{nicknamize(row["fixed-name"])}" }
           create_anonymous_user!(row)
         else
           @logger.warn { "Rake(import:bdx:users)>  #{e.class}: '#{e.message}'" }
@@ -95,8 +99,8 @@ module Decidim
 
     def create_user!(data)
       Decidim::User.create!(
-        name: data["name"],
-        nickname: nicknamize(data["name"]),
+        name: data["fixed-name"],
+        nickname: nicknamize(data["fixed-name"]),
         email: data["mail"],
         organization: @organization,
         password: generated_password = SecureRandom.hex,
@@ -117,6 +121,8 @@ module Decidim
     end
 
     def create_anonymous_user!(data)
+      extended_data = generate_extended_data(data)
+      extended_data[:drupal] = extended_data[:drupal].merge({ status: "anonymized at import" })
       Decidim::User.create!(
         name: "",
         organization: @organization,
@@ -125,7 +131,7 @@ module Decidim
         password_confirmation: generated_password,
         deleted_at: Time.zone.now,
         tos_agreement: "1",
-        extended_data: generate_extended_data(data)
+        extended_data: extended_data
       )
       @anonymous += 1
     end
@@ -133,6 +139,9 @@ module Decidim
     def generate_extended_data(data)
       {
         drupal: {
+          uid: data["uid"],
+          name: data["name"],
+          mail: data["mail"],
           uid: data["uid"],
           created: integer_to_datetime(data["created"]),
           access: integer_to_datetime(data["access"]),
@@ -147,7 +156,7 @@ module Decidim
     end
 
     def nicknamize(name)
-      Decidim::UserBaseEntity.nicknamize(name&.parameterize&.tableize&.camelize, organization: @organization)
+      Decidim::UserBaseEntity.nicknamize(name&.parameterize&.tableize&.camelize, organization: @organization)[0..-2]
     end
 
     def write_csv_error_file

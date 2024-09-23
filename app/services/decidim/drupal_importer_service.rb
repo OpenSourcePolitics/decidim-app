@@ -140,7 +140,7 @@ module Decidim
 
     def create_meeting!(org, pp)
       component = Decidim::Component.find_by(name: "RENCONTRES 📍", manifest_name: "meetings", participatory_space: pp)
-      return if component.present?
+      return component if component.present?
 
       Decidim::Component.create!(
         name: "RENCONTRES 📍",
@@ -158,7 +158,7 @@ module Decidim
 
     def create_page!(org, pp)
       component = Decidim::Component.find_by(name: "BILANS & DÉCISIONS", manifest_name: "pages", participatory_space: pp)
-      return if component.present?
+      return Decidim::Pages::Page.find_by(component: component) if component.present?
 
       component = Decidim::Component.create!(
         name: "BILANS & DÉCISIONS",
@@ -181,7 +181,7 @@ module Decidim
 
     def create_proposal!(org, pp)
       component = Decidim::Component.find_by(name: "AVIS ET REACTIONS 💡", manifest_name: "proposals", participatory_space: pp)
-      return if component.present?
+      return component if component.present?
 
       Decidim::Component.create!(
         name: "AVIS ET REACTIONS 💡",

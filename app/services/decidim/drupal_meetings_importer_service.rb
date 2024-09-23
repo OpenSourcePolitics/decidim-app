@@ -17,6 +17,8 @@ module Decidim
       @organization = args[:organization]
       @path = args[:path]
       @locale = @organization.default_locale
+      @created = 0
+      @processed = 0
       @errors = []
       @errors_comments = []
       @author = @organization
@@ -69,7 +71,9 @@ module Decidim
             closed_at: advance_time(meeting_page.date, 14)
           )
           meeting.save!
+          @created += 1
         end
+        @processed += 1
       rescue StandardError => e
         @logger.warn { "Rake(import:bdx:meetings)>  #{e.class}: '#{e.message}'" }
         @errors.push(row.merge({ error: "#{e.class}: #{e.message}", location: e.backtrace[0] }))
