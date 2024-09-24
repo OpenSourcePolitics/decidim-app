@@ -11,5 +11,9 @@ module Drupal
     def user
       @user ||= Decidim::User.where("extended_data::jsonb @> :drupal", drupal: { drupal: { uid: uid } }.to_json).first
     end
+
+    def edit_user(u)
+      @user = u
+    end
   end
 end

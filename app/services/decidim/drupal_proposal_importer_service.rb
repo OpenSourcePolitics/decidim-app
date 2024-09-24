@@ -101,13 +101,26 @@ module Decidim
         end
 
         if record.uid.zero? || record.user.nil?
-          record.user = anonymous_user
+          record.edit_user(anonymous_user)
         end
         
         if record.pid.zero?
           create_proposal(target_component, record) unless existing_proposal?(create_import_reference(record.cid)) 
         else
-          create_comment_on_proposal(create_import_reference(record.pid), record) unless existing_comment?(create_import_reference(record.pid), record) 
+          begin
+            create_comment_on_proposal(create_import_reference(record.pid), record) unless existing_comment?(create_import_reference(record.pid), record)
+          rescue ActiveRecord::RecordInvalid => e
+            case e.message
+            when /Validation failed: Coauthorships is invalid/, /La validation a échoué : Coauthorships n'est pas valide/
+              @logger.warn { "Rake(import:bdx:proposals)>  #{e.class}: '#{e.message}' => drupal uid #{record.uid}" }
+              record.edit_user(anonymous_user)
+              create_comment_on_proposal(create_import_reference(record.pid), record)
+            else
+              @logger.warn { "Rake(import:bdx:proposals)>  #{e.class}: '#{e.message}'" }
+              @errors_comments.push(record.as_json.merge({ error: "#{e.class}: #{e.message}" }))
+            end
+            next
+          end
         end
       rescue ActiveRecord::RecordNotFound => e 
         @logger.warn { "Rake(import:bdx:proposals)>  #{e.class}: '#{e.message}' with reference #{create_import_reference(record.pid)}" }
