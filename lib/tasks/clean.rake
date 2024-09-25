@@ -81,5 +81,67 @@ namespace :clean do
 
 
     end
+
+    task components: :environment do
+      host = ENV["ORGANIZATION_HOST"].presence || Decidim::Organization.first.host
+      organization = Decidim::Organization.find_by(host: host)
+      raise "Organization not found for '#{host}'" unless organization
+
+      logger = ::LoggerWithStdout.new("log/clean-bdx-components--#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
+      logger.warn "Rake(clean:bdx:components)> initializing..."
+      logger.warn "Rake(clean:bdx:components)> Organization with host #{organization.host}"
+
+      processes_counter = 0
+      components_counter = 0
+
+      Decidim::ParticipatoryProcess.where(organization: organization).each do |process|
+
+        if process.slug.start_with?("projet-")
+
+          meetings_component = Decidim::Component.where(manifest_name: "meetings", participatory_space: process)
+          
+          if meetings_component.count == 2
+            meetings_component.first.update_columns(published_at: DateTime.now)
+            Decidim::Meetings::Meeting.where(component: meetings_component.second).update_columns(decidim_component_id: meetings_component.first.id)
+            meetings_component.second.update_columns(published_at: nil)
+            logger.warn "Rake(clean:bdx:components)> meetings component https://#{organization.host}/participatory_processes/#{process.slug}/components/#{meetings_component.second.id}/manage/ unpublished ..."
+            components_counter += 1
+          end
+          meetings = Decidim::Meetings::Meeting.where(component: meetings_component).order("id ASC")
+          meetings.each do |meeting|
+            if Decidim::Meetings::Meeting.find(meeting.id).published?
+              Decidim::Meetings::Meeting.where(component: meetings_component, title: meeting.title, description: meeting.description, start_time: meeting.start_time).where.not(id: meeting.id).update_columns(published_at: nil)
+            end
+          end
+
+          pages_component = Decidim::Component.where(manifest_name: "pages", participatory_space: process)
+
+          if pages_component.count == 2
+            pages_component.first.update_columns(published_at: DateTime.now)
+            pages_component.second.update_columns(published_at: nil)
+            logger.warn "Rake(clean:bdx:components)> pages component https://#{organization.host}/participatory_processes/#{process.slug}/components/#{pages_component.second.id}/manage/ unpublished ..."
+            components_counter += 1
+          end
+
+          proposals_component = Decidim::Component.where(manifest_name: "proposals", participatory_space: process)
+
+          if proposals_component.count == 2
+            proposals_component.first.update_columns(published_at: DateTime.now)
+            Decidim::Proposals::Proposal.where(component: proposals_component.second).update_columns(decidim_component_id: proposals_component.first.id)
+            proposals_component.second.update_columns(published_at: nil)
+            logger.warn "Rake(clean:bdx:components)> proposals component https://#{organization.host}/participatory_processes/#{process.slug}/components/#{proposals_component.second.id}/manage/ unpublished ..."
+            components_counter += 1
+          end
+        end
+
+        processes_counter += 1
+      end
+
+      logger.warn "Rake(clean:bdx:components)> #{processes_counter} participatory processes were analyzed"
+      logger.warn "Rake(clean:bdx:components)> #{components_counter} components where updated"
+      logger.warn "Rake(clean:bdx:components)> terminated"
+
+
+    end   
   end
 end
