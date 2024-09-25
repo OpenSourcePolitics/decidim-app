@@ -19,7 +19,7 @@ namespace :notify do
       if users.present?
         users = Decidim::User.where(organization: organization, email: users)
       else
-        users = Decidim::User.where(organization: organization, admin: false, deleted_at: nil).where.not(email: [nil, ""])
+        users = Decidim::User.where(organization: organization, admin: false, deleted_at: nil).where.not(email: [nil, ""], blocked: true)
       end
 
       logger.warn "Rake(#{task_scope.join(":")})> found #{users.count} users"
