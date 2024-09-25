@@ -102,7 +102,7 @@ namespace :clean do
           
           if meetings_component.count == 2
             meetings_component.first.update_columns(published_at: DateTime.now)
-            Decidim::Meetings::Meeting.where(component: meetings_component.second).update_columns(decidim_component_id: meetings_component.first.id)
+            Decidim::Meetings::Meeting.where(component: meetings_component.second).update_all(decidim_component_id: meetings_component.first.id)
             meetings_component.second.update_columns(published_at: nil)
             logger.warn "Rake(clean:bdx:components)> meetings component https://#{organization.host}/participatory_processes/#{process.slug}/components/#{meetings_component.second.id}/manage/ unpublished ..."
             components_counter += 1
@@ -110,7 +110,7 @@ namespace :clean do
           meetings = Decidim::Meetings::Meeting.where(component: meetings_component).order("id ASC")
           meetings.each do |meeting|
             if Decidim::Meetings::Meeting.find(meeting.id).published?
-              Decidim::Meetings::Meeting.where(component: meetings_component, title: meeting.title, description: meeting.description, start_time: meeting.start_time).where.not(id: meeting.id).update_columns(published_at: nil)
+              Decidim::Meetings::Meeting.where(component: meetings_component, title: meeting.title, description: meeting.description, start_time: meeting.start_time).where.not(id: meeting.id).update_all(published_at: nil)
             end
           end
 
@@ -127,7 +127,7 @@ namespace :clean do
 
           if proposals_component.count == 2
             proposals_component.first.update_columns(published_at: DateTime.now)
-            Decidim::Proposals::Proposal.where(component: proposals_component.second).update_columns(decidim_component_id: proposals_component.first.id)
+            Decidim::Proposals::Proposal.where(component: proposals_component.second).update_all(decidim_component_id: proposals_component.first.id)
             proposals_component.second.update_columns(published_at: nil)
             logger.warn "Rake(clean:bdx:components)> proposals component https://#{organization.host}/participatory_processes/#{process.slug}/components/#{proposals_component.second.id}/manage/ unpublished ..."
             components_counter += 1
