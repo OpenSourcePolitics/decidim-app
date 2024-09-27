@@ -139,10 +139,11 @@ en:
         new:
           add_file: Add file
           edit_file: Edit file
-      index:
-        collaborative_drafts_list: Collaborative drafts list
-        new_proposal: New proposal
-        view_proposal: View proposal
+      proposals:
+        index:
+          collaborative_drafts_list: Collaborative drafts list
+          new_proposal: New proposal
+          view_proposal: View proposal
       update:
         error: There was a problem saving the idea.
         success: Idea successfully updated.

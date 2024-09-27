@@ -141,10 +141,11 @@ fr:
         new:
           add_file: Ajouter le fichier
           edit_file: Editer le fichier
-      index:
-        collaborative_drafts_list: Accéder aux brouillons collaboratifs
-        new_proposal: Nouvelle proposition
-        view_proposal: Voir la proposition
+      proposals:
+        index:
+          collaborative_drafts_list: Accéder aux brouillons collaboratifs
+          new_proposal: Nouvelle proposition
+          view_proposal: Voir la proposition
       update:
         error: Il y a eu une erreur lors de la mise à jour de la proposition.
         success: Proposition mise à jour avec succès.
