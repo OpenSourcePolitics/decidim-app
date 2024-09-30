@@ -58,7 +58,15 @@ module DevelopmentApp
       require "extends/commands/decidim/admin/destroy_participatory_space_private_user_extends"
       require "extends/controllers/decidim/proposals/proposals_controller_extends"
 
-      if ActiveRecord::Base.connection.table_exists?(:decidim_initiatives)
+      def database_exists?
+        ActiveRecord::Base.connection
+      rescue ActiveRecord::NoDatabaseError
+        false
+      else
+        true
+      end
+
+      if database_exists? && ActiveRecord::Base.connection.table_exists?(:decidim_initiatives)
         require "extends/forms/decidim/initiatives/initiative_form_extends"
         require "extends/models/decidim/initiative_extends"
       end
