@@ -57,8 +57,12 @@ module DevelopmentApp
       require "extends/controllers/decidim/newsletters_controller_extends"
       require "extends/commands/decidim/admin/destroy_participatory_space_private_user_extends"
       require "extends/controllers/decidim/proposals/proposals_controller_extends"
-      require "extends/forms/decidim/initiatives/initiative_form_extends"
-      require "extends/models/decidim/initiative_extends"
+
+      if ActiveRecord::Base.connection.table_exists?(:decidim_initiatives)
+        require "extends/forms/decidim/initiatives/initiative_form_extends"
+        require "extends/models/decidim/initiative_extends"
+      end
+
 
       Decidim::GraphiQL::Rails.config.tap do |config|
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
