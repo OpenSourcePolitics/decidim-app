@@ -220,6 +220,8 @@ fr:
       links:
         forgot_your_password: Mot de passe oublié ?
         sign_in_with_france_connect: FranceConnect
+  errors:
+    no_img_tag_in_description: Les images ne sont pas autorisées
   faker:
     address:
       country_code:
