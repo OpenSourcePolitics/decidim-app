@@ -2,6 +2,11 @@
 * `app/cells/decidim/version_cell.rb`
 This override the default `VersionCell` from `decidim-core`, by adding sanitization for `version_number` to prevent XSS attacks.
 
+## Initiative XSS vulnerability
+* `lib/extends/models/decidim/initiative_extends.rb`
+* `lib/extends/forms/decidim/admin/initiative_form_extends.rb`
+This adds a validation to prevent XSS vulnerability to img tag in description.
+
 ## Proposal's draft (Decidim awesome overrides 0.26.7)
 * `app/views/decidim/proposals/collaborative_drafts/_edit_form_fields.html.erb`
 
