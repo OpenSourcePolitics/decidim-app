@@ -35,7 +35,7 @@ module Decidim
                   )
           @form.attachment = form_attachment_model
           # "sanitize" the translated description, if the value is a hash (for machine_translation key) we don't modify it
-          @form.description.transform_values! { |v| v.class == String ? v.gsub(/on\w+=("|')/, "nothing") : v }
+          @form.description.transform_values! { |v| v.instance_of?(String) ? v.gsub(/on\w+=("|')/, "nothing") : v }
 
           render layout: "decidim/admin/initiative"
         end

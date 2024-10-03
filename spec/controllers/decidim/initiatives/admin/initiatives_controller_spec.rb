@@ -622,7 +622,7 @@ describe Decidim::Initiatives::Admin::InitiativesController do
         it "enqueues the job" do
           expect(Decidim::Initiatives::ExportInitiativesJob).to receive(:perform_later).with(admin_user, organization, "csv", collection_ids)
 
-          get :export, params: { format: :csv, collection_ids: collection_ids}
+          get :export, params: { format: :csv, collection_ids: collection_ids }
           expect(flash[:alert]).to be_nil
           expect(response).to have_http_status(:found)
         end
