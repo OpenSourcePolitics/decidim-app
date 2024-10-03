@@ -143,7 +143,7 @@ GIT
 
 GIT
   remote: https://github.com/alecslupu-pfa/decidim-module-custom_proposal_states
-  revision: 66bc4d1a9f00eb66356e583365597e737e1d6917
+  revision: 848eb550d44d9bebc9e72c458c4e3aab79203d9e
   branch: release/0.27-stable
   specs:
     decidim-custom_proposal_states (0.27.5)
