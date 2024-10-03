@@ -218,8 +218,6 @@ en:
       links:
         forgot_your_password: Forgot your password
         sign_in_with_france_connect: Sign in with france connect
-  errors:
-    no_img_tag_in_description: Images are not allowed
   faker:
     address:
       country_code:

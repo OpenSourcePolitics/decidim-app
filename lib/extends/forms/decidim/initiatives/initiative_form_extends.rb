@@ -6,12 +6,12 @@ module NoAdminInitiativeFormExtends
   extend ActiveSupport::Concern
 
   included do
-    validate :no_img_tag_in_description
+    validate :no_javascript_event_in_description
 
     private
 
-    def no_img_tag_in_description
-      errors.add :description, I18n.t("errors.no_img_tag_in_description") if description =~ /(&lt;img|<img)/
+    def no_javascript_event_in_description
+      errors.add :description, :invalid if description =~ /on\w+=("|')/
     end
   end
 end
