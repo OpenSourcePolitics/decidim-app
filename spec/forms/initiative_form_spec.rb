@@ -42,7 +42,7 @@ module Decidim
         it { is_expected.to be_valid }
       end
 
-      context "when description contains an img tag" do
+      context "when description contains a javascript event" do
         let(:my_description) { '<p>description&lt;img src=\"invalid.jpg\" onerror=\"alert();\"&gt;</p>' }
 
         it { is_expected.to be_invalid }

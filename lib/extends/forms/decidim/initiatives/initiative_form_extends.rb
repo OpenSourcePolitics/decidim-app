@@ -11,7 +11,7 @@ module NoAdminInitiativeFormExtends
     private
 
     def no_javascript_event_in_description
-      errors.add :description, :invalid if description =~ /on\w+=("|')/
+      errors.add :description, :invalid if description =~ /on\w+=/
     end
   end
 end
