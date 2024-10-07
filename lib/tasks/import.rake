@@ -230,7 +230,7 @@ namespace :import do
     raise "Organization not found for '#{host}'" unless organization
 
     path = ENV["CSV_FILE"].presence || "tmp/links.csv"
-    DrupalJob.perform_now(organization: organization, path: path)
+    DrupalJob.perform_later(organization: organization, path: path)
   end
 
   namespace :bdx do
