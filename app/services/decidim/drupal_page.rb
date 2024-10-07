@@ -53,6 +53,8 @@ module Decidim
         short_description: @short_description,
         pdf_attachments: @pdf_attachments,
         calendars: @calendars,
+        bilan: @bilan,
+        decision: @decision,
         errors: @errors
       }
     end
@@ -72,6 +74,8 @@ module Decidim
       set_drupal_thematique
       set_drupal_organization
       set_drupal_author
+      set_bilan
+      set_decision
       save!
 
       self
@@ -83,9 +87,20 @@ module Decidim
 
     def fetch_html
       Faraday.default_adapter = :net_http
-      req = Faraday.get(@url)
+      conn = Faraday.new(url: @url)
+      if ENV.fetch("BASIC_AUTH_USER", "").present? && ENV.fetch("BASIC_AUTH_PASSWORD", "").present?
+        conn.set_basic_auth(ENV.fetch("BASIC_AUTH_USER", ""), ENV.fetch("BASIC_AUTH_PASSWORD", ""))
+      end
+
+      req = conn.get(@url)
+
       @html = req.body if req.status == 200
       @nokogiri_document = Nokogiri::HTML(@html) if @html.present?
+    end
+
+    def get_bilan
+      "#{@bilan}
+#{@decision}"
     end
 
     def set_participatory_process_url(url)
@@ -118,6 +133,14 @@ module Decidim
 
     def set_description
       @description = @nokogiri_document.css("div.description").children.to_s.strip
+    end
+
+    def set_bilan
+      @bilan = @nokogiri_document.css("div.bilan-wrapper .left").children.to_s.strip
+    end
+
+    def set_decision
+      @decision = @nokogiri_document.css("div.prop-decision .left").children.reject { |dec| dec.classes.include?("documents") }.to_s_strip
     end
 
     def set_calendars
