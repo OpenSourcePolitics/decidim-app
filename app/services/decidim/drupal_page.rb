@@ -139,8 +139,12 @@ module Decidim
       @bilan = @nokogiri_document.css("div.bilan-wrapper .left").children.to_s.strip
     end
 
+    # set_decision defines @decision but without the documents links
     def set_decision
-      @decision = @nokogiri_document.css("div.prop-decision .left").children.reject { |dec| dec.classes.include?("documents") }.to_s_strip
+      children = @nokogiri_document.css("div.prop-decision .left").children.children
+      children_without_documents = children.reject { |el| el.classes.include?("documents") }
+      node = Nokogiri::XML::NodeSet.new(@nokogiri_document, children_without_documents)
+      @decision = node.to_s.strip
     end
 
     def set_calendars

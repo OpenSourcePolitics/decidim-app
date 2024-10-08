@@ -12,29 +12,34 @@ module Decidim
     end
 
     def initialize(**args)
-      Rails.logger.warn "Rake(#{RAKE_NAME})> initializing..."
+      warn_message "initializing..."
       @path = args[:path]
       @organization = args[:organization]
       @errors = []
     end
 
     def execute
-      Rails.logger.warn "Rake(#{RAKE_NAME})> executing..."
+      warn_message "executing..."
       rows = CSV.read(@path, headers: true)
 
       if rows.blank?
-        Rails.logger.warn "Rake(#{RAKE_NAME})> No rows found"
+        warn_message "No rows found"
         return
       end
 
+      warn_message "processing #{rows.size} rows..."
       rows.each do |row|
         drupal_page = Decidim::DrupalPage.scrape(url: row["url"])
+        warn_message "processing #{row['url']}..."
+
         if drupal_page.blank?
+          warn_message "URL #{row['url']} not found..."
           @errors << "URL not found: #{row["url"]}"
         end
+
         pp = Decidim::ParticipatoryProcess.find_by(slug: "projet-#{drupal_page.drupal_node_id}")
         if pp.blank?
-          @errors << "ParticipatoryProcess not found: #{drupal_page.drupal_node_id}"
+          @errors << "ParticipatoryProcess not found: #{row["url"]}"
         end
 
         if (error = edit_decision_page!(drupal_page, pp)).present?
@@ -44,8 +49,8 @@ module Decidim
         sleep 0.75
       end
 
-      Rails.logger.warn "Rake(#{RAKE_NAME})> #{@errors.count} errors: #{@errors.join(" | ")}"
-      Rails.logger.warn "Rake(#{RAKE_NAME})> terminated"
+      warn_message "#{@errors.count} errors: #{@errors.join(" | ")}"
+      warn_message "terminated"
     end
 
     private
@@ -53,18 +58,22 @@ module Decidim
     def edit_decision_page!(drupal_page, pp)
       component = Decidim::Component.find_by(name: "BILANS & DÉCISIONS", manifest_name: "pages", participatory_space: pp)
       if component.blank?
-        Rails.logger.warn "Rake(#{RAKE_NAME})> :not_found: component for '#{drupal_page.url}' not found"
+        warn_message ":not_found: component for '#{drupal_page.url}' not found"
         return ":not_found: component for '#{drupal_page.url}' not found"
       end
 
       page = Decidim::Pages::Page.find_by(component: component)
       if page.blank?
-        Rails.logger.warn "Rake(#{RAKE_NAME})> :not_found: page for '#{drupal_page.url}' not found"
+        warn_message ":not_found: page for '#{drupal_page.url}' not found"
         return "not_found: page for '#{drupal_page.url}' not found"
       end
       page.body = { "fr" => drupal_page.get_bilan.presence || "." }
       page.save!
       return
+    end
+
+    def warn_message(msg)
+      Rails.logger.warn "Rake(#{RAKE_NAME})> #{msg}"
     end
   end
 end

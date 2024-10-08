@@ -25,9 +25,13 @@ module Decidim
         return
       end
 
+      Rails.logger.warn "Rake(import:pps)> processing #{rows.size} rows..."
       rows.each do |row|
         drupal_page = Decidim::DrupalPage.scrape(url: row["url"])
-        raise if drupal_page.errors.present?
+        Rails.logger.warn "Rake(import:pps)> Retrieving #{row["url"]}..."
+        if drupal_page.errors.present?
+          Rails.logger.warn "Rake(import:pps)> Error: #{drupal_page.errors} for '#{rows["url"]}'"
+        end
 
         pp = Decidim::ParticipatoryProcess.find_by(slug: "projet-#{drupal_page.drupal_node_id}")
         if pp.blank?
@@ -111,7 +115,7 @@ module Decidim
             human_filesize: human_filesize,
             limit: limit
           )
-          sleep 2
+          sleep 0.75
         end
 
         drupal_page.set_decidim_participatory_process_id(pp.id)
