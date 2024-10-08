@@ -31,6 +31,7 @@ module Decidim
         Rails.logger.warn "Rake(import:pps)> Retrieving #{row["url"]}..."
         if drupal_page.errors.present?
           Rails.logger.warn "Rake(import:pps)> Error: #{drupal_page.errors} for '#{rows["url"]}'"
+          next
         end
 
         pp = Decidim::ParticipatoryProcess.find_by(slug: "projet-#{drupal_page.drupal_node_id}")

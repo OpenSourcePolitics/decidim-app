@@ -36,11 +36,13 @@ module Decidim
         if drupal_page.blank?
           warn_message "URL #{row['url']} not found..."
           @errors << "URL not found: #{row["url"]}"
+          next
         end
 
         pp = Decidim::ParticipatoryProcess.find_by(slug: "projet-#{drupal_page.drupal_node_id}")
         if pp.blank?
           @errors << "ParticipatoryProcess not found: #{row["url"]}"
+          next
         end
 
         if (error = edit_decision_page!(drupal_page, pp)).present?
