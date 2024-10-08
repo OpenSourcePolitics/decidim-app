@@ -12,10 +12,11 @@ module Decidim
     end
 
     def initialize(**args)
-      warn_message "initializing..."
       @path = args[:path]
       @organization = args[:organization]
       @errors = []
+      @logger = Logger.new("log/import-decisions-#{Time.zone.now.strftime "%Y-%m-%d-%H-%M-%S"}.log")
+      warn_message "initializing..."
     end
 
     def execute
@@ -73,7 +74,7 @@ module Decidim
     end
 
     def warn_message(msg)
-      Rails.logger.warn "Rake(#{RAKE_NAME})> #{msg}"
+      @logger.warn "Rake(#{RAKE_NAME})> #{msg}"
     end
   end
 end
