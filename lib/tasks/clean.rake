@@ -143,5 +143,60 @@ namespace :clean do
 
 
     end   
+
+    task files: :environment do
+      host = ENV["ORGANIZATION_HOST"].presence || Decidim::Organization.first.host
+      organization = Decidim::Organization.find_by(host: host)
+      raise "Organization not found for '#{host}'" unless organization
+
+      logger = ::LoggerWithStdout.new("log/clean-bdx-files--#{Time.zone.now.strftime("%Y-%m-%d-%H-%M-%S")}.log")
+      logger.warn "Rake(clean:bdx:files)> initializing..."
+      logger.warn "Rake(clean:bdx:files)> Organization with host #{organization.host}"
+
+      processes_counter = 0
+      deleted_files_counter = 0
+      errors_counter = 0
+
+      Decidim::ParticipatoryProcess.where(organization: organization).where("slug LIKE 'projet-%'").each do |process|
+
+        if process.attachments.present?
+          logger.warn "Rake(clean:bdx:files)> Found #{process.attachments.count} attachments found for process #{process.id} | #{process.slug} | https://#{organization.host}/admin/participatory_processes/#{process.slug}/attachments"
+
+          deleted_process_files_counter = 0
+          process_errors_counter = 0
+          attachments_titles = []
+
+          process.attachments.each do |attachment|
+            if attachments_titles.include?({ title: attachment.title, filename: attachment.file&.blob&.filename })
+              begin
+                attachment.destroy
+                logger.warn { "Rake(clean:bdx:files)> File #{attachment.id} | #{attachment.title} deleted" }
+                deleted_process_files_counter += 1
+                deleted_files_counter += 1
+              rescue StandardError => e
+                logger.error { "Rake(clean:bdx:files)> ERROR on file #{attachment.id} | #{attachment.title} | https://#{organization.host}/admin/participatory_processes/#{process.slug}/attachments/#{attachment.id}/edit --> #{e.class}: '#{e.message}'" }
+                process_errors_counter += 1
+                errors_counter += 1
+                next
+              end
+            else 
+              attachments_titles.push({ title: attachment.title, filename: attachment.file&.blob&.filename })
+            end
+          end
+
+          logger.warn { "Rake(clean:bdx:files)> #{deleted_process_files_counter} files were deleted on process #{process.slug}" }
+          logger.warn { "Rake(clean:bdx:files)> with #{process_errors_counter} errors" }
+
+        else
+          logger.warn "Rake(clean:bdx:files)> No attachments found for process #{process.id} | #{process.slug} | https://#{organization.host}/admin/participatory_processes/#{process.slug}/attachments"
+        end
+        processes_counter += 1
+      end
+
+      logger.warn "Rake(clean:bdx:files)> #{processes_counter} participatory processes were analyzed"
+      logger.warn "Rake(clean:bdx:files)> #{deleted_files_counter} files where deleted"
+      logger.warn "Rake(clean:bdx:files)> #{errors_counter} errors were detected"
+      logger.warn "Rake(clean:bdx:files)> terminated"
+    end
   end
 end
