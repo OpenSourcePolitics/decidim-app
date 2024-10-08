@@ -29,16 +29,6 @@ default: &default
     password: <%= ENV.fetch("DATABASE_PASSWORD") { "" } %>
     database: <%= ENV.fetch("DATABASE_NAME") { "osp_app" } %>
     prepared_statements: <%= ENV.fetch("DATABASE_PREPARED_STATEMENTS") { true } %>
-  drupal:
-    adapter: mysql2
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    encoding: utf8
-    host: <%= ENV.fetch("DRUPAL_DATABASE_HOST") { "" } %>
-    port: <%= ENV.fetch("DRUPAL_DATABASE_PORT") { "3306" } %>
-    username: <%= ENV.fetch("DRUPAL_DATABASE_USERNAME") { "" } %>
-    password: <%= ENV.fetch("DRUPAL_DATABASE_PASSWORD") { "" } %>
-    database: <%= ENV.fetch("DRUPAL_DATABASE_NAME") { "" } %>
-    database_tasks: false
 
 development:
   <<: *default

@@ -42,8 +42,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git
-  revision: 26c437571e847259d80741c52d16349a50436cfc
-  branch: fix/sign-in-link-if-disabled
+  revision: 5bee2b5422e4131f933ad854ab872e049dcf7b54
+  branch: feature/half_signup_and_budgets_booth
   specs:
     decidim-half_signup (0.27.0)
       countries (~> 5.1, >= 5.1.2)
@@ -759,7 +759,6 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.4.1)
     mustache (1.1.1)
-    mysql2 (0.5.6)
     net-http (0.4.1)
       uri
     net-imap (0.4.11)
@@ -1187,7 +1186,6 @@ DEPENDENCIES
   listen (~> 3.1)
   lograge
   multipart-post
-  mysql2
   net-smtp (~> 0.4.0)
   nokogiri (= 1.13.4)
   omniauth-france_connect!
