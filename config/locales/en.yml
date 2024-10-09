@@ -30,6 +30,18 @@ en:
             This amendment for %{amendable_type} %{proposal_link}
             is in evaluation state.
     anonymous_user: Anonymous user
+    assemblies:
+      show:
+        active_assembly_participatory_processes: Active participatory processes
+        active_assembly_participatory_processes_mini: Active
+        future_assembly_participatory_processes: Future participatory processes
+        future_assembly_participatory_processes_mini: Future
+        past_assembly_participatory_processes: Past participatory processes
+        past_assembly_participatory_processes_mini: Past
+        private_space: This is a private assembly
+        related_participatory_processes: Related participatory processes
+        social_networks: Social Networks
+        social_networks_title: Visit assembly on
     authorization_handlers:
       osp_authorization_handler:
         explanation: Verify your identity by entering a unique number
@@ -139,10 +151,11 @@ en:
         new:
           add_file: Add file
           edit_file: Edit file
-      index:
-        collaborative_drafts_list: Collaborative drafts list
-        new_proposal: New proposal
-        view_proposal: View proposal
+      proposals:
+        index:
+          collaborative_drafts_list: Collaborative drafts list
+          new_proposal: New proposal
+          view_proposal: View proposal
       update:
         error: There was a problem saving the idea.
         success: Idea successfully updated.
