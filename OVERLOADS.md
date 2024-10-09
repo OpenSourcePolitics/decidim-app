@@ -2,6 +2,15 @@
 * `app/cells/decidim/version_cell.rb`
 This override the default `VersionCell` from `decidim-core`, by adding sanitization for `version_number` to prevent XSS attacks.
 
+* `app/controllers/decidim/assemblies/assemblies_controller.rb`
+This override the default `AssembliesController` from `decidim-assemblies`, by adding custom sort for assembly_participatory_processes
+
+* `app/helpers/decidim/assemblies/assemblies_helper.rb`
+This override the default `AssembliesHelpler` from `decidim-assemblies`, by adding custom html for sorted assembly_participatory_processes
+
+* `app/controllers/decidim/participatory_processes/participatory_processes_controller.rb`
+This override the default `ParticipatoryProcessesController` from `decidim-participatory_processes`, by adding custom sort for participatory_processes
+
 ## Proposal's draft (Decidim awesome overrides 0.26.7)
 * `app/views/decidim/proposals/collaborative_drafts/_edit_form_fields.html.erb`
 
