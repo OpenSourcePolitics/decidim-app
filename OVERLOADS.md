@@ -11,6 +11,10 @@ This override the default `AssembliesHelpler` from `decidim-assemblies`, by addi
 * `app/controllers/decidim/participatory_processes/participatory_processes_controller.rb`
 This override the default `ParticipatoryProcessesController` from `decidim-participatory_processes`, by adding custom sort for participatory_processes
 
+## Initiative form
+* `lib/extends/forms/decidim/initiatives/initiative_form_extends.rb`
+This adds a validation to form's description.
+
 ## Proposal's draft (Decidim awesome overrides 0.26.7)
 * `app/views/decidim/proposals/collaborative_drafts/_edit_form_fields.html.erb`
 
