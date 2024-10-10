@@ -1,0 +1,23 @@
+name: Review Assign
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: garnertb/get-team-members@v1
+        with:
+          org: 'OpenSourcePolitics'
+          team_slug: 'reviewers'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: "echo ${{ steps.get-members.outputs.members }}"
+        shell: bash
+
+      - uses: hkusu/review-assign-action@v1
+        with:
+          assignees: ${{ github.actor }}
+          reviewers: ${{ steps.get-members.outputs.members }}
