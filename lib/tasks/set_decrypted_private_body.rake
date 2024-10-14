@@ -3,7 +3,7 @@
 namespace :decidim do
   desc "Set decrypted_private_body to existing extra fields"
   task set_decrypted_private_body: :environment do
-    extra_fields = Decidim::DecidimAwesome::ProposalExtraField.where(decrypted_private_body: nil)
+    extra_fields = Decidim::DecidimAwesome::ProposalExtraField.where(decrypted_private_body: nil).where.not(private_body: nil)
     if extra_fields.any?
       p "Extra fields to update: #{extra_fields.size}"
       count = 0
