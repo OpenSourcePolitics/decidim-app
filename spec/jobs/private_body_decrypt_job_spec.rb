@@ -23,6 +23,7 @@ describe "rake decidim:private_body_decrypted_job", type: :task do
 
   it "sets the decrypted body correctly if there is a private body" do
     # we need an empty decrypted_private_body to test if the task will update it well
+    allow_any_instance_of(Decidim::DecidimAwesome::ProposalExtraField).to receive(:update_decrypted_body)
     extra_fields.update(decrypted_private_body: nil)
     expect(extra_fields.decrypted_private_body).to be_nil
     expect(Rails.logger).to receive(:info).with("Extra fields to update: 1")
