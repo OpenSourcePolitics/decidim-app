@@ -59,10 +59,14 @@ module Decidim
     private
 
     def edit_decision_page!(drupal_page, pp)
-      component = Decidim::Component.find_by(name: "BILANS & DÉCISIONS", manifest_name: "pages", participatory_space: pp)
+
+      component = Decidim::Component.find_by(name: {"fr" => "BILANS & DÉCISIONS"}, manifest_name: "pages", participatory_space: pp)
       if component.blank?
-        warn_message ":not_found: component for '#{drupal_page.url}' not found"
-        return ":not_found: component for '#{drupal_page.url}' not found"
+        component = Decidim::Component.find_by(name: "BILANS & DÉCISIONS", manifest_name: "pages", participatory_space: pp)
+        if component.blank?
+          warn_message ":not_found: component for '#{drupal_page.url}' not found"
+          return ":not_found: component for '#{drupal_page.url}' not found"
+        end
       end
 
       page = Decidim::Pages::Page.find_by(component: component)
