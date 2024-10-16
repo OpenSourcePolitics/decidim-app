@@ -23,20 +23,29 @@ namespace :active_storage do
     task s3: :environment do
       include ActionView::Helpers::NumberHelper
 
+      LIMIT = ENV.fetch("S3_LIMIT", "1000").to_i
+      Rails.logger.info "Looking for orphan blobs in S3... (limit: #{LIMIT})"
       objects = ActiveStorage::Blob.service.bucket.objects
-      puts "Total files: #{objects.size}"
+      Rails.logger.info "Total files: #{objects.size}"
 
-      orphan = objects.reject do |obj|
-        ActiveStorage::Blob.exists?(key: obj.key)
-      end
-
+      current_iteration = 0
       sum = 0
-      orphan.each do |obj|
+      orphans_count = 0
+      objects.each do |obj|
+        break if current_iteration >= LIMIT
+
+        current_iteration += 1
+        next if ActiveStorage::Blob.exists?(key: obj.key)
+
+        Rails.logger.info "Removing orphan: #{obj.key}"
         sum += obj.size
+        orphans_count += 1
         obj.delete
       end
 
-      puts "Size: #{number_to_human_size(sum)} in #{orphan.size} files"
+      Rails.logger.info "Size: #{number_to_human_size(sum)} in #{orphans_count} files"
+      Rails.logger.info "Configuration limit is #{LIMIT} files"
+      Rails.logger.info "Terminated task... "
     end
   end
 end
