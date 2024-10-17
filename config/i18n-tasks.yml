@@ -119,6 +119,8 @@ ignore_missing:
  - decidim.term_customizer.admin.actions.*
  - decidim.term_customizer.admin.add_translations.index.*
  - decidim.term_customizer.admin.models.translations.fields.*
+ - decidim.proposals.new.limit_reached
+ - decidim.proposals.create.error
 
 # Consider these keys used:
 ignore_unused:
