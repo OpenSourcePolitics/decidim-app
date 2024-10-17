@@ -58,3 +58,7 @@
       cron: '0 1 * * *'
       class: NotifyProgressInitiatives
       queue: initiatives
+    ActiveStorageClearOrphans:
+      cron: '30 6 1 9 0' # Run at 06:30AM on 1st September
+      class: ActiveStorageClearOrphansJob
+      queue: default

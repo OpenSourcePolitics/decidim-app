@@ -65,8 +65,8 @@ services:
       - AVAILABLE_LOCALES=${AVAILABLE_LOCALES}
       - OBJECTSTORE_S3_HOST=minio:9000
       - SCALEWAY_BUCKET_NAME=localhost
-      - SCALEWAY_ID=O35LJJVOztztLYc9Kufu
-      - SCALEWAY_TOKEN=x6CdylbphThMlZwfuDUNX9fwxlcgwpToxng3BFgR
+      - SCALEWAY_ID=minioadmin
+      - SCALEWAY_TOKEN=minioadmin
     depends_on:
       - app
     volumes:
