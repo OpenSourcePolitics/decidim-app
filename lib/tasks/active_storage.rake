@@ -4,18 +4,18 @@ namespace :active_storage do
   namespace :purge do
     desc "Purge orphan blobs in databa"
     task blobs: :environment do
-      puts "Looking for blobs without attachments in database..."
+      Rails.logger.info "Looking for blobs without attachments in database..."
       blobs = ActiveStorage::Blob.where.not(id: ActiveStorage::Attachment.select(:blob_id))
 
       if blobs.count.zero?
-        puts "Database is clean !"
-        puts "Terminating task..."
+        Rails.logger.info "Database is clean !"
+        Rails.logger.info "Terminating task..."
       else
-        puts "Found #{blobs.count} orphan blobs !"
+        Rails.logger.info "Found #{blobs.count} orphan blobs !"
 
         ActiveStorage::Blob.where.not(id: ActiveStorage::Attachment.select(:blob_id)).find_each(&:purge)
 
-        puts "Task terminated !"
+        Rails.logger.info "Task terminated !"
       end
     end
 
