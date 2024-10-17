@@ -4,7 +4,8 @@ source "https://rubygems.org"
 
 DECIDIM_VERSION = "0.27"
 DECIDIM_BRANCH = "release/#{DECIDIM_VERSION}-stable".freeze
-DECIDIM_ANONYMOUS_PROPOSALS_VERSION = { git: "https://github.com/PopulateTools/decidim-module-anonymous_proposals", branch: "anonymous_proposals_for_registered_users" }.freeze
+DECIDIM_ANONYMOUS_PROPOSALS_VERSION = { git: "https://github.com/OpenSourcePolitics/decidim-module-anonymous_proposals",
+                                        branch: "feat/disable_override_from_index_proposals" }.freeze
 
 ruby RUBY_VERSION
 
@@ -24,7 +25,7 @@ gem "decidim-cache_cleaner"
 gem "decidim-category_enhanced", "~> 0.0.1"
 gem "decidim-cleaner"
 gem "decidim-custom_proposal_states", git: "https://github.com/alecslupu-pfa/decidim-module-custom_proposal_states", branch: DECIDIM_BRANCH
-gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: "main"
+gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: DECIDIM_BRANCH
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
                                                                 branch: DECIDIM_BRANCH
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "temp/twilio-compatibility-0.27"

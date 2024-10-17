@@ -32,6 +32,18 @@ fr:
             Cet amendement pour le %{amendable_type} %{proposal_link}
             est en cours d’évaluation.
     anonymous_user: Utilisateur anonyme
+    assemblies:
+      show:
+        active_assembly_participatory_processes: Concertations actives
+        active_assembly_participatory_processes_mini: Actives
+        future_assembly_participatory_processes: Concertations futures
+        future_assembly_participatory_processes_mini: Futures
+        past_assembly_participatory_processes: Concertations passées
+        past_assembly_participatory_processes_mini: Passées
+        private_space: Ceci est une assemblée privée
+        related_participatory_processes: Concertations associées
+        social_networks: Réseaux sociaux
+        social_networks_title: Visiter l'assemblée sur
     authorization_handlers:
       osp_authorization_handler:
         explanation: Vérifier votre identité en saisissant un numéro unique
@@ -141,10 +153,11 @@ fr:
         new:
           add_file: Ajouter le fichier
           edit_file: Editer le fichier
-      index:
-        collaborative_drafts_list: Accéder aux brouillons collaboratifs
-        new_proposal: Nouvelle proposition
-        view_proposal: Voir la proposition
+      proposals:
+        index:
+          collaborative_drafts_list: Accéder aux brouillons collaboratifs
+          new_proposal: Nouvelle proposition
+          view_proposal: Voir la proposition
       update:
         error: Il y a eu une erreur lors de la mise à jour de la proposition.
         success: Proposition mise à jour avec succès.

@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-anonymous_proposals
+  revision: ea7c828c82fabb1c35e161095082f15ba63b6eaf
+  branch: feat/disable_override_from_index_proposals
+  specs:
+    decidim-anonymous_proposals (0.27.0)
+      decidim-core (>= 0.27.0)
+      deface (~> 1.5)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git
   revision: adec5e66cd07b5e5fdce5562453a7e8d6de88013
   branch: release/0.27-stable
@@ -113,15 +122,6 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
-  remote: https://github.com/PopulateTools/decidim-module-anonymous_proposals
-  revision: b44a938500716dbfd99e8615769045701137c82e
-  branch: anonymous_proposals_for_registered_users
-  specs:
-    decidim-anonymous_proposals (0.27.0)
-      decidim-core (>= 0.27.0)
-      deface (~> 1.5)
-
-GIT
   remote: https://github.com/alecslupu-pfa/decidim-budget_category_voting.git
   revision: e059d392d6468a0fff556a458589685a047032d6
   branch: release/0.27-stable
@@ -135,7 +135,7 @@ GIT
 
 GIT
   remote: https://github.com/alecslupu-pfa/decidim-module-custom_proposal_states
-  revision: 66bc4d1a9f00eb66356e583365597e737e1d6917
+  revision: 848eb550d44d9bebc9e72c458c4e3aab79203d9e
   branch: release/0.27-stable
   specs:
     decidim-custom_proposal_states (0.27.5)
@@ -145,10 +145,10 @@ GIT
 
 GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome
-  revision: 058af7db47737e3ca108ac8e08efd5ec55d67a44
-  branch: main
+  revision: 51bc593da8fb72d14c2e5b5df55dbb686be1fbbe
+  branch: release/0.27-stable
   specs:
-    decidim-decidim_awesome (0.10.2)
+    decidim-decidim_awesome (0.10.3)
       decidim-admin (>= 0.26.0, < 0.28)
       decidim-core (>= 0.26.0, < 0.28)
       deface (>= 1.5)
