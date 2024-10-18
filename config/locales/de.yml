@@ -1,0 +1,11 @@
+---
+de:
+  decidim:
+    notifications_digest_mailer:
+      subject: Dies ist E-Mail-Zusammenfassung
+    participatory_processes:
+      pages:
+        home:
+          highlighted_processes:
+            active_processes: Aktive Prozesse
+            see_all_processes: Alle Prozesse anzeigen
