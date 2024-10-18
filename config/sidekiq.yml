@@ -32,6 +32,11 @@
       cron: '0 <%= Random.rand(0..59) %> <%= Random.rand(6..8) %> * * *' # Run randomly between 06:00 and 08:59
       class: Decidim::SpamDetection::MarkUsersJob
       queue: scheduled
+    SpamBotBlockUsers:
+      cron: '0 <%= Random.rand(0..59) %> <%= Random.rand(6..8) %> * * *' # Run randomly between 06:00 and 08:59
+      class: Decidim::SpamDetection::BlockUsersJob
+      queue: default
+      enabled: false
     Backup:
       cron: '0 <%= Random.rand(0..59) %> <%= Random.rand(2..3) %> * * *' # Run randomly between 02:00 and 03:59
       class: BackupJob
