@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_10_092645) do
+ActiveRecord::Schema.define(version: 2024_10_11_092707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -332,6 +332,7 @@ ActiveRecord::Schema.define(version: 2024_10_10_092645) do
     t.string "private_body"
     t.string "decidim_proposal_type", null: false
     t.datetime "private_body_updated_at"
+    t.string "decrypted_private_body"
     t.index ["decidim_proposal_id", "decidim_proposal_type"], name: "index_decidim_awesome_proposal_extra_fields_on_decidim_proposal"
   end
 
