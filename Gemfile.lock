@@ -416,6 +416,8 @@ GEM
       decidim-admin (~> 0.27.0)
       decidim-core (~> 0.27.0)
       deface (>= 1.9)
+    decidim-cleaner (3.1.0)
+      decidim-core (~> 0.27.0)
     decidim-comments (0.27.4)
       decidim-core (= 0.27.4)
       redcarpet (~> 3.5, >= 3.5.1)
@@ -1170,6 +1172,7 @@ DEPENDENCIES
   decidim-budgets_booth!
   decidim-cache_cleaner
   decidim-category_enhanced (~> 0.0.1)
+  decidim-cleaner
   decidim-conferences (~> 0.27.0)
   decidim-custom_proposal_states!
   decidim-decidim_awesome!
