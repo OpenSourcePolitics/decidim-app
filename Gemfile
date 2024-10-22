@@ -34,7 +34,7 @@ gem "decidim-half_signup", git: "https://github.com/OpenSourcePolitics/decidim-m
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: "release/0.27-stable"
 gem "decidim-simple_proposal", git: "https://github.com/OpenSourcePolitics/decidim-module-simple_proposal", branch: DECIDIM_BRANCH
-gem "decidim-spam_detection"
+gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git", tag: "4.1.1"
 gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "fix/email_with_precompile"
 
