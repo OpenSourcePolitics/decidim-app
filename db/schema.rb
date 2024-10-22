@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_16_143432) do
-
+ActiveRecord::Schema.define(version: 2024_10_10_092645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
@@ -329,7 +328,10 @@ ActiveRecord::Schema.define(version: 2024_09_16_143432) do
     t.integer "weight_total", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["decidim_proposal_id"], name: "decidim_awesome_extra_fields_on_proposal"
+    t.string "private_body"
+    t.string "decidim_proposal_type", null: false
+    t.datetime "private_body_updated_at"
+    t.index ["decidim_proposal_id", "decidim_proposal_type"], name: "index_decidim_awesome_proposal_extra_fields_on_decidim_proposal"
   end
 
   create_table "decidim_awesome_vote_weights", force: :cascade do |t|
@@ -1999,6 +2001,7 @@ ActiveRecord::Schema.define(version: 2024_09_16_143432) do
     t.string "previous_passwords", default: [], array: true
     t.string "phone_number"
     t.string "phone_country"
+    t.datetime "warning_date"
     t.index ["confirmation_token"], name: "index_decidim_users_on_confirmation_token", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_users_on_decidim_organization_id"
     t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false) AND ((type)::text = 'Decidim::User'::text))"

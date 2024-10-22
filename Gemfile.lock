@@ -143,7 +143,7 @@ GIT
 
 GIT
   remote: https://github.com/alecslupu-pfa/decidim-module-custom_proposal_states
-  revision: 66bc4d1a9f00eb66356e583365597e737e1d6917
+  revision: 848eb550d44d9bebc9e72c458c4e3aab79203d9e
   branch: release/0.27-stable
   specs:
     decidim-custom_proposal_states (0.27.5)
@@ -153,10 +153,10 @@ GIT
 
 GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome
-  revision: 058af7db47737e3ca108ac8e08efd5ec55d67a44
-  branch: main
+  revision: 51bc593da8fb72d14c2e5b5df55dbb686be1fbbe
+  branch: release/0.27-stable
   specs:
-    decidim-decidim_awesome (0.10.2)
+    decidim-decidim_awesome (0.10.3)
       decidim-admin (>= 0.26.0, < 0.28)
       decidim-core (>= 0.26.0, < 0.28)
       deface (>= 1.5)
@@ -416,6 +416,8 @@ GEM
       decidim-admin (~> 0.27.0)
       decidim-core (~> 0.27.0)
       deface (>= 1.9)
+    decidim-cleaner (3.1.0)
+      decidim-core (~> 0.27.0)
     decidim-comments (0.27.4)
       decidim-core (= 0.27.4)
       redcarpet (~> 3.5, >= 3.5.1)
@@ -1170,6 +1172,7 @@ DEPENDENCIES
   decidim-budgets_booth!
   decidim-cache_cleaner
   decidim-category_enhanced (~> 0.0.1)
+  decidim-cleaner
   decidim-conferences (~> 0.27.0)
   decidim-custom_proposal_states!
   decidim-decidim_awesome!
@@ -1223,4 +1226,4 @@ RUBY VERSION
    ruby 3.0.6p216
 
 BUNDLED WITH
-   2.4.9
+   2.4.6
