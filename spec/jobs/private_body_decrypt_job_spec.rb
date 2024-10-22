@@ -31,7 +31,7 @@ describe PrivateBodyDecryptJob, type: :job do
       expect(Rails.logger).not_to receive(:info).with("Extra fields to update: 1")
       expect(Rails.logger).not_to receive(:info).with("Extra fields updated: 1")
       described_class.perform_now
-      expect(extra_fields.reload.decrypted_private_body).to eq(extra_fields.private_body.to_s)
+      expect(extra_fields.reload.decrypted_private_body).to eq('{"en"=>"<xml><dl><dt name=\"something\">Something</dt></dl></xml>"}')
     end
   end
 end
