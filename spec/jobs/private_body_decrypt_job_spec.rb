@@ -27,7 +27,6 @@ describe PrivateBodyDecryptJob, type: :job do
 
   context "when extra fields are missing" do
     it "does not log or update" do
-      extra_fields.update(decrypted_private_body: extra_fields.private_body.to_s)
       expect(extra_fields.reload.decrypted_private_body).not_to be_nil
       expect(Rails.logger).not_to receive(:info).with("Extra fields to update: 1")
       expect(Rails.logger).not_to receive(:info).with("Extra fields updated: 1")
