@@ -15,15 +15,25 @@ describe "rake decidim:set_decrypted_private_body", type: :task do
     expect(task.prerequisites).to include "environment"
   end
 
-  it "prints nothing if no extra_fields to update" do
-    expect { task.execute }.not_to output("\"Extra fields to update: 1\"\n\"Extra fields updated: 1\"\n").to_stdout
+  context "when the environment is development" do
+    before do
+      allow(Rails.env).to receive(:development?).and_return(true)
+    end
+
+    it "executes the job immediately" do
+      expect(PrivateBodyDecryptJob).to receive(:perform_now)
+      task.execute
+    end
   end
 
-  it "sets the decrypted body correctly if there is a private body" do
-    # we need an empty decrypted_private_body to test if the task will update it well
-    extra_fields.update_columns(decrypted_private_body: nil)
-    expect(extra_fields.decrypted_private_body).to be_nil
-    expect { task.execute }.to output("\"Extra fields to update: 1\"\n\"Extra fields updated: 1\"\n").to_stdout
-    expect(extra_fields.reload.decrypted_private_body).to eq('{"en"=>"<xml><dl><dt name=\"something\">Something</dt></dl></xml>"}')
+  context "when the environment is not development" do
+    before do
+      allow(Rails.env).to receive(:development?).and_return(false)
+    end
+
+    it "enqueues the job to perform later" do
+      expect(PrivateBodyDecryptJob).to receive(:perform_later)
+      task.execute
+    end
   end
 end
