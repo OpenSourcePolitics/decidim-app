@@ -45,7 +45,6 @@ describe PrivateBodyDecryptJob, type: :job do
         expect(proposal_with_both_bodies_defined.reload.decrypted_private_body).to eq('<xml><dl><dt name="something">Something</dt></dl></xml>')
       end
     end
-
   end
 
   context "when extra fields are missing" do
@@ -53,7 +52,7 @@ describe PrivateBodyDecryptJob, type: :job do
       expect(Rails.logger).not_to receive(:info).with("Extra fields to update: 1")
       expect(Rails.logger).not_to receive(:info).with("Extra fields updated: 1")
       described_class.perform_now
-      expect(proposal_without_extra_fields.reload.decrypted_private_body).to eq(nil)
+      expect(proposal_without_extra_fields.reload.decrypted_private_body).to be_nil
     end
   end
 end
