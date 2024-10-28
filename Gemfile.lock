@@ -108,10 +108,10 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-spam_detection.git
-  revision: 52623c57f571716730532eab8757560818f7f1df
-  tag: 4.1.0
+  revision: fb2ee4624b728ce6f73603bfb84eda1d9b4e04d4
+  tag: 4.1.1
   specs:
-    decidim-spam_detection (4.1.0)
+    decidim-spam_detection (4.1.1)
       decidim-core (~> 0.27.0)
 
 GIT
@@ -427,6 +427,8 @@ GEM
       decidim-admin (~> 0.27.0)
       decidim-core (~> 0.27.0)
       deface (>= 1.9)
+    decidim-cleaner (3.1.0)
+      decidim-core (~> 0.27.0)
     decidim-comments (0.27.4)
       decidim-core (= 0.27.4)
       redcarpet (~> 3.5, >= 3.5.1)
@@ -1181,6 +1183,7 @@ DEPENDENCIES
   decidim-budgets_booth!
   decidim-cache_cleaner
   decidim-category_enhanced (~> 0.0.1)
+  decidim-cleaner
   decidim-conferences (~> 0.27.0)
   decidim-custom_proposal_states!
   decidim-decidim_awesome!

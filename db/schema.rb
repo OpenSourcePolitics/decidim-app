@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_18_101348) do
+ActiveRecord::Schema.define(version: 2024_10_28_094242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -1168,6 +1168,10 @@ ActiveRecord::Schema.define(version: 2024_10_18_101348) do
     t.string "state"
     t.integer "iframe_access_level", default: 0
     t.integer "iframe_embed_type", default: 0
+    t.boolean "enable_guest_registration", default: false
+    t.boolean "enable_registration_confirmation", default: false
+    t.boolean "enable_cancellation", default: false
+    t.boolean "disable_account_confirmation", default: false
     t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_meetings_meetings_on_author"
     t.index ["decidim_author_id"], name: "index_decidim_meetings_meetings_on_decidim_author_id"
     t.index ["decidim_component_id"], name: "index_decidim_meetings_meetings_on_decidim_component_id"
@@ -2031,6 +2035,7 @@ ActiveRecord::Schema.define(version: 2024_10_18_101348) do
     t.string "previous_passwords", default: [], array: true
     t.string "phone_number"
     t.string "phone_country"
+    t.datetime "warning_date"
     t.index ["confirmation_token"], name: "index_decidim_users_on_confirmation_token", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_users_on_decidim_organization_id"
     t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false) AND ((type)::text = 'Decidim::User'::text))"
