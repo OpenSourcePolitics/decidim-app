@@ -67,6 +67,7 @@ module Decidim
       end
 
       describe "#serialize" do
+
         let(:serialized) { subject.serialize }
 
         it "includes the answer for each question" do
@@ -86,7 +87,7 @@ module Decidim
           end
 
           serialized_files_answer = files_answer.attachments.map(&:url)
-
+          
           expect(serialized).to include(
             "#{multichoice_question.position + 1}. #{translated(multichoice_question.body, locale: I18n.locale)}" => [multichoice_answer_choices.first.body, multichoice_answer_choices.last.body]
           )
@@ -102,6 +103,7 @@ module Decidim
           expect(serialized).to include(
             "#{files_question.position + 1}. #{translated(files_question.body, locale: I18n.locale)}" => serialized_files_answer
           )
+
         end
 
         context "and includes the attributes" do
@@ -207,6 +209,14 @@ module Decidim
           def memory_usage
             `ps -o rss #{Process.pid}`.lines.last.to_i
           end
+        end
+      end
+
+      describe "questions_hash" do
+
+        it "generates a hash of questions ordered by position" do
+          questions.shuffle!
+          expect(subject.instance_eval { questions_hash }.keys.map{|key| key[0].to_i}.uniq).to eq(questions.sort_by{|q| q.position}.map{|question| question.position + 1})
         end
       end
     end
