@@ -147,6 +147,11 @@ en:
         exports:
           awesome_private_proposals: Proposals with private fields
           proposal_comments: Comments
+      notifications:
+        proposal_published:
+          title: "Your proposal %{proposal_title} has been published!"
+          body: "Your proposal is now live. View it here: %{proposal_link}"
+          subject: "Your proposal has been published!"
       collaborative_drafts:
         new:
           add_file: Add file

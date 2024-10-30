@@ -103,6 +103,23 @@ module Decidim
             end
           end
         end
+        def publish
+          enforce_permission_to :edit, :proposal, proposal: @proposal
+
+          # Publier la proposition et envoyer la notification si succès
+          Decidim::Proposals::PublishProposal.call(@proposal, current_user) do
+            on(:ok) do
+              flash[:notice] = I18n.t("proposals.publish.success", scope: "decidim")
+              send_publication_notification # Appel de la méthode de notification
+              redirect_to proposal_path(@proposal)
+            end
+
+            on(:invalid) do
+              flash.now[:alert] = I18n.t("proposals.publish.error", scope: "decidim")
+              render :edit_draft
+            end
+          end
+        end
 
         # Overridden because of a core bug when the command posts the "invalid"
         # signal and when rendering the form.
@@ -202,6 +219,16 @@ module Decidim
 
         def current_user_proposals(form)
           Decidim::Proposals::Proposal.from_author(current_user).where(component: form.current_component).except_withdrawn
+        end
+
+        def send_publication_notification
+          Decidim::EventsManager.publish(
+            event: "decidim.proposals.proposal_published",
+            event_class: Decidim::Proposals::ProposalPublishedEvent,
+            resource: @proposal,
+            affected_users: [@proposal.creator_identity],
+            extra: { participatory_space: true }
+          )
         end
       end
     end
