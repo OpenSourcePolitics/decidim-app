@@ -36,9 +36,9 @@ describe "Admin manages survey question with image", type: :system do
       visit questionnaire_edit_path
       click_button "Expand all"
       expect(page).to have_selector("img[src='#{image_url}']")
-      #click_button "Save"
-      #click_button "Expand all"
-      #expect(page).to have_selector("img[src='#{image_url}']")
+      click_button "Save"
+      click_button "Expand all"
+      expect(page).to have_selector("img[src='#{image_url}']")
       #within "#questionnaire_question_#{question.id}-field" do
       #  within "#questionnaire_question_#{question.id}-description-panel-0" do
       #    input = page.find("#questionnaire_questions_#{question.id}_description_en")
