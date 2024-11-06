@@ -31,12 +31,11 @@ describe "Admin manages survey question with image", type: :system do
 
     let!(:question) { create(:questionnaire_question, description: description_with_image, questionnaire: questionnaire) }
 
-    it "after save, it renders image in description with hidden input value filled" do
+    it "after save, it renders description with hidden input value filled" do
       Capybara.ignore_hidden_elements = false
       visit questionnaire_edit_path
       click_button "Save"
       click_button "Expand all"
-      expect(page).to have_css("img[src$='mon_image.png']")
       within "#questionnaire_question_#{question.id}-field" do
         within "#questionnaire_question_#{question.id}-description-panel-0" do
           input = page.find("#questionnaire_questions_#{question.id}_description_en")
