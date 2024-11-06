@@ -158,6 +158,11 @@ fr:
           collaborative_drafts_list: Accéder aux brouillons collaboratifs
           new_proposal: Nouvelle proposition
           view_proposal: Voir la proposition
+      notifications:
+        proposal_published:
+          title: "Votre proposition %{proposal_title} a bien été publiée!"
+          body: "Votre proposition est en ligne. Lien ici: %{proposal_link}"
+          subject: "Votre proposition est publiée!"
       update:
         error: Il y a eu une erreur lors de la mise à jour de la proposition.
         success: Proposition mise à jour avec succès.
