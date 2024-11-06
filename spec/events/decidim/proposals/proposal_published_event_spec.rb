@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "nokogiri"
 
 module Decidim::Proposals
   describe "ProposalPublishedEvent", type: :job do
@@ -18,25 +19,25 @@ module Decidim::Proposals
     end
 
     context "when proposal is published" do
+
       it "sends a notification email with the correct content" do
-        Decidim::EventsManager.publish(
-          event: "decidim.proposals.proposal_published",
-          event_class: ProposalPublishedEvent,
-          resource: proposal,
-          affected_users: [user],
-        )
-
-        perform_enqueued_jobs do
-          Decidim::EmailNotificationsDigestGeneratorJob.perform_now(user.id, user.notifications_sending_frequency)
-        end
-
+        subject { ProposalPublishedEvent.new(resource: proposal, event_name: "decidim.proposals.proposal_published", user: proposal.creator_identity) }
         expect(last_email).not_to be_nil
         expect(last_email_body).not_to include("translation missing")
         expect(last_email_body).to include("Test proposition notification")
+      end
 
+      it "sends a notification with the correct content" do
+        subject { ProposalPublishedEvent.new(resource: proposal, event_name: "decidim.proposals.proposal_published", user: proposal.creator_identity) }
+        notification = Decidim::Notification.last
+        # Parse avec Nokogiri
+        html_body = Nokogiri::HTML(notification.extra["body"])
+        text = html_body.text
+        expect(text).to eq("Your proposal Test proposition notification has been published")
+
+        expect(notification).not_to be_nil
       end
     end
-
   end
 end
 #
