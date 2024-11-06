@@ -36,10 +36,9 @@ describe "Admin manages survey question with image", type: :system do
       visit questionnaire_edit_path
       click_button "Save"
       click_button "Expand all"
+      expect(page).to have_xpath('//img[@src="http://mon_image.png"]')
       within "#questionnaire_question_#{question.id}-field" do
         within "#questionnaire_question_#{question.id}-description-panel-0" do
-          description = find(".ql-editor p")
-          expect(description).to have_css("img[src='http://mon_image.png']")
           input = page.find("#questionnaire_questions_#{question.id}_description_en")
           expect(input.value).to eq('<p><img src="http://mon_image.png"></p>')
         end
