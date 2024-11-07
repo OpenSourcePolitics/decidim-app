@@ -86,9 +86,6 @@ group :production do
   gem "health_check", "~> 3.1"
   gem "lograge"
   gem "sendgrid-ruby"
-  gem "sentry-rails"
-  gem "sentry-ruby"
-  gem "sentry-sidekiq"
   gem "sidekiq", "~> 6.0"
   gem "sidekiq-scheduler", "~> 5.0"
 end
