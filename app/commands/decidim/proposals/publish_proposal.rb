@@ -82,7 +82,7 @@ module Decidim
 
       def send_publication_notification
         Decidim::EventsManager.publish(
-          event: "decidim.events.proposals.proposal_published",
+          event: "decidim.events.proposals.proposal_published_event",
           event_class: Decidim::Proposals::ProposalPublishedEvent,
           resource: @proposal,
           affected_users: [@proposal.creator_identity],
