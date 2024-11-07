@@ -107,6 +107,14 @@ GIT
       decidim-core (~> 0.27)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-spam_detection.git
+  revision: fb2ee4624b728ce6f73603bfb84eda1d9b4e04d4
+  tag: 4.1.1
+  specs:
+    decidim-spam_detection (4.1.1)
+      decidim-core (~> 0.27.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-france_connect
   revision: 14a53ad31928c8a83742360cfbdb90938d0a057e
   specs:
@@ -144,11 +152,22 @@ GIT
       deface (>= 1.9)
 
 GIT
-  remote: https://github.com/decidim-ice/decidim-module-decidim_awesome
-  revision: 058af7db47737e3ca108ac8e08efd5ec55d67a44
-  branch: main
+  remote: https://github.com/alecslupu-pfa/guest-meeting-registration.git
+  revision: 532de9e87ecb8b2959c0013c6408d4c092abce87
+  ref: 532de9e
+  branch: release/0.27-stable
   specs:
-    decidim-decidim_awesome (0.10.2)
+    decidim-guest_meeting_registration (0.27.7)
+      decidim-core (~> 0.27)
+      decidim-meetings (~> 0.27)
+      deface (>= 1.9)
+
+GIT
+  remote: https://github.com/decidim-ice/decidim-module-decidim_awesome
+  revision: 51bc593da8fb72d14c2e5b5df55dbb686be1fbbe
+  branch: release/0.27-stable
+  specs:
+    decidim-decidim_awesome (0.10.3)
       decidim-admin (>= 0.26.0, < 0.28)
       decidim-core (>= 0.26.0, < 0.28)
       deface (>= 1.5)
@@ -408,6 +427,8 @@ GEM
       decidim-admin (~> 0.27.0)
       decidim-core (~> 0.27.0)
       deface (>= 1.9)
+    decidim-cleaner (3.1.0)
+      decidim-core (~> 0.27.0)
     decidim-comments (0.27.4)
       decidim-core (= 0.27.4)
       redcarpet (~> 3.5, >= 3.5.1)
@@ -532,8 +553,6 @@ GEM
       decidim-comments (= 0.27.4)
       decidim-core (= 0.27.4)
       decidim-proposals (= 0.27.4)
-    decidim-spam_detection (4.0.0)
-      decidim-core (~> 0.27.0)
     decidim-surveys (0.27.4)
       decidim-core (= 0.27.4)
       decidim-forms (= 0.27.4)
@@ -1164,6 +1183,7 @@ DEPENDENCIES
   decidim-budgets_booth!
   decidim-cache_cleaner
   decidim-category_enhanced (~> 0.0.1)
+  decidim-cleaner
   decidim-conferences (~> 0.27.0)
   decidim-custom_proposal_states!
   decidim-decidim_awesome!
@@ -1172,12 +1192,13 @@ DEPENDENCIES
   decidim-extra_user_fields!
   decidim-friendly_signup!
   decidim-gallery!
+  decidim-guest_meeting_registration!
   decidim-half_signup!
   decidim-homepage_interactive_map!
   decidim-initiatives (~> 0.27.0)
   decidim-phone_authorization_handler!
   decidim-simple_proposal!
-  decidim-spam_detection
+  decidim-spam_detection!
   decidim-survey_multiple_answers!
   decidim-templates (~> 0.27.0)
   decidim-term_customizer!
@@ -1217,4 +1238,4 @@ RUBY VERSION
    ruby 3.0.6p216
 
 BUNDLED WITH
-   2.4.9
+   2.4.6

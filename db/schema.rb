@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_16_143432) do
+ActiveRecord::Schema.define(version: 2024_10_28_094242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -329,7 +329,10 @@ ActiveRecord::Schema.define(version: 2024_09_16_143432) do
     t.integer "weight_total", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["decidim_proposal_id"], name: "decidim_awesome_extra_fields_on_proposal"
+    t.string "private_body"
+    t.string "decidim_proposal_type", null: false
+    t.datetime "private_body_updated_at"
+    t.index ["decidim_proposal_id", "decidim_proposal_type"], name: "index_decidim_awesome_proposal_extra_fields_on_decidim_proposal"
   end
 
   create_table "decidim_awesome_vote_weights", force: :cascade do |t|
@@ -879,6 +882,35 @@ ActiveRecord::Schema.define(version: 2024_09_16_143432) do
     t.index ["user_id"], name: "index_decidim_gamification_badge_scores_on_user_id"
   end
 
+  create_table "decidim_guest_meeting_registration_registration_requests", force: :cascade do |t|
+    t.bigint "decidim_organization_id"
+    t.bigint "decidim_meetings_meetings_id"
+    t.integer "decidim_user_id"
+    t.jsonb "form_data"
+    t.string "email", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.string "cancellation_token"
+    t.string "session_token"
+    t.index ["decidim_meetings_meetings_id"], name: "index_guest_meeting_registration_mm_on_organization_id"
+    t.index ["decidim_organization_id"], name: "index_guest_meeting_registration_rr_on_organization_id"
+    t.index ["decidim_user_id"], name: "index_guest_meeting_registration_uid_on_organization_id"
+  end
+
+  create_table "decidim_guest_meeting_registration_settings", force: :cascade do |t|
+    t.boolean "enable_guest_registration", default: false
+    t.bigint "decidim_organization_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "enable_registration_confirmation", default: false
+    t.boolean "enable_cancellation", default: false
+    t.boolean "disable_account_confirmation", default: false
+    t.index ["decidim_organization_id"], name: "index_guest_meeting_registration_settings_on_organization_id"
+  end
+
   create_table "decidim_half_signup_auth_settings", force: :cascade do |t|
     t.boolean "enable_partial_sms_signup", default: false
     t.boolean "enable_partial_email_signup", default: false
@@ -1136,6 +1168,10 @@ ActiveRecord::Schema.define(version: 2024_09_16_143432) do
     t.string "state"
     t.integer "iframe_access_level", default: 0
     t.integer "iframe_embed_type", default: 0
+    t.boolean "enable_guest_registration", default: false
+    t.boolean "enable_registration_confirmation", default: false
+    t.boolean "enable_cancellation", default: false
+    t.boolean "disable_account_confirmation", default: false
     t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_meetings_meetings_on_author"
     t.index ["decidim_author_id"], name: "index_decidim_meetings_meetings_on_decidim_author_id"
     t.index ["decidim_component_id"], name: "index_decidim_meetings_meetings_on_decidim_component_id"
@@ -1999,6 +2035,7 @@ ActiveRecord::Schema.define(version: 2024_09_16_143432) do
     t.string "previous_passwords", default: [], array: true
     t.string "phone_number"
     t.string "phone_country"
+    t.datetime "warning_date"
     t.index ["confirmation_token"], name: "index_decidim_users_on_confirmation_token", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_users_on_decidim_organization_id"
     t.index ["email", "decidim_organization_id"], name: "index_decidim_users_on_email_and_decidim_organization_id", unique: true, where: "((deleted_at IS NULL) AND (managed = false) AND ((type)::text = 'Decidim::User'::text))"
@@ -2134,6 +2171,9 @@ ActiveRecord::Schema.define(version: 2024_09_16_143432) do
   add_foreign_key "decidim_debates_debates", "decidim_scopes"
   add_foreign_key "decidim_editor_images", "decidim_organizations"
   add_foreign_key "decidim_editor_images", "decidim_users", column: "decidim_author_id"
+  add_foreign_key "decidim_guest_meeting_registration_registration_requests", "decidim_meetings_meetings", column: "decidim_meetings_meetings_id"
+  add_foreign_key "decidim_guest_meeting_registration_registration_requests", "decidim_organizations"
+  add_foreign_key "decidim_guest_meeting_registration_settings", "decidim_organizations"
   add_foreign_key "decidim_half_signup_auth_settings", "decidim_organizations"
   add_foreign_key "decidim_identities", "decidim_organizations"
   add_foreign_key "decidim_initiatives_settings", "decidim_organizations"
