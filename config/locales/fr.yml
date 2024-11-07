@@ -67,6 +67,12 @@ fr:
         new:
           sign_in_disabled: Vous pouvez accéder avec un compte externe
     events:
+      proposals:
+        proposal_published_event:
+          email_intro: 'que vous suivez, a publié une nouvelle proposition appelée "%{resource_title}". Découvrez-le et contribuez:'
+          email_outro: Vous avez reçu cette notification car vous suivez . Si vous souhaitez vous désabonner des notifications, connectez-vous à la plateforme, puis rendez-vous dans l'onglet “Mon compte” > “Paramètres des notifications”.
+          email_subject: Nouvelle proposition "%{resource_title}" publiée
+          notification_title: La proposition <a href="%{resource_path}">%{resource_title}</a> a été publiée.
       budgets:
         pending_order:
           email_intro: Le vote sur le budget "%{resource_title}" n'est pas encore finalisé sur la concertation "%{participatory_space_title}".
