@@ -4,13 +4,17 @@ module Decidim
   module Proposals
     # A command with all the business logic when a user publishes a draft proposal.
     class PublishProposal < Decidim::Command
+      include Decidim::AnonymousProposals::AnonymousBehaviorCommandsConcern
+
       # Public: Initializes the command.
       #
       # proposal     - The proposal to publish.
       # current_user - The current user.
+      # override: decidim-module-anonymous_proposals/app/commands/decidim/anonymous_proposals/publish_proposal_command_overrides.rb
       def initialize(proposal, current_user)
         @proposal = proposal
-        @current_user = current_user
+        @is_anonymous = allow_anonymous_proposals? && (current_user.blank? || proposal.authored_by?(anonymous_group))
+        set_current_user(current_user)
       end
 
       # Executes the command. Broadcasts these events:
@@ -77,14 +81,13 @@ module Decidim
       end
 
       def send_publication_notification
-        puts "send notification from proposal #{@proposal.id}"
-        # debug message
         Decidim::EventsManager.publish(
-          event: "decidim.proposals.proposal_published",
+          event: "decidim.events.proposals.proposal_published",
           event_class: Decidim::Proposals::ProposalPublishedEvent,
           resource: @proposal,
           affected_users: [@proposal.creator_identity],
-          extra: { participatory_space: true }
+          extra: { force_email: true },
+          force_send: true
         )
       end
 
@@ -112,6 +115,11 @@ module Decidim
             Decidim::Gamification.increment_score(coauthorship.author, :proposals)
           end
         end
+      end
+
+      # override: decidim-module-anonymous_proposals/app/commands/decidim/anonymous_proposals/publish_proposal_command_overrides.rb
+      def component
+        @component ||= @proposal.component
       end
     end
   end
