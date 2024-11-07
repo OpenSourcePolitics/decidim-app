@@ -100,7 +100,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler
-  revision: a3e77fb29e9a19793b3ff8b5d2273d41fac0919b
+  revision: 885122479e7fb9d8294dcf4c4d4f2d34e978b3c6
   branch: release/0.27-stable
   specs:
     decidim-phone_authorization_handler (1.0.0)
