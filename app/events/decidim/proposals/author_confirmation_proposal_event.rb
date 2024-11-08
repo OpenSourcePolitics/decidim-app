@@ -1,4 +1,5 @@
-# app/events/decidim/proposals/proposal_published_event.rb
+# frozen_string_literal: true
+
 module Decidim
   module Proposals
     class AuthorConfirmationProposalEvent < Decidim::Events::SimpleEvent
