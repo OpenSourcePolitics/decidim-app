@@ -136,11 +136,11 @@ module Decidim
       def custom_sort(date)
         case date
         when "active"
-          @participatory_processes.sort_by(&:end_date)
+          @participatory_processes.order('end_date ASC NULLS LAST')
         when "past"
-          @participatory_processes.sort_by(&:end_date).reverse
+          @participatory_processes.order('end_date DESC NULLS LAST')
         when "upcoming"
-          @participatory_processes.sort_by(&:start_date)
+          @participatory_processes.order('start_date ASC NULLS LAST')
         when "all"
           @participatory_processes = sort_all_processes
         else
