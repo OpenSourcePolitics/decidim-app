@@ -4,49 +4,65 @@ require "spec_helper"
 
 module Decidim
   module Proposals
-    describe ProposalPublishedEvent do
-      let(:organization) { create(:organization) }
-      let(:author) { create(:user, organization: organization) }
-      let(:resource) { create(:proposal, component: proposal_component, title: { en: "Proposition de test" }, body: { en: "Corps de la proposition" }) }
-      let(:participatory_process) { create(:participatory_process, organization: organization) }
-      let(:proposal_component) { create(:component, manifest_name: :proposals, participatory_space: participatory_process) }
+    describe AuthorConfirmationProposalEvent do
+      let(:resource) { create :extended_proposal }
+      let(:participatory_process) { create :participatory_process, organization: organization }
+      let(:proposal_component) { create(:extended_proposal_component, participatory_space: participatory_process) }
       let(:resource_title) { decidim_sanitize_translated(resource.title) }
-      let(:resource_path) { Decidim::ResourceLocatorPresenter.new(resource).path }
       let(:event_name) { "decidim.events.proposals.proposal_published" }
 
-      subject { described_class.new(resource: resource, event_name: event_name, user: author) }
+      include_context "when a simple event"
+
+      it_behaves_like "a simple event"
+
+      describe "resource_text" do
+        it "returns the proposal body" do
+          expect(subject.resource_text).to eq(resource.body)
+        end
+      end
 
       describe "email_subject" do
         it "matches the expected translation" do
-          expect(subject.email_subject).to eq(I18n.t("decidim.proposals.notifications.proposal_published.subject"))
+          expect(subject.email_subject).to eq("Your proposal has been published!")
         end
       end
 
       describe "email_intro" do
         it "matches the expected translation" do
-          expected_intro = I18n.t("decidim.proposals.notifications.proposal_published.email_intro", resource_title: resource_title, resource_path: resource_path)
+          expected_intro = "Your proposal \"#{resource_title}\" was successfully received and is now public. Thank you for participating! Here it is: <a href=\"#{resource_path}\">#{resource_title}</a>."
           expect(subject.email_intro).to eq(expected_intro)
         end
       end
 
       describe "email_outro" do
         it "matches the expected translation" do
-          expected_outro = I18n.t("decidim.proposals.notifications.proposal_published.email_outro", resource_title: resource_title)
+          expected_outro = "You have received this notification because you are the author of the proposal. You can unfollow it by going to the proposal page (\"#{resource_title}\") and clicking on \"Unfollow\"."
           expect(subject.email_outro).to eq(expected_outro)
         end
       end
 
       describe "notification_title" do
         it "matches the expected translation" do
-          expected_title = I18n.t("decidim.proposals.notifications.proposal_published.notification_title", resource_title: resource_title, resource_path: resource_path)
+          expected_title = "Your proposal <a href=\"#{resource_path}\">#{resource_title}</a> is now live."
           expect(subject.notification_title).to eq(expected_title)
         end
       end
 
-      describe "resource_text" do
-        it "returns the proposal body" do
-          expect(subject.resource_text).to eq(resource.body)
+      describe "translated notifications" do
+        let(:en_body) { "A nice proposal" }
+        let(:body) { { en: en_body, machine_translations: { ca: "Une belle idee" } } }
+        let(:resource) do
+          create :extended_proposal,
+                 component: proposal_component,
+                 title: { en: "A nice proposal", machine_translations: { ca: "Une belle idee" } },
+                 body: body
         end
+
+        let(:en_version) { subject.resource_text["en"] }
+        let(:machine_translated) { subject.resource_text["machine_translations"]["ca"] }
+        let(:translatable) { true }
+
+        it_behaves_like "a translated event"
       end
     end
   end
