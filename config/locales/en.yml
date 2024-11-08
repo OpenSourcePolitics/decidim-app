@@ -147,11 +147,11 @@ en:
         exports:
           awesome_private_proposals: Proposals with private fields
           proposal_comments: Comments
-      notifications:
-        proposal_published:
-          title: "Your proposal %{proposal_title} has been published!"
-          body: "Your proposal is now live. View it here: %{proposal_link}"
-          subject: "Your proposal has been published!"
+      author_confirmation_proposal_event:
+        email_intro: 'Your proposal "%{resource_title}" was successfully received and is now public. Thank you for participating! You can view it here: <a href="%{resource_path}">%{resource_title}</a>.'
+        email_outro: You received this notification because you are the author of the proposal. You can unfollow it by visiting the proposal page ("%{resource_title}") and clicking on "Unfollow".
+        email_subject: Your proposal has been published!
+        notification_title: Your proposal <a href="%{resource_path}">%{resource_title}</a> is now live.
       collaborative_drafts:
         new:
           add_file: Add file
