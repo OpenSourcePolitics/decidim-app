@@ -17,34 +17,34 @@ module Decidim
 
       describe "resource_text" do
         it "returns the proposal body" do
-          expect(subject.resource_text).to eq(resource.body)
+          expect(subject.resource_text).to be(resource.body)
         end
       end
 
       describe "email_subject" do
         it "matches the expected translation" do
-          expect(subject.email_subject).to eq("Your proposal has been published!")
+          expect(subject.email_subject).to be("Your proposal has been published!")
         end
       end
 
       describe "email_intro" do
         it "matches the expected translation" do
           expected_intro = "Your proposal \"#{resource_title}\" was successfully received and is now public. Thank you for participating! Here it is: <a href=\"#{resource_path}\">#{resource_title}</a>."
-          expect(subject.email_intro).to eq(expected_intro)
+          expect(subject.email_intro).to be(expected_intro)
         end
       end
 
       describe "email_outro" do
         it "matches the expected translation" do
           expected_outro = "You have received this notification because you are the author of the proposal. You can unfollow it by going to the proposal page (\"#{resource_title}\") and clicking on \"Unfollow\"."
-          expect(subject.email_outro).to eq(expected_outro)
+          expect(subject.email_outro).to be(expected_outro)
         end
       end
 
       describe "notification_title" do
         it "matches the expected translation" do
           expected_title = "Your proposal <a href=\"#{resource_path}\">#{resource_title}</a> is now live."
-          expect(subject.notification_title).to eq(expected_title)
+          expect(subject.notification_title).to be(expected_title)
         end
       end
 
