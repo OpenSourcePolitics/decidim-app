@@ -80,11 +80,11 @@ fr:
           email_subject: La pétition "%{resource_title}" a reçu une réponse.
           notification_title: La pétition <a href="%{resource_path}">%{resource_title}</a> a reçu une réponse.
       proposals:
-        proposal_published_event:
-          email_intro: 'que vous suivez, a publié une nouvelle proposition appelée "%{resource_title}". Découvrez-le et contribuez:'
-          email_outro: Vous avez reçu cette notification car vous suivez . Si vous souhaitez vous désabonner des notifications, connectez-vous à la plateforme, puis rendez-vous dans l'onglet “Mon compte” > “Paramètres des notifications”.
-          email_subject: Nouvelle proposition "%{resource_title}" publiée
-          notification_title: La proposition <a href="%{resource_path}">%{resource_title}</a> a été publiée.
+        author_confirmation_proposal_event:
+          email_intro: 'Votre proposition "%{resource_title}" a été reçue avec succès et est maintenant publique. Merci pour votre participation! Vous pouvez la consulter ici : <a href="%{resource_path}">%{resource_title}</a>.'
+          email_outro: Vous recevez cette notification car vous êtes l’auteur de la proposition. Vous pouvez vous désabonner en visitant la page de la proposition ("%{resource_title}") et en cliquant sur "Ne plus suivre".
+          email_subject: Votre proposition a été publiée !
+          notification_title: Votre proposition <a href="%{resource_path}">%{resource_title}</a> est maintenant en ligne.
       users:
         user_officialized:
           email_intro: Le participant %{name} (%{nickname}) a été officialisé.
@@ -155,11 +155,6 @@ fr:
         exports:
           awesome_private_proposals: Propositions avec champs privés
           proposal_comments: Commentaires
-      author_confirmation_proposal_event:
-        email_intro: 'Votre proposition "%{resource_title}" a été reçue avec succès et est maintenant publique. Merci pour votre participation! Vous pouvez la consulter ici : <a href="%{resource_path}">%{resource_title}</a>.'
-        email_outro: Vous recevez cette notification car vous êtes l’auteur de la proposition. Vous pouvez vous désabonner en visitant la page de la proposition ("%{resource_title}") et en cliquant sur "Ne plus suivre".
-        email_subject: Votre proposition a été publiée !
-        notification_title: Votre proposition <a href="%{resource_path}">%{resource_title}</a> est maintenant en ligne.
       collaborative_drafts:
         new:
           add_file: Ajouter le fichier
