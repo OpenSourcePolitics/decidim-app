@@ -107,3 +107,7 @@ RSpec/MultipleMemoizedHelpers:
 
 RSpec/AnyInstance:
   Enabled: false
+
+RSpec/BeEq:
+  Exclude:
+    - spec/events/decidim/proposals/author_confirmation_proposal_event_spec.rb
