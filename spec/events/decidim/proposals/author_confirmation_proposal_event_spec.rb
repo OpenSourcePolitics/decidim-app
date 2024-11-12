@@ -5,10 +5,12 @@ require "spec_helper"
 module Decidim
   module Proposals
     describe AuthorConfirmationProposalEvent do
+      include Decidim::TranslatableAttributes
+      
       let(:resource) { create :extended_proposal }
       let(:participatory_process) { create :participatory_process, organization: organization }
       let(:proposal_component) { create(:extended_proposal_component, participatory_space: participatory_process) }
-      let(:resource_title) { decidim_sanitize_translated(resource.title) }
+      let(:resource_title) { decidim_sanitize(translated_attribute(resource.title)) }
       let(:event_name) { "decidim.events.proposals.author_confirmation_proposal_event" }
 
       include_context "when a simple event"
