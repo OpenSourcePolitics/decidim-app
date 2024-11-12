@@ -50,7 +50,9 @@ module Decidim::Admin
             event: "decidim.events.attachments.attachment_created",
             event_class: Decidim::AttachmentCreatedEvent,
             resource: kind_of(Decidim::Attachment),
-            followers: [follower]
+            followers: [follower],
+            extra: { force_email: true },
+            force_send: true
           )
 
         subject

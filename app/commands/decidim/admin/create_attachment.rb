@@ -62,7 +62,9 @@ module Decidim
           event: "decidim.events.attachments.attachment_created",
           event_class: Decidim::AttachmentCreatedEvent,
           resource: @attachment,
-          followers: @attachment.attached_to.followers
+          followers: @attachment.attached_to.followers,
+          extra: { force_email: true },
+          force_send: true
         )
       end
 
