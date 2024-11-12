@@ -5,23 +5,23 @@ shared_examples_for "a translated event" do
     let(:organization) { create(:organization, enable_machine_translations: false, machine_translation_display_priority: "original") }
 
     it "does not perform translation" do
-      expect(subject.perform_translation?).to eq(false)
+      expect(subject.perform_translation?).to be(false)
     end
 
     it "does not have a missing translation" do
-      expect(subject.translation_missing?).to eq(false)
+      expect(subject.translation_missing?).to be(false)
     end
 
     it "does have content available in multiple languages" do
-      expect(subject.content_in_same_language?).to eq(false)
+      expect(subject.content_in_same_language?).to be(false)
     end
 
     it "does return the original language" do
-      expect(subject.safe_resource_text).to eq(en_version)
+      expect(subject.safe_resource_text).to be(en_version)
     end
 
     it "does not offer an alternate translation" do
-      expect(subject.safe_resource_translated_text).to eq(en_version)
+      expect(subject.safe_resource_translated_text).to be(en_version)
     end
   end
 
@@ -36,46 +36,46 @@ shared_examples_for "a translated event" do
       let(:organization) { create(:organization, enable_machine_translations: true, machine_translation_display_priority: "original") }
 
       it "does perform translation" do
-        expect(subject.perform_translation?).to eq(translatable)
+        expect(subject.perform_translation?).to be(translatable)
       end
 
       it "does not have a missing translation" do
-        expect(subject.translation_missing?).to eq(false)
+        expect(subject.translation_missing?).to be(false)
       end
 
       it "does have content available in multiple languages" do
-        expect(subject.content_in_same_language?).to eq(false)
+        expect(subject.content_in_same_language?).to be(false)
       end
 
       it "does return the original language" do
-        expect(subject.safe_resource_text).to eq(en_version)
+        expect(subject.safe_resource_text).to be(en_version)
       end
 
       it "does not offer an alternate translation" do
-        expect(subject.safe_resource_translated_text).to eq(machine_translated)
+        expect(subject.safe_resource_translated_text).to be(machine_translated)
       end
 
       context "when translation is not available" do
         let(:body) { { en: en_body } }
 
         it "does perform translation" do
-          expect(subject.perform_translation?).to eq(translatable)
+          expect(subject.perform_translation?).to be(translatable)
         end
 
         it "does have a missing translation" do
-          expect(subject.translation_missing?).to eq(translatable)
+          expect(subject.translation_missing?).to be(translatable)
         end
 
         it "does have content available in multiple languages" do
-          expect(subject.content_in_same_language?).to eq(false)
+          expect(subject.content_in_same_language?).to be(false)
         end
 
         it "does return the original language" do
-          expect(subject.safe_resource_text).to eq(en_version)
+          expect(subject.safe_resource_text).to be(en_version)
         end
 
         it "does not offer an alternate translation" do
-          expect(subject.safe_resource_translated_text).to eq(en_version)
+          expect(subject.safe_resource_translated_text).to be(en_version)
         end
       end
     end
@@ -84,46 +84,46 @@ shared_examples_for "a translated event" do
       let(:organization) { create(:organization, enable_machine_translations: true, machine_translation_display_priority: "translation") }
 
       it "does perform translation" do
-        expect(subject.perform_translation?).to eq(translatable)
+        expect(subject.perform_translation?).to be(translatable)
       end
 
       it "does not have a missing translation" do
-        expect(subject.translation_missing?).to eq(false)
+        expect(subject.translation_missing?).to be(false)
       end
 
       it "does have content available in multiple languages" do
-        expect(subject.content_in_same_language?).to eq(false)
+        expect(subject.content_in_same_language?).to be(false)
       end
 
       it "does return the original language" do
-        expect(subject.safe_resource_text).to eq(en_version)
+        expect(subject.safe_resource_text).to be(en_version)
       end
 
       it "does not offer an alternate translation" do
-        expect(subject.safe_resource_translated_text).to eq(machine_translated)
+        expect(subject.safe_resource_translated_text).to be(machine_translated)
       end
 
       context "when translation is not available" do
         let(:body) { { en: en_body } }
 
         it "does perform translation" do
-          expect(subject.perform_translation?).to eq(translatable)
+          expect(subject.perform_translation?).to be(translatable)
         end
 
         it "does have a missing translation" do
-          expect(subject.translation_missing?).to eq(translatable)
+          expect(subject.translation_missing?).to be(translatable)
         end
 
         it "does have content available in multiple languages" do
-          expect(subject.content_in_same_language?).to eq(false)
+          expect(subject.content_in_same_language?).to be(false)
         end
 
         it "does return the original language" do
-          expect(subject.safe_resource_text).to eq(en_version)
+          expect(subject.safe_resource_text).to be(en_version)
         end
 
         it "does not offer an alternate translation" do
-          expect(subject.safe_resource_translated_text).to eq(en_version)
+          expect(subject.safe_resource_translated_text).to be(en_version)
         end
       end
     end
