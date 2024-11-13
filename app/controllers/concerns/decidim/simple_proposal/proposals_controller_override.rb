@@ -103,9 +103,9 @@ module Decidim
             end
           end
         end
+
         # Overridden because of a core bug when the command posts the "invalid"
         # signal and when rendering the form.
-
         def update_draft
           enforce_permission_to :edit, :proposal, proposal: @proposal
           @step = Decidim::Proposals::ProposalsController::STEP1
