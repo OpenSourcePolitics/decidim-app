@@ -23,6 +23,7 @@ gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
 gem "decidim-cache_cleaner"
 gem "decidim-category_enhanced", "~> 0.0.1"
+gem "decidim-cleaner"
 gem "decidim-custom_proposal_states", git: "https://github.com/alecslupu-pfa/decidim-module-custom_proposal_states", branch: DECIDIM_BRANCH
 gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: DECIDIM_BRANCH
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
@@ -34,10 +35,11 @@ gem "decidim-half_signup", git: "https://github.com/OpenSourcePolitics/decidim-m
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: "release/0.27-stable"
 gem "decidim-simple_proposal", git: "https://github.com/OpenSourcePolitics/decidim-module-simple_proposal", branch: DECIDIM_BRANCH
-gem "decidim-spam_detection"
+gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git", tag: "4.1.1"
 gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "fix/email_with_precompile"
 
+gem "decidim-guest_meeting_registration", git: "https://github.com/alecslupu-pfa/guest-meeting-registration.git", branch: DECIDIM_BRANCH, ref: "532de9e"
 # Omniauth gems
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
 gem "omniauth_openid_connect"
@@ -84,9 +86,6 @@ group :production do
   gem "health_check", "~> 3.1"
   gem "lograge"
   gem "sendgrid-ruby"
-  gem "sentry-rails"
-  gem "sentry-ruby"
-  gem "sentry-sidekiq"
   gem "sidekiq", "~> 6.0"
   gem "sidekiq-scheduler", "~> 5.0"
 end

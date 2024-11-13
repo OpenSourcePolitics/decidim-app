@@ -32,6 +32,11 @@
       cron: '0 <%= Random.rand(0..59) %> <%= Random.rand(6..8) %> * * *' # Run randomly between 06:00 and 08:59
       class: Decidim::SpamDetection::MarkUsersJob
       queue: scheduled
+    SpamBotBlockUsers:
+      cron: '0 <%= Random.rand(0..59) %> <%= Random.rand(6..8) %> * * *' # Run randomly between 06:00 and 08:59
+      class: Decidim::SpamDetection::BlockUsersJob
+      queue: default
+      enabled: false
     Backup:
       cron: '0 <%= Random.rand(0..59) %> <%= Random.rand(2..3) %> * * *' # Run randomly between 02:00 and 03:59
       class: BackupJob
@@ -58,3 +63,15 @@
       cron: '0 1 * * *'
       class: NotifyProgressInitiatives
       queue: initiatives
+    CleanAdminLogs:
+      cron: "0 9 0 * * *"
+      class: Decidim::Cleaner::CleanAdminLogsJob
+      queue: scheduled
+    CleanInactiveUsers:
+      cron: "0 9 0 * * *"
+      class: Decidim::Cleaner::CleanInactiveUsersJob
+      queue: scheduled
+    CleanDeletedUsersData:
+      cron: "0 9 0 * * *"
+      class: Decidim::Cleaner::CleanDeletedUsersDataJob
+      queue: scheduled
