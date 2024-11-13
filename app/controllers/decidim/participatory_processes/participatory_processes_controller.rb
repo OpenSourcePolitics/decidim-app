@@ -136,7 +136,7 @@ module Decidim
       def custom_sort(date)
         case date
         when "active"
-          @participatory_processes.where.not(end_date: nil).sort_by(&:end_date) + @participatory_processes.where(end_date: nil)
+          @participatory_processes.reject { |process| process.end_date.nil? }.sort_by(&:end_date) + processes_without_end_date(@participatory_processes)
         when "past"
           @participatory_processes.sort_by(&:end_date).reverse
         when "upcoming"
@@ -149,10 +149,15 @@ module Decidim
       end
 
       def sort_all_processes
-        actives = @participatory_processes.where.not(end_date: nil).select(&:active?).sort_by(&:end_date) + @participatory_processes.where(end_date: nil).select(&:active?)
+        actives = @participatory_processes.select { |process| process.active? && !process.end_date.nil? }.sort_by(&:end_date) +
+                  processes_without_end_date(@participatory_processes).select(&:active?)
         pasts = @participatory_processes.select(&:past?).sort_by(&:end_date).reverse
         upcomings = @participatory_processes.select(&:upcoming?).sort_by(&:start_date)
         (actives + upcomings + pasts)
+      end
+
+      def processes_without_end_date(processes)
+        processes.select { |process| process.end_date.nil? }
       end
     end
   end

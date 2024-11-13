@@ -151,7 +151,7 @@ module Decidim
 
           it "includes only participatory processes related to the assembly, actives one by end_date with end_date nil last, then upcoming ones by start_date then past ones by end_date reversed" do
             sorted_participatory_processes = {
-              active: participatory_processes.reject { |process| process.end_date.nil? }.select(&:active?).sort_by(&:end_date) + participatory_processes.select { |process| process.end_date.nil? && process.active? },
+              active: participatory_processes.select { |process| process.active? && !process.end_date.nil? }.sort_by(&:end_date) + participatory_processes.select { |process| process.active? && process.end_date.nil? },
               future: participatory_processes.select(&:upcoming?).sort_by(&:start_date),
               past: participatory_processes.select(&:past?).sort_by(&:end_date).reverse
             }
