@@ -12,9 +12,7 @@ namespace :active_storage do
         Rails.logger.info "Terminating task..."
       else
         Rails.logger.info "Found #{blobs.count} orphan blobs !"
-
-        ActiveStorage::Blob.where.not(id: ActiveStorage::Attachment.select(:blob_id)).find_each(&:purge)
-
+        blobs.each(&:purge)
         Rails.logger.info "Task terminated !"
       end
     end
