@@ -12,7 +12,7 @@ module Decidim
       translatable_attribute :description, String
       attribute :weight, Integer, default: 0
       attribute :attachment_collection_id, Integer
-      attribute :send_notification, Boolean, default: false
+      attribute :send_notification_to_followers, Boolean, default: false
 
       mimic :attachment
 

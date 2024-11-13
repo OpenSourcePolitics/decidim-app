@@ -16,6 +16,9 @@ en:
         file: importing file
   decidim:
     admin:
+      attachments:
+        form:
+          send_notification_to_followers: Send a notification to all the people following the consultation who have agreed to receive email notifications
       exports:
         export_as: "%{name} as %{export_format}"
         notice: Your export is currently in progress. You'll receive an email when it's complete.
