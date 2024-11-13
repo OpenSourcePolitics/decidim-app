@@ -17,7 +17,7 @@ module Decidim
       subject { described_class.new(resource: resource, event_name: event_name, user: user, user_role: user_role, extra: extra) }
 
       before do
-        allow(subject).to receive(:participatory_space_title).and_return(participatory_process.title["en"])
+        allow(subject).to receive(:participatory_space_title).and_return(participatory_process.title)
       end
 
       describe "email_subject" do
