@@ -55,6 +55,7 @@ module DevelopmentApp
       # Models
       require "extends/models/decidim/budgets/project_extends"
       require "extends/models/decidim/authorization_extends"
+      require "extends/models/decidim/decidim_awesome/proposal_extra_field_extends"
       # Services
       require "extends/services/decidim/iframe_disabler_extends"
       # Helpers
