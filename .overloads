@@ -58,7 +58,6 @@ config/initializers/filter_parameter_logging.rb
 config/initializers/inflections.rb
 config/initializers/mime_types.rb
 config/initializers/new_framework_defaults_5_2.rb
-config/initializers/sentry.rb
 config/initializers/social_share_button.rb
 config/initializers/wrap_parameters.rb
 config/locales/decidim-awesome/fr.yml

@@ -1,20 +1,41 @@
 services:
+  minio:
+    container_name: minio
+    image: "bitnami/minio:latest"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_DEFAULT_BUCKETS=localhost
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    networks:
+      - minio_network
+    volumes:
+      - 'minio:/bitnami/minio/data'
+
   database:
     image: postgres
     volumes:
       - pg-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+    networks:
+      - minio_network
   memcached:
     image: memcached
     ports:
       - "11211:11211"
+    networks:
+      - minio_network
   redis:
     image: redis
     ports:
       - "6379:6379"
     volumes:
       - redis-data:/var/lib/redis/data
+    networks:
+      - minio_network
   sidekiq:
     image: decidim-app:latest
     command: [ "bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml" ]
@@ -26,6 +47,7 @@ services:
       - MEMCACHE_SERVERS=memcached:11211
       - RAILS_SERVE_STATIC_FILES=true
       - RAILS_LOG_TO_STDOUT=true
+      - RAILS_LOG_LEVEL=debug
       - ASSET_HOST=localhost:3000
       - FORCE_SSL=1
       - ENABLE_LETTER_OPENER=1
@@ -41,6 +63,10 @@ services:
       - GEOCODER_LOOKUP_API_KEY=${GEOCODER_LOOKUP_API_KEY}
       - DEFAULT_LOCALE=${DEFAULT_LOCALE}
       - AVAILABLE_LOCALES=${AVAILABLE_LOCALES}
+      - OBJECTSTORE_S3_HOST=minio:9000
+      - SCALEWAY_BUCKET_NAME=localhost
+      - SCALEWAY_ID=minioadmin
+      - SCALEWAY_TOKEN=minioadmin
     depends_on:
       - app
     volumes:
@@ -48,6 +74,8 @@ services:
     links:
       - database
       - redis
+    networks:
+      - minio_network
   app:
     image: decidim-app:latest
     environment:
@@ -58,6 +86,7 @@ services:
       - MEMCACHE_SERVERS=memcached:11211
       - RAILS_SERVE_STATIC_FILES=true
       - RAILS_LOG_TO_STDOUT=true
+      - RAILS_LOG_LEVEL=debug
       - ASSET_HOST=localhost:3000
       - FORCE_SSL=1
       - ENABLE_LETTER_OPENER=1
@@ -73,6 +102,10 @@ services:
       - GEOCODER_LOOKUP_API_KEY=${GEOCODER_LOOKUP_API_KEY}
       - DEFAULT_LOCALE=${DEFAULT_LOCALE}
       - AVAILABLE_LOCALES=${AVAILABLE_LOCALES}
+      - OBJECTSTORE_S3_HOST=minio:9000
+      - SCALEWAY_BUCKET_NAME=localhost
+      - SCALEWAY_ID=minioadmin
+      - SCALEWAY_TOKEN=minioadmin
     volumes:
       - shared-volume:/app
     ports:
@@ -81,8 +114,16 @@ services:
       - database
       - redis
       - memcached
+    networks:
+      - minio_network
+
+networks:
+  minio_network:
+    driver: bridge
 
 volumes:
   shared-volume: { }
   pg-data: { }
   redis-data: { }
+  minio:
+    driver: local
