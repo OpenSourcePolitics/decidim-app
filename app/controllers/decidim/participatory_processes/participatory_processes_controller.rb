@@ -149,8 +149,8 @@ module Decidim
       end
 
       def sort_all_processes
-        actives = @participatory_processes.select { |process| process.active? && !process.end_date.nil? }.sort_by(&:end_date) +
-                  processes_without_end_date(@participatory_processes).select(&:active?)
+        @actives_processes ||= @participatory_processes.select(&:active?)
+        actives = @actives_processes.reject { |process| process.end_date.nil? }.sort_by(&:end_date) + processes_without_end_date(@actives_processes)
         pasts = @participatory_processes.select(&:past?).sort_by(&:end_date).reverse
         upcomings = @participatory_processes.select(&:upcoming?).sort_by(&:start_date)
         (actives + upcomings + pasts)

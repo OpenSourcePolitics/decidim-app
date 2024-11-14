@@ -89,9 +89,9 @@ module Decidim
           @assembly_participatory_processes ||= @current_participatory_space.linked_participatory_space_resources(:participatory_processes, "included_participatory_processes")
         else
           @assembly_participatory_processes = @current_participatory_space.linked_participatory_space_resources(:participatory_processes, "included_participatory_processes")
+          @active_processes ||= @assembly_participatory_processes.select(&:active?)
           sorted_by_date = {
-            active: @assembly_participatory_processes.select { |process| process.active? && !process.end_date.nil? }.sort_by(&:end_date) +
-                    active_processes_without_end_date(@assembly_participatory_processes),
+            active: @active_processes.reject { |process| process.end_date.nil? }.sort_by(&:end_date) + processes_without_end_date(@active_processes),
             future: @assembly_participatory_processes.upcoming.sort_by(&:start_date),
             past: @assembly_participatory_processes.past.sort_by(&:end_date).reverse
           }
@@ -103,8 +103,8 @@ module Decidim
         @current_assemblies_settings ||= Decidim::AssembliesSetting.find_or_create_by(decidim_organization_id: current_organization.id)
       end
 
-      def active_processes_without_end_date(processes)
-        processes.select { |process| process.active? && process.end_date.nil? }
+      def processes_without_end_date(processes)
+        processes.select { |process| process.end_date.nil? }
       end
     end
   end
