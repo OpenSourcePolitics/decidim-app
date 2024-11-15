@@ -41,8 +41,8 @@ fr:
         update:
           error: Il y a eu une erreur lors de la mise à jour du secteur.
           success: Secteur mis à jour avec succès.
-        titles:
-          scopes: Secteurs
+      titles:
+        scopes: Secteurs
     amendments:
       emendation:
         announcement:

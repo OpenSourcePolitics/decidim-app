@@ -22,14 +22,14 @@ en:
         confirm_destroy: Confirm destroy
         destroy: Destroy
         edit: Edit
+      exports:
+        export_as: "%{name} as %{export_format}"
+        notice: Your export is currently in progress. You'll receive an email when it's complete.
       models:
         scope:
           fields:
             name: Name
             scope_type: Scope type
-      exports:
-        export_as: "%{name} as %{export_format}"
-        notice: Your export is currently in progress. You'll receive an email when it's complete.
       participatory_space_private_users:
         create:
           error: Error
@@ -39,8 +39,8 @@ en:
         update:
           error: Il y a eu une erreur lors de la mise à jour du secteur.
           success: Secteur mis à jour avec succès.
-        titles:
-          scopes: Scopes
+      titles:
+        scopes: Scopes
     amendments:
       emendation:
         announcement:
