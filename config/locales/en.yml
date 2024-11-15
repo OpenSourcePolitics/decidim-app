@@ -16,6 +16,17 @@ en:
         file: importing file
   decidim:
     admin:
+      actions:
+        add: Add
+        browse: Browse
+        confirm_destroy: Confirm destroy
+        destroy: Destroy
+        edit: Edit
+      models:
+        scope:
+          fields:
+            name: Name
+            scope_type: Scope type
       exports:
         export_as: "%{name} as %{export_format}"
         notice: Your export is currently in progress. You'll receive an email when it's complete.
@@ -23,6 +34,13 @@ en:
         create:
           error: Error
           success: Success
+      scopes:
+        no_scopes: Aucun secteur à ce niveau.
+        update:
+          error: Il y a eu une erreur lors de la mise à jour du secteur.
+          success: Secteur mis à jour avec succès.
+        titles:
+          scopes: Scopes
     amendments:
       emendation:
         announcement:

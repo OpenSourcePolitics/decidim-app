@@ -16,15 +16,33 @@ fr:
         file: importer un fichier d'utilisateurs
   decidim:
     admin:
+      actions:
+        add: Ajouter
+        browse: Naviguer
+        confirm_destroy: Confirmer la suppression
+        destroy: Supprimer
+        edit: Modifier
       exports:
         export_as: "%{name} au format %{export_format}"
         notice: Votre exportation est en cours. Vous recevrez un e-mail quand elle sera terminée.
       menu:
         admin_accountability: Admin accountability
+      models:
+        scope:
+          fields:
+            name: Nom
+            scope_type: Type de secteur
       participatory_space_private_users:
         create:
           error: Erreur
           success: Succès
+      scopes:
+        no_scopes: Aucun secteur à ce niveau.
+        update:
+          error: Il y a eu une erreur lors de la mise à jour du secteur.
+          success: Secteur mis à jour avec succès.
+        titles:
+          scopes: Secteurs
     amendments:
       emendation:
         announcement:
