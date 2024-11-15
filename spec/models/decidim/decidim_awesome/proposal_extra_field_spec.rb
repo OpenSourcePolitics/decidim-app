@@ -8,8 +8,14 @@ module Decidim::DecidimAwesome
 
     let(:extra_fields) { create(:awesome_proposal_extra_fields, proposal: create(:extended_proposal)) }
     let(:proposal) { create(:extended_proposal) }
+    let(:component) { create(:component, settings: { awesome_voting_manifest: "default" }) }
 
     it { is_expected.to be_valid }
+
+    before do
+      create(:proposal_vote, proposal: proposal, weight: 1)
+      create(:proposal_vote, proposal: proposal, weight: 2)
+    end
 
     it "has a proposal associated" do
       expect(extra_fields.proposal).to be_a(Decidim::Proposals::Proposal)
