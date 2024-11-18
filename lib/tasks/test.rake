@@ -6,5 +6,6 @@ namespace :test do
     system("RAILS_ENV=test bundle exec rake db:drop")
     system("RAILS_ENV=test bundle exec rake db:create")
     system("RAILS_ENV=test bundle exec rake db:migrate")
+    system("RAILS_ENV=test bundle exec rails shakapacker:compile")
   end
 end

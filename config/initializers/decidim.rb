@@ -15,7 +15,7 @@ Decidim.configure do |config|
   # config.available_locales = Rails.application.secrets.decidim[:available_locales].presence || [:en]
   # Or block set it up manually and prevent ENV manipulation:
   config.available_locales = if Rails.env.test?
-                                %w[en fr ca es]
+                               %w(en fr ca es)
                              else
                                Rails.application.secrets.decidim[:available_locales].presence || %(en fr)
                              end
@@ -238,7 +238,7 @@ Decidim.configure do |config|
   #   end
   # end
   #
-  config.sms_gateway_service = 'Decidim::Verifications::Sms::ExampleGateway'
+  config.sms_gateway_service = "Decidim::Verifications::Sms::ExampleGateway"
 
   # Timestamp service configuration
   #
@@ -347,7 +347,7 @@ Decidim.configure do |config|
   #   end
   # end
   #
-  config.machine_translation_service = 'Decidim::Dev::DummyTranslator'
+  config.machine_translation_service = "Decidim::Dev::DummyTranslator"
 
   # Defines the social networking services used for social sharing
   config.social_share_services = Rails.application.secrets.decidim[:social_share_services]

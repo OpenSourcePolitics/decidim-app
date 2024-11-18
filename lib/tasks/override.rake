@@ -5,7 +5,7 @@ namespace :override do
   # Add FILE_PATH to the command line to find the original spec file
   # Example: rake override:find FILE_PATH=spec/controllers/registrations_controller_spec.rb
   task rspec: :environment do
-    file_path = ENV["file"]
+    file_path = ENV.fetch("file", nil)
 
     src = Bundler.locked_gems.sources.select { |source| source.respond_to?(:ref) }.first
     path = src&.path&.to_s
@@ -20,7 +20,7 @@ namespace :override do
       puts "Found file in path: #{file}"
 
       path = File.dirname(file_path)
-      FileUtils.mkdir_p(path) unless Dir.exist?(path)
+      FileUtils.mkdir_p(path)
       File.open(file_path, "w") do |f|
         content = File.read(file)
         f.write(content)

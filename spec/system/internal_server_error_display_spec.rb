@@ -21,7 +21,7 @@ describe "Internal server error display" do
     Decidim.send(:remove_const, :HomepageController) if Decidim.const_defined?(:HomepageController)
     Decidim.const_set(:HomepageController, controller)
     switch_to_host(organization.host)
-    allow(Time).to receive(:current).and_return("01/01/2022 - 12:00".to_time)
+    allow(Time).to receive(:current).and_return(Time.zone.parse("01/01/2022 - 12:00"))
   end
 
   after do

@@ -21,3 +21,7 @@ AllCops:
     - "db/schema.rb"
     - "db/migrate/*"
     - "vendor/**/*"
+
+RSpec/NoExpectationExample:
+  Exclude:
+    - "spec/controllers/registrations_controller_spec.rb"
