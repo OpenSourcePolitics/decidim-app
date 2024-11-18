@@ -35,10 +35,10 @@ en:
           error: Error
           success: Success
       scopes:
-        no_scopes: Aucun secteur à ce niveau.
+        no_scopes: No scopes at this level.
         update:
-          error: Il y a eu une erreur lors de la mise à jour du secteur.
-          success: Secteur mis à jour avec succès.
+          error: There was a problem updating this scope.
+          success: Scope updated successfully
       titles:
         scopes: Scopes
     amendments:
