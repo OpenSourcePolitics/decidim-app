@@ -50,4 +50,4 @@
 
 
 # Ignore Tailwind configuration
-tailwind.config.js
+tailwind.config.jspublic/sw.js*

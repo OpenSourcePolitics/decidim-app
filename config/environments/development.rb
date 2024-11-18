@@ -80,6 +80,9 @@ Rails.application.configure do
     # Logging
     config.log_level = :info
     config.action_view.logger = nil
+
+    config.log_tags = [:uuid, :remote_ip]
+
     # Compress the HTML responses with gzip
     config.middleware.use Rack::Deflater
   end
