@@ -146,11 +146,12 @@ module Decidim
         context "when sort_by_date variable is true" do
           before do
             allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
+            active_processes.first.update(end_date: nil)
           end
 
-          it "includes only participatory processes related to the assembly, actives one by end_date then upcoming ones by start_date then past ones by end_date reversed" do
+          it "includes only participatory processes related to the assembly, actives one by end_date with end_date nil last, then upcoming ones by start_date then past ones by end_date reversed" do
             sorted_participatory_processes = {
-              active: participatory_processes.select(&:active?).sort_by(&:end_date),
+              active: participatory_processes.select { |process| process.active? && !process.end_date.nil? }.sort_by(&:end_date) + participatory_processes.select { |process| process.active? && process.end_date.nil? },
               future: participatory_processes.select(&:upcoming?).sort_by(&:start_date),
               past: participatory_processes.select(&:past?).sort_by(&:end_date).reverse
             }

@@ -108,10 +108,10 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-spam_detection.git
-  revision: fb2ee4624b728ce6f73603bfb84eda1d9b4e04d4
-  tag: 4.1.1
+  revision: 5e4f92f19b903228b8349fb002d735e900d63ed4
+  tag: 4.1.2
   specs:
-    decidim-spam_detection (4.1.1)
+    decidim-spam_detection (4.1.2)
       decidim-core (~> 0.27.0)
 
 GIT
@@ -1226,4 +1226,4 @@ RUBY VERSION
    ruby 3.0.6p216
 
 BUNDLED WITH
-   2.5.10
+   2.5.22
