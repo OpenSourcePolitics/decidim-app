@@ -199,6 +199,7 @@ module Decidim::DecidimAwesome
       let!(:votes) do
         vote = create(:proposal_vote, proposal: proposal, author: create(:user, organization: proposal.organization))
         create(:awesome_vote_weight, vote: vote, weight: 1)
+        vote.update(weight: 1)
       end
       let!(:other_votes) do
         vote = create(:proposal_vote, proposal: another_proposal, author: create(:user, organization: proposal.organization))
