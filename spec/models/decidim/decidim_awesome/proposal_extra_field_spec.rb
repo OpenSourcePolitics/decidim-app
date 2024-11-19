@@ -222,15 +222,10 @@ module Decidim::DecidimAwesome
         end
 
         it "returns all vote weights for a component" do
-          allow(component.settings).to receive(:awesome_voting_manifest).and_return("default")
           expect(proposal.reload.extra_fields.vote_weight_totals).to eq({ "3" => 1, "4" => 1 })
-          # update_vote_weights!
-          proposal.update_vote_weights!
-          # puts "Vote Weights After Update: #{proposal.vote_weights}"
-          # puts "Vote Weight Totals: #{proposal.extra_fields.vote_weight_totals}"
           expect(proposal.vote_weights).to eq({ "1" => 0, "2" => 0 })
           proposal.update_vote_weights!
-          expect(proposal.vote_weights).to eq({ "1" => 1, "2" => 0 })
+          expect(proposal.reload.vote_weights).to eq({ "1" => 1, "2" => 0 })
           expect(another_proposal.reload.vote_weights).to eq({ "1" => 0, "2" => 1 })
           expect(proposal.extra_fields.vote_weight_totals).to eq({ "1" => 1 })
           expect(another_proposal.extra_fields.vote_weight_totals).to eq({ "2" => 1 })
