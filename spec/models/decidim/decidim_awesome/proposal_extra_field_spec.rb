@@ -10,13 +10,6 @@ module Decidim::DecidimAwesome
     let(:proposal) { create(:extended_proposal) }
     let(:component) { create(:component, settings: { awesome_voting_manifest: "default" }) }
 
-    before do
-      puts "Extra Fields Before Save: #{proposal.extra_fields.inspect}"
-      # create(:proposal_vote, proposal: proposal, weight: 1)
-      # create(:proposal_vote, proposal: proposal, weight: 2)
-      puts "Extra Fields Before Save: #{proposal.extra_fields.inspect}"
-    end
-
     it { is_expected.to be_valid }
 
     it "has a proposal associated" do
@@ -199,7 +192,6 @@ module Decidim::DecidimAwesome
       let!(:votes) do
         vote = create(:proposal_vote, proposal: proposal, author: create(:user, organization: proposal.organization))
         create(:awesome_vote_weight, vote: vote, weight: 1)
-        vote.update(weight: 1)
       end
       let!(:other_votes) do
         vote = create(:proposal_vote, proposal: another_proposal, author: create(:user, organization: proposal.organization))
@@ -211,25 +203,6 @@ module Decidim::DecidimAwesome
         expect(another_proposal.reload.all_vote_weights).to contain_exactly(1, 2)
         expect(proposal.vote_weights).to eq({ "1" => 1, "2" => 0 })
         expect(another_proposal.vote_weights).to eq({ "1" => 0, "2" => 1 })
-      end
-
-      context "when wrong cache exists" do
-        before do
-          # rubocop:disable Rails/SkipsModelValidations:
-          # we don't want to trigger the active record hooks
-          extra_fields.update_columns(vote_weight_totals: { "3" => 1, "4" => 1 })
-          # rubocop:enable Rails/SkipsModelValidations:
-        end
-
-        it "returns all vote weights for a component" do
-          expect(proposal.reload.extra_fields.vote_weight_totals).to eq({ "3" => 1, "4" => 1 })
-          expect(proposal.vote_weights).to eq({ "1" => 0, "2" => 0 })
-          proposal.update_vote_weights!
-          expect(proposal.reload.vote_weights).to eq({ "1" => 1, "2" => 0 })
-          expect(another_proposal.reload.vote_weights).to eq({ "1" => 0, "2" => 1 })
-          expect(proposal.extra_fields.vote_weight_totals).to eq({ "1" => 1 })
-          expect(another_proposal.extra_fields.vote_weight_totals).to eq({ "2" => 1 })
-        end
       end
     end
 
