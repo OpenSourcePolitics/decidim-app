@@ -184,25 +184,10 @@ module Decidim::DecidimAwesome
       end
     end
 
-    describe "all_vote_weights" do
-      let!(:extra_fields) { create(:awesome_proposal_extra_fields, proposal: proposal) }
-      let!(:another_extra_fields) { create(:awesome_proposal_extra_fields, proposal: another_proposal) }
-      let!(:unrelated_another_extra_fields) { create(:awesome_proposal_extra_fields, :with_votes, proposal: create(:extended_proposal)) }
-      let(:another_proposal) { create(:proposal, component: proposal.component) }
-      let!(:votes) do
-        vote = create(:proposal_vote, proposal: proposal, author: create(:user, organization: proposal.organization))
-        create(:awesome_vote_weight, vote: vote, weight: 1)
-      end
-      let!(:other_votes) do
-        vote = create(:proposal_vote, proposal: another_proposal, author: create(:user, organization: proposal.organization))
-        create(:awesome_vote_weight, vote: vote, weight: 2)
-      end
-
-      it "returns all vote weights for a component" do
-        expect(proposal.reload.all_vote_weights).to contain_exactly(1, 2)
-        expect(another_proposal.reload.all_vote_weights).to contain_exactly(1, 2)
-        expect(proposal.vote_weights).to eq({ "1" => 1, "2" => 0 })
-        expect(another_proposal.vote_weights).to eq({ "1" => 0, "2" => 1 })
+    describe "weighted_proposal_voting_enabled" do
+      it "is disabled by default" do
+        default_value = Rails.application.secrets.dig(:decidim, :decidim_awesome, :weighted_proposal_voting_enabled)
+        expect(default_value).to eq("disabled")
       end
     end
 
