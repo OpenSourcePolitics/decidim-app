@@ -137,11 +137,12 @@ module Decidim
           context "and sort_by_date is true" do
             before do
               allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
+              active_processes.first.update(end_date: nil)
             end
             # search.with_date will default to "active"
 
             it "orders active processes by end date" do
-              expect(controller.helpers.participatory_processes).to eq(active_processes.sort_by(&:end_date))
+              expect(controller.helpers.participatory_processes).to eq(active_processes.reject { |process| process.end_date.nil? }.sort_by(&:end_date) + active_processes.select { |process| process.end_date.nil? })
             end
           end
         end
