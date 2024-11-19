@@ -195,6 +195,7 @@ fr:
         change: Modifier
         choose: Sélectionner
         currently_selected: Sélectionné
+      prompt: Sélectionnez un périmètre d'application
     shared:
       login_modal:
         close_modal: Fermer

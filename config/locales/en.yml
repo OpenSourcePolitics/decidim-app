@@ -193,6 +193,7 @@ en:
         change: Change
         choose: Choose
         currently_selected: Currently selected
+      prompt: Select a scope
     shared:
       login_modal:
         close_modal: Close modal
