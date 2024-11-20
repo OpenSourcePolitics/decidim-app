@@ -56,12 +56,6 @@ module Decidim
           enforce_permission_to :create, :proposal
           @step = Decidim::Proposals::ProposalsController::STEP1
           @form = form(Decidim::Proposals::ProposalForm).from_params(proposal_creation_params)
-          if proposal_limit_reached?
-            @form.errors.add(:base, I18n.t("decidim.proposals.new.limit_reached"))
-            flash.now[:alert] = I18n.t("proposals.create.error", scope: "decidim")
-            render :new
-            return
-          end
 
           @proposal = Decidim::Proposals::Proposal.new(@form.attributes.except(
             :user_group_id,
@@ -191,17 +185,6 @@ module Decidim
               attachment
             end
           end
-        end
-
-        def proposal_limit_reached?(form = form_proposal_params)
-          proposal_limit = form.current_component.settings.proposal_limit
-          return false if proposal_limit.zero?
-
-          current_user_proposals(form).count >= proposal_limit
-        end
-
-        def current_user_proposals(form)
-          Decidim::Proposals::Proposal.from_author(current_user).where(component: form.current_component).except_withdrawn
         end
       end
     end
