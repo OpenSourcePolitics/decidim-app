@@ -119,8 +119,6 @@ ignore_missing:
  - decidim.term_customizer.admin.actions.*
  - decidim.term_customizer.admin.add_translations.index.*
  - decidim.term_customizer.admin.models.translations.fields.*
- - decidim.proposals.new.limit_reached
- - decidim.proposals.create.error
  - decidim.participatory_processes.admin.participatory_processes.form.*
 
 # Consider these keys used:
