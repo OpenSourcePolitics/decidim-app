@@ -3,6 +3,7 @@
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
+
 gem "decidim-accountability", github: "decidim/decidim", tag: "v0.29.1"
 gem "decidim-admin", github: "decidim/decidim", tag: "v0.29.1"
 gem "decidim-api", github: "decidim/decidim", tag: "v0.29.1"
