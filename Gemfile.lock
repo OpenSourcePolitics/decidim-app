@@ -52,10 +52,10 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
-  revision: dd685166fdf953a11bd6a9e0dac56feca3bd0708
+  revision: 1ff222533cb3e7c30c8112a56c09c217c0530dbc
   branch: release/0.27-stable
   specs:
-    decidim-homepage_interactive_map (2.0.0)
+    decidim-homepage_interactive_map (2.0.1)
       decidim-admin (>= 0.25.0, < 0.28)
       decidim-core (>= 0.25.0, < 0.28)
       decidim-dev (>= 0.25.0, < 0.28)
