@@ -3,7 +3,6 @@
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
-
 gem "decidim-accountability", github: "decidim/decidim", tag: "v0.29.1"
 gem "decidim-admin", github: "decidim/decidim", tag: "v0.29.1"
 gem "decidim-api", github: "decidim/decidim", tag: "v0.29.1"
@@ -23,10 +22,11 @@ gem "decidim-system", github: "decidim/decidim", tag: "v0.29.1"
 gem "decidim-verifications", github: "decidim/decidim", tag: "v0.29.1"
 
 gem "bootsnap", "~> 1.4"
-
 gem "puma", ">= 6.3.1"
 
+gem "dalli"
 gem "dotenv-rails", "~> 2.7"
+gem "letter_opener_web", "~> 2.0"
 gem "spring"
 
 group :development, :test do
@@ -41,7 +41,6 @@ end
 group :development do
   gem "bullet"
   gem "flamegraph"
-  gem "letter_opener_web", "~> 2.0"
   gem "listen", "~> 3.1"
   gem "memory_profiler"
   gem "rack-mini-profiler", require: false

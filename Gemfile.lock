@@ -309,6 +309,7 @@ GEM
     css_parser (1.19.1)
       addressable
     csv (3.3.0)
+    dalli (3.2.8)
     dartsass (1.49.8)
     date (3.4.0)
     date_validator (0.12.0)
@@ -853,6 +854,7 @@ DEPENDENCIES
   brakeman (~> 6.1)
   bullet
   byebug (~> 11.0)
+  dalli
   decidim-accountability!
   decidim-admin!
   decidim-api!
@@ -889,4 +891,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.5.11
+   2.5.22

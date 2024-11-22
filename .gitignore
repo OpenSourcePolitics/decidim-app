@@ -40,14 +40,15 @@
 .rbenv-vars
 
 # Ignore the files and folders generated through Webpack
-/public/decidim-packs
-/public/packs-test
-/public/sw.js
-/public/sw.js.map
+public/decidim-packs
+public/packs-test
+public/sw.js*
+
 
 # Ignore node modules
 /node_modules
 
 
 # Ignore Tailwind configuration
-tailwind.config.jspublic/sw.js*
+tailwind.config.js
+yarn-error.log

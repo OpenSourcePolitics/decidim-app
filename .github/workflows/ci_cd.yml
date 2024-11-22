@@ -97,9 +97,39 @@ jobs:
         shell: "bash"
         env:
           NODE_ENV: test
+  docker_build:
+    name: Test build docker image
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11
+        ports: [ "5432:5432" ]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_PASSWORD: postgres
+    env:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: host.docker.internal
+    steps:
+      - uses: OpenSourcePolitics/build-and-test-images-action@master
+        with:
+          registry: ${{ vars.REGISTRY_ENDPOINT }}
+          namespace: ${{ vars.REGISTRY_NAMESPACE }}
+          image_name: ${{ vars.IMAGE_NAME }}
+          tag: ${{ github.ref }}
+          password: ${{ secrets.TOKEN }}
+          database_username: ${{ env.DATABASE_USERNAME }}
+          database_password: ${{ env.DATABASE_PASSWORD }}
+          database_host: ${{ env.DATABASE_HOST }}
+          push: "true"
   generate_release:
     name: Generate release
-    needs: [lint, zeitwerk, tests]
+    needs: [lint, zeitwerk, tests, docker_build]
     if: "github.ref == 'refs/heads/main'"
     runs-on: ubuntu-latest
     steps:

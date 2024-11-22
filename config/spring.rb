@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+return if Rails.env.production?
+
 require "decidim/spring"
 
 Spring.watch(
