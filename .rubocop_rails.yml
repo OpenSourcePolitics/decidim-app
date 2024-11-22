@@ -89,6 +89,8 @@ Rails/SkipsModelValidations:
   Enabled: true
   Exclude:
     - db/migrate/*.rb
+    - lib/extends/models/decidim/decidim_awesome/proposal_extra_field_extends.rb
+    - spec/lib/tasks/decidim_app/set_decrypted_private_body_task_spec.rb
 
 Rails/Validation:
   Include:
@@ -107,3 +109,7 @@ RSpec/MultipleMemoizedHelpers:
 
 RSpec/AnyInstance:
   Enabled: false
+
+RSpec/BeEq:
+  Exclude:
+    - spec/events/decidim/proposals/author_confirmation_proposal_event_spec.rb

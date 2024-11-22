@@ -110,6 +110,114 @@ module Decidim
         end
       end
 
+      describe "participatory_processes" do
+        context "when there are active processes" do
+          let!(:active_processes) do
+            5.times.map do |i|
+              create(
+                :participatory_process,
+                :published,
+                organization: organization,
+                start_date: Time.zone.now - (i + 5).days,
+                end_date: Time.zone.now + (i + 5).days
+              )
+            end
+          end
+
+          context "and sort_by_date is false" do
+            before do
+              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(false)
+            end
+
+            it "includes active processes without ordering" do
+              expect(controller.helpers.participatory_processes.to_a).to eq(active_processes)
+            end
+          end
+
+          context "and sort_by_date is true" do
+            before do
+              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
+              active_processes.first.update(end_date: nil)
+            end
+            # search.with_date will default to "active"
+
+            it "orders active processes by end date" do
+              expect(controller.helpers.participatory_processes).to eq(active_processes.reject { |process| process.end_date.nil? }.sort_by(&:end_date) + active_processes.select { |process| process.end_date.nil? })
+            end
+          end
+        end
+
+        context "when there are upcoming processes" do
+          let!(:upcoming_processes) do
+            5.times.map do |i|
+              create(
+                :participatory_process,
+                :published,
+                organization: organization,
+                start_date: Time.zone.now + (i + 2).days,
+                end_date: Time.zone.now + (i + 5).days
+              )
+            end
+          end
+
+          context "and sort_by_date is false" do
+            before do
+              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(false)
+            end
+
+            it "includes upcoming processes without ordering" do
+              expect(controller.helpers.participatory_processes.to_a).to eq(upcoming_processes)
+            end
+          end
+
+          context "and sort_by_date is true" do
+            before do
+              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
+            end
+            # search.with_date will default to "upcoming"
+
+            it "orders upcoming processes by start_date" do
+              expect(controller.helpers.participatory_processes).to eq(upcoming_processes.sort_by(&:start_date))
+            end
+          end
+        end
+
+        context "when there are past processes" do
+          let!(:past_processes) do
+            5.times.map do |i|
+              create(
+                :participatory_process,
+                :published,
+                organization: organization,
+                start_date: Time.zone.now - (i + 10).days,
+                end_date: Time.zone.now - (i + 5).days
+              )
+            end
+          end
+
+          context "and sort_by_date is false" do
+            before do
+              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(false)
+            end
+
+            it "includes past processes without ordering" do
+              expect(controller.helpers.participatory_processes.to_a).to eq(past_processes)
+            end
+          end
+
+          context "and sort_by_date is true" do
+            before do
+              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
+            end
+            # search.with_date will default to "past"
+
+            it "orders past processes by reverse end_date" do
+              expect(controller.helpers.participatory_processes).to eq(past_processes.sort_by(&:end_date).reverse)
+            end
+          end
+        end
+      end
+
       describe "GET show" do
         context "when the process is unpublished" do
           it "redirects to sign in path" do

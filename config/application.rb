@@ -30,14 +30,16 @@ module DevelopmentApp
     config.action_dispatch.default_headers = {
       "X-Frame-Options" => "SAMEORIGIN",
       "X-XSS-Protection" => "1; mode=block",
-      "X-Content-Type-Options" => "nosniff"
+      "X-Content-Type-Options" => "nosniff",
+      "X-Download-Options" => "noopen",
+      "X-Permitted-Cross-Domain-Policies" => "none",
+      "Referrer-Policy" => "strict-origin-when-cross-origin"
     }
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-
     config.to_prepare do
       require "extends/helpers/decidim/forms/application_helper_extends"
       require "extends/cells/decidim/forms/step_navigation_cell_extends"
@@ -57,6 +59,8 @@ module DevelopmentApp
       require "extends/controllers/decidim/newsletters_controller_extends"
       require "extends/commands/decidim/admin/destroy_participatory_space_private_user_extends"
       require "extends/controllers/decidim/proposals/proposals_controller_extends"
+      require "extends/forms/decidim/initiatives/initiative_form_extends"
+      require "extends/models/decidim/decidim_awesome/proposal_extra_field_extends"
 
       Decidim::GraphiQL::Rails.config.tap do |config|
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
