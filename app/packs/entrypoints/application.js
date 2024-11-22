@@ -17,3 +17,5 @@
 // Activate Active Storage
 // import * as ActiveStorage from "@rails/activestorage"
 // ActiveStorage.start()
+
+import "src/decidim/admin/reorder_scopes";

@@ -48,7 +48,10 @@ module DevelopmentApp
     config.after_initialize do
       require "extends/controllers/decidim/devise/sessions_controller_extends"
       require "extends/controllers/decidim/editor_images_controller_extends"
+      require "extends/controllers/decidim/admin/scopes_controller_extends"
+      require "extends/controllers/decidim/scopes_controller_extends"
       require "extends/services/decidim/iframe_disabler_extends"
+      require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       require "extends/helpers/decidim/icon_helper_extends"
       require "extends/commands/decidim/initiatives/admin/update_initiative_answer_extends"
       require "extends/controllers/decidim/initiatives/committee_requests_controller_extends"

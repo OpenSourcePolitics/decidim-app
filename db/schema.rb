@@ -1766,6 +1766,7 @@ ActiveRecord::Schema.define(version: 2024_11_18_114335) do
     t.string "code", null: false
     t.integer "part_of", default: [], null: false, array: true
     t.jsonb "geojson"
+    t.integer "weight", default: 0
     t.index ["decidim_organization_id", "code"], name: "index_decidim_scopes_on_decidim_organization_id_and_code", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_scopes_on_decidim_organization_id"
     t.index ["parent_id"], name: "index_decidim_scopes_on_parent_id"
