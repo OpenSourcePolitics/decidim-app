@@ -94,6 +94,41 @@ describe "Participatory Processes", type: :system do
 
       it_behaves_like "accessible page"
 
+      context "when emitter is defined", :slow do
+        context "when no emitter" do
+          it "doesn't displays logo or text" do
+            within "#participatory_process_#{promoted_process.id}" do
+              expect(page).not_to have_css(".emitter-header")
+            end
+          end
+        end
+
+        context "when emitter" do
+          let(:base_process) do
+            create(
+              :participatory_process,
+              :active,
+              :with_emitter,
+              organization: organization,
+              description: { en: "Description", ca: "Descripció", es: "Descripción" },
+              short_description: { en: "Short description", ca: "Descripció curta", es: "Descripción corta" },
+              show_metrics: show_metrics,
+              show_statistics: show_statistics,
+              developer_group: { en: "Developer group" }
+            )
+          end
+
+          it "displays logo and text" do
+            within "#participatory_process_#{base_process.id}" do
+              within ".emitter-header" do
+                expect(page).to have_css("img", count: 1)
+                expect(page).to have_content("Consultation published by Developer group")
+              end
+            end
+          end
+        end
+      end
+
       context "and accessing from the homepage" do
         it "the menu link is not shown" do
           visit decidim.root_path
@@ -115,6 +150,41 @@ describe "Participatory Processes", type: :system do
         end
 
         it_behaves_like "accessible page"
+
+        context "when emitter is defined", :slow do
+          context "when no emitter" do
+            it "doesn't displays logo or text" do
+              within "#participatory_process_#{promoted_process.id}" do
+                expect(page).not_to have_css(".emitter-header")
+              end
+            end
+          end
+
+          context "when emitter" do
+            let(:base_process) do
+              create(
+                :participatory_process,
+                :active,
+                :with_emitter,
+                organization: organization,
+                description: { en: "Description", ca: "Descripció", es: "Descripción" },
+                short_description: { en: "Short description", ca: "Descripció curta", es: "Descripción corta" },
+                show_metrics: show_metrics,
+                show_statistics: show_statistics,
+                developer_group: { en: "Developer group" }
+              )
+            end
+
+            it "displays logo and text" do
+              within "#participatory_process_#{base_process.id}" do
+                within ".emitter-header" do
+                  expect(page).to have_css("img", count: 1)
+                  expect(page).to have_content("Consultation published by Developer group")
+                end
+              end
+            end
+          end
+        end
 
         it "lists all the highlighted processes" do
           within "#highlighted-processes" do
