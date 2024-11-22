@@ -7,7 +7,8 @@
     "heroku-redis:hobby-dev",
     "memcachedcloud:30",
     "newrelic:wayne",
-    "sendgrid:starter"
+    "sendgrid:starter",
+    "sentry:f1"
   ],
   "scripts": {
     "postdeploy":"rake db:schema:load db:migrate"

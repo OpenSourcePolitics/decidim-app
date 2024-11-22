@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Admin adds display condition to template's questionnaire question", type: :system do
+describe "Admin adds display condition to template's questionniaire question", type: :system do
   let!(:organization) { create(:organization) }
   let!(:user) { create(:user, :admin, :confirmed, organization: organization) }
   let(:template) { create(:questionnaire_template, organization: organization) }
@@ -23,16 +23,14 @@ describe "Admin adds display condition to template's questionnaire question", ty
     # expand question two
     find("[data-toggle$=button--expand-question-questionnaire_question_#{question_two.id}]").click
     # add display condition
-    within "#questionnaire_question_#{question_two.id}-question-card" do
-      find(".add-display-condition").click
-      # select question
-      select translated(question_one.body), from: "questionnaire[questions][#{question_two.id}][display_conditions][questionnaire-display-condition-id][decidim_condition_question_id]"
-      # select equal
-      select "Equal", from: "questionnaire[questions][#{question_two.id}][display_conditions][questionnaire-display-condition-id][condition_type]"
-      # validate we have the 2 answer options from question one in the select
-      select = find("#questionnaire_questions_#{question_two.id}_display_conditions_questionnaire-display-condition-id_decidim_answer_option_id")
-      expect(select).to have_content(translated(question_one.answer_options.first.body))
-      expect(select).to have_content(translated(question_one.answer_options.last.body))
-    end
+    find(".add-display-condition").click
+    # select question
+    select translated(question_one.body), from: "questionnaire[questions][#{question_two.id}][display_conditions][questionnaire-display-condition-id][decidim_condition_question_id]"
+    # select equal
+    select "Equal", from: "questionnaire[questions][#{question_two.id}][display_conditions][questionnaire-display-condition-id][condition_type]"
+    # validate we have the 2 answer options from question one in the select
+    select = find("#questionnaire_questions_#{question_two.id}_display_conditions_questionnaire-display-condition-id_decidim_answer_option_id")
+    expect(select).to have_content(translated(question_one.answer_options.first.body))
+    expect(select).to have_content(translated(question_one.answer_options.last.body))
   end
 end

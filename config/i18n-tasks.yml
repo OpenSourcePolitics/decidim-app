@@ -151,7 +151,6 @@ ignore_unused:
   - decidim.proposals.collaborative_drafts.new.*
   - decidim.admin.menu.admin_accountability
   - decidim.anonymous_user
-  - decidim.assemblies.show.*
   - decidim.events.initiatives.initiative_answered.*
   - decidim.initiatives.pages.home.highlighted_initiatives.*
   - activemodel.attributes.attachment.documents
@@ -162,8 +161,5 @@ ignore_unused:
   - decidim.newsletters.unsubscribe.error
   - decidim.newsletters.unsubscribe.token_error
   - decidim.half_signup.quick_auth.sms_verification.text_message
-  - decidim.events.proposals.author_confirmation_proposal_event.email_intro
-  - decidim.events.proposals.author_confirmation_proposal_event.email_outro
-  - decidim.events.proposals.author_confirmation_proposal_event.notification_title
 
 
