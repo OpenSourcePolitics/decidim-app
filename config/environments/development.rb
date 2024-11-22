@@ -60,4 +60,5 @@ Rails.application.configure do
   # Setting this to 100 years should be enough
   config.global_id.expires_in = 100.years
   config.deface.enabled = ENV.fetch("DEFACE_ENABLED", nil) == "true"
+  config.log_tags = [:uuid, :remote_ip]
 end
