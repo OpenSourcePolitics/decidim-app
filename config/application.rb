@@ -53,10 +53,6 @@ module DevelopmentApp
       require "extends/controllers/decidim/newsletters_controller_extends"
       require "extends/controllers/decidim/admin/scopes_controller_extends"
       require "extends/controllers/decidim/scopes_controller_extends"
-      require "extends/services/decidim/iframe_disabler_extends"
-      require "extends/helpers/decidim/check_boxes_tree_helper_extends"
-      require "extends/helpers/decidim/icon_helper_extends"
-      require "extends/commands/decidim/initiatives/admin/update_initiative_answer_extends"
       require "extends/controllers/decidim/initiatives/committee_requests_controller_extends"
       # Models
       require "extends/models/decidim/budgets/project_extends"
@@ -66,6 +62,7 @@ module DevelopmentApp
       require "extends/services/decidim/iframe_disabler_extends"
       # Helpers
       require "extends/helpers/decidim/icon_helper_extends"
+      require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       # Forms
       require "extends/forms/decidim/initiatives/initiative_form_extends"
       require "extends/forms/decidim/initiatives/admin/initiative_form_extends"
