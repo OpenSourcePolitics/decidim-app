@@ -61,6 +61,7 @@ module DevelopmentApp
       # Services
       require "extends/services/decidim/iframe_disabler_extends"
       # Helpers
+      require "extends/helpers/decidim/meetings/directory/application_helper_extends"
       require "extends/helpers/decidim/icon_helper_extends"
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       # Forms
