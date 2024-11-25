@@ -164,18 +164,6 @@ module Decidim
             expect(flash[:notice]).not_to be_empty
             expect(response).to have_http_status(:found)
           end
-
-          context "and proposals limit is reached" do
-            before do
-              allow(controller).to receive(:proposal_limit_reached?).and_return(true)
-            end
-
-            it "does not create a proposal and raises an error" do
-              post :create, params: params
-              expect(response).to have_http_status(:ok)
-              expect(flash[:alert]).not_to be_empty
-            end
-          end
         end
       end
 

@@ -51,6 +51,12 @@ module DevelopmentApp
       require "extends/controllers/decidim/editor_images_controller_extends"
       require "extends/controllers/decidim/proposals/proposals_controller_extends"
       require "extends/controllers/decidim/newsletters_controller_extends"
+      require "extends/controllers/decidim/admin/scopes_controller_extends"
+      require "extends/controllers/decidim/scopes_controller_extends"
+      require "extends/services/decidim/iframe_disabler_extends"
+      require "extends/helpers/decidim/check_boxes_tree_helper_extends"
+      require "extends/helpers/decidim/icon_helper_extends"
+      require "extends/commands/decidim/initiatives/admin/update_initiative_answer_extends"
       require "extends/controllers/decidim/initiatives/committee_requests_controller_extends"
       # Models
       require "extends/models/decidim/budgets/project_extends"

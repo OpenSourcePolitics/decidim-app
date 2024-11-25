@@ -1,0 +1,18 @@
+.draggable-list .draggable-content {
+  cursor: move;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0.5rem 1rem;
+}
+
+.custom-text {
+  color: black;
+}
+
+.custom-list {
+  border: 1px solid lightgray !important;
+  margin: 0.4rem
+}
