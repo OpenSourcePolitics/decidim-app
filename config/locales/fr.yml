@@ -147,6 +147,9 @@ fr:
             see_all_initiatives: Voir toutes les pétitions
       unavailable_scope: Portée indisponible
     meetings:
+      application_helper:
+        filter_scope_values:
+          all: Tous
       directory:
         meetings:
           index:
