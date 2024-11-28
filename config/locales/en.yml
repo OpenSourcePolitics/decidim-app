@@ -145,6 +145,9 @@ en:
             see_all_initiatives: See all initiatives
       unavailable_scope: Unavailable scope
     meetings:
+      application_helper:
+        filter_scope_values:
+          all: All
       directory:
         meetings:
           index:
