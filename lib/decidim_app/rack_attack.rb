@@ -4,21 +4,39 @@ module DecidimApp
   module RackAttack
     def self.rack_enabled?
       setting = Rails.application.secrets.dig(:decidim, :rack_attack, :enabled)
-      return setting == "1" if setting.present?
+      return setting.to_s == "1" if setting.present?
 
       Rails.env.production?
     end
 
-    def self.apply_configuration
-      Rack::Attack.enabled = true
+    def self.info!
+      Rails.logger.info("Rack::Attack is enabled: #{Rack::Attack.enabled}")
+      Rails.logger.info("Rack::Attack Fail2ban is enabled: #{DecidimApp::RackAttack::Fail2ban.enabled?}")
+      Rack::Attack.throttles.keys.each do |throttle|
+        Rails.logger.info("Rack::Attack throttling registered: #{throttle}")
+      end
+    end
 
+    def self.enable_rack_attack!
+      Rails.logger.info("Rack::Attack is now enabled")
+      Rack::Attack.enabled = true
+    end
+
+    def self.disable_rack_attack!
+      Rails.logger.info("Rack::Attack is now disabled")
+      Rack::Attack.enabled = false
+    end
+
+    def self.deactivate_decidim_throttling!
       # Remove the original throttle from decidim-core
       # see https://github.com/decidim/decidim/blob/release/0.26-stable/decidim-core/config/initializers/rack_attack.rb#L19
       DecidimApp::RackAttack::Throttling.deactivate_decidim_throttling! do
         Rails.logger.info("Deactivating 'requests by ip' from Decidim Core")
         Rack::Attack.throttles.delete("requests by ip")
       end
+    end
 
+    def self.apply_configuration
       Rack::Attack.throttled_response_retry_after_header = true
 
       Rack::Attack.throttled_responder = lambda do |request|

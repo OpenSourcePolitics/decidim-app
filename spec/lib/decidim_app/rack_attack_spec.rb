@@ -62,19 +62,61 @@ describe DecidimApp::RackAttack, type: :request do
     end
   end
 
-  describe "#apply_configuration" do
+  describe "#enable_rack_attack!" do
     before do
-      described_class.apply_configuration
-      Rack::Attack.reset!
+      described_class.enable_rack_attack!
     end
 
+    it "enables Rack::Attack" do
+      expect(Rack::Attack.enabled).to be_truthy
+    end
+  end
+
+  describe "#disable_rack_attack!" do
+    before do
+      described_class.disable_rack_attack!
+    end
+
+    it "enables Rack::Attack" do
+      expect(Rack::Attack.enabled).to be_falsey
+    end
+  end
+
+  describe "#deactivate_decidim_throttling!" do
+    before do
+      described_class.deactivate_decidim_throttling!
+    end
+
+    it "deactivates Decidim throttling" do
+      # Decidim throttling is deactivated by default in rails env test
+      # https://github.com/decidim/decidim/blob/release/0.27-stable/decidim-core/config/initializers/rack_attack.rb#L19
+      expect(Rack::Attack.throttles.keys.join).to include("limit confirmations attempts per code")
+    end
+  end
+
+  describe "#apply_configuration" do
     describe "Throttling" do
       let(:headers) { { "REMOTE_ADDR" => "1.2.3.4", "decidim.current_organization" => organization } }
+      let(:rack_max_requests) { 15 }
 
-      it "successful for 100 requests, then blocks the user" do
-        100.times do
+      before do
+        allow(Rails.application.secrets).to receive(:dig).with(any_args).and_call_original
+        allow(Rails.application.secrets).to receive(:dig).with(:decidim, :rack_attack, :throttle, :max_requests).and_return(rack_max_requests)
+        described_class.apply_configuration
+        Rack::Attack.reset!
+        described_class.enable_rack_attack!
+      end
+
+      it "defines default period and max_requests" do
+        expect(DecidimApp::RackAttack::Throttling.max_requests).to eq(rack_max_requests)
+        expect(DecidimApp::RackAttack::Throttling.period).to eq(60)
+      end
+
+      it "successful for 15 requests, then blocks the user" do
+        rack_max_requests.times do
           get decidim.root_path, params: {}, headers: headers
           expect(response).to have_http_status(:ok)
+          expect(response.body).not_to include("Your connection has been slowed because server received too many requests.")
         end
 
         get decidim.root_path, params: {}, headers: headers
@@ -86,26 +128,16 @@ describe DecidimApp::RackAttack, type: :request do
           expect(response).to have_http_status(:ok)
         end
       end
-
-      it "successful for 99 requests" do
-        99.times do
-          get decidim.root_path, params: {}, headers: headers
-          expect(response).to have_http_status(:ok)
-        end
-
-        get decidim.root_path, params: {}, headers: headers
-        expect(response.body).not_to include("Your connection has been slowed because server received too many requests.")
-        expect(response).not_to have_http_status(:too_many_requests)
-
-        travel_to(1.minute.from_now) do
-          get decidim.root_path, params: {}, headers: headers
-          expect(response).to have_http_status(:ok)
-        end
-      end
     end
 
     describe "Fail2Ban" do
       let(:headers) { { "REMOTE_ADDR" => "1.2.3.4", "decidim.current_organization" => organization } }
+
+      before do
+        described_class.apply_configuration
+        Rack::Attack.reset!
+        described_class.enable_rack_attack!
+      end
 
       %w(/etc/passwd /wp-admin/index.php /wp-login/index.php SELECT CONCAT /.git/config).each do |path|
         it "blocks user for specific request : '#{path}'" do
