@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_28_094242) do
+ActiveRecord::Schema.define(version: 2024_11_18_114335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -1518,6 +1518,8 @@ ActiveRecord::Schema.define(version: 2024_10_28_094242) do
     t.float "longitude"
     t.boolean "display_linked_assemblies", default: false
     t.bigint "decidim_participatory_process_type_id"
+    t.string "emitter"
+    t.text "emitter_name"
     t.index ["decidim_area_id"], name: "index_decidim_participatory_processes_on_decidim_area_id"
     t.index ["decidim_organization_id", "slug"], name: "index_unique_process_slug_and_organization", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_processes_on_decidim_organization_id"
@@ -1764,6 +1766,7 @@ ActiveRecord::Schema.define(version: 2024_10_28_094242) do
     t.string "code", null: false
     t.integer "part_of", default: [], null: false, array: true
     t.jsonb "geojson"
+    t.integer "weight", default: 0
     t.index ["decidim_organization_id", "code"], name: "index_decidim_scopes_on_decidim_organization_id_and_code", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_scopes_on_decidim_organization_id"
     t.index ["parent_id"], name: "index_decidim_scopes_on_parent_id"

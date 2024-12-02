@@ -16,13 +16,34 @@ en:
         file: importing file
   decidim:
     admin:
+      actions:
+        add: Add
+        browse: Browse
+        confirm_destroy: Confirm destroy
+        destroy: Destroy
+        edit: Edit
+      attachments:
+        form:
+          send_notification_to_followers: Send a notification to all the people following the consultation who have agreed to receive email notifications
       exports:
         export_as: "%{name} as %{export_format}"
         notice: Your export is currently in progress. You'll receive an email when it's complete.
+      models:
+        scope:
+          fields:
+            name: Name
+            scope_type: Scope type
       participatory_space_private_users:
         create:
           error: Error
           success: Success
+      scopes:
+        no_scopes: No scopes at this level.
+        update:
+          error: There was a problem updating this scope.
+          success: Scope updated successfully
+      titles:
+        scopes: Scopes
     amendments:
       emendation:
         announcement:
@@ -124,6 +145,9 @@ en:
             see_all_initiatives: See all initiatives
       unavailable_scope: Unavailable scope
     meetings:
+      application_helper:
+        filter_scope_values:
+          all: All
       directory:
         meetings:
           index:
@@ -175,6 +199,7 @@ en:
         change: Change
         choose: Choose
         currently_selected: Currently selected
+      prompt: Select a scope
     shared:
       login_modal:
         close_modal: Close modal

@@ -8,6 +8,14 @@ GIT
       deface (~> 1.5)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-emitter.git
+  revision: 8633ea56b422eecfe7d8730c89f191387f860e55
+  specs:
+    decidim-emitter (0.1.0)
+      decidim-core (~> 0.27.0)
+      decidim-participatory_processes (~> 0.27.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git
   revision: adec5e66cd07b5e5fdce5562453a7e8d6de88013
   branch: release/0.27-stable
@@ -52,10 +60,10 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git
-  revision: dd685166fdf953a11bd6a9e0dac56feca3bd0708
+  revision: 1ff222533cb3e7c30c8112a56c09c217c0530dbc
   branch: release/0.27-stable
   specs:
-    decidim-homepage_interactive_map (2.0.0)
+    decidim-homepage_interactive_map (2.0.1)
       decidim-admin (>= 0.25.0, < 0.28)
       decidim-core (>= 0.25.0, < 0.28)
       decidim-dev (>= 0.25.0, < 0.28)
@@ -1179,6 +1187,7 @@ DEPENDENCIES
   decidim-custom_proposal_states!
   decidim-decidim_awesome!
   decidim-dev (~> 0.27.0)
+  decidim-emitter!
   decidim-extended_socio_demographic_authorization_handler!
   decidim-extra_user_fields!
   decidim-friendly_signup!

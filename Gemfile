@@ -26,6 +26,7 @@ gem "decidim-category_enhanced", "~> 0.0.1"
 gem "decidim-cleaner"
 gem "decidim-custom_proposal_states", git: "https://github.com/alecslupu-pfa/decidim-module-custom_proposal_states", branch: DECIDIM_BRANCH
 gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome", branch: DECIDIM_BRANCH
+gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git"
 gem "decidim-extended_socio_demographic_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-extended_socio_demographic_authorization_handler.git",
                                                                 branch: DECIDIM_BRANCH
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "temp/twilio-compatibility-0.27"
