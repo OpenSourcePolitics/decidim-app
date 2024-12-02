@@ -30,7 +30,7 @@ module Decidim
       save_user_data(tmpdir, user_data)
       save_user_attachments(tmpdir, user_attachments)
 
-      SevenZipWrapper.compress_and_encrypt(filename: @path, password: @password, input_directory: tmpdir)
+      Decidim::SevenZipWrapper.compress_and_encrypt(filename: @path, password: @password, input_directory: tmpdir)
     end
 
     private
@@ -59,6 +59,9 @@ module Decidim
         next if exporter_data.read == "\n"
 
         file_name = File.join(tmpdir, "#{entity}-#{exporter_data.filename}")
+
+        dir_path = File.dirname(file_name)
+        FileUtils.mkdir_p(dir_path) unless Dir.exist?(dir_path)
         File.write(file_name, exporter_data.read)
       end
     end
@@ -70,7 +73,8 @@ module Decidim
 
           blobs = attachment.is_a?(ActiveStorage::Attached::One) ? [attachment.blob] : attachment.blobs
           blobs.each do |blob|
-            Dir.mkdir(File.join(tmpdir, entity.parameterize))
+            dir_path = File.join(tmpdir, entity.parameterize)
+            Dir.mkdir(dir_path) unless Dir.exist?(dir_path)
             file_name = File.join(tmpdir, entity.parameterize, blob.filename.to_s)
             blob.open do |blob_file|
               File.write(file_name, blob_file.read.force_encoding("UTF-8"))

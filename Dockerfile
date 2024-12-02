@@ -6,7 +6,7 @@ ENV RAILS_ENV=production \
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get -y install libpq-dev curl git libicu-dev build-essential && \
+    apt-get -y install libpq-dev curl git libicu-dev build-essential p7zip-full && \
     curl https://deb.nodesource.com/setup_16.x | bash && \
     apt-get install -y nodejs  && \
     npm install --global yarn && \
@@ -41,7 +41,7 @@ ENV RAILS_ENV=production \
     RAILS_LOG_TO_STDOUT=true
 
 RUN apt update && \
-    apt install -y postgresql-client imagemagick libproj-dev proj-bin libjemalloc2 && \
+    apt install -y postgresql-client imagemagick libproj-dev proj-bin libjemalloc2 p7zip-full && \
     gem install bundler:2.4.9
 
 WORKDIR /app
