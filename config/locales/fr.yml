@@ -83,6 +83,10 @@ fr:
           projects_count:
             one: 1 projet
             other: "%{count} projets"
+    comments:
+      comments:
+        create:
+          error: Une erreur s'est produite lors du vote sur le commentaire.
     devise:
       sessions:
         new:

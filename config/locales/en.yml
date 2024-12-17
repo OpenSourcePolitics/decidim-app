@@ -81,6 +81,10 @@ en:
           projects_count:
             one: 1 project
             other: "%{count} projects"
+    comments:
+      comments:
+        create:
+          error: There was a problem creating the comment.
     devise:
       sessions:
         new:
