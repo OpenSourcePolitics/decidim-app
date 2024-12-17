@@ -37,5 +37,12 @@ namespace :decidim do
         Decidim::SurveysService.new(verbose: true).clear
       end
     end
+
+    namespace :versions do
+      desc "Clean versions"
+      task clean: :environment do
+        Decidim::PapertrailVersionsJob.perform_later
+      end
+    end
   end
 end
