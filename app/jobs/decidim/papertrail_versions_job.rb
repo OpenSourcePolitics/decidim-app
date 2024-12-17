@@ -8,7 +8,10 @@ module Decidim
 
     def perform(expiration = 6.months.ago)
       log! "Cleaning versions in database..."
-      elements = ["Decidim::UserBaseEntity", "Decidim::Comments::Comment", "Decidim::Attachment", "Decidim::Blogs::Post"]
+      elements = ["Decidim::UserBaseEntity",
+                  "Decidim::Comments::Comment",
+                  "Decidim::Attachment",
+                  "Decidim::Blogs::Post"]
       log! "Cleaning item_types : #{elements.join(", ")}"
 
       total = 0

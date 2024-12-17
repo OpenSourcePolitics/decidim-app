@@ -41,7 +41,9 @@ namespace :decidim do
     namespace :versions do
       desc "Clean versions"
       task clean: :environment do
+        puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Executing PapertrailVersionsJob..."
         Decidim::PapertrailVersionsJob.perform_later
+        puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Job delayed to Sidekiq."
       end
     end
   end
