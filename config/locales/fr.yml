@@ -243,6 +243,12 @@ fr:
             client_id: Client ID
             client_secret: Client secret
             site_url: Site URL
+      titles:
+        dashboard:
+          info:
+            db_size: 'Poids base de données: %{db_size}'
+            title: Informations générales
+          title: Tableau de bord système
     verifications:
       authorizations:
         create:
