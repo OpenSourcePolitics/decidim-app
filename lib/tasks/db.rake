@@ -42,7 +42,7 @@ namespace :decidim do
       desc "Clean versions"
       task clean: :environment do
         puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Executing PapertrailVersionsJob..."
-        retention = ENV.fetch("DECIDIM_DB_VERSIONS_RETENTION", "6")&.to_i
+        retention = Rails.application.secrets.dig(:decidim, :database, :versions, :clean, :retention)
         retention = retention.months.ago
         puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Clean versions created before #{retention.strftime("%d-%m-%Y %H:%M:%S")}..."
         Decidim::PapertrailVersionsJob.perform_later(retention)

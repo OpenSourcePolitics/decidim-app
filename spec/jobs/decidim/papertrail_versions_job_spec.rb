@@ -30,5 +30,40 @@ module Decidim
         end.not_to change(PaperTrail::Version, :count)
       end
     end
+
+    describe "#retention" do
+      subject { described_class.new.send(:retention, retention) }
+      let(:retention) { 8.months.ago }
+
+      it "returns the defined retention" do
+        expect(subject).to eq(retention)
+      end
+
+      context "when retention isn't a Date" do
+        let(:retention) { 8 }
+
+        it "returns default value" do
+          expect(subject.strftime("%d-%m-%Y")).to eq(6.months.ago.strftime("%d-%m-%Y"))
+        end
+      end
+
+      context "when retention is blank" do
+        let(:retention) { nil }
+
+        it "returns default value" do
+          expect(subject.strftime("%d-%m-%Y")).to eq(6.months.ago.strftime("%d-%m-%Y"))
+        end
+      end
+    end
+
+    describe "#item_types" do
+      subject { described_class.new.send(:item_types) }
+
+      it "does not includes Proposals nor Initiatives" do
+        expect(subject).not_to include("Decidim::Proposals::Proposal")
+        expect(subject).not_to include("Decidim::Proposals::CollaborativeDraft")
+        expect(subject).not_to include("Decidim::Initiative")
+      end
+    end
   end
 end
