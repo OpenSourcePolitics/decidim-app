@@ -42,10 +42,10 @@ namespace :decidim do
       desc "Clean versions"
       task clean: :environment do
         puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Executing PapertrailVersionsJob..."
-        expiration = ENV.fetch("DECIDIM_DB_VERSIONS_EXPIRATION", "6")&.to_i
-        expiration = expiration.months.ago
-        puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Clean versions created before #{expiration.strftime("%d-%m-%Y %H:%M:%S")}..."
-        Decidim::PapertrailVersionsJob.perform_later(expiration)
+        retention = ENV.fetch("DECIDIM_DB_VERSIONS_RETENTION", "6")&.to_i
+        retention = retention.months.ago
+        puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Clean versions created before #{retention.strftime("%d-%m-%Y %H:%M:%S")}..."
+        Decidim::PapertrailVersionsJob.perform_later(retention)
         puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Job delayed to Sidekiq."
       end
     end

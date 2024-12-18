@@ -6,7 +6,7 @@ module Decidim
 
     include Decidim::Logging
 
-    def perform(expiration = 6.months.ago)
+    def perform(retention = 6.months.ago)
       log! "Cleaning versions in database..."
       elements = [
                   "Decidim::Accountability::TimelineEntry",
@@ -27,7 +27,7 @@ module Decidim
       log! "Cleaning item_types : #{elements.join(", ")}"
 
       total = 0
-      PaperTrail::Version.where(item_type: elements).where("created_at <= ?", expiration).in_batches do |versions|
+      PaperTrail::Version.where(item_type: elements).where("created_at <= ?", retention).in_batches do |versions|
         total += versions.size
         versions.destroy_all
       end
