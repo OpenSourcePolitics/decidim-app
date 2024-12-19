@@ -245,6 +245,7 @@ en:
         dashboard: Dashboard
         info:
           db_size: 'Database size: %{db_size}'
+          decidim_version: 'Decidim version: v%{version}'
           title: General informations
         title:
     verifications:

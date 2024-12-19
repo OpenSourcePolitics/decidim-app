@@ -247,6 +247,7 @@ fr:
         dashboard:
           info:
             db_size: 'Poids base de données: %{db_size}'
+            decidim_version: 'Decidim version: v%{version}'
             title: Informations générales
           title: Tableau de bord système
     verifications:
