@@ -37,5 +37,17 @@ namespace :decidim do
         Decidim::SurveysService.new(verbose: true).clear
       end
     end
+
+    namespace :versions do
+      desc "Clean versions"
+      task clean: :environment do
+        puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Executing PapertrailVersionsJob..."
+        retention = Rails.application.secrets.dig(:decidim, :database, :versions, :clean, :retention)
+        retention = retention.months.ago
+        puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Clean versions created before #{retention.strftime("%d-%m-%Y %H:%M:%S")}..."
+        Decidim::PapertrailVersionsJob.perform_later(retention)
+        puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Job delayed to Sidekiq."
+      end
+    end
   end
 end
