@@ -208,6 +208,9 @@ fr:
         please_sign_in: Veuillez vous connecter
         sign_up: Créer un compte
     system:
+      dashboard:
+        show:
+          current_organizations: Organisations
       organizations:
         omniauth_settings:
           france_connect:

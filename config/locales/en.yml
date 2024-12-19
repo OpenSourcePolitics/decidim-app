@@ -206,6 +206,9 @@ en:
         please_sign_in: Please sign in
         sign_up: Sign up
     system:
+      dashboard:
+        show:
+          current_organizations: Current organizations
       organizations:
         omniauth_settings:
           france_connect:
@@ -242,12 +245,12 @@ en:
             client_secret: Client secret
             site_url: Site URL
       titles:
-        dashboard: Dashboard
-        info:
-          db_size: 'Database size: %{db_size}'
-          decidim_version: 'Decidim version: v%{version}'
-          title: General informations
-        title:
+        dashboard:
+          info:
+            db_size: 'Database size: %{db_size}'
+            decidim_version: 'Decidim version: v%{version}'
+            title: General informations
+          title: Dashboard
     verifications:
       authorizations:
         create:
