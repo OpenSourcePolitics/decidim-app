@@ -241,6 +241,13 @@ en:
             client_id: Client ID
             client_secret: Client secret
             site_url: Site URL
+      titles:
+        dashboard: Dashboard
+        info:
+          db_size: 'Database size: %{db_size}'
+          decidim_version: 'Decidim version: v%{version}'
+          title: General informations
+        title:
     verifications:
       authorizations:
         create:
