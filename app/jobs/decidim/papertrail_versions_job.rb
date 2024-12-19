@@ -13,7 +13,7 @@ module Decidim
       log! "Cleaning item_types : #{item_types.join(", ")}"
 
       total = 0
-      PaperTrail::Version.where(item_type: item_types).where("created_at <= ?", ret).in_batches do |versions|
+      PaperTrail::Version.where(item_type: item_types).where("created_at <= ?", ret).in_batches(of: 5000) do |versions|
         total += versions.size
         versions.destroy_all
       end
