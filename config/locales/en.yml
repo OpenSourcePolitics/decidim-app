@@ -81,6 +81,14 @@ en:
           projects_count:
             one: 1 project
             other: "%{count} projects"
+        orders:
+          alphabetical: Alphabetical order (A-Z)
+          highest_cost: Highest cost
+          label: Order projects by
+          lowest_cost: Lowest cost
+          most_voted: Most voted
+          random: Random order
+          selected: Selected
     comments:
       comments:
         create:

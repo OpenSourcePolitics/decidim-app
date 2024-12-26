@@ -168,5 +168,6 @@ ignore_unused:
   - decidim.events.proposals.author_confirmation_proposal_event.notification_title
   - decidim.system.titles.{dashboard,title}
   - decidim.system.titles.info.*
+  - decidim.budgets.projects.orders.*
 
 

@@ -83,6 +83,14 @@ fr:
           projects_count:
             one: 1 projet
             other: "%{count} projets"
+        orders:
+          alphabetical: Ordre Alphabétique (A-Z)
+          highest_cost: Prix décroissant
+          label: Trier les projets par
+          lowest_cost: Prix croissant
+          most_voted: Les plus votés
+          random: Ordre aléatoire
+          selected: Sélectionné
     comments:
       comments:
         create:
