@@ -169,5 +169,6 @@ ignore_unused:
   - decidim.system.titles.{dashboard,title}
   - decidim.system.titles.info.*
   - decidim.budgets.projects.orders.*
+  - decidim.components.budgets.settings.*
 
 

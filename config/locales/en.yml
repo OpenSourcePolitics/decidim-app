@@ -82,7 +82,7 @@ en:
             one: 1 project
             other: "%{count} projects"
         orders:
-          alphabetical: Alphabetical order (A-Z)
+          alphabetical: A-Z (Alphabetical)
           highest_cost: Highest cost
           label: Order projects by
           lowest_cost: Lowest cost
@@ -93,6 +93,29 @@ en:
       comments:
         create:
           error: There was a problem creating the comment.
+    components:
+      budgets:
+        settings:
+          global:
+            default_sort_order: Default Projects sorting
+            default_sort_order_help: Default means that if the supports are enabled, the projects will be shown sorted by random, and if the supports are blocked, then they will be sorted by the most supported.
+            default_sort_order_options:
+              alphabetical: A-Z (Alphabetical)
+              default: Default
+              highest_cost: Highest cost
+              lowest_cost: Lowest cost
+              most_voted: Most supported
+              random: Random
+          step:
+            default_sort_order: Default Projects sorting
+            default_sort_order_help: Default means that if the supports are enabled, the projects will be shown sorted by random, and if the supports are blocked, then they will be sorted by the most supported.
+            default_sort_order_options:
+              alphabetical: A-Z (Alphabetical)
+              default: Default
+              highest_cost: Highest cost
+              lowest_cost: Lowest cost
+              most_voted: Most supported
+              random: Random
     devise:
       sessions:
         new:

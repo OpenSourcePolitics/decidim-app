@@ -52,7 +52,7 @@ describe "Sorting projects", type: :system do
     let!(:project1) { create(:project, budget: budget, title: { "en" => "A project", "es" => "A proyecto" }) }
     let!(:project2) { create(:project, budget: budget, title: { "en" => "B project", "es" => "B proyecto" }) }
 
-    it_behaves_like "ordering projects by selected option", "Alphabetical order (A-Z)" do
+    it_behaves_like "ordering projects by selected option", "A-Z (Alphabetical)" do
       let(:first_project) { project1 }
       let(:last_project) { project2 }
     end
@@ -72,14 +72,14 @@ describe "Sorting projects", type: :system do
       within ".order-by" do
         expect(page).to have_selector("ul[data-dropdown-menu$=dropdown-menu]", text: "Ordre aléatoire")
         page.find("a", text: "Ordre aléatoire").click
-        click_link("Alphabétique (A-Z)")
+        click_link("A-Z (Alphabétique)")
       end
     end
 
     it "lists the projects ordered by selected option" do
       within "#projects li.is-dropdown-submenu-parent a" do
         expect(page).to have_no_content("Ordre aléatoire", wait: 20)
-        expect(page).to have_content("Alphabétique (A-Z)")
+        expect(page).to have_content("A-Z (Alphabétique)")
       end
 
       I18n.with_locale(:fr) do

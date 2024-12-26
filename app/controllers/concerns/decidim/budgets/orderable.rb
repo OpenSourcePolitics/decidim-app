@@ -15,7 +15,11 @@ module Decidim
 
         # Available orders based on enabled settings
         def available_orders
-          @available_orders ||= begin
+          @available_orders ||= [default_order] + possible_orders.excluding(default_order)
+        end
+
+        def possible_orders
+          @possible_orders ||= begin
             available_orders = []
             available_orders << "random" if voting_open? || !votes_are_visible?
             available_orders << "most_voted" if votes_are_visible?
@@ -25,7 +29,18 @@ module Decidim
         end
 
         def default_order
-          available_orders.first
+          @default_order ||= fetch_default_order
+        end
+
+        def fetch_default_order
+          default_order = current_settings.default_sort_order.presence || component_settings.default_sort_order
+          return order_by_default if default_order == "default"
+
+          possible_orders.include?(default_order) ? default_order : order_by_default
+        end
+
+        def order_by_default
+          voting_open? || !votes_are_visible? ? "random" : "most_voted"
         end
 
         def votes_are_visible?
