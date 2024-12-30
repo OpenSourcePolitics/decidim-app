@@ -100,7 +100,7 @@ fr:
         settings:
           global:
             default_sort_order: Tri des projets par défaut
-            default_sort_order_help: Par défaut signifie que si les votes sont désactivés, les propositions seront affichées par ordre aléatoire, et si les votes sont activés, elles seront triées par ordre décroissant des votes.
+            default_sort_order_help: Par défaut signifie que si les votes sont désactivés, les projets seront affichés par ordre aléatoire, et si les votes sont activés, ils seront triés par ordre décroissant des votes.
             default_sort_order_options:
               alphabetical: A-Z (Alphabétique)
               default: Par défaut
@@ -110,7 +110,7 @@ fr:
               random: Ordre aléatoire
           step:
             default_sort_order: Tri des projets par défaut
-            default_sort_order_help: Par défaut signifie que si les votes sont désactivés, les propositions seront affichées par ordre aléatoire, et si les votes sont activés, elles seront triées par ordre décroissant des votes.
+            default_sort_order_help: Par défaut signifie que si les votes sont désactivés, les projets seront affichés par ordre aléatoire, et si les votes sont activés, ils seront triés par ordre décroissant des votes.
             default_sort_order_options:
               alphabetical: A-Z (alphabétique)
               default: Par défaut
