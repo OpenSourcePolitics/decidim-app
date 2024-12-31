@@ -8,6 +8,8 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
     duplicated_numbers = find_duplicated_phone_numbers
     return puts("No duplicated phone numbers found") if duplicated_numbers.empty?
 
+    alerts = []
+
     duplicated_numbers.each do |phone_info|
       phone_number, phone_country = phone_info
 
@@ -17,8 +19,9 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
 
       quick_auth_users.each { |user| soft_delete_user(user, "Duplicated account") }
 
-      alert_about_duplicated_numbers(phone_number, other_users) if other_users.map(&:email).uniq.size > 1
+      alerts << generate_alert_message(phone_number, other_users) if other_users.map(&:email).uniq.size > 1
     end
+    display_alerts(alerts)
   end
 
   private
@@ -34,6 +37,8 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
 
   def soft_delete_user(user, reason)
     if user.email.include?("quick_auth")
+      puts "\n---- Processing duplicated phone number: #{obfuscate_phone_number(user.phone_number)} ----\n"
+
       user.update(phone_number: nil, phone_country: nil)
 
       form = Decidim::DeleteAccountForm.from_params(delete_reason: reason)
@@ -42,6 +47,7 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
         on(:ok) do
           log!("User #{user.id} (#{previous_email}) has been deleted", :info)
           puts("User #{user.id} (#{previous_email}) has been deleted")
+          save_deleted_user_email(user, previous_email)
         end
         on(:invalid) do
           log!("Failed to delete user #{user.id} (#{user.email}): #{form.errors.full_messages}", :warn)
@@ -54,21 +60,34 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
     end
   end
 
-  def alert_about_duplicated_numbers(phone_number, users)
+  def save_deleted_user_email(user, email)
+    user.extended_data["deleted_user_email"] = email
+    user.save
+  end
+
+  def generate_alert_message(phone_number, users)
     obfuscated_number = obfuscate_phone_number(phone_number)
-    emails = users.map(&:email)
+    emails = users.map { |user| "#{user.id} - #{user.email}" }
     email_pairs = emails.each_slice(2).map { |pair| pair.join(" | ") }
 
-    message = <<~MSG
-      \nALERT: Duplicated Phone Number Detected!
+    <<~MSG
 
-      Phone Number: #{obfuscated_number}
+      ALERT: Duplicated Phone Number Detected : #{obfuscated_number}
+
       Users with this number:
+
       #{email_pairs.join("\n")}
     MSG
+  end
 
-    log!(message, :warn)
-    puts(message)
+  def display_alerts(alerts)
+    return if alerts.empty?
+
+    puts "\n---- ALERTS ----"
+    alerts.each do |alert|
+      puts alert
+      log!(alert, :warn)
+    end
   end
 
   def obfuscate_phone_number(phone_number)
