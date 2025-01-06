@@ -6,6 +6,8 @@ module Decidim
 
     def log!(msg, level = :warn)
       msg = "(#{self.class}) #{Time.current.strftime("%d-%m-%Y %H:%M")}> #{msg}"
+      puts msg unless Rails.env.production?
+
       case level
       when :info
         Rails.logger.info msg
