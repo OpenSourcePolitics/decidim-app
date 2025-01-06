@@ -5,15 +5,20 @@ module Decidim
     private
 
     def log!(msg, level = :warn)
-      msg = "(#{self.class}) #{Time.current.strftime("%d-%m-%Y %H:%M")}> #{msg}"
-      puts msg unless Rails.env.production?
+      msg = "(#{self.class})> #{msg}"
 
       case level
       when :info
         Rails.logger.info msg
+        stdout_logger.info msg unless Rails.env.production?
       else
         Rails.logger.warn msg
+        stdout_logger.warn msg unless Rails.env.production?
       end
+    end
+
+    def stdout_logger
+      @stdout_logger ||= Logger.new($stdout)
     end
   end
 end

@@ -4,44 +4,42 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
   include Decidim::Logging
 
   def perform
-    Benchmark.bm do |x|
-      x.report do
-
-        if duplicated_phone_numbers.blank?
-          log! "No duplicated phone numbers found"
-          return
-        end
-
-        alerts = duplicated_phone_numbers.map do |phone_info|
-          phone_number, phone_country = phone_info
-          users_with_phone = Decidim::User.where(phone_number: phone_number, phone_country: phone_country)
-          decidim_user_dup_accounts = []
-
-          users_with_phone.each do |user|
-            if user.email.include?("quick_auth")
-              soft_delete_user(user, "HalfSignup duplicated account")
-            else
-              decidim_user_dup_accounts << user
-            end
-          end
-
-          generate_alert_message(phone_number, decidim_user_dup_accounts) if decidim_user_dup_accounts.map(&:email).uniq.size > 1
-        end.compact!
-
-        display_alerts(alerts)
-      end
+    log! "Start clearing half signup accounts..."
+    if duplicated_phone_numbers.blank?
+      log! "No duplicated phone numbers found"
+      return
     end
+
+    alerts = duplicated_phone_numbers.map do |phone_info|
+      phone_number, phone_country = phone_info
+      users_with_phone = Decidim::User.where(phone_number: phone_number, phone_country: phone_country)
+      decidim_user_dup_accounts = []
+
+      users_with_phone.each do |user|
+        if user.email.include?("quick_auth")
+          soft_delete_user(user, "HalfSignup duplicated account")
+        else
+          decidim_user_dup_accounts << user
+        end
+      end
+
+      generate_alert_message(phone_number, decidim_user_dup_accounts) if decidim_user_dup_accounts.map(&:email).uniq.size > 1
+    end
+
+    display_alerts alerts
+
+    log! "Terminated !"
   end
 
   private
 
   def duplicated_phone_numbers
     @duplicated_phone_numbers ||= Decidim::User
-                                    .where.not(phone_number: [nil, ""])
-                                    .where.not(phone_country: [nil, ""])
-                                    .group(:phone_number, :phone_country)
-                                    .having("count(*) > 1")
-                                    .pluck(:phone_number, :phone_country)
+                                  .where.not(phone_number: [nil, ""])
+                                  .where.not(phone_country: [nil, ""])
+                                  .group(:phone_number, :phone_country)
+                                  .having("count(*) > 1")
+                                  .pluck(:phone_number, :phone_country)
   end
 
   def soft_delete_user(user, reason)
@@ -56,7 +54,7 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
                                                     half_signup: {
                                                       email: email,
                                                       phone_number: phone,
-                                                      phone_country: user.phone_country,
+                                                      phone_country: user.phone_country
                                                     }
                                                   })
 
@@ -77,16 +75,16 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
     phone = obfuscate_phone_number(phone_number)
     infos = users.map { |user| "(ID/#{user.id} email/#{user.email})" }
 
-    <<~MSG
-      #{phone} : #{infos.join(" | ")}
-    MSG
+    "#{phone} : #{infos.join(" | ")}"
   end
 
   def display_alerts(alerts)
-    return if alerts.empty?
+    return if alerts.blank?
 
-    log!("Users to cleanup manually :")
+    log! "Decidim users account to cleanup manually:"
     alerts.each do |alert|
+      next if alert.blank?
+
       log!(alert)
     end
   end
