@@ -49,5 +49,19 @@ namespace :decidim do
         puts "(decidim:db:versions:clean) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Job delayed to Sidekiq."
       end
     end
+
+    namespace :restore do
+      desc "Clear database dump to work with localhost"
+      task local: :environment do
+        puts "(decidim:db:restore:local) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Modifying Organization settings..."
+        organization = Decidim::Organization.first
+        organization.host = "localhost"
+        organization.smtp_settings = {}
+        organization.omniauth_settings = {}
+        organization.save(validate: false)
+
+        puts "(decidim:db:restore:local) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Changes done..."
+      end
+    end
   end
 end
