@@ -10,10 +10,10 @@ module Decidim
       case level
       when :info
         Rails.logger.info msg
-        stdout_logger.info msg unless Rails.env.production?
+        stdout_logger.info msg
       else
         Rails.logger.warn msg
-        stdout_logger.warn msg unless Rails.env.production?
+        stdout_logger.warn msg
       end
     end
 

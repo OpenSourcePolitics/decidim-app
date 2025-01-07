@@ -42,12 +42,10 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
     users.each do |user|
       if user.email.include?("quick_auth")
         soft_delete_user(user, "HalfSignup duplicated account")
+      elsif clear_user_accounts
+        clear_account_phone_number(user)
       else
-        if clear_user_accounts
-          clear_account_phone_number(user)
-        else
-          decidim_user_dup_accounts << user
-        end
+        decidim_user_dup_accounts << user
       end
     end
 
@@ -96,7 +94,6 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
       user.phone_country = nil
       user.save(validate: false)
     end
-
 
     log! "User (ID/#{user.id} email/#{user.email}) has been cleaned"
   end
