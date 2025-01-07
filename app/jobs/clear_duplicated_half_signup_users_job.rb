@@ -3,26 +3,20 @@
 class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
   include Decidim::Logging
 
-  def perform
+  def perform(clear_user_accounts = false)
     log! "Start clearing half signup accounts..."
     if duplicated_phone_numbers.blank?
       log! "No duplicated phone numbers found"
       return
     end
 
+    log! "Found #{duplicated_phone_numbers.count} rows to cleanup"
     alerts = duplicated_phone_numbers.map do |phone_info|
       phone_number, phone_country = phone_info
       users_with_phone = Decidim::User.where(phone_number: phone_number, phone_country: phone_country)
       decidim_user_dup_accounts = []
 
-      users_with_phone.each do |user|
-        if user.email.include?("quick_auth")
-          soft_delete_user(user, "HalfSignup duplicated account")
-        else
-          decidim_user_dup_accounts << user
-        end
-      end
-
+      clear_data(users_with_phone, clear_user_accounts)
       generate_alert_message(phone_number, decidim_user_dup_accounts) if decidim_user_dup_accounts.map(&:email).uniq.size > 1
     end
 
@@ -40,6 +34,24 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
                                   .group(:phone_number, :phone_country)
                                   .having("count(*) > 1")
                                   .pluck(:phone_number, :phone_country)
+  end
+
+  def clear_data(users, clear_user_accounts)
+    decidim_user_dup_accounts = []
+
+    users.each do |user|
+      if user.email.include?("quick_auth")
+        soft_delete_user(user, "HalfSignup duplicated account")
+      else
+        if clear_user_accounts
+          clear_account_phone_number(user)
+        else
+          decidim_user_dup_accounts << user
+        end
+      end
+    end
+
+    decidim_user_dup_accounts
   end
 
   def soft_delete_user(user, reason)
@@ -71,6 +83,24 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
     end
   end
 
+  def clear_account_phone_number(user)
+    Decidim::User.transaction do
+      user.extended_data = user.extended_data.merge({
+                                                      half_signup: {
+                                                        phone_number: user.phone_number,
+                                                        phone_country: user.phone_country
+                                                      }
+                                                    })
+
+      user.phone_number = nil
+      user.phone_country = nil
+      user.save(validate: false)
+    end
+
+
+    log! "User (ID/#{user.id} email/#{user.email}) has been cleaned"
+  end
+
   def generate_alert_message(phone_number, users)
     phone = obfuscate_phone_number(phone_number)
     infos = users.map { |user| "(ID/#{user.id} email/#{user.email})" }
@@ -79,6 +109,7 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
   end
 
   def display_alerts(alerts)
+    alerts&.compact!
     return if alerts.blank?
 
     log! "Decidim users account to cleanup manually:"

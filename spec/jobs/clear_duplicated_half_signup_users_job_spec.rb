@@ -8,6 +8,7 @@ module Decidim
     let!(:user2) { create(:user, phone_number: "1234567890", phone_country: "US", email: "quick_auth_user@example.com") }
     let!(:user3) { create(:user, phone_number: "1234567890", phone_country: "US", email: "user3@example.com") }
     let!(:user4) { create(:user, phone_number: "9876543210", phone_country: "US", email: "user4@example.com") }
+    let(:delete_reason) { "HalfSignup duplicated account" }
 
     before do
       allow_any_instance_of(Decidim::DestroyAccount).to receive(:call).and_return(true)
@@ -30,7 +31,7 @@ module Decidim
         end
 
         it "soft deletes quick_auth users" do
-          expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:soft_delete_user).with(user2, "Duplicated account")
+          expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:soft_delete_user).with(user2, delete_reason)
 
           described_class.perform_now
         end
@@ -42,13 +43,13 @@ module Decidim
         end
 
         it "does not soft delete non quick_auth users" do
-          expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).not_to receive(:soft_delete_user).with(user1, "Duplicated account")
+          expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).not_to receive(:soft_delete_user).with(user1, delete_reason)
 
           described_class.perform_now
         end
 
         it "does not soft delete users with different phone numbers" do
-          expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).not_to receive(:soft_delete_user).with(user4, "Duplicated account")
+          expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).not_to receive(:soft_delete_user).with(user4, delete_reason)
 
           described_class.perform_now
         end
@@ -61,13 +62,13 @@ module Decidim
       it "updates the user to nullify the phone number and country" do
         expect(user).to receive(:update).with(phone_number: nil, phone_country: nil)
 
-        described_class.new.send(:soft_delete_user, user, "Duplicated account")
+        described_class.new.send(:soft_delete_user, user, delete_reason)
       end
 
       it "calls the Decidim::DestroyAccount service to delete the user" do
         expect_any_instance_of(Decidim::DestroyAccount).to receive(:call)
 
-        described_class.new.send(:soft_delete_user, user, "Duplicated account")
+        described_class.new.send(:soft_delete_user, user, delete_reason)
       end
 
       it "does not delete a non-quick_auth account" do
@@ -76,7 +77,7 @@ module Decidim
         expect_any_instance_of(Decidim::DestroyAccount).not_to receive(:call)
         expect(Rails.logger).to receive(:info).with(/Not a Quick Auth account, skipping deletion/)
 
-        described_class.new.send(:soft_delete_user, user_with_diff_email, "Duplicated account")
+        described_class.new.send(:soft_delete_user, user_with_diff_email, delete_reason)
       end
     end
 
