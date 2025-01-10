@@ -83,10 +83,41 @@ fr:
           projects_count:
             one: 1 projet
             other: "%{count} projets"
+        orders:
+          alphabetical: A-Z (Alphabétique)
+          highest_cost: Prix décroissant
+          label: Trier les projets par
+          lowest_cost: Prix croissant
+          most_voted: Les plus votés
+          random: Ordre aléatoire
+          selected: Sélectionné
     comments:
       comments:
         create:
           error: Une erreur s'est produite lors du vote sur le commentaire.
+    components:
+      budgets:
+        settings:
+          global:
+            default_sort_order: Tri des projets par défaut
+            default_sort_order_help: Par défaut signifie que si les votes sont désactivés, les projets seront affichés par ordre aléatoire, et si les votes sont activés, ils seront triés par ordre décroissant des votes.
+            default_sort_order_options:
+              alphabetical: A-Z (Alphabétique)
+              default: Par défaut
+              highest_cost: Prix décroissant
+              lowest_cost: Prix croissant
+              most_voted: Les plus votés
+              random: Ordre aléatoire
+          step:
+            default_sort_order: Tri des projets par défaut
+            default_sort_order_help: Par défaut signifie que si les votes sont désactivés, les projets seront affichés par ordre aléatoire, et si les votes sont activés, ils seront triés par ordre décroissant des votes.
+            default_sort_order_options:
+              alphabetical: A-Z (alphabétique)
+              default: Par défaut
+              highest_cost: Prix décroissant
+              lowest_cost: Prix croissant
+              most_voted: Les plus votés
+              random: Ordre aléatoire
     devise:
       sessions:
         new:
