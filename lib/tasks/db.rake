@@ -54,7 +54,24 @@ namespace :decidim do
       desc "Clear database dump to work with localhost"
       task local: :environment do
         puts "(decidim:db:restore:local) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Modifying Organization settings..."
-        organization = Decidim::Organization.first
+        organizations = Decidim::Organization.all.pluck(:id, :name, :host)
+
+        if organizations.blank?
+          puts "(decidim:db:restore:local) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> No existing organizations..."
+          puts "(decidim:db:restore:local) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Terminating"
+          return
+        elsif organizations.size == 1
+          organization = Decidim::Organization.first
+        else
+          "(decidim:db:restore:local) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Select the organization to restore"
+          organizations.each do |org|
+            puts "#{org.id}) #{org.name} - #{org.host}"
+          end
+          puts "Select the organization ID: "
+          org_id = $stdin.gets
+          organization = Decidim::Organization.find(org_id)
+        end
+
         organization.host = "localhost"
         organization.smtp_settings = {}
         organization.omniauth_settings = {}
