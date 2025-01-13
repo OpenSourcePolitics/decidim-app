@@ -6,98 +6,107 @@ module Decidim
   describe ClearDuplicatedHalfSignupUsersJob do
     subject { described_class.perform_now }
 
-    let(:logger) { Logger.new(StringIO.new) }
-
-    let!(:user1) { create(:user, phone_number: "1234567890", phone_country: "US", email: "user1@example.com") }
-    let!(:user2) { create(:user, phone_number: phonenumberuser2, phone_country: "US", email: "quick_auth_user@example.com") }
-    let!(:user3) { create(:user, phone_number: phonenumberuser3, phone_country: "US", email: "user3@example.com") }
-    let!(:user4) { create(:user, phone_number: "9876543210", phone_country: "US", email: "user4@example.com") }
+    let!(:dup_user1) { create(:user, phone_number: "1234", phone_country: "US", email: "user1@example.com") }
+    let!(:dup_user2) { create(:user, phone_number: "1234", phone_country: "US", email: "quick_auth_user@example.com") }
+    let!(:dup_user3) { create(:user, phone_number: "1234", phone_country: "US", email: "user3@example.com") }
+    let(:dup_user4) do
+      dup_user4 = build(:user, phone_number: "1234", phone_country: "US", email: "")
+      dup_user4.save(validate: false)
+      dup_user4
+    end
+    let!(:user5) { create(:user, phone_number: "6789", phone_country: "US", email: "user5@example.com") }
     let(:delete_reason) { "HalfSignup duplicated account (#{current_date})" }
     let(:current_date) { Date.current.strftime "%Y-%m-%d" }
 
-    let(:phonenumberuser2) { "1234567890" }
-    let(:phonenumberuser3) { "1234567890" }
-
     before do
-      allow_any_instance_of(Decidim::Logging).to receive(:stdout_logger).and_return(logger)
-      allow_any_instance_of(Decidim::DestroyAccount).to receive(:call).and_return(true)
+      allow(Decidim::Logging).to receive(:stdout_logger).and_return(Logger.new(StringIO.new))
     end
 
     describe "#perform" do
-      context "when no duplicated phone numbers are found" do
-        let(:phonenumberuser2) { "1234567891" }
-        let(:phonenumberuser3) { "1234567892" }
+      it "soft deletes quick_auth users" do
+        expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:soft_delete_user).with(dup_user2, delete_reason)
 
-        it "prints that no duplicated phone numbers are found" do
-          expect { subject }.to output(/No duplicated phone numbers found/).to_stdout
-          puts "ok"
-        end
+        subject
       end
 
-      context "when duplicated phone numbers are found" do
-        before do
-          allow_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:duplicated_phone_numbers).and_return([%w(1234567890 US)])
-        end
+      it "does not soft delete non quick_auth users" do
+        expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).not_to receive(:soft_delete_user).with(dup_user1, delete_reason)
 
-        it "soft deletes quick_auth users" do
-          expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:soft_delete_user).with(user2, delete_reason)
+        subject
+      end
+    end
 
-          subject
-        end
+    describe "#clear_data" do
+      let(:object) do
+        obj = described_class.new
+        obj.instance_variable_set(:@dup_half_signup_count, 0)
+        obj.instance_variable_set(:@dup_decidim_users_count, 0)
+        obj
+      end
 
-        it "alerts about duplicated phone numbers for non-quick_auth users" do
-          expect(Rails.logger).to receive(:warn).and_call_original
-          expect(Rails.logger).to receive(:warn).with(/ALERT: Duplicated Phone Number Detected/)
+      it "clears the phone number and country of the users" do
+        expect(dup_user1.phone_number).to eq("1234")
+        expect(dup_user1.phone_country).to eq("US")
+        object.send(:clear_data, [dup_user1, dup_user3])
+        dup_user1.reload
 
-          subject
-        end
+        expect(dup_user1.phone_number).to be_nil
+        expect(dup_user1.phone_country).to be_nil
+        expect(dup_user1.extended_data).to include("half_signup" => {
+                                                     "phone_number" => "1234",
+                                                     "phone_country" => "US"
+                                                   })
+        expect(object.instance_variable_get(:@dup_half_signup_count)).to eq(0)
+        expect(object.instance_variable_get(:@dup_decidim_users_count)).to eq(2)
+      end
 
-        it "does not soft delete non quick_auth users" do
-          expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).not_to receive(:soft_delete_user).with(user1, delete_reason)
+      context "when user is not half signup and email is empty" do
+        it "does clear the phone number and country of the user" do
+          expect(dup_user4.phone_number).to eq("1234")
+          expect(dup_user4.phone_country).to eq("US")
+          object.send(:clear_data, [dup_user4])
+          dup_user4.reload
 
-          subject
-        end
-
-        it "does not soft delete users with different phone numbers" do
-          expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).not_to receive(:soft_delete_user).with(user4, delete_reason)
-
-          subject
+          expect(dup_user4.phone_number).to be_nil
+          expect(dup_user4.phone_country).to be_nil
+          expect(dup_user4.extended_data).to include("half_signup" => {
+                                                       "phone_number" => "1234",
+                                                       "phone_country" => "US"
+                                                     })
+          expect(object.instance_variable_get(:@dup_half_signup_count)).to eq(0)
+          expect(object.instance_variable_get(:@dup_decidim_users_count)).to eq(1)
         end
       end
     end
 
     describe "#soft_delete_user" do
-      let(:user) { create(:user, phone_number: "1234567890", phone_country: "US", email: "quick_auth_user@example.com") }
-
       it "updates the user to nullify the phone number and country" do
-        expect(user).to receive(:update).with(phone_number: nil, phone_country: nil)
+        expect(dup_user2.phone_number).to eq("1234")
+        expect(dup_user2.phone_country).to eq("US")
+        described_class.new.send(:soft_delete_user, dup_user2, delete_reason)
+        dup_user2.reload
 
-        described_class.new.send(:soft_delete_user, user, delete_reason)
+        expect(dup_user2.phone_number).to be_nil
+        expect(dup_user2.phone_country).to be_nil
+        expect(dup_user2.extended_data).to include("half_signup" => {
+                                                     "email" => "quick_auth_user@example.com",
+                                                     "phone_number" => "1234",
+                                                     "phone_country" => "US"
+                                                   })
       end
 
-      it "calls the Decidim::DestroyAccount service to delete the user" do
+      it "calls the Decidim::DestroyAccount service to delete the half signup user" do
         expect_any_instance_of(Decidim::DestroyAccount).to receive(:call)
 
-        described_class.new.send(:soft_delete_user, user, delete_reason)
+        described_class.new.send(:soft_delete_user, dup_user2, delete_reason)
       end
 
       it "does not delete a non-quick_auth account" do
-        user_with_diff_email = create(:user, phone_number: "1234567890", phone_country: "US", email: "user_diff@example.com")
+        user_with_diff_email = create(:user, phone_number: "1234", phone_country: "US", email: "user_diff@example.com")
 
         expect_any_instance_of(Decidim::DestroyAccount).not_to receive(:call)
-        expect(Rails.logger).to receive(:info).with(/Not a Quick Auth account, skipping deletion/)
 
         described_class.new.send(:soft_delete_user, user_with_diff_email, delete_reason)
-      end
-    end
-
-    describe "#alert_about_duplicated_numbers" do
-      let(:users) { [user1, user2, user3] }
-
-      it "obfuscates the phone number and logs an alert message" do
-        allow_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:obfuscate_phone_number).with("1234567890").and_return("12****90")
-
-        described_class.new.send(:generate_alert_message, "1234567890", users)
       end
     end
 
@@ -125,7 +134,7 @@ module Decidim
       it "finds duplicated phone numbers" do
         result = described_class.new.send(:duplicated_phone_numbers)
 
-        expect(result).to include(%w(1234567890 US))
+        expect(result).to include(%w(1234 US))
       end
     end
   end

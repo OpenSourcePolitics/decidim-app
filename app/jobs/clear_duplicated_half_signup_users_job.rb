@@ -63,6 +63,8 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
   end
 
   def soft_delete_user(user, reason)
+    return unless user.email&.include?("quick_auth")
+
     email = user.email
     phone = user.phone_number
     user.extended_data = user.extended_data.merge({
