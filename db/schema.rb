@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_26_092405) do
+ActiveRecord::Schema.define(version: 2024_12_19_141621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -1609,11 +1609,13 @@ ActiveRecord::Schema.define(version: 2024_04_26_092405) do
     t.jsonb "body"
     t.integer "comments_count", default: 0, null: false
     t.integer "follows_count", default: 0, null: false
+    t.datetime "deleted_at"
     t.index "md5((body)::text)", name: "decidim_proposals_proposal_body_search"
     t.index "md5((title)::text)", name: "decidim_proposals_proposal_title_search"
     t.index ["created_at"], name: "index_decidim_proposals_proposals_on_created_at"
     t.index ["decidim_component_id"], name: "index_decidim_proposals_proposals_on_decidim_component_id"
     t.index ["decidim_scope_id"], name: "index_decidim_proposals_proposals_on_decidim_scope_id"
+    t.index ["deleted_at"], name: "index_decidim_proposals_proposals_on_deleted_at"
     t.index ["proposal_votes_count"], name: "index_decidim_proposals_proposals_on_proposal_votes_count"
     t.index ["state"], name: "index_decidim_proposals_proposals_on_state"
   end
