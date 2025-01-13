@@ -18,8 +18,6 @@ module Decidim
         versions.destroy_all
       end
 
-      vacuum_table! if total.positive?
-
       log! "#{total} versions removed"
     end
 
@@ -50,12 +48,6 @@ module Decidim
         Decidim::Forms::Questionnaire
         Decidim::UserBaseEntity
       )
-    end
-
-    def vacuum_table!
-      log! "Running VACUUM on table 'versions'"
-      sql = "VACUUM (FULL) versions;"
-      ActiveRecord::Base.connection.execute(sql)
     end
   end
 end
