@@ -4,54 +4,64 @@ require "spec_helper"
 
 module Decidim
   describe ClearDuplicatedHalfSignupUsersJob do
+    subject { described_class.perform_now }
+
+    let(:logger) { Logger.new(StringIO.new) }
+
     let!(:user1) { create(:user, phone_number: "1234567890", phone_country: "US", email: "user1@example.com") }
-    let!(:user2) { create(:user, phone_number: "1234567890", phone_country: "US", email: "quick_auth_user@example.com") }
-    let!(:user3) { create(:user, phone_number: "1234567890", phone_country: "US", email: "user3@example.com") }
+    let!(:user2) { create(:user, phone_number: phonenumberuser2, phone_country: "US", email: "quick_auth_user@example.com") }
+    let!(:user3) { create(:user, phone_number: phonenumberuser3, phone_country: "US", email: "user3@example.com") }
     let!(:user4) { create(:user, phone_number: "9876543210", phone_country: "US", email: "user4@example.com") }
-    let(:delete_reason) { "HalfSignup duplicated account" }
+    let(:delete_reason) { "HalfSignup duplicated account (#{current_date})" }
+    let(:current_date) { Date.current.strftime "%Y-%m-%d" }
+
+    let(:phonenumberuser2) { "1234567890" }
+    let(:phonenumberuser3) { "1234567890" }
 
     before do
+      allow_any_instance_of(Decidim::Logging).to receive(:stdout_logger).and_return(logger)
       allow_any_instance_of(Decidim::DestroyAccount).to receive(:call).and_return(true)
-      allow(Rails.logger).to receive(:warn)
-      allow(Rails.logger).to receive(:info)
     end
 
     describe "#perform" do
       context "when no duplicated phone numbers are found" do
-        it "prints that no duplicated phone numbers are found" do
-          allow_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:find_duplicated_phone_numbers).and_return([])
+        let(:phonenumberuser2) { "1234567891" }
+        let(:phonenumberuser3) { "1234567892" }
 
-          expect { described_class.perform_now }.to output(/No duplicated phone numbers found/).to_stdout
+        it "prints that no duplicated phone numbers are found" do
+          expect { subject }.to output(/No duplicated phone numbers found/).to_stdout
+          puts "ok"
         end
       end
 
       context "when duplicated phone numbers are found" do
         before do
-          allow_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:find_duplicated_phone_numbers).and_return([%w(1234567890 US)])
+          allow_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:duplicated_phone_numbers).and_return([%w(1234567890 US)])
         end
 
         it "soft deletes quick_auth users" do
           expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:soft_delete_user).with(user2, delete_reason)
 
-          described_class.perform_now
+          subject
         end
 
         it "alerts about duplicated phone numbers for non-quick_auth users" do
+          expect(Rails.logger).to receive(:warn).and_call_original
           expect(Rails.logger).to receive(:warn).with(/ALERT: Duplicated Phone Number Detected/)
 
-          described_class.perform_now
+          subject
         end
 
         it "does not soft delete non quick_auth users" do
           expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).not_to receive(:soft_delete_user).with(user1, delete_reason)
 
-          described_class.perform_now
+          subject
         end
 
         it "does not soft delete users with different phone numbers" do
           expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).not_to receive(:soft_delete_user).with(user4, delete_reason)
 
-          described_class.perform_now
+          subject
         end
       end
     end
@@ -111,13 +121,9 @@ module Decidim
       end
     end
 
-    describe "#find_duplicated_phone_numbers" do
+    describe "#duplicated_phone_numbers" do
       it "finds duplicated phone numbers" do
-        user1
-        user2
-        user3
-
-        result = described_class.new.send(:find_duplicated_phone_numbers)
+        result = described_class.new.send(:duplicated_phone_numbers)
 
         expect(result).to include(%w(1234567890 US))
       end
