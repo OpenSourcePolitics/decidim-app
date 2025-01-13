@@ -63,7 +63,6 @@ namespace :decidim do
         elsif organizations.size == 1
           organization = Decidim::Organization.first
         else
-          "(decidim:db:restore:local) #{Time.current.strftime("%d-%m-%Y %H:%M:%S")}> Select the organization to restore"
           organizations.each do |org|
             puts "#{org.id}) #{org.name} - #{org.host}"
           end
