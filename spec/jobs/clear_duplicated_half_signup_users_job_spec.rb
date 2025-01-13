@@ -24,9 +24,15 @@ module Decidim
 
     describe "#perform" do
       it "soft deletes quick_auth users" do
-        expect_any_instance_of(ClearDuplicatedHalfSignupUsersJob).to receive(:soft_delete_user).with(dup_user2, delete_reason)
-
+        expect(dup_user2.delete_reason).to be_nil
         subject
+        dup_user1.reload
+        dup_user2.reload
+        dup_user3.reload
+        expect(dup_user1.delete_reason).to be_nil
+        expect(dup_user3.delete_reason).to be_nil
+        expect(dup_user2.delete_reason).to eq("HalfSignup duplicated account (#{current_date})")
+        expect(dup_user2.extended_data).to include("half_signup" => { "email" => "quick_auth_user@example.com", "phone_number" => "1234", "phone_country" => "US" })
       end
 
       it "does not soft delete non quick_auth users" do
