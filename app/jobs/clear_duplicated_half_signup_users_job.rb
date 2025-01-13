@@ -1,93 +1,110 @@
 # frozen_string_literal: true
 
-# rubocop:disable Rails/Output
 class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
   include Decidim::Logging
 
   def perform
-    duplicated_numbers = find_duplicated_phone_numbers
-    return puts("No duplicated phone numbers found") if duplicated_numbers.empty?
+    @dup_decidim_users_count = 0
+    @dup_half_signup_count = 0
 
-    alerts = []
-
-    duplicated_numbers.each do |phone_info|
-      phone_number, phone_country = phone_info
-
-      users_with_phone = Decidim::User.where(phone_number: phone_number, phone_country: phone_country)
-      quick_auth_users = users_with_phone.select { |user| user.email.include?("quick_auth") }
-      other_users = users_with_phone.reject { |user| user.email.include?("quick_auth") }
-
-      quick_auth_users.each { |user| soft_delete_user(user, "Duplicated account") }
-
-      alerts << generate_alert_message(phone_number, other_users) if other_users.map(&:email).uniq.size > 1
+    log! "Start clearing half signup accounts..."
+    if duplicated_phone_numbers.blank?
+      log! "No duplicated phone numbers found"
+      return
     end
-    display_alerts(alerts)
+
+    log! "Found #{duplicated_phone_numbers.count} duplicated phone number to cleanup"
+    duplicated_phone_numbers.each do |phone_info|
+      phone_number, phone_country = phone_info
+      users = Decidim::User.where(phone_number: phone_number, phone_country: phone_country)
+
+      clear_data users
+    end
+
+    log! "Total distinct numbers to clear : #{duplicated_phone_numbers.size}"
+    log! "Half signup users archived : #{@dup_half_signup_count}"
+    log! "Decidim users account updated : #{@dup_decidim_users_count}"
+    log! "Total accounts modified : #{@dup_half_signup_count + @dup_decidim_users_count}"
+    log! "Terminated !"
   end
 
   private
 
-  def find_duplicated_phone_numbers
-    Decidim::User
-      .where.not(phone_number: [nil, ""])
-      .where.not(phone_country: [nil, ""])
-      .group(:phone_number, :phone_country)
-      .having("count(*) > 1")
-      .pluck(:phone_number, :phone_country)
+  def duplicated_phone_numbers
+    @duplicated_phone_numbers ||= Decidim::User
+                                  .where.not(phone_number: [nil, ""])
+                                  .where.not(phone_country: [nil, ""])
+                                  .group(:phone_number, :phone_country)
+                                  .having("count(*) > 1")
+                                  .pluck(:phone_number, :phone_country)
+  end
+
+  def clear_data(users)
+    decidim_user_dup_accounts = []
+
+    users.each do |user|
+      if user.email.include?("quick_auth")
+        @dup_half_signup_count += 1
+        soft_delete_user(user, delete_reason)
+      else
+        @dup_decidim_users_count += 1
+        decidim_user_dup_accounts << user
+      end
+    end
+
+    return if decidim_user_dup_accounts.blank?
+    # The unique user might be a user without email, if so, it should be cleared
+    return if decidim_user_dup_accounts.size <= 1 && decidim_user_dup_accounts.first.email.present?
+
+    # if there is multiple decidim user accounts, clear all phone number for these accounts
+    decidim_user_dup_accounts.each do |decidim_user|
+      clear_account_phone_number(decidim_user)
+    end
   end
 
   def soft_delete_user(user, reason)
-    if user.email.include?("quick_auth")
-      puts "\n---- Processing duplicated phone number: #{obfuscate_phone_number(user.phone_number)} ----\n"
+    return unless user.email&.include?("quick_auth")
 
-      user.update(phone_number: nil, phone_country: nil)
+    email = user.email
+    phone = user.phone_number
+    user.extended_data = user.extended_data.merge({
+                                                    half_signup: {
+                                                      email: email,
+                                                      phone_number: phone,
+                                                      phone_country: user.phone_country
+                                                    }
+                                                  })
 
-      form = Decidim::DeleteAccountForm.from_params(delete_reason: reason)
-      previous_email = user.email
-      Decidim::DestroyAccount.call(user, form) do
-        on(:ok) do
-          log!("User #{user.id} (#{previous_email}) has been deleted", :info)
-          puts("User #{user.id} (#{previous_email}) has been deleted")
-          save_deleted_user_email(user, previous_email)
-        end
-        on(:invalid) do
-          log!("Failed to delete user #{user.id} (#{user.email}): #{form.errors.full_messages}", :warn)
-          puts("Failed to delete user #{user.id} (#{user.email}): #{form.errors.full_messages}")
-        end
+    user.phone_number = nil
+    user.phone_country = nil
+
+    form = Decidim::DeleteAccountForm.from_params(delete_reason: reason)
+    Decidim::DestroyAccount.call(user, form) do
+      on(:ok) do
+        log!("User (ID/#{user.id} email/#{email} phone/#{obfuscate_phone_number(phone)}) has been deleted")
       end
-    else
-      log!("Not a Quick Auth account, skipping deletion", :info)
-      puts("Not a Quick Auth account, skipping deletion")
+      on(:invalid) do
+        log!("User (ID/#{user.id} email/#{email} phone/#{obfuscate_phone_number(phone)}) cannot be deleted: #{form.errors.full_messages}")
+      end
     end
   end
 
-  def save_deleted_user_email(user, email)
-    user.extended_data["deleted_user_email"] = email
-    user.save
-  end
+  def clear_account_phone_number(user)
+    phone_number = user.phone_number
+    Decidim::User.transaction do
+      user.extended_data = user.extended_data.merge({
+                                                      half_signup: {
+                                                        phone_number: user.phone_number,
+                                                        phone_country: user.phone_country
+                                                      }
+                                                    })
 
-  def generate_alert_message(phone_number, users)
-    obfuscated_number = obfuscate_phone_number(phone_number)
-    emails = users.map { |user| "#{user.id} - #{user.email}" }
-    email_pairs = emails.each_slice(2).map { |pair| pair.join(" | ") }
-
-    <<~MSG
-
-      ALERT: Duplicated Phone Number Detected : #{obfuscated_number}
-
-      Users with this number:
-
-      #{email_pairs.join("\n")}
-    MSG
-  end
-
-  def display_alerts(alerts)
-    return if alerts.empty?
-
-    puts "\n---- ALERTS ----"
-    alerts.each do |alert|
-      puts alert
-      log!(alert, :warn)
+      user.phone_number = nil
+      user.phone_country = nil
+      user.save(validate: false)
     end
+
+    log! "User (ID/#{user.id} phone/#{obfuscate_phone_number(phone_number)} email/#{user.email}) has been cleaned"
   end
 
   def obfuscate_phone_number(phone_number)
@@ -99,5 +116,12 @@ class ClearDuplicatedHalfSignupUsersJob < ApplicationJob
 
     visible_prefix + obfuscated_middle + visible_suffix
   end
+
+  def current_date
+    Date.current.strftime "%Y-%m-%d"
+  end
+
+  def delete_reason
+    "HalfSignup duplicated account (#{current_date})"
+  end
 end
-# rubocop:enable Rails/Output
