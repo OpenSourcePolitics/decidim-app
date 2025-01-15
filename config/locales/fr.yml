@@ -83,6 +83,41 @@ fr:
           projects_count:
             one: 1 projet
             other: "%{count} projets"
+        orders:
+          alphabetical: A-Z (Alphabétique)
+          highest_cost: Prix décroissant
+          label: Trier les projets par
+          lowest_cost: Prix croissant
+          most_voted: Les plus votés
+          random: Ordre aléatoire
+          selected: Sélectionné
+    comments:
+      comments:
+        create:
+          error: Une erreur s'est produite lors du vote sur le commentaire.
+    components:
+      budgets:
+        settings:
+          global:
+            default_sort_order: Tri des projets par défaut
+            default_sort_order_help: Par défaut signifie que si les votes sont désactivés, les projets seront affichés par ordre aléatoire, et si les votes sont activés, ils seront triés par ordre décroissant des votes.
+            default_sort_order_options:
+              alphabetical: A-Z (Alphabétique)
+              default: Par défaut
+              highest_cost: Prix décroissant
+              lowest_cost: Prix croissant
+              most_voted: Les plus votés
+              random: Ordre aléatoire
+          step:
+            default_sort_order: Tri des projets par défaut
+            default_sort_order_help: Par défaut signifie que si les votes sont désactivés, les projets seront affichés par ordre aléatoire, et si les votes sont activés, ils seront triés par ordre décroissant des votes.
+            default_sort_order_options:
+              alphabetical: A-Z (alphabétique)
+              default: Par défaut
+              highest_cost: Prix décroissant
+              lowest_cost: Prix croissant
+              most_voted: Les plus votés
+              random: Ordre aléatoire
     devise:
       sessions:
         new:
@@ -208,6 +243,9 @@ fr:
         please_sign_in: Veuillez vous connecter
         sign_up: Créer un compte
     system:
+      dashboard:
+        show:
+          current_organizations: Organisations
       organizations:
         omniauth_settings:
           france_connect:
@@ -243,6 +281,13 @@ fr:
             client_id: Client ID
             client_secret: Client secret
             site_url: Site URL
+      titles:
+        dashboard:
+          info:
+            db_size: 'Poids base de données: %{db_size}'
+            decidim_version: 'Decidim version: v%{version}'
+            title: Informations générales
+          title: Tableau de bord système
     verifications:
       authorizations:
         create:
