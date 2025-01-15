@@ -171,10 +171,10 @@ GIT
 
 GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome
-  revision: b9aae42bc835485edec5887cb02062caaaf64ed1
-  branch: release/0.27-stable
+  revision: 576acefb1aad36bd54a56b2225b234d3366e7233
+  branch: memoize-27
   specs:
-    decidim-decidim_awesome (0.10.3)
+    decidim-decidim_awesome (0.10.4)
       decidim-admin (>= 0.26.0, < 0.28)
       decidim-core (>= 0.26.0, < 0.28)
       deface (>= 1.5)
@@ -1235,4 +1235,4 @@ RUBY VERSION
    ruby 3.0.6p216
 
 BUNDLED WITH
-   2.5.10
+   2.5.22
