@@ -18,7 +18,7 @@ module Decidim
         versions.destroy_all
       end
 
-      log! "#{total} versions have been removed"
+      log! "#{total} versions removed"
     end
 
     private
