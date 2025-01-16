@@ -79,3 +79,7 @@
       cron: "0 9 0 * * *"
       class: Decidim::Cleaner::CleanDeletedUsersDataJob
       queue: scheduled
+    PapertrailCleanVersions:
+      cron: '0 0 3 * * *'
+      class: Decidim::PapertrailVersionJob
+      queue: default
