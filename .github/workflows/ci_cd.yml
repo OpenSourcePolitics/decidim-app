@@ -95,7 +95,7 @@ jobs:
           rm /tmp/chrome.deb
         name: Install Chrome version ${{ env.CHROME_VERSION }}
       - run: sudo apt install imagemagick
-        name: Install imagemagick  
+        name: Install imagemagick
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
