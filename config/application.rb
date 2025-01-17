@@ -55,6 +55,7 @@ module DevelopmentApp
       require "extends/controllers/decidim/admin/scopes_controller_extends"
       require "extends/controllers/decidim/scopes_controller_extends"
       require "extends/controllers/decidim/initiatives/committee_requests_controller_extends"
+      require "extends/controllers/decidim/comments/comments_controller"
       # Models
       require "extends/models/decidim/budgets/project_extends"
       require "extends/models/decidim/authorization_extends"
@@ -68,6 +69,7 @@ module DevelopmentApp
       # Forms
       require "extends/forms/decidim/initiatives/initiative_form_extends"
       require "extends/forms/decidim/initiatives/admin/initiative_form_extends"
+      require "extends/forms/decidim/comments/comment_form_extends"
       # Commands
       require "extends/commands/decidim/initiatives/admin/update_initiative_answer_extends"
       require "extends/commands/decidim/budgets/admin/import_proposals_to_budgets_extends"
