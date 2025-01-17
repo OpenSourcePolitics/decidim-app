@@ -120,6 +120,8 @@ ignore_missing:
  - decidim.term_customizer.admin.add_translations.index.*
  - decidim.term_customizer.admin.models.translations.fields.*
  - decidim.participatory_processes.admin.participatory_processes.form.*
+ - decidim.devise.omniauth_registrations.create.email_already_exists
+ - devise.registrations.signed_up_but_unconfirmed
 
 # Consider these keys used:
 ignore_unused:
