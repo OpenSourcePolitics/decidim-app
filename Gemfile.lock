@@ -51,8 +51,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git
-  revision: 34bbced1a8215618b8b115467c3cffc8e190d465
-  branch: fix/show_sms_verification_code
+  revision: 03b2b148762131802f878f2e6e08b6fc917776f5
+  branch: refactor/half_signup_budgets_booth
   specs:
     decidim-half_signup (0.27.0)
       countries (~> 5.1, >= 5.1.2)
