@@ -83,3 +83,8 @@
       cron: '0 0 3 * * *'
       class: Decidim::PapertrailVersionJob
       queue: default
+    ArchiveUsersPhone:
+      cron: '0 <%= Random.rand(0..59) %> <%= Random.rand(6..8) %> * * *' # Run randomly between 06:00 and 08:59
+      class: ArchiveUsersPhoneJob
+      queue: default
+      enabled: false

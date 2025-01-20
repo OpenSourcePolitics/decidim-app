@@ -8,4 +8,5 @@ Decidim::HalfSignup.configure do |config|
   config.default_countries = ENV.fetch("AVAILABLE_LOCALES", "fr").split(",").map(&:to_sym)
 
   config.skip_csrf = ENV.fetch("HALF_SIGNUP_SKIP_CSRF", "false") == "true"
+  config.show_sms_verification_code = ENV.fetch("HALF_SIGNUP_SHOW_SMS_VERIFICATION_CODE", "false") == "true"
 end
