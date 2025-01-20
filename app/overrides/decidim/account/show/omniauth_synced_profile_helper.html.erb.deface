@@ -1,0 +1,3 @@
+<!-- insert_before "erb[loud]:contains('form_required_explanation')" -->
+  <%= render partial: "/decidim/account/omniauth_synced_profile_helper", locals: { f: f } %>
+      

@@ -1,0 +1,2 @@
+<!-- replace "erb[loud]:contains('text_field :name')" -->
+      <%= f.text_field :name, disabled: force_profile_sync_on_omniauth_connection?, autocomplete: "name" %>

@@ -15,6 +15,22 @@ fr:
       participatory_space_private_user_csv_import:
         file: importer un fichier d'utilisateurs
   decidim:
+    account:
+      omniauth_synced_profile:
+        helper:
+          title: Synchronisation du profil
+          body_html: |-
+            <p>
+              les informations suivantes sont synchronisées avec un fournisseur d'identité externe:
+            </p>
+            <ul>
+              <li>Nom</li>
+              <li>Pseudonyme</li>
+              <li>Email</li>
+            </ul>
+            <p>
+              Vous ne pouvez pas modifier ces informations ici.
+            </p>
     admin:
       exports:
         notice: Votre exportation est en cours. Vous recevrez un e-mail quand elle sera terminée.
