@@ -29,6 +29,9 @@ gem "dalli"
 gem "dotenv-rails", "~> 2.7"
 gem "letter_opener_web", "~> 2.0"
 gem "spring"
+gem "aws-sdk-s3"
+gem "fog-aws"
+gem "carrierwave"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
