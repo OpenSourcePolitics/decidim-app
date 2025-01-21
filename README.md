@@ -27,8 +27,7 @@ Here's the revised and improved formatting of the table:
 | decidim-templates                                                                                                       | v0.29.1 | Module for using templates within the Decidim platform.       
 
 ## 🚀 Getting started
-- [Coming soon]
-
+- Local development setup with Docker can be found [here](./docs/DOCKER.md)
 
 ## 👋 Contributing
 - See our [contributing guide](./docs/CONTRIBUTING.md)

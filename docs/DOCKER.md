@@ -23,10 +23,12 @@ _You should have a two new files at `$(HOME)/.decidim/tls-certificate/` named `k
 make run
 ```
 _Seeds takes around 10 minutes to be generated, however you can start navigating while seeds are running_
-3. If not already done, add minio as known host
+
+3. If not already done, add MinIO as known host
 ```bash
 echo '127.0.0.1       minio' >> /etc/hosts
 ```
+
 4. Open your browser and navigate to `https://localhost:3000`
 5. MinIO S3 bucket is reachable at ``http://localhost:9000`` with access key `minioadmin` and secret key `minioadmin`
 
