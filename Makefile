@@ -53,7 +53,7 @@ rebuild:
 	docker volume rm decidim-app_shared-volume || true
 	@make up
 
-tls-certificate:
+tls-cert:
 	mkdir -p $(HOME)/.decidim/tls-certificate
 	openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
         -subj "/C=FR/ST=France/L=Paris/O=decidim/CN=decidim.eu" \

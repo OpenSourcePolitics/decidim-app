@@ -7,19 +7,19 @@ ENV RAILS_ENV=production \
 WORKDIR /opt/decidim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev curl git libicu-dev build-essential openssl \
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash \
+    libpq-dev curl git libicu-dev build-essential \
+    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && npm install --global yarn \
     && gem install bundler:2.5.22 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY Gemfile Gemfile.lock ./
+
 RUN bundle install --jobs="$(nproc)" --retry=3
 
 COPY . .
 
-RUN yarn add axe-core
 RUN bundle exec rake decidim:webpacker:install && \
     bundle exec rake assets:precompile && \
     bundle exec rails shakapacker:compile
