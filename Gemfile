@@ -25,13 +25,13 @@ gem "decidim-verifications", github: "decidim/decidim", tag: "v0.29.1"
 gem "bootsnap", "~> 1.4"
 gem "puma", ">= 6.3.1"
 
+gem "aws-sdk-s3"
+gem "carrierwave"
 gem "dalli"
 gem "dotenv-rails", "~> 2.7"
+gem "fog-aws"
 gem "letter_opener_web", "~> 2.0"
 gem "spring"
-gem "aws-sdk-s3"
-gem "fog-aws"
-gem "carrierwave"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
