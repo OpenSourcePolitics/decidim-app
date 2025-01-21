@@ -17,13 +17,10 @@ if Rails.env.production?
         aws_signature_version: 4,
         region: "fr-par",
         host: Rails.application.secrets.dig(:storage, :s3, :endpoint),
-        endpoint: Rails.application.secrets.dig(:storage, :s3, :bucket) == "localhost" ? "http://#{Rails.application.secrets.dig(:storage, :s3, :endpoint)}" : "https://#{Rails.application.secrets.dig(:storage, :s3, :endpoint)}",
+        endpoint: Rails.application.secrets.dig(:storage, :s3, :bucket) == "mybucket" ? "http://#{Rails.application.secrets.dig(:storage, :s3, :endpoint)}" : "https://#{Rails.application.secrets.dig(:storage, :s3, :endpoint)}",
         enable_signature_v4_streaming: false
       }
       config.storage = :fog
-      # config.fog_use_ssl_for_aws = false
-      # config.enable_processing = false
-      # config.fog_public = false # optional, defaults to true
       config.fog_directory = Rails.application.secrets.dig(:storage, :s3, :bucket)
       config.fog_attributes = {
         "Cache-Control" => "max-age=#{365.days.to_i}",
