@@ -52,3 +52,4 @@ public/sw.js*
 # Ignore Tailwind configuration
 tailwind.config.js
 yarn-error.log
+minio_data
