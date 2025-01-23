@@ -34,8 +34,8 @@ gem "spring"
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
-  gem "decidim-dev", github: "decidim/decidim", tag: "v0.29.1"
   gem "brakeman", "~> 6.1"
+  gem "decidim-dev", github: "decidim/decidim", tag: "v0.29.1"
   gem "parallel_tests", "~> 4.2"
 end
 
