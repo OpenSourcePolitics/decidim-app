@@ -88,3 +88,12 @@ Rails.application.configure do
     config.middleware.use Rack::Deflater
   end
 end
+
+require "decidim/spring"
+
+Spring.watch(
+  ".ruby-version",
+  ".rbenv-vars",
+  "tmp/restart.txt",
+  "tmp/caching-dev.txt"
+)
