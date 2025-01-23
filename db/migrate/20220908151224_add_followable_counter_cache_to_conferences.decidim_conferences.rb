@@ -4,7 +4,9 @@
 
 class AddFollowableCounterCacheToConferences < ActiveRecord::Migration[5.2]
   def change
-    add_column :decidim_conferences, :follows_count, :integer, null: false, default: 0, index: true
+    return unless defined?(Decidim::Conference)
+
+    add_column :decidim_conferences, :follows_count, :integer, null: false, default: 0, index: true, if_not_exists: true
 
     reversible do |dir|
       dir.up do

@@ -3,6 +3,8 @@
 
 class AddFollowableCounterCacheToInitiatives < ActiveRecord::Migration[5.2]
   def change
+    return unless defined?(Decidim::Initiative)
+
     add_column :decidim_initiatives, :follows_count, :integer, null: false, default: 0, index: true
 
     reversible do |dir|

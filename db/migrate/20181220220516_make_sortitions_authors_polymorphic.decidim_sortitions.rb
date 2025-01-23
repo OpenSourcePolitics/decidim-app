@@ -4,7 +4,9 @@
 
 class MakeSortitionsAuthorsPolymorphic < ActiveRecord::Migration[5.2]
   def change
-    add_column :decidim_sortitions_sortitions, :decidim_author_type, :string
+    return unless defined?(Decidim::Sortitions::Sortition)
+
+    add_column :decidim_sortitions_sortitions, :decidim_author_type, :string, if_not_exists: true
 
     Decidim::Sortitions::Sortition.reset_column_information
     Decidim::Sortitions::Sortition.includes(:author).find_each do |sortition|
