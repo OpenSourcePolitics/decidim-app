@@ -1,0 +1,7 @@
+en:
+  decidim:
+    admin:
+      models:
+        assembly:
+          fields:
+            promoted: "Promoted"

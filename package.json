@@ -1,0 +1,22 @@
+{
+  "name": "decidim-lite",
+  "private": true,
+  "dependencies": {
+    "@decidim/browserslist-config": "file:packages/browserslist-config",
+    "@decidim/core": "file:packages/core",
+    "@decidim/webpacker": "file:packages/webpacker",
+    "axe-core": "^4.10.2",
+    "graphql": "^16.9.0",
+    "graphql-ws": "^5.16.0"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "@decidim/dev": "file:packages/dev",
+    "@decidim/eslint-config": "file:packages/eslint-config",
+    "@decidim/prettier-config": "file:packages/prettier-config",
+    "@decidim/stylelint-config": "file:packages/stylelint-config"
+  },
+  "browserslist": [
+    "extends @decidim/browserslist-config"
+  ]
+}
