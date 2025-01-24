@@ -43,6 +43,8 @@ class ChangeColorFieldsOnProposalsStates < ActiveRecord::Migration[6.1]
       bg_color: colors[:red][:background], text_color: colors[:red][:foreground]
     )
     # rubocop:enable Rails/SkipsModelValidations
+  rescue ActiveModel::UnknownAttributeError
+    # Skip migration
   end
 
   def down

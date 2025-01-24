@@ -1,3 +1,6 @@
+image_name = decidim-app
+image_tag = 3.0.0
+
 run: up
 	@make create-seeds
 
@@ -6,7 +9,7 @@ up: build
 	@make setup-database
 
 build:
-	docker build . -t decidim-lite:1.0.0
+	docker build . -t "$(image_name):$(image_tag)"
 
 # Stops containers and remove volumes
 teardown:

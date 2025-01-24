@@ -23,7 +23,6 @@ services:
       /usr/bin/mc alias set local http://minio:9000 minioadmin minioadmin &&
       /usr/bin/mc mb --ignore-existing local/mybucket &&
       /usr/bin/mc anonymous set public local/mybucket &&
-      /usr/bin/mc admin config set local/ cors="*" &&
       /usr/bin/mc admin service restart local &&
       echo 'Bucket mybucket created and set to public!';
       exit 0;
@@ -49,7 +48,7 @@ services:
       - redis-data:/var/lib/redis/data
 
   sidekiq:
-    image: decidim-lite:1.0.0
+    image: decidim-app:3.0.0
     command: [ "bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml" ]
     environment:
       - DATABASE_HOST=database
@@ -91,7 +90,7 @@ services:
       - redis
 
   app:
-    image: decidim-lite:1.0.0
+    image: decidim-app:3.0.0
     command: [ "bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=/decidim/tls-certificate/key.pem&cert=/decidim/tls-certificate/cert.pem" ]
     environment:
       - DATABASE_HOST=database
