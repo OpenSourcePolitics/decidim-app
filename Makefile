@@ -60,5 +60,6 @@ tls-cert:
 	mkdir -p $(HOME)/.decidim/tls-certificate
 	openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
         -subj "/C=FR/ST=France/L=Paris/O=decidim/CN=decidim.eu" \
+        -addext "subjectAltName = DNS:localhost, DNS:minio" \
         -keyout $(HOME)/.decidim/tls-certificate/key.pem \
         -out $(HOME)/.decidim/tls-certificate/cert.pem

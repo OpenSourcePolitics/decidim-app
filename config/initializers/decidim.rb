@@ -389,8 +389,8 @@ Decidim.configure do |config|
   # Defines additional content security policies following the structure
   # Read more: https://docs.decidim.org/en/develop/configure/initializer#_content_security_policy
   config.content_security_policies_extra = {
-    "connect-src" => %w(http://minio:9000 http://minio http://localhost:9000),
-    "img-src" => %w(http://minio:9000 http://minio http://localhost:9000)
+    "connect-src" => %w(http://minio:9000 http://minio http://localhost:9000 https://localhost:3000),
+    "img-src" => %w(http://minio:9000 http://minio http://localhost:9000 https://localhost:3000)
   }
 
   # Admin admin password configurations
