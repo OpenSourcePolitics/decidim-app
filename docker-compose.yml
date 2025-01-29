@@ -82,17 +82,17 @@ services:
       - minio_mc
       - app
     volumes:
-      - ./app:/decidim/app
-      - ./config:/decidim/config
-      - ./lib:/decidim/lib
-      - ${HOME}/.decidim/tls-certificate:/decidim/tls-certificate
+      - ./app:/opt/decidim/app
+      - ./config:/opt/decidim/config
+      - ./lib:/opt/decidim/lib
+      - ${HOME}/.decidim/tls-certificate:/opt/decidim/tls-certificate
     links:
       - database
       - redis
 
   app:
     image: decidim-app:3.0.0
-    command: [ "bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=/decidim/tls-certificate/key.pem&cert=/decidim/tls-certificate/cert.pem" ]
+    command: [ "bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=/opt/decidim/tls-certificate/key.pem&cert=/opt/decidim/tls-certificate/cert.pem" ]
     environment:
       - DATABASE_HOST=database
       - DATABASE_USERNAME=postgres
@@ -121,10 +121,10 @@ services:
       - AWS_ACCESS_KEY_ID=minioadmin
       - AWS_SECRET_ACCESS_KEY=minioadmin
     volumes:
-      - ./app:/decidim/app
-      - ./config:/decidim/config
-      - ./lib:/decidim/lib
-      - ${HOME}/.decidim/tls-certificate:/decidim/tls-certificate
+      - ./app:/opt/decidim/app
+      - ./config:/opt/decidim/config
+      - ./lib:/opt/decidim/lib
+      - ${HOME}/.decidim/tls-certificate:/opt/decidim/tls-certificate
     ports:
       - 3000:3000
     depends_on:
