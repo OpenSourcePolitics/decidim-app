@@ -54,3 +54,7 @@ if ENV.fetch("DEV_SSL", nil) && defined?(Bundler) && (dev_gem = Bundler.load.spe
     key_pem: File.read("#{cert_dir}/ssl-key.pem")
   )
 end
+
+if Rails.application.secrets.puma[:health_check][:enabled]
+  activate_control_app "tcp://0.0.0.0:#{Rails.application.secrets.puma[:health_check][:port]}", { auth_token: Rails.application.secrets.puma[:health_check][:token] }
+end
