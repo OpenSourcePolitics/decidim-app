@@ -41,10 +41,10 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = Rails.application.secrets.dig(:storage, :provider)&.to_sym || :local
 
-  config.active_storage.service_urls_expire_in = if Rails.application.secrets.dig(:storage, :s3, :access_key_id).blank?
-                                                   "120000"
-                                                 else
+  config.active_storage.service_urls_expire_in = if %w(amazon amazon_instance_profile minio).include?(Rails.application.secrets.dig(:storage, :provider))
                                                    Rails.application.secrets.dig(:decidim, :service_urls_expires_in)
+                                                 else
+                                                   "120000"
                                                  end.to_i.weeks
 
   # Mount Action Cable outside main process or domain.
@@ -53,11 +53,11 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = Rails.application.secrets.decidim[:force_ssl].present?
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = %w(debug info warn error fatal).include?(ENV["RAILS_LOG_LEVEL"]) ? ENV["RAILS_LOG_LEVEL"] : :warn
+  config.log_level = %w(debug info warn error fatal).include?(ENV["RAILS_LOG_LEVEL"]) ? ENV["RAILS_LOG_LEVEL"]&.to_sym : :warn
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id, :ip]
@@ -116,4 +116,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.ssl_options = if config.force_ssl
+                         {
+                           redirect: {
+                             exclude: ->(request) { request.port == ENV.fetch("PUMA_HEALTH_CHECK_PORT", 3124) }
+                           }
+                         }
+                       else
+                         {
+                           redirect: false
+                         }
+                       end
 end

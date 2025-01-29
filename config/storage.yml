@@ -6,14 +6,30 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-s3:
+amazon:
   service: S3
-  access_key_id: <%= Rails.application.secrets.dig(:storage, :s3, :access_key_id) %>
-  secret_access_key: <%= Rails.application.secrets.dig(:storage, :s3, :secret_access_key) %>
-  bucket: <%= Rails.application.secrets.dig(:storage, :s3, :bucket) %>
-  endpoint: <%= Rails.application.secrets.dig(:storage, :s3, :bucket) == "mybucket" ? "http" : "https" %>://<%= Rails.application.secrets.dig(:storage, :s3, :endpoint) %>
+  region: <%= Rails.application.secrets.dig(:storage, :amazon, :region) %>
+  bucket: <%= Rails.application.secrets.dig(:amazon, :bucket) %>
+  access_key_id: <%= Rails.application.secrets.dig(:storage, :amazon, :access_key_id) %>
+  secret_access_key: <%= Rails.application.secrets.dig(:storage, :amazon, :secret_access_key) %>
+
+amazon_instance_profile:
+  service: S3
+  region: <%= Rails.application.secrets.dig(:storage, :amazon_instance_profile, :region) %>
+  bucket: <%= Rails.application.secrets.dig(:storage, :amazon_instance_profile, :bucket) %>
+  # In production, the following configuration is set through instance profile
+  # see config/initalizers/storage.rb for more details
+  # access_key_id: <%= Rails.application.secrets.dig(:storage, :amazon_instance_profile, :access_key_id) %>
+  # secret_access_key: <%= Rails.application.secrets.dig(:storage, :amazon_instance_profile, :secret_access_key) %>
+
+minio:
+  service: S3
+  access_key_id: <%= Rails.application.secrets.dig(:storage, :minio, :access_key_id) %>
+  secret_access_key: <%= Rails.application.secrets.dig(:storage, :minio, :secret_access_key) %>
+  bucket: <%= Rails.application.secrets.dig(:storage, :minio, :bucket) %>
+  endpoint: <%= Rails.application.secrets.dig(:storage, :minio, :endpoint) %>
+  region: <%= Rails.application.secrets.dig(:storage, :minio, :region) %>
   force_path_style: true
-  <%= "region: #{Rails.application.secrets.dig(:storage, :s3, :region)}" if Rails.application.secrets.dig(:storage, :s3, :region) %>
 
 azure:
   service: AzureStorage
@@ -36,8 +52,3 @@ gcs:
     token_uri: <%= Rails.application.secrets.dig(:storage, :gcs, :token_uri) %>
     auth_provider_x509_cert_url: <%= Rails.application.secrets.dig(:storage, :gcs, :auth_provider_x509_cert_url) %>
     client_x509_cert_url: <%= Rails.application.secrets.dig(:storage, :gcs, :client_x509_cert_url) %>
-
-# mirror:
-#   service: Mirror
-#   primary: local
-#   mirrors: [ s3, gcs, azure ]
