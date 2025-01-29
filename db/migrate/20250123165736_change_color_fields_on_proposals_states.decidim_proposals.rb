@@ -28,8 +28,6 @@ class ChangeColorFieldsOnProposalsStates < ActiveRecord::Migration[6.1]
   end
 
   def up
-    return unless ProposalState.column_names.include?("bg_color")
-
     colors = ProposalState.colors
 
     # rubocop:disable Rails/SkipsModelValidations
