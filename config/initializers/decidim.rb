@@ -428,6 +428,13 @@ if Decidim.module_installed? :proposals
   Decidim::Proposals.configure do |config|
     config.participatory_space_highlighted_proposals_limit = Rails.application.secrets.dig(:decidim, :proposals, :participatory_space_highlighted_proposals_limit).presence || 4
     config.process_group_highlighted_proposals_limit = Rails.application.secrets.dig(:decidim, :proposals, :process_group_highlighted_proposals_limit).presence || 3
+    config.require_category = true # Default
+    config.require_scope = true # Default
+  end
+
+  Decidim.find_component_manifest(:proposals).settings(:global) do |settings|
+    settings.attribute :require_category, type: :boolean, default: Decidim::Proposals.config.require_category
+    settings.attribute :require_scope, type: :boolean, default: Decidim::Proposals.config.require_scope
   end
 end
 
