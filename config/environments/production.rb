@@ -120,7 +120,7 @@ Rails.application.configure do
   config.ssl_options = if config.force_ssl
                          {
                            redirect: {
-                             exclude: false
+                             exclude: ->(request) { /health_check/.match?(request.path) }
                            }
                          }
                        else
