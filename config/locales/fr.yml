@@ -1,4 +1,24 @@
 fr:
+  decidim:
+    admin:
+      actions:
+        add: Ajouter
+        browse: Naviguer
+        confirm_destroy: Confirmer la suppression
+        destroy: Supprimer
+        edit: Modifier
+      models:
+        scope:
+          fields:
+            name: Nom
+            scope_type: Type de secteur
+      scopes:
+        no_scopes: Aucun secteur à ce niveau.
+        update:
+          error: Il y a eu une erreur lors de la mise à jour du secteur.
+          success: Secteur mis à jour avec succès.
+        titles:
+          scopes: Secteurs
   time:
     buttons:
       select: Sélectionner
