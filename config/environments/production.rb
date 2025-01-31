@@ -120,7 +120,7 @@ Rails.application.configure do
   config.ssl_options = if config.force_ssl
                          {
                            redirect: {
-                             exclude: ->(request) { request.port == ENV.fetch("PUMA_HEALTH_CHECK_PORT", 3124) }
+                             exclude: false
                            }
                          }
                        else
