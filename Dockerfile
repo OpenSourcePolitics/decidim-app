@@ -42,7 +42,7 @@ ENV RAILS_ENV=production \
     MALLOC_CONF="background_thread:true,metadata_thp:auto,dirty_decay_ms:5000,muzzy_decay_ms:5000,narenas:2"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client imagemagick libproj-dev proj-bin libjemalloc2 \
+    postgresql-client imagemagick libproj-dev proj-bin libjemalloc2 p7zip-full \
     && gem install bundler:2.5.22 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
