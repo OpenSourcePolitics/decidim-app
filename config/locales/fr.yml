@@ -1,4 +1,12 @@
+---
 fr:
+  decidim:
+    components:
+      proposals:
+        settings:
+          global:
+            require_category: La catégorie est obligatoire
+            require_scope: Le secteur est obligatoire
   time:
     buttons:
       select: Sélectionner
