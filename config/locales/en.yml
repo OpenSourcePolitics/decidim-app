@@ -1,7 +1,25 @@
 en:
   decidim:
     admin:
+      actions:
+        add: Add
+        browse: Browse
+        confirm_destroy: Confirm destroy
+        destroy: Destroy
+        edit: Edit
       models:
         assembly:
           fields:
             promoted: "Promoted"
+        scope:
+          fields:
+            name: Name
+            scope_type: Scope type
+      scopes:
+        no_scopes: No scopes at this level.
+        update:
+          error: There was a problem updating this scope.
+          success: Scope updated successfully
+        titles:
+          scopes: Scopes
+
