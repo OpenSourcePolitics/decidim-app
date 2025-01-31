@@ -11,5 +11,9 @@ Bundler.require(*Rails.groups)
 module DecidimApp
   class Application < Rails::Application
     config.load_defaults 6.1
+
+    config.after_initialize do # run after the initialization of the framework itself, engines, and all the application's initializers in config/initializers
+      require "extends/forms/decidim/proposals/proposal_form_extends"
+    end
   end
 end
