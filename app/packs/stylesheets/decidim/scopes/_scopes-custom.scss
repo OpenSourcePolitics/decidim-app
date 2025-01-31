@@ -1,0 +1,32 @@
+.draggable-list .draggable-content {
+  cursor: move;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0.5rem 1rem;
+}
+
+.custom-text {
+  color: black;
+}
+
+.custom-list {
+  border: 1px solid lightgray !important;
+  margin: 0.4rem
+}
+.draggable-content, .draggable-content__title, .draggable-content__icons {
+  display:flex;
+  align-items: center;
+}
+.draggable-content__title > a {
+  margin-left: 0.5rem;
+}
+.draggable-content__icons {
+  justify-content: space-between;
+  width: 8%;
+}
+.action-icon--remove {
+  fill: #e66a5d;
+}
