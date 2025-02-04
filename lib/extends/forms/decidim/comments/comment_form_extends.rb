@@ -7,8 +7,6 @@ module CommentFormExtends
 
   included do
     attribute :current_component, Decidim::Component
-
-    validates :current_component, presence: true
   end
 end
 
