@@ -1,8 +1,15 @@
 FROM ruby:3.2.2-slim as builder
 
+ARG DOCKER_IMAGE_TAG
+ARG DOCKER_IMAGE_NAME
+ARG DOCKER_IMAGE
+
 ENV RAILS_ENV=production \
     NODE_ENV=production \
-    SECRET_KEY_BASE=dummy
+    SECRET_KEY_BASE=dummy \
+    DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME:-decidim-app} \
+    DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME:-latest} \
+    DOCKER_IMAGE=${DOCKER_IMAGE:-rg.fr-par.scw.cloud/decidim-app/decidim-app}
 
 WORKDIR /opt/decidim
 
@@ -16,7 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY Gemfile Gemfile.lock ./
 
-RUN bundle install --jobs="$(nproc)" --retry=3
+RUN bundle install
 
 COPY . .
 
