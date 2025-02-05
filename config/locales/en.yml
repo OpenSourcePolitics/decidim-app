@@ -15,6 +15,22 @@ en:
       participatory_space_private_user_csv_import:
         file: importing file
   decidim:
+    account:
+      omniauth_synced_profile:
+        helper:
+          body_html: |-
+            <p>
+              The following informations are synchronized with an external identity provider:
+            </p>
+            <ul>
+              <li>Name</li>
+              <li>Nickname</li>
+              <li>Email</li>
+            </ul>
+            <p>
+              You can't edit these informations here.
+            </p>
+          title: Profile synchronization
     admin:
       actions:
         add: Add

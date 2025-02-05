@@ -1,0 +1,6 @@
+<% if force_profile_sync_on_omniauth_connection? %>
+  <div class="callout secondary">
+    <p><strong><%= t("decidim.account.omniauth_synced_profile.helper.title") %></strong></p>
+    <%= t("decidim.account.omniauth_synced_profile.helper.body_html") %>
+  </div>
+<% end %>
