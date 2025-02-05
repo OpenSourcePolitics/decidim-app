@@ -44,6 +44,14 @@ en:
           success: Scope updated successfully
       titles:
         scopes: Scopes
+    admin_multi_factor:
+      verification_code_mailer:
+        verification_code:
+          copy: 'Copy this code:'
+          expires_in: It will expire in %{time}.
+          ignore_html: If you didn't request this communication, please ignore this email.<br/>Your account won't be active until your account is fully confirmed.
+          subtitle_html: To finalize the authentication you just need to copy the 4 digit code below, go back to the %{organization} verification page and paste it!
+          title: Your 2Factor Authentication
     amendments:
       emendation:
         announcement:
