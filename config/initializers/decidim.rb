@@ -483,3 +483,16 @@ Rails.application.config.i18n.default_locale = Decidim.default_locale
 
 # Inform Decidim about the assets folder
 Decidim.register_assets_path File.expand_path("app/packs", Rails.application.root)
+
+
+
+org.content_security_policy = {
+  "default-src" => "localhost:* fonts.gstatic.com decidim.storage.opensourcepolitics.eu club.decidim.opensourcepolitics.eu:* templates.opensourcepolitics.net unpkg.com fonts.googleapis.com tarteaucitron.io",
+  "script-src" => "localhost:* fonts.gstatic.com decidim.storage.opensourcepolitics.eu club.decidim.opensourcepolitics.eu:* templates.opensourcepolitics.net unpkg.com fonts.googleapis.com tarteaucitron.io",
+  "style-src" => "localhost:* fonts.gstatic.com decidim.storage.opensourcepolitics.eu club.decidim.opensourcepolitics.eu:* templates.opensourcepolitics.net unpkg.com fonts.googleapis.com tarteaucitron.io",
+  "img-src" => "localhost:* fonts.gstatic.com decidim.storage.opensourcepolitics.eu club.decidim.opensourcepolitics.eu:* templates.opensourcepolitics.net unpkg.com fonts.googleapis.com tarteaucitron.io",
+  "font-src" => "localhost:* fonts.gstatic.com decidim.storage.opensourcepolitics.eu club.decidim.opensourcepolitics.eu:* templates.opensourcepolitics.net unpkg.com fonts.googleapis.com tarteaucitron.io",
+  "connect-src" => "localhost:* fonts.gstatic.com decidim.storage.opensourcepolitics.eu club.decidim.opensourcepolitics.eu:* templates.opensourcepolitics.net unpkg.com fonts.googleapis.com tarteaucitron.io",
+  "frame-src" => "localhost:* www.youtube.com fonts.gstatic.com decidim.storage.opensourcepolitics.eu club.decidim.opensourcepolitics.eu:* templates.opensourcepolitics.net unpkg.com fonts.googleapis.com tarteaucitron.io",
+  "media-src" => "localhost:* fonts.gstatic.com decidim.storage.opensourcepolitics.eu club.decidim.opensourcepolitics.eu:* templates.opensourcepolitics.net unpkg.com fonts.googleapis.com tarteaucitron.io"
+}
