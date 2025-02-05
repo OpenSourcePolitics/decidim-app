@@ -19,6 +19,7 @@ gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp"
 
 # External Decidim gems
+gem "decidim-admin_multi_factor", git: "https://github.com/alecslupu-pfa/decidim-module-admin_multi_factor.git"
 gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
 gem "decidim-cache_cleaner"
@@ -31,8 +32,8 @@ gem "decidim-extended_socio_demographic_authorization_handler", git: "https://gi
                                                                 branch: DECIDIM_BRANCH
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "temp/twilio-compatibility-0.27"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
-gem "decidim-admin_multi_factor", git: "https://github.com/alecslupu-pfa/decidim-module-admin_multi_factor.git"
 gem "decidim-gallery", git: "https://github.com/OpenSourcePolitics/decidim-module-gallery.git", branch: "fix/nokogiri_deps"
+gem "decidim-guest_meeting_registration", git: "https://github.com/alecslupu-pfa/guest-meeting-registration.git", branch: DECIDIM_BRANCH
 gem "decidim-half_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git", branch: "refactor/half_signup_budgets_booth"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: "release/0.27-stable"
@@ -40,7 +41,6 @@ gem "decidim-simple_proposal", git: "https://github.com/OpenSourcePolitics/decid
 gem "decidim-spam_detection", git: "https://github.com/OpenSourcePolitics/decidim-spam_detection.git", tag: "4.1.2"
 gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "fix/email_with_precompile"
-gem "decidim-guest_meeting_registration", git: "https://github.com/alecslupu-pfa/guest-meeting-registration.git", branch: DECIDIM_BRANCH
 # Omniauth gems
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect"
 gem "omniauth_openid_connect"
