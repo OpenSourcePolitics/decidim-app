@@ -3,6 +3,7 @@
 # For tuning the Content Security Policy, check the Decidim documentation site
 # https://docs.decidim.org/develop/en/customize/content_security_policy
 
+# rubocop:disable Layout/LineLength
 Decidim.configure do |config|
   config.content_security_policies_extra = {
     "default-src" => "localhost:* fonts.gstatic.com decidim.storage.opensourcepolitics.eu club.decidim.opensourcepolitics.eu:* templates.opensourcepolitics.net unpkg.com fonts.googleapis.com tarteaucitron.io",
@@ -15,3 +16,4 @@ Decidim.configure do |config|
     "media-src" => "localhost:* fonts.gstatic.com decidim.storage.opensourcepolitics.eu club.decidim.opensourcepolitics.eu:* templates.opensourcepolitics.net unpkg.com fonts.googleapis.com tarteaucitron.io"
   }
 end
+# rubocop:enable Layout/LineLength
