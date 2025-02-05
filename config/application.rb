@@ -74,6 +74,8 @@ module DevelopmentApp
       require "extends/commands/decidim/budgets/admin/import_proposals_to_budgets_extends"
       require "extends/commands/decidim/admin/destroy_participatory_space_private_user_extends"
       require "extends/commands/decidim/admin/create_attachment_extends"
+      # Mailers
+      require "extends/mailers/decidim/admin_multi_factor/verification_code_mailer"
 
       Decidim::GraphiQL::Rails.config.tap do |config|
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
