@@ -1,15 +1,12 @@
-FROM ruby:3.2.2-slim as builder
-
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
 ARG DOCKER_IMAGE
 
+FROM ruby:3.2.2-slim as builder
+
 ENV RAILS_ENV=production \
     NODE_ENV=production \
-    SECRET_KEY_BASE=dummy \
-    DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME:-decidim-app} \
-    DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME:-latest} \
-    DOCKER_IMAGE=${DOCKER_IMAGE:-rg.fr-par.scw.cloud/decidim-app/decidim-app}
+    SECRET_KEY_BASE=dummy
 
 WORKDIR /opt/decidim
 
@@ -23,7 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY Gemfile Gemfile.lock ./
 
-RUN bundle install
+RUN bundle config set --local without 'development test' && \
+    bundle install -j"$(nproc)"
 
 COPY . .
 
@@ -45,11 +43,13 @@ FROM ruby:3.2.2-slim as runner
 ENV RAILS_ENV=production \
     NODE_ENV=production \
     SECRET_KEY_BASE=dummy \
-    LD_PRELOAD="libjemalloc.so.2" \
-    MALLOC_CONF="background_thread:true,metadata_thp:auto,dirty_decay_ms:5000,muzzy_decay_ms:5000,narenas:2"
+    DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME:-decidim-app} \
+    DOCKER_IMAGE_TAG=${DOCKER_IMAGE_TAG:-latest} \
+    DOCKER_IMAGE=${DOCKER_IMAGE:-rg.fr-par.scw.cloud/decidim-app/decidim-app}
+
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client imagemagick libproj-dev proj-bin libjemalloc2 p7zip-full \
+    postgresql-client imagemagick libproj-dev proj-bin p7zip-full \
     && gem install bundler:2.5.22 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
