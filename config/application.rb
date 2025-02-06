@@ -4,7 +4,6 @@ require_relative "boot"
 
 require "decidim/rails"
 require "action_cable/engine"
-require "rails/test_unit/railtie"
 
 Bundler.require(*Rails.groups)
 
