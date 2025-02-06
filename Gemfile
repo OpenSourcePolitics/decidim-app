@@ -29,14 +29,14 @@ gem "puma", ">= 6.3.1"
 gem "aws-sdk-s3"
 gem "dalli"
 gem "dotenv-rails", "~> 2.7"
-gem "letter_opener_web", "~> 2.0"
-gem "spring"
-gem "rack-attack", "~> 6.7"
 gem "faker", "~> 3.2"
+gem "letter_opener_web", "~> 2.0"
+gem "rack-attack", "~> 6.7"
+gem "spring"
 
 group :development, :test do
-  gem "byebug", "~> 11.0", platform: :mri
   gem "brakeman", "~> 6.1"
+  gem "byebug", "~> 11.0", platform: :mri
   gem "decidim-dev", github: "decidim/decidim", tag: "v0.29.1"
   gem "parallel_tests", "~> 4.2"
 end
@@ -57,4 +57,3 @@ group :production do
   gem "sidekiq", "~> 6.0"
   gem "sidekiq-scheduler", "~> 5.0"
 end
-
