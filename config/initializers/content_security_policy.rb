@@ -11,11 +11,9 @@ CSPS = %w(minio:*
           club.decidim.opensourcepolitics.eu
           templates.opensourcepolitics.net
           unpkg.com
-          www.youtube.com
-          ).freeze
+          www.youtube.com).freeze
 # tarteaucitron.io
 
-# rubocop:disable Layout/LineLength
 Decidim.configure do |config|
   config.content_security_policies_extra = {
     "default-src" => CSPS + %w(http://minio:*),
@@ -28,4 +26,3 @@ Decidim.configure do |config|
     "media-src" => CSPS + %w(http://minio:)
   }
 end
-# rubocop:enable Layout/LineLength

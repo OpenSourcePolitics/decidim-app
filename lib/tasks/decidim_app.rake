@@ -5,9 +5,7 @@ namespace :decidim_app do
     desc "Disable production configuration for restored database"
     task restore_local: :environment do
       Rails.logger.warn "(decidim_app:db:restore_local)> Disabling production configuration..."
-      if Decidim::Organization.count > 1 && ENV["ORGANIZATION_ID"].blank?
-        raise ::ArgumentError, "Multiple organizations found, please specify ORGANIZATION_ID environment variable"
-      end
+      raise ArgumentError, "Multiple organizations found, please specify ORGANIZATION_ID environment variable" if Decidim::Organization.count > 1 && ENV["ORGANIZATION_ID"].blank?
 
       organization_id = ENV.fetch("ORGANIZATION_ID", 1)
       organization = Decidim::Organization.find(organization_id)

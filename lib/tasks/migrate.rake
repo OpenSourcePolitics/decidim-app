@@ -28,9 +28,9 @@ namespace :migrate do
       versions_migration_forced = []
 
       rails_migrations.versions_down_but_already_passed&.each do |version|
-        next if ActiveRecord::SchemaMigration.find_by(version: version).present?
+        next if ActiveRecord::SchemaMigration.find_by(version:).present?
 
-        ActiveRecord::SchemaMigration.create!(version: version)
+        ActiveRecord::SchemaMigration.create!(version:)
         versions_migration_success << version
         logger.info("Migration '#{version}' up")
       end
@@ -47,8 +47,8 @@ namespace :migrate do
         else
           logger.warn("Migration '#{version}' failed, validating directly in database schema migrations...")
           logger.warn(migration_process)
-          if ActiveRecord::SchemaMigration.find_by(version: version).blank?
-            ActiveRecord::SchemaMigration.create!(version: version)
+          if ActiveRecord::SchemaMigration.find_by(version:).blank?
+            ActiveRecord::SchemaMigration.create!(version:)
             versions_migration_forced << version
             logger.info("Migration '#{version}' successfully marked as up")
           end
