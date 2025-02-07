@@ -32,9 +32,9 @@ gem "dotenv-rails", "~> 2.7"
 gem "faker", "~> 3.2"
 gem "letter_opener_web", "~> 2.0"
 gem "rack-attack", "~> 6.7"
-gem "spring"
 
 group :development, :test do
+  gem "spring"
   gem "brakeman", "~> 6.1"
   gem "byebug", "~> 11.0", platform: :mri
   gem "decidim-dev", github: "decidim/decidim", tag: "v0.29.1"
