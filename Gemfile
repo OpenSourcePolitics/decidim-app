@@ -23,10 +23,10 @@ gem "decidim-surveys", github: "decidim/decidim", tag: "v0.29.1"
 gem "decidim-system", github: "decidim/decidim", tag: "v0.29.1"
 gem "decidim-verifications", github: "decidim/decidim", tag: "v0.29.1"
 
-gem "bootsnap", "~> 1.4"
+gem "bootsnap", "~> 1.4", require: false
 gem "puma", ">= 6.3.1"
 
-gem "aws-sdk-s3"
+gem "aws-sdk-s3", require: false
 gem "dalli"
 gem "dotenv-rails", "~> 2.7"
 gem "faker", "~> 3.2"
