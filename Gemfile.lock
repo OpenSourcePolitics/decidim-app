@@ -42,7 +42,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-gallery.git
-  revision: 726fab33984c3adeec30cf90d0e1b4ad3881787d
+  revision: 0ce98eeade3f86055782522ab9aa0339183eaa6e
   branch: fix/nokogiri_deps
   specs:
     decidim-gallery (0.26.0)
