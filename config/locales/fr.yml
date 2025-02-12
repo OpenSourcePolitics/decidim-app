@@ -248,6 +248,10 @@ fr:
           current_organizations: Organisations
       organizations:
         omniauth_settings:
+          cultuur_connect:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
           france_connect:
             client_id: Client ID
             client_secret: Client secret
