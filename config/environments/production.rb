@@ -117,15 +117,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.ssl_options = if config.force_ssl
-                         {
-                           redirect: {
-                             exclude: ->(request) { /health_check/.match?(request.path) }
-                           }
-                         }
-                       else
-                         {
-                           redirect: false
-                         }
-                       end
+  config.ssl_options = {}
 end
