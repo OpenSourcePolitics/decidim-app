@@ -1215,6 +1215,7 @@ DEPENDENCIES
   multipart-post
   nokogiri (= 1.13.4)
   omniauth-france_connect!
+  omniauth-oauth2
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
   omniauth_openid_connect
