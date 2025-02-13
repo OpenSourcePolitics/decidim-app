@@ -11,7 +11,7 @@ ENV RAILS_ENV=production \
 WORKDIR /opt/decidim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev curl git libicu-dev build-essential \
+    libpq-dev curl git libicu-dev build-essential wkhtmltopdf \
     && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && npm install --global yarn \
@@ -49,7 +49,7 @@ ENV RAILS_ENV=production \
 
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client imagemagick libproj-dev proj-bin p7zip-full \
+    postgresql-client imagemagick libproj-dev proj-bin p7zip-full wkhtmltopdf \
     && gem install bundler:2.5.22 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
