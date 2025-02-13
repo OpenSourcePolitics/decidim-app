@@ -67,11 +67,6 @@ services:
       - DEFACE_ENABLED=false
       - QUESTION_CAPTCHA_HOST=
       - ENABLE_RACK_ATTACK=0
-      - PUMA_MIN_THREADS=5
-      - PUMA_MAX_THREADS=5
-      - PUMA_WORKERS=4
-      - PUMA_PRELOAD_APP=true
-      - RAILS_SESSION_STORE=active_record
       - STORAGE_PROVIDER=minio
       - AWS_REGION=fr-par-1
       - AWS_ENDPOINT=http://minio:9000
@@ -92,7 +87,7 @@ services:
 
   app:
     image: decidim-app:3.0.0
-    command: [ "bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=/opt/decidim/tls-certificate/key.pem&cert=/opt/decidim/tls-certificate/cert.pem" ]
+    command: [ "bundle", "exec", "puma", "-b", "ssl://0.0.0.0:3000?key=/opt/decidim/tls-certificate/key.pem&cert=/opt/decidim/tls-certificate/cert.pem" ]
     environment:
       - DATABASE_HOST=database
       - DATABASE_USERNAME=postgres
@@ -109,11 +104,6 @@ services:
       - DEFACE_ENABLED=false
       - QUESTION_CAPTCHA_HOST=
       - ENABLE_RACK_ATTACK=0
-      - PUMA_MIN_THREADS=5
-      - PUMA_MAX_THREADS=5
-      - PUMA_WORKERS=4
-      - PUMA_PRELOAD_APP=true
-      - RAILS_SESSION_STORE=active_record
       - STORAGE_PROVIDER=minio
       - AWS_REGION=fr-par-1
       - AWS_ENDPOINT=http://minio:9000
