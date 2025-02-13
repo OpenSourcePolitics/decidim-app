@@ -9,7 +9,7 @@ up: build
 	@make setup-database
 
 build:
-	docker build . -t "$(image_name):$(image_tag)"
+	docker build . --build-arg DOCKER_IMAGE_NAME=$(image_name) --build-arg DOCKER_IMAGE_TAG=$(image_tag) --build-arg DOCKER_IMAGE=rg.fr-par.scw.cloud/decidim-app/$(image_name):$(image_tag) -t "$(image_name):$(image_tag)"
 
 # Stops containers and remove volumes
 teardown:
