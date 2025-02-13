@@ -144,6 +144,7 @@ ignore_unused:
   - decidim.system.organizations.omniauth_settings.{france_connect, france_connect_profile, france_connect_uid}.*
   - decidim.system.organizations.omniauth_settings.openid_connect.*
   - decidim.system.organizations.omniauth_settings.publik.*
+  - decidim.system.organizations.omniauth_settings.cultuur_connect.*
   - decidim.verifications.authorizations.create.*
   - decidim.verifications.authorizations.first_login.actions.*
   - rack_attack.too_many_requests.*
