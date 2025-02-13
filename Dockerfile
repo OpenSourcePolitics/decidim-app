@@ -61,10 +61,8 @@ WORKDIR /opt/decidim
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY --from=builder /opt/decidim /opt/decidim
 
-RUN mkdir -p /opt/decidim/tmp/pids /opt/decidim/tmp/sockets /opt/decidim/log \
-    && chown -R decidim:decidim /opt/decidim
 RUN chown -R decidim:decidim /opt/decidim
 USER decidim
 
 EXPOSE 3000
-CMD ["bundle", "exec", "puma", "-b", "0.0.0.0"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
