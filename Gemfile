@@ -54,6 +54,7 @@ end
 group :production do
   gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
   gem "health_check", "~> 3.1"
+  gem "lograge"
   gem "sidekiq", "~> 6.0"
   gem "sidekiq-scheduler", "~> 5.0"
 end
