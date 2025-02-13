@@ -5,23 +5,6 @@ source "https://rubygems.org"
 ruby RUBY_VERSION
 
 gem "decidim", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-accountability", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-admin", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-api", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-assemblies", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-blogs", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-budgets", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-comments", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-core", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-debates", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-forms", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-meetings", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-pages", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-participatory_processes", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-proposals", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-surveys", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-system", github: "decidim/decidim", tag: "v0.29.2"
-gem "decidim-verifications", github: "decidim/decidim", tag: "v0.29.2"
 
 gem "bootsnap", "~> 1.4", require: false
 gem "puma", ">= 6.3.1"
