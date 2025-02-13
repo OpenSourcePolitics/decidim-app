@@ -1,0 +1,3 @@
+<!-- replace "erb[loud]:contains('decidim_sanitize_editor translated_attribute project.description')" -->
+
+<%= decidim_sanitize_editor_admin translated_attribute project.description %>
