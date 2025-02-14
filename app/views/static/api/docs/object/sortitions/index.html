@@ -1,45 +1,15 @@
 <div class="content"><h1>
-<a id="commentable" class="anchor" href="#commentable" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Commentable</h1>
-<p>A commentable object</p>
+<a id="sortitions" class="anchor" href="#sortitions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sortitions</h1>
+<p>A sortition component of a participatory space.</p>
 <h2>
 <a id="implements" class="anchor" href="#implements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Implements</h2>
 <ul>
-   <li><code><a href="/api/docs/interface/commentableinterface">CommentableInterface</a></code></li>
+   <li><code><a href="/api/docs/interface/componentinterface">ComponentInterface</a></code></li>
 </ul>
 <h2>
-<a id="fields" class="anchor" href="#fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fields</h2>
+<a id="connections" class="anchor" href="#connections" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Connections</h2>
 <div class="field-entry ">
-  <span id="id" class="field-name anchored">id (<code><a href="/api/docs/scalar/id">ID!</a></code>)</span>
-  <div class="description-wrapper">
-   <p>The commentable's ID</p>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="type" class="field-name anchored">type (<code><a href="/api/docs/scalar/string">String!</a></code>)</span>
-  <div class="description-wrapper">
-   <p>The commentable's class name. i.e. <code>Decidim::ParticipatoryProcess</code></p>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="acceptsnewcomments" class="field-name anchored">acceptsNewComments (<code><a href="/api/docs/scalar/boolean">Boolean!</a></code>)</span>
-  <div class="description-wrapper">
-   <p>Whether the object can have new comments or not</p>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="commentshavealignment" class="field-name anchored">commentsHaveAlignment (<code><a href="/api/docs/scalar/boolean">Boolean!</a></code>)</span>
-  <div class="description-wrapper">
-   <p>Whether the object comments have alignment or not</p>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="commentshavevotes" class="field-name anchored">commentsHaveVotes (<code><a href="/api/docs/scalar/boolean">Boolean!</a></code>)</span>
-  <div class="description-wrapper">
-   <p>Whether the object comments have votes or not</p>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="comments" class="field-name anchored">comments (<code><a href="/api/docs/object/comment">[Comment!]!</a></code>)</span>
+  <span id="sortitions" class="field-name connection-name anchored">sortitions (<code><a href="/api/docs/object/sortitionconnection">SortitionConnection</a></code>)</span>
   <div class="description-wrapper">
      <table class="arguments">
   <thead>
@@ -51,21 +21,65 @@
   </thead>
   <tbody>
   <tr>
-  <td><code class="anchored">orderBy</code></td>
+  <td><code class="anchored">after</code></td>
   <td>
     <code><a href="/api/docs/scalar/string">String</a></code>
   </td>
   <td>
-    <p>Order the comments</p>
+    <p>Returns the elements in the list that come after the specified cursor.</p>
    </td>
   </tr>
   <tr>
-  <td><code class="anchored">singleCommentId</code></td>
+  <td><code class="anchored">before</code></td>
   <td>
     <code><a href="/api/docs/scalar/string">String</a></code>
   </td>
   <td>
-    <p>ID of the single comment to look at</p>
+    <p>Returns the elements in the list that come before the specified cursor.</p>
+   </td>
+  </tr>
+  <tr>
+  <td><code class="anchored">first</code></td>
+  <td>
+    <code><a href="/api/docs/scalar/int">Int</a></code>
+  </td>
+  <td>
+    <p>Returns the first <em>n</em> elements from the list.</p>
+   </td>
+  </tr>
+  <tr>
+  <td><code class="anchored">last</code></td>
+  <td>
+    <code><a href="/api/docs/scalar/int">Int</a></code>
+  </td>
+  <td>
+    <p>Returns the last <em>n</em> elements from the list.</p>
+   </td>
+  </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+<h2>
+<a id="fields" class="anchor" href="#fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fields</h2>
+<div class="field-entry ">
+  <span id="sortition" class="field-name anchored">sortition (<code><a href="/api/docs/object/sortition">Sortition</a></code>)</span>
+  <div class="description-wrapper">
+     <table class="arguments">
+  <thead>
+  <tr>
+    <th>Argument</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code class="anchored">id</code></td>
+  <td>
+    <code><a href="/api/docs/scalar/id">ID!</a></code>
+  </td>
+  <td>
    </td>
   </tr>
   </tbody>
@@ -73,21 +87,27 @@
   </div>
 </div>
 <div class="field-entry ">
-  <span id="totalcommentscount" class="field-name anchored">totalCommentsCount (<code><a href="/api/docs/scalar/int">Int!</a></code>)</span>
+  <span id="id" class="field-name anchored">id (<code><a href="/api/docs/scalar/id">ID!</a></code>)</span>
   <div class="description-wrapper">
-   <p>The number of comments in all levels this resource holds</p>
+   <p>The Component's unique ID</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="hascomments" class="field-name anchored">hasComments (<code><a href="/api/docs/scalar/boolean">Boolean!</a></code>)</span>
+  <span id="name" class="field-name anchored">name (<code><a href="/api/docs/object/translatedfield">TranslatedField!</a></code>)</span>
   <div class="description-wrapper">
-   <p>Check if the commentable has comments</p>
+   <p>The name of this component.</p>
   </div>
 </div>
 <div class="field-entry ">
-  <span id="userallowedtocomment" class="field-name anchored">userAllowedToComment (<code><a href="/api/docs/scalar/boolean">Boolean!</a></code>)</span>
+  <span id="weight" class="field-name anchored">weight (<code><a href="/api/docs/scalar/int">Int!</a></code>)</span>
   <div class="description-wrapper">
-   <p>Check if the current user can comment</p>
+   <p>The weight of the component</p>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="participatoryspace" class="field-name anchored">participatorySpace (<code><a href="/api/docs/object/participatoryspace">ParticipatorySpace!</a></code>)</span>
+  <div class="description-wrapper">
+   <p>The participatory space in which this component belongs to.</p>
   </div>
 </div></div>
 <div id="sidebar"><ul class="categories">
@@ -234,13 +254,6 @@
       <li>
         <a href="/api/docs/object/commentmutation/" class="sidebar-link">
           CommentMutation
-        </a>
-      </li>
-      
-        
-      <li>
-        <a href="/api/docs/object/commentable/" class="sidebar-link">
-          Commentable
         </a>
       </li>
       
@@ -582,6 +595,34 @@
       
         
       <li>
+        <a href="/api/docs/object/sortition/" class="sidebar-link">
+          Sortition
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/api/docs/object/sortitionconnection/" class="sidebar-link">
+          SortitionConnection
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/api/docs/object/sortitionedge/" class="sidebar-link">
+          SortitionEdge
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/api/docs/object/sortitions/" class="sidebar-link">
+          Sortitions
+        </a>
+      </li>
+      
+        
+      <li>
         <a href="/api/docs/object/statistic/" class="sidebar-link">
           Statistic
         </a>
@@ -808,6 +849,13 @@
         <li>
           <a href="/api/docs/interface/fingerprintinterface/" class="sidebar-link">
             FingerprintInterface
+          </a>
+        </li>
+      
+        
+        <li>
+          <a href="/api/docs/interface/meetingslinkedresourcesinterface/" class="sidebar-link">
+            MeetingsLinkedResourcesInterface
           </a>
         </li>
       
