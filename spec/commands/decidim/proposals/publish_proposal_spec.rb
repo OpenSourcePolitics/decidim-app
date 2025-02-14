@@ -38,38 +38,38 @@ module Decidim
             create(:follow, followable: component.participatory_space, user: other_follower)
 
             allow(Decidim::EventsManager).to receive(:publish)
-                                               .with(hash_including(event: "decidim.events.gamification.badge_earned"))
+              .with(hash_including(event: "decidim.events.gamification.badge_earned"))
 
             expect(Decidim::EventsManager)
               .to receive(:publish)
-                    .with(
-                      event: "decidim.events.proposals.proposal_published",
-                      event_class: Decidim::Proposals::PublishProposalEvent,
-                      resource: kind_of(Decidim::Proposals::Proposal),
-                      followers: [follower]
-                    )
+              .with(
+                event: "decidim.events.proposals.proposal_published",
+                event_class: Decidim::Proposals::PublishProposalEvent,
+                resource: kind_of(Decidim::Proposals::Proposal),
+                followers: [follower]
+              )
 
             expect(Decidim::EventsManager)
               .to receive(:publish)
-                    .with(
-                      event: "decidim.events.proposals.proposal_published",
-                      event_class: Decidim::Proposals::PublishProposalEvent,
-                      resource: kind_of(Decidim::Proposals::Proposal),
-                      followers: [other_follower],
-                      extra: {
-                        participatory_space: true
-                      }
-                    )
+              .with(
+                event: "decidim.events.proposals.proposal_published",
+                event_class: Decidim::Proposals::PublishProposalEvent,
+                resource: kind_of(Decidim::Proposals::Proposal),
+                followers: [other_follower],
+                extra: {
+                  participatory_space: true
+                }
+              )
             expect(Decidim::EventsManager)
               .to receive(:publish)
-                    .with(
-                      event: "decidim.events.proposals.author_confirmation_proposal_event",
-                      event_class: Decidim::Proposals::AuthorConfirmationProposalEvent,
-                      resource: kind_of(Decidim::Proposals::Proposal),
-                      affected_users: [proposal_draft.creator_identity],
-                      extra: { force_email: true },
-                      force_send: true
-                    )
+              .with(
+                event: "decidim.events.proposals.author_confirmation_proposal_event",
+                event_class: Decidim::Proposals::AuthorConfirmationProposalEvent,
+                resource: kind_of(Decidim::Proposals::Proposal),
+                affected_users: [proposal_draft.creator_identity],
+                extra: { force_email: true },
+                force_send: true
+              )
             subject.call
           end
         end
