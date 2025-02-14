@@ -1,4 +1,12 @@
 fr:
+  decidim:
+    events:
+      proposals:
+        author_confirmation_proposal_event:
+          email_intro: 'Votre proposition « %{resource_title} » a été reçue avec succès et est maintenant publique. Merci pour votre participation ! Vous pouvez la consulter ici :'
+          email_outro: Vous recevez cette notification car vous êtes l’auteur de la proposition. Vous pouvez vous désabonner en visitant la page de la proposition (« %{resource_title} ») et en cliquant sur « Ne plus suivre ».
+          email_subject: Votre proposition a été publiée !
+          notification_title: Votre proposition <a href="%{resource_path}">%{resource_title}</a> est maintenant en ligne.
   time:
     buttons:
       select: Sélectionner
