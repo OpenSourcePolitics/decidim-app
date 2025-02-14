@@ -11,7 +11,7 @@ module DecidimApp
   class Application < Rails::Application
     config.load_defaults 7.0
 
-    config.action_dispatch.cookies_serializer = :hybrid
-    config.active_support.key_generator_hash_digest_class = OpenSSL::Digest::SHA1
+
+    config.action_dispatch.use_cookies_with_metadata = false
   end
 end
