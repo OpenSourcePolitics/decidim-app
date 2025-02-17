@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_18_114335) do
+ActiveRecord::Schema.define(version: 2025_02_04_152655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -117,6 +117,17 @@ ActiveRecord::Schema.define(version: 2024_11_18_114335) do
     t.index ["resource_type", "resource_id"], name: "index_action_logs_on_resource_type_and_id"
     t.index ["version_id"], name: "index_decidim_action_logs_on_version_id"
     t.index ["visibility"], name: "index_decidim_action_logs_on_visibility"
+  end
+
+  create_table "decidim_admin_multi_factor_settings", force: :cascade do |t|
+    t.boolean "enable_multifactor", default: false
+    t.boolean "email", default: false
+    t.boolean "sms", default: false
+    t.boolean "webauthn", default: false
+    t.bigint "decidim_organization_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["decidim_organization_id"], name: "index_decidim_admin_multi_factor_settings_on_organization_id"
   end
 
   create_table "decidim_amendments", force: :cascade do |t|
@@ -503,6 +514,8 @@ ActiveRecord::Schema.define(version: 2024_11_18_114335) do
     t.string "decidim_participatory_space_type"
     t.integer "decidim_participatory_space_id"
     t.datetime "deleted_at"
+    t.integer "up_votes_count", default: 0, null: false
+    t.integer "down_votes_count", default: 0, null: false
     t.index ["created_at"], name: "index_decidim_comments_comments_on_created_at"
     t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_comments_comments_on_decidim_author"
     t.index ["decidim_author_id"], name: "decidim_comments_comment_author"
@@ -755,7 +768,7 @@ ActiveRecord::Schema.define(version: 2024_11_18_114335) do
     t.bigint "resource_id"
     t.string "decidim_author_type"
     t.bigint "decidim_author_id"
-    t.integer "decidim_user_group_id"
+    t.integer "decidim_user_group_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["decidim_author_type", "decidim_author_id"], name: "idx_endorsements_authors"
@@ -1667,6 +1680,7 @@ ActiveRecord::Schema.define(version: 2024_11_18_114335) do
     t.integer "follows_count", default: 0, null: false
     t.integer "decidim_proposals_proposal_state_id", null: false
     t.datetime "deleted_at"
+    t.integer "valuation_assignments_count", default: 0
     t.index "md5((body)::text)", name: "decidim_proposals_proposal_body_search"
     t.index "md5((title)::text)", name: "decidim_proposals_proposal_title_search"
     t.index ["created_at"], name: "index_decidim_proposals_proposals_on_created_at"
@@ -2157,6 +2171,7 @@ ActiveRecord::Schema.define(version: 2024_11_18_114335) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "decidim_admin_multi_factor_settings", "decidim_organizations"
   add_foreign_key "decidim_area_types", "decidim_organizations"
   add_foreign_key "decidim_areas", "decidim_area_types", column: "area_type_id"
   add_foreign_key "decidim_areas", "decidim_organizations"
