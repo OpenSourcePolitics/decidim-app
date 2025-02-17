@@ -289,8 +289,8 @@ fr:
             client_options_secret: Client secret
             discovery: Enable discovery (true or false)
             issuer: Issuer (Identity Provider)
-            logout_policy: Logout policy (none|session.destroy)
             logout_path: Logout path (with starting "/")
+            logout_policy: Logout policy (none|session.destroy)
             post_logout_redirect_uri: Post logout redirect URI
             response_type: Response type
             scope: Scope
