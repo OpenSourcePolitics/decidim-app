@@ -1,5 +1,10 @@
 fr:
   decidim:
+    admin:
+      attachments:
+        form:
+          send_notification_to_followers: Envoyer une notification à toutes les personnes qui suivent la concertation ayant accepté de recevoir des notifications par mail
+        exports:
     events:
       proposals:
         author_confirmation_proposal_event:
