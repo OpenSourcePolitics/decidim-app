@@ -42,7 +42,7 @@ namespace :decidim_app do
       Rake::Task["decidim:upgrade:clean:action_logs"].invoke
       Rails.logger.warn "(decidim_app:k8s:upgrade)> Successfully upgraded!"
     rescue StandardError => e
-      Rails.logger.failure "(decidim_app:k8s:upgrade)> An error occured : #{e.message}"
+      Rails.logger.error "(decidim_app:k8s:upgrade)> An error occured : #{e.message}"
     end
   end
 end
