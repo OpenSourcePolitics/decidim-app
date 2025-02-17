@@ -47,6 +47,7 @@ module DevelopmentApp
 
     config.after_initialize do
       # Controllers
+      require "extends/controllers/decidim/devise_controllers_extends"
       require "extends/controllers/decidim/devise/sessions_controller_extends"
       require "extends/controllers/decidim/devise/omniauth_registrations_controller_extends"
       require "extends/controllers/decidim/editor_images_controller_extends"

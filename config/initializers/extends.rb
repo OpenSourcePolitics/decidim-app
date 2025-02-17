@@ -8,3 +8,5 @@ require "extends/lib/decidim/phone_authorization_handler/proposal_serializer_ext
 require "decidim/exporters/serializer"
 require "extends/lib/decidim/forms/user_answers_serializer_extend"
 require "extends/lib/decidim/geocoding/geocoder_coordinates_extends"
+
+require "extends/omniauth/strategies/openid_connect_extends"
