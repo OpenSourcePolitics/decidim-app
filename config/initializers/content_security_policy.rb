@@ -3,26 +3,28 @@
 # For tuning the Content Security Policy, check the Decidim documentation site
 # https://docs.decidim.org/develop/en/customize/content_security_policy
 
-CSPS = %w(minio:*
-          localhost:*
-          fonts.gstatic.com
-          fonts.googleapis.com
-          decidim.storage.opensourcepolitics.eu
-          club.decidim.opensourcepolitics.eu
-          templates.opensourcepolitics.net
-          unpkg.com
-          www.youtube.com).freeze
-# tarteaucitron.io
+content_security_policies = {
+  "default-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net),
+  "img-src" => %w(decidim.storage.opensourcepolitics.eu),
+  "media-src" => %w(decidim.storage.opensourcepolitics.eu www.youtube.com),
+  "script-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net tarteaucitron.io unpkg.com),
+  "style-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net),
+  "font-src" => %w(decidim.storage.opensourcepolitics.eu),
+  "connect-src" => %w(decidim.storage.opensourcepolitics.eu),
+  "frame-src" => %w(decidim.storage.opensourcepolitics.eu)
+}
 
-# Decidim.configure do |config|
-#   config.content_security_policies_extra = {
-#     "default-src" => CSPS + %w(http://minio:*),
-#     "script-src" => CSPS + %w(http://minio:*),
-#     "style-src" => CSPS + %w(http://minio:*),
-#     "img-src" => CSPS + %w(http://minio:*),
-#     "font-src" => CSPS + %w(http://minio:*),
-#     "connect-src" => CSPS + %w(http://minio:*),
-#     "frame-src" => CSPS + %w(http://minio:*),
-#     "media-src" => CSPS + %w(http://minio:)
-#   }
-# end
+minio_endpoint = Rails.application.secrets.dig(:storage, :minio, :endpoint)
+if minio_endpoint.presence == "http://minio:9000"
+  content_security_policies["default-src"] << minio_endpoint
+  content_security_policies["img-src"] << minio_endpoint
+  content_security_policies["media-src"] << minio_endpoint
+  content_security_policies["script-src"] << minio_endpoint
+  content_security_policies["style-src"] << minio_endpoint
+  content_security_policies["connect-src"] << minio_endpoint
+  content_security_policies["frame-src"] << minio_endpoint
+end
+
+Decidim.configure do |config|
+  config.content_security_policies_extra = content_security_policies
+end
