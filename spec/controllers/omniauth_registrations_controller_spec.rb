@@ -29,6 +29,7 @@ module Decidim
             email: email
           }
         }
+        request.env["omniauth.strategy"] = OmniAuth::Strategies::Facebook.new({})
       end
 
       describe "after_sign_in_path_for" do
