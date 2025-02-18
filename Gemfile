@@ -16,6 +16,9 @@ gem "faker", "~> 3.2"
 gem "letter_opener_web", "~> 2.0"
 gem "rack-attack", "~> 6.7"
 
+# External Decidim gems
+gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
+
 group :development, :test do
   gem "brakeman", "~> 6.1"
   gem "byebug", "~> 11.0", platform: :mri
