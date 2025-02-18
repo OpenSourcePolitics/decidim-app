@@ -1,6 +1,9 @@
 en:
   decidim:
     admin:
+      attachments:
+        form:
+          send_notification_to_followers: Send a notification to all the people following the consultation who have agreed to receive email notifications
       models:
         assembly:
           fields:

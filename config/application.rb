@@ -13,6 +13,7 @@ module DecidimApp
 
     config.after_initialize do
       require "extends/commands/decidim/proposals/publish_proposal_extends"
+      require "extends/commands/decidim/admin/create_attachment_extends"
     end
   end
 end
