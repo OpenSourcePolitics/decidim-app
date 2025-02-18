@@ -7,6 +7,10 @@ fr:
           email_outro: Vous recevez cette notification car vous êtes l’auteur de la proposition. Vous pouvez vous désabonner en visitant la page de la proposition (« %{resource_title} ») et en cliquant sur « Ne plus suivre ».
           email_subject: Votre proposition a été publiée !
           notification_title: Votre proposition <a href="%{resource_path}">%{resource_title}</a> est maintenant en ligne.
+    forms:
+      user_answers_serializer:
+        email: Email
+        name: Nom
   time:
     buttons:
       select: Sélectionner
