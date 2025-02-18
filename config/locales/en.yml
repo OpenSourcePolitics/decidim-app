@@ -15,6 +15,22 @@ en:
       participatory_space_private_user_csv_import:
         file: importing file
   decidim:
+    account:
+      omniauth_synced_profile:
+        helper:
+          body_html: |-
+            <p>
+              The following informations are synchronized with an external identity provider:
+            </p>
+            <ul>
+              <li>Name</li>
+              <li>Nickname</li>
+              <li>Email</li>
+            </ul>
+            <p>
+              You can't edit these informations here.
+            </p>
+          title: Profile synchronization
     admin:
       actions:
         add: Add
@@ -271,6 +287,8 @@ en:
             client_options_secret: Client secret
             discovery: Enable discovery (true or false)
             issuer: Issuer (Identity Provider)
+            logout_path: Logout path (with starting "/")
+            logout_policy: Logout policy (none|session.destroy)
             post_logout_redirect_uri: Post logout redirect URI
             response_type: Response type
             scope: Scope
