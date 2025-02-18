@@ -4,7 +4,7 @@ module Decidim
   class ExportJob < ApplicationJob
     queue_as :exports
 
-    def perform(user, component, name, format, resource_id = nil, filters = nil)
+    def perform(user, component, name, format, resource_id = nil, filters = nil) # rubocop:disable Metrics/ParameterLists
       export_manifest = component.manifest.export_manifests.find do |manifest|
         manifest.name == name.to_sym
       end
