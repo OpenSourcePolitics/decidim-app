@@ -41,10 +41,9 @@ Decidim.configure do |config|
 
   # Whether SSL should be enabled or not.
   # if this var is not defined, it is decided automatically per-rails-environment
-  config.force_ssl = Rails.application.secrets.decidim[:force_ssl].present? if Rails.env.production? && !Rails.application.secrets.decidim[:force_ssl] == ("auto")
-
+  config.force_ssl = Rails.application.secrets.decidim[:force_ssl].present? unless Rails.application.secrets.decidim[:force_ssl] == "auto"
   # or set it up manually and prevent any ENV manipulation:
-  # config.force_ssl = false
+  # config.force_ssl = true
 
   # Enable the service worker. By default is disabled in development and enabled in the rest of environments
   config.service_worker_enabled = Rails.application.secrets.decidim[:service_worker_enabled].present?
