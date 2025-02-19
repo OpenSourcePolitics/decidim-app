@@ -31,6 +31,8 @@ if Rails.application.secrets.dig(:omniauth, :openid_connect).present?
         %w(
           issuer
           response_type
+          logout_policy
+          logout_path
           post_logout_redirect_uri
           uid_field
         ).map(&:to_sym).each do |key|
