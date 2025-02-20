@@ -19,6 +19,7 @@ gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp"
 
 # External Decidim gems
+gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "fix/decidim_version_and_missing_helper"
 gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
 gem "decidim-cache_cleaner"
@@ -65,6 +66,7 @@ gem "puma", ">= 5.5.1"
 gem "rack-attack", "~> 6.6"
 gem "sys-filesystem"
 gem "wicked_pdf", "2.6.3"
+gem "concurrent-ruby", "1.3.4"
 
 group :development do
   gem "listen", "~> 3.1"
