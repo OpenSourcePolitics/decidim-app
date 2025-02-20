@@ -52,6 +52,7 @@ gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "activerecord-session_store"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", "~> 1.4"
+gem "concurrent-ruby", "1.3.4"
 gem "deepl-rb", require: "deepl"
 gem "deface"
 gem "dotenv-rails", "~> 2.7"
@@ -66,7 +67,6 @@ gem "puma", ">= 5.5.1"
 gem "rack-attack", "~> 6.6"
 gem "sys-filesystem"
 gem "wicked_pdf", "2.6.3"
-gem "concurrent-ruby", "1.3.4"
 
 group :development do
   gem "listen", "~> 3.1"
