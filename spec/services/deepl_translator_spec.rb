@@ -186,7 +186,7 @@ describe DeeplTranslator do
         "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
         "Authorization" => "DeepL-Auth-Key dummy_key",
         "Content-Type" => "application/json",
-        "User-Agent" => "deepl-ruby/3.0.2 (darwin23) ruby/3.0.6"
+        "User-Agent" => "deepl-ruby/3.0.2 (linux) ruby/3.0.6"
       }
     ).to_return(status: 200, body: JSON.dump({
                                                translations: [
