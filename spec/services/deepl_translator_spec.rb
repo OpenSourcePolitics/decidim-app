@@ -17,6 +17,7 @@ describe DeeplTranslator do
       headers: {
         "Accept" => "*/*",
         "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+        "Authorization" => "DeepL-Auth-Key dummy_key",
         "User-Agent" => "Ruby"
       }
     ).to_return(status: 200, body: JSON.dump([
@@ -182,6 +183,7 @@ describe DeeplTranslator do
       headers: {
         "Accept" => "*/*",
         "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+        "Authorization" => "DeepL-Auth-Key dummy_key",
         "Content-Type" => "application/x-www-form-urlencoded",
         "User-Agent" => "Ruby"
       }
