@@ -18,8 +18,7 @@ describe DeeplTranslator do
         "Accept" => "*/*",
         "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
         "Authorization" => "DeepL-Auth-Key dummy_key",
-        "Content-Type" => "application/json",
-        "User-Agent" => "deepl-ruby/3.0.2 (linux) ruby/3.0.6"
+        "User-Agent" => "Ruby"
       }
     ).to_return(status: 200, body: JSON.dump([
                                                {
@@ -180,13 +179,13 @@ describe DeeplTranslator do
                                              ]), headers: {})
 
     stub_request(:post, "https://translator.example.org/v2/translate").with(
-      body: { "text" => ["This is a comment"], "source_lang" => "en", "target_lang" => "es" },
+      body: { "source_lang" => "en", "target_lang" => "es", "text" => "This is a comment" },
       headers: {
         "Accept" => "*/*",
         "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
         "Authorization" => "DeepL-Auth-Key dummy_key",
-        "Content-Type" => "application/json",
-        "User-Agent" => "deepl-ruby/3.0.2 (linux) ruby/3.0.6"
+        "Content-Type" => "application/x-www-form-urlencoded",
+        "User-Agent" => "Ruby"
       }
     ).to_return(status: 200, body: JSON.dump({
                                                translations: [
