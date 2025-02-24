@@ -35,11 +35,12 @@ Decidim.configure do |config|
 
   # Geocoder configuration
   config.maps = {
-    # Keep HERE as the default provider for static maps
     provider: :here,
     api_key: Rails.application.secrets.maps[:api_key],
-    static: {
-      url: "https://image.maps.ls.hereapi.com/mia/1.6/mapview"
+
+    # Keep HERE as the default provider for autocomplete
+    autocomplete: {
+      address_format: [%w(houseNumber street), "city", "country"]
     },
 
     # Change to OSM for dynamic maps to avoid usage limits from HERE
@@ -51,11 +52,6 @@ Decidim.configure do |config|
         &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors
       )
       }
-    },
-
-    # Keep HERE as the default provider for autocomplete
-    autocomplete: {
-      address_format: [%w(houseNumber street), "city", "country"]
     }
   }
 
