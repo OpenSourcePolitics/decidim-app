@@ -1,16 +1,6 @@
 ---
 de:
   decidim:
-    admin_multi_factor:
-      verification_code_mailer:
-        verification_code:
-          title: Ihre Zwei-Faktor-Authentifizierung
-          subtitle_html: Um die Authentifizierung abzuschließen, kopieren Sie den unten stehenden 4-stelligen Code, kehren Sie zur Verifizierungsseite von %{organization} zurück und fügen Sie ihn dort ein!
-          copy: 'Kopieren Sie diesen Code:'
-          expires_in: Es läuft in %{time} ab.
-          ignore_html: |-
-            Falls Sie diese Nachricht nicht angefordert haben, ignorieren Sie bitte diese E-Mail.<br />
-            Ihr Konto wird erst aktiviert, wenn es vollständig bestätigt wurde.
     notifications_digest_mailer:
       subject: Dies ist E-Mail-Zusammenfassung
     participatory_processes:

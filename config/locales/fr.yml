@@ -62,14 +62,6 @@ fr:
           success: Secteur mis à jour avec succès.
       titles:
         scopes: Secteurs
-    admin_multi_factor:
-      verification_code_mailer:
-        verification_code:
-          copy: 'Copiez ce code :'
-          expires_in: Il va expirer dans %{time}.
-          ignore_html: Si vous n'avez pas demandé à recevoir cette communication, veuillez ignorer cet email.<br />Votre compte ne sera pas actif tant que votre compte n'est pas confirmé.
-          subtitle_html: Pour finaliser l'authentification, il vous suffit de copier le code à 4 chiffres ci-dessous, retournez à la page de vérification %{organization} et collez-le.
-          title: Votre authentification à deux facteurs
     amendments:
       emendation:
         announcement:

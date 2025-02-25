@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_02_20_125330) do
+ActiveRecord::Schema.define(version: 2024_11_18_114335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -117,17 +117,6 @@ ActiveRecord::Schema.define(version: 2025_02_20_125330) do
     t.index ["resource_type", "resource_id"], name: "index_action_logs_on_resource_type_and_id"
     t.index ["version_id"], name: "index_decidim_action_logs_on_version_id"
     t.index ["visibility"], name: "index_decidim_action_logs_on_visibility"
-  end
-
-  create_table "decidim_admin_multi_factor_settings", force: :cascade do |t|
-    t.boolean "enable_multifactor", default: false
-    t.boolean "email", default: false
-    t.boolean "sms", default: false
-    t.boolean "webauthn", default: false
-    t.bigint "decidim_organization_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["decidim_organization_id"], name: "index_decidim_admin_multi_factor_settings_on_organization_id"
   end
 
   create_table "decidim_amendments", force: :cascade do |t|
@@ -2168,7 +2157,6 @@ ActiveRecord::Schema.define(version: 2025_02_20_125330) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "decidim_admin_multi_factor_settings", "decidim_organizations"
   add_foreign_key "decidim_area_types", "decidim_organizations"
   add_foreign_key "decidim_areas", "decidim_area_types", column: "area_type_id"
   add_foreign_key "decidim_areas", "decidim_organizations"
