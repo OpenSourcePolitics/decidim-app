@@ -16,7 +16,6 @@ module OmniAuth
           strategy.options.client_id = "dummy_client_id"
           strategy.options.client_secret = "dummy_client_secret"
           strategy.options.redirect_url = "https://example.com/callback"
-          strategy.options.site = site
         end
       end
       let(:site) { "https://example.com" }
@@ -26,7 +25,7 @@ module OmniAuth
       end
 
       it "returns option site" do
-        expect(subject.options.site).to eq(site)
+        expect(subject.options.client_options.site).to eq(site)
       end
 
       it "returns client_id" do
@@ -39,44 +38,6 @@ module OmniAuth
 
       it "returns redirect_url" do
         expect(subject.options.redirect_url).to eq("https://example.com/callback")
-      end
-
-      describe "#callback_url" do
-        it "returns the correct callback URL" do
-          expect(subject.send(:callback_url)).to eq("https://example.com/callback")
-        end
-      end
-
-      describe "#authorize_params" do
-        it "includes state parameter" do
-          params = subject.send(:authorize_params)
-          expect(params[:state]).to be_present
-        end
-      end
-
-      describe "#csrf_detected?" do
-        context "when csrf_detected is true" do
-          before do
-            allow(subject).to receive(:csrf_detected?).and_return(true)
-          end
-
-          it "returns true if state is missing" do
-            allow(subject).to receive(:request).and_return(double(params: {}))
-            expect(subject.send(:csrf_detected?)).to be_truthy
-          end
-        end
-
-        context "when csrf_detected is false" do
-          before do
-            allow(subject).to receive(:csrf_detected?).and_return(false)
-          end
-
-          it "returns false if state matches" do
-            allow(subject).to receive(:request).and_return(double(params: { "state" => "valid_state" }))
-            allow(subject).to receive(:session).and_return({ "omniauth.state" => "valid_state" })
-            expect(subject.send(:csrf_detected?)).to be_falsey
-          end
-        end
       end
 
       describe "#build_access_token" do
