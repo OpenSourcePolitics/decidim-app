@@ -15,6 +15,22 @@ en:
       participatory_space_private_user_csv_import:
         file: importing file
   decidim:
+    account:
+      omniauth_synced_profile:
+        helper:
+          body_html: |-
+            <p>
+              The following informations are synchronized with an external identity provider:
+            </p>
+            <ul>
+              <li>Name</li>
+              <li>Nickname</li>
+              <li>Email</li>
+            </ul>
+            <p>
+              You can't edit these informations here.
+            </p>
+          title: Profile synchronization
     admin:
       actions:
         add: Add
@@ -44,6 +60,14 @@ en:
           success: Scope updated successfully
       titles:
         scopes: Scopes
+    admin_multi_factor:
+      verification_code_mailer:
+        verification_code:
+          copy: 'Copy this code:'
+          expires_in: It will expire in %{time}.
+          ignore_html: If you didn't request this communication, please ignore this email.<br/>Your account won't be active until your account is fully confirmed.
+          subtitle_html: To finalize the authentication you just need to copy the 4 digit code below, go back to the %{organization} verification page and paste it!
+          title: Your 2Factor Authentication
     amendments:
       emendation:
         announcement:
@@ -275,6 +299,8 @@ en:
             client_options_secret: Client secret
             discovery: Enable discovery (true or false)
             issuer: Issuer (Identity Provider)
+            logout_path: Logout path (with starting "/")
+            logout_policy: Logout policy (none|session.destroy)
             post_logout_redirect_uri: Post logout redirect URI
             response_type: Response type
             scope: Scope

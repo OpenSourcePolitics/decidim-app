@@ -171,5 +171,5 @@ ignore_unused:
   - decidim.system.titles.info.*
   - decidim.budgets.projects.orders.*
   - decidim.components.budgets.settings.*
-
+  - decidim.admin_multi_factor.verification_code_mailer.verification_code.*
 
