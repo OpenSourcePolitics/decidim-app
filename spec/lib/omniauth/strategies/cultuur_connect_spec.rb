@@ -15,7 +15,6 @@ module OmniAuth
           strategy.options.client_options.site = site
           strategy.options.client_id = "dummy_client_id"
           strategy.options.client_secret = "dummy_client_secret"
-          strategy.options.redirect_url = "https://example.com/callback"
         end
       end
       let(:site) { "https://example.com" }
@@ -36,12 +35,9 @@ module OmniAuth
         expect(subject.options.client_secret).to eq("dummy_client_secret")
       end
 
-      it "returns redirect_url" do
-        expect(subject.options.redirect_url).to eq("https://example.com/callback")
-      end
-
       describe "#build_access_token" do
         it "builds access token with correct params" do
+          allow(subject).to receive(:callback_url).and_return("https://example.com/callback")
           allow(subject).to receive(:request).and_return(double(params: { "code" => "dummy_code" }))
           allow(subject).to receive(:client).and_return(double(auth_code: double(get_token: "dummy_token")))
 
