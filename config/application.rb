@@ -14,6 +14,8 @@ module DecidimApp
     config.after_initialize do
       require "extends/commands/decidim/proposals/publish_proposal_extends"
       require "extends/commands/decidim/admin/create_attachment_extends"
+      require "extends/controllers/decidim/comments/comments_controller_extends"
+      require "extends/forms/decidim/comments/comment_form_extends"
     end
   end
 end
