@@ -17,7 +17,7 @@ Decidim.configure do |config|
   config.available_locales = if Rails.env.test?
                                %w(en fr ca es)
                              else
-                               Rails.application.secrets.decidim[:available_locales].presence || %(en fr)
+                               Rails.application.secrets.decidim[:available_locales].presence
                              end
 
   # Sets the default locale for new organizations. When creating a new
@@ -385,13 +385,6 @@ Decidim.configure do |config|
   #     mandatory: false
   #   }
   # ]
-
-  # Defines additional content security policies following the structure
-  # Read more: https://docs.decidim.org/en/develop/configure/initializer#_content_security_policy
-  config.content_security_policies_extra = {
-    "connect-src" => %w(http://minio:9000 http://minio http://localhost:9000 https://localhost:3000),
-    "img-src" => %w(http://minio:9000 http://minio http://localhost:9000 https://localhost:3000)
-  }
 
   # Admin admin password configurations
   Rails.application.secrets.dig(:decidim, :admin_password, :strong).tap do |strong_pw|
