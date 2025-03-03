@@ -1,3 +1,4 @@
+---
 en:
   decidim:
     admin:
@@ -7,7 +8,13 @@ en:
       models:
         assembly:
           fields:
-            promoted: "Promoted"
+            promoted: Promoted
+    components:
+      proposals:
+        settings:
+          global:
+            require_category: Category is required
+            require_scope: Scope is required
     events:
       proposals:
         author_confirmation_proposal_event:

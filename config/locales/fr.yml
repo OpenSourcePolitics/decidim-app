@@ -1,3 +1,4 @@
+---
 fr:
   decidim:
     admin:
@@ -5,6 +6,12 @@ fr:
         form:
           send_notification_to_followers: Envoyer une notification à toutes les personnes qui suivent la concertation ayant accepté de recevoir des notifications par mail
         exports:
+    components:
+      proposals:
+        settings:
+          global:
+            require_category: La catégorie est obligatoire
+            require_scope: Le secteur est obligatoire    
     events:
       proposals:
         author_confirmation_proposal_event:
