@@ -9,7 +9,7 @@ up: build
 	@make setup-database
 
 build:
-	docker build . -t "$(image_name):$(image_tag)"
+	docker build . --build-arg DOCKER_IMAGE_NAME=$(image_name) --build-arg DOCKER_IMAGE_TAG=$(image_tag) --build-arg DOCKER_IMAGE=rg.fr-par.scw.cloud/decidim-app/$(image_name):$(image_tag) -t "$(image_name):$(image_tag)"
 
 # Stops containers and remove volumes
 teardown:
@@ -19,7 +19,7 @@ create-database:
 	docker compose exec app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/bundle exec rake db:create'
 
 setup-database: create-database
-	docker compose exec app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/bundle exec rake db:migrate'
+	docker compose exec app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 /usr/local/bundle/bin/bundle exec rake db:migrate migrate:db:force'
 
 # Create seeds
 create-seeds:
