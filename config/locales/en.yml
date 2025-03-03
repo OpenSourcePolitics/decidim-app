@@ -12,3 +12,7 @@ en:
           email_outro: You received this notification because you are the author of the proposal. You can unfollow it by visiting the proposal page (" %{resource_title} ") and clicking on " Unfollow ".
           email_subject: Your proposal has been published!
           notification_title: Your proposal <a href="%{resource_path}">%{resource_title}</a> is now live.
+    forms:
+      user_answers_serializer:
+        email: Email
+        name: Name
