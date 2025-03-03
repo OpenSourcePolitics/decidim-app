@@ -7,6 +7,10 @@ fr:
         confirm_destroy: Confirmer la suppression
         destroy: Supprimer
         edit: Modifier
+      attachments:
+        form:
+          send_notification_to_followers: Envoyer une notification à toutes les personnes qui suivent la concertation ayant accepté de recevoir des notifications par mail
+        exports:  
       models:
         scope:
           fields:
@@ -19,6 +23,17 @@ fr:
           success: Secteur mis à jour avec succès.
         titles:
           scopes: Secteurs
+    events:
+      proposals:
+        author_confirmation_proposal_event:
+          email_intro: 'Votre proposition « %{resource_title} » a été reçue avec succès et est maintenant publique. Merci pour votre participation ! Vous pouvez la consulter ici :'
+          email_outro: Vous recevez cette notification car vous êtes l’auteur de la proposition. Vous pouvez vous désabonner en visitant la page de la proposition (« %{resource_title} ») et en cliquant sur « Ne plus suivre ».
+          email_subject: Votre proposition a été publiée !
+          notification_title: Votre proposition <a href="%{resource_path}">%{resource_title}</a> est maintenant en ligne.
+    forms:
+      user_answers_serializer:
+        email: Email
+        name: Nom
   time:
     buttons:
       select: Sélectionner
