@@ -19,6 +19,7 @@ gem "decidim-templates", "~> #{DECIDIM_VERSION}.0"
 gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp"
 
 # External Decidim gems
+gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "fix/decidim_version_and_missing_helper"
 gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
 gem "decidim-cache_cleaner"
@@ -42,7 +43,9 @@ gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decid
 
 gem "decidim-guest_meeting_registration", git: "https://github.com/alecslupu-pfa/guest-meeting-registration.git", branch: DECIDIM_BRANCH
 # Omniauth gems
+
 gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect", branch: "feat/omniauth_openid_connect--v0.7.1"
+gem "omniauth-oauth2"
 gem "omniauth_openid_connect"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik"
 
@@ -51,6 +54,7 @@ gem "activejob-uniqueness", require: "active_job/uniqueness/sidekiq_patch"
 gem "activerecord-session_store"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", "~> 1.4"
+gem "concurrent-ruby", "1.3.4"
 gem "deepl-rb", require: "deepl"
 gem "deface"
 gem "dotenv-rails", "~> 2.7"
