@@ -11,6 +11,7 @@ gem "puma", ">= 6.3.1"
 
 gem "aws-sdk-s3", require: false
 gem "dalli"
+gem "deface"
 gem "dotenv-rails", "~> 2.7"
 gem "faker", "~> 3.2"
 gem "letter_opener_web", "~> 2.0"
