@@ -1,0 +1,4 @@
+<!-- surround "div.card-divider" -->
+<div class="question-divider">
+  <%= render_original %>
+</div>
