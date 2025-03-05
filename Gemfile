@@ -3,8 +3,12 @@
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
+DECIDIM_TAG = "v0.29.2"
 
-gem "decidim", github: "decidim/decidim", tag: "v0.29.2"
+gem "decidim", github: "decidim/decidim", tag: DECIDIM_TAG
+gem "decidim-conferences", github: "decidim/decidim", tag: DECIDIM_TAG
+gem "decidim-initiatives", github: "decidim/decidim", tag: DECIDIM_TAG
+gem "decidim-templates", github: "decidim/decidim", tag: DECIDIM_TAG
 
 gem "bootsnap", "~> 1.4", require: false
 gem "puma", ">= 6.3.1"
@@ -23,7 +27,7 @@ gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSou
 group :development, :test do
   gem "brakeman", "~> 6.1"
   gem "byebug", "~> 11.0", platform: :mri
-  gem "decidim-dev", github: "decidim/decidim", tag: "v0.29.2"
+  gem "decidim-dev", github: "decidim/decidim", tag: DECIDIM_TAG
   gem "parallel_tests", "~> 4.2"
   gem "spring"
 end

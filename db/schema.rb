@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_06_092441) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_03_145039) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
+  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
@@ -413,6 +414,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_06_092441) do
     t.index ["decidim_user_id"], name: "index_decidim_budgets_orders_on_decidim_user_id"
   end
 
+  create_table "decidim_budgets_paper_ballot_results", force: :cascade do |t|
+    t.integer "votes", null: false
+    t.bigint "decidim_project_id", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["decidim_project_id"], name: "index_decidim_paper_ballot_on_project"
+  end
+
   create_table "decidim_budgets_projects", id: :serial, force: :cascade do |t|
     t.jsonb "title"
     t.jsonb "description"
@@ -577,6 +586,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_06_092441) do
     t.bigint "decidim_user_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.datetime "published_at"
     t.index ["decidim_conference_id"], name: "index_decidim_conference_speakers_on_decidim_conference_id"
     t.index ["decidim_user_id"], name: "index_decidim_conference_speaker_on_decidim_user_id"
   end
@@ -620,6 +630,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_06_092441) do
     t.string "main_logo"
     t.date "sign_date"
     t.datetime "diploma_sent_at", precision: nil
+    t.integer "follows_count", default: 0, null: false
+    t.integer "weight", default: 0, null: false
     t.index ["decidim_organization_id", "slug"], name: "index_unique_conference_slug_and_organization", unique: true
     t.index ["decidim_organization_id"], name: "index_decidim_conferences_on_decidim_organization_id"
     t.index ["decidim_scope_id"], name: "index_decidim_conferences_on_decidim_scope_id"
@@ -1005,6 +1017,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_06_092441) do
     t.jsonb "online_votes", default: {}
     t.jsonb "offline_votes", default: {}
     t.bigint "decidim_area_id"
+    t.integer "comments_count", default: 0, null: false
+    t.integer "follows_count", default: 0, null: false
     t.index "md5((description)::text)", name: "decidim_initiatives_description_search"
     t.index ["answered_at"], name: "index_decidim_initiatives_on_answered_at"
     t.index ["decidim_area_id"], name: "index_decidim_initiatives_on_decidim_area_id"
@@ -1853,14 +1867,17 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_06_092441) do
     t.datetime "updated_at", precision: nil, null: false
     t.jsonb "witnesses"
     t.jsonb "additional_info"
-    t.bigint "decidim_author_id"
+    t.bigint "decidim_author_id", null: false
     t.string "reference"
     t.jsonb "title"
     t.jsonb "cancel_reason"
     t.datetime "cancelled_on", precision: nil
     t.integer "cancelled_by_user_id"
     t.jsonb "candidate_proposals"
+    t.string "decidim_author_type", null: false
+    t.integer "comments_count", default: 0, null: false
     t.index ["cancelled_by_user_id"], name: "index_decidim_sortitions_sortitions_on_cancelled_by_user_id"
+    t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_sortitions_sortitions_on_decidim_author"
     t.index ["decidim_author_id"], name: "index_decidim_sortitions_sortitions_on_decidim_author_id"
     t.index ["decidim_component_id"], name: "index_sortitions__on_feature"
     t.index ["decidim_proposals_component_id"], name: "index_sortitions__on_proposals_feature"
@@ -1920,6 +1937,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_06_092441) do
     t.jsonb "description"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.json "field_values", default: {}
+    t.string "target"
     t.index ["decidim_organization_id"], name: "index_decidim_templates_organization"
     t.index ["templatable_type", "templatable_id"], name: "index_decidim_templates_templatable"
   end
