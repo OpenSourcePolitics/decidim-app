@@ -118,12 +118,12 @@ jobs:
         name: RSpec
       # - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
       #  name: Upload coverage
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
           path: ./spec/tmp/screenshots
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: assets-manifest-${{ matrix.slice }}
@@ -192,12 +192,12 @@ jobs:
         name: RSpec
       # - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
       #  name: Upload coverage
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
           path: ./spec/tmp/screenshots
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: assets-manifest-${{ matrix.slice }}

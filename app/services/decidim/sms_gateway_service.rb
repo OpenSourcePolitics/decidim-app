@@ -36,10 +36,12 @@ module Decidim
         request["Content-Type"] = "application/json"
         request["Authorization"] = "Basic #{Base64.strict_encode64("#{@mb_account_id}:#{@mb_api_key}")}"
 
-        request.body = JSON.dump({
-                                   "mobile" => @mobile_phone_number,
-                                   "message" => @message
-                                 })
+        body = {
+          "mobile" => @mobile_phone_number,
+          "message" => @message
+        }
+        body["oadc"] = fetch_configuration(:oadc, required: false) if fetch_configuration(:oadc, required: false).present?
+        request.body = JSON.dump(body)
       else
         url = URI("#{@url}?u=#{@username}&p=#{@password}&t=#{@message}&n=#{@mobile_phone_number}&f=#{@type}")
         request = Net::HTTP::Get.new(url)
