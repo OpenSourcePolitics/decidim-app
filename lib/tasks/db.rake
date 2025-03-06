@@ -50,6 +50,13 @@ namespace :decidim do
       end
     end
 
+    namespace :users do
+      desc "Clean users phone numbers"
+      task phone: :environment do
+        ArchiveUsersPhoneJob.perform_now
+      end
+    end
+
     namespace :restore do
       desc "Clear database dump to work with localhost"
       task local: :environment do

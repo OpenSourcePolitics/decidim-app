@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git
+  revision: 8fd7a2736962259cb1bcad1fc1dfbd973bcb9055
+  branch: fix/decidim_version_and_missing_helper
+  specs:
+    decidim-admin_multi_factor (0.27.4)
+      countries (~> 5.1, >= 5.1.2)
+      decidim-core (= 0.27.4)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-anonymous_proposals
   revision: ea7c828c82fabb1c35e161095082f15ba63b6eaf
   branch: feat/disable_override_from_index_proposals
@@ -42,7 +51,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-gallery.git
-  revision: 726fab33984c3adeec30cf90d0e1b4ad3881787d
+  revision: 0ce98eeade3f86055782522ab9aa0339183eaa6e
   branch: fix/nokogiri_deps
   specs:
     decidim-gallery (0.26.0)
@@ -51,8 +60,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git
-  revision: 5bee2b5422e4131f933ad854ab872e049dcf7b54
-  branch: feature/half_signup_and_budgets_booth
+  revision: 03b2b148762131802f878f2e6e08b6fc917776f5
+  branch: refactor/half_signup_budgets_booth
   specs:
     decidim-half_signup (0.27.0)
       countries (~> 5.1, >= 5.1.2)
@@ -72,7 +81,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-ptp.git
-  revision: 32b0f9a29499768cf6783a0026badaed33f025ab
+  revision: 46bb834a68d52cd7d1d4bba6182cca55f2495125
   specs:
     decidim-budgets_booth (0.27.0)
       decidim-budgets (~> 0.27.0)
@@ -124,10 +133,11 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-france_connect
-  revision: 14a53ad31928c8a83742360cfbdb90938d0a057e
+  revision: cbf54f82e0ea55e7397004aa21905dce2b528674
+  branch: feat/omniauth_openid_connect--v0.7.1
   specs:
     omniauth-france_connect (0.1.0)
-      omniauth_openid_connect (~> 0.4.0)
+      omniauth_openid_connect (~> 0.7.0)
 
 GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-publik
@@ -364,7 +374,7 @@ GEM
     coffee-script-source (1.12.2)
     colorize (0.8.1)
     commonmarker (0.23.10)
-    concurrent-ruby (1.2.3)
+    concurrent-ruby (1.3.4)
     connection_pool (2.4.1)
     countries (5.7.2)
       unaccent (~> 0.3)
@@ -612,6 +622,8 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     dumb_delegator (1.0.0)
+    email_validator (2.2.4)
+      activemodel
     erb_lint (0.0.37)
       activesupport
       better_html (~> 1.0.7)
@@ -694,7 +706,6 @@ GEM
       nokogiri (>= 1.4)
     html_tokenizer (0.0.7)
     htmlentities (4.3.4)
-    httpclient (2.8.3)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.37)
@@ -846,21 +857,22 @@ GEM
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
-    omniauth_openid_connect (0.4.0)
-      addressable (~> 2.5)
+    omniauth_openid_connect (0.7.1)
       omniauth (>= 1.9, < 3)
-      openid_connect (~> 1.1)
-    openid_connect (1.4.2)
+      openid_connect (~> 2.2)
+    openid_connect (2.3.1)
       activemodel
       attr_required (>= 1.0.0)
-      json-jwt (>= 1.15.0)
-      net-smtp
-      rack-oauth2 (~> 1.21)
-      swd (~> 1.3)
+      email_validator
+      faraday (~> 2.0)
+      faraday-follow_redirects
+      json-jwt (>= 1.16)
+      mail
+      rack-oauth2 (~> 2.2)
+      swd (~> 2.0)
       tzinfo
-      validate_email
       validate_url
-      webfinger (~> 1.2)
+      webfinger (~> 2.0)
     origami (2.1.0)
       colorize (~> 0.7)
     orm_adapter (0.5.0)
@@ -896,10 +908,11 @@ GEM
       rack (>= 1.0, < 4)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
-    rack-oauth2 (1.21.3)
+    rack-oauth2 (2.2.1)
       activesupport
       attr_required
-      httpclient
+      faraday (~> 2.0)
+      faraday-follow_redirects
       json-jwt (>= 1.11.0)
       rack (>= 2.1.0)
     rack-protection (3.2.0)
@@ -1079,10 +1092,11 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     ssrf_filter (1.1.2)
-    swd (1.3.0)
+    swd (2.0.3)
       activesupport (>= 3)
       attr_required (>= 0.0.5)
-      httpclient (>= 2.4)
+      faraday (~> 2.0)
+      faraday-follow_redirects
     sys-filesystem (1.4.4)
       ffi (~> 1.1)
     temple (0.10.3)
@@ -1102,9 +1116,6 @@ GEM
     valid_email2 (2.3.1)
       activemodel (>= 3.2)
       mail (~> 2.5)
-    validate_email (0.1.6)
-      activemodel (>= 3.0)
-      mail (>= 2.2.5)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
@@ -1128,9 +1139,10 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webfinger (1.2.0)
+    webfinger (2.1.3)
       activesupport
-      httpclient (>= 2.4)
+      faraday (~> 2.0)
+      faraday-follow_redirects
     webmock (3.22.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -1152,7 +1164,7 @@ GEM
       activesupport
     wisper (2.0.1)
     wisper-rspec (1.1.0)
-    wkhtmltopdf-binary (0.12.6.6)
+    wkhtmltopdf-binary (0.12.6.8)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.15)
@@ -1175,8 +1187,10 @@ DEPENDENCIES
   brakeman (~> 5.1)
   byebug (~> 11.0)
   climate_control (~> 1.2)
+  concurrent-ruby (= 1.3.4)
   dalli
   decidim (~> 0.27.0)
+  decidim-admin_multi_factor!
   decidim-anonymous_proposals!
   decidim-budget_category_voting!
   decidim-budgets_booth!
@@ -1215,6 +1229,7 @@ DEPENDENCIES
   multipart-post
   nokogiri (= 1.13.4)
   omniauth-france_connect!
+  omniauth-oauth2
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
   omniauth_openid_connect

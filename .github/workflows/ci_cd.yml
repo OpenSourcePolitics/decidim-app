@@ -89,7 +89,7 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
       - run: |
-          sudo apt install libu2f-udev
+          sudo apt install libu2f-udev imagemagick
           wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{env.CHROME_VERSION}}-1_amd64.deb
           sudo dpkg -i /tmp/chrome.deb
           rm /tmp/chrome.deb
@@ -118,12 +118,12 @@ jobs:
         name: RSpec
       # - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
       #  name: Upload coverage
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
           path: ./spec/tmp/screenshots
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: assets-manifest-${{ matrix.slice }}
@@ -163,7 +163,7 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
       - run: |
-          sudo apt install libu2f-udev
+          sudo apt install libu2f-udev imagemagick
           wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{env.CHROME_VERSION}}-1_amd64.deb
           sudo dpkg -i /tmp/chrome.deb
           rm /tmp/chrome.deb
@@ -192,12 +192,12 @@ jobs:
         name: RSpec
       # - run: ./.github/upload_coverage.sh decidim-app $GITHUB_EVENT_PATH
       #  name: Upload coverage
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots
           path: ./spec/tmp/screenshots
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: assets-manifest-${{ matrix.slice }}
