@@ -21,24 +21,23 @@ module CopyAssemblyExtends
       broadcast(:ok, @copied_assembly)
     end
 
-
     private
 
     def copy_landing_page_blocks
       blocks = Decidim::ContentBlock.where(scoped_resource_id: @assembly.id, scope_name: "assembly_homepage", organization: @assembly.organization)
-      if blocks.present?
-        blocks.each do |block|
-          new_block = Decidim::ContentBlock.create!(
-            organization: @copied_assembly.organization,
-            scope_name: "assembly_homepage",
-            scoped_resource_id: @copied_assembly.id,
-            manifest_name: block.manifest_name,
-            settings: block.settings,
-            weight: block.weight,
-            published_at: block.published_at.present? ? @copied_assembly.created_at : nil, # determine if block is active/inactive
-            )
-          copy_block_attachments(block, new_block) if block.attachments.present?
-        end
+      return if blocks.blank?
+
+      blocks.each do |block|
+        new_block = Decidim::ContentBlock.create!(
+          organization: @copied_assembly.organization,
+          scope_name: "assembly_homepage",
+          scoped_resource_id: @copied_assembly.id,
+          manifest_name: block.manifest_name,
+          settings: block.settings,
+          weight: block.weight,
+          published_at: block.published_at.present? ? @copied_assembly.created_at : nil # determine if block is active/inactive
+        )
+        copy_block_attachments(block, new_block) if block.attachments.present?
       end
     end
 

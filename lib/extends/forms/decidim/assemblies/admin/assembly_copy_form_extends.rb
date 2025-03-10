@@ -6,9 +6,7 @@ module AssemblyCopyFormExtends
   extend ActiveSupport::Concern
 
   included do
-
     attribute :copy_landing_page_blocks, Decidim::AttributeObject::TypeMap::Boolean
-
   end
 end
 

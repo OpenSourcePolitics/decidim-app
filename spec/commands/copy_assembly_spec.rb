@@ -21,7 +21,7 @@ module Decidim::Assemblies
         slug: "copied-slug",
         copy_categories?: copy_categories,
         copy_components?: copy_components,
-        copy_landing_page_blocks?: copy_landing_page_blocks,
+        copy_landing_page_blocks?: copy_landing_page_blocks
       )
     end
     let!(:category) do
@@ -75,8 +75,8 @@ module Decidim::Assemblies
       it "traces the action", versioning: true do
         expect(Decidim.traceability)
           .to receive(:perform_action!)
-                .with("duplicate", Decidim::Assembly, user)
-                .and_call_original
+          .with("duplicate", Decidim::Assembly, user)
+          .and_call_original
 
         expect { subject.call }.to change(Decidim::ActionLog, :count)
         action_log = Decidim::ActionLog.last
@@ -112,7 +112,7 @@ module Decidim::Assemblies
         expect { subject.call }.to change(Decidim::Component, :count).by(1)
 
         last_assembly = Decidim::Assembly.last
-        last_component = Decidim::Component.all.reorder(:id).last
+        last_component = Decidim::Component.reorder(:id).last
 
         expect(last_component.participatory_space).to eq(last_assembly)
         expect(last_component.name).to eq(component.name)
