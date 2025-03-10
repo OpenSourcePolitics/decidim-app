@@ -43,9 +43,11 @@ module CopyAssemblyExtends
 
     def copy_block_attachments(block, new_block)
       block.attachments.map(&:name).each do |name|
-        original_image = block.images_container.send(name).blob.download
+        original_image = block.images_container.send(name).blob
+        next if original_image.blank?
+
         new_block.images_container.send("#{name}=", ActiveStorage::Blob.create_and_upload!(
-                                                      io: StringIO.new(original_image),
+                                                      io: StringIO.new(original_image.download),
                                                       filename: "image.png",
                                                       content_type: block.images_container.background_image.blob.content_type
                                                     ))
