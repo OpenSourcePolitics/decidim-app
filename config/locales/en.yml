@@ -1,3 +1,4 @@
+---
 en:
   decidim:
     admin:
@@ -13,7 +14,7 @@ en:
       models:
         assembly:
           fields:
-            promoted: "Promoted"
+            promoted: Promoted
         scope:
           fields:
             name: Name
@@ -36,3 +37,20 @@ en:
       user_answers_serializer:
         email: Email
         name: Name
+    initiatives:
+      admin:
+        index:
+          initiatives_types:
+            alert_html: "<p>You must create at least one initiative type so participants can start creating initiatives.</p><p> %{link}</p>"
+            button: New initiative type
+        initiatives_types:
+          create:
+            error: An error has occurred.
+            success: A new initiative type has been successfully created. You need to define at least one scope for this initiative type so it can be used.
+          destroy:
+            success: The initiative type has been successfully removed.
+          edit:
+            update: Update
+  time:
+    buttons:
+      select: Select

@@ -1,3 +1,4 @@
+---
 fr:
   decidim:
     admin:
@@ -10,8 +11,10 @@ fr:
       attachments:
         form:
           send_notification_to_followers: Envoyer une notification à toutes les personnes qui suivent la concertation ayant accepté de recevoir des notifications par mail
-        exports:  
       models:
+        assembly:
+          fields:
+            promoted: Mis en avant
         scope:
           fields:
             name: Nom
@@ -34,6 +37,20 @@ fr:
       user_answers_serializer:
         email: Email
         name: Nom
+    initiatives:
+      admin:
+        index:
+          initiatives_types:
+            alert_html: "<p>Vous devez créer au moins un type de pétition pour que les participants puissent commencer à créer des pétitions.</p><p> %{link}</p>"
+            button: Nouveau type de pétition
+        initiatives_types:
+          create:
+            error: Une erreur est survenue à la création du type de pétition.
+            success: Un nouveau type de pétition a été créé avec succès. Vous devez définir au moins un secteur pour ce type d'initiative afin de l'utiliser.
+          destroy:
+            success: Le type de pétition a été supprimé avec succès.
+          edit:
+            update: Mettre à jour
   time:
     buttons:
       select: Sélectionner
