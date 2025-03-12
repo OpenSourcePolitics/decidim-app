@@ -25,7 +25,13 @@ fr:
           error: Il y a eu une erreur lors de la mise à jour du secteur.
           success: Secteur mis à jour avec succès.
         titles:
-          scopes: Secteurs
+          scopes: Secteurs    
+    components:
+      proposals:
+        settings:
+          global:
+            require_category: La catégorie est obligatoire
+            require_scope: Le secteur est obligatoire    
     events:
       proposals:
         author_confirmation_proposal_event:
