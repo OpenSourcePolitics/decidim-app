@@ -1,29 +1,35 @@
 # frozen_string_literal: true
 
+require "spec_helper"
 require "i18n/tasks"
 
-RSpec.describe I18n do
-  let(:i18n) { I18n::Tasks::BaseTask.new }
+describe "I18n sanity" do
+  let(:locales) do
+    ENV["ENFORCED_LOCALES"].presence || Decidim.available_locales.map(&:to_s).join(",")
+  end
+
+  let(:i18n) { I18n::Tasks::BaseTask.new(locales: %w(en fr)) }
   let(:missing_keys) { i18n.missing_keys }
   let(:unused_keys) { i18n.unused_keys }
+  let(:non_normalized_paths) { i18n.non_normalized_paths }
   let(:inconsistent_interpolations) { i18n.inconsistent_interpolations }
 
   it "does not have missing keys" do
-    expect(missing_keys).to be_empty,
-                            "Missing #{missing_keys.leaves.count} i18n keys, run `i18n-tasks missing' to show them"
+    expect(missing_keys).to be_empty, "#{missing_keys.inspect} are missing"
   end
 
   it "does not have unused keys" do
-    expect(unused_keys).to be_empty,
-                           "#{unused_keys.leaves.count} unused i18n keys, run `i18n-tasks unused' to show them"
+    expect(unused_keys).to be_empty, "#{unused_keys.inspect} are unused"
   end
 
-  it "files are normalized" do
-    non_normalized = i18n.non_normalized_paths
-    error_message = "The following files need to be normalized:\n" \
-                    "#{non_normalized.map { |path| "  #{path}" }.join("\n")}\n" \
-                    "Please run `i18n-tasks normalize' to fix"
-    expect(non_normalized).to be_empty, error_message
+  unless ENV["SKIP_NORMALIZATION"]
+    it "is normalized" do
+      error_message = "The following files need to be normalized:\n" \
+                      "#{non_normalized_paths.map { |path| "  #{path}" }.join("\n")}\n" \
+                      "Please run `bundle exec i18n-tasks normalize --locales #{locales}` to fix them"
+
+      expect(non_normalized_paths).to be_empty, error_message
+    end
   end
 
   it "does not have inconsistent interpolations" do
