@@ -100,3 +100,5 @@ ignore_unused:
   - decidim.admin.models.assembly.fields.promoted.*
   - decidim.components.proposals.settings.global.require_category
   - decidim.components.proposals.settings.global.require_scope
+  - decidim.admin.scopes.update.error
+  - decidim.admin.scopes.update.success

@@ -13,8 +13,13 @@ module DecidimApp
 
     config.after_initialize do
       require "extends/forms/decidim/proposals/proposal_form_extends"
+      require "extends/controllers/decidim/admin/scopes_controller_extends"
+      require "extends/controllers/decidim/scopes_controller_extends"
+      require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       require "extends/commands/decidim/proposals/publish_proposal_extends"
       require "extends/commands/decidim/admin/create_attachment_extends"
+      require "extends/controllers/decidim/comments/comments_controller_extends"
+      require "extends/forms/decidim/comments/comment_form_extends"
     end
   end
 end
