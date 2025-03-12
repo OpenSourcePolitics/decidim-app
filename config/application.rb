@@ -12,6 +12,9 @@ module DecidimApp
     config.load_defaults 7.0
 
     config.after_initialize do
+      require "extends/controllers/decidim/admin/scopes_controller_extends"
+      require "extends/controllers/decidim/scopes_controller_extends"
+      require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       require "extends/commands/decidim/proposals/publish_proposal_extends"
       require "extends/commands/decidim/admin/create_attachment_extends"
     end

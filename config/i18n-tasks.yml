@@ -3,6 +3,9 @@
 # The "main" locale.
 base_locale: en
 
+## All available locales are inferred from the data by default. Alternatively, specify them explicitly:
+# locales: [es, fr]
+
 ## Reporting locale, default: en. Available: en, ru.
 # internal_locale: en
 
@@ -82,7 +85,8 @@ translation:
 
 # Do not consider these keys missing:
 ignore_missing:
-
+  - time.buttons.select
+  - decidim.admin.models.assembly.fields.promoted
 
 # Consider these keys used:
 ignore_unused:
@@ -94,3 +98,5 @@ ignore_unused:
   - decidim.initiatives.admin.initiatives_types.*
   - time.buttons.*
   - decidim.admin.models.assembly.fields.promoted.*
+  - decidim.admin.scopes.update.error
+  - decidim.admin.scopes.update.success
