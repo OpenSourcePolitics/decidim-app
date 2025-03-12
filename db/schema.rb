@@ -13,7 +13,6 @@
 ActiveRecord::Schema[7.0].define(version: 2025_03_03_145039) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
-  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
@@ -412,14 +411,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_03_145039) do
     t.bigint "decidim_budgets_budget_id"
     t.index ["decidim_budgets_budget_id"], name: "index_decidim_budgets_orders_on_decidim_budgets_budget_id"
     t.index ["decidim_user_id"], name: "index_decidim_budgets_orders_on_decidim_user_id"
-  end
-
-  create_table "decidim_budgets_paper_ballot_results", force: :cascade do |t|
-    t.integer "votes", null: false
-    t.bigint "decidim_project_id", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["decidim_project_id"], name: "index_decidim_paper_ballot_on_project"
   end
 
   create_table "decidim_budgets_projects", id: :serial, force: :cascade do |t|
