@@ -10,7 +10,7 @@ content_security_policies = {
   "script-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net tarteaucitron.io unpkg.com),
   "style-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net),
   "font-src" => %w(decidim.storage.opensourcepolitics.eu),
-  "connect-src" => %w(decidim.storage.opensourcepolitics.eu),
+  "connect-src" => %w(decidim.storage.opensourcepolitics.eu https://cdn.jsdelivr.net),
   "frame-src" => %w(decidim.storage.opensourcepolitics.eu)
 }
 
