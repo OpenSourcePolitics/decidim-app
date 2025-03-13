@@ -102,7 +102,7 @@ namespace :decidim do
     desc "Correct locales depth for comments"
     task comments_locales: :environment do
       total = Decidim::Comments::Comment.count
-      Rails.logger.info("(decidim:repair:comments_locales) > Checking locales for #{total} comments...")
+      Rails.logger.warn("(decidim:repair:comments_locales) > Checking locales for #{total} comments...")
       updated = 0
       Decidim::Comments::Comment.find_each do |comment|
         body = comment.body
@@ -119,7 +119,7 @@ namespace :decidim do
           comment.save(validate: false)
         end
       end
-      Rails.logger.info("(decidim:repair:comments_locales) > Updated #{updated} comments")
+      Rails.logger.warn("(decidim:repair:comments_locales) > Updated #{updated} comments")
     end
   end
 end
