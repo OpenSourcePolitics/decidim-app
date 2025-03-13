@@ -6,6 +6,16 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
+  remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
+  revision: 9da093f854b1bafb812ca093e7e61a61afe21369
+  specs:
+    decidim-decidim_awesome (0.12.0)
+      decidim-admin (>= 0.29.1, < 0.30)
+      decidim-core (>= 0.29.1, < 0.30)
+      deface (>= 1.5)
+      sassc (~> 2.3)
+
+GIT
   remote: https://github.com/decidim/decidim.git
   revision: 90dc58727e4b5560bd7a102f42e1b831a5096264
   tag: v0.29.2
@@ -798,6 +808,8 @@ GEM
     rubyzip (2.3.2)
     rufus-scheduler (3.9.2)
       fugit (~> 1.1, >= 1.11.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.26.0)
       base64 (~> 0.2)
       logger (~> 1.4)
@@ -916,6 +928,7 @@ DEPENDENCIES
   decidim!
   decidim-additional_authorization_handler!
   decidim-conferences!
+  decidim-decidim_awesome!
   decidim-dev!
   decidim-initiatives!
   decidim-templates!
