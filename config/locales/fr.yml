@@ -1,5 +1,8 @@
 ---
 fr:
+  date:
+    formats:
+      order: d-m-y
   decidim:
     admin:
       attachments:
