@@ -8,6 +8,12 @@ en:
         copy_landing_page_blocks: Copy landing page blocks
   decidim:
     admin:
+      actions:
+        add: Add
+        browse: Browse
+        confirm_destroy: Confirm destroy
+        destroy: Destroy
+        edit: Edit
       attachments:
         form:
           send_notification_to_followers: Send a notification to all the people following the consultation who have agreed to receive email notifications
@@ -15,6 +21,23 @@ en:
         assembly:
           fields:
             promoted: Promoted
+        scope:
+          fields:
+            name: Name
+            scope_type: Scope type
+      scopes:
+        no_scopes: No scopes at this level.
+        update:
+          error: There was a problem updating this scope.
+          success: Scope updated successfully
+        titles:
+          scopes: Scopes    
+    components:
+      proposals:
+        settings:
+          global:
+            require_category: Category is required
+            require_scope: Scope is required
     events:
       proposals:
         author_confirmation_proposal_event:

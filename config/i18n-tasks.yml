@@ -3,6 +3,9 @@
 # The "main" locale.
 base_locale: en
 
+## All available locales are inferred from the data by default. Alternatively, specify them explicitly:
+# locales: [es, fr]
+
 ## Reporting locale, default: en. Available: en, ru.
 # internal_locale: en
 
@@ -88,6 +91,8 @@ ignore_missing:
   - decidim.admin.participatory_process_copies.new.select
   - decidim.participatory_processes.admin.participatory_process_copies.new.select
   - decidim.participatory_processes.admin.participatory_process_copies.form.slug_help_html
+  - time.buttons.select
+  - decidim.admin.models.assembly.fields.promoted
 
 # Consider these keys used:
 ignore_unused:
@@ -101,3 +106,7 @@ ignore_unused:
   - decidim.admin.models.assembly.fields.promoted.*
   - activemodel.attributes.assembly.copy_landing_page_blocks
   - activemodel.attributes.participatory_process.copy_landing_page_blocks
+  - decidim.components.proposals.settings.global.require_category
+  - decidim.components.proposals.settings.global.require_scope
+  - decidim.admin.scopes.update.error
+  - decidim.admin.scopes.update.success

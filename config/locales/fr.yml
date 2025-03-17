@@ -8,6 +8,12 @@ fr:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
   decidim:
     admin:
+      actions:
+        add: Ajouter
+        browse: Naviguer
+        confirm_destroy: Confirmer la suppression
+        destroy: Supprimer
+        edit: Modifier
       attachments:
         form:
           send_notification_to_followers: Envoyer une notification à toutes les personnes qui suivent la concertation ayant accepté de recevoir des notifications par mail
@@ -15,6 +21,23 @@ fr:
         assembly:
           fields:
             promoted: Mis en avant
+        scope:
+          fields:
+            name: Nom
+            scope_type: Type de secteur
+      scopes:
+        no_scopes: Aucun secteur à ce niveau.
+        update:
+          error: Il y a eu une erreur lors de la mise à jour du secteur.
+          success: Secteur mis à jour avec succès.
+        titles:
+          scopes: Secteurs    
+    components:
+      proposals:
+        settings:
+          global:
+            require_category: La catégorie est obligatoire
+            require_scope: Le secteur est obligatoire    
     events:
       proposals:
         author_confirmation_proposal_event:
