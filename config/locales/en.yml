@@ -25,7 +25,13 @@ en:
           error: There was a problem updating this scope.
           success: Scope updated successfully
         titles:
-          scopes: Scopes
+          scopes: Scopes    
+    components:
+      proposals:
+        settings:
+          global:
+            require_category: Category is required
+            require_scope: Scope is required
     events:
       proposals:
         author_confirmation_proposal_event:
