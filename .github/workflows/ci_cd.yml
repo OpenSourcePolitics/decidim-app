@@ -66,11 +66,11 @@ jobs:
           fetch-depth: 1
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
+          ruby-version: ${{ inputs.ruby_version }}
           bundler-cache: true
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ inputs.node_version }}
           cache: 'npm'
           cache-dependency-path: ./package-lock.json
       - uses: actions/cache@v4
