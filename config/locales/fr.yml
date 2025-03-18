@@ -6,6 +6,9 @@ fr:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
       participatory_process:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
+  date:
+    formats:
+      order: d-m-y
   decidim:
     admin:
       actions:
