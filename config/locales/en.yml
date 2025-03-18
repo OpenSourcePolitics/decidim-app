@@ -1,5 +1,11 @@
 ---
 en:
+  activemodel:
+    attributes:
+      assembly:
+        copy_landing_page_blocks: Copy landing page blocks
+      participatory_process:
+        copy_landing_page_blocks: Copy landing page blocks
   decidim:
     admin:
       actions:

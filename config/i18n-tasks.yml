@@ -85,6 +85,12 @@ translation:
 
 # Do not consider these keys missing:
 ignore_missing:
+  - decidim.admin.assembly_copies.new.select
+  - decidim.assemblies.admin.assembly_copies.new.select
+  - decidim.assemblies.admin.assembly_copies.form.slug_help_html
+  - decidim.admin.participatory_process_copies.new.select
+  - decidim.participatory_processes.admin.participatory_process_copies.new.select
+  - decidim.participatory_processes.admin.participatory_process_copies.form.slug_help_html
   - time.buttons.select
   - decidim.admin.models.assembly.fields.promoted
 
@@ -98,6 +104,8 @@ ignore_unused:
   - decidim.initiatives.admin.initiatives_types.*
   - time.buttons.*
   - decidim.admin.models.assembly.fields.promoted.*
+  - activemodel.attributes.assembly.copy_landing_page_blocks
+  - activemodel.attributes.participatory_process.copy_landing_page_blocks
   - decidim.components.proposals.settings.global.require_category
   - decidim.components.proposals.settings.global.require_scope
   - decidim.admin.scopes.update.error
