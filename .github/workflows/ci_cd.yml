@@ -129,7 +129,7 @@ jobs:
     env:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
-      DATABASE_HOST: host.docker.internal
+      DATABASE_HOST: postgres
     steps:
       - uses: OpenSourcePolitics/build-and-test-images-action@master
         with:
