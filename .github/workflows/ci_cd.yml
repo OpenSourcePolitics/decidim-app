@@ -131,8 +131,6 @@ jobs:
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: host.docker.internal
     steps:
-      - name: Restart PostgreSQL
-        run: sudo systemctl restart postgresql || echo "PostgreSQL service not found"
       - uses: OpenSourcePolitics/build-and-test-images-action@master
         with:
           registry: ${{ vars.REGISTRY_ENDPOINT }}
@@ -143,6 +141,7 @@ jobs:
           database_username: ${{ env.DATABASE_USERNAME }}
           database_password: ${{ env.DATABASE_PASSWORD }}
           database_host: ${{ env.DATABASE_HOST }}
+          database_port: "5432"
           push: "true"
   generate_release:
     name: Generate release
