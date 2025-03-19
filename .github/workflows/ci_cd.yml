@@ -126,10 +126,11 @@ jobs:
           --health-retries 5
         env:
           POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
     env:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
-      DATABASE_HOST: postgres
+      DATABASE_HOST: host.docker.internal
     steps:
       - uses: OpenSourcePolitics/build-and-test-images-action@master
         with:
