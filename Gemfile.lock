@@ -18,8 +18,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git
-  revision: 3da4973f52649534fa9cc2acaaa4d89176a19351
-  branch: master
+  revision: f3b55cae4e22713d7c842f0de4c421e9765ad7b0
+  branch: backport/fix_database_not_available
   specs:
     decidim-term_customizer (0.29.0)
       decidim-admin (~> 0.29.0)
