@@ -17,6 +17,15 @@ GIT
       sassc (~> 2.3)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git
+  revision: f3b55cae4e22713d7c842f0de4c421e9765ad7b0
+  branch: backport/fix_database_not_available
+  specs:
+    decidim-term_customizer (0.29.0)
+      decidim-admin (~> 0.29.0)
+      decidim-core (~> 0.29.0)
+
+GIT
   remote: https://github.com/decidim/decidim.git
   revision: 90dc58727e4b5560bd7a102f42e1b831a5096264
   tag: v0.29.2
@@ -933,6 +942,7 @@ DEPENDENCIES
   decidim-dev!
   decidim-initiatives!
   decidim-templates!
+  decidim-term_customizer!
   deface
   dotenv-rails (~> 2.7)
   faker (~> 3.2)
