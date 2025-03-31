@@ -238,25 +238,22 @@ export default class UploadModal {
 
     handleButtonClick({ currentTarget }) {
         const item = currentTarget.closest("[data-filename]")
-        const { filename } = item.dataset;
+        const { filename } = item.dataset
 
-        // ❗ Utilise un sélecteur plus robuste
-        const selector = `li[data-filename="${CSS.escape(filename)}"]`;
-        const nodeToRemove = this.uploadItems.querySelector(selector);
-        if (nodeToRemove) nodeToRemove.remove();
+        // remove item from DOM
+        item.remove();
 
-        const ix = this.items.findIndex(({ name }) => name === filename);
+        // mark item as removable from the array of File(s), if exists (it could be non-validated)
+        const ix = this.items.findIndex(({ name }) => name === filename)
         if (ix > -1) {
-            this.items[ix].removable = true;
+            this.items[ix].removable = true
         }
 
         this.updateDropZone();
     }
 
     setProgressBar(name, value) {
-        const selector = `li[data-filename="${CSS.escape(name)}"] progress`;
-        const progress = this.uploadItems.querySelector(selector);
-        if (progress) progress.value = value;
+        this.uploadItems.querySelector(`[data-filename="${escapeQuotes(name)}"] progress`).value = value
     }
 
     updateAddAttachmentsButton() {
