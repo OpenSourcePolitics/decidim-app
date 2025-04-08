@@ -26,6 +26,10 @@ module DecidimApp
       require "extends/controllers/decidim/admin/scopes_controller_extends"
       require "extends/controllers/decidim/scopes_controller_extends"
       require "extends/controllers/decidim/comments/comments_controller_extends"
+      require "extends/controllers/decidim/account_controller_extends"
+      require "extends/controllers/decidim/devise_controllers_extends"
+      require "extends/controllers/decidim/devise/sessions_controller_extends"
+      require "extends/controllers/decidim/devise/omniauth_registrations_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
     end

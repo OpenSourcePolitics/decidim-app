@@ -1,0 +1,3 @@
+<% if force_profile_sync_on_omniauth_connection? %>
+  <%= cell("decidim/announcement", t("decidim.account.omniauth_synced_profile.announcement_html"), callout_class: "alert") %>
+<% end %>

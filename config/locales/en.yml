@@ -7,6 +7,21 @@ en:
       participatory_process:
         copy_landing_page_blocks: Copy landing page blocks
   decidim:
+    account:
+      omniauth_synced_profile:
+        announcement_html: |-
+          <p><strong>Profile synchronization</strong></p>
+          <p>
+            The following informations are synchronized with an external identity provider:
+          </p>
+          <ul>
+            <li>Name</li>
+            <li>Nickname</li>
+            <li>Email</li>
+          </ul>
+          <p>
+            You can't edit these informations here.
+          </p>
     admin:
       actions:
         add: Add
