@@ -25,7 +25,7 @@ gem "rack-attack", "~> 6.7"
 gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
 gem "decidim-decidim_awesome", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git", branch: "fix/update_packages_dependancies"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "backport/fix_database_not_available"
-gem "decidim-ai", git: "https://github.com/OpenSourcePolitics/decidim-module-ai.git"
+gem "decidim-ai", git: "https://github.com/OpenSourcePolitics/decidim-module-ai.git", branch: "feat/third_party_service"
 
 group :development, :test do
   gem "brakeman", "~> 6.1"

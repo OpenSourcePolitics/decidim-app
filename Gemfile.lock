@@ -7,7 +7,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-ai.git
-  revision: 40a70ec998e8054e3ad5e3b413c4cb6c06bdc7cb
+  revision: 9ee8df374d6a0160f96ba9c9a505da837ba28a5c
+  branch: feat/third_party_service
   specs:
     decidim-ai (0.29.2)
       classifier-reborn (~> 2.3.0)
