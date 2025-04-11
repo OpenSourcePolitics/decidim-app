@@ -22,6 +22,7 @@ module DecidimApp
       require "extends/forms/decidim/participatory_processes/admin/participatory_process_copy_form_extends"
       require "extends/forms/decidim/proposals/proposal_form_extends"
       require "extends/forms/decidim/comments/comment_form_extends"
+      require "extends/forms/decidim/system/base_organization_form_extends"
       # controllers
       require "extends/controllers/decidim/admin/scopes_controller_extends"
       require "extends/controllers/decidim/scopes_controller_extends"
