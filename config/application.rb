@@ -29,6 +29,8 @@ module DecidimApp
       require "extends/controllers/decidim/comments/comments_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
+      # cells
+      require "extends/cells/decidim/system/system_checks_cell_extends"
     end
   end
 end
