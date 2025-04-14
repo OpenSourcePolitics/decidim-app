@@ -34,7 +34,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
-  revision: ce52252129fe2dc13c0cdf91a517e43790fff97f
+  revision: 40edb6a73ee1e21fa939392bcdcd8c0820436460
   branch: temp/twilio-compatibility-0.27
   specs:
     decidim-extra_user_fields (0.27.2)
