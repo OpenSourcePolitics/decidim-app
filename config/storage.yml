@@ -12,6 +12,7 @@ amazon:
   bucket: <%= Rails.application.secrets.dig(:amazon, :bucket) %>
   access_key_id: <%= Rails.application.secrets.dig(:storage, :amazon, :access_key_id) %>
   secret_access_key: <%= Rails.application.secrets.dig(:storage, :amazon, :secret_access_key) %>
+  validate_params: false
 
 amazon_instance_profile:
   service: S3
@@ -21,6 +22,7 @@ amazon_instance_profile:
   # see config/initalizers/storage.rb for more details
   # access_key_id: <%= Rails.application.secrets.dig(:storage, :amazon_instance_profile, :access_key_id) %>
   # secret_access_key: <%= Rails.application.secrets.dig(:storage, :amazon_instance_profile, :secret_access_key) %>
+  validate_params: false
 
 minio:
   service: S3
@@ -30,6 +32,7 @@ minio:
   endpoint: <%= Rails.application.secrets.dig(:storage, :minio, :endpoint) %>
   region: <%= Rails.application.secrets.dig(:storage, :minio, :region) %>
   force_path_style: true
+  validate_params: false
 
 azure:
   service: AzureStorage
