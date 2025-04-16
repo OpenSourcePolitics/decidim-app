@@ -13,18 +13,18 @@ gem "decidim-templates", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "bootsnap", "~> 1.4", require: false
 gem "puma", ">= 6.3.1"
 
+gem "actionpack", "~> 7.0.8.7"
 gem "aws-sdk-s3", require: false
 gem "dalli"
 gem "deface"
 gem "dotenv-rails", "~> 2.7"
 gem "faker", "~> 3.2"
-gem "letter_opener_web", "~> 2.0"
-gem "rack-attack", "~> 6.7"
-gem "actionpack", "~> 7.0.8.7"
 gem "graphql", "~> 2.2.17"
-gem "nokogiri", ">= 1.18.4"
-gem "uri", ">= 1.0.3"
+gem "letter_opener_web", "~> 2.0"
 gem "net-imap", ">= 0.5.6"
+gem "nokogiri", ">= 1.18.4"
+gem "rack-attack", "~> 6.7"
+gem "uri", ">= 1.0.3"
 
 # External Decidim gems
 gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
