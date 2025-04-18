@@ -122,29 +122,40 @@ Decidim.configure do |config|
   #   cache: Redis.new,
   #   cache_prefix: "..."
   # }
-  if Rails.application.secrets.maps.present? && Rails.application.secrets.maps[:static_provider].present?
-    static_provider = Rails.application.secrets.maps[:static_provider]
-    dynamic_provider = Rails.application.secrets.maps[:dynamic_provider]
-    dynamic_url = Rails.application.secrets.maps[:dynamic_url]
-    static_url = Rails.application.secrets.maps[:static_url]
-    static_url = "https://image.maps.ls.hereapi.com/mia/1.6/mapview" if static_provider == "here" && static_url.blank?
+  if Rails.application.secrets.maps.present?
     config.maps = {
-      provider: static_provider,
-      api_key: Rails.application.secrets.maps[:static_api_key],
-      static: { url: static_url },
+      provider: Rails.application.secrets.maps[:provider]&.to_sym || :here,
+      api_key: Rails.application.secrets.maps[:api_key] || "",
+
+      autocomplete: {
+        address_format: [%w(houseNumber street), "city", "country"]
+      },
+
       dynamic: {
-        provider: dynamic_provider,
-        api_key: Rails.application.secrets.maps[:dynamic_api_key]
+        provider: Rails.application.secrets.maps[:dynamic_provider]&.to_sym || :osm,
+        api_key: Rails.application.secrets.maps[:dynamic_api_key] || "",
+        tile_layer: {
+          url: Rails.application.secrets.maps[:dynamic_url] || "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          attribution: Rails.application.secrets.maps[:attribution] || '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }
+      },
+
+      geocoding: {
+        provider: Rails.application.secrets.maps[:geocoding_provider]&.to_sym || Rails.application.secrets.maps[:provider]&.to_sym || :here,
+        api_key: Rails.application.secrets.maps[:geocoding_api_key] || Rails.application.secrets.maps[:api_key] || ""
       }
     }
-    config.maps[:geocoding] = { host: Rails.application.secrets.maps[:geocoding_host], use_https: true } if Rails.application.secrets.maps[:geocoding_host]
-    config.maps[:dynamic][:tile_layer] = {}
-    config.maps[:dynamic][:tile_layer][:url] = dynamic_url if dynamic_url
-    config.maps[:dynamic][:tile_layer][:attribution] = Rails.application.secrets.maps[:attribution] if Rails.application.secrets.maps[:attribution]
+
+    if Rails.application.secrets.maps[:static_url].present?
+      config.maps[:static] = {
+        provider: Rails.application.secrets.maps[:static_provider]&.to_sym || Rails.application.secrets.maps[:provider]&.to_sym || :here,
+        url: Rails.application.secrets.maps[:static_url] || "https://image.maps.ls.hereapi.com/mia/1.6/mapview"
+      }
+    end
+
     if Rails.application.secrets.maps[:extra_vars].present?
       vars = URI.decode_www_form(Rails.application.secrets.maps[:extra_vars])
       vars.each do |key, value|
-        # perform a naive type conversion
         config.maps[:dynamic][:tile_layer][key] = case value
                                                   when /^true$|^false$/i
                                                     value.downcase == "true"
@@ -155,8 +166,12 @@ Decidim.configure do |config|
                                                   end
       end
     end
-  end
 
+    config.geocoder = {
+      timeout: Rails.application.secrets.maps[:geocoder_timeout] || 5,
+      units: Rails.application.secrets.maps[:geocoder_units]&.to_sym || :km
+    }
+  end
   # Custom resource reference generator method. Check the docs for more info.
   # config.reference_generator = lambda do |resource, component|
   #   # Implement your custom method to generate resources references
