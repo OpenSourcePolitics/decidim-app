@@ -13,7 +13,6 @@ gem "decidim-templates", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "bootsnap", "~> 1.4", require: false
 gem "puma", ">= 6.3.1"
 
-gem "actionpack", "~> 7.0.8.7"
 gem "aws-sdk-s3", require: false
 gem "dalli"
 gem "deface"
