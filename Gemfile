@@ -21,6 +21,13 @@ gem "faker", "~> 3.2"
 gem "letter_opener_web", "~> 2.0"
 gem "rack-attack", "~> 6.7"
 
+# gems updated with bundle-audit
+gem "actionpack", "~> 7.0.8.7"
+gem "graphql", "~> 2.2.17"
+gem "net-imap", ">= 0.5.6"
+gem "nokogiri", ">= 1.18.4"
+gem "uri", ">= 1.0.3"
+
 # External Decidim gems
 gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
 gem "decidim-decidim_awesome", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git", branch: "fix/update_packages_dependancies"
