@@ -14,7 +14,6 @@ if Decidim.module_installed?(:ai)
 
   Decidim::Ai::SpamDetection.reporting_user_email = Rails.application.secrets.dig(:decidim, :ai, :reporting_user_email)
   Decidim::Ai::SpamDetection.resource_score_threshold = 0.75
-  Decidim::Ai::SpamDetection.spam_detection_delay = 30.seconds
   Decidim::Ai::SpamDetection.resource_analyzers = [
     {
       name: :scaleway,
@@ -47,8 +46,8 @@ if Decidim.module_installed?(:ai)
   Decidim::Ai::SpamDetection.user_models = {
     "Decidim::User" => "Decidim::Ai::SpamDetection::Resource::UserBaseEntity"
   }
-  Decidim::Ai::SpamDetection.user_detection_service = "Decidim::Ai::ThirdPartyService"
-  Decidim::Ai::SpamDetection.resource_detection_service = "Decidim::Ai::ThirdPartyService"
+  Decidim::Ai::SpamDetection.user_detection_service = "Decidim::Ai::SpamDetection::ThirdPartyService"
+  Decidim::Ai::SpamDetection.resource_detection_service = "Decidim::Ai::SpamDetection::ThirdPartyService"
   Decidim::Ai::SpamDetection.user_spam_analyzer_job = "Decidim::Ai::SpamDetection::UserSpamAnalyzerJob"
   Decidim::Ai::SpamDetection.generic_spam_analyzer_job = "Decidim::Ai::SpamDetection::GenericSpamAnalyzerJob"
 end
