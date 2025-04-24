@@ -143,15 +143,13 @@ Decidim.configure do |config|
       geocoding: {
         provider: Rails.application.secrets.maps[:geocoding_provider]&.to_sym || Rails.application.secrets.maps[:provider]&.to_sym || :here,
         api_key: Rails.application.secrets.maps[:geocoding_api_key] || Rails.application.secrets.maps[:api_key] || ""
-      }
-    }
+      },
 
-    if Rails.application.secrets.maps[:static_url].present?
-      config.maps[:static] = {
-        provider: Rails.application.secrets.maps[:static_provider]&.to_sym || Rails.application.secrets.maps[:provider]&.to_sym || :here,
+      static: {
+        provider: Rails.application.secrets.maps[:static_provider]&.to_sym || :here,
         url: Rails.application.secrets.maps[:static_url] || "https://image.maps.ls.hereapi.com/mia/1.6/mapview"
       }
-    end
+    }
 
     if Rails.application.secrets.maps[:extra_vars].present?
       vars = URI.decode_www_form(Rails.application.secrets.maps[:extra_vars])
