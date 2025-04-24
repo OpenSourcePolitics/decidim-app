@@ -6,10 +6,12 @@ module OmniauthRegistrationsControllerExtends
   included do
     def sign_in_and_redirect(resource_or_scope, *args)
       strategy = request.env["omniauth.strategy"]
-      provider = strategy.name
+
+      provider = strategy&.name
       session["omniauth.provider"] = provider
-      session["omniauth.#{provider}.logout_policy"] = strategy.options[:logout_policy] if strategy.options[:logout_policy].present?
-      session["omniauth.#{provider}.logout_path"] = strategy.options[:logout_path] if strategy.options[:logout_path].present?
+      session["omniauth.#{provider}.logout_policy"] = strategy.options[:logout_policy] if strategy&.options.present? && strategy.options[:logout_policy].present?
+      session["omniauth.#{provider}.logout_path"] = strategy.options[:logout_path] if strategy&.options.present? && strategy.options[:logout_path].present?
+
       super
     end
 
