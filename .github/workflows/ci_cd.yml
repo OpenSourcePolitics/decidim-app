@@ -10,14 +10,6 @@ env:
   AVAILABLE_LOCALES: "en,fr,ca,es"
 
 jobs:
-  audit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: 'Bundler Audit'
-        uses: andrewmcodes/bundler-audit-action@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   lint:
     name: Lint code
     runs-on: ubuntu-latest
@@ -31,6 +23,21 @@ jobs:
         with:
           ruby_version: ${{ env.RUBY_VERSION }}
           node_version: ${{ env.NODE_VERSION }}
+  sast:
+    name: Check for known vulnerabilities
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - name: Check for known vulnerabilities
+        run: |
+          bundle exec rake bundle:audit
   zeitwerk:
     name: Check for Zeitwerk errors
     runs-on: ubuntu-latest
