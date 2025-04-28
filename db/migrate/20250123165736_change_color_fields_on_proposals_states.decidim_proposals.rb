@@ -45,7 +45,5 @@ class ChangeColorFieldsOnProposalsStates < ActiveRecord::Migration[6.1]
     # Skip migration
   end
 
-  def down
-    raise ActiveRecord::IrreversibleMigration
-  end
+  def down; end
 end
