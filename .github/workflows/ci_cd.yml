@@ -24,7 +24,7 @@ jobs:
           ruby_version: ${{ env.RUBY_VERSION }}
           node_version: ${{ env.NODE_VERSION }}
   sast:
-    name: Check for known vulnerabilities
+    name: Bundler Audit
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -35,7 +35,7 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - name: Check for known vulnerabilities
+      - name: Bundler Audit
         run: |
           bundle exec rake bundle:audit
   zeitwerk:
