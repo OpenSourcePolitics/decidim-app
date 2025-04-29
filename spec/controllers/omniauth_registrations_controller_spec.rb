@@ -33,20 +33,16 @@ module Decidim
       end
 
       describe "#sign_in_and_redirect" do
-        let(:user) { instance_double(User) }
-
         before do
-          controller.singleton_class.class_eval do
-            define_method(:sign_in_and_redirect) do |_user|
-              strategy = request.env["omniauth.strategy"]
-              provider = strategy&.name
-              session["omniauth.provider"] = provider
+          allow(controller).to receive(:sign_in_and_redirect) do |_user|
+            strategy = request.env["omniauth.strategy"]
 
-              if provider && (options = strategy&.options)
-                session["omniauth.#{provider}.logout_policy"] = options[:logout_policy] if options[:logout_policy]
-                session["omniauth.#{provider}.logout_path"] = options[:logout_path] if options[:logout_path]
-              end
-            end
+            provider = strategy&.name
+            session["omniauth.provider"] = provider
+            session["omniauth.#{provider}.logout_policy"] = strategy.options[:logout_policy] if strategy&.options.present? && strategy.options[:logout_policy].present?
+            session["omniauth.#{provider}.logout_path"] = strategy.options[:logout_path] if strategy&.options.present? && strategy.options[:logout_path].present?
+
+            true
           end
         end
 
