@@ -66,6 +66,9 @@ fr:
             success: Le type de pétition a été supprimé avec succès.
           edit:
             update: Mettre à jour
+    participatory_processes:
+      show:
+        related_processes: Concertations liées
   time:
     buttons:
       select: Sélectionner

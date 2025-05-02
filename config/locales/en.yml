@@ -63,6 +63,9 @@ en:
             success: The initiative type has been successfully removed.
           edit:
             update: Update
+    participatory_processes:
+      show:
+        related_processes: Related processes
   time:
     buttons:
       select: Select
