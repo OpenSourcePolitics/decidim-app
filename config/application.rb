@@ -32,5 +32,12 @@ module DecidimApp
       # cells
       require "extends/cells/decidim/system/system_checks_cell_extends"
     end
+
+    config.to_prepare do
+      Decidim::Api::QueryType.include ::QueryExtensions
+      Decidim::GraphiQL::Rails.config.tap do |config|
+        config.initial_query = "{\n  deployment {\n    registry\n    image\n    tag\n    decidimVersion\n  }\n}".html_safe
+      end
+    end
   end
 end
