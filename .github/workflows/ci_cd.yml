@@ -89,11 +89,13 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
       - run: |
-          sudo apt install libu2f-udev imagemagick
+          sudo apt update
+          sudo apt install -y libu2f-udev
+          sudo apt install -y --fix-missing imagemagick
           wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{env.CHROME_VERSION}}-1_amd64.deb
           sudo dpkg -i /tmp/chrome.deb
           rm /tmp/chrome.deb
-        name: Install Chrome version ${{ env.CHROME_VERSION }}
+        name: Install dependencies and Chrome version ${{ env.CHROME_VERSION }}
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -163,11 +165,13 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
       - run: |
-          sudo apt install libu2f-udev imagemagick
+          sudo apt update
+          sudo apt install -y libu2f-udev
+          sudo apt install -y --fix-missing imagemagick
           wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{env.CHROME_VERSION}}-1_amd64.deb
           sudo dpkg -i /tmp/chrome.deb
           rm /tmp/chrome.deb
-        name: Install Chrome version ${{ env.CHROME_VERSION }}
+        name: Install dependencies and Chrome version ${{ env.CHROME_VERSION }}
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
