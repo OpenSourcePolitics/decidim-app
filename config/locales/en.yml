@@ -38,6 +38,7 @@ en:
         confirm_destroy: Confirm destroy
         destroy: Destroy
         edit: Edit
+        import: Import
       attachments:
         form:
           send_notification_to_followers: Send a notification to all the people following the consultation who have agreed to receive email notifications
@@ -98,6 +99,13 @@ en:
       osp_authorization_workflow:
         name: Authorization procedure
     budgets:
+      actions:
+        import: Import proposals to projects
+        new: New %{name}
+      admin:
+        models:
+          project:
+            name: Project
       order_reminder:
         text_message: Your vote is still pending for the participatory budget. Please reconnect to %{organization_host} to confirm it
       projects:
@@ -113,6 +121,9 @@ en:
           most_voted: Most voted
           random: Random order
           selected: Selected
+    budgets_importer:
+      actions:
+        import: Import projects to budget
     comments:
       comments:
         create:

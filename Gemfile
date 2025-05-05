@@ -22,6 +22,8 @@ gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp"
 gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "fix/decidim_version_and_missing_helper"
 gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
+gem "decidim-budgets_importer", git: "https://github.com/OpenSourcePolitics/decidim-module-budgets_importer.git"
+gem "decidim-budgets_paper_ballots", git: "https://github.com/armandfardeau/decidim-module-budgets_paper_ballots.git"
 gem "decidim-cache_cleaner"
 gem "decidim-category_enhanced", "~> 0.0.1"
 gem "decidim-cleaner"

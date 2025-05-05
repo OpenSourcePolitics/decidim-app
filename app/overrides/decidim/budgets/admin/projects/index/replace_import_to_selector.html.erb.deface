@@ -1,0 +1,21 @@
+<!-- replace "erb[loud]:contains('bulk-actions')" -->
+
+      <div class="flex--cc flex-gap--1">
+        <span class="imports dropdown tiny button button--simple" data-toggle="import-dropdown"><%= t "actions.import", scope: "decidim.admin" %></span>
+        <div class="dropdown-pane" id="import-dropdown" data-dropdown data-position=bottom data-alignment=right data-auto-focus="true" data-close-on-click="true">
+          <ul class="vertical menu add-components">
+            <li class="imports--file imports--proposals">
+              <%= link_to t("actions.import", scope: "decidim.budgets", name: t("models.project.name", scope: "decidim.budgets.admin")), new_budget_proposals_import_path(budget) if allowed_to? :import_proposals, :project %>
+            </li>
+            <li class="imports--file imports--projects">
+              <%= link_to t("actions.import", scope: "decidim.budgets_importer", name: t("models.project.name", scope: "decidim.budgets.admin")), new_budget_projects_import_path(budget) if allowed_to? :import_proposals, :project %>
+            </li>
+          </ul>
+        </div>
+
+
+        <% if allowed_to? :export, :budget %>
+          <%= export_dropdown(current_component, budget.id) %>
+        <% end %>
+        <%= link_to t("actions.new", scope: "decidim.budgets", name: t("models.project.name", scope: "decidim.budgets.admin")), new_budget_project_path, class: "button tiny button--title new" if allowed_to? :create, :project %>
+      </div>

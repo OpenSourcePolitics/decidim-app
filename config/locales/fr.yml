@@ -38,6 +38,7 @@ fr:
         confirm_destroy: Confirmer la suppression
         destroy: Supprimer
         edit: Modifier
+        import: Importer
       attachments:
         form:
           send_notification_to_followers: Envoyer une notification à toutes les personnes qui suivent la concertation ayant accepté de recevoir des notifications par mail
@@ -100,6 +101,13 @@ fr:
       osp_authorization_workflow:
         name: Procédure d'autorisation
     budgets:
+      actions:
+        import: Importer des propositions dans des projets
+        new: Nouveau %{name}
+      admin:
+        models:
+          project:
+            name: Projet
       order_reminder:
         text_message: Votre vote au budget participatif n'est pas terminé. Pour le terminer, reconnectez-vous sur %{organization_host}
       projects:
@@ -115,6 +123,9 @@ fr:
           most_voted: Les plus votés
           random: Ordre aléatoire
           selected: Sélectionné
+    budgets_importer:
+      actions:
+        import: Importer des projets
     comments:
       comments:
         create:
