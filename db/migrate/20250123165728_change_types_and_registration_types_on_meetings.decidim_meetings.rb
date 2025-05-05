@@ -32,8 +32,8 @@ class ChangeTypesAndRegistrationTypesOnMeetings < ActiveRecord::Migration[6.1]
     rename_column :decidim_meetings_meetings, :type_of_meeting, :old_type_of_meeting
     rename_column :decidim_meetings_meetings, :registration_type, :old_registration_type
 
-    add_column :decidim_meetings_meetings, :type_of_meeting, :string, default: null
-    add_column :decidim_meetings_meetings, :registration_type, :string, default: null
+    add_column :decidim_meetings_meetings, :type_of_meeting, :string, default: nil
+    add_column :decidim_meetings_meetings, :registration_type, :string, default: nil
 
     Meeting.reset_column_information
 

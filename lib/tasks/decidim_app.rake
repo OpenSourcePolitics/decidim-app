@@ -32,6 +32,14 @@ namespace :decidim_app do
     task upgrade: :environment do
       Rails.logger.warn "(decidim_app:k8s:upgrade)> Starting upgrade..."
       Rake::Task["migrate:db:force"].invoke
+      Rake::Task["active_storage:update_service_name"].invoke("scaleway", "minio")
+      Rails.logger.warn "(decidim_app:k8s:upgrade)> Successfully upgraded!"
+    rescue StandardError => e
+      Rails.logger.error "(decidim_app:k8s:upgrade)> An error occured : #{e.message}"
+    end
+
+    desc "Configure decidim-app"
+    task configure: :environment do
       Rake::Task["decidim:upgrade:migrate_wysiwyg_content"].invoke
       Rake::Task["decidim:upgrade:moderation:fix_blocked_user_panel"].invoke
       Rake::Task["decidim:upgrade:fix_duplicate_endorsements"].invoke
@@ -40,9 +48,6 @@ namespace :decidim_app do
       Rake::Task["decidim:upgrade:clean:notifications"].invoke
       Rake::Task["decidim:upgrade:clean:follows"].invoke
       Rake::Task["decidim:upgrade:clean:action_logs"].invoke
-      Rails.logger.warn "(decidim_app:k8s:upgrade)> Successfully upgraded!"
-    rescue StandardError => e
-      Rails.logger.error "(decidim_app:k8s:upgrade)> An error occured : #{e.message}"
     end
   end
 end

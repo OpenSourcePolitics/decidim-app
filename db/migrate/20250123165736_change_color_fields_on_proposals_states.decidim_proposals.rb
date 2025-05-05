@@ -28,6 +28,9 @@ class ChangeColorFieldsOnProposalsStates < ActiveRecord::Migration[6.1]
   end
 
   def up
+    add_column :decidim_proposals_proposal_states, :bg_color, :string, default: "#F6F8FA", null: false, if_not_exists: true
+    add_column :decidim_proposals_proposal_states, :text_color, :string, default: "#4B5058", null: false, if_not_exists: true
+
     colors = ProposalState.colors
 
     # rubocop:disable Rails/SkipsModelValidations
@@ -45,7 +48,5 @@ class ChangeColorFieldsOnProposalsStates < ActiveRecord::Migration[6.1]
     # Skip migration
   end
 
-  def down
-    raise ActiveRecord::IrreversibleMigration
-  end
+  def down; end
 end
