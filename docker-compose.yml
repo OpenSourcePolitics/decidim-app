@@ -88,6 +88,8 @@ services:
   app:
     image: decidim-app:3.0.0
     command: [ "bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=/opt/decidim/tls-certificate/key.pem&cert=/opt/decidim/tls-certificate/cert.pem" ]
+    env_file:
+      - .env
     environment:
       - DATABASE_HOST=database
       - DATABASE_USERNAME=postgres
