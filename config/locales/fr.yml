@@ -17,6 +17,7 @@ fr:
         confirm_destroy: Confirmer la suppression
         destroy: Supprimer
         edit: Modifier
+        new_assembly: Nouvelle assemblée
       attachments:
         form:
           send_notification_to_followers: Envoyer une notification à toutes les personnes qui suivent la concertation ayant accepté de recevoir des notifications par mail
@@ -30,17 +31,21 @@ fr:
             scope_type: Type de secteur
       scopes:
         no_scopes: Aucun secteur à ce niveau.
+        titles:
+          scopes: Secteurs
         update:
           error: Il y a eu une erreur lors de la mise à jour du secteur.
           success: Secteur mis à jour avec succès.
-        titles:
-          scopes: Secteurs    
+    comments:
+      comments:
+        create:
+          error: Une erreur s'est produite lors de la création du commentaire.
     components:
       proposals:
         settings:
           global:
             require_category: La catégorie est obligatoire
-            require_scope: Le secteur est obligatoire    
+            require_scope: Le secteur est obligatoire
     events:
       proposals:
         author_confirmation_proposal_event:
@@ -66,6 +71,39 @@ fr:
             success: Le type de pétition a été supprimé avec succès.
           edit:
             update: Mettre à jour
+      create_initiative:
+        fill_data:
+          back: Retour
+          continue: Continuer
+          fill_data_help: "<ul> <li>Vérifier le contenu de votre pétition : le titre est-il facile à comprendre ? L'objectif de votre pétition est-il clair ?</li> <li>Vous devez choisir le type de signature : en présentiel, en ligne ou une combinaison des deux</li> <li>Quelle est le secteur géographique de l'initiative ?</li> </ul>"
+          more_information: "(Plus d'informations)"
+          select_area: Sélectionnez une zone
+          select_scope: Sélectionnez une portée
+        select_initiative_type:
+          new: Créer une nouvelle pétition
+      form:
+        add_documents: Ajouter des documents
+        add_image: Ajouter une image
+        attachment_legend: "(Facultatif) Ajouter une pièce jointe"
+        edit_documents: Modifier les documents
+        edit_image: Modifier l'Image
+        image_legend: "(Facultatif) Ajouter une image"
+    proposals:
+      proposals:
+        dynamic_map_instructions:
+          description: Les coordonnées seront mises à jour en cliquant sur le bouton 'Aperçu'. Cependant, l'adresse ne change pas.
+          instructions: Vous pouvez déplacer le point sur la carte.
+        edit:
+          add_documents: Ajouter des documents
+          attachment_legend: "(Facultatif) Ajouter une pièce jointe"
+          edit_documents: Modifier les documents
+          select_a_category: Veuillez sélectionner une catégorie
+        edit_form_fields:
+          marker_added: Marqueur ajouté à la carte.
+        placeholder:
+          address: 60 Boulevard Victor Hugo Saint-Jean-de-Luz, BP 64500
+    scopes:
+      global: Portée générale
   time:
     buttons:
       select: Sélectionner
