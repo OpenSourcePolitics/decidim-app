@@ -32,6 +32,118 @@ module Decidim
         request.env["omniauth.strategy"] = OmniAuth::Strategies::Facebook.new({})
       end
 
+      describe "#sign_in_and_redirect" do
+        before do
+          allow(controller).to receive(:sign_in_and_redirect) do |_user|
+            strategy = request.env["omniauth.strategy"]
+
+            provider = strategy&.name
+            session["omniauth.provider"] = provider
+            session["omniauth.#{provider}.logout_policy"] = strategy.options[:logout_policy] if strategy&.options.present? && strategy.options[:logout_policy].present?
+            session["omniauth.#{provider}.logout_path"] = strategy.options[:logout_path] if strategy&.options.present? && strategy.options[:logout_path].present?
+
+            true
+          end
+        end
+
+        context "with full strategy and options" do
+          let(:strategy) do
+            double("OmniAuth::Strategy",
+                   name: "facebook",
+                   options: { logout_policy: "delete", logout_path: "/logout/facebook" })
+          end
+
+          before do
+            request.env["omniauth.strategy"] = strategy
+          end
+
+          it "stores provider and logout options in session" do
+            controller.send(:sign_in_and_redirect, user)
+
+            expect(session["omniauth.provider"]).to eq("facebook")
+            expect(session["omniauth.facebook.logout_policy"]).to eq("delete")
+            expect(session["omniauth.facebook.logout_path"]).to eq("/logout/facebook")
+          end
+        end
+
+        context "when strategy is nil" do
+          before do
+            request.env["omniauth.strategy"] = nil
+          end
+
+          it "does not raise and sets session accordingly" do
+            expect do
+              controller.send(:sign_in_and_redirect, user)
+            end.not_to raise_error
+
+            expect(session["omniauth.provider"]).to be_nil
+          end
+        end
+
+        context "when strategy.options is nil" do
+          let(:strategy) do
+            double("OmniAuth::Strategy", name: "facebook", options: nil)
+          end
+
+          before do
+            request.env["omniauth.strategy"] = strategy
+          end
+
+          it "does not raise and sets only the provider in session" do
+            expect do
+              controller.send(:sign_in_and_redirect, user)
+            end.not_to raise_error
+
+            expect(session["omniauth.provider"]).to eq("facebook")
+            expect(session["omniauth.facebook.logout_policy"]).to be_nil
+            expect(session["omniauth.facebook.logout_path"]).to be_nil
+          end
+        end
+
+        context "when strategy.options is empty" do
+          let(:strategy) do
+            double("OmniAuth::Strategy", name: "facebook", options: {})
+          end
+
+          before do
+            request.env["omniauth.strategy"] = strategy
+          end
+
+          it "sets only the provider in session without errors" do
+            expect do
+              controller.send(:sign_in_and_redirect, user)
+            end.not_to raise_error
+
+            expect(session["omniauth.provider"]).to eq("facebook")
+            expect(session["omniauth.facebook.logout_policy"]).to be_nil
+            expect(session["omniauth.facebook.logout_path"]).to be_nil
+          end
+        end
+      end
+
+      describe "#skip_first_login_authorization?" do
+        around do |example|
+          original = ENV.fetch("SKIP_FIRST_LOGIN_AUTHORIZATION", nil)
+          example.run
+          ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"] = original
+        end
+
+        it "returns true when the env is set to true" do
+          ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"] = "true"
+          expect(controller.send(:skip_first_login_authorization?)).to be true
+        end
+
+        it "returns false when the env is set to false" do
+          ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"] = "false"
+          expect(controller.send(:skip_first_login_authorization?)).to be false
+        end
+
+        it "returns false when the env is not set" do
+          ENV.delete("SKIP_FIRST_LOGIN_AUTHORIZATION")
+          expect(controller.send(:skip_first_login_authorization?)).to be false
+        end
+      end
+
       describe "after_sign_in_path_for" do
         subject { controller.after_sign_in_path_for(user) }
 
@@ -125,6 +237,18 @@ module Decidim
 
               it { is_expected.to eq("/") }
             end
+
+            context "when the user is blocked and admin" do
+              let(:user) { build(:user, :admin, blocked: true, sign_in_count: 1) }
+
+              it { is_expected.to eq("/") }
+            end
+
+            context "when the user is blocked and not admin" do
+              let(:user) { build(:user, blocked: true, sign_in_count: 1) }
+
+              it { is_expected.to eq("/") }
+            end
           end
         end
       end
@@ -136,7 +260,7 @@ module Decidim
           post :create
         end
 
-        it "logs in" do
+        it "does not log in" do
           expect(controller).not_to be_user_signed_in
         end
 

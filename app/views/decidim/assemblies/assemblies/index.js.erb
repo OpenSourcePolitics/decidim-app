@@ -1,0 +1,24 @@
+var $grid = $('#parent-assemblies');
+var $assembliesCount = $('#assemblies-count');
+var $assembliesFilter = $('#assemblies-filter');
+
+$grid.find('.card-grid').html('<%= j(render(parent_assemblies)).strip.html_safe %>');
+$assembliesCount.html('<%= j(render partial: "count").strip.html_safe %>');
+$assembliesFilter.html('<%= j(render partial: "decidim/assemblies/filter_by_type") %>');
+$assembliesFilter.foundation();
+
+var $scope_prompt = $('.picker-prompt > a')
+var $scope_value = $('.picker-values').children()
+var $prompt_text = $('.filter-text-suppress')
+
+if ($scope_value.length > 0){
+    $scope_prompt.css("pointer-events", "none")
+    $scope_prompt.css("cursor", "none")
+    $('.picker-prompt').append("<p class='filter-text-suppress' style='font-style:italic;color:red;font-size:80%'>Supprimez le précédent filtre avant d'en sélectionner un nouveau</p>")
+}else{
+    $scope_prompt.css("cursor", "pointer")
+    $scope_prompt.css("pointer-events", "auto")
+    if($('.filter-text-suppress').length){
+        $('.filter-text-suppress').remove()
+    }
+}

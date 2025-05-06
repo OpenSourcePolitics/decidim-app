@@ -17,6 +17,13 @@ GIT
       deface (~> 1.5)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-budgets_importer.git
+  revision: 62d9a328d94e39ad005431d1dca7f1d0455e937c
+  specs:
+    decidim-budgets_importer (2.0.0)
+      decidim-core (~> 0.27)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-emitter.git
   revision: 8633ea56b422eecfe7d8730c89f191387f860e55
   specs:
@@ -34,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
-  revision: ce52252129fe2dc13c0cdf91a517e43790fff97f
+  revision: 40edb6a73ee1e21fa939392bcdcd8c0820436460
   branch: temp/twilio-compatibility-0.27
   specs:
     decidim-extra_user_fields (0.27.2)
@@ -60,8 +67,8 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git
-  revision: 03b2b148762131802f878f2e6e08b6fc917776f5
-  branch: refactor/half_signup_budgets_booth
+  revision: b449e37dca1a51fc03824b6f37811b18806febe5
+  branch: middleware-1.0.0
   specs:
     decidim-half_signup (0.27.0)
       countries (~> 5.1, >= 5.1.2)
@@ -178,6 +185,14 @@ GIT
       decidim-core (~> 0.27)
       decidim-meetings (~> 0.27)
       deface (>= 1.9)
+
+GIT
+  remote: https://github.com/armandfardeau/decidim-module-budgets_paper_ballots.git
+  revision: 5a24fd62b48fea1b6349cefab65941cd5be1f512
+  specs:
+    decidim-budgets_paper_ballots (0.27.0)
+      decidim-budgets (>= 0.27.0)
+      decidim-core (>= 0.27.0)
 
 GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome
@@ -1194,6 +1209,8 @@ DEPENDENCIES
   decidim-anonymous_proposals!
   decidim-budget_category_voting!
   decidim-budgets_booth!
+  decidim-budgets_importer!
+  decidim-budgets_paper_ballots!
   decidim-cache_cleaner
   decidim-category_enhanced (~> 0.0.1)
   decidim-cleaner
@@ -1250,4 +1267,4 @@ RUBY VERSION
    ruby 3.0.6p216
 
 BUNDLED WITH
-   2.5.10
+   2.4.9

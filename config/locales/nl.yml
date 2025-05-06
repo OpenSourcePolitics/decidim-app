@@ -1,5 +1,5 @@
 ---
-en:
+nl:
   activemodel:
     attributes:
       attachment:
@@ -38,13 +38,14 @@ en:
         confirm_destroy: Confirm destroy
         destroy: Destroy
         edit: Edit
-        import: Import
       attachments:
         form:
           send_notification_to_followers: Send a notification to all the people following the consultation who have agreed to receive email notifications
       exports:
         export_as: "%{name} as %{export_format}"
         notice: Your export is currently in progress. You'll receive an email when it's complete.
+      menu:
+        initiatives_settings: Instellingen voor initiatieven
       models:
         scope:
           fields:
@@ -64,11 +65,11 @@ en:
     admin_multi_factor:
       verification_code_mailer:
         verification_code:
-          copy: 'Copy this code:'
-          expires_in: It will expire in %{time}.
-          ignore_html: If you didn't request this communication, please ignore this email.<br/>Your account won't be active until your account is fully confirmed.
-          subtitle_html: To finalize the authentication you just need to copy the 4 digit code below, go back to the %{organization} verification page and paste it!
-          title: Your 2Factor Authentication
+          copy: 'Kopieer deze code:'
+          expires_in: Deze vervalt na %{time}.
+          ignore_html: Als je deze code niet zelf aangevraagd hebt, gelieve deze e-mail te negeren.<br/>Je account wordt pas geactiveerd na bevestiging.
+          subtitle_html: Om de authentificatie te finaliseren moet je de 4-cijferige code onderaan invoeren. Ga terug naar de %{organization} verificatiepagina en plak die daar.
+          title: Jouw tweefactorauthentificatie
     amendments:
       emendation:
         announcement:
@@ -99,13 +100,6 @@ en:
       osp_authorization_workflow:
         name: Authorization procedure
     budgets:
-      actions:
-        import: Import proposals to projects
-        new: New %{name}
-      admin:
-        models:
-          project:
-            name: Project
       order_reminder:
         text_message: Your vote is still pending for the participatory budget. Please reconnect to %{organization_host} to confirm it
       projects:
@@ -121,9 +115,6 @@ en:
           most_voted: Most voted
           random: Random order
           selected: Selected
-    budgets_importer:
-      actions:
-        import: Import projects to budget
     comments:
       comments:
         create:
@@ -158,34 +149,34 @@ en:
     events:
       budgets:
         pending_order:
-          email_intro: The vote on budget "%{resource_title}" is not confirmed yet in "%{participatory_space_title}".
-          email_outro: You have received this notification because you are participating in "%{participatory_space_title}"
-          email_subject: Your vote is still pending in %{participatory_space_title}
-          notification_title: The vote on budget <a href="%{resource_path}">%{resource_title}</a> is still waiting for your confirmation in %{participatory_space_title}
+          email_intro: De stemming bij het budget "%{resource_title}" is nog niet bevestigd in "%{participatory_space_title}".
+          email_outro: Je hebt deze melding ontvangen omdat je deelneemt in "%{participatory_space_title}"
+          email_subject: Jouw stem is nog in behandeling in %{participatory_space_title}
+          notification_title: De stem voor het budget <a href="%{resource_path}">%{resource_title}</a> wacht nog op bevestiging in %{participatory_space_title}
       initiatives:
         initiative_answered:
-          email_intro: The initiative "%{resource_title}" has been answered.
-          email_outro: You have received this notification because you are following the initiative "%{resource_title}".
-          email_subject: Initiative "%{resource_title}" has been answered
-          notification_title: The initiative <a href="%{resource_path}">%{resource_title}</a> has been answered.
+          email_intro: Het initiatief  "%{resource_title}" is beantwoord.
+          email_outro: Je hebt deze melding ontvangen omdat je het initiatief "%{resource_title}" volgt.
+          email_subject: Initiatief "%{resource_title}" is beantwoord.
+          notification_title: Het initiatief <a href="%{resource_path}">%{resource_title}</a> is beantwoord.
       proposals:
         author_confirmation_proposal_event:
-          email_intro: 'Your proposal " %{resource_title} " was successfully received and is now public. Thank you for participating ! You can view it here:'
-          email_outro: You received this notification because you are the author of the proposal. You can unfollow it by visiting the proposal page (" %{resource_title} ") and clicking on " Unfollow ".
-          email_subject: Your proposal has been published!
-          notification_title: Your proposal <a href="%{resource_path}">%{resource_title}</a> is now live.
+          email_intro: 'Je voorstel " %{resource_title} " werd succesvol ontvangen en is nu zichtbaar. Bedankt om deel te nemen. Je kan het hier bekijken:'
+          email_outro: Je ontving deze melding omdat je de auteur bent van een voorstel. Je kunt dit voorstel ontvolgen door naar de voorstellenpagina te surfen en daar op 'ontvolgen' te klikken.
+          email_subject: Je voorstel is gepubliceerd!
+          notification_title: Je voorstel <a href="%{resource_path}">%{resource_title}</a> is nu zichtbaar.
       users:
         user_officialized:
-          email_intro: Participant %{name} (%{nickname}) has been officialized.
-          email_outro: You have received this notification because you are an administrator of the organization.
-          email_subject: "%{name} has been officialized"
-          notification_title: Participant %{name} (%{nickname}) has been officialized.
+          email_intro: Deelnemer %{name} (%{nickname}) werd bevestigd.
+          email_outro: Je hebt deze melding ontvangen omdat je een beheerder bent van de organisatie.
+          email_subject: "%{name} werd bevestigd."
+          notification_title: Deelnemer %{name} (%{nickname}) werd bevestigd.
       verifications:
         verify_with_managed_user:
-          email_intro: The participant <a href="%{resource_path}">%{resource_title}</a> has tried to verify themself with the data of the managed participant <a href="%{managed_user_path}">%{managed_user_name}</a>.
-          email_outro: Check the <a href="%{conflicts_path}">Verifications's conflicts list</a> and contact the participant to verify their details and solve the issue.
-          email_subject: Failed verification attempt against a managed participant
-          notification_title: The participant <a href="%{resource_path}">%{resource_title}</a> has tried to verify themself with the data of the managed participant <a href="%{managed_user_path}">%{managed_user_name}</a>.
+          email_intro: De deelnemer <a href="%{resource_path}">%{resource_title}</a> probeerde zich te verifiëren met de gegevens van de beheerde deelnemer <a href="%{managed_user_path}">%{managed_user_name}</a>.
+          email_outro: Bekijk de <a href="%{conflicts_path}">lijst met verificatieproblemen</a> en contacteer de deelnemer om hun gegevens te verifiëren en het probleem op te lossen.
+          email_subject: Mislukte verificatiepoging van een deelnemer
+          notification_title: De deelnemer <a href="%{resource_path}">%{resource_title}</a> probeerde zich te verifiëren met de gegevens van de beheerde deelnemer <a href="%{managed_user_path}">%{managed_user_name}</a>.
     forms:
       user_answers_serializer:
         email: Email
@@ -351,17 +342,17 @@ en:
   faker:
     address:
       country_code:
-      - EN
-      - EN0
-      - EN1
-      - EN2
-      - EN3
-      - EN4
-      - EN5
-      - EN6
-      - EN7
-      - EN8
-      - EN9
+        - EN
+        - EN0
+        - EN1
+        - EN2
+        - EN3
+        - EN4
+        - EN5
+        - EN6
+        - EN7
+        - EN8
+        - EN9
   layouts:
     decidim:
       footer:

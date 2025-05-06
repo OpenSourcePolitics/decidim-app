@@ -22,6 +22,8 @@ gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp"
 gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "fix/decidim_version_and_missing_helper"
 gem "decidim-anonymous_proposals", DECIDIM_ANONYMOUS_PROPOSALS_VERSION
 gem "decidim-budget_category_voting", git: "https://github.com/alecslupu-pfa/decidim-budget_category_voting.git", branch: DECIDIM_BRANCH
+gem "decidim-budgets_importer", git: "https://github.com/OpenSourcePolitics/decidim-module-budgets_importer.git"
+gem "decidim-budgets_paper_ballots", git: "https://github.com/armandfardeau/decidim-module-budgets_paper_ballots.git"
 gem "decidim-cache_cleaner"
 gem "decidim-category_enhanced", "~> 0.0.1"
 gem "decidim-cleaner"
@@ -33,7 +35,7 @@ gem "decidim-extended_socio_demographic_authorization_handler", git: "https://gi
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "temp/twilio-compatibility-0.27"
 gem "decidim-friendly_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-friendly_signup.git"
 gem "decidim-gallery", git: "https://github.com/OpenSourcePolitics/decidim-module-gallery.git", branch: "fix/nokogiri_deps"
-gem "decidim-half_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git", branch: "refactor/half_signup_budgets_booth"
+gem "decidim-half_signup", git: "https://github.com/OpenSourcePolitics/decidim-module-half_sign_up.git", branch: "middleware-1.0.0"
 gem "decidim-homepage_interactive_map", git: "https://github.com/OpenSourcePolitics/decidim-module-homepage_interactive_map.git", branch: DECIDIM_BRANCH
 gem "decidim-phone_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module_phone_authorization_handler", branch: "release/0.27-stable"
 gem "decidim-simple_proposal", git: "https://github.com/OpenSourcePolitics/decidim-module-simple_proposal", branch: DECIDIM_BRANCH
