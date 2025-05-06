@@ -253,7 +253,7 @@ jobs:
   generate_release:
     name: Generate release
     needs: [lint, tests, system_tests, test_build]
-    if: "github.ref == 'refs/heads/master'"
+    if: "github.ref == 'refs/heads/release/0.27-stable'"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -262,6 +262,7 @@ jobs:
         id: tag_version
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_tag: v2.8.2
       - uses: ncipollo/release-action@v1
         name: Create a GitHub release
         with:
