@@ -112,9 +112,8 @@ jobs:
         shell: "bash"
         env:
           NODE_ENV: test
-      - run: bundle exec rspec spec
+      - run: bundle exec rspec spec/
         name: Run specs
-        working-directory: ./spec/decidim_dummy_app/
 
   docker_build:
     name: Test build docker image
