@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "decidim/rspec_runner"
+
 namespace :test do
   desc "Setup tests environment"
   task setup: :environment do
