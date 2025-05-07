@@ -57,8 +57,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        slice: [ "0-2", "1-2" ]
-    name: Tests
+        group: ["1", "2"]
+    name: "Tests (group ${{ matrix.group }}/2)"
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -119,13 +119,18 @@ jobs:
         env:
           NODE_ENV: test
       - name: Run unit tests
-        run: PARALLEL_TEST_PROCESSORS=2 PARALLEL_TEST_GROUPS=${{ matrix.slice }} bundle exec parallel_test --type rspec --pattern spec/ --exclude-pattern spec/system
+        run: |
+          bundle exec parallel_test --type rspec \
+            --pattern spec/ \
+            --exclude-pattern spec/system \
+            --group 2 \
+            --only-group ${{ matrix.group }}
   system_tests:
     strategy:
       fail-fast: false
       matrix:
-        slice: [ "0-4", "1-4", "2-4", "3-4" ]
-    name: System tests
+        group: ["1", "2", "3", "4"]
+    name: "System tests (group ${{ matrix.group }}/4)"
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -186,7 +191,12 @@ jobs:
         env:
           NODE_ENV: test
       - name: Run system tests
-        run: PARALLEL_TEST_PROCESSORS=4 PARALLEL_TEST_GROUPS=${{ matrix.slice }} bundle exec parallel_test --type rspec --pattern spec/system --exclude-pattern spec/system/admin
+        run: |
+          bundle exec parallel_test --type rspec \
+            --pattern spec/system \
+            --exclude-pattern spec/system/admin \
+            --group 4 \
+            --only-group ${{ matrix.group }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
