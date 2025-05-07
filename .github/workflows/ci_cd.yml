@@ -119,7 +119,7 @@ jobs:
         env:
           NODE_ENV: test
       - name: Run unit tests
-        run: PARALLEL_TEST_PROCESSORS=2 PARALLEL_TEST_GROUPS=${{ matrix.slice }} bundle exec parallel_test --type rspec --pattern spec/ --exclude-pattern spec/system
+        run: bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
   system_tests:
     strategy:
       fail-fast: false
@@ -186,7 +186,7 @@ jobs:
         env:
           NODE_ENV: test
       - name: Run system tests
-        run: PARALLEL_TEST_PROCESSORS=4 PARALLEL_TEST_GROUPS=${{ matrix.slice }} bundle exec parallel_test --type rspec --pattern spec/system --exclude-pattern spec/system/admin
+        run: bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
