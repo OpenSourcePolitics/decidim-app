@@ -54,6 +54,10 @@ jobs:
         run: |
           bundle exec rails zeitwerk:check
   tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        slice: [ "0-2", "1-2" ]
     name: Tests
     runs-on: ubuntu-latest
     services:
@@ -81,39 +85,98 @@ jobs:
           fetch-depth: 1
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ inputs.ruby_version }}
+          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
       - uses: actions/setup-node@v4
         with:
-          node-version: ${{ inputs.node_version }}
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
           cache-dependency-path: ./package-lock.json
-      - uses: actions/cache@v4
-        id: app-cache
+      - name: Create test app
+        run: bundle exec rake test:setup
+        shell: "bash"
+      - name: Create the screenshots folder
+        run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
+        shell: "bash"
+      - name: Install JS dependencies
+        run: npm install
+        working-directory: ./spec/decidim_dummy_app/
+        shell: "bash"
+        env:
+          NODE_ENV: test
+      - name: Precompile assets
+        run: bundle exec rails shakapacker:compile
+        working-directory: ./spec/decidim_dummy_app/
+        shell: "bash"
+        env:
+          NODE_ENV: test
+      - name: Run specs
+        run: bundle exec rake "test:run[exclude, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
+
+  system_tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        slice: [ "0-4", "1-4", "2-4", "3-4" ]
+    name: System tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_PASSWORD: postgres
+    env:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: localhost
+    steps:
+      - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
+        if: "github.ref != 'refs/heads/main' || github.ref != 'refs/heads/develop'"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/checkout@v4
         with:
-          path: ./spec/decidim_dummy_app/
-          key: app-${{ github.sha }}
-          restore-keys: app-${{ github.sha }}
-      - run: bundle exec rake test:setup
-        name: Create test app
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
+      - name: Create test app
+        run: bundle exec rake test:setup
         shell: "bash"
-      - run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
-        name: Create the screenshots folder
+      - name: Create the screenshots folder
+        run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
         shell: "bash"
-      - run: npm install
-        name: Install JS dependencies
+      - name: Install JS dependencies
+        run: npm install
         working-directory: ./spec/decidim_dummy_app/
         shell: "bash"
         env:
           NODE_ENV: test
-      - run: bundle exec rails shakapacker:compile
-        name: Precompile assets
+      - name: Precompile assets
+        run: bundle exec rails shakapacker:compile
         working-directory: ./spec/decidim_dummy_app/
         shell: "bash"
         env:
           NODE_ENV: test
-      - run: bundle exec rspec spec/
-        name: Run specs
+      - name: Run system specs
+        run: bundle exec rake "test:run[include, spec/system/**/*_spec.rb, ${{ matrix.slice }}]"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: ./spec/decidim_dummy_app/tmp/screenshots
 
   docker_build:
     name: Test build docker image
@@ -147,7 +210,7 @@ jobs:
           push: "true"
   generate_release:
     name: Generate release
-    needs: [lint, sast, zeitwerk, tests, docker_build]
+    needs: [lint, sast, zeitwerk, tests, system_tests, docker_build]
     if: "github.ref == 'refs/heads/main'"
     runs-on: ubuntu-latest
     steps:
