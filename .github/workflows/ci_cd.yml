@@ -97,8 +97,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
           cache-dependency-path: ./package-lock.json
-      - name: Create test app
-        run: bundle exec rake test:setup
+      - name: Create test app and configure databases
+        run: |
+          bundle exec rake test:setup
+          bundle exec rake parallel:create
+          bundle exec rake parallel:prepare
         shell: "bash"
       - name: Create the screenshots folder
         run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
@@ -161,8 +164,11 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
           cache-dependency-path: ./package-lock.json
-      - name: Create test app
-        run: bundle exec rake test:setup
+      - name: Create test app and configure databases
+        run: |
+          bundle exec rake test:setup
+          bundle exec rake parallel:create
+          bundle exec rake parallel:prepare
         shell: "bash"
       - name: Create the screenshots folder
         run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
