@@ -90,7 +90,6 @@ jobs:
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v1.7.3
         with:
-          chrome-version: 126
           install-chromedriver: true
       - run: |
           sudo apt update
@@ -162,7 +161,6 @@ jobs:
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v1.7.3
         with:
-          chrome-version: 126
           install-chromedriver: true
       - run: |
           sudo apt update
