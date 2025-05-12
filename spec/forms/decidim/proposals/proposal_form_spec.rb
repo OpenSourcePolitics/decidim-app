@@ -175,6 +175,20 @@ module Decidim
 
           context "when the address is present" do
             let(:address) { "Some address" }
+            let(:params) do
+              {
+                title:,
+                body:,
+                body_template:,
+                author:,
+                category_id:,
+                scope_id:,
+                address:,
+                attachment: attachment_params,
+                latitude:,
+                longitude:
+              }
+            end
 
             before do
               stub_geocoding(address, [latitude, longitude])
@@ -275,12 +289,24 @@ module Decidim
           it { is_expected.to be_valid }
 
           context "when the form has some errors" do
-            let(:title) { nil }
+            context "when title is blank" do
+              let(:title) { nil }
 
-            it "adds an error to the `:attachment` field" do
-              expect(subject).not_to be_valid
-              expect(subject.errors.full_messages).to contain_exactly("Title cannot be blank", "Title is too short (under 15 characters)", "Add documents Needs to be reattached")
-              expect(subject.errors.attribute_names).to contain_exactly(:title, :add_documents)
+              it "adds an error to the `:attachment` field" do
+                expect(subject).not_to be_valid
+                expect(subject.errors.full_messages).to contain_exactly("Title cannot be blank")
+                expect(subject.errors.attribute_names).to contain_exactly(:title)
+              end
+            end
+
+            context "when title is too short" do
+              let(:title) { "Short" }
+
+              it "adds an error to the `:attachment` field" do
+                expect(subject).not_to be_valid
+                expect(subject.errors.full_messages).to contain_exactly("Title is too short (under 15 characters)")
+                expect(subject.errors.attribute_names).to contain_exactly(:title)
+              end
             end
           end
         end

@@ -9,10 +9,9 @@ module ProposalFormExtends
     attribute :require_category, :boolean, default: Decidim::Proposals.config.require_category
     attribute :require_scope, :boolean, default: Decidim::Proposals.config.require_scope
 
-    validates :category_id, presence: true, if: ->(form) { form.require_category? }
-    validates :scope_id, presence: true, if: ->(form) { form.require_scope? }
-    validate :check_category, if: ->(form) { form.require_category? }
-    validate :check_scope, if: ->(form) { form.require_scope? }
+    validate :validate_category
+    validate :validate_scope
+    validate :validate_scope_belongs_to_component
 
     def categories_enabled?
       categories&.any?
@@ -32,12 +31,30 @@ module ProposalFormExtends
 
     private
 
-    def check_category
-      errors.add(:category, :blank) if category_id.blank? && require_category?
+    def validate_category
+      if require_category? && category_id.blank?
+        errors.add(:category, :blank)
+      elsif category_id.present? && category.blank?
+        errors.add(:category_id, :invalid)
+      end
     end
 
-    def check_scope
-      errors.add(:scope, :blank) if scope_id.blank? && require_scope?
+    def validate_scope
+      if require_scope? && scope_id.blank?
+        errors.add(:scope, :blank)
+      elsif scope_id.present? && scope.blank?
+        errors.add(:scope_id, :invalid)
+      end
+    end
+
+    def validate_scope_belongs_to_component
+      return if scope_id.blank? || scope.blank? || current_component.scope.blank?
+
+      unless scope.ancestor_of?(current_component.scope) ||
+             scope.descendants.include?(current_component.scope) ||
+             scope == current_component.scope
+        errors.add(:scope_id, :invalid_scope)
+      end
     end
   end
 end
