@@ -87,6 +87,11 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1.7.3
+        with:
+          chrome-version: 126
+          install-chromedriver: true
       - run: |
           sudo apt update
           sudo apt install -y libu2f-udev
@@ -154,6 +159,11 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1.7.3
+        with:
+          chrome-version: 126
+          install-chromedriver: true
       - run: |
           sudo apt update
           sudo apt install -y libu2f-udev
