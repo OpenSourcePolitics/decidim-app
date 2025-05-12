@@ -4,7 +4,6 @@ on: [push]
 env:
   RSPEC_FORMAT: "documentation"
   RUBY_VERSION: 3.2.2
-  CHROME_VERSION: 126.0.6478.182
   RAILS_ENV: test
   NODE_ENV: test
   NODE_VERSION: 18.17.1
@@ -92,10 +91,7 @@ jobs:
           sudo apt update
           sudo apt install -y libu2f-udev
           sudo apt install -y --fix-missing imagemagick
-          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{env.CHROME_VERSION}}-1_amd64.deb
-          sudo dpkg -i /tmp/chrome.deb
-          rm /tmp/chrome.deb
-        name: Install dependencies and Chrome version ${{env.CHROME_VERSION}}
+        name: Install dependencies
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -110,9 +106,6 @@ jobs:
       - name: Create the screenshots folder
         run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
         shell: "bash"
-      - uses: nanasess/setup-chromedriver@v2
-        with:
-          chromedriver-version: ${{ env.CHROME_VERSION }}
       - name: Install JS dependencies
         run: npm install
         working-directory: ./spec/decidim_dummy_app/
@@ -165,10 +158,7 @@ jobs:
           sudo apt update
           sudo apt install -y libu2f-udev
           sudo apt install -y --fix-missing imagemagick
-          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{env.CHROME_VERSION}}-1_amd64.deb
-          sudo dpkg -i /tmp/chrome.deb
-          rm /tmp/chrome.deb
-        name: Install dependencies and Chrome version ${{env.CHROME_VERSION}}
+        name: Install dependencies
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -183,9 +173,6 @@ jobs:
       - name: Create the screenshots folder
         run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
         shell: "bash"
-      - uses: nanasess/setup-chromedriver@v2
-        with:
-          chromedriver-version: ${{ env.CHROME_VERSION }}
       - name: Install JS dependencies
         run: npm install
         working-directory: ./spec/decidim_dummy_app/
