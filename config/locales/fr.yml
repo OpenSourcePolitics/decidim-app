@@ -4,6 +4,8 @@ fr:
     attributes:
       attachment:
         documents: ajouter un document
+      content_block_attachment:
+        background_image: Image de fond
       initiative:
         offline_votes_for_scope: Signatures en personne pour %{scope_name}
       osp_authorization_handler:
@@ -14,6 +16,8 @@ fr:
         private_space: Espace privé
       participatory_space_private_user_csv_import:
         file: importer un fichier d'utilisateurs
+      project:
+        document: Document
   decidim:
     account:
       omniauth_synced_profile:
@@ -105,6 +109,12 @@ fr:
         import: Importer des propositions dans des projets
         new: Nouveau %{name}
       admin:
+        help:
+          paper_ballot_results: 'Le document d''import doit contenir les colonnes suivantes : ''id'' (avec l''identifiant du projet) et ''paper_ballots_to_import'' (avec le nombre de nouveaux votes pour le projet qui doivent être importés). Vous pouvez simplement réutiliser une exportation de tous les projets et ajouter une colonne nommée ''paper_ballots_to_import''.'
+          label:
+            paper_ballot_results: Importer les votes papier
+          title:
+            paper_ballot_results: Importer les résultats du vote papier
         models:
           project:
             name: Projet
@@ -249,6 +259,9 @@ fr:
         exports:
           awesome_private_proposals: Propositions avec champs privés
           proposal_comments: Commentaires
+        imports:
+          help:
+            proposals: 'Le fichier doit avoir les noms de colonnes suivants en cas de fichiers CSV ou Excel ou noms de clés suivants en cas de fichiers JSON : <ul> <li><b>title/fr:</b> Titre de la proposition. Cela dépendra de la configuration de la langue de votre plateforme.</li> <li><b>body/fr:</b> Corps de la proposition. Cela dépendra de la configuration de la langue de votre plateforme.</li> <li><b>scope/id :</b> ID du périmêtre d''application</li> <li><b>category/id :</b> ID de la catégorie</li> </ul>'
       collaborative_drafts:
         new:
           add_file: Ajouter le fichier
