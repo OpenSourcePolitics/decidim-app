@@ -72,6 +72,7 @@ module DevelopmentApp
       require "extends/forms/decidim/initiatives/initiative_form_extends"
       require "extends/forms/decidim/initiatives/admin/initiative_form_extends"
       require "extends/forms/decidim/comments/comment_form_extends"
+      require "extends/forms/decidim/omniauth_registration_form_extends"
       # Commands
       require "extends/commands/decidim/initiatives/admin/update_initiative_answer_extends"
       require "extends/commands/decidim/budgets/admin/import_proposals_to_budgets_extends"
