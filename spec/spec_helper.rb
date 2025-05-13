@@ -19,11 +19,6 @@ RSpec.configure do |config|
                     end
     options.args << "--ignore-certificate-errors" if ENV["TEST_SSL"]
     options.add_preference("intl.accept_languages", "en-GB")
-
-    user_data_dir = File.join(Dir.tmpdir, "chrome_user_data_#{Process.pid}")
-    options.args << "--user-data-dir=#{user_data_dir}"
-    options.args << "--disable-dev-shm-usage"
-
     Capybara::Selenium::Driver.new(
       app,
       browser: :chrome,
