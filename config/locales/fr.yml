@@ -109,8 +109,9 @@ fr:
         import: Importer des propositions dans des projets
         new: Nouveau %{name}
       admin:
-        help:
-          paper_ballot_results: 'Le document d''import doit contenir les colonnes suivantes : ''id'' (avec l''identifiant du projet) et ''paper_ballots_to_import'' (avec le nombre de nouveaux votes pour le projet qui doivent être importés). Vous pouvez simplement réutiliser une exportation de tous les projets et ajouter une colonne nommée ''paper_ballots_to_import''.'
+        imports:
+          help:
+            paper_ballot_results: 'Le document d''import doit contenir les colonnes suivantes : ''id'' (avec l''identifiant du projet) et ''paper_ballots_to_import'' (avec le nombre de nouveaux votes pour le projet qui doivent être importés). Vous pouvez simplement réutiliser une exportation de tous les projets et ajouter une colonne nommée ''paper_ballots_to_import''.'
           label:
             paper_ballot_results: Importer les votes papier
           title:
