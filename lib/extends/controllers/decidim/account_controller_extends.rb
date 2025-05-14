@@ -46,7 +46,6 @@ module Decidim
       if force_profile_sync_on_omniauth_connection?
         params[:user][:name] = current_user.name
         params[:user][:email] = current_user.email
-        params[:user][:nickname] = current_user.nickname
       end
       params[:user].to_unsafe_h
     end
