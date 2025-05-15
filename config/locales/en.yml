@@ -6,6 +6,9 @@ en:
         copy_landing_page_blocks: Copy landing page blocks
       participatory_process:
         copy_landing_page_blocks: Copy landing page blocks
+  date:
+    formats:
+      order: "%Y-%m-%d"
   decidim:
     account:
       omniauth_synced_profile:
@@ -29,6 +32,7 @@ en:
         confirm_destroy: Confirm destroy
         destroy: Destroy
         edit: Edit
+        new_assembly: New assembly
       attachments:
         form:
           send_notification_to_followers: Send a notification to all the people following the consultation who have agreed to receive email notifications
@@ -42,11 +46,15 @@ en:
             scope_type: Scope type
       scopes:
         no_scopes: No scopes at this level.
+        titles:
+          scopes: Scopes
         update:
           error: There was a problem updating this scope.
           success: Scope updated successfully
-        titles:
-          scopes: Scopes    
+    comments:
+      comments:
+        create:
+          error: There was a problem creating the comment.
     components:
       proposals:
         settings:
@@ -78,6 +86,39 @@ en:
             success: The initiative type has been successfully removed.
           edit:
             update: Update
+      create_initiative:
+        fill_data:
+          back: Back
+          continue: Continue
+          fill_data_help: "<ul> <li>Review the content of your initiative. Is your title easy to understand? Is the objective of your initiative clear?</li> <li>You have to choose the type of signature. In-person, online or a combination of both</li> <li>Which is the geographic scope of the initiative?</li> </ul>"
+          more_information: "(More information)"
+          select_area: Select an area
+          select_scope: Select a scope
+        select_initiative_type:
+          new: Create a new initiative
+      form:
+        add_documents: Add documents
+        add_image: Add image
+        attachment_legend: "(Optional) Add an attachment"
+        edit_documents: Edit documents
+        edit_image: Edit image
+        image_legend: "(Optional) Add an image"
+    proposals:
+      proposals:
+        dynamic_map_instructions:
+          description: The coordinates will be updated when clicking on 'preview' button. However, the address does not change.
+          instructions: You can move the point on the map.
+        edit:
+          add_documents: Add documents
+          attachment_legend: "(Optional) Add an attachment"
+          edit_documents: Edit documents
+          select_a_category: Please select a category
+        edit_form_fields:
+          marker_added: Marker added to the map.
+        placeholder:
+          address: 37 Homewood Drive Brownsburg, IN 46112
+    scopes:
+      global: Global scope
   time:
     buttons:
       select: Select

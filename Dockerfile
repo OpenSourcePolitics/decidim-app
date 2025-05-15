@@ -1,8 +1,8 @@
+FROM ruby:3.2.2-slim as builder
+
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
 ARG DOCKER_IMAGE
-
-FROM ruby:3.2.2-slim as builder
 
 ENV RAILS_ENV=production \
     NODE_ENV=production \
@@ -39,6 +39,10 @@ RUN rm -rf node_modules tmp/cache vendor/bundle/spec \
     && rm -rf log/*.log
 
 FROM ruby:3.2.2-slim as runner
+
+ARG DOCKER_IMAGE_TAG
+ARG DOCKER_IMAGE_NAME
+ARG DOCKER_IMAGE
 
 ENV RAILS_ENV=production \
     NODE_ENV=production \

@@ -5,7 +5,7 @@
 
 content_security_policies = {
   "default-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net),
-  "img-src" => %w(decidim.storage.opensourcepolitics.eu),
+  "img-src" => %w(decidim.storage.opensourcepolitics.eu https://*.tile.openstreetmap.org),
   "media-src" => %w(decidim.storage.opensourcepolitics.eu www.youtube.com),
   "script-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net tarteaucitron.io unpkg.com),
   "style-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net),

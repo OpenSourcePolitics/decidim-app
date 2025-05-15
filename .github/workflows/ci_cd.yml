@@ -23,6 +23,21 @@ jobs:
         with:
           ruby_version: ${{ env.RUBY_VERSION }}
           node_version: ${{ env.NODE_VERSION }}
+  sast:
+    name: Bundler Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+      - name: Bundler Audit
+        run: |
+          bundle exec rake bundle:audit
   zeitwerk:
     name: Check for Zeitwerk errors
     runs-on: ubuntu-latest
@@ -129,7 +144,7 @@ jobs:
           push: "true"
   generate_release:
     name: Generate release
-    needs: [lint, zeitwerk, tests, docker_build]
+    needs: [lint, sast, zeitwerk, tests, docker_build]
     if: "github.ref == 'refs/heads/main'"
     runs-on: ubuntu-latest
     steps:
