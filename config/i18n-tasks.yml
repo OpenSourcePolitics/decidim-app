@@ -172,4 +172,8 @@ ignore_unused:
   - decidim.budgets.projects.orders.*
   - decidim.components.budgets.settings.*
   - decidim.admin_multi_factor.verification_code_mailer.verification_code.*
+  - activemodel.attributes.content_block_attachment.background_image
+  - activemodel.attributes.project.document
+  - decidim.budgets.admin.imports.*
+  - decidim.proposals.admin.imports.help.proposals
 

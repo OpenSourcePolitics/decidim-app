@@ -4,6 +4,8 @@ en:
     attributes:
       attachment:
         documents: add a document
+      content_block_attachment:
+        background_image: Background image
       initiative:
         offline_votes_for_scope: In-person signatures for %{scope_name}
       osp_authorization_handler:
@@ -14,6 +16,8 @@ en:
         private_space: Private space
       participatory_space_private_user_csv_import:
         file: importing file
+      project:
+        document: Document
   decidim:
     account:
       omniauth_synced_profile:
@@ -102,6 +106,13 @@ en:
         import: Import proposals to projects
         new: New %{name}
       admin:
+        imports:
+          help:
+            paper_ballot_results: 'The import document should contain the following columns: ''id'' (with the project''s id) and ''paper_ballots_to_import'' (with the number of new votes for the project that should be imported). You can simply reuse an export of all the projects and add a column named ''paper_ballots_to_import''.'
+          label:
+            paper_ballot_results: Import paper ballots
+          title:
+            paper_ballot_results: Import results from paper ballots
         models:
           project:
             name: Project
@@ -246,6 +257,9 @@ en:
         exports:
           awesome_private_proposals: Proposals with private fields
           proposal_comments: Comments
+        imports:
+          help:
+            proposals: 'The file should have the following column names in the case of CSV or Excel files, or the following key names in the case of JSON files: <ul> <li><b>title/fr:</b> Title of the proposal. This will depend on the language configuration of your platform.</li> <li><b>body/fr:</b> Body of the proposal. This will depend on the language configuration of your platform.</li> <li><b>scope/id:</b> ID of the application scope.</li> <li><b>category/id:</b> ID of the category.</li> </ul>'
       collaborative_drafts:
         new:
           add_file: Add file
