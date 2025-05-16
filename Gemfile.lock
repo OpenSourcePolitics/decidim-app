@@ -358,9 +358,9 @@ GEM
     activerecord (7.0.8.7)
       activemodel (= 7.0.8.7)
       activesupport (= 7.0.8.7)
-    activerecord-postgis-adapter (3.1.2)
-      activerecord (>= 4.2.0)
-      rgeo-activerecord (>= 4.0.4)
+    activerecord-postgis-adapter (8.0.3)
+      activerecord (~> 7.0.0)
+      rgeo-activerecord (~> 7.0.0)
     activestorage (7.0.8.7)
       actionpack (= 7.0.8.7)
       activejob (= 7.0.8.7)
@@ -851,9 +851,9 @@ GEM
       railties (>= 5.2)
     rexml (3.3.9)
     rgeo (3.0.1)
-    rgeo-activerecord (8.0.0)
-      activerecord (>= 7.0)
-      rgeo (>= 3.0)
+    rgeo-activerecord (7.0.1)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
     rgeo-geojson (2.2.0)
       multi_json (~> 1.15)
       rgeo (>= 1.0.0)
@@ -1052,7 +1052,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack (~> 7.0.8.7)
   activejob-uniqueness
-  activerecord-postgis-adapter
+  activerecord-postgis-adapter (~> 8.0, >= 8.0.3)
   aws-sdk-s3
   bootsnap (~> 1.4)
   brakeman (~> 6.1)
