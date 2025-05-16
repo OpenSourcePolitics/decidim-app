@@ -58,6 +58,7 @@ jobs:
       bullet_unused_eager_loading: true
   docker_build:
     name: Test build docker image
+    needs: [tests]
     runs-on: ubuntu-22.04
     services:
       postgres:
