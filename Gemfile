@@ -13,6 +13,7 @@ gem "decidim-templates", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "bootsnap", "~> 1.4", require: false
 gem "puma", ">= 6.3.1"
 
+gem "activerecord-postgis-adapter"
 gem "aws-sdk-s3", require: false
 gem "dalli"
 gem "deface"
@@ -20,6 +21,8 @@ gem "dotenv-rails", "~> 2.7"
 gem "faker", "~> 3.2"
 gem "letter_opener_web", "~> 2.0"
 gem "rack-attack", "~> 6.7"
+gem "rgeo"
+gem "rgeo-activerecord"
 
 # gems updated with bundle-audit
 gem "actionpack", "~> 7.0.8.7"
@@ -43,6 +46,7 @@ gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-modul
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "bump/0.29"
 gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePolitics/guest-meeting-registration.git", branch: "bump/module_to_0.29"
 gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git", branch: "bump/0.29"
+gem "decidim-decidim_geo", git: "https://git.octree.ch/decidim/decidim-module-geo.git"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "backport/fix_database_not_available"
 
 group :development, :test do
