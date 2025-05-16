@@ -13,7 +13,7 @@ gem "decidim-templates", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "bootsnap", "~> 1.4", require: false
 gem "puma", ">= 6.3.1"
 
-gem 'activerecord-postgis-adapter', '~> 8.0', '>= 8.0.3'
+gem "activerecord-postgis-adapter", "~> 8.0", ">= 8.0.3"
 gem "aws-sdk-s3", require: false
 gem "dalli"
 gem "deface"
