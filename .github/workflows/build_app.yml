@@ -52,24 +52,21 @@ jobs:
       - uses: actions/cache@v4
         id: app-cache
         with:
-          path: ./spec/decidim_dummy_app/
           key: app-${{ github.sha }}
           restore-keys: app-${{ github.sha }}
       - run: bundle exec rake test:setup
         name: Create test app
         shell: "bash"
-      - run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
+      - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
         shell: "bash"
       - run: npm install
         name: Install JS dependencies
-        working-directory: ./spec/decidim_dummy_app/
         shell: "bash"
         env:
           NODE_ENV: test
       - run: bundle exec rails shakapacker:compile
         name: Precompile assets
-        working-directory: ./spec/decidim_dummy_app/
         shell: "bash"
         env:
           NODE_ENV: "test"

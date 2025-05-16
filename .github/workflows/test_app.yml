@@ -92,7 +92,6 @@ jobs:
       - uses: actions/cache@v4
         id: app-cache
         with:
-          path: ./spec/decidim_dummy_app/
           key: app-${{ github.sha }}
           restore-keys: app-${{ github.sha }}
       - run: |
@@ -100,7 +99,6 @@ jobs:
           bundle exec rake parallel:create parallel:load_schema
         name: Parallel tests
         shell: "bash"
-        working-directory: ./spec/decidim_dummy_app/
       - run: |
           sudo Xvfb -ac $DISPLAY -screen 0 1920x1084x24 > /dev/null 2>&1 &
           ${{ inputs.test_command }}
@@ -129,6 +127,6 @@ jobs:
         if: always()
         with:
           name: screenshots
-          path: ./spec/decidim_dummy_app/tmp/screenshots
+          path: ./spec/tmp/screenshots
           if-no-files-found: ignore
           overwrite: true
