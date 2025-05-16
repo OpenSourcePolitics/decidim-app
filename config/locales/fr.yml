@@ -205,8 +205,7 @@ fr:
     half_signup:
       quick_auth:
         sms:
-          instruction: Après avoir saisi votre numéro de téléphone vous allez recevoir un code par SMS. 
-            Ce code vous donnera accès à la cabine de vote.
+          instruction: Après avoir saisi votre numéro de téléphone vous allez recevoir un code par SMS. Ce code vous donnera accès à la cabine de vote.
         sms_verification:
           text_message: Bonjour, %{verification} est le code pour vous authentifier sur la plateforme
     initiatives:
