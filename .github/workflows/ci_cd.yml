@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:15
+        image: postgis/postgis:17-3.4
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -117,7 +117,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:15
+        image: postgis/postgis:17-3.4
         ports: [ "5432:5432" ]
         options: >-
           --health-cmd pg_isready
