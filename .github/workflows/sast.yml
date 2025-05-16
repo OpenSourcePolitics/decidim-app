@@ -4,7 +4,7 @@ on:
       ruby_version:
         required: false
         description: 'Ruby version'
-        default: ${{ env.RUBY_VERSION }}
+        default: "3.2.2"
         type: string
 
 jobs:
