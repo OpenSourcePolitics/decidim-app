@@ -26,13 +26,9 @@ jobs:
   sast:
     name: Bundler Audit
     uses: ./.github/workflows/sast.yml
-    with:
-      ruby_version: ${{ env.RUBY_VERSION }}
   zeitwerk:
     name: Check for Zeitwerk errors
     uses: ./.github/workflows/zeitwerk.yml
-    with:
-      ruby_version: ${{ env.RUBY_VERSION }}
   tests:
     name: Tests
     runs-on: ubuntu-22.04
