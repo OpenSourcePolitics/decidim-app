@@ -9,6 +9,10 @@ env:
   NODE_VERSION: 22.13.1
   AVAILABLE_LOCALES: "en,fr,ca,es"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint:
     name: Lint code
@@ -29,71 +33,29 @@ jobs:
   zeitwerk:
     name: Check for Zeitwerk errors
     uses: ./.github/workflows/zeitwerk.yml
-  tests:
-    name: Tests
-    runs-on: ubuntu-22.04
-    services:
-      postgres:
-        image: postgres:15
-        ports: ["5432:5432"]
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        env:
-          POSTGRES_PASSWORD: postgres
-    env:
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgres
-      DATABASE_HOST: localhost
-    steps:
-      - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
-        if: "github.ref != 'refs/heads/main' || github.ref != 'refs/heads/develop'"
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ inputs.ruby_version }}
-          bundler-cache: true
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ inputs.node_version }}
-          cache: 'npm'
-          cache-dependency-path: ./package-lock.json
-      - uses: actions/cache@v4
-        id: app-cache
-        with:
-          path: ./spec/decidim_dummy_app/
-          key: app-${{ github.sha }}
-          restore-keys: app-${{ github.sha }}
-      - run: bundle exec rake test:setup
-        name: Create test app
-        shell: "bash"
-      - run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
-        name: Create the screenshots folder
-        shell: "bash"
-      - run: npm install
-        name: Install JS dependencies
-        working-directory: ./spec/decidim_dummy_app/
-        shell: "bash"
-        env:
-          NODE_ENV: test
-      - run: bundle exec rails shakapacker:compile
-        name: Precompile assets
-        working-directory: ./spec/decidim_dummy_app/
-        shell: "bash"
-        env:
-          NODE_ENV: test
-      - run: bundle exec rails shakapacker:compile
-        name: Precompile assets
-        working-directory: ./spec/decidim_dummy_app/
-        shell: "bash"
-        env:
-          NODE_ENV: test
+  build_app:
+    uses: ./.github/workflows/build_app.yml
+    secrets: inherit
+    name: Build test application
+  main:
+    strategy:
+      fail-fast: false
+      matrix:
+        test:
+          - command: bundle exec parallel_test --type rspec --pattern spec/lib
+            name: "Lib specs"
+          - command: bundle exec parallel_test --type rspec --pattern spec/system
+            name: "System specs"
+          - command: bundle exec parallel_test --type rspec --pattern spec/ --exclude-pattern 'spec/(system|lib)'
+            name: "Tasks specs"
+    needs: build_app
+    name: ${{ matrix.test.name }}
+    uses: ./.github/workflows/test_app.yml
+    secrets: inherit
+    with:
+      test_command: ${{ matrix.test.command }}
+      bullet_n_plus_one: true
+      bullet_unused_eager_loading: true
   docker_build:
     name: Test build docker image
     runs-on: ubuntu-22.04
