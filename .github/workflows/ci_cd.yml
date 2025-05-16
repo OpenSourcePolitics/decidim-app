@@ -37,7 +37,7 @@ jobs:
     uses: ./.github/workflows/build_app.yml
     secrets: inherit
     name: Build test application
-  main:
+  tests:
     strategy:
       fail-fast: false
       matrix:
