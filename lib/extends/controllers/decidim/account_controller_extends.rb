@@ -5,7 +5,7 @@ module Decidim
     def destroy
       enforce_permission_to(:delete, :user, current_user:)
       @form = form(Decidim::DeleteAccountForm).from_params(params)
-      Decidim::DestroyAccount.call(current_user, @form) do
+      Decidim::DestroyAccount.call(@form) do
         on(:ok) do
           handle_successful_destruction
         end
