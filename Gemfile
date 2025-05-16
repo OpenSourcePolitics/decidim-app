@@ -35,6 +35,7 @@ gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decid
 
 group :development, :test do
   gem "brakeman", "~> 6.1"
+  gem "bundler-audit", require: false
   gem "byebug", "~> 11.0", platform: :mri
   gem "decidim-dev", github: "decidim/decidim", tag: DECIDIM_TAG
   gem "parallel_tests", "~> 4.2"

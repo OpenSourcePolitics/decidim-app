@@ -19,7 +19,7 @@ class AddWithdrawnAtFieldToProposals < ActiveRecord::Migration[6.1]
   end
 
   def down
-    CustomProposal.where.not(withdrawn_at: null).find_each do |proposal|
+    CustomProposal.where.not(withdrawn_at: nil).find_each do |proposal|
       proposal.state = :withdrawn
       proposal.save!
     end

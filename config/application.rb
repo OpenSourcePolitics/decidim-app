@@ -13,6 +13,7 @@ module DecidimApp
 
     config.after_initialize do
       # commands
+      require "extends/commands/decidim/proposals/create_proposal_extends"
       require "extends/commands/decidim/proposals/publish_proposal_extends"
       require "extends/commands/decidim/admin/create_attachment_extends"
       require "extends/commands/decidim/assemblies/admin/copy_assembly_extends"
@@ -32,6 +33,14 @@ module DecidimApp
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       # cells
       require "extends/cells/decidim/system/system_checks_cell_extends"
+      require "extends/cells/decidim/comments/comment_metadata_cell_extends"
+    end
+
+    config.to_prepare do
+      Decidim::Api::QueryType.include ::QueryExtensions
+      Decidim::GraphiQL::Rails.config.tap do |config|
+        config.initial_query = "{\n  deployment {\n    registry\n    image\n    tag\n    decidimVersion\n  }\n}".html_safe
+      end
     end
   end
 end

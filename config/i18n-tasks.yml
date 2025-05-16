@@ -110,3 +110,4 @@ ignore_unused:
   - decidim.components.proposals.settings.global.require_scope
   - decidim.admin.scopes.update.error
   - decidim.admin.scopes.update.success
+  - date.formats.order
