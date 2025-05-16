@@ -388,4 +388,4 @@ fr:
       time_unit: seconds
       title: Thank you for your participation on %{organization_name}
   sms_verification_workflow:
-    message: Bonjour, %{code} est le code pour vous authentifier sur la plateforme %{platform}
+    message: Bonjour, %{code} est le code pour voter au budget participatif de la plateforme %{platform}
