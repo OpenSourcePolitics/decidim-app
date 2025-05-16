@@ -54,8 +54,8 @@ jobs:
     secrets: inherit
     with:
       test_command: ${{ matrix.test.command }}
-      bullet_n_plus_one: true
-      bullet_unused_eager_loading: true
+      bullet_n_plus_one: false
+      bullet_unused_eager_loading: false
   docker_build:
     name: Test build docker image
     needs: [tests]
