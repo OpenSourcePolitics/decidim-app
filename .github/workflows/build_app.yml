@@ -52,6 +52,7 @@ jobs:
       - uses: actions/cache@v4
         id: app-cache
         with:
+          path: ./
           key: app-${{ github.sha }}
           restore-keys: app-${{ github.sha }}
       - run: bundle exec rake test:setup
