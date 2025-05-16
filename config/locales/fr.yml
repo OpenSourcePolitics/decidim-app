@@ -71,6 +71,7 @@ fr:
             success: Le type de pétition a été supprimé avec succès.
           edit:
             update: Mettre à jour
+    participatory_processes:
       create_initiative:
         fill_data:
           back: Retour
@@ -81,6 +82,8 @@ fr:
           select_scope: Sélectionnez une portée
         select_initiative_type:
           new: Créer une nouvelle pétition
+        show:
+          related_processes: Concertations liées
       form:
         add_documents: Ajouter des documents
         add_image: Ajouter une image

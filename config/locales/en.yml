@@ -71,6 +71,7 @@ en:
             success: The initiative type has been successfully removed.
           edit:
             update: Update
+    participatory_processes:
       create_initiative:
         fill_data:
           back: Back
@@ -81,6 +82,8 @@ en:
           select_scope: Select a scope
         select_initiative_type:
           new: Create a new initiative
+        show:
+          related_processes: Related processes
       form:
         add_documents: Add documents
         add_image: Add image
