@@ -25,12 +25,12 @@ jobs:
           node_version: ${{ env.NODE_VERSION }}
   sast:
     name: Bundler Audit
-    uses: ./sast.yml
+    uses: ./.github/workflows/sast.yml
     with:
       ruby_version: ${{ env.RUBY_VERSION }}
   zeitwerk:
     name: Check for Zeitwerk errors
-    uses: ./zeitwerk.yml
+    uses: ./.github/workflows/zeitwerk.yml
     with:
       ruby_version: ${{ env.RUBY_VERSION }}
   tests:
