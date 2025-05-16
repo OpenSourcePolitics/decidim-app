@@ -1,0 +1,136 @@
+on:
+  workflow_call:
+    inputs:
+      codecov_token:
+        required: false
+        description: 'Codecov token'
+        default: ${{ secrets.CODECOV_TOKEN }}
+        type: string
+      ruby_version:
+        description: 'Ruby Version'
+        default: "3.2.2"
+        required: false
+        type: string
+      test_command:
+        description: 'The testing command to be ran'
+        required: true
+        type: string
+      bullet_enabled:
+        description: 'Enable bullet performance testing'
+        required: false
+        default: true
+        type: boolean
+      bullet_n_plus_one:
+        description: 'Enable bullet n+1 testing'
+        required: false
+        default: true
+        type: boolean
+      bullet_counter_cache:
+        description: 'Enable bullet counter cache testing'
+        required: false
+        default: true
+        type: boolean
+      bullet_unused_eager_loading:
+        description: 'Enable bullet unused eager loading testing'
+        required: false
+        default: true
+        type: boolean
+      chrome_version:
+        description: 'Chrome & Chromedriver version'
+        required: false
+        default: "136.0.7103.92"
+        type: string
+
+jobs:
+  build_app:
+    name: Test
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    env:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: localhost
+      DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE: "memory"
+      DECIDIM_SPAM_DETECTION_BACKEND_USER: "memory"
+    services:
+      validator:
+        image: ghcr.io/validator/validator:latest
+        ports: ["8888:8888"]
+      postgres:
+        image: postgres:15
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_PASSWORD: postgres
+      redis:
+        image: redis
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ inputs.ruby_version }}
+      - run: |
+          sudo apt update
+          sudo apt install libu2f-udev
+          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{inputs.chrome_version}}-1_amd64.deb
+          sudo dpkg -i /tmp/chrome.deb
+          rm /tmp/chrome.deb
+      - uses: nanasess/setup-chromedriver@v2
+        with:
+          chromedriver-version: ${{inputs.chrome_version}}
+        name: Install Chrome version ${{inputs.chrome_version}}
+      - uses: actions/cache@v4
+        id: app-cache
+        with:
+          path: ./spec/decidim_dummy_app/
+          key: app-${{ github.sha }}
+          restore-keys: app-${{ github.sha }}
+      - run: |
+          bundle install
+          bundle exec rake parallel:create parallel:load_schema
+        name: Parallel tests
+        shell: "bash"
+        working-directory: ./spec/decidim_dummy_app/
+      - run: |
+          sudo Xvfb -ac $DISPLAY -screen 0 1920x1084x24 > /dev/null 2>&1 &
+          ${{ inputs.test_command }}
+        name: RSpec
+        env:
+          VALIDATOR_HTML_URI: http://localhost:8888/
+          RUBY_VERSION: ${{ inputs.ruby_version }}
+          CODECOV_TOKEN: ${{ inputs.codecov_token }}
+          DECIDIM_BULLET_ENABLED: ${{ inputs.bullet_enabled }}
+          DECIDIM_BULLET_N_PLUS_ONE: ${{ inputs.bullet_n_plus_one }}
+          DECIDIM_BULLET_COUNTER_CACHE: ${{ inputs.bullet_counter_cache }}
+          DECIDIM_BULLET_UNUSED_EAGER: ${{ inputs.bullet_unused_eager_loading }}
+          DISPLAY: ":99"
+          CI: "true"
+          FAST_SEEDS: "true"
+          SIMPLECOV: "true"
+          SHAKAPACKER_RUNTIME_COMPILE: "false"
+          NODE_ENV: "test"
+      - uses: codecov/codecov-action@v4
+        name: Upload coverage
+        with:
+          token: ${{ inputs.codecov_token }}
+          name: "decidim-app"
+          flags: "decidim-app"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: ./spec/decidim_dummy_app/tmp/screenshots
+          if-no-files-found: ignore
+          overwrite: true

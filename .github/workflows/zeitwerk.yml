@@ -1,0 +1,25 @@
+on:
+  workflow_call:
+    inputs:
+      ruby_version:
+        required: false
+        description: 'Ruby version'
+        default: ${{ env.RUBY_VERSION }}
+        type: string
+
+jobs:
+  sast:
+    name: Bundler Audit
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ inputs.ruby_version }}
+          bundler-cache: true
+      - name: Check for Zeitwerk errors
+        run: |
+          bundle exec rails zeitwerk:check

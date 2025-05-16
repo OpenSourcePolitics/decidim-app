@@ -6,13 +6,13 @@ env:
   RUBY_VERSION: 3.2.2
   RAILS_ENV: test
   NODE_ENV: test
-  NODE_VERSION: 18.17.1
+  NODE_VERSION: 22.13.1
   AVAILABLE_LOCALES: "en,fr,ca,es"
 
 jobs:
   lint:
     name: Lint code
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 60
     steps:
       - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
@@ -25,37 +25,17 @@ jobs:
           node_version: ${{ env.NODE_VERSION }}
   sast:
     name: Bundler Audit
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
-      - name: Bundler Audit
-        run: |
-          bundle exec rake bundle:audit
+    uses: ./sast.yml
+    with:
+      ruby_version: ${{ env.RUBY_VERSION }}
   zeitwerk:
     name: Check for Zeitwerk errors
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
-      - name: Check for Zeitwerk errors
-        run: |
-          bundle exec rails zeitwerk:check
+    uses: ./zeitwerk.yml
+    with:
+      ruby_version: ${{ env.RUBY_VERSION }}
   tests:
     name: Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     services:
       postgres:
         image: postgres:15
@@ -112,9 +92,15 @@ jobs:
         shell: "bash"
         env:
           NODE_ENV: test
+      - run: bundle exec rails shakapacker:compile
+        name: Precompile assets
+        working-directory: ./spec/decidim_dummy_app/
+        shell: "bash"
+        env:
+          NODE_ENV: test
   docker_build:
     name: Test build docker image
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     services:
       postgres:
         image: postgres:15
@@ -146,7 +132,7 @@ jobs:
     name: Generate release
     needs: [lint, sast, zeitwerk, tests, docker_build]
     if: "github.ref == 'refs/heads/main'"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
       - uses: mathieudutour/github-tag-action@v6.1
