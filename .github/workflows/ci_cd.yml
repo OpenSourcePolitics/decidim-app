@@ -58,7 +58,7 @@ jobs:
       bullet_unused_eager_loading: false
   docker_build:
     name: Test build docker image
-    needs: [tests]
+    needs: [lint, sast, zeitwerk]
     runs-on: ubuntu-22.04
     services:
       postgres:

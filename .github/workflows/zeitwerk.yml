@@ -9,7 +9,7 @@ on:
 
 jobs:
   sast:
-    name: Bundler Audit
+    name: Zeitwerk check
     runs-on: ubuntu-22.04
     timeout-minutes: 60
     steps:
