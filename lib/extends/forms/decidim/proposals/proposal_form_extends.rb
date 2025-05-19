@@ -45,8 +45,8 @@ module ProposalFormExtends
       return if scope_id.blank? || scope.blank? || current_component.scope.blank?
 
       unless scope.ancestor_of?(current_component.scope) ||
-        current_component.scope.descendants.include?(scope) ||
-        scope == current_component.scope
+             current_component.scope.descendants.include?(scope) ||
+             scope == current_component.scope
         errors.add(:scope_id, :invalid_scope)
       end
     end
