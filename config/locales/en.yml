@@ -202,6 +202,8 @@ en:
         name: Name
     half_signup:
       quick_auth:
+        sms:
+          instruction: After entering your phone number, you will receive a code via SMS. This code will grant you access to the voting booth.
         sms_verification:
           text_message: Hello, %{verification} is the code to authenticate yourself on the platform
     initiatives:
