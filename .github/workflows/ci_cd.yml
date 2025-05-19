@@ -144,7 +144,7 @@ jobs:
           push: "true"
   generate_release:
     name: Generate release
-    needs: [lint, zeitwerk, tests, docker_build]
+    needs: [lint, sast, zeitwerk, tests, docker_build]
     if: "github.ref == 'refs/heads/main'"
     runs-on: ubuntu-latest
     steps:
