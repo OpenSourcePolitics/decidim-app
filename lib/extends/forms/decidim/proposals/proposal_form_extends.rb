@@ -13,6 +13,7 @@ module ProposalFormExtends
     validates :scope_id, presence: true, if: ->(form) { form.require_scope? }
     validate :check_category, if: ->(form) { form.require_category? }
     validate :check_scope, if: ->(form) { form.require_scope? }
+    validate :validate_scope_belongs_to_component
 
     def categories_enabled?
       categories&.any?
@@ -33,11 +34,21 @@ module ProposalFormExtends
     private
 
     def check_category
-      errors.add(:category, :blank) if category_id.blank? && require_category?
+      errors.add(:category, :blank) if (category_id.blank? || category.blank?) && require_category?
     end
 
     def check_scope
-      errors.add(:scope, :blank) if scope_id.blank? && require_scope?
+      errors.add(:scope, :blank) if (scope_id.blank? || scope.blank?) && require_scope?
+    end
+
+    def validate_scope_belongs_to_component
+      return if scope_id.blank? || scope.blank? || current_component.scope.blank?
+
+      unless scope.ancestor_of?(current_component.scope) ||
+        current_component.scope.descendants.include?(scope) ||
+        scope == current_component.scope
+        errors.add(:scope_id, :invalid_scope)
+      end
     end
   end
 end
