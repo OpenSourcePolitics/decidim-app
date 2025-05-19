@@ -52,7 +52,7 @@ describe "User edits proposals" do
       expect(Decidim::Proposals::Proposal.last.body["en"]).to eq(proposal_body)
     end
 
-    context "when uploading a file", processing_uploads_for: Decidim::AttachmentUploader do
+    context "when uploading a file" do
       it "can add image" do
         dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city.jpeg"))
         click_link_or_button "Send"

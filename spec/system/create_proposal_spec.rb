@@ -101,7 +101,7 @@ describe "User creates proposal simply" do
         expect(page).to have_content("Proposal successfully published.")
       end
 
-      context "when uploading a file", processing_uploads_for: Decidim::AttachmentUploader do
+      context "when uploading a file" do
         it "can add image" do
           click_link_or_button "New proposal"
           fill_in :proposal_title, with: proposal_title
@@ -118,6 +118,7 @@ describe "User creates proposal simply" do
         let!(:draft) { create(:proposal, :draft, component:, users: [user]) }
 
         before do
+          login_as user, scope: :user
           click_link_or_button "New proposal"
           path = "#{main_component_path(component)}/#{draft.id}/edit_draft?component_id=#{component.id}&question_slug=#{component.participatory_space.slug}"
           expect(page).to have_current_path(path)
