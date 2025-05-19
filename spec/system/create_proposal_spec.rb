@@ -31,16 +31,13 @@ describe "User creates proposal simply" do
     page.visit main_component_path(component)
   end
 
-  before do
-    login_as user, scope: :user
-    visit_component
-  end
-
   context "when category and scope are required," do
     let(:settings) { { require_category: true, require_scope: true } }
 
     context "without any scopes or categories" do
       before do
+        login_as user, scope: :user
+        visit_component
         expect(Decidim::Scope.count).to eq(0)
         expect(Decidim::Category.count).to eq(0)
       end
@@ -59,6 +56,8 @@ describe "User creates proposal simply" do
 
     context "when scopes are enabled and there is subscope and category" do
       before do
+        login_as user, scope: :user
+        visit_component
         component.update(settings: { scopes_enabled: true, scope_id: parent_scope.id, attachments_allowed: true })
       end
 
@@ -136,6 +135,11 @@ describe "User creates proposal simply" do
 
   context "when category and scope arent required," do
     let(:settings) { { require_category: false, require_scope: false } }
+
+    before do
+      login_as user, scope: :user
+      visit_component
+    end
 
     it "creates a new proposal without category and scope" do
       click_link_or_button "New proposal"

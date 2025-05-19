@@ -107,7 +107,37 @@ describe "User edits proposals" do
         end
       end
 
-      context "when proposal has card image" do
+      context "when changing card image of proposal" do
+        let(:filename) { "city.jpeg" }
+        let(:file) { Decidim::Dev.test_file(filename, "image/jpeg") }
+
+        before do
+          login_as user, scope: :user
+
+          settings = component.settings
+          settings.comments_enabled = false
+          component.update(settings:)
+
+          visit_component
+          click_link_or_button translated(proposal.title), match: :first
+        end
+
+        it "can set new card image" do
+          click_link_or_button "Edit proposal"
+          dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city2.jpeg"), remove_before: true)
+
+          click_link_or_button "Send"
+          expect(page).to have_content("Proposal successfully updated.")
+          expect(page).to have_content("Images")
+
+          created_proposal = Decidim::Proposals::Proposal.find(proposal.id)
+          expect(created_proposal.attachments.count).to eq(1)
+          expect(created_proposal.photos.count).to eq(1)
+          expect(created_proposal.photos.first.title["en"]).to eq("city2.jpeg")
+        end
+      end
+
+      context "when removing card image of proposal" do
         let(:filename) { "city.jpeg" }
         let(:file) { Decidim::Dev.test_file(filename, "image/jpeg") }
 
@@ -136,20 +166,6 @@ describe "User edits proposals" do
           expect(page).to have_no_content("Images")
           expect(page).to have_no_link(filename)
           expect(Decidim::Proposals::Proposal.find(proposal.id).attachments).to be_empty
-        end
-
-        it "can set new card image" do
-          click_link_or_button "Edit proposal"
-          dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city2.jpeg"), remove_before: true)
-
-          click_link_or_button "Send"
-          expect(page).to have_content("Proposal successfully updated.")
-          expect(page).to have_content("Images")
-
-          created_proposal = Decidim::Proposals::Proposal.find(proposal.id)
-          expect(created_proposal.attachments.count).to eq(1)
-          expect(created_proposal.photos.count).to eq(1)
-          expect(created_proposal.photos.first.title["en"]).to eq("city2.jpeg")
         end
       end
     end
