@@ -74,11 +74,12 @@ describe "User creates proposal simply" do
         expect(page).to have_content("There is an error in this field")
       end
 
-      it "creates a new proposal with a category and scope" do
+      it "creates a new proposal with a category, a scope and an image" do
         click_link_or_button "New proposal"
         fill_in :proposal_title, with: proposal_title
         fill_in :proposal_body, with: proposal_body
         fill_category_and_scope(category, scope)
+        dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city.jpeg"))
         click_link_or_button "Continue"
         click_link_or_button "Publish"
         expect(page).to have_content("Proposal successfully published.")
@@ -98,19 +99,6 @@ describe "User creates proposal simply" do
         expect(page).to have_content("This proposal is modified")
         click_link_or_button "Publish"
         expect(page).to have_content("Proposal successfully published.")
-      end
-
-      context "when uploading a file" do
-        it "can add image" do
-          click_link_or_button "New proposal"
-          fill_in :proposal_title, with: proposal_title
-          fill_in :proposal_body, with: proposal_body
-          fill_category_and_scope(category, scope)
-          dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city.jpeg"))
-          click_link_or_button "Continue"
-          click_link_or_button "Publish"
-          expect(page).to have_content("Proposal successfully published.")
-        end
       end
 
       context "when draft proposal exists for current users" do
