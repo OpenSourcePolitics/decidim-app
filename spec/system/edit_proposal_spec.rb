@@ -10,8 +10,6 @@ describe "Edit proposals" do
   let!(:another_user) { create(:user, :confirmed, organization: participatory_process.organization) }
   let!(:proposal) { create(:proposal, users: [user], component:) }
   let!(:proposal_title) { translated(proposal.title) }
-  let(:manifest_name) { "proposals" }
-  let(:manifest) { Decidim.find_component_manifest(manifest_name) }
   let(:settings) { nil }
   let(:component) do
     create(:proposal_component,
