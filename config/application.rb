@@ -41,5 +41,7 @@ module DecidimApp
         config.initial_query = "{\n  deployment {\n    registry\n    image\n    tag\n    decidimVersion\n  }\n}".html_safe
       end
     end
+
+    config.active_support.key_generator_hash_digest_class = OpenSSL::Digest::SHA1
   end
 end
