@@ -104,6 +104,10 @@ fr:
           address: 60 Boulevard Victor Hugo Saint-Jean-de-Luz, BP 64500
     scopes:
       global: Portée générale
+  layouts:
+    decidim:
+      footer:
+        help: Aide
   time:
     buttons:
       select: Sélectionner

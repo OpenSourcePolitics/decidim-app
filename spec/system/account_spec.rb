@@ -33,7 +33,21 @@ describe "Account" do
 
     describe "update avatar" do
       it "can update avatar" do
-        dynamically_attach_file(:user_avatar, Decidim::Dev.asset("avatar.jpg"), remove_before: true)
+        click_on "Replace"
+        file_location = Decidim::Dev.asset("avatar.jpg")
+        filename = file_location.to_s.split("/").last
+        within ".upload-modal" do
+          click_on "Remove"
+          # sometimes there is 2 avatars img in the modal
+          click_on "Remove" if find("button", text: "Remove")
+          input_element = find("input[type='file']", visible: :all)
+          input_element.attach_file(file_location)
+          within "[data-filename='#{filename}']" do
+            expect(page).to have_css(filled_selector("li progress[value='100']"), wait: 5)
+            expect(page).to have_content(filename.first(12))
+          end
+          click_on("Save")
+        end
 
         within "form.edit_user" do
           find("*[type=submit]").click
