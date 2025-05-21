@@ -31,16 +31,13 @@ describe "User creates proposal simply" do
     page.visit main_component_path(component)
   end
 
-  before do
-    login_as user, scope: :user
-    visit_component
-  end
-
   context "when category and scope are required," do
     let(:settings) { { require_category: true, require_scope: true } }
 
     context "without any scopes or categories" do
       before do
+        login_as user, scope: :user
+        visit_component
         expect(Decidim::Scope.count).to eq(0)
         expect(Decidim::Category.count).to eq(0)
       end
@@ -59,6 +56,8 @@ describe "User creates proposal simply" do
 
     context "when scopes are enabled and there is subscope and category" do
       before do
+        login_as user, scope: :user
+        visit_component
         component.update(settings: { scopes_enabled: true, scope_id: parent_scope.id, attachments_allowed: true })
       end
 
@@ -75,11 +74,12 @@ describe "User creates proposal simply" do
         expect(page).to have_content("There is an error in this field")
       end
 
-      it "creates a new proposal with a category and scope" do
+      it "creates a new proposal with a category, a scope and an image" do
         click_link_or_button "New proposal"
         fill_in :proposal_title, with: proposal_title
         fill_in :proposal_body, with: proposal_body
         fill_category_and_scope(category, scope)
+        dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city.jpeg"))
         click_link_or_button "Continue"
         click_link_or_button "Publish"
         expect(page).to have_content("Proposal successfully published.")
@@ -101,23 +101,11 @@ describe "User creates proposal simply" do
         expect(page).to have_content("Proposal successfully published.")
       end
 
-      context "when uploading a file", processing_uploads_for: Decidim::AttachmentUploader do
-        it "can add image" do
-          click_link_or_button "New proposal"
-          fill_in :proposal_title, with: proposal_title
-          fill_in :proposal_body, with: proposal_body
-          fill_category_and_scope(category, scope)
-          dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city.jpeg"))
-          click_link_or_button "Continue"
-          click_link_or_button "Publish"
-          expect(page).to have_content("Proposal successfully published.")
-        end
-      end
-
       context "when draft proposal exists for current users" do
         let!(:draft) { create(:proposal, :draft, component:, users: [user]) }
 
         before do
+          login_as user, scope: :user
           click_link_or_button "New proposal"
           path = "#{main_component_path(component)}/#{draft.id}/edit_draft?component_id=#{component.id}&question_slug=#{component.participatory_space.slug}"
           expect(page).to have_current_path(path)
@@ -135,6 +123,11 @@ describe "User creates proposal simply" do
 
   context "when category and scope arent required," do
     let(:settings) { { require_category: false, require_scope: false } }
+
+    before do
+      login_as user, scope: :user
+      visit_component
+    end
 
     it "creates a new proposal without category and scope" do
       click_link_or_button "New proposal"
