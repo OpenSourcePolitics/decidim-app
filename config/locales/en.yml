@@ -104,6 +104,10 @@ en:
           address: 37 Homewood Drive Brownsburg, IN 46112
     scopes:
       global: Global scope
+  layouts:
+    decidim:
+      footer:
+        help: Help
   time:
     buttons:
       select: Select
