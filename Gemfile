@@ -33,6 +33,7 @@ gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSou
 gem "decidim-decidim_awesome", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git", branch: "fix/update_packages_dependancies"
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "bump/0.29"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "backport/fix_database_not_available"
+gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.29"
 
 group :development, :test do
   gem "brakeman", "~> 6.1"
