@@ -38,9 +38,9 @@ describe "Omniauth Publik" do
 
     context "when the user has confirmed the email in publik" do
       it "creates a new User without sending confirmation instructions" do
-        find(".sign-up-link").click
+        click_on("Log in", match: :first)
 
-        click_link_or_button "Sign in with Publik"
+        click_on("Publik", match: :first)
 
         expect(page).to have_content("Successfully")
         expect_user_logged
