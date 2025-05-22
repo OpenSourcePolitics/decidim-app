@@ -993,6 +993,7 @@ DEPENDENCIES
   nokogiri (>= 1.18.4)
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
+  rack (~> 2.2.14)
   rack-attack (~> 6.7)
   rack-mini-profiler
   sidekiq (~> 6.0)

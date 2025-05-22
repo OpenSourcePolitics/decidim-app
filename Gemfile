@@ -26,6 +26,7 @@ gem "actionpack", "~> 7.0.8.7"
 gem "graphql", "~> 2.2.17"
 gem "net-imap", ">= 0.5.6"
 gem "nokogiri", ">= 1.18.4"
+gem "rack", "~> 2.2.14"
 gem "uri", ">= 1.0.3"
 
 # External Decidim gems
