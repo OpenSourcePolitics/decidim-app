@@ -113,3 +113,4 @@ ignore_unused:
   - date.formats.order
   - decidim.participatory_processes.create_initiative.*
   - decidim.participatory_processes.form.*
+  - decidim.system.organizations.omniauth_settings.publik.*
