@@ -42,7 +42,7 @@ export default class UploadModal {
 
         this.emptyItems = this.modal.querySelector("[data-dropzone-no-items]");
         this.uploadItems = this.modal.querySelector("[data-dropzone-items]");
-        this.input = this.dropZone.querySelector("input");
+        this.input = this.modal.querySelector('input[id^=files-upload]');
         this.items = []
 
         this.attachmentCounter = 0;
@@ -83,7 +83,6 @@ export default class UploadModal {
                 } else {
                     // attach the file hash to submit the form, when the file has been uploaded
                     file.hiddenField = blob.signed_id
-
                     // since the validation step is async, we must wait for the responses
                     uploader.validate(blob.signed_id).then(() => {
                         if (uploader.errors.length) {

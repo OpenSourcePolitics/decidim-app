@@ -18,6 +18,7 @@ module DecidimApp
       require "extends/commands/decidim/admin/create_attachment_extends"
       require "extends/commands/decidim/assemblies/admin/copy_assembly_extends"
       require "extends/commands/decidim/participatory_processes/admin/copy_participatory_process_extends"
+      require "extends/commands/decidim/create_omniauth_registration_extends"
       # forms
       require "extends/forms/decidim/assemblies/admin/assembly_copy_form_extends"
       require "extends/forms/decidim/participatory_processes/admin/participatory_process_copy_form_extends"
@@ -28,6 +29,7 @@ module DecidimApp
       require "extends/controllers/decidim/admin/scopes_controller_extends"
       require "extends/controllers/decidim/scopes_controller_extends"
       require "extends/controllers/decidim/comments/comments_controller_extends"
+      require "extends/controllers/decidim/participatory_processes/participatory_processes_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       # cells
@@ -41,5 +43,7 @@ module DecidimApp
         config.initial_query = "{\n  deployment {\n    registry\n    image\n    tag\n    decidimVersion\n  }\n}".html_safe
       end
     end
+
+    config.active_support.key_generator_hash_digest_class = OpenSSL::Digest::SHA1
   end
 end
