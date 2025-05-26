@@ -1,0 +1,26 @@
+<% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <div class="row column">
+    <%= settings_fields.text_field :max_results,
+                                   label: label,
+                                   placeholder: "0-100",
+                                   oninput: "validateInput(this)",
+                                   pattern: "[0-9]{1,3}" %>
+  </div>
+<% end %>
+
+<script>
+  function validateInput(input) {
+    input.value = input.value.replace(/[^0-9]/g, '');
+
+    if (input.value !== '') {
+      let value = parseInt(input.value, 10);
+      if (value > 100) {
+        value = 100;
+      }
+      if (value < 0) {
+        value = 0;
+      }
+      input.value = value.toString();
+    }
+  }
+</script>
