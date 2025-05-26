@@ -111,3 +111,5 @@ ignore_unused:
   - decidim.admin.scopes.update.error
   - decidim.admin.scopes.update.success
   - date.formats.order
+  - decidim.participatory_processes.create_initiative.*
+  - decidim.participatory_processes.form.*
