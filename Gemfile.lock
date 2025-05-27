@@ -45,6 +45,15 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/omniauth-publik.git
+  revision: 3bec74589e5a1c97a1529edfc20bfb61666021a8
+  branch: feat/update_to_0.29
+  specs:
+    omniauth-publik (0.1.1)
+      omniauth (~> 2.1)
+      omniauth-oauth2 (>= 1.7.2, < 2.0)
+
+GIT
   remote: https://github.com/decidim/decidim.git
   revision: 8f4f1c213c3e141b1d33f41ce2ee9e1f95f0048b
   tag: v0.29.3
@@ -1001,6 +1010,7 @@ DEPENDENCIES
   memory_profiler
   net-imap (>= 0.5.6)
   nokogiri (>= 1.18.4)
+  omniauth-publik!
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
   rack (~> 2.2.14)
