@@ -88,6 +88,26 @@ fr:
         edit_documents: Modifier les documents
         edit_image: Modifier l'Image
         image_legend: "(Facultatif) Ajouter une image"
+    participatory_processes:
+      create_initiative:
+        fill_data:
+          back: Retour
+          continue: Continuer
+          fill_data_help: "<ul> <li>Vérifier le contenu de votre pétition : le titre est-il facile à comprendre ? L'objectif de votre pétition est-il clair ?</li> <li>Vous devez choisir le type de signature : en présentiel, en ligne ou une combinaison des deux</li> <li>Quelle est le secteur géographique de l'initiative ?</li> </ul>"
+          more_information: "(Plus d'informations)"
+          select_area: Sélectionnez une zone
+          select_scope: Sélectionnez une portée
+        select_initiative_type:
+          new: Créer une nouvelle pétition
+      form:
+        add_documents: Ajouter des documents
+        add_image: Ajouter une image
+        attachment_legend: "(Facultatif) Ajouter une pièce jointe"
+        edit_documents: Modifier les documents
+        edit_image: Modifier l'Image
+        image_legend: "(Facultatif) Ajouter une image"
+      show:
+        related_processes: Concertations liées
     proposals:
       proposals:
         dynamic_map_instructions:
@@ -104,6 +124,13 @@ fr:
           address: 60 Boulevard Victor Hugo Saint-Jean-de-Luz, BP 64500
     scopes:
       global: Portée générale
+    system:
+      organizations:
+        omniauth_settings:
+          publik:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
   layouts:
     decidim:
       footer:
