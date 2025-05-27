@@ -36,6 +36,17 @@ GIT
       deface (~> 1.5)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git
+  revision: 971ad38a2955b5f495b7f2ed719589cd329cf269
+  branch: bump/0.29
+  specs:
+    decidim-survey_multiple_answers (0.29.2)
+      decidim-admin (>= 0.26.0, < 0.30.0)
+      decidim-core (>= 0.26.0, < 0.30.0)
+      decidim-forms (>= 0.26.0, < 0.30.0)
+      decidim-surveys (>= 0.26.0, < 0.30.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git
   revision: f3b55cae4e22713d7c842f0de4c421e9765ad7b0
   branch: backport/fix_database_not_available
@@ -996,6 +1007,7 @@ DEPENDENCIES
   decidim-emitter!
   decidim-extra_user_fields!
   decidim-initiatives!
+  decidim-survey_multiple_answers!
   decidim-templates!
   decidim-term_customizer!
   deface
