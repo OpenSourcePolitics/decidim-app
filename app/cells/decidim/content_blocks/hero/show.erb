@@ -1,0 +1,13 @@
+<section id="hero-<%= model.id %>" class="hero__container" style="background-image:url('<%= background_image %>')" data-process-hero>-->
+  <div class="hero">
+    <h1 class="hero__title">
+      <% if translated_welcome_text.blank? %>
+        <%= t("decidim.pages.home.hero.welcome", organization: current_organization_name) %>
+      <% else %>
+        <%= decidim_sanitize_admin translated_welcome_text %>
+      <% end %>
+    </h1>
+
+    <%= render :cta_button %>
+  </div>
+</section>
