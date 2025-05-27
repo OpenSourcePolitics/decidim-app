@@ -17,6 +17,15 @@ GIT
       sassc (~> 2.3)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-emitter.git
+  revision: 4ce3f32a268351dcfcb94f8be75926d73f221c86
+  branch: bump/0.29
+  specs:
+    decidim-emitter (1.0.0)
+      decidim-core (~> 0.29.0)
+      decidim-participatory_processes (~> 0.29.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
   revision: 7428d7f0c797506ad0919e13ed7d8a78e46e448c
   branch: bump/0.29
@@ -975,6 +984,7 @@ DEPENDENCIES
   decidim-conferences!
   decidim-decidim_awesome!
   decidim-dev!
+  decidim-emitter!
   decidim-extra_user_fields!
   decidim-initiatives!
   decidim-templates!
