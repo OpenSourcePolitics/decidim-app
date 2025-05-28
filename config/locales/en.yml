@@ -88,6 +88,10 @@ en:
         edit_documents: Edit documents
         edit_image: Edit image
         image_legend: "(Optional) Add an image"
+    pages:
+      home:
+        hero:
+          welcome: Welcome to %{organization} !
     participatory_processes:
       create_initiative:
         fill_data:
