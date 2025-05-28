@@ -6,6 +6,14 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-cleaner.git
+  revision: 2199b9ad30c2ef596843ec467d3b98bf5b107399
+  branch: bump/0.29
+  specs:
+    decidim-cleaner (5.0.0)
+      decidim-core (~> 0.29.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git
   revision: 5148029a3d2e25873ce86c48448bc862ef283677
   branch: fix/update_packages_dependancies
@@ -1001,6 +1009,7 @@ DEPENDENCIES
   dalli
   decidim!
   decidim-additional_authorization_handler!
+  decidim-cleaner!
   decidim-conferences!
   decidim-decidim_awesome!
   decidim-dev!

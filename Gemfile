@@ -34,6 +34,7 @@ gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publ
 
 # External Decidim gems
 gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
+gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "bump/0.29"
 gem "decidim-decidim_awesome", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git", branch: "fix/update_packages_dependancies"
 gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.29"
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "bump/0.29"
