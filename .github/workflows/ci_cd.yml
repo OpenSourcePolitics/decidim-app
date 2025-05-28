@@ -262,7 +262,7 @@ jobs:
         id: tag_version
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          custom_tag: 2.8.4
+          custom_tag: 2.8.5
       - uses: ncipollo/release-action@v1
         name: Create a GitHub release
         with:
