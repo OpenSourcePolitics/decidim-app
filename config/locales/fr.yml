@@ -128,6 +128,13 @@ fr:
           address: 60 Boulevard Victor Hugo Saint-Jean-de-Luz, BP 64500
     scopes:
       global: Portée générale
+    system:
+      organizations:
+        omniauth_settings:
+          publik:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
   layouts:
     decidim:
       footer:
