@@ -2,6 +2,7 @@
   "name": "decidim-lite",
   "private": true,
   "dependencies": {
+    "@bufbuild/protobuf": "^2.5.1",
     "@decidim/browserslist-config": "file:packages/browserslist-config",
     "@decidim/core": "file:packages/core",
     "@decidim/webpacker": "file:packages/webpacker",
