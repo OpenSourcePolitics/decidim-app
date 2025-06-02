@@ -46,8 +46,10 @@ if Decidim.module_installed?(:ai)
   Decidim::Ai::SpamDetection.user_models = {
     "Decidim::User" => "Decidim::Ai::SpamDetection::Resource::UserBaseEntity"
   }
-  Decidim::Ai::SpamDetection.user_detection_service = "Decidim::Ai::SpamDetection::ThirdPartyService"
-  Decidim::Ai::SpamDetection.resource_detection_service = "Decidim::Ai::SpamDetection::ThirdPartyService"
-  Decidim::Ai::SpamDetection.user_spam_analyzer_job = "Decidim::Ai::SpamDetection::UserSpamAnalyzerJob"
-  Decidim::Ai::SpamDetection.generic_spam_analyzer_job = "Decidim::Ai::SpamDetection::GenericSpamAnalyzerJob"
+  Decidim::Ai::SpamDetection.user_detection_service = "Decidim::Ai::SpamDetection::Strategy::Scaleway"
+  # Decidim::Ai::SpamDetection.user_detection_service = "Decidim::Ai::SpamDetection::ThirdPartyService"
+  # Decidim::Ai::SpamDetection.resource_detection_service = "Decidim::Ai::SpamDetection::ThirdPartyService"
+  Decidim::Ai::SpamDetection.resource_detection_service = "Decidim::Ai::SpamDetection::Strategy::Scaleway"
+  Decidim::Ai::SpamDetection.user_spam_analyzer_job = "Decidim::Ai::SpamDetection::ThirdParty::UserSpamAnalyzerJob"
+  Decidim::Ai::SpamDetection.generic_spam_analyzer_job = "Decidim::Ai::SpamDetection::ThirdParty::GenericSpamAnalyzerJob"
 end
