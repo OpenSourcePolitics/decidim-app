@@ -377,7 +377,7 @@ describe "Admin manages newsletters" do
       visit decidim_admin.newsletters_path
 
       within("tr[data-newsletter-id=\"#{newsletter.id}\"]") do
-        accept_confirm { click_on "Delete" }
+        accept_confirm { find('svg[aria-label="Destroy"]').click }
       end
 
       expect(page).to have_content("successfully")

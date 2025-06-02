@@ -14,7 +14,8 @@
     "graphql-ws": "^5.16.0",
     "inline-attacher": "^0.0.7",
     "jsrender": "^1.0.9",
-    "leaflet.featuregroup.subgroup": "^1.0.2"
+    "leaflet.featuregroup.subgroup": "^1.0.2",
+    "uc.micro": "^2.1.0"
   },
   "version": "0.1.0",
   "devDependencies": {
