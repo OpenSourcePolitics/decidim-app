@@ -6,6 +6,14 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-cleaner.git
+  revision: 2199b9ad30c2ef596843ec467d3b98bf5b107399
+  branch: bump/0.29
+  specs:
+    decidim-cleaner (5.0.0)
+      decidim-core (~> 0.29.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git
   revision: 5148029a3d2e25873ce86c48448bc862ef283677
   branch: fix/update_packages_dependancies
@@ -17,6 +25,15 @@ GIT
       sassc (~> 2.3)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-emitter.git
+  revision: 4ce3f32a268351dcfcb94f8be75926d73f221c86
+  branch: bump/0.29
+  specs:
+    decidim-emitter (1.0.0)
+      decidim-core (~> 0.29.0)
+      decidim-participatory_processes (~> 0.29.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
   revision: 7428d7f0c797506ad0919e13ed7d8a78e46e448c
   branch: bump/0.29
@@ -25,6 +42,17 @@ GIT
       country_select (~> 4.0)
       decidim-core (>= 0.29)
       deface (~> 1.5)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git
+  revision: 971ad38a2955b5f495b7f2ed719589cd329cf269
+  branch: bump/0.29
+  specs:
+    decidim-survey_multiple_answers (0.29.2)
+      decidim-admin (>= 0.26.0, < 0.30.0)
+      decidim-core (>= 0.26.0, < 0.30.0)
+      decidim-forms (>= 0.26.0, < 0.30.0)
+      decidim-surveys (>= 0.26.0, < 0.30.0)
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git
@@ -44,6 +72,15 @@ GIT
       decidim-core (~> 0.29)
       decidim-meetings (~> 0.29)
       deface (>= 1.9)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/omniauth-publik.git
+  revision: 3bec74589e5a1c97a1529edfc20bfb61666021a8
+  branch: feat/update_to_0.29
+  specs:
+    omniauth-publik (0.1.1)
+      omniauth (~> 2.1)
+      omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
   remote: https://github.com/decidim/decidim.git
@@ -982,12 +1019,15 @@ DEPENDENCIES
   dalli
   decidim!
   decidim-additional_authorization_handler!
+  decidim-cleaner!
   decidim-conferences!
   decidim-decidim_awesome!
   decidim-dev!
+  decidim-emitter!
   decidim-extra_user_fields!
   decidim-guest_meeting_registration!
   decidim-initiatives!
+  decidim-survey_multiple_answers!
   decidim-templates!
   decidim-term_customizer!
   deface
@@ -1002,6 +1042,7 @@ DEPENDENCIES
   memory_profiler
   net-imap (>= 0.5.6)
   nokogiri (>= 1.18.4)
+  omniauth-publik!
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
   rack (~> 2.2.14)
