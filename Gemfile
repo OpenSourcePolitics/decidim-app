@@ -32,6 +32,9 @@ gem "uri", ">= 1.0.3"
 # omniauth
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik.git", branch: "feat/update_to_0.29"
 
+# Load Budgets Booth to avoid errors
+gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp", branch: "bump/0.29-budgets_booth"
+
 # External Decidim gems
 gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
 gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "bump/0.29"
