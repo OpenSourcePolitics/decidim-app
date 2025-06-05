@@ -44,6 +44,15 @@ GIT
       deface (~> 1.5)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-ptp.git
+  revision: 7797825087a742963bb04d960ee1607c9d434307
+  branch: bump/0.29-budgets_booth
+  specs:
+    decidim-budgets_booth (0.29.0)
+      decidim-budgets (~> 0.29.0)
+      decidim-core (~> 0.29.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git
   revision: 971ad38a2955b5f495b7f2ed719589cd329cf269
   branch: bump/0.29
@@ -1019,6 +1028,7 @@ DEPENDENCIES
   dalli
   decidim!
   decidim-additional_authorization_handler!
+  decidim-budgets_booth!
   decidim-cleaner!
   decidim-conferences!
   decidim-decidim_awesome!
