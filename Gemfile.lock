@@ -73,6 +73,16 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/guest-meeting-registration.git
+  revision: a0ad48b581e1b1576d38e00f168ef8885a7d8133
+  branch: bump/module_to_0.29
+  specs:
+    decidim-guest_meeting_registration (0.29.2)
+      decidim-core (~> 0.29)
+      decidim-meetings (~> 0.29)
+      deface (>= 1.9)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-publik.git
   revision: 3bec74589e5a1c97a1529edfc20bfb61666021a8
   branch: feat/update_to_0.29
@@ -1025,6 +1035,7 @@ DEPENDENCIES
   decidim-dev!
   decidim-emitter!
   decidim-extra_user_fields!
+  decidim-guest_meeting_registration!
   decidim-initiatives!
   decidim-survey_multiple_answers!
   decidim-templates!
