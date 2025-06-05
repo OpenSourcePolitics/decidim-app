@@ -38,6 +38,7 @@ gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-modul
 gem "decidim-decidim_awesome", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git", branch: "fix/update_packages_dependancies"
 gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.29"
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "bump/0.29"
+gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePolitics/guest-meeting-registration.git", branch: "bump/module_to_0.29"
 gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git", branch: "bump/0.29"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "backport/fix_database_not_available"
 
