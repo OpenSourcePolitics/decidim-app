@@ -56,6 +56,16 @@ module OmniauthRegistrationsControllerExtends
       end
     end
 
+    # def failure
+    # https://github.com/heartcombo/devise/blob/main/app/controllers/devise/omniauth_callbacks_controller.rb#L10
+    # end
+
+    protected
+
+    def after_omniauth_failure_path_for(scope)
+      request.params[stored_location_key_for(scope)] || session[stored_location_key_for(scope)] || request.referer || super
+    end
+
     private
 
     def verified_email

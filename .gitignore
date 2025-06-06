@@ -57,3 +57,6 @@ minio_data
 
 # Ignore the files and folders generated through Deface
 app/compiled_views/
+
+# byebug
+.byebug_history

@@ -8,6 +8,29 @@ module OpenIDConnectExtends
 
     option :logout_policy, "none"
 
+    info do
+      base_info
+    end
+
+    def base_info
+      {
+        name: user_info_name,
+        email: user_info.email,
+        email_verified: user_info.email_verified,
+        nickname: user_info.preferred_username,
+        first_name: user_info.given_name,
+        last_name: user_info.family_name,
+        gender: user_info.gender,
+        image: user_info.picture,
+        phone: user_info.phone_number,
+        urls: { website: user_info.website }
+      }
+    end
+
+    def user_info_name
+      user_info.name || [user_info.given_name, user_info.family_name].join(" ")
+    end
+
     def other_phase
       log :debug, "logout_path_pattern #{logout_path_pattern}"
       log :debug, "current_path #{current_path}"
@@ -24,7 +47,10 @@ module OpenIDConnectExtends
           options.issuer = issuer if options.issuer.to_s.empty?
           discover!
           session["omniauth.logout.callback"] = end_session_callback_value
-          return redirect(end_session_uri) if end_session_uri
+          log :debug, "found End session URI in session" if session["omniauth.end_session_uri"].present?
+          end_session_redirect_uri = session.delete("omniauth.end_session_uri") || end_session_uri
+          log :debug, "End session redirect URI: #{end_session_redirect_uri}"
+          return redirect(end_session_redirect_uri) if end_session_redirect_uri.present?
         end
       end
       call_app!
@@ -47,6 +73,23 @@ module OpenIDConnectExtends
 
     def end_session_callback_value
       "#{name}--#{session["session_id"]}"
+    end
+
+    def user_info
+      return @user_info if @user_info
+
+      if access_token.id_token
+        decoded = decode_id_token(access_token.id_token).raw_attributes
+
+        response = access_token.userinfo!
+        response = decode_id_token(response) if response.is_a?(String)
+
+        log :debug, "Userinfo response: #{response.raw_attributes.to_h}"
+
+        @user_info = ::OpenIDConnect::ResponseObject::UserInfo.new response.raw_attributes.merge(decoded).deep_symbolize_keys
+      else
+        @user_info = access_token.userinfo!
+      end
     end
   end
 end
