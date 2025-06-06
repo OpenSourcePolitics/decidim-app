@@ -40,6 +40,11 @@ module SessionControllerExtends
     def after_sign_out_path_for(user)
       request.params[stored_location_key_for(user)] || request.referer || super
     end
+
+    # Skip authorization handler by default
+    def skip_first_login_authorization?
+      Rails.application.secrets.dig(:decidim, :skip_first_login_authorization)
+    end
   end
 
   def active_omniauth_session?

@@ -56,6 +56,11 @@ module OmniauthRegistrationsControllerExtends
       end
     end
 
+    # Skip authorization handler by default
+    def skip_first_login_authorization?
+      Rails.application.secrets.dig(:decidim, :skip_first_login_authorization)
+    end
+
     # def failure
     # https://github.com/heartcombo/devise/blob/main/app/controllers/devise/omniauth_callbacks_controller.rb#L10
     # end
