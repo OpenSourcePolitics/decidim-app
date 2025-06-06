@@ -6,13 +6,17 @@ env:
   RUBY_VERSION: 3.2.2
   RAILS_ENV: test
   NODE_ENV: test
-  NODE_VERSION: 18.17.1
+  NODE_VERSION: 22.13.1
   AVAILABLE_LOCALES: "en,fr,ca,es"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint:
     name: Lint code
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 60
     steps:
       - uses: rokroskar/workflow-run-cleanup-action@v0.3.0
@@ -25,96 +29,37 @@ jobs:
           node_version: ${{ env.NODE_VERSION }}
   sast:
     name: Bundler Audit
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
-      - name: Bundler Audit
-        run: |
-          bundle exec rake bundle:audit
+    uses: ./.github/workflows/sast.yml
   zeitwerk:
     name: Check for Zeitwerk errors
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
-      - name: Check for Zeitwerk errors
-        run: |
-          bundle exec rails zeitwerk:check
+    uses: ./.github/workflows/zeitwerk.yml
+  build_app:
+    uses: ./.github/workflows/build_app.yml
+    secrets: inherit
+    name: Build test application
   tests:
-    name: Tests
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:15
-        ports: ["5432:5432"]
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        env:
-          POSTGRES_PASSWORD: postgres
-    env:
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgres
-      DATABASE_HOST: localhost
-    steps:
-      - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
-        if: "github.ref != 'refs/heads/main' || github.ref != 'refs/heads/develop'"
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ inputs.ruby_version }}
-          bundler-cache: true
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ inputs.node_version }}
-          cache: 'npm'
-          cache-dependency-path: ./package-lock.json
-      - uses: actions/cache@v4
-        id: app-cache
-        with:
-          path: ./spec/decidim_dummy_app/
-          key: app-${{ github.sha }}
-          restore-keys: app-${{ github.sha }}
-      - run: bundle exec rake test:setup
-        name: Create test app
-        shell: "bash"
-      - run: mkdir -p ./spec/decidim_dummy_app/tmp/screenshots
-        name: Create the screenshots folder
-        shell: "bash"
-      - run: npm install
-        name: Install JS dependencies
-        working-directory: ./spec/decidim_dummy_app/
-        shell: "bash"
-        env:
-          NODE_ENV: test
-      - run: bundle exec rails shakapacker:compile
-        name: Precompile assets
-        working-directory: ./spec/decidim_dummy_app/
-        shell: "bash"
-        env:
-          NODE_ENV: test
+    strategy:
+      fail-fast: false
+      matrix:
+        test:
+          - command: bundle exec parallel_test --type rspec --pattern spec/lib
+            name: "Lib specs"
+          - command: bundle exec parallel_test --type rspec --pattern spec/system
+            name: "System specs"
+          - command: bundle exec parallel_test --type rspec --pattern spec/ --exclude-pattern 'spec/(system|lib)'
+            name: "Tasks specs"
+    needs: build_app
+    name: ${{ matrix.test.name }}
+    uses: ./.github/workflows/test_app.yml
+    secrets: inherit
+    with:
+      test_command: ${{ matrix.test.command }}
+      bullet_n_plus_one: false
+      bullet_unused_eager_loading: false
   docker_build:
     name: Test build docker image
-    runs-on: ubuntu-latest
+    needs: [lint, sast, zeitwerk]
+    runs-on: ubuntu-22.04
     services:
       postgres:
         image: postgres:15
@@ -146,7 +91,7 @@ jobs:
     name: Generate release
     needs: [lint, sast, zeitwerk, tests, docker_build]
     if: "github.ref == 'refs/heads/main'"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
       - uses: mathieudutour/github-tag-action@v6.1
@@ -161,3 +106,10 @@ jobs:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
+      - uses: OpenSourcePolitics/build-and-push-images-action@master
+        with:
+          registry: ${{ vars.REGISTRY_ENDPOINT }}
+          namespace: ${{ vars.REGISTRY_NAMESPACE }}
+          password: ${{ secrets.TOKEN }}
+          image_name: ${{ vars.IMAGE_NAME }}
+          tag: ${{ steps.tag_version.outputs.new_tag }}
