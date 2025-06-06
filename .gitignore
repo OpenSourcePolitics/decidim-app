@@ -60,3 +60,6 @@ app/compiled_views/
 
 # byebug
 .byebug_history
+
+# RSpec
+.rspec-failures
