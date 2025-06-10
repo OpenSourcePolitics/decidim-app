@@ -42,23 +42,21 @@ if Decidim.module_installed?(:ai)
   Decidim::Ai::SpamDetection.resource_analyzers = analyzers
   Decidim::Ai::SpamDetection.user_analyzers = analyzers
 
-
   Decidim::Ai::SpamDetection.resource_score_threshold = Rails.application.secrets.dig(:decidim, :ai, :resource_score_threshold)
   Decidim::Ai::SpamDetection.user_score_threshold = Rails.application.secrets.dig(:decidim, :ai, :user_score_threshold)
   Decidim::Ai::SpamDetection.resource_models = begin
-                                                 models = {}
-                                                 models["Decidim::Comments::Comment"] = "Decidim::Ai::SpamDetection::Resource::Comment" if Decidim.module_installed?("comments")
-                                                 models["Decidim::Debates::Debate"] = "Decidim::Ai::SpamDetection::Resource::Debate" if Decidim.module_installed?("debates")
-                                                 models["Decidim::Initiative"] = "Decidim::Ai::SpamDetection::Resource::Initiative" if Decidim.module_installed?("initiatives")
-                                                 models["Decidim::Meetings::Meeting"] = "Decidim::Ai::SpamDetection::Resource::Meeting" if Decidim.module_installed?("meetings")
-                                                 models["Decidim::Proposals::Proposal"] = "Decidim::Ai::SpamDetection::Resource::Proposal" if Decidim.module_installed?("proposals")
-                                                 if Decidim.module_installed?("proposals")
-                                                   models["Decidim::Proposals::CollaborativeDraft"] =
-                                                     "Decidim::Ai::SpamDetection::Resource::CollaborativeDraft"
-                                                 end
-                                                 models
-                                               end
-
+    models = {}
+    models["Decidim::Comments::Comment"] = "Decidim::Ai::SpamDetection::Resource::Comment" if Decidim.module_installed?("comments")
+    models["Decidim::Debates::Debate"] = "Decidim::Ai::SpamDetection::Resource::Debate" if Decidim.module_installed?("debates")
+    models["Decidim::Initiative"] = "Decidim::Ai::SpamDetection::Resource::Initiative" if Decidim.module_installed?("initiatives")
+    models["Decidim::Meetings::Meeting"] = "Decidim::Ai::SpamDetection::Resource::Meeting" if Decidim.module_installed?("meetings")
+    models["Decidim::Proposals::Proposal"] = "Decidim::Ai::SpamDetection::Resource::Proposal" if Decidim.module_installed?("proposals")
+    if Decidim.module_installed?("proposals")
+      models["Decidim::Proposals::CollaborativeDraft"] =
+        "Decidim::Ai::SpamDetection::Resource::CollaborativeDraft"
+    end
+    models
+  end
 
   Decidim::Ai::SpamDetection.user_models = {
     "Decidim::User" => "Decidim::Ai::SpamDetection::Resource::UserBaseEntity"
