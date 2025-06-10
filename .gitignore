@@ -63,3 +63,5 @@ app/compiled_views/
 
 # RSpec
 .rspec-failures
+
+.DS_Store

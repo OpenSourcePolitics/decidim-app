@@ -1,0 +1,15 @@
+<% is_horizontal = false unless local_assigns.has_key?(:is_horizontal) %>
+<% if Devise.mappings[:user].omniauthable? && current_organization.enabled_omniauth_providers.any? %>
+  <div class="login__omniauth<%= " login__omniauth__horizontal" if is_horizontal %>">
+    <%- current_organization.enabled_omniauth_providers.keys.each do |provider| %>
+      <% if lookup_context.find_all("decidim/devise/shared/omniauth_buttons/_#{provider}").any? %>
+        <%= render partial: "decidim/devise/shared/omniauth_buttons/#{provider}", locals: {provider: provider} %>
+      <% else %>
+        <%= render partial: "decidim/devise/shared/omniauth_buttons/default", locals: {provider: provider} %>
+      <% end %>
+    <% end %>
+  </div>
+  <%- if current_organization.sign_in_enabled? %>
+    <span class="login__omniauth-separator"><%= t(".or") %></span>
+  <%- end %>
+<% end %>

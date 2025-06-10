@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_22_141917) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_26_084136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
@@ -1685,7 +1685,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_22_141917) do
     t.integer "comments_count", default: 0, null: false
     t.integer "follows_count", default: 0, null: false
     t.datetime "deleted_at", precision: nil
-    t.integer "state", default: 0, null: false
+    t.integer "old_state", default: 0, null: false
     t.datetime "withdrawn_at", precision: nil
     t.integer "valuation_assignments_count", default: 0
     t.integer "decidim_proposals_proposal_state_id"
