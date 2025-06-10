@@ -64,8 +64,8 @@ en:
     devise:
       omniauth:
         france_connect:
-          introduction: "FranceConnect is the solution offered by the public state to secure and simplify connection to your online services.."
-          help_link: "Learn more about France Connect"
+          help_link: Learn more about France Connect
+          introduction: FranceConnect is the solution offered by the public state to secure and simplify connection to your online services..
     events:
       proposals:
         author_confirmation_proposal_event:
@@ -152,37 +152,33 @@ en:
       organizations:
         omniauth_settings:
           france_connect:
-            icon_hover_path: Icon path for hover state (e.g. /media/images/oidc_hover.png)
-            display_name: Display name
-            issuer: Issuer URL (e.g. https://identity.com)
-            # discovery: Discovery (true or false)
-            client_options_identifier: Client identifier
-            client_options_secret: Client secret
-            client_options_redirect_uri: Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
-            scope: Scope / Claims (e.g. openid email profile)
-            # response_type: Response type (code or id_token)
             acr_values: ACR values
-            # client_auth_method: Client authentication method (e.g. basic, jwt_bearer, mtls ...)
-            client_signing_alg: Client signing algorithm (e.g. RS256, ES256, PS256 ...)
-            logout_policy: Logout policy (none/session.destroy)
-            logout_path: Logout path (path after "/users/auth/openid_connect")
-            post_logout_redirect_uri: Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
-            # uid_field: UID field (e.g. sub, email, username)
-          openid_connect:
-            display_name: Display name
-            issuer: Issuer URL (e.g. https://identity.com)
-            discovery: Discovery (true or false)
             client_options_identifier: Client identifier
-            client_options_secret: Client secret
             client_options_redirect_uri: Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
+            client_options_secret: Client secret
+            client_signing_alg: Client signing algorithm (e.g. RS256, ES256, PS256 ...)
+            display_name: Display name
+            icon_hover_path: Icon path for hover state (e.g. /media/images/oidc_hover.png)
+            issuer: Issuer URL (e.g. https://identity.com)
+            logout_path: Logout path (path after "/users/auth/openid_connect")
+            logout_policy: Logout policy (none/session.destroy)
+            post_logout_redirect_uri: Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
             scope: Scope / Claims (e.g. openid email profile)
-            response_type: Response type (code or id_token)
+          openid_connect:
             acr_values: ACR values
             client_auth_method: Client authentication method (e.g. basic, jwt_bearer, mtls ...)
+            client_options_identifier: Client identifier
+            client_options_redirect_uri: Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
+            client_options_secret: Client secret
             client_signing_alg: Client signing algorithm (e.g. RS256, ES256, PS256 ...)
-            logout_policy: Logout policy (none/session.destroy)
+            discovery: Discovery (true or false)
+            display_name: Display name
+            issuer: Issuer URL (e.g. https://identity.com)
             logout_path: Logout path (path after "/users/auth/openid_connect")
+            logout_policy: Logout policy (none/session.destroy)
             post_logout_redirect_uri: Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
+            response_type: Response type (code or id_token)
+            scope: Scope / Claims (e.g. openid email profile)
             uid_field: UID field (e.g. sub, email, username)
           publik:
             client_id: Client ID
