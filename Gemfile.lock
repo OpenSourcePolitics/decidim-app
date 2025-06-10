@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-ai.git
-  revision: 157161ee45b7342130a3a4c3a0403664192d5486
+  revision: 39a88646c6fd39724994822137cc7d505846fdd7
   branch: feat/third_party_service
   specs:
     decidim-ai (0.29.2)
