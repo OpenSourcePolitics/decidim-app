@@ -12,7 +12,7 @@ content_security_policies = {
   "font-src" => %w(decidim.storage.opensourcepolitics.eu),
   "connect-src" => %w(decidim.storage.opensourcepolitics.eu https://cdn.jsdelivr.net),
   "frame-src" => %w(decidim.storage.opensourcepolitics.eu),
-  "worker-src" => %w('self' 'blob')
+  "worker-src" => %w(self blob)
 }
 
 minio_endpoint = Rails.application.secrets.dig(:storage, :minio, :endpoint)
