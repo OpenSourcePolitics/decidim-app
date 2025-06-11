@@ -7,12 +7,12 @@ content_security_policies = {
   "default-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net),
   "img-src" => %w(decidim.storage.opensourcepolitics.eu https://*.tile.openstreetmap.org),
   "media-src" => %w(decidim.storage.opensourcepolitics.eu www.youtube.com),
-  "script-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net tarteaucitron.io unpkg.com http://*.lvh.me:*),
+  "script-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net tarteaucitron.io unpkg.com blob:),
   "style-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net),
   "font-src" => %w(decidim.storage.opensourcepolitics.eu),
   "connect-src" => %w(decidim.storage.opensourcepolitics.eu https://cdn.jsdelivr.net),
   "frame-src" => %w(decidim.storage.opensourcepolitics.eu),
-  "worker-src" => %w(self blob)
+  "worker-src" => %w(self blob:)
 }
 
 minio_endpoint = Rails.application.secrets.dig(:storage, :minio, :endpoint)
@@ -24,6 +24,7 @@ if minio_endpoint.presence == "http://minio:9000"
   content_security_policies["style-src"] << minio_endpoint
   content_security_policies["connect-src"] << minio_endpoint
   content_security_policies["frame-src"] << minio_endpoint
+  content_security_policies["worker-src"] << minio_endpoint
 end
 
 Decidim.configure do |config|
