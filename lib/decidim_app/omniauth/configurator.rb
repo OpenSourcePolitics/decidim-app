@@ -9,7 +9,14 @@ module DecidimApp
         request = Rack::Request.new(env)
         organization = env["decidim.current_organization"].presence || Decidim::Organization.find_by(host: request.host)
         @provider = provider
-        @strategy_options = env["omniauth.strategy"].options
+        @strategy_options = if env["omniauth.strategy"].present?
+                              env["omniauth.strategy"].options
+                            else
+                              OmniAuth::Strategies.const_get(
+                                OmniAuth::Utils.camelize(provider).to_s,
+                                false
+                              ).default_options
+                            end
         @database_settings = organization.enabled_omniauth_providers[provider.to_sym]
         @rails_secrets = Rails.application.secrets.dig(:omniauth, provider.to_sym)
 
@@ -41,6 +48,10 @@ module DecidimApp
         elsif rails_secrets&.dig(key).present?
           rails_secrets[key]
         end
+      end
+
+      def options(key)
+        find_value(key) || strategy_options[key]
       end
 
       def manage_boolean(value)

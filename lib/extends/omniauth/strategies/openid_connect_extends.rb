@@ -47,8 +47,7 @@ module OpenIDConnectExtends
           options.issuer = issuer if options.issuer.to_s.empty?
           discover!
           session["omniauth.logout.callback"] = end_session_callback_value
-          log :debug, "found End session URI in session" if session["omniauth.end_session_uri"].present?
-          end_session_redirect_uri = session.delete("omniauth.end_session_uri") || end_session_uri
+          end_session_redirect_uri = end_session_uri
           log :debug, "End session redirect URI: #{end_session_redirect_uri}"
           return redirect(end_session_redirect_uri) if end_session_redirect_uri.present?
         end

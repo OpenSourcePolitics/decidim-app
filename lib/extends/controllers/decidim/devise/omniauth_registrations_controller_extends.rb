@@ -41,8 +41,6 @@ module OmniauthRegistrationsControllerExtends
       strategy = request.env["omniauth.strategy"]
       provider = strategy.name
       session["omniauth.provider"] = provider
-      session["omniauth.#{provider}.logout_policy"] = strategy.options[:logout_policy] if strategy.options[:logout_policy].present?
-      session["omniauth.#{provider}.logout_path"] = strategy.options[:logout_path] if strategy.options[:logout_path].present?
       super
     end
 

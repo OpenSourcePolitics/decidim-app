@@ -11,6 +11,8 @@ module DecidimApp
   class Application < Rails::Application
     config.load_defaults 7.0
 
+    require "decidim_app/omniauth/configurator"
+
     config.after_initialize do
       # commands
       require "extends/commands/decidim/proposals/create_proposal_extends"

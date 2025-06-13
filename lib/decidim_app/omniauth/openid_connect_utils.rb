@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "decidim_app/omniauth/configurator"
-
 module DecidimApp
   module Omniauth
     class OpenidConnectUtils

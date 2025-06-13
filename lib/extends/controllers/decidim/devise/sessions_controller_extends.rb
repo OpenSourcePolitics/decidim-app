@@ -7,8 +7,9 @@ module SessionControllerExtends
     def destroy
       if active_omniauth_session?
         provider = session.delete("omniauth.provider")
-        logout_policy = session.delete("omniauth.#{provider}.logout_policy")
-        logout_path = session.delete("omniauth.#{provider}.logout_path")
+        omniauth_config = DecidimApp::Omniauth::Configurator.new(provider, request.env)
+        logout_policy = omniauth_config.options(:logout_policy)
+        logout_path = omniauth_config.options(:logout_path)
       end
 
       if provider.present? && logout_policy == "session.destroy" && logout_path.present?
