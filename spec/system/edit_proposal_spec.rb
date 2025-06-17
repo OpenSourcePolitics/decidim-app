@@ -198,8 +198,8 @@ describe "Edit proposals" do
     context "with geocoding enabled" do
       let(:settings) { { require_category: false, require_scope: false, geocoding_enabled: true } }
       let(:component) { create(:proposal_component, participatory_space: participatory_process, settings:) }
-      let(:address) { "6 Villa des Nymphéas, Paris" }
-      let(:new_address) { "6 Rue Sorbier, Paris" }
+      let(:address) { "6 Villa des Nymphéas 75020 Paris" }
+      let(:new_address) { "6 rue Sorbier 75020 Paris" }
       let!(:proposal) { create(:proposal, address:, users: [user], skip_injection: true, component:) }
       let(:latitude) { 48.8682538 }
       let(:longitude) { 2.389643 }
@@ -228,7 +228,6 @@ describe "Edit proposals" do
         expect(page).to have_content("Marker added to the map.")
 
         click_on "Send"
-        sleep 0.5
         expect(page).to have_content(new_address)
       end
 
