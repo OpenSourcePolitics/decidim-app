@@ -88,6 +88,17 @@ fr:
         edit_documents: Modifier les documents
         edit_image: Modifier l'Image
         image_legend: "(Facultatif) Ajouter une image"
+    menu:
+      help: Aide
+    metadata:
+      progress:
+        remaining: reste %{time_distance}
+    pages:
+      home:
+        extended:
+          meetings: Rencontres
+        hero:
+          welcome: Bienvenue sur %{organization} !
     participatory_processes:
       create_initiative:
         fill_data:
@@ -108,6 +119,9 @@ fr:
         image_legend: "(Facultatif) Ajouter une image"
       show:
         related_processes: Concertations liées
+    profiles:
+      show:
+        activity: Activité
     proposals:
       proposals:
         dynamic_map_instructions:
@@ -124,6 +138,13 @@ fr:
           address: 60 Boulevard Victor Hugo Saint-Jean-de-Luz, BP 64500
     scopes:
       global: Portée générale
+    system:
+      organizations:
+        omniauth_settings:
+          publik:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
   layouts:
     decidim:
       footer:

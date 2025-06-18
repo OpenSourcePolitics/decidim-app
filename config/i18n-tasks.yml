@@ -93,6 +93,7 @@ ignore_missing:
   - decidim.participatory_processes.admin.participatory_process_copies.form.slug_help_html
   - time.buttons.select
   - decidim.admin.models.assembly.fields.promoted
+  - decidim.metadata.progress.remaining
 
 # Consider these keys used:
 ignore_unused:
@@ -113,3 +114,8 @@ ignore_unused:
   - date.formats.order
   - decidim.participatory_processes.create_initiative.*
   - decidim.participatory_processes.form.*
+  - decidim.system.organizations.omniauth_settings.publik.*
+  - decidim.metadata.progress.remaining
+  - decidim.menu.help
+  - decidim.pages.home.extended.meetings
+  - decidim.profiles.show.activity

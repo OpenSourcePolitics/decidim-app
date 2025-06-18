@@ -88,6 +88,14 @@ en:
         edit_documents: Edit documents
         edit_image: Edit image
         image_legend: "(Optional) Add an image"
+    menu:
+      help: Help
+    pages:
+      home:
+        extended:
+          meetings: Meetings
+        hero:
+          welcome: Welcome to %{organization} !
     participatory_processes:
       create_initiative:
         fill_data:
@@ -108,6 +116,9 @@ en:
         image_legend: "(Optional) Add an image"
       show:
         related_processes: Related processes
+    profiles:
+      show:
+        activity: Activity
     proposals:
       proposals:
         dynamic_map_instructions:
@@ -124,6 +135,13 @@ en:
           address: 37 Homewood Drive Brownsburg, IN 46112
     scopes:
       global: Global scope
+    system:
+      organizations:
+        omniauth_settings:
+          publik:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
   layouts:
     decidim:
       footer:
