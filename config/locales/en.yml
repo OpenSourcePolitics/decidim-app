@@ -88,8 +88,12 @@ en:
         edit_documents: Edit documents
         edit_image: Edit image
         image_legend: "(Optional) Add an image"
+    menu:
+      help: Help
     pages:
       home:
+        extended:
+          meetings: Meetings
         hero:
           welcome: Welcome to %{organization} !
     participatory_processes:
@@ -112,6 +116,9 @@ en:
         image_legend: "(Optional) Add an image"
       show:
         related_processes: Related processes
+    profiles:
+      show:
+        activity: Activity
     proposals:
       proposals:
         dynamic_map_instructions:
