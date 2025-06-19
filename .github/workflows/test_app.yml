@@ -55,7 +55,7 @@ jobs:
         image: ghcr.io/validator/validator:latest
         ports: ["8888:8888"]
       postgres:
-        image: postgres:15
+        image: postgis/postgis:17-3.5
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready

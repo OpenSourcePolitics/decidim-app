@@ -53,7 +53,7 @@ ENV RAILS_ENV=production \
 
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client imagemagick libproj-dev proj-bin p7zip-full wkhtmltopdf \
+    postgresql-client imagemagick libproj-dev proj-bin p7zip-full wkhtmltopdf libgeos-dev \
     && gem install bundler:2.5.22 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 

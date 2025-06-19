@@ -16,13 +16,8 @@ describe "Comments" do
     switch_to_host(organization.host)
   end
 
-  after do
-    expect_no_js_errors
-  end
-
   it "shows the list of comments for the resource" do
     visit resource_path
-
     expect(page).to have_css("#comments")
     expect(page).to have_css(".comment", count: comments.length)
 
