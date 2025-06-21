@@ -37,6 +37,7 @@ gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp", br
 
 # External Decidim gems
 gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
+gem "decidim-ai", git: "https://github.com/OpenSourcePolitics/decidim-module-ai.git", branch: "feat/third_party_service"
 gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "bump/0.29"
 gem "decidim-decidim_awesome", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git", branch: "fix/update_packages_dependancies"
 gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.29"
