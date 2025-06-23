@@ -33,7 +33,7 @@ shell:
 	docker compose exec app /bin/bash
 
 restart:
-	docker compose up -d
+	docker compose restart
 
 status:
 	docker compose ps
