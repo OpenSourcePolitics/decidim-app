@@ -116,3 +116,6 @@ ignore_unused:
   - decidim.participatory_processes.form.*
   - decidim.system.organizations.omniauth_settings.publik.*
   - decidim.metadata.progress.remaining
+  - decidim.menu.help
+  - decidim.pages.home.extended.meetings
+  - decidim.profiles.show.activity
