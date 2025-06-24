@@ -15,7 +15,6 @@ def update_user_profile(data)
   user.email = data[:email] if data[:email].present?
   user.skip_reconfirmation! if data[:email].present? && user.email_changed?
   user.name = data[:name] if data[:name].present?
-  user.nickname = data[:nickname] if data[:nickname].present? && data.dig(:raw_data, :info, "nickname") != user.nickname
 
   user.save!(validate: false, touch: false)
 end
