@@ -97,6 +97,8 @@ ignore_missing:
   - decidim.account.destroy.success
   - decidim.devise.omniauth_registrations.create.email_already_exists
   - devise.registrations.signed_up_but_unconfirmed
+  - decidim.devise.shared.omniauth_buttons.or
+  - devise.shared.links.log_in_with_provider
 
 # Consider these keys used:
 ignore_unused:
@@ -118,3 +120,5 @@ ignore_unused:
   - decidim.participatory_processes.create_initiative.*
   - decidim.participatory_processes.form.*
   - decidim.system.organizations.omniauth_settings.publik.*
+  - decidim.system.organizations.omniauth_settings.france_connect.*
+  - decidim.system.organizations.omniauth_settings.openid_connect.*
