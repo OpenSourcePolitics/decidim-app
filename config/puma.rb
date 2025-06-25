@@ -17,7 +17,7 @@ worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development"
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-port ENV.fetch("PORT", 8080)
+port ENV.fetch("PORT", 3000)
 
 # Specifies the `environment` that Puma will run in.
 #
@@ -49,7 +49,7 @@ if ENV.fetch("DEV_SSL", nil) && defined?(Bundler) && (dev_gem = Bundler.load.spe
   cert_dir = ENV.fetch("DEV_SSL_DIR") { "#{dev_gem.full_gem_path}/lib/decidim/dev/assets" }
   ssl_bind(
     "0.0.0.0",
-    ENV.fetch("DEV_SSL_PORT", 3000),
+    ENV.fetch("DEV_SSL_PORT", 3443),
     cert_pem: File.read("#{cert_dir}/ssl-cert.pem"),
     key_pem: File.read("#{cert_dir}/ssl-key.pem")
   )
