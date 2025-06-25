@@ -46,6 +46,10 @@ en:
           global:
             require_category: Category is required
             require_scope: Scope is required
+    devise:
+      shared:
+        links:
+          log_in_with_provider: Log in with %{provider}
     events:
       proposals:
         author_confirmation_proposal_event:
