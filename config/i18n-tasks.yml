@@ -94,6 +94,7 @@ ignore_missing:
   - time.buttons.select
   - decidim.admin.models.assembly.fields.promoted
   - decidim.metadata.progress.remaining
+  - decidim.devise.shared.links.log_in_with_user
 
 # Consider these keys used:
 ignore_unused:
@@ -119,3 +120,4 @@ ignore_unused:
   - decidim.menu.help
   - decidim.pages.home.extended.meetings
   - decidim.profiles.show.activity
+  - decidim.devise.shared.links.log_in_with_user
