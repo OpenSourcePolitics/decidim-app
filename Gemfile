@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 DECIDIM_TAG = "v0.29.3"
+DECIDIM_TAG = "v0.29.3"
 
 gem "decidim", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "decidim-conferences", github: "decidim/decidim", tag: DECIDIM_TAG
@@ -45,6 +46,10 @@ gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/dec
 gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePolitics/guest-meeting-registration.git", branch: "bump/module_to_0.29"
 gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git", branch: "bump/0.29"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "backport/fix_database_not_available"
+
+gem "omniauth_openid_connect"
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
 group :development, :test do
   gem "brakeman", "~> 6.1"
   gem "bundler-audit", require: false

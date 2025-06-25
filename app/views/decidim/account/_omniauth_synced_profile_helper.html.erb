@@ -1,0 +1,7 @@
+<% if force_profile_sync_on_omniauth_connection? %>
+  <div id="omniauth-synced-profile" class="flash warning" data-announcement>
+    <div class="flash__message flex-none block leading-relaxed">
+      <%= t("decidim.account.omniauth_synced_profile.announcement_html") %>
+    </div>
+  </div>
+<% end %>

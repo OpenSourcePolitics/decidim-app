@@ -29,6 +29,7 @@ module Decidim
             email:
           }
         }
+        request.env["omniauth.strategy"] = OmniAuth::Strategies::Facebook.new({})
       end
 
       describe "after_sign_in_path_for" do
@@ -88,6 +89,22 @@ module Decidim
                 context "when the user is not blocked" do
                   before do
                     user.blocked = false
+                  end
+
+                  it { is_expected.to eq("/authorizations/first_login") }
+                end
+
+                context "when skip_first_login_authorization? is true" do
+                  before do
+                    allow(controller).to receive(:skip_first_login_authorization?).and_return(true)
+                  end
+
+                  it { is_expected.to eq("/") }
+                end
+
+                context "when skip_first_login_authorization? is false" do
+                  before do
+                    allow(controller).to receive(:skip_first_login_authorization?).and_return(false)
                   end
 
                   it { is_expected.to eq("/authorizations/first_login") }
