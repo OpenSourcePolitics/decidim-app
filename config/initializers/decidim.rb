@@ -147,7 +147,7 @@ Decidim.configure do |config|
 
       static: {
         provider: Rails.application.secrets.maps[:static_provider]&.to_sym || :here,
-        url: Rails.application.secrets.maps[:static_url] || "https://image.maps.ls.hereapi.com/mia/1.6/mapview"
+        url: Rails.application.secrets.maps[:static_url] || "https://image.maps.hereapi.com/mia/v3/base/mc/overlay"
       }
     }
 

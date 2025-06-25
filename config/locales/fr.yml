@@ -107,8 +107,15 @@ fr:
         edit_documents: Modifier les documents
         edit_image: Modifier l'Image
         image_legend: "(Facultatif) Ajouter une image"
+    menu:
+      help: Aide
+    metadata:
+      progress:
+        remaining: reste %{time_distance}
     pages:
       home:
+        extended:
+          meetings: Rencontres
         hero:
           welcome: Bienvenue sur %{organization} !
     participatory_processes:
@@ -131,6 +138,9 @@ fr:
         image_legend: "(Facultatif) Ajouter une image"
       show:
         related_processes: Concertations liées
+    profiles:
+      show:
+        activity: Activité
     proposals:
       proposals:
         dynamic_map_instructions:

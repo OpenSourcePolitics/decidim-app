@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 DECIDIM_TAG = "v0.29.3"
+DECIDIM_TAG = "v0.29.3"
 
 gem "decidim", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "decidim-conferences", github: "decidim/decidim", tag: DECIDIM_TAG
@@ -37,6 +38,7 @@ gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp", br
 
 # External Decidim gems
 gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
+gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "rc-0.29"
 gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "bump/0.29"
 gem "decidim-decidim_awesome", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git", branch: "fix/update_packages_dependancies"
 gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.29"

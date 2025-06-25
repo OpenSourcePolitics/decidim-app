@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_26_084136) do
+ActiveRecord::Schema[7.0].define(version: 2025_06_20_142243) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
@@ -116,6 +116,17 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_26_084136) do
     t.index ["resource_type", "resource_id"], name: "index_action_logs_on_resource_type_and_id"
     t.index ["version_id"], name: "index_decidim_action_logs_on_version_id"
     t.index ["visibility"], name: "index_decidim_action_logs_on_visibility"
+  end
+
+  create_table "decidim_admin_multi_factor_settings", force: :cascade do |t|
+    t.boolean "enable_multifactor", default: false
+    t.boolean "email", default: false
+    t.boolean "sms", default: false
+    t.boolean "webauthn", default: false
+    t.bigint "decidim_organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["decidim_organization_id"], name: "index_decidim_admin_multi_factor_settings_on_organization_id"
   end
 
   create_table "decidim_amendments", force: :cascade do |t|
@@ -1685,7 +1696,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_26_084136) do
     t.integer "comments_count", default: 0, null: false
     t.integer "follows_count", default: 0, null: false
     t.datetime "deleted_at", precision: nil
-    t.integer "old_state", default: 0, null: false
+    t.integer "state", default: 0, null: false
     t.datetime "withdrawn_at", precision: nil
     t.integer "valuation_assignments_count", default: 0
     t.integer "decidim_proposals_proposal_state_id"
@@ -2178,6 +2189,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_26_084136) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "decidim_admin_multi_factor_settings", "decidim_organizations"
   add_foreign_key "decidim_area_types", "decidim_organizations"
   add_foreign_key "decidim_areas", "decidim_area_types", column: "area_type_id"
   add_foreign_key "decidim_areas", "decidim_organizations"

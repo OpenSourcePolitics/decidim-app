@@ -99,6 +99,7 @@ ignore_missing:
   - devise.registrations.signed_up_but_unconfirmed
   - decidim.devise.shared.omniauth_buttons.or
   - devise.shared.links.log_in_with_provider
+  - decidim.metadata.progress.remaining
 
 # Consider these keys used:
 ignore_unused:
@@ -122,3 +123,7 @@ ignore_unused:
   - decidim.system.organizations.omniauth_settings.publik.*
   - decidim.system.organizations.omniauth_settings.france_connect.*
   - decidim.system.organizations.omniauth_settings.openid_connect.*
+  - decidim.metadata.progress.remaining
+  - decidim.menu.help
+  - decidim.pages.home.extended.meetings
+  - decidim.profiles.show.activity
