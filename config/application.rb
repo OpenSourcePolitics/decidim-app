@@ -32,6 +32,7 @@ module DecidimApp
       require "extends/controllers/decidim/participatory_processes/participatory_processes_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
+      require "extends/helpers/decidim/omniauth_helper_extends"
       # cells
       require "extends/cells/decidim/system/system_checks_cell_extends"
       require "extends/cells/decidim/comments/comment_metadata_cell_extends"
