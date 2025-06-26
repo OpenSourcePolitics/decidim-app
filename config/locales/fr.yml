@@ -46,6 +46,10 @@ fr:
           global:
             require_category: La catégorie est obligatoire
             require_scope: Le secteur est obligatoire
+    devise:
+      shared:
+        links:
+          log_in_with_provider: Connectez-vous avec %{provider}
     events:
       proposals:
         author_confirmation_proposal_event:
