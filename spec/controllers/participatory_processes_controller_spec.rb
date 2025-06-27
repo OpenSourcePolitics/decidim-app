@@ -136,7 +136,7 @@ module Decidim
 
           context "and sort_by_date is true" do
             before do
-              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
+              Rails.application.secrets.decidim[:participatory_processes][:sort_by_date] = true
               active_processes.first.update(end_date: nil)
             end
             # search.with_date will default to "active"

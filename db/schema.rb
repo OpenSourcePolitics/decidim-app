@@ -10,11 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.0].define(version: 2025_06_20_142243) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -919,6 +921,87 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_20_142243) do
     t.string "badge_name", null: false
     t.integer "value", default: 0, null: false
     t.index ["user_id"], name: "index_decidim_gamification_badge_scores_on_user_id"
+  end
+
+  create_table "decidim_geo_configs", force: :cascade do |t|
+    t.float "longitude"
+    t.float "latitude"
+    t.integer "zoom"
+    t.string "tile"
+    t.boolean "only_processes", default: false, null: false
+    t.boolean "only_assemblies", default: false, null: false
+    t.integer "default_geoencoded_filter", default: 0
+    t.integer "focus_zoom_level", default: 21
+    t.string "maptiler_api_key", default: ""
+    t.string "maptiler_style_id", default: ""
+  end
+
+  create_table "decidim_geo_indexes", force: :cascade do |t|
+    t.jsonb "title", null: false
+    t.jsonb "short_description"
+    t.jsonb "description_html"
+    t.string "image_url"
+    t.boolean "avoid_index", default: false, null: false
+    t.jsonb "extended_data"
+    t.integer "component_id"
+    t.string "participatory_space_type", null: false
+    t.integer "participatory_space_id", null: false
+    t.integer "resource_id", null: false
+    t.string "resource_type", null: false
+    t.string "resource_url", null: false
+    t.string "resource_status"
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.bigint "geo_scope_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["end_date"], name: "index_decidim_geo_indexes_on_end_date"
+    t.index ["geo_scope_id"], name: "index_decidim_geo_indexes_on_geo_scope_id"
+    t.index ["resource_type", "resource_id"], name: "decidim_geo_indx_resource", unique: true
+    t.index ["start_date"], name: "index_decidim_geo_indexes_on_start_date"
+  end
+
+  create_table "decidim_geo_no_indexes", force: :cascade do |t|
+    t.boolean "no_index", default: false, null: false
+    t.integer "decidim_component_id"
+    t.string "decidim_component_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["decidim_component_id"], name: "decidim_geo_uniq_no_index", unique: true
+  end
+
+  create_table "decidim_geo_shapefile_datas", force: :cascade do |t|
+    t.bigint "decidim_geo_shapefiles_id"
+    t.jsonb "data"
+    t.geometry "geom", limit: {:srid=>0, :type=>"multi_polygon"}
+    t.bigint "decidim_scopes_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["decidim_geo_shapefiles_id"], name: "index_decidim_geo_shapefile_datas_on_decidim_geo_shapefiles_id"
+    t.index ["decidim_scopes_id"], name: "index_decidim_geo_shapefile_datas_on_decidim_scopes_id"
+  end
+
+  create_table "decidim_geo_shapefiles", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description"
+    t.bigint "decidim_scope_types_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "decidim_organization_id"
+    t.index ["decidim_organization_id"], name: "index_decidim_geo_shapefiles_on_decidim_organization_id"
+    t.index ["decidim_scope_types_id"], name: "index_decidim_geo_shapefiles_on_decidim_scope_types_id"
+  end
+
+  create_table "decidim_geo_space_locations", force: :cascade do |t|
+    t.bigint "decidim_geo_space_id"
+    t.string "decidim_geo_space_type"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["decidim_geo_space_type", "decidim_geo_space_id"], name: "decidim_geo_space_poly_idx", unique: true
   end
 
   create_table "decidim_guest_meeting_registration_registration_requests", force: :cascade do |t|
@@ -2212,6 +2295,11 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_20_142243) do
   add_foreign_key "decidim_debates_debates", "decidim_scopes"
   add_foreign_key "decidim_editor_images", "decidim_organizations"
   add_foreign_key "decidim_editor_images", "decidim_users", column: "decidim_author_id"
+  add_foreign_key "decidim_geo_indexes", "decidim_scopes", column: "geo_scope_id"
+  add_foreign_key "decidim_geo_shapefile_datas", "decidim_geo_shapefiles", column: "decidim_geo_shapefiles_id"
+  add_foreign_key "decidim_geo_shapefile_datas", "decidim_scopes", column: "decidim_scopes_id"
+  add_foreign_key "decidim_geo_shapefiles", "decidim_organizations"
+  add_foreign_key "decidim_geo_shapefiles", "decidim_scope_types", column: "decidim_scope_types_id"
   add_foreign_key "decidim_guest_meeting_registration_registration_requests", "decidim_meetings_meetings", column: "decidim_meetings_meetings_id"
   add_foreign_key "decidim_guest_meeting_registration_registration_requests", "decidim_organizations"
   add_foreign_key "decidim_guest_meeting_registration_settings", "decidim_organizations"
