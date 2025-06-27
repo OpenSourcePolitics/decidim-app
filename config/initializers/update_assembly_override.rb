@@ -21,5 +21,3 @@ Rails.application.config.to_prepare do
 
   Decidim::Assemblies::Admin::UpdateAssembly.include(UpdateAssemblyExtends)
 end
-
-
