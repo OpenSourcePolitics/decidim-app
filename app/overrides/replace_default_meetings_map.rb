@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# TODO, delete this override when issue
+# https://git.octree.ch/decidim/decidim-module-geo/-/issues?show=eyJpaWQiOiIxNjYiLCJmdWxsX3BhdGgiOiJkZWNpZGltL2RlY2lkaW0tbW9kdWxlLWdlbyIsImlkIjo0ODI0fQ%3D%3D
+# has been fixed
+
 # Meetings
 
 Deface::Override.new(virtual_path: "decidim/meetings/shared/_index",

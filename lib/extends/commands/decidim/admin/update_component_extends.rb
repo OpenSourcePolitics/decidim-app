@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# TODO: delete this extends when issue https://git.octree.ch/decidim/decidim-module-geo/-/issues/168 has been fixed
+# TODO, delete this extends when issue
+# https://git.octree.ch/decidim/decidim-module-geo/-/issues/168 has been fixed
 
 require "active_support/concern"
 
