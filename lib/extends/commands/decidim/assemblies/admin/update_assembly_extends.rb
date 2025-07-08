@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# TODO, delete this extends when issue
+# https://git.octree.ch/decidim/decidim-module-geo/-/issues?show=eyJpaWQiOiIxNjciLCJmdWxsX3BhdGgiOiJkZWNpZGltL2RlY2lkaW0tbW9kdWxlLWdlbyIsImlkIjo0OTE2fQ%3D%3D
+# has been fixed
+
 require "active_support/concern"
 module UpdateAssemblyExtends
   extend ActiveSupport::Concern
