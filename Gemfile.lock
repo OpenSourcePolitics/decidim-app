@@ -38,17 +38,6 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git
-  revision: 5148029a3d2e25873ce86c48448bc862ef283677
-  branch: fix/update_packages_dependancies
-  specs:
-    decidim-decidim_awesome (0.12.0)
-      decidim-admin (>= 0.29.1, < 0.30)
-      decidim-core (>= 0.29.1, < 0.30)
-      deface (>= 1.5)
-      sassc (~> 2.3)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-emitter.git
   revision: 4ce3f32a268351dcfcb94f8be75926d73f221c86
   branch: bump/0.29
@@ -114,6 +103,17 @@ GIT
     omniauth-publik (0.1.1)
       omniauth (~> 2.1)
       omniauth-oauth2 (>= 1.7.2, < 2.0)
+
+GIT
+  remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
+  revision: b4c50032542f7295163645b04f494fd00f8c87bb
+  specs:
+    decidim-decidim_awesome (0.12.3)
+      active_hashcash (~> 0.4.0)
+      decidim-admin (>= 0.29.1, < 0.30)
+      decidim-core (>= 0.29.1, < 0.30)
+      deface (>= 1.5)
+      sassc (~> 2.3)
 
 GIT
   remote: https://github.com/decidim/decidim.git
@@ -353,6 +353,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_hashcash (0.4.0)
+      rails (>= 5.2.0)
     active_link_to (1.0.5)
       actionpack
       addressable
