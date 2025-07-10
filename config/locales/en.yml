@@ -65,6 +65,9 @@ en:
         france_connect:
           help_link: Learn more about France Connect
           introduction: FranceConnect is the solution offered by the public state to secure and simplify connection to your online services..
+      shared:
+        links:
+          log_in_with_provider: Log in with %{provider}
     events:
       proposals:
         author_confirmation_proposal_event:

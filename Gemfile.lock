@@ -1,4 +1,19 @@
 GIT
+  remote: https://git.octree.ch/decidim/decidim-module-geo.git
+  revision: 538ee55fc66175d60a2034e8658a7f82f8d63c65
+  specs:
+    decidim-decidim_geo (0.3.0)
+      activerecord-postgis-adapter
+      decidim-admin (>= 0.29)
+      decidim-api (>= 0.29)
+      decidim-core (>= 0.29)
+      deface (~> 1.9.0)
+      ffi-geos (~> 2.5)
+      rgeo (~> 3.0)
+      rgeo-geojson (~> 2.2)
+      rgeo-shapefile (~> 3.1)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git
   revision: c8037a6f81004dc1616b61ffa2da8277cea8780a
   specs:
@@ -35,7 +50,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-emitter.git
-  revision: 4ce3f32a268351dcfcb94f8be75926d73f221c86
+  revision: d25e43f2b5267213d435611f1a34df275e0b56d0
   branch: bump/0.29
   specs:
     decidim-emitter (1.0.0)
@@ -44,7 +59,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
-  revision: 6406aff4fecde79cead61218e5874a2dbe9bdfcb
+  revision: 32c4f18b948a09fb6b1fb191f2c7b727cad625e2
   branch: bump/0.29
   specs:
     decidim-extra_user_fields (0.29.0)
@@ -54,7 +69,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-ptp.git
-  revision: 7797825087a742963bb04d960ee1607c9d434307
+  revision: d6aee2da0577cb882235be0cbdb42fe5b9e673fe
   branch: bump/0.29-budgets_booth
   specs:
     decidim-budgets_booth (0.29.0)
@@ -352,6 +367,9 @@ GEM
     activerecord (7.0.8.7)
       activemodel (= 7.0.8.7)
       activesupport (= 7.0.8.7)
+    activerecord-postgis-adapter (8.0.3)
+      activerecord (~> 7.0.0)
+      rgeo-activerecord (~> 7.0.0)
     activestorage (7.0.8.7)
       actionpack (= 7.0.8.7)
       activejob (= 7.0.8.7)
@@ -458,6 +476,8 @@ GEM
     date_validator (0.12.0)
       activemodel (>= 3)
       activesupport (>= 3)
+    dbf (4.3.2)
+      csv
     declarative-builder (0.2.0)
       trailblazer-option (~> 0.1.0)
     declarative-option (0.1.0)
@@ -534,6 +554,8 @@ GEM
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     ffi (1.17.0-x86_64-linux-musl)
+    ffi-geos (2.5.0)
+      ffi (>= 1.0.0)
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
@@ -672,6 +694,7 @@ GEM
     mini_portile2 (2.8.8)
     minitest (5.25.5)
     msgpack (1.7.5)
+    multi_json (1.15.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     net-http (0.6.0)
@@ -870,6 +893,16 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.3.9)
+    rgeo (3.0.1)
+    rgeo-activerecord (7.0.1)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
+    rgeo-geojson (2.2.0)
+      multi_json (~> 1.15)
+      rgeo (>= 1.0.0)
+    rgeo-shapefile (3.1.0)
+      dbf (~> 4.0)
+      rgeo (>= 1.0)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -1075,6 +1108,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack (~> 7.0.8.7)
   activejob-uniqueness
+  activerecord-postgis-adapter (~> 8.0, >= 8.0.3)
   aws-sdk-s3
   bootsnap (~> 1.4)
   brakeman (~> 6.1)
@@ -1089,6 +1123,7 @@ DEPENDENCIES
   decidim-cleaner!
   decidim-conferences!
   decidim-decidim_awesome!
+  decidim-decidim_geo!
   decidim-dev!
   decidim-emitter!
   decidim-extra_user_fields!
@@ -1117,6 +1152,8 @@ DEPENDENCIES
   rack (~> 2.2.14)
   rack-attack (~> 6.7)
   rack-mini-profiler
+  rgeo
+  rgeo-activerecord
   sidekiq (~> 6.0)
   sidekiq-scheduler (~> 5.0)
   spring
