@@ -10,13 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.0].define(version: 2025_06_20_142243) do
+ActiveRecord::Schema[7.0].define(version: 2025_07_08_085825) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "active_hashcash_stamps", force: :cascade do |t|
+    t.string "version", null: false
+    t.integer "bits", null: false
+    t.date "date", null: false
+    t.string "resource", null: false
+    t.string "ext", null: false
+    t.string "rand", null: false
+    t.string "counter", null: false
+    t.string "request_path"
+    t.string "ip_address"
+    t.jsonb "context"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["counter", "rand", "date", "resource", "bits", "version", "ext"], name: "index_active_hashcash_stamps_unique", unique: true
+    t.index ["ip_address", "created_at"], name: "index_active_hashcash_stamps_on_ip_address_and_created_at", where: "(ip_address IS NOT NULL)"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -403,7 +419,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_20_142243) do
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "decidim_scope_id"
     t.json "category_budget_rules", default: []
-    t.string "main_image"
     t.index ["decidim_component_id"], name: "index_decidim_budgets_budgets_on_decidim_component_id"
     t.index ["decidim_scope_id"], name: "index_decidim_budgets_budgets_on_decidim_scope_id"
   end
