@@ -20,7 +20,11 @@ module Decidim
     def handle_successful_destruction
       sign_out(current_user)
       flash[:notice] = t("account.destroy.success", scope: "decidim")
-      handle_omniauth_logout if active_omniauth_session?
+      if active_omniauth_session?
+        handle_omniauth_logout
+      else
+        redirect_to decidim.root_path
+      end
     end
 
     def handle_omniauth_logout
@@ -29,7 +33,11 @@ module Decidim
       logout_policy = omniauth_config.options(:logout_policy)
       logout_path = omniauth_config.options(:logout_path)
 
-      redirect_to omniauth_logout_path(provider, logout_path) if provider.present? && logout_policy == "session.destroy" && logout_path.present?
+      if provider.present? && logout_policy == "session.destroy" && logout_path.present?
+        redirect_to omniauth_logout_path(provider, logout_path)
+      else
+        redirect_to decidim.root_path
+      end
     end
 
     def handle_invalid_destruction
