@@ -27,6 +27,7 @@ COPY . .
 
 RUN bundle exec rake decidim:webpacker:install && \
     bundle exec rake assets:precompile && \
+    bundle exec rails deface:precompile && \
     bundle exec rails shakapacker:compile
 
 RUN rm -rf node_modules tmp/cache vendor/bundle/spec \
