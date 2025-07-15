@@ -15,14 +15,14 @@ en:
         announcement_html: |-
           <p><strong>Profile synchronization</strong></p>
           <p>
-            The following informations are synchronized with an external identity provider:
+            The following information is synchronized with an external identity provider:
           </p>
           <ul>
             <li>Name</li>
             <li>Email</li>
           </ul>
           <p>
-            You can't edit these informations here.
+            You can't edit this information here.
           </p>
     admin:
       actions:
