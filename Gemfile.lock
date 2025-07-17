@@ -1,19 +1,4 @@
 GIT
-  remote: https://git.octree.ch/decidim/decidim-module-geo.git
-  revision: 538ee55fc66175d60a2034e8658a7f82f8d63c65
-  specs:
-    decidim-decidim_geo (0.3.0)
-      activerecord-postgis-adapter
-      decidim-admin (>= 0.29)
-      decidim-api (>= 0.29)
-      decidim-core (>= 0.29)
-      deface (~> 1.9.0)
-      ffi-geos (~> 2.5)
-      rgeo (~> 3.0)
-      rgeo-geojson (~> 2.2)
-      rgeo-shapefile (~> 3.1)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git
   revision: c8037a6f81004dc1616b61ffa2da8277cea8780a
   specs:
@@ -478,8 +463,6 @@ GEM
     date_validator (0.12.0)
       activemodel (>= 3)
       activesupport (>= 3)
-    dbf (4.3.2)
-      csv
     declarative-builder (0.2.0)
       trailblazer-option (~> 0.1.0)
     declarative-option (0.1.0)
@@ -556,8 +539,6 @@ GEM
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     ffi (1.17.0-x86_64-linux-musl)
-    ffi-geos (2.5.0)
-      ffi (>= 1.0.0)
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
@@ -696,7 +677,6 @@ GEM
     mini_portile2 (2.8.8)
     minitest (5.25.5)
     msgpack (1.7.5)
-    multi_json (1.15.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     net-http (0.6.0)
@@ -899,12 +879,6 @@ GEM
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
-    rgeo-geojson (2.2.0)
-      multi_json (~> 1.15)
-      rgeo (>= 1.0.0)
-    rgeo-shapefile (3.1.0)
-      dbf (~> 4.0)
-      rgeo (>= 1.0)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -1125,7 +1099,6 @@ DEPENDENCIES
   decidim-cleaner!
   decidim-conferences!
   decidim-decidim_awesome!
-  decidim-decidim_geo!
   decidim-dev!
   decidim-emitter!
   decidim-extra_user_fields!
