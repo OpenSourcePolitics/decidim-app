@@ -10,6 +10,20 @@ fr:
     formats:
       order: d-m-y
   decidim:
+    account:
+      omniauth_synced_profile:
+        announcement_html: |-
+          <p><strong>Synchronisation du profil</strong></p>
+          <p>
+            les informations suivantes sont synchronisées avec un fournisseur d'identité externe:
+          </p>
+          <ul>
+            <li>Nom</li>
+            <li>Email</li>
+          </ul>
+          <p>
+            Vous ne pouvez pas modifier ces informations ici.
+          </p>
     admin:
       actions:
         add: Ajouter
@@ -47,6 +61,10 @@ fr:
             require_category: La catégorie est obligatoire
             require_scope: Le secteur est obligatoire
     devise:
+      omniauth:
+        france_connect:
+          help_link: Qu’est-ce que FranceConnect ?
+          introduction: FranceConnect est la solution proposée par l’État pour sécuriser et simplifier la connexion à vos services en ligne.
       shared:
         links:
           log_in_with_provider: Connectez-vous avec %{provider}
@@ -145,6 +163,35 @@ fr:
     system:
       organizations:
         omniauth_settings:
+          france_connect:
+            acr_values: ACR values
+            client_options_identifier: Client identifier
+            client_options_redirect_uri: Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
+            client_options_secret: Client secret
+            client_signing_alg: Client signing algorithm (e.g. RS256, ES256, PS256 ...)
+            display_name: Display name
+            icon_hover_path: Icon path for hover state (e.g. /media/images/oidc_hover.png)
+            issuer: Issuer URL (e.g. https://identity.com)
+            logout_path: Logout path (path after "/users/auth/openid_connect")
+            logout_policy: Logout policy (none/session.destroy)
+            post_logout_redirect_uri: Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
+            scope: Scope / Claims (e.g. openid email profile)
+          openid_connect:
+            acr_values: ACR values
+            client_auth_method: Client authentication method (e.g. basic, jwt_bearer, mtls ...)
+            client_options_identifier: Client identifier
+            client_options_redirect_uri: Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
+            client_options_secret: Client secret
+            client_signing_alg: Client signing algorithm (e.g. RS256, ES256, PS256 ...)
+            discovery: Discovery (true or false)
+            display_name: Display name
+            issuer: Issuer URL (e.g. https://identity.com)
+            logout_path: Logout path (path after "/users/auth/openid_connect")
+            logout_policy: Logout policy (none/session.destroy)
+            post_logout_redirect_uri: Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
+            response_type: Response type (code or id_token)
+            scope: Scope / Claims (e.g. openid email profile)
+            uid_field: UID field (e.g. sub, email, username)
           publik:
             client_id: Client ID
             client_secret: Client secret
