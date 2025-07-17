@@ -57,3 +57,14 @@ minio_data
 
 # Ignore the files and folders generated through Deface
 app/compiled_views/
+
+# byebug
+.byebug_history
+
+# RSpec
+.rspec-failures
+
+.DS_Store
+
+# Webpacker
+packages/webpacker/node_modules
