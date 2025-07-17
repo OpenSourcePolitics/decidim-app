@@ -31,7 +31,7 @@ describe "Account" do
 
     it_behaves_like "accessible page"
 
-    describe "update avatar" do
+    describe "update avatar", :slow do
       it "can update avatar" do
         click_on "Replace"
         file_location = Decidim::Dev.asset("avatar.jpg")
@@ -56,7 +56,7 @@ describe "Account" do
         expect(page).to have_css(".flash.success")
       end
 
-      it "shows error when image is too big" do
+      it "shows error when image is too big", :slow do
         find_by_id("user_avatar_button").click
 
         within ".upload-modal" do
