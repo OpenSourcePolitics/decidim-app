@@ -33,7 +33,7 @@ module Decidim
           private
 
           def decidim_ai_enabled?
-            Rails.application.secrets.dig(:decidim, :ai, :enabled)
+            Rails.application.secrets.dig(:decidim, :ai, :enabled) && Rails.application.secrets.dig(:decidim, :ai, :generic_spam_analyzer_enabled)
           end
         end
       end
