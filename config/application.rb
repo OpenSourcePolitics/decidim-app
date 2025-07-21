@@ -11,6 +11,8 @@ module DecidimApp
   class Application < Rails::Application
     config.load_defaults 7.0
 
+    require "decidim_app/omniauth/configurator"
+
     config.after_initialize do
       # commands
       require "extends/commands/decidim/proposals/create_proposal_extends"
@@ -19,22 +21,31 @@ module DecidimApp
       require "extends/commands/decidim/assemblies/admin/copy_assembly_extends"
       require "extends/commands/decidim/participatory_processes/admin/copy_participatory_process_extends"
       require "extends/commands/decidim/create_omniauth_registration_extends"
+      require "extends/commands/decidim/assemblies/admin/update_assembly_extends"
+      require "extends/commands/decidim/forms/admin/update_questionnaire_extends"
       # forms
       require "extends/forms/decidim/assemblies/admin/assembly_copy_form_extends"
       require "extends/forms/decidim/participatory_processes/admin/participatory_process_copy_form_extends"
       require "extends/forms/decidim/proposals/proposal_form_extends"
       require "extends/forms/decidim/comments/comment_form_extends"
       require "extends/forms/decidim/system/base_organization_form_extends"
+      require "extends/forms/decidim/omniauth_registration_form_extends"
       # controllers
       require "extends/controllers/decidim/admin/scopes_controller_extends"
       require "extends/controllers/decidim/scopes_controller_extends"
       require "extends/controllers/decidim/comments/comments_controller_extends"
+      require "extends/controllers/decidim/account_controller_extends"
+      require "extends/controllers/decidim/devise_controllers_extends"
+      require "extends/controllers/decidim/devise/sessions_controller_extends"
+      require "extends/controllers/decidim/devise/omniauth_registrations_controller_extends"
       require "extends/controllers/decidim/participatory_processes/participatory_processes_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
+      require "extends/helpers/decidim/omniauth_helper_extends"
       # cells
       require "extends/cells/decidim/system/system_checks_cell_extends"
       require "extends/cells/decidim/comments/comment_metadata_cell_extends"
+      require "extends/cells/decidim/proposals/proposal_metadata_cell_extends"
     end
 
     config.to_prepare do

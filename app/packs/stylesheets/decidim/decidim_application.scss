@@ -9,3 +9,9 @@
 .card__grid-metadata {
   @apply overflow-x-hidden
 }
+.home__section-image {
+  /* stylelint-disable-next-line number-leading-zero */
+  background-image: var(--hero-image);
+
+  @apply bg-center bg-cover;
+}

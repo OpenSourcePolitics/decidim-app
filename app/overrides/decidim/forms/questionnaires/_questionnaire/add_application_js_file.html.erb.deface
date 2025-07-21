@@ -1,0 +1,2 @@
+<!-- insert_before "noscript" -->
+<%= append_javascript_pack_tag 'application' %>

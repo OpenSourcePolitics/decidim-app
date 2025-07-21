@@ -6,6 +6,15 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git
+  revision: e436cc6d3dbb83da3bb250fba9fd123041566b5a
+  branch: rc-0.29
+  specs:
+    decidim-admin_multi_factor (0.29.3)
+      countries (~> 5.1, >= 5.1.2)
+      decidim-core (~> 0.29.3)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-cleaner.git
   revision: 2199b9ad30c2ef596843ec467d3b98bf5b107399
   branch: bump/0.29
@@ -14,19 +23,8 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git
-  revision: 5148029a3d2e25873ce86c48448bc862ef283677
-  branch: fix/update_packages_dependancies
-  specs:
-    decidim-decidim_awesome (0.12.0)
-      decidim-admin (>= 0.29.1, < 0.30)
-      decidim-core (>= 0.29.1, < 0.30)
-      deface (>= 1.5)
-      sassc (~> 2.3)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-emitter.git
-  revision: 4ce3f32a268351dcfcb94f8be75926d73f221c86
+  revision: d25e43f2b5267213d435611f1a34df275e0b56d0
   branch: bump/0.29
   specs:
     decidim-emitter (1.0.0)
@@ -35,17 +33,17 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
-  revision: 7428d7f0c797506ad0919e13ed7d8a78e46e448c
+  revision: 32c4f18b948a09fb6b1fb191f2c7b727cad625e2
   branch: bump/0.29
   specs:
     decidim-extra_user_fields (0.29.0)
-      country_select (~> 4.0)
+      country_select (~> 9.0)
       decidim-core (>= 0.29)
       deface (~> 1.5)
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-ptp.git
-  revision: 7797825087a742963bb04d960ee1607c9d434307
+  revision: c089979c5ed5561e4973806ccd678f2e70491957
   branch: bump/0.29-budgets_booth
   specs:
     decidim-budgets_booth (0.29.0)
@@ -90,6 +88,17 @@ GIT
     omniauth-publik (0.1.1)
       omniauth (~> 2.1)
       omniauth-oauth2 (>= 1.7.2, < 2.0)
+
+GIT
+  remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
+  revision: b4c50032542f7295163645b04f494fd00f8c87bb
+  specs:
+    decidim-decidim_awesome (0.12.3)
+      active_hashcash (~> 0.4.0)
+      decidim-admin (>= 0.29.1, < 0.30)
+      decidim-core (>= 0.29.1, < 0.30)
+      deface (>= 1.5)
+      sassc (~> 2.3)
 
 GIT
   remote: https://github.com/decidim/decidim.git
@@ -329,6 +338,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_hashcash (0.4.0)
+      rails (>= 5.2.0)
     active_link_to (1.0.5)
       actionpack
       addressable
@@ -343,6 +354,9 @@ GEM
     activerecord (7.0.8.7)
       activemodel (= 7.0.8.7)
       activesupport (= 7.0.8.7)
+    activerecord-postgis-adapter (8.0.3)
+      activerecord (~> 7.0.0)
+      rgeo-activerecord (~> 7.0.0)
     activestorage (7.0.8.7)
       actionpack (= 7.0.8.7)
       activejob (= 7.0.8.7)
@@ -360,7 +374,9 @@ GEM
       activesupport (>= 6.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    aes_key_wrap (1.1.0)
     ast (2.4.2)
+    attr_required (1.0.2)
     aws-eventstream (1.3.0)
     aws-partitions (1.894.0)
     aws-sdk-core (3.191.3)
@@ -388,6 +404,7 @@ GEM
       parser (>= 2.4)
       smart_properties
     bigdecimal (3.1.8)
+    bindata (2.5.0)
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
@@ -429,13 +446,10 @@ GEM
     commonmarker (0.23.10)
     concurrent-ruby (1.3.4)
     connection_pool (2.4.1)
-    countries (3.1.0)
-      i18n_data (~> 0.11.0)
-      sixarm_ruby_unaccent (~> 1.1)
-      unicode_utils (~> 1.4)
-    country_select (4.0.0)
-      countries (~> 3.0)
-      sort_alphabetical (~> 1.0)
+    countries (5.7.2)
+      unaccent (~> 0.3)
+    country_select (9.0.0)
+      countries (> 5.0, < 7.0)
     crack (1.0.0)
       bigdecimal
       rexml
@@ -482,6 +496,8 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
+    email_validator (2.2.4)
+      activemodel
     erb_lint (0.4.0)
       activesupport
       better_html (>= 2.0.1)
@@ -509,6 +525,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
+    faraday-follow_redirects (0.3.0)
+      faraday (>= 1, < 3)
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
     ffi (1.17.0-aarch64-linux-gnu)
@@ -597,6 +615,13 @@ GEM
     io-console (0.7.2)
     jmespath (1.6.2)
     json (2.8.2)
+    json-jwt (1.16.7)
+      activesupport (>= 4.2)
+      aes_key_wrap
+      base64
+      bindata
+      faraday (~> 2.0)
+      faraday-follow_redirects
     jwt (2.9.3)
       base64
     kaminari (1.2.2)
@@ -654,7 +679,7 @@ GEM
     msgpack (1.7.5)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    net-http (0.5.0)
+    net-http (0.6.0)
       uri
     net-imap (0.5.8)
       date
@@ -722,6 +747,22 @@ GEM
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
+    omniauth_openid_connect (0.8.0)
+      omniauth (>= 1.9, < 3)
+      openid_connect (~> 2.2)
+    openid_connect (2.3.1)
+      activemodel
+      attr_required (>= 1.0.0)
+      email_validator
+      faraday (~> 2.0)
+      faraday-follow_redirects
+      json-jwt (>= 1.16)
+      mail
+      rack-oauth2 (~> 2.2)
+      swd (~> 2.0)
+      tzinfo
+      validate_url
+      webfinger (~> 2.0)
     openssl (3.2.0)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
@@ -761,6 +802,13 @@ GEM
       rack (>= 2.0.0)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
+    rack-oauth2 (2.2.1)
+      activesupport
+      attr_required
+      faraday (~> 2.0)
+      faraday-follow_redirects
+      json-jwt (>= 1.11.0)
+      rack (>= 2.1.0)
     rack-protection (3.2.0)
       base64 (>= 0.1.0)
       rack (~> 2.2, >= 2.2.4)
@@ -827,6 +875,10 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.3.9)
+    rgeo (3.0.1)
+    rgeo-activerecord (7.0.1)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -947,6 +999,11 @@ GEM
       spring (>= 4)
     stackprof (0.2.26)
     stringio (3.1.2)
+    swd (2.0.3)
+      activesupport (>= 3)
+      attr_required (>= 0.0.5)
+      faraday (~> 2.0)
+      faraday-follow_redirects
     temple (0.10.3)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
@@ -957,6 +1014,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
+    unaccent (0.4.0)
     unicode-display_width (2.6.0)
     unicode_utils (1.4.0)
     uniform_notifier (1.16.0)
@@ -964,6 +1022,9 @@ GEM
     valid_email2 (4.0.6)
       activemodel (>= 3.2)
       mail (~> 2.5)
+    validate_url (1.0.15)
+      activemodel (>= 3.0.0)
+      public_suffix
     version_gem (1.1.4)
     w3c_rspec_validators (0.3.0)
       rails
@@ -983,6 +1044,10 @@ GEM
     web-push (3.0.1)
       jwt (~> 2.0)
       openssl (~> 3.0)
+    webfinger (2.1.3)
+      activesupport
+      faraday (~> 2.0)
+      faraday-follow_redirects
     webmock (3.24.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -1019,6 +1084,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack (~> 7.0.8.7)
   activejob-uniqueness
+  activerecord-postgis-adapter (~> 8.0, >= 8.0.3)
   aws-sdk-s3
   bootsnap (~> 1.4)
   brakeman (~> 6.1)
@@ -1028,6 +1094,7 @@ DEPENDENCIES
   dalli
   decidim!
   decidim-additional_authorization_handler!
+  decidim-admin_multi_factor!
   decidim-budgets_booth!
   decidim-cleaner!
   decidim-conferences!
@@ -1053,11 +1120,15 @@ DEPENDENCIES
   net-imap (>= 0.5.6)
   nokogiri (>= 1.18.4)
   omniauth-publik!
+  omniauth-rails_csrf_protection (~> 1.0)
+  omniauth_openid_connect
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
   rack (~> 2.2.14)
   rack-attack (~> 6.7)
   rack-mini-profiler
+  rgeo
+  rgeo-activerecord
   sidekiq (~> 6.0)
   sidekiq-scheduler (~> 5.0)
   spring

@@ -30,11 +30,13 @@ services:
       "
 
   database:
-    image: postgres
+    image: postgis/postgis:17-3.4
     volumes:
       - pg-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5432:5432"
 
   memcached:
     image: memcached
