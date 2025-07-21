@@ -2,8 +2,7 @@
 
 # This file is a Decidim initializer for the AI module.
 # It configures the Third Party AI provider.
-
-if Decidim.module_installed?(:ai)
+if Decidim.module_installed?(:ai) && Rails.application.secrets.dig(:decidim, :ai, :enabled)
   if Rails.application.secrets.dig(:decidim, :ai, :endpoint).blank? || Rails.application.secrets.dig(:decidim, :ai, :basic_auth).blank?
     Rails.logger.warn "[decidim-ai] Initializer - AI endpoint or secret not configured. AI features will be disabled."
 
@@ -65,4 +64,7 @@ if Decidim.module_installed?(:ai)
 
   Decidim::Ai::SpamDetection.user_spam_analyzer_job = "Decidim::Ai::SpamDetection::ThirdParty::UserSpamAnalyzerJob"
   Decidim::Ai::SpamDetection.generic_spam_analyzer_job = "Decidim::Ai::SpamDetection::ThirdParty::GenericSpamAnalyzerJob"
+else
+  Rails.logger.warn "[decidim-ai] Initializer - AI module is not installed or spam detection is disabled. AI features will be disabled."
+  Rails.logger.warn "[decidim-ai] Initializer - Spam detection enabled: #{Rails.application.secrets.dig(:decidim, :ai, :spam_detection, :enabled)}"
 end

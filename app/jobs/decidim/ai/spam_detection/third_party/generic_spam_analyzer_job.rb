@@ -6,6 +6,8 @@ module Decidim
       module ThirdParty
         class GenericSpamAnalyzerJob < Decidim::Ai::SpamDetection::GenericSpamAnalyzerJob
           def perform(reportable, author, locale, fields)
+            return unless decidim_ai_enabled?
+
             @author = author
             @organization = reportable.organization
             klass = reportable.class.to_s
@@ -26,6 +28,12 @@ module Decidim
             return unless overall_score >= Decidim::Ai::SpamDetection.resource_score_threshold
 
             Decidim::CreateReport.call(form, reportable)
+          end
+
+          private
+
+          def decidim_ai_enabled?
+            Rails.application.secrets.dig(:decidim, :ai, :enabled)
           end
         end
       end

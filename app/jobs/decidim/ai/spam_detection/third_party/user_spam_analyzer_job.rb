@@ -6,6 +6,8 @@ module Decidim
       module ThirdParty
         class UserSpamAnalyzerJob < Decidim::Ai::SpamDetection::UserSpamAnalyzerJob
           def perform(reportable)
+            return unless decidim_ai_enabled?
+
             @author = reportable
             @organization = reportable.organization
             klass = reportable.class.to_s
@@ -33,6 +35,12 @@ module Decidim
             end
 
             Decidim::CreateUserReport.call(form, reportable)
+          end
+
+          private
+
+          def decidim_ai_enabled?
+            Rails.application.secrets.dig(:decidim, :ai, :enabled)
           end
         end
       end
