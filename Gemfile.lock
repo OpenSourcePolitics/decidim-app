@@ -1,4 +1,10 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-ai_third_party.git
+  revision: 58fe29f21c9c299f7e8f21bd0ac1ed582efc8bbd
+  specs:
+    decidim-ai_third_party (0.1.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git
   revision: c8037a6f81004dc1616b61ffa2da8277cea8780a
   specs:
@@ -13,6 +19,15 @@ GIT
     decidim-admin_multi_factor (0.29.3)
       countries (~> 5.1, >= 5.1.2)
       decidim-core (~> 0.29.3)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-ai.git
+  revision: 36d7e28702bece32ae4f8c72e143a10d7278a608
+  branch: feat/third_party
+  specs:
+    decidim-ai (0.29.2)
+      classifier-reborn (~> 2.3.0)
+      decidim-core (~> 0.29.0)
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-cleaner.git
@@ -442,6 +457,9 @@ GEM
     charlock_holmes (0.7.9)
     childprocess (5.1.0)
       logger (~> 1.5)
+    classifier-reborn (2.3.0)
+      fast-stemmer (~> 1.0)
+      matrix (~> 0.4)
     cmdparse (3.0.7)
     commonmarker (0.23.10)
     concurrent-ruby (1.3.4)
@@ -529,6 +547,7 @@ GEM
       faraday (>= 1, < 3)
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
+    fast-stemmer (1.0.2)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm-linux-gnu)
@@ -602,7 +621,6 @@ GEM
       rails-i18n
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
-    i18n_data (0.11.0)
     icalendar (2.10.3)
       ice_cube (~> 0.16)
       ostruct
@@ -986,13 +1004,10 @@ GEM
       simplecov (~> 0.19)
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
-    sixarm_ruby_unaccent (1.2.2)
     smart_properties (1.17.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
-    sort_alphabetical (1.1.0)
-      unicode_utils (>= 1.2.2)
     spring (4.2.1)
     spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
@@ -1016,7 +1031,6 @@ GEM
     uber (0.1.0)
     unaccent (0.4.0)
     unicode-display_width (2.6.0)
-    unicode_utils (1.4.0)
     uniform_notifier (1.16.0)
     uri (1.0.3)
     valid_email2 (4.0.6)
@@ -1095,6 +1109,8 @@ DEPENDENCIES
   decidim!
   decidim-additional_authorization_handler!
   decidim-admin_multi_factor!
+  decidim-ai!
+  decidim-ai_third_party!
   decidim-budgets_booth!
   decidim-cleaner!
   decidim-conferences!
