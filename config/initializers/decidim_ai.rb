@@ -4,7 +4,7 @@
 # It configures the Third Party AI provider.
 
 if Decidim.module_installed?(:ai)
-  if Rails.application.secrets.dig(:decidim, :ai, :endpoint).blank? || Rails.application.secrets.dig(:decidim, :ai, :secret).blank?
+  if Rails.application.secrets.dig(:decidim, :ai, :endpoint).blank? || Rails.application.secrets.dig(:decidim, :ai, :basic_auth).blank?
     Rails.logger.warn "[decidim-ai] Initializer - AI endpoint or secret not configured. AI features will be disabled."
 
     # FIX: While building Docker image, endpoint and secret are not defined and crashes because default Bayes strategy try to reach Redis
@@ -29,7 +29,7 @@ if Decidim.module_installed?(:ai)
       strategy: Decidim::Ai::SpamDetection::AiRequestHandler::Strategy,
       options: {
         endpoint: Rails.application.secrets.dig(:decidim, :ai, :endpoint),
-        secret: Rails.application.secrets.dig(:decidim, :ai, :secret)
+        basic_auth: Rails.application.secrets.dig(:decidim, :ai, :basic_auth)
       }
     }
   ]
@@ -43,18 +43,18 @@ if Decidim.module_installed?(:ai)
   Decidim::Ai::SpamDetection.resource_score_threshold = Rails.application.secrets.dig(:decidim, :ai, :resource_score_threshold)
   Decidim::Ai::SpamDetection.user_score_threshold = Rails.application.secrets.dig(:decidim, :ai, :user_score_threshold)
   Decidim::Ai::SpamDetection.resource_models = begin
-                                                 models = {}
-                                                 models["Decidim::Comments::Comment"] = "Decidim::Ai::SpamDetection::Resource::Comment" if Decidim.module_installed?("comments")
-                                                 models["Decidim::Debates::Debate"] = "Decidim::Ai::SpamDetection::Resource::Debate" if Decidim.module_installed?("debates")
-                                                 models["Decidim::Initiative"] = "Decidim::Ai::SpamDetection::Resource::Initiative" if Decidim.module_installed?("initiatives")
-                                                 models["Decidim::Meetings::Meeting"] = "Decidim::Ai::SpamDetection::Resource::Meeting" if Decidim.module_installed?("meetings")
-                                                 models["Decidim::Proposals::Proposal"] = "Decidim::Ai::SpamDetection::Resource::Proposal" if Decidim.module_installed?("proposals")
-                                                 if Decidim.module_installed?("proposals")
-                                                   models["Decidim::Proposals::CollaborativeDraft"] =
-                                                     "Decidim::Ai::SpamDetection::Resource::CollaborativeDraft"
-                                                 end
-                                                 models
-                                               end
+    models = {}
+    models["Decidim::Comments::Comment"] = "Decidim::Ai::SpamDetection::Resource::Comment" if Decidim.module_installed?("comments")
+    models["Decidim::Debates::Debate"] = "Decidim::Ai::SpamDetection::Resource::Debate" if Decidim.module_installed?("debates")
+    models["Decidim::Initiative"] = "Decidim::Ai::SpamDetection::Resource::Initiative" if Decidim.module_installed?("initiatives")
+    models["Decidim::Meetings::Meeting"] = "Decidim::Ai::SpamDetection::Resource::Meeting" if Decidim.module_installed?("meetings")
+    models["Decidim::Proposals::Proposal"] = "Decidim::Ai::SpamDetection::Resource::Proposal" if Decidim.module_installed?("proposals")
+    if Decidim.module_installed?("proposals")
+      models["Decidim::Proposals::CollaborativeDraft"] =
+        "Decidim::Ai::SpamDetection::Resource::CollaborativeDraft"
+    end
+    models
+  end
 
   Decidim::Ai::SpamDetection.user_models = {
     "Decidim::User" => "Decidim::Ai::SpamDetection::Resource::UserBaseEntity"
