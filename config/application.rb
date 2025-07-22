@@ -21,7 +21,6 @@ module DecidimApp
       require "extends/commands/decidim/assemblies/admin/copy_assembly_extends"
       require "extends/commands/decidim/participatory_processes/admin/copy_participatory_process_extends"
       require "extends/commands/decidim/create_omniauth_registration_extends"
-      require "extends/commands/decidim/assemblies/admin/update_assembly_extends"
       require "extends/commands/decidim/forms/admin/update_questionnaire_extends"
       # forms
       require "extends/forms/decidim/assemblies/admin/assembly_copy_form_extends"
