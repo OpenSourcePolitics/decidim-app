@@ -1,0 +1,31 @@
+<!-- replace "div.row:has(erb[silent]:contains('unless single_initiative_type?'))" -->
+<div class="row">
+  <% if single_initiative_type? %>
+    <%= form.hidden_field :type_id,
+                          value: initiative_type_options.first.last,
+                          "data-scope-selector": "initiative_decidim_scope_id",
+                          "data-scope-id": form.object.decidim_scope_id.to_s,
+                          "data-scope-search-url": decidim_initiatives.initiative_type_scopes_search_url,
+                          "data-signature-types-selector": "initiative_signature_type",
+                          "data-signature-type": current_initiative.signature_type,
+                          "data-signature-types-search-url": decidim_initiatives.initiative_type_signature_types_search_url %>
+  <% else %>
+    <div class="columns">
+      <%= form.select :type_id,
+                      initiative_type_options,
+                      {},
+                      {
+                        disabled: !@form.signature_type_updatable?,
+                        "data-scope-selector": "initiative_decidim_scope_id",
+                        "data-scope-id": form.object.decidim_scope_id.to_s,
+                        "data-scope-search-url": decidim_initiatives.initiative_type_scopes_search_url,
+                        "data-signature-types-selector": "initiative_signature_type",
+                        "data-signature-type": current_initiative.signature_type,
+                        "data-signature-types-search-url": decidim_initiatives.initiative_type_signature_types_search_url
+                      } %>
+    </div>
+  <% end %>
+  <div class="columns">
+    <%= form.select :decidim_scope_id, [], {}, { disabled: !@form.signature_type_updatable? } %>
+  </div>
+</div>
