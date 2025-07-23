@@ -18,7 +18,7 @@ module Decidim
       mimic :attachment
 
       validates :file, presence: true, unless: :persisted_or_link?
-      validates :link, url: true
+      validates :link, url: true, unless: :file_present?
       validates :file, passthru: { to: Decidim::Attachment }
       validates :title, :description, translatable_presence: true
       validates :attachment_collection, presence: true, if: ->(form) { form.attachment_collection_id.present? }
@@ -30,6 +30,17 @@ module Decidim
 
       def persisted_or_link?
         persisted? || link.present?
+      end
+
+      def file_present?
+        return false if file.blank?
+
+        begin
+          blob = ActiveStorage::Blob.find_signed(file)
+          blob.present?
+        rescue ActiveRecord::RecordNotFound, ActiveSupport::MessageVerifier::InvalidSignature
+          false
+        end
       end
 
       def attachment_collections
