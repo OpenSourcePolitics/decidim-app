@@ -28,7 +28,7 @@ gem "rgeo-activerecord"
 gem "actionpack", "~> 7.0.8.7"
 gem "graphql", "~> 2.2.17"
 gem "net-imap", ">= 0.5.6"
-gem "nokogiri", ">= 1.18.4"
+gem "nokogiri", ">= 1.18.9"
 gem "rack", "~> 2.2.14"
 gem "uri", ">= 1.0.3"
 
@@ -48,6 +48,9 @@ gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/dec
 gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePolitics/guest-meeting-registration.git", branch: "bump/module_to_0.29"
 gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git", branch: "bump/0.29"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "backport/fix_database_not_available"
+
+gem "decidim-ai", git: "https://github.com/OpenSourcePolitics/decidim-module-ai.git", branch: "feat/third_party"
+gem "decidim-ai_third_party", git: "https://github.com/OpenSourcePolitics/decidim-ai_third_party.git"
 
 gem "omniauth_openid_connect"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
