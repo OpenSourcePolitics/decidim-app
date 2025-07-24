@@ -32,7 +32,8 @@ namespace :decidim_app do
     task upgrade: :environment do
       Rails.logger.warn "(decidim_app:k8s:upgrade)> Starting upgrade..."
       Rake::Task["migrate:db:force"].invoke
-      Rake::Task["active_storage:update_service_name"].invoke("scaleway", "minio")
+      Rake::Task["active_storage:update_service_name"].invoke("scaleway", "minio") # TODO: Remove when all instances are in v3.x.x
+      Rake::Task["decidim:ai:spam:create_reporting_user"].invoke # TODO: Remove when all instances are in v3.3.x
       Rails.logger.warn "(decidim_app:k8s:upgrade)> Successfully upgraded!"
     rescue StandardError => e
       Rails.logger.error "(decidim_app:k8s:upgrade)> An error occured : #{e.message}"
