@@ -14,5 +14,10 @@ Rails.application.routes.draw do
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development? || ENV.fetch("ENABLE_LETTER_OPENER", "0") == "1"
 
+  devise_scope :user do
+    get "users/sign_out",
+        to: "decidim/devise/sessions#destroy"
+  end
+
   mount Decidim::Core::Engine => "/"
 end

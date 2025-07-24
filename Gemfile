@@ -28,7 +28,7 @@ gem "rgeo-activerecord"
 gem "actionpack", "~> 7.0.8.7"
 gem "graphql", "~> 2.2.17"
 gem "net-imap", ">= 0.5.6"
-gem "nokogiri", ">= 1.18.4"
+gem "nokogiri", ">= 1.18.9"
 gem "rack", "~> 2.2.14"
 gem "uri", ">= 1.0.3"
 
@@ -42,13 +42,16 @@ gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp", br
 gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
 gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "rc-0.29"
 gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "bump/0.29"
-gem "decidim-decidim_awesome", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git", branch: "fix/update_packages_dependancies"
-gem "decidim-decidim_geo", git: "https://git.octree.ch/decidim/decidim-module-geo.git"
+gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git"
 gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.29"
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "bump/0.29"
 gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePolitics/guest-meeting-registration.git", branch: "bump/module_to_0.29"
 gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git", branch: "bump/0.29"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "backport/fix_database_not_available"
+
+gem "omniauth_openid_connect"
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
 group :development, :test do
   gem "brakeman", "~> 6.1"
   gem "bundler-audit", require: false

@@ -1,19 +1,4 @@
 GIT
-  remote: https://git.octree.ch/decidim/decidim-module-geo.git
-  revision: 538ee55fc66175d60a2034e8658a7f82f8d63c65
-  specs:
-    decidim-decidim_geo (0.3.0)
-      activerecord-postgis-adapter
-      decidim-admin (>= 0.29)
-      decidim-api (>= 0.29)
-      decidim-core (>= 0.29)
-      deface (~> 1.9.0)
-      ffi-geos (~> 2.5)
-      rgeo (~> 3.0)
-      rgeo-geojson (~> 2.2)
-      rgeo-shapefile (~> 3.1)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git
   revision: c8037a6f81004dc1616b61ffa2da8277cea8780a
   specs:
@@ -38,19 +23,8 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
-  remote: https://github.com/OpenSourcePolitics/decidim-module-decidim_awesome.git
-  revision: 5148029a3d2e25873ce86c48448bc862ef283677
-  branch: fix/update_packages_dependancies
-  specs:
-    decidim-decidim_awesome (0.12.0)
-      decidim-admin (>= 0.29.1, < 0.30)
-      decidim-core (>= 0.29.1, < 0.30)
-      deface (>= 1.5)
-      sassc (~> 2.3)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-emitter.git
-  revision: 4ce3f32a268351dcfcb94f8be75926d73f221c86
+  revision: d25e43f2b5267213d435611f1a34df275e0b56d0
   branch: bump/0.29
   specs:
     decidim-emitter (1.0.0)
@@ -69,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-ptp.git
-  revision: d6aee2da0577cb882235be0cbdb42fe5b9e673fe
+  revision: c089979c5ed5561e4973806ccd678f2e70491957
   branch: bump/0.29-budgets_booth
   specs:
     decidim-budgets_booth (0.29.0)
@@ -114,6 +88,17 @@ GIT
     omniauth-publik (0.1.1)
       omniauth (~> 2.1)
       omniauth-oauth2 (>= 1.7.2, < 2.0)
+
+GIT
+  remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
+  revision: b4c50032542f7295163645b04f494fd00f8c87bb
+  specs:
+    decidim-decidim_awesome (0.12.3)
+      active_hashcash (~> 0.4.0)
+      decidim-admin (>= 0.29.1, < 0.30)
+      decidim-core (>= 0.29.1, < 0.30)
+      deface (>= 1.5)
+      sassc (~> 2.3)
 
 GIT
   remote: https://github.com/decidim/decidim.git
@@ -353,6 +338,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_hashcash (0.4.0)
+      rails (>= 5.2.0)
     active_link_to (1.0.5)
       actionpack
       addressable
@@ -387,7 +374,9 @@ GEM
       activesupport (>= 6.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    aes_key_wrap (1.1.0)
     ast (2.4.2)
+    attr_required (1.0.2)
     aws-eventstream (1.3.0)
     aws-partitions (1.894.0)
     aws-sdk-core (3.191.3)
@@ -415,6 +404,7 @@ GEM
       parser (>= 2.4)
       smart_properties
     bigdecimal (3.1.8)
+    bindata (2.5.0)
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
@@ -473,8 +463,6 @@ GEM
     date_validator (0.12.0)
       activemodel (>= 3)
       activesupport (>= 3)
-    dbf (4.3.2)
-      csv
     declarative-builder (0.2.0)
       trailblazer-option (~> 0.1.0)
     declarative-option (0.1.0)
@@ -508,6 +496,8 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
+    email_validator (2.2.4)
+      activemodel
     erb_lint (0.4.0)
       activesupport
       better_html (>= 2.0.1)
@@ -535,6 +525,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
+    faraday-follow_redirects (0.3.0)
+      faraday (>= 1, < 3)
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
     ffi (1.17.0-aarch64-linux-gnu)
@@ -547,8 +539,6 @@ GEM
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     ffi (1.17.0-x86_64-linux-musl)
-    ffi-geos (2.5.0)
-      ffi (>= 1.0.0)
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
@@ -624,6 +614,13 @@ GEM
     io-console (0.7.2)
     jmespath (1.6.2)
     json (2.8.2)
+    json-jwt (1.16.7)
+      activesupport (>= 4.2)
+      aes_key_wrap
+      base64
+      bindata
+      faraday (~> 2.0)
+      faraday-follow_redirects
     jwt (2.9.3)
       base64
     kaminari (1.2.2)
@@ -676,13 +673,12 @@ GEM
     mime-types-data (3.2024.1105)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.8)
+    mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.7.5)
-    multi_json (1.15.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    net-http (0.5.0)
+    net-http (0.6.0)
       uri
     net-imap (0.5.8)
       date
@@ -694,24 +690,24 @@ GEM
     net-smtp (0.3.4)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.8)
+    nokogiri (1.18.9)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.18.8-aarch64-linux-gnu)
+    nokogiri (1.18.9-aarch64-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.8-aarch64-linux-musl)
+    nokogiri (1.18.9-aarch64-linux-musl)
       racc (~> 1.4)
-    nokogiri (1.18.8-arm-linux-gnu)
+    nokogiri (1.18.9-arm-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.8-arm-linux-musl)
+    nokogiri (1.18.9-arm-linux-musl)
       racc (~> 1.4)
-    nokogiri (1.18.8-arm64-darwin)
+    nokogiri (1.18.9-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.8-x86_64-darwin)
+    nokogiri (1.18.9-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.8-x86_64-linux-gnu)
+    nokogiri (1.18.9-x86_64-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.8-x86_64-linux-musl)
+    nokogiri (1.18.9-x86_64-linux-musl)
       racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
@@ -750,6 +746,22 @@ GEM
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
+    omniauth_openid_connect (0.8.0)
+      omniauth (>= 1.9, < 3)
+      openid_connect (~> 2.2)
+    openid_connect (2.3.1)
+      activemodel
+      attr_required (>= 1.0.0)
+      email_validator
+      faraday (~> 2.0)
+      faraday-follow_redirects
+      json-jwt (>= 1.16)
+      mail
+      rack-oauth2 (~> 2.2)
+      swd (~> 2.0)
+      tzinfo
+      validate_url
+      webfinger (~> 2.0)
     openssl (3.2.0)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
@@ -789,6 +801,13 @@ GEM
       rack (>= 2.0.0)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
+    rack-oauth2 (2.2.1)
+      activesupport
+      attr_required
+      faraday (~> 2.0)
+      faraday-follow_redirects
+      json-jwt (>= 1.11.0)
+      rack (>= 2.1.0)
     rack-protection (3.2.0)
       base64 (>= 0.1.0)
       rack (~> 2.2, >= 2.2.4)
@@ -859,12 +878,6 @@ GEM
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
-    rgeo-geojson (2.2.0)
-      multi_json (~> 1.15)
-      rgeo (>= 1.0.0)
-    rgeo-shapefile (3.1.0)
-      dbf (~> 4.0)
-      rgeo (>= 1.0)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -982,10 +995,15 @@ GEM
       spring (>= 4)
     stackprof (0.2.26)
     stringio (3.1.2)
+    swd (2.0.3)
+      activesupport (>= 3)
+      attr_required (>= 0.0.5)
+      faraday (~> 2.0)
+      faraday-follow_redirects
     temple (0.10.3)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
-    thor (1.3.2)
+    thor (1.4.0)
     tilt (2.4.0)
     timeout (0.4.3)
     trailblazer-option (0.1.2)
@@ -999,6 +1017,9 @@ GEM
     valid_email2 (4.0.6)
       activemodel (>= 3.2)
       mail (~> 2.5)
+    validate_url (1.0.15)
+      activemodel (>= 3.0.0)
+      public_suffix
     version_gem (1.1.4)
     w3c_rspec_validators (0.3.0)
       rails
@@ -1018,6 +1039,10 @@ GEM
     web-push (3.0.1)
       jwt (~> 2.0)
       openssl (~> 3.0)
+    webfinger (2.1.3)
+      activesupport
+      faraday (~> 2.0)
+      faraday-follow_redirects
     webmock (3.24.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -1069,7 +1094,6 @@ DEPENDENCIES
   decidim-cleaner!
   decidim-conferences!
   decidim-decidim_awesome!
-  decidim-decidim_geo!
   decidim-dev!
   decidim-emitter!
   decidim-extra_user_fields!
@@ -1089,8 +1113,10 @@ DEPENDENCIES
   lograge
   memory_profiler
   net-imap (>= 0.5.6)
-  nokogiri (>= 1.18.4)
+  nokogiri (>= 1.18.9)
   omniauth-publik!
+  omniauth-rails_csrf_protection (~> 1.0)
+  omniauth_openid_connect
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
   rack (~> 2.2.14)

@@ -1,0 +1,16 @@
+<% link_classes = "login__omniauth-image-button image-button--#{normalize_provider_name(provider)} group/oauth-icon" %>
+<% display_name = current_organization.enabled_omniauth_providers.dig(provider.to_sym, :display_name) %>
+<% provider_name = display_name.present? ? display_name : normalize_provider_name(provider).titleize %>
+<div class="max-w-md flex flex-col items-center justify-center">
+  <p class="font-normal text-center p-3">
+    <%= t("decidim.devise.omniauth.france_connect.introduction") %>
+  </p>
+  <%= link_to decidim.send("user_#{provider}_omniauth_authorize_path"), class: link_classes, method: :post, title: t("devise.shared.links.log_in_with_provider", provider: provider_name) do %>
+    <%= oauth_icon_with_hover provider %>
+  <% end %>
+  <p class="font-normal text-center p-3">
+    <%= link_to "https://franceconnect.gouv.fr/", class: "text-secondary hover:underline", target: "_blank", title: t("decidim.devise.omniauth.france_connect.help_link") do %>
+      <%= t("decidim.devise.omniauth.france_connect.help_link") %>
+    <% end %>
+  </p>
+</div>
