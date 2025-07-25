@@ -45,6 +45,8 @@ module DecidimApp
       require "extends/cells/decidim/system/system_checks_cell_extends"
       require "extends/cells/decidim/comments/comment_metadata_cell_extends"
       require "extends/cells/decidim/proposals/proposal_metadata_cell_extends"
+      # presenters
+      require "extends/presenters/decidim/forms/admin/questionnaire_answer_presenter_extends"
     end
 
     config.to_prepare do
