@@ -1020,6 +1020,9 @@ GEM
     spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
       spring (>= 4)
+    sprockets (4.2.1)
+      concurrent-ruby (~> 1.0)
+      rack (>= 2.2.4, < 4)
     stackprof (0.2.26)
     stringio (3.1.2)
     swd (2.0.3)
@@ -1158,9 +1161,11 @@ DEPENDENCIES
   sidekiq (~> 6.0)
   sidekiq-scheduler (~> 5.0)
   spring
+  sprockets (~> 4.0)
   stackprof
   uri (>= 1.0.3)
   web-console (~> 4.2)
+  wicked_pdf (~> 2.8, >= 2.8.2)
 
 RUBY VERSION
    ruby 3.2.2p53

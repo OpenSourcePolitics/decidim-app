@@ -24,6 +24,10 @@ gem "rack-attack", "~> 6.7"
 gem "rgeo"
 gem "rgeo-activerecord"
 
+# Fix for WickedPdf compatibility issues
+gem "sprockets", "~> 4.0"
+gem "wicked_pdf", "~> 2.8", ">= 2.8.2"
+
 # gems updated with bundle-audit
 gem "actionpack", "~> 7.0.8.7"
 gem "graphql", "~> 2.2.17"
