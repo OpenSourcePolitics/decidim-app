@@ -113,6 +113,8 @@ en:
         answers:
           files:
             upload_not_allowed: Uploading files is only allowed for connected users.
+      questionnaire_answer_presenter:
+        download_attachment: Download attachment
       user_answers_serializer:
         email: Email
         name: Name

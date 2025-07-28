@@ -121,6 +121,8 @@ fr:
         answers:
           files:
             upload_not_allowed: Seuls les utilisateurs connectés peuvent télécharger des documents.
+      questionnaire_answer_presenter:
+        download_attachment: Télécharger la pièce jointe
       user_answers_serializer:
         email: Email
         name: Nom
