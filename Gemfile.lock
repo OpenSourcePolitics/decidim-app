@@ -1135,6 +1135,7 @@ DEPENDENCIES
   memory_profiler
   net-imap (>= 0.5.6)
   nokogiri (>= 1.18.9)
+  omniauth-oauth2
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
   omniauth_openid_connect
