@@ -32,7 +32,6 @@ GIT
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner.git
   revision: 2660f6d46640fbab0d1f5fe9ce08050274c09fb0
-  branch: bump/module_to_0.29
   specs:
     decidim-cache_cleaner (1.1)
       decidim-core (~> 0.29.0)
