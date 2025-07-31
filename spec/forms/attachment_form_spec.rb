@@ -28,8 +28,7 @@ module Decidim
                 "file" => file,
                 "link" => link,
                 "attachment_collection_id" => attachment_collection_id
-              }
-            }
+              } }
           end
 
           it { is_expected.to be_valid }
