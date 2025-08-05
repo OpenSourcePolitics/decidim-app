@@ -5,6 +5,7 @@
     "@decidim/browserslist-config": "file:packages/browserslist-config",
     "@decidim/core": "file:packages/core",
     "@decidim/webpacker": "file:packages/webpacker",
+    "@glidejs/glide": "^3.7.1",
     "@maptiler/leaflet-maptilersdk": "^4.0.3",
     "@tarekraafat/autocomplete.js": "10.2.7",
     "axe-core": "^4.10.2",
