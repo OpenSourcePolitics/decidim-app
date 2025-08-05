@@ -33,6 +33,7 @@ gem "rack", "~> 2.2.14"
 gem "uri", ">= 1.0.3"
 
 # omniauth
+gem "omniauth-oauth2"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik.git", branch: "feat/update_to_0.29"
 
 # Load Budgets Booth to avoid errors
