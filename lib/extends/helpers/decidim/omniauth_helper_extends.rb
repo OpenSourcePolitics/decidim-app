@@ -8,6 +8,11 @@ module OmniauthHelperExtends
     icon_path = info&.dig(:icon_path)
     icon_hover_path = info&.dig(:icon_hover_path)
 
+    if provider.to_sym == :france_connect
+      icon_path = "media/images/franceconnect-btn-principal.svg" if icon_path.blank?
+      icon_hover_path = "media/images/franceconnect-btn-principal-hover.svg" if icon_hover_path.blank?
+    end
+
     return oauth_icon(provider) unless icon_path.present? && icon_hover_path.present?
 
     # parent html element needs to have the "group/oauth-icon" tailwind class
