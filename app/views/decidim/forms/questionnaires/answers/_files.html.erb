@@ -1,0 +1,18 @@
+<div class="connected" data-current-user="<%= current_user ? 'true' : 'false' %>">
+  <%= answer_form.upload :add_documents, label: false, multiple: true, id: field_id, disabled:, button_class: "button button__lg button__transparent-secondary w-full" %>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event){
+        const user = document.querySelector('div.connected').dataset.currentUser;
+        const button = document.querySelector('button[name="add_documents"]')
+        if(user === 'false'){
+            button.disabled = true;
+            button.dataset.dialogOpen = "";
+            const p = document.createElement("p");
+            p.textContent = "Le téléchargement de documents n'est autorisé qu'aux utilisateurs connectés."
+            p.style.fontStyle= 'italic';
+            button.insertAdjacentElement('beforebegin', p)
+        }
+    });
+</script>
