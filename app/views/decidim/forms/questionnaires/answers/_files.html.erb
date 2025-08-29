@@ -10,7 +10,7 @@
             button.disabled = true;
             button.dataset.dialogOpen = "";
             const p = document.createElement("p");
-            p.textContent = "Le téléchargement de documents n'est autorisé qu'aux utilisateurs connectés."
+            p.textContent = "<%= t('.upload_not_allowed') %>"
             p.style.fontStyle= 'italic';
             button.insertAdjacentElement('beforebegin', p)
         }

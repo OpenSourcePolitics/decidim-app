@@ -68,7 +68,7 @@ describe "Answer a survey" do
       expect(page).to have_i18n_content(questionnaire.title)
       expect(page).to have_i18n_content(questionnaire.description)
       # testing that connected users can have access to upload files
-      expect(page).to have_no_content("Le téléchargement de documents n'est autorisé qu'aux utilisateurs connectés.")
+      expect(page).to have_no_content("Uploading files is only allowed for connected users.")
       expect(page).to have_button("Add file", disabled: false)
 
       fill_in question.body["en"], with: "My first answer"
