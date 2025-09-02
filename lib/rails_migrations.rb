@@ -18,9 +18,7 @@ class RailsMigrations
 
   # Return all migrations marked as 'down'
   def down
-    @down ||= @fetch_all&.map do |migration_ary|
-      migration_ary if migration_ary&.first == "down"
-    end&.compact
+    @down ||= @fetch_all&.select { |migration_ary| migration_ary&.first == "down" }
   end
 
   # Refresh all migrations according to DB

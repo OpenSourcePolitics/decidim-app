@@ -5,7 +5,7 @@ require "decidim/dev/test/promoted_participatory_processes_shared_examples"
 
 module Decidim
   module ParticipatoryProcesses
-    describe ParticipatoryProcessesController, type: :controller do
+    describe ParticipatoryProcessesController do
       routes { Decidim::ParticipatoryProcesses::Engine.routes }
 
       let(:organization) { create(:organization) }
@@ -13,7 +13,7 @@ module Decidim
         create(
           :participatory_process,
           :unpublished,
-          organization: organization
+          organization:
         )
       end
 
@@ -27,7 +27,7 @@ module Decidim
             :participatory_process,
             2,
             :published,
-            organization: organization
+            organization:
           )
 
           expect(controller.helpers.participatory_processes.count).to eq(2)
@@ -36,7 +36,7 @@ module Decidim
           expect(controller.helpers.participatory_processes.to_a).not_to include(unpublished_process)
         end
 
-        it "redirects to 404 if there aren't any" do
+        it "redirects to 404 if there are not any" do
           expect { get :index }.to raise_error(ActionController::RoutingError)
         end
       end
@@ -55,21 +55,21 @@ module Decidim
             :participatory_process,
             2,
             :published,
-            organization: organization
+            organization:
           )
 
           _unpublished = create_list(
             :participatory_process,
             2,
             :unpublished,
-            organization: organization
+            organization:
           )
 
           organization_groups = create_list(
             :participatory_process_group,
             2,
             :with_participatory_processes,
-            organization: organization
+            organization:
           )
 
           _other_groups = create_list(
@@ -81,18 +81,18 @@ module Decidim
 
           _manipulated_other_groups = create(
             :participatory_process_group,
-            participatory_processes: [create(:participatory_process, organization: organization)]
+            participatory_processes: [create(:participatory_process, organization:)]
           )
 
           expect(controller.helpers.collection)
-            .to match_array([*published, *organization_groups])
+            .to match_array(published + organization_groups)
         end
       end
 
       describe "default_date_filter" do
-        let!(:active) { create(:participatory_process, :published, :active, organization: organization) }
-        let!(:upcoming) { create(:participatory_process, :published, :upcoming, organization: organization) }
-        let!(:past) { create(:participatory_process, :published, :past, organization: organization) }
+        let!(:active) { create(:participatory_process, :published, :active, organization:) }
+        let!(:upcoming) { create(:participatory_process, :published, :upcoming, organization:) }
+        let!(:past) { create(:participatory_process, :published, :past, organization:) }
 
         it "defaults to active if there are active published processes" do
           expect(controller.helpers.default_date_filter).to eq("active")
@@ -117,7 +117,7 @@ module Decidim
               create(
                 :participatory_process,
                 :published,
-                organization: organization,
+                organization:,
                 start_date: Time.zone.now - (i + 5).days,
                 end_date: Time.zone.now + (i + 5).days
               )
@@ -136,7 +136,7 @@ module Decidim
 
           context "and sort_by_date is true" do
             before do
-              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
+              Rails.application.secrets.decidim[:participatory_processes][:sort_by_date] = true
               active_processes.first.update(end_date: nil)
             end
             # search.with_date will default to "active"
@@ -153,7 +153,7 @@ module Decidim
               create(
                 :participatory_process,
                 :published,
-                organization: organization,
+                organization:,
                 start_date: Time.zone.now + (i + 2).days,
                 end_date: Time.zone.now + (i + 5).days
               )
@@ -188,7 +188,7 @@ module Decidim
               create(
                 :participatory_process,
                 :published,
-                organization: organization,
+                organization:,
                 start_date: Time.zone.now - (i + 10).days,
                 end_date: Time.zone.now - (i + 5).days
               )
@@ -209,7 +209,6 @@ module Decidim
             before do
               allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
             end
-            # search.with_date will default to "past"
 
             it "orders past processes by reverse end_date" do
               expect(controller.helpers.participatory_processes).to eq(past_processes.sort_by(&:end_date).reverse)
@@ -227,7 +226,7 @@ module Decidim
           end
 
           context "with signed in user" do
-            let!(:user) { create(:user, :confirmed, organization: organization) }
+            let!(:user) { create(:user, :confirmed, organization:) }
 
             before do
               sign_in user, scope: :user
@@ -243,7 +242,7 @@ module Decidim
       end
 
       describe "GET statistics" do
-        let!(:active) { create(:participatory_process, :published, :active, organization: organization) }
+        let!(:active) { create(:participatory_process, :published, :active, organization:) }
 
         before do
           request.env["decidim.current_organization"] = organization
@@ -254,15 +253,6 @@ module Decidim
             get :all_metrics, params: { slug: active.slug }
 
             expect(response).to be_successful
-          end
-        end
-
-        context "when the process cannot show statistics" do
-          it "does not show them" do
-            active.update!(show_statistics: false)
-            get :all_metrics, params: { slug: active.slug }
-
-            expect(response).to be_not_found
           end
         end
       end

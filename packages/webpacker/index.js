@@ -1,6 +1,10 @@
-const webpacker = require("@rails/webpacker");
+const { generateWebpackConfig, ...restOpts } = require("shakapacker");
+
+const webpackConfig = generateWebpackConfig();
 const overrideConfig = require("./src/override-config");
 
-module.exports = Object.assign(webpacker, { // eslint-disable-line
-  webpackConfig: overrideConfig(webpacker.webpackConfig)
-});
+// eslint-disable-next-line no-undef
+module.exports = {
+  webpackConfig: overrideConfig(webpackConfig),
+  ...restOpts
+};

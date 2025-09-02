@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim::Admin
   describe CreateAttachment do
-    subject { described_class.call(form, attached_to, user) }
+    subject { described_class.call(form, attached_to) }
     let(:user) { create(:user) }
     let(:send_notification) { true }
     let(:form) do
@@ -20,8 +20,9 @@ module Decidim::Admin
           ca: "Una ciutat",
           es: "Una ciudad"
         },
-        file: file,
+        file:,
         attachment_collection: nil,
+        current_user: user,
         send_notification_to_followers: send_notification,
         weight: 0
       )

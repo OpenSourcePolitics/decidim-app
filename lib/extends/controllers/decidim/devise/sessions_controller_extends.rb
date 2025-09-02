@@ -4,12 +4,12 @@ module SessionControllerExtends
   extend ActiveSupport::Concern
 
   included do
-    # rubocop:disable Metrics/PerceivedComplexity
     def destroy
       if active_omniauth_session?
         provider = session.delete("omniauth.provider")
-        logout_policy = session.delete("omniauth.#{provider}.logout_policy")
-        logout_path = session.delete("omniauth.#{provider}.logout_path")
+        omniauth_config = DecidimApp::Omniauth::Configurator.new(provider, request.env)
+        logout_policy = omniauth_config.options(:logout_policy)
+        logout_path = omniauth_config.options(:logout_path)
       end
 
       if provider.present? && logout_policy == "session.destroy" && logout_path.present?
@@ -20,16 +20,13 @@ module SessionControllerExtends
           request.params[stored_location_key_for(current_user)] = stored_location_for(current_user) if pending_redirect?(current_user)
         end
 
-        if active_france_connect_session?
-          destroy_france_connect_session(session["omniauth.france_connect.end_session_uri"])
-        elsif params[:translation_suffix].present?
+        if params[:translation_suffix].present?
           super { set_flash_message! :notice, params[:translation_suffix], { scope: "decidim.devise.sessions" } }
         else
           super
         end
       end
     end
-    # rubocop:enable Metrics/PerceivedComplexity
 
     def after_sign_in_path_for(user)
       if user.present? && user.blocked?
@@ -45,26 +42,10 @@ module SessionControllerExtends
       request.params[stored_location_key_for(user)] || request.referer || super
     end
 
-    private
-
     # Skip authorization handler by default
     def skip_first_login_authorization?
-      ActiveRecord::Type::Boolean.new.cast(ENV.fetch("SKIP_FIRST_LOGIN_AUTHORIZATION", "false"))
+      Rails.application.secrets.dig(:decidim, :skip_first_login_authorization)
     end
-  end
-
-  def destroy_france_connect_session(fc_logout_path)
-    signed_out = (::Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
-    if signed_out
-      set_flash_message! :notice, :signed_out
-      session.delete("omniauth.france_connect.end_session_uri")
-    end
-
-    redirect_to fc_logout_path
-  end
-
-  def active_france_connect_session?
-    current_organization.enabled_omniauth_providers.include?(:france_connect) && session["omniauth.france_connect.end_session_uri"].present?
   end
 
   def active_omniauth_session?

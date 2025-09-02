@@ -2,35 +2,28 @@
 en:
   activemodel:
     attributes:
-      attachment:
-        documents: add a document
-      initiative:
-        offline_votes_for_scope: In-person signatures for %{scope_name}
-      osp_authorization_handler:
-        birthday: Birthday
-        document_number: Unique number
-        postal_code: Postal code
+      assembly:
+        copy_landing_page_blocks: Copy landing page blocks
       participatory_process:
-        private_space: Private space
-      participatory_space_private_user_csv_import:
-        file: importing file
+        copy_landing_page_blocks: Copy landing page blocks
+  date:
+    formats:
+      order: "%Y-%m-%d"
   decidim:
     account:
       omniauth_synced_profile:
-        helper:
-          body_html: |-
-            <p>
-              The following informations are synchronized with an external identity provider:
-            </p>
-            <ul>
-              <li>Name</li>
-              <li>Nickname</li>
-              <li>Email</li>
-            </ul>
-            <p>
-              You can't edit these informations here.
-            </p>
-          title: Profile synchronization
+        announcement_html: |-
+          <p><strong>Profile synchronization</strong></p>
+          <p>
+            The following information is synchronized with an external identity provider:
+          </p>
+          <ul>
+            <li>Name</li>
+            <li>Email</li>
+          </ul>
+          <p>
+            You can't edit this information here.
+          </p>
     admin:
       actions:
         add: Add
@@ -38,328 +31,176 @@ en:
         confirm_destroy: Confirm destroy
         destroy: Destroy
         edit: Edit
+        new_assembly: New assembly
       attachments:
         form:
           send_notification_to_followers: Send a notification to all the people following the consultation who have agreed to receive email notifications
-      exports:
-        export_as: "%{name} as %{export_format}"
-        notice: Your export is currently in progress. You'll receive an email when it's complete.
       models:
+        assembly:
+          fields:
+            promoted: Promoted
         scope:
           fields:
             name: Name
             scope_type: Scope type
-      participatory_space_private_users:
-        create:
-          error: Error
-          success: Success
       scopes:
         no_scopes: No scopes at this level.
+        titles:
+          scopes: Scopes
         update:
           error: There was a problem updating this scope.
           success: Scope updated successfully
-      titles:
-        scopes: Scopes
-    admin_multi_factor:
-      verification_code_mailer:
-        verification_code:
-          copy: 'Copy this code:'
-          expires_in: It will expire in %{time}.
-          ignore_html: If you didn't request this communication, please ignore this email.<br/>Your account won't be active until your account is fully confirmed.
-          subtitle_html: To finalize the authentication you just need to copy the 4 digit code below, go back to the %{organization} verification page and paste it!
-          title: Your 2Factor Authentication
-    amendments:
-      emendation:
-        announcement:
-          evaluating: |-
-            This amendment for %{amendable_type} %{proposal_link}
-            is in evaluation state.
-    anonymous_user: Anonymous user
-    assemblies:
-      show:
-        active_assembly_participatory_processes: Active participatory processes
-        active_assembly_participatory_processes_mini: Active
-        future_assembly_participatory_processes: Future participatory processes
-        future_assembly_participatory_processes_mini: Future
-        past_assembly_participatory_processes: Past participatory processes
-        past_assembly_participatory_processes_mini: Past
-        private_space: This is a private assembly
-        related_participatory_processes: Related participatory processes
-        social_networks: Social Networks
-        social_networks_title: Visit assembly on
-    authorization_handlers:
-      osp_authorization_handler:
-        explanation: Verify your identity by entering a unique number
-        fields:
-          birthday: Birthday
-          document_number: Unique number
-          postal_code: Postal code
-        name: Identity Verification Form
-      osp_authorization_workflow:
-        name: Authorization procedure
-    budgets:
-      order_reminder:
-        text_message: Your vote is still pending for the participatory budget. Please reconnect to %{organization_host} to confirm it
-      projects:
-        count:
-          projects_count:
-            one: 1 project
-            other: "%{count} projects"
-        orders:
-          alphabetical: A-Z (Alphabetical)
-          highest_cost: Highest cost
-          label: Order projects by
-          lowest_cost: Lowest cost
-          most_voted: Most voted
-          random: Random order
-          selected: Selected
     comments:
       comments:
         create:
           error: There was a problem creating the comment.
     components:
-      budgets:
+      proposals:
         settings:
           global:
-            default_sort_order: Default projects sorting
-            default_sort_order_help: Default means that if the supports are disabled, the projects will be shown sorted by random, and if the supports are enabled, then they will be sorted by the most supported.
-            default_sort_order_options:
-              alphabetical: A-Z (Alphabetical)
-              default: Default
-              highest_cost: Highest cost
-              lowest_cost: Lowest cost
-              most_voted: Most supported
-              random: Random
-          step:
-            default_sort_order: Default projects sorting
-            default_sort_order_help: Default means that if the supports are enabled, the projects will be shown sorted by random, and if the supports are blocked, then they will be sorted by the most supported.
-            default_sort_order_options:
-              alphabetical: A-Z (Alphabetical)
-              default: Default
-              highest_cost: Highest cost
-              lowest_cost: Lowest cost
-              most_voted: Most supported
-              random: Random
+            require_category: Category is required
+            require_scope: Scope is required
     devise:
-      sessions:
-        new:
-          sign_in_disabled: Sign in disabled
+      omniauth:
+        france_connect:
+          help_link: Learn more about France Connect
+          introduction: FranceConnect is the solution offered by the public state to secure and simplify connection to your online services..
+      shared:
+        links:
+          log_in_with_provider: Log in with %{provider}
     events:
-      budgets:
-        pending_order:
-          email_intro: The vote on budget "%{resource_title}" is not confirmed yet in "%{participatory_space_title}".
-          email_outro: You have received this notification because you are participating in "%{participatory_space_title}"
-          email_subject: Your vote is still pending in %{participatory_space_title}
-          notification_title: The vote on budget <a href="%{resource_path}">%{resource_title}</a> is still waiting for your confirmation in %{participatory_space_title}
-      initiatives:
-        initiative_answered:
-          email_intro: The initiative "%{resource_title}" has been answered.
-          email_outro: You have received this notification because you are following the initiative "%{resource_title}".
-          email_subject: Initiative "%{resource_title}" has been answered
-          notification_title: The initiative <a href="%{resource_path}">%{resource_title}</a> has been answered.
       proposals:
         author_confirmation_proposal_event:
           email_intro: 'Your proposal " %{resource_title} " was successfully received and is now public. Thank you for participating ! You can view it here:'
           email_outro: You received this notification because you are the author of the proposal. You can unfollow it by visiting the proposal page (" %{resource_title} ") and clicking on " Unfollow ".
           email_subject: Your proposal has been published!
           notification_title: Your proposal <a href="%{resource_path}">%{resource_title}</a> is now live.
-      users:
-        user_officialized:
-          email_intro: Participant %{name} (%{nickname}) has been officialized.
-          email_outro: You have received this notification because you are an administrator of the organization.
-          email_subject: "%{name} has been officialized"
-          notification_title: Participant %{name} (%{nickname}) has been officialized.
-      verifications:
-        verify_with_managed_user:
-          email_intro: The participant <a href="%{resource_path}">%{resource_title}</a> has tried to verify themself with the data of the managed participant <a href="%{managed_user_path}">%{managed_user_name}</a>.
-          email_outro: Check the <a href="%{conflicts_path}">Verifications's conflicts list</a> and contact the participant to verify their details and solve the issue.
-          email_subject: Failed verification attempt against a managed participant
-          notification_title: The participant <a href="%{resource_path}">%{resource_title}</a> has tried to verify themself with the data of the managed participant <a href="%{managed_user_path}">%{managed_user_name}</a>.
     forms:
+      questionnaires:
+        answers:
+          files:
+            upload_not_allowed: Uploading files is only allowed for connected users.
       user_answers_serializer:
         email: Email
         name: Name
-    half_signup:
-      quick_auth:
-        sms_verification:
-          text_message: Hello, %{verification} is the code to authenticate yourself on the platform
     initiatives:
       admin:
-        initiatives:
-          edit:
-            success: The initiative has been sent to technical validation
-          form:
-            attachments: Attachments
-            settings: Settings
-            title: General information
-          index:
-            warning: Initiatives are not used for now. When you create an initiative type, it will be displayed in front-office.
-          update:
-            error: An error has occurred
-            success: The initiative has been successfully updated
-      pages:
-        home:
-          highlighted_initiatives:
-            active_initiatives: Active initiatives
-            see_all_initiatives: See all initiatives
-      unavailable_scope: Unavailable scope
-    meetings:
-      application_helper:
-        filter_scope_values:
-          all: All
-      directory:
-        meetings:
-          index:
-            all: All
-      meeting:
-        not_allowed: You are not allowed to view this meeting
-      meetings:
-        create:
-          invalid: There was a problem creating this meeting.
-          success: You have created the meeting successfully.
-        update:
-          invalid: There was a problem updating the meeting.
-          success: You have updated the meeting successfully.
-    omniauth:
-      france_connect:
-        explanation: Explanation
-        external:
-          link: https://franceconnect.gouv.fr/
-          text: What is FranceConnect ?
-        forgot_password:
-          ok_text: Warning, this password is the one of your local account and in no case the one of the account you use through FranceConnect. It will only be used when you log in with your email address rather than via FranceConnect.
-    participatory_processes:
-      show:
-        local_area: Organization area
-    proposals:
-      admin:
-        exports:
-          awesome_private_proposals: Proposals with private fields
-          proposal_comments: Comments
-      collaborative_drafts:
-        new:
-          add_file: Add file
-          edit_file: Edit file
-      proposals:
         index:
-          collaborative_drafts_list: Collaborative drafts list
-          new_proposal: New proposal
-          view_proposal: View proposal
-      update:
-        error: There was a problem saving the idea.
-        success: Idea successfully updated.
-      update_draft:
-        error: There was a problem saving the idea.
-        success: Idea draft successfully updated.
+          initiatives_types:
+            alert_html: "<p>You must create at least one initiative type so participants can start creating initiatives.</p><p> %{link}</p>"
+            button: New initiative type
+        initiatives_types:
+          create:
+            error: An error has occurred.
+            success: A new initiative type has been successfully created. You need to define at least one scope for this initiative type so it can be used.
+          destroy:
+            success: The initiative type has been successfully removed.
+          edit:
+            update: Update
+      create_initiative:
+        fill_data:
+          back: Back
+          continue: Continue
+          fill_data_help: "<ul> <li>Review the content of your initiative. Is your title easy to understand? Is the objective of your initiative clear?</li> <li>You have to choose the type of signature. In-person, online or a combination of both</li> <li>Which is the geographic scope of the initiative?</li> </ul>"
+          more_information: "(More information)"
+          select_area: Select an area
+          select_scope: Select a scope
+        select_initiative_type:
+          new: Create a new initiative
+      form:
+        add_documents: Add documents
+        add_image: Add image
+        attachment_legend: "(Optional) Add an attachment"
+        edit_documents: Edit documents
+        edit_image: Edit image
+        image_legend: "(Optional) Add an image"
+    menu:
+      help: Help
+    pages:
+      home:
+        extended:
+          meetings: Meetings
+        hero:
+          welcome: Welcome to %{organization} !
+    participatory_processes:
+      create_initiative:
+        fill_data:
+          back: Back
+          continue: Continue
+          fill_data_help: "<ul> <li>Review the content of your initiative. Is your title easy to understand? Is the objective of your initiative clear?</li> <li>You have to choose the type of signature. In-person, online or a combination of both</li> <li>Which is the geographic scope of the initiative?</li> </ul>"
+          more_information: "(More information)"
+          select_area: Select an area
+          select_scope: Select a scope
+        select_initiative_type:
+          new: Create a new initiative
+      form:
+        add_documents: Add documents
+        add_image: Add image
+        attachment_legend: "(Optional) Add an attachment"
+        edit_documents: Edit documents
+        edit_image: Edit image
+        image_legend: "(Optional) Add an image"
+      show:
+        related_processes: Related processes
+    profiles:
+      show:
+        activity: Activity
+    proposals:
+      proposals:
+        dynamic_map_instructions:
+          description: The coordinates will be updated when clicking on 'preview' button. However, the address does not change.
+          instructions: You can move the point on the map.
+        edit:
+          add_documents: Add documents
+          attachment_legend: "(Optional) Add an attachment"
+          edit_documents: Edit documents
+          select_a_category: Please select a category
+        edit_form_fields:
+          marker_added: Marker added to the map.
+        placeholder:
+          address: 37 Homewood Drive Brownsburg, IN 46112
     scopes:
-      global: Global
-      picker:
-        cancel: Cancel
-        change: Change
-        choose: Choose
-        currently_selected: Currently selected
-      prompt: Select a scope
-    shared:
-      login_modal:
-        close_modal: Close modal
-        please_sign_in: Please sign in
-        sign_up: Sign up
+      global: Global scope
     system:
-      dashboard:
-        show:
-          current_organizations: Current organizations
       organizations:
         omniauth_settings:
-          cultuur_connect:
-            client_id: Client ID
-            client_secret: Client secret
-            site_url: Site URL
           france_connect:
-            client_id: Client ID
-            client_secret: Client secret
-            provider: FranceConnect
-            provider_name: FranceConnect
-            scope: scope
-            site_url: Site URL
-          france_connect_profile:
-            button_path: Button path
-            client_id: Client ID
-            client_secret: Client secret
-            provider_name: Provider name
-            site: Site URL
-          france_connect_uid:
-            button_path: Button path
-            client_id: Client ID
-            client_secret: Client secret
-            provider_name: Provider name
-            site: Site URL
-          openid_connect:
-            client_options_identifier: Client ID
-            client_options_redirect_uri: Redirection URL
+            acr_values: ACR values
+            client_options_identifier: Client identifier
+            client_options_redirect_uri: Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
             client_options_secret: Client secret
-            discovery: Enable discovery (true or false)
-            issuer: Issuer (Identity Provider)
-            logout_path: Logout path (with starting "/")
-            logout_policy: Logout policy (none|session.destroy)
-            post_logout_redirect_uri: Post logout redirect URI
-            response_type: Response type
-            scope: Scope
-            uid_field: UID field
+            client_signing_alg: Client signing algorithm (e.g. RS256, ES256, PS256 ...)
+            display_name: Display name
+            icon_hover_path: Icon path for hover state (e.g. /media/images/oidc_hover.png)
+            issuer: Issuer URL (e.g. https://identity.com)
+            logout_path: Logout path (path after "/users/auth/openid_connect")
+            logout_policy: Logout policy (none/session.destroy)
+            post_logout_redirect_uri: Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
+            scope: Scope / Claims (e.g. openid email profile)
+          openid_connect:
+            acr_values: ACR values
+            client_auth_method: Client authentication method (e.g. basic, jwt_bearer, mtls ...)
+            client_options_identifier: Client identifier
+            client_options_redirect_uri: Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
+            client_options_secret: Client secret
+            client_signing_alg: Client signing algorithm (e.g. RS256, ES256, PS256 ...)
+            discovery: Discovery (true or false)
+            display_name: Display name
+            issuer: Issuer URL (e.g. https://identity.com)
+            logout_path: Logout path (path after "/users/auth/openid_connect")
+            logout_policy: Logout policy (none/session.destroy)
+            post_logout_redirect_uri: Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
+            response_type: Response type (code or id_token)
+            scope: Scope / Claims (e.g. openid email profile)
+            uid_field: UID field (e.g. sub, email, username)
           publik:
             client_id: Client ID
             client_secret: Client secret
             site_url: Site URL
-      titles:
-        dashboard:
-          info:
-            db_size: 'Database size: %{db_size}'
-            decidim_version: 'Decidim version: v%{version}'
-            title: General informations
-          title: Dashboard
-    verifications:
-      authorizations:
-        create:
-          error: Error
-          success: Success
-        first_login:
-          actions:
-            osp_authorization_handler: Verify with the identity verification form
-            osp_authorization_workflow: Verify with the identity verification form
-  devise:
-    passwords:
-      new:
-        forgot_your_password: Forgot your password
-        send_me_reset_password_instructions: Send me reset password instructions
-    sessions:
-      new:
-        sign_in: Log in
-    shared:
-      links:
-        forgot_your_password: Forgot your password
-        sign_in_with_france_connect: Sign in with france connect
-  faker:
-    address:
-      country_code:
-      - EN
-      - EN0
-      - EN1
-      - EN2
-      - EN3
-      - EN4
-      - EN5
-      - EN6
-      - EN7
-      - EN8
-      - EN9
   layouts:
     decidim:
       footer:
-        made_with_open_source: Website made by <a target="_blank" href="https://opensourcepolitics.eu/en/">Open Source Politics</a> with the <a target="_blank" href="https://github.com/decidim/decidim">decidim free software</a>.
-  rack_attack:
-    too_many_requests:
-      message: Your connection has been slowed because server received too many requests.
-      time: 'You will be able to navigate on our website in :'
-      time_unit: seconds
-      title: Thank you for your participation on %{organization_name}
-  sms_verification_workflow:
-    message: 'Hello, here is the code to authenticate yourself on the %{platform} platform: %{code}'
+        help: Help
+  time:
+    buttons:
+      select: Select

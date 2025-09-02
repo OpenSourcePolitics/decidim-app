@@ -13,12 +13,12 @@ module Decidim
         end
 
         def update
-          enforce_permission_to :update, :scope, scope: scope
+          enforce_permission_to(:update, :scope, scope:)
           @form = form(ScopeForm).from_params(params)
 
           return update_scopes if params[:id] == "refresh_scopes"
 
-          UpdateScope.call(scope, @form) do
+          UpdateScope.call(@form, scope) do
             on(:ok) do
               flash[:notice] = I18n.t("scopes.update.success", scope: "decidim.admin")
               redirect_to current_scopes_path

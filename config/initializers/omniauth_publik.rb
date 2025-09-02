@@ -16,3 +16,13 @@ if Rails.application.secrets.dig(:omniauth, :publik).present?
     )
   end
 end
+
+Rails.application.config.after_initialize do
+  Decidim.icons.register(
+    name: "publik-fill",
+    icon: "publik-fill",
+    category: "system",
+    description: "Publik authentication provider icon",
+    engine: :core
+  )
+end

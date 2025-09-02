@@ -2,11 +2,11 @@
 
 require "spec_helper"
 
-describe "Organization scopes", type: :system do
+describe "Organization scopes" do
   include Decidim::SanitizeHelper
 
   let(:organization) { create :organization, default_locale: :en, available_locales: [:en, :es, :ca, :fr] }
-  let(:admin) { create :user, :admin, :confirmed, organization: organization }
+  let(:admin) { create :user, :admin, :confirmed, organization: }
   let!(:attributes) { attributes_for(:scope) }
 
   before do
@@ -19,12 +19,12 @@ describe "Organization scopes", type: :system do
     before do
       login_as admin, scope: :user
       visit decidim_admin.root_path
-      click_link "Settings"
-      click_link "Scopes"
+      click_link_or_button "Settings"
+      click_link_or_button "Scopes"
     end
 
     it "can create new scopes" do
-      click_link "Add"
+      click_link_or_button "Add"
 
       within ".new_scope" do
         fill_in_i18n :scope_name, "#scope-name-tabs", **attributes[:name].except("machine_translations")
@@ -45,15 +45,15 @@ describe "Organization scopes", type: :system do
     end
 
     context "with existing scopes" do
-      let!(:scope) { create(:scope, organization: organization) }
+      let!(:scope) { create(:scope, organization:) }
 
       before do
         visit current_path
       end
 
       it "can edit them" do
-        within find(".draggable-content", text: translated(scope.name)) do
-          click_link "Edit"
+        within ".draggable-content", text: translated(scope.name) do
+          click_link_or_button "Edit"
         end
 
         within ".edit_scope" do
@@ -72,8 +72,8 @@ describe "Organization scopes", type: :system do
       end
 
       it "can delete them" do
-        within find(".draggable-content", text: translated(scope.name)) do
-          accept_confirm { click_link "Destroy" }
+        within ".draggable-content", text: translated(scope.name) do
+          accept_confirm { click_link_or_button "Destroy" }
         end
 
         expect(page).to have_admin_callout("successfully")
@@ -84,11 +84,11 @@ describe "Organization scopes", type: :system do
       end
 
       it "can create a new subcope" do
-        within find(".draggable-content", text: translated(scope.name)) do
+        within ".draggable-content", text: translated(scope.name) do
           find("a", text: translated(scope.name)).click
         end
 
-        click_link "Add"
+        click_link_or_button "Add"
 
         within ".new_scope" do
           fill_in_i18n :scope_name, "#scope-name-tabs", en: "My nice subdistrict",

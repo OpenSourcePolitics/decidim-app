@@ -4,7 +4,9 @@
 
 class ChangeAwesomeConfigVarType < ActiveRecord::Migration[5.2]
   def change
-    change_column :decidim_awesome_config, :var, :string
+    return unless defined?(Decidim::DecidimAwesome::AwesomeConfig)
+
+    change_column :decidim_awesome_config, :var, :string, if_not_exists: true
 
     Decidim::DecidimAwesome::AwesomeConfig.find_each do |config|
       config.var.gsub!('"', "")

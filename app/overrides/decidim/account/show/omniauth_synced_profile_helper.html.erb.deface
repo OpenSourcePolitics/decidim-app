@@ -1,2 +1,2 @@
-<!-- insert_before "erb[loud]:contains('form_required_explanation')" -->
-  <%= render partial: "/decidim/account/omniauth_synced_profile_helper", locals: { f: f } %>
+<!-- insert_before "erb[silent]:contains('if current_user.unconfirmed_email.present?')" -->
+  <%= render partial: "/decidim/account/omniauth_synced_profile_helper" %>

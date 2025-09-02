@@ -17,16 +17,16 @@ module ScopesControllerExtends
         :picker,
         layout: nil,
         locals: {
-          required: required,
-          title: title,
-          root: root,
+          required:,
+          title:,
+          root:,
           current: (current || root),
           scopes: scopes&.sort_by(&:weight),
           parent_scopes: parent_scopes.sort_by(&:weight),
           picker_target_id: (params[:target_element_id] || "content"),
           global_value: params[:global_value],
-          max_depth: max_depth,
-          context: context
+          max_depth:,
+          context:
         }
       )
     end

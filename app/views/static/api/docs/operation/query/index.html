@@ -4,134 +4,6 @@
 <h2>
 <a id="fields" class="anchor" href="#fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fields</h2>
 <div class="field-entry ">
-  <span id="deployment" class="field-name anchored">deployment (<code><a href="/api/docs/object/deployment">Deployment</a></code>)</span>
-  <div class="description-wrapper">
-   <p>Deployment's properties.</p>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="commentable" class="field-name anchored">commentable (<code><a href="/api/docs/object/commentable">Commentable!</a></code>)</span>
-  <div class="description-wrapper">
-     <table class="arguments">
-  <thead>
-  <tr>
-    <th>Argument</th>
-    <th>Type</th>
-    <th>Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code class="anchored">id</code></td>
-  <td>
-    <code><a href="/api/docs/scalar/string">String!</a></code>
-  </td>
-  <td>
-    <p>The commentable's ID</p>
-   </td>
-  </tr>
-  <tr>
-  <td><code class="anchored">type</code></td>
-  <td>
-    <code><a href="/api/docs/scalar/string">String!</a></code>
-  </td>
-  <td>
-    <p>The commentable's class name. i.e. <code>Decidim::ParticipatoryProcess</code></p>
-   </td>
-  </tr>
-  <tr>
-  <td><code class="anchored">locale</code></td>
-  <td>
-    <code><a href="/api/docs/scalar/string">String!</a></code>
-  </td>
-  <td>
-    <p>The locale for which to get the comments text</p>
-   </td>
-  </tr>
-  <tr>
-  <td><code class="anchored">toggleTranslations</code></td>
-  <td>
-    <code><a href="/api/docs/scalar/boolean">Boolean!</a></code>
-  </td>
-  <td>
-    <p>Whether the user asked to toggle the machine translations or not.</p>
-   </td>
-  </tr>
-  </tbody>
-</table>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="participatoryprocesses" class="field-name anchored">participatoryProcesses (<code><a href="/api/docs/object/participatoryprocess">[ParticipatoryProcess!]</a></code>)</span>
-  <div class="description-wrapper">
-   <p>Lists all participatory_processes</p>
-     <table class="arguments">
-  <thead>
-  <tr>
-    <th>Argument</th>
-    <th>Type</th>
-    <th>Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code class="anchored">filter</code></td>
-  <td>
-    <code><a href="/api/docs/input_object/participatoryprocessfilter">ParticipatoryProcessFilter</a></code>
-  </td>
-  <td>
-    <p>This argument let's you filter the results</p>
-   </td>
-  </tr>
-  <tr>
-  <td><code class="anchored">order</code></td>
-  <td>
-    <code><a href="/api/docs/input_object/participatoryprocesssort">ParticipatoryProcessSort</a></code>
-  </td>
-  <td>
-    <p>This argument let's you order the results</p>
-   </td>
-  </tr>
-  </tbody>
-</table>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="participatoryprocess" class="field-name anchored">participatoryProcess (<code><a href="/api/docs/object/participatoryprocess">ParticipatoryProcess</a></code>)</span>
-  <div class="description-wrapper">
-   <p>Finds a participatory_process</p>
-     <table class="arguments">
-  <thead>
-  <tr>
-    <th>Argument</th>
-    <th>Type</th>
-    <th>Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code class="anchored">id</code></td>
-  <td>
-    <code><a href="/api/docs/scalar/id">ID</a></code>
-  </td>
-  <td>
-    <p>The ID of the participatory space</p>
-   </td>
-  </tr>
-  <tr>
-  <td><code class="anchored">slug</code></td>
-  <td>
-    <code><a href="/api/docs/scalar/string">String</a></code>
-  </td>
-  <td>
-    <p>The slug of the participatory process</p>
-   </td>
-  </tr>
-  </tbody>
-</table>
-  </div>
-</div>
-<div class="field-entry ">
   <span id="component" class="field-name anchored">component (<code><a href="/api/docs/interface/componentinterface">ComponentInterface</a></code>)</span>
   <div class="description-wrapper">
    <p>Lists the components this space contains.</p>
@@ -315,6 +187,76 @@
   </div>
 </div>
 <div class="field-entry ">
+  <span id="participatoryprocesses" class="field-name anchored">participatoryProcesses (<code><a href="/api/docs/object/participatoryprocess">[ParticipatoryProcess!]</a></code>)</span>
+  <div class="description-wrapper">
+   <p>Lists all participatory_processes</p>
+     <table class="arguments">
+  <thead>
+  <tr>
+    <th>Argument</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code class="anchored">filter</code></td>
+  <td>
+    <code><a href="/api/docs/input_object/participatoryprocessfilter">ParticipatoryProcessFilter</a></code>
+  </td>
+  <td>
+    <p>This argument lets you filter the results</p>
+   </td>
+  </tr>
+  <tr>
+  <td><code class="anchored">order</code></td>
+  <td>
+    <code><a href="/api/docs/input_object/participatoryprocesssort">ParticipatoryProcessSort</a></code>
+  </td>
+  <td>
+    <p>This argument lets you order the results</p>
+   </td>
+  </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="participatoryprocess" class="field-name anchored">participatoryProcess (<code><a href="/api/docs/object/participatoryprocess">ParticipatoryProcess</a></code>)</span>
+  <div class="description-wrapper">
+   <p>Finds a participatory_process</p>
+     <table class="arguments">
+  <thead>
+  <tr>
+    <th>Argument</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code class="anchored">id</code></td>
+  <td>
+    <code><a href="/api/docs/scalar/id">ID</a></code>
+  </td>
+  <td>
+    <p>The ID of the participatory space</p>
+   </td>
+  </tr>
+  <tr>
+  <td><code class="anchored">slug</code></td>
+  <td>
+    <code><a href="/api/docs/scalar/string">String</a></code>
+  </td>
+  <td>
+    <p>The slug of the participatory process</p>
+   </td>
+  </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+<div class="field-entry ">
   <span id="participatoryprocessgroups" class="field-name anchored">participatoryProcessGroups (<code><a href="/api/docs/object/participatoryprocessgroup">[ParticipatoryProcessGroup!]!</a></code>)</span>
   <div class="description-wrapper">
    <p>Lists all participatory process groups</p>
@@ -429,67 +371,6 @@
     <code><a href="/api/docs/input_object/participatoryprocessfilter">ParticipatoryProcessFilter</a></code>
   </td>
   <td>
-    <p>This argument let's you filter the results</p>
-   </td>
-  </tr>
-  <tr>
-  <td><code class="anchored">order</code></td>
-  <td>
-    <code><a href="/api/docs/input_object/participatoryprocesssort">ParticipatoryProcessSort</a></code>
-  </td>
-  <td>
-    <p>This argument let's you order the results</p>
-   </td>
-  </tr>
-  </tbody>
-</table>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="assembly" class="field-name anchored">assembly (<code><a href="/api/docs/object/assembly">Assembly</a></code>)</span>
-  <div class="description-wrapper">
-   <p>Finds a assembly</p>
-     <table class="arguments">
-  <thead>
-  <tr>
-    <th>Argument</th>
-    <th>Type</th>
-    <th>Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code class="anchored">id</code></td>
-  <td>
-    <code><a href="/api/docs/scalar/id">ID</a></code>
-  </td>
-  <td>
-    <p>The ID of the participatory space</p>
-   </td>
-  </tr>
-  </tbody>
-</table>
-  </div>
-</div>
-<div class="field-entry ">
-  <span id="conferences" class="field-name anchored">conferences (<code><a href="/api/docs/object/conference">[Conference!]</a></code>)</span>
-  <div class="description-wrapper">
-   <p>Lists all conferences</p>
-     <table class="arguments">
-  <thead>
-  <tr>
-    <th>Argument</th>
-    <th>Type</th>
-    <th>Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code class="anchored">filter</code></td>
-  <td>
-    <code><a href="/api/docs/input_object/participatoryprocessfilter">ParticipatoryProcessFilter</a></code>
-  </td>
-  <td>
     <p>This argument lets you filter the results</p>
    </td>
   </tr>
@@ -507,9 +388,9 @@
   </div>
 </div>
 <div class="field-entry ">
-  <span id="conference" class="field-name anchored">conference (<code><a href="/api/docs/object/conference">Conference</a></code>)</span>
+  <span id="assembly" class="field-name anchored">assembly (<code><a href="/api/docs/object/assembly">Assembly</a></code>)</span>
   <div class="description-wrapper">
-   <p>Finds a conference</p>
+   <p>Finds an assembly</p>
      <table class="arguments">
   <thead>
   <tr>
@@ -526,6 +407,58 @@
   </td>
   <td>
     <p>The ID of the participatory space</p>
+   </td>
+  </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+<div class="field-entry ">
+  <span id="commentable" class="field-name anchored">commentable (<code><a href="/api/docs/interface/commentableinterface">CommentableInterface</a></code>)</span>
+  <div class="description-wrapper">
+     <table class="arguments">
+  <thead>
+  <tr>
+    <th>Argument</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code class="anchored">id</code></td>
+  <td>
+    <code><a href="/api/docs/scalar/string">String!</a></code>
+  </td>
+  <td>
+    <p>The commentable's ID</p>
+   </td>
+  </tr>
+  <tr>
+  <td><code class="anchored">type</code></td>
+  <td>
+    <code><a href="/api/docs/scalar/string">String!</a></code>
+  </td>
+  <td>
+    <p>The commentable's class name. i.e. <code>Decidim::ParticipatoryProcess</code></p>
+   </td>
+  </tr>
+  <tr>
+  <td><code class="anchored">locale</code></td>
+  <td>
+    <code><a href="/api/docs/scalar/string">String!</a></code>
+  </td>
+  <td>
+    <p>The locale for which to get the comments text</p>
+   </td>
+  </tr>
+  <tr>
+  <td><code class="anchored">toggleTranslations</code></td>
+  <td>
+    <code><a href="/api/docs/scalar/boolean">Boolean!</a></code>
+  </td>
+  <td>
+    <p>Whether the user asked to toggle the machine translations or not.</p>
    </td>
   </tr>
   </tbody>
@@ -681,50 +614,8 @@
       
         
       <li>
-        <a href="/api/docs/object/commentable/" class="sidebar-link">
-          Commentable
-        </a>
-      </li>
-      
-        
-      <li>
         <a href="/api/docs/object/commentablemutation/" class="sidebar-link">
           CommentableMutation
-        </a>
-      </li>
-      
-        
-      <li>
-        <a href="/api/docs/object/component/" class="sidebar-link">
-          Component
-        </a>
-      </li>
-      
-        
-      <li>
-        <a href="/api/docs/object/conference/" class="sidebar-link">
-          Conference
-        </a>
-      </li>
-      
-        
-      <li>
-        <a href="/api/docs/object/conferencemedialink/" class="sidebar-link">
-          ConferenceMediaLink
-        </a>
-      </li>
-      
-        
-      <li>
-        <a href="/api/docs/object/conferencepartner/" class="sidebar-link">
-          ConferencePartner
-        </a>
-      </li>
-      
-        
-      <li>
-        <a href="/api/docs/object/conferencespeaker/" class="sidebar-link">
-          ConferenceSpeaker
         </a>
       </li>
       
@@ -767,13 +658,6 @@
       <li>
         <a href="/api/docs/object/decidim/" class="sidebar-link">
           Decidim
-        </a>
-      </li>
-      
-        
-      <li>
-        <a href="/api/docs/object/deployment/" class="sidebar-link">
-          Deployment
         </a>
       </li>
       
@@ -947,6 +831,13 @@
       
         
       <li>
+        <a href="/api/docs/object/participatoryspacemanifest/" class="sidebar-link">
+          ParticipatorySpaceManifest
+        </a>
+      </li>
+      
+        
+      <li>
         <a href="/api/docs/object/post/" class="sidebar-link">
           Post
         </a>
@@ -998,6 +889,13 @@
       <li>
         <a href="/api/docs/object/proposals/" class="sidebar-link">
           Proposals
+        </a>
+      </li>
+      
+        
+      <li>
+        <a href="/api/docs/object/quantifiabletranslatedfield/" class="sidebar-link">
+          QuantifiableTranslatedField
         </a>
       </li>
       
@@ -1563,8 +1461,22 @@
       
       
       <li>
+        <a href="/api/docs/directive/oneof/" class="sidebar-link">
+          oneOf
+        </a>
+      </li>
+      
+      
+      <li>
         <a href="/api/docs/directive/skip/" class="sidebar-link">
           skip
+        </a>
+      </li>
+      
+      
+      <li>
+        <a href="/api/docs/directive/specifiedby/" class="sidebar-link">
+          specifiedBy
         </a>
       </li>
       

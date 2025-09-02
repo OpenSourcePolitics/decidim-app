@@ -1,9 +1,0 @@
----
-ga:
-  decidim:
-    admin:
-      filters:
-        search_label: Cuardaigh
-      menu:
-        participants: Rannpháirtithe
-        users: Rannpháirtithe

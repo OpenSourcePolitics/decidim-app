@@ -1,26 +1,30 @@
 # frozen_string_literal: true
-# Be sure to restart your server when you modify this file.
 
-# Define an application-wide content security policy
-# For further information see the following documentation
-# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+# For tuning the Content Security Policy, check the Decidim documentation site
+# https://docs.decidim.org/develop/en/customize/content_security_policy
 
-# Rails.application.config.content_security_policy do |policy|
-#   policy.default_src :self, :https
-#   policy.font_src    :self, :https, :data
-#   policy.img_src     :self, :https, :data
-#   policy.object_src  :none
-#   policy.script_src  :self, :https
-#   policy.style_src   :self, :https
+content_security_policies = {
+  "default-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net),
+  "img-src" => %w(decidim.storage.opensourcepolitics.eu https://*.tile.openstreetmap.org),
+  "media-src" => %w(decidim.storage.opensourcepolitics.eu www.youtube.com),
+  "script-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net tarteaucitron.io unpkg.com blob:),
+  "style-src" => %w(decidim.storage.opensourcepolitics.eu templates.opensourcepolitics.net),
+  "font-src" => %w(decidim.storage.opensourcepolitics.eu),
+  "connect-src" => %w(decidim.storage.opensourcepolitics.eu https://cdn.jsdelivr.net),
+  "frame-src" => %w(decidim.storage.opensourcepolitics.eu)
+}
 
-#   # Specify URI for violation reports
-#   # policy.report_uri "/csp-violation-report-endpoint"
-# end
+minio_endpoint = Rails.application.secrets.dig(:storage, :minio, :endpoint)
+if minio_endpoint.presence == "http://minio:9000"
+  content_security_policies["default-src"] << minio_endpoint
+  content_security_policies["img-src"] << minio_endpoint
+  content_security_policies["media-src"] << minio_endpoint
+  content_security_policies["script-src"] << minio_endpoint
+  content_security_policies["style-src"] << minio_endpoint
+  content_security_policies["connect-src"] << minio_endpoint
+  content_security_policies["frame-src"] << minio_endpoint
+end
 
-# If you are using UJS then enable automatic nonce generation
-# Rails.application.config.content_security_policy_nonce_generator = -> request { SecureRandom.base64(16) }
-
-# Report CSP violations to a specified URI
-# For further information see the following documentation:
-# https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only
-# Rails.application.config.content_security_policy_report_only = true
+Decidim.configure do |config|
+  config.content_security_policies_extra = content_security_policies
+end

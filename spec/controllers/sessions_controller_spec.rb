@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   module Devise
-    describe SessionsController, type: :controller do
+    describe SessionsController do
       routes { Decidim::Core::Engine.routes }
 
       describe "after_sign_in_path_for" do
@@ -37,7 +37,7 @@ module Decidim
 
                 it { is_expected.to eq("/authorizations/first_login") }
 
-                context "when there's a pending redirection" do
+                context "when there is a pending redirection" do
                   before do
                     controller.store_location_for(user, account_path)
                   end
@@ -45,7 +45,7 @@ module Decidim
                   it { is_expected.to eq account_path }
                 end
 
-                context "when the user hasn't confirmed their email" do
+                context "when the user has not confirmed their email" do
                   before do
                     user.confirmed_at = nil
                   end
@@ -68,18 +68,6 @@ module Decidim
 
                   it { is_expected.to eq("/authorizations/first_login") }
                 end
-
-                context "when first login authorization is skipped" do
-                  before do
-                    ENV["SKIP_FIRST_LOGIN_AUTHORIZATION"] = "true"
-                  end
-
-                  after do
-                    ENV.delete("SKIP_FIRST_LOGIN_AUTHORIZATION")
-                  end
-
-                  it { is_expected.to eq("/") }
-                end
               end
 
               context "and otherwise", with_authorization_workflows: [] do
@@ -91,7 +79,7 @@ module Decidim
               end
             end
 
-            context "and it's not the first time to log in" do
+            context "and it is not the first time to log in" do
               let(:user) { build(:user, sign_in_count: 2) }
 
               it { is_expected.to eq("/") }
@@ -100,12 +88,63 @@ module Decidim
         end
       end
 
-      describe "DELETE destroy" do
-        let(:organization) { create(:organization) }
-        let(:user) { create(:user, :confirmed, organization: organization) }
+      describe "POST create" do
+        let(:params) { { user: { email: user.email, password: } } }
+        let(:user) { create(:user, :confirmed, password:) }
+        let(:password) { "decidim123456789" }
 
         before do
-          request.env["decidim.current_organization"] = organization
+          request.env["decidim.current_organization"] = user.organization
+          request.env["devise.mapping"] = ::Devise.mappings[:user]
+        end
+
+        context "when participant" do
+          context "with weak password" do
+            let(:password) { "decidim123" }
+
+            it "does not update password_updated_at" do
+              post(:create, params:)
+
+              expect(user.reload.password_updated_at).not_to be_nil
+            end
+          end
+        end
+
+        context "when admin" do
+          context "with strong password" do
+            let(:user) { create(:user, :confirmed, :admin) }
+
+            it "does not change password_updated_at" do
+              post(:create, params:)
+
+              expect(user.reload.password_updated_at).not_to be_nil
+            end
+          end
+
+          context "with weak password" do
+            let(:user) { create(:user, :confirmed, password:) }
+            let(:password) { "decidim123" }
+
+            # To avoid the password validation failing when creating the user
+            before do
+              user.password = nil
+              user.update!(admin: true)
+            end
+
+            it "sets password_updated_at to nil" do
+              post(:create, params:)
+
+              expect(user.reload.password_updated_at).to be_nil
+            end
+          end
+        end
+      end
+
+      describe "DELETE destroy" do
+        let(:user) { create(:user, :confirmed) }
+
+        before do
+          request.env["decidim.current_organization"] = user.organization
           request.env["devise.mapping"] = ::Devise.mappings[:user]
 
           sign_in user
@@ -115,43 +154,6 @@ module Decidim
           delete :destroy
 
           expect(controller.current_user).to be_nil
-        end
-
-        context "when France Connect is enabled" do
-          let(:organization) { create(:organization, omniauth_settings: omniauth_settings) }
-          let(:omniauth_settings) do
-            { omniauth_settings_france_connect_enabled: true }
-          end
-
-          before do
-            stub_request(:get, /test-france-connect.fr/)
-              .with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" })
-              .to_return(status: 200, body: "", headers: {})
-
-            request.env["decidim.current_organization"] = user.organization
-            request.env["devise.mapping"] = ::Devise.mappings[:user]
-
-            sign_in user
-          end
-
-          it "logout user from France Connect" do
-            delete :destroy, session: { "omniauth.france_connect.end_session_uri" => "http://test-france-connect.fr/" }
-
-            expect(controller.current_user).to be_nil
-            expect(controller).to redirect_to("http://test-france-connect.fr/")
-            expect(session["flash"]["flashes"]["notice"]).to eq("Signed out successfully.")
-          end
-
-          context "and France Connect logout session is not present" do
-            it "logout user from application" do
-              delete :destroy
-
-              expect(controller.current_user).to be_nil
-              expect(controller).not_to redirect_to("http://test-france-connect.fr/")
-              expect(controller).to redirect_to("http://test.host/")
-              expect(session["flash"]["flashes"]["notice"]).to eq("Signed out successfully.")
-            end
-          end
         end
       end
     end

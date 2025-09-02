@@ -1,23 +1,29 @@
 # frozen_string_literal: true
 
+require "active_support/core_ext/integer/time"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # In the development environment your application's code is reloaded on
-  # every request. This slows down response time but is perfect for development
+  # In the development environment your application's code is reloaded any time
+  # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
   # Do not eager load code on boot.
   config.eager_load = false
-
+  config.active_job.queue_adapter = :inline
   # Show full error reports.
   config.consider_all_requests_local = true
+
+  # Enable server timing
+  config.server_timing = true
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
     config.action_controller.perform_caching = true
+    config.action_controller.enable_fragment_cache_logging = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
@@ -29,18 +35,24 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  # Store uploaded files on the local file system (see config/storage.yml for options).
+  config.active_storage.service = :local
+
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :letter_opener_web
   config.action_mailer.default_url_options = { port: 3000 }
-
-  # Store uploaded files on the local file system (see config/storage.yml for options)
-  config.active_storage.service = Rails.application.secrets.dig(:scaleway, :id).blank? ? :local : :scaleway
 
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
+
+  # Raise exceptions for disallowed deprecations.
+  config.active_support.disallowed_deprecation = :raise
+
+  # Tell Active Support which deprecation messages to disallow.
+  config.active_support.disallowed_deprecation_warnings = []
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
@@ -48,17 +60,40 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-  # Raises error for missing translations
-  config.action_view.raise_on_missing_translations = false
+  # Suppress logger output for asset requests.
 
-  # Use an evented file watcher to asynchronously detect changes in source code,
-  # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # Raises error for missing translations.
+  # config.i18n.raise_on_missing_translations = true
 
-  # Global IDs are used to identify records and
-  # are known to cause issue with moderation due to expiration
-  # Setting this to 100 years should be enough
-  config.global_id.expires_in = 100.years
-  config.deface.enabled = ENV.fetch("DEFACE_ENABLED", nil) == "true"
-  config.log_tags = [:uuid, :remote_ip]
+  # Annotate rendered view with file names.
+  # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # Uncomment if you wish to allow Action Cable access from any origin.
+  # config.action_cable.disable_request_forgery_protection = true
+
+  # Performance configs for local testing
+  if ENV.fetch("RAILS_BOOST_PERFORMANCE", false).to_s == "true"
+    # Indicate boost performance mode
+    config.boost_performance = true
+    # Enable caching and eager load
+    config.eager_load = true
+    config.cache_classes = true
+    # Logging
+    config.log_level = :info
+    config.action_view.logger = nil
+
+    config.log_tags = [:uuid, :remote_ip]
+
+    # Compress the HTML responses with gzip
+    config.middleware.use Rack::Deflater
+  end
 end
+
+require "decidim/spring"
+
+Spring.watch(
+  ".ruby-version",
+  ".rbenv-vars",
+  "tmp/restart.txt",
+  "tmp/caching-dev.txt"
+)

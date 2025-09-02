@@ -3,9 +3,9 @@
 module Decidim
   module AccountControllerExtends
     def destroy
-      enforce_permission_to :delete, :user, current_user: current_user
+      enforce_permission_to(:delete, :user, current_user:)
       @form = form(Decidim::DeleteAccountForm).from_params(params)
-      Decidim::DestroyAccount.call(current_user, @form) do
+      Decidim::DestroyAccount.call(@form) do
         on(:ok) do
           handle_successful_destruction
         end
@@ -20,21 +20,24 @@ module Decidim
     def handle_successful_destruction
       sign_out(current_user)
       flash[:notice] = t("account.destroy.success", scope: "decidim")
-      handle_omniauth_logout if active_omniauth_session?
-
-      handle_france_connect_logout if active_france_connect_session?
+      if active_omniauth_session?
+        handle_omniauth_logout
+      else
+        redirect_to decidim.root_path
+      end
     end
 
     def handle_omniauth_logout
       provider = session.delete("omniauth.provider")
-      logout_policy = session.delete("omniauth.#{provider}.logout_policy")
-      logout_path = session.delete("omniauth.#{provider}.logout_path")
+      omniauth_config = DecidimApp::Omniauth::Configurator.new(provider, request.env)
+      logout_policy = omniauth_config.options(:logout_policy)
+      logout_path = omniauth_config.options(:logout_path)
 
-      redirect_to omniauth_logout_path(provider, logout_path) if provider.present? && logout_policy == "session.destroy" && logout_path.present?
-    end
-
-    def handle_france_connect_logout
-      destroy_france_connect_session(session["omniauth.france_connect.end_session_uri"])
+      if provider.present? && logout_policy == "session.destroy" && logout_path.present?
+        redirect_to omniauth_logout_path(provider, logout_path)
+      else
+        redirect_to decidim.root_path
+      end
     end
 
     def handle_invalid_destruction
@@ -46,18 +49,8 @@ module Decidim
       if force_profile_sync_on_omniauth_connection?
         params[:user][:name] = current_user.name
         params[:user][:email] = current_user.email
-        params[:user][:nickname] = current_user.nickname
       end
       params[:user].to_unsafe_h
-    end
-
-    def destroy_france_connect_session(fc_logout_path)
-      session.delete("omniauth.france_connect.end_session_uri")
-      redirect_to fc_logout_path
-    end
-
-    def active_france_connect_session?
-      current_organization.enabled_omniauth_providers.include?(:france_connect) && session["omniauth.france_connect.end_session_uri"].present?
     end
 
     def active_omniauth_session?

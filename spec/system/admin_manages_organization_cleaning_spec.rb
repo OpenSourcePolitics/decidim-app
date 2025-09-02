@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "AdminManagesOrganizationCleaning" do
   let(:organization) { create(:organization) }
-  let(:user) { create(:user, :admin, :confirmed, organization: organization) }
+  let(:user) { create(:user, :admin, :confirmed, organization:) }
 
   before do
     switch_to_host(organization.host)
@@ -27,7 +27,7 @@ describe "AdminManagesOrganizationCleaning" do
       fill_in "Delete inactive users x days after", with: 30
       fill_in "Send email to inactive users before deletion", with: 365
 
-      click_button "Update"
+      click_link_or_button "Update"
       expect(page).to have_content("updated successfully")
     end
   end

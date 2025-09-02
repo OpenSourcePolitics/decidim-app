@@ -3,6 +3,9 @@
 # The "main" locale.
 base_locale: en
 
+## All available locales are inferred from the data by default. Alternatively, specify them explicitly:
+# locales: [es, fr]
+
 ## Reporting locale, default: en. Available: en, ru.
 # internal_locale: en
 
@@ -82,94 +85,47 @@ translation:
 
 # Do not consider these keys missing:
 ignore_missing:
- - faker.*
- - decidim.devise.shared.omniauth_buttons.or
- - devise.shared.links.sign_in_with_provider
- - layouts.decidim.header.user_menu
- - layouts.decidim.header.user_menu
- - decidim.devise.shared.omniauth_buttons.or
- - devise.shared.links.sign_in_with_provider
- - decidim.forms.step_navigation.*
- - decidim.forms.questionnaires.show.*
- - decidim.account.destroy.success
- - decidim.account.destroy.error
- - decidim.editor_images.create.error
- - decidim.editor_images.create.success
- - decidim.forms.questionnaires.question.max_choices
- - activemodel.errors.models.questionnaire.request_invalid
- - decidim.admin.menu.admin_accountability
- - layouts.decidim.footer.download_open_data
- - decidim.initiatives.admin.initiatives_types.new.{title,create}
- - decidim.initiatives.admin.initiatives.index.*
- - decidim.initiatives.actions.answer
- - decidim.admin.titles.initiatives
- - decidim.admin.models.initiatives.fields.*
- - decidim.admin.models.initiatives_votes.*
- - decidim.admin.actions.configure
- - decidim.account.email_change.*
- - decidim.account.show.*
- - layouts.decidim.user_menu.profile
- - decidim.newsletters.unsubscribe.success
- - decidim.newsletters.unsubscribe.error
- - decidim.newsletters.unsubscribe.token_error
- - decidim.admin.actions.destroy
- - decidim.admin.autocomplete.search_prompt
- - decidim.term_customizer.menu.term_customizer
- - decidim.term_customizer.admin.titles.add_multiple_translations
- - decidim.term_customizer.admin.actions.*
- - decidim.term_customizer.admin.add_translations.index.*
- - decidim.term_customizer.admin.models.translations.fields.*
- - decidim.participatory_processes.admin.participatory_processes.form.*
+  - decidim.admin.assembly_copies.new.select
+  - decidim.assemblies.admin.assembly_copies.new.select
+  - decidim.assemblies.admin.assembly_copies.form.slug_help_html
+  - decidim.admin.participatory_process_copies.new.select
+  - decidim.participatory_processes.admin.participatory_process_copies.new.select
+  - decidim.participatory_processes.admin.participatory_process_copies.form.slug_help_html
+  - time.buttons.select
+  - decidim.admin.models.assembly.fields.promoted
+  - decidim.account.destroy.error 
+  - decidim.account.destroy.success
+  - decidim.devise.omniauth_registrations.create.email_already_exists
+  - devise.registrations.signed_up_but_unconfirmed
+  - decidim.devise.shared.omniauth_buttons.or
+  - devise.shared.links.log_in_with_provider
+  - decidim.metadata.progress.remaining
+  - decidim.devise.shared.links.log_in_with_user
 
 # Consider these keys used:
 ignore_unused:
   - faker.*
-  - activemodel.attributes.osp_authorization_handler.*
-  - activemodel.attributes.participatory_process.private_space
-  - decidim.admin.exports.export_as
-  - decidim.amendments.emendation.announcement.evaluating
-  - decidim.authorization_handlers.osp_authorization_handler.{explanation, name}
-  - decidim.authorization_handlers.osp_authorization_handler.fields.*
-  - decidim.authorization_handlers.osp_authorization_workflow.name
-  - decidim.events.budgets.pending_order.*
-  - decidim.events.users.user_officialized.*
-  - decidim.events.verifications.verify_with_managed_user.*
-  - decidim.meetings.meeting.not_allowed
-  - decidim.meetings.directory.meetings.index.all
-  - decidim.meetings.meetings.{create, update}.{invalid, success}
-  - decidim.proposals.admin.exports.awesome_private_proposals
-  - decidim.proposals.admin.exports.proposal_comments
-  - decidim.scopes.global
-  - decidim.scopes.picker.*
-  - decidim.system.organizations.omniauth_settings.{france_connect, france_connect_profile, france_connect_uid}.*
-  - decidim.system.organizations.omniauth_settings.openid_connect.*
+  - decidim.admin.models.assembly.fields.*
+  - decidim.events.proposals.author_confirmation_proposal_event.*
+  - decidim.forms.user_answers_serializer.*
+  - decidim.initiatives.admin.index.initiatives_types.*
+  - decidim.initiatives.admin.initiatives_types.*
+  - time.buttons.*
+  - decidim.admin.models.assembly.fields.promoted.*
+  - activemodel.attributes.assembly.copy_landing_page_blocks
+  - activemodel.attributes.participatory_process.copy_landing_page_blocks
+  - decidim.components.proposals.settings.global.require_category
+  - decidim.components.proposals.settings.global.require_scope
+  - decidim.admin.scopes.update.error
+  - decidim.admin.scopes.update.success
+  - date.formats.order
+  - decidim.participatory_processes.create_initiative.*
+  - decidim.participatory_processes.form.*
   - decidim.system.organizations.omniauth_settings.publik.*
-  - decidim.system.organizations.omniauth_settings.cultuur_connect.*
-  - decidim.verifications.authorizations.create.*
-  - decidim.verifications.authorizations.first_login.actions.*
-  - rack_attack.too_many_requests.*
-  - decidim.account.destroy.success
-  - decidim.account.destroy.error
-  - decidim.proposals.collaborative_drafts.new.*
-  - decidim.admin.menu.admin_accountability
-  - decidim.anonymous_user
-  - decidim.assemblies.show.*
-  - decidim.events.initiatives.initiative_answered.*
-  - decidim.initiatives.pages.home.highlighted_initiatives.*
-  - activemodel.attributes.attachment.documents
-  - activemodel.attributes.participatory_space_private_user_csv_import.file
-  - decidim.forms.user_answers_serializer.{email,name}
-  - decidim.participatory_processes.show.local_area
-  - decidim.newsletters.unsubscribe.success
-  - decidim.newsletters.unsubscribe.error
-  - decidim.newsletters.unsubscribe.token_error
-  - decidim.half_signup.quick_auth.sms_verification.text_message
-  - decidim.events.proposals.author_confirmation_proposal_event.email_intro
-  - decidim.events.proposals.author_confirmation_proposal_event.email_outro
-  - decidim.events.proposals.author_confirmation_proposal_event.notification_title
-  - decidim.system.titles.{dashboard,title}
-  - decidim.system.titles.info.*
-  - decidim.budgets.projects.orders.*
-  - decidim.components.budgets.settings.*
-  - decidim.admin_multi_factor.verification_code_mailer.verification_code.*
-
+  - decidim.system.organizations.omniauth_settings.france_connect.*
+  - decidim.system.organizations.omniauth_settings.openid_connect.*
+  - decidim.metadata.progress.remaining
+  - decidim.menu.help
+  - decidim.pages.home.extended.meetings
+  - decidim.profiles.show.activity
+  - decidim.devise.shared.links.log_in_with_user

@@ -6,38 +6,52 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-scaleway:
+amazon:
   service: S3
-  endpoint: <%= Rails.application.secrets.dig(:scaleway, :bucket_name) == "localhost" ? "http" : "https" %>://<%= Rails.application.secrets.dig(:scaleway, :endpoint) %>
-  access_key_id: <%= Rails.application.secrets.dig(:scaleway, :id) %>
-  secret_access_key: <%= Rails.application.secrets.dig(:scaleway, :token) %>
-  region: fr-par
-  bucket: <%= Rails.application.secrets.dig(:scaleway, :bucket_name) %>
+  region: <%= Rails.application.secrets.dig(:storage, :amazon, :region) %>
+  bucket: <%= Rails.application.secrets.dig(:amazon, :bucket) %>
+  access_key_id: <%= Rails.application.secrets.dig(:storage, :amazon, :access_key_id) %>
+  secret_access_key: <%= Rails.application.secrets.dig(:storage, :amazon, :secret_access_key) %>
+  validate_params: false
+
+amazon_instance_profile:
+  service: S3
+  region: <%= Rails.application.secrets.dig(:storage, :amazon_instance_profile, :region) %>
+  bucket: <%= Rails.application.secrets.dig(:storage, :amazon_instance_profile, :bucket) %>
+  # In production, the following configuration is set through instance profile
+  # see config/initalizers/storage.rb for more details
+  # access_key_id: <%= Rails.application.secrets.dig(:storage, :amazon_instance_profile, :access_key_id) %>
+  # secret_access_key: <%= Rails.application.secrets.dig(:storage, :amazon_instance_profile, :secret_access_key) %>
+  validate_params: false
+
+minio:
+  service: S3
+  access_key_id: <%= Rails.application.secrets.dig(:storage, :minio, :access_key_id) %>
+  secret_access_key: <%= Rails.application.secrets.dig(:storage, :minio, :secret_access_key) %>
+  bucket: <%= Rails.application.secrets.dig(:storage, :minio, :bucket) %>
+  endpoint: <%= Rails.application.secrets.dig(:storage, :minio, :endpoint) %>
+  region: <%= Rails.application.secrets.dig(:storage, :minio, :region) %>
   force_path_style: true
+  validate_params: false
 
-# Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-# amazon:
-#   service: S3
-#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-#   region: us-east-1
-#   bucket: your_own_bucket
+azure:
+  service: AzureStorage
+  storage_account_name: <%= Rails.application.secrets.dig(:storage, :azure, :storage_account_name) %>
+  storage_access_key: <%= Rails.application.secrets.dig(:storage, :azure, :storage_access_key) %>
+  container: <%= Rails.application.secrets.dig(:storage, :azure, :container) %>
 
-# Remember not to checkin your GCS keyfile to a repository
-# google:
-#   service: GCS
-#   project: your_project
-#   credentials: <%= Rails.root.join("path/to/gcs.keyfile") %>
-#   bucket: your_own_bucket
-
-# Use rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
-# microsoft:
-#   service: AzureStorage
-#   storage_account_name: your_account_name
-#   storage_access_key: <%= Rails.application.credentials.dig(:azure_storage, :storage_access_key) %>
-#   container: your_container_name
-
-# mirror:
-#   service: Mirror
-#   primary: local
-#   mirrors: [ amazon, google, microsoft ]
+gcs:
+  service: GCS
+  project: <%= Rails.application.secrets.dig(:storage, :gcs, :project) %>
+  bucket: <%= Rails.application.secrets.dig(:storage, :gcs, :bucket) %>
+  credentials:
+    type: <%= Rails.application.secrets.dig(:storage, :gcs, :type) %>
+    project_id: <%= Rails.application.secrets.dig(:storage, :gcs, :project_id) %>
+    private_key_id: <%= Rails.application.secrets.dig(:storage, :gcs, :private_key_id) %>
+    private_key: <%= Rails.application.secrets.dig(:storage, :gcs, :private_key) %>
+    client_email: <%= Rails.application.secrets.dig(:storage, :gcs, :client_email) %>
+    client_id: <%= Rails.application.secrets.dig(:storage, :gcs, :client_id) %>
+    auth_uri: <%= Rails.application.secrets.dig(:storage, :gcs, :auth_uri) %>
+    token_uri: <%= Rails.application.secrets.dig(:storage, :gcs, :token_uri) %>
+    auth_provider_x509_cert_url: <%= Rails.application.secrets.dig(:storage, :gcs, :auth_provider_x509_cert_url) %>
+    client_x509_cert_url: <%= Rails.application.secrets.dig(:storage, :gcs, :client_x509_cert_url) %>

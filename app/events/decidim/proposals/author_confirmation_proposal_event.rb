@@ -8,7 +8,7 @@ module Decidim
       end
 
       def resource_title
-        translated_attribute(resource.title)
+        decidim_sanitize_translated(resource.title)
       end
     end
   end

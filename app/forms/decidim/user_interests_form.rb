@@ -6,7 +6,7 @@ module Decidim
   class UserInterestsForm < Form
     mimic :user
 
-    attribute :scopes, Array[UserInterestScopeForm]
+    attribute :scopes, [UserInterestScopeForm]
 
     def newsletter_notifications_at
       return unless newsletter_notifications
@@ -16,7 +16,7 @@ module Decidim
 
     def map_model(user)
       self.scopes = user.organization.scopes.top_level.sort_by(&:weight).map do |scope|
-        UserInterestScopeForm.from_model(scope: scope, user: user)
+        UserInterestScopeForm.from_model(scope:, user:)
       end
     end
   end

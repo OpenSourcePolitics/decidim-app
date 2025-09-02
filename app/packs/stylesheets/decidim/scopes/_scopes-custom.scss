@@ -16,3 +16,17 @@
   border: 1px solid lightgray !important;
   margin: 0.4rem
 }
+.draggable-content, .draggable-content__title, .draggable-content__icons {
+  display:flex;
+  align-items: center;
+}
+.draggable-content__title > a {
+  margin-left: 0.5rem;
+}
+.draggable-content__icons {
+  justify-content: space-between;
+  width: 8%;
+}
+.action-icon--remove {
+  fill: #e66a5d;
+}

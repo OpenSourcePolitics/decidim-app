@@ -1,56 +1,73 @@
-FROM ruby:3.0.6-slim as builder
+FROM ruby:3.2.2-slim as builder
+
+ARG DOCKER_IMAGE_TAG
+ARG DOCKER_IMAGE_NAME
+ARG DOCKER_IMAGE
 
 ENV RAILS_ENV=production \
+    NODE_ENV=production \
     SECRET_KEY_BASE=dummy
 
-WORKDIR /app
+WORKDIR /opt/decidim
 
-RUN apt-get update && \
-    apt-get -y install libpq-dev curl git libicu-dev build-essential p7zip-full && \
-    curl https://deb.nodesource.com/setup_16.x | bash && \
-    apt-get install -y nodejs  && \
-    npm install --global yarn && \
-    gem install bundler:2.4.9
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq-dev curl git libicu-dev build-essential wkhtmltopdf \
+    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
+    && npm install --global yarn \
+    && gem install bundler:2.5.22 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY Gemfile* ./
+COPY Gemfile Gemfile.lock ./
+
 RUN bundle config set --local without 'development test' && \
     bundle install -j"$(nproc)"
 
-COPY package* ./
-COPY yarn.lock .
-COPY packages packages
-RUN yarn install --frozen-lockfile
-
 COPY . .
 
-RUN bundle exec bootsnap precompile --gemfile app/ lib/ config/ bin/ db/ && \
-    bundle exec rails assets:precompile && \
-    bundle exec rails deface:precompile
+RUN bundle exec rake decidim:webpacker:install && \
+    bundle exec rake assets:precompile && \
+    bundle exec rails deface:precompile && \
+    bundle exec rails shakapacker:compile
 
-RUN rm -rf node_modules tmp/cache vendor/bundle spec \
+RUN rm -rf node_modules tmp/cache vendor/bundle/spec \
     && rm -rf /usr/local/bundle/cache/*.gem \
     && find /usr/local/bundle/gems/ -name "*.c" -delete \
     && find /usr/local/bundle/gems/ -name "*.o" -delete \
-    && find /usr/local/bundle/gems/ -type d -name "spec" -prune -exec rm -rf {} \; \
+    && find /usr/local/bundle/bundler/gems/ -type d -name "spec" -prune -exec rm -rf {} \; \
+    && find /usr/local/bundle/bundler/gems/decidim-* -type d -name "db/migrate" -prune -exec rm -rf {} \; \
+    && find /usr/local/bundle/bundler/gems/decidim-* -type d -name "docs" -prune -exec rm -rf {} \; \
     && rm -rf log/*.log
 
-FROM ruby:3.0.6-slim as runner
+FROM ruby:3.2.2-slim as runner
+
+ARG DOCKER_IMAGE_TAG
+ARG DOCKER_IMAGE_NAME
+ARG DOCKER_IMAGE
 
 ENV RAILS_ENV=production \
+    NODE_ENV=production \
     SECRET_KEY_BASE=dummy \
-    RAILS_LOG_TO_STDOUT=true
+    DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME:-decidim-app} \
+    DOCKER_IMAGE_TAG=${DOCKER_IMAGE_TAG:-latest} \
+    DOCKER_IMAGE=${DOCKER_IMAGE:-rg.fr-par.scw.cloud/decidim-app/decidim-app}
 
-RUN apt update && \
-    apt install -y postgresql-client imagemagick libproj-dev proj-bin libjemalloc2 p7zip-full && \
-    gem install bundler:2.4.9
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    postgresql-client imagemagick libproj-dev proj-bin p7zip-full wkhtmltopdf libgeos-dev \
+    && gem install bundler:2.5.22 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN groupadd --gid 1000 decidim && \
+    useradd --uid 1000 --gid decidim --create-home --shell /bin/bash decidim
+
+WORKDIR /opt/decidim
 
 COPY --from=builder /usr/local/bundle /usr/local/bundle
-COPY --from=builder /app /app
+COPY --from=builder /opt/decidim /opt/decidim
 
-ENV LD_PRELOAD="libjemalloc.so.2" \
-    MALLOC_CONF="background_thread:true,metadata_thp:auto,dirty_decay_ms:5000,muzzy_decay_ms:5000,narenas:2"
+RUN chown -R decidim:decidim /opt/decidim
+USER decidim
 
 EXPOSE 3000
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

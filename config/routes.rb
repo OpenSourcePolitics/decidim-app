@@ -4,6 +4,10 @@ require "sidekiq/web"
 require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
+  if Rails.application.secrets.puma[:health_check][:enabled]
+    get "/stats", to: redirect { |_params, request| "http://#{request.host}:#{Rails.application.secrets.puma[:health_check][:port]}/stats?#{request.params.to_query}" }
+  end
+
   authenticate :admin do
     mount Sidekiq::Web => "/sidekiq"
   end
@@ -16,6 +20,4 @@ Rails.application.routes.draw do
   end
 
   mount Decidim::Core::Engine => "/"
-  # mount Decidim::Map::Engine => '/map'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

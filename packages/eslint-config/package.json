@@ -1,24 +1,25 @@
 {
   "name": "@decidim/eslint-config",
   "description": "The eslint configuration for Decidim",
-  "version": "0.26.2",
+  "version": "0.29.3",
   "repository": {
     "url": "git@github.com:decidim/decidim.git",
     "type": "git",
     "directory": "packages/eslint-config"
   },
   "author": "Decidim Contributors",
-  "license": "AGPL-3.0",
+  "license": "AGPL-3.0-or-later",
   "main": "index.js",
   "peerDependencies": {
-    "eslint": "^7.25.0",
-    "eslint-config-prettier": "^8.2.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-no-relative-import-paths": "^1.5.3",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-react": "^7.20.6",
-    "eslint-plugin-standard": "^3.1.0"
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2"
   }
 }

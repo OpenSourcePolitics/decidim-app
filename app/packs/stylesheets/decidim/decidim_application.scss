@@ -2,29 +2,16 @@
 // Notice that this file is included at the very end of the stylesheets packs to have
 // more priority
 //
-// To override CSS variables or Foundation settings use _decidim-settings.scss
+// To override the Tailwind CSS configuration you can do so by following the instructions
+// available at https://docs.decidim.org/en/develop/customize/styles.html#_tailwind_css
 //
 // By default this is empty.
-
-@import "email/email-custom";
-@import "modules/footer";
-
-.social-register > .text-center > a.primary.external-link-container {color: #002057;}
-
-.social-register > .text-center a.button--france_connect > img {
-  height: 60px;
-  width: 228px;
+.card__grid-metadata {
+  @apply overflow-x-hidden
 }
-.social-register > .text-center a.button--france_connect > img:hover {
-  filter: brightness(165%);
-}
+.home__section-image {
+  /* stylelint-disable-next-line number-leading-zero */
+  background-image: var(--hero-image);
 
-a.button--france_connect {
-  display: block;
+  @apply bg-center bg-cover;
 }
-
-a[title="Find out more about cookies"]{
-  color: #000000;
-  text-decoration: underline;
-}
-
