@@ -491,6 +491,7 @@ GEM
     declarative-builder (0.2.0)
       trailblazer-option (~> 0.1.0)
     declarative-option (0.1.0)
+    deepl-rb (3.2.0)
     deface (1.9.0)
       actionview (>= 5.2)
       nokogiri (>= 1.6)
@@ -1131,6 +1132,7 @@ DEPENDENCIES
   decidim-survey_multiple_answers!
   decidim-templates!
   decidim-term_customizer!
+  deepl-rb
   deface
   dotenv-rails (~> 2.7)
   faker (~> 3.2)
