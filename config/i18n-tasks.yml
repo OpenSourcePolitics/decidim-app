@@ -129,3 +129,4 @@ ignore_unused:
   - decidim.pages.home.extended.meetings
   - decidim.profiles.show.activity
   - decidim.devise.shared.links.log_in_with_user
+  - decidim.authorization_handlers.data_authorization_handler.(explanation|name)

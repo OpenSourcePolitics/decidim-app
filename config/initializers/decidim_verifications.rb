@@ -21,3 +21,7 @@ Decidim::Verifications.register_workflow(:another_dummy_authorization_handler) d
     options.attribute :passport_number, type: :string, required: false
   end
 end
+
+Decidim::Verifications.register_workflow(:data_authorization_handler) do |auth|
+  auth.form = "Decidim::DataAuthorizationHandler"
+end

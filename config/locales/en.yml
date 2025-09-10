@@ -50,6 +50,30 @@ en:
         update:
           error: There was a problem updating this scope.
           success: Scope updated successfully
+    authorization_handlers:
+      data_authorization_handler:
+        errors:
+          error_message: This field contains an error
+          gdpr: You must accept the terms and conditions
+          minimum_age: You must be over 16 years old to register
+          no_postal_code_result: No result found for this postal code
+        explanation: Verify your identity
+        fields:
+          city: City
+          firstname: Firstname
+          gdpr: I accept that my data will be used to verify my identity
+          lastname: Lastname
+          minimum_age: I confirm that I am over 16 years old
+          phone: Phone number
+          postal_code: Zip code
+        help_text:
+          city: Your city depends on your postal code, please select your city from the dropdown list
+          firstname: Your firstname must contain at least 1 character and be composed only of letters, spaces and special characters such as - and '
+          global_help: It is necessary to complete this form to submit a proposal in the participatory budget.
+          lastname: Your lastname must contain at least 1 character and be composed only of letters, spaces and special characters such as - and '
+          postal_code: Your postal code must be composed of 5 digits
+        legend: Contact information
+        name: Data Sharing Process
     comments:
       comments:
         create:
