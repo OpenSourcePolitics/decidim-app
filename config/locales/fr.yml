@@ -63,7 +63,7 @@ fr:
           firstname: Prénom
           gdpr: J'accepte la collecte de mes données personnelles pour l'instruction de mes propositions au budget participatif ou encore à des fins statistiques. Voir le détail du traitement réalisé sur les données à caractères personnelles dans le cadre du budget participatif
           lastname: Nom
-          minimum_age: J'atteste avoir plus de 16 ans et résider, travailler ou étudier dans le département de Loire-Atlantique en complétant ce formulaire.
+          minimum_age: J'atteste avoir plus de 16 ans
           phone: Numéro de téléphone
           postal_code: Code postal
         help_text:

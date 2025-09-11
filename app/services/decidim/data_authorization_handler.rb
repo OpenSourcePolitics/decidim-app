@@ -2,7 +2,6 @@
 
 module Decidim
   class DataAuthorizationHandler < Decidim::AuthorizationHandler
-    # Import valid_phone to make it execute
     attribute :firstname, String
     attribute :lastname, String
     attribute :phone, String
