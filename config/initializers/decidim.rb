@@ -497,13 +497,3 @@ Rails.application.config.i18n.default_locale = Decidim.default_locale
 # Inform Decidim about the assets folder
 Decidim.register_assets_path File.expand_path("app/packs", Rails.application.root)
 
-# Machine Translation Configuration
-#
-# Enable machine translations
-if Rails.application.secrets.translator.present?
-  Decidim.configure do |config|
-    config.enable_machine_translations = Rails.application.secrets.translator[:enabled]
-    config.machine_translation_service = "DeeplTranslator"
-    config.machine_translation_delay = Rails.application.secrets.translator[:delay]
-  end
-end
