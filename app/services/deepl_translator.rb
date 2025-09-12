@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require "deepl"
+
 class DeeplTranslator
-  attr_reader :text, :source_locale, :target_locale, :resource, :field_name
+  attr_reader :resource, :field_name, :text, :target_locale, :source_locale
 
   def initialize(resource, field_name, text, target_locale, source_locale)
     @resource = resource
@@ -12,7 +14,9 @@ class DeeplTranslator
   end
 
   def translate
-    translation = DeepL.translate(text, source_locale.to_s.upcase, target_locale.to_s.upcase)
+    return if text.blank?
+
+    translation = ::DeepL.translate text, source_locale, target_locale
 
     Decidim::MachineTranslationSaveJob.perform_later(
       resource,
@@ -20,6 +24,8 @@ class DeeplTranslator
       target_locale,
       translation.text
     )
+  rescue => e
+    Rails.logger.error("[DeeplTranslator] #{e.class} - #{e.message}")
+    nil
   end
 end
-
