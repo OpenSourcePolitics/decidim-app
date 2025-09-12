@@ -1132,7 +1132,7 @@ DEPENDENCIES
   decidim-survey_multiple_answers!
   decidim-templates!
   decidim-term_customizer!
-  deepl-rb
+  deepl-rb (~> 3.2)
   deface
   dotenv-rails (~> 2.7)
   faker (~> 3.2)
