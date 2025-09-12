@@ -335,7 +335,7 @@ Decidim.configure do |config|
   # for more information about how it works and how to set it up.
   #
   # Enable machine translations
-  config.enable_machine_translations = false
+  config.enable_machine_translations = true
   #
   # If you want to enable machine translation you can create your own service
   # to interact with third party service to translate the user content.
@@ -360,7 +360,8 @@ Decidim.configure do |config|
   #   end
   # end
   #
-  config.machine_translation_service = "Decidim::Dev::DummyTranslator"
+  config.machine_translation_service = "DeeplTranslator"
+  config.machine_translation_delay = 0.seconds
 
   # Defines the social networking services used for social sharing
   config.social_share_services = Rails.application.secrets.decidim[:social_share_services]
