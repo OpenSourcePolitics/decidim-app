@@ -24,7 +24,7 @@ class DeeplTranslator
       target_locale,
       translation.text
     )
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("[DeeplTranslator] #{e.class} - #{e.message}")
     nil
   end
