@@ -16,7 +16,7 @@ class DeeplTranslator
   def translate
     return if text.blank?
 
-    translation = ::DeepL.translate text, source_locale, target_locale
+    translation = ::DeepL.translate text, source_locale.to_s.upcase, target_locale.to_s.upcase
 
     Decidim::MachineTranslationSaveJob.perform_later(
       resource,
