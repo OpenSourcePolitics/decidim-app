@@ -13,7 +13,7 @@ module Decidim
 
     before do
       allow(Decidim).to receive(:machine_translation_service_klass).and_return(DeeplTranslator)
-      allow(::DeepL).to receive(:translate).with(title[source_locale.to_sym], source_locale.upcase, target_locale.upcase).and_return(translation)
+      allow(::DeepL).to receive(:translate).with(title[source_locale.to_sym], source_locale, target_locale).and_return(translation)
     end
 
     describe "When fields job is executed" do
