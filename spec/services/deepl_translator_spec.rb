@@ -13,9 +13,7 @@ module Decidim
 
     before do
       allow(Decidim).to receive(:machine_translation_service_klass).and_return(DeeplTranslator)
-      allow(::DeepL).to receive(:translate)
-                          .with(title[source_locale.to_sym], source_locale.upcase, target_locale.upcase)
-                          .and_return(translation)
+      allow(::DeepL).to receive(:translate).with(title[source_locale.to_sym], source_locale.upcase, target_locale.upcase).and_return(translation)
     end
 
     describe "When fields job is executed" do
@@ -24,16 +22,13 @@ module Decidim
       end
 
       it "calls DeeplTranslator to create machine translations" do
-        expect(DeeplTranslator)
-          .to receive(:new)
-                .with(
-                  process,
-                  "title",
-                  process["title"][source_locale],
-                  target_locale,
-                  source_locale
-                )
-                .and_call_original
+        expect(DeeplTranslator).to receive(:new).with(
+          process,
+          "title",
+          process["title"][source_locale],
+          target_locale,
+          source_locale
+        ).and_call_original
 
         process.save
 
