@@ -4,10 +4,10 @@ en:
     attributes:
       assembly:
         copy_landing_page_blocks: Copy landing page blocks
-      participatory_process:
-        copy_landing_page_blocks: Copy landing page blocks
       organization:
         enable_machine_translations: enable machine translations
+      participatory_process:
+        copy_landing_page_blocks: Copy landing page blocks
   date:
     formats:
       order: "%Y-%m-%d"
