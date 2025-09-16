@@ -123,8 +123,9 @@ describe "Registration" do
     context "with a weak password" do
       let(:password) { "sekritpass123" }
 
-      it "requires a password change" do
-        expect(page).to have_content("Password change")
+      # with admin_password expiration_days set to 0, no password change will be triggered
+      it "does not require a password change" do
+        expect(page).to have_no_content("Password change")
       end
     end
 

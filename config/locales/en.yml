@@ -76,6 +76,10 @@ en:
           email_subject: Your proposal has been published!
           notification_title: Your proposal <a href="%{resource_path}">%{resource_title}</a> is now live.
     forms:
+      questionnaires:
+        answers:
+          files:
+            upload_not_allowed: Uploading files is only allowed for connected users.
       user_answers_serializer:
         email: Email
         name: Name
