@@ -6,6 +6,8 @@ en:
         copy_landing_page_blocks: Copy landing page blocks
       participatory_process:
         copy_landing_page_blocks: Copy landing page blocks
+      organization:
+        enable_machine_translations: enable machine translations
   date:
     formats:
       order: "%Y-%m-%d"

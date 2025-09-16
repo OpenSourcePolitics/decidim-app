@@ -4,6 +4,8 @@ fr:
     attributes:
       assembly:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
+      organization:
+        enable_machine_translations: Activer la traduction automatique
       participatory_process:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
   date:
