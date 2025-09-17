@@ -94,7 +94,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/guest-meeting-registration.git
-  revision: 19e3998acafa5af237dc04fb7b605de20c0dd18d
+  revision: ec9b95ec43831e994aa6ec121f69ed5fbf21c96d
   branch: bump/module_to_0.29
   specs:
     decidim-guest_meeting_registration (0.29.2)
