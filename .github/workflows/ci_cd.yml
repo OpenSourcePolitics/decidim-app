@@ -58,7 +58,7 @@ jobs:
       bullet_unused_eager_loading: false
   docker_build:
     name: Test build docker image
-    needs: [lint, sast, zeitwerk]
+    needs: [lint, zeitwerk]
     runs-on: ubuntu-22.04
     services:
       postgres:
@@ -89,7 +89,7 @@ jobs:
           push: "true"
   generate_release:
     name: Generate release
-    needs: [lint, sast, zeitwerk, tests, docker_build]
+    needs: [lint, zeitwerk, tests, docker_build]
     if: "github.ref == 'refs/heads/main'"
     runs-on: ubuntu-22.04
     steps:
