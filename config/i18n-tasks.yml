@@ -101,6 +101,8 @@ ignore_missing:
 
 # Consider these keys used:
 ignore_unused:
+  - activemodel.attributes.organization.enable_machine_translations
+  - activemodel.attributes.organization.enable_machine_translations
   - faker.*
   - decidim.admin.models.assembly.fields.*
   - decidim.events.proposals.author_confirmation_proposal_event.*
