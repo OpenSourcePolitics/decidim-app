@@ -5,7 +5,7 @@ en:
       assembly:
         copy_landing_page_blocks: Copy landing page blocks
       organization:
-        enable_machine_translations: enable machine translations
+        enable_machine_translations: Enable machine translations
       participatory_process:
         copy_landing_page_blocks: Copy landing page blocks
   date:
