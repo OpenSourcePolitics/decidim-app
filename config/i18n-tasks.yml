@@ -80,9 +80,6 @@ search:
 #   # Get an API key and set billing info at https://code.google.com/apis/console to use Google Translate
 #   api_key: "AbC-dEf5"
 
-translation:
-  deepl_api_key: <%= ENV["DEEPL_API_KEY"] %>
-
 # Do not consider these keys missing:
 ignore_missing:
   - decidim.admin.assembly_copies.new.select
