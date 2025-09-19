@@ -3,12 +3,13 @@
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
-DECIDIM_TAG = "v0.29.4"
+# DECIDIM_TAG = "v0.29.4"
+DECIDIM_BRANCH = "release/0.29-stable"
 
-gem "decidim", github: "decidim/decidim", tag: DECIDIM_TAG
-gem "decidim-conferences", github: "decidim/decidim", tag: DECIDIM_TAG
-gem "decidim-initiatives", github: "decidim/decidim", tag: DECIDIM_TAG
-gem "decidim-templates", github: "decidim/decidim", tag: DECIDIM_TAG
+gem "decidim", github: "decidim/decidim", branch: DECIDIM_BRANCH
+gem "decidim-conferences", github: "decidim/decidim", branch: DECIDIM_BRANCH
+gem "decidim-initiatives", github: "decidim/decidim", branch: DECIDIM_BRANCH
+gem "decidim-templates", github: "decidim/decidim", branch: DECIDIM_BRANCH
 
 gem "bootsnap", "~> 1.4", require: false
 gem "puma", ">= 6.3.1"
@@ -43,7 +44,7 @@ gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSou
 gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "rc-0.29"
 gem "decidim-cache_cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner.git"
 gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "bump/0.29"
-gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git"
+gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git", branch: DECIDIM_BRANCH
 gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.29"
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "bump/0.29"
 gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePolitics/guest-meeting-registration.git", branch: "bump/module_to_0.29"
@@ -60,7 +61,7 @@ group :development, :test do
   gem "brakeman", "~> 6.1"
   gem "bundler-audit", require: false
   gem "byebug", "~> 11.0", platform: :mri
-  gem "decidim-dev", github: "decidim/decidim", tag: DECIDIM_TAG
+  gem "decidim-dev", github: "decidim/decidim", branch: DECIDIM_BRANCH
   gem "parallel_tests", "~> 4.2"
   gem "spring"
 end
