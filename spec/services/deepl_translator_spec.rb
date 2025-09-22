@@ -41,7 +41,7 @@ module Decidim
     end
 
     describe "#translate" do
-      subject { described_class.new(process, "title", text, target_locale, source_locale).translate }
+      subject { DeeplTranslator.new(process, "title", text, target_locale, source_locale).translate }
       let(:text) { title[source_locale.to_sym] }
 
       context "when translation is nil" do
@@ -53,11 +53,20 @@ module Decidim
         end
       end
 
-      context "when text is blank" do
+      context "when text is empty" do
         let(:text) { "" }
 
         it "does not enqueue a job" do
           expect(Decidim::MachineTranslationSaveJob).not_to receive(:perform_later)
+          expect(subject).to be_nil
+        end
+      end
+
+      context "when DeepL raises an error" do
+        before { allow(::DeepL).to receive(:translate).and_raise(StandardError, "API failure") }
+
+        it "logs the error and flow does not break" do
+          expect(Rails.logger).to receive(:error).with(/\[DeeplTranslator\] StandardError - API failure/)
           expect(subject).to be_nil
         end
       end
