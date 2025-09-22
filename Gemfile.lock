@@ -55,7 +55,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
-  revision: 32c4f18b948a09fb6b1fb191f2c7b727cad625e2
+  revision: 9b4e8d153342fed90cbd06675f91e74ee831b81b
   branch: bump/0.29
   specs:
     decidim-extra_user_fields (0.29.0)
@@ -94,7 +94,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/guest-meeting-registration.git
-  revision: a0ad48b581e1b1576d38e00f168ef8885a7d8133
+  revision: ec9b95ec43831e994aa6ec121f69ed5fbf21c96d
   branch: bump/module_to_0.29
   specs:
     decidim-guest_meeting_registration (0.29.2)
