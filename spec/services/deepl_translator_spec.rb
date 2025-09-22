@@ -17,9 +17,7 @@ module Decidim
     end
 
     describe "When fields job is executed" do
-      before do
-        clear_enqueued_jobs
-      end
+      before { clear_enqueued_jobs }
 
       it "calls DeeplTranslator to create machine translations" do
         expect(DeeplTranslator).to receive(:new).with(
@@ -39,6 +37,29 @@ module Decidim
           target_locale,
           source_locale
         )
+      end
+    end
+
+    describe "#translate" do
+      subject { described_class.new(process, "title", text, target_locale, source_locale).translate }
+      let(:text) { title[source_locale.to_sym] }
+
+      context "when translation is nil" do
+        before { allow(::DeepL).to receive(:translate).and_return(nil) }
+
+        it "does not enqueue a job" do
+          expect(Decidim::MachineTranslationSaveJob).not_to receive(:perform_later)
+          expect(subject).to be_nil
+        end
+      end
+
+      context "when text is blank" do
+        let(:text) { "" }
+
+        it "does not enqueue a job" do
+          expect(Decidim::MachineTranslationSaveJob).not_to receive(:perform_later)
+          expect(subject).to be_nil
+        end
       end
     end
   end
