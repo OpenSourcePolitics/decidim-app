@@ -1,5 +1,5 @@
 image_name = decidim-app
-image_tag = 3.4.0
+image_tag = 3.5.0
 
 run: up
 	@make create-seeds
