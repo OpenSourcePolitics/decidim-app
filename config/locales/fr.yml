@@ -4,6 +4,8 @@ fr:
     attributes:
       assembly:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
+      osp_authorization_handler:
+        document_number: Numéro unique
       participatory_process:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
   date:
@@ -50,6 +52,14 @@ fr:
         update:
           error: Il y a eu une erreur lors de la mise à jour du secteur.
           success: Secteur mis à jour avec succès.
+    authorization_handlers:
+      osp_authorization_handler:
+        explanation: Vérifier votre identité en saisissant un numéro unique
+        fields:
+          document_number: Numéro unique
+        name: Formulaire de vérification d'identité
+      osp_authorization_workflow:
+        name: Procédure d'autorisation
     comments:
       comments:
         create:
@@ -200,6 +210,12 @@ fr:
             client_id: Client ID
             client_secret: Client secret
             site_url: Site URL
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
+            osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
   layouts:
     decidim:
       footer:

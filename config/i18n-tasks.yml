@@ -105,7 +105,12 @@ ignore_missing:
 # Consider these keys used:
 ignore_unused:
   - faker.*
+  - activemodel.attributes.osp_authorization_handler.*
   - decidim.admin.models.assembly.fields.*
+  - decidim.authorization_handlers.osp_authorization_handler.*
+  - decidim.authorization_handlers.osp_authorization_workflow.*
+  - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
+  - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow
   - decidim.events.proposals.author_confirmation_proposal_event.*
   - decidim.forms.user_answers_serializer.*
   - decidim.initiatives.admin.index.initiatives_types.*

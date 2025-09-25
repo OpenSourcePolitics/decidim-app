@@ -4,6 +4,8 @@ en:
     attributes:
       assembly:
         copy_landing_page_blocks: Copy landing page blocks
+      osp_authorization_handler:
+        document_number: Unique number
       participatory_process:
         copy_landing_page_blocks: Copy landing page blocks
   date:
@@ -50,6 +52,14 @@ en:
         update:
           error: There was a problem updating this scope.
           success: Scope updated successfully
+    authorization_handlers:
+      osp_authorization_handler:
+        explanation: Verify your identity by entering a unique number
+        fields:
+          document_number: Unique number
+        name: Identity Verification Form
+      osp_authorization_workflow:
+        name: Authorization procedure
     comments:
       comments:
         create:
@@ -197,6 +207,12 @@ en:
             client_id: Client ID
             client_secret: Client secret
             site_url: Site URL
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            osp_authorization_handler: Verify with the identity verification form
+            osp_authorization_workflow: Verify with the identity verification form
   layouts:
     decidim:
       footer:
