@@ -2,8 +2,16 @@
 fr:
   activemodel:
     attributes:
+      another_dummy_authorization_handler:
+        passport_number: Numéro de passeport
+        postal_code: Code postal
       assembly:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
+      dummy_authorization_handler:
+        birthday: Date de naissance
+        document_number: Numéro unique
+        postal_code: Code postal
+        scope_id: Secteur
       osp_authorization_handler:
         document_number: Numéro unique
       participatory_process:
