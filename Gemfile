@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
-DECIDIM_TAG = "v0.29.4"
+DECIDIM_TAG = "v0.29.5"
 
 gem "decidim", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "decidim-conferences", github: "decidim/decidim", tag: DECIDIM_TAG
