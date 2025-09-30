@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module CheckBoxesTreeHelperExtends
-
   def filter_categories_values
     sorted_main_categories = current_participatory_space.categories.first_class.includes(:subcategories).sort_by do |category|
       [category.weight, translated_attribute(category.name)]
