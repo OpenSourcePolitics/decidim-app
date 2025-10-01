@@ -1,0 +1,74 @@
+name: "Release from branch"
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch you want to release"
+        required: true
+        default: "develop"
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+env:
+  RSPEC_FORMAT: "documentation"
+  RUBY_VERSION: 3.2.2
+  RAILS_ENV: test
+  NODE_ENV: test
+  NODE_VERSION: 22.13.1
+  AVAILABLE_LOCALES: "en,fr,ca,es"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.inputs.branch || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Create/Update tag & Release from branch
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          fetch-depth: 0
+
+      - name: Compute sanitized tag name
+        id: tag
+        run: |
+          BRANCH="${{ inputs.branch }}"
+          SAFE="${BRANCH//\//-}"
+          SAFE="${SAFE// /-}"
+          TAG="$(echo "$SAFE" | tr '[:upper:]' '[:lower:]')"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Create or move annotated tag to current HEAD (force)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git tag -fa "${{ steps.tag.outputs.tag }}" -m "Release from branch ${{ inputs.branch }} @ $(git rev-parse --short HEAD)"
+          git push -f origin "refs/tags/${{ steps.tag.outputs.tag }}"
+
+      - name: Create or update GitHub release for this tag
+        uses: ncipollo/release-action@v1
+        with:
+          tag:  ${{ steps.tag.outputs.tag }}
+          name: Release ${{ steps.tag.outputs.tag }}
+          generateReleaseNotes: true
+          allowUpdates: true
+          makeLatest: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & push Docker images with same tag
+        if: ${{ inputs.push_images }}
+        uses: OpenSourcePolitics/build-and-push-images-action@master
+        with:
+          registry:   ${{ vars.REGISTRY_ENDPOINT }}
+          namespace:  ${{ vars.REGISTRY_NAMESPACE }}
+          password:   ${{ secrets.TOKEN }}
+          image_name: ${{ vars.IMAGE_NAME }}
+          tag:        ${{ steps.tag.outputs.tag }}
