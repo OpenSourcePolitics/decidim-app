@@ -55,15 +55,6 @@ module CheckBoxesTreeHelperExtends
     filter_tree_from(scopes_values)
   end
 
-  def filter_tree_from(scopes_values)
-    if scopes_values.present?
-      Decidim::CheckBoxesTreeHelper::TreeNode.new(
-        Decidim::CheckBoxesTreeHelper::TreePoint.new("", t("decidim.core.application_helper.filter_scope_values.all")),
-        scopes_values
-      )
-    end
-  end
-
   def scope_children_to_tree(scope, participatory_space = nil)
     return if participatory_space.present? && scope.scope_type && scope.scope_type == current_participatory_space.try(:scope_type_max_depth)
     return unless scope.children.any?
