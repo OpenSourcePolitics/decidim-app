@@ -101,6 +101,7 @@ ignore_missing:
   - devise.shared.links.log_in_with_provider
   - decidim.metadata.progress.remaining
   - decidim.devise.shared.links.log_in_with_user
+  - decidim.core.application_helper.filter_area_values.all
 
 # Consider these keys used:
 ignore_unused:
