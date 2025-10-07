@@ -31,6 +31,9 @@
     "postcss-scss": "^4.0.9",
     "sass-embedded": "^1.89.2"
   },
+  "resolutions": {
+    "graphql-ws": "<6.0.0"
+  },
   "browserslist": [
     "extends @decidim/browserslist-config"
   ]
