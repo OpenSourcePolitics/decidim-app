@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
-DECIDIM_TAG = "v0.29.4"
+DECIDIM_TAG = "v0.29.5"
 
 gem "decidim", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "decidim-conferences", github: "decidim/decidim", tag: DECIDIM_TAG
@@ -43,7 +43,7 @@ gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSou
 gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "rc-0.29"
 gem "decidim-cache_cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner.git"
 gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "bump/0.29"
-gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git"
+gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git", branch: "release/0.29-stable"
 gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.29"
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "bump/0.29"
 gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePolitics/guest-meeting-registration.git", branch: "bump/module_to_0.29"

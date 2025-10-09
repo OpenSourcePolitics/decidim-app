@@ -42,7 +42,7 @@ describe "Admin manages newsletters" do
         fill_in_i18n(
           :newsletter_subject,
           "#newsletter-subject-tabs",
-          **attributes[:subject].except("machine_translations")
+          **attributes[:subject].except("machine_translations", "fr")
         )
 
         fill_in_i18n_editor(
@@ -150,7 +150,7 @@ describe "Admin manages newsletters" do
         fill_in_i18n(
           :newsletter_subject,
           "#newsletter-subject-tabs",
-          **attributes[:subject].except("machine_translations")
+          **attributes[:subject].except("machine_translations", "fr")
         )
 
         fill_in_i18n_editor(
