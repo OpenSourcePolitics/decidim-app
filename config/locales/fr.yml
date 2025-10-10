@@ -185,6 +185,10 @@ fr:
     system:
       organizations:
         omniauth_settings:
+          cultuur_connect:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
           france_connect:
             acr_values: ACR values
             client_options_identifier: Client identifier
