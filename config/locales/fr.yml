@@ -50,6 +50,16 @@ fr:
         update:
           error: Il y a eu une erreur lors de la mise à jour du secteur.
           success: Secteur mis à jour avec succès.
+    ai:
+      spam_detection:
+        digest:
+          title: Résumé des spams détectés par l’IA
+          summary:
+            one: "Un spam a été détecté automatiquement %{frequency_label}."
+            other: "%{count} spams ont été détectés automatiquement %{frequency_label}."
+          frequency_label:
+            daily: aujourd’hui
+            weekly: cette semaine
     comments:
       comments:
         create:

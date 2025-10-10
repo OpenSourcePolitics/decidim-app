@@ -54,6 +54,16 @@ en:
       comments:
         create:
           error: There was a problem creating the comment.
+    ai:
+      spam_detection:
+        digest:
+          title: "AI spam detection summary"
+          summary:
+            one: "One spam item was automatically detected %{frequency_label}."
+            other: "%{count} spam items were automatically detected %{frequency_label}."
+          frequency_label:
+            daily: "today"
+            weekly: "this week"
     components:
       proposals:
         settings:
