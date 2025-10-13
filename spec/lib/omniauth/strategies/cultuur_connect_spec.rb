@@ -18,6 +18,7 @@ module OmniAuth
         end
       end
       let(:site) { "https://example.com" }
+      let(:organization) { create(:organization) }
 
       it "returns correct strategy name" do
         expect(subject.options.name).to eq(:cultuur_connect)
@@ -50,6 +51,7 @@ module OmniAuth
         it "decodes JWT token correctly" do
           allow(subject).to receive(:access_token).and_return(double(token: "dummy_jwt_token"))
           allow(JWT).to receive(:decode).and_return([{ "sub" => "123", "email" => "test@example.com" }])
+          allow(subject).to receive_message_chain(:request, :host).and_return(organization.host)
 
           raw_info = subject.send(:raw_info)
           expect(raw_info["sub"]).to eq("123")
