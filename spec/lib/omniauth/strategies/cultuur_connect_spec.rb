@@ -51,7 +51,6 @@ module OmniAuth
         it "decodes JWT token correctly" do
           allow(subject).to receive(:access_token).and_return(double(token: "dummy_jwt_token"))
           allow(JWT).to receive(:decode).and_return([{ "sub" => "123", "email" => "test@example.com" }])
-          allow(subject).to receive_message_chain(:request, :host).and_return(organization.host)
 
           raw_info = subject.send(:raw_info)
           expect(raw_info["sub"]).to eq("123")
@@ -62,8 +61,11 @@ module OmniAuth
       describe "#info" do
         it "returns correct user info" do
           allow(subject).to receive(:raw_info).and_return({ "sub" => "123", "email" => "test@example.com", "firstname" => "John", "surname" => "Doe" })
-
+          # rubocop:disable RSpec/MessageChain
+          allow(subject).to receive_message_chain(:request, :host).and_return(organization.host)
+          # rubocop:enable RSpec/MessageChain
           info = subject.send(:info)
+
           expect(info[:name]).to eq("John Doe")
           expect(info[:email]).to eq("test@example.com")
           expect(info[:nickname]).to eq("john_doe")
