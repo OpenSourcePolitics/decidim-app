@@ -33,3 +33,7 @@
       cron: "0 9 0 * * *"
       class: Decidim::Cleaner::CleanDeletedUsersDataJob
       queue: scheduled
+    ChangeActiveStepJob:
+      cron: "*/15 * * * *"
+      class: Decidim::ParticipatoryProcesses::ChangeActiveStepJob
+      queue: scheduled
