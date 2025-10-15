@@ -8,7 +8,7 @@ en:
         copy_landing_page_blocks: Copy landing page blocks
   date:
     formats:
-      order: "%Y-%m-%d"
+      order: d-m-y
   decidim:
     account:
       omniauth_synced_profile:
