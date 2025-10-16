@@ -53,10 +53,9 @@ fr:
     ai:
       spam_detection:
         digest:
-          title: Résumé des spams détectés par l’IA
-          summary:
-            one: "Un spam a été détecté automatiquement %{frequency_label}."
-            other: "%{count} spams ont été détectés automatiquement %{frequency_label}."
+          title: Résumé des spams détectés par l’IA pour %{organization}
+          subject: Résumé anti-spam %{count} spams détectés (%{frequency_label})
+          summary: "%{count} spams ont été détectés automatiquement %{frequency_label}"
           frequency_label:
             daily: aujourd’hui
             weekly: cette semaine

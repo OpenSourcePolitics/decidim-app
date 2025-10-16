@@ -42,13 +42,13 @@
     AiSpamDigestDaily:
       cron: "55 8 * * *"
       class: Decidim::Ai::SpamDetection::SpamDigestGeneratorJob
-      queue: scheduled
+      queue: mailers
       args:
         - daily
 
     AiSpamDigestWeekly:
       cron: "0 8 * * MON"
       class: Decidim::Ai::SpamDetection::SpamDigestGeneratorJob
-      queue: scheduled
+      queue: mailers
       args:
         - weekly
