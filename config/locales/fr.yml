@@ -50,6 +50,30 @@ fr:
         update:
           error: Il y a eu une erreur lors de la mise à jour du secteur.
           success: Secteur mis à jour avec succès.
+    authorization_handlers:
+      data_authorization_handler:
+        errors:
+          error_message: Ce champ contient une erreur
+          gdpr: Vous devez accepter les mentions légales
+          minimum_age: Vous devez avoir plus de 16 ans pour pouvoir vous inscrire
+          no_postal_code_result: Aucun résultat trouvé pour ce code postal
+        explanation: Vérifier votre identité
+        fields:
+          city: Ville
+          firstname: Prénom
+          gdpr: J'accepte la collecte de mes données personnelles pour l'instruction de mes propositions au budget participatif ou encore à des fins statistiques. Voir le détail du traitement réalisé sur les données à caractères personnelles dans le cadre du budget participatif
+          lastname: Nom
+          minimum_age: J'atteste avoir plus de 16 ans
+          phone: Numéro de téléphone
+          postal_code: Code postal
+        help_text:
+          city: Votre ville dépend de votre code postal, veuillez sélectionner votre ville dans la liste déroulante
+          firstname: Votre prénom doit comporter au moins 1 caractère et n'être composé que de lettres, d'espaces et de caractères spéciaux tels que - et '
+          global_help: Il est nécessaire de compléter ce formulaire pour déposer une proposition dans le budget participatif
+          lastname: Votre nom doit comporter au moins 1 caractère et n'être composé que de lettres, d'espaces et de caractères spéciaux tels que - et '
+          postal_code: Votre code postal doit être composé de 5 chiffres
+        legend: Informations de contact
+        name: Procédure de partage de données
     comments:
       comments:
         create:

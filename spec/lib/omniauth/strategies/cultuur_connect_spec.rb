@@ -18,6 +18,7 @@ module OmniAuth
         end
       end
       let(:site) { "https://example.com" }
+      let(:organization) { create(:organization) }
 
       it "returns correct strategy name" do
         expect(subject.options.name).to eq(:cultuur_connect)
@@ -60,8 +61,11 @@ module OmniAuth
       describe "#info" do
         it "returns correct user info" do
           allow(subject).to receive(:raw_info).and_return({ "sub" => "123", "email" => "test@example.com", "firstname" => "John", "surname" => "Doe" })
-
+          # rubocop:disable RSpec/MessageChain
+          allow(subject).to receive_message_chain(:request, :host).and_return(organization.host)
+          # rubocop:enable RSpec/MessageChain
           info = subject.send(:info)
+
           expect(info[:name]).to eq("John Doe")
           expect(info[:email]).to eq("test@example.com")
           expect(info[:nickname]).to eq("john_doe")
