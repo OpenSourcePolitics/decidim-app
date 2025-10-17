@@ -15,5 +15,3 @@ namespace :decidim do
     end
   end
 end
-
-
