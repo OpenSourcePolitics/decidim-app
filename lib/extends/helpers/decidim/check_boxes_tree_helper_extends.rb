@@ -1,6 +1,22 @@
 # frozen_string_literal: true
 
 module CheckBoxesTreeHelperExtends
+  def filter_areas_values
+    areas_or_types = areas_for_select(current_organization)
+
+    areas_values = if areas_or_types.first.is_a?(Decidim::Area)
+                     filter_areas(areas_or_types)
+                   else
+                     filter_areas_and_types(areas_or_types)
+                   end
+    return if areas_values.blank?
+
+    Decidim::CheckBoxesTreeHelper::TreeNode.new(
+      Decidim::CheckBoxesTreeHelper::TreePoint.new("", t("decidim.core.application_helper.filter_area_values.all")),
+      areas_values
+    )
+  end
+
   def filter_scopes_values
     return filter_scopes_values_from_parent(current_component.scope) if current_component.scope.present?
 

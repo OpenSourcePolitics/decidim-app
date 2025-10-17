@@ -103,6 +103,7 @@ ignore_missing:
   - devise.shared.links.log_in_with_provider
   - decidim.metadata.progress.remaining
   - decidim.devise.shared.links.log_in_with_user
+  - decidim.core.application_helper.filter_area_values.all
 
 # Consider these keys used:
 ignore_unused:
@@ -138,4 +139,5 @@ ignore_unused:
   - decidim.pages.home.extended.meetings
   - decidim.profiles.show.activity
   - decidim.devise.shared.links.log_in_with_user
+  - decidim.authorization_handlers.data_authorization_handler.(explanation|name)
   - decidim.system.organizations.omniauth_settings.cultuur_connect.*

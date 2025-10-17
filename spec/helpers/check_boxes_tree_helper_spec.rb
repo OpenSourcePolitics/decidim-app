@@ -18,6 +18,8 @@ module Decidim
     before do
       allow(helper).to receive(:current_participatory_space).and_return(participatory_space)
       allow(helper).to receive(:current_component).and_return(component)
+      allow(helper).to receive(:current_organization).and_return(organization)
+      allow(helper).to receive(:areas_for_select).with(organization).and_return(organization.areas)
     end
 
     describe "#filter_scopes_values" do
@@ -70,6 +72,31 @@ module Decidim
           expect(leaf.value).to eq("")
           expect(root).to be_a(Decidim::CheckBoxesTreeHelper::TreeNode)
           expect(root.node.count).to eq(5)
+        end
+      end
+    end
+
+    describe "#filter_areas_values" do
+      let(:root) { helper.filter_areas_values }
+
+      context "when the organization does not have areas" do
+        it "does not return any area" do
+          expect(root).to be_nil
+        end
+      end
+
+      context "when the organization has areas" do
+        let!(:areas) { create_list(:area, 2, organization:) }
+        let(:participatory_space) { create(:participatory_process, organization:) }
+        let(:root) { helper.filter_areas_values }
+        let(:leaf) { helper.filter_areas_values.leaf }
+        let(:nodes) { helper.filter_areas_values.node }
+
+        it "returns all the areas" do
+          expect(root).to be_a(Decidim::CheckBoxesTreeHelper::TreeNode)
+          expect(leaf.value).to eq("")
+          expect(leaf.label).to eq("All")
+          expect(nodes.count).to eq(2)
         end
       end
     end

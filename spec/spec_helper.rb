@@ -12,6 +12,7 @@ RSpec.configure do |config|
     options = Selenium::WebDriver::Chrome::Options.new
     options.args << "--headless=new"
     options.args << "--no-sandbox"
+    options.args << "--disable-search-engine-choice-screen"
     options.args << if ENV["BIG_SCREEN_SIZE"].present?
                       "--window-size=1920,3000"
                     else

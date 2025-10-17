@@ -37,7 +37,7 @@ module OmniAuth
       end
 
       def find_nickname
-        ::Decidim::UserBaseEntity.nicknamize(find_name)
+        ::Decidim::UserBaseEntity.nicknamize(find_name, Decidim::Organization.find_by(host: request.host)&.id)
       end
 
       protected

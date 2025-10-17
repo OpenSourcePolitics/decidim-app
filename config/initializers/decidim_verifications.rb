@@ -24,4 +24,7 @@ end
 
 Decidim::Verifications.register_workflow(:osp_authorization_handler) do |workflow|
   workflow.form = "Decidim::OspAuthorizationHandler"
+  
+Decidim::Verifications.register_workflow(:data_authorization_handler) do |auth|
+  auth.form = "Decidim::DataAuthorizationHandler"
 end
