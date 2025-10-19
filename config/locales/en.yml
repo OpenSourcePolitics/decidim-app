@@ -50,19 +50,19 @@ en:
         update:
           error: There was a problem updating this scope.
           success: Scope updated successfully
+    ai:
+      spam_detection:
+        digest:
+          frequency_label:
+            daily: today
+            weekly: this week
+          subject: AI spam detection summary - %{count} spam items detected (%{frequency_label})
+          summary: "%{count} spam items were automatically detected %{frequency_label}."
+          title: AI spam detection summary for %{organization}
     comments:
       comments:
         create:
           error: There was a problem creating the comment.
-    ai:
-      spam_detection:
-        digest:
-          title: "AI spam detection summary for %{organization}"
-          subject: "AI spam detection summary - %{count} spam items detected (%{frequency_label})"
-          summary: "%{count} spam items were automatically detected %{frequency_label}."
-          frequency_label:
-            daily: "today"
-            weekly: "this week"
     components:
       proposals:
         settings:

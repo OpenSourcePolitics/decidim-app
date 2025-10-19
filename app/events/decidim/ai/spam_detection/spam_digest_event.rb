@@ -48,9 +48,22 @@ module Decidim
 
         def resource_locator
           helpers = Decidim::Core::Engine.routes.url_helpers
-          host = Decidim::Organization.first&.host || "localhost"
+          host = organization.host || Decidim::Organization.first&.host || "localhost"
 
-          Struct.new(:path, :url).new(
+          Class.new do
+            def initialize(path, url)
+              @path = path
+              @url = url
+            end
+
+            def path(_params = nil)
+              @path
+            end
+
+            def url(_params = nil)
+              @url
+            end
+          end.new(
             resource_path,
             helpers.root_url(host:, protocol: "http")
           )
