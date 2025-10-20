@@ -70,7 +70,7 @@ module Decidim
             process_two.update!(promoted: true, private_space: true)
           end
 
-          context 'and current_user is private user of that process' do
+          context "and current_user is private user of that process" do
             let!(:participatory_space_private_user) { create(:participatory_space_private_user, privatable_to: process_two, user:) }
 
             it "returns the private process" do
