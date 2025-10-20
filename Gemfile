@@ -25,7 +25,6 @@ gem "rgeo"
 gem "rgeo-activerecord"
 
 # Fix for WickedPdf compatibility issues
-gem "sprockets-rails", "~> 3.4"
 gem "wicked_pdf", "~> 2.8", ">= 2.8.2"
 gem "wkhtmltopdf-binary", "~> 0.12.6.6"
 
