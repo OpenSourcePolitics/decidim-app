@@ -2,8 +2,18 @@
 fr:
   activemodel:
     attributes:
+      another_dummy_authorization_handler:
+        passport_number: Numéro de passeport
+        postal_code: Code postal
       assembly:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
+      dummy_authorization_handler:
+        birthday: Date de naissance
+        document_number: Numéro unique
+        postal_code: Code postal
+        scope_id: Secteur
+      osp_authorization_handler:
+        document_number: Numéro unique
       participatory_process:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
   date:
@@ -74,6 +84,13 @@ fr:
           postal_code: Votre code postal doit être composé de 5 chiffres
         legend: Informations de contact
         name: Procédure de partage de données
+      osp_authorization_handler:
+        explanation: Vérifier votre identité en saisissant un numéro unique
+        fields:
+          document_number: Numéro unique
+        name: Formulaire de vérification d'identité
+      osp_authorization_workflow:
+        name: Procédure d'autorisation
     comments:
       comments:
         create:
@@ -228,6 +245,12 @@ fr:
             client_id: Client ID
             client_secret: Client secret
             site_url: Site URL
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
+            osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
   layouts:
     decidim:
       footer:
