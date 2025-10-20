@@ -109,12 +109,12 @@ en:
           email_subject: Your proposal has been published!
           notification_title: Your proposal <a href="%{resource_path}">%{resource_title}</a> is now live.
     forms:
+      questionnaire_answer_presenter:
+        download_attachment: Download attachment
       questionnaires:
         answers:
           files:
             upload_not_allowed: Uploading files is only allowed for connected users.
-      questionnaire_answer_presenter:
-        download_attachment: Download attachment
       user_answers_serializer:
         email: Email
         name: Name
