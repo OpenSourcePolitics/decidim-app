@@ -1023,6 +1023,10 @@ GEM
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
+    sprockets-rails (3.4.2)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
+      sprockets (>= 3.0.0)
     stackprof (0.2.26)
     stringio (3.1.2)
     swd (2.0.3)
@@ -1086,6 +1090,7 @@ GEM
       ostruct
     wisper (2.0.1)
     wisper-rspec (1.1.0)
+    wkhtmltopdf-binary (0.12.6.6)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.1)
@@ -1161,11 +1166,12 @@ DEPENDENCIES
   sidekiq (~> 6.0)
   sidekiq-scheduler (~> 5.0)
   spring
-  sprockets (~> 4.0)
+  sprockets-rails (~> 3.4)
   stackprof
   uri (>= 1.0.3)
   web-console (~> 4.2)
   wicked_pdf (~> 2.8, >= 2.8.2)
+  wkhtmltopdf-binary (~> 0.12.6.6)
 
 RUBY VERSION
    ruby 3.2.2p53
