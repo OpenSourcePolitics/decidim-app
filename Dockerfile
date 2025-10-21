@@ -3,6 +3,7 @@ FROM ruby:3.2.2-slim as builder
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
 ARG DOCKER_IMAGE
+ARG TARGET_ARCH
 
 ENV RAILS_ENV=production \
     NODE_ENV=production \
@@ -11,9 +12,17 @@ ENV RAILS_ENV=production \
 WORKDIR /opt/decidim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev curl git libicu-dev build-essential wkhtmltopdf \
-    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt-get install -y --no-install-recommends nodejs \
+    libpq-dev curl git libicu-dev build-essential wkhtmltopdf xz-utils \
+    && NODE_VERSION=22.12.0 \
+    && case "${TARGET_ARCH}" in \
+         "amd64")  NODE_ARCH="linux-x64" ;; \
+         "arm64")  NODE_ARCH="linux-arm64" ;; \
+         *)        echo "Unsupported architecture: ${TARGET_ARCH}" && exit 1 ;; \
+       esac \
+    && echo "Downloading Node.js ${NODE_VERSION} for ${NODE_ARCH}..." \
+    && curl -fsSLO https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-${NODE_ARCH}.tar.xz \
+    && tar -xJf node-v${NODE_VERSION}-${NODE_ARCH}.tar.xz -C /usr/local --strip-components=1 \
+    && rm node-v${NODE_VERSION}-${NODE_ARCH}.tar.xz \
     && npm install --global yarn \
     && gem install bundler:2.5.22 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*

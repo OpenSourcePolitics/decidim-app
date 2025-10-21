@@ -20,6 +20,7 @@
     "leaflet.featuregroup.subgroup": "^1.0.2",
     "leaflet.fullscreen": "^4.0.0",
     "polylabel": "^2.0.1",
+    "uc.micro": "^2.1.0",
     "zustand": "^5.0.5"
   },
   "version": "0.1.0",
