@@ -17,10 +17,17 @@ module Decidim
         end
 
         def email_intro
+          org_name =
+            organization.name[I18n.locale.to_s].presence ||
+              organization.name.dig("machine_translations", I18n.locale.to_s).presence ||
+              organization.name["en"].presence ||
+              organization.name.values.compact.first
+
           I18n.t(
             "decidim.ai.spam_detection.digest.summary",
             count: spam_count,
-            frequency_label:
+            frequency_label:,
+            organization: org_name
           )
         end
 
@@ -37,13 +44,7 @@ module Decidim
         end
 
         def resource_title
-          org_name =
-            organization.name[I18n.locale.to_s].presence ||
-            organization.name.dig("machine_translations", I18n.locale.to_s).presence ||
-            organization.name["en"].presence ||
-            organization.name.values.compact.first
-
-          I18n.t("decidim.ai.spam_detection.digest.title", organization: org_name)
+          nil
         end
 
         def resource_locator
