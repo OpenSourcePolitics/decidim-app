@@ -3,7 +3,7 @@ FROM ruby:3.2.2-slim as builder
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
 ARG DOCKER_IMAGE
-ARG TARGET_ARCH
+ARG TARGETARCH
 
 ENV RAILS_ENV=production \
     NODE_ENV=production \
@@ -14,10 +14,10 @@ WORKDIR /opt/decidim
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev curl git libicu-dev build-essential wkhtmltopdf xz-utils \
     && NODE_VERSION=22.12.0 \
-    && case "${TARGET_ARCH}" in \
+    && case "${TARGETARCH}" in \
          "amd64")  NODE_ARCH="linux-x64" ;; \
          "arm64")  NODE_ARCH="linux-arm64" ;; \
-         *)        echo "Unsupported architecture: ${TARGET_ARCH}" && exit 1 ;; \
+         *)        echo "Unsupported architecture: ${TARGETARCH}" && exit 1 ;; \
        esac \
     && echo "Downloading Node.js ${NODE_VERSION} for ${NODE_ARCH}..." \
     && curl -fsSLO https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-${NODE_ARCH}.tar.xz \
