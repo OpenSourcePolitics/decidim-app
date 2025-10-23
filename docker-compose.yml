@@ -1,34 +1,5 @@
 services:
 
-  minio:
-    image: minio/minio
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: minioadmin
-      MINIO_DEFAULT_BUCKETS: mybucket
-    volumes:
-      - ./minio_data:/data
-    command: server /data --console-address ":9001"
-    restart: always
-
-  minio_mc:
-    image: minio/mc
-    depends_on:
-      - minio
-    entrypoint: >
-      /bin/sh -c "
-      sleep 5 &&
-      /usr/bin/mc alias set local http://minio:9000 minioadmin minioadmin &&
-      /usr/bin/mc mb --ignore-existing local/mybucket &&
-      /usr/bin/mc anonymous set public local/mybucket &&
-      /usr/bin/mc admin service restart local &&
-      echo 'Bucket mybucket created and set to public!';
-      exit 0;
-      "
-
   database:
     image: imresamu/postgis:17-3.5.2-alpine3.21
     volumes:
@@ -50,6 +21,13 @@ services:
     volumes:
       - redis-data:/var/lib/redis/data
 
+  init_storage:
+    image: decidim-app:3.4.0
+    user: root
+    command: chown -R 1000:1000 /opt/decidim/storage
+    volumes:
+      - storage-data:/opt/decidim/storage
+
   sidekiq:
     image: decidim-app:3.4.0
     command: [ "bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml" ]
@@ -62,26 +40,24 @@ services:
       - RAILS_SERVE_STATIC_FILES=true
       - RAILS_LOG_TO_STDOUT=true
       - RAILS_LOG_LEVEL=debug
-      - ASSET_HOST=localhost:3000
+      - ASSET_HOST=https://localhost:3000
       - DECIDIM_FORCE_SSL=true
       - ENABLE_LETTER_OPENER=1
       - SEED=true
       - DEFACE_ENABLED=false
       - QUESTION_CAPTCHA_HOST=
       - ENABLE_RACK_ATTACK=0
-      - STORAGE_PROVIDER=minio
-      - AWS_REGION=fr-par-1
-      - AWS_ENDPOINT=http://minio:9000
-      - AWS_BUCKET=mybucket # SCALEWAY_BUCKET_NAME
-      - AWS_ACCESS_KEY_ID=minioadmin # SCALEWAY_ID
-      - AWS_SECRET_ACCESS_KEY=minioadmin #SCALEWAY_TOKEN
+      - STORAGE_PROVIDER=local
     depends_on:
-      - minio_mc
-      - app
+      init_storage:
+        condition: service_completed_successfully
+      app:
+        condition: service_started
     volumes:
       - ./app:/opt/decidim/app
       - ./config:/opt/decidim/config
       - ./lib:/opt/decidim/lib
+      - storage-data:/opt/decidim/storage
       - ${HOME}/.decidim/tls-certificate:/opt/decidim/tls-certificate
     links:
       - database
@@ -101,35 +77,33 @@ services:
       - RAILS_SERVE_STATIC_FILES=true
       - RAILS_LOG_TO_STDOUT=true
       - RAILS_LOG_LEVEL=debug
-      - ASSET_HOST=localhost:3000
+      - ASSET_HOST=https://localhost:3000
       - DECIDIM_FORCE_SSL=true
       - ENABLE_LETTER_OPENER=1
       - SEED=true
       - DEFACE_ENABLED=false
       - QUESTION_CAPTCHA_HOST=
       - ENABLE_RACK_ATTACK=0
-      - STORAGE_PROVIDER=minio
-      - AWS_REGION=fr-par-1
-      - AWS_ENDPOINT=http://minio:9000
-      - AWS_BUCKET=mybucket
-      - AWS_ACCESS_KEY_ID=minioadmin
-      - AWS_SECRET_ACCESS_KEY=minioadmin
+      - STORAGE_PROVIDER=local
     volumes:
       - ./app:/opt/decidim/app
       - ./config:/opt/decidim/config
       - ./lib:/opt/decidim/lib
+      - storage-data:/opt/decidim/storage
       - ${HOME}/.decidim/tls-certificate:/opt/decidim/tls-certificate
     ports:
       - 3000:3000
     depends_on:
-      - minio_mc
-      - database
-      - redis
-      - memcached
+      init_storage:
+        condition: service_completed_successfully
+      database:
+        condition: service_started
+      redis:
+        condition: service_started
+      memcached:
+        condition: service_started
 
 volumes:
-  shared-volume: { }
   pg-data: { }
   redis-data: { }
-  minio_data: { }
-  minio_config: { }
+  storage-data: { }
