@@ -1,6 +1,8 @@
 image_name = decidim-app
 image_tag = 3.4.0
 
+TARGET_ARCH := $(shell [ "$(shell uname -m)" = "arm64" ] && echo "arm64" || echo "amd64")
+
 .DEFAULT_GOAL := help
 
 run: up ## Build and start the application with seeds
@@ -10,8 +12,14 @@ up: build ## Start containers and setup database
 	docker compose up -d
 	@make setup-database
 
-build: ## Build the Docker image
-	docker build . --build-arg DOCKER_IMAGE_NAME=$(image_name) --build-arg DOCKER_IMAGE_TAG=$(image_tag) --build-arg DOCKER_IMAGE=rg.fr-par.scw.cloud/decidim-app/$(image_name):$(image_tag) -t "$(image_name):$(image_tag)"
+build:
+	@echo "Building for $(TARGET_ARCH)..."
+	docker build \
+		--build-arg TARGETARCH=$(TARGET_ARCH) \
+		--build-arg DOCKER_IMAGE_NAME=$(image_name) \
+		--build-arg DOCKER_IMAGE_TAG=$(image_tag) \
+		--build-arg DOCKER_IMAGE=rg.fr-par.scw.cloud/decidim-app/$(image_name):$(image_tag) \
+		-t "$(image_name):$(image_tag)" .
 
 teardown: ## Stop containers and remove volumes
 	docker compose down -v --rmi all
