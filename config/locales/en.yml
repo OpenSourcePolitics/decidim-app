@@ -57,8 +57,9 @@ en:
             daily: today
             weekly: this week
           subject: AI spam detection summary - %{count} spam items detected (%{frequency_label})
-          summary: "%{count} spam items were automatically detected %{frequency_label}."
-          title: AI spam detection summary for %{organization}
+          summary: |-
+            Your AI spam detection summary for %{organization}:
+            %{count} spam items were automatically detected %{frequency_label}.
     comments:
       comments:
         create:
