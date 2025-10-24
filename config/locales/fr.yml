@@ -56,10 +56,8 @@ fr:
           frequency_label:
             daily: aujourd’hui
             weekly: cette semaine
-          subject: 'Résumé anti-spam: %{count} spams détectés (%{frequency_label})'
-          summary: |
-            Résumé des spams détectés par l’IA pour %{organization} :
-            %{count} spams ont été détectés automatiquement %{frequency_label}.
+          subject: Résumé anti-spam, %{count} spams détectés (%{frequency_label})
+          summary: "%{count} spams ont été détectés automatiquement %{frequency_label}."
           title: Résumé des spams détectés par l’IA pour %{organization}
     comments:
       comments:
