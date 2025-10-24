@@ -19,9 +19,9 @@ module Decidim
         def email_intro
           org_name =
             organization.name[I18n.locale.to_s].presence ||
-              organization.name.dig("machine_translations", I18n.locale.to_s).presence ||
-              organization.name["en"].presence ||
-              organization.name.values.compact.first
+            organization.name.dig("machine_translations", I18n.locale.to_s).presence ||
+            organization.name["en"].presence ||
+            organization.name.values.compact.first
 
           I18n.t(
             "decidim.ai.spam_detection.digest.summary",
