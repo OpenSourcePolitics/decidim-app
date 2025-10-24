@@ -41,11 +41,14 @@ module DecidimApp
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       require "extends/helpers/decidim/omniauth_helper_extends"
+      require "extends/helpers/decidim/menu_helper_extends"
       # cells
       require "extends/cells/decidim/system/system_checks_cell_extends"
       require "extends/cells/decidim/comments/comment_metadata_cell_extends"
       require "extends/cells/decidim/proposals/proposal_metadata_cell_extends"
       require "extends/cells/decidim/user_activity_cell_extends"
+      # models
+      require "extends/models/decidim/accountability/result_extends"
       # presenters
       require "extends/presenters/decidim/forms/admin/questionnaire_answer_presenter_extends"
     end
