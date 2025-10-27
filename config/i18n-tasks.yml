@@ -141,3 +141,4 @@ ignore_unused:
   - decidim.devise.shared.links.log_in_with_user
   - decidim.authorization_handlers.data_authorization_handler.(explanation|name)
   - decidim.system.organizations.omniauth_settings.cultuur_connect.*
+  - layouts.decidim.budgets.voting_menubar.cancel_voting

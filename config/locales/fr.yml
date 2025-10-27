@@ -253,6 +253,9 @@ fr:
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
   layouts:
     decidim:
+      budgets:
+        voting_menubar:
+          cancel_voting: Sortir de la cabine de vote
       footer:
         help: Aide
   time:

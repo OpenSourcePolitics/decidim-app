@@ -242,6 +242,9 @@ en:
             osp_authorization_workflow: Verify with the identity verification form
   layouts:
     decidim:
+      budgets:
+        voting_menubar:
+          cancel_voting: Exit voting booth
       footer:
         help: Help
   time:
