@@ -32,9 +32,13 @@ module Decidim
         def count_spam(organization, frequency)
           since = frequency == :weekly ? 1.week.ago : 1.day.ago
 
-          spam_reports_since(since).count do |report|
+          general_spams = spam_reports_since(since).count do |report|
             report_belongs_to_org?(report, organization)
           end
+
+          user_spams = spam_user_reports_since(since).where(decidim_users: { decidim_organization_id: organization.id }).count
+
+          user_spams + general_spams
         end
 
         # Returns all spam reports created since the given time
@@ -43,6 +47,13 @@ module Decidim
             .joins(:moderation)
             .where(reason: "spam")
             .where("decidim_reports.created_at >= ?", since)
+        end
+
+        def spam_user_reports_since(since)
+          Decidim::UserReport
+            .joins(:user)
+            .where(reason: "spam")
+            .where("decidim_user_reports.created_at >= ?", since)
         end
 
         # Determines if a spam report belongs to the given organization
