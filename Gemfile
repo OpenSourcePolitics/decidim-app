@@ -78,6 +78,7 @@ group :development do
   gem "rack-mini-profiler", require: false
   gem "stackprof"
   gem "web-console", "~> 4.2"
+  gem "wkhtmltopdf-binary"
 end
 
 group :production do
