@@ -5,8 +5,8 @@ TARGET_ARCH := $(shell [ "$(shell uname -m)" = "arm64" ] && echo "arm64" || echo
 
 .DEFAULT_GOAL := help
 
-run: up ## Build and start the application with seeds
-	@make create-seeds
+run: up ## Build and start the application
+	@make setup-seeds
 
 up: build ## Start containers and setup database
 	docker compose up -d
@@ -30,7 +30,18 @@ create-database: ## Create database
 setup-database: create-database ## Create and migrate database
 	@docker compose exec -T app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:migrate migrate:db:force' > /dev/null 2>&1
 
-create-seeds: ## Create database seeds
+setup-seeds: ## Create seeds only if database is empty
+	@echo "Checking if database needs seeding..."
+	@if docker compose exec -T app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rails runner "exit(Decidim::Organization.count == 0 ? 0 : 1)"' > /dev/null 2>&1; then \
+		echo "Database is empty, creating seeds..."; \
+		make create-seeds; \
+	else \
+		echo "Database already has data, skipping seeds."; \
+		echo "Application started at https://localhost:3000"; \
+	fi
+
+create-seeds: ## ⚠️  DESTRUCTIVE: Drop all data and create seeds
+	@echo "⚠️  WARNING: This will destroy all existing data!"
 	@echo "Creating seeds... You can still access the app at https://localhost:3000 and it will generate seeds in background."
 	@start=$$(date +%s); \
 	docker compose exec -T app /bin/bash -c 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_LOG_LEVEL=error bundle exec rake db:schema:load db:seed' > /dev/null 2>&1; \
