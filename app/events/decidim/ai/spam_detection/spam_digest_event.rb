@@ -27,8 +27,9 @@ module Decidim
             "decidim.ai.spam_detection.digest.summary",
             count: spam_count,
             frequency_label:,
-            organization: org_name
-          )
+            organization: org_name,
+            moderations_url:
+          ).html_safe
         end
 
         def notification_title
@@ -80,19 +81,35 @@ module Decidim
           false
         end
 
+        private
+
+        def moderations_url
+          host = organization.host
+
+          if host.blank?
+            return "" unless Rails.env.development? || Rails.env.test?
+
+            host = "localhost:3000"
+          elsif host == "localhost" && (Rails.env.development? || Rails.env.test?)
+            host = "localhost:3000"
+          end
+
+          protocol = Rails.env.production? ? "https" : "http"
+
+          "#{protocol}://#{host}/admin/moderations"
+        end
+
         def organization
           if @resource.is_a?(Decidim::Organization)
             @resource
           elsif @resource.respond_to?(:organization)
-            @resource.organization # user.organization
+            @resource.organization
           elsif @resource.respond_to?(:component)
             @resource.component.participatory_space.organization
           else
             Decidim::Organization.first
           end
         end
-
-        private
 
         def spam_count
           extra[:spam_count] || 0

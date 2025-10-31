@@ -60,6 +60,7 @@ en:
           summary: |-
             Your AI spam detection summary for %{organization}:
             %{count} spam items were automatically detected %{frequency_label}.
+            <a href="%{moderations_url}" target="_blank">View detected spams</a>.
     comments:
       comments:
         create:
