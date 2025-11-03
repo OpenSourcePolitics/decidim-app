@@ -109,6 +109,8 @@ en:
           email_subject: Your proposal has been published!
           notification_title: Your proposal <a href="%{resource_path}">%{resource_title}</a> is now live.
     forms:
+      questionnaire_answer_presenter:
+        download_attachment: Download attachment
       questionnaires:
         answers:
           files:

@@ -117,6 +117,8 @@ fr:
           email_subject: Votre proposition a été publiée !
           notification_title: Votre proposition <a href="%{resource_path}">%{resource_title}</a> est maintenant en ligne.
     forms:
+      questionnaire_answer_presenter:
+        download_attachment: Télécharger la pièce jointe
       questionnaires:
         answers:
           files:

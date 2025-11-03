@@ -24,6 +24,9 @@ gem "rack-attack", "~> 6.7"
 gem "rgeo"
 gem "rgeo-activerecord"
 
+# Fix for WickedPdf compatibility issues
+gem "wicked_pdf", "~> 2.8", ">= 2.8.2"
+
 # gems updated with bundle-audit
 gem "actionpack", "~> 7.0.8.7"
 gem "graphql", "~> 2.2.17"
@@ -75,6 +78,7 @@ group :development do
   gem "rack-mini-profiler", require: false
   gem "stackprof"
   gem "web-console", "~> 4.2"
+  gem "wkhtmltopdf-binary"
 end
 
 group :production do
