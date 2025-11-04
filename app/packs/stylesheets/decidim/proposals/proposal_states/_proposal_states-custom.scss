@@ -1,0 +1,70 @@
+.draggable-list .draggable-content {
+  cursor: move;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0.5rem 1rem;
+}
+
+.custom-text {
+  color: black;
+}
+
+.custom-list {
+  border: 1px solid lightgray !important;
+  margin: 0.4rem;
+}
+
+.draggable-content,
+.draggable-content__title,
+.draggable-content__middle,
+.draggable-content__icons {
+  display: flex;
+  align-items: center;
+}
+
+.draggable-content__title > a,
+.draggable-content__title > span {
+  margin-left: 0.5rem;
+}
+
+.draggable-content__middle {
+  flex: 1;
+  justify-content: center;
+}
+
+.draggable-content__icons {
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-width: 80px;
+}
+
+.action-icon--remove {
+  fill: #e66a5d;
+}
+
+.action-icon--edit-proposal {
+  fill: #1a73e8;
+}
+
+.js-list-proposal-states {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.js-list-proposal-states li {
+  transition: background-color 0.2s ease;
+}
+
+.js-list-proposal-states li:hover {
+  background-color: #f8f9fa;
+}
+
+.js-list-proposal-states .label {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
