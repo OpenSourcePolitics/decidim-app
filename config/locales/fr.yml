@@ -192,6 +192,28 @@ fr:
       show:
         activity: Activité
     proposals:
+      actions:
+        delete_proposal_state_confirm: Etes-vous sûr(e) de vouloir supprimer cet état?
+        destroy: Supprimer l'état
+        edit_proposal_state: Modifier l'état
+        new_proposal_state: Nouvel état
+        title: Actions
+      admin:
+        proposal_states:
+          index:
+            title: États
+          update:
+            error: Erreur lors de la mise à jour de l'état
+            success: Etat mis à jour avec succès
+      application_helper:
+        filter_state_values:
+          all: Tout
+          not_answered: En attente de réponse
+      models:
+        proposal_state:
+          css_class: Classe CSS
+          title: État
+      no_proposal_states: Aucun état de proposition n'a encore été créé.
       proposals:
         dynamic_map_instructions:
           description: Les coordonnées seront mises à jour en cliquant sur le bouton 'Aperçu'. Cependant, l'adresse ne change pas.
