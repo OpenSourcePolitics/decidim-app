@@ -149,6 +149,9 @@ en:
         edit_documents: Edit documents
         edit_image: Edit image
         image_legend: "(Optional) Add an image"
+      initiatives:
+        index_header:
+          new_initiative: New initiative
     menu:
       help: Help
     pages:
