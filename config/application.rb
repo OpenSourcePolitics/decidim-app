@@ -50,6 +50,8 @@ module DecidimApp
       require "extends/cells/decidim/user_activity_cell_extends"
       # models
       require "extends/models/decidim/accountability/result_extends"
+      # permissions
+      require "extends/permissions/initiatives/permissions_extends"
       # presenters
       require "extends/presenters/decidim/forms/admin/questionnaire_answer_presenter_extends"
     end
