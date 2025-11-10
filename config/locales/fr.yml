@@ -164,9 +164,35 @@ fr:
               most_voted: Les plus votés
               random: Ordre aléatoire
     devise:
+      omniauth_registrations:
+        create:
+          email_already_exists: Un autre compte utilise la même adresse email
+        new:
+          address: Adresse
+          birth_date: Date de naissance
+          birth_date_help: Vous devez avoir plus de 16 ans pour avoir accès à ce service.
+          certification: Je certifie l'exactitude de ces informations.
+          city: Ville
+          code: Code postal
+          complete_profile: Complétez votre profil
+          personal_data_step: Complétez votre profil
+          registration_info: Renseignez vos informations personnelles
+          sign_up: Renseignez vos informations personnelles
+          subtitle: Vous êtes sur le point de créer un compte sur la plateforme de pétitions du CESE.
+          terms: les termes et conditions d'utilisation
+          tos_agreement: En vous créant un compte, vous acceptez %{link}.
+          tos_title: Conditions d'utilisation
+      registrations:
+        form:
+          errors:
+            messages:
+              over_16: Vous devez avoir plus de 16 ans pour accéder à ce service.
       sessions:
         new:
           sign_in_disabled: Vous pouvez accéder avec un compte externe
+    errors:
+      not_found:
+        back_home: Retour à l'accueil
     events:
       budgets:
         pending_order:
@@ -303,24 +329,18 @@ fr:
             client_secret: Client secret
             site_url: Site URL
           france_connect:
-            client_id: Client ID
-            client_secret: Client secret
-            provider: FranceConnect
-            provider_name: FranceConnect
-            scope: Périmètre de données
-            site_url: Site URL
-          france_connect_profile:
-            button_path: Chemin du bouton
-            client_id: Client ID
-            client_secret: Client secret
-            provider_name: Provider name
-            site: Site URL
-          france_connect_uid:
-            button_path: Chemin du bouton
-            client_id: Client ID
-            client_secret: Client secret
-            provider_name: Provider name
-            site: Site URL
+            acr_values: ACR values
+            client_options_identifier: Client identifier
+            client_options_redirect_uri: Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
+            client_options_secret: Client secret
+            client_signing_alg: Client signing algorithm (e.g. RS256, ES256, PS256 ...)
+            display_name: Display name
+            icon_hover_path: Icon path for hover state (e.g. /media/images/oidc_hover.png)
+            issuer: Issuer URL (e.g. https://identity.com)
+            logout_path: Logout path (path after "/users/auth/openid_connect")
+            logout_policy: Logout policy (none/session.destroy)
+            post_logout_redirect_uri: Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
+            scope: Scope / Claims (e.g. openid email profile)
           openid_connect:
             client_options_identifier: Client ID
             client_options_redirect_uri: Redirection URL
@@ -358,13 +378,14 @@ fr:
       new:
         forgot_your_password: Mot de passe oublié ?
         send_me_reset_password_instructions: Envoyez-moi les instructions de réinitialisation du mot de passe
+    registrations:
+      signed_up_but_unconfirmed: Un message avec un lien de confirmation a été envoyé à votre adresse e-mail. Veuillez suivre le lien pour activer votre compte.
     sessions:
       new:
         sign_in: S'identifier
     shared:
       links:
         forgot_your_password: Mot de passe oublié ?
-        sign_in_with_france_connect: FranceConnect
   faker:
     address:
       country_code:

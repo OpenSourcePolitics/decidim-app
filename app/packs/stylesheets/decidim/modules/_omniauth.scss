@@ -1,0 +1,80 @@
+.button--social {
+  margin: 0 auto;
+  white-space: nowrap;
+
+  $icon-height: 32px;
+
+  // height: 2.8em;
+  padding-bottom: 0.6em;
+  margin-bottom: 1rem;
+
+  .button--social__icon {
+    display: block;
+    float: left;
+    padding: .35em .5em;
+
+    .icon {
+      width: 2em;
+      height: 2em;
+    }
+  }
+
+  .button--label {
+    display: inline-block;
+    padding-top: 0.6em;
+    line-height: 1.5rem;
+  }
+}
+
+.button--france_connect,
+.button--france_connect_uid,
+.button--france_connect_profile {
+  background-color: #034EA2;
+
+  &:hover {
+    background-color: #034EA2;
+  }
+
+  .button--label b {
+    white-space: nowrap;
+  }
+}
+
+.button--social--custom {
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  background-color: transparent;
+  max-width: 282px;
+
+  img.button--is-hover {
+    display: none;
+  }
+
+  &:hover, &:focus {
+    background-color: transparent;
+    filter: none;
+
+    img.button--has-hover {
+      display: none;
+    }
+    img.button--is-hover {
+      display: inline-block;
+    }
+  }
+}
+
+.social-register {
+  margin-bottom: 1rem;
+  text-align: center;
+
+  .explanation {
+    padding: 0.75rem 3rem;
+  }
+}
+
+a.button.small > .icon {
+  width: .65em;
+  height: .65em;
+  vertical-align: baseline;
+}

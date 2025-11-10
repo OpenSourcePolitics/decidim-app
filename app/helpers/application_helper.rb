@@ -8,8 +8,10 @@ module ApplicationHelper
   end
 
   # Public: renders SSO link as image
-  def sso_provider_image(provider, link_to_path, image_path = "media/images/FCboutons-10@2x.png")
-    ActionController::Base.helpers.link_to link_to_path, class: "button--#{normalize_full_provider_name(provider)}", method: :post do
+  def sso_provider_image(provider, link_to_path, image_path: "media/images/franceconnect-btn-principal@2x.png", link_class: nil)
+    css_class = link_class || "button--#{normalize_full_provider_name(provider)}"
+
+    ActionController::Base.helpers.link_to link_to_path, class: css_class, method: :post do
       image_pack_tag image_path,
                      alt: I18n.t("devise.shared.links.sign_in_with_provider",
                                  provider: normalize_full_provider_name(provider).titleize)

@@ -139,14 +139,6 @@ GIT
       decidim-core (~> 0.27.0)
 
 GIT
-  remote: https://github.com/OpenSourcePolitics/omniauth-france_connect
-  revision: cbf54f82e0ea55e7397004aa21905dce2b528674
-  branch: feat/omniauth_openid_connect--v0.7.1
-  specs:
-    omniauth-france_connect (0.1.0)
-      omniauth_openid_connect (~> 0.7.0)
-
-GIT
   remote: https://github.com/OpenSourcePolitics/omniauth-publik
   revision: ab703a565c402b773ce0025593554b329f603e5c
   specs:
@@ -1245,7 +1237,6 @@ DEPENDENCIES
   lograge
   multipart-post
   nokogiri (= 1.13.4)
-  omniauth-france_connect!
   omniauth-oauth2
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
