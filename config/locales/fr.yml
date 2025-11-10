@@ -164,6 +164,22 @@ fr:
               most_voted: Les plus votés
               random: Ordre aléatoire
     devise:
+      omniauth_registrations:
+        new:
+          address: Adresse
+          birth_date: Date de naissance
+          birth_date_help: Vous devez avoir au moins 18 ans pour utiliser cette plateforme
+          certification: Je certifie l'exactitude des informations fournies
+          city: Ville
+          code: Code postal
+          complete_profile: Compléter le profil
+          personal_data_step: Données personnelles
+          registration_info: Veuillez compléter votre profil avant de continuer
+          sign_up: S'inscrire
+          subtitle: Vous y êtes presque !
+          terms: conditions générales d'utilisation
+          tos_agreement: En vous inscrivant, vous acceptez les %{link}.
+          tos_title: Conditions générales d'utilisation
       sessions:
         new:
           sign_in_disabled: Vous pouvez accéder avec un compte externe

@@ -1,0 +1,30 @@
+// Omniauth buttons styling
+
+.social-register {
+  margin-bottom: 1rem;
+
+  &__provider {
+    text-align: center;
+  }
+}
+
+.omniauth-button {
+  display: inline-block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0.5rem auto;
+}
+
+.france-connect-button {
+  display: inline-block;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.external-link-container {
+  margin-top: 1rem;
+  display: block;
+}

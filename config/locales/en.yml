@@ -162,6 +162,22 @@ en:
               most_voted: Most supported
               random: Random
     devise:
+      omniauth_registrations:
+        new:
+          address: Address
+          birth_date: Birth date
+          birth_date_help: You must be at least 18 years old to use this platform
+          certification: I certify the accuracy of the information provided
+          city: City
+          code: Postal code
+          complete_profile: Complete profile
+          personal_data_step: Personal data
+          registration_info: Please complete your profile before continuing
+          sign_up: Sign up
+          subtitle: You are almost done!
+          terms: terms and conditions
+          tos_agreement: By signing up you agree to the %{link}.
+          tos_title: Terms and conditions
       sessions:
         new:
           sign_in_disabled: Sign in disabled
