@@ -6,6 +6,8 @@ module OmniauthRegistrationFormExtends
   extend ActiveSupport::Concern
 
   included do
+    # validates :email, "valid_email_2/email": { mx: true }
+    
     def normalized_nickname
       source = Rails.application.secrets.dig(:decidim, :omniauth, :ignore_nickname) ? name : (nickname || name)
       Decidim::UserBaseEntity.nicknamize(source, organization: current_organization)
