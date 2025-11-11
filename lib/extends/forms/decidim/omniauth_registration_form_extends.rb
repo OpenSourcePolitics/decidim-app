@@ -27,6 +27,11 @@ module OmniauthRegistrationFormExtends
     validates :tos_agreement, acceptance: true, presence: true
     validate :over_16?
 
+    def normalized_nickname
+      source = Rails.application.secrets.dig(:decidim, :omniauth, :ignore_nickname) ? name : (nickname || name)
+      Decidim::UserBaseEntity.nicknamize(source, organization: current_organization)
+    end
+
     private
 
     def over_16?
@@ -35,11 +40,6 @@ module OmniauthRegistrationFormExtends
 
       errors.add :base, I18n.t("decidim.devise.registrations.form.errors.messages.over_16")
       errors.add :birth_date, I18n.t("decidim.devise.registrations.form.errors.messages.over_16")
-    end
-
-    def normalized_nickname
-      source = Rails.application.secrets.dig(:decidim, :omniauth, :ignore_nickname) ? name : (nickname || name)
-      Decidim::UserBaseEntity.nicknamize(source, organization: current_organization)
     end
   end
 end

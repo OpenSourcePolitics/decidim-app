@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   # Public: renders SSO link as image
-  def sso_provider_image(provider, link_to_path, image_path: "media/images/franceconnect-btn-principal@2x.png", link_class: nil)
+  def sso_provider_image(provider, link_to_path, image_path = "media/images/franceconnect-btn-principal@2x.png", link_class: nil)
     css_class = link_class || "button--#{normalize_full_provider_name(provider)}"
 
     ActionController::Base.helpers.link_to link_to_path, class: css_class, method: :post do

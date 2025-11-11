@@ -20,6 +20,7 @@ en:
         document: Document
   decidim:
     account:
+      blocked: This account has been blocked due to Terms and Conditions violation
       omniauth_synced_profile:
         helper:
           body_html: |-

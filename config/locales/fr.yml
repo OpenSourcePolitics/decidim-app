@@ -20,6 +20,7 @@ fr:
         document: Document
   decidim:
     account:
+      blocked: Ce compte a été bloqué en raison d'une violation des Conditions Générales d'Utilisation
       omniauth_synced_profile:
         helper:
           body_html: |-
