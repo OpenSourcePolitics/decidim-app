@@ -39,10 +39,12 @@ module DecidimApp
       require "extends/controllers/decidim/devise/omniauth_registrations_controller_extends"
       require "extends/controllers/decidim/participatory_processes/participatory_processes_controller_extends"
       require "extends/controllers/decidim/budgets/projects_controller_extends"
+      require "extends/controllers/decidim/proposals/admin/proposal_states_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       require "extends/helpers/decidim/omniauth_helper_extends"
       require "extends/helpers/decidim/menu_helper_extends"
+      require "extends/helpers/decidim/proposals/application_helper_extends"
       # cells
       require "extends/cells/decidim/system/system_checks_cell_extends"
       require "extends/cells/decidim/comments/comment_metadata_cell_extends"
@@ -50,6 +52,7 @@ module DecidimApp
       require "extends/cells/decidim/user_activity_cell_extends"
       # models
       require "extends/models/decidim/accountability/result_extends"
+      require "extends/models/decidim/proposals/proposal_state_extends"
       # presenters
       require "extends/presenters/decidim/forms/admin/questionnaire_answer_presenter_extends"
     end
