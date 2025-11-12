@@ -7,17 +7,25 @@
 module Decidim
   module InstantSpamMailBlocker
     def send_report_notification_to_moderators
-      return if @report.reason.to_s == "spam"
+      return if spam_report? && !frequency_notifications_is_realtime?(@report.moderation.participatory_space.organization.admins)
 
-      Rails.logger.info("[Decidim-AI] 🧩 Skipped spam mail for moderator report ID=#{@report.id}")
       super
     end
 
     def send_notification_to_admins!
-      return if @report.reason.to_s == "spam"
+      return if spam_report? && !frequency_notifications_is_realtime?(@report.moderation.user.organization.admins)
 
-      Rails.logger.info("[Decidim-AI] send_notification_to_admins! USER Skipped spam mail for moderator report ID=#{@report.id}")
       super
+    end
+
+    private
+
+    def spam_report?
+      @report.reason.to_s == "spam"
+    end
+
+    def frequency_notifications_is_realtime?(admins)
+      admins.any? { |a| a.notifications_sending_frequency == "realtime" }
     end
   end
 end
