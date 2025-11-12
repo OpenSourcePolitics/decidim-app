@@ -104,6 +104,9 @@ ignore_missing:
   - decidim.metadata.progress.remaining
   - decidim.devise.shared.links.log_in_with_user
   - decidim.core.application_helper.filter_area_values.all
+  - decidim.accessibility.front_page_link
+  - decidim.accessibility.logo
+  - decidim.errors.not_found.back_home
 
 # Consider these keys used:
 ignore_unused:
