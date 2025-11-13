@@ -3,71 +3,110 @@ FROM ruby:3.2.2-slim as builder
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
 ARG DOCKER_IMAGE
+ARG TARGETARCH
 
 ENV RAILS_ENV=production \
     NODE_ENV=production \
-    SECRET_KEY_BASE=dummy
+    SECRET_KEY_BASE=dummy \
+    BUNDLE_JOBS=8 \
+    MAKEFLAGS="-j8" \
+    NODE_OPTIONS="--max-old-space-size=4096" \
+    EXECJS_RUNTIME=Node
 
 WORKDIR /opt/decidim
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev curl git libicu-dev build-essential wkhtmltopdf \
-    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt-get install -y --no-install-recommends nodejs \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    rm -f /var/lib/apt/lists/lock && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    libpq-dev curl git libicu-dev build-essential xz-utils \
+    libssl3 libxrender1 libxext6 libfontconfig1 xfonts-75dpi xfonts-base \
+    && NODE_VERSION=22.12.0 \
+    && case "${TARGETARCH}" in \
+         "amd64")  NODE_ARCH="linux-x64" ;; \
+         "arm64")  NODE_ARCH="linux-arm64" ;; \
+         *)        echo "Unsupported architecture: ${TARGETARCH}" && exit 1 ;; \
+       esac \
+    && curl -fsSLO https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-${NODE_ARCH}.tar.xz \
+    && tar -xJf node-v${NODE_VERSION}-${NODE_ARCH}.tar.xz -C /usr/local --strip-components=1 \
+    && rm node-v${NODE_VERSION}-${NODE_ARCH}.tar.xz \
     && npm install --global yarn \
     && gem install bundler:2.5.22 \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    && WKHTML_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "arm64" || echo "amd64") \
+    && curl -fsSL "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_${WKHTML_ARCH}.deb" -o /tmp/wkhtmltox.deb \
+    && apt-get install -y --no-install-recommends /tmp/wkhtmltox.deb \
+    && rm /tmp/wkhtmltox.deb
 
 COPY Gemfile Gemfile.lock ./
 
-RUN bundle config set --local without 'development test' && \
-    bundle install -j"$(nproc)"
+RUN --mount=type=cache,target=/usr/local/bundle/cache \
+    --mount=type=cache,target=/root/.bundle \
+    bundle config set --local without 'development test' && \
+    bundle install -j8 --retry 3
 
 COPY . .
 
-RUN bundle exec rake decidim:webpacker:install && \
-    bundle exec rake assets:precompile && \
-    bundle exec rails deface:precompile && \
-    bundle exec rails shakapacker:compile
+RUN --mount=type=cache,target=/opt/decidim/tmp/cache \
+    --mount=type=cache,target=/root/.npm \
+    --mount=type=cache,target=/root/.cache/yarn \
+    --mount=type=cache,target=/opt/decidim/node_modules/.cache \
+    bundle exec rake decidim:webpacker:install assets:precompile deface:precompile shakapacker:compile
 
-RUN rm -rf node_modules tmp/cache vendor/bundle/spec \
+RUN rm -rf node_modules tmp/cache vendor/bundle/spec .git .gitignore .dockerignore \
     && rm -rf /usr/local/bundle/cache/*.gem \
-    && find /usr/local/bundle/gems/ -name "*.c" -delete \
-    && find /usr/local/bundle/gems/ -name "*.o" -delete \
-    && find /usr/local/bundle/bundler/gems/ -type d -name "spec" -prune -exec rm -rf {} \; \
-    && find /usr/local/bundle/bundler/gems/decidim-* -type d -name "db/migrate" -prune -exec rm -rf {} \; \
-    && find /usr/local/bundle/bundler/gems/decidim-* -type d -name "docs" -prune -exec rm -rf {} \; \
-    && rm -rf log/*.log
+    && find /usr/local/bundle/gems/ \( -name "*.c" -o -name "*.o" -o -name "*.h" \) -delete \
+    && find /usr/local/bundle/bundler/gems/ -type d \( -name "spec" -o -name "test" \) -exec rm -rf {} + 2>/dev/null || true \
+    && find /usr/local/bundle/bundler/gems/decidim-* -type d -name "db" -exec sh -c 'rm -rf "$0/migrate"' {} \; 2>/dev/null || true \
+    && find /usr/local/bundle/bundler/gems/decidim-* -type d -name "docs" -exec rm -rf {} + 2>/dev/null || true \
+    && rm -rf log/*.log tmp/* public/packs-test
 
 FROM ruby:3.2.2-slim as runner
 
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
 ARG DOCKER_IMAGE
+ARG TARGETARCH
 
 ENV RAILS_ENV=production \
     NODE_ENV=production \
     SECRET_KEY_BASE=dummy \
     DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME:-decidim-app} \
     DOCKER_IMAGE_TAG=${DOCKER_IMAGE_TAG:-latest} \
-    DOCKER_IMAGE=${DOCKER_IMAGE:-rg.fr-par.scw.cloud/decidim-app/decidim-app}
+    DOCKER_IMAGE=${DOCKER_IMAGE:-rg.fr-par.scw.cloud/decidim-app/decidim-app} \
+    MALLOC_ARENA_MAX=2 \
+    RUBY_YJIT_ENABLE=1
 
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client imagemagick libproj-dev proj-bin p7zip-full wkhtmltopdf libgeos-dev \
-    && gem install bundler:2.5.22 \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    rm -f /var/lib/apt/lists/lock && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    postgresql-client imagemagick libproj-dev proj-bin p7zip-full libgeos-dev libjemalloc2 \
+    libssl3 libxrender1 libxext6 libfontconfig1 xfonts-75dpi xfonts-base curl \
+    && WKHTML_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "arm64" || echo "amd64") \
+    && curl -fsSL "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_${WKHTML_ARCH}.deb" -o /tmp/wkhtmltox.deb \
+    && apt-get install -y --no-install-recommends /tmp/wkhtmltox.deb \
+    && rm /tmp/wkhtmltox.deb \
+    && apt-get remove -y curl \
+    && apt-get autoremove -y \
+    && JEMALLOC_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "aarch64" || echo "x86_64") \
+    && echo '#!/bin/bash' > /usr/local/bin/docker-entrypoint.sh \
+    && echo 'set -e' >> /usr/local/bin/docker-entrypoint.sh \
+    && echo "export LD_PRELOAD=/usr/lib/${JEMALLOC_ARCH}-linux-gnu/libjemalloc.so.2" >> /usr/local/bin/docker-entrypoint.sh \
+    && echo 'exec "$@"' >> /usr/local/bin/docker-entrypoint.sh \
+    && chmod +x /usr/local/bin/docker-entrypoint.sh \
+    && gem install bundler:2.5.22
 
 RUN groupadd --gid 1000 decidim && \
     useradd --uid 1000 --gid decidim --create-home --shell /bin/bash decidim
 
 WORKDIR /opt/decidim
 
-COPY --from=builder /usr/local/bundle /usr/local/bundle
-COPY --from=builder /opt/decidim /opt/decidim
+COPY --from=builder --chown=decidim:decidim /usr/local/bundle /usr/local/bundle
+COPY --from=builder --chown=decidim:decidim /opt/decidim /opt/decidim
 
-RUN chown -R decidim:decidim /opt/decidim
 USER decidim
 
 EXPOSE 3000
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

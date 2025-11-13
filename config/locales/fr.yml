@@ -2,8 +2,18 @@
 fr:
   activemodel:
     attributes:
+      another_dummy_authorization_handler:
+        passport_number: Numéro de passeport
+        postal_code: Code postal
       assembly:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
+      dummy_authorization_handler:
+        birthday: Date de naissance
+        document_number: Numéro unique
+        postal_code: Code postal
+        scope_id: Secteur
+      osp_authorization_handler:
+        document_number: Numéro unique
       participatory_process:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
   date:
@@ -61,6 +71,37 @@ fr:
             Résumé anti-spam IA pour %{organization} :
             %{count} spams ont été automatiquement détectés %{frequency_label}.
             <a href="%{moderations_url}" target="_blank">Voir les spams détectés</a>.
+    authorization_handlers:
+      data_authorization_handler:
+        errors:
+          error_message: Ce champ contient une erreur
+          gdpr: Vous devez accepter les mentions légales
+          minimum_age: Vous devez avoir plus de 16 ans pour pouvoir vous inscrire
+          no_postal_code_result: Aucun résultat trouvé pour ce code postal
+        explanation: Vérifier votre identité
+        fields:
+          city: Ville
+          firstname: Prénom
+          gdpr: J'accepte la collecte de mes données personnelles pour l'instruction de mes propositions au budget participatif ou encore à des fins statistiques. Voir le détail du traitement réalisé sur les données à caractères personnelles dans le cadre du budget participatif
+          lastname: Nom
+          minimum_age: J'atteste avoir plus de 16 ans
+          phone: Numéro de téléphone
+          postal_code: Code postal
+        help_text:
+          city: Votre ville dépend de votre code postal, veuillez sélectionner votre ville dans la liste déroulante
+          firstname: Votre prénom doit comporter au moins 1 caractère et n'être composé que de lettres, d'espaces et de caractères spéciaux tels que - et '
+          global_help: Il est nécessaire de compléter ce formulaire pour déposer une proposition dans le budget participatif
+          lastname: Votre nom doit comporter au moins 1 caractère et n'être composé que de lettres, d'espaces et de caractères spéciaux tels que - et '
+          postal_code: Votre code postal doit être composé de 5 chiffres
+        legend: Informations de contact
+        name: Procédure de partage de données
+      osp_authorization_handler:
+        explanation: Vérifier votre identité en saisissant un numéro unique
+        fields:
+          document_number: Numéro unique
+        name: Formulaire de vérification d'identité
+      osp_authorization_workflow:
+        name: Procédure d'autorisation
     comments:
       comments:
         create:
@@ -87,6 +128,8 @@ fr:
           email_subject: Votre proposition a été publiée !
           notification_title: Votre proposition <a href="%{resource_path}">%{resource_title}</a> est maintenant en ligne.
     forms:
+      questionnaire_answer_presenter:
+        download_attachment: Télécharger la pièce jointe
       questionnaires:
         answers:
           files:
@@ -160,6 +203,28 @@ fr:
       show:
         activity: Activité
     proposals:
+      actions:
+        delete_proposal_state_confirm: Etes-vous sûr(e) de vouloir supprimer cet état?
+        destroy: Supprimer l'état
+        edit_proposal_state: Modifier l'état
+        new_proposal_state: Nouvel état
+        title: Actions
+      admin:
+        proposal_states:
+          index:
+            title: États
+          update:
+            error: Erreur lors de la mise à jour de l'état
+            success: Etat mis à jour avec succès
+      application_helper:
+        filter_state_values:
+          all: Tout
+          not_answered: En attente de réponse
+      models:
+        proposal_state:
+          css_class: Classe CSS
+          title: État
+      no_proposal_states: Aucun état de proposition n'a encore été créé.
       proposals:
         dynamic_map_instructions:
           description: Les coordonnées seront mises à jour en cliquant sur le bouton 'Aperçu'. Cependant, l'adresse ne change pas.
@@ -178,6 +243,10 @@ fr:
     system:
       organizations:
         omniauth_settings:
+          cultuur_connect:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
           france_connect:
             acr_values: ACR values
             client_options_identifier: Client identifier
@@ -211,8 +280,17 @@ fr:
             client_id: Client ID
             client_secret: Client secret
             site_url: Site URL
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            osp_authorization_handler: Vérifier avec le formulaire de vérification de l'identité
+            osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
   layouts:
     decidim:
+      budgets:
+        voting_menubar:
+          cancel_voting: Sortir de la cabine de vote
       footer:
         help: Aide
   time:

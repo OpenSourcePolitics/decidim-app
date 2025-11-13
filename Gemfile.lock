@@ -821,7 +821,7 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (2.2.14)
+    rack (2.2.20)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
     rack-cors (1.1.1)
@@ -900,7 +900,7 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.3.9)
+    rexml (3.4.4)
     rgeo (3.0.1)
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
@@ -1040,7 +1040,7 @@ GEM
     unaccent (0.4.0)
     unicode-display_width (2.6.0)
     uniform_notifier (1.16.0)
-    uri (1.0.3)
+    uri (1.0.4)
     valid_email2 (4.0.6)
       activemodel (>= 3.2)
       mail (~> 2.5)
@@ -1083,6 +1083,7 @@ GEM
       ostruct
     wisper (2.0.1)
     wisper-rspec (1.1.0)
+    wkhtmltopdf-binary (0.12.6.6)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.1)
@@ -1144,22 +1145,26 @@ DEPENDENCIES
   memory_profiler
   net-imap (>= 0.5.6)
   nokogiri (>= 1.18.9)
+  omniauth-oauth2
   omniauth-publik!
   omniauth-rails_csrf_protection (~> 1.0)
   omniauth_openid_connect
   parallel_tests (~> 4.2)
   puma (>= 6.3.1)
-  rack (~> 2.2.14)
+  rack (~> 2.2.20)
   rack-attack (~> 6.7)
   rack-mini-profiler
+  rexml (>= 3.4.2)
   rgeo
   rgeo-activerecord
   sidekiq (~> 6.0)
   sidekiq-scheduler (~> 5.0)
   spring
   stackprof
-  uri (>= 1.0.3)
+  uri (>= 1.0.4)
   web-console (~> 4.2)
+  wicked_pdf (~> 2.8, >= 2.8.2)
+  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 3.2.2p53

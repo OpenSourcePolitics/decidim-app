@@ -24,15 +24,20 @@ gem "rack-attack", "~> 6.7"
 gem "rgeo"
 gem "rgeo-activerecord"
 
+# Fix for WickedPdf compatibility issues
+gem "wicked_pdf", "~> 2.8", ">= 2.8.2"
+
 # gems updated with bundle-audit
 gem "actionpack", "~> 7.0.8.7"
 gem "graphql", "~> 2.2.17"
 gem "net-imap", ">= 0.5.6"
 gem "nokogiri", ">= 1.18.9"
-gem "rack", "~> 2.2.14"
-gem "uri", ">= 1.0.3"
+gem "rack", "~> 2.2.20"
+gem "rexml", ">= 3.4.2"
+gem "uri", ">= 1.0.4"
 
 # omniauth
+gem "omniauth-oauth2"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik.git", branch: "feat/update_to_0.29"
 
 # Load Budgets Booth to avoid errors
@@ -73,6 +78,7 @@ group :development do
   gem "rack-mini-profiler", require: false
   gem "stackprof"
   gem "web-console", "~> 4.2"
+  gem "wkhtmltopdf-binary"
 end
 
 group :production do

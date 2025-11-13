@@ -56,6 +56,39 @@ module CopyParticipatoryProcessExtends
         new_block.save!
       end
     end
+
+    def copy_participatory_process_components
+      new_component_id = nil
+      @participatory_process.components.each do |component|
+        copied_step_settings = @form.copy_steps? ? map_step_settings(component.step_settings) : {}
+        new_component = Decidim::Component.create!(
+          manifest_name: component.manifest_name,
+          name: component.name,
+          participatory_space: @copied_process,
+          settings: component.settings,
+          step_settings: copied_step_settings,
+          weight: component.weight
+        )
+        new_component_id = new_component.id if new_component.manifest_name == "proposals"
+        component.manifest.run_hooks(:copy, new_component:, old_component: component)
+      end
+      component_id = @participatory_process.components.where(manifest_name: "proposals")&.first&.id
+      proposal_states = Decidim::Proposals::ProposalState.where(decidim_component_id: component_id) if component_id
+      copy_proposal_states(proposal_states, new_component_id) if proposal_states
+    end
+
+    def copy_proposal_states(states, new_component_id)
+      states.each do |state|
+        Decidim::Proposals::ProposalState.create!(
+          decidim_component_id: new_component_id,
+          title: state.title,
+          text_color: state.text_color,
+          bg_color: state.bg_color,
+          announcement_title: state.announcement_title,
+          token: state.token
+        )
+      end
+    end
   end
 end
 

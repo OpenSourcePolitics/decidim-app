@@ -1,4 +1,10 @@
 $(document).ready(() => {
+    const scopesList = document.querySelector(".js-list-scopes");
+
+    if (!scopesList) {
+        return;
+    }
+
     let activeBlocks = Array.prototype.slice.call(document.querySelectorAll(".js-list-scopes li"));
     const defaultOrder = activeBlocks.map(block => block.dataset.scopeId);
 

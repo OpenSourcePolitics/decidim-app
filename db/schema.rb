@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_07_08_085825) do
+ActiveRecord::Schema[7.0].define(version: 2025_10_31_143932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
@@ -1750,6 +1750,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_08_085825) do
     t.integer "proposals_count", default: 0, null: false
     t.string "bg_color", default: "#F6F8FA", null: false
     t.string "text_color", default: "#4B5058", null: false
+    t.integer "weight"
     t.index ["decidim_component_id"], name: "index_decidim_proposals_proposal_states_on_decidim_component_id"
   end
 

@@ -13,14 +13,17 @@
 .env
 .dockerignore
 Procfile
-tmp
-log
+tmp/
+log/
 docs
-node_modules
-storage
+node_modules/
+storage/
 vendor/
-public/packs-test
-public/uploads
+public/packs-test/
+public/uploads/
+public/assets/
+public/packs/
+public/decidim-packs/
 spec
 deploy
 
@@ -31,3 +34,4 @@ OVERLOADS.md
 Makefile
 
 backups
+minio_data/

@@ -4,11 +4,13 @@ en:
     attributes:
       assembly:
         copy_landing_page_blocks: Copy landing page blocks
+      osp_authorization_handler:
+        document_number: Unique number
       participatory_process:
         copy_landing_page_blocks: Copy landing page blocks
   date:
     formats:
-      order: "%Y-%m-%d"
+      order: d-m-y
   decidim:
     account:
       omniauth_synced_profile:
@@ -61,6 +63,37 @@ en:
             Your AI spam detection summary for %{organization}:
             %{count} spam items were automatically detected %{frequency_label}.
             <a href="%{moderations_url}" target="_blank">View detected spams</a>.
+    authorization_handlers:
+      data_authorization_handler:
+        errors:
+          error_message: This field contains an error
+          gdpr: You must accept the terms and conditions
+          minimum_age: You must be over 16 years old to register
+          no_postal_code_result: No result found for this postal code
+        explanation: Verify your identity
+        fields:
+          city: City
+          firstname: Firstname
+          gdpr: I accept that my data will be used to verify my identity
+          lastname: Lastname
+          minimum_age: I confirm that I am over 16 years old
+          phone: Phone number
+          postal_code: Zip code
+        help_text:
+          city: Your city depends on your postal code, please select your city from the dropdown list
+          firstname: Your firstname must contain at least 1 character and be composed only of letters, spaces and special characters such as - and '
+          global_help: It is necessary to complete this form to submit a proposal in the participatory budget.
+          lastname: Your lastname must contain at least 1 character and be composed only of letters, spaces and special characters such as - and '
+          postal_code: Your postal code must be composed of 5 digits
+        legend: Contact information
+        name: Data Sharing Process
+      osp_authorization_handler:
+        explanation: Verify your identity by entering a unique number
+        fields:
+          document_number: Unique number
+        name: Identity Verification Form
+      osp_authorization_workflow:
+        name: Authorization procedure
     comments:
       comments:
         create:
@@ -87,6 +120,8 @@ en:
           email_subject: Your proposal has been published!
           notification_title: Your proposal <a href="%{resource_path}">%{resource_title}</a> is now live.
     forms:
+      questionnaire_answer_presenter:
+        download_attachment: Download attachment
       questionnaires:
         answers:
           files:
@@ -157,6 +192,28 @@ en:
       show:
         activity: Activity
     proposals:
+      actions:
+        delete_proposal_state_confirm: Are you sure you want to delete this state?
+        destroy: Delete state
+        edit_proposal_state: Edit state
+        new_proposal_state: New status
+        title: Actions
+      admin:
+        proposal_states:
+          index:
+            title: Statuses
+          update:
+            error: Error updating status
+            success: Status updated successfully
+      application_helper:
+        filter_state_values:
+          all: All
+          not_answered: Not answered
+      models:
+        proposal_state:
+          css_class: CSS class
+          title: Status
+      no_proposal_states: No statuses have been created yet.
       proposals:
         dynamic_map_instructions:
           description: The coordinates will be updated when clicking on 'preview' button. However, the address does not change.
@@ -175,6 +232,10 @@ en:
     system:
       organizations:
         omniauth_settings:
+          cultuur_connect:
+            client_id: Client ID
+            client_secret: Client secret
+            site_url: Site URL
           france_connect:
             acr_values: ACR values
             client_options_identifier: Client identifier
@@ -208,8 +269,17 @@ en:
             client_id: Client ID
             client_secret: Client secret
             site_url: Site URL
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            osp_authorization_handler: Verify with the identity verification form
+            osp_authorization_workflow: Verify with the identity verification form
   layouts:
     decidim:
+      budgets:
+        voting_menubar:
+          cancel_voting: Exit voting booth
       footer:
         help: Help
   time:
