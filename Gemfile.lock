@@ -30,6 +30,15 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-anonymous_proposals.git
+  revision: a4dae9ded580c8960f39564909f9b17794970d79
+  branch: bump/0.29
+  specs:
+    decidim-anonymous_proposals (0.29.3)
+      decidim-core (>= 0.29.3)
+      deface (~> 1.9)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner.git
   revision: 2660f6d46640fbab0d1f5fe9ce08050274c09fb0
   specs:
@@ -1120,6 +1129,7 @@ DEPENDENCIES
   decidim-admin_multi_factor!
   decidim-ai!
   decidim-ai_third_party!
+  decidim-anonymous_proposals!
   decidim-budgets_booth!
   decidim-cache_cleaner!
   decidim-cleaner!
