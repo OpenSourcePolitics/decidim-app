@@ -46,7 +46,6 @@ gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decid
 gem "decidim-guest_meeting_registration", git: "https://github.com/alecslupu-pfa/guest-meeting-registration.git", branch: DECIDIM_BRANCH
 # Omniauth gems
 
-gem "omniauth-france_connect", git: "https://github.com/OpenSourcePolitics/omniauth-france_connect", branch: "feat/omniauth_openid_connect--v0.7.1"
 gem "omniauth-oauth2"
 gem "omniauth_openid_connect"
 gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik"

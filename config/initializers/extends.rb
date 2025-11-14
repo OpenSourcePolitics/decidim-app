@@ -10,3 +10,4 @@ require "extends/lib/decidim/forms/user_answers_serializer_extend"
 require "extends/lib/decidim/geocoding/geocoder_coordinates_extends"
 
 require "extends/omniauth/strategies/openid_connect_extends"
+require "extends/openid_connect/access_token_extends"

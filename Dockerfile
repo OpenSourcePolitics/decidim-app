@@ -44,6 +44,9 @@ RUN apt update && \
     apt install -y postgresql-client imagemagick libproj-dev proj-bin libjemalloc2 p7zip-full && \
     gem install bundler:2.4.9
 
+ADD https://letsencrypt.org/certs/isrg-root-x2.pem  /etc/ssl/certs/ISRG_ROOT_X2.pem
+RUN chmod 644 /etc/ssl/certs/ISRG_ROOT_X2.pem && update-ca-certificates && c_rehash
+
 WORKDIR /app
 
 COPY --from=builder /usr/local/bundle /usr/local/bundle
