@@ -166,32 +166,9 @@ en:
       omniauth_registrations:
         create:
           email_already_exists: Another account is using the same email address
-        new:
-          address: Address
-          birth_date: Date of birth
-          birth_date_help: You must be over 16 years old to access this service.
-          certification: CESE Certification
-          city: City
-          code: Postal code
-          complete_profile: Complete profile
-          personal_data_step: Complete your profile
-          registration_info: Please complete your profile
-          sign_up: Sign up
-          subtitle: Create your account
-          terms: the terms and conditions of use
-          tos_agreement: By signing up you agree to %{link}.
-          tos_title: Terms of Service
-      registrations:
-        form:
-          errors:
-            messages:
-              over_16: You must be over 16 years old to access this service.
       sessions:
         new:
           sign_in_disabled: Sign in disabled
-    errors:
-      not_found:
-        back_home: Back to home
     events:
       budgets:
         pending_order:

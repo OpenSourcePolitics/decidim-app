@@ -168,32 +168,9 @@ fr:
       omniauth_registrations:
         create:
           email_already_exists: Un autre compte utilise la même adresse email
-        new:
-          address: Adresse
-          birth_date: Date de naissance
-          birth_date_help: Vous devez avoir plus de 16 ans pour avoir accès à ce service.
-          certification: Je certifie l'exactitude de ces informations.
-          city: Ville
-          code: Code postal
-          complete_profile: Complétez votre profil
-          personal_data_step: Complétez votre profil
-          registration_info: Renseignez vos informations personnelles
-          sign_up: Renseignez vos informations personnelles
-          subtitle: Vous êtes sur le point de créer un compte sur la plateforme de pétitions du CESE.
-          terms: les termes et conditions d'utilisation
-          tos_agreement: En vous créant un compte, vous acceptez %{link}.
-          tos_title: Conditions d'utilisation
-      registrations:
-        form:
-          errors:
-            messages:
-              over_16: Vous devez avoir plus de 16 ans pour accéder à ce service.
       sessions:
         new:
           sign_in_disabled: Vous pouvez accéder avec un compte externe
-    errors:
-      not_found:
-        back_home: Retour à l'accueil
     events:
       budgets:
         pending_order:
