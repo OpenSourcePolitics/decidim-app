@@ -4,8 +4,6 @@ module SessionControllerExtends
   extend ActiveSupport::Concern
 
   included do
-    include Decidim::AfterSignInActionHelper
-
     def destroy
       if active_omniauth_session?
         provider = session.delete("omniauth.provider")
@@ -31,8 +29,6 @@ module SessionControllerExtends
     end
 
     def after_sign_in_path_for(user)
-      after_sign_in_action_for(user, request.params[:after_action]) if request.params[:after_action].present?
-
       if user.present? && user.blocked?
         check_user_block_status(user)
       elsif !skip_first_login_authorization? && (first_login_and_not_authorized?(user) && !user.admin? && !pending_redirect?(user))
