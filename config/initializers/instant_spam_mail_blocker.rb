@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Patch to stop instant spam report emails from Decidim-AI.
-# Allows the Spam Summary Digest to manage notifications (daily, weekly, or none)
+# Patch to stop instant spam report emails from Decidim-AI when frequency is daily, weekly
+# Allows the Spam Summary Digest to manage notifications (daily, weekly)
 # instead of non-configurable real-time emails from Decidim-ai report
 
 module Decidim
