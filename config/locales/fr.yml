@@ -67,10 +67,9 @@ fr:
             daily: aujourd’hui
             weekly: cette semaine
           subject: Résumé anti-spam, %{count} spams détectés (%{frequency_label})
-          summary: >
-            Résumé anti-spam IA pour %{organization} :
-            %{count} spams ont été automatiquement détectés %{frequency_label}.
-            <a href="%{moderations_url}" target="_blank">Voir les spams détectés</a>.
+          summary: 'Résumé anti-spam IA pour %{organization} : %{count} spams ont été automatiquement détectés %{frequency_label}. <a href="%{moderations_url}" target="_blank">Voir les spams détectés</a>.
+
+            '
     authorization_handlers:
       data_authorization_handler:
         errors:
