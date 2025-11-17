@@ -1,0 +1,67 @@
+<% add_decidim_page_title(t(".title")) %>
+<div class="card">
+  <div class="item_show__header">
+    <h1 class="item_show__header-title">
+      <%= t(".title") %>
+      <%= link_to t("actions.new_proposal_state", scope: "decidim.proposals"), new_proposal_state_path, class: "button button__sm button__secondary" if allowed_to? :create, :proposal_state %>
+    </h1>
+  </div>
+
+  <% if proposal_states.any? %>
+    <div class="table-scroll mt-16">
+      <table class="table-list">
+        <thead>
+        <tr>
+          <th class="!text-left">
+            <%= t("models.proposal_state.title", scope: "decidim.proposals") %>
+          </th>
+          <th>
+            <%= t("models.proposal_state.css_class", scope: "decidim.proposals") %>
+          </th>
+          <th><%= t("actions.title", scope: "decidim.proposals") %></th>
+        </tr>
+        </thead>
+      </table>
+      <table>
+        <tbody>
+        <ul class="draggable-list js-connect js-list-proposal-states" data-sort-url="<%= proposal_state_path('refresh_proposal_states') %>">
+          <% proposal_states.each do |state| %>
+            <li draggable="true" data-proposal-state-id="<%= state.id %>" class="custom-list">
+              <div class="draggable-content">
+                <div class="draggable-content__title">
+                  <%= icon "drag-move-2-fill", class: "icon--small", role: "img", "aria-hidden": true %>
+                  <span class="custom-text" style="margin-left: 0.5rem;">
+                    <%= translated_attribute(state.title) %>
+                  </span>
+                </div>
+                <div class="draggable-content__middle">
+                  <strong class="label" style="<%= state.css_style %>">
+                    <%= decidim_sanitize_translated(state.token) %>
+                  </strong>
+                </div>
+                <div class="draggable-content__icons">
+                  <% if allowed_to? :update, :proposal_state, proposal_state: state %>
+                    <%= icon_link_to "pencil-line", edit_proposal_state_path(state), t("actions.edit_proposal_state", scope: "decidim.proposals"), class: "action-icon--edit-proposal", method: :get, data: {} %>
+                  <% else %>
+                    <span class="action-space icon"></span>
+                  <% end %>
+                  <% if allowed_to?(:destroy, :proposal_state, proposal_state: state) %>
+                    <%= icon_link_to "close-circle-line", proposal_state_path(state), t("actions.destroy", scope: "decidim.proposals"), class: "action-icon--remove", method: :delete, data: { confirm: t("actions.delete_proposal_state_confirm", scope: "decidim.proposals") } %>
+                  <% end %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p><%= t("no_proposal_states", scope: "decidim.proposals") %></p>
+  <% end %>
+</div>
+
+<%= decidim_paginate proposal_states %>
+
+<%= append_stylesheet_pack_tag "decidim_custom_proposal_states", media: "all" %>
+<%= append_javascript_pack_tag 'application' %>

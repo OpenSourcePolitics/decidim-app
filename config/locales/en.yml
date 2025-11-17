@@ -184,6 +184,28 @@ en:
       show:
         activity: Activity
     proposals:
+      actions:
+        delete_proposal_state_confirm: Are you sure you want to delete this state?
+        destroy: Delete state
+        edit_proposal_state: Edit state
+        new_proposal_state: New status
+        title: Actions
+      admin:
+        proposal_states:
+          index:
+            title: Statuses
+          update:
+            error: Error updating status
+            success: Status updated successfully
+      application_helper:
+        filter_state_values:
+          all: All
+          not_answered: Not answered
+      models:
+        proposal_state:
+          css_class: CSS class
+          title: Status
+      no_proposal_states: No statuses have been created yet.
       proposals:
         dynamic_map_instructions:
           description: The coordinates will be updated when clicking on 'preview' button. However, the address does not change.
