@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_07_08_085825) do
+ActiveRecord::Schema[7.0].define(version: 2025_11_07_144743) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
-  enable_extension "postgis"
 
   create_table "active_hashcash_stamps", force: :cascade do |t|
     t.string "version", null: false
@@ -60,6 +59,44 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_08_085825) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "dataspace_authors", force: :cascade do |t|
+    t.bigint "interoperable_id", null: false
+    t.string "name"
+    t.index ["interoperable_id"], name: "index_dataspace_authors_on_interoperable_id"
+  end
+
+  create_table "dataspace_containers", force: :cascade do |t|
+    t.bigint "interoperable_id", null: false
+    t.bigint "parent_id"
+    t.string "name"
+    t.string "description"
+    t.index ["interoperable_id"], name: "index_dataspace_containers_on_interoperable_id"
+    t.index ["parent_id"], name: "index_dataspace_containers_on_parent_id"
+  end
+
+  create_table "dataspace_contributions", force: :cascade do |t|
+    t.bigint "interoperable_id", null: false
+    t.string "title"
+    t.string "content"
+    t.string "locale"
+    t.jsonb "translations", default: {}
+    t.bigint "parent_id"
+    t.bigint "container_id", null: false
+    t.index ["container_id"], name: "index_dataspace_contributions_on_container_id"
+    t.index ["interoperable_id"], name: "index_dataspace_contributions_on_interoperable_id"
+    t.index ["parent_id"], name: "index_dataspace_contributions_on_parent_id"
+  end
+
+  create_table "dataspace_interoperables", force: :cascade do |t|
+    t.string "reference", null: false
+    t.string "source", null: false
+    t.datetime "deleted_at", precision: nil
+    t.jsonb "metadata", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reference"], name: "index_dataspace_interoperables_on_reference", unique: true
   end
 
   create_table "decidim_accountability_results", id: :serial, force: :cascade do |t|
@@ -759,6 +796,12 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_08_085825) do
     t.index ["section_id"], name: "index_decidim_contextual_help_sections_on_section_id"
   end
 
+  create_table "decidim_contributions_authors", id: false, force: :cascade do |t|
+    t.bigint "contribution_id", null: false
+    t.bigint "author_id", null: false
+    t.index ["contribution_id", "author_id"], name: "index_on_contribution_id_and_author_id", unique: true
+  end
+
   create_table "decidim_debates_debates", id: :serial, force: :cascade do |t|
     t.jsonb "title"
     t.jsonb "description"
@@ -951,32 +994,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_08_085825) do
     t.string "maptiler_style_id", default: ""
   end
 
-  create_table "decidim_geo_indexes", force: :cascade do |t|
-    t.jsonb "title", null: false
-    t.jsonb "short_description"
-    t.jsonb "description_html"
-    t.string "image_url"
-    t.boolean "avoid_index", default: false, null: false
-    t.jsonb "extended_data"
-    t.integer "component_id"
-    t.string "participatory_space_type", null: false
-    t.integer "participatory_space_id", null: false
-    t.integer "resource_id", null: false
-    t.string "resource_type", null: false
-    t.string "resource_url", null: false
-    t.string "resource_status"
-    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
-    t.bigint "geo_scope_id"
-    t.date "start_date"
-    t.date "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["end_date"], name: "index_decidim_geo_indexes_on_end_date"
-    t.index ["geo_scope_id"], name: "index_decidim_geo_indexes_on_geo_scope_id"
-    t.index ["resource_type", "resource_id"], name: "decidim_geo_indx_resource", unique: true
-    t.index ["start_date"], name: "index_decidim_geo_indexes_on_start_date"
-  end
-
   create_table "decidim_geo_no_indexes", force: :cascade do |t|
     t.boolean "no_index", default: false, null: false
     t.integer "decidim_component_id"
@@ -984,28 +1001,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_08_085825) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["decidim_component_id"], name: "decidim_geo_uniq_no_index", unique: true
-  end
-
-  create_table "decidim_geo_shapefile_datas", force: :cascade do |t|
-    t.bigint "decidim_geo_shapefiles_id"
-    t.jsonb "data"
-    t.geometry "geom", limit: {:srid=>0, :type=>"multi_polygon"}
-    t.bigint "decidim_scopes_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["decidim_geo_shapefiles_id"], name: "index_decidim_geo_shapefile_datas_on_decidim_geo_shapefiles_id"
-    t.index ["decidim_scopes_id"], name: "index_decidim_geo_shapefile_datas_on_decidim_scopes_id"
-  end
-
-  create_table "decidim_geo_shapefiles", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "description"
-    t.bigint "decidim_scope_types_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "decidim_organization_id"
-    t.index ["decidim_organization_id"], name: "index_decidim_geo_shapefiles_on_decidim_organization_id"
-    t.index ["decidim_scope_types_id"], name: "index_decidim_geo_shapefiles_on_decidim_scope_types_id"
   end
 
   create_table "decidim_geo_space_locations", force: :cascade do |t|
@@ -2287,6 +2282,10 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_08_085825) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "dataspace_authors", "dataspace_interoperables", column: "interoperable_id"
+  add_foreign_key "dataspace_containers", "dataspace_interoperables", column: "interoperable_id"
+  add_foreign_key "dataspace_contributions", "dataspace_containers", column: "container_id"
+  add_foreign_key "dataspace_contributions", "dataspace_interoperables", column: "interoperable_id"
   add_foreign_key "decidim_admin_multi_factor_settings", "decidim_organizations"
   add_foreign_key "decidim_area_types", "decidim_organizations"
   add_foreign_key "decidim_areas", "decidim_area_types", column: "area_type_id"
@@ -2310,11 +2309,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_08_085825) do
   add_foreign_key "decidim_debates_debates", "decidim_scopes"
   add_foreign_key "decidim_editor_images", "decidim_organizations"
   add_foreign_key "decidim_editor_images", "decidim_users", column: "decidim_author_id"
-  add_foreign_key "decidim_geo_indexes", "decidim_scopes", column: "geo_scope_id"
-  add_foreign_key "decidim_geo_shapefile_datas", "decidim_geo_shapefiles", column: "decidim_geo_shapefiles_id"
-  add_foreign_key "decidim_geo_shapefile_datas", "decidim_scopes", column: "decidim_scopes_id"
-  add_foreign_key "decidim_geo_shapefiles", "decidim_organizations"
-  add_foreign_key "decidim_geo_shapefiles", "decidim_scope_types", column: "decidim_scope_types_id"
   add_foreign_key "decidim_guest_meeting_registration_registration_requests", "decidim_meetings_meetings", column: "decidim_meetings_meetings_id"
   add_foreign_key "decidim_guest_meeting_registration_registration_requests", "decidim_organizations"
   add_foreign_key "decidim_guest_meeting_registration_settings", "decidim_organizations"
