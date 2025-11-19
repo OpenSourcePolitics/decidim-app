@@ -1,5 +1,5 @@
 image_name = decidim-app
-image_tag = 3.4.0
+image_tag = 3.5.0
 
 TARGET_ARCH := $(shell [ "$(shell uname -m)" = "arm64" ] && echo "arm64" || echo "amd64")
 
