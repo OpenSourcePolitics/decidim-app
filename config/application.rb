@@ -53,6 +53,8 @@ module DecidimApp
       # models
       require "extends/models/decidim/accountability/result_extends"
       require "extends/models/decidim/proposals/proposal_state_extends"
+      # permissions
+      require "extends/permissions/initiatives/permissions_extends"
       # presenters
       require "extends/presenters/decidim/forms/admin/questionnaire_answer_presenter_extends"
     end
