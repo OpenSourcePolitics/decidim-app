@@ -47,8 +47,8 @@ nl:
       menu:
         admin_accountability: Beheerdersrollen
         clean: Data opschonen
-        initiatives_settings: "Instellingen: initiatieven"
-        participatory_process_types: "Inspraakprocessen: types"
+        initiatives_settings: 'Instellingen: initiatieven'
+        participatory_process_types: 'Inspraakprocessen: types'
       models:
         scope:
           fields:
@@ -163,8 +163,8 @@ nl:
             livechat: Live chat
             maintenance:
               private_data: Privé-data
-            proposal_custom_fields: "Aangepaste velden: openbare info"
-            proposal_private_custom_fields: "Aangepaste velden: privé-info"
+            proposal_custom_fields: 'Aangepaste velden: openbare info'
+            proposal_private_custom_fields: 'Aangepaste velden: privé-info'
         menu:
           admins: Beheerders
           custom_redirects: Aangepaste redirects
@@ -174,8 +174,8 @@ nl:
           proposal_custom_fields: Aangepaste velden
         proposal_custom_fields:
           menu:
-            title: "Aangepaste velden: openbare info"
-          proposal_private_custom_fields: "Aangepaste velden: privé-info"
+            title: 'Aangepaste velden: openbare info'
+          proposal_private_custom_fields: 'Aangepaste velden: privé-info'
     devise:
       sessions:
         new:
@@ -218,14 +218,14 @@ nl:
             title: Bewerk vragenlijst
       upload:
         labels:
-          replace: Vervangen
           add_image: Afbeelding toevoegen
+          replace: Vervangen
       user_answers_serializer:
         email: Email
         name: Name
     half_signup:
       menu:
-        auth_settings: "Authenticatie: instellingen"
+        auth_settings: 'Authenticatie: instellingen'
       quick_auth:
         sms_verification:
           text_message: Hello, %{verification} is the code to authenticate yourself on the platform
@@ -389,17 +389,17 @@ nl:
   faker:
     address:
       country_code:
-        - EN
-        - EN0
-        - EN1
-        - EN2
-        - EN3
-        - EN4
-        - EN5
-        - EN6
-        - EN7
-        - EN8
-        - EN9
+      - EN
+      - EN0
+      - EN1
+      - EN2
+      - EN3
+      - EN4
+      - EN5
+      - EN6
+      - EN7
+      - EN8
+      - EN9
   layouts:
     decidim:
       footer:

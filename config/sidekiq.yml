@@ -37,3 +37,18 @@
       cron: "*/15 * * * *"
       class: Decidim::ParticipatoryProcesses::ChangeActiveStepJob
       queue: scheduled
+
+#  Decidim-AI Spam Digest Jobs
+    AiSpamDigestDaily:
+      cron: "55 8 * * *"
+      class: Decidim::Ai::SpamDetection::SpamDigestGeneratorJob
+      queue: mailers
+      args:
+        - daily
+
+    AiSpamDigestWeekly:
+      cron: "0 8 * * MON"
+      class: Decidim::Ai::SpamDetection::SpamDigestGeneratorJob
+      queue: mailers
+      args:
+        - weekly
