@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe Decidim::FindAndUpdateDescendantsJob do
+describe FindAndUpdateDescendantsJob do
   subject { described_class }
 
   let!(:participatory_process) { create(:participatory_process) }
@@ -17,9 +17,9 @@ describe Decidim::FindAndUpdateDescendantsJob do
 
   describe "#perform" do
     it "enqueues a job with perform_later" do
-      expect {
+      expect do
         Decidim::FindAndUpdateDescendantsJob.perform_later(participatory_process)
-      }.to have_enqueued_job(Decidim::FindAndUpdateDescendantsJob).with(participatory_process)
+      end.to have_enqueued_job(Decidim::FindAndUpdateDescendantsJob).with(participatory_process)
     end
 
     it "calls process_element_and_descendants private method" do

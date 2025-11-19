@@ -63,7 +63,6 @@ describe "search process and descendants" do
       expect(page).to have_current_path decidim.search_path, ignore_query: true
       expect(page).to have_content("0 Results for the search")
       expect(page).to have_css(".filter-search.filter-container")
-
     end
   end
 
@@ -79,7 +78,7 @@ describe "search process and descendants" do
       participatory_process.reload
       expect(participatory_process.published_at).not_to be_nil
       component.reload
-      meetings.each { |meeting| meeting.reload }
+      meetings.each(&:reload)
       comment.reload
     end
 

@@ -36,7 +36,9 @@ module Decidim
             next if sr.blank?
 
             attrs = element.send(:contents_to_searchable_resource_attributes, fields, sr.locale)
+            # rubocop:disable Rails/SkipsModelValidations
             sr.update_columns(attrs)
+            # rubocop:enable Rails/SkipsModelValidations
           end
         end
       elsif searchables_in_org.any?
@@ -51,7 +53,7 @@ module Decidim
         klass = component_class(component)
         next unless valid_component_class?(klass)
 
-        klass.where(component: component).find_in_batches(batch_size: BATCH_SIZE) do |batch|
+        klass.where(component:).find_in_batches(batch_size: BATCH_SIZE) do |batch|
           batch.each { |descendant| process_element_and_descendants(descendant) }
         end
       end
