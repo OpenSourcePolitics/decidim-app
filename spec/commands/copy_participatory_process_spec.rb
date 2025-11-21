@@ -157,6 +157,20 @@ module Decidim::ParticipatoryProcesses
       end
     end
 
+    context "when component's manifest is proposal with proposal states" do
+      let(:copy_components) { true }
+      let!(:component) { create(:component, manifest_name: "proposals", participatory_space: participatory_process) }
+      let!(:proposal_states) { create_list(:proposal_state, 2, component:) }
+
+      it "duplicates proposal states if component's manifest name is proposals" do
+        dummy_hook = proc {}
+        component.manifest.on :copy, &dummy_hook
+        expect(dummy_hook).to receive(:call).with({ new_component: an_instance_of(Decidim::Component), old_component: component })
+        expect { subject.call }.to change(Decidim::Proposals::ProposalState, :count).by(2)
+        expect(Decidim::Proposals::ProposalState.last(2).map(&:title)).to include(proposal_states.first.title)
+      end
+    end
+
     context "when copy_landing_page_blocks exists" do
       let(:copy_landing_page_blocks) { true }
       let(:original_image) do

@@ -1,0 +1,56 @@
+<%= form.hidden_field :handler_name %>
+
+<%= form_required_explanation %>
+
+<div class="form__wrapper">
+  <div class="row">
+    <div class="columns medium-6 mb-6">
+      <div class="field lastname_field">
+        <%= form.text_field :lastname, label: I18n.t('decidim.authorization_handlers.data_authorization_handler.fields.lastname')%>
+        <p class="help-text"><%= I18n.t('decidim.authorization_handlers.data_authorization_handler.help_text.lastname') %></p>
+      </div>
+    </div>
+    <div class="columns medium-3">
+      <div class="field firstname_field">
+        <%= form.text_field :firstname, label: I18n.t('decidim.authorization_handlers.data_authorization_handler.fields.firstname')%>
+        <p class="help-text"><%= I18n.t('decidim.authorization_handlers.data_authorization_handler.help_text.firstname') %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="columns medium-4">
+      <div class="field postal_code_field mb-6">
+        <%= form.text_field :postal_code, label: I18n.t('decidim.authorization_handlers.data_authorization_handler.fields.postal_code'), maxlength: 5, pattern: "[0-9]{5}" %>
+        <p class="help-text"><%= I18n.t('decidim.authorization_handlers.data_authorization_handler.help_text.postal_code') %></p>
+      </div>
+    </div>
+    <div class="columns medium-8">
+      <div class="field city_field">
+        <%= form.text_field :city, label: I18n.t('decidim.authorization_handlers.data_authorization_handler.fields.city') %>
+        <p class="help-text"><%= I18n.t('decidim.authorization_handlers.data_authorization_handler.help_text.city') %></p>
+      </div>
+    </div>
+  </div>
+
+  <fieldset class="fieldset">
+    <legend class="legend mb-6"><%= I18n.t('decidim.authorization_handlers.data_authorization_handler.legend') %></legend>
+    <div class="row">
+      <div class="field phone_field columns medium-12">
+        <%= form.text_field :phone, label: I18n.t('decidim.authorization_handlers.data_authorization_handler.fields.phone') %>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="field gdpr_field">
+    <%= form.check_box :gdpr, label: I18n.t('decidim.authorization_handlers.data_authorization_handler.fields.gdpr') %>
+  </div>
+
+  <div class="field minimum_age_field">
+    <%= form.check_box :minimum_age, label: I18n.t('decidim.authorization_handlers.data_authorization_handler.fields.minimum_age') %>
+  </div>
+
+  <div class="padding-2">
+    <strong><%= I18n.t('decidim.authorization_handlers.data_authorization_handler.help_text.global_help')%></strong>
+  </div>
+</div>

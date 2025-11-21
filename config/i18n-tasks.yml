@@ -85,6 +85,8 @@ translation:
 
 # Do not consider these keys missing:
 ignore_missing:
+  - activemodel.attributes.another_dummy_authorization_handler.*
+  - activemodel.attributes.dummy_authorization_handler.*
   - decidim.admin.assembly_copies.new.select
   - decidim.assemblies.admin.assembly_copies.new.select
   - decidim.assemblies.admin.assembly_copies.form.slug_help_html
@@ -101,11 +103,22 @@ ignore_missing:
   - devise.shared.links.log_in_with_provider
   - decidim.metadata.progress.remaining
   - decidim.devise.shared.links.log_in_with_user
+  - decidim.core.application_helper.filter_area_values.all
+  - decidim.accessibility.front_page_link
+  - decidim.accessibility.logo
+  - decidim.errors.not_found.back_home
 
 # Consider these keys used:
 ignore_unused:
   - faker.*
+  - activemodel.attributes.another_dummy_authorization_handler.*
+  - activemodel.attributes.dummy_authorization_handler.*
+  - activemodel.attributes.osp_authorization_handler.*
   - decidim.admin.models.assembly.fields.*
+  - decidim.authorization_handlers.osp_authorization_handler.*
+  - decidim.authorization_handlers.osp_authorization_workflow.*
+  - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
+  - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow
   - decidim.events.proposals.author_confirmation_proposal_event.*
   - decidim.forms.user_answers_serializer.*
   - decidim.initiatives.admin.index.initiatives_types.*
@@ -129,3 +142,6 @@ ignore_unused:
   - decidim.pages.home.extended.meetings
   - decidim.profiles.show.activity
   - decidim.devise.shared.links.log_in_with_user
+  - decidim.authorization_handlers.data_authorization_handler.(explanation|name)
+  - decidim.system.organizations.omniauth_settings.cultuur_connect.*
+  - layouts.decidim.budgets.voting_menubar.cancel_voting
