@@ -23,13 +23,15 @@ module Decidim
             organization.name["en"].presence ||
             organization.name.values.compact.first
 
-          I18n.t(
-            "decidim.ai.spam_detection.digest.summary",
-            count: spam_count,
-            frequency_label:,
-            organization: org_name,
-            moderations_url:
-          ).html_safe
+          sanitize(
+            I18n.t(
+              "decidim.ai.spam_detection.digest.summary",
+              count: spam_count,
+              frequency_label:,
+              organization: org_name,
+              moderations_url:
+            )
+          )
         end
 
         def notification_title
