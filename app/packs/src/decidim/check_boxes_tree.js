@@ -97,7 +97,6 @@ export default class CheckBoxesTree {
 
         // search for leaves with the same parent, what means they are siblings
         const totalCheckSiblings = this.checkboxesLeaf.filter((node) => node.parentNode.dataset.childrenCheckbox === key)
-        console.log(`totalCheckSiblings: ${totalCheckSiblings.length}`)
         const checkedSiblings = totalCheckSiblings.filter((checkbox) => checkbox.checked)
         const indeterminateSiblings = totalCheckSiblings.filter((checkbox) => checkbox.indeterminate)
 
