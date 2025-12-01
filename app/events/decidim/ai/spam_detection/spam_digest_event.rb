@@ -17,18 +17,12 @@ module Decidim
         end
 
         def email_intro
-          org_name =
-            organization.name[I18n.locale.to_s].presence ||
-            organization.name.dig("machine_translations", I18n.locale.to_s).presence ||
-            organization.name["en"].presence ||
-            organization.name.values.compact.first
-
           sanitize(
             I18n.t(
               "decidim.ai.spam_detection.digest.summary",
               count: spam_count,
               frequency_label:,
-              organization: org_name,
+              organization: translated_attribute(organization.name),
               moderations_url:
             )
           )
