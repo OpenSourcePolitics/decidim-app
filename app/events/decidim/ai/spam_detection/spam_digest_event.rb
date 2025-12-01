@@ -41,10 +41,7 @@ module Decidim
         end
 
         def resource_title
-          organization.name[I18n.locale.to_s].presence ||
-            organization.name.dig("machine_translations", I18n.locale.to_s).presence ||
-            organization.name["en"].presence ||
-            organization.name.values.compact.first
+          translated_attribute(organization.name)
         end
 
         def resource_locator
