@@ -25,7 +25,7 @@ module Decidim
     end
 
     def frequency_notifications_is_realtime?(admins)
-      admins.any? { |a| a.notifications_sending_frequency == "realtime" }
+      admins.where(notifications_sending_frequency: "realtime").exists?
     end
   end
 end
