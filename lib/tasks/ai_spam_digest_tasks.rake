@@ -2,15 +2,15 @@
 
 namespace :decidim do
   namespace :mailers do
-    desc "Ajoute le résumé IA au digest quotidien"
+    desc "Adds the AI summary to the daily digest"
     task spam_digest_daily: :environment do
-      puts "[Decidim-AI] Génération du résumé IA quotidien..."
+      puts "[Decidim-AI] Generating the daily AI spam digest..."
       Decidim::Ai::SpamDetection::SpamDigestGeneratorJob.perform_now(:daily)
     end
 
-    desc "Ajoute le résumé IA au digest hebdomadaire"
+    desc "Adds the AI summary to the weekly digest"
     task spam_digest_weekly: :environment do
-      puts "[Decidim-AI] Génération du résumé IA hebdomadaire..."
+      puts "[Decidim-AI] Generating the weekly AI spam digest..."
       Decidim::Ai::SpamDetection::SpamDigestGeneratorJob.perform_now(:weekly)
     end
   end
