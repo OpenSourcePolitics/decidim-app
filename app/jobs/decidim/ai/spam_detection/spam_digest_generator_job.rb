@@ -8,7 +8,14 @@ module Decidim
       class SpamDigestGeneratorJob < ApplicationJob
         queue_as :mailers
 
+        FREQUENCIES = {
+          daily: "daily",
+          weekly: "weekly"
+        }.freeze
+
         def perform(frequency)
+          raise ArgumentError, "Invalid frequency: #{frequency}" unless FREQUENCIES.has_key?(frequency.to_sym)
+
           Decidim::Organization.find_each do |organization|
             admins = organization.admins.where(notifications_sending_frequency: frequency)
             next if admins.empty?
