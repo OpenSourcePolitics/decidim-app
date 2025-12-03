@@ -11,12 +11,12 @@ module Decidim
         def index
           if component_settings.participatory_texts_enabled?
             @proposals = Decidim::Proposals::Proposal
-                           .where(component: current_component)
-                           .published
-                           .not_hidden
-                           .only_amendables
-                           .includes(:category, :scope, :attachments, :coauthorships)
-                           .order(position: :asc)
+                         .where(component: current_component)
+                         .published
+                         .not_hidden
+                         .only_amendables
+                         .includes(:category, :scope, :attachments, :coauthorships)
+                         .order(position: :asc)
             render "decidim/proposals/proposals/participatory_texts/participatory_text"
           else
             @proposals = search.result
@@ -44,4 +44,3 @@ module Decidim
 end
 
 Decidim::Proposals::ProposalsController.include(Decidim::Proposals::ProposalsControllerExtends)
-
