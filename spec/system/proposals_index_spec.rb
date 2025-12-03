@@ -84,7 +84,7 @@ describe "Proposals" do
           click_filter_item "Official"
         end
         # make the page reload
-        visit current_path + "?" + URI.parse(current_url).query.to_s
+        visit "#{current_path}?#{URI.parse(current_url).query}"
         expect(page).to have_css(".leaflet-marker-icon", count: 2, wait: 10)
       end
     end
