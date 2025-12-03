@@ -64,7 +64,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
-  revision: 9b4e8d153342fed90cbd06675f91e74ee831b81b
+  revision: d456beeee5d4a7932160618b31b064715a955c73
   branch: bump/0.29
   specs:
     decidim-extra_user_fields (0.29.0)
@@ -94,7 +94,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git
-  revision: f3b55cae4e22713d7c842f0de4c421e9765ad7b0
+  revision: 08a7a55ac5336a5d3e2d549441423ca961714dce
   branch: backport/fix_database_not_available
   specs:
     decidim-term_customizer (0.29.0)
