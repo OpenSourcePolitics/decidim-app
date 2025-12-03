@@ -44,12 +44,28 @@ module Decidim
           translated_attribute(organization.name)
         end
 
-        ResourceLocator = Struct.new(:path, :url)
         def resource_locator
           helpers = Decidim::Core::Engine.routes.url_helpers
           host = organization.host || Decidim::Organization.first&.host || "localhost"
 
-          ResourceLocator.new(
+          Class.new do
+            def initialize(path, url)
+              @path = path
+              @url = url
+            end
+
+            def path(_params = nil)
+              @path
+            end
+
+            def url(_params = nil)
+              @url
+            end
+
+            def route_name
+              "organization"
+            end
+          end.new(
             resource_path,
             helpers.root_url(host:)
           )
