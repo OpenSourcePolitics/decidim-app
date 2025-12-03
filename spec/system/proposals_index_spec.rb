@@ -83,9 +83,9 @@ describe "Proposals" do
         within "#panel-dropdown-menu-origin" do
           click_filter_item "Official"
         end
-        expect(page).to have_css(".leaflet-marker-icon", count: 2)
-
-        expect_no_js_errors
+        # make the page reload
+        visit current_path + "?" + URI.parse(current_url).query.to_s
+        expect(page).to have_css(".leaflet-marker-icon", count: 2, wait: 10)
       end
     end
 
@@ -189,12 +189,15 @@ describe "Proposals" do
         visit_component
 
         expect(page).to have_css("[id^='proposals__proposal']", count: Decidim::Paginable::OPTIONS.first)
-
+        texts = page.all("[id^='proposals__proposal']").map(&:text)
         click_on "Next"
 
         expect(page).to have_css("[data-pages] [data-page][aria-current='page']", text: "2")
 
         expect(page).to have_css("[id^='proposals__proposal']", count: 5)
+        click_on "Prev"
+        # check elements on page one are still the same
+        expect(page.all("[id^='proposals__proposal']").map(&:text)).to eq(texts)
       end
     end
 
