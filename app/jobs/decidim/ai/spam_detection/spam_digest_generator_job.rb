@@ -46,19 +46,24 @@ module Decidim
 
         # Returns all spam reports created since the given time
         def spam_reports_since(since, organization)
-          Decidim::Report
-            .joins(:moderation)
-            .where(reason: "spam")
-            .where("decidim_reports.created_at >= ?", since)
-            .where(decidim_moderations: { decidim_organization_id: organization.id })
+          reports = Decidim::Report
+                    .joins(:moderation)
+                    .where(reason: "spam")
+                    .where("decidim_reports.created_at >= ?", since)
+                    .includes(moderation: { participatory_space: :organization })
+
+          reports.select { |r| r.moderation.participatory_space&.organization&.id == organization.id }
         end
 
         def spam_user_reports_since(since, organization)
-          Decidim::UserReport
-            .joins(:user)
-            .where(reason: "spam")
-            .where("decidim_user_reports.created_at >= ?", since)
-            .where(decidim_users: { decidim_organization_id: organization.id })
+          reports = Decidim::UserReport
+                    .joins(:user)
+                    .where(reason: "spam")
+                    .where("decidim_user_reports.created_at >= ?", since)
+                    .where(decidim_users: { decidim_organization_id: organization.id })
+                    .includes(:user)
+
+          reports.select { |r| r.user.decidim_organization_id == organization.id }
         end
 
         # Determines if a spam report belongs to the given organization
