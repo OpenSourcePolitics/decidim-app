@@ -217,6 +217,7 @@ describe Decidim::Initiatives::Permissions do
       # This bypasses all authorization checks when available_authorizations is empty
       context "and there is no authorizations on organization" do
         let(:organization) { create(:organization, available_authorizations: []) }
+
         # Base case: unverified user with no authorizations required
         # Extension allows this because no_authorizations_available is true
         context "and user is not verified" do
@@ -252,7 +253,7 @@ describe Decidim::Initiatives::Permissions do
           before do
             allow(Decidim::Initiatives)
               .to receive(:do_not_require_authorization)
-                    .and_return(true)
+              .and_return(true)
           end
 
           it "allows creation" do
