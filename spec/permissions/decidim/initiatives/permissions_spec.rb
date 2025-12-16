@@ -206,90 +206,27 @@ describe Decidim::Initiatives::Permissions do
     end
 
     context "when creation is enabled" do
-      # Explicitly set available_authorizations to ensure the organization HAS authorizations configured
-      # This tests the standard behavior where users must be verified when authorizations exist
-      let(:organization) { create(:organization, available_authorizations: %w(dummy_authorization_handler)) }
-
       before do
         allow(Decidim::Initiatives)
           .to receive(:creation_enabled)
           .and_return(true)
       end
 
-      it { is_expected.to be false }
-
-      context "when authorizations are not required" do
-        before do
-          allow(Decidim::Initiatives)
-            .to receive(:do_not_require_authorization)
-            .and_return(true)
-        end
-
-        it { is_expected.to be true }
-      end
-
-      context "when user is authorized" do
-        before do
-          create(:authorization, :granted, user:)
-        end
-
-        it { is_expected.to be true }
-      end
-
-      context "when user belongs to a verified user group" do
-        before do
-          create(:user_group, :verified, users: [user], organization: user.organization)
-        end
-
-        it { is_expected.to be true }
-      end
-
-      context "when the initiative type has permissions to create" do
-        before do
-          initiative.type.create_resource_permission(
-            permissions: {
-              "create" => {
-                "authorization_handlers" => {
-                  "dummy_authorization_handler" => { "options" => {} },
-                  "another_dummy_authorization_handler" => { "options" => {} }
-                }
-              }
-            }
-          )
-        end
-
-        # User lacks required authorizations AND organization has authorizations configured
-        # Standard behavior: creation should be denied
-        context "when user is not verified" do
-          it { is_expected.to be false }
-        end
-
-        context "when user is fully verified" do
-          before do
-            create(:authorization, name: "dummy_authorization_handler", user:, granted_at: 2.seconds.ago)
-            create(:authorization, name: "another_dummy_authorization_handler", user:, granted_at: 2.seconds.ago)
-          end
-
-          it { is_expected.to be true }
-        end
-      end
-
       # When the org has NO authorizations configured,
       # creation should be allowed regardless of user verification status
       # This bypasses all authorization checks when available_authorizations is empty
-      context "when organization has no available authorizations" do
+      context "and there is no authorizations on organization" do
         let(:organization) { create(:organization, available_authorizations: []) }
-
         # Base case: unverified user with no authorizations required
         # Extension allows this because no_authorizations_available is true
-        context "when user is not verified" do
+        context "and user is not verified" do
           it "allows creation because no authorizations are configured" do
             expect(subject).to be true
           end
         end
 
-        # Verified user with no authorizations required - should still work
-        context "when user is verified" do
+        # Verified user - should still work
+        context "and user is verified" do
           before do
             create(:authorization, :granted, user:)
           end
@@ -299,12 +236,23 @@ describe Decidim::Initiatives::Permissions do
           end
         end
 
+        # User belongs to a verified group - should still work
+        context "and user belongs to a verified user group" do
+          before do
+            create(:user_group, :verified, users: [user], organization: user.organization)
+          end
+
+          it "allows creation" do
+            expect(subject).to be true
+          end
+        end
+
         # Ensure do_not_require_authorization flag still works with no authorizations available
-        context "when authorizations are not required" do
+        context "and authorizations are not required" do
           before do
             allow(Decidim::Initiatives)
               .to receive(:do_not_require_authorization)
-              .and_return(true)
+                    .and_return(true)
           end
 
           it "allows creation" do
@@ -315,7 +263,7 @@ describe Decidim::Initiatives::Permissions do
         # CRITICAL TEST: Initiative type requires specific authorization BUT organization has none configured
         # Extend should bypass the initiative type's authorization requirements
         # because no_authorizations_available takes precedence
-        context "when the initiative type has permissions to create" do
+        context "and the initiative type has permission on create" do
           before do
             initiative.type.create_resource_permission(
               permissions: {
@@ -330,15 +278,105 @@ describe Decidim::Initiatives::Permissions do
 
           # KEY BEHAVIOR: Even though initiative type requires dummy_authorization_handler,
           # creation is allowed because the organization has no authorizations configured
-          context "when user is not verified" do
+          context "and user is not verified" do
             it "allows creation because no authorizations are available in the organization" do
               expect(subject).to be true
             end
           end
 
           # Verified user should also be allowed
-          context "when user is verified" do
+          context "and user is verified" do
             before do
+              create(:authorization, name: "dummy_authorization_handler", user:, granted_at: 2.seconds.ago)
+            end
+
+            it "allows creation" do
+              expect(subject).to be true
+            end
+          end
+        end
+      end
+
+      # When the org HAS authorization configured, but there is NO permission on initiative_type
+      # creation should be allowed regardless of user verification status
+      context "and there is authorization on organization" do
+        # Explicitly set available_authorizations to ensure the organization HAS authorizations configured
+        let(:organization) { create(:organization, available_authorizations: %w(dummy_authorization_handler)) }
+
+        # NO permission on initiative_type
+        # Extension allows this because no_create_permission_on_initiative_type? will be true
+        context "and there is no permission on initiative_type" do
+          it { is_expected.to be true }
+        end
+
+        # Permission on initiative_type on vote but NOT on create
+        # Extension allows this because no_create_permission_on_initiative_type? will be true
+        context "and there is a permission on vote on initiative_type" do
+          before do
+            initiative.type.create_resource_permission(
+              permissions: {
+                "vote" => {
+                  "authorization_handlers" => {
+                    "dummy_authorization_handler" => { "options" => {} },
+                    "another_dummy_authorization_handler" => { "options" => {} }
+                  }
+                }
+              }
+            )
+          end
+
+          it { is_expected.to be true }
+        end
+
+        # This tests the behavior where users must be verified when authorizations exist on organization
+        # and there are permissions on create on initiative_type
+        context "and there are permissions on create on initiative_type" do
+          before do
+            initiative.type.create_resource_permission(
+              permissions: {
+                "create" => {
+                  "authorization_handlers" => {
+                    "dummy_authorization_handler" => { "options" => {} },
+                    "another_dummy_authorization_handler" => { "options" => {} }
+                  }
+                }
+              }
+            )
+          end
+
+          # Unverified user should not be allowed
+          context "and user is not verified" do
+            it "doesn't allow creation" do
+              expect(subject).to be false
+            end
+          end
+
+          # User belonging to a verified group but not authorized should not be allowed
+          context "and user belongs to a verified user group but is not authorized" do
+            before do
+              create(:user_group, :verified, users: [user], organization: user.organization)
+            end
+
+            it "does not allow creation" do
+              expect(subject).to be false
+            end
+          end
+
+          # Verified user should be allowed
+          context "and user is verified" do
+            before do
+              create(:authorization, name: "dummy_authorization_handler", user:, granted_at: 2.seconds.ago)
+            end
+
+            it "allows creation" do
+              expect(subject).to be true
+            end
+          end
+
+          # User belonging to a verified group and authorized should be allowed
+          context "and user belongs to a verified user group and is authorized" do
+            before do
+              create(:user_group, :verified, users: [user], organization: user.organization)
               create(:authorization, name: "dummy_authorization_handler", user:, granted_at: 2.seconds.ago)
             end
 
