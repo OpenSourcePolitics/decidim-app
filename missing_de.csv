@@ -1,0 +1,159 @@
+Locale,Key,Value in other locales or source
+de,activemodel.attributes.assembly.copy_landing_page_blocks,en Copy landing page blocks
+de,activemodel.attributes.osp_authorization_handler.document_number,en Unique number
+de,activemodel.attributes.participatory_process.copy_landing_page_blocks,en Copy landing page blocks
+de,activerecord.models.decidim/assembly_member,other
+de,date.formats.order,en d-m-y
+de,decidim.account.omniauth_synced_profile.announcement_html,en <p><strong>Profile synchronization</strong></p>
+,,<p>
+,,The following information is synchronized with an external identity provider:
+,,</p>
+,,<ul>
+,,<li>Name</li>
+,,<li>Email</li>
+,,</ul>
+,,<p>
+,,You can't edit this information here.
+,,</p>
+de,decidim.admin.actions.add,en Add
+de,decidim.admin.actions.browse,en Browse
+de,decidim.admin.actions.confirm_destroy,en Confirm destroy
+de,decidim.admin.actions.destroy,en Destroy
+de,decidim.admin.actions.edit,en Edit
+de,decidim.admin.attachments.form.send_notification_to_followers,en Send a notification to all the people following the consultation who have agreed to receive email notifications
+de,decidim.admin.models.scope.fields.name,en Name
+de,decidim.admin.models.scope.fields.scope_type,en Scope type
+de,decidim.admin.scopes.no_scopes,en No scopes at this level.
+de,decidim.admin.scopes.titles.scopes,en Scopes
+de,decidim.admin.scopes.update.error,en There was a problem updating this scope.
+de,decidim.admin.scopes.update.success,en Scope updated successfully
+de,decidim.authorization_handlers.data_authorization_handler.errors.error_message,en This field contains an error
+de,decidim.authorization_handlers.data_authorization_handler.errors.gdpr,en You must accept the terms and conditions
+de,decidim.authorization_handlers.data_authorization_handler.errors.minimum_age,en You must be over 16 years old to register
+de,decidim.authorization_handlers.data_authorization_handler.errors.no_postal_code_result,en No result found for this postal code
+de,decidim.authorization_handlers.data_authorization_handler.explanation,en Verify your identity
+de,decidim.authorization_handlers.data_authorization_handler.fields.city,en City
+de,decidim.authorization_handlers.data_authorization_handler.fields.firstname,en Firstname
+de,decidim.authorization_handlers.data_authorization_handler.fields.gdpr,en I accept that my data will be used to verify my identity
+de,decidim.authorization_handlers.data_authorization_handler.fields.lastname,en Lastname
+de,decidim.authorization_handlers.data_authorization_handler.fields.minimum_age,en I confirm that I am over 16 years old
+de,decidim.authorization_handlers.data_authorization_handler.fields.phone,en Phone number
+de,decidim.authorization_handlers.data_authorization_handler.fields.postal_code,en Zip code
+de,decidim.authorization_handlers.data_authorization_handler.help_text.city,en Your city depends on your postal code, please select your city from the dropdown list
+de,decidim.authorization_handlers.data_authorization_handler.help_text.firstname,en Your firstname must contain at least 1 character and be composed only of letters, spaces and special characters such as - and '
+de,decidim.authorization_handlers.data_authorization_handler.help_text.global_help,en It is necessary to complete this form to submit a proposal in the participatory budget.
+de,decidim.authorization_handlers.data_authorization_handler.help_text.lastname,en Your lastname must contain at least 1 character and be composed only of letters, spaces and special characters such as - and '
+de,decidim.authorization_handlers.data_authorization_handler.help_text.postal_code,en Your postal code must be composed of 5 digits
+de,decidim.authorization_handlers.data_authorization_handler.legend,en Contact information
+de,decidim.authorization_handlers.data_authorization_handler.name,en Data Sharing Process
+de,decidim.authorization_handlers.osp_authorization_handler.explanation,en Verify your identity by entering a unique number
+de,decidim.authorization_handlers.osp_authorization_handler.fields.document_number,en Unique number
+de,decidim.authorization_handlers.osp_authorization_handler.name,en Identity Verification Form
+de,decidim.authorization_handlers.osp_authorization_workflow.name,en Authorization procedure
+de,decidim.comments.comments.create.error,en There was a problem creating the comment.
+de,decidim.components.proposals.settings.global.require_category,en Category is required
+de,decidim.components.proposals.settings.global.require_scope,en Scope is required
+de,decidim.devise.omniauth.france_connect.help_link,en Learn more about France Connect
+de,decidim.devise.omniauth.france_connect.introduction,en FranceConnect is the solution offered by the public state to secure and simplify connection to your online services..
+de,decidim.devise.shared.links.log_in_with_provider,en Log in with %{provider}
+de,decidim.forms.questionnaire_answer_presenter.download_attachment,en Download attachment
+de,decidim.forms.questionnaires.answers.files.upload_not_allowed,en Uploading files is only allowed for connected users.
+de,decidim.forms.user_answers_serializer.email,en Email
+de,decidim.forms.user_answers_serializer.name,en Name
+de,decidim.initiatives.admin.index.initiatives_types.alert_html,en <p>You must create at least one initiative type so participants can start creating initiatives.</p><p> %{link}</p>
+de,decidim.initiatives.admin.index.initiatives_types.button,en New initiative type
+de,decidim.initiatives.admin.initiatives_types.create.error,en An error has occurred.
+de,decidim.initiatives.admin.initiatives_types.create.success,en A new initiative type has been successfully created. You need to define at least one scope for this initiative type so it can be used.
+de,decidim.initiatives.admin.initiatives_types.destroy.success,en The initiative type has been successfully removed.
+de,decidim.initiatives.admin.initiatives_types.edit.update,en Update
+de,decidim.initiatives.create_initiative.fill_data.back,en Back
+de,decidim.initiatives.create_initiative.fill_data.continue,en Continue
+de,decidim.initiatives.create_initiative.fill_data.fill_data_help,en <ul> <li>Review the content of your initiative. Is your title easy to understand? Is the objective of your initiative clear?</li> <li>You have to choose the type of signature. In-person, online or a combination of both</li> <li>Which is the geographic scope of the initiative?</li> </ul>
+de,decidim.initiatives.create_initiative.fill_data.more_information,en (More information)
+de,decidim.initiatives.create_initiative.fill_data.select_area,en Select an area
+de,decidim.initiatives.create_initiative.fill_data.select_scope,en Select a scope
+de,decidim.initiatives.create_initiative.select_initiative_type.new,en Create a new initiative
+de,decidim.initiatives.form.add_documents,en Add documents
+de,decidim.initiatives.form.add_image,en Add image
+de,decidim.initiatives.form.attachment_legend,en (Optional) Add an attachment
+de,decidim.initiatives.form.edit_documents,en Edit documents
+de,decidim.initiatives.form.edit_image,en Edit image
+de,decidim.initiatives.form.image_legend,en (Optional) Add an image
+de,decidim.initiatives.initiatives.index_header.new_initiative,en New initiative
+de,decidim.menu.help,en Help
+de,decidim.pages.home.extended.meetings,en Meetings
+de,decidim.pages.home.hero.welcome,en Welcome to %{organization} !
+de,decidim.participatory_processes.create_initiative.fill_data.back,en Back
+de,decidim.participatory_processes.create_initiative.fill_data.continue,en Continue
+de,decidim.participatory_processes.create_initiative.fill_data.fill_data_help,en <ul> <li>Review the content of your initiative. Is your title easy to understand? Is the objective of your initiative clear?</li> <li>You have to choose the type of signature. In-person, online or a combination of both</li> <li>Which is the geographic scope of the initiative?</li> </ul>
+de,decidim.participatory_processes.create_initiative.fill_data.more_information,en (More information)
+de,decidim.participatory_processes.create_initiative.fill_data.select_area,en Select an area
+de,decidim.participatory_processes.create_initiative.fill_data.select_scope,en Select a scope
+de,decidim.participatory_processes.create_initiative.select_initiative_type.new,en Create a new initiative
+de,decidim.participatory_processes.form.add_documents,en Add documents
+de,decidim.participatory_processes.form.add_image,en Add image
+de,decidim.participatory_processes.form.attachment_legend,en (Optional) Add an attachment
+de,decidim.participatory_processes.form.edit_documents,en Edit documents
+de,decidim.participatory_processes.form.edit_image,en Edit image
+de,decidim.participatory_processes.form.image_legend,en (Optional) Add an image
+de,decidim.participatory_processes.show.related_processes,en Related processes
+de,decidim.profiles.show.activity,en Activity
+de,decidim.proposals.actions.delete_proposal_state_confirm,en Are you sure you want to delete this state?
+de,decidim.proposals.actions.destroy,en Delete state
+de,decidim.proposals.actions.edit_proposal_state,en Edit state
+de,decidim.proposals.actions.new_proposal_state,en New status
+de,decidim.proposals.actions.title,en Actions
+de,decidim.proposals.admin.proposal_states.index.title,en Statuses
+de,decidim.proposals.admin.proposal_states.update.error,en Error updating status
+de,decidim.proposals.admin.proposal_states.update.success,en Status updated successfully
+de,decidim.proposals.application_helper.filter_state_values.all,en All
+de,decidim.proposals.application_helper.filter_state_values.not_answered,en Not answered
+de,decidim.proposals.models.proposal_state.css_class,en CSS class
+de,decidim.proposals.models.proposal_state.title,en Status
+de,decidim.proposals.no_proposal_states,en No statuses have been created yet.
+de,decidim.proposals.proposals.dynamic_map_instructions.description,en The coordinates will be updated when clicking on 'preview' button. However, the address does not change.
+de,decidim.proposals.proposals.dynamic_map_instructions.instructions,en You can move the point on the map.
+de,decidim.proposals.proposals.edit.add_documents,en Add documents
+de,decidim.proposals.proposals.edit.attachment_legend,en (Optional) Add an attachment
+de,decidim.proposals.proposals.edit.edit_documents,en Edit documents
+de,decidim.proposals.proposals.edit.select_a_category,en Please select a category
+de,decidim.proposals.proposals.edit_form_fields.marker_added,en Marker added to the map.
+de,decidim.proposals.proposals.placeholder.address,en 37 Homewood Drive Brownsburg, IN 46112
+de,decidim.scopes.global,en Global scope
+de,decidim.system.organizations.omniauth_settings.cultuur_connect.client_id,en Client ID
+de,decidim.system.organizations.omniauth_settings.cultuur_connect.client_secret,en Client secret
+de,decidim.system.organizations.omniauth_settings.cultuur_connect.site_url,en Site URL
+de,decidim.system.organizations.omniauth_settings.france_connect.acr_values,en ACR values
+de,decidim.system.organizations.omniauth_settings.france_connect.client_options_identifier,en Client identifier
+de,decidim.system.organizations.omniauth_settings.france_connect.client_options_redirect_uri,en Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
+de,decidim.system.organizations.omniauth_settings.france_connect.client_options_secret,en Client secret
+de,decidim.system.organizations.omniauth_settings.france_connect.client_signing_alg,en Client signing algorithm (e.g. RS256, ES256, PS256 ...)
+de,decidim.system.organizations.omniauth_settings.france_connect.display_name,en Display name
+de,decidim.system.organizations.omniauth_settings.france_connect.icon_hover_path,en Icon path for hover state (e.g. /media/images/oidc_hover.png)
+de,decidim.system.organizations.omniauth_settings.france_connect.issuer,en Issuer URL (e.g. https://identity.com)
+de,decidim.system.organizations.omniauth_settings.france_connect.logout_path,en Logout path (path after "/users/auth/openid_connect")
+de,decidim.system.organizations.omniauth_settings.france_connect.logout_policy,en Logout policy (none/session.destroy)
+de,decidim.system.organizations.omniauth_settings.france_connect.post_logout_redirect_uri,en Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
+de,decidim.system.organizations.omniauth_settings.france_connect.scope,en Scope / Claims (e.g. openid email profile)
+de,decidim.system.organizations.omniauth_settings.openid_connect.acr_values,en ACR values
+de,decidim.system.organizations.omniauth_settings.openid_connect.client_auth_method,en Client authentication method (e.g. basic, jwt_bearer, mtls ...)
+de,decidim.system.organizations.omniauth_settings.openid_connect.client_options_identifier,en Client identifier
+de,decidim.system.organizations.omniauth_settings.openid_connect.client_options_redirect_uri,en Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
+de,decidim.system.organizations.omniauth_settings.openid_connect.client_options_secret,en Client secret
+de,decidim.system.organizations.omniauth_settings.openid_connect.client_signing_alg,en Client signing algorithm (e.g. RS256, ES256, PS256 ...)
+de,decidim.system.organizations.omniauth_settings.openid_connect.discovery,en Discovery (true or false)
+de,decidim.system.organizations.omniauth_settings.openid_connect.display_name,en Display name
+de,decidim.system.organizations.omniauth_settings.openid_connect.issuer,en Issuer URL (e.g. https://identity.com)
+de,decidim.system.organizations.omniauth_settings.openid_connect.logout_path,en Logout path (path after "/users/auth/openid_connect")
+de,decidim.system.organizations.omniauth_settings.openid_connect.logout_policy,en Logout policy (none/session.destroy)
+de,decidim.system.organizations.omniauth_settings.openid_connect.post_logout_redirect_uri,en Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
+de,decidim.system.organizations.omniauth_settings.openid_connect.response_type,en Response type (code or id_token)
+de,decidim.system.organizations.omniauth_settings.openid_connect.scope,en Scope / Claims (e.g. openid email profile)
+de,decidim.system.organizations.omniauth_settings.openid_connect.uid_field,en UID field (e.g. sub, email, username)
+de,decidim.system.organizations.omniauth_settings.publik.client_id,en Client ID
+de,decidim.system.organizations.omniauth_settings.publik.client_secret,en Client secret
+de,decidim.system.organizations.omniauth_settings.publik.site_url,en Site URL
+de,decidim.verifications.authorizations.first_login.actions.osp_authorization_handler,en Verify with the identity verification form
+de,decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow,en Verify with the identity verification form
+de,layouts.decidim.budgets.voting_menubar.cancel_voting,en Exit voting booth
+de,layouts.decidim.footer.help,en Help
