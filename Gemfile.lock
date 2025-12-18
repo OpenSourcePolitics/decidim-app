@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-anonymous_proposals.git
-  revision: 2d9dc00745ca1cc52b4cb73c3177dcd77e36c031
+  revision: e74c279204b74bbac3e394ba589b40a2825eca6e
   branch: bump/0.29
   specs:
     decidim-anonymous_proposals (0.29.3)
