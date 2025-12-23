@@ -56,14 +56,11 @@ module Decidim
         end
 
         def spam_user_reports_since(since, organization)
-          reports = Decidim::UserReport
-                    .joins(:user)
-                    .where(reason: "spam")
-                    .where("decidim_user_reports.created_at >= ?", since)
-                    .where(decidim_users: { decidim_organization_id: organization.id })
-                    .includes(:user)
-
-          reports.select { |r| r.user.decidim_organization_id == organization.id }
+          Decidim::UserReport
+            .joins(:user)
+            .where(reason: "spam")
+            .where("decidim_user_reports.created_at >= ?", since)
+            .where(decidim_users: { decidim_organization_id: organization.id })
         end
 
         # Determines if a spam report belongs to the given organization
