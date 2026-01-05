@@ -30,6 +30,15 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-anonymous_proposals.git
+  revision: e74c279204b74bbac3e394ba589b40a2825eca6e
+  branch: bump/0.29
+  specs:
+    decidim-anonymous_proposals (0.29.3)
+      decidim-core (>= 0.29.3)
+      deface (~> 1.9)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner.git
   revision: 2660f6d46640fbab0d1f5fe9ce08050274c09fb0
   specs:
@@ -55,7 +64,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
-  revision: 9b4e8d153342fed90cbd06675f91e74ee831b81b
+  revision: d456beeee5d4a7932160618b31b064715a955c73
   branch: bump/0.29
   specs:
     decidim-extra_user_fields (0.29.0)
@@ -85,7 +94,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git
-  revision: f3b55cae4e22713d7c842f0de4c421e9765ad7b0
+  revision: 08a7a55ac5336a5d3e2d549441423ca961714dce
   branch: backport/fix_database_not_available
   specs:
     decidim-term_customizer (0.29.0)
@@ -113,10 +122,10 @@ GIT
 
 GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
-  revision: f2c71529cfb362d2144f8728de9c98cf92f27342
+  revision: a9f2077f80438f6bc7b9fa7c26aa150cac46523a
   branch: release/0.29-stable
   specs:
-    decidim-decidim_awesome (0.12.5)
+    decidim-decidim_awesome (0.12.6)
       active_hashcash (~> 0.4.0)
       decidim-admin (>= 0.29.1, < 0.30)
       decidim-core (>= 0.29.1, < 0.30)
@@ -1120,6 +1129,7 @@ DEPENDENCIES
   decidim-admin_multi_factor!
   decidim-ai!
   decidim-ai_third_party!
+  decidim-anonymous_proposals!
   decidim-budgets_booth!
   decidim-cache_cleaner!
   decidim-cleaner!
