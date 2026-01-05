@@ -7,11 +7,16 @@ module PermissionsExtends
     def creation_enabled?
       return false unless Decidim::Initiatives.creation_enabled
       return true if no_authorizations_available?
+      return true if no_create_permission_on_initiative_type?
 
       user_can_create? && authorized?(:create, permissions_holder: initiative_type)
     end
 
     private
+
+    def no_create_permission_on_initiative_type?
+      initiative_type.permissions.nil? || initiative_type.permissions.keys.empty? || !initiative_type.permissions&.keys&.include?("create")
+    end
 
     def no_authorizations_available?
       user&.organization&.available_authorizations&.empty?
