@@ -38,6 +38,21 @@ module Decidim
                                end
           end
         end
+
+        private
+
+        def default_filter_params
+          {
+            activity: "all",
+            related_to: "",
+            search_text_cont: "",
+            type: "all",
+            with_any_category: nil,
+            with_any_origin: nil,
+            with_any_scope: nil,
+            with_any_state: default_states
+          }
+        end
       end
     end
   end
