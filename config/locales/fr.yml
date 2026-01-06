@@ -60,6 +60,16 @@ fr:
         update:
           error: Il y a eu une erreur lors de la mise à jour du secteur.
           success: Secteur mis à jour avec succès.
+    ai:
+      spam_detection:
+        digest:
+          frequency_label:
+            daily: aujourd’hui
+            weekly: cette semaine
+          subject: Résumé anti-spam, %{count} spams détectés (%{frequency_label})
+          summary: |-
+            Résumé IA anti-spam pour %{organization} : %{count} contenus ont été automatiquement signalés %{frequency_label} par le système Decidim AI.<br><br>
+            <a href="%{moderations_url}" target="_blank">Voir les spams détectés</a>.
     authorization_handlers:
       data_authorization_handler:
         errors:

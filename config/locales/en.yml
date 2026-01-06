@@ -52,6 +52,16 @@ en:
         update:
           error: There was a problem updating this scope.
           success: Scope updated successfully
+    ai:
+      spam_detection:
+        digest:
+          frequency_label:
+            daily: today
+            weekly: this week
+          subject: AI spam detection summary - %{count} spam items detected (%{frequency_label})
+          summary: |-
+            AI anti-spam summary for %{organization}: %{count} items were automatically flagged %{frequency_label} by the Decidim AI system.<br><br>
+            <a href="%{moderations_url}" target="_blank">View detected spams</a>.
     authorization_handlers:
       data_authorization_handler:
         errors:
