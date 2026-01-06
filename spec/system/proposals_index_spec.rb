@@ -185,18 +185,42 @@ describe "Proposals" do
         create_list(:proposal, Decidim::Paginable::OPTIONS.first + 5, component:)
       end
 
-      it "paginates them" do
+      it "paginates them and keeps the same order" do
         visit_component
-
+        # 25 proposals on page one
         expect(page).to have_css("[id^='proposals__proposal']", count: Decidim::Paginable::OPTIONS.first)
         texts = page.all("[id^='proposals__proposal']").map(&:text)
         click_on "Next"
 
         expect(page).to have_css("[data-pages] [data-page][aria-current='page']", text: "2")
-
+        # 5 proposals on page two
         expect(page).to have_css("[id^='proposals__proposal']", count: 5)
         click_on "Prev"
         # check elements on page one are still the same
+        expect(page.all("[id^='proposals__proposal']").map(&:text)).to eq(texts)
+      end
+    end
+
+    context "when there is a lot of proposals and using a filter" do
+      before do
+        create_list(:proposal, Decidim::Paginable::OPTIONS.first - 5, :evaluating, component:)
+        create_list(:proposal, Decidim::Paginable::OPTIONS.first - 5, :accepted, component:)
+        create_list(:proposal, 10, :not_answered, component:)
+      end
+
+      it "paginates proposals and keeps the same order in pages" do
+        visit_component
+
+        expect(page).to have_css("[id^='proposals__proposal']", count: Decidim::Paginable::OPTIONS.first)
+        uncheck "Not answered"
+        sleep 5
+        texts = page.all("[id^='proposals__proposal']").map(&:text)
+        click_on "Next"
+        expect(page).to have_css("[data-pages] [data-page][aria-current='page']", text: "2")
+        # we have 40 proposals without the not_answered, so 15 on page 2
+        expect(page).to have_css("[id^='proposals__proposal']", count: 15)
+        click_on "Prev"
+        # check elements on page one are still in the same order
         expect(page.all("[id^='proposals__proposal']").map(&:text)).to eq(texts)
       end
     end
