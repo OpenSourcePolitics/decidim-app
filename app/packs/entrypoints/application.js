@@ -21,3 +21,4 @@
 import "src/decidim/admin/reorder_scopes";
 import "src/decidim/admin/reorder_proposal_states";
 import "src/decidim/surveys/sorted_answers_fixes";
+import "src/decidim/check_boxes_tree";
