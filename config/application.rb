@@ -40,6 +40,7 @@ module DecidimApp
       require "extends/controllers/decidim/participatory_processes/participatory_processes_controller_extends"
       require "extends/controllers/decidim/budgets/projects_controller_extends"
       require "extends/controllers/decidim/proposals/admin/proposal_states_controller_extends"
+      require "extends/controllers/decidim/proposals/proposals_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       require "extends/helpers/decidim/omniauth_helper_extends"
