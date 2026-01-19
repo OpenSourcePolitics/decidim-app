@@ -1,6 +1,9 @@
 ---
 name: Bug report
 about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
@@ -31,4 +34,4 @@ If applicable, add the error stacktrace to help explain your problem.
 - Decidim installation: [e.g. Metadecidim]
 
 **Additional context**
-Add any other context about the problem here. For instance, add Metadecidim link. 
+Add any other context about the problem here. For instance, add Metadecidim link.
