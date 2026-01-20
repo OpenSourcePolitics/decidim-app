@@ -87,10 +87,10 @@ module Decidim
           host = organization.host
 
           if host.blank?
-            return "" unless Rails.env.development? || Rails.env.test?
+            return "" unless Rails.env.local?
 
             host = "localhost:3000"
-          elsif host == "localhost" && (Rails.env.development? || Rails.env.test?)
+          elsif host == "localhost" && (Rails.env.local?)
             host = "localhost:3000"
           end
 

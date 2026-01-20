@@ -2,8 +2,13 @@
 
 # This file is a Decidim initializer for the AI module.
 # It configures the Third Party AI provider.
-if Decidim.module_installed?(:ai) && Rails.application.secrets.dig(:decidim, :ai, :enabled)
-  if Rails.application.secrets.dig(:decidim, :ai, :endpoint).blank? || Rails.application.secrets.dig(:decidim, :ai, :basic_auth).blank?
+ai_enabled = Decidim::Env.new("DECIDIM_AI_ENABLED", true).to_boolean_string == "true"
+
+if Decidim.module_installed?(:ai) && ai_enabled
+  ai_endpoint = ENV.fetch("DECIDIM_AI_ENDPOINT", nil)
+  ai_basic_auth = ENV.fetch("DECIDIM_AI_BASIC_AUTH", nil)
+
+  if ai_endpoint.blank? || ai_basic_auth.blank?
     Rails.logger.warn "[decidim-ai] Initializer - AI endpoint or secret not configured. AI features will be disabled."
 
     # FIX: While building Docker image, endpoint and secret are not defined and crashes because default Bayes strategy try to reach Redis
@@ -27,20 +32,20 @@ if Decidim.module_installed?(:ai) && Rails.application.secrets.dig(:decidim, :ai
       name: :ai_request_handler,
       strategy: Decidim::Ai::SpamDetection::AiRequestHandler::Strategy,
       options: {
-        endpoint: Rails.application.secrets.dig(:decidim, :ai, :endpoint),
-        basic_auth: Rails.application.secrets.dig(:decidim, :ai, :basic_auth)
+        endpoint: ai_endpoint,
+        basic_auth: ai_basic_auth
       }
     }
   ]
 
   Decidim::Ai::Language.formatter = "Decidim::Ai::Language::Formatter"
 
-  Decidim::Ai::SpamDetection.reporting_user_email = Rails.application.secrets.dig(:decidim, :ai, :reporting_user_email)
+  Decidim::Ai::SpamDetection.reporting_user_email = ENV.fetch("DECIDIM_AI_REPORTING_USER_EMAIL", nil)
   Decidim::Ai::SpamDetection.resource_analyzers = analyzers
   Decidim::Ai::SpamDetection.user_analyzers = analyzers
 
-  Decidim::Ai::SpamDetection.resource_score_threshold = Rails.application.secrets.dig(:decidim, :ai, :resource_score_threshold)
-  Decidim::Ai::SpamDetection.user_score_threshold = Rails.application.secrets.dig(:decidim, :ai, :user_score_threshold)
+  Decidim::Ai::SpamDetection.resource_score_threshold = Decidim::Env.new("DECIDIM_AI_RESOURCE_SCORE_THRESHOLD", 0.5).to_f
+  Decidim::Ai::SpamDetection.user_score_threshold = Decidim::Env.new("DECIDIM_AI_USER_SCORE_THRESHOLD", 0.5).to_f
   Decidim::Ai::SpamDetection.resource_models = begin
     models = {}
     models["Decidim::Comments::Comment"] = "Decidim::Ai::SpamDetection::Resource::Comment" if Decidim.module_installed?("comments")
@@ -65,6 +70,6 @@ if Decidim.module_installed?(:ai) && Rails.application.secrets.dig(:decidim, :ai
   Decidim::Ai::SpamDetection.user_spam_analyzer_job = "Decidim::Ai::SpamDetection::ThirdParty::UserSpamAnalyzerJob"
   Decidim::Ai::SpamDetection.generic_spam_analyzer_job = "Decidim::Ai::SpamDetection::ThirdParty::GenericSpamAnalyzerJob"
 else
-  Rails.logger.warn "[decidim-ai] Initializer - AI module is not installed or spam detection is disabled. AI features will be disabled."
-  Rails.logger.warn "[decidim-ai] Initializer - Spam detection enabled: #{Rails.application.secrets.dig(:decidim, :ai, :spam_detection, :enabled).presence || false}"
+  Rails.logger.warn "[decidim-ai] Initializer - AI module is not installed or AI is disabled. AI features will be disabled."
+  Rails.logger.warn "[decidim-ai] Initializer - AI enabled: #{Decidim::Env.new("DECIDIM_AI_ENABLED", true).to_boolean_string}"
 end

@@ -3,17 +3,17 @@
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
-DECIDIM_TAG = "v0.29.5"
+# DECIDIM_TAG = "v0.29.5"
+DECIDIM_BRANCH = "release/0.31-stable"
 
-gem "decidim", github: "decidim/decidim", tag: DECIDIM_TAG
-gem "decidim-conferences", github: "decidim/decidim", tag: DECIDIM_TAG
-gem "decidim-initiatives", github: "decidim/decidim", tag: DECIDIM_TAG
-gem "decidim-templates", github: "decidim/decidim", tag: DECIDIM_TAG
+gem "decidim", github: "decidim/decidim", branch: DECIDIM_BRANCH
+gem "decidim-conferences", github: "decidim/decidim", branch: DECIDIM_BRANCH
+gem "decidim-initiatives", github: "decidim/decidim", branch: DECIDIM_BRANCH
+gem "decidim-templates", github: "decidim/decidim", branch: DECIDIM_BRANCH
 
 gem "bootsnap", "~> 1.4", require: false
 gem "puma", ">= 6.3.1"
 
-gem "activerecord-postgis-adapter", "~> 8.0", ">= 8.0.3"
 gem "aws-sdk-s3", require: false
 gem "dalli"
 gem "deface"
@@ -27,46 +27,37 @@ gem "rgeo-activerecord"
 # Fix for WickedPdf compatibility issues
 gem "wicked_pdf", "~> 2.8", ">= 2.8.2"
 
-# gems updated with bundle-audit
-gem "actionpack", "~> 7.0.8.7"
-gem "graphql", "~> 2.2.17"
-gem "net-imap", ">= 0.5.6"
-gem "nokogiri", ">= 1.18.9"
-gem "rack", "~> 2.2.20"
-gem "rexml", ">= 3.4.2"
-gem "uri", ">= 1.0.4"
-
 # omniauth
 gem "omniauth-oauth2"
-gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik.git", branch: "feat/update_to_0.29"
+# gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik.git", branch: "feat/update_to_0.29"
 
 # Load Budgets Booth to avoid errors
-gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp", branch: "bump/0.29-budgets_booth"
+# gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp", branch: "bump/0.29-budgets_booth"
 
 # External Decidim gems
-gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
-gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "rc-0.29"
-gem "decidim-anonymous_proposals", git: "https://github.com/OpenSourcePolitics/decidim-module-anonymous_proposals.git", branch: "bump/0.29"
-gem "decidim-cache_cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner.git"
-gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "bump/0.29"
-gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git", branch: "release/0.29-stable"
-gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.29"
-gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "bump/0.29"
-gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePolitics/guest-meeting-registration.git", branch: "bump/module_to_0.29"
-gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git", branch: "bump/0.29"
-gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "backport/fix_database_not_available"
-
-gem "decidim-ai", git: "https://github.com/OpenSourcePolitics/decidim-module-ai.git", branch: "feat/third_party"
-gem "decidim-ai_third_party", git: "https://github.com/OpenSourcePolitics/decidim-ai_third_party.git"
+# gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
+# gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "rc-0.29"
+# gem "decidim-anonymous_proposals", git: "https://github.com/OpenSourcePolitics/decidim-module-anonymous_proposals.git", branch: "bump/0.29"
+# gem "decidim-cache_cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner.git"
+# gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "bump/0.29"
+gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git", branch: DECIDIM_BRANCH
+# gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.29"
+# gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "bump/0.29"
+# gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePolitics/guest-meeting-registration.git", branch: "bump/module_to_0.29"
+# gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git", branch: "bump/0.29"
+# gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "backport/fix_database_not_available"
+#
+# gem "decidim-ai", git: "https://github.com/OpenSourcePolitics/decidim-module-ai.git", branch: "feat/third_party"
+# gem "decidim-ai_third_party", git: "https://github.com/OpenSourcePolitics/decidim-ai_third_party.git"
 
 gem "omniauth_openid_connect"
-gem "omniauth-rails_csrf_protection", "~> 1.0"
+# gem "omniauth-rails_csrf_protection", "~> 1.0"
 
 group :development, :test do
-  gem "brakeman", "~> 6.1"
+  gem "brakeman", "~> 7.0"
   gem "bundler-audit", require: false
   gem "byebug", "~> 11.0", platform: :mri
-  gem "decidim-dev", github: "decidim/decidim", tag: DECIDIM_TAG
+  gem "decidim-dev", github: "decidim/decidim", branch: DECIDIM_BRANCH
   gem "parallel_tests", "~> 4.2"
   gem "spring"
 end

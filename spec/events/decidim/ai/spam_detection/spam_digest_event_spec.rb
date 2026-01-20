@@ -22,7 +22,7 @@ module Decidim
           Decidim::Report
             .joins(:moderation)
             .where(reason: "spam")
-            .where("decidim_reports.created_at >= ?", since)
+            .where(decidim_reports: { created_at: since.. })
             .select { |r| r.moderation.participatory_space.organization == organization }
             .count
         end
@@ -31,7 +31,7 @@ module Decidim
           Decidim::UserReport
             .joins(:user)
             .where(reason: "spam")
-            .where("decidim_user_reports.created_at >= ?", since)
+            .where(decidim_user_reports: { created_at: since.. })
             .where(decidim_users: { decidim_organization_id: organization.id })
             .count
         end

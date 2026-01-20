@@ -2,7 +2,7 @@
 
 require "active_support/concern"
 
-module ParticipatoryProcessCopyFormExtends
+module ParticipatoryProcessDuplicateFormExtends
   extend ActiveSupport::Concern
 
   included do
@@ -10,4 +10,4 @@ module ParticipatoryProcessCopyFormExtends
   end
 end
 
-Decidim::ParticipatoryProcesses::Admin::ParticipatoryProcessCopyForm.include(ParticipatoryProcessCopyFormExtends)
+Decidim::ParticipatoryProcesses::Admin::ParticipatoryProcessDuplicateForm.include(ParticipatoryProcessDuplicateFormExtends)

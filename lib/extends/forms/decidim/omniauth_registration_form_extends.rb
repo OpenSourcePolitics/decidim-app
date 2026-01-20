@@ -7,7 +7,7 @@ module OmniauthRegistrationFormExtends
 
   included do
     def normalized_nickname
-      source = Rails.application.secrets.dig(:decidim, :omniauth, :ignore_nickname) ? name : (nickname || name)
+      source = Decidim::Env.new("OMNIAUTH_IGNORE_NICKNAME", false).to_boolean_string == "true" ? name : (nickname || name)
       Decidim::UserBaseEntity.nicknamize(source, organization: current_organization)
     end
   end

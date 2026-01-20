@@ -18,16 +18,11 @@ module DecidimApp
                               ).default_options
                             end
         @database_settings = organization.enabled_omniauth_providers[provider.to_sym]
-        @rails_secrets = Rails.application.secrets.dig(:omniauth, provider.to_sym)
-
-        # Rails.logger.debug { "Configuring omniauth provider: #{provider} for organization: (#{organization.id}) #{organization.host}" }
-        # Rails.logger.debug { "Strategy default options: #{strategy_options.inspect}" }
-        # Rails.logger.debug { "Database settings: #{database_settings.inspect}" }
-        # Rails.logger.debug { "Rails secrets: #{rails_secrets.inspect}" }
+        @rails_secrets = load_provider_secrets(provider)
       end
 
       def set_value(key, forced_value: nil, path: nil, transform: ->(value) { value })
-        value = if forced_value.nil? # false and "" are valid values
+        value = if forced_value.nil?
                   transform.call(find_value(key.to_sym))
                 else
                   forced_value
@@ -56,6 +51,69 @@ module DecidimApp
 
       def manage_boolean(value)
         [true, "true", "TRUE", 1, "1"].include?(value) if value.present?
+      end
+
+      private
+
+      def load_provider_secrets(provider)
+        case provider.to_s
+        when "france_connect"
+          {
+            enabled: ENV["OMNIAUTH_FRANCE_CONNECT_CLIENT_OPTIONS_SECRET"].present?,
+            icon: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_ICON_PATH", nil),
+            icon_hover_path: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_ICON_HOVER_PATH", nil),
+            display_name: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_DISPLAY_NAME", nil),
+            issuer: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_ISSUER", nil),
+            client_options_identifier: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_CLIENT_OPTIONS_IDENTIFIER", nil),
+            client_options_secret: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_CLIENT_OPTIONS_SECRET", nil),
+            client_options_redirect_uri: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_CLIENT_OPTIONS_REDIRECT_URI", nil),
+            scope: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_SCOPE", nil),
+            acr_values: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_ACR_VALUES", nil),
+            client_signing_alg: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_CLIENT_SIGNING_ALG", nil),
+            logout_policy: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_LOGOUT_POLICY", nil),
+            logout_path: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_LOGOUT_PATH", nil),
+            post_logout_redirect_uri: ENV.fetch("OMNIAUTH_FRANCE_CONNECT_POST_LOGOUT_REDIRECT_URI", nil)
+          }.compact
+        when "openid_connect"
+          {
+            enabled: ENV["OMNIAUTH_OPENID_CONNECT_CLIENT_OPTIONS_SECRET"].present?,
+            icon: ENV.fetch("OMNIAUTH_OPENID_CONNECT_ICON_PATH", nil),
+            display_name: ENV.fetch("OMNIAUTH_OPENID_CONNECT_DISPLAY_NAME", nil),
+            issuer: ENV.fetch("OMNIAUTH_OPENID_CONNECT_ISSUER", nil),
+            discovery: ENV.fetch("OMNIAUTH_OPENID_CONNECT_DISCOVERY", nil),
+            client_options_identifier: ENV.fetch("OMNIAUTH_OPENID_CONNECT_CLIENT_OPTIONS_IDENTIFIER", nil),
+            client_options_secret: ENV.fetch("OMNIAUTH_OPENID_CONNECT_CLIENT_OPTIONS_SECRET", nil),
+            client_options_redirect_uri: ENV.fetch("OMNIAUTH_OPENID_CONNECT_CLIENT_OPTIONS_REDIRECT_URI", nil),
+            scope: ENV.fetch("OMNIAUTH_OPENID_CONNECT_SCOPE", nil),
+            response_type: ENV.fetch("OMNIAUTH_OPENID_CONNECT_RESPONSE_TYPE", nil),
+            acr_values: ENV.fetch("OMNIAUTH_OPENID_CONNECT_ACR_VALUES", nil),
+            client_auth_method: ENV.fetch("OMNIAUTH_OPENID_CONNECT_CLIENT_AUTH_METHOD", nil),
+            client_signing_alg: ENV.fetch("OMNIAUTH_OPENID_CONNECT_CLIENT_SIGNING_ALG", nil),
+            logout_policy: ENV.fetch("OMNIAUTH_OPENID_CONNECT_LOGOUT_POLICY", nil),
+            logout_path: ENV.fetch("OMNIAUTH_OPENID_CONNECT_LOGOUT_PATH", nil),
+            post_logout_redirect_uri: ENV.fetch("OMNIAUTH_OPENID_CONNECT_POST_LOGOUT_REDIRECT_URI", nil),
+            uid_field: ENV.fetch("OMNIAUTH_OPENID_CONNECT_UID_FIELD", nil)
+          }.compact
+        when "publik"
+          {
+            enabled: ENV["OMNIAUTH_PUBLIK_CLIENT_SECRET"].present?,
+            icon_path: ENV.fetch("OMNIAUTH_PUBLIK_ICON_PATH", nil),
+            display_name: ENV.fetch("OMNIAUTH_PUBLIK_DISPLAY_NAME", nil),
+            client_id: ENV.fetch("OMNIAUTH_PUBLIK_CLIENT_ID", nil),
+            client_secret: ENV.fetch("OMNIAUTH_PUBLIK_CLIENT_SECRET", nil),
+            site_url: ENV.fetch("OMNIAUTH_PUBLIK_SITE_URL", nil)
+          }.compact
+        when "cultuur_connect"
+          {
+            enabled: false,
+            icon_path: ENV.fetch("OMNIAUTH_CCO_ICON_PATH", nil),
+            client_id: ENV.fetch("OMNIAUTH_CCO_CLIENT_ID", nil),
+            client_secret: ENV.fetch("OMNIAUTH_CCO_CLIENT_SECRET", nil),
+            site_url: ENV.fetch("OMNIAUTH_SITE_URL", nil)
+          }.compact
+        else
+          raise ArgumentError, "Omniauth provider '#{provider}' is not configured. Supported providers are: france_connect, openid_connect, publik, cultuur_connect"
+        end
       end
     end
   end

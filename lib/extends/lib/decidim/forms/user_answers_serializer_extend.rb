@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module UserAnswersSerializerExtends
+module UserResponsesSerializerExtends
   extend ActiveSupport::Concern
 
   included do
@@ -28,6 +28,6 @@ module UserAnswersSerializerExtends
   end
 end
 
-Decidim::Forms::UserAnswersSerializer.class_eval do
-  include(UserAnswersSerializerExtends)
+Decidim::Forms::UserResponsesSerializer.class_eval do
+  include(UserResponsesSerializerExtends)
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-if Rails.application.secrets.dig(:omniauth, :publik).present?
+if ENV["OMNIAUTH_PUBLIK_CLIENT_SECRET"].present?
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider(
       :publik,

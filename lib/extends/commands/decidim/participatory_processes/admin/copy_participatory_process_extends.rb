@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "active_support/concern"
-module CopyParticipatoryProcessExtends
+module DuplicateParticipatoryProcessExtends
   extend ActiveSupport::Concern
 
   included do
@@ -92,4 +92,4 @@ module CopyParticipatoryProcessExtends
   end
 end
 
-Decidim::ParticipatoryProcesses::Admin::CopyParticipatoryProcess.include(CopyParticipatoryProcessExtends)
+Decidim::ParticipatoryProcesses::Admin::DuplicateParticipatoryProcess.include(DuplicateParticipatoryProcessExtends)

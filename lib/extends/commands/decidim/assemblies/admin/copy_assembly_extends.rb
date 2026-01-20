@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "active_support/concern"
-module CopyAssemblyExtends
+module DuplicateAssemblyExtends
   extend ActiveSupport::Concern
 
   included do
@@ -89,4 +89,4 @@ module CopyAssemblyExtends
   end
 end
 
-Decidim::Assemblies::Admin::CopyAssembly.include(CopyAssemblyExtends)
+Decidim::Assemblies::Admin::DuplicateAssembly.include(DuplicateAssemblyExtends)

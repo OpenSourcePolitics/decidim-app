@@ -55,6 +55,8 @@ if ENV.fetch("DEV_SSL", nil) && defined?(Bundler) && (dev_gem = Bundler.load.spe
   )
 end
 
-if Rails.application.secrets.puma[:health_check][:enabled]
-  activate_control_app "tcp://0.0.0.0:#{Rails.application.secrets.puma[:health_check][:port]}", { auth_token: Rails.application.secrets.puma[:health_check][:token] }
+if Decidim::Env.new("PUMA_HEALTH_CHECK_ENABLED", false).to_boolean_string == "true"
+  port = Decidim::Env.new("PUMA_HEALTH_CHECK_PORT", 3124).to_i
+  token = Decidim::Env.new("PUMA_HEALTH_CHECK_TOKEN", "decidimlite123456789").to_s
+  activate_control_app "tcp://0.0.0.0:#{port}", { auth_token: token }
 end

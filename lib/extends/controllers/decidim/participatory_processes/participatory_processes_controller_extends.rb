@@ -7,7 +7,7 @@ module ParticipatoryProcessesControllerExtends
   included do
     def participatory_processes
       @participatory_processes ||= filtered_processes.groupless.includes(attachments: :file_attachment)
-      return @participatory_processes if Rails.application.secrets.dig(:decidim, :participatory_processes, :sort_by_date) == false
+      return @participatory_processes if Decidim::Env.new("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).to_boolean_string == "false"
 
       custom_sort(search.with_date)
     end

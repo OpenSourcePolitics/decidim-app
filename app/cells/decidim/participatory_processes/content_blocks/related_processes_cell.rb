@@ -16,7 +16,7 @@ module Decidim
 
           # Change the order of the processes if the setting is enabled
           # and use the new method "sort_processes_from"
-          @related_processes = if Rails.application.secrets.dig(:decidim, :participatory_processes, :sort_by_date) == false
+          @related_processes = if Decidim::Env.new("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).to_boolean_string == "false"
                                  processes
                                else
                                  sort_processes_from(processes)

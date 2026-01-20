@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module QuestionnaireAnswerPresenterExtends
+module QuestionnaireResponsePresenterExtends
   extend ActiveSupport::Concern
 
   included do
@@ -38,6 +38,6 @@ module QuestionnaireAnswerPresenterExtends
   end
 end
 
-Decidim::Forms::Admin::QuestionnaireAnswerPresenter.class_eval do
-  include(QuestionnaireAnswerPresenterExtends)
+Decidim::Forms::Admin::QuestionnaireResponsePresenter.class_eval do
+  include(QuestionnaireResponsePresenterExtends)
 end

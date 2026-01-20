@@ -39,13 +39,13 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = Rails.application.secrets.dig(:storage, :provider)&.to_sym || :local
+  config.active_storage.service = Decidim::Env.new("STORAGE_PROVIDER", "local").to_s.to_sym
 
-  config.active_storage.service_urls_expire_in = if %w(amazon amazon_instance_profile minio).include?(Rails.application.secrets.dig(:storage, :provider))
-                                                   Rails.application.secrets.dig(:decidim, :service_urls_expires_in)
+  config.active_storage.service_urls_expire_in = if %w(amazon amazon_instance_profile minio).include?(ENV["STORAGE_PROVIDER"])
+                                                   Decidim::Env.new("DECIDIM_SERVICE_URLS_EXPIRES_IN", "1").to_i
                                                  else
-                                                   "120000"
-                                                 end.to_i.weeks
+                                                   120_000
+                                                 end.weeks
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -53,7 +53,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = Rails.application.secrets.decidim[:force_ssl].present?
+  config.force_ssl = Decidim::Env.new("DECIDIM_FORCE_SSL", "auto").default_or_present_if_exists.present?
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
@@ -93,13 +93,13 @@ Rails.application.configure do
 
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      address: Rails.application.secrets.smtp_address,
-      port: Rails.application.secrets.smtp_port,
-      authentication: Rails.application.secrets.smtp_authentication,
-      user_name: Rails.application.secrets.smtp_username,
-      password: Rails.application.secrets.smtp_password,
-      domain: Rails.application.secrets.smtp_domain,
-      enable_starttls_auto: Rails.application.secrets.smtp_starttls_auto,
+      address: ENV.fetch("SMTP_ADDRESS"),
+      port: Decidim::Env.new("SMTP_PORT", 587).to_i,
+      authentication: Decidim::Env.new("SMTP_AUTHENTICATION", "plain").to_s,
+      user_name: ENV.fetch("SMTP_USERNAME"),
+      password: ENV.fetch("SMTP_PASSWORD"),
+      domain: ENV.fetch("SMTP_DOMAIN"),
+      enable_starttls_auto: Decidim::Env.new("SMTP_STARTTLS_AUTO", true).to_boolean_string,
       openssl_verify_mode: "none"
     }
   end

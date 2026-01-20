@@ -201,6 +201,189 @@ fr:
         image_legend: "(Facultatif) Ajouter une image"
       show:
         related_processes: Concertations liées
+      static_pages:
+        democratic_quality_indicators:
+          content: |-
+            <h2>Système d’indicateurs pour mesurer la qualité démocratique dans Decidim.</h2>
+      
+            <h3>Introduction</h3>
+            <p>La qualité démocratique est un principe fondamental de Decidim. Afin de la garantir, nous avons développé un système d’indicateurs permettant d’évaluer la qualité des processus participatifs sur la plateforme. Cet article explique comment ces indicateurs sont calculés.</p>
+      
+            <h3>Comment les indicateurs sont-ils calculés&nbsp;?</h3>
+            <p>Nous avons défini deux méthodes de collecte des indicateurs de qualité&nbsp;:</p>
+      
+            <ol>
+              <li><strong>Indicateurs automatiques&nbsp;:</strong> ils sont calculés directement à partir des données de la plateforme Decidim.</li>
+              <li><strong>Questions d’auto-évaluation&nbsp;:</strong> elles reposent sur un formulaire rempli par un administrateur.</li>
+            </ol>
+      
+            <p>Chaque indicateur est exprimé en pourcentage (n/total). Ce pourcentage est ensuite converti en un score sur une échelle de 1 à 5&nbsp;:</p>
+      
+            <ul>
+              <li>1 = 0–20&nbsp;%</li>
+              <li>2 = 20–40&nbsp;%</li>
+              <li>3 = 40–60&nbsp;%</li>
+              <li>4 = 60–80&nbsp;%</li>
+              <li>5 = 80–100&nbsp;%</li>
+            </ul>
+      
+            <br><br>
+            <h3>Indicateurs automatiques</h3>
+            <p>Ces indicateurs sont calculés automatiquement à partir des données disponibles dans Decidim. Ils sont évalués par processus participatif et peuvent être rendus publics par les administrateurs, afin que l’ensemble des participants puisse y accéder.</p>
+      
+            <p>Nous avons défini quatre indicateurs principaux&nbsp;: l’influence citoyenne, l’hybridation, la réactivité institutionnelle et la traçabilité&nbsp;:</p>
+      
+            <h3>Influence citoyenne</h3>
+      
+            <p>Cet indicateur mesure le niveau d’influence des citoyens sur les propositions acceptées et sur les résultats du processus.</p>
+      
+            <ul>
+              <li>
+                Influence citoyenne sur les propositions
+                <ul>
+                  <li>Pourcentage de propositions acceptées (n/total)</li>
+                  <li>Pourcentage de propositions <em>citoyennes</em> approuvées par rapport au total des propositions citoyennes (influence citoyenne totale sur les propositions approuvées)</li>
+                  <li>Pourcentage de propositions citoyennes approuvées par rapport au total des propositions approuvées (influence citoyenne relative sur les propositions approuvées)</li>
+                </ul>
+              </li>
+              <li>
+                Influence citoyenne sur les résultats
+                <ul>
+                  <li>Pourcentage de résultats liés à des propositions citoyennes par rapport au total des résultats (influence citoyenne totale sur les résultats)</li>
+                </ul>
+              </li>
+            </ul>
+      
+            <h3>Hybridation</h3>
+      
+            <p>Cet indicateur mesure le niveau de combinaison entre les espaces et dispositifs en ligne et hors ligne au cours du processus.</p>
+      
+            <ul>
+              <li>Un composant « réunions » est-il actif&nbsp;? (Oui = 5, Non = 0)</li>
+              <li>Y a-t-il des réunions en présentiel&nbsp;? (Oui = 5, Non = 0)</li>
+              <li>Y a-t-il des réunions en ligne&nbsp;? (Oui = 5, Non = 0)</li>
+              <li>Y a-t-il des réunions hybrides&nbsp;? (Oui = 5, Non = 0)</li>
+              <li>Des propositions ont-elles été créées à partir des réunions&nbsp;? (Oui = 5, Non = 0)</li>
+            </ul>
+      
+            <h3>Réactivité institutionnelle</h3>
+      
+            <p>Cet indicateur mesure le niveau de réactivité de l’organisation face aux contributions des participants. Il reflète son engagement à travers des réponses officielles et la mise en œuvre des décisions.</p>
+      
+            <ul>
+              <li>Pourcentage de propositions ayant reçu une réponse (n/total) – réactivité institutionnelle aux propositions</li>
+              <li>Pourcentage de résultats réalisés à 100&nbsp;% (n/total)</li>
+            </ul>
+      
+            <h3>Traçabilité</h3>
+      
+            <p>Cet indicateur mesure la transparence et la traçabilité du processus participatif. Il reflète la facilité avec laquelle les participants peuvent suivre l’évolution des propositions et vérifier les actions institutionnelles grâce aux informations publiées.</p>
+      
+            <ul>
+              <li>Nombre de propositions disposant d’un historique (n/total)</li>
+              <li>Pourcentage de résultats liés à des propositions (n/total)</li>
+              <li>Pourcentage de réunions clôturées avec un compte rendu publié (n/total)</li>
+              <li>Activation du module open data (dichotomique&nbsp;: 0 ou 5)</li>
+              <li>Pourcentage de propositions liées aux budgets (n/total)</li>
+            </ul>
+      
+            <br><br>
+            <h3>Indicateurs d’auto-évaluation</h3>
+      
+            <p>En complément des indicateurs automatiques, nous proposons l’utilisation d’un <strong>formulaire d’auto-évaluation</strong> afin d’évaluer les dimensions qualitatives de chaque processus participatif. Ce formulaire est complété par les administrateurs de la plateforme à la fin de chaque processus, et les réponses sont affichées publiquement dans le bloc de contenu des indicateurs.</p>
+      
+            <p>Ces questions visent à saisir des aspects de la qualité démocratique qui ne peuvent pas être évalués uniquement à partir de données quantitatives. Il est important de noter que les réponses à ce questionnaire sont biaisées par l’opinion des administrateurs de la plateforme.</p>
+      
+            <br><br>
+            <h3>Questions d’auto-évaluation</h3>
+      
+            <p>Les questions composant le formulaire d’auto-évaluation rempli par les administrateurs, ainsi que les valeurs associées à chaque réponse, sont présentées ci-dessous.</p>
+      
+            <h4>Qualité de l’information</h4>
+      
+            <ol>
+              <li>Les informations publiées apportent-elles de la clarté sur les mécanismes de prise de décision (par exemple&nbsp;: vote, consensus, négociations directes)&nbsp;?
+                <ul>
+                  <li>Aucune clarté = 0</li>
+                  <li>Faible clarté = 1</li>
+                  <li>Clarté suffisante = 2,5</li>
+                  <li>Clarté totale = 5</li>
+                </ul>
+              </li>
+              <li>Des informations ont-elles été fournies concernant la capacité des participants à influencer le sujet débattu (dans la communication du processus et des invitations, ainsi qu’au début de chaque session de débat)&nbsp;?
+                <ul>
+                  <li>Jamais = 0</li>
+                  <li>Presque jamais = 1</li>
+                  <li>Généralement = 2,5</li>
+                  <li>Toujours = 5</li>
+                </ul>
+              </li>
+            </ol>
+      
+            <h4>Influence citoyenne</h4>
+      
+            <ol>
+              <li>Évaluation du degré de participation dans le processus
+                <ul>
+                  <li>Les participants ont reçu des informations de la part de l’organisation. = 1</li>
+                  <li>Les participants ont été consultés ou ont fourni un retour à l’organisation. = 2</li>
+                  <li>Les participants ont été impliqués dans le partage du pouvoir décisionnel. = 3</li>
+                  <li>Les participants ont été impliqués de manière décisive dans la prise de décision. = 4</li>
+                  <li>Les participants ont été impliqués dans la prise de décision ainsi que dans la gestion des ressources ou la mise en œuvre. = 5</li>
+                </ul>
+              </li>
+              <li>Pourcentage de phases avec un pouvoir décisionnel citoyen.
+                <p>Sur l’ensemble des phases du processus (de la sélection des enjeux à la supervision de l’exécution), dans combien le public a-t-il la capacité de prendre des décisions ou d’agir de manière exécutive&nbsp;?</p>
+                <ul>
+                  <li>0–20&nbsp;% = 1</li>
+                  <li>20–40&nbsp;% = 2</li>
+                  <li>40–60&nbsp;% = 3</li>
+                  <li>60–80&nbsp;% = 4</li>
+                  <li>80–100&nbsp;% = 5</li>
+                </ul>
+              </li>
+            </ol>
+      
+            <h4>Inclusivité</h4>
+      
+            <ol>
+              <li>Comment le degré de diversité des acteurs et des participants est-il évalué par rapport à la population de référence du processus&nbsp;?
+                <ul>
+                  <li>Aucune = 0</li>
+                  <li>Faible = 1</li>
+                  <li>Suffisante = 2,5</li>
+                  <li>Bonne = 5</li>
+                </ul>
+              </li>
+              <li>En combien de langues le processus a-t-il été communiqué&nbsp;?
+                <ul>
+                  <li>Une seule langue = 1</li>
+                  <li>Moins de la moitié des langues parlées dans la communauté = 2,5</li>
+                  <li>Plus de la moitié des langues parlées dans la communauté = 5</li>
+                </ul>
+              </li>
+              <li>Les lieux des réunions en présentiel étaient-ils accessibles aux personnes à mobilité réduite&nbsp;?
+                <ul>
+                  <li>Non = 0</li>
+                  <li>Partiellement = 2,5</li>
+                  <li>Oui = 5</li>
+                </ul>
+              </li>
+              <li>Les sessions de participation ont-elles été planifiées à des horaires variés (matin, midi, après-midi, soir et week-ends)&nbsp;?
+                <ul>
+                  <li>Non = 0</li>
+                  <li>Partiellement = 2,5</li>
+                  <li>Oui = 5</li>
+                </ul>
+              </li>
+              <li>Un accompagnement numérique a-t-il été proposé aux participants&nbsp;?
+                <ul>
+                  <li>Non = 0</li>
+                  <li>Partiellement = 2,5</li>
+                  <li>Oui = 5</li>
+                </ul>
+              </li>
+            </ol>
     profiles:
       show:
         activity: Activité

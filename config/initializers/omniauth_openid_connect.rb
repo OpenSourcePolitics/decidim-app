@@ -2,7 +2,7 @@
 
 require "decidim_app/omniauth/openid_connect_utils"
 
-if Rails.application.secrets.dig(:omniauth, :openid_connect).present?
+if ENV["OMNIAUTH_OPENID_CONNECT_CLIENT_OPTIONS_SECRET"].present?
   OmniAuth.config.logger = Rails.logger
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider(

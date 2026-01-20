@@ -3,11 +3,11 @@
 require "spec_helper"
 
 describe "User creates proposal simply" do
-  let!(:organization) { create :organization, *organization_traits, available_locales: [:en] }
-  let!(:participatory_process) { create :participatory_process, :with_steps, organization: }
+  let!(:organization) { create(:organization, *organization_traits, available_locales: [:en]) }
+  let!(:participatory_process) { create(:participatory_process, :with_steps, organization:) }
   let(:manifest_name) { "proposals" }
   let(:manifest) { Decidim.find_component_manifest(manifest_name) }
-  let!(:user) { create :user, :confirmed, organization: }
+  let!(:user) { create(:user, :confirmed, organization:) }
   let(:settings) { nil }
   let!(:component) do
     create(:proposal_component,

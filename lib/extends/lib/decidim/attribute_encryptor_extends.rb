@@ -13,7 +13,7 @@ module AttributeEncryptorExtends
     def self.cryptor
       @cryptor ||= begin
         key = ActiveSupport::KeyGenerator.new("attribute").generate_key(
-          Rails.application.secrets.secret_key_base, ActiveSupport::MessageEncryptor.key_len
+          ENV.fetch("SECRET_KEY_BASE"), ActiveSupport::MessageEncryptor.key_len
         )
         encryptor = ActiveSupport::MessageEncryptor.new(key)
 
@@ -21,7 +21,7 @@ module AttributeEncryptorExtends
           "attribute",
           hash_digest_class: OpenSSL::Digest::SHA1
         ).generate_key(
-          Rails.application.secrets.secret_key_base,
+          ENV.fetch("SECRET_KEY_BASE"),
           ActiveSupport::MessageEncryptor.key_len
         )
 

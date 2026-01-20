@@ -3,7 +3,7 @@
 class FixI18nProposalContent < ActiveRecord::Migration[5.2]
   def change
     PaperTrail.request(enabled: false) do
-      Decidim::Proposals::Proposal.find_each do |proposal|
+      Decidim::Proposals::Proposal.unscoped.find_each do |proposal|
         fix_content(proposal, :title)
         fix_content(proposal, :body)
         fix_content(proposal, :answer)

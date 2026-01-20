@@ -3,7 +3,7 @@
 require "decidim_app/omniauth/openid_connect_utils"
 require "omniauth/strategies/france_connect"
 
-if Rails.application.secrets.dig(:omniauth, :france_connect).present?
+if ENV["OMNIAUTH_FRANCE_CONNECT_CLIENT_OPTIONS_SECRET"].present?
   OmniAuth.config.logger = Rails.logger
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider(

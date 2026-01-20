@@ -5,8 +5,8 @@ require "spec_helper"
 describe "Organization scopes" do
   include Decidim::SanitizeHelper
 
-  let(:organization) { create :organization, default_locale: :en, available_locales: [:en, :es, :ca, :fr] }
-  let(:admin) { create :user, :admin, :confirmed, organization: }
+  let(:organization) { create(:organization, default_locale: :en, available_locales: [:en, :es, :ca, :fr]) }
+  let(:admin) { create(:user, :admin, :confirmed, organization:) }
   let!(:attributes) { attributes_for(:scope) }
 
   before do

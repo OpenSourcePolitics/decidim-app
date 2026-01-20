@@ -16,7 +16,7 @@ module Decidim::ParticipatoryProcesses
     let!(:component) { create(:component, manifest_name: :dummy, participatory_space: participatory_process) }
     let(:form) do
       instance_double(
-        Admin::ParticipatoryProcessCopyForm,
+        Admin::ParticipatoryProcessDuplicateForm,
         invalid?: invalid,
         title: { en: "title" },
         slug: "copied-slug",

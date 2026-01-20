@@ -126,7 +126,7 @@ module Decidim
 
           context "and sort_by_date is false" do
             before do
-              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(false)
+              allow(Decidim::Env).to receive(:new).with("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).and_return(double(to_boolean_string: "false"))
             end
 
             it "includes active processes without ordering" do
@@ -136,7 +136,7 @@ module Decidim
 
           context "and sort_by_date is true" do
             before do
-              Rails.application.secrets.decidim[:participatory_processes][:sort_by_date] = true
+              allow(Decidim::Env).to receive(:new).with("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).and_return(double(to_boolean_string: "true"))
               active_processes.first.update(end_date: nil)
             end
             # search.with_date will default to "active"
@@ -162,7 +162,7 @@ module Decidim
 
           context "and sort_by_date is false" do
             before do
-              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(false)
+              allow(Decidim::Env).to receive(:new).with("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).and_return(double(to_boolean_string: "false"))
             end
 
             it "includes upcoming processes without ordering" do
@@ -172,7 +172,7 @@ module Decidim
 
           context "and sort_by_date is true" do
             before do
-              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
+              allow(Decidim::Env).to receive(:new).with("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).and_return(double(to_boolean_string: "true"))
             end
             # search.with_date will default to "upcoming"
 
@@ -197,7 +197,7 @@ module Decidim
 
           context "and sort_by_date is false" do
             before do
-              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(false)
+              allow(Decidim::Env).to receive(:new).with("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).and_return(double(to_boolean_string: "false")
             end
 
             it "includes past processes without ordering" do
@@ -207,7 +207,7 @@ module Decidim
 
           context "and sort_by_date is true" do
             before do
-              allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
+              allow(Decidim::Env).to receive(:new).with("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).and_return(double(to_boolean_string: "true"))
             end
 
             it "orders past processes by reverse end_date" do

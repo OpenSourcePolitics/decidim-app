@@ -14,7 +14,7 @@ content_security_policies = {
   "frame-src" => %w(decidim.storage.opensourcepolitics.eu)
 }
 
-minio_endpoint = Rails.application.secrets.dig(:storage, :minio, :endpoint)
+minio_endpoint = ENV.fetch("AWS_ENDPOINT", "https://#{ENV.fetch("OBJECTSTORE_S3_HOST", nil)}")
 if minio_endpoint.presence == "http://minio:9000"
   content_security_policies["default-src"] << minio_endpoint
   content_security_policies["img-src"] << minio_endpoint

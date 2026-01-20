@@ -95,7 +95,7 @@ describe Decidim::ParticipatoryProcesses::ContentBlocks::RelatedProcessesCell, t
   describe "#related_processes" do
     context "when sorting is disabled" do
       before do
-        allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(false)
+        allow(Decidim::Env).to receive(:new).with("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).and_return(double(to_boolean_string: "false"))
       end
 
       it "returns processes without sorting" do
@@ -105,7 +105,7 @@ describe Decidim::ParticipatoryProcesses::ContentBlocks::RelatedProcessesCell, t
 
     context "when sorting is enabled" do
       before do
-        allow(Rails.application.secrets).to receive(:dig).with(:decidim, :participatory_processes, :sort_by_date).and_return(true)
+        allow(Decidim::Env).to receive(:new).with("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).and_return(double(to_boolean_string: "true"))
       end
 
       it "sorts the processes" do

@@ -3,7 +3,7 @@
 ActiveSupport::Notifications.subscribe "decidim.user.omniauth_registration" do |_name, data|
   Rails.logger.debug "decidim.user.omniauth_registration event in config/initializers/omniauth.rb"
 
-  if Rails.application.secrets.dig(:decidim, :omniauth, :force_profile_sync)
+  if Decidim::Env.new("OMNIAUTH_FORCE_PROFILE_SYNC", false).to_boolean_string == "true"
     Rails.logger.debug "decidim.user.omniauth_registration :: force_profile_sync is enabled"
     update_user_profile(data)
   end

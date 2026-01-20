@@ -44,7 +44,7 @@ module SessionControllerExtends
 
     # Skip authorization handler by default
     def skip_first_login_authorization?
-      Rails.application.secrets.dig(:decidim, :skip_first_login_authorization)
+      Decidim::Env.new("SKIP_FIRST_LOGIN_AUTHORIZATION", false).to_boolean_string == "true"
     end
   end
 

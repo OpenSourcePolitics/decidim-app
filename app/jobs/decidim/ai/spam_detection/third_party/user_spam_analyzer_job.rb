@@ -40,7 +40,7 @@ module Decidim
           private
 
           def decidim_ai_enabled?
-            Rails.application.secrets.dig(:decidim, :ai, :enabled) && Rails.application.secrets.dig(:decidim, :ai, :user_spam_analyzer_enabled)
+            Decidim::Env.new("DECIDIM_AI_ENABLED", true).to_boolean_string == "true" && Decidim::Env.new("DECIDIM_AI_USER_SPAM_ANALYZER_ENABLED", true).to_boolean_string == "true"
           end
         end
       end

@@ -8,7 +8,7 @@ module SystemChecksCellExtends
   included do
     # TODO : Remove this when we have a procedure to update the secret_key_base
     def correct_secret_key_base?
-      Rails.application.secrets.secret_key_base.present?
+      ENV["SECRET_KEY_BASE"].present?
     end
   end
 end

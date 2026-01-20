@@ -7,9 +7,11 @@ class MoveProposalEndorsementsToCoreEndorsements < ActiveRecord::Migration[5.2]
   class ProposalEndorsement < ApplicationRecord
     self.table_name = :decidim_proposals_proposal_endorsements
   end
+
   class Endorsement < ApplicationRecord
     self.table_name = :decidim_endorsements
   end
+
   # Move ProposalEndorsements to Endorsements
   def up
     non_duplicated_group_endorsements = ProposalEndorsement.select(
@@ -26,7 +28,7 @@ class MoveProposalEndorsementsToCoreEndorsements < ActiveRecord::Migration[5.2]
       )
     end
     # update new `decidim_proposals_proposal.endorsements_count` counter cache
-    Decidim::Proposals::Proposal.select(:id).all.find_each do |proposal|
+    Decidim::Proposals::Proposal.unscoped.select(:id).all.find_each do |proposal|
       Decidim::Proposals::Proposal.reset_counters(proposal.id, :endorsements)
     end
   end

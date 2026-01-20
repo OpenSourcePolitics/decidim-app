@@ -4,7 +4,7 @@ require "spec_helper"
 
 module Decidim
   module Forms
-    describe UserAnswersSerializer do
+    describe UserResponsesSerializer do
       subject do
         described_class.new(questionnaire.answers)
       end

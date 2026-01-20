@@ -2,7 +2,7 @@
 
 require "active_support/concern"
 
-module AssemblyCopyFormExtends
+module AssemblyDuplicateFormExtends
   extend ActiveSupport::Concern
 
   included do
@@ -10,4 +10,4 @@ module AssemblyCopyFormExtends
   end
 end
 
-Decidim::Assemblies::Admin::AssemblyCopyForm.include(AssemblyCopyFormExtends)
+Decidim::Assemblies::Admin::AssemblyDuplicateForm.include(AssemblyDuplicateFormExtends)

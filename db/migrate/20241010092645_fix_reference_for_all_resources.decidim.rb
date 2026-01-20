@@ -8,7 +8,7 @@ class FixReferenceForAllResources < ActiveRecord::Migration[5.1]
     models.each do |model|
       next unless model.table_exists?
 
-      model.find_each(&:touch)
+      model.unscoped.find_each(&:touch)
     end
   end
 
