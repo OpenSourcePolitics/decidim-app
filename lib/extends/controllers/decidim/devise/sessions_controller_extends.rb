@@ -31,8 +31,8 @@ module SessionControllerExtends
     def after_sign_in_path_for(user)
       if user.present? && user.blocked?
         check_user_block_status(user)
-      elsif !skip_first_login_authorization? && (first_login_and_not_authorized?(user) && !user.admin? && !pending_redirect?(user))
-        decidim_verifications.first_login_authorizations_path
+      elsif !skip_first_login_authorization? && (pending_onboarding_action?(user) && !user.admin? && !pending_redirect?(user))
+        decidim_verifications.onboarding_pending_authorizations_path
       else
         super
       end

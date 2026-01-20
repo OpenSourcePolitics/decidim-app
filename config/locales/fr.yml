@@ -16,6 +16,12 @@ fr:
         document_number: Numéro unique
       participatory_process:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
+  activerecord:
+    models:
+      decidim:
+        history:
+          one: Historique
+          other: Historique
   date:
     formats:
       order: d-m-y
@@ -42,6 +48,8 @@ fr:
         destroy: Supprimer
         edit: Modifier
         new_assembly: Nouvelle assemblée
+      areas:
+        deprecated: Gardez à l'esprit que les périmètres sont dépréciés et seront supprimés dans les futures versions. Veuillez utiliser les taxonomies à la place. Le seul module utilisant actuellement les périmètres est le module des initiatives.
       attachments:
         form:
           send_notification_to_followers: Envoyer une notification à toutes les personnes qui suivent la concertation ayant accepté de recevoir des notifications par mail
@@ -60,6 +68,134 @@ fr:
         update:
           error: Il y a eu une erreur lors de la mise à jour du secteur.
           success: Secteur mis à jour avec succès.
+      taxonomies:
+        actions:
+          actions: Actions
+          destroy: Supprimer
+          edit: Éditer
+          filters: Appliquer les filtres
+        breadcrumb:
+          edit: Éditer la taxonomie
+          new: Nouvelle taxonomie
+        count: Ressources associées
+        create:
+          invalid: Il y a eu un problème lors de la création de cette taxonomie.
+          success: Taxonomie créée avec succès.
+        destroy:
+          invalid: Il y a eu un problème lors de la suppression de cette taxonomie.
+          success: Taxonomie supprimée avec succès.
+        edit:
+          back: Retour
+          description: Les éléments de cette taxonomies permettent d'organiser et de filtrer les ressources, telles que les espaces participatifs ou les composants. Utilisez le glisser-déposer pour réorganiser la liste.
+          new_item: Nouvel élément
+          no_items: Il n'y a actuellement aucun élément dans cette taxonomie. Créez une liste d'éléments ici pour classer ou filtrer les ressources, telles que les espaces participatifs ou les composants. Les éléments peuvent être imbriqués jusqu'à trois niveaux.
+          subtitle: Éléments dans "%{taxonomy_name}"
+          title: Éditer la taxonomie "%{taxonomy_name}"
+          update: Mettre à jour
+        filters:
+          search_placeholder: Rechercher
+        index:
+          description: Une taxonomie permet aux administrateurs de trier et d'organiser le contenu. Par exemple, ajoutez une taxonomie avec les quartiers et arrondissements de la ville, puis créez des filtres uniquement avec les arrondissements ou pour un quartier spécifique.
+          new_taxonomy: Nouvelle taxonomie
+          no_items_found: Aucune taxonomie ne correspond aux critères de recherche.
+        name: Nom
+        new:
+          create: Créer une taxonomie
+          title: Nouvelle taxonomie
+        no_taxonomies: Il n'y a actuellement aucune taxonomie. Créez une liste de taxonomies ici et définissez des éléments dans chacune d'elles pour classer ou filtrer les ressources.
+        table:
+          to_next_page: Glisser pour la page suivante
+          to_prev_page: Glisser pour la page précédente
+        taxonomy_actions:
+          confirm_destroy: 'Êtes-vous sûr de vouloir supprimer la taxonomie %{name} ? Cela supprimera également tous les éléments enfants. NOTE : Les ressources qui utilisent cette taxonomie ne seront pas affectées mais elles perdront la référence à cette taxonomie.'
+        total_filters: Filtres
+        total_items: Éléments dans la taxonomie
+        update:
+          invalid: Il y a eu un problème lors de la mise à jour de cette taxonomie.
+          success: Taxonomie mise à jour avec succès.
+      taxonomy_filters:
+        actions:
+          new_taxonomy_filter: Nouveau filtre de taxonomie
+        breadcrumb:
+          edit: Éditer le filtre
+          filters: Filtres
+          new: Nouveau filtre
+        create:
+          error: Il y a eu un problème lors de la création de ce filtre.
+          success: Filtre de taxonomie créé avec succès.
+        destroy:
+          error: Il y a eu un problème lors de la suppression de ce filtre.
+          success: Filtre de taxonomie supprimé avec succès.
+        edit:
+          back: Retour
+          title: Éditer le filtre de taxonomie
+          update: Mettre à jour le filtre de taxonomie
+        form:
+          all: Tous
+          items:
+            one: "%{count} élément sélectionné"
+            other: "%{count} éléments sélectionnés"
+          name_help: Le titre du filtre à afficher dans le front-end.
+          no_items: Aucun élément disponible pour cette taxonomie. Vous pouvez créer des éléments dans les paramètres de configuration de la taxonomie.
+          space_filter: Disponible en tant que filtre pour
+        index:
+          description: Un filtre de taxonomie permet aux administrateurs de trier et de filtrer les espaces participatifs en fonction d'une taxonomie. Par exemple, ajoutez un filtre de taxonomie pour trier les processus par portée géographique.
+          empty: Il n'y a actuellement aucun filtre de taxonomie. Créez une liste de filtres de taxonomie ici pour trier et filtrer les espaces participatifs en fonction d'une taxonomie.
+          new_filter: Nouveau filtre
+        new:
+          back: Retour
+          create: Créer un filtre de taxonomie
+          title: Nouveau filtre de taxonomie
+        table:
+          actions: Actions
+          components_count: Composants utilisant ce filtre
+          confirm_destroy: 'Êtes-vous sûr de vouloir supprimer le filtre de taxonomie %{name} ? NOTE : Les ressources qui utilisent ce filtre ne seront pas affectées mais elles perdront la référence à ce filtre.'
+          destroy: Supprimer
+          edit: Éditer
+          internal_name: Nom interne
+          name: Nom
+        update:
+          error: Il y a eu un problème lors de la mise à jour de ce filtre.
+          success: Filtre de taxonomie mis à jour avec succès.
+      taxonomy_filters_selector:
+        new:
+          add_new_items_html: Pour définir un nouveau filtre ou élément, faites-le via les paramètres de configuration ou en cliquant <a href="%{url}">ici</a>.
+          items_count: "%{count} éléments"
+          save: Sauvegarder
+        show:
+          items_count: "%{count} éléments"
+          remove: Supprimer
+        taxonomies_select:
+          filters: Filtres
+          select_filter: Sélectionner un filtre
+          select_taxonomy: Sélectionner une taxonomie
+          taxonomies: Taxonomies
+      taxonomy_items:
+        edit:
+          title: Éditer l'élément dans %{taxonomy}
+          update: Éditer
+        new:
+          create: Créer
+          none: Aucun
+          title: Nouvel élément dans %{taxonomy}
+      titles:
+        taxonomies: Taxonomies
+        taxonomy_filters: Filtres de taxonomie pour "%{taxonomy}"
+    admin_log:
+      taxonomy:
+        create: "%{user_name} a créé la taxonomie %{resource_name}"
+        create_with_parent: "%{user_name} a créé la taxonomie %{resource_name} dans la taxonomie %{parent_taxonomy}"
+        delete: "%{user_name} a supprimé la taxonomie %{resource_name}"
+        delete_with_parent: "%{user_name} a supprimé la taxonomie %{resource_name} dans la taxonomie %{parent_taxonomy}"
+        update: "%{user_name} a mit à jour la taxonomie %{resource_name}"
+        update_with_parent: "%{user_name} a mit à jour la taxonomie %{resource_name} dans la taxonomie %{parent_taxonomy} "
+      taxonomy_filter:
+        create: "%{user_name} a créé le filtre %{resource_name}"
+        create_with_filter_info: '%{user_name} a créé le filtre %{resource_name} basé sur la taxonomie "%{taxonomy_name}" avec %{filter_items_count} éléments'
+        delete: "%{user_name} a supprimé le filtre %{resource_name}"
+        delete_with_filter_info: '%{user_name} a supprimé le filtre %{resource_name} basé sur la taxonomie "%{taxonomy_name}" avec %{filter_items_count} éléments'
+        update: "%{user_name} a mit à jour le filtre %{resource_name}"
+        update_with_filter_info: '%{user_name} a mit a jour le filtre %{resource_name} basé sur la taxonomie "%{taxonomy_name}" avec %{filter_items_count} éléments'
     ai:
       spam_detection:
         digest:
@@ -70,6 +206,10 @@ fr:
           summary: |-
             Résumé IA anti-spam pour %{organization} : %{count} contenus ont été automatiquement signalés %{frequency_label} par le système Decidim AI.<br><br>
             <a href="%{moderations_url}" target="_blank">Voir les spams détectés</a>.
+    author:
+      likes:
+        one: j'aime
+        other: j'aime
     authorization_handlers:
       data_authorization_handler:
         errors:
@@ -150,6 +290,8 @@ fr:
             success: Le type de pétition a été supprimé avec succès.
           edit:
             update: Mettre à jour
+      admin_states:
+        created: Crée
       create_initiative:
         fill_data:
           back: Retour
@@ -170,6 +312,16 @@ fr:
       initiatives:
         index_header:
           new_initiative: Nouvelle pétition
+    like_buttons_cell:
+      already_liked: Je n'aime plus
+      like: J'aime
+    likes_list:
+      liked_by:
+        one: Aimé par %{visible}
+        other: Aimé par %{visible} et %{others}
+      others: "%{count} autres personnes"
+      title: Aimé par
+      you: vous
     menu:
       help: Aide
     metadata:
@@ -205,20 +357,20 @@ fr:
         democratic_quality_indicators:
           content: |-
             <h2>Système d’indicateurs pour mesurer la qualité démocratique dans Decidim.</h2>
-      
+
             <h3>Introduction</h3>
             <p>La qualité démocratique est un principe fondamental de Decidim. Afin de la garantir, nous avons développé un système d’indicateurs permettant d’évaluer la qualité des processus participatifs sur la plateforme. Cet article explique comment ces indicateurs sont calculés.</p>
-      
+
             <h3>Comment les indicateurs sont-ils calculés&nbsp;?</h3>
             <p>Nous avons défini deux méthodes de collecte des indicateurs de qualité&nbsp;:</p>
-      
+
             <ol>
               <li><strong>Indicateurs automatiques&nbsp;:</strong> ils sont calculés directement à partir des données de la plateforme Decidim.</li>
               <li><strong>Questions d’auto-évaluation&nbsp;:</strong> elles reposent sur un formulaire rempli par un administrateur.</li>
             </ol>
-      
+
             <p>Chaque indicateur est exprimé en pourcentage (n/total). Ce pourcentage est ensuite converti en un score sur une échelle de 1 à 5&nbsp;:</p>
-      
+
             <ul>
               <li>1 = 0–20&nbsp;%</li>
               <li>2 = 20–40&nbsp;%</li>
@@ -226,17 +378,17 @@ fr:
               <li>4 = 60–80&nbsp;%</li>
               <li>5 = 80–100&nbsp;%</li>
             </ul>
-      
+
             <br><br>
             <h3>Indicateurs automatiques</h3>
             <p>Ces indicateurs sont calculés automatiquement à partir des données disponibles dans Decidim. Ils sont évalués par processus participatif et peuvent être rendus publics par les administrateurs, afin que l’ensemble des participants puisse y accéder.</p>
-      
+
             <p>Nous avons défini quatre indicateurs principaux&nbsp;: l’influence citoyenne, l’hybridation, la réactivité institutionnelle et la traçabilité&nbsp;:</p>
-      
+
             <h3>Influence citoyenne</h3>
-      
+
             <p>Cet indicateur mesure le niveau d’influence des citoyens sur les propositions acceptées et sur les résultats du processus.</p>
-      
+
             <ul>
               <li>
                 Influence citoyenne sur les propositions
@@ -253,11 +405,11 @@ fr:
                 </ul>
               </li>
             </ul>
-      
+
             <h3>Hybridation</h3>
-      
+
             <p>Cet indicateur mesure le niveau de combinaison entre les espaces et dispositifs en ligne et hors ligne au cours du processus.</p>
-      
+
             <ul>
               <li>Un composant « réunions » est-il actif&nbsp;? (Oui = 5, Non = 0)</li>
               <li>Y a-t-il des réunions en présentiel&nbsp;? (Oui = 5, Non = 0)</li>
@@ -265,20 +417,20 @@ fr:
               <li>Y a-t-il des réunions hybrides&nbsp;? (Oui = 5, Non = 0)</li>
               <li>Des propositions ont-elles été créées à partir des réunions&nbsp;? (Oui = 5, Non = 0)</li>
             </ul>
-      
+
             <h3>Réactivité institutionnelle</h3>
-      
+
             <p>Cet indicateur mesure le niveau de réactivité de l’organisation face aux contributions des participants. Il reflète son engagement à travers des réponses officielles et la mise en œuvre des décisions.</p>
-      
+
             <ul>
               <li>Pourcentage de propositions ayant reçu une réponse (n/total) – réactivité institutionnelle aux propositions</li>
               <li>Pourcentage de résultats réalisés à 100&nbsp;% (n/total)</li>
             </ul>
-      
+
             <h3>Traçabilité</h3>
-      
+
             <p>Cet indicateur mesure la transparence et la traçabilité du processus participatif. Il reflète la facilité avec laquelle les participants peuvent suivre l’évolution des propositions et vérifier les actions institutionnelles grâce aux informations publiées.</p>
-      
+
             <ul>
               <li>Nombre de propositions disposant d’un historique (n/total)</li>
               <li>Pourcentage de résultats liés à des propositions (n/total)</li>
@@ -286,21 +438,21 @@ fr:
               <li>Activation du module open data (dichotomique&nbsp;: 0 ou 5)</li>
               <li>Pourcentage de propositions liées aux budgets (n/total)</li>
             </ul>
-      
+
             <br><br>
             <h3>Indicateurs d’auto-évaluation</h3>
-      
+
             <p>En complément des indicateurs automatiques, nous proposons l’utilisation d’un <strong>formulaire d’auto-évaluation</strong> afin d’évaluer les dimensions qualitatives de chaque processus participatif. Ce formulaire est complété par les administrateurs de la plateforme à la fin de chaque processus, et les réponses sont affichées publiquement dans le bloc de contenu des indicateurs.</p>
-      
+
             <p>Ces questions visent à saisir des aspects de la qualité démocratique qui ne peuvent pas être évalués uniquement à partir de données quantitatives. Il est important de noter que les réponses à ce questionnaire sont biaisées par l’opinion des administrateurs de la plateforme.</p>
-      
+
             <br><br>
             <h3>Questions d’auto-évaluation</h3>
-      
+
             <p>Les questions composant le formulaire d’auto-évaluation rempli par les administrateurs, ainsi que les valeurs associées à chaque réponse, sont présentées ci-dessous.</p>
-      
+
             <h4>Qualité de l’information</h4>
-      
+
             <ol>
               <li>Les informations publiées apportent-elles de la clarté sur les mécanismes de prise de décision (par exemple&nbsp;: vote, consensus, négociations directes)&nbsp;?
                 <ul>
@@ -319,9 +471,9 @@ fr:
                 </ul>
               </li>
             </ol>
-      
+
             <h4>Influence citoyenne</h4>
-      
+
             <ol>
               <li>Évaluation du degré de participation dans le processus
                 <ul>
@@ -343,9 +495,9 @@ fr:
                 </ul>
               </li>
             </ol>
-      
+
             <h4>Inclusivité</h4>
-      
+
             <ol>
               <li>Comment le degré de diversité des acteurs et des participants est-il évalué par rapport à la population de référence du processus&nbsp;?
                 <ul>
@@ -421,10 +573,30 @@ fr:
           select_a_category: Veuillez sélectionner une catégorie
         edit_form_fields:
           marker_added: Marqueur ajouté à la carte.
+        orders:
+          most_liked: Les plus aimées
         placeholder:
           address: 60 Boulevard Victor Hugo Saint-Jean-de-Luz, BP 64500
+        voting_rules:
+          already_vote:
+            description: Souvenez vous qu'il vous reste %{number} soutien(s) à attribuer entre les différentes propositions pour que vos votes soient pris en compte.
+            title: Vous avez %{number} soutien(s) restants
+          minimum_votes_per_user:
+            description: Vous devez distribuer un minimum de %{votes} soutiens entre les différentes propositions pour que vos soutiens soient pris en compte.
+    resource:
+      controls_label: Gestion des ressources
     scopes:
       global: Portée générale
+    surveys:
+      surveys:
+        count:
+          surveys_count:
+            one: "%{count} questionnaire"
+            other: "%{count} questionnaires"
+        response:
+          invalid: Un problème est survenu lors de la réponse au questionnaire.
+          spam_detected: Un problème est survenu lors de la réponse au questionnaire. Peut-être avez-vous été trop rapide, pouvez-vous réessayer?
+          success: Merci pour votre réponse au questionnaire.
     system:
       organizations:
         omniauth_settings:
@@ -465,6 +637,8 @@ fr:
             client_id: Client ID
             client_secret: Client secret
             site_url: Site URL
+    tags:
+      filter_results_for_taxonomy: 'Filtrer les résultats pour: %{resource}'
     verifications:
       authorizations:
         first_login:

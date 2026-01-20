@@ -145,3 +145,16 @@ ignore_unused:
   - decidim.authorization_handlers.data_authorization_handler.(explanation|name)
   - decidim.system.organizations.omniauth_settings.cultuur_connect.*
   - layouts.decidim.budgets.voting_menubar.cancel_voting
+  # 0.31 additions
+  - activerecord.models.decidim.history.*
+  - decidim.admin.areas.deprecated
+  - decidim.admin.(taxonom|titles.)*
+  - decidim.admin_log.(taxonomy|taxonomy_filter).*
+  - decidim.author.likes.*
+  - decidim.initiatives.admin_states.created
+  - decidim.(like_buttons_cell|likes_list).*
+  - decidim.participatory_processes.static_pages.democratic_quality_indicators.*
+  - decidim.proposals.proposals.(orders|voting_rules).*
+  - decidim.resource.controls_label
+  - decidim.surveys.surveys.(count|response).*
+  - decidim.tags.filter_results_for_taxonomy
