@@ -121,6 +121,16 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
+  remote: https://github.com/PopulateTools/decidim-module_homepage_proposals.git
+  revision: efd6d82ec5af2a6b66ee289343f9b73efb8a5827
+  branch: release/0.29-stable
+  specs:
+    decidim-homepage_proposals (3.1.0)
+      decidim-admin (~> 0.29)
+      decidim-core (~> 0.29)
+      deface (>= 1.5)
+
+GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
   revision: a9f2077f80438f6bc7b9fa7c26aa150cac46523a
   branch: release/0.29-stable
@@ -1139,6 +1149,7 @@ DEPENDENCIES
   decidim-emitter!
   decidim-extra_user_fields!
   decidim-guest_meeting_registration!
+  decidim-homepage_proposals!
   decidim-initiatives!
   decidim-survey_multiple_answers!
   decidim-templates!
