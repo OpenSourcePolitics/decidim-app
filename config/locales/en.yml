@@ -265,7 +265,7 @@ en:
         answers:
           files:
             upload_not_allowed: Uploading files is only allowed for connected users.
-      user_answers_serializer:
+      user_responses_serializer:
         email: Email
         name: Name
     initiatives:
@@ -537,6 +537,12 @@ en:
         title: Actions
       admin:
         proposal_states:
+          create:
+            error: Error creating state
+            success: Status created successfully
+          destroy:
+            error: Error deleting state
+            success: Status deleted successfully
           index:
             title: Statuses
           update:
@@ -556,10 +562,9 @@ en:
           description: The coordinates will be updated when clicking on 'preview' button. However, the address does not change.
           instructions: You can move the point on the map.
         edit:
-          add_documents: Add documents
+          add_attachments: Add attachments
           attachment_legend: "(Optional) Add an attachment"
-          edit_documents: Edit documents
-          select_a_category: Please select a category
+          edit_attachments: Edit attachments
         edit_form_fields:
           marker_added: Marker added to the map.
         orders:

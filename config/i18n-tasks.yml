@@ -120,7 +120,7 @@ ignore_unused:
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_handler
   - decidim.verifications.authorizations.first_login.actions.osp_authorization_workflow
   - decidim.events.proposals.author_confirmation_proposal_event.*
-  - decidim.forms.user_answers_serializer.*
+  - decidim.forms.user_responses_serializer.*
   - decidim.initiatives.admin.index.initiatives_types.*
   - decidim.initiatives.admin.initiatives_types.*
   - time.buttons.*

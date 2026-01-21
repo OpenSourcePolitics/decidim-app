@@ -5,12 +5,11 @@ module CreateOmniauthRegistrationExtends
     verify_oauth_signature!
 
     begin
-      if existing_identity
-        @identity = existing_identity
-        @user = @identity.user
+      if (@identity = existing_identity)
+        @user = existing_identity.user
         verify_user_confirmed(@user)
-        trigger_omniauth_registration
 
+        trigger_omniauth_event("decidim.user.omniauth_login")
         return broadcast(:ok, @user)
       end
       return broadcast(:invalid) if form.invalid?
@@ -20,9 +19,11 @@ module CreateOmniauthRegistrationExtends
         @identity = create_identity
       end
       manage_user_confirmation
-      trigger_omniauth_registration
+      trigger_omniauth_event
 
       broadcast(:ok, @user)
+    rescue NeedTosAcceptance
+      broadcast(:add_tos_errors, @user)
     rescue ActiveRecord::RecordInvalid => e
       broadcast(:error, e.record)
     end

@@ -3,31 +3,16 @@
 require "spec_helper"
 
 module Decidim
-  module Forms
+  module Meetings
     module Admin
       describe UpdateQuestionnaire do
         let(:current_organization) { create(:organization) }
-        let(:participatory_process) { create(:participatory_process, organization: current_organization) }
-        let(:questionnaire) { create(:questionnaire, questionnaire_for: participatory_process) }
         let(:user) { create(:user, organization: current_organization) }
-        let(:published_at) { nil }
+        let(:participatory_process) { create(:participatory_process, organization: current_organization) }
+        let(:current_component) { create(:component, participatory_space: participatory_process, manifest_name: "meetings") }
+        let(:meeting) { create(:meeting, component: current_component) }
         let(:form_params) do
           {
-            "title" => {
-              "en" => "Title",
-              "ca" => "Title",
-              "es" => "Title"
-            },
-            "tos" => {
-              "en" => "<p>TOS</p>",
-              "ca" => "<p>TOS</p>",
-              "es" => "<p>TOS</p>"
-            },
-            "description" => {
-              "en" => "<p>Content</p>",
-              "ca" => "<p>Contingut</p>",
-              "es" => "<p>Contenido</p>"
-            },
             "questions" => {
               "0" => {
                 "body" => {
@@ -36,9 +21,23 @@ module Decidim
                   "es" => "Primera pregunta"
                 },
                 "position" => "0",
-                "question_type" => "short_answer",
-                "max_characters" => "0",
-                "answer_options" => {}
+                "question_type" => "single_option",
+                "response_options" => {
+                  "0" => {
+                    "body" => {
+                      "en" => "First response",
+                      "ca" => "Primera resposta",
+                      "es" => "Primera respuesta"
+                    }
+                  },
+                  "1" => {
+                    "body" => {
+                      "en" => "Second response",
+                      "ca" => "Segona resposta",
+                      "es" => "Segunda respuesta"
+                    }
+                  }
+                }
               },
               "1" => {
                 "body" => {
@@ -46,632 +45,223 @@ module Decidim
                   "ca" => "Segona pregunta",
                   "es" => "Segunda pregunta"
                 },
-                "description" => { "en" => "Description" },
                 "position" => "1",
-                "mandatory" => "1",
-                "question_type" => "long_answer",
-                "max_characters" => "100",
-                "answer_options" => {}
-              },
-              "2" => {
-                "body" => {
-                  "en" => "Third question",
-                  "ca" => "Tercera pregunta",
-                  "es" => "Tercera pregunta"
-                },
-                "position" => "2",
-                "question_type" => "single_option",
-                "max_characters" => "0",
-                "answer_options" => {
-                  "0" => {
-                    "body" => {
-                      "en" => "First answer",
-                      "ca" => "Primera resposta",
-                      "es" => "Primera respuesta"
-                    },
-                    "free_text" => "0"
-                  },
-                  "1" => {
-                    "body" => {
-                      "en" => "Second answer",
-                      "ca" => "Segona resposta",
-                      "es" => "Segunda respuesta"
-                    }
-                  }
-                }
-              },
-              "3" => {
-                "body" => {
-                  "en" => "Fourth question",
-                  "ca" => "Quarta pregunta",
-                  "es" => "Cuarta pregunta"
-                },
-                "position" => "3",
                 "question_type" => "multiple_option",
                 "max_choices" => "2",
-                "answer_options" => {
+                "response_options" => {
                   "0" => {
                     "body" => {
-                      "en" => "First answer",
+                      "en" => "First response",
                       "ca" => "Primera resposta",
                       "es" => "Primera respuesta"
-                    },
-                    "free_text" => "1"
+                    }
                   },
                   "1" => {
                     "body" => {
-                      "en" => "Second answer",
+                      "en" => "Second response",
                       "ca" => "Segona resposta",
                       "es" => "Segunda respuesta"
-                    }
-                  }
-                }
-              },
-              "4" => {
-                "body" => {
-                  "en" => "Fifth question",
-                  "ca" => "Cinquena pregunta",
-                  "es" => "Quinta pregunta"
-                },
-                "position" => "4",
-                "question_type" => "matrix_single",
-                "answer_options" => {
-                  "0" => {
-                    "body" => {
-                      "en" => "First answer",
-                      "ca" => "Primera resposta",
-                      "es" => "Primera respuesta"
-                    },
-                    "free_text" => "1"
-                  },
-                  "1" => {
-                    "body" => {
-                      "en" => "Second answer",
-                      "ca" => "Segona resposta",
-                      "es" => "Segunda respuesta"
-                    }
-                  }
-                },
-                "matrix_rows" => {
-                  "0" => {
-                    "body" => {
-                      "en" => "First row",
-                      "ca" => "Primera fila",
-                      "es" => "Primera fila"
-                    }
-                  },
-                  "1" => {
-                    "body" => {
-                      "en" => "Second row",
-                      "ca" => "Segona fila",
-                      "es" => "Segunda fila"
-                    }
-                  }
-                }
-              },
-              "5" => {
-                "body" => {
-                  "en" => "Sixth question",
-                  "ca" => "Sisena pregunta",
-                  "es" => "Sexta pregunta"
-                },
-                "position" => "5",
-                "question_type" => "matrix_multiple",
-                "max_choices" => "2",
-                "answer_options" => {
-                  "0" => {
-                    "body" => {
-                      "en" => "First answer",
-                      "ca" => "Primera resposta",
-                      "es" => "Primera respuesta"
-                    },
-                    "free_text" => "1"
-                  },
-                  "1" => {
-                    "body" => {
-                      "en" => "Second answer",
-                      "ca" => "Segona resposta",
-                      "es" => "Segunda respuesta"
-                    }
-                  }
-                },
-                "matrix_rows" => {
-                  "0" => {
-                    "body" => {
-                      "en" => "First row",
-                      "ca" => "Primera fila",
-                      "es" => "Primera fila"
-                    }
-                  },
-                  "1" => {
-                    "body" => {
-                      "en" => "Second row",
-                      "ca" => "Segona fila",
-                      "es" => "Segunda fila"
                     }
                   }
                 }
               }
-            },
-            "published_at" => published_at
+            }
           }
         end
         let(:form) do
           QuestionnaireForm.from_params(
             questionnaire: form_params
           ).with_context(
-            current_organization:
+            current_organization:,
+            current_user: user
           )
         end
-        let(:command) { described_class.new(form, questionnaire, user) }
+        let(:command) { described_class.new(form, questionnaire) }
 
-        describe "when the form is invalid" do
-          before do
-            allow(form).to receive(:invalid?).and_return(true)
-          end
+        context "with a persisted poll and questionnaire" do
+          let(:poll) { create(:poll, meeting:) }
+          let(:questionnaire) { create(:meetings_poll_questionnaire, questionnaire_for: poll) }
 
-          it "broadcasts invalid" do
-            expect { command.call }.to broadcast(:invalid)
-          end
-
-          it "does not update the questionnaire" do
-            expect(questionnaire).not_to receive(:update!)
-            command.call
-          end
-        end
-
-        describe "when the form is valid" do
-          it "broadcasts ok" do
-            expect { command.call }.to broadcast(:ok)
-          end
-
-          it "updates the questionnaire" do
-            command.call
-            questionnaire.reload
-
-            expect(questionnaire.description["en"]).to eq("<p>Content</p>")
-            expect(questionnaire.questions.length).to eq(6)
-
-            questionnaire.questions.each_with_index do |question, idx|
-              expect(question.body["en"]).to eq(form_params["questions"][idx.to_s]["body"]["en"])
+          describe "when the form is invalid" do
+            before do
+              allow(form).to receive(:invalid?).and_return(true)
             end
 
-            expect(questionnaire.questions[1]).to be_mandatory
-            expect(questionnaire.questions[1].description["en"]).to eq(form_params["questions"]["1"]["description"]["en"])
-            expect(questionnaire.questions[1].question_type).to eq("long_answer")
-            expect(questionnaire.questions[1].max_characters).to eq(100)
-            expect(questionnaire.questions[2].answer_options[1]["body"]["en"]).to eq(form_params["questions"]["2"]["answer_options"]["1"]["body"]["en"])
-
-            expect(questionnaire.questions[2].question_type).to eq("single_option")
-            expect(questionnaire.questions[2].max_choices).to be_nil
-            expect(questionnaire.questions[2].max_characters).to eq(0)
-
-            expect(questionnaire.questions[3].question_type).to eq("multiple_option")
-            expect(questionnaire.questions[2].answer_options[0].free_text).to be(false)
-            expect(questionnaire.questions[2].max_choices).to be_nil
-
-            expect(questionnaire.questions[3].question_type).to eq("multiple_option")
-            expect(questionnaire.questions[3].answer_options[0].free_text).to be(true)
-            expect(questionnaire.questions[3].max_choices).to eq(2)
-
-            expect(questionnaire.questions[4].question_type).to eq("matrix_single")
-            expect(questionnaire.questions[4].answer_options[0].free_text).to be(true)
-            2.times do |idx|
-              expect(questionnaire.questions[4].matrix_rows[idx].body["en"]).to eq(form_params["questions"]["4"]["matrix_rows"][idx.to_s]["body"]["en"])
-              expect(questionnaire.questions[4].matrix_rows[idx].position).to eq(idx)
+            it "broadcasts invalid" do
+              expect { command.call }.to broadcast(:invalid)
             end
 
-            expect(questionnaire.questions[5].question_type).to eq("matrix_multiple")
-            expect(questionnaire.questions[5].answer_options[0].free_text).to be(true)
-            expect(questionnaire.questions[5].matrix_rows[0].body["en"]).to eq(form_params["questions"]["5"]["matrix_rows"]["0"]["body"]["en"])
+            it "does not update the questionnaire" do
+              expect(questionnaire).not_to receive(:update!)
+              command.call
+            end
           end
 
-          it "traces the action", versioning: true do
-            expect(Decidim.traceability)
-              .to receive(:perform_action!)
-              .with("update", questionnaire, user)
-              .and_call_original
-
-            expect { command.call }.to change(Decidim::ActionLog, :count)
-            action_log = Decidim::ActionLog.last
-            expect(action_log.action).to eq("update")
-            expect(action_log.version).to be_present
-          end
-        end
-
-        describe "when the questionnaire has an existing question" do
-          let!(:question) { create(:questionnaire_question, questionnaire:) }
-
-          context "and the question should be removed" do
-            let(:form_params) do
-              {
-                "title" => {
-                  "en" => "Title",
-                  "ca" => "Title",
-                  "es" => "Title"
-                },
-                "description" => {
-                  "en" => "<p>Content</p>",
-                  "ca" => "<p>Contingut</p>",
-                  "es" => "<p>Contenido</p>"
-                },
-                "tos" => {
-                  "en" => "<p>TOS</p>",
-                  "ca" => "<p>TOS</p>",
-                  "es" => "<p>TOS</p>"
-                },
-                "questions" => [
-                  {
-                    "id" => question.id,
-                    "body" => question.body,
-                    "position" => 0,
-                    "question_type" => "short_answer",
-                    "deleted" => "true"
-                  }
-                ]
-              }
+          describe "when the form is valid" do
+            it "broadcasts ok" do
+              expect { command.call }.to broadcast(:ok)
             end
 
-            it "deletes the questionnaire question" do
+            it "updates the questionnaire" do
               command.call
               questionnaire.reload
 
-              expect(questionnaire.questions.length).to eq(0)
+              expect(questionnaire.questions[0].question_type).to eq("single_option")
+              expect(questionnaire.questions[0].max_choices).to be_nil
+              expect(questionnaire.questions[0].response_options[1]["body"]["en"]).to eq(form_params["questions"]["0"]["response_options"]["1"]["body"]["en"])
+
+              expect(questionnaire.questions[1].question_type).to eq("multiple_option")
+              expect(questionnaire.questions[1].max_choices).to eq(2)
+            end
+
+            it "traces the action", versioning: true do
+              expect(Decidim.traceability)
+                .to receive(:perform_action!)
+                .with("update", Decidim::Meetings::Questionnaire, user, { meeting: })
+                .and_call_original
+
+              expect { command.call }.to change(Decidim::ActionLog, :count)
+              action_log = Decidim::ActionLog.last
+              expect(action_log.action).to eq("update")
+              expect(action_log.version).to be_present
+            end
+          end
+
+          describe "when the questionnaire has an existing question" do
+            let!(:question) { create(:meetings_poll_question, questionnaire:) }
+
+            context "and the question should be removed" do
+              let(:form_params) do
+                {
+                  "questions" => [
+                    {
+                      "id" => question.id,
+                      "body" => question.body,
+                      "position" => 0,
+                      "question_type" => "single_option",
+                      "deleted" => "true",
+                      "response_options" => [
+                        {
+                          "body" => {
+                            "en" => "First response",
+                            "ca" => "Primera resposta",
+                            "es" => "Primera respuesta"
+                          }
+                        },
+                        {
+                          "body" => {
+                            "en" => "Second response",
+                            "ca" => "Segona resposta",
+                            "es" => "Segunda respuesta"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              end
+
+              it "deletes the questionnaire question" do
+                command.call
+                questionnaire.reload
+
+                expect(questionnaire.questions.length).to eq(0)
+              end
             end
           end
         end
 
-        describe "when the questionnaire has existing questions" do
-          let!(:questions) { 0.upto(3).to_a.map { |x| create(:questionnaire_question, questionnaire:, position: x) } }
-          let!(:question_2_answer_options) { create_list(:answer_option, 3, question: questions.second) }
+        context "with a new poll and questionnaire" do
+          let(:poll) { build(:poll) }
+          let(:questionnaire) { build(:meetings_poll_questionnaire, questionnaire_for: poll) }
 
-          context "and display conditions are to be created" do
-            let(:form_params) do
-              {
-                "title" => {
-                  "en" => "Title",
-                  "ca" => "Títol",
-                  "es" => "Título"
-                },
-                "description" => {
-                  "en" => "<p>Content</p>",
-                  "ca" => "<p>Contingut</p>",
-                  "es" => "<p>Contenido</p>"
-                },
-                "tos" => {
-                  "en" => "<p>TOS</p>",
-                  "ca" => "<p>TOS</p>",
-                  "es" => "<p>TOS</p>"
-                },
-                "questions" => {
-                  "1" => {
-                    "id" => questions[0].id,
-                    "body" => questions[0].body,
-                    "position" => 0,
-                    "question_type" => "short_answer"
-                  },
-                  "2" => {
-                    "id" => questions[1].id,
-                    "body" => questions[1].body,
-                    "position" => 1,
-                    "question_type" => "single_option",
-                    "answer_options" => question_2_answer_options.to_h do |answer_option|
-                      [answer_option.id.to_s, { "id" => answer_option.id, "body" => answer_option.body, "free_text" => answer_option.free_text, "deleted" => false }]
-                    end
-                  },
-                  "3" => {
-                    "id" => questions[2].id,
-                    "body" => questions[2].body,
-                    "position" => 2,
-                    "question_type" => "short_answer",
-                    "deleted" => "false",
-                    "display_conditions" => {
-                      "1" => {
-                        "decidim_condition_question_id" => questions[0].id,
-                        "decidim_question_id" => questions[2].id,
-                        "condition_type" => "answered"
-                      },
-                      "2" => {
-                        "decidim_condition_question_id" => questions[1].id,
-                        "decidim_question_id" => questions[2].id,
-                        "condition_type" => "equal",
-                        "decidim_answer_option_id" => question_2_answer_options.first.id
-                      }
-                    }
-                  }
-                }
-              }
+          describe "when the form is invalid" do
+            before do
+              allow(form).to receive(:invalid?).and_return(true)
             end
 
-            it "saves the questionnaire" do
+            it "broadcasts invalid" do
+              expect { command.call }.to broadcast(:invalid)
+            end
+
+            it "does not update the questionnaire" do
+              expect(questionnaire).not_to receive(:update!)
+              command.call
+            end
+          end
+
+          describe "when the form is valid" do
+            it "broadcasts ok" do
               expect { command.call }.to broadcast(:ok)
-              questionnaire.reload
-
-              expect(questionnaire.questions[2].display_conditions).not_to be_empty
-              expect(questionnaire.questions[2].display_conditions.first.condition_type).to eq("answered")
-              expect(questionnaire.questions[2].display_conditions.second.condition_type).to eq("equal")
-              expect(questionnaire.questions[2].display_conditions.second.decidim_answer_option_id).to eq(question_2_answer_options.first.id)
-            end
-          end
-        end
-
-        describe "display conditions persistence" do
-          let!(:questions) { 0.upto(3).to_a.map { |x| create(:questionnaire_question, questionnaire:, position: x) } }
-          let!(:question_2_answer_options) { create_list(:answer_option, 3, question: questions.second) }
-
-          context "when display conditions are created and then updated" do
-            let(:initial_form_params) do
-              {
-                "title" => {
-                  "en" => "Title",
-                  "ca" => "Títol",
-                  "es" => "Título"
-                },
-                "description" => {
-                  "en" => "<p>Content</p>",
-                  "ca" => "<p>Contingut</p>",
-                  "es" => "<p>Contenido</p>"
-                },
-                "tos" => {
-                  "en" => "<p>TOS</p>",
-                  "ca" => "<p>TOS</p>",
-                  "es" => "<p>TOS</p>"
-                },
-                "questions" => {
-                  "1" => {
-                    "id" => questions[0].id,
-                    "body" => questions[0].body,
-                    "position" => 0,
-                    "question_type" => "short_answer"
-                  },
-                  "2" => {
-                    "id" => questions[1].id,
-                    "body" => questions[1].body,
-                    "position" => 1,
-                    "question_type" => "single_option",
-                    "answer_options" => question_2_answer_options.to_h do |answer_option|
-                      [answer_option.id.to_s, { "id" => answer_option.id, "body" => answer_option.body, "free_text" => answer_option.free_text, "deleted" => false }]
-                    end
-                  },
-                  "3" => {
-                    "id" => questions[2].id,
-                    "body" => questions[2].body,
-                    "position" => 2,
-                    "question_type" => "short_answer",
-                    "deleted" => "false",
-                    "display_conditions" => {
-                      "1" => {
-                        "decidim_condition_question_id" => questions[0].id,
-                        "decidim_question_id" => questions[2].id,
-                        "condition_type" => "answered"
-                      },
-                      "2" => {
-                        "decidim_condition_question_id" => questions[1].id,
-                        "decidim_question_id" => questions[2].id,
-                        "condition_type" => "equal",
-                        "decidim_answer_option_id" => question_2_answer_options.first.id
-                      }
-                    }
-                  }
-                }
-              }
             end
 
-            it "persists display conditions after multiple saves" do
-              initial_form = QuestionnaireForm.from_params(
-                questionnaire: initial_form_params
-              ).with_context(
-                current_organization:
-              )
-              initial_command = described_class.new(initial_form, questionnaire, user)
+            it "persists the poll" do
+              command.call
+              poll.reload
 
-              expect { initial_command.call }.to broadcast(:ok)
+              expect(poll).not_to be_new_record
+            end
+
+            it "persists the questionnaire" do
+              command.call
               questionnaire.reload
 
-              expect(questionnaire.questions[2].display_conditions.count).to eq(2)
-              initial_conditions = questionnaire.questions[2].display_conditions
-              expect(initial_conditions.map(&:condition_type)).to contain_exactly("answered", "equal")
+              expect(questionnaire).not_to be_new_record
+            end
 
-              updated_form_params = initial_form_params.deep_dup
-              updated_form_params["questions"]["3"]["body"]["en"] = "Updated Third question"
-
-              updated_form = QuestionnaireForm.from_params(
-                questionnaire: updated_form_params
-              ).with_context(
-                current_organization:
-              )
-              updated_command = described_class.new(updated_form, questionnaire, user)
-
-              expect { updated_command.call }.to broadcast(:ok)
+            it "updates the questionnaire" do
+              command.call
               questionnaire.reload
 
-              expect(questionnaire.questions[2].display_conditions.count).to eq(2)
-              updated_conditions = questionnaire.questions[2].display_conditions
-              expect(updated_conditions.map(&:condition_type)).to contain_exactly("answered", "equal")
-              expect(questionnaire.questions[2].body["en"]).to eq("Updated Third question")
+              expect(questionnaire.questions[0].question_type).to eq("single_option")
+              expect(questionnaire.questions[0].max_choices).to be_nil
+              expect(questionnaire.questions[0].response_options[1]["body"]["en"]).to eq(form_params["questions"]["0"]["response_options"]["1"]["body"]["en"])
+
+              expect(questionnaire.questions[1].question_type).to eq("multiple_option")
+              expect(questionnaire.questions[1].max_choices).to eq(2)
             end
           end
 
-          context "when display conditions are modified" do
-            let(:initial_form_params) do
-              {
-                "title" => {
-                  "en" => "Title",
-                  "ca" => "Títol",
-                  "es" => "Título"
-                },
-                "description" => {
-                  "en" => "<p>Content</p>",
-                  "ca" => "<p>Contingut</p>",
-                  "es" => "<p>Contenido</p>"
-                },
-                "tos" => {
-                  "en" => "<p>TOS</p>",
-                  "ca" => "<p>TOS</p>",
-                  "es" => "<p>TOS</p>"
-                },
-                "questions" => {
-                  "1" => {
-                    "id" => questions[0].id,
-                    "body" => questions[0].body,
-                    "position" => 0,
-                    "question_type" => "short_answer"
-                  },
-                  "2" => {
-                    "id" => questions[1].id,
-                    "body" => questions[1].body,
-                    "position" => 1,
-                    "question_type" => "single_option",
-                    "answer_options" => question_2_answer_options.to_h do |answer_option|
-                      [answer_option.id.to_s, { "id" => answer_option.id, "body" => answer_option.body, "free_text" => answer_option.free_text, "deleted" => false }]
-                    end
-                  },
-                  "3" => {
-                    "id" => questions[2].id,
-                    "body" => questions[2].body,
-                    "position" => 2,
-                    "question_type" => "short_answer",
-                    "deleted" => "false",
-                    "display_conditions" => {
-                      "1" => {
-                        "decidim_condition_question_id" => questions[0].id,
-                        "decidim_question_id" => questions[2].id,
-                        "condition_type" => "answered"
-                      },
-                      "2" => {
-                        "decidim_condition_question_id" => questions[1].id,
-                        "decidim_question_id" => questions[2].id,
-                        "condition_type" => "equal",
-                        "decidim_answer_option_id" => question_2_answer_options.first.id
-                      }
+          describe "when the questionnaire has an existing question" do
+            let!(:question) { create(:meetings_poll_question, questionnaire:) }
+
+            context "and the question should be removed" do
+              let(:form_params) do
+                {
+                  "questions" => [
+                    {
+                      "id" => question.id,
+                      "body" => question.body,
+                      "position" => 0,
+                      "question_type" => "single_option",
+                      "deleted" => "true",
+                      "response_options" => [
+                        {
+                          "body" => {
+                            "en" => "First response",
+                            "ca" => "Primera resposta",
+                            "es" => "Primera respuesta"
+                          }
+                        },
+                        {
+                          "body" => {
+                            "en" => "Second response",
+                            "ca" => "Segona resposta",
+                            "es" => "Segunda respuesta"
+                          }
+                        }
+                      ]
                     }
-                  }
+                  ]
                 }
-              }
-            end
+              end
 
-            it "correctly updates display conditions when modified" do
-              initial_form = QuestionnaireForm.from_params(
-                questionnaire: initial_form_params
-              ).with_context(
-                current_organization:
-              )
-              initial_command = described_class.new(initial_form, questionnaire, user)
+              it "deletes the questionnaire question" do
+                command.call
+                questionnaire.reload
 
-              expect { initial_command.call }.to broadcast(:ok)
-              questionnaire.reload
-
-              expect(questionnaire.questions[2].display_conditions.count).to eq(2)
-
-              modified_form_params = initial_form_params.deep_dup
-              modified_form_params["questions"]["3"]["display_conditions"] = {
-                "1" => {
-                  "decidim_condition_question_id" => questions[0].id,
-                  "decidim_question_id" => questions[2].id,
-                  "condition_type" => "answered"
-                }
-              }
-
-              modified_form = QuestionnaireForm.from_params(
-                questionnaire: modified_form_params
-              ).with_context(
-                current_organization:
-              )
-              modified_command = described_class.new(modified_form, questionnaire, user)
-
-              expect { modified_command.call }.to broadcast(:ok)
-              questionnaire.reload
-
-              expect(questionnaire.questions[2].display_conditions.count).to eq(1)
-              expect(questionnaire.questions[2].display_conditions.first.condition_type).to eq("answered")
-            end
-          end
-
-          context "when display conditions are removed" do
-            let(:initial_form_params) do
-              {
-                "title" => {
-                  "en" => "Title",
-                  "ca" => "Títol",
-                  "es" => "Título"
-                },
-                "description" => {
-                  "en" => "<p>Content</p>",
-                  "ca" => "<p>Contingut</p>",
-                  "es" => "<p>Contenido</p>"
-                },
-                "tos" => {
-                  "en" => "<p>TOS</p>",
-                  "ca" => "<p>TOS</p>",
-                  "es" => "<p>TOS</p>"
-                },
-                "questions" => {
-                  "1" => {
-                    "id" => questions[0].id,
-                    "body" => questions[0].body,
-                    "position" => 0,
-                    "question_type" => "short_answer"
-                  },
-                  "2" => {
-                    "id" => questions[1].id,
-                    "body" => questions[1].body,
-                    "position" => 1,
-                    "question_type" => "single_option",
-                    "answer_options" => question_2_answer_options.to_h do |answer_option|
-                      [answer_option.id.to_s, { "id" => answer_option.id, "body" => answer_option.body, "free_text" => answer_option.free_text, "deleted" => false }]
-                    end
-                  },
-                  "3" => {
-                    "id" => questions[2].id,
-                    "body" => questions[2].body,
-                    "position" => 2,
-                    "question_type" => "short_answer",
-                    "deleted" => "false",
-                    "display_conditions" => {
-                      "1" => {
-                        "decidim_condition_question_id" => questions[0].id,
-                        "decidim_question_id" => questions[2].id,
-                        "condition_type" => "answered"
-                      },
-                      "2" => {
-                        "decidim_condition_question_id" => questions[1].id,
-                        "decidim_question_id" => questions[2].id,
-                        "condition_type" => "equal",
-                        "decidim_answer_option_id" => question_2_answer_options.first.id
-                      }
-                    }
-                  }
-                }
-              }
-            end
-
-            it "correctly removes all display conditions when none are provided" do
-              initial_form = QuestionnaireForm.from_params(
-                questionnaire: initial_form_params
-              ).with_context(
-                current_organization:
-              )
-              initial_command = described_class.new(initial_form, questionnaire, user)
-
-              expect { initial_command.call }.to broadcast(:ok)
-              questionnaire.reload
-
-              expect(questionnaire.questions[2].display_conditions.count).to eq(2)
-
-              no_conditions_form_params = initial_form_params.deep_dup
-              no_conditions_form_params["questions"]["3"]["display_conditions"] = {}
-
-              no_conditions_form = QuestionnaireForm.from_params(
-                questionnaire: no_conditions_form_params
-              ).with_context(
-                current_organization:
-              )
-              no_conditions_command = described_class.new(no_conditions_form, questionnaire, user)
-
-              expect { no_conditions_command.call }.to broadcast(:ok)
-              questionnaire.reload
-
-              expect(questionnaire.questions[2].display_conditions.count).to eq(0)
+                expect(questionnaire.questions.length).to eq(0)
+              end
             end
           end
         end

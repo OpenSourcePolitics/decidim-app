@@ -9,23 +9,55 @@ module PermissionsExtends
       return true if no_authorizations_available?
       return true if no_create_permission_on_initiative_type?
 
-      user_can_create? && authorized?(:create, permissions_holder: initiative_type)
+      user_can_create? && authorized_to_create?
+    end
+
+    def can_vote?
+      return false unless initiative.votes_enabled?
+      return false unless initiative.organization&.id == user.organization&.id
+      return false unless initiative.votes.where(author: user).empty?
+
+      authorized_to_vote?
     end
 
     private
 
     def no_create_permission_on_initiative_type?
-      initiative_type.permissions.nil? || initiative_type.permissions.keys.empty? || !initiative_type.permissions&.keys&.include?("create")
+      return true if initiative_type.nil?
+      return true if initiative_type.permissions.nil?
+      return true if initiative_type.permissions.keys.empty?
+
+      initiative_type.permissions.keys.exclude?("create")
     end
 
     def no_authorizations_available?
-      user&.organization&.available_authorizations&.empty?
+      organization = user&.organization
+      organization&.available_authorizations&.empty?
     end
 
     def user_can_create?
-      Decidim::Initiatives.do_not_require_authorization ||
-        Decidim::Initiatives::UserAuthorizations.for(user).any? ||
-        Decidim::UserGroups::ManageableUserGroups.for(user).verified.any?
+      return true if Decidim::Initiatives.do_not_require_authorization
+      return true if Decidim::Initiatives::UserAuthorizations.for(user).any?
+
+      false
+    end
+
+    def authorized_to_create?
+      return true if initiative_type.nil?
+      return true if initiative_type.permissions.nil?
+
+      result = authorized?(:create, permissions_holder: initiative_type)
+      result != false
+    end
+
+    def authorized_to_vote?
+      return true if initiative&.type.nil?
+      return true if initiative.type.permissions.nil?
+      return true unless initiative.type.permissions.keys.include?("vote")
+      return true if Decidim::Initiatives.do_not_require_authorization
+
+      result = authorized?(:vote, resource: initiative, permissions_holder: initiative.type)
+      result == true
     end
   end
 end

@@ -220,7 +220,7 @@ nl:
         labels:
           add_image: Afbeelding toevoegen
           replace: Vervangen
-      user_answers_serializer:
+      user_responses_serializer:
         email: Email
         name: Name
     half_signup:

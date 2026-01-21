@@ -273,7 +273,7 @@ fr:
         answers:
           files:
             upload_not_allowed: Seuls les utilisateurs connectés peuvent télécharger des documents.
-      user_answers_serializer:
+      user_responses_serializer:
         email: Email
         name: Nom
     initiatives:
@@ -548,6 +548,12 @@ fr:
         title: Actions
       admin:
         proposal_states:
+          create:
+            error: Erreur lors de la création de l'état
+            success: Etat créé avec succès
+          destroy:
+            error: Erreur lors de la suppression de l'état
+            success: Etat supprimé avec succès
           index:
             title: États
           update:
@@ -567,10 +573,9 @@ fr:
           description: Les coordonnées seront mises à jour en cliquant sur le bouton 'Aperçu'. Cependant, l'adresse ne change pas.
           instructions: Vous pouvez déplacer le point sur la carte.
         edit:
-          add_documents: Ajouter des documents
+          add_attachments: Ajouter des pièces jointes
           attachment_legend: "(Facultatif) Ajouter une pièce jointe"
-          edit_documents: Modifier les documents
-          select_a_category: Veuillez sélectionner une catégorie
+          edit_attachments: Modifier les pièces jointes
         edit_form_fields:
           marker_added: Marqueur ajouté à la carte.
         orders:

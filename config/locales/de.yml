@@ -268,7 +268,7 @@ de:
         answers:
           files:
             upload_not_allowed: Datei-Uploads sind nur für angemeldete Benutzerinnen und Benutzer erlaubt.
-      user_answers_serializer:
+      user_responses_serializer:
         email: E-Mail
         name: Name
     help:

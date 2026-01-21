@@ -2,6 +2,8 @@
 
 module Decidim
   class ExportJob < ApplicationJob
+    include Decidim::PrivateDownloadHelper
+
     queue_as :exports
 
     def perform(user, component, name, format, resource_id = nil, filters = nil) # rubocop:disable Metrics/ParameterLists
@@ -18,7 +20,10 @@ module Decidim
                     else
                       Decidim::Exporters.find_exporter(format).new(collection, serializer).export
                     end
-      ExportMailer.export(user, name, export_data).deliver_now
+
+      private_export = attach_archive(export_data, name, user)
+
+      ExportMailer.export(user, private_export).deliver_later
     end
 
     private

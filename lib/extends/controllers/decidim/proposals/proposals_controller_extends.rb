@@ -27,15 +27,6 @@ module Decidim
                                                      .page(params[:page])
                                                      .per(per_page)
             @proposals = @proposals.includes(:component, :coauthorships, :attachments)
-
-            @voted_proposals = if current_user
-                                 ProposalVote.where(
-                                   author: current_user,
-                                   proposal: @proposals.pluck(:id)
-                                 ).pluck(:decidim_proposal_id)
-                               else
-                                 []
-                               end
           end
         end
 
@@ -47,9 +38,7 @@ module Decidim
             related_to: "",
             search_text_cont: "",
             type: "all",
-            with_any_category: nil,
-            with_any_origin: nil,
-            with_any_scope: nil,
+            with_any_taxonomies: nil,
             with_any_state: default_states
           }
         end

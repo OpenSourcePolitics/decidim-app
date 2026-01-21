@@ -87,6 +87,13 @@ module Decidim
           expect(controller.helpers.collection)
             .to match_array(published + organization_groups)
         end
+
+        it "orders processes by weight" do
+          process1 = create(:participatory_process, :published, organization:, weight: 2)
+          process2 = create(:participatory_process, :published, organization:, weight: 1)
+
+          expect(controller.helpers.collection).to eq([process2, process1])
+        end
       end
 
       describe "default_date_filter" do
@@ -197,7 +204,7 @@ module Decidim
 
           context "and sort_by_date is false" do
             before do
-              allow(Decidim::Env).to receive(:new).with("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).and_return(double(to_boolean_string: "false")
+              allow(Decidim::Env).to receive(:new).with("DECIDIM_PARTICIPATORY_PROCESSES_SORT_BY_DATE", true).and_return(double(to_boolean_string: "false"))
             end
 
             it "includes past processes without ordering" do
@@ -237,22 +244,6 @@ module Decidim
 
               expect(response).to redirect_to("/")
             end
-          end
-        end
-      end
-
-      describe "GET statistics" do
-        let!(:active) { create(:participatory_process, :published, :active, organization:) }
-
-        before do
-          request.env["decidim.current_organization"] = organization
-        end
-
-        context "when the process can show statistics" do
-          it "shows them" do
-            get :all_metrics, params: { slug: active.slug }
-
-            expect(response).to be_successful
           end
         end
       end

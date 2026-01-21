@@ -3,38 +3,30 @@
 require "spec_helper"
 
 module Decidim::Assemblies
-  describe Admin::CopyAssembly do
+  describe Admin::DuplicateAssembly do
     subject { described_class.new(form, assembly, user) }
 
     let(:organization) { create(:organization) }
     let(:user) { create(:user, organization:) }
-    let(:scope) { create(:scope, organization:) }
     let(:errors) { double.as_null_object }
-    let!(:assembly) { create(:assembly) }
+    let!(:assembly) { create(:assembly, organization:, taxonomies: [taxonomy]) }
     let!(:content_block) { create(:content_block, manifest_name: :hero, organization: assembly.organization, scope_name: :assembly_homepage, scoped_resource_id: assembly.id) }
+    let(:taxonomy) { create(:taxonomy, :with_parent, organization:) }
     let!(:component) { create(:component, manifest_name: :dummy, participatory_space: assembly) }
     let(:form) do
       instance_double(
-        Admin::AssemblyCopyForm,
+        Admin::AssemblyDuplicateForm,
         invalid?: invalid,
         title: { en: "title" },
-        slug: "copied-slug",
-        copy_categories?: copy_categories,
-        copy_components?: copy_components,
-        copy_landing_page_blocks?: copy_landing_page_blocks
-      )
-    end
-    let!(:category) do
-      create(
-        :category,
-        participatory_space: assembly
+        slug: "duplicated-slug",
+        duplicate_components?: duplicate_components,
+        duplicate_landing_page_blocks?: duplicate_landing_page_blocks
       )
     end
 
     let(:invalid) { false }
-    let(:copy_categories) { false }
-    let(:copy_components) { false }
-    let(:copy_landing_page_blocks) { false }
+    let(:duplicate_components) { false }
+    let(:duplicate_landing_page_blocks) { false }
 
     context "when the form is not valid" do
       let(:invalid) { true }
@@ -51,7 +43,7 @@ module Decidim::Assemblies
         old_assembly = Decidim::Assembly.first
         new_assembly = Decidim::Assembly.last
 
-        expect(new_assembly.slug).to eq("copied-slug")
+        expect(new_assembly.slug).to eq("duplicated-slug")
         expect(new_assembly.title["en"]).to eq("title")
         expect(new_assembly).not_to be_published
         expect(new_assembly.organization).to eq(old_assembly.organization)
@@ -59,13 +51,13 @@ module Decidim::Assemblies
         expect(new_assembly.description).to eq(old_assembly.description)
         expect(new_assembly.short_description).to eq(old_assembly.short_description)
         expect(new_assembly.promoted).to eq(old_assembly.promoted)
-        expect(new_assembly.scope).to eq(old_assembly.scope)
         expect(new_assembly.developer_group).to eq(old_assembly.developer_group)
         expect(new_assembly.local_area).to eq(old_assembly.local_area)
         expect(new_assembly.target).to eq(old_assembly.target)
         expect(new_assembly.participatory_scope).to eq(old_assembly.participatory_scope)
         expect(new_assembly.meta_scope).to eq(old_assembly.meta_scope)
         expect(new_assembly.announcement).to eq(old_assembly.announcement)
+        expect(new_assembly.taxonomies).to eq(old_assembly.taxonomies)
       end
 
       it "broadcasts ok" do
@@ -85,28 +77,12 @@ module Decidim::Assemblies
       end
     end
 
-    context "when copy_categories exists" do
-      let(:copy_categories) { true }
-
-      it "duplicates an assembly and the categories" do
-        expect { subject.call }.to change(Decidim::Category, :count).by(1)
-        expect(Decidim::Category.unscoped.distinct.pluck(:decidim_participatory_space_id).count).to eq 2
-
-        old_assembly_category = Decidim::Category.unscoped.first
-        new_assembly_category = Decidim::Category.unscoped.last
-
-        expect(new_assembly_category.name).to eq(old_assembly_category.name)
-        expect(new_assembly_category.description).to eq(old_assembly_category.description)
-        expect(new_assembly_category.parent).to eq(old_assembly_category.parent)
-      end
-    end
-
-    context "when copy_components exists" do
-      let(:copy_components) { true }
+    context "when duplicate_components exists" do
+      let(:duplicate_components) { true }
 
       it "duplicates an assembly and the components" do
         dummy_hook = proc {}
-        component.manifest.on :copy, &dummy_hook
+        component.manifest.on :duplicate, &dummy_hook
         expect(dummy_hook).to receive(:call).with({ new_component: an_instance_of(Decidim::Component), old_component: component })
 
         expect { subject.call }.to change(Decidim::Component, :count).by(1)
@@ -123,22 +99,8 @@ module Decidim::Assemblies
       end
     end
 
-    context "when component's manifest is proposal with proposal states" do
-      let(:copy_components) { true }
-      let!(:component) { create(:component, manifest_name: "proposals", participatory_space: assembly) }
-      let!(:proposal_states) { create_list(:proposal_state, 2, component:) }
-
-      it "duplicates proposal states if component's manifest name is proposals" do
-        dummy_hook = proc {}
-        component.manifest.on :copy, &dummy_hook
-        expect(dummy_hook).to receive(:call).with({ new_component: an_instance_of(Decidim::Component), old_component: component })
-        expect { subject.call }.to change(Decidim::Proposals::ProposalState, :count).by(2)
-        expect(Decidim::Proposals::ProposalState.last(2).map(&:title)).to include(proposal_states.first.title)
-      end
-    end
-
-    context "when copy_landing_page_blocks exists" do
-      let(:copy_landing_page_blocks) { true }
+    context "when duplicate_landing_page_blocks exists" do
+      let(:duplicate_landing_page_blocks) { true }
       let(:original_image) do
         Rack::Test::UploadedFile.new(
           Decidim::Dev.test_file("city.jpeg", "image/jpeg"),
@@ -171,7 +133,7 @@ module Decidim::Assemblies
       end
     end
 
-    context "when copying a child assembly" do
+    context "when duplicating a child assembly" do
       context "when the form is not valid" do
         let(:invalid) { true }
 
@@ -190,7 +152,7 @@ module Decidim::Assemblies
           old_assembly = Decidim::Assembly.find_by(id: assembly.id)
           new_assembly = Decidim::Assembly.last
 
-          expect(new_assembly.slug).to eq("copied-slug")
+          expect(new_assembly.slug).to eq("duplicated-slug")
           expect(new_assembly.title["en"]).to eq("title")
           expect(new_assembly).not_to be_published
           expect(new_assembly.organization).to eq(old_assembly.organization)
@@ -198,7 +160,6 @@ module Decidim::Assemblies
           expect(new_assembly.description).to eq(old_assembly.description)
           expect(new_assembly.short_description).to eq(old_assembly.short_description)
           expect(new_assembly.promoted).to eq(old_assembly.promoted)
-          expect(new_assembly.scope).to eq(old_assembly.scope)
           expect(new_assembly.parent).to eq(old_assembly.parent)
           expect(new_assembly.developer_group).to eq(old_assembly.developer_group)
           expect(new_assembly.local_area).to eq(old_assembly.local_area)

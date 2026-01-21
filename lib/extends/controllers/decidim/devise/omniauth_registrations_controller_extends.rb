@@ -26,12 +26,18 @@ module OmniauthRegistrationsControllerExtends
         on(:invalid) do
           set_flash_message :notice, :success, kind: @form.provider.capitalize
           session["devise.omniauth.verified_email"] = verified_email
-          render :new
+          render :new, status: :unprocessable_entity
+        end
+
+        on(:add_tos_errors) do
+          set_flash_message :alert, :add_tos_errors if @form.valid_tos?
+          session[:verified_email] = verified_email
+          render :new_tos_fields
         end
 
         on(:error) do |user|
           set_flash_message :alert, :failure, kind: @form.provider.capitalize, reason: t("decidim.devise.omniauth_registrations.create.email_already_exists") if user.errors[:email]
-          session["devise.omniauth.verified_email"] = verified_email
+          session[:verified_email] = verified_email
           render :new
         end
       end

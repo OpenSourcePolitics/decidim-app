@@ -9,8 +9,7 @@ module ProjectsControllerExtends
       {
         search_text_cont: "",
         with_any_status: "all",
-        with_any_scope: nil,
-        with_any_category: nil,
+        with_any_taxonomies: nil,
         addition_type: "all"
       }
     end

@@ -25,7 +25,6 @@ module DecidimApp
       # forms
       require "extends/forms/decidim/assemblies/admin/assembly_copy_form_extends"
       require "extends/forms/decidim/participatory_processes/admin/participatory_process_copy_form_extends"
-      require "extends/forms/decidim/proposals/proposal_form_extends"
       require "extends/forms/decidim/comments/comment_form_extends"
       require "extends/forms/decidim/system/base_organization_form_extends"
       require "extends/forms/decidim/omniauth_registration_form_extends"
@@ -56,7 +55,7 @@ module DecidimApp
       # permissions
       require "extends/permissions/initiatives/permissions_extends"
       # presenters
-      require "extends/presenters/decidim/forms/admin/questionnaire_answer_presenter_extends"
+      require "extends/presenters/decidim/forms/admin/questionnaire_response_presenter_extends"
     end
 
     config.to_prepare do
