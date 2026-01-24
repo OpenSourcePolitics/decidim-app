@@ -52,7 +52,7 @@ class MigrationsFixer
 
   # Returns path to DB migrations (default: "db/migrate")
   def migrations_folder
-    ActiveRecord::Base.connection.migration_context.migrations_paths.first
+    Rails.application.config.paths["db/migrate"].first || "db/migrate"
   end
 
   # Display helper

@@ -1,4 +1,4 @@
-<% link_classes = "login__omniauth-image-button image-button--#{normalize_provider_name(provider)} group/oauth-icon" %>
+<% link_classes = "login__omniauth-image-button login__omniauth-image-button--#{normalize_provider_name(provider)} group/oauth-icon" %>
 <% display_name = current_organization.enabled_omniauth_providers.dig(provider.to_sym, :display_name) %>
 <% provider_name = display_name.present? ? display_name : normalize_provider_name(provider).titleize %>
 <div class="max-w-md flex flex-col items-center justify-center">

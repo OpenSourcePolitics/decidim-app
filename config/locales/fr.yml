@@ -53,6 +53,11 @@ fr:
       attachments:
         form:
           send_notification_to_followers: Envoyer une notification à toutes les personnes qui suivent la concertation ayant accepté de recevoir des notifications par mail
+      menu:
+        participatory_process_groups_submenu:
+          landing_page: Page d'accueil
+        participatory_processes_submenu:
+          landing_page: Page d'accueil
       models:
         assembly:
           fields:
@@ -246,19 +251,65 @@ fr:
         create:
           error: Une erreur s'est produite lors de la création du commentaire.
     components:
+      blogs:
+        settings:
+          step:
+            default_sort_order_options:
+              most_liked: Les plus aimées
+            likes_blocked: Les "J'aime" sont désactivés pour ce composant.
+            likes_enabled: Les "J'aime" sont activés
+      budgets:
+        settings:
+          global:
+            taxonomy_filters: Sélectionner les filtres pour ce composant
+            taxonomy_filters_add: Ajouter un filtre
+      debates:
+        settings:
+          global:
+            taxonomy_filters: Sélectionner les filtres pour ce composant
+            taxonomy_filters_add: Ajouter un filtre
+          step:
+            default_sort_order_options:
+              most_liked: Les plus aimées
+            likes_blocked: Les "J'aime" sont désactivés pour ce composant.
+            likes_enabled: Les "J'aime" sont activés
+      meetings:
+        settings:
+          global:
+            taxonomy_filters: Sélectionner les filtres pour ce composant
+            taxonomy_filters_add: Ajouter un filtre
       proposals:
         settings:
           global:
+            default_sort_order_options:
+              most_liked: Les plus aimées
+            edit_time_units:
+              minutes: Minutes
             require_category: La catégorie est obligatoire
             require_scope: Le secteur est obligatoire
-    devise:
-      omniauth:
-        france_connect:
-          help_link: Qu’est-ce que FranceConnect ?
-          introduction: FranceConnect est la solution proposée par l’État pour sécuriser et simplifier la connexion à vos services en ligne.
-      shared:
-        links:
-          log_in_with_provider: Connectez-vous avec %{provider}
+          step:
+            default_sort_order_options:
+              most_liked: Les plus aimées
+            likes_blocked: Les "J'aime" sont désactivés pour ce composant.
+            likes_enabled: Les "J'aime" sont activés
+    debates:
+      models:
+        debate:
+          fields:
+            taxonomies: Taxonomies
+    proposals:
+      admin:
+        proposals:
+          index:
+            change_taxonomies: Changer les taxonomies
+  devise:
+    omniauth:
+      france_connect:
+        help_link: Qu’est-ce que FranceConnect ?
+        introduction: FranceConnect est la solution proposée par l’État pour sécuriser et simplifier la connexion à vos services en ligne.
+    shared:
+      links:
+        log_in_with_provider: Connectez-vous avec %{provider}
     events:
       proposals:
         author_confirmation_proposal_event:
@@ -652,6 +703,9 @@ fr:
             osp_authorization_workflow: Vérifier avec le formulaire de vérification de l'identité
   layouts:
     decidim:
+      admin:
+        taxonomy_filters_selector:
+          title: Titre
       budgets:
         voting_menubar:
           cancel_voting: Sortir de la cabine de vote

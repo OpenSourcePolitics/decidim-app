@@ -18,11 +18,13 @@ module CreateOmniauthRegistrationExtends
         create_or_find_user
         @identity = create_identity
       end
-      manage_user_confirmation
+
+      manage_user_confirmation if @user.previous_changes.has_key?("id")
+
       trigger_omniauth_event
 
       broadcast(:ok, @user)
-    rescue NeedTosAcceptance
+    rescue Decidim::NeedTosAcceptance
       broadcast(:add_tos_errors, @user)
     rescue ActiveRecord::RecordInvalid => e
       broadcast(:error, e.record)

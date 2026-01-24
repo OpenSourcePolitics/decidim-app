@@ -37,7 +37,7 @@ module OmniauthRegistrationsControllerExtends
 
         on(:error) do |user|
           set_flash_message :alert, :failure, kind: @form.provider.capitalize, reason: t("decidim.devise.omniauth_registrations.create.email_already_exists") if user.errors[:email]
-          session[:verified_email] = verified_email
+
           render :new
         end
       end

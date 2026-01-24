@@ -1,7 +1,7 @@
 services:
 
   database:
-    image: imresamu/postgis:17-3.5.2-alpine3.21
+    image: postgres:16-alpine
     volumes:
       - pg-data:/var/lib/postgresql/data
     environment:
@@ -22,14 +22,14 @@ services:
       - redis-data:/var/lib/redis/data
 
   init_storage:
-    image: decidim-app:3.4.0
+    image: decidim-app:4.0.0
     user: root
     command: chown -R 1000:1000 /opt/decidim/storage
     volumes:
       - storage-data:/opt/decidim/storage
 
   sidekiq:
-    image: decidim-app:3.4.0
+    image: decidim-app:4.0.0
     command: [ "bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml" ]
     environment:
       - DATABASE_HOST=database
@@ -64,7 +64,7 @@ services:
       - redis
 
   app:
-    image: decidim-app:3.4.0
+    image: decidim-app:4.0.0
     command: [ "bundle", "exec", "rails", "server", "-b", "ssl://0.0.0.0:3000?key=/opt/decidim/tls-certificate/key.pem&cert=/opt/decidim/tls-certificate/cert.pem" ]
     env_file:
       - .env

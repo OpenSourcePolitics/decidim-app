@@ -93,12 +93,12 @@ Rails.application.configure do
 
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      address: ENV.fetch("SMTP_ADDRESS"),
+      address: ENV.fetch("SMTP_ADDRESS", "smtp.example.com"),
       port: Decidim::Env.new("SMTP_PORT", 587).to_i,
       authentication: Decidim::Env.new("SMTP_AUTHENTICATION", "plain").to_s,
-      user_name: ENV.fetch("SMTP_USERNAME"),
-      password: ENV.fetch("SMTP_PASSWORD"),
-      domain: ENV.fetch("SMTP_DOMAIN"),
+      user_name: ENV.fetch("SMTP_USERNAME", "example_user"),
+      password: ENV.fetch("SMTP_PASSWORD", "example_password"),
+      domain: ENV.fetch("SMTP_DOMAIN", "example.com"),
       enable_starttls_auto: Decidim::Env.new("SMTP_STARTTLS_AUTO", true).to_boolean_string,
       openssl_verify_mode: "none"
     }

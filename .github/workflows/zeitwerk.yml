@@ -4,7 +4,7 @@ on:
       ruby_version:
         required: false
         description: 'Ruby version'
-        default: "3.2.2"
+        default: "3.3.4"
         type: string
 
 jobs:

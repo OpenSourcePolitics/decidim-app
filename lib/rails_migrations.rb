@@ -76,6 +76,6 @@ class RailsMigrations
 
   # Fetch all migrations statuses
   def migration_status
-    ActiveRecord::Base.connection.migration_context.migrations_status
+    ActiveRecord::Base.connection_pool.migration_context.migrations_status
   end
 end

@@ -3,12 +3,12 @@ on:
     inputs:
       ruby_version:
         description: 'Ruby Version'
-        default: "3.2.2"
+        default: "3.3.4"
         type: string
         required: false
       node_version:
         description: 'Node version'
-        default: '22.13.1'
+        default: '22.16.0'
         required: false
         type: string
 jobs:

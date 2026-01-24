@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-slim as builder
+FROM ruby:3.3.4-slim as builder
 
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
@@ -21,7 +21,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev curl git libicu-dev build-essential xz-utils \
     libssl3 libxrender1 libxext6 libfontconfig1 xfonts-75dpi xfonts-base \
-    && NODE_VERSION=22.12.0 \
+    p7zip-full \
+    && NODE_VERSION=22.16.0 \
     && case "${TARGETARCH}" in \
          "amd64")  NODE_ARCH="linux-x64" ;; \
          "arm64")  NODE_ARCH="linux-arm64" ;; \
@@ -46,11 +47,10 @@ RUN --mount=type=cache,target=/usr/local/bundle/cache \
 
 COPY . .
 
-RUN --mount=type=cache,target=/opt/decidim/tmp/cache \
-    --mount=type=cache,target=/root/.npm \
-    --mount=type=cache,target=/root/.cache/yarn \
-    --mount=type=cache,target=/opt/decidim/node_modules/.cache \
-    bundle exec rake decidim:webpacker:install assets:precompile deface:precompile shakapacker:compile
+RUN --mount=type=cache,target=/root/.cache/yarn \
+    yarn install --frozen-lockfile --production=false
+
+RUN bundle exec rake assets:precompile deface:precompile
 
 RUN rm -rf node_modules tmp/cache vendor/bundle/spec .git .gitignore .dockerignore \
     && rm -rf /usr/local/bundle/cache/*.gem \
@@ -60,7 +60,7 @@ RUN rm -rf node_modules tmp/cache vendor/bundle/spec .git .gitignore .dockerigno
     && find /usr/local/bundle/bundler/gems/decidim-* -type d -name "docs" -exec rm -rf {} + 2>/dev/null || true \
     && rm -rf log/*.log tmp/* public/packs-test
 
-FROM ruby:3.2.2-slim as runner
+FROM ruby:3.3.4-slim as runner
 
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME

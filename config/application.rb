@@ -34,7 +34,7 @@ module DecidimApp
       require "extends/controllers/decidim/account_controller_extends"
       require "extends/controllers/decidim/devise_controllers_extends"
       require "extends/controllers/decidim/devise/sessions_controller_extends"
-      require "extends/controllers/decidim/devise/omniauth_registrations_controller_extends"
+      # require "extends/controllers/decidim/devise/omniauth_registrations_controller_extends"
       require "extends/controllers/decidim/participatory_processes/participatory_processes_controller_extends"
       require "extends/controllers/decidim/budgets/projects_controller_extends"
       require "extends/controllers/decidim/proposals/admin/proposal_states_controller_extends"

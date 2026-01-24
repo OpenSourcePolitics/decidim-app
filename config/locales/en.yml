@@ -45,6 +45,9 @@ en:
       attachments:
         form:
           send_notification_to_followers: Send a notification to all the people following the consultation who have agreed to receive email notifications
+      menu:
+        participatory_process_groups_submenu:
+          landing_page: Landing page layout
       models:
         assembly:
           fields:
@@ -238,19 +241,65 @@ en:
         create:
           error: There was a problem creating the comment.
     components:
+      blogs:
+        settings:
+          step:
+            default_sort_order_options:
+              most_liked: Most liked
+            likes_blocked: Likes blocked
+            likes_enabled: Likes enabled
+      budgets:
+        settings:
+          global:
+            taxonomy_filters: Select filters for the component
+            taxonomy_filters_add: Add filter
+      debates:
+        settings:
+          global:
+            taxonomy_filters: Select filters for the component
+            taxonomy_filters_add: Add filter
+          step:
+            default_sort_order_options:
+              most_liked: Most liked
+            likes_blocked: Likes blocked
+            likes_enabled: Likes enabled
+      meetings:
+        settings:
+          global:
+            taxonomy_filters: Select filters for the component
+            taxonomy_filters_add: Add filter
       proposals:
         settings:
           global:
+            default_sort_order_options:
+              most_liked: Most liked
+            edit_time_units:
+              minutes: Minutes
             require_category: Category is required
             require_scope: Scope is required
-    devise:
-      omniauth:
-        france_connect:
-          help_link: Learn more about France Connect
-          introduction: FranceConnect is the solution offered by the public state to secure and simplify connection to your online services..
-      shared:
-        links:
-          log_in_with_provider: Log in with %{provider}
+          step:
+            default_sort_order_options:
+              most_liked: Most liked
+            likes_blocked: Likes blocked
+            likes_enabled: Likes enabled
+    debates:
+      models:
+        debate:
+          fields:
+            taxonomies: Taxonomies
+    proposals:
+      admin:
+        proposals:
+          index:
+            change_taxonomies: Change taxonomies
+  devise:
+    omniauth:
+      france_connect:
+        help_link: Learn more about France Connect
+        introduction: FranceConnect is the solution offered by the public state to secure and simplify connection to your online services..
+    shared:
+      links:
+        log_in_with_provider: Log in with %{provider}
     events:
       proposals:
         author_confirmation_proposal_event:
@@ -641,6 +690,9 @@ en:
             osp_authorization_workflow: Verify with the identity verification form
   layouts:
     decidim:
+      admin:
+        taxonomy_filters_selector:
+          title: Title
       budgets:
         voting_menubar:
           cancel_voting: Exit voting booth
