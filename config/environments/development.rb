@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require "active_support/core_ext/integer/time"
+require "securerandom"
+
+ENV["SECRET_KEY_BASE"] ||= SecureRandom.hex(64)
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
