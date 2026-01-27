@@ -33,6 +33,7 @@ minio:
   region: <%= Rails.application.secrets.dig(:storage, :minio, :region) %>
   force_path_style: true
   validate_params: false
+  public: true
 
 azure:
   service: AzureStorage
