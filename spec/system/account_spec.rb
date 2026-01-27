@@ -31,22 +31,32 @@ describe "Account" do
 
     it_behaves_like "accessible page"
 
-    describe "update avatar", :slow do
+    describe "update avatar" do
       it "can update avatar" do
         click_on "Replace"
-        file_location = Decidim::Dev.asset("avatar.jpg")
-        filename = file_location.to_s.split("/").last
+
         within ".upload-modal" do
-          click_on "Remove"
-          # sometimes there is 2 avatars img in the modal
-          click_on "Remove" if find("button", text: "Remove")
+          # rubocop :disable Capybara/SpecificMatcher
+          expect(page).to have_css("input[type='file']", visible: :all)
+          # rubocop :enable Capybara/SpecificMatcher
+
+          all("button", text: "Remove", wait: 1).each do |button|
+            button.click
+            sleep 0.2
+          end
+
+          file_location = Decidim::Dev.asset("avatar.jpg")
+          filename = file_location.to_s.split("/").last
+
           input_element = find("input[type='file']", visible: :all)
           input_element.attach_file(file_location)
-          within "[data-filename='#{filename}']" do
-            expect(page).to have_css(filled_selector("li progress[value='100']"), wait: 5)
+
+          within "[data-filename='#{filename}']", match: :first do
+            expect(page).to have_css("li progress[value='100']", wait: 10)
             expect(page).to have_content(filename.first(12))
           end
-          click_on("Save")
+
+          click_on "Save"
         end
 
         within "form.edit_user" do
@@ -56,7 +66,7 @@ describe "Account" do
         expect(page).to have_css(".flash.success")
       end
 
-      it "shows error when image is too big", :slow do
+      it "shows error when image is too big" do
         find_by_id("user_avatar_button").click
 
         within ".upload-modal" do
@@ -97,6 +107,59 @@ describe "Account" do
 
         # The user's password should not change when they did not update it
         expect(user.reload.encrypted_password).to eq(encrypted_password)
+      end
+    end
+
+    describe "when updating the user's nickname" do
+      it "changes the user's nickname - 'nickname'" do
+        within "form.edit_user" do
+          fill_in "Nickname", with: "nickname"
+          find("*[type=submit]").click
+        end
+
+        expect(page).to have_content("Your account was successfully updated.")
+        expect(page).to have_field("user[nickname]", with: "nickname", type: "text")
+      end
+
+      it "respects the maxlength attribute with a really long word - 'nicknamenicknamenickname'" do
+        within "form.edit_user" do
+          fill_in "Nickname", with: "nicknamenicknamenickname"
+          find("*[type=submit]").click
+        end
+
+        expect(page).to have_content("Your account was successfully updated.")
+        expect(page).to have_field("user[nickname]", with: "nicknamenicknamenick", type: "text")
+      end
+
+      it "shows error when word has a capital letter - 'nickName'" do
+        within "form.edit_user" do
+          fill_in "Nickname", with: "nickName"
+          find("*[type=submit]").click
+        end
+
+        expect(page).to have_content("There was a problem updating your account.")
+        expect(page).to have_content("The nickname must be lowercase and contain no spaces")
+        expect(page).to have_field("user[nickname]", with: "nickName", type: "text")
+      end
+
+      it "shows error when word starts with a capital letter - 'Nickname'" do
+        within "form.edit_user" do
+          fill_in "Nickname", with: "Nickname"
+          find("*[type=submit]").click
+        end
+
+        expect(page).to have_content("There was a problem updating your account.")
+        expect(page).to have_field("user[nickname]", with: "Nickname", type: "text")
+      end
+
+      it "shows error when string has a space - 'nick name'" do
+        within "form.edit_user" do
+          fill_in "Nickname", with: "nick name"
+          find("*[type=submit]").click
+        end
+
+        expect(page).to have_content("There was a problem updating your account.")
+        expect(page).to have_field("user[nickname]", with: "nick name", type: "text")
       end
     end
 
@@ -256,6 +319,7 @@ describe "Account" do
 
         it "updates the administrator's notifications" do
           page.find("[for='email_on_moderations']").click
+          page.find("[for='email_on_assigned_proposals']").click
           page.find("[for='user_notification_settings[close_meeting_reminder]']").click
 
           within "form.edit_user" do
@@ -264,44 +328,6 @@ describe "Account" do
 
           within_flash_messages do
             expect(page).to have_content("successfully")
-          end
-        end
-      end
-    end
-
-    context "when on the interests page" do
-      before do
-        visit decidim.user_interests_path
-      end
-
-      it "does not find any scopes" do
-        expect(page).to have_content("My interests")
-        expect(page).to have_content("This organization does not have any scope yet")
-      end
-
-      context "when scopes are defined" do
-        let!(:scopes) { create_list(:scope, 3, organization:) }
-        let!(:subscopes) { create_list(:subscope, 3, parent: scopes.first) }
-
-        before do
-          visit decidim.user_interests_path
-        end
-
-        it "display translated scope name" do
-          expect(page).to have_content("My interests")
-          within "label[for='user_scopes_#{scopes.first.id}_checked']" do
-            expect(page).to have_content(translated(scopes.first.name))
-          end
-        end
-
-        it "allows to choose interests" do
-          label_field = "label[for='user_scopes_#{scopes.first.id}_checked']"
-          expect(page).to have_content("My interests")
-          find(label_field).click
-          click_on "Update my interests"
-
-          within_flash_messages do
-            expect(page).to have_content("Your interests have been successfully updated.")
           end
         end
       end
@@ -366,9 +392,9 @@ describe "Account" do
 
     context "when VAPID keys are set" do
       before do
-        allow(ENV).to receive(:[]).and_call_original
-        allow(ENV).to receive(:[]).with("VAPID_PUBLIC_KEY").and_return(vapid_keys[:public_key])
-        allow(ENV).to receive(:[]).with("VAPID_PRIVATE_KEY").and_return(vapid_keys[:private_key])
+        allow(Decidim).to receive(:vapid_public_key).and_return(vapid_keys[:public_key])
+        allow(Decidim).to receive(:vapid_private_key).and_return(vapid_keys[:private_key])
+
         driven_by(:pwa_chrome)
         switch_to_host(organization.host)
         login_as user, scope: :user
@@ -398,7 +424,7 @@ describe "Account" do
 
     context "when VAPID is disabled" do
       before do
-        allow(ENV).to receive(:[]).with("VAPID_PUBLIC_KEY").and_return(nil)
+        allow(Decidim).to receive(:vapid_public_key).and_return("")
         driven_by(:pwa_chrome)
         switch_to_host(organization.host)
         login_as user, scope: :user
@@ -412,7 +438,7 @@ describe "Account" do
 
     context "when VAPID keys are not set" do
       before do
-        allow(ENV).to receive(:[]).with("VAPID_PUBLIC_KEY").and_return(nil)
+        allow(Decidim).to receive(:vapid_public_key).and_return(nil)
         driven_by(:pwa_chrome)
         switch_to_host(organization.host)
         login_as user, scope: :user

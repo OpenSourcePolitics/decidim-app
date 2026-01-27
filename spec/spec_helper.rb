@@ -10,7 +10,7 @@ RSpec.configure do |config|
 
   Capybara.register_driver :headless_chrome do |app|
     options = Selenium::WebDriver::Chrome::Options.new
-    options.args << "--headless=new"
+    options.args << "--headless"
     options.args << "--no-sandbox"
     options.args << "--disable-search-engine-choice-screen"
     options.args << if ENV["BIG_SCREEN_SIZE"].present?

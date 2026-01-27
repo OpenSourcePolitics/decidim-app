@@ -28,11 +28,6 @@ describe "Authentication" do
     }
   end
 
-  around do |example|
-    clear_emails
-    perform_enqueued_jobs { example.run }
-  end
-
   before do
     allow(Decidim).to receive(:omniauth_providers).and_return(omniauth_secrets)
     switch_to_host(organization.host)
@@ -40,6 +35,11 @@ describe "Authentication" do
   end
 
   describe "Create an account" do
+    around do |example|
+      clear_emails
+      perform_enqueued_jobs { example.run }
+    end
+
     context "when using email and password" do
       it "creates a new User" do
         click_on "Create an account"
@@ -401,7 +401,7 @@ describe "Authentication" do
 
   describe "Confirm email" do
     it "confirms and logs in the user" do
-      create(:user, organization:)
+      perform_enqueued_jobs { create(:user, organization:) }
 
       visit last_email_link
 
@@ -419,7 +419,7 @@ describe "Authentication" do
     let!(:user) { create(:user, organization:) }
 
     before do
-      user.confirm
+      perform_enqueued_jobs { user.confirm }
       switch_to_host(user.organization.host)
       login_as user, scope: :user
       sleep 1
@@ -441,7 +441,7 @@ describe "Authentication" do
 
   describe "Resend confirmation instructions" do
     let(:user) do
-      create(:user, organization:)
+      perform_enqueued_jobs { create(:user, organization:) }
     end
 
     it "sends an email with the instructions" do
@@ -449,7 +449,7 @@ describe "Authentication" do
 
       within ".new_user" do
         fill_in :confirmation_user_email, with: user.email
-        find("*[type=submit]").click
+        perform_enqueued_jobs { find("*[type=submit]").click }
       end
 
       expect(emails.count).to eq(2)
@@ -536,7 +536,7 @@ describe "Authentication" do
 
         within ".new_user" do
           fill_in :password_user_email, with: user.email
-          find("*[type=submit]").click
+          perform_enqueued_jobs { find("*[type=submit]").click }
         end
 
         expect(page).to have_content("If your email address exists in our database")
@@ -557,7 +557,7 @@ describe "Authentication" do
 
     describe "Reset password" do
       before do
-        user.send_reset_password_instructions
+        perform_enqueued_jobs { user.send_reset_password_instructions }
       end
 
       it "sets a new password for the user" do
@@ -663,7 +663,7 @@ describe "Authentication" do
             within ".new_user" do
               fill_in :session_user_email, with: user.email
               fill_in :session_user_password, with: "not-the-password"
-              find("*[type=submit]").click
+              perform_enqueued_jobs { find("*[type=submit]").click }
             end
 
             expect(page).to have_content("Invalid")
@@ -682,7 +682,7 @@ describe "Authentication" do
         it "resends the unlock instructions" do
           within ".new_user" do
             fill_in :unlock_user_email, with: user.email
-            find("*[type=submit]").click
+            perform_enqueued_jobs { find("*[type=submit]").click }
           end
 
           expect(page).to have_content("If your account exists")
@@ -702,7 +702,7 @@ describe "Authentication" do
       describe "Unlock account" do
         before do
           user.lock_access!
-          user.send_unlock_instructions
+          perform_enqueued_jobs { user.send_unlock_instructions }
         end
 
         it "unlocks the user account" do

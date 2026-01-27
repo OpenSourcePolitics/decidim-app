@@ -414,7 +414,7 @@ Decidim.configure do |config|
   strong_password = Decidim::Env.new("DECIDIM_ADMIN_PASSWORD_STRONG", true).to_boolean_string
   # When the strong password is not configured, default to true
   config.admin_password_strong = strong_password == "true"
-  config.admin_password_expiration_days = Decidim::Env.new("DECIDIM_ADMIN_PASSWORD_EXPIRATION_DAYS", 90).to_i
+  config.admin_password_expiration_days = Decidim::Env.new("DECIDIM_ADMIN_PASSWORD_EXPIRATION_DAYS", 0).to_i
   config.admin_password_min_length = Decidim::Env.new("DECIDIM_ADMIN_PASSWORD_MIN_LENGTH", 15).to_i
   config.admin_password_repetition_times = Decidim::Env.new("DECIDIM_ADMIN_PASSWORD_REPETITION_TIMES", 5).to_i
 

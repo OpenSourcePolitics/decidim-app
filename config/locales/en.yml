@@ -37,7 +37,7 @@ en:
         add: Add
         browse: Browse
         confirm_destroy: Confirm destroy
-        destroy: Destroy
+        destroy: Delete
         edit: Edit
         new_assembly: New assembly
       areas:

@@ -8,7 +8,7 @@ $(() => {
   const preventScroll = (e) => {
     if (isDragging) {
       e.preventDefault();
-      e.stopPropagation();
+      // e.stopPropagation();
       return false;
     }
   };

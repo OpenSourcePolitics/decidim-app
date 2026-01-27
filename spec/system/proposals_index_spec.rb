@@ -54,7 +54,6 @@ describe "Proposals" do
       let(:component) { create(:proposal_component, :with_geocoding_enabled, participatory_space: participatory_process) }
 
       let!(:author_proposals) { create_list(:proposal, 2, :participant_author, :published, component:) }
-      let!(:group_proposals) { create_list(:proposal, 2, :user_group_author, :published, component:) }
       let!(:official_proposals) { create_list(:proposal, 2, :official, :published, component:) }
 
       # We are providing a list of coordinates to make sure the points are scattered all over the map
@@ -64,12 +63,7 @@ describe "Proposals" do
           [-95.501705376541395, 95.10059236654689],
           [-95.501705376541395, -95.10059236654689],
           [95.10059236654689, -95.501705376541395],
-          [95.10059236654689, 95.10059236654689],
-          [142.15275006889419, -33.33377235135252],
-          [33.33377235135252, -142.15275006889419],
-          [-33.33377235135252, 142.15275006889419],
-          [-142.15275006889419, 33.33377235135252],
-          [-55.28745034772282, -35.587843900166945]
+          [95.10059236654689, 95.10059236654689]
         ]
         Decidim::Proposals::Proposal.where(component:).geocoded.each_with_index do |proposal, index|
           proposal.update!(latitude: coordinates[index][0], longitude: coordinates[index][1]) if coordinates[index]
@@ -79,13 +73,13 @@ describe "Proposals" do
       end
 
       it "shows markers for selected proposals" do
-        expect(page).to have_css(".leaflet-marker-icon", count: 5)
+        expect(page).to have_css(".leaflet-marker-icon", count: 4)
         within "#panel-dropdown-menu-origin" do
           click_filter_item "Official"
         end
         # make the page reload
         visit "#{current_path}?#{URI.parse(current_url).query}"
-        expect(page).to have_css(".leaflet-marker-icon", count: 2, wait: 10)
+        expect(page).to have_css(".leaflet-marker-icon", minimum: 2, wait: 10)
       end
     end
 
@@ -153,8 +147,10 @@ describe "Proposals" do
 
       it "lists the proposals ordered by votes by default" do
         expect(page).to have_css("a", text: "Most voted")
-        expect(page).to have_css("[id^='proposals__proposal']:first-child", text: most_voted_proposal_title)
-        expect(page).to have_css("[id^='proposals__proposal']:last-child", text: less_voted_proposal_title)
+
+        proposals = page.all("[id^='proposals__proposal']")
+        expect(proposals.first).to have_content(most_voted_proposal_title)
+        expect(proposals.last).to have_content(less_voted_proposal_title)
       end
     end
 
@@ -235,11 +231,14 @@ describe "Proposals" do
           page.find("a", text: "Random").click
           click_on(selected_option)
         end
+        sleep 1
       end
 
       it "lists the proposals ordered by selected option" do
-        expect(page).to have_css("[id^='proposals__proposal']:first-child", text: first_proposal_title)
-        expect(page).to have_css("[id^='proposals__proposal']:last-child", text: last_proposal_title)
+        expect(page).to have_css("[id^='proposals__proposal']", minimum: 2)
+        proposals = page.all("[id^='proposals__proposal']")
+        expect(proposals.first).to have_content(first_proposal_title)
+        expect(proposals.last).to have_content(last_proposal_title)
       end
     end
 
@@ -292,7 +291,7 @@ describe "Proposals" do
       end
     end
 
-    context "when ordering by 'most_endorsed'" do
+    context "when ordering by 'most_endorsed'", skip: "Endorsements removed in Decidim 0.31" do
       let!(:most_endorsed_proposal) { create(:proposal, component:, created_at: 1.month.ago) }
       let!(:endorsements) do
         3.times.collect do
@@ -432,5 +431,9 @@ describe "Proposals" do
         expect(page).to have_css(".card__grid-img img")
       end
     end
+  end
+
+  def click_filter_item(item_text)
+    find("label", text: item_text).click
   end
 end

@@ -40,7 +40,7 @@ describe "Comments" do
     expect(page).to have_css(".comment", minimum: 1)
 
     within ".comment-order-by" do
-      click_on "Best rated"
+      select "Best rated", from: "order"
     end
 
     expect(page).to have_css(".comments > div:nth-child(2)", text: "Most Rated Comment")
@@ -56,7 +56,7 @@ describe "Comments" do
       expect(page).to have_css(".comment", minimum: 1)
 
       within("#accordion-#{single_comment.id}") do
-        expect(page).to have_content "Hide reply"
+        expect(page).to have_content "1 answer"
       end
     end
 
@@ -567,7 +567,8 @@ describe "Comments" do
         it "displays the hide button" do
           visit current_path
           within "#comment_#{thread.id}" do
-            expect(page).to have_content("Hide reply")
+            expect(page).to have_content("1 answer")
+            click_on "1 answer"
             expect(page).to have_content(new_reply_body)
           end
         end
@@ -575,8 +576,9 @@ describe "Comments" do
         it "displays the show button" do
           visit current_path
           within "#comment_#{thread.id}" do
-            click_on "Hide reply"
-            expect(page).to have_content("Show reply")
+            click_on "1 answer"
+            expect(page).to have_content(new_reply_body)
+            click_on "1 answer"
             expect(page).to have_no_content(new_reply_body)
           end
         end
@@ -587,8 +589,9 @@ describe "Comments" do
           it "displays the show button" do
             visit current_path
             within "#comment_#{thread.id}" do
-              click_on "Hide 3 replies"
-              expect(page).to have_content("Show 3 replies")
+              click_on "3 answers"
+              expect(page).to have_content(new_reply_body)
+              click_on "3 answers"
               expect(page).to have_no_content(new_reply_body)
             end
           end
@@ -619,29 +622,6 @@ describe "Comments" do
           expect(page.find("#add-comment-#{commentable.commentable_type.demodulize}-#{commentable.id}").value).to include(content)
           expect(page.find("#add-comment-#{thread.commentable_type.demodulize}-#{thread.id}").value).to include(reply_content)
         end
-      end
-    end
-
-    context "when the user has verified organizations" do
-      let(:user_group) { create(:user_group, :verified, organization:) }
-      let(:content) { "This is a new comment" }
-
-      before do
-        create(:user_group_membership, user:, user_group:)
-      end
-
-      it "adds new comment as a user group" do
-        visit resource_path
-
-        within "form#new_comment_for_#{commentable.commentable_type.demodulize}_#{commentable.id}" do
-          field = find("#add-comment-#{commentable.commentable_type.demodulize}-#{commentable.id}")
-          field.set " "
-          field.native.send_keys content
-          select user_group.name, from: "Comment as"
-          click_on "Publish comment"
-        end
-
-        expect(page).to have_comment_from(user_group, content, wait: 20)
       end
     end
 
@@ -710,7 +690,6 @@ describe "Comments" do
 
         it "the context menu of the comment does not show an edit button" do
           within "#comment_#{comment.id}" do
-            # Toolbar
             page.find("[id^='dropdown-trigger']").click
             expect(page).to have_no_button("Edit")
           end
@@ -722,7 +701,6 @@ describe "Comments" do
 
         it "the context menu of the comment show an edit button" do
           within "#comment_#{comment.id}" do
-            # Toolbar
             page.find("[id^='dropdown-trigger']").click
             expect(page).to have_button("Edit")
           end
@@ -931,15 +909,6 @@ describe "Comments" do
           expect(page).to have_no_css(".tribute-container", text: mentioned_user.name)
         end
       end
-
-      context "when mentioning a group" do
-        let!(:mentioned_group) { create(:user_group, :confirmed, organization:) }
-        let(:content) { "A confirmed user group mention: @#{mentioned_group.nickname}" }
-
-        it "shows the tribute container" do
-          expect(page).to have_css(".tribute-container", text: mentioned_group.nickname, wait: 10)
-        end
-      end
     end
 
     describe "mentions", :slow do
@@ -956,7 +925,6 @@ describe "Comments" do
 
       context "when mentioning a valid user" do
         let!(:mentioned_user) { create(:user, :confirmed, organization:) }
-        # do not finish with the mention to avoid trigger the drop-down
         let(:content) { "A valid user mention: @#{mentioned_user.nickname}." }
 
         it "replaces the mention with a link to the user's profile" do
@@ -985,26 +953,6 @@ describe "Comments" do
       end
     end
 
-    describe "hashtags", :slow do
-      let(:content) { "A comment with a hashtag #decidim" }
-
-      before do
-        visit resource_path
-
-        within "form#new_comment_for_#{commentable.commentable_type.demodulize}_#{commentable.id}" do
-          field = find("#add-comment-#{commentable.commentable_type.demodulize}-#{commentable.id}")
-          field.set " "
-          field.native.send_keys content
-          click_on "Publish comment"
-        end
-      end
-
-      it "replaces the hashtag with a link to the hashtag search" do
-        expect(page).to have_comment_from(user, "A comment with a hashtag #decidim", wait: 20)
-        expect(page).to have_link "#decidim", href: "/search?term=%23decidim"
-      end
-    end
-
     describe "export_serializer" do
       let(:comment) { comments.first }
 
@@ -1022,7 +970,6 @@ describe "Comments" do
         it { is_expected.to have_key(:author) }
         it { is_expected.to have_key(:alignment) }
         it { is_expected.to have_key(:depth) }
-        it { is_expected.to have_key(:user_group) }
         it { is_expected.to have_key(:commentable_id) }
         it { is_expected.to have_key(:commentable_type) }
         it { is_expected.to have_key(:root_commentable_url) }

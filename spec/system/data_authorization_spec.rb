@@ -37,7 +37,7 @@ describe "Data authorization" do
       fill_in :authorization_handler_city, with: city
       check :authorization_handler_gdpr
       check :authorization_handler_minimum_age
-      click_on "I continue"
+      click_on "Send"
     end
 
     shared_examples_for "is a valid firstname" do
@@ -126,7 +126,7 @@ describe "Data authorization" do
       let(:firstname) { "John1" }
 
       before do
-        click_on "I continue"
+        click_on "Send"
       end
 
       it_behaves_like "is an invalid firstname"
@@ -136,7 +136,7 @@ describe "Data authorization" do
       let(:firstname) { "John@" }
 
       before do
-        click_on "I continue"
+        click_on "Send"
       end
 
       it_behaves_like "is an invalid firstname"
@@ -152,7 +152,7 @@ describe "Data authorization" do
       let(:lastname) { "Doe1" }
 
       before do
-        click_on "I continue"
+        click_on "Send"
       end
 
       it_behaves_like "is an invalid lastname"
@@ -162,7 +162,7 @@ describe "Data authorization" do
       let(:lastname) { "Doe@" }
 
       before do
-        click_on "I continue"
+        click_on "Send"
       end
 
       it_behaves_like "is an invalid lastname"
@@ -172,7 +172,7 @@ describe "Data authorization" do
       let(:lastname) { "" }
 
       before do
-        click_on "I continue"
+        click_on "Send"
       end
 
       it "does not authorize the user" do
@@ -184,7 +184,7 @@ describe "Data authorization" do
       let(:firstname) { "" }
 
       before do
-        click_on "I continue"
+        click_on "Send"
       end
 
       it "does not authorize the user" do
@@ -196,7 +196,7 @@ describe "Data authorization" do
       let(:phone) { "" }
 
       before do
-        click_on "I continue"
+        click_on "Send"
       end
 
       it "does not authorize the user" do
@@ -208,7 +208,7 @@ describe "Data authorization" do
       let(:postal_code) { "" }
 
       before do
-        click_on "I continue"
+        click_on "Send"
       end
 
       it "does not authorize the user" do
@@ -220,7 +220,7 @@ describe "Data authorization" do
       let(:postal_code) { "1234" }
 
       before do
-        click_on "I continue"
+        click_on "Send"
       end
 
       it "does not authorize the user" do
@@ -232,7 +232,7 @@ describe "Data authorization" do
       let(:city) { "" }
 
       before do
-        click_on "I continue"
+        click_on "Send"
       end
 
       it "does not authorize the user" do
@@ -243,7 +243,7 @@ describe "Data authorization" do
     describe "when gdpr is not checked" do
       before do
         uncheck :authorization_handler_gdpr
-        click_on "I continue"
+        click_on "Send"
       end
 
       it "does not authorize the user" do
@@ -254,7 +254,7 @@ describe "Data authorization" do
     describe "when minimum age is not checked" do
       before do
         uncheck :authorization_handler_minimum_age
-        click_on "I continue"
+        click_on "Send"
       end
 
       it "does not authorize the user" do

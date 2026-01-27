@@ -39,6 +39,7 @@ module Decidim
             search_text_cont: "",
             type: "all",
             with_any_taxonomies: nil,
+            with_any_origin: nil,
             with_any_state: default_states
           }
         end

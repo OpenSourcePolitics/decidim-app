@@ -73,7 +73,7 @@ describe "Organization scopes" do
 
       it "can delete them" do
         within ".draggable-content", text: translated(scope.name) do
-          accept_confirm { click_link_or_button "Destroy" }
+          accept_confirm { click_link_or_button "Delete" }
         end
 
         expect(page).to have_admin_callout("successfully")

@@ -36,7 +36,8 @@ describe "Edit proposals" do
       visit_component
 
       click_on proposal_title
-      click_on "Edit proposal"
+      find("#dropdown-trigger-resource-#{proposal.id}").click
+      click_on "Edit"
 
       expect(page).to have_content "Edit proposal"
       expect(page).to have_no_content("You can move the point on the map.")
@@ -60,7 +61,8 @@ describe "Edit proposals" do
       end
 
       it "shows validation error when format is not accepted" do
-        click_on "Edit proposal"
+        find("#dropdown-trigger-resource-#{proposal.id}").click
+        click_on "Edit"
         dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("dummy-dummies-example.xlsx"), keep_modal_open: true) do
           expect(page).to have_content("Accepted formats: #{Decidim::OrganizationSettings.for(organization).upload_allowed_file_extensions_image.join(", ")}")
         end
@@ -75,9 +77,10 @@ describe "Edit proposals" do
           visit current_path
 
           expect(page).to have_content("Documents")
-          click_on "Edit proposal"
+          find("#dropdown-trigger-resource-#{proposal.id}").click
+          click_on "Edit"
 
-          click_on "Edit documents"
+          click_on "Edit attachments"
           within ".upload-modal" do
             within "[data-filename='city.jpeg']" do
               click_on("Remove")
@@ -99,11 +102,12 @@ describe "Edit proposals" do
           let(:attachment_image_title) { Faker::Lorem.sentence }
 
           it "can change attachment titles" do
-            click_on "Edit proposal"
-            click_on "Edit documents"
+            find("#dropdown-trigger-resource-#{proposal.id}").click
+            click_on "Edit"
+            click_on "Edit attachments"
             within ".upload-modal" do
               expect(page).to have_content("Has to be an image or a document")
-              expect(page).to have_content("For images, use preferably landscape images, the service crops the image")
+              expect(page).to have_content("If it is an image, it preferably be a landscape image that does not have any text. The platform crops the image.")
               within "[data-filename='city.jpeg']" do
                 find("input[type='text']").set(attachment_image_title)
               end
@@ -130,10 +134,11 @@ describe "Edit proposals" do
           end
 
           it "displays them correctly on the edit form" do
+            find("#dropdown-trigger-resource-#{proposal.id}").click
             # With problematic code, should raise Selenium::WebDriver::Error::UnexpectedAlertOpenError
-            click_on "Edit proposal"
+            click_on "Edit"
             expect(page).to have_content("Required fields are marked with an asterisk")
-            click_on("Edit documents")
+            click_on("Edit attachments")
             within "[data-dialog]" do
               click_on("Save")
             end
@@ -152,10 +157,11 @@ describe "Edit proposals" do
           end
 
           it "displays them correctly on the edit form" do
+            find("#dropdown-trigger-resource-#{proposal.id}").click
             # With problematic code, should raise Selenium::WebDriver::Error::UnexpectedAlertOpenError
-            click_on "Edit proposal"
+            click_on "Edit"
             expect(page).to have_content("Required fields are marked with an asterisk")
-            click_on("Edit documents")
+            click_on("Edit attachments")
             within "[data-dialog]" do
               click_on("Save")
             end
@@ -169,12 +175,14 @@ describe "Edit proposals" do
         it "can add many images many times" do
           skip "REDESIGN_PENDING - Flaky test: upload modal fails on GitHub with multiple files https://github.com/decidim/decidim/issues/10961"
 
-          click_on "Edit proposal"
+          find("#dropdown-trigger-resource-#{proposal.id}").click
+          click_on "Edit"
           dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city.jpeg"))
           dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("icon.png"))
           dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("avatar.jpg"))
           click_on "Send"
-          click_on "Edit proposal"
+          find("#dropdown-trigger-resource-#{proposal.id}").click
+          click_on "Edit"
           expect(page).to have_content("city.jpeg")
           expect(page).to have_content("icon.png")
           expect(page).to have_content("avatar.jpg")
@@ -195,7 +203,7 @@ describe "Edit proposals" do
       end
     end
 
-    context "with geocoding enabled" do
+    context "with maps enabled" do
       let(:settings) { { require_category: false, require_scope: false, geocoding_enabled: true } }
       let(:component) { create(:proposal_component, participatory_space: participatory_process, settings:) }
       let(:address) { "6 Villa des Nymphéas 75020 Paris" }
@@ -208,11 +216,13 @@ describe "Edit proposals" do
         stub_geocoding(new_address, [latitude, longitude])
       end
 
-      it "can be updated with address", :serves_geocoding_autocomplete do
+      it "can be updated with address" do
         visit_component
 
         click_on translated(proposal.title)
-        click_on "Edit proposal"
+        find("#dropdown-trigger-resource-#{proposal.id}").click
+        click_on "Edit"
+
         expect(page).to have_field("Title", with: translated(proposal.title))
         expect(page).to have_field("Body", with: strip_tags(translated(proposal.body)))
         expect(page).to have_field("Address", with: proposal.address)
@@ -244,7 +254,8 @@ describe "Edit proposals" do
           visit_component
 
           click_on translated(proposal.title)
-          click_on "Edit proposal"
+          find("#dropdown-trigger-resource-#{proposal.id}").click
+          click_on "Edit"
 
           expect(page).to have_field("Title", with: translated(proposal.title))
           expect(page).to have_field("Body", with: strip_tags(translated(proposal.body)))
@@ -272,17 +283,18 @@ describe "Edit proposals" do
         visit_component
 
         click_on proposal_title
-        click_on "Edit proposal"
+        find("#dropdown-trigger-resource-#{proposal.id}").click
+        click_on "Edit"
 
         expect(page).to have_content "Edit proposal"
 
         within "form.edit_proposal" do
-          fill_in :proposal_body, with: "A"
+          fill_in :proposal_body, with: "Abort mission"
           click_on "Send"
         end
 
-        # The character counters are doubled because there is a separate screen reader character counter.
-        expect(page).to have_content("At least 15 characters", count: 4)
+        expect(page).to have_content("is too short (under 15 characters)", count: 1)
+        expect(page).to have_content("At least 15 characters", count: 2)
 
         within "form.edit_proposal" do
           fill_in :proposal_body, with: "WE DO NOT WANT TO SHOUT IN THE PROPOSAL BODY TEXT!"
@@ -296,7 +308,8 @@ describe "Edit proposals" do
         visit_component
 
         click_on proposal_title
-        click_on "Edit proposal"
+        find("#dropdown-trigger-resource-#{proposal.id}").click
+        click_on "Edit"
 
         expect(page).to have_content "Edit proposal"
 
@@ -328,7 +341,8 @@ describe "Edit proposals" do
           proposal.update!(body:)
           visit_component
           click_on proposal_title
-          click_on "Edit proposal"
+          find("#dropdown-trigger-resource-#{proposal.id}").click
+          click_on "Edit"
         end
 
         it_behaves_like "having a rich text editor", "edit_proposal", "basic"
@@ -343,63 +357,6 @@ describe "Edit proposals" do
           expect(editor).to have_no_selector("a.external-link-container")
         end
       end
-    end
-  end
-
-  describe "editing my own proposal with category and scope mandatory" do
-    let(:new_title) { "This is my proposal new title" }
-    let(:new_body) { "This is my proposal new body" }
-    let(:settings) { { scopes_enabled: true, require_category: true, require_scope: true } }
-    let(:category) { create(:category, participatory_space: participatory_process) }
-    let!(:category_bis) { create(:category, participatory_space: participatory_process) }
-    let(:parent_scope) { create(:scope, organization:) }
-    let(:scope) { create(:subscope, parent: parent_scope) }
-    let(:proposal) { create(:proposal, users: [user], component:, decidim_scope_id: scope.id, category:) }
-
-    before do
-      login_as user, scope: :user
-      visit_component
-
-      click_on proposal_title
-      click_on "Edit proposal"
-    end
-
-    it "can be updated without changing category and scope" do
-      expect(page).to have_content "Edit proposal"
-      expect(page).to have_no_content("You can move the point on the map.")
-
-      within "form.edit_proposal" do
-        fill_in :proposal_title, with: new_title
-        fill_in :proposal_body, with: new_body
-        click_on "Send"
-      end
-
-      expect(page).to have_content(new_title)
-      expect(page).to have_content(new_body)
-    end
-
-    it "can edit proposal by changing scope" do
-      select parent_scope.name["en"], from: :proposal_scope_id
-      click_link_or_button "Send"
-      expect(page).to have_content("Proposal successfully updated.")
-    end
-
-    it "can edit proposal by changing category" do
-      select category_bis.name["en"], from: :proposal_category_id
-      click_link_or_button "Send"
-      expect(page).to have_content("Proposal successfully updated.")
-    end
-
-    it "cannot edit proposal without a category" do
-      select "Please select a category", from: :proposal_category_id
-      click_link_or_button "Send"
-      expect(page).to have_content("There is an error in this field")
-    end
-
-    it "cannot edit proposal without a scope" do
-      select "Select a scope", from: :proposal_scope_id
-      click_link_or_button "Send"
-      expect(page).to have_content("There is an error in this field")
     end
   end
 
