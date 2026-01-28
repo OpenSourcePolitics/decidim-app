@@ -55,7 +55,7 @@ jobs:
         image: ghcr.io/validator/validator:latest
         ports: ["8888:8888"]
       postgres:
-        image: postgis/postgis:17-3.5
+        image: postgres:16-alpine
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -95,6 +95,17 @@ jobs:
           path: ./
           key: app-${{ github.sha }}
           restore-keys: app-${{ github.sha }}
+      - uses: actions/cache@v4
+        id: assets-cache
+        with:
+          path: |
+            public/packs
+            public/packs-test
+            tmp/shakapacker
+            node_modules
+          key: assets-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/Gemfile.lock') }}
+          restore-keys: |
+            assets-${{ runner.os }}-
       - run: |
           bundle install
           bundle exec rake parallel:create parallel:load_schema
@@ -118,6 +129,7 @@ jobs:
           SIMPLECOV: "true"
           SHAKAPACKER_RUNTIME_COMPILE: "false"
           NODE_ENV: "test"
+          PARALLEL_TEST_PROCESSORS: 8
       - uses: codecov/codecov-action@v4
         name: Upload coverage
         with:

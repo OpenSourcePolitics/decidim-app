@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-22.04
     services:
       postgres:
-        image: postgis/postgis:17-3.5
+        image: postgres:16-alpine
         ports: [ "5432:5432" ]
         options: >-
           --health-cmd pg_isready
