@@ -158,3 +158,8 @@ ignore_unused:
   - decidim.resource.controls_label
   - decidim.surveys.surveys.(count|response).*
   - decidim.tags.filter_results_for_taxonomy
+  - decidim.admin.menu.*
+  - decidim.components.blogs.settings.step.*
+  - decidim.components.(budgets|debates|meetings|proposals).settings.(global|step).*
+  - decidim.debates.models.debate.fields.taxonomies
+  - layouts.decidim.admin.taxonomy_filters_selector.*

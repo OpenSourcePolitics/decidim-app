@@ -205,7 +205,7 @@ fr:
       spam_detection:
         digest:
           frequency_label:
-            daily: aujourd’hui
+            daily: aujourd'hui
             weekly: cette semaine
           subject: Résumé anti-spam, %{count} spams détectés (%{frequency_label})
           summary: |-
@@ -297,24 +297,19 @@ fr:
         debate:
           fields:
             taxonomies: Taxonomies
-    proposals:
-      admin:
-        proposals:
-          index:
-            change_taxonomies: Changer les taxonomies
-  devise:
-    omniauth:
-      france_connect:
-        help_link: Qu’est-ce que FranceConnect ?
-        introduction: FranceConnect est la solution proposée par l’État pour sécuriser et simplifier la connexion à vos services en ligne.
-    shared:
-      links:
-        log_in_with_provider: Connectez-vous avec %{provider}
+    devise:
+      omniauth:
+        france_connect:
+          help_link: Qu'est-ce que FranceConnect ?
+          introduction: FranceConnect est la solution proposée par l'État pour sécuriser et simplifier la connexion à vos services en ligne.
+      shared:
+        links:
+          log_in_with_provider: Connectez-vous avec %{provider}
     events:
       proposals:
         author_confirmation_proposal_event:
           email_intro: 'Votre proposition « %{resource_title} » a été reçue avec succès et est maintenant publique. Merci pour votre participation ! Vous pouvez la consulter ici :'
-          email_outro: Vous recevez cette notification car vous êtes l’auteur de la proposition. Vous pouvez vous désabonner en visitant la page de la proposition (« %{resource_title} ») et en cliquant sur « Ne plus suivre ».
+          email_outro: Vous recevez cette notification car vous êtes l'auteur de la proposition. Vous pouvez vous désabonner en visitant la page de la proposition (« %{resource_title} ») et en cliquant sur « Ne plus suivre ».
           email_subject: Votre proposition a été publiée !
           notification_title: Votre proposition <a href="%{resource_path}">%{resource_title}</a> est maintenant en ligne.
     forms:
@@ -407,17 +402,17 @@ fr:
       static_pages:
         democratic_quality_indicators:
           content: |-
-            <h2>Système d’indicateurs pour mesurer la qualité démocratique dans Decidim.</h2>
+            <h2>Système d'indicateurs pour mesurer la qualité démocratique dans Decidim.</h2>
 
             <h3>Introduction</h3>
-            <p>La qualité démocratique est un principe fondamental de Decidim. Afin de la garantir, nous avons développé un système d’indicateurs permettant d’évaluer la qualité des processus participatifs sur la plateforme. Cet article explique comment ces indicateurs sont calculés.</p>
+            <p>La qualité démocratique est un principe fondamental de Decidim. Afin de la garantir, nous avons développé un système d'indicateurs permettant d'évaluer la qualité des processus participatifs sur la plateforme. Cet article explique comment ces indicateurs sont calculés.</p>
 
             <h3>Comment les indicateurs sont-ils calculés&nbsp;?</h3>
             <p>Nous avons défini deux méthodes de collecte des indicateurs de qualité&nbsp;:</p>
 
             <ol>
               <li><strong>Indicateurs automatiques&nbsp;:</strong> ils sont calculés directement à partir des données de la plateforme Decidim.</li>
-              <li><strong>Questions d’auto-évaluation&nbsp;:</strong> elles reposent sur un formulaire rempli par un administrateur.</li>
+              <li><strong>Questions d'auto-évaluation&nbsp;:</strong> elles reposent sur un formulaire rempli par un administrateur.</li>
             </ol>
 
             <p>Chaque indicateur est exprimé en pourcentage (n/total). Ce pourcentage est ensuite converti en un score sur une échelle de 1 à 5&nbsp;:</p>
@@ -432,13 +427,13 @@ fr:
 
             <br><br>
             <h3>Indicateurs automatiques</h3>
-            <p>Ces indicateurs sont calculés automatiquement à partir des données disponibles dans Decidim. Ils sont évalués par processus participatif et peuvent être rendus publics par les administrateurs, afin que l’ensemble des participants puisse y accéder.</p>
+            <p>Ces indicateurs sont calculés automatiquement à partir des données disponibles dans Decidim. Ils sont évalués par processus participatif et peuvent être rendus publics par les administrateurs, afin que l'ensemble des participants puisse y accéder.</p>
 
-            <p>Nous avons défini quatre indicateurs principaux&nbsp;: l’influence citoyenne, l’hybridation, la réactivité institutionnelle et la traçabilité&nbsp;:</p>
+            <p>Nous avons défini quatre indicateurs principaux&nbsp;: l'influence citoyenne, l'hybridation, la réactivité institutionnelle et la traçabilité&nbsp;:</p>
 
             <h3>Influence citoyenne</h3>
 
-            <p>Cet indicateur mesure le niveau d’influence des citoyens sur les propositions acceptées et sur les résultats du processus.</p>
+            <p>Cet indicateur mesure le niveau d'influence des citoyens sur les propositions acceptées et sur les résultats du processus.</p>
 
             <ul>
               <li>
@@ -471,7 +466,7 @@ fr:
 
             <h3>Réactivité institutionnelle</h3>
 
-            <p>Cet indicateur mesure le niveau de réactivité de l’organisation face aux contributions des participants. Il reflète son engagement à travers des réponses officielles et la mise en œuvre des décisions.</p>
+            <p>Cet indicateur mesure le niveau de réactivité de l'organisation face aux contributions des participants. Il reflète son engagement à travers des réponses officielles et la mise en œuvre des décisions.</p>
 
             <ul>
               <li>Pourcentage de propositions ayant reçu une réponse (n/total) – réactivité institutionnelle aux propositions</li>
@@ -480,10 +475,10 @@ fr:
 
             <h3>Traçabilité</h3>
 
-            <p>Cet indicateur mesure la transparence et la traçabilité du processus participatif. Il reflète la facilité avec laquelle les participants peuvent suivre l’évolution des propositions et vérifier les actions institutionnelles grâce aux informations publiées.</p>
+            <p>Cet indicateur mesure la transparence et la traçabilité du processus participatif. Il reflète la facilité avec laquelle les participants peuvent suivre l'évolution des propositions et vérifier les actions institutionnelles grâce aux informations publiées.</p>
 
             <ul>
-              <li>Nombre de propositions disposant d’un historique (n/total)</li>
+              <li>Nombre de propositions disposant d'un historique (n/total)</li>
               <li>Pourcentage de résultats liés à des propositions (n/total)</li>
               <li>Pourcentage de réunions clôturées avec un compte rendu publié (n/total)</li>
               <li>Activation du module open data (dichotomique&nbsp;: 0 ou 5)</li>
@@ -491,18 +486,18 @@ fr:
             </ul>
 
             <br><br>
-            <h3>Indicateurs d’auto-évaluation</h3>
+            <h3>Indicateurs d'auto-évaluation</h3>
 
-            <p>En complément des indicateurs automatiques, nous proposons l’utilisation d’un <strong>formulaire d’auto-évaluation</strong> afin d’évaluer les dimensions qualitatives de chaque processus participatif. Ce formulaire est complété par les administrateurs de la plateforme à la fin de chaque processus, et les réponses sont affichées publiquement dans le bloc de contenu des indicateurs.</p>
+            <p>En complément des indicateurs automatiques, nous proposons l'utilisation d'un <strong>formulaire d'auto-évaluation</strong> afin d'évaluer les dimensions qualitatives de chaque processus participatif. Ce formulaire est complété par les administrateurs de la plateforme à la fin de chaque processus, et les réponses sont affichées publiquement dans le bloc de contenu des indicateurs.</p>
 
-            <p>Ces questions visent à saisir des aspects de la qualité démocratique qui ne peuvent pas être évalués uniquement à partir de données quantitatives. Il est important de noter que les réponses à ce questionnaire sont biaisées par l’opinion des administrateurs de la plateforme.</p>
+            <p>Ces questions visent à saisir des aspects de la qualité démocratique qui ne peuvent pas être évalués uniquement à partir de données quantitatives. Il est important de noter que les réponses à ce questionnaire sont biaisées par l'opinion des administrateurs de la plateforme.</p>
 
             <br><br>
-            <h3>Questions d’auto-évaluation</h3>
+            <h3>Questions d'auto-évaluation</h3>
 
-            <p>Les questions composant le formulaire d’auto-évaluation rempli par les administrateurs, ainsi que les valeurs associées à chaque réponse, sont présentées ci-dessous.</p>
+            <p>Les questions composant le formulaire d'auto-évaluation rempli par les administrateurs, ainsi que les valeurs associées à chaque réponse, sont présentées ci-dessous.</p>
 
-            <h4>Qualité de l’information</h4>
+            <h4>Qualité de l'information</h4>
 
             <ol>
               <li>Les informations publiées apportent-elles de la clarté sur les mécanismes de prise de décision (par exemple&nbsp;: vote, consensus, négociations directes)&nbsp;?
@@ -513,7 +508,7 @@ fr:
                   <li>Clarté totale = 5</li>
                 </ul>
               </li>
-              <li>Des informations ont-elles été fournies concernant la capacité des participants à influencer le sujet débattu (dans la communication du processus et des invitations, ainsi qu’au début de chaque session de débat)&nbsp;?
+              <li>Des informations ont-elles été fournies concernant la capacité des participants à influencer le sujet débattu (dans la communication du processus et des invitations, ainsi qu'au début de chaque session de débat)&nbsp;?
                 <ul>
                   <li>Jamais = 0</li>
                   <li>Presque jamais = 1</li>
@@ -528,15 +523,15 @@ fr:
             <ol>
               <li>Évaluation du degré de participation dans le processus
                 <ul>
-                  <li>Les participants ont reçu des informations de la part de l’organisation. = 1</li>
-                  <li>Les participants ont été consultés ou ont fourni un retour à l’organisation. = 2</li>
+                  <li>Les participants ont reçu des informations de la part de l'organisation. = 1</li>
+                  <li>Les participants ont été consultés ou ont fourni un retour à l'organisation. = 2</li>
                   <li>Les participants ont été impliqués dans le partage du pouvoir décisionnel. = 3</li>
                   <li>Les participants ont été impliqués de manière décisive dans la prise de décision. = 4</li>
                   <li>Les participants ont été impliqués dans la prise de décision ainsi que dans la gestion des ressources ou la mise en œuvre. = 5</li>
                 </ul>
               </li>
               <li>Pourcentage de phases avec un pouvoir décisionnel citoyen.
-                <p>Sur l’ensemble des phases du processus (de la sélection des enjeux à la supervision de l’exécution), dans combien le public a-t-il la capacité de prendre des décisions ou d’agir de manière exécutive&nbsp;?</p>
+                <p>Sur l'ensemble des phases du processus (de la sélection des enjeux à la supervision de l'exécution), dans combien le public a-t-il la capacité de prendre des décisions ou d'agir de manière exécutive&nbsp;?</p>
                 <ul>
                   <li>0–20&nbsp;% = 1</li>
                   <li>20–40&nbsp;% = 2</li>

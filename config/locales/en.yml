@@ -48,6 +48,8 @@ en:
       menu:
         participatory_process_groups_submenu:
           landing_page: Landing page layout
+        participatory_processes_submenu:
+          landing_page: Landing page
       models:
         assembly:
           fields:
@@ -287,19 +289,14 @@ en:
         debate:
           fields:
             taxonomies: Taxonomies
-    proposals:
-      admin:
-        proposals:
-          index:
-            change_taxonomies: Change taxonomies
-  devise:
-    omniauth:
-      france_connect:
-        help_link: Learn more about France Connect
-        introduction: FranceConnect is the solution offered by the public state to secure and simplify connection to your online services..
-    shared:
-      links:
-        log_in_with_provider: Log in with %{provider}
+    devise:
+      omniauth:
+        france_connect:
+          help_link: Learn more about France Connect
+          introduction: FranceConnect is the solution offered by the public state to secure and simplify connection to your online services.
+      shared:
+        links:
+          log_in_with_provider: Log in with %{provider}
     events:
       proposals:
         author_confirmation_proposal_event:
@@ -365,6 +362,9 @@ en:
       you: you
     menu:
       help: Help
+    metadata:
+      progress:
+        remaining: remains %{time_distance}
     pages:
       home:
         extended:
