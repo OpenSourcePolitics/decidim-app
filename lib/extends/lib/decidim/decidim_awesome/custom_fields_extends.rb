@@ -7,7 +7,6 @@ module CustomFieldsExtends
     private
 
     def parse_xml(xml)
-      debugger
       @xml = xml
       @data = Nokogiri.HTML(@xml).xpath("//dl/dd")
       return if @data.present?
