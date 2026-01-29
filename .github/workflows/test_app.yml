@@ -123,20 +123,35 @@ jobs:
           restore-keys: |
             assets-${{ runner.os }}-
       - run: |
-          if [ ! -d "public/packs-test" ] || [ -z "$(ls -A public/packs-test)" ]; then
-            echo "⚠️  Assets not found in cache, recompiling..."
+          echo "Checking assets cache status..."
+          if [ -d "public/packs-test" ]; then
+            echo "public/packs-test exists"
+            ls -lah public/packs-test/ || echo "Empty directory"
+            file_count=$(find public/packs-test -type f | wc -l)
+            echo "Files in packs-test: $file_count"
+            if [ "$file_count" -lt 10 ]; then
+              echo "⚠️ Too few files in cache, forcing recompile"
+              rm -rf public/packs-test
+            fi
+          else
+            echo "⚠️ public/packs-test does not exist"
+          fi
+          
+          if [ ! -d "public/packs-test" ] || [ ! -f "public/packs-test/manifest.json" ]; then
+            echo "⚠️ Assets missing or incomplete, recompiling..."
             bundle install
-            npm install
-            bundle exec rails shakapacker:compile
+            npm ci
+            NODE_ENV=test RAILS_ENV=test bundle exec rails shakapacker:compile
+            echo "✓ Assets compiled"
           else
             echo "✓ Assets loaded from cache"
-            ls -lah public/packs-test/
           fi
+          
+          echo "Final check:"
+          ls -lah public/packs-test/
+          cat public/packs-test/manifest.json | head -20
         name: Verify and compile assets if needed
         shell: "bash"
-        env:
-          NODE_ENV: "test"
-          RAILS_ENV: "test"
       - run: |
           bundle install
           bundle exec rake parallel:create parallel:load_schema

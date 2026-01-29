@@ -61,7 +61,7 @@ jobs:
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
         shell: "bash"
-      - run: npm install
+      - run: npm ci
         name: Install JS dependencies
         shell: "bash"
         env:
@@ -72,3 +72,28 @@ jobs:
         env:
           NODE_ENV: "test"
           RAILS_ENV: "test"
+      - run: |
+          echo "Verifying compiled assets..."
+          ls -lah public/packs-test/
+          if [ ! -f "public/packs-test/manifest.json" ]; then
+            echo "ERROR: manifest.json not found!"
+            exit 1
+          fi
+          echo "Manifest content:"
+          cat public/packs-test/manifest.json | head -30
+          file_count=$(find public/packs-test -type f | wc -l)
+          echo "Total files in packs-test: $file_count"
+          if [ "$file_count" -lt 10 ]; then
+            echo "ERROR: Too few files compiled!"
+            exit 1
+          fi
+        name: Verify compiled assets
+        shell: "bash"
+      - uses: actions/cache@v4
+        with:
+          path: |
+            public/packs-test
+            tmp/shakapacker
+            node_modules
+          key: assets-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/Gemfile.lock') }}
+        name: Cache compiled assets
