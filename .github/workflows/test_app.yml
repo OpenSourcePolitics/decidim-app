@@ -38,7 +38,12 @@ on:
       chrome_version:
         description: 'Chrome & Chromedriver version'
         required: false
-        default: "136.0.7103.92"
+        default: "139.0.7258.66"
+        type: string
+      node_version:
+        description: 'Node version'
+        default: '22.16.0'
+        required: false
         type: string
 
 jobs:
@@ -50,6 +55,9 @@ jobs:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
+      DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE: "memory"
+      DECIDIM_SPAM_DETECTION_BACKEND_USER: "memory"
+      PARALLEL_TEST_PROCESSORS: 4
     services:
       validator:
         image: ghcr.io/validator/validator:latest
@@ -79,6 +87,15 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ inputs.ruby_version }}
+          bundler-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node_version }}
+          cache: 'npm'
+          cache-dependency-path: ./package-lock.json
+      - run: npm config set fetch-retries 5 && npm config set fetch-retry-mintimeout 20000 && npm config set fetch-retry-maxtimeout 120000
+        name: Tune NPM configuration
+        shell: "bash"
       - run: |
           sudo apt update
           sudo apt install libu2f-udev
@@ -99,7 +116,6 @@ jobs:
         id: assets-cache
         with:
           path: |
-            public/packs
             public/packs-test
             tmp/shakapacker
             node_modules
@@ -107,15 +123,29 @@ jobs:
           restore-keys: |
             assets-${{ runner.os }}-
       - run: |
-          bundle install
-          bundle exec rake parallel:create parallel:load_schema
-        name: Setup parallel test databases
+          if [ ! -d "public/packs-test" ] || [ -z "$(ls -A public/packs-test)" ]; then
+            echo "⚠️  Assets not found in cache, recompiling..."
+            bundle install
+            npm install
+            bundle exec rails shakapacker:compile
+          else
+            echo "✓ Assets loaded from cache"
+            ls -lah public/packs-test/
+          fi
+        name: Verify and compile assets if needed
         shell: "bash"
         env:
-          PARALLEL_TEST_PROCESSORS: 8
+          NODE_ENV: "test"
+          RAILS_ENV: "test"
+      - run: |
+          bundle install
+          bundle exec rake parallel:create parallel:load_schema
+        name: Parallel tests setup
+        shell: "bash"
+        env:
+          PARALLEL_TEST_PROCESSORS: 4
       - run: |
           sudo Xvfb -ac $DISPLAY -screen 0 1920x1084x24 > /dev/null 2>&1 &
-          sleep 3
           ${{ inputs.test_command }}
         name: RSpec
         env:
@@ -132,7 +162,8 @@ jobs:
           SIMPLECOV: "true"
           SHAKAPACKER_RUNTIME_COMPILE: "false"
           NODE_ENV: "test"
-          PARALLEL_TEST_PROCESSORS: 8
+          PARALLEL_TEST_PROCESSORS: 4
+          CAPYBARA_DISABLE_ANIMATION: "true"
       - uses: codecov/codecov-action@v4
         name: Upload coverage
         with:
@@ -142,7 +173,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: screenshots
+          name: screenshots-${{ github.run_id }}-${{ github.run_attempt }}
           path: ./spec/tmp/screenshots
           if-no-files-found: ignore
-          overwrite: true
+          retention-days: 3
