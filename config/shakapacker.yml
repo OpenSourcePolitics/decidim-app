@@ -39,7 +39,6 @@ development:
   <<: *default
   compile: true
   compiler_strategy: mtime
-  cache_manifest: true
   # Compile test packs to decidim decidim-packs folder
 
   # Reference: https://webpack.js.org/configuration/dev-server/
@@ -76,6 +75,7 @@ test:
   <<: *default
   compile: true
   public_output_path: packs-test
+  cache_manifest: true
 
 production:
   <<: *default
