@@ -54,15 +54,10 @@ RSpec.configure do |config|
 
     options.logging_prefs = { browser: "OFF", driver: "OFF" } if ENV["CI"]
 
-    capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-      "goog:loggingPrefs" => { browser: "OFF", driver: "OFF", performance: "OFF" }
-    )
-
     Capybara::Selenium::Driver.new(
       app,
       browser: :chrome,
       options: options,
-      capabilities: capabilities,
       timeout: 180
     )
   end
