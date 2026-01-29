@@ -131,7 +131,13 @@ jobs:
             echo "Assets cache hit"
             ls -lah public/packs-test/ | head -20
           fi
-        name: Restore or compile assets
+          
+          echo "✓ manifest.json exists"
+          cat public/packs-test/manifest.json | head -50
+          
+          js_count=$(find public/packs-test -name "*.js" | wc -l)
+          echo "JS files: $js_count"
+        name: Force compile assets (DEBUG)
         shell: "bash"
       - run: |
           bundle install
@@ -156,10 +162,21 @@ jobs:
           CI: "true"
           FAST_SEEDS: "true"
           SIMPLECOV: "true"
-          SHAKAPACKER_RUNTIME_COMPILE: "false"
+          SHAKAPACKER_RUNTIME_COMPILE: "true"
           NODE_ENV: "test"
           PARALLEL_TEST_PROCESSORS: 6
           CAPYBARA_DISABLE_ANIMATION: "true"
+      - run: |
+          echo "=== Searching for screenshots ==="
+          find . -type f \( -name "*.png" -o -name "*.html" \) -path "*/screenshot*" 2>/dev/null | head -20
+          find . -type f \( -name "*.png" -o -name "*.html" \) -path "*/tmp/*" 2>/dev/null | head -20
+          
+          echo "=== Checking directories ==="
+          ls -la tmp/ 2>/dev/null || echo "tmp/ not found"
+          ls -la spec/tmp/ 2>/dev/null || echo "spec/tmp/ not found"
+        name: Debug screenshots location
+        if: always()
+        shell: "bash"
       - uses: codecov/codecov-action@v4
         name: Upload coverage
         with:
@@ -169,7 +186,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: screenshots-${{ github.run_id }}-${{ github.run_attempt }}
-          path: ./spec/tmp/screenshots
-          if-no-files-found: ignore
+          name: screenshots-${{ github.run_attempt }}
+          path: |
+            tmp/screenshots
+            spec/tmp/screenshots
+          if-no-files-found: warn
           retention-days: 3
