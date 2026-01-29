@@ -85,5 +85,3 @@ RSpec.configure do |config|
     # Session already closed, nothing to do here
   end
 end
-
-Rails.application.config.assets.check_precompiled_asset = false if ENV["CI"]
