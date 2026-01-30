@@ -31,9 +31,6 @@ gem "wicked_pdf", "~> 2.8", ">= 2.8.2"
 gem "omniauth-oauth2"
 # gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publik.git", branch: "feat/update_to_0.29"
 
-# Load Budgets Booth to avoid errors
-# gem "decidim-budgets_booth", github: "OpenSourcePolitics/decidim-module-ptp", branch: "bump/0.29-budgets_booth"
-
 # External Decidim gems
 # gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git"
 # gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "rc-0.29"
