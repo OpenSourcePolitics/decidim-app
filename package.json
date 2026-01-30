@@ -26,6 +26,9 @@
     "uc.micro": "^2.1.0",
     "zustand": "^5.0.5"
   },
+  "overrides": {
+    "jquery": "3.7.1"
+  },
   "version": "0.1.0",
   "devDependencies": {
     "@decidim/dev": "^0.31.0",

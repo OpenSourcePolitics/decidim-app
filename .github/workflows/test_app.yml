@@ -40,11 +40,7 @@ on:
         required: false
         default: "139.0.7258.66"
         type: string
-      node_version:
-        description: 'Node version'
-        default: '22.16.0'
-        required: false
-        type: string
+
 
 jobs:
   build_app:
@@ -87,15 +83,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ inputs.ruby_version }}
-          bundler-cache: true
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ inputs.node_version }}
-          cache: 'npm'
-          cache-dependency-path: ./package-lock.json
-      - run: npm config set fetch-retries 5 && npm config set fetch-retry-mintimeout 20000 && npm config set fetch-retry-maxtimeout 120000
-        name: Tune NPM configuration
-        shell: "bash"
       - run: |
           sudo apt update
           sudo apt install libu2f-udev
@@ -112,49 +99,6 @@ jobs:
           path: ./
           key: app-${{ github.sha }}
           restore-keys: app-${{ github.sha }}
-      - uses: actions/cache@v4
-        id: assets-cache
-        with:
-          path: |
-            public/packs-test
-            tmp/shakapacker
-            node_modules
-          key: assets-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/Gemfile.lock') }}
-          restore-keys: |
-            assets-${{ runner.os }}-
-      - run: |
-          if [ ! -f "public/packs-test/manifest.json" ]; then
-            echo "Assets cache miss - compiling..."
-            bundle install
-            npm ci
-            NODE_ENV=test RAILS_ENV=test bundle exec rails shakapacker:compile
-          else
-            echo "Assets cache hit"
-            ls -lah public/packs-test/ | head -20
-          fi
-          
-          echo "=== Verifying manifest ==="
-          if [ ! -f "public/packs-test/manifest.json" ]; then
-            echo "ERROR: manifest.json not found!"
-            exit 1
-          fi
-          
-          echo "✓ manifest.json exists"
-          js_count=$(find public/packs-test -name "*.js" | wc -l)
-          echo "JS files: $js_count"
-          
-          echo "=== Verifying Rails can load Shakapacker ==="
-          bundle exec rails runner "
-            Shakapacker.manifest.refresh
-            core_js = Shakapacker.manifest.lookup('decidim_core.js')
-            puts \"decidim_core.js path: #{core_js}\"
-            raise 'Cannot find decidim_core.js in manifest' if core_js.nil?
-          " || exit 1
-        name: Restore or compile assets
-        shell: "bash"
-        env:
-          RAILS_ENV: "test"
-          NODE_ENV: "test"
       - run: |
           bundle install
           bundle exec rake parallel:create parallel:load_schema
