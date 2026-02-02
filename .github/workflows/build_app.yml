@@ -69,8 +69,17 @@ jobs:
       - name: Prepare cache directory
         run: |
           echo "Build completed at $(date)" > .build_complete
-          ls -la
-          ls -la node_modules/ | head -20
+          
+          echo "Listing root directory:"
+          ls -la || true
+          
+          if [ -d node_modules ]; then
+            echo "node_modules exists"
+            echo "First 20 entries in node_modules:"
+            ls node_modules | sed -n '1,20p'
+          else
+            echo "node_modules does not exist"
+          fi
         shell: bash
       - name: Save application cache
         id: cache-save
