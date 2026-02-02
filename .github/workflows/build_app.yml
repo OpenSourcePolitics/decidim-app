@@ -66,8 +66,8 @@ jobs:
         env:
           NODE_ENV: "test"
           RAILS_ENV: "test"
-      - uses: actions/cache/save@v4
-        id: app-cache
+      - name: Save cache
+        uses: actions/cache@v4
         with:
           path: ./
           key: app-${{ github.sha }}
