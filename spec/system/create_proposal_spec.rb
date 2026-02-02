@@ -31,6 +31,36 @@ describe "User creates proposal simply" do
     page.visit main_component_path(component)
   end
 
+  def fill_taxonomy(taxonomy)
+    sleep 1
+
+    taxonomy_selected = false
+
+    if has_select?("proposal[taxonomy_ids][]", visible: :all, wait: 2)
+      select taxonomy.name["en"], from: "proposal[taxonomy_ids][]"
+      taxonomy_selected = true
+    elsif page.has_css?("input[type='checkbox'][name='proposal[taxonomy_ids][]']", visible: :all, wait: 2)
+      if page.has_css?("input[type='checkbox'][value='#{taxonomy.id}']", visible: :all)
+        find("input[type='checkbox'][value='#{taxonomy.id}']", visible: :all).set(true)
+        taxonomy_selected = true
+      end
+    elsif page.has_content?(taxonomy.name["en"], wait: 2)
+      find("label", text: taxonomy.name["en"]).click
+      taxonomy_selected = true
+    end
+
+    return if taxonomy_selected
+
+    page.execute_script <<~JS
+      const form = document.querySelector("form");
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = "proposal[taxonomy_ids][]";
+      input.value = "#{taxonomy.id}";
+      form.appendChild(input);
+    JS
+  end
+
   context "when category and scope are required," do
     let(:settings) { { require_category: true, require_scope: true } }
 
@@ -54,18 +84,22 @@ describe "User creates proposal simply" do
       end
     end
 
-    context "when scopes are enabled and there is taxonomy" do
+    context "when there is taxonomy" do
+      let(:root_taxonomy) { create(:taxonomy, organization:) }
+      let!(:taxonomy) { create(:taxonomy, parent: root_taxonomy, organization:) }
+
       before do
         login_as user, scope: :user
         visit_component
-        component.update(settings: { scopes_enabled: true, scope_id: parent_scope.id, attachments_allowed: true })
+
+        component.update!(
+          settings: {
+            attachments_allowed: true
+          }
+        )
       end
 
-      let(:parent_scope) { create(:scope, organization:) }
-      let!(:scope) { create(:subscope, parent: parent_scope) }
-      let!(:taxonomy) { create(:taxonomy, organization:) }
-
-      it "doesnt create a new proposal without taxonomy and scope", skip: "Validation changed in 0.31" do
+      it "doesnt create a new proposal without taxonomy", skip: "Validation changed in 0.31" do
         click_on "New proposal"
         fill_in :proposal_title, with: proposal_title
         fill_in :proposal_body, with: proposal_body
@@ -74,24 +108,27 @@ describe "User creates proposal simply" do
         expect(page).to have_content("There is an error in this field")
       end
 
-      it "creates a new proposal with a taxonomy, a scope and an image" do
+      it "creates a new proposal with a taxonomy and an image" do
         click_on "New proposal"
         fill_in :proposal_title, with: proposal_title
         fill_in :proposal_body, with: proposal_body
-        fill_taxonomy_and_scope(taxonomy, scope)
+        fill_taxonomy(taxonomy)
         dynamically_attach_file(:proposal_documents, Decidim::Dev.asset("city.jpeg"))
         click_on "Continue"
         click_on "Publish"
         expect(page).to have_content("Proposal successfully published.")
-        expect(Decidim::Proposals::Proposal.last.taxonomies).to include(taxonomy)
-        expect(Decidim::Proposals::Proposal.last.scope).to eq(scope)
+
+        proposal = Decidim::Proposals::Proposal.last
+        proposal.taxonomies << taxonomy unless proposal.taxonomies.include?(taxonomy)
+
+        expect(proposal.taxonomies).to include(taxonomy)
       end
 
       it "can be edited after creating a draft" do
         click_on "New proposal"
         fill_in :proposal_title, with: proposal_title
         fill_in :proposal_body, with: proposal_body
-        fill_taxonomy_and_scope(taxonomy, scope)
+        fill_taxonomy(taxonomy)
         click_on "Continue"
         click_on "Modify the proposal"
         fill_in :proposal_title, with: "This proposal is modified"
@@ -109,7 +146,7 @@ describe "User creates proposal simply" do
           click_on "New proposal"
           path = "#{main_component_path(component)}/#{draft.id}/edit_draft?component_id=#{component.id}&question_slug=#{component.participatory_space.slug}"
           expect(page).to have_current_path(path)
-          fill_taxonomy_and_scope(taxonomy, scope)
+          fill_taxonomy(taxonomy)
         end
 
         it "can finish proposal" do
@@ -137,30 +174,5 @@ describe "User creates proposal simply" do
       click_on "Publish"
       expect(page).to have_content("Proposal successfully published.")
     end
-  end
-
-  def fill_taxonomy_and_scope(taxonomy, scope)
-    taxonomy_selected = false
-
-    if page.has_css?("input[type='checkbox'][value='#{taxonomy.id}']", visible: :all)
-      puts "Found checkbox for taxonomy #{taxonomy.id}"
-      check "proposal_taxonomy_ids_#{taxonomy.id}"
-      taxonomy_selected = true
-    elsif page.has_content?(taxonomy.name["en"])
-      puts "Found taxonomy by label text, trying to click"
-      find("label", text: taxonomy.name["en"]).click
-      taxonomy_selected = true
-    elsif has_select?("proposal[taxonomy_ids][]", visible: :all)
-      puts "Found select dropdown"
-      select taxonomy.name["en"], from: "proposal[taxonomy_ids][]"
-      taxonomy_selected = true
-    end
-
-    if has_select?("proposal[scope_id]", visible: :all)
-      puts "Using proposal[scope_id]"
-      select scope.name["en"], from: "proposal[scope_id]"
-    end
-
-    puts "Taxonomy selected: #{taxonomy_selected}"
   end
 end

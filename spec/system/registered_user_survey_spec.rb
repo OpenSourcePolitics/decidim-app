@@ -66,11 +66,13 @@ describe "Respond a survey" do
       expect(page).to have_i18n_content(questionnaire.title)
       expect(page).to have_i18n_content(questionnaire.description)
 
-      fill_in question.body["en"], with: "My first response"
+      fill_in "questionnaire_responses_0", with: "My first response"
 
       check "questionnaire_tos_agreement"
 
-      accept_confirm { click_on "Submit" }
+      within("form.response-questionnaire") do
+        accept_confirm { click_button(type: "submit") }
+      end
 
       within ".success.flash" do
         expect(page).to have_content("successfully")

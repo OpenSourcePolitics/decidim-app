@@ -82,7 +82,9 @@ shared_examples "editable survey responses" do
     end
 
     check "questionnaire_tos_agreement"
-    click_on "Submit"
+    within("form.response-questionnaire") do
+      click_button(type: "submit")
+    end
   end
 
   it "restricts the change of an response when editing is disabled" do
@@ -109,6 +111,19 @@ shared_examples "editable survey responses" do
     expect(page).to have_content("Edit your responses")
     click_on "Edit your responses"
 
+    verify_initial_responses
+    update_all_responses
+    submit_updated_responses
+
+    expect(page).to have_content("Edit your responses")
+    click_on "Edit your responses"
+
+    verify_updated_responses
+  end
+
+  private
+
+  def verify_initial_responses
     expect(page).to have_field("questionnaire_responses_0", with: "My first response")
     expect(page).to have_field("questionnaire_responses_1", with: "My long response")
 
@@ -119,36 +134,53 @@ shared_examples "editable survey responses" do
     expect(page).to have_checked_field(:questionnaire_responses_5_matrix_row_1_choice_0_body)
     expect(page).to have_checked_field(:questionnaire_responses_5_matrix_row_2_choice_0_body)
     expect(page).to have_content("city.jpeg")
+  end
 
-    fill_in "questionnaire_responses_0", with: "My first response has changed"
-    fill_in "questionnaire_responses_1", with: "My long response has changed"
+  def update_all_responses
+    update_text_responses
+    update_choice_responses
+    update_matrix_responses
+    dynamically_attach_file("questionnaire_responses_6_add_documents", Decidim::Dev.asset("city2.jpeg"), remove_before: true)
+    page.execute_script "window.scrollBy(0,1800)"
+    drag_and_drop(first: response_options.second, second: response_options.last, last: response_options.first)
+  end
 
+  def update_text_responses
+    find_field("questionnaire_responses_0").tap do |f|
+      f.native.clear
+      f.set("My first response has changed")
+    end
+    find_field("questionnaire_responses_1").tap do |f|
+      f.native.clear
+      f.set("My long response has changed")
+    end
+  end
+
+  def update_choice_responses
     choose :questionnaire_responses_2_choices_2_body
     check :questionnaire_responses_3_choices_2_body
     choose :questionnaire_responses_4_matrix_row_0_choice_2_body
+  end
 
+  def update_matrix_responses
     uncheck :questionnaire_responses_5_matrix_row_0_choice_0_body
     uncheck :questionnaire_responses_5_matrix_row_1_choice_0_body
     uncheck :questionnaire_responses_5_matrix_row_2_choice_0_body
     check :questionnaire_responses_5_matrix_row_0_choice_2_body
     check :questionnaire_responses_5_matrix_row_1_choice_2_body
     check :questionnaire_responses_5_matrix_row_2_choice_2_body
+  end
 
-    dynamically_attach_file("questionnaire_responses_6_add_documents", Decidim::Dev.asset("city2.jpeg"), remove_before: true)
-
-    page.execute_script "window.scrollBy(0,1800)"
-
-    drag_and_drop(first: response_options.second, second: response_options.last, last: response_options.first)
-
+  def submit_updated_responses
     check "questionnaire_tos_agreement"
-    click_on "Submit"
+    within("form.response-questionnaire") do
+      click_button(type: "submit")
+    end
+  end
 
-    expect(page).to have_content("Edit your responses")
-    click_on "Edit your responses"
-
+  def verify_updated_responses
     expect(page).to have_field("questionnaire_responses_0", with: "My first response has changed")
     expect(page).to have_field("questionnaire_responses_1", with: "My long response has changed")
-
     expect(page).to have_checked_field(:questionnaire_responses_2_choices_2_body)
     expect(page).to have_checked_field(:questionnaire_responses_3_choices_2_body)
     expect(page).to have_checked_field(:questionnaire_responses_4_matrix_row_0_choice_2_body)
@@ -159,7 +191,6 @@ shared_examples "editable survey responses" do
     expect(page).to have_checked_field(:questionnaire_responses_5_matrix_row_1_choice_2_body)
     expect(page).to have_checked_field(:questionnaire_responses_5_matrix_row_2_choice_2_body)
     expect(page).to have_content("city2.jpeg")
-
     page.execute_script "window.scrollBy(0,1800)"
     within ".js-sortable-check-box-collection" do
       # Skip drag and drop order verification in Decidim 0.31

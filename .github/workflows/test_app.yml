@@ -135,7 +135,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: screenshots-${{ github.run_number }}-${{ github.run_attempt }}-${{ strategy.job-index }}
+          name: screenshots-${{ github.run_number }}-${{ github.run_attempt }}-${{ github.job }}
           path: |
             tmp/screenshots
             spec/tmp/screenshots

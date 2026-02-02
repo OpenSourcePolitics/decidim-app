@@ -96,8 +96,6 @@ describe "Explore projects", :slow do
         let!(:findable_project) { create(:project, budget:, title: { en: "Findable project" }) }
         let!(:another_findable_project) { create(:project, budget:, title: { en: "Findable project number 2" }) }
 
-        # We are providing a list of coordinates to make sure the points are scattered all over the map
-        # otherwise, there is a chance that markers can be clustered, which may result in a flaky spec.
         before do
           coordinates = [
             [-95.501705376541395, 95.10059236654689],
@@ -250,14 +248,44 @@ describe "Explore projects", :slow do
     end
 
     context "when directly accessing from URL with an invalid budget id" do
-      it_behaves_like "a 404 page" do
-        let(:target_path) { decidim_budgets.budget_projects_path(99_999_999) }
+      describe "visiting the page", driver: :rack_test do
+        before do
+          allow(Rails.application).to \
+            receive(:env_config).with(no_args).and_wrap_original do |m, *|
+            m.call.merge(
+              "action_dispatch.show_exceptions" => true,
+              "action_dispatch.show_detailed_exceptions" => false
+            )
+          end
+
+          visit decidim_budgets.budget_projects_path(99_999_999)
+        end
+
+        it "leads to a 404" do
+          expect(page).to have_content("The page you are looking for cannot be found")
+          expect(page).to have_current_path(decidim_budgets.budget_projects_path(99_999_999))
+        end
       end
     end
 
     context "when directly accessing from URL with an invalid project id" do
-      it_behaves_like "a 404 page" do
-        let(:target_path) { decidim_budgets.budget_project_path(budget, 99_999_999) }
+      describe "visiting the page", driver: :rack_test do
+        before do
+          allow(Rails.application).to \
+            receive(:env_config).with(no_args).and_wrap_original do |m, *|
+            m.call.merge(
+              "action_dispatch.show_exceptions" => true,
+              "action_dispatch.show_detailed_exceptions" => false
+            )
+          end
+
+          visit decidim_budgets.budget_project_path(budget, 99_999_999)
+        end
+
+        it "leads to a 404" do
+          expect(page).to have_content("The page you are looking for cannot be found")
+          expect(page).to have_current_path(decidim_budgets.budget_project_path(budget, 99_999_999))
+        end
       end
     end
   end
