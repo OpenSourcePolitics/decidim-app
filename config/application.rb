@@ -23,8 +23,8 @@ module DecidimApp
       require "extends/commands/decidim/create_omniauth_registration_extends"
       require "extends/commands/decidim/forms/admin/update_questionnaire_extends"
       # forms
-      require "extends/forms/decidim/assemblies/admin/assembly_copy_form_extends"
-      require "extends/forms/decidim/participatory_processes/admin/participatory_process_copy_form_extends"
+      require "extends/forms/decidim/assemblies/admin/assembly_duplicate_form_extends"
+      require "extends/forms/decidim/participatory_processes/admin/participatory_process_duplicate_form_extends"
       require "extends/forms/decidim/comments/comment_form_extends"
       require "extends/forms/decidim/system/base_organization_form_extends"
       require "extends/forms/decidim/omniauth_registration_form_extends"
