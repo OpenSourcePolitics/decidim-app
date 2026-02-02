@@ -66,8 +66,19 @@ jobs:
         env:
           NODE_ENV: "test"
           RAILS_ENV: "test"
-      - name: Save cache
-        uses: actions/cache@v4
+      - name: Prepare cache directory
+        run: |
+          echo "Build completed at $(date)" > .build_complete
+          ls -la
+          ls -la node_modules/ | head -20
+        shell: bash
+      - name: Save application cache
+        id: cache-save
+        uses: actions/cache/save@v4
         with:
           path: ./
           key: app-${{ github.sha }}
+      - name: Verify cache was saved
+        run: |
+          echo "Cache saved with key: app-${{ github.sha }}"
+          echo "Cache hit: ${{ steps.cache-save.outputs.cache-hit }}"
