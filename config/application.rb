@@ -18,8 +18,8 @@ module DecidimApp
       require "extends/commands/decidim/proposals/create_proposal_extends"
       require "extends/commands/decidim/proposals/publish_proposal_extends"
       require "extends/commands/decidim/admin/create_attachment_extends"
-      require "extends/commands/decidim/assemblies/admin/copy_assembly_extends"
-      require "extends/commands/decidim/participatory_processes/admin/copy_participatory_process_extends"
+      require "extends/commands/decidim/assemblies/admin/duplicate_assembly_extends"
+      require "extends/commands/decidim/participatory_processes/admin/duplicate_participatory_process_extends"
       require "extends/commands/decidim/create_omniauth_registration_extends"
       require "extends/commands/decidim/forms/admin/update_questionnaire_extends"
       # forms
