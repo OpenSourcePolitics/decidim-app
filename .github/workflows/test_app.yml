@@ -93,12 +93,12 @@ jobs:
         with:
           chromedriver-version: ${{inputs.chrome_version}}
         name: Install Chrome version ${{inputs.chrome_version}}
-      - uses: actions/cache@v4
+      - uses: actions/cache/restore@v4
         id: app-cache
         with:
           path: ./
           key: app-${{ github.sha }}
-          restore-keys: app-${{ github.sha }}
+          fail-on-cache-miss: true
       - run: |
           bundle install
           bundle exec rake parallel:create parallel:load_schema
