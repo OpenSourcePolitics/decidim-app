@@ -49,26 +49,25 @@ jobs:
       - run: npm config set fetch-retries 5 && npm config set fetch-retry-mintimeout 20000 && npm config set fetch-retry-maxtimeout 120000
         name: Tune NPM configuration
         shell: "bash"
-      - uses: actions/cache@v4
-        id: app-cache
-        with:
-          path: ./
-          key: app-${{ github.sha }}
-          restore-keys: app-${{ github.sha }}
+      - run: npm install
+        name: Install JS dependencies
+        shell: "bash"
+        env:
+          NODE_ENV: test
       - run: bundle exec rake test:setup
         name: Create test app
         shell: "bash"
       - run: mkdir -p ./spec/tmp/screenshots
         name: Create the screenshots folder
         shell: "bash"
-      - run: npm install
-        name: Install JS dependencies
-        shell: "bash"
-        env:
-          NODE_ENV: test
       - run: bundle exec rails shakapacker:compile
         name: Precompile assets
         shell: "bash"
         env:
           NODE_ENV: "test"
           RAILS_ENV: "test"
+      - uses: actions/cache/save@v4
+        id: app-cache
+        with:
+          path: ./
+          key: app-${{ github.sha }}
