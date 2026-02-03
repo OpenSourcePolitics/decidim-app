@@ -54,6 +54,13 @@ GIT
       decidim-core (~> 0.29.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-dataspace.git
+  revision: 1dc01385246e69ba487261a175aa652b255e3ec0
+  specs:
+    decidim-dataspace (1.0.0)
+      decidim-core (~> 0.29.3)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-emitter.git
   revision: d25e43f2b5267213d435611f1a34df275e0b56d0
   branch: bump/0.29
@@ -1134,6 +1141,7 @@ DEPENDENCIES
   decidim-cache_cleaner!
   decidim-cleaner!
   decidim-conferences!
+  decidim-dataspace!
   decidim-decidim_awesome!
   decidim-dev!
   decidim-emitter!

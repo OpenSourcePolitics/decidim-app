@@ -4,11 +4,12 @@ require "active_support/concern"
 
 module Decidim
   module Proposals
-    module ProposalsControllerExtends
+    module ProposalsControllerAppExtends
       extend ActiveSupport::Concern
 
       included do
         def index
+          debugger
           if component_settings.participatory_texts_enabled?
             @proposals = Decidim::Proposals::Proposal
                          .where(component: current_component)
@@ -58,4 +59,4 @@ module Decidim
   end
 end
 
-Decidim::Proposals::ProposalsController.include(Decidim::Proposals::ProposalsControllerExtends)
+Decidim::Proposals::ProposalsController.include(Decidim::Proposals::ProposalsControllerAppExtends)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_10_31_143932) do
+ActiveRecord::Schema[7.0].define(version: 2026_02_03_090707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
   enable_extension "pg_trgm"
@@ -552,6 +552,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_31_143932) do
     t.datetime "deleted_at", precision: nil
     t.integer "up_votes_count", default: 0, null: false
     t.integer "down_votes_count", default: 0, null: false
+    t.string "reference"
     t.index ["created_at"], name: "index_decidim_comments_comments_on_created_at"
     t.index ["decidim_author_id", "decidim_author_type"], name: "index_decidim_comments_comments_on_decidim_author"
     t.index ["decidim_author_id"], name: "decidim_comments_comment_author"
@@ -1549,6 +1550,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_31_143932) do
     t.jsonb "extra_user_fields", default: {"enabled"=>false}
     t.jsonb "content_security_policy", default: {}
     t.jsonb "name", default: {}, null: false
+    t.boolean "enable_dataspace", default: false, null: false
     t.index ["host"], name: "index_decidim_organizations_on_host", unique: true
   end
 
