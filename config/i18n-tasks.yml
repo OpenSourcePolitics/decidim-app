@@ -163,3 +163,5 @@ ignore_unused:
   - decidim.components.(budgets|debates|meetings|proposals).settings.(global|step).*
   - decidim.debates.models.debate.fields.taxonomies
   - layouts.decidim.admin.taxonomy_filters_selector.*
+  - decidim.download_your_data.show.*
+  - decidim.open_data.(help|index).*

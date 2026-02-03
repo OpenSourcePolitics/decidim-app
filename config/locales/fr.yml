@@ -305,6 +305,13 @@ fr:
       shared:
         links:
           log_in_with_provider: Connectez-vous avec %{provider}
+    download_your_data:
+      show:
+        explanation:
+          body_1: Ces fichiers sont des jeux de données exportés depuis votre activité sur cette plateforme, tels que des propositions ou des commentaires. Ils fournissent des données brutes et structurées qui peuvent être utilisées pour l'analyse, la recherche ou l'intégration avec d'autres outils.
+          body_2: Ces fichiers sont au format CSV (valeurs séparées par des virgules), un format de fichier largement utilisé qui peut être ouvert et traité par diverses applications logicielles, notamment des tableurs, des éditeurs de texte et des outils d'analyse de données.
+          title: Que sont ces fichiers ?
+        files_to_download: Fichiers à télécharger
     events:
       proposals:
         author_confirmation_proposal_event:
@@ -373,6 +380,128 @@ fr:
     metadata:
       progress:
         remaining: reste %{time_distance}
+    open_data:
+      help:
+        comment_votes:
+          comment: L'identifiant du commentaire qui a été voté
+          created_at: La date de création de ce vote
+          id: L'identifiant du vote
+          updated_at: La date de la dernière mise à jour de ce vote
+          weight: Le poids du vote (1 pour un vote positif, -1 pour un vote négatif)
+        comments:
+          alignment: Si ce commentaire était favorable, défavorable ou neutre
+          author: Le nom du participant qui a rédigé ce commentaire
+          body: Le commentaire lui-même
+          commentable_id: L'identifiant unique de l'élément commentable
+          commentable_type: Le type de l'élément commentable (s'il s'agit d'un résultat, d'une proposition, etc.)
+          created_at: La date de création de ce commentaire
+          depth: La position de ce commentaire dans l'arborescence des commentaires (s'il s'agit d'une réponse ou d'une réponse à une réponse)
+          id: L'identifiant de ce commentaire
+          locale: La langue du participant lors de la rédaction de ce commentaire
+          root_commentable_url: L'URL de la ressource associée à ce commentaire
+        follows:
+          created_at: La date et l'heure de création du suivi
+          followable: La ressource ou l'espace qui est suivi
+          id: L'identifiant unique de ce suivi
+          updated_at: La date et l'heure de la dernière mise à jour du suivi
+        messaging_conversations:
+          created_at: La date de création de cette conversation
+          id: L'identifiant unique de cette conversation
+          messages: Les messages de cette conversation
+          updated_at: La date de la dernière mise à jour de cette conversation
+        proposals:
+          address: L'adresse de la proposition dans le cas où elle a un emplacement physique
+          answer: La réponse à la proposition dans le cas où elle a reçu une réponse
+          answered_at: La date à laquelle cette proposition a reçu une réponse
+          attachments: Le nombre de pièces jointes de cette proposition
+          author: Les données de l'auteur de cette proposition
+          body: Le corps de la proposition
+          coauthorships_count: Le nombre de coauteurs que la proposition représente
+          comments: Le nombre de commentaires de cette proposition
+          component: Le composant auquel appartient la proposition
+          cost: Le coût total de la proposition en question
+          cost_report: Un rapport sur les coûts de la proposition
+          created_at: La date de création de la proposition
+          created_in_meeting: Si la proposition a été créée dans une rencontre
+          execution_period: La période à laquelle la proposition s'est déroulée du début à la fin
+          follows_count: Le nombre de personnes qui suivent cette proposition
+          id: L'identifiant unique de la proposition
+          is_amend: Si cette proposition est un amendement à une autre proposition
+          latitude: La latitude de la proposition dans le cas où elle a un emplacement physique
+          likes: Le nombre de mentions « j'aime » de cette proposition
+          longitude: La longitude de la proposition dans le cas où elle a un emplacement physique
+          meeting_urls: Les URL des rencontres où cette proposition a été présentée ou discutée
+          original_proposal: La référence de la proposition originale s'il s'agit d'un amendement
+          participatory_space: L'espace (par exemple, Processus participatif ou Assemblée) auquel appartient cette proposition
+          published_at: La date de publication de cette proposition
+          reference: L'identifiant unique de la ressource sur cette plateforme
+          related_proposals: Les propositions liées à cette proposition
+          state: Le statut de cette proposition (par exemple « Acceptée »)
+          state_published_at: Un horodatage de l'état de la proposition lorsqu'elle est publiée
+          taxonomies: Les taxonomies auxquelles appartient cette proposition
+          title: Le titre de la proposition
+          updated_at: La date de la dernière mise à jour de la proposition
+          url: L'URL où cette proposition peut être consultée
+          votes: Le nombre de votes de cette proposition
+          withdrawn: Si cette proposition a été retirée
+          withdrawn_at: La date à laquelle cette proposition a été retirée
+        taxonomies:
+          children_count: Le nombre d'éléments enfants de cette taxonomie
+          created_at: La date de création de cette taxonomie
+          filter_items_count: Le nombre d'éléments de filtres qui utilisent cette taxonomie
+          filters_count: Le nombre de filtres qui utilisent cette taxonomie
+          id: L'identifiant unique de cette taxonomie
+          is_root: Vrai si cette taxonomie n'a pas de parent
+          name: Le nom de cette taxonomie
+          parent_id: L'identifiant unique du parent de cette taxonomie (le cas échéant)
+          part_of: Utilisé pour détecter si cette taxonomie fait partie d'une autre taxonomie
+          taxonomizations_count: Le nombre de ressources qui utilisent cette taxonomie
+          updated_at: La date de la dernière mise à jour de cette taxonomie
+          weight: L'ordre dans lequel cette taxonomie est affichée
+        users:
+          about: La description du profil de ce participant
+          accepted_tos_version: La date à laquelle les conditions d'utilisation de cette plateforme ont été acceptées par l'utilisateur
+          admin: Si cet utilisateur est un administrateur
+          confirmation_sent_at: La date et l'heure d'envoi de la confirmation
+          confirmed_at: La date et l'heure de confirmation de cet utilisateur
+          created_at: La date et l'heure de création de cet utilisateur
+          current_sign_in_at: La date et l'heure de la connexion actuelle
+          current_sign_in_ip: L'adresse IP de la connexion actuelle
+          delete_reason: La raison donnée pour la suppression de cet utilisateur
+          deleted_at: La date et l'heure où cet utilisateur a été supprimé
+          email: L'adresse e-mail de cet utilisateur
+          followers_count: Le nombre de participants qui suivent cet utilisateur
+          following_count: Le nombre de participants que cet utilisateur suit
+          id: L'identifiant unique de l'utilisateur
+          invitation_accepted_at: La date et l'heure d'acceptation de l'invitation
+          invitation_created_at: La date et l'heure à laquelle cet utilisateur a été invité
+          invitation_sent_at: La date et l'heure d'envoi de l'invitation
+          invitations_count: Le nombre d'invitations envoyées à cet utilisateur
+          invited_by: L'utilisateur qui a invité cet utilisateur
+          last_sign_in_at: La date et l'heure de la connexion précédente
+          last_sign_in_ip: L'adresse IP de la connexion précédente
+          locale: La langue que cet utilisateur a sélectionnée
+          managed: Si cet utilisateur est géré par un autre utilisateur
+          name: Le nom de cet utilisateur
+          newsletter_notifications_at: La date et l'heure à laquelle cet utilisateur s'est abonné pour recevoir une newsletter
+          nickname: Le pseudonyme de l'utilisateur
+          notification_settings: Les paramètres de notification que cet utilisateur a sélectionnés
+          notifications_sending_frequency: La fréquence des notifications que cet utilisateur reçoit
+          officialized_as: Le nom de la fonction officielle (conseiller municipal, maire, etc.)
+          officialized_at: La date et l'heure de l'officialisation de cet utilisateur
+          organization: L'organisation à laquelle appartient cet utilisateur
+          password_updated_at: La date à laquelle leur mot de passe a été modifié pour la dernière fois
+          personal_url: L'URL personnelle de cet utilisateur
+          remember_created_at: La date et l'heure à laquelle l'utilisateur a été sélectionné pour être mémorisé
+          reset_password_sent_at: La date et l'heure d'envoi de la réinitialisation du mot de passe
+          roles: Le rôle de cet utilisateur s'il en a un
+          sign_in_count: Le nombre de fois que cet utilisateur s'est connecté
+          type: Le type que cet utilisateur a
+          unconfirmed_email: L'adresse e-mail que cet utilisateur n'a pas encore confirmée
+          updated_at: La date et l'heure de la dernière mise à jour de cet utilisateur
+      index:
+        detailed:
+          body_1: 'Vous trouverez ci-dessous une description de chaque jeu de données, incluant son schéma (structure) et le type d''informations qu''il contient :'
     pages:
       home:
         extended:
