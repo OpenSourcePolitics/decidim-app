@@ -113,7 +113,9 @@ describe "Account" do
     describe "when updating the user's nickname" do
       it "changes the user's nickname - 'nickname'" do
         within "form.edit_user" do
-          fill_in "Nickname", with: "nickname"
+          field = find_field("Nickname")
+          field.native.clear
+          field.set("nickname")
           find("*[type=submit]").click
         end
 
@@ -123,7 +125,9 @@ describe "Account" do
 
       it "respects the maxlength attribute with a really long word - 'nicknamenicknamenickname'" do
         within "form.edit_user" do
-          fill_in "Nickname", with: "nicknamenicknamenickname"
+          field = find_field("Nickname")
+          field.native.clear
+          field.set("nicknamenicknamenickname")
           find("*[type=submit]").click
         end
 
@@ -133,7 +137,9 @@ describe "Account" do
 
       it "shows error when word has a capital letter - 'nickName'" do
         within "form.edit_user" do
-          fill_in "Nickname", with: "nickName"
+          field = find_field("Nickname")
+          field.native.clear
+          field.set("nickName")
           find("*[type=submit]").click
         end
 
@@ -144,7 +150,9 @@ describe "Account" do
 
       it "shows error when word starts with a capital letter - 'Nickname'" do
         within "form.edit_user" do
-          fill_in "Nickname", with: "Nickname"
+          field = find_field("Nickname")
+          field.native.clear
+          field.set("Nickname")
           find("*[type=submit]").click
         end
 
@@ -154,7 +162,9 @@ describe "Account" do
 
       it "shows error when string has a space - 'nick name'" do
         within "form.edit_user" do
-          fill_in "Nickname", with: "nick name"
+          field = find_field("Nickname")
+          field.native.clear
+          field.set("nick name")
           find("*[type=submit]").click
         end
 
