@@ -15,6 +15,10 @@ on:
         description: 'The testing command to be ran'
         required: true
         type: string
+      test_id:
+        description: 'Unique test identifier'
+        required: true
+        type: string
       bullet_enabled:
         description: 'Enable bullet performance testing'
         required: false
@@ -135,7 +139,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: screenshots-${{ github.run_number }}-${{ github.run_attempt }}-${{ github.job }}
+          name: screenshots-${{ inputs.test_id }}-${{ github.run_number }}
           path: |
             tmp/screenshots
             spec/tmp/screenshots
