@@ -55,7 +55,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-dataspace.git
-  revision: 3bbf162ab8704d9c1a857424deb1e4b87466ef13
+  revision: eaab294a0f9dfd632f2a7c1b0a3a85b584332382
   specs:
     decidim-dataspace (1.0.0)
       decidim-core (~> 0.29.3)
