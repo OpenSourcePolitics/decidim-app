@@ -27,7 +27,6 @@ module Decidim
         context "when participatory texts are disabled" do
           let(:component) { create(:proposal_component, :with_geocoding_enabled) }
 
-
           it "sorts proposals by search defaults" do
             create_list(:proposal, 10, component:)
             get :index
