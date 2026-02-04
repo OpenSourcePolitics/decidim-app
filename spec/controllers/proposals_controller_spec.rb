@@ -27,11 +27,13 @@ module Decidim
         context "when participatory texts are disabled" do
           let(:component) { create(:proposal_component, :with_geocoding_enabled) }
 
+
           it "sorts proposals by search defaults" do
+            create_list(:proposal, 10, component:)
             get :index
             expect(response).to have_http_status(:ok)
             expect(subject).to render_template(:index)
-            expect(assigns(:proposals).order_values).to eq(["position(decidim_proposals_proposals.id::text in '')"])
+            expect(assigns(:proposals).order_values).to eq(["position(decidim_proposals_proposals.id::text in '#{assigns(:proposals).ids.join(",")}')"])
           end
 
           it "sets two different collections" do
