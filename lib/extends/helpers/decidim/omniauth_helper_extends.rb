@@ -24,9 +24,7 @@ module OmniauthHelperExtends
   def normalize_provider_name(provider)
     return "x" if provider == :twitter
     # customize the name of the omniauth btn login with publik
-    if custom_publik_translation?(provider)
-      return I18n.t("decidim.devise.shared.links.log_in_with_provider")
-    end
+    return I18n.t("decidim.devise.shared.links.log_in_with_provider") if custom_publik_translation?(provider)
 
     provider.to_s.split("_").first
   end
