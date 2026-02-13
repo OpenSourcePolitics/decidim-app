@@ -14,6 +14,9 @@ module Decidim
         }.freeze
 
         def perform(frequency)
+          # Stop if Decidim-AI is disabled
+          return unless Rails.application.secrets.dig(:decidim, :ai, :enabled)
+
           # Skip validation if frequency is nil (called by Decidim core specs)
           return if frequency.nil? && Rails.env.test?
           raise ArgumentError, "Invalid frequency: #{frequency}" unless frequency && FREQUENCIES.has_key?(frequency.to_sym)
