@@ -15,7 +15,7 @@ module Decidim
 
         def perform(frequency)
           # Stop if Decidim-AI is disabled
-          return unless Rails.application.secrets.dig(:decidim, :ai, :enabled)
+          return unless decidim_ai_enabled?
 
           # Skip validation if frequency is nil (called by Decidim core specs)
           return if frequency.nil? && Rails.env.test?
@@ -39,6 +39,10 @@ module Decidim
         end
 
         private
+
+        def decidim_ai_enabled?
+          Rails.application.secrets.dig(:decidim, :ai, :enabled) == true
+        end
 
         # Counts the spam reports for the given organization and frequency (daily/weekly)
         def count_spam(organization, frequency)
