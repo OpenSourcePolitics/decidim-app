@@ -12,6 +12,7 @@ namespace :migrate do
 
       migration_fixer = MigrationsFixer.new(logger)
       rails_migrations = RailsMigrations.new(migration_fixer)
+      schema_migrations = ActiveRecord::SchemaMigration.new(ActiveRecord::Base.connection_pool)
 
       logger.warn("#{rails_migrations.fetch_all.count} migrations are present.")
       logger.warn("#{rails_migrations.down.count} migrations seems to be missing...")
@@ -28,9 +29,9 @@ namespace :migrate do
       versions_migration_forced = []
 
       rails_migrations.versions_down_but_already_passed&.each do |version|
-        next if ActiveRecord::SchemaMigration.find_by(version:).present?
+        next if schema_migrations.versions.include?(version)
 
-        ActiveRecord::SchemaMigration.create!(version:)
+        schema_migrations.create_version(version)
         versions_migration_success << version
         logger.warn("Migration '#{version}' up")
       end
@@ -47,8 +48,8 @@ namespace :migrate do
         else
           logger.warn("Migration '#{version}' failed, validating directly in database schema migrations...")
           logger.warn(migration_process)
-          if ActiveRecord::SchemaMigration.find_by(version:).blank?
-            ActiveRecord::SchemaMigration.create!(version:)
+          unless schema_migrations.versions.include?(version)
+            schema_migrations.create_version(version)
             versions_migration_forced << version
             logger.warn("Migration '#{version}' successfully marked as up")
           end
