@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# Disable Redis backend for Decidim AI in test
+ENV['DECIDIM_SPAM_DETECTION_BACKEND_USER'] ||= 'memory'
+ENV['DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE'] ||= 'memory'
+
 require "active_support/core_ext/integer/time"
 
 # The test environment is used exclusively to run your application's

@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-Rails.logger.warn " DEBUG AI INIT "
-Rails.logger.warn "ENV DECIDIM_AI_ENABLED: #{ENV['DECIDIM_AI_ENABLED'].inspect}"
-Rails.logger.warn "Secrets decidim.ai.enabled: #{Rails.application.secrets.dig(:decidim, :ai, :enabled).inspect}"
-Rails.logger.warn "Rails.env: #{Rails.env}"
-Rails.logger.warn "======================="
-
 # This file is a Decidim initializer for the AI module.
 # It configures the Third Party AI provider.
 if Decidim.module_installed?(:ai) && Rails.application.secrets.dig(:decidim, :ai, :enabled)
