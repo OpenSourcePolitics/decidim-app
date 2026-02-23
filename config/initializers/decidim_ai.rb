@@ -2,7 +2,7 @@
 
 # This file is a Decidim initializer for the AI module.
 # It configures the Third Party AI provider.
-if Decidim.module_installed?(:ai) && Rails.application.secrets.dig(:decidim, :ai, :enabled)
+if Decidim.module_installed?(:ai) && Rails.application.secrets.dig(:decidim, :ai, :enabled) && !ENV["CI"]
   if Rails.application.secrets.dig(:decidim, :ai, :endpoint).blank? || Rails.application.secrets.dig(:decidim, :ai, :basic_auth).blank?
     Rails.logger.warn "[decidim-ai] Initializer - AI endpoint or secret not configured. AI features will be disabled."
 
