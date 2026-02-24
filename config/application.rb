@@ -2,12 +2,6 @@
 
 require_relative "boot"
 
-ENV["DECIDIM_AI_ENABLED"] ||= "false"
-
-# Disable Redis backend for Decidim AI in test
-ENV["DECIDIM_SPAM_DETECTION_BACKEND_USER"] ||= "memory"
-ENV["DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE"] ||= "memory"
-
 require "decidim/rails"
 require "action_cable/engine"
 
@@ -15,12 +9,6 @@ Bundler.require(*Rails.groups)
 
 module DecidimApp
   class Application < Rails::Application
-    config.before_initialize do
-      if ENV["CI"]
-        Decidim::Ai::SpamDetection.resource_analyzers = []
-        Decidim::Ai::SpamDetection.user_analyzers = []
-      end
-    end
     config.load_defaults 7.0
 
     require "decidim_app/omniauth/configurator"
