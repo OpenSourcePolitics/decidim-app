@@ -1,8 +1,20 @@
 # frozen_string_literal: true
+analyzers = [
+  {
+    name: :bayes,
+    strategy: Decidim::Ai::SpamDetection::Strategy::Bayes,
+    options: {
+      adapter: "memory"
+    }
+  }
+]
+Decidim::Ai::SpamDetection.resource_analyzers = analyzers
+Decidim::Ai::SpamDetection.user_analyzers = analyzers
 
+return
 # This file is a Decidim initializer for the AI module.
 # It configures the Third Party AI provider.
-if Decidim.module_installed?(:ai) && Rails.application.secrets.dig(:decidim, :ai, :enabled) && !ENV["CI"]
+if Decidim.module_installed?(:ai) && Rails.application.secrets.dig(:decidim, :ai, :enabled)
   if Rails.application.secrets.dig(:decidim, :ai, :endpoint).blank? || Rails.application.secrets.dig(:decidim, :ai, :basic_auth).blank?
     Rails.logger.warn "[decidim-ai] Initializer - AI endpoint or secret not configured. AI features will be disabled."
 
