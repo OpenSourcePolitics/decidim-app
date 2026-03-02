@@ -68,7 +68,7 @@ fr:
             weekly: cette semaine
           subject: Résumé anti-spam, %{count} spams détectés (%{frequency_label})
           summary: |-
-            Résumé IA anti-spam pour %{organization} : %{count} contenus ont été automatiquement signalés %{frequency_label} par le système Decidim AI.<br><br>
+            Résumé anti-spam pour %{organization} : %{count} contenus ont été signalés %{frequency_label}.<br><br>
             <a href="%{moderations_url}" target="_blank">Voir les spams détectés</a>.
     authorization_handlers:
       data_authorization_handler:

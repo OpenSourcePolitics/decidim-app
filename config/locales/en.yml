@@ -58,9 +58,9 @@ en:
           frequency_label:
             daily: today
             weekly: this week
-          subject: AI spam detection summary - %{count} spam items detected (%{frequency_label})
+          subject: Reports summary - %{count} spam (%{frequency_label})
           summary: |-
-            AI anti-spam summary for %{organization}: %{count} items were automatically flagged %{frequency_label} by the Decidim AI system.<br><br>
+            Reports summary for %{organization}: %{count} items were flagged %{frequency_label}.<br><br>
             <a href="%{moderations_url}" target="_blank">View detected spams</a>.
     authorization_handlers:
       data_authorization_handler:
