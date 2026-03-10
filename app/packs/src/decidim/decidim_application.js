@@ -4,6 +4,9 @@
 // Load images
 require.context("../../images", true)
 
+// Import centralized global adjustments for Decidim
+import "src/decidim/global_adjustments"
+
 // add an error message if loading image with special character in rich-text editor
 document.addEventListener("DOMContentLoaded", function(event) {
     setTimeout(function (){
