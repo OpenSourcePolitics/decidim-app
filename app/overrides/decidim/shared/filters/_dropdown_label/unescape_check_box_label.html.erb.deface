@@ -1,0 +1,1 @@
+<!-- replace "erb[loud]:contains('filter_text_for(leaf.label')" --><%= filter_text_for(CGI.unescapeHTML(leaf.label), id: "dropdown-title-#{data_checkboxes_tree_id}") %>

@@ -31,6 +31,10 @@ module CreateProposalExtends
           proposal.longitude = form.longitude if form.longitude.present?
           proposal.add_coauthor(@current_user, user_group:)
           proposal.save!
+          # from decidim_awesome
+          # Update the proposal with the private body, to
+          # avoid tracebility on private fields.
+          proposal.update_private_body!(form.private_body) if form.private_body.present?
           @attached_to = proposal
           proposal
         end

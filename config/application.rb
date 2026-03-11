@@ -30,6 +30,7 @@ module DecidimApp
       require "extends/forms/decidim/system/base_organization_form_extends"
       require "extends/forms/decidim/omniauth_registration_form_extends"
       require "extends/forms/decidim/account_form_extends"
+      require "extends/forms/decidim/editor_image_form_extends"
       # controllers
       require "extends/controllers/decidim/admin/scopes_controller_extends"
       require "extends/controllers/decidim/scopes_controller_extends"
@@ -41,6 +42,7 @@ module DecidimApp
       require "extends/controllers/decidim/participatory_processes/participatory_processes_controller_extends"
       require "extends/controllers/decidim/budgets/projects_controller_extends"
       require "extends/controllers/decidim/proposals/admin/proposal_states_controller_extends"
+      require "extends/controllers/decidim/proposals/proposals_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       require "extends/helpers/decidim/omniauth_helper_extends"

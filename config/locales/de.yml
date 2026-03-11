@@ -1,199 +1,342 @@
----
 de:
   activemodel:
     attributes:
+      assembly:
+        copy_landing_page_blocks: Startseitenblöcke kopieren
       meeting:
-        online_meeting_url: URL für Online-Veranstaltung
+        online_meeting_url: URL zur Online-Veranstaltung
+      osp_authorization_handler:
+        document_number: Eindeutige Kennnummer
+      participatory_process:
+        copy_landing_page_blocks: Startseitenblöcke kopieren
   activerecord:
     models:
       decidim/assembly:
-        one: Versammlung
-        other: Versammlungen
+        one: Akteur
+        other: Akteure
       decidim/assembly_member:
-        one: Versammlungenmitglieder
+        one: Bereichsmitglied
+        other: Bereichsmitglieder
+  date:
+    formats:
+      order: d-m-y
   decidim:
+    account:
+      omniauth_synced_profile:
+        announcement_html: |-
+          <p><strong>Profilsynchronisierung</strong></p>
+          <p>
+            Die folgenden Informationen werden mit einem externen Identitätsanbieter synchronisiert:
+          </p>
+          <ul>
+            <li>Name</li>
+            <li>E-Mail</li>
+          </ul>
+          <p>
+            Diese Informationen können Sie hier nicht bearbeiten.
+          </p>
     admin:
       actions:
-        new_assembly: Neues Versammlung
-        new_assembly_member: Neues Versammlungenmitglied
-        new_assembly_type: Neuer Versammlungtyp
-        new_assembly_user_role: Neuer Versammlung-Admin
+        add: Hinzufügen
+        browse: Durchsuchen
+        confirm_destroy: Löschen bestätigen
+        destroy: Löschen
+        edit: Bearbeiten
+        new_assembly: Neuer Bereich
+        new_assembly_member: Neues Bereichsmitglied
+        new_assembly_type: Neuer Bereichstyp
+        new_assembly_user_role: Neuer Bereichsadmin
       assemblies:
         create:
-          error: Beim Erstellen eines neuen Versammlungen ist ein Fehler aufgetreten.
-          success: Das Versammlung wurde erfolgreich erstellt.
+          error: Beim Erstellen eines neuen Bereichs ist ein Fehler aufgetreten.
+          success: Der Bereich wurde erfolgreich erstellt.
         new:
-          title: Neues Versammlung
+          title: Neuer Bereich
         update:
-          error: Beim Aktualisieren dieses Versammlungen ist ein Fehler aufgetreten.
+          error: Beim Aktualisieren dieses Bereichs ist ein Fehler aufgetreten.
       assemblies_copies:
         create:
-          error: Beim Duplizieren dieses Versammlungen ist ein Fehler aufgetreten.
-          success: Das Versammlung wurde erfolgreich dupliziert.
+          error: Beim Duplizieren dieses Bereichs ist ein Fehler aufgetreten.
+          success: Der Bereich wurde erfolgreich dupliziert.
         destroy:
-          success: Versammlungtyp wurde erfolgreich gelöscht.
-          new:
-            title: Neuer Versammlungtyp
-          update:
-            error: Beim Aktualisieren dieses Versammlungtyps ist ein Fehler aufgetreten.
-            success: Versammlungtyp wurde erfolgreich aktualisiert.
+          success: Der Bereichstyp wurde erfolgreich gelöscht.
+        new:
+          title: Neuer Bereichstyp
+        update:
+          error: Beim Aktualisieren dieses Bereichstyps ist ein Fehler aufgetreten.
+          success: Der Bereichstyp wurde erfolgreich aktualisiert.
       assembly_copies:
         new:
-          title: Dupliziertes Versammlung
+          title: Bereich duplizieren
       assembly_imports:
         create:
-          error: Beim Importieren dieses Versammlungen ist ein Fehler aufgetreten.
-          success: Versammlung wurde erfolgreich importiert.
+          error: Beim Importieren dieses Bereichs ist ein Fehler aufgetreten.
+          success: Der Bereich wurde erfolgreich importiert.
         new:
-          title: Versammlung importieren
+          title: Bereich importieren
       assembly_members:
         create:
-          error: Beim Hinzufügen eines Mitglieds zu diesem Versammlung ist ein Fehler aufgetreten.
-          success: Mitglied wurde diesem Versammlung erfolgreich hinzugefügt.
+          error: Beim Hinzufügen eines Mitglieds zu diesem Bereich ist ein Fehler aufgetreten.
+          success: Das Mitglied wurde diesem Bereich erfolgreich hinzugefügt.
         destroy:
-          success: Mitglied wurde erfolgreich aus diesem Versammlung entfernt.
+          success: Das Mitglied wurde erfolgreich aus diesem Bereich entfernt.
         index:
-          assembly_members_title: Versammlungenmitglieder
+          assembly_members_title: Bereichsmitglieder
         new:
-          title: Neues Versammlungenmitglied
+          title: Neues Bereichsmitglied
         update:
-          error: Beim Aktualisieren des Mitglieds dieses Versammlungen ist ein Fehler aufgetreten.
-          success: Mitglied dieses Versammlungen erfolgreich aktualisiert.
+          error: Beim Aktualisieren des Mitglieds dieses Bereichs ist ein Fehler aufgetreten.
+          success: Das Mitglied dieses Bereichs wurde erfolgreich aktualisiert.
       assembly_publications:
         create:
-          error: Beim Veröffentlichen dieses Versammlungen ist ein Fehler aufgetreten.
-          success: Versammlung erfolgreich veröffentlicht.
+          error: Beim Veröffentlichen dieses Bereichs ist ein Fehler aufgetreten.
+          success: Der Bereich wurde erfolgreich veröffentlicht.
       assembly_user_roles:
         edit:
-          title: Versammlungenadmin aktualisieren
+          title: Bereichsadmin aktualisieren
         new:
-          title: Neuer Versammlungenadmin
+          title: Neuer Bereichsadmin
+      attachments:
+        form:
+          send_notification_to_followers: >
+            Eine Benachrichtigung an alle Personen senden, die der Konsultation folgen und dem Empfang von E-Mail-Benachrichtigungen zugestimmt haben
       meetings:
         with_any_type:
           values:
             in_person: Vor-Ort-Termin
       menu:
-        assemblies: Versammlungen
+        assemblies: Bereiche
         assemblies_submenu:
-          info: Über dieses Versammlung
-          see_assembly: Versammlung ansehen
+          info: Über diesen Bereich
+          see_assembly: Bereich ansehen
         clean: Datenbereinigung
       models:
         assembly:
-          name: Versammlung
+          name: Bereich
+        scope:
+          fields:
+            name: Name
+            scope_type: Geltungsbereichstyp
+      scopes:
+        no_scopes: Auf dieser Ebene gibt es keine Geltungsbereiche.
+        titles:
+          scopes: Geltungsbereiche
+        update:
+          error: Beim Aktualisieren dieses Geltungsbereichs ist ein Problem aufgetreten.
+          success: Geltungsbereich erfolgreich aktualisiert
       titles:
-        assemblies: Versammlungen
+        assemblies: Bereiche
     admin_log:
       assembly:
-        create: "%{user_name} hat das Versammlung %{resource_name} erstellt"
-        duplicate: "%{user_name} hat das Versammlung %{resource_name} dupliziert"
-        export: "%{user_name} hat das Versammlung %{resource_name} exportiert"
-        import: "%{user_name} hat das Versammlung %{resource_name} importiert"
-        publish: "%{user_name} hat das Versammlung %{resource_name} veröffentlicht"
-        unpublish: "%{user_name} hat das Versammlung %{resource_name} auf \"unveröffentlicht\" gesetzt"
-        update: "%{user_name} hat das Versammlung %{resource_name} aktualisiert"
+        create: "%{user_name} hat den Bereich %{resource_name} erstellt"
+        duplicate: "%{user_name} hat den Bereich %{resource_name} dupliziert"
+        export: "%{user_name} hat den Bereich %{resource_name} exportiert"
+        import: "%{user_name} hat den Bereich %{resource_name} importiert"
+        publish: "%{user_name} hat den Bereich %{resource_name} veröffentlicht"
+        unpublish: "%{user_name} hat den Bereich %{resource_name} auf \"unveröffentlicht\" gesetzt"
+        update: "%{user_name} hat den Bereich %{resource_name} aktualisiert"
       assembly_member:
-        create: "%{user_name} hat das Mitglied %{resource_name} im Versammlung %{space_name} erstellt"
-        delete: "%{user_name} hat das Mitglied %{resource_name} aus dem Versammlung %{space_name} entfernt"
-        update: "%{user_name} hat das Mitglied %{resource_name} im Versammlung %{space_name} aktualisiert"
+        create: "%{user_name} hat das Mitglied %{resource_name} im Bereich %{space_name} erstellt"
+        delete: "%{user_name} hat das Mitglied %{resource_name} aus dem Bereich %{space_name} entfernt"
+        update: "%{user_name} hat das Mitglied %{resource_name} im Bereich %{space_name} aktualisiert"
       assembly_setting:
-        update: "%{user_name} hat die Versammlungeneinstellungen aktualisiert"
+        update: "%{user_name} hat die Bereichseinstellungen aktualisiert"
       assembly_type:
-        create: "%{user_name} hat den Versammlungentyp %{resource_name} erstellt"
-        delete: "%{user_name} hat den Versammlungentyp %{resource_name} entfernt"
-        publish: "%{user_name} hat den Versammlungentyp %{resource_name} veröffentlicht"
-        unpublish: "%{user_name} hat den Versammlungentyp %{resource_name} auf \"unveröffentlicht\" gesetzt"
-        update: "%{user_name} hat den Versammlungentyp %{resource_name} aktualisiert"
+        create: "%{user_name} hat den Bereichstyp %{resource_name} erstellt"
+        delete: "%{user_name} hat den Bereichstyp %{resource_name} entfernt"
+        publish: "%{user_name} hat den Bereichstyp %{resource_name} veröffentlicht"
+        unpublish: "%{user_name} hat den Bereichstyp %{resource_name} auf \"unveröffentlicht\" gesetzt"
+        update: "%{user_name} hat den Bereichstyp %{resource_name} aktualisiert"
       assembly_user_role:
-        create: "%{user_name} hat %{resource_name} zum Versammlung %{space_name} eingeladen"
-        delete: "%{user_name} hat %{resource_name} aus dem Versammlung %{space_name} entfernt"
-        update: "%{user_name} hat die Rolle von %{resource_name} im Versammlung %{space_name} geändert"
+        create: "%{user_name} hat %{resource_name} zum Bereich %{space_name} eingeladen"
+        delete: "%{user_name} hat %{resource_name} aus dem Bereich %{space_name} entfernt"
+        update: "%{user_name} hat die Rolle von %{resource_name} im Bereich %{space_name} geändert"
     assemblies:
       admin:
         assemblies:
           form:
-            announcement_help: Der Text, den Sie hier eingeben, wird dem Benutzer direkt unter den Versammlungen-Informationen angezeigt.
-            duration_help: Wenn die Dauer dieses Versammlungen begrenzt ist, dann wählen Sie hier das Enddatum aus. Andernfalls wird das Datum als unbestimmt angezeigt.
-            included_at_help: Wählen Sie das Datum aus, an dem dieses Versammlung zur Plattform hinzugefügt wurde. Das Datum muss nicht zwingend mit dem Gründungsdatum übereinstimmen.
-            select_an_assembly_type: Wählen Sie einen Versammlungtyp
-            select_parent_assembly: Übergeordnetes Versammlung auswählen
+            announcement_help: Der Text, den Sie hier eingeben, wird den Benutzerinnen und Benutzern direkt unter den Bereichsinformationen angezeigt.
+            duration_help: Wenn dieser Bereich zeitlich begrenzt ist, wählen Sie hier das Enddatum aus. Andernfalls wird es als unbestimmt angezeigt.
+            included_at_help: Wählen Sie das Datum aus, an dem dieser Bereich zur Plattform hinzugefügt wurde. Das Datum muss nicht zwingend mit dem Gründungsdatum übereinstimmen.
+            select_an_assembly_type: Wählen Sie einen Bereichstyp aus
+            select_parent_assembly: Übergeordneten Bereich auswählen
         assembly_copies:
           form:
-            slug_help_html: 'URL-Slugs werden zum Generieren der URLs verwendet, die auf dieses Versammlung verweisen. Akzeptiert werden nur Buchstaben, Zahlen und Bindestriche und es muss mit einem Buchstaben beginnen. Beispiel: %{url}'
+            slug_help_html: 'URL-Slugs werden zum Generieren der URLs verwendet, die auf diesen Bereich verweisen. Es sind nur Buchstaben, Zahlen und Bindestriche erlaubt, und der Slug muss mit einem Buchstaben beginnen. Beispiel: %{url}'
         assembly_imports:
           form:
-            slug_help_html: 'URL-Slugs werden zum Generieren der URLs verwendet, die auf dieses Versammlung verweisen. Akzeptiert werden nur Buchstaben, Zahlen und Bindestriche und es muss mit einem Buchstaben beginnen. Beispiel: %{url}'
+            slug_help_html: 'URL-Slugs werden zum Generieren der URLs verwendet, die auf diesen Bereich verweisen. Es sind nur Buchstaben, Zahlen und Bindestriche erlaubt, und der Slug muss mit einem Buchstaben beginnen. Beispiel: %{url}'
       assemblies:
         description:
-          data: Versammlungendaten
-          title: Über dieses Versammlung
+          data: Akteurdaten
+          title: Über diesen Akteur
         show:
-          title: Über dieses Versammlung
+          title: Über diesen Akteur
       content_blocks:
         children_assemblies:
-          name: Versammlungen
+          name: Akteure
         highlighted_assemblies:
-          name: Hervorgehobene Versammlungen
+          name: Hervorgehobene Akteure
         related_assemblies:
-          name: Ähnliche Versammlungen
+          name: Ähnliche Akteure
       index:
-        title: Versammlungen
+        title: Akteure
       last_activity:
-        new_assembly: 'Neues Versammlung:'
+        new_assembly: "Neuer Akteur:"
       pages:
         home:
           highlighted_assemblies:
-            active_spaces: Aktive Versammlungen
-            see_all_spaces: Alle Versammlungen
+            active_spaces: Aktive Akteure
+            see_all_spaces: Alle Akteure anzeigen
       show:
-        social_networks_title: Versammlung besuchen unter
+        social_networks_title: Akteur auch auf
     components:
       meetings:
         settings:
           step:
-            creation_enabled_for_participants: Veranstaltung-Erstellung durch Teilnehmer aktiviert
-            creation_enabled_for_user_groups: Veranstaltung-Erstellung durch Benutzergruppen aktiviert
+            creation_enabled_for_participants: Veranstaltungserstellung durch Teilnehmende aktiviert
+            creation_enabled_for_user_groups: Veranstaltungserstellung durch Benutzergruppen aktiviert
+    authorization_handlers:
+      data_authorization_handler:
+        errors:
+          error_message: Dieses Feld enthält einen Fehler.
+          gdpr: Sie müssen der Datenverarbeitung zustimmen.
+          minimum_age: Sie müssen mindestens 16 Jahre alt sein, um sich zu registrieren.
+          no_postal_code_result: Für diese Postleitzahl wurde kein Ergebnis gefunden.
+        explanation: Verifizieren Sie Ihre Identität
+        fields:
+          city: Ort
+          firstname: Vorname
+          gdpr: Ich stimme zu, dass meine Daten zur Überprüfung meiner Identität verwendet werden dürfen.
+          lastname: Nachname
+          minimum_age: Ich bestätige, dass ich mindestens 16 Jahre alt bin.
+          phone: Telefonnummer
+          postal_code: Postleitzahl
+        help_text:
+          city: Ihr Ort wird anhand Ihrer Postleitzahl ermittelt. Bitte wählen Sie Ihren Ort aus der Dropdown-Liste aus.
+          firstname: Ihr Vorname muss mindestens 1 Zeichen enthalten und darf nur Buchstaben, Leerzeichen und Sonderzeichen wie - und ' enthalten.
+          global_help: Dieses Formular muss ausgefüllt werden, um einen Vorschlag im Bürgerhaushalt einzureichen.
+          lastname: Ihr Nachname muss mindestens 1 Zeichen enthalten und darf nur Buchstaben, Leerzeichen und Sonderzeichen wie - und ' enthalten.
+          postal_code: Ihre Postleitzahl muss aus 5 Ziffern bestehen.
+        legend: Kontaktinformationen
+        name: Datenfreigabe-Verfahren
+      osp_authorization_handler:
+        explanation: Verifizieren Sie Ihre Identität, indem Sie eine eindeutige Kennnummer eingeben.
+        fields:
+          document_number: Eindeutige Kennnummer
+        name: Formular zur Identitätsprüfung
+      osp_authorization_workflow:
+        name: Autorisierungsverfahren
+    comments:
+      comments:
+        create:
+          error: Beim Erstellen des Kommentars ist ein Problem aufgetreten.
+    components:
+      proposals:
+        settings:
+          global:
+            require_category: Kategorie ist erforderlich
+            require_scope: Geltungsbereich ist erforderlich
+    devise:
+      omniauth:
+        france_connect:
+          help_link: Mehr über FranceConnect erfahren
+          introduction: FranceConnect ist die vom Staat angebotene Lösung, um die Anmeldung an Online-Diensten sicherer und einfacher zu machen.
+      shared:
+        links:
+          log_in_with_provider: Mit %{provider} anmelden
     events:
       assemblies:
         create_assembly_member:
-          email_intro: Ein Administrator des Versammlungen <a href="%{resource_url}">%{resource_name}</a> hat Sie als Mitglied eingeladen.
-          email_outro: Sie haben diese Benachrichtigung erhalten, weil Sie zu einem Versammlung eingeladen wurden. Gehen Sie zur <a href="%{resource_url}">Versammlungseite</a>, um mitzumachen!
-          email_subject: Sie wurden als Mitglied des Versammlungen %{resource_name} eingeladen!
-          notification_title: Sie wurden als Mitglied des Versammlungen <a href="%{resource_path}">%{resource_name}</a> eingetragen. Gehen Sie zur <a href="%{resource_path}">Versammlungseite</a>, um mitzuwirken!
+          email_intro: Ein Administrator des Akteurs <a href="%{resource_url}">%{resource_name}</a> hat Sie als Mitglied eingeladen.
+          email_outro: Sie haben diese Benachrichtigung erhalten, weil Sie zu einem Akteur eingeladen wurden. Gehen Sie zur <a href="%{resource_url}">Akteurseite</a>, um mitzumachen!
+          email_subject: Sie wurden als Mitglied des Akteurs %{resource_name} eingeladen!
+          notification_title: Sie wurden als Mitglied des Akteurs <a href="%{resource_path}">%{resource_name}</a> eingetragen. Gehen Sie zur <a href="%{resource_path}">Akteurseite</a>, um mitzuwirken!
       meetings:
         meeting_registrations_over_percentage:
-          email_outro: Sie haben diese Benachrichtigung erhalten, weil Sie ein Administrator des Teilnahmebereichs der Veranstaltung sind.
+          email_outro: Sie haben diese Benachrichtigung erhalten, weil Sie Administrator des Beteiligungsraums der Veranstaltung sind.
       proposals:
         author_confirmation_proposal_event:
-          email_intro: 'Ihr Vorschlag « %{resource_title} » wurde erfolgreich entgegengenommen und ist nun öffentlich. Vielen Dank für Ihre Teilnahme! Sie können ihn hier einsehen :'
-          email_outro: Sie erhalten diese Benachrichtigung, da Sie der Autor des Vorschlags sind. Sie können sich abmelden, indem Sie die Vorschlagsseite besuchen (« %{resource_title} ») und auf « Nicht mehr folge » klicken.
-          email_subject: Ihr Vorschlag wurde veröffentlicht !
+          email_intro: 'Ihr Vorschlag "%{resource_title}" wurde erfolgreich entgegengenommen und ist nun öffentlich. Vielen Dank für Ihre Teilnahme! Sie können ihn hier einsehen:'
+          email_outro: 'Sie erhalten diese Benachrichtigung, weil Sie der Autor des Vorschlags sind. Sie können sich abmelden, indem Sie die Vorschlagsseite ("%{resource_title}") besuchen und auf "Nicht mehr folgen" klicken.'
+          email_subject: Ihr Vorschlag wurde veröffentlicht!
           notification_title: Ihr Vorschlag <a href="%{resource_path}">%{resource_title}</a> ist jetzt online.
+    forms:
+      questionnaire_answer_presenter:
+        download_attachment: Anhang herunterladen
+      questionnaires:
+        answers:
+          files:
+            upload_not_allowed: Datei-Uploads sind nur für angemeldete Benutzerinnen und Benutzer erlaubt.
+      user_answers_serializer:
+        email: E-Mail
+        name: Name
     help:
       participatory_spaces:
         assemblies:
-          title: Was sind Versammlungen?
+          title: Was sind Akteure?
+    initiatives:
+      admin:
+        index:
+          initiatives_types:
+            alert_html: |
+              <p>Sie müssen mindestens einen Initiativtyp anlegen, damit Teilnehmende Initiativen erstellen können.</p>
+              <p>%{link}</p>
+            button: Neuer Initiativtyp
+        initiatives_types:
+          create:
+            error: Ein Fehler ist aufgetreten.
+            success: Ein neuer Initiativtyp wurde erfolgreich erstellt. Sie müssen mindestens einen Geltungsbereich für diesen Initiativtyp definieren, damit er verwendet werden kann.
+          destroy:
+            success: Der Initiativtyp wurde erfolgreich entfernt.
+          edit:
+            update: Aktualisieren
+      create_initiative:
+        fill_data:
+          back: Zurück
+          continue: Weiter
+          fill_data_help: |
+            <ul>
+            <li>Überprüfen Sie den Inhalt Ihrer Initiative. Ist Ihr Titel leicht verständlich? Ist das Ziel Ihrer Initiative klar?</li>
+            <li>Wählen Sie die Art der Unterschrift: vor Ort, online oder eine Kombination aus beidem.</li>
+            <li>Welcher geografische Geltungsbereich gilt für die Initiative?</li>
+            </ul>
+          more_information: (Mehr Informationen)
+          select_area: Bereich auswählen
+          select_scope: Geltungsbereich auswählen
+        select_initiative_type:
+          new: Neue Initiative erstellen
+      form:
+        add_documents: Dokumente hinzufügen
+        add_image: Bild hinzufügen
+        attachment_legend: (Optional) Anhang hinzufügen
+        edit_documents: Dokumente bearbeiten
+        edit_image: Bild bearbeiten
+        image_legend: (Optional) Bild hinzufügen
+      initiatives:
+        index_header:
+          new_initiative: Neue Initiative
     meetings:
       actions:
         invalid_destroy:
           proposals_count:
-            one: 'Die Veranstaltung kann nicht gelöscht werden, da %{count} Vorschlag mit dieser verbunden ist:'
-            other: 'Die Veranstaltung kann nicht gelöscht werden, da %{count} Vorschläge mit dieser verbunden sind:'
+            one: "Die Veranstaltung kann nicht gelöscht werden, da %{count} Vorschlag damit verbunden ist:"
+            other: "Die Veranstaltung kann nicht gelöscht werden, da %{count} Vorschläge damit verbunden sind:"
       admin:
         meetings:
           destroy:
-            success: Das Veranstaltung wurde erfolgreich gelöscht
+            success: Die Veranstaltung wurde erfolgreich gelöscht.
           new:
             title: Veranstaltung erstellen
         registrations:
           form:
-            recommendation_message: Aus Datenschutzgründen empfehlen wir, dass Sie dieses Einschreibeformular löschen, wenn es nicht länger benötigt wird. Standardmäßig ist das 3 Monate nachdem die Veranstaltung durchgeführt wurde.
+            recommendation_message: Aus Datenschutzgründen empfehlen wir, dieses Anmeldeformular zu löschen, sobald es nicht mehr benötigt wird. Standardmäßig ist das drei Monate nach der Veranstaltung.
       directory:
         meetings:
           index:
             meetings: Veranstaltungen
       iframe_access_level:
-        registered: Registrierte Teilnehmer zu diesem Veranstaltung
+        registered: Registrierte Teilnehmende dieser Veranstaltung
       meetings:
         create:
           invalid: Beim Erstellen dieser Veranstaltung ist ein Problem aufgetreten.
@@ -205,7 +348,7 @@ de:
         index:
           new_meeting: Neue Veranstaltung
         meetings:
-          no_meetings_warning: Keine Veranstaltungen entsprechen Ihren Suchkriterien oder es ist keine Veranstaltung geplant.
+          no_meetings_warning: Keine Veranstaltungen entsprechen Ihren Suchkriterien oder es sind keine Veranstaltungen geplant.
         update:
           invalid: Beim Aktualisieren der Veranstaltung ist ein Fehler aufgetreten.
       models:
@@ -213,27 +356,151 @@ de:
           fields:
             official_meeting: Offizielle Veranstaltung
     menu:
-      assemblies: Versammlungen
+      assemblies: Akteure
+      help: Hilfe
     metrics:
       assemblies:
-        description: Anzahl der erstellten Versammlungen
-        object: Versammlungen
-        title: Versammlungen
+        description: Anzahl der erstellten Akteure
+        object: Akteure
+        title: Akteure
+    pages:
+      home:
+        extended:
+          meetings: Veranstaltungen
+        hero:
+          welcome: Willkommen bei %{organization}!
+    participatory_processes:
+      create_initiative:
+        fill_data:
+          back: Zurück
+          continue: Weiter
+          fill_data_help: |
+            <ul>
+            <li>Überprüfen Sie den Inhalt Ihrer Initiative. Ist Ihr Titel leicht verständlich? Ist das Ziel Ihrer Initiative klar?</li>
+            <li>Wählen Sie die Art der Unterschrift: vor Ort, online oder eine Kombination aus beidem.</li>
+            <li>Welcher geografische Geltungsbereich gilt für die Initiative?</li>
+            </ul>
+          more_information: (Mehr Informationen)
+          select_area: Bereich auswählen
+          select_scope: Geltungsbereich auswählen
+        select_initiative_type:
+          new: Neue Initiative erstellen
+      form:
+        add_documents: Dokumente hinzufügen
+        add_image: Bild hinzufügen
+        attachment_legend: (Optional) Anhang hinzufügen
+        edit_documents: Dokumente bearbeiten
+        edit_image: Bild bearbeiten
+        image_legend: (Optional) Bild hinzufügen
+      show:
+        related_processes: Verwandte Prozesse
     participatory_spaces:
       highlighted_meetings:
         see_all: Alle Veranstaltungen anzeigen
+    profiles:
+      show:
+        activity: Aktivität
+    proposals:
+      actions:
+        delete_proposal_state_confirm: Möchten Sie diesen Status wirklich löschen?
+        destroy: Status löschen
+        edit_proposal_state: Status bearbeiten
+        new_proposal_state: Neuer Status
+        title: Aktionen
+      admin:
+        proposal_states:
+          index:
+            title: Status
+          update:
+            error: Fehler beim Aktualisieren des Status
+            success: Status erfolgreich aktualisiert
+      application_helper:
+        filter_state_values:
+          all: Alle
+          not_answered: Nicht beantwortet
+      models:
+        proposal_state:
+          css_class: CSS-Klasse
+          title: Status
+      no_proposal_states: Es wurden noch keine Status angelegt.
+      proposals:
+        dynamic_map_instructions:
+          description: Die Koordinaten werden aktualisiert, wenn Sie auf „Vorschau“ klicken. Die Adresse bleibt jedoch unverändert.
+          instructions: Sie können den Punkt auf der Karte verschieben.
+        edit:
+          add_documents: Dokumente hinzufügen
+          attachment_legend: (Optional) Anhang hinzufügen
+          edit_documents: Dokumente bearbeiten
+          select_a_category: Bitte wählen Sie eine Kategorie aus
+        edit_form_fields:
+          marker_added: Markierung zur Karte hinzugefügt.
+        placeholder:
+          address: 37 Homewood Drive Brownsburg, IN 46112
+    scopes:
+      global: Globaler Geltungsbereich
     statistics:
-      assemblies_count: Versammlungen
+      assemblies_count: Akteure
+    system:
+      organizations:
+        omniauth_settings:
+          cultuur_connect:
+            client_id: Client-ID
+            client_secret: Client-Secret
+            site_url: Website-URL
+          france_connect:
+            acr_values: ACR-Werte
+            client_options_identifier: Client-Kennung
+            client_options_redirect_uri: Redirect-URI (z. B. https://my-decidim.com/users/auth/openid_connect/callback)
+            client_options_secret: Client-Secret
+            client_signing_alg: Signaturalgorithmus des Clients (z. B. RS256, ES256, PS256 ...)
+            display_name: Anzeigename
+            icon_hover_path: Icon-Pfad für Hover-Zustand (z. B. /media/images/oidc_hover.png)
+            issuer: Issuer-URL (z. B. https://identity.com)
+            logout_path: Logout-Pfad (Pfad nach "/users/auth/openid_connect")
+            logout_policy: Logout-Richtlinie (none/session.destroy)
+            post_logout_redirect_uri: Post-Logout-Redirect-URI (z. B. https://my-decidim.com/users/auth/openid_connect/logout)
+            scope: Scope / Claims (z. B. openid email profile)
+          openid_connect:
+            acr_values: ACR-Werte
+            client_auth_method: Client-Authentifizierungsmethode (z. B. basic, jwt_bearer, mtls ...)
+            client_options_identifier: Client-Kennung
+            client_options_redirect_uri: Redirect-URI (z. B. https://my-decidim.com/users/auth/openid_connect/callback)
+            client_options_secret: Client-Secret
+            client_signing_alg: Signaturalgorithmus des Clients (z. B. RS256, ES256, PS256 ...)
+            discovery: Discovery (true oder false)
+            display_name: Anzeigename
+            issuer: Issuer-URL (z. B. https://identity.com)
+            logout_path: Logout-Pfad (Pfad nach "/users/auth/openid_connect")
+            logout_policy: Logout-Richtlinie (none/session.destroy)
+            post_logout_redirect_uri: Post-Logout-Redirect-URI (z. B. https://my-decidim.com/users/auth/openid_connect/logout)
+            response_type: Response-Typ (code oder id_token)
+            scope: Scope / Claims (z. B. openid email profile)
+            uid_field: UID-Feld (z. B. sub, email, username)
+          publik:
+            client_id: Client-ID
+            client_secret: Client-Secret
+            site_url: Website-URL
+    verifications:
+      authorizations:
+        first_login:
+          actions:
+            osp_authorization_handler: Mit dem Formular zur Identitätsprüfung verifizieren
+            osp_authorization_workflow: Mit dem Formular zur Identitätsprüfung verifizieren
   layouts:
     decidim:
       assemblies:
         index:
-          promoted_assemblies: Hervorgehobene Versammlungen
+          promoted_assemblies: Hervorgehobene Akteure
         metadata:
           children_item:
-            one: "%{count} Versammlung"
-            other: "%{count} Versammlungen"
+            one: "%{count} Akteur"
+            other: "%{count} Akteure"
         order_by_assemblies:
           assemblies:
-            one: "%{count} Versammlungen"
-            other: "%{count} Versammlungen"
+            one: "%{count} Akteur"
+            other: "%{count} Akteure"
+      budgets:
+        voting_menubar:
+          cancel_voting: Wahlkabine verlassen
+      footer:
+        help: Hilfe
