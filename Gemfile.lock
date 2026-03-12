@@ -59,6 +59,8 @@ GIT
     decidim-budgets (0.31.1)
       decidim-comments (= 0.31.1)
       decidim-core (= 0.31.1)
+    decidim-collaborative_texts (0.31.1)
+      decidim-core (= 0.31.1)
     decidim-comments (0.31.1)
       decidim-core (= 0.31.1)
       redcarpet (~> 3.5, >= 3.5.1)
@@ -165,6 +167,10 @@ GIT
       w3c_rspec_validators (~> 0.3.0)
       webmock (~> 3.18)
       wisper-rspec (~> 1.0)
+    decidim-elections (0.31.1)
+      decidim-admin (= 0.31.1)
+      decidim-core (= 0.31.1)
+      decidim-forms (= 0.31.1)
     decidim-forms (0.31.1)
       decidim-core (= 0.31.1)
     decidim-generators (0.31.1)
@@ -589,7 +595,7 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jmespath (1.6.2)
-    json (2.18.1)
+    json (2.19.1)
     json-jwt (1.17.0)
       activesupport (>= 4.2)
       aes_key_wrap
@@ -652,7 +658,8 @@ GEM
     mime-types-data (3.2026.0203)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
-    minitest (6.0.1)
+    minitest (6.0.2)
+      drb (~> 2.0)
       prism (~> 1.5)
     msgpack (1.8.0)
     multi_xml (0.8.1)
@@ -776,7 +783,7 @@ GEM
     psych (5.3.1)
       date
       stringio
-    public_suffix (7.0.2)
+    public_suffix (7.0.5)
     puma (6.6.1)
       nio4r (~> 2.0)
     raabro (1.4.0)
@@ -1039,7 +1046,7 @@ GEM
       unicode-display_width (>= 1.1.1, < 4)
     thor (1.5.0)
     tilt (2.7.0)
-    timeout (0.6.0)
+    timeout (0.6.1)
     trailblazer-option (0.1.2)
     tsort (0.2.0)
     tzinfo (2.0.6)
@@ -1127,9 +1134,11 @@ DEPENDENCIES
   byebug (~> 11.0)
   dalli
   decidim!
+  decidim-collaborative_texts!
   decidim-conferences!
   decidim-decidim_awesome!
   decidim-dev!
+  decidim-elections!
   decidim-initiatives!
   decidim-templates!
   deface

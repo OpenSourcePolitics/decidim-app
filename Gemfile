@@ -7,7 +7,9 @@ ruby RUBY_VERSION
 DECIDIM_BRANCH = "release/0.31-stable"
 
 gem "decidim", github: "decidim/decidim", branch: DECIDIM_BRANCH
+gem "decidim-collaborative_texts", github: "decidim/decidim", branch: DECIDIM_BRANCH
 gem "decidim-conferences", github: "decidim/decidim", branch: DECIDIM_BRANCH
+gem "decidim-elections", github: "decidim/decidim", branch: DECIDIM_BRANCH
 gem "decidim-initiatives", github: "decidim/decidim", branch: DECIDIM_BRANCH
 gem "decidim-templates", github: "decidim/decidim", branch: DECIDIM_BRANCH
 
