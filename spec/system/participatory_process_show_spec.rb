@@ -79,9 +79,10 @@ describe "Participatory Process show page" do
           end
 
           it "shows less or more description when clicking on button" do
+            sleep 5
             click_link_or_button "Show less"
             sleep 5
-            within ".content-block__description.editor-content[data-controller='accordion']" do
+            within "[data-content]" do
               aria_hidden = page.find('div[id^="panel-view-more"]')["aria-hidden"]
               inert = page.find('div[id^="panel-view-more"]')["inert"]
               aria_expanded = page.find('button[data-controls^="panel-view-more"]')["aria-expanded"]
@@ -89,6 +90,7 @@ describe "Participatory Process show page" do
               expect(inert).to eq("true")
               expect(aria_expanded).to eq("false")
             end
+            sleep 5
             click_link_or_button "More information"
             sleep 5
             within "[data-content]" do
