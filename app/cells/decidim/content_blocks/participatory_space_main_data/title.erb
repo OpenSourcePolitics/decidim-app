@@ -31,11 +31,12 @@
   </div>
 <% end %>
 <script>
+    // get the description visible when arriving on the show page of a participatory space
     const button = document.querySelector('button[data-controls^="panel-view-more"]')
     const divDescription = document.querySelector('div[id^="panel-view-more"]')
 
     function showPanel() {
-        divDescription.removeAttribute('aria-hidden')
+        divDescription.setAttribute('aria-hidden', 'false')
         divDescription.removeAttribute('inert')
         button.setAttribute('aria-expanded', 'true')
     }
@@ -45,23 +46,24 @@
         divDescription.setAttribute('inert', 'true')
         button.setAttribute('aria-expanded', 'false')
     }
+    if (button) {
+        button.addEventListener('click', function () {
+            if (button.getAttribute('aria-expanded') === 'true') {
+                setTimeout(() => hidePanel(), 500)
+            } else {
+                setTimeout(() => showPanel(), 500)
+            }
+        })
 
-    button.addEventListener('click', function() {
-        if (button.getAttribute('aria-expanded') === 'true') {
-            setTimeout(() => hidePanel(), 500)
-        } else {
+        button.addEventListener('keydown', function (e) {
+            if (e.keyCode === 32 || e.keyCode === 13) {
+                e.preventDefault()
+                button.click()
+            }
+        })
+
+        document.addEventListener("DOMContentLoaded", function () {
             setTimeout(() => showPanel(), 500)
-        }
-    })
-
-    button.addEventListener('keydown', function(e) {
-        if (e.keyCode === 32 || e.keyCode === 13) {
-            e.preventDefault()
-            button.click()
-        }
-    })
-
-    document.addEventListener("DOMContentLoaded", function() {
-        setTimeout(() => showPanel(), 500)
-    })
+        })
+    }
 </script>
