@@ -65,6 +65,17 @@ if Decidim.module_installed?(:ai) && Rails.application.secrets.dig(:decidim, :ai
   Decidim::Ai::SpamDetection.user_spam_analyzer_job = "Decidim::Ai::SpamDetection::ThirdParty::UserSpamAnalyzerJob"
   Decidim::Ai::SpamDetection.generic_spam_analyzer_job = "Decidim::Ai::SpamDetection::ThirdParty::GenericSpamAnalyzerJob"
 else
+  analyzers = [
+    {
+      name: :bayes,
+      strategy: Decidim::Ai::SpamDetection::Strategy::Bayes,
+      options: {
+        adapter: "memory"
+      }
+    }
+  ]
+  Decidim::Ai::SpamDetection.resource_analyzers = analyzers
+  Decidim::Ai::SpamDetection.user_analyzers = analyzers
   Rails.logger.warn "[decidim-ai] Initializer - AI module is not installed or spam detection is disabled. AI features will be disabled."
   Rails.logger.warn "[decidim-ai] Initializer - Spam detection enabled: #{Rails.application.secrets.dig(:decidim, :ai, :spam_detection, :enabled).presence || false}"
 end
