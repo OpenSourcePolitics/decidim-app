@@ -109,8 +109,8 @@ fr:
       proposals:
         settings:
           global:
-            require_category: La catégorie est obligatoire
-            require_scope: Le secteur est obligatoire
+            enable_iframe: Voeg een iframe toe
+            iframe_url: Url de l'iframe
     devise:
       omniauth:
         france_connect:

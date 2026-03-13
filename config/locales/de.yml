@@ -196,6 +196,11 @@ de:
           step:
             creation_enabled_for_participants: Veranstaltungserstellung durch Teilnehmende aktiviert
             creation_enabled_for_user_groups: Veranstaltungserstellung durch Benutzergruppen aktiviert
+      proposals:
+        settings:
+          global:
+            enable_iframe: Fügen Sie einen Iframe hinzu
+            iframe_url: Iframe-URL
     authorization_handlers:
       data_authorization_handler:
         errors:

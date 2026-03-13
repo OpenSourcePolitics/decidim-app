@@ -152,6 +152,11 @@ nl:
         name: Afzender
       gallery:
         name: Galerie maken
+      proposals:
+        settings:
+          global:
+            enable_iframe: Enable iframe
+            iframe_url: iframe-URL
     decidim_admin_multi_factor:
       menu:
         admin_multifactor: Multifactorauthenticatie

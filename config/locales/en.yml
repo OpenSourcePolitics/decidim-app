@@ -103,6 +103,8 @@ en:
           global:
             require_category: Category is required
             require_scope: Scope is required
+            enable_iframe: Enable iframe
+            iframe_url: Url iframe
     devise:
       omniauth:
         france_connect:
