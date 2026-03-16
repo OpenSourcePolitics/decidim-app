@@ -3,7 +3,7 @@
 
 // Load images
 require.context("../../images", true)
-
+import "src/decidim/iframe_settings_proposal_component";
 // add an error message if loading image with special character in rich-text editor
 document.addEventListener("DOMContentLoaded", function(event) {
     setTimeout(function (){
