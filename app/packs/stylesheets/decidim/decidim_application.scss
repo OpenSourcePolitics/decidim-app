@@ -15,3 +15,13 @@
 
   @apply bg-center bg-cover;
 }
+// css for proposal_aside deface override
+.proposal-iframe {
+  width: 100%;
+
+  @screen xl {
+    width: 150%;
+  }
+  overflow: scroll;
+}
+
