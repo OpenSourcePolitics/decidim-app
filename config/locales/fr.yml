@@ -109,7 +109,7 @@ fr:
       proposals:
         settings:
           global:
-            enable_iframe: Voeg een iframe toe
+            enable_iframe: Autoriser un iframe
             iframe_url: Url de l'iframe
     devise:
       omniauth:
