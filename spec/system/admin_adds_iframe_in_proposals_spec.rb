@@ -47,7 +47,7 @@ describe "Admin adds iframe on proposals component" do
         # get an error message
         expect(page).to have_css("p.url_input_error")
         # submit button is disabled
-        expect(page).to have_css("button[name='commit'][disabled='true']")
+        expect(page).to have_button("Update", disabled: true)
         # providing a good url removes the error
         fill_in "component[settings][iframe_url]", with: "http://api.example.com"
         sleep(1)
@@ -55,14 +55,14 @@ describe "Admin adds iframe on proposals component" do
       end
 
       context "and unchecking enable iframe" do
-        it 'can submit the component' do
+        it "can submit the component" do
           # provide invalid url
           fill_in "component[settings][iframe_url]", with: "api.example.com"
           sleep(1)
           # get an error message
           expect(page).to have_css("p.url_input_error")
           # submit button is disabled
-          expect(page).to have_css("button[name='commit'][disabled='true']")
+          expect(page).to have_button("Update", disabled: true)
           # unchecking the enable_iframe removes the error and enables submit button again
           uncheck I18n.t("decidim.components.proposals.settings.global.enable_iframe")
           sleep(1)
