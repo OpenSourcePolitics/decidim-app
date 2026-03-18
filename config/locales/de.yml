@@ -201,6 +201,8 @@ de:
           global:
             enable_iframe: Fügen Sie einen Iframe hinzu
             iframe_url: Iframe-URL
+            require_category: Kategorie ist erforderlich
+            require_scope: Umfang erforderlich
     authorization_handlers:
       data_authorization_handler:
         errors:
