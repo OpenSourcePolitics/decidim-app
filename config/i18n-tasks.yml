@@ -165,3 +165,7 @@ ignore_unused:
   - layouts.decidim.admin.taxonomy_filters_selector.*
   - decidim.download_your_data.show.*
   - decidim.open_data.(help|index).*
+  - decidim.admin.actions.export_all
+  - decidim.conferences.admin.conferences.form.taxonomies
+  - decidim.core.application_helper.filter_taxonomy_values.all
+  - decidim.proposals.proposals.vote_button.votes_blocked
