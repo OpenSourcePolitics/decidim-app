@@ -254,21 +254,21 @@ module Decidim
           it "places vote weight columns immediately after votes" do
             keys = serialized.keys
             votes_index = keys.index(:votes)
-            expect(keys[votes_index + 1]).to eq(:votes_green)
-            expect(keys[votes_index + 2]).to eq(:votes_yellow)
-            expect(keys[votes_index + 3]).to eq(:votes_red)
+            expect(keys[votes_index + 1]).to eq(:votes_red_disapproval)
+            expect(keys[votes_index + 2]).to eq(:votes_yellow_neutral)
+            expect(keys[votes_index + 3]).to eq(:votes_green_approval)
           end
 
-          it "serializes votes_green_favorable count" do
-            expect(serialized).to include(votes_green: 1)
+          it "serializes votes_green_approval_favorable count" do
+            expect(serialized).to include(votes_green_approval: 1)
           end
 
-          it "serializes votes_yellow_neutral count" do
-            expect(serialized).to include(votes_yellow: 1)
+          it "serializes votes_yellow_neutral_neutral count" do
+            expect(serialized).to include(votes_yellow_neutral: 1)
           end
 
-          it "serializes votes_red_unfavorable count" do
-            expect(serialized).to include(votes_red: 1)
+          it "serializes votes_red_disapproval_unfavorable count" do
+            expect(serialized).to include(votes_red_disapproval: 1)
           end
 
           context "when proposal has no votes" do
@@ -279,9 +279,9 @@ module Decidim
 
             it "returns zero for all weight columns" do
               expect(serialized).to include(
-                votes_green: 0,
-                votes_yellow: 0,
-                votes_red: 0
+                votes_green_approval: 0,
+                votes_yellow_neutral: 0,
+                votes_red_disapproval: 0
               )
             end
           end
@@ -290,18 +290,18 @@ module Decidim
             before { extra_fields.destroy }
 
             it "does not include vote weight columns" do
-              expect(serialized).not_to have_key(:votes_green)
-              expect(serialized).not_to have_key(:votes_yellow)
-              expect(serialized).not_to have_key(:votes_red)
+              expect(serialized).not_to have_key(:votes_green_approval)
+              expect(serialized).not_to have_key(:votes_yellow_neutral)
+              expect(serialized).not_to have_key(:votes_red_disapproval)
             end
           end
         end
 
         context "when awesome_voting_manifest is not set" do
           it "does not include vote weight columns" do
-            expect(serialized).not_to have_key(:votes_green)
-            expect(serialized).not_to have_key(:votes_yellow)
-            expect(serialized).not_to have_key(:votes_red)
+            expect(serialized).not_to have_key(:votes_green_approval)
+            expect(serialized).not_to have_key(:votes_yellow_neutral)
+            expect(serialized).not_to have_key(:votes_red_disapproval)
           end
         end
 

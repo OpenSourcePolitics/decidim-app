@@ -4,9 +4,9 @@ module Extends
   module Proposals
     module ProposalSerializerExtends
       WEIGHT_LABELS = {
-        "1" => :votes_green,
-        "2" => :votes_yellow,
-        "3" => :votes_red
+        "1" => :votes_red_disapproval,
+        "2" => :votes_yellow_neutral,
+        "3" => :votes_green_approval
       }.freeze
 
       def serialize
