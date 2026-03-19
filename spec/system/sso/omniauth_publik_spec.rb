@@ -28,10 +28,22 @@ describe "Omniauth Publik" do
     end
 
     before do
+      allow(Decidim).to receive(:omniauth_providers).and_return(
+        {
+          publik: {
+            enabled: true,
+            client_id: ENV["OMNIAUTH_PUBLIK_CLIENT_ID"],
+            client_secret: ENV["OMNIAUTH_PUBLIK_CLIENT_SECRET"],
+            site_url: ENV["OMNIAUTH_PUBLIK_SITE_URL"],
+            icon: "phone"
+          }
+        }
+      )
       OmniAuth.config.test_mode = true
       OmniAuth.config.mock_auth[:publik] = omniauth_hash
       OmniAuth.config.add_camelization "publik", "Publik"
       OmniAuth.config.request_validation_phase = ->(env) {} if OmniAuth.config.respond_to?(:request_validation_phase)
+      visit decidim.root_path
     end
 
     after do
