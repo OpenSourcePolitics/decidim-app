@@ -32,9 +32,9 @@ describe "Omniauth Publik" do
         {
           publik: {
             enabled: true,
-            client_id: ENV["OMNIAUTH_PUBLIK_CLIENT_ID"],
-            client_secret: ENV["OMNIAUTH_PUBLIK_CLIENT_SECRET"],
-            site_url: ENV["OMNIAUTH_PUBLIK_SITE_URL"],
+            client_id: ENV.fetch("OMNIAUTH_PUBLIK_CLIENT_ID", nil),
+            client_secret: ENV.fetch("OMNIAUTH_PUBLIK_CLIENT_SECRET", nil),
+            site_url: ENV.fetch("OMNIAUTH_PUBLIK_SITE_URL", nil),
             icon: "phone"
           }
         }
