@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-ENV["OMNIAUTH_PUBLIK_CLIENT_SECRET"] ||= "fake_client_secret"
-ENV["OMNIAUTH_PUBLIK_CLIENT_ID"] ||= "fake_client_id"
-ENV["OMNIAUTH_PUBLIK_SITE_URL"] ||= "https://publik.example.org"
-
 require "spec_helper"
 
 describe "Omniauth Publik" do
@@ -11,7 +7,6 @@ describe "Omniauth Publik" do
 
   before do
     switch_to_host(organization.host)
-    visit decidim.root_path
   end
 
   context "when using Publik" do
@@ -32,9 +27,9 @@ describe "Omniauth Publik" do
         {
           publik: {
             enabled: true,
-            client_id: ENV.fetch("OMNIAUTH_PUBLIK_CLIENT_ID", nil),
-            client_secret: ENV.fetch("OMNIAUTH_PUBLIK_CLIENT_SECRET", nil),
-            site_url: ENV.fetch("OMNIAUTH_PUBLIK_SITE_URL", nil),
+            client_id: "fake_client_id",
+            client_secret: "fake_client_secret",
+            site_url: "https://publik.example.org",
             icon: "phone"
           }
         }
