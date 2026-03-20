@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-decidim_ai_spam_bot.git
+  revision: b2c54b60246804712c54f3eb7b9313892f4ea627
+  branch: feat/block_service
+  specs:
+    decidim-decidim_ai_spam_bot (1.0.0)
+      decidim-core (~> 0.31)
+
+GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
   revision: b8bbaef4fb1bae845f8ce4beede7323faed674f8
   branch: release/0.31-stable
@@ -1128,6 +1136,7 @@ DEPENDENCIES
   dalli
   decidim!
   decidim-conferences!
+  decidim-decidim_ai_spam_bot!
   decidim-decidim_awesome!
   decidim-dev!
   decidim-initiatives!

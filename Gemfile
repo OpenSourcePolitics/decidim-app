@@ -43,9 +43,9 @@ gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-modu
 # gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePolitics/guest-meeting-registration.git", branch: "bump/module_to_0.29"
 # gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git", branch: "bump/0.29"
 # gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "backport/fix_database_not_available"
-#
 # gem "decidim-ai", git: "https://github.com/OpenSourcePolitics/decidim-module-ai.git", branch: "feat/third_party"
 # gem "decidim-ai_third_party", git: "https://github.com/OpenSourcePolitics/decidim-ai_third_party.git"
+gem "decidim-decidim_ai_spam_bot", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_ai_spam_bot.git", branch: "feat/block_service"
 
 gem "omniauth_openid_connect"
 # gem "omniauth-rails_csrf_protection", "~> 1.0"
