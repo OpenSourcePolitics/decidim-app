@@ -32,6 +32,23 @@ GIT
       decidim-core (~> 0.31.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-budgets_importer.git
+  revision: 509ab6e37fc19ed1825ff0096545c4c8fc233604
+  branch: bump/0.31
+  specs:
+    decidim-budgets_importer (3.0.0)
+      decidim-core (~> 0.31.2)
+
+GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-budgets_paper_ballots.git
+  revision: 13fbc6faa824bc6f28efd58abe920528e01cbd19
+  branch: bump/0.31
+  specs:
+    decidim-budgets_paper_ballots (0.31)
+      decidim-budgets (~> 0.31.0)
+      decidim-core (~> 0.31.0)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner.git
   revision: 7742d8f263d840143d9a8b3f9577ff59d5481769
   branch: bump/0.31
@@ -1258,6 +1275,8 @@ DEPENDENCIES
   decidim-ai!
   decidim-ai_third_party!
   decidim-anonymous_proposals!
+  decidim-budgets_importer!
+  decidim-budgets_paper_ballots!
   decidim-cache_cleaner!
   decidim-cleaner!
   decidim-conferences!
