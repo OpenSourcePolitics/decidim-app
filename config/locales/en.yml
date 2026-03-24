@@ -241,6 +241,17 @@ en:
         name: Identity Verification Form
       osp_authorization_workflow:
         name: Authorization procedure
+    budgets:
+      actions:
+        import: Import proposals to projects
+        new_project: New project
+      admin:
+        models:
+          project:
+            name: Project
+    budgets_importer:
+      actions:
+        import: Import projects to budget
     comments:
       comments:
         create:

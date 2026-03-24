@@ -249,6 +249,17 @@ fr:
         name: Formulaire de vérification d'identité
       osp_authorization_workflow:
         name: Procédure d'autorisation
+    budgets:
+      actions:
+        import: Importer des propositions dans des projets
+        new_project: Nouveau projet
+      admin:
+        models:
+          project:
+            name: Projet
+    budgets_importer:
+      actions:
+        import: Importer des projets
     comments:
       comments:
         create:
