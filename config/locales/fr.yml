@@ -242,6 +242,9 @@ fr:
           address: 60 Boulevard Victor Hugo Saint-Jean-de-Luz, BP 64500
     scopes:
       global: Portée générale
+    searches:
+      filters:
+        jump_to: Parcourir
     system:
       organizations:
         omniauth_settings:
