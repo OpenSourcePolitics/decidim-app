@@ -767,6 +767,9 @@ fr:
       controls_label: Gestion des ressources
     scopes:
       global: Portée générale
+    searches:
+      filters:
+        jump_to: Parcourir
     surveys:
       surveys:
         count:
