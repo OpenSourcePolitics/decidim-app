@@ -41,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-budgets_paper_ballots.git
-  revision: 13fbc6faa824bc6f28efd58abe920528e01cbd19
+  revision: c79d6c87f1963adae16c006e9578e721f52d2a22
   branch: bump/0.31
   specs:
     decidim-budgets_paper_ballots (0.31)
