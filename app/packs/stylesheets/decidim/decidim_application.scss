@@ -6,6 +6,9 @@
 // available at https://docs.decidim.org/en/develop/customize/styles.html#_tailwind_css
 //
 // By default this is empty.
+
+@import "stylesheets/decidim/global_adjustments.scss";
+
 .card__grid-metadata {
   @apply overflow-x-hidden
 }
