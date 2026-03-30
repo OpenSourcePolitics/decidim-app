@@ -1,8 +1,6 @@
 .flash[data-announcement] {
-  display: none;
-
-  &:has(.flash__message p:not(:empty)) {
-    display: flex;
+  &:has(.flash__message p:empty):not(:has(.flash__message p:not(:empty))) {
+    display: none;
   }
 }
 
