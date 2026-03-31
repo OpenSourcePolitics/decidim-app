@@ -166,3 +166,7 @@ ignore_unused:
   - decidim.download_your_data.show.*
   - decidim.open_data.(help|index).*
   - decidim.searches.filters.jump_to
+  - decidim.admin.actions.export_all
+  - decidim.conferences.admin.conferences.form.taxonomies
+  - decidim.core.application_helper.filter_taxonomy_values.all
+  - decidim.proposals.proposals.vote_button.votes_blocked
