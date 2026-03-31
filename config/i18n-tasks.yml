@@ -187,3 +187,7 @@ ignore_unused:
   - decidim.elections.censuses.census_ready_html
   - decidim.elections.censuses.census_size_html.*
   - decidim.elections.status.scheduled
+  - decidim.admin.actions.export_all
+  - decidim.conferences.admin.conferences.form.taxonomies
+  - decidim.core.application_helper.filter_taxonomy_values.all
+  - decidim.proposals.proposals.vote_button.votes_blocked

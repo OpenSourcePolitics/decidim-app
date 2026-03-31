@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+ENV["OMNIAUTH_PUBLIK_CLIENT_SECRET"] ||= "fake_client_secret"
+ENV["OMNIAUTH_PUBLIK_CLIENT_ID"] ||= "fake_client_id"
+ENV["OMNIAUTH_PUBLIK_SITE_URL"] ||= "https://publik.example.org"
+
 require "decidim/dev"
 
 Decidim::Dev.dummy_app_path = File.expand_path(Rails.root.to_s)
@@ -69,6 +73,8 @@ RSpec.configure do |config|
   end
 
   config.after(:each, type: :system) do
+    Capybara.reset_sessions!
+
     if page.driver.browser.respond_to?(:window_handles)
       page.driver.browser.window_handles[1..-1]&.each do |handle|
         page.driver.browser.switch_to.window(handle)

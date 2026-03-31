@@ -3,3 +3,5 @@
 
 // Load images
 require.context("../../images", true)
+
+import "src/decidim/global_adjustments"
