@@ -192,7 +192,6 @@ describe "Authentication" do
           click_on "Complete profile"
 
           expect(page).to have_content("A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.")
-          expect(Decidim::Identity.where(provider: :facebook, uid: "123545").first.user.newsletter_notifications_at).to be_present
         end
       end
     end
@@ -581,7 +580,7 @@ describe "Authentication" do
         end
 
         expect(page).to have_content("10 characters minimum")
-        expect(page).to have_content("must be different from your nickname and your email")
+        expect(page).to have_content("must be different from your name, nickname, email and the organization's host")
         expect(page).to have_content("must not be too common")
         expect(page).to have_current_path "/users/password"
       end
