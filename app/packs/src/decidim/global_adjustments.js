@@ -12,8 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.innerWidth <= 768) return;
-
+  const MOBILE_BREAKPOINT = 768;
   const menuBar = document.getElementById("menu-bar-container");
   if (!menuBar) return;
 
@@ -22,25 +21,49 @@ document.addEventListener("DOMContentLoaded", function () {
   placeholder.style.height = menuBar.offsetHeight + "px";
   placeholder.style.display = "none";
 
-  const menuOriginalTop = menuBar.getBoundingClientRect().top + window.scrollY;
+  let isFixed = false;
+  let scrollListenerActive = false;
 
-  window.addEventListener("scroll", function () {
-    const fixed = window.scrollY >= menuOriginalTop;
+  function unfix() {
+    if (!isFixed) return;
+    isFixed = false;
+    menuBar.removeAttribute("style");
+    placeholder.style.display = "none";
+  }
 
-    menuBar.style.position = fixed ? "fixed" : "";
-    menuBar.style.top = fixed ? "0" : "";
-    menuBar.style.left = fixed ? "0" : "";
-    menuBar.style.right = fixed ? "0" : "";
-    menuBar.style.zIndex = fixed ? "1000" : "";
-    menuBar.style.background = fixed ? "#fff" : "";
-    menuBar.style.boxShadow = fixed ? "0 2px 8px rgba(0,0,0,0.1)" : "";
+  function fix() {
+    if (isFixed) return;
+    isFixed = true;
+    placeholder.style.display = "block";
+    menuBar.style.position = "fixed";
+    menuBar.style.top = "0";
+    menuBar.style.left = "0";
+    menuBar.style.right = "0";
+    menuBar.style.zIndex = "1000";
+    menuBar.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)";
+  }
 
-    if (fixed) {
-      placeholder.style.display = "block";
-    } else {
-      requestAnimationFrame(() => placeholder.style.display = "none");
+  function onScroll() {
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+      unfix();
+      return;
     }
-  }, { passive: true });
+    if (isFixed) {
+      if (placeholder.getBoundingClientRect().top > 0) unfix();
+    } else {
+      if (menuBar.getBoundingClientRect().top <= 0) fix();
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth <= MOBILE_BREAKPOINT) {
+      unfix();
+    } else {
+      onScroll();
+    }
+  });
 });
 // on mobile portrait, when user is not signin, change the display of div.main-bar__menu-mobile
 // so that logo and signin link don't overlap

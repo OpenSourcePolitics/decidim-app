@@ -784,6 +784,9 @@ en:
       controls_label: Resource controls
     scopes:
       global: Global scope
+    searches:
+      filters:
+        jump_to: Jump to
     surveys:
       surveys:
         count:

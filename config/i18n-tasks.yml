@@ -95,7 +95,7 @@ ignore_missing:
   - decidim.participatory_processes.admin.participatory_process_copies.form.slug_help_html
   - time.buttons.select
   - decidim.admin.models.assembly.fields.promoted
-  - decidim.account.destroy.error 
+  - decidim.account.destroy.error
   - decidim.account.destroy.success
   - decidim.devise.omniauth_registrations.create.email_already_exists
   - devise.registrations.signed_up_but_unconfirmed
@@ -165,6 +165,7 @@ ignore_unused:
   - layouts.decidim.admin.taxonomy_filters_selector.*
   - decidim.download_your_data.show.*
   - decidim.open_data.(help|index).*
+  - decidim.searches.filters.jump_to
   - decidim.admin.actions.export_all
   - decidim.conferences.admin.conferences.form.taxonomies
   - decidim.core.application_helper.filter_taxonomy_values.all
