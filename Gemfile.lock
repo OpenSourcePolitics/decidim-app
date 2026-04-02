@@ -183,6 +183,8 @@ GIT
     decidim-budgets (0.31.2)
       decidim-comments (= 0.31.2)
       decidim-core (= 0.31.2)
+    decidim-collaborative_texts (0.31.2)
+      decidim-core (= 0.31.2)
     decidim-comments (0.31.2)
       decidim-core (= 0.31.2)
       redcarpet (~> 3.5, >= 3.5.1)
@@ -289,6 +291,10 @@ GIT
       w3c_rspec_validators (~> 0.3.0)
       webmock (~> 3.18)
       wisper-rspec (~> 1.0)
+    decidim-elections (0.31.2)
+      decidim-admin (= 0.31.2)
+      decidim-core (= 0.31.2)
+      decidim-forms (= 0.31.2)
     decidim-forms (0.31.2)
       decidim-core (= 0.31.2)
     decidim-generators (0.31.2)
@@ -1279,9 +1285,11 @@ DEPENDENCIES
   decidim-budgets_paper_ballots!
   decidim-cache_cleaner!
   decidim-cleaner!
+  decidim-collaborative_texts!
   decidim-conferences!
   decidim-decidim_awesome!
   decidim-dev!
+  decidim-elections!
   decidim-emitter!
   decidim-extra_user_fields!
   decidim-guest_meeting_registration!

@@ -260,6 +260,38 @@ fr:
     budgets_importer:
       actions:
         import: Importer des projets
+    collaborative_texts:
+      admin:
+        documents:
+          edit:
+            document_has_suggestions_html: <a href="%{url}">Ce texte a des suggestions</a> et ne peut pas être édité directement. Veuillez accepter ou rejeter les suggestions afin de générer une nouvelle version brouillon qui peut être éditée.
+            draft: Version brouillon
+            version: Version %{version_number}, créée le %{created_at} a reçu %{suggestions_count} suggestions.
+          non_draft_options:
+            create_draft: Enlever les suggestions et créer une nouvelle version brouillon
+            draft_help_html: Une version brouillon n'est pas publique et peut être éditée par les administrateurs. Enlever le statut de brouillon pour rendre cette version publique. <strong>Notez que tant que la version brouillon est active, les participants verront la version précédente et ne pourront pas faire de suggestions.</strong>
+      admin_log:
+        suggestion:
+          create: "%{user_name} a suggéré des modifications au texte collaboratif %{resource_name} dans %{space_name}"
+      document:
+        consolidate:
+          confirm: Cette action appliquera toutes les suggestions acceptées dans une nouvelle version du document. Les suggestions non acceptées seront transférées à la nouvelle version pour un examen plus approfondi. Cette action maintiendra le statut des suggestions activé.
+          invalid: Il y a eu un problème lors de l'application des suggestions au document (%{errors}).
+          new: Appliquer les suggestions acceptées
+        consolidate_counter: La consolidation fusionnera les %{applied} suggestions acceptées et déplacera les %{pending} suggestions en attente vers la nouvelle version.
+        controls_label: Contrôles de suggestion
+        draft_counter: Le brouillon va fusionner les %{applied} suggestions acceptées et supprimer les %{pending} suggestions en attente.
+        rollout:
+          confirm: Cette action créera une nouvelle version brouillon du document et vous serez redirigé vers la page d'édition pour les ajustements finaux. La version actuelle restera publique et les suggestions seront désactivées.
+          invalid: Il y a eu un problème lors de la création d'une nouvelle version du document (%{errors}).
+          new: Brouillon d'une nouvelle version
+        save: Suggérer des modifications
+        status:
+          accepting_suggestions: Pour suggérer des modifications, sélectionnez ou double-cliquez sur le texte que vous souhaitez modifier, puis cliquez sur le bouton « Suggérer des modifications ».
+      suggestion:
+        add_html: <span class="type">Add:</span> <span class="text">%{text}</span>
+        remove_html: <span class="type">Remove:</span> <span class="text">%{text}</span>
+        replace_html: <span class="type">Replace:</span> <span class="text">%{text}</span>
     comments:
       comments:
         create:
@@ -335,6 +367,68 @@ fr:
           body_2: Ces fichiers sont au format CSV (valeurs séparées par des virgules), un format de fichier largement utilisé qui peut être ouvert et traité par diverses applications logicielles, notamment des tableurs, des éditeurs de texte et des outils d'analyse de données.
           title: Que sont ces fichiers ?
         files_to_download: Fichiers à télécharger
+    elections:
+      actions:
+        confirm_unpublish_election: Êtes-vous sûr de vouloir dépublier cette élection ?
+      admin:
+        dashboard:
+          calendar:
+            end_at: 'Heure de fin:'
+            end_election: Terminer l'élection
+            manual_start: Démarrer manuellement
+            published_results_at: Résultats publiés à
+            start_at: 'Heure de début:'
+            start_election: Démarrer l'élection
+            title: Calendrier
+          main:
+            labels:
+              calendar: Calendrier
+              description: Description
+              image: Galerie d'image
+              results: Disponibilité des résultats
+              title: Titre
+            title: Principal
+          publish_confirm: Êtes-vous sûr(e) de vouloir publier cette élection ?
+          questions_table:
+            answer: Réponses
+            percentage: Pourcentage
+            total: Total
+            votes: Votes
+            votes_count:
+              one: 1 vote
+              other: "%{count} votes"
+          results:
+            not_started: L'élection n'a pas encore commencé.
+            publish_button: Publier les résultats
+            title: Résultats
+          title: Statut de l'élection
+        elections:
+          dashboard:
+            title: Tableau de bord
+          form:
+            calendar_description: Vérifiez que le fuseau horaire de l'organisation est correct dans les paramètres de l'organisation. La configuration actuelle est %{timezone}.
+            results_availability:
+              after_end_help: publier les résultats lorsque l'élection est terminée
+              per_question_help: gérer manuellement le vote et publier les résultats pour chaque question
+              real_time_help: publier automatiquement les résultats pendant l'élection pendant le vote
+        statuses:
+          enable_voting:
+            invalid: Il y a eu un problème lors de l'activation du vote.
+            success: Le vote a été activé avec succès.
+          end:
+            invalid: Il y a eu un problème lors de la fin de l'élection.
+            success: L'élection s'est terminée avec succès.
+          start:
+            invalid: Il y a eu un problème lors du démarrage de l'élection.
+            success: L'élection a démarré avec succès.
+          unknown: Statut de l'élection inconnu.
+      censuses:
+        census_ready_html: Les données du recensement sont téléchargées et préparées pour leur utilisation dans l'élection <b>%{election_title}</b>.
+        census_size_html:
+          one: Il y a actuellement <strong>1</strong> personne éligible pour voter dans cette élection (ce nombre peut changer dans un recensement dynamique).
+          other: Il y a actuellement <strong>%{count}</strong> personnes éligibles pour voter dans cette élection (ce nombre peut changer dans un recensement dynamique).
+      status:
+        scheduled: Programmé
     events:
       proposals:
         author_confirmation_proposal_event:
