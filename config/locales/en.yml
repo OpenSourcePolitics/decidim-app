@@ -39,6 +39,7 @@ en:
         confirm_destroy: Confirm destroy
         destroy: Delete
         edit: Edit
+        export_all: Export all
         new_assembly: New assembly
       areas:
         deprecated: Mind that areas are deprecated and will be removed in future versions. Please use taxonomies instead. The only module currently using areas is the initiatives module.
@@ -46,6 +47,8 @@ en:
         form:
           send_notification_to_followers: Send a notification to all the people following the consultation who have agreed to receive email notifications
       menu:
+        assemblies_submenu:
+          landing_page: Landing page layout
         participatory_process_groups_submenu:
           landing_page: Landing page layout
         participatory_processes_submenu:
@@ -238,6 +241,49 @@ en:
         name: Identity Verification Form
       osp_authorization_workflow:
         name: Authorization procedure
+    budgets:
+      actions:
+        import: Import proposals to projects
+        new_project: New project
+      admin:
+        models:
+          project:
+            name: Project
+    budgets_importer:
+      actions:
+        import: Import projects to budget
+    collaborative_texts:
+      admin:
+        documents:
+          edit:
+            document_has_suggestions_html: <a href="%{url}">This document has suggestions</a> and cannot be edited directly. Please accept or reject the suggestions in order to generate a new draft version that can be edited.
+            draft: Draft version
+            version: Version %{version_number}, created on %{created_at} got %{suggestions_count} suggestions.
+          non_draft_options:
+            create_draft: Discard suggestions and create a new draft version
+            draft_help_html: A draft version is not public and can be edited by the admins. Remove the draft status to make this version public. <strong>Note that meanwhile the draft version is active, the participants will see the previous version and they will not be able to make suggestions.</strong>
+      admin_log:
+        suggestion:
+          create: "%{user_name} suggested changes to the %{resource_name} collaborative text in %{space_name}"
+      document:
+        consolidate:
+          confirm: This action will consolidate all accepted suggestions into a new version of the document. Non-accepted suggestions will be transferred to the new version for further review. This action will maintain the suggestions enabled status.
+          invalid: There was a problem consolidating the suggestions into the document (%{errors}).
+          new: Consolidate accepted suggestions
+        consolidate_counter: Consolidate will merge the %{applied} applied suggestions and move the %{pending} pending suggestions to the new version.
+        controls_label: Suggestion controls
+        draft_counter: Draft will merge the %{applied} applied suggestions and discard the %{pending} pending suggestions.
+        rollout:
+          confirm: This action will create a new draft version of the document and you will be redirected to the edit page for final refinements. The current version will remain public and suggestions will be disabled.
+          invalid: There was a problem creating a new version of the document (%{errors}).
+          new: Draft a new version
+        save: Suggest changes
+        status:
+          accepting_suggestions: To suggest changes, select or double-click on the text you want to edit, then click the 'Suggest changes' button.
+      suggestion:
+        add_html: <span class="type">Add:</span> <span class="text">%{text}</span>
+        remove_html: <span class="type">Remove:</span> <span class="text">%{text}</span>
+        replace_html: <span class="type">Replace:</span> <span class="text">%{text}</span>
     comments:
       comments:
         create:
@@ -284,6 +330,15 @@ en:
               most_liked: Most liked
             likes_blocked: Likes blocked
             likes_enabled: Likes enabled
+    conferences:
+      admin:
+        conferences:
+          form:
+            taxonomies: Taxonomies
+    core:
+      application_helper:
+        filter_taxonomy_values:
+          all: All
     debates:
       models:
         debate:
@@ -304,6 +359,68 @@ en:
           body_2: These files are in CSV (Comma-Separated Values) format, which is a widely-used file format that can be opened and processed by a variety of software applications, including spreadsheet programs, text editors, and data analysis tools.
           title: What are these files?
         files_to_download: Files to download
+    elections:
+      actions:
+        confirm_unpublish_election: Are you sure you want to unpublish this election?
+      admin:
+        dashboard:
+          calendar:
+            end_at: 'End time:'
+            end_election: End election
+            manual_start: Manual
+            published_results_at: Results published at
+            start_at: 'Start time:'
+            start_election: Start election
+            title: Calendar
+          main:
+            labels:
+              calendar: Calendar
+              description: Description
+              image: Image gallery
+              results: Results availability
+              title: Title
+            title: Main
+          publish_confirm: Are you sure you want to publish this election?
+          questions_table:
+            answer: Answers
+            percentage: Percentage
+            total: Total
+            votes: Votes
+            votes_count:
+              one: 1 vote
+              other: "%{count} votes"
+          results:
+            not_started: Election has not started yet.
+            publish_button: Publish results
+            title: Results
+          title: Election status
+        elections:
+          dashboard:
+            title: Dashboard
+          form:
+            calendar_description: Check that the organization time zone is correct in the organization settings. The current configuration is %{timezone}.
+            results_availability:
+              after_end_help: publish results when the election is finished
+              per_question_help: manually handle voting and publish results for each question
+              real_time_help: automatically publish results during the election while voting
+        statuses:
+          enable_voting:
+            invalid: There was a problem enabling voting.
+            success: Voting enabled successfully.
+          end:
+            invalid: There was a problem ending the election.
+            success: Election ended successfully.
+          start:
+            invalid: There was a problem starting the election.
+            success: Election started successfully.
+          unknown: Unknown status
+      censuses:
+        census_ready_html: The census data is uploaded and prepared for its use in the <b>%{election_title}</b> election.
+        census_size_html:
+          one: There is currently <strong>1</strong> person eligible for voting in this election (this might change on a dynamic census).
+          other: There are currently <strong>%{count}</strong> people eligible for voting in this election (this might change on a dynamic census).
+      status:
+        scheduled: Scheduled
     events:
       proposals:
         author_confirmation_proposal_event:
@@ -749,6 +866,8 @@ en:
           most_liked: Most liked
         placeholder:
           address: 37 Homewood Drive Brownsburg, IN 46112
+        vote_button:
+          votes_blocked: Votes blocked
         voting_rules:
           already_vote:
             description: Remember that you still have to give %{number} supports between different proposals so that your supports are taken into account.
@@ -759,6 +878,9 @@ en:
       controls_label: Resource controls
     scopes:
       global: Global scope
+    searches:
+      filters:
+        jump_to: Jump to
     surveys:
       surveys:
         count:

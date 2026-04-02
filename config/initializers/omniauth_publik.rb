@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 if ENV["OMNIAUTH_PUBLIK_CLIENT_SECRET"].present?
+  Decidim.configure do |config|
+    config.omniauth_providers[:publik] = {
+      enabled: true,
+      client_id: ENV.fetch("OMNIAUTH_PUBLIK_CLIENT_ID", nil),
+      client_secret: ENV["OMNIAUTH_PUBLIK_CLIENT_SECRET"],
+      site_url: ENV.fetch("OMNIAUTH_PUBLIK_SITE_URL", nil)
+    }
+  end
+
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider(
       :publik,
