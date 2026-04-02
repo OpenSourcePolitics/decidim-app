@@ -107,6 +107,7 @@ ignore_missing:
   - decidim.accessibility.front_page_link
   - decidim.accessibility.logo
   - decidim.errors.not_found.back_home
+  - layouts.decidim.announcements.*
 
 # Consider these keys used:
 ignore_unused:

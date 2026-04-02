@@ -1,0 +1,82 @@
+<h2 class="h2 decorator"><%= title_text %></h2>
+
+<% if short_description_text.present? %>
+  <div class="content-block__description editor-content">
+    <% if rich_text_processors? %>
+      <%= render_rich_text(resource, :short_description) %>
+    <% else %>
+      <%= short_description_text %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if description_text.present? %>
+  <% should_truncate = strip_tags(description_text).length > 300 %>
+  <div class="content-block__description editor-content" <%= "data-controller='accordion'" if should_truncate %>>
+    <% if should_truncate %>
+      <% seed = SecureRandom.hex(4) %>
+      <div id="panel-view-more-<%= seed %>" class="editor-content">
+        <% if rich_text_processors? %>
+          <%= render_rich_text(resource, :description) %>
+        <% else %>
+          <%= description_text %>
+        <% end %>
+      </div>
+
+      <button class="button button__sm button__text-secondary mt-2" data-controls="panel-view-more-<%= seed %>" aria-expanded="false">
+        <span>
+          <%= t("view_more", scope: "layouts.decidim.announcements") %>
+        </span>
+        <%= icon "arrow-down-s-line" %>
+        <span>
+          <%= t("view_less", scope: "layouts.decidim.announcements") %>
+        </span>
+        <%= icon "arrow-up-s-line" %>
+      </button>
+    <% else %>
+      <% if rich_text_processors? %>
+        <%= render_rich_text(resource, :description) %>
+      <% else %>
+        <%= description_text %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+<script>
+    // get the description visible when arriving on the show page of a participatory space
+    const button = document.querySelector('button[data-controls^="panel-view-more"]')
+    const divDescription = document.querySelector('div[id^="panel-view-more"]')
+
+    function showPanel() {
+        divDescription.setAttribute('aria-hidden', 'false')
+        divDescription.removeAttribute('inert')
+        button.setAttribute('aria-expanded', 'true')
+    }
+
+    function hidePanel() {
+        divDescription.setAttribute('aria-hidden', 'true')
+        divDescription.setAttribute('inert', 'true')
+        button.setAttribute('aria-expanded', 'false')
+    }
+    if (button) {
+        button.addEventListener('click', function () {
+            if (button.getAttribute('aria-expanded') === 'true') {
+                setTimeout(() => hidePanel(), 500)
+            } else {
+                setTimeout(() => showPanel(), 500)
+            }
+        })
+
+        button.addEventListener('keydown', function (e) {
+            // press space or enter
+            if (e.keyCode === 32 || e.keyCode === 13) {
+                e.preventDefault()
+                button.click()
+            }
+        })
+
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(() => showPanel(), 500)
+        })
+    }
+</script>
