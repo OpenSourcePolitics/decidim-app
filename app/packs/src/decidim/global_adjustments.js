@@ -42,3 +42,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }, { passive: true });
 });
+// on mobile portrait, when user is not signin, change the display of div.main-bar__menu-mobile
+// so that logo and signin link don't overlap
+document.addEventListener("DOMContentLoaded", function () {
+  const signIn = document.querySelector('.main-bar a[href^="/users/sign_in"]')
+  const menuBarMobile = document.querySelector('header .main-bar__menu-mobile');
+  const menuBarMobileLink = document.querySelector('header .main-bar__links-mobile__login')
+
+  if (window.innerWidth <= 600 && signIn && screen.orientation.type === "portrait-primary"){
+    menuBarMobile.style.flexDirection = "column-reverse";
+    if (menuBarMobileLink) menuBarMobileLink.style.marginBottom = "1rem";
+  }
+  screen.orientation.addEventListener("change", () => {
+    if (screen.orientation.type === "landscape-primary"){
+      menuBarMobile.style.flexDirection = "row-reverse";
+      if (menuBarMobileLink) menuBarMobileLink.style.marginBottom = "0rem";
+    }else {
+      menuBarMobile.style.flexDirection = "column-reverse";
+      if (menuBarMobileLink) menuBarMobileLink.style.marginBottom = "1rem";
+    }
+  });
+});
