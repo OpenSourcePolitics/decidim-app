@@ -146,3 +146,5 @@ ignore_unused:
   - decidim.authorization_handlers.data_authorization_handler.(explanation|name)
   - decidim.system.organizations.omniauth_settings.cultuur_connect.*
   - layouts.decidim.budgets.voting_menubar.cancel_voting
+  - decidim.components.proposals.settings.global.enable_iframe
+  - decidim.components.proposals.settings.global.iframe_url

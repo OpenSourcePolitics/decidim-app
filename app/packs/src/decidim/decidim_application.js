@@ -3,6 +3,7 @@
 
 // Load images
 require.context("../../images", true)
+import "src/decidim/iframe_settings_proposal_component";
 
 // Import centralized global adjustments for Decidim
 import "src/decidim/global_adjustments"
