@@ -29,6 +29,7 @@ module DecidimApp
       require "extends/forms/decidim/comments/comment_form_extends"
       require "extends/forms/decidim/system/base_organization_form_extends"
       require "extends/forms/decidim/omniauth_registration_form_extends"
+      require "extends/forms/decidim/account_form_extends"
       require "extends/forms/decidim/editor_image_form_extends"
       # controllers
       require "extends/controllers/decidim/admin/scopes_controller_extends"

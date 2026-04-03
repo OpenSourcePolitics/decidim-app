@@ -19,6 +19,7 @@ module CreateOmniauthRegistrationExtends
         create_or_find_user
         @identity = create_identity
       end
+      send_email_to_statutory_representative
       manage_user_confirmation
       trigger_omniauth_registration
 
@@ -30,7 +31,7 @@ module CreateOmniauthRegistrationExtends
 
   def manage_user_confirmation
     # send welcome notification and email
-    @user.after_confirmation
+    @user.after_confirmation if verified_email
   end
 end
 
