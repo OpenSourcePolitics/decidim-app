@@ -19,10 +19,7 @@ en:
           <p>
             The following information is synchronized with an external identity provider:
           </p>
-          <ul>
-            <li>Name</li>
-            <li>Email</li>
-          </ul>
+          %{field_list_html}
           <p>
             You can't edit this information here.
           </p>
@@ -101,6 +98,8 @@ en:
       proposals:
         settings:
           global:
+            enable_iframe: Enable iframe
+            iframe_url: Url iframe
             require_category: Category is required
             require_scope: Scope is required
     devise:

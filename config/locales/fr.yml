@@ -27,10 +27,7 @@ fr:
           <p>
             les informations suivantes sont synchronisées avec un fournisseur d'identité externe:
           </p>
-          <ul>
-            <li>Nom</li>
-            <li>Email</li>
-          </ul>
+          %{field_list_html}
           <p>
             Vous ne pouvez pas modifier ces informations ici.
           </p>
@@ -109,8 +106,10 @@ fr:
       proposals:
         settings:
           global:
-            require_category: La catégorie est obligatoire
-            require_scope: Le secteur est obligatoire
+            enable_iframe: Autoriser un iframe
+            iframe_url: Url de l'iframe
+            require_category: La catégorie est requise
+            require_scope: Le secteur est requis
     devise:
       omniauth:
         france_connect:

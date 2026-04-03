@@ -147,3 +147,5 @@ ignore_unused:
   - decidim.system.organizations.omniauth_settings.cultuur_connect.*
   - layouts.decidim.budgets.voting_menubar.cancel_voting
   - decidim.searches.filters.jump_to
+  - decidim.components.proposals.settings.global.enable_iframe
+  - decidim.components.proposals.settings.global.iframe_url

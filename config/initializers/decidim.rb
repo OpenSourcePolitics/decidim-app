@@ -441,6 +441,8 @@ if Decidim.module_installed? :proposals
   Decidim.find_component_manifest(:proposals).settings(:global) do |settings|
     settings.attribute :require_category, type: :boolean, default: Decidim::Proposals.config.require_category
     settings.attribute :require_scope, type: :boolean, default: Decidim::Proposals.config.require_scope
+    settings.attribute :enable_iframe, type: :boolean, default: false
+    settings.attribute :iframe_url, type: :string
   end
 end
 
