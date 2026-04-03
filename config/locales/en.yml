@@ -230,6 +230,9 @@ en:
           address: 37 Homewood Drive Brownsburg, IN 46112
     scopes:
       global: Global scope
+    searches:
+      filters:
+        jump_to: Jump to
     system:
       organizations:
         omniauth_settings:
