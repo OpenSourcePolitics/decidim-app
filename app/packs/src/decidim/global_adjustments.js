@@ -89,9 +89,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // dropdown for voting rules on mobile is open
 document.addEventListener("DOMContentLoaded", function () {
-  const dropdown = document.querySelector('#progress-summary-dropdown-menu')
+  const dropdown = document.querySelector('div#progress-summary-dropdown-menu')
+  const addButtons = document.querySelectorAll('button.budget-list__action')
+  const voteButton = document.querySelector('button[data-dialog-open="budget-confirm"]')
 
   if (window.innerWidth <= 768 && dropdown){
-    dropdown.setAttribute('aria-hidden', false)
+    dropdown.setAttribute('aria-hidden', false);
+    // when adding a project without achieving the minimum required
+    if (voteButton.disabled === true && addButtons){
+      addButtons.forEach((button) => {
+        button.addEventListener('click', function () {
+          setTimeout(() => {
+            dropdown.setAttribute('aria-hidden', false)
+          }, 1000);
+        })
+      })
+    }
   }
 });
