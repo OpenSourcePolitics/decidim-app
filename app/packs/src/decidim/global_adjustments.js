@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = e.target.closest("button[data-toggle-toggle-value]");
     if (!btn) return;
 
-    const goingForward = btn.dataset.toggleToggleValue.startsWith("step-1");
+    const goingForward = !btn.dataset.toggleToggleValue.startsWith("step-0");
     announcements.forEach(a => a.classList.toggle("is-hidden", goingForward));
   });
 });
