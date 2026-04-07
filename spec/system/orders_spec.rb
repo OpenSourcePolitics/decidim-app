@@ -88,13 +88,12 @@ describe "Orders" do
             # voting rules still displayed when scrolling the page
             page.scroll_to(find("footer"))
             within ".progressbox-fixed-wrapper" do
-              expect(page).to have_css('.budget-summary__progressbox--checked_out')
+              expect(page).to have_css(".budget-summary__progressbox--checked_out")
               expect(page).to have_content("Assign at least € 70,000,000 to the projects you want and vote according to your preferences.")
             end
           end
         end
       end
-
 
       context "when voting by minimum projects number" do
         let!(:component) do
@@ -215,8 +214,8 @@ describe "Orders" do
             within ".budget-summary__content", match: :first do
               expect(page).to have_css ".budget-summary__progressbar--meter", style: "width: 25%"
               expect(page).to have_no_button(text: "Vote budget")
-              # voting rules added
-              expect(page).to have_css ".budget-summary__progressbox--checked_out"
+              # dropdown visible and voting rules displayed
+              expect(page).to have_css ".progress-summary-dropdown-menu[aria-hidden=false]"
               expect(page).to have_content("Assign at least € 70,000,000 to the projects you want and vote according to your preferences.")
             end
           end
