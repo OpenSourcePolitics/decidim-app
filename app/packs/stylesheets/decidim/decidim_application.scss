@@ -6,6 +6,9 @@
 // available at https://docs.decidim.org/en/develop/customize/styles.html#_tailwind_css
 //
 // By default this is empty.
+
+@import "stylesheets/decidim/global_adjustments.scss";
+
 .card__grid-metadata {
   @apply overflow-x-hidden
 }
@@ -15,3 +18,13 @@
 
   @apply bg-center bg-cover;
 }
+// css for proposal_aside deface override
+.proposal-iframe {
+  width: 100%;
+
+  @screen xl {
+    width: 150%;
+  }
+  overflow: scroll;
+}
+

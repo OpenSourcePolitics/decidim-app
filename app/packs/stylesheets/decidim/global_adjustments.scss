@@ -1,0 +1,22 @@
+.flash[data-announcement] {
+  &:has(.flash__message p:empty):not(:has(.flash__message p:not(:empty))) {
+    display: none;
+  }
+}
+
+.flash[data-announcement].is-hidden {
+  display: none !important;
+}
+
+.content-block {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.participatory-space__metadata-link-endorsers {
+  display: none;
+}
+
+.main-bar__links-desktop__item-wrapper div:has(a[aria-label="Activité"]) {
+  display: none;
+}

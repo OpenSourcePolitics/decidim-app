@@ -46,10 +46,8 @@ module Decidim
     end
 
     def account_params
-      if force_profile_sync_on_omniauth_connection?
-        params[:user][:name] = current_user.name
-        params[:user][:email] = current_user.email
-      end
+      params[:user][:name] = current_user.name if disable_profile_field?(:name)
+      params[:user][:email] = current_user.email if disable_profile_field?(:email)
       params[:user].to_unsafe_h
     end
 

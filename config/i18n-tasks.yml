@@ -107,6 +107,7 @@ ignore_missing:
   - decidim.accessibility.front_page_link
   - decidim.accessibility.logo
   - decidim.errors.not_found.back_home
+  - layouts.decidim.announcements.*
 
 # Consider these keys used:
 ignore_unused:
@@ -145,3 +146,6 @@ ignore_unused:
   - decidim.authorization_handlers.data_authorization_handler.(explanation|name)
   - decidim.system.organizations.omniauth_settings.cultuur_connect.*
   - layouts.decidim.budgets.voting_menubar.cancel_voting
+  - decidim.searches.filters.jump_to
+  - decidim.components.proposals.settings.global.enable_iframe
+  - decidim.components.proposals.settings.global.iframe_url
