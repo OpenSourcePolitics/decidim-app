@@ -86,3 +86,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// dropdown for voting rules on mobile is open
+document.addEventListener("DOMContentLoaded", function () {
+  const dropdown = document.querySelector('#progress-summary-dropdown-menu')
+
+  if (window.innerWidth <= 768 && dropdown){
+    dropdown.setAttribute('aria-hidden', false)
+  }
+});
