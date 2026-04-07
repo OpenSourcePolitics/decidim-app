@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }, { passive: true });
 });
+
 // on mobile portrait, when user is not signin, change the display of div.main-bar__menu-mobile
 // so that logo and signin link don't overlap
 document.addEventListener("DOMContentLoaded", function () {
@@ -86,3 +87,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// --- Fixes regarding the surveys --- //
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-survey-buttons]");
+    if (!btn) return;
+
+    setTimeout(() => {
+      const target =
+        document.querySelector(".answer-questionnaire") ||
+        document.querySelector(".questionnaire") ||
+        document.querySelector("main");
+
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 50);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const announcements = document.querySelectorAll(".flash[data-announcement]");
+  if (!announcements.length) return;
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-survey-buttons]");
+    if (!btn) return;
+
+    const toggle = btn.dataset.toggle || "";
+    const goingForward = !toggle.startsWith("step-0");
+    announcements.forEach(a => a.classList.toggle("is-hidden", goingForward));
+  });
+});
+
+// ------ //
