@@ -215,7 +215,7 @@ describe "Orders" do
               expect(page).to have_css ".budget-summary__progressbar--meter", style: "width: 25%"
               expect(page).to have_no_button(text: "Vote budget")
               # dropdown visible and voting rules displayed
-              expect(page).to have_css ".progress-summary-dropdown-menu[aria-hidden=false]"
+              expect(page).to have_css "#progress-summary-dropdown-menu[aria-hidden=false]"
               expect(page).to have_content("Assign at least € 70,000,000 to the projects you want and vote according to your preferences.")
             end
           end
@@ -346,7 +346,7 @@ describe "Orders" do
           click_on "Add", match: :first
 
           expect(page).to have_content("We need to verify your identity")
-          expect(page).to have_content("Verify with Example authorization")
+          expect(page).to have_content("Please complete the form to proceed with this action")
         end
       end
 
