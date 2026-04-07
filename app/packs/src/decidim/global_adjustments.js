@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!btn) return;
 
     const toggle = btn.dataset.toggle || "";
-    const goingForward = toggle.startsWith("step-1");
+    const goingForward = !toggle.startsWith("step-0");
     announcements.forEach(a => a.classList.toggle("is-hidden", goingForward));
   });
 });
