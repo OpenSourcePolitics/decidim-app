@@ -22,3 +22,13 @@
 .main-bar__links-desktop__item-wrapper div:has(a[aria-label="Activité"]) {
   display: none;
 }
+/* show the rules to vote on budgets */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .budget-summary__progressbox--checked_out {
+    display: block !important;
+  }
+  .budget-summary__progressbar {
+    margin-top: 1rem !important;
+  }
+}
+
