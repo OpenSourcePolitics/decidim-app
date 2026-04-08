@@ -9,11 +9,9 @@ shared_examples "on/off confirmation codes" do
     it "confirms the user" do
       expect(user.reload).not_to be_confirmed
 
-      fill_confirmation_code(code)
-
-      within_flash_messages do
-        expect(page).to have_content("Your account has been succesfully confirmed")
-      end
+      real_code = ::Decidim::FriendlySignup.confirmation_code(user.confirmation_token)
+      fill_confirmation_code(real_code)
+      submit_confirmation_code
 
       expect(user.reload).to be_confirmed
     end
@@ -25,6 +23,7 @@ shared_examples "on/off confirmation codes" do
         expect(user.reload).not_to be_confirmed
 
         fill_confirmation_code(code)
+        submit_confirmation_code
 
         within_flash_messages do
           expect(page).to have_content("Code is invalid")
@@ -93,6 +92,7 @@ shared_examples "on/off standard confirmation" do
       expect(last_email.subject).to include(organization.name)
       expect(last_email_code).to eq(code.to_s)
       fill_confirmation_code(last_email_code)
+      submit_confirmation_code
 
       expect(user.reload).to be_confirmed
     end

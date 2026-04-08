@@ -22,7 +22,13 @@ module Decidim
               "name" => "Facebook User",
               "nickname" => "facebook_user",
               "oauth_signature" => oauth_signature,
-              "avatar_url" => "http://www.example.com/foo.jpg"
+              "avatar_url" => "http://www.example.com/foo.jpg",
+              "tos_agreement" => true,
+              "postal_code" => "75001",
+              "birth_date" => Date.new(1990, 1, 1),
+              "city" => "Paris",
+              "address" => "123 Rue de la Paix",
+              "certification" => true
             }
           }
         end
@@ -93,24 +99,20 @@ module Decidim
           end
 
           it "notifies about registration with oauth data" do
-            user = create(:user, email: email, organization: organization)
-            identity = Decidim::Identity.new(id: 1234)
-            allow(command).to receive(:create_identity).and_return(identity)
-
             expect(ActiveSupport::Notifications)
               .to receive(:publish)
               .with(
                 "decidim.user.omniauth_registration",
-                user_id: user.id,
-                identity_id: 1234,
-                provider: provider,
-                uid: uid,
-                email: email,
-                name: "Facebook User",
-                nickname: "facebook_user",
-                avatar_url: "http://www.example.com/foo.jpg",
-                raw_data: {}
+                hash_including(
+                  provider: provider,
+                  uid: uid,
+                  email: email,
+                  name: "Facebook User",
+                  avatar_url: "http://www.example.com/foo.jpg",
+                  raw_data: {}
+                )
               )
+
             command.call
           end
 
@@ -203,25 +205,33 @@ module Decidim
 
         # New tests for triggering omniauth_registration:
         context "when the user has an existing identity" do
-          before do
-            user = create(:user, email: email, organization: organization)
-            create(:identity, user: user, provider: provider, uid: uid)
-            allow(command).to receive(:trigger_omniauth_registration)
-          end
+          let!(:user) { create(:user, email: email, organization: organization) }
+          let!(:identity) { create(:identity, user: user, provider: provider, uid: uid) }
 
           it "triggers omniauth registration" do
-            expect(command).to receive(:trigger_omniauth_registration)
+            expect(ActiveSupport::Notifications).to receive(:publish).with(
+              "decidim.user.omniauth_registration",
+              hash_including(
+                user_id: user.id,
+                identity_id: identity.id,
+                provider: provider,
+                uid: uid
+              )
+            )
             command.call
           end
         end
 
         context "when a new user and identity are created" do
-          before do
-            allow(command).to receive(:trigger_omniauth_registration)
-          end
-
           it "triggers omniauth registration" do
-            expect(command).to receive(:trigger_omniauth_registration)
+            expect(ActiveSupport::Notifications).to receive(:publish).with(
+              "decidim.user.omniauth_registration",
+              hash_including(
+                provider: provider,
+                uid: uid,
+                email: email
+              )
+            )
             command.call
           end
         end

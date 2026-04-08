@@ -20,6 +20,7 @@ en:
         document: Document
   decidim:
     account:
+      blocked: This account has been blocked due to Terms and Conditions violation
       omniauth_synced_profile:
         helper:
           body_html: |-
@@ -162,6 +163,9 @@ en:
               most_voted: Most supported
               random: Random
     devise:
+      omniauth_registrations:
+        create:
+          email_already_exists: Another account is using the same email address
       sessions:
         new:
           sign_in_disabled: Sign in disabled
@@ -301,24 +305,18 @@ en:
             client_secret: Client secret
             site_url: Site URL
           france_connect:
-            client_id: Client ID
-            client_secret: Client secret
-            provider: FranceConnect
-            provider_name: FranceConnect
-            scope: scope
-            site_url: Site URL
-          france_connect_profile:
-            button_path: Button path
-            client_id: Client ID
-            client_secret: Client secret
-            provider_name: Provider name
-            site: Site URL
-          france_connect_uid:
-            button_path: Button path
-            client_id: Client ID
-            client_secret: Client secret
-            provider_name: Provider name
-            site: Site URL
+            acr_values: ACR values
+            client_options_identifier: Client identifier
+            client_options_redirect_uri: Redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/callback)
+            client_options_secret: Client secret
+            client_signing_alg: Client signing algorithm (e.g. RS256, ES256, PS256 ...)
+            display_name: Display name
+            icon_hover_path: Icon path for hover state (e.g. /media/images/oidc_hover.png)
+            issuer: Issuer URL (e.g. https://identity.com)
+            logout_path: Logout path (path after "/users/auth/openid_connect")
+            logout_policy: Logout policy (none/session.destroy)
+            post_logout_redirect_uri: Post logout redirect URI (e.g. https://my-decidim.com/users/auth/openid_connect/logout)
+            scope: Scope / Claims (e.g. openid email profile)
           openid_connect:
             client_options_identifier: Client ID
             client_options_redirect_uri: Redirection URL
@@ -356,13 +354,14 @@ en:
       new:
         forgot_your_password: Forgot your password
         send_me_reset_password_instructions: Send me reset password instructions
+    registrations:
+      signed_up_but_unconfirmed: A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.
     sessions:
       new:
         sign_in: Log in
     shared:
       links:
         forgot_your_password: Forgot your password
-        sign_in_with_france_connect: Sign in with france connect
   faker:
     address:
       country_code:

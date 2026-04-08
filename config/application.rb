@@ -36,6 +36,8 @@ module DevelopmentApp
       "Referrer-Policy" => "strict-origin-when-cross-origin"
     }
 
+    require "decidim_app/omniauth/configurator"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
@@ -57,7 +59,7 @@ module DevelopmentApp
       require "extends/controllers/decidim/scopes_controller_extends"
       require "extends/controllers/decidim/initiatives/committee_requests_controller_extends"
       require "extends/controllers/decidim/comments/comments_controller"
-      require "extends/controllers/decidim/account_controller_extends"
+      require "extends/controllers/decidim/devise/account_controller_extends"
       # Models
       require "extends/models/decidim/budgets/project_extends"
       require "extends/models/decidim/authorization_extends"
@@ -82,6 +84,12 @@ module DevelopmentApp
 
       Decidim::GraphiQL::Rails.config.tap do |config|
         config.initial_query = "{\n  deployment {\n    version\n    branch\n    remote\n    upToDate\n    currentCommit\n    latestCommit\n    locallyModified\n  }\n}".html_safe
+      end
+    end
+
+    initializer "decidim_app.overrides", after: "decidim.action_controller" do
+      config.to_prepare do
+        Decidim::Devise::OmniauthRegistrationsController.include(Decidim::OmniauthRegistrationsControllerOverride)
       end
     end
 

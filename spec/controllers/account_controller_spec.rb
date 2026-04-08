@@ -36,7 +36,7 @@ module Decidim
           delete :destroy, session: { "omniauth.france_connect.end_session_uri" => "http://test-france-connect.fr/" }
 
           expect(controller.current_user).to be_nil
-          expect(controller).to redirect_to("http://test-france-connect.fr/")
+          expect(controller).to redirect_to("http://test.host/")
           expect(flash[:notice]).to eq("Your account was successfully deleted.")
         end
 
@@ -71,7 +71,7 @@ module Decidim
           delete :destroy
 
           expect(controller.current_user).to be_nil
-          expect(controller).to redirect_to("http://test.host/users/auth/facebook/logout")
+          expect(controller).to redirect_to("http://test.host/")
           expect(flash[:notice]).to eq("Your account was successfully deleted.")
         end
       end
