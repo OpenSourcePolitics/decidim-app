@@ -107,3 +107,39 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+// --- Fixes regarding the surveys --- //
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-toggle-toggle-value]");
+    if (!btn) return;
+
+    setTimeout(() => {
+      const target =
+        document.querySelector(".answer-questionnaire") ||
+        document.querySelector(".questionnaire") ||
+        document.querySelector("main");
+
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 50);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const announcements = document.querySelectorAll(".flash[data-announcement]");
+  if (!announcements.length) return;
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-toggle-toggle-value]");
+    if (!btn) return;
+
+    const goingForward = !btn.dataset.toggleToggleValue.startsWith("step-0");
+    announcements.forEach(a => a.classList.toggle("is-hidden", goingForward));
+  });
+});
+
+// ------ //
