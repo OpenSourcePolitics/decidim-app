@@ -49,6 +49,7 @@ gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePoliti
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "bump/0.31"
 
 gem "decidim-ai", git: "https://github.com/OpenSourcePolitics/decidim-module-ai.git", branch: "bump/0.31_third_party_service"
+gem "decidim-decidim_ai_spam_bot", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_ai_spam_bot.git", branch: "master"
 gem "decidim-ai_third_party", git: "https://github.com/OpenSourcePolitics/decidim-ai_third_party.git", branch: "bump/0.31"
 
 gem "omniauth_openid_connect"
