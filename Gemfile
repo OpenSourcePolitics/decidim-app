@@ -41,6 +41,7 @@ gem "decidim-budgets_importer", git: "https://github.com/OpenSourcePolitics/deci
 gem "decidim-budgets_paper_ballots", git: "https://github.com/OpenSourcePolitics/decidim-module-budgets_paper_ballots.git", branch: "bump/0.31"
 gem "decidim-cache_cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner.git", branch: "bump/0.31"
 gem "decidim-cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cleaner.git", branch: "bump/0.31"
+gem "decidim-decidim_ai_spam_bot", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_ai_spam_bot.git", branch: "master"
 gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git", branch: DECIDIM_BRANCH
 gem "decidim-emitter", git: "https://github.com/OpenSourcePolitics/decidim-module-emitter.git", branch: "bump/0.31"
 gem "decidim-extra_user_fields", git: "https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git", branch: "bump/0.31"
@@ -49,7 +50,6 @@ gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePoliti
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "bump/0.31"
 
 gem "decidim-ai", git: "https://github.com/OpenSourcePolitics/decidim-module-ai.git", branch: "bump/0.31_third_party_service"
-gem "decidim-decidim_ai_spam_bot", git: "https://github.com/OpenSourcePolitics/decidim-module-decidim_ai_spam_bot.git", branch: "master"
 gem "decidim-ai_third_party", git: "https://github.com/OpenSourcePolitics/decidim-ai_third_party.git", branch: "bump/0.31"
 
 gem "omniauth_openid_connect"
