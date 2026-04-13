@@ -900,6 +900,8 @@ fr:
           spam_detected: Un problème est survenu lors de la réponse au questionnaire. Peut-être avez-vous été trop rapide, pouvez-vous réessayer?
           success: Merci pour votre réponse au questionnaire.
     system:
+      menu:
+        api_credentials: Identifiants de l'API
       organizations:
         omniauth_settings:
           cultuur_connect:

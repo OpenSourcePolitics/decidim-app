@@ -892,6 +892,8 @@ en:
           spam_detected: There was a problem responding the form. Maybe you have been too quick, can you try again?
           success: Survey successfully responded.
     system:
+      menu:
+        api_credentials: API credentials
       organizations:
         omniauth_settings:
           cultuur_connect:

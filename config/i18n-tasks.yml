@@ -199,3 +199,4 @@ ignore_unused:
   - decidim.conferences.admin.conferences.form.taxonomies
   - decidim.core.application_helper.filter_taxonomy_values.all
   - decidim.proposals.proposals.vote_button.votes_blocked
+  - decidim.system.menu.api_credentials
