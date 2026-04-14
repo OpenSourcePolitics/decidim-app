@@ -20,6 +20,7 @@ jobs:
         with:
           ruby-version: ${{ inputs.ruby_version }}
           bundler-cache: true
+          cache-version: 2
       - name: Check for Zeitwerk errors
         run: |
           bundle exec rails zeitwerk:check
