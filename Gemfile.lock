@@ -27,7 +27,7 @@ GIT
   revision: 0679c37c7a6bff42a9a8d9b59c137559dfde8291
   branch: bump/0.31_third_party_service
   specs:
-    decidim-ai (0.31.2)
+    decidim-ai (0.31)
       classifier-reborn (~> 2.3.0)
       decidim-core (~> 0.31.0)
 
