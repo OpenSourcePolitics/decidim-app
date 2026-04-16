@@ -41,7 +41,6 @@ jobs:
         with:
           ruby-version: ${{ inputs.ruby_version }}
           bundler-cache: true
-          cache-version: 2
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node_version }}
