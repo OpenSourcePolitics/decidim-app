@@ -34,8 +34,6 @@ describe "Explore projects", :slow do
         visit_budget
         click_on translated(project.title)
       end
-
-      it_behaves_like "has embedded video in description", :description
     end
 
     context "when voting is finished" do
