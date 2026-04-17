@@ -29,13 +29,6 @@ describe "Explore projects", :slow do
     let(:description) { { en: "Short description", ca: "Descripció curta", es: "Descripción corta" } }
     let(:project) { create(:project, budget:, description:) }
 
-    context "when voting is open" do
-      before do
-        visit_budget
-        click_on translated(project.title)
-      end
-    end
-
     context "when voting is finished" do
       let(:active_step_id) { participatory_process.active_step.id }
 
