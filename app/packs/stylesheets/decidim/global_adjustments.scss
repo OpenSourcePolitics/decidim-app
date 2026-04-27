@@ -1,7 +1,11 @@
 .flash[data-announcement] {
-  &:has(.flash__message p:empty) {
+  &:has(.flash__message p:empty):not(:has(.flash__message p:not(:empty))) {
     display: none;
   }
+}
+
+.flash[data-announcement].is-hidden {
+  display: none !important;
 }
 
 .content-block {
