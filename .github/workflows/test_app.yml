@@ -79,15 +79,9 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ inputs.ruby_version }}
-      - run: |
-          sudo apt update
-          sudo apt install libu2f-udev
-          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{inputs.chrome_version}}-1_amd64.deb
-          sudo dpkg -i /tmp/chrome.deb
-          rm /tmp/chrome.deb
       - uses: browser-actions/setup-chrome@v1
         with:
-          chromedriver-version: ${{inputs.chrome_version}}
+          chrome-version: ${{inputs.chrome_version}}
         name: Install Chrome version ${{inputs.chrome_version}}
       - uses: actions/cache@v4
         id: app-cache
