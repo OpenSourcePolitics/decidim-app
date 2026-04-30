@@ -31,7 +31,7 @@
   <section>
     <% if allow_answers? %>
       <% if visitor_can_answer? %>
-        <% if visitor_already_answered? && flash[:notice].blank? %>
+        <% if visitor_already_answered? %>
           <%= cell("decidim/announcement", { title: t("decidim.forms.questionnaires.show.questionnaire_answered.title"), body: t("decidim.forms.questionnaires.show.questionnaire_answered.body") }) %>
         <% else %>
           <% if @form.responses_by_step.flatten.empty? %>
