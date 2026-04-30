@@ -38,7 +38,7 @@ on:
       chrome_version:
         description: 'Chrome & Chromedriver version'
         required: false
-        default: "136.0.7103.92"
+        default: "136.0.7103.114"
         type: string
 
 jobs:
@@ -79,9 +79,15 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ inputs.ruby_version }}
-      - uses: browser-actions/setup-chrome@v1
+      - run: |
+          sudo apt update
+          sudo apt install libu2f-udev
+          wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${{inputs.chrome_version}}-1_amd64.deb
+          sudo dpkg -i /tmp/chrome.deb
+          rm /tmp/chrome.deb
+      - uses: nanasess/setup-chromedriver@v2
         with:
-          chrome-version: ${{inputs.chrome_version}}
+          chromedriver-version: ${{inputs.chrome_version}}
         name: Install Chrome version ${{inputs.chrome_version}}
       - uses: actions/cache@v4
         id: app-cache
