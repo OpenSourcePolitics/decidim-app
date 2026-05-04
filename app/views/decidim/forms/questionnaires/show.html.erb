@@ -33,7 +33,7 @@
       <% if visitor_can_answer? %>
         <% if visitor_already_answered? && flash[:notice].blank? %>
           <%= cell("decidim/announcement", { title: t("decidim.forms.questionnaires.show.questionnaire_answered.title"), body: t("decidim.forms.questionnaires.show.questionnaire_answered.body") }) %>
-        <% else !visitor_already_answered? %>
+        <% elsif !visitor_already_answered? %>
           <% if @form.responses_by_step.flatten.empty? %>
             <%= cell("decidim/announcement", t("decidim.forms.questionnaires.show.empty")) %>
           <% else %>
