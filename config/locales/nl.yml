@@ -310,6 +310,8 @@ nl:
         close_modal: Close modal
         please_sign_in: Please sign in
         sign_up: Sign up
+    sms_gateway_service:
+      message: 'Hallo, hier is de code om jezelf te authenticeren op het %{platform} platform: %{code}'
     system:
       dashboard:
         show:

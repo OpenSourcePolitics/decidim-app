@@ -264,6 +264,18 @@ Decidim.configure do |config|
   #
   # config.sms_gateway_service = "MySMSGatewayService"
 
+  sms_gateway_service = Decidim::Env.new("SMS_GATEWAY_SERVICE").to_s
+  if sms_gateway_service.present?
+    config.sms_gateway_service = sms_gateway_service
+    config.sms_gateway_context = {}
+
+    %w(url bulk_url username password mb_account_id mb_api_key oadc platform).each do |key|
+      env_key = "SMS_GATEWAY_#{key.upcase}"
+      value = Decidim::Env.new(env_key).to_s
+      config.sms_gateway_context[key.to_sym] = value if value.present?
+    end
+  end
+
   # Timestamp service configuration
   #
   # Provide a class to generate a timestamp for a document. The instances of

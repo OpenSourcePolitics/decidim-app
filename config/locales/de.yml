@@ -438,6 +438,8 @@ de:
           address: 37 Homewood Drive Brownsburg, IN 46112
     scopes:
       global: Globaler Geltungsbereich
+    sms_gateway_service:
+      message: 'Hallo, hier ist der Code, um sich auf der %{platform} Plattform zu authentifizieren: %{code}'
     statistics:
       assemblies_count: Akteure
     system:

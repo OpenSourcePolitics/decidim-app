@@ -48,6 +48,9 @@ gem "decidim-guest_meeting_registration", git: "https://github.com/OpenSourcePol
 gem "decidim-survey_multiple_answers", git: "https://github.com/OpenSourcePolitics/decidim-module-survey_multiple_answers.git", branch: "bump/0.31"
 gem "decidim-term_customizer", git: "https://github.com/OpenSourcePolitics/decidim-module-term_customizer.git", branch: "bump/0.31"
 
+gem "decidim-ephemeral_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-ephemeral_authorization_handler.git",
+                                               branch: "feat/handle_ephemeral_handler"
+
 gem "decidim-ai", git: "https://github.com/OpenSourcePolitics/decidim-module-ai.git", branch: "bump/0.31_third_party_service"
 gem "decidim-ai_third_party", git: "https://github.com/OpenSourcePolitics/decidim-ai_third_party.git", branch: "bump/0.31"
 

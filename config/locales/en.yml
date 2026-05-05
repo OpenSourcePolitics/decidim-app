@@ -881,6 +881,8 @@ en:
     searches:
       filters:
         jump_to: Jump to
+    sms_gateway_service:
+      message: 'Hello, here is the code to authenticate yourself on the %{platform} platform: %{code}'
     surveys:
       surveys:
         count:
