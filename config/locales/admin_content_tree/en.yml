@@ -1,0 +1,11 @@
+en:
+  decidim:
+    admin:
+      content:
+        tree:
+          label:
+            previously_published: "Previously published"
+            private: "Private"
+            published: "Published"
+            public: "Public"
+            unpublished: "Unpublished"

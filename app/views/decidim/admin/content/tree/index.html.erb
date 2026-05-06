@@ -1,0 +1,41 @@
+<div class="item_show__header">
+  <h1 class="item_show__header-title">Content Tree</h1>
+</div>
+
+<div class="table-scroll">
+  <table class="table-list">
+    <%# <thead>
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          status
+        </th>
+        <th>
+          actions
+        </th>
+      </tr>
+    </thead> %>
+    <tbody>
+      <% content_tree[:children].each do |participatory_spaces| %>
+        <% participatory_space_type_prefix = participatory_spaces[:manifest][:item_class].to_s.demodulize.underscore.pluralize %>
+        <tr>
+          <th class="border-b border-background-4 bg-background-3" scope="rowgroup" colspan="3">
+            <div class="m-2" id="<%= participatory_space_type_prefix + "__header" %>">
+              <h2 class="text-left text-lg font-semibold">
+                <%= participatory_spaces[:name] %>
+              </h2>
+            </div>            
+          </th>
+        </tr>
+        <% participatory_spaces[:children].each do |participatory_space| %>
+          <%= render partial: "table/row", locals: { item: participatory_space } %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="my-4">
+<pre><%= JSON.pretty_generate(content_tree) %></pre>
+</div>

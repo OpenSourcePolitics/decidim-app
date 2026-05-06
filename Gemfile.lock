@@ -248,6 +248,8 @@ GIT
     decidim-debates (0.29.5)
       decidim-comments (= 0.29.5)
       decidim-core (= 0.29.5)
+    decidim-design (0.29.5)
+      decidim-core (= 0.29.5)
     decidim-dev (0.29.5)
       bullet (~> 7.1.6)
       byebug (~> 11.0)
@@ -1143,6 +1145,7 @@ DEPENDENCIES
   decidim-conferences!
   decidim-dataspace!
   decidim-decidim_awesome!
+  decidim-design!
   decidim-dev!
   decidim-emitter!
   decidim-extra_user_fields!
