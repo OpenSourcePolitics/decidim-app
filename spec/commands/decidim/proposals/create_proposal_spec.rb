@@ -120,6 +120,44 @@ module Decidim
                 expect { command.call }.to broadcast(:invalid)
               end
             end
+
+            context "with a private body" do
+              let(:form_params) do
+                {
+                  title: "A reasonable proposal title",
+                  body: "A reasonable proposal body",
+                  private_body: "A valid private proposal body"
+                }
+              end
+              let(:proposal) { Decidim::Proposals::Proposal.last }
+
+              it "broadcasts :ok and creates a private_body" do
+                expect { command.call }.to broadcast(:ok)
+                expect(proposal.title["en"]).to eq("A reasonable proposal title")
+                expect(proposal.body["en"]).to eq("A reasonable proposal body")
+                expect(proposal.private_body).to eq("A valid private proposal body")
+                expect(proposal.extra_fields.private_body).to eq("A valid private proposal body")
+              end
+            end
+
+            context "with no private body" do
+              let(:form_params) do
+                {
+                  title: "A reasonable proposal title",
+                  body: "A reasonable proposal body",
+                  private_body: nil
+                }
+              end
+              let(:proposal) { Decidim::Proposals::Proposal.last }
+
+              it "broadcasts :ok and does not create a private_body" do
+                expect { command.call }.to broadcast(:ok)
+                expect(proposal.title["en"]).to eq("A reasonable proposal title")
+                expect(proposal.body["en"]).to eq("A reasonable proposal body")
+                expect(proposal.private_body).to be_nil
+                expect(proposal.extra_fields).to be_nil
+              end
+            end
           end
 
           describe "the proposal limit excludes withdrawn proposals" do
