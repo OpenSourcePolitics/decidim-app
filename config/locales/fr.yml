@@ -108,8 +108,6 @@ fr:
           global:
             enable_iframe: Autoriser un iframe
             iframe_url: Url de l'iframe
-            require_category: La catégorie est requise
-            require_scope: Le secteur est requis
     devise:
       omniauth:
         france_connect:
