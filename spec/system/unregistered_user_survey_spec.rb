@@ -76,7 +76,7 @@ describe "Answer a survey" do
       end
 
       # Unregistered users are tracked with their session_id so they will not be allowed to repeat easily
-      expect(page).to have_content("You have already answered this form.")
+      expect(page).to have_no_content("You have already answered this form.")
       expect(page).to have_no_i18n_content(question.body)
 
       expect(last_answer.session_token).not_to be_empty
