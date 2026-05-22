@@ -60,6 +60,7 @@ module DecidimApp
       require "extends/permissions/initiatives/permissions_extends"
       # presenters
       require "extends/presenters/decidim/forms/admin/questionnaire_answer_presenter_extends"
+      require "extends/presenters/decidim/menu_item_presenter_extends"
       # serializers
       require "extends/serializers/decidim/proposals/proposal_serializer_extends"
     end
