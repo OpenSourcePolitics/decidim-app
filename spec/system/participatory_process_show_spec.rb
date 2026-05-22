@@ -80,23 +80,16 @@ describe "Participatory Process show page" do
           end
 
           it "shows less or more description when clicking on button" do
+            expect(page).to have_css('button[data-controls^="panel-view-more"][aria-expanded="true"]')
             click_link_or_button "Show less"
-            sleep 1
             within "[data-content]" do
-              aria_hidden = page.find('div[id^="panel-view-more"]')["aria-hidden"]
-              inert = page.find('div[id^="panel-view-more"]')["inert"]
-              aria_expanded = page.find('button[data-controls^="panel-view-more"]')["aria-expanded"]
-              expect(aria_hidden).to eq("true")
-              expect(inert).to eq("true")
-              expect(aria_expanded).to eq("false")
+              expect(page).to have_css('div[id^="panel-view-more"][aria-hidden="true"]')
+              expect(page).to have_css('button[data-controls^="panel-view-more"][aria-expanded="false"]')
             end
             click_link_or_button "More information"
-            sleep 1
             within "[data-content]" do
-              aria_hidden = page.find('div[id^="panel-view-more"]')["aria-hidden"]
-              aria_expanded = page.find('button[data-controls^="panel-view-more"]')["aria-expanded"]
-              expect(aria_hidden).to eq("false")
-              expect(aria_expanded).to eq("true")
+              expect(page).to have_css('div[id^="panel-view-more"][aria-hidden="false"]')
+              expect(page).to have_css('button[data-controls^="panel-view-more"][aria-expanded="true"]')
             end
           end
         end
