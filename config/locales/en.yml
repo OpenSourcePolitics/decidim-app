@@ -98,6 +98,8 @@ en:
       proposals:
         settings:
           global:
+            enable_iframe: Enable iframe
+            iframe_url: Url of the iframe
             require_category: Category is required
             require_scope: Scope is required
     devise:
