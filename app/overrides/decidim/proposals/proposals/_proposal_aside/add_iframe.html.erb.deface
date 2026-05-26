@@ -1,6 +1,0 @@
-<!-- insert_after "section.layout-aside__section.actions__secondary" -->
-<% if current_component.settings.enable_iframe && current_component.settings.iframe_url.present? %>
-  <section class="layout-aside__section proposal-iframe">
-    <iframe width="100%" height="400" frameBorder="0" allowFullscreen src=<%= current_component.settings.iframe_url %>>></iframe>
-  </section>
-<% end %>

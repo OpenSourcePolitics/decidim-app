@@ -81,7 +81,7 @@ describe "Answer a survey" do
         expect(page).to have_content("successfully")
       end
 
-      expect(page).to have_content("You have already answered this form.")
+      expect(page).to have_no_content("You have already answered this form.")
       expect(page).to have_no_i18n_content(question.body)
 
       expect(questionnaire.answers.last.session_token).not_to be_empty

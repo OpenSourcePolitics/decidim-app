@@ -155,8 +155,6 @@ nl:
       proposals:
         settings:
           global:
-            enable_iframe: Enable iframe
-            iframe_url: iframe-URL
             require_category: Categorie is vereist
             require_scope: Reikwijdte is vereist
     decidim_admin_multi_factor:
