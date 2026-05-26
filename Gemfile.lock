@@ -27,7 +27,7 @@ GIT
   revision: 0b04b83e97c47012fdbac4eb5d2ab031b549c66a
   branch: bump/0.31_third_party_service
   specs:
-    decidim-ai (0.31.5)
+    decidim-ai (0.31.2)
       classifier-reborn (~> 2.3.0)
       decidim-core (~> 0.31.0)
 
@@ -105,10 +105,10 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/guest-meeting-registration.git
-  revision: 3ab3f814566219a10c8b0887cf6b2ed0cbb7b9dd
+  revision: deb31f199866285296c366ca0d1ccd90bc8a3905
   branch: bump/0.31
   specs:
-    decidim-guest_meeting_registration (0.31.0)
+    decidim-guest_meeting_registration (0.31.5)
       decidim-core (~> 0.31.0)
       decidim-meetings (~> 0.31.0)
       deface (>= 1.9)
