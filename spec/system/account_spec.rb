@@ -67,6 +67,7 @@ describe "Account" do
       end
 
       it "shows error when image is too big" do
+        skip "ACCESSIBILITY_PENDING - HTML validation fails due to NuValidator rule changes, fixed upstream in decidim/decidim#16875 (waiting the backport v0.31 #16878)"
         find_by_id("user_avatar_button").click
 
         within ".upload-modal" do
