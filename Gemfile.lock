@@ -24,10 +24,10 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-ai.git
-  revision: 0b04b83e97c47012fdbac4eb5d2ab031b549c66a
-  branch: bump/0.31_third_party_service
+  revision: fc64a2cc160dcf6efe6bc81801ad89be4ea42331
+  branch: bump/version_to_0.31.5
   specs:
-    decidim-ai (0.31.2)
+    decidim-ai (0.31.5)
       classifier-reborn (~> 2.3.0)
       decidim-core (~> 0.31.0)
 
