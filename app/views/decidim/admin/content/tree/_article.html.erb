@@ -1,0 +1,90 @@
+<% depth = local_assigns[:depth] || 0 %>
+<% item_prefix = local_assigns[:item_prefix] || SecureRandom.uuid.underscore %>
+<% siblings_with_children = local_assigns[:siblings_with_children] || false %>
+<%# depth += 1 if item[:children].blank? && siblings_with_children %>
+<div class="tree-row">
+  <article>
+    <header class="tree-row-content flex gap-4">
+      <div class="flex grow flex-col gap-1" style="padding-inline-start: <%= depth %>em">
+        <div class="flex grow gap-4">
+          <div class="inline-flex items-center gap-1">
+            <span class="inline-flex items-center">
+              <% if item[:children]&.any? %>
+                <%= render partial: "accordion_trigger", locals: { target: item_prefix + "__children" } %>
+              <% elsif item[:kind] != "component" %>
+                <span style="padding-inline-start: 1em"></span>
+              <% end %>
+              <% if item[:icon].present? %>
+                <%= icon(item[:icon], class: "inline-block") %>
+              <% end %>
+            </span>
+            <span class="item-name">
+              <%= item[:name] %>
+              <% if item[:item_count].to_i.positive? %>
+                <span class="item-count"><%= item[:item_count] %></span>
+              <% end %>
+            </span>
+          </div>
+          <% if item.dig(:metadata, :labels).present? %>
+            <div class="item-labels grow">
+              <% item[:metadata][:labels].each do |key, label| %>
+                  <span class="label !text-sm <%= label[:level] %>">
+                    <%= icon(label[:icon]) if label[:icon].present? %>
+                    <%= label[:text] || label[:value] %>
+                  </span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <% if item.dig(:metadata, :stats).present? %>
+          <div class="item-stats">
+            <% item[:metadata][:stats].except(:components_count).each do |key, label| %>
+              <span class="label !text-sm <%= label[:level] %>">
+                <%= label[:value] %>
+                <%= label[:text] %>
+              </span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="actions px-4">
+        <% button_cell_attributes = { button_classes: "button button__xs button__transparent-secondary", html_options: { target: "_blank", data: { "external-link": false } } } %>
+        <% if item[:path].present? %>
+          <%= cell("decidim/button", { text: "View", icon: "eye-line", path: item[:path] }, button_cell_attributes) %>
+        <% end %>
+        <% if item[:admin_path].present? %>
+          <%= cell("decidim/button", { text: "Admin", icon: "settings-4-line", path: item[:admin_path] }, button_cell_attributes) %>
+        <% end %>
+      </div>
+    </header>
+    <% if item[:components]&.any? %>
+      <div class="tree-row">
+        <section class="components">
+          <header class="tree-row-content flex gap-4">
+            <div class="grow inline-flex items-center gap-1 text-sm" style="padding-inline-start: <%= depth + 1.5 %>em">
+              <span class="inline-flex items-center">
+                <%= render partial: "accordion_trigger", locals: { target: item_prefix + "__components" } %>
+                <%= icon("apps-2-line", class: "inline-block") %>
+              </span>
+              <span class="item-name">
+                Components
+                <span class="item-count"><%= item[:components].size %></span>
+              </span>
+            </div>
+            <div class="actions px-4">
+              <%= cell("decidim/button", { text: "Admin", icon: "settings-4-line", path: Decidim::EngineRouter.admin_proxy(item[:object]).send("components_path") }, button_cell_attributes) %>
+            </div>
+          </header>
+          <div id="<%= item_prefix + "__components" %>" aria-hidden="true" class="accordion-group">
+            <%= render partial: "article", collection: item[:components], as: :item, locals: { depth: depth + 2 } %>
+          </div>
+        </section>
+      </div>
+    <% end %>
+    <% if item[:children]&.any? %>
+      <section id="<%= item_prefix + "__children" %>" aria-hidden="true" class="children accordion-group">
+        <%= render partial: "article", collection: item[:children], as: :item, locals: { depth: depth + 1, siblings_with_children: any_grand_children?(item) } %>
+      </section>
+    <% end %>
+  </article>
+</div>

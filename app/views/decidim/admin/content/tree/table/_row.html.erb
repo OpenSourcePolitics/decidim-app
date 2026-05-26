@@ -36,7 +36,16 @@
     </div>
   </td>
   <td class="table-list__state">
-    -- status --
+    <% if item[:path].present? %>
+      <div>
+        <%= link_to "View", item[:path], target: "_blank", data: { "external-link": false } %>
+      </div>
+    <% end %>
+    <% if item[:admin_path].present? %>
+      <div>
+        <%= link_to "Admin", item[:admin_path], target: "_blank", data: { "external-link": false } %>
+      </div>
+    <% end %>
   </td>
   <td class="table-list__actions">
     <span class="action-space icon">A</span>
@@ -45,8 +54,8 @@
   </td>
 </tr>
 <% item[:components]&.each do |component| %>
-  <%= render partial: "table/row", locals: { item: component, ident_level: ident_level + 1 } %>
+<%= render partial: "table/row", locals: { item: component, ident_level: ident_level + 1 } %>
 <% end %>
 <% if item[:children]&.any? %>
-  <%= render partial: "table/row", collection: item[:children], as: :item, locals: { ident_level: ident_level + 1 } %>
+<%= render partial: "table/row", collection: item[:children], as: :item, locals: { ident_level: ident_level + 1 } %>
 <% end %>

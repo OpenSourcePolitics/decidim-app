@@ -52,9 +52,10 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         })
     }
-    // check validity of urls when input looses focus
-    inputUrl.addEventListener("keyup", checkUrl)
-
+    if(inputUrl){
+        // check validity of urls when input looses focus
+        inputUrl.addEventListener("keyup", checkUrl)
+    }
     function checkUrl(event){
         const values = event.target.value;
         const errors = [];

@@ -1,0 +1,30 @@
+fr:
+  decidim:
+    admin:
+      content:
+        tree:
+          label:
+            previously_published: "Publié précédemment"
+            private: "Privé"
+            published: "Publié"
+            public: "Public"
+            unpublished: "Non publié"
+          stats:
+            attachments: "Pièces jointes"
+            authors: "Auteurs"
+            categories: "Catégories"
+            comments: "Commentaires"
+            components: "Fonctionnalités"
+            followers: "Abonnés"
+            hidden_moderations: "Contenus cachés"
+            moderations: "Modérations"
+            signatures: "Signatures"
+          views:
+            index:
+              title: "Arbre de contenu"
+              actions:
+                export_to_csv: "Exporter l'arbre en CSV"
+            table:
+              title: "Tableau de contenu"
+      menu:
+        reversibility: "Arbre de contenu"

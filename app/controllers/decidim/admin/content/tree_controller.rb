@@ -6,11 +6,9 @@ module Decidim
       class TreeController < Decidim::Admin::ApplicationController
         helper Decidim::IconHelper
 
-        IDENT_TOKEN = "  "
-
         before_action :default_permissions
         before_action :relative_view_path
-        helper_method :content_tree
+        helper_method :content_tree, :any_grand_children?
         layout "decidim/admin/content/tree"
 
         def index; end
@@ -19,9 +17,10 @@ module Decidim
           generator = Decidim::Content::TreeGenerator.new(
             organization: current_organization,
             include_object: false,
+            location_type: :url,
             include_metadata: true,
             include_score: true,
-            components_as_children: true
+            components_as_children: false
           )
           csv_data = generator.to_csv
 
@@ -41,7 +40,7 @@ module Decidim
           end
         end
 
-        def treeview; end
+        def table; end
 
         private
 
@@ -65,6 +64,10 @@ module Decidim
             include_score: true,
             components_as_children: true
           ).hash
+        end
+
+        def any_grand_children?(node)
+          node[:children]&.any? { |child| child[:children]&.any? }
         end
       end
     end
