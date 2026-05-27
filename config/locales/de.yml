@@ -199,8 +199,6 @@ de:
       proposals:
         settings:
           global:
-            enable_iframe: Fügen Sie einen Iframe hinzu
-            iframe_url: Iframe-URL
             require_category: Kategorie ist erforderlich
             require_scope: Umfang erforderlich
     authorization_handlers:
@@ -238,12 +236,6 @@ de:
       comments:
         create:
           error: Beim Erstellen des Kommentars ist ein Problem aufgetreten.
-    components:
-      proposals:
-        settings:
-          global:
-            require_category: Kategorie ist erforderlich
-            require_scope: Geltungsbereich ist erforderlich
     devise:
       omniauth:
         france_connect:

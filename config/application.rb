@@ -56,10 +56,12 @@ module DecidimApp
       # models
       require "extends/models/decidim/accountability/result_extends"
       require "extends/models/decidim/proposals/proposal_state_extends"
+      require "extends/models/decidim/searchable_author_extends"
       # permissions
       require "extends/permissions/initiatives/permissions_extends"
       # presenters
       require "extends/presenters/decidim/forms/admin/questionnaire_answer_presenter_extends"
+      require "extends/presenters/decidim/menu_item_presenter_extends"
       # serializers
       require "extends/serializers/decidim/proposals/proposal_serializer_extends"
     end
