@@ -28,7 +28,6 @@ describe "Orders" do
 
       it example_description do
         visit_budget
-        click_on "Accept all"
 
         within "[data-order-progress-responsive='true']" do
           if should_be == :visible
@@ -187,8 +186,6 @@ describe "Orders" do
             login_as user, scope: :user # This does not work with mobile devices (i.e. iphone), so we need to do log in manually too
             driven_by(:iphone)
             visit_budget
-
-            click_on "Accept all"
 
             within "#project-#{project.id}-item" do
               page.find(".budget-list__action").click
