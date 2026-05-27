@@ -200,3 +200,8 @@ ignore_unused:
   - decidim.conferences.admin.conferences.form.taxonomies
   - decidim.core.application_helper.filter_taxonomy_values.all
   - decidim.proposals.proposals.vote_button.votes_blocked
+  - decidim.system.menu.api_credentials
+  - decidim.initiatives.create_initiative.*
+  - decidim.initiatives.form.add_documents
+  - decidim.initiatives.form.edit_documents
+  - layouts.decidim.initiative_creation_header.*
