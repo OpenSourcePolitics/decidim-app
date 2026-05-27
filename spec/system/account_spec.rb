@@ -29,7 +29,9 @@ describe "Account" do
       visit decidim.account_path
     end
 
-    it_behaves_like "accessible page"
+    it_behaves_like "accessible page" do
+      before { skip "ACCESSIBILITY_PENDING - HTML validation fails due to NuValidator rule changes, fixed upstream in decidim/decidim#16875 (waiting the backport v0.31 #16878)" }
+    end
 
     describe "update avatar" do
       it "can update avatar" do
