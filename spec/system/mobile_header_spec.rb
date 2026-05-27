@@ -26,7 +26,6 @@ describe "Mobile header" do
       driven_by(:iphone)
       switch_to_host(organization.host)
       visit decidim.root_path
-      click_on(id: "dc-dialog-accept")
     end
 
     it "has a sticky header" do
@@ -79,7 +78,6 @@ describe "Mobile header" do
       switch_to_host(organization.host)
       login_as user, scope: :user
       visit decidim.root_path
-      click_on(id: "dc-dialog-accept")
     end
 
     it "displays an avatar on the header" do
