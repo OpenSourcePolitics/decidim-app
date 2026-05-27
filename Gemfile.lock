@@ -123,6 +123,15 @@ GIT
       omniauth-oauth2 (>= 1.7.2, < 2.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/openpoke-anonymous_proposals.git
+  revision: 3559bec904efda660fc679d550977d1e3f1fd72f
+  branch: upgrade-0.31
+  specs:
+    decidim-anonymous_proposals (0.31)
+      decidim-core (>= 0.31)
+      deface (~> 1.9)
+
+GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
   revision: 6351cdc9f414b642f713392a760f47c77ac8f947
   branch: release/0.31-stable
@@ -336,15 +345,6 @@ GIT
       decidim-forms (= 0.31.5)
     decidim-verifications (0.31.5)
       decidim-core (= 0.31.5)
-
-GIT
-  remote: https://github.com/openpoke/decidim-module-anonymous_proposals.git
-  revision: 11486e30e9c546d5ebc4a386a6a9521d8f4383f3
-  branch: upgrade-0.31
-  specs:
-    decidim-anonymous_proposals (0.31)
-      decidim-core (>= 0.31)
-      deface (~> 1.9)
 
 GEM
   remote: https://rubygems.org/

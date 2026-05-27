@@ -6,6 +6,14 @@
   </style>
 <% end %>
 
+<% if Decidim::Env.new("DECIDIM_CUSTOM_NEWSLETTER_BAR_COLOR").present? %>
+  <style>
+      .decidim-bar, th.decidim-bar, td.decidim-bar {
+          background-color: <%= Decidim::Env.new("DECIDIM_CUSTOM_NEWSLETTER_BAR_COLOR").to_s %> !important;
+      }
+  </style>
+<% end %>
+
 <table class="main container">
   <tr>
     <td class="decidim-bar">
