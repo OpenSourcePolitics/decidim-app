@@ -108,6 +108,7 @@ ignore_missing:
   - decidim.accessibility.logo
   - decidim.errors.not_found.back_home
   - layouts.decidim.announcements.*
+  - layouts.decidim.data_consent.*
   - decidim.budgets.budget_information_modal.more_information
   - decidim.budgets.projects.budget_summary.vote
   - decidim.budgets.projects.budget_summary.cancel_order
