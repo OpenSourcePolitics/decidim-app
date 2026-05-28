@@ -63,6 +63,9 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  # Configure secret key base for development environment
+  config.secret_key_base = Rails.application.credentials.secret_key_base
+
   # Suppress logger output for asset requests.
 
   # Raises error for missing translations.
