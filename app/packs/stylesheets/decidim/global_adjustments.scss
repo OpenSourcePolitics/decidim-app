@@ -32,3 +32,9 @@
   }
 }
 
+#dc-dialog-wrapper.cookies__container,
+#dc-modal,
+a[data-dialog-open="dc-modal"],
+li:has(a[data-dialog-open="dc-modal"]) {
+  display: none !important;
+}

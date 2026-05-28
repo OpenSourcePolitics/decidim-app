@@ -36,7 +36,7 @@ gem "omniauth-publik", git: "https://github.com/OpenSourcePolitics/omniauth-publ
 # External Decidim gems
 gem "decidim-additional_authorization_handler", git: "https://github.com/OpenSourcePolitics/decidim-module-additional_authorization_handler.git", branch: "bump/0.31"
 gem "decidim-admin_multi_factor", git: "https://github.com/OpenSourcePolitics/decidim-module-admin_multi_factor.git", branch: "bump/0.31"
-gem "decidim-anonymous_proposals", git: "https://github.com/openpoke/decidim-module-anonymous_proposals.git", branch: "upgrade-0.31"
+gem "decidim-anonymous_proposals", git: "https://github.com/OpenSourcePolitics/openpoke-anonymous_proposals.git", branch: "upgrade-0.31"
 gem "decidim-budgets_importer", git: "https://github.com/OpenSourcePolitics/decidim-module-budgets_importer.git", branch: "bump/0.31"
 gem "decidim-budgets_paper_ballots", git: "https://github.com/OpenSourcePolitics/decidim-module-budgets_paper_ballots.git", branch: "bump/0.31"
 gem "decidim-cache_cleaner", git: "https://github.com/OpenSourcePolitics/decidim-module-cache_cleaner.git", branch: "bump/0.31"
