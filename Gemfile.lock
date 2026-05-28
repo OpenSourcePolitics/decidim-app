@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-ai_third_party.git
-  revision: 3fadd4a6b7bc2540b2f280a4a5c46ca4d6500cae
+  revision: 4e3bc11c2bcc5fa30894f91716cc95277cdebaf0
   branch: bump/0.31
   specs:
     decidim-ai_third_party (0.2.0)
