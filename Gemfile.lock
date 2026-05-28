@@ -75,8 +75,7 @@ GIT
 
 GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-ephemeral_authorization_handler.git
-  revision: b00cc1fcb5fd7e808370f0d6f3adb4bfc4ff97ee
-  branch: fix/handle_ephemeral_handler
+  revision: 51f0e676579ec3e7b0789f8fc176e0fd8fb15f52
   specs:
     decidim-ephemeral_authorization_handler (1.0.0)
       countries (~> 5.1, >= 5.1.2)
