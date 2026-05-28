@@ -71,11 +71,21 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const signIn = document.querySelector('.main-bar a[href^="/users/sign_in"]')
   const menuBarMobile = document.querySelector('header .main-bar__menu-mobile');
-  const menuBarMobileLink = document.querySelector('header .main-bar__links-mobile__login')
+  const menuBarMobileLink = document.querySelector('header .main-bar__links-mobile__login');
+  const button = document.querySelector('#main-dropdown-summary-mobile');
 
   if (window.innerWidth <= 600 && signIn && screen.orientation.type === "portrait-primary"){
     menuBarMobile.style.flexDirection = "column-reverse";
     if (menuBarMobileLink) menuBarMobileLink.style.marginBottom = "1rem";
+
+    // hide or show signin when the dropdown-menu is clicked
+    button.addEventListener('click', () => {
+      if (menuBarMobile.style.flexDirection == "column-reverse") {
+        menuBarMobile.style.flexDirection = "row-reverse";
+      } else {
+        menuBarMobile.style.flexDirection = "column-reverse";
+      }
+    })
   }
   screen.orientation.addEventListener("change", () => {
     if (screen.orientation.type === "landscape-primary"){
