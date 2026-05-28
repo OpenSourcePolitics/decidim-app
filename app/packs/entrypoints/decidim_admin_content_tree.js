@@ -1,0 +1,1 @@
+import "src/decidim/admin/content/tree";

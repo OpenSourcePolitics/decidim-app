@@ -3,6 +3,17 @@
 require "sidekiq/web"
 require "sidekiq-scheduler/web"
 
+Decidim::Admin::Engine.routes.draw do
+  constraints(->(request) { Decidim::Admin::OrganizationDashboardConstraint.new(request).matches? }) do
+    namespace :content do
+      root to: "tree#index"
+      get "export", to: "tree#export"
+      get "table", to: "tree#table"
+      get "treemap", to: "tree#treemap"
+    end
+  end
+end
+
 Rails.application.routes.draw do
   if Rails.application.secrets.puma[:health_check][:enabled]
     get "/stats", to: redirect { |_params, request| "http://#{request.host}:#{Rails.application.secrets.puma[:health_check][:port]}/stats?#{request.params.to_query}" }

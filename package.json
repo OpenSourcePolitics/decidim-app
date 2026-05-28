@@ -1,5 +1,5 @@
 {
-  "name": "decidim-lite",
+  "name": "decidim-app",
   "private": true,
   "dependencies": {
     "@decidim/browserslist-config": "file:packages/browserslist-config",
@@ -24,7 +24,7 @@
     "zustand": "^5.0.5",
     "regenerator-runtime": "0.14.1"
   },
-  "version": "0.1.0",
+  "version": "3.10.0",
   "devDependencies": {
     "@decidim/dev": "file:packages/dev",
     "@decidim/eslint-config": "file:packages/eslint-config",

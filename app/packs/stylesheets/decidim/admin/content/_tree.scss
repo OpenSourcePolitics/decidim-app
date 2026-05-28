@@ -1,0 +1,49 @@
+.depth-ident-0 {
+  @apply pl-0;
+}
+.depth-ident-1 {
+  @apply pl-4;
+}
+.depth-ident-2 {
+  @apply pl-8;
+}
+.depth-ident-3 {
+  @apply pl-12;
+}
+.depth-ident-4 {
+  @apply pl-16;
+}
+
+.content-tree.tree-view {
+  @apply flex flex-col text-md rounded-lg bg-background-2 border border-background-4;
+
+  &, :has(> *.tree-row) {
+    @apply divide-y divide-background-4 !important;
+  }
+
+  .accordion-group > *.tree-row:first-of-type {
+    @apply border-t border-background-4;
+  }
+
+  .tree-row-content {
+    @apply p-2;
+  }
+
+  .item-name {
+    @apply font-semibold align-middle;
+  }
+
+  .item-stats {
+    @apply pl-6;
+  }
+
+  section.components .item-stats {
+    @apply pl-2;
+  }
+
+  .actions {
+    a:not(.button) {
+      @apply underline text-md font-semibold text-secondary;
+    }
+  }
+}

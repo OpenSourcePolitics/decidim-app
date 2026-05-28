@@ -1,0 +1,30 @@
+<div class="item_show__header">
+  <h1 class="item_show__header-title">
+    <div><%= I18n.t("decidim.admin.content.tree.views.index.title") %></div>
+    <div class="flex items-center gap-x-4">
+      <%= link_to I18n.t("decidim.admin.content.tree.views.index.actions.export_to_csv"), decidim_admin.content_export_path(format: :csv), class: "button button__sm button__secondary" %>
+    </div>
+  </h1>
+</div>
+
+<div class="content-tree tree-view" data-component="accordion">
+  <% content_tree[:children].each do |participatory_spaces| %>
+    <% participatory_space_type_prefix = participatory_spaces[:manifest][:space_class].to_s.demodulize.underscore.pluralize %>
+    <section class="tree-row">
+      <header class="tree-row-content inline-flex items-center gap-1">
+        <%= render partial: "accordion_trigger", locals: { target: participatory_space_type_prefix + "__group" } %>
+        <h2 class="inline text-lg font-semibold">
+          <%= participatory_spaces[:name] %>
+          <% if participatory_spaces[:item_count].present? %>
+            <span class="item-count"><%= participatory_spaces[:item_count] %></span>
+          <% end %>
+        </h2>
+      </header>
+      <div id="<%= participatory_space_type_prefix + "__group" %>" aria-hidden="true" class="accordion-group">
+        <% participatory_spaces[:children].each do |participatory_space| %>
+          <%= render partial: "article", locals: { item: participatory_space, depth: 1, siblings_with_children: any_grand_children?(participatory_spaces) } %>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+</div>
