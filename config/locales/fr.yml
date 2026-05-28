@@ -932,6 +932,8 @@ fr:
     searches:
       filters:
         jump_to: Parcourir
+    sms_gateway_service:
+      message: 'Bonjour, voici votre code pour vous authentifier sur la plateforme %{platform} : %{code}'
     surveys:
       surveys:
         count:

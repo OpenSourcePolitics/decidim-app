@@ -74,6 +74,14 @@ GIT
       decidim-participatory_processes (~> 0.31.0)
 
 GIT
+  remote: https://github.com/OpenSourcePolitics/decidim-module-ephemeral_authorization_handler.git
+  revision: 51f0e676579ec3e7b0789f8fc176e0fd8fb15f52
+  specs:
+    decidim-ephemeral_authorization_handler (1.0.0)
+      countries (~> 5.1, >= 5.1.2)
+      decidim-core (~> 0.31)
+
+GIT
   remote: https://github.com/OpenSourcePolitics/decidim-module-extra_user_fields.git
   revision: 9792e8489123c21be679264852ca4d71985d8a46
   branch: bump/0.31
@@ -1296,6 +1304,7 @@ DEPENDENCIES
   decidim-dev!
   decidim-elections!
   decidim-emitter!
+  decidim-ephemeral_authorization_handler!
   decidim-extra_user_fields!
   decidim-guest_meeting_registration!
   decidim-initiatives!
