@@ -84,6 +84,7 @@ describe "Proposals" do
     end
 
     it_behaves_like "accessible page" do
+      before { skip "ACCESSIBILITY_PENDING - HTML validation fails due to NuValidator rule changes, fixed upstream in decidim/decidim#16875 (waiting the backport v0.31 #16878)" }
       before { visit_component }
     end
 
@@ -235,10 +236,8 @@ describe "Proposals" do
       end
 
       it "lists the proposals ordered by selected option" do
-        expect(page).to have_css("[id^='proposals__proposal']", minimum: 2)
-        proposals = page.all("[id^='proposals__proposal']")
-        expect(proposals.first).to have_content(first_proposal_title)
-        expect(proposals.last).to have_content(last_proposal_title)
+        expect(page).to have_css("[id^='proposals__proposal']:first-child", text: first_proposal_title)
+        expect(page).to have_css("[id^='proposals__proposal']:last-child", text: last_proposal_title)
       end
     end
 
@@ -253,9 +252,23 @@ describe "Proposals" do
       let!(:votes) { create_list(:proposal_vote, 3, proposal: most_voted_proposal) }
       let!(:less_voted_proposal) { create(:proposal, component:) }
 
-      it_behaves_like "ordering proposals by selected option", "Most voted" do
-        let(:first_proposal) { most_voted_proposal }
-        let(:last_proposal) { less_voted_proposal }
+      before do
+        visit_component
+        within ".order-by" do
+          expect(page).to have_css("div.order-by a", text: "Random")
+          page.find("a", text: "Random").click
+          click_on("Most voted")
+        end
+      end
+
+      it "ordering proposals by selected option", "Most voted" do
+        expect(page).to have_css("[id^='proposals__proposal']:first-child", text: translated(most_voted_proposal.title))
+        sleep 3
+        within all("[id^='proposals__proposal']").last do
+          within ".card__list-content" do
+            expect(page).to have_css("div.card__list-title", text: translated(less_voted_proposal.title))
+          end
+        end
       end
     end
 
@@ -291,18 +304,18 @@ describe "Proposals" do
       end
     end
 
-    context "when ordering by 'most_endorsed'", skip: "Endorsements removed in Decidim 0.31" do
-      let!(:most_endorsed_proposal) { create(:proposal, component:, created_at: 1.month.ago) }
-      let!(:endorsements) do
+    context "when ordering by 'most_liked'" do
+      let!(:most_liked_proposal) { create(:proposal, component:, created_at: 1.month.ago) }
+      let!(:likes) do
         3.times.collect do
-          create(:endorsement, resource: most_endorsed_proposal, author: build(:user, organization:))
+          create(:like, resource: most_liked_proposal, author: build(:user, organization:))
         end
       end
-      let!(:less_endorsed_proposal) { create(:proposal, component:) }
+      let!(:less_liked_proposal) { create(:proposal, component:) }
 
-      it_behaves_like "ordering proposals by selected option", "Most endorsed" do
-        let(:first_proposal) { most_endorsed_proposal }
-        let(:last_proposal) { less_endorsed_proposal }
+      it_behaves_like "ordering proposals by selected option", "Most liked" do
+        let(:first_proposal) { most_liked_proposal }
+        let(:last_proposal) { less_liked_proposal }
       end
     end
 
@@ -429,6 +442,38 @@ describe "Proposals" do
 
         expect(page).to have_no_css(".card__grid-img img[src*='proposal_image_placeholder.svg']")
         expect(page).to have_css(".card__grid-img img")
+      end
+    end
+
+    context "when proposal does not have history" do
+      let!(:proposal) { create(:proposal, component:) }
+
+      it "shows the proposal with no history panel" do
+        visit_component
+        click_on proposal_title
+
+        expect(page).to have_no_content("History")
+        expect(page).to have_no_content("This proposal was created")
+      end
+    end
+
+    context "when proposal have history" do
+      let!(:proposal) { create(:proposal, component:) }
+      let(:budget_component) do
+        create(:component, manifest_name: :budgets, participatory_space: proposal.component.participatory_space)
+      end
+      let(:project) { create(:project, component: budget_component) }
+
+      before do
+        project.link_resources([proposal], "included_proposals")
+      end
+
+      it "shows the proposal with history panel" do
+        visit_component
+        click_on proposal_title
+
+        expect(page).to have_content("History")
+        expect(page).to have_content("This proposal was created")
       end
     end
   end

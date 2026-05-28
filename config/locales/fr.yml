@@ -57,6 +57,8 @@ fr:
       menu:
         assemblies_submenu:
           landing_page: Page d'accueil
+        initiatives_submenu:
+          info: À propos des pétitions
         participatory_process_groups_submenu:
           landing_page: Page d'accueil
         participatory_processes_submenu:
@@ -463,20 +465,61 @@ fr:
       admin_states:
         created: Crée
       create_initiative:
+        committee_member:
+          approve: Approuver
+          confirm_approve: Êtes-vous sûr de vouloir approuver ce membre ?
+          confirm_revoke: Êtes-vous sûr de vouloir révoquer ce membre ?
+          revoke: Révoquer
         fill_data:
           back: Retour
+          confirm_discard: Êtes-vous sûr de vouloir abandonner cette pétition ?
           continue: Continuer
+          discard: Abandonner la pétition
           fill_data_help: "<ul> <li>Vérifier le contenu de votre pétition : le titre est-il facile à comprendre ? L'objectif de votre pétition est-il clair ?</li> <li>Vous devez choisir le type de signature : en présentiel, en ligne ou une combinaison des deux</li> <li>Quelle est le secteur géographique de l'initiative ?</li> </ul>"
           more_information: "(Plus d'informations)"
           select_area: Sélectionnez une zone
           select_scope: Sélectionnez une portée
+        finish:
+          back: Retour
+          callout_text_created: Félicitations ! Votre pétition a été créée avec succès.
+          callout_text_validating: Votre pétition a été envoyée à la validation technique avec succès.
+          go_to_initiatives: Aller aux pétitions
+          publish_helper_text_html: N'oubliez pas que pour que votre pétition soit publiée, elle doit être validée techniquement par un administrateur.
+        previous_form:
+          back: Retour
+        promotal_committee:
+          individual_help_text: Votre pétition a été créée et enregistrée en tant que brouillon. Vous devez maintenant ajouter des personnes au Comité de promotion.
+          invite_link_title: Lien pour inviter des personnes
+          promoters_committee_help_2: N'oubliez pas que pour que votre pétition soit publiée, vous devez compléter les informations requises et l'envoyer à la validation technique pour qu'elle soit examinée par un administrateur.
+          promoters_committee_help_html: Avant d'envoyer votre pétition à la validation technique, vous devez ajouter %{committee_members_left} membres supplémentaires au comité de promotion, vous en avez <strong>%{committee_members_count}/%{committee_size}</strong>.
+          promoters_committee_title: Comité de promotion
+        return_to_initiatives_button:
+          return_initiatives_html: Ignorer pour l'instant et <a href="%{initiatives_path}">retourner aux pétitions</a>
         select_initiative_type:
+          back: Retour
+          choose_html: Je veux créer un <strong>%{title}</strong>
+          consult_existing_initiatives: Consulter les pétitions existantes
+          continue: Continuer
+          more_information: Plus d'informations
           new: Créer une nouvelle pétition
+          select: Créer une pétition
+          select_initiative_type_help_html: "<p>Les pétitions sont un moyen pour les participants d'intervenir afin que l'organisation mène des actions dans l'intérêt général. Quelle pétition souhaitez-vous lancer ?</p>"
+          show_less: Voir moins
+          show_more: Voir plus
+          subtitle: Quelle pétition souhaitez-vous promouvoir ?
+          verification_required: Vérifiez votre compte pour créer une pétition
+        send_to_technical_validation_button:
+          button: Envoyer à la validation technique
+          confirm: Vous allez envoyer la pétition à un administrateur pour qu'il la consulte et la publie. Une fois publiée, vous ne pourrez plus la modifier. Êtes-vous sûr(e) ?
+        share_committee_link:
+          invite_to_committee_help: Lien pour inviter des personnes qui feront partie de la Commission de promotion.
+          invite_to_committee_help_2: Ce type de pétition citoyenne requiert un comité de promotion composé d'au moins %{committee_size} membres (certifiants). Vous devez partager le lien suivant avec les autres personnes qui font partie de cette pétition. Lorsque vos contacts recevront ce lien, ils devront suivre les étapes indiquées.
+          more_information: Plus d'informations
       form:
-        add_documents: Ajouter des documents
+        add_attachments: Ajouter des pièces jointes
         add_image: Ajouter une image
         attachment_legend: "(Facultatif) Ajouter une pièce jointe"
-        edit_documents: Modifier les documents
+        edit_attachments: Modifier les pièces jointes
         edit_image: Modifier l'Image
         image_legend: "(Facultatif) Ajouter une image"
       initiatives:
@@ -902,6 +945,8 @@ fr:
           spam_detected: Un problème est survenu lors de la réponse au questionnaire. Peut-être avez-vous été trop rapide, pouvez-vous réessayer?
           success: Merci pour votre réponse au questionnaire.
     system:
+      menu:
+        api_credentials: Identifiants de l'API
       organizations:
         omniauth_settings:
           cultuur_connect:
@@ -959,6 +1004,11 @@ fr:
           cancel_voting: Sortir de la cabine de vote
       footer:
         help: Aide
+      initiative_creation_header:
+        fill_data: Complétez votre pétition
+        finish: Validation technique
+        promotal_committee: Trouver des promoteurs
+        select_initiative_type: Sélectionnez le type de pétition
   time:
     buttons:
       select: Sélectionner
