@@ -84,6 +84,7 @@ describe "Proposals" do
     end
 
     it_behaves_like "accessible page" do
+      before { skip "ACCESSIBILITY_PENDING - HTML validation fails due to NuValidator rule changes, fixed upstream in decidim/decidim#16875 (waiting the backport v0.31 #16878)" }
       before { visit_component }
     end
 
