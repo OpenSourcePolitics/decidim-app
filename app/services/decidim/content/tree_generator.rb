@@ -64,7 +64,7 @@ module Decidim
         sub_group: "folder-line",
         space: "pages-line",
         component: "focus-line"
-      }
+      }.freeze
 
       DEFAULT_OPTIONS = {
         include_components: true,
