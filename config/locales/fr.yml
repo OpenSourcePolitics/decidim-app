@@ -449,6 +449,11 @@ fr:
         email: Email
         name: Nom
     initiatives:
+      signatures:
+        workflows:
+          legacy_signature_handler:
+            description: "Procédure de signature basée sur l'ancien système de pétitions, incluant la collecte de données personnelles, l'étape de vérification par SMS et la validation de l'autorisation. Modifiez les paramètres de l'initializer pour l'adapter à votre configuration."
+            name: Procédure de signature standard
       admin:
         index:
           initiatives_types:
