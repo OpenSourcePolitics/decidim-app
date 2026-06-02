@@ -32,7 +32,7 @@ end
 
 # Dummy workflows for local development and testing only.
 # These classes are provided by decidim-dev and do not exist in production.
-if Rails.env.development? || Rails.env.test?
+if Rails.env.local?
   Decidim::Initiatives::Signatures.register_workflow(:dummy_signature_handler) do |workflow|
     workflow.form = "DummySignatureHandler"
     workflow.authorization_handler_form = "DummyAuthorizationHandler"
