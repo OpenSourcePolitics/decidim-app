@@ -205,3 +205,4 @@ ignore_unused:
   - decidim.initiatives.form.add_documents
   - decidim.initiatives.form.edit_documents
   - layouts.decidim.initiative_creation_header.*
+  - decidim.initiatives.signatures.workflows.legacy_signature_handler.*
