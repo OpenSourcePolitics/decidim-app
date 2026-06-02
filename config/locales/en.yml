@@ -514,9 +514,6 @@ en:
         edit_attachments: Edit attachments
         edit_image: Edit image
         image_legend: "(Optional) Add an image"
-      initiatives:
-        index_header:
-          new_initiative: New initiative
       signatures:
         workflows:
           legacy_signature_handler:

@@ -522,9 +522,6 @@ fr:
         edit_attachments: Modifier les pièces jointes
         edit_image: Modifier l'Image
         image_legend: "(Facultatif) Ajouter une image"
-      initiatives:
-        index_header:
-          new_initiative: Nouvelle pétition
       signatures:
         workflows:
           legacy_signature_handler:
