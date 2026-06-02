@@ -441,6 +441,11 @@ en:
         email: Email
         name: Name
     initiatives:
+      signatures:
+        workflows:
+          legacy_signature_handler:
+            description: Signature handler based on the old signature feature including the collection of personal data, the SMS step and validating the authorization with dummy_authorization_handler. Modify any parameter to adapt to the configuration used
+            name: Legacy Signature Handler
       admin:
         index:
           initiatives_types:
