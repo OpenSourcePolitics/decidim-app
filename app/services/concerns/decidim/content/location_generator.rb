@@ -5,6 +5,8 @@ module Decidim
     module LocationGenerator
       extend ActiveSupport::Concern
       included do
+        include Decidim::Content::UrlTools
+
         def location_for(instance, location_type = :path)
           # TODO : create options for path versus url
 
@@ -91,16 +93,6 @@ module Decidim
 
         def admin_base_url
           @admin_base_url ||= switch_url_port(Decidim::Admin::Engine.routes.url_helpers.root_url(host: organization.host))
-        end
-
-        def switch_url_port(url)
-          if Rails.env.development? || Rails.env.test?
-            url_with_port = URI(url)
-            url_with_port.port = Rails::Server::Options.new.parse!(ARGV)[:Port]
-            url_with_port.to_s
-          else
-            url
-          end
         end
       end
     end

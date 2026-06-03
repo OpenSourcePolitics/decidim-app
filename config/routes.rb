@@ -7,9 +7,10 @@ Decidim::Admin::Engine.routes.draw do
   constraints(->(request) { Decidim::Admin::OrganizationDashboardConstraint.new(request).matches? }) do
     namespace :content do
       root to: "tree#index"
-      get "export", to: "tree#export"
       get "table", to: "tree#table"
       get "treemap", to: "tree#treemap"
+      get "tree/export", to: "tree#export"
+      get "bundle/export", to: "bundle#export"
     end
   end
 end

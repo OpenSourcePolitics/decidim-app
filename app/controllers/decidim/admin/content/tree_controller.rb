@@ -27,7 +27,7 @@ module Decidim
           respond_to do |format|
             format.csv do
               send_data csv_data.string,
-                        filename: "content_tree_#{Time.zone.now.strftime("%Y%m%d_%H%M%S")}.csv",
+                        filename: "content-tree--#{Time.zone.now.strftime("%Y%m%d-%H%M%S")}.csv",
                         type: "text/csv"
             end
           end

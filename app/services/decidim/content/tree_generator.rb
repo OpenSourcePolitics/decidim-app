@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "csv"
-require "stringio"
-
 module Decidim
   module Content
     class TreeGenerator
@@ -97,13 +94,14 @@ module Decidim
             )
           end
         ) { |_key, old_value, new_value| old_value + new_value }
+        # TODO: remove spaces type without any records (eg: 0 conference) to avoid showing empty sections in the tree
       end
 
       def to_csv
         rows = flatten_hash_for_csv(hash)
 
         forced_headers = [:kind, :group, :sub_group, :space, :class, :component_type, :name, :private, :published, :item_count, :stats, :url, :admin_url, :gid]
-        rejected_headers = [:manifest]
+        rejected_headers = [:manifest, :components, :component_count, :hashtag]
 
         headers_row_hash = rows.each_with_object([]) do |row, keys|
           row.keys.each { |key| keys << key unless keys.include?(key) }

@@ -11,6 +11,11 @@ module DecidimApp
   class Application < Rails::Application
     config.load_defaults 7.0
 
+    config.autoload_paths.push(
+      "#{root}/app/serializers",
+      "#{root}/lib/concerns"
+    )
+
     require "decidim_app/omniauth/configurator"
 
     config.after_initialize do
