@@ -128,7 +128,8 @@ module Decidim
 
       # rubocop:disable Metrics/PerceivedComplexity
       def parse_bundle_manifests(bundle_manifests, object: nil)
-        bundle_manifests.each.with_index.inject([]) do |bundle_results, (manifest, index)|
+        bundle_manifests.each.with_index.inject([]) do |bundle_results, (bundle_manifest, index)|
+          manifest = bundle_manifest.dup
           results = []
 
           begin
