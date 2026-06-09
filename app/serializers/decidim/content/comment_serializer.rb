@@ -16,10 +16,8 @@ module Decidim
           down_votes_count: resource.down_votes&.count,
           depth: resource.depth,
           comments_count: resource.comments_count,
-          commentable_id: resource.decidim_commentable_id,
-          commentable_type: resource.decidim_commentable_type,
-          root_commentable_id: resource.decidim_commentable_id,
-          root_commentable_type: resource.decidim_commentable_type,
+          commentable: uid(resource.commentable),
+          root_commentable: uid(resource.root_commentable),
           created_at: resource.created_at,
           updated_at: resource.updated_at
         }
