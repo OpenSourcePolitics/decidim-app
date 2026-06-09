@@ -195,7 +195,7 @@ module Decidim
                 )
               end
             elsif manifest[:children].present?
-              if manifest[:collection].present?
+              if manifest[:collection] # .present? doesn't fit in this case because [] is a valid candidate
                 results.concat(
                   manifest[:collection].each.with_index.inject([]) do |collection_results, (collection_item, collection_index)|
                     collection_item_results = parse_bundle_manifests(manifest[:children], object: collection_item)
