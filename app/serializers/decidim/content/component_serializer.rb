@@ -10,11 +10,19 @@ module Decidim
           uid: uid(resource),
           manifest_name: resource.manifest_name,
           name: normalize_translated_attribute(resource.name),
-          settings: resource[:settings],
+          settings: convert_settings_to_uid(resource[:settings]),
           weight: resource.try(:weight),
           permissions: resource.try(:permissions),
-          published_at: resource.try(:published_at)
+          published_at: resource.try(:published_at),
+          previously_published: resource.try(:previously_published?)
         }.merge(specific_data: resource.manifest.specific_data_serializer_class&.new(resource)&.run)
+      end
+
+      def convert_settings_to_uid(settings)
+        return unless settings
+
+        settings["steps"].transform_keys! { |key| uid(Decidim::ParticipatoryProcessStep.new(id: key.to_i)) } if settings["steps"]
+        settings["global"]["scope_id"] = uid(Decidim::Scope.new(id: settings["global"]["scope_id"].to_i)) if settings.dig("global", "scope_id")
       end
     end
   end

@@ -11,6 +11,7 @@ module Decidim
         include Decidim::TranslationsHelper
         include Decidim::Content::UrlTools
         include Decidim::Content::UidTools
+        include Decidim::Content::AuthorableTools
 
         def normalize_translated_attribute(attribute)
           # NOTES : if returning nil creates issues then return empty_translatable

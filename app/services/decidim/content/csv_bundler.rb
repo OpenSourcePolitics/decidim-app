@@ -10,6 +10,7 @@ module Decidim
   module Content
     class CsvBundler
       include Decidim::Content::UidTools
+      include Decidim::Content::ComponentTools
 
       DEFAULT_OPTIONS = {
         flatten_json: false,
@@ -34,7 +35,7 @@ module Decidim
             {
               path: "users",
               serializer: Decidim::Content::UserSerializer,
-              collection: organization.users.reorder("id ASC")
+              collection: organization.user_entities.reorder("id ASC")
             },
             {
               path: "scopes",
@@ -84,14 +85,57 @@ module Decidim
                       collection: ->(parent) { parent.attachments }
                     },
                     {
-                      path: "components",
-                      serializer: Decidim::Content::ComponentSerializer,
-                      collection: ->(parent) { parent.components }
-                    },
-                    {
                       path: "users",
                       serializer: Decidim::Content::ParticipatorySpaceUserSerializer,
                       collection: ->(parent) { participatory_process_users(parent) }
+                    },
+                    # TODO : followers
+                    {
+                      path: "components",
+                      children: [
+                        {
+                          path: ->(resource) { "#{uid(resource)}---#{resource.try(:manifest_name)}" },
+                          collection: ->(parent) { parent.components },
+                          children: [
+                            {
+                              path: "component",
+                              serializer: Decidim::Content::ComponentSerializer,
+                              collection: ->(parent) { [parent] }
+                            },
+                            # TODO : before proposals -> attachments, states
+                            {
+                              path: "proposals",
+                              include_if: ->(parent) { parent&.manifest_name == "proposals" },
+                              serializer: Decidim::Content::ProposalSerializer,
+                              collection: lambda { |parent|
+                                Decidim::Proposals::Proposal
+                                .published
+                                .not_hidden
+                                .where(component: parent)
+                                .includes(:scope, :category)
+                              }
+                            },
+                            # TODO : after proposals -> comments, votes, endorsements, followers, notes
+                            {
+                              path: "debates",
+                              include_if: ->(parent) { parent&.manifest_name == "debates" },
+                              serializer: Decidim::Content::DebateSerializer,
+                              collection: lambda { |parent|
+                                Decidim::Debates::Debate
+                                .not_hidden
+                                .where(component: parent)
+                                .includes(:category)
+                              }
+                            },
+                            {
+                              path: "comments",
+                              include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(proposals debates).include?(parent&.manifest_name) },
+                              serializer: Decidim::Content::CommentSerializer,
+                              collection: ->(parent) { comments_for_component(parent) }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   ]
                 }
@@ -126,14 +170,20 @@ module Decidim
 
       private
 
+      # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity
       def parse_bundle_manifests(bundle_manifests, object: nil)
-        bundle_manifests.each.with_index.inject([]) do |bundle_results, (bundle_manifest, index)|
+        index = 0
+        bundle_manifests.each.inject([]) do |bundle_results, bundle_manifest|
           manifest = bundle_manifest.dup
           results = []
 
           begin
             validate_manifest!(manifest, object:)
+
+            next bundle_results if manifest[:include_if].present? && !manifest[:include_if].call(object)
+
+            index += 1
 
             manifest[:collection] = manifest[:collection].call(object) if manifest[:collection].respond_to?(:call)
 
@@ -168,6 +218,7 @@ module Decidim
         end
       end
       # rubocop:enable Metrics/PerceivedComplexity
+      # rubocop:enable Metrics/CyclomaticComplexity
 
       # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity
@@ -189,7 +240,7 @@ module Decidim
 
       def compute_path(path, object: nil, index: nil)
         path = path.call(object) if path.respond_to?(:call) && !object.nil?
-        path = "#{format("%02d", index + 1)}---#{path}" if index.present?
+        path = "#{format("%02d", index)}---#{path}" if index.present?
         path
       end
 
@@ -232,7 +283,7 @@ module Decidim
       def participatory_process_users(participatory_process)
         users_with_roles = participatory_process.user_roles.select(:decidim_user_id, :role).reorder("decidim_user_id").to_a
         private_users = participatory_process.users.select(:decidim_user_id).reorder("decidim_user_id").to_a
-        (users_with_roles + private_users).uniq(&:decidim_user_id).map { |o| o.attributes.compact.symbolize_keys.merge(role: o.role || "private_user") }
+        (users_with_roles + private_users).uniq(&:decidim_user_id).map { |o| o.attributes.compact.symbolize_keys.merge(role: o[:role] || "private_user") }
       end
     end
   end
