@@ -31,6 +31,8 @@ services:
   sidekiq:
     image: decidim-app:3.4.0
     command: [ "bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml" ]
+    env_file:
+      - .env
     environment:
       - DATABASE_HOST=database
       - DATABASE_USERNAME=postgres
