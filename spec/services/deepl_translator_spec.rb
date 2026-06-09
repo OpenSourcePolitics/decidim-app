@@ -12,7 +12,6 @@ module Decidim
     let(:translation) { double("translation", text: "Nouveau Titre") }
     let(:translate_request) { instance_double(DeepL::Requests::Translate, request: translation) }
     let(:api) { instance_double(DeepL::API) }
-    let(:translate_request) { instance_double(DeepL::Requests::Translate, request: translation) }
 
     before do
       allow(Decidim).to receive(:machine_translation_service_klass).and_return(DeeplTranslator)
