@@ -4,6 +4,8 @@ en:
     attributes:
       assembly:
         copy_landing_page_blocks: Copy landing page blocks
+      organization:
+        enable_machine_translations: Enable machine translations
       osp_authorization_handler:
         document_number: Unique number
       participatory_process:

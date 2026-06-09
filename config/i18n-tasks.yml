@@ -151,3 +151,5 @@ ignore_unused:
   - decidim.searches.filters.jump_to
   - decidim.components.proposals.settings.global.enable_iframe
   - decidim.components.proposals.settings.global.iframe_url
+  - activemodel.attributes.organization.enable_machine_translations
+  - activemodel.attributes.organization.enable_machine_translations

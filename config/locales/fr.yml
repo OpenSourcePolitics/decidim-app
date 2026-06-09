@@ -12,6 +12,8 @@ fr:
         document_number: Numéro unique
         postal_code: Code postal
         scope_id: Secteur
+      organization:
+        enable_machine_translations: Activer la traduction automatique
       osp_authorization_handler:
         document_number: Numéro unique
       participatory_process:
