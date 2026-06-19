@@ -31,6 +31,10 @@ fr:
           <p>
             Vous ne pouvez pas modifier ces informations ici.
           </p>
+      update:
+        error: Une erreur s'est produite lors de la mise à jour de votre compte.
+        success: Votre compte a été mis à jour avec succès.
+        success_with_email_confirmation: Votre compte a été mis à jour avec succès. Vous recevrez un email pour confirmer votre nouvelle adresse.
     admin:
       actions:
         add: Ajouter
@@ -125,6 +129,9 @@ fr:
           email_outro: Vous recevez cette notification car vous êtes l’auteur de la proposition. Vous pouvez vous désabonner en visitant la page de la proposition (« %{resource_title} ») et en cliquant sur « Ne plus suivre ».
           email_subject: Votre proposition a été publiée !
           notification_title: Votre proposition <a href="%{resource_path}">%{resource_title}</a> est maintenant en ligne.
+    extra_user_fields:
+      force_euf_completion:
+        alert: Veuillez compléter votre profil avant de continuer. Les champs obligatoires doivent être renseignés.
     forms:
       questionnaire_answer_presenter:
         download_attachment: Télécharger la pièce jointe

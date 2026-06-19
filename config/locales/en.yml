@@ -23,6 +23,10 @@ en:
           <p>
             You can't edit this information here.
           </p>
+      update:
+        error: There was a problem updating your account.
+        success: Your account was successfully updated.
+        success_with_email_confirmation: Your account was successfully updated. You will receive an email to confirm your new email address.
     admin:
       actions:
         add: Add
@@ -117,6 +121,9 @@ en:
           email_outro: You received this notification because you are the author of the proposal. You can unfollow it by visiting the proposal page (" %{resource_title} ") and clicking on " Unfollow ".
           email_subject: Your proposal has been published!
           notification_title: Your proposal <a href="%{resource_path}">%{resource_title}</a> is now live.
+    extra_user_fields:
+      force_euf_completion:
+        alert: Please complete your profile before continuing. Required fields must be filled in.
     forms:
       questionnaire_answer_presenter:
         download_attachment: Download attachment
