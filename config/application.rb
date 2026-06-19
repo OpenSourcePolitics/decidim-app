@@ -39,6 +39,8 @@ module DecidimApp
       require "extends/forms/decidim/editor_image_form_extends"
       require "extends/forms/decidim/admin/content_block_form_extends"
       # controllers
+      require "extends/controllers/application_controller_extends"
+      require "extends/controllers/decidim/devise/invitations_controller_extends"
       require "extends/controllers/decidim/admin/scopes_controller_extends"
       require "extends/controllers/decidim/scopes_controller_extends"
       require "extends/controllers/decidim/comments/comments_controller_extends"
