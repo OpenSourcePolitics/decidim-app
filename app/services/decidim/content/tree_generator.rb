@@ -205,6 +205,7 @@ module Decidim
           components_attribute = :components
           count_attribute = :component_count
         end
+
         {
           components_attribute.to_sym => children = instance.components.map do |component|
             shared_hash(instance: component, kind: "component", manifest: instance.manifest.to_h, icon: component.manifest.icon_key).merge(

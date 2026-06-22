@@ -20,7 +20,7 @@ module Decidim
             location_type: :url,
             include_metadata: true,
             include_score: true,
-            components_as_children: false
+            components_as_children: true
           )
           csv_data = generator.to_csv
 
