@@ -35,7 +35,8 @@ module Decidim
           },
           created_at: resource.created_at,
           updated_at: resource.updated_at,
-          published_at: resource.try(:published_at)
+          published_at: resource.try(:published_at),
+          url: Decidim::ResourceLocatorPresenter.new(resource).url
         }
       end
     end

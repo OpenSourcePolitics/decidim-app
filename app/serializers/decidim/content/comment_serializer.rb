@@ -19,8 +19,21 @@ module Decidim
           commentable: uid(resource.commentable),
           root_commentable: uid(resource.root_commentable),
           created_at: resource.created_at,
-          updated_at: resource.updated_at
+          updated_at: resource.updated_at,
+          url: single_comment_url
         }
+      end
+
+      def root_commentable
+        if defined?(Decidim::Budgets) && resource.root_commentable.is_a?(Decidim::Budgets::Project)
+          [resource.root_commentable.budget, resource.root_commentable]
+        else
+          resource.root_commentable
+        end
+      end
+
+      def single_comment_url
+        "#{Decidim::ResourceLocatorPresenter.new(root_commentable).url(commentId: resource.id)}#comment_#{resource.id}"
       end
     end
   end

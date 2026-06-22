@@ -33,7 +33,8 @@ module Decidim
           is_amend: resource.try(:emendation?),
           original_proposal: uid(resource.try(:amendable)),
           withdrawn: resource.try(:withdrawn?),
-          withdrawn_at: resource.try(:withdrawn_at)
+          withdrawn_at: resource.try(:withdrawn_at),
+          url: Decidim::ResourceLocatorPresenter.new(resource).url
         } # TODO : add custom fields (public & private)
       end
     end

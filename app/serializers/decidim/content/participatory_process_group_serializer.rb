@@ -5,6 +5,8 @@ module Decidim
     class ParticipatoryProcessGroupSerializer < Decidim::Exporters::Serializer
       include Decidim::Content::SerializerTools
 
+      delegate :organization, to: :resource
+
       def serialize
         {
           uid: uid(resource),
@@ -23,7 +25,8 @@ module Decidim
             participatory_structure: resource.participatory_structure
           },
           created_at: resource.created_at,
-          updated_at: resource.updated_at
+          updated_at: resource.updated_at,
+          url: switch_url_port(Decidim::ParticipatoryProcesses::Engine.routes.url_helpers.participatory_process_group_url(resource, host: resource.organization.host))
         }
       end
     end

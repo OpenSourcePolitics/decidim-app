@@ -14,8 +14,10 @@ module Decidim
           weight: resource.try(:weight),
           permissions: resource.try(:permissions),
           published_at: resource.try(:published_at),
-          previously_published: resource.try(:previously_published?)
-        }.merge(specific_data: resource.manifest.specific_data_serializer_class&.new(resource)&.run)
+          previously_published: resource.try(:previously_published?),
+          specific_data: resource.manifest.specific_data_serializer_class&.new(resource)&.run,
+          url: Decidim::EngineRouter.main_proxy(resource)&.root_url
+        }
       end
 
       def convert_settings_to_uid(settings)

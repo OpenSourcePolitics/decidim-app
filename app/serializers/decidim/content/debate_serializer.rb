@@ -24,7 +24,8 @@ module Decidim
           comments_enabled: resource.try(:comments_enabled),
           comments_count: resource.try(:comments_count),
           endorsements_count: resource.try(:endorsements).try(:size),
-          followers_count: resource.try(:follows).try(:size)
+          followers_count: resource.try(:follows).try(:size),
+          url: Decidim::ResourceLocatorPresenter.new(resource).url
         }
       end
     end
