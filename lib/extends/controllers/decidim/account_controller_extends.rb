@@ -17,7 +17,9 @@ module Decidim
 
           bypass_sign_in(current_user)
 
-          redirect_url = session.delete(:euf_redirect_url) || decidim.account_path
+          redirect_url = session.delete(:euf_redirect_url) ||
+                         stored_location_for(current_user) ||
+                         decidim.account_path
           redirect_to redirect_url
         end
 
@@ -43,6 +45,23 @@ module Decidim
     end
 
     private
+
+    def private_space_path_for(user)
+      private_user = Decidim::ParticipatorySpacePrivateUser
+                     .where(user:)
+                     .order(created_at: :desc)
+                     .first
+
+      return if private_user&.privatable_to.blank?
+
+      space = private_user.privatable_to
+      case space
+      when Decidim::Assembly
+        decidim_assemblies.assembly_path(space.slug)
+      when Decidim::ParticipatoryProcess
+        decidim_participatory_processes.participatory_process_path(space.slug)
+      end
+    end
 
     def handle_successful_destruction
       sign_out(current_user)

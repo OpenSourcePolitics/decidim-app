@@ -18,7 +18,7 @@ module ApplicationInvitationsControllerExtends
                       when Decidim::ParticipatoryProcess
                         decidim_participatory_processes.participatory_process_path(space.slug)
                       end
-        session[:euf_redirect_url] = destination if destination.present?
+        store_location_for(resource, destination) if destination.present?
       end
 
       invite_redirect_path || after_sign_in_path_for(resource)

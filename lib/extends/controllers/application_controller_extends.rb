@@ -15,7 +15,12 @@ module ApplicationControllerExtends
       missing_field = first_missing_euf_field(current_user)
       return unless missing_field
 
-      stored = safe_euf_redirect_path? ? request.fullpath : stored_location_for(current_user)
+      existing = session["user_return_to"]
+      stored = if existing.present?
+                 existing
+               elsif safe_euf_redirect_path?
+                 request.fullpath
+               end
       session[:euf_redirect_url] = stored if stored.present?
       flash[:alert] = t("decidim.extra_user_fields.force_euf_completion.alert")
       redirect_to "#{decidim.account_path}#user_#{missing_field}"
