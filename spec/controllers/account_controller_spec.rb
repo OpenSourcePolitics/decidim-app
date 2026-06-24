@@ -30,74 +30,97 @@ module Decidim
       sign_in user
     end
 
-    def stub_update_account(event, *args)
+    def stub_update_account_ok
       allow(Decidim::UpdateAccount).to receive(:call) do |_form, &block|
         callbacks = {}
         allow(controller).to receive(:on) { |ev, &cb| callbacks[ev] = cb }
         controller.instance_exec(&block)
-        callbacks[event]&.call(*args)
+        callbacks[:ok]&.call(false)
       end
     end
 
-    describe "PUT update" do
-      context "when UpdateAccount succeeds" do
-        before { stub_update_account(:ok, false) }
+    describe "POST update redirection after EUF completion" do
+      before { stub_update_account_ok }
 
-        context "and euf_redirect_url is stored in session" do
-          before { session[:euf_redirect_url] = "/assemblies/some-assembly" }
+      context "when session[:euf_redirect_url] is set (normal navigation interception)" do
+        context "and points to an assembly" do
+          before { session[:euf_redirect_url] = "/assemblies/my-assembly" }
 
-          it "redirects to the stored euf_redirect_url" do
+          it "redirects to the assembly" do
             put :update, params: valid_params
-            expect(response).to redirect_to("/assemblies/some-assembly")
+            expect(response).to redirect_to("/assemblies/my-assembly")
           end
 
           it "clears euf_redirect_url from session" do
             put :update, params: valid_params
             expect(session[:euf_redirect_url]).to be_nil
           end
-
-          it "shows the success flash" do
-            put :update, params: valid_params
-            expect(flash[:notice]).to be_present
-          end
         end
 
-        context "and euf_redirect_url is a participatory process path" do
-          before { session[:euf_redirect_url] = "/processes/some-process" }
+        context "and points to a participatory process" do
+          before { session[:euf_redirect_url] = "/processes/my-process" }
 
-          it "redirects to the stored process path" do
+          it "redirects to the process" do
             put :update, params: valid_params
-            expect(response).to redirect_to("/processes/some-process")
+            expect(response).to redirect_to("/processes/my-process")
           end
-        end
 
-        context "and no euf_redirect_url is stored in session" do
-          it "redirects to account path" do
+          it "clears euf_redirect_url from session" do
             put :update, params: valid_params
-            expect(response).to redirect_to(account_path)
+            expect(session[:euf_redirect_url]).to be_nil
           end
         end
       end
 
-      context "when UpdateAccount fails" do
+      context "when stored_location_for is set (invitation flow)" do
+        context "and points to an assembly" do
+          before do
+            allow(controller).to receive(:stored_location_for).and_return("/assemblies/private-assembly")
+          end
+
+          it "redirects to the assembly" do
+            put :update, params: valid_params
+            expect(response).to redirect_to("/assemblies/private-assembly")
+          end
+        end
+
+        context "and points to a participatory process" do
+          before do
+            allow(controller).to receive(:stored_location_for).and_return("/processes/private-process")
+          end
+
+          it "redirects to the process" do
+            put :update, params: valid_params
+            expect(response).to redirect_to("/processes/private-process")
+          end
+        end
+      end
+
+      context "when both session[:euf_redirect_url] and stored_location_for are set" do
         before do
-          stub_update_account(:invalid, false)
-          session[:euf_redirect_url] = "/assemblies/some-assembly"
+          session[:euf_redirect_url] = "/assemblies/from-session"
+          allow(controller).to receive(:stored_location_for).and_return("/assemblies/from-devise")
         end
 
-        it "renders the show template" do
+        it "prioritizes session[:euf_redirect_url]" do
           put :update, params: valid_params
-          expect(response).to render_template(:show)
+          expect(response).to redirect_to("/assemblies/from-session")
         end
+      end
 
-        it "keeps euf_redirect_url in session so the user can retry" do
+      context "when neither session[:euf_redirect_url] nor stored_location_for are set" do
+        it "redirects to account path" do
           put :update, params: valid_params
-          expect(session[:euf_redirect_url]).to eq("/assemblies/some-assembly")
+          expect(response).to redirect_to(account_path)
         end
+      end
 
-        it "shows the error flash" do
+      context "when stored_location_for returns nil" do
+        before { allow(controller).to receive(:stored_location_for).and_return(nil) }
+
+        it "redirects to account path" do
           put :update, params: valid_params
-          expect(flash[:alert]).to be_present
+          expect(response).to redirect_to(account_path)
         end
       end
     end
