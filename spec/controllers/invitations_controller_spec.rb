@@ -19,19 +19,6 @@ module Decidim
     describe "#after_accept_path_for" do
       subject { controller.after_accept_path_for(user) }
 
-      context "when the user has no private space membership" do
-        it "does not store euf_redirect_url in session" do
-          subject
-          expect(session[:euf_redirect_url]).to be_nil
-        end
-
-        it "delegates to after_sign_in_path_for" do
-          allow(controller).to receive(:after_sign_in_path_for).with(user).and_return("/account")
-          expect(subject).to eq("/account")
-          subject
-        end
-      end
-
       context "when the user is a member of a private assembly" do
         let(:assembly) { create(:assembly, :private, organization:) }
 
@@ -39,15 +26,15 @@ module Decidim
           create(:participatory_space_private_user, user:, privatable_to: assembly)
         end
 
-        it "stores the assembly path in euf_redirect_url" do
+        it "stores the assembly path via store_location_for" do
+          expect(controller).to receive(:store_location_for)
+            .with(user, "/assemblies/#{assembly.slug}")
           subject
-          expect(session[:euf_redirect_url]).to eq("/assemblies/#{assembly.slug}")
         end
 
-        it "delegates to after_sign_in_path_for" do
-          allow(controller).to receive(:after_sign_in_path_for).with(user).and_return("/account")
-          expect(subject).to eq("/account")
+        it "does not store in session[:euf_redirect_url]" do
           subject
+          expect(session[:euf_redirect_url]).to be_nil
         end
       end
 
@@ -58,9 +45,22 @@ module Decidim
           create(:participatory_space_private_user, user:, privatable_to: participatory_process)
         end
 
-        it "stores the participatory process path in euf_redirect_url" do
+        it "stores the process path via store_location_for" do
+          expect(controller).to receive(:store_location_for)
+            .with(user, "/processes/#{participatory_process.slug}")
           subject
-          expect(session[:euf_redirect_url]).to eq("/processes/#{participatory_process.slug}")
+        end
+
+        it "does not store in session[:euf_redirect_url]" do
+          subject
+          expect(session[:euf_redirect_url]).to be_nil
+        end
+      end
+
+      context "when the user has no private space membership" do
+        it "does not call store_location_for" do
+          expect(controller).not_to receive(:store_location_for)
+          subject
         end
 
         it "delegates to after_sign_in_path_for" do
@@ -82,8 +82,9 @@ module Decidim
         end
 
         it "stores the most recent membership's space path" do
+          expect(controller).to receive(:store_location_for)
+            .with(user, "/assemblies/#{assembly_new.slug}")
           subject
-          expect(session[:euf_redirect_url]).to eq("/assemblies/#{assembly_new.slug}")
         end
       end
 
@@ -94,7 +95,7 @@ module Decidim
           )
         end
 
-        it "returns the invite_redirect path without delegating to after_sign_in_path_for" do
+        it "returns the invite_redirect path" do
           expect(controller).not_to receive(:after_sign_in_path_for)
           expect(subject).to eq("/some/path")
         end
