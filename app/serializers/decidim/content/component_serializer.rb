@@ -58,10 +58,11 @@ module Decidim
             answer_option["decidim_question_id"] = question["id"]
           end
           question["matrix_rows"]&.each do |matrix_row|
-            matrix_row["id"] = uid(Decidim::Forms::MatrixRow.new(id: matrix_row["id"].to_i))
+            matrix_row["id"] = uid(Decidim::Forms::QuestionMatrixRow.new(id: matrix_row["id"].to_i))
             matrix_row["decidim_question_id"] = question["id"]
           end
         end
+        specific_data
       end
     end
   end
