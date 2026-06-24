@@ -132,6 +132,15 @@ module Decidim
                               include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(proposals debates).include?(parent&.manifest_name) },
                               serializer: Decidim::Content::CommentSerializer,
                               collection: ->(parent) { comments_for_component(parent) }
+                            },
+                            {
+                              path: "answers",
+                              include_if: ->(parent) { parent&.manifest_name == "surveys" },
+                              serializer: Decidim::Content::SurveyAnswerSerializer,
+                              collection: lambda { |parent|
+                                survey = Decidim::Surveys::Survey.find_by(component: parent)
+                                Decidim::Forms::QuestionnaireUserAnswers.for(survey.questionnaire)
+                              }
                             }
                           ]
                         }
