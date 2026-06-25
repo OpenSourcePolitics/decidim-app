@@ -14,7 +14,7 @@ module Decidim
           # file: Decidim::AttachmentPresenter.new(resource).attachment_file_url
           file: blob_url(resource.file, resource.organization),
           attached_to: polymorphic_uid(resource, :attached_to),
-          collection: uid(Decidim::AttachmentCollection.new(id: resource.decidim_attachment_collection_id))
+          collection: uid(Decidim::AttachmentCollection.new(id: resource.try(:attachment_collection_id)))
         }
       end
     end
