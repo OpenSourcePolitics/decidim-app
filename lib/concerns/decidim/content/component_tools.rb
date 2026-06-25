@@ -15,16 +15,28 @@ module Decidim
           end
         end
 
-        def component_commentable_resource_manifests(manifest_name)
-          component_resource_manifests(manifest_name).select { |manifest| manifest.model_class_name&.constantize&.include?(Decidim::Comments::Commentable) }
+        def component_resource_manifests_including_trait(manifest_name, trait_module)
+          component_resource_manifests(manifest_name).select { |manifest| manifest.model_class_name&.constantize&.include?(trait_module) }
+        end
+
+        def endorsable_component?(manifest_name)
+          component_resource_manifests_including_trait(manifest_name, Decidim::Endorsable).any?
+        end
+
+        def followable_component?(manifest_name)
+          component_resource_manifests_including_trait(manifest_name, Decidim::Followable).any?
+        end
+
+        def component_has_attachments?(manifest_name)
+          component_resource_manifests_including_trait(manifest_name, Decidim::HasAttachments).any?
         end
 
         def commentable_component?(manifest_name)
-          component_commentable_resource_manifests(manifest_name).any?
+          component_resource_manifests_including_trait(manifest_name, Decidim::Comments::Commentable).any?
         end
 
         def comments_for_component(component)
-          component_commentable_resource_manifests(component&.manifest_name).each.with_object([]) do |manifest, results|
+          component_resource_manifests_including_trait(component&.manifest_name, Decidim::Comments::Commentable).each.with_object([]) do |manifest, results|
             results.concat(comments_for_resource(manifest.model_class_name.constantize, component)) if manifest.model_class_name.present?
           end
         end
@@ -60,6 +72,20 @@ module Decidim
         end
         # rubocop:enable Metrics/CyclomaticComplexity
         # rubocop:enable Metrics/PerceivedComplexity
+
+        def endorsements_for_component(component)
+          component_resource_manifests_including_trait(component&.manifest_name, Decidim::Endorsable).each.with_object([]) do |manifest, results|
+            results.concat(endorsements_for_resource(manifest.model_class_name.constantize, component)) if manifest.model_class_name.present?
+          end
+        end
+
+        def endorsements_for_resource(resource_class, component)
+          endorsable_resources = resource_class.where(component:)
+          return Decidim::Endorsement.where(resource: endorsable_resources) if endorsable_resources.present?
+
+          Rails.logger.warn "Decidim::Content::ComponentTools.endorsements_for_resource (concerns) : Unable to fetch endorsements for #{resource_class} with component association."
+          Decidim::Endorsement.none
+        end
       end
     end
   end

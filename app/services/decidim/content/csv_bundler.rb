@@ -108,14 +108,10 @@ module Decidim
                               include_if: ->(parent) { parent&.manifest_name == "proposals" },
                               serializer: Decidim::Content::ProposalSerializer,
                               collection: lambda { |parent|
-                                Decidim::Proposals::Proposal
-                                .published
-                                .not_hidden
-                                .where(component: parent)
-                                .includes(:scope, :category)
+                                proposals_for_component(parent).includes(:category)
                               }
                             },
-                            # TODO : after proposals -> comments, votes, endorsements, followers, notes
+                            # TODO : after proposals -> endorsements, followers
                             {
                               path: "debates",
                               include_if: ->(parent) { parent&.manifest_name == "debates" },
@@ -141,6 +137,28 @@ module Decidim
                                 survey = Decidim::Surveys::Survey.find_by(component: parent)
                                 Decidim::Forms::QuestionnaireUserAnswers.for(survey.questionnaire)
                               }
+                            },
+                            {
+                              path: "proposal-votes",
+                              include_if: ->(parent) { parent&.manifest_name == "proposals" },
+                              serializer: Decidim::Content::ProposalVoteSerializer,
+                              collection: lambda { |parent|
+                                Decidim::Proposals::ProposalVote.where(decidim_proposal_id: proposals_for_component(parent).pluck(:id))
+                              }
+                            },
+                            {
+                              path: "proposal-notes",
+                              include_if: ->(parent) { parent&.manifest_name == "proposals" },
+                              serializer: Decidim::Content::ProposalNoteSerializer,
+                              collection: lambda { |parent|
+                                Decidim::Proposals::ProposalNote.where(decidim_proposal_id: proposals_for_component(parent).pluck(:id))
+                              }
+                            },
+                            {
+                              path: "endorsements",
+                              include_if: ->(parent) { endorsable_component?(parent&.manifest_name) && parent&.manifest_name == "proposals" },
+                              serializer: Decidim::Content::EndorsementSerializer,
+                              collection: ->(parent) { endorsements_for_component(parent) }
                             }
                           ]
                         }
@@ -293,6 +311,13 @@ module Decidim
         users_with_roles = participatory_process.user_roles.select(:decidim_user_id, :role).reorder("decidim_user_id").to_a
         private_users = participatory_process.users.select(:decidim_user_id).reorder("decidim_user_id").to_a
         (users_with_roles + private_users).uniq(&:decidim_user_id).map { |o| o.attributes.compact.symbolize_keys.merge(role: o[:role] || "private_user") }
+      end
+
+      def proposals_for_component(component)
+        Decidim::Proposals::Proposal
+          .published
+          .not_hidden
+          .where(component:)
       end
     end
   end

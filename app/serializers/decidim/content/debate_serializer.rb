@@ -25,6 +25,7 @@ module Decidim
           comments_count: resource.try(:comments_count),
           endorsements_count: resource.try(:endorsements).try(:size),
           followers_count: resource.try(:follows).try(:size),
+          component: uid(resource.try(:component)),
           url: Decidim::ResourceLocatorPresenter.new(resource).url
         }
       end

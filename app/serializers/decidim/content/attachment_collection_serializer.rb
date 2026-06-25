@@ -10,7 +10,8 @@ module Decidim
           uid: uid(resource),
           name: normalize_translated_attribute(resource.name),
           weight: resource.try(:weight),
-          description: normalize_translated_attribute(resource.description)
+          description: normalize_translated_attribute(resource.description),
+          collection_for: polymorphic_uid(resource, :collection_for)
         }
       end
     end

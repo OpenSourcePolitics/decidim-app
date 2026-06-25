@@ -11,7 +11,7 @@ module Decidim
           uid: uid(resource),
           authors: coauthors(resource).map { |author| uid(author) },
           category: uid(resource.try(:category)),
-          scope: uid(resource.try(:scope)),
+          scope: uid(Decidim::Scope.new(id: resource.try(:decidim_scope_id))),
           title: normalize_translated_attribute(resource.try(:title)),
           body: normalize_translated_attribute(resource.try(:body)),
           address: resource.try(:address),
@@ -27,6 +27,7 @@ module Decidim
           comments_count: resource.try(:comments_count),
           attachments_count: resource.try(:attachments).try(:size),
           followers_count: resource.try(:follows).try(:size),
+          notes_count: resource.try(:proposal_notes_count),
           published_at: resource.try(:published_at),
           related_proposals: resource.linked_resources(:proposals, "copied_from_component").map { |proposal| uid(proposal) },
           related_meetings: resource.linked_resources(:meetings, "proposals_from_meeting").map { |meeting| uid(meeting) },
@@ -34,6 +35,7 @@ module Decidim
           original_proposal: uid(resource.try(:amendable)),
           withdrawn: resource.try(:withdrawn?),
           withdrawn_at: resource.try(:withdrawn_at),
+          component: uid(resource.try(:component)),
           url: Decidim::ResourceLocatorPresenter.new(resource).url
         } # TODO : add custom fields (public & private)
       end
