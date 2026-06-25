@@ -8,7 +8,7 @@ module Decidim
       extend ActiveSupport::Concern
       included do
         def uid(resource)
-          resource.to_gid.uri.path.underscore.parameterize(separator: "--").dasherize if resource.respond_to?(:to_gid)
+          resource.to_gid.uri.path.underscore.parameterize(separator: "--").dasherize if resource.respond_to?(:to_gid) && resource.try(:id).present?
         end
 
         def locate_resource_by_uid(uid)
