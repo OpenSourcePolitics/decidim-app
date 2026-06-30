@@ -7,6 +7,26 @@ module Decidim
     module ComponentTools
       extend ActiveSupport::Concern
       included do
+        def component_resource_cache
+          @component_resource_cache ||= Hash.new { |h, k| h[k] = h.dup.clear }
+        end
+
+        def component_resource_cache_set(component:, resource_class:, query:, force: false)
+          if force || component_resource_cache[component.id][resource_class.name].blank?
+            component_resource_cache[component.id][resource_class.name] = query
+          else
+            resource_class.none
+          end
+        end
+
+        def component_resource_cache_get(component:, resource_class:)
+          component_resource_cache[component.id][resource_class.name]
+        end
+
+        def component_resource_cache_exists?(component:, resource_class:)
+          component_resource_cache[component.id][resource_class.name].present?
+        end
+
         def component_resource_manifests(manifest_name)
           return [] if manifest_name.blank?
 
@@ -60,6 +80,12 @@ module Decidim
               gateway_resources = gateway_reflection.try(:options)&.[](:class_name)&.constantize&.where(component:)
               root_commentable = gateway_resources.present? ? resource_class.where(through => gateway_resources) : resource_class.none
             end
+
+            if component_resource_cache_exists?(component:, resource_class:)
+              cached_ids = component_resource_cache_get(component:, resource_class:).pluck(:id)
+              root_commentable = root_commentable.where(id: cached_ids)
+            end
+
             if root_commentable.present?
               return Decidim::Comments::Comment
                      .not_deleted
@@ -67,7 +93,8 @@ module Decidim
                      .where(root_commentable:)
             end
           end
-          Rails.logger.warn "Decidim::Content::ComponentTools.comments_for_resource (concerns) : Unable to fetch comments for #{resource_class} with component association."
+          Rails.logger.warn "Decidim::Content::ComponentTools.comments_for_resource (concerns) : No comments found for #{resource_class} with component association."
+          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(component:, resource_class:)
           Decidim::Comments::Comment.none
         end
         # rubocop:enable Metrics/CyclomaticComplexity
@@ -81,10 +108,55 @@ module Decidim
 
         def endorsements_for_resource(resource_class, component)
           endorsable_resources = resource_class.where(component:)
+          if component_resource_cache_exists?(component:, resource_class:)
+            cached_ids = component_resource_cache_get(component:, resource_class:).pluck(:id)
+            endorsable_resources = endorsable_resources.where(id: cached_ids)
+          end
           return Decidim::Endorsement.where(resource: endorsable_resources) if endorsable_resources.present?
 
-          Rails.logger.warn "Decidim::Content::ComponentTools.endorsements_for_resource (concerns) : Unable to fetch endorsements for #{resource_class} with component association."
+          Rails.logger.warn "Decidim::Content::ComponentTools.endorsements_for_resource (concerns) : No endorsements found for #{resource_class} with component association."
+          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(component:, resource_class:)
           Decidim::Endorsement.none
+        end
+
+        def followers_for_component(component)
+          component_resource_manifests_including_trait(component&.manifest_name, Decidim::Followable).each.with_object([]) do |manifest, results|
+            results.concat(followers_for_resource(manifest.model_class_name.constantize, component)) if manifest.model_class_name.present?
+          end
+        end
+
+        def followers_for_resource(resource_class, component)
+          followable_resources = resource_class.where(component:)
+          if component_resource_cache_exists?(component:, resource_class:)
+            cached_ids = component_resource_cache_get(component:, resource_class:).pluck(:id)
+            followable_resources = followable_resources.where(id: cached_ids)
+          end
+          return Decidim::Follow.where(followable: followable_resources) if followable_resources.present?
+
+          Rails.logger.warn "Decidim::Content::ComponentTools.followers_for_resource (concerns) : No followers found for #{resource_class} with component association."
+          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(component:, resource_class:)
+          Decidim::Follow.none
+        end
+
+        def proposals_for_component(component)
+          component_resource_cache_set(
+            component:,
+            resource_class: Decidim::Proposals::Proposal,
+            query: Decidim::Proposals::Proposal
+                    .published
+                    .not_hidden
+                    .where(component:)
+          )
+        end
+
+        def debates_for_component(component)
+          component_resource_cache_set(
+            component:,
+            resource_class: Decidim::Debates::Debate,
+            query: Decidim::Debates::Debate
+                    .not_hidden
+                    .where(component:)
+          )
         end
       end
     end

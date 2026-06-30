@@ -19,9 +19,14 @@ module Decidim
         end
 
         def polymorphic_uid(resource, key)
-          return unless key.present? && resource.respond_to?(key.to_sym)
+          return if key.blank?
 
-          uid(resource.try("#{key}_type".to_sym)&.safe_constantize&.new(id: resource.try("#{key}_id".to_sym)))
+          type_attribute = "#{key}_type".to_sym
+          id_attribute = "#{key}_id".to_sym
+          return unless resource.respond_to?(type_attribute) && resource.respond_to?(id_attribute)
+
+          # Rails.logger.debug { "polymorphic_uid: resource=#{resource.class.name} key=#{key} type=#{resource.try(type_attribute)} id=#{resource.try(id_attribute)}" }
+          uid(resource.try(type_attribute)&.safe_constantize&.new(id: resource.try(id_attribute)&.to_i))
         end
       end
     end

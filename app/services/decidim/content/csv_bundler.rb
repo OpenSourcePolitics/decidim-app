@@ -117,10 +117,7 @@ module Decidim
                               include_if: ->(parent) { parent&.manifest_name == "debates" },
                               serializer: Decidim::Content::DebateSerializer,
                               collection: lambda { |parent|
-                                Decidim::Debates::Debate
-                                .not_hidden
-                                .where(component: parent)
-                                .includes(:category)
+                                debates_for_component(parent).includes(:category)
                               }
                             },
                             {
@@ -156,9 +153,15 @@ module Decidim
                             },
                             {
                               path: "endorsements",
-                              include_if: ->(parent) { endorsable_component?(parent&.manifest_name) && parent&.manifest_name == "proposals" },
+                              include_if: ->(parent) { endorsable_component?(parent&.manifest_name) && %w(proposals debates).include?(parent&.manifest_name) },
                               serializer: Decidim::Content::EndorsementSerializer,
                               collection: ->(parent) { endorsements_for_component(parent) }
+                            },
+                            {
+                              path: "followers",
+                              include_if: ->(parent) { followable_component?(parent&.manifest_name) && %w(proposals debates).include?(parent&.manifest_name) },
+                              serializer: Decidim::Content::FollowerSerializer,
+                              collection: ->(parent) { followers_for_component(parent) }
                             }
                           ]
                         }
@@ -311,13 +314,6 @@ module Decidim
         users_with_roles = participatory_process.user_roles.select(:decidim_user_id, :role).reorder("decidim_user_id").to_a
         private_users = participatory_process.users.select(:decidim_user_id).reorder("decidim_user_id").to_a
         (users_with_roles + private_users).uniq(&:decidim_user_id).map { |o| o.attributes.compact.symbolize_keys.merge(role: o[:role] || "private_user") }
-      end
-
-      def proposals_for_component(component)
-        Decidim::Proposals::Proposal
-          .published
-          .not_hidden
-          .where(component:)
       end
     end
   end
