@@ -316,6 +316,8 @@ de:
       initiatives:
         index_header:
           new_initiative: Neue Initiative
+        pending_initiatives:
+          description: Diese Initiativen sind noch nicht öffentlich. Bitte prüfen Sie sie und reichen Sie sie zur technischen Validierung ein, damit sie veröffentlicht werden können.
     meetings:
       actions:
         invalid_destroy:

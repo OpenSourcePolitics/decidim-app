@@ -113,6 +113,7 @@ ignore_missing:
   - decidim.budgets.projects.budget_summary.vote
   - decidim.budgets.projects.budget_summary.cancel_order
   - decidim.budgets.projects.budget_confirm.are_you_sure
+  - decidim.initiatives.initiatives.pending_initiatives.*
 
 
 # Consider these keys used:
@@ -206,3 +207,5 @@ ignore_unused:
   - decidim.initiatives.form.edit_documents
   - layouts.decidim.initiative_creation_header.*
   - decidim.initiatives.signatures.workflows.legacy_signature_handler.*
+  # initiatives
+  - decidim.initiatives.initiatives.pending_initiatives.*
