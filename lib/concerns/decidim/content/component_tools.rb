@@ -138,6 +138,46 @@ module Decidim
           Decidim::Follow.none
         end
 
+        def attachment_collections_for_component(component)
+          component_resource_manifests_including_trait(component&.manifest_name, Decidim::HasAttachments).each.with_object([]) do |manifest, results|
+            results.concat(attachment_collections_for_resource(manifest.model_class_name.constantize, component)) if manifest.model_class_name.present?
+          end
+        end
+
+        def attachment_collections_for_resource(resource_class, component)
+          attachable_resources = resource_class.where(component:)
+          if component_resource_cache_exists?(component:, resource_class:)
+            cached_ids = component_resource_cache_get(component:, resource_class:).pluck(:id)
+            attachable_resources = attachable_resources.where(id: cached_ids)
+          end
+          return Decidim::AttachmentCollection.where(collection_for: attachable_resources) if attachable_resources.present?
+
+          Rails.logger.warn do
+            "Decidim::Content::ComponentTools.attachment_collections_for_resource (concerns) : No attachment collections found for #{resource_class} with component association."
+          end
+          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(component:, resource_class:)
+          Decidim::AttachmentCollection.none
+        end
+
+        def attachments_for_component(component)
+          component_resource_manifests_including_trait(component&.manifest_name, Decidim::HasAttachments).each.with_object([]) do |manifest, results|
+            results.concat(attachments_for_resource(manifest.model_class_name.constantize, component)) if manifest.model_class_name.present?
+          end
+        end
+
+        def attachments_for_resource(resource_class, component)
+          attachable_resources = resource_class.where(component:)
+          if component_resource_cache_exists?(component:, resource_class:)
+            cached_ids = component_resource_cache_get(component:, resource_class:).pluck(:id)
+            attachable_resources = attachable_resources.where(id: cached_ids)
+          end
+          return Decidim::Attachment.where(attached_to: attachable_resources) if attachable_resources.present?
+
+          Rails.logger.warn "Decidim::Content::ComponentTools.attachments_for_resource (concerns) : No attachments found for #{resource_class} with component association."
+          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(component:, resource_class:)
+          Decidim::Attachment.none
+        end
+
         def proposals_for_component(component)
           component_resource_cache_set(
             component:,
@@ -156,6 +196,14 @@ module Decidim
             query: Decidim::Debates::Debate
                     .not_hidden
                     .where(component:)
+          )
+        end
+
+        def accountability_results_for_component(component)
+          component_resource_cache_set(
+            component:,
+            resource_class: Decidim::Accountability::Result,
+            query: Decidim::Accountability::Result.where(component:).order("children_count DESC, parent_id ASC, id ASC")
           )
         end
       end

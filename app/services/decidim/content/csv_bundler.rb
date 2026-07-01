@@ -102,7 +102,17 @@ module Decidim
                               serializer: Decidim::Content::ComponentSerializer,
                               collection: ->(parent) { [parent] }
                             },
-                            # TODO : before proposals -> attachments, states
+                            {
+                              path: "statuses",
+                              serializer: Decidim::Content::AccountabilityStatusSerializer,
+                              collection: ->(parent) { Decidim::Accountability::Status.where(component: parent) }
+                            },
+                            {
+                              path: "results",
+                              serializer: Decidim::Content::AccountabilityResultSerializer,
+                              collection: ->(parent) { accountability_results_for_component(parent).includes(:category) }
+                            },
+                            # TODO : before proposals -> states
                             {
                               path: "proposals",
                               include_if: ->(parent) { parent&.manifest_name == "proposals" },
@@ -121,8 +131,20 @@ module Decidim
                               }
                             },
                             {
+                              path: "attachment_collections",
+                              include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(proposals accountability).include?(parent&.manifest_name) },
+                              serializer: Decidim::Content::AttachmentCollectionSerializer,
+                              collection: ->(parent) { attachment_collections_for_component(parent) }
+                            },
+                            {
+                              path: "attachments",
+                              include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(proposals accountability).include?(parent&.manifest_name) },
+                              serializer: Decidim::Content::AttachmentSerializer,
+                              collection: ->(parent) { attachments_for_component(parent) }
+                            },
+                            {
                               path: "comments",
-                              include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(proposals debates).include?(parent&.manifest_name) },
+                              include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(proposals debates accountability).include?(parent&.manifest_name) },
                               serializer: Decidim::Content::CommentSerializer,
                               collection: ->(parent) { comments_for_component(parent) }
                             },
@@ -159,7 +181,7 @@ module Decidim
                             },
                             {
                               path: "followers",
-                              include_if: ->(parent) { followable_component?(parent&.manifest_name) && %w(proposals debates).include?(parent&.manifest_name) },
+                              include_if: ->(parent) { followable_component?(parent&.manifest_name) && %w(proposals debates accountability).include?(parent&.manifest_name) },
                               serializer: Decidim::Content::FollowerSerializer,
                               collection: ->(parent) { followers_for_component(parent) }
                             }
