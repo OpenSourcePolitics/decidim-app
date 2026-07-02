@@ -12,7 +12,7 @@ module Decidim
           respond_to do |format|
             format.zip do
               send_data zip_data.read,
-                        filename: "content-bundle--#{Time.zone.now.strftime("%Y%m%d-%H%M%S")}.zip",
+                        filename: "#{current_organization.host}--content-bundle--#{Time.zone.now.strftime("%Y%m%d-%H%M%S")}.zip",
                         type: "application/zip"
             end
           end

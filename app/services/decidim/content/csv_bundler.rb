@@ -69,132 +69,170 @@ module Decidim
                       serializer: Decidim::Content::ParticipatoryProcessStepSerializer,
                       collection: ->(parent) { parent.steps.reorder("start_date ASC") }
                     },
+                    *participatory_space_shared_bundle_array,
+                    **components_bundle_hash
+                  ]
+                }
+              ]
+            },
+            {
+              path: "assemblies",
+              children: [
+                {
+                  path: "assembly-types",
+                  serializer: Decidim::Content::AssembliesTypeSerializer,
+                  collection: Decidim::AssembliesType.where(organization:).reorder("id ASC")
+                },
+                {
+                  path: ->(resource) { uid(resource) },
+                  collection: Decidim::Assembly.where(organization:).reorder("id ASC"),
+                  children: [
                     {
-                      path: "categories",
-                      serializer: Decidim::Content::CategorySerializer,
-                      collection: ->(parent) { parent.categories }
+                      path: "assembly",
+                      serializer: Decidim::Content::AssemblySerializer,
+                      collection: ->(parent) { [parent] }
                     },
+                    *participatory_space_shared_bundle_array,
                     {
-                      path: "attachment_collections",
-                      serializer: Decidim::Content::AttachmentCollectionSerializer,
-                      collection: ->(parent) { parent.attachment_collections }
+                      path: "members",
+                      serializer: Decidim::Content::AssemblyMemberSerializer,
+                      collection: ->(parent) { parent.members.includes(:user).reorder("id ASC") }
                     },
-                    {
-                      path: "attachments",
-                      serializer: Decidim::Content::AttachmentSerializer,
-                      collection: ->(parent) { parent.attachments }
-                    },
-                    {
-                      path: "users",
-                      serializer: Decidim::Content::ParticipatorySpaceUserSerializer,
-                      collection: ->(parent) { participatory_process_users(parent) }
-                    },
-                    # TODO : followers
-                    {
-                      path: "components",
-                      children: [
-                        {
-                          path: ->(resource) { "#{uid(resource)}---#{resource.try(:manifest_name)}" },
-                          collection: ->(parent) { parent.components },
-                          children: [
-                            {
-                              path: "component",
-                              serializer: Decidim::Content::ComponentSerializer,
-                              collection: ->(parent) { [parent] }
-                            },
-                            {
-                              path: "statuses",
-                              serializer: Decidim::Content::AccountabilityStatusSerializer,
-                              collection: ->(parent) { Decidim::Accountability::Status.where(component: parent) }
-                            },
-                            {
-                              path: "results",
-                              serializer: Decidim::Content::AccountabilityResultSerializer,
-                              collection: ->(parent) { accountability_results_for_component(parent).includes(:category) }
-                            },
-                            # TODO : before proposals -> states
-                            {
-                              path: "proposals",
-                              include_if: ->(parent) { parent&.manifest_name == "proposals" },
-                              serializer: Decidim::Content::ProposalSerializer,
-                              collection: lambda { |parent|
-                                proposals_for_component(parent).includes(:category)
-                              }
-                            },
-                            # TODO : after proposals -> endorsements, followers
-                            {
-                              path: "debates",
-                              include_if: ->(parent) { parent&.manifest_name == "debates" },
-                              serializer: Decidim::Content::DebateSerializer,
-                              collection: lambda { |parent|
-                                debates_for_component(parent).includes(:category)
-                              }
-                            },
-                            {
-                              path: "attachment_collections",
-                              include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(proposals accountability).include?(parent&.manifest_name) },
-                              serializer: Decidim::Content::AttachmentCollectionSerializer,
-                              collection: ->(parent) { attachment_collections_for_component(parent) }
-                            },
-                            {
-                              path: "attachments",
-                              include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(proposals accountability).include?(parent&.manifest_name) },
-                              serializer: Decidim::Content::AttachmentSerializer,
-                              collection: ->(parent) { attachments_for_component(parent) }
-                            },
-                            {
-                              path: "comments",
-                              include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(proposals debates accountability).include?(parent&.manifest_name) },
-                              serializer: Decidim::Content::CommentSerializer,
-                              collection: ->(parent) { comments_for_component(parent) }
-                            },
-                            {
-                              path: "answers",
-                              include_if: ->(parent) { parent&.manifest_name == "surveys" },
-                              serializer: Decidim::Content::SurveyAnswerSerializer,
-                              collection: lambda { |parent|
-                                survey = Decidim::Surveys::Survey.find_by(component: parent)
-                                Decidim::Forms::QuestionnaireUserAnswers.for(survey.questionnaire)
-                              }
-                            },
-                            {
-                              path: "proposal-votes",
-                              include_if: ->(parent) { parent&.manifest_name == "proposals" },
-                              serializer: Decidim::Content::ProposalVoteSerializer,
-                              collection: lambda { |parent|
-                                Decidim::Proposals::ProposalVote.where(decidim_proposal_id: proposals_for_component(parent).pluck(:id))
-                              }
-                            },
-                            {
-                              path: "proposal-notes",
-                              include_if: ->(parent) { parent&.manifest_name == "proposals" },
-                              serializer: Decidim::Content::ProposalNoteSerializer,
-                              collection: lambda { |parent|
-                                Decidim::Proposals::ProposalNote.where(decidim_proposal_id: proposals_for_component(parent).pluck(:id))
-                              }
-                            },
-                            {
-                              path: "endorsements",
-                              include_if: ->(parent) { endorsable_component?(parent&.manifest_name) && %w(proposals debates).include?(parent&.manifest_name) },
-                              serializer: Decidim::Content::EndorsementSerializer,
-                              collection: ->(parent) { endorsements_for_component(parent) }
-                            },
-                            {
-                              path: "followers",
-                              include_if: ->(parent) { followable_component?(parent&.manifest_name) && %w(proposals debates accountability).include?(parent&.manifest_name) },
-                              serializer: Decidim::Content::FollowerSerializer,
-                              collection: ->(parent) { followers_for_component(parent) }
-                            }
-                          ]
-                        }
-                      ]
-                    }
+                    **components_bundle_hash
                   ]
                 }
               ]
             }
           ]
         )
+      end
+
+      def participatory_space_shared_bundle_array
+        @participatory_space_shared_bundle_array ||= [
+          {
+            path: "categories",
+            serializer: Decidim::Content::CategorySerializer,
+            collection: ->(parent) { parent.categories }
+          },
+          {
+            path: "attachment_collections",
+            serializer: Decidim::Content::AttachmentCollectionSerializer,
+            collection: ->(parent) { parent.attachment_collections }
+          },
+          {
+            path: "attachments",
+            serializer: Decidim::Content::AttachmentSerializer,
+            collection: ->(parent) { parent.attachments }
+          },
+          {
+            path: "users",
+            serializer: Decidim::Content::ParticipatorySpaceUserSerializer,
+            collection: ->(parent) { participatory_space_users(parent) }
+          }
+          # TODO : followers
+        ]
+      end
+
+      def components_bundle_hash
+        @components_bundle_hash ||= {
+          path: "components",
+          children: [
+            {
+              path: ->(resource) { "#{uid(resource)}---#{resource.try(:manifest_name)}" },
+              collection: ->(parent) { parent.components },
+              children: [
+                {
+                  path: "component",
+                  serializer: Decidim::Content::ComponentSerializer,
+                  collection: ->(parent) { [parent] }
+                },
+                {
+                  path: "statuses",
+                  serializer: Decidim::Content::AccountabilityStatusSerializer,
+                  collection: ->(parent) { Decidim::Accountability::Status.where(component: parent) }
+                },
+                {
+                  path: "results",
+                  serializer: Decidim::Content::AccountabilityResultSerializer,
+                  collection: ->(parent) { accountability_results_for_component(parent).includes(:category) }
+                },
+                # TODO : before proposals -> states
+                {
+                  path: "proposals",
+                  include_if: ->(parent) { parent&.manifest_name == "proposals" },
+                  serializer: Decidim::Content::ProposalSerializer,
+                  collection: lambda { |parent|
+                    proposals_for_component(parent).includes(:category)
+                  }
+                },
+                # TODO : after proposals -> endorsements, followers
+                {
+                  path: "debates",
+                  include_if: ->(parent) { parent&.manifest_name == "debates" },
+                  serializer: Decidim::Content::DebateSerializer,
+                  collection: lambda { |parent|
+                    debates_for_component(parent).includes(:category)
+                  }
+                },
+                {
+                  path: "attachment_collections",
+                  include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(proposals accountability).include?(parent&.manifest_name) },
+                  serializer: Decidim::Content::AttachmentCollectionSerializer,
+                  collection: ->(parent) { attachment_collections_for_component(parent) }
+                },
+                {
+                  path: "attachments",
+                  include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(proposals accountability).include?(parent&.manifest_name) },
+                  serializer: Decidim::Content::AttachmentSerializer,
+                  collection: ->(parent) { attachments_for_component(parent) }
+                },
+                {
+                  path: "comments",
+                  include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(proposals debates accountability).include?(parent&.manifest_name) },
+                  serializer: Decidim::Content::CommentSerializer,
+                  collection: ->(parent) { comments_for_component(parent) }
+                },
+                {
+                  path: "answers",
+                  include_if: ->(parent) { parent&.manifest_name == "surveys" },
+                  serializer: Decidim::Content::SurveyAnswerSerializer,
+                  collection: lambda { |parent|
+                    survey = Decidim::Surveys::Survey.find_by(component: parent)
+                    Decidim::Forms::QuestionnaireUserAnswers.for(survey.questionnaire)
+                  }
+                },
+                {
+                  path: "proposal-votes",
+                  include_if: ->(parent) { parent&.manifest_name == "proposals" },
+                  serializer: Decidim::Content::ProposalVoteSerializer,
+                  collection: lambda { |parent|
+                    Decidim::Proposals::ProposalVote.where(decidim_proposal_id: proposals_for_component(parent).pluck(:id))
+                  }
+                },
+                {
+                  path: "proposal-notes",
+                  include_if: ->(parent) { parent&.manifest_name == "proposals" },
+                  serializer: Decidim::Content::ProposalNoteSerializer,
+                  collection: lambda { |parent|
+                    Decidim::Proposals::ProposalNote.where(decidim_proposal_id: proposals_for_component(parent).pluck(:id))
+                  }
+                },
+                {
+                  path: "endorsements",
+                  include_if: ->(parent) { endorsable_component?(parent&.manifest_name) && %w(proposals debates).include?(parent&.manifest_name) },
+                  serializer: Decidim::Content::EndorsementSerializer,
+                  collection: ->(parent) { endorsements_for_component(parent) }
+                },
+                {
+                  path: "followers",
+                  include_if: ->(parent) { followable_component?(parent&.manifest_name) && %w(proposals debates accountability).include?(parent&.manifest_name) },
+                  serializer: Decidim::Content::FollowerSerializer,
+                  collection: ->(parent) { followers_for_component(parent) }
+                }
+              ]
+            }
+          ]
+        }
       end
 
       def export_to_directory
@@ -332,9 +370,9 @@ module Decidim
         ).export.read
       end
 
-      def participatory_process_users(participatory_process)
-        users_with_roles = participatory_process.user_roles.select(:decidim_user_id, :role).reorder("decidim_user_id").to_a
-        private_users = participatory_process.users.select(:decidim_user_id).reorder("decidim_user_id").to_a
+      def participatory_space_users(participatory_space)
+        users_with_roles = participatory_space.user_roles.select(:decidim_user_id, :role).reorder("decidim_user_id").to_a
+        private_users = participatory_space.users.select(:decidim_user_id).reorder("decidim_user_id").to_a
         (users_with_roles + private_users).uniq(&:decidim_user_id).map { |o| o.attributes.compact.symbolize_keys.merge(role: o[:role] || "private_user") }
       end
     end

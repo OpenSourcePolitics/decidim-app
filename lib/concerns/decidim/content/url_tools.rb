@@ -18,7 +18,7 @@ module Decidim
         end
 
         def blob_url(attachment, organization)
-          return unless attachment.respond_to?(:blob) && attachment.blob.present?
+          return unless attachment.present? && attachment.respond_to?(:blob) && attachment.blob.present?
 
           # TODO : Optimize Decidim::Organization , ActiveStorage::Attachment and ActiveStorage::Blob eager load on each call
 
