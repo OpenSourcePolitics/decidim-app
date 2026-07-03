@@ -46,6 +46,9 @@ fr:
       attachments:
         form:
           send_notification_to_followers: Envoyer une notification à toutes les personnes qui suivent la concertation ayant accepté de recevoir des notifications par mail
+      content_blocks:
+        update:
+          error: Une erreur est survenue lors de la mise à jour du bloc de contenu.
       models:
         assembly:
           fields:
