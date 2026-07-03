@@ -15,6 +15,10 @@ Rails.application.routes.draw do
         to: "decidim/devise/sessions#destroy"
   end
 
+  match "/api", to: redirect("/404"), via: :all
+  match "/api/graphiql", to: redirect("/404"), via: :all
+  match "/api/docs", to: redirect("/404"), via: :all
+
   mount Decidim::Core::Engine => "/"
   # mount Decidim::Map::Engine => '/map'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
