@@ -58,9 +58,17 @@ module Decidim
         end
 
         def comments_for_component(component)
-          component_resource_manifests_including_trait(component&.manifest_name, Decidim::Comments::Commentable).each.with_object([]) do |manifest, results|
-            results.concat(comments_for_resource(manifest.model_class_name.constantize, component)) if manifest.model_class_name.present?
-          end
+          # !! WARNING !! We are caching an array instead of an ActiveRecord::Relation here,
+          # so we can't use the cached results to chain further queries.
+          # This is a limitation of the current implementation.
+          # TODO : fix this the remove the confusion between caching an array and caching an ActiveRecord::Relation.
+          component_resource_cache_set(
+            container: component,
+            resource_class: Decidim::Comments::Comment,
+            query: component_resource_manifests_including_trait(component&.manifest_name, Decidim::Comments::Commentable).each.with_object([]) do |manifest, results|
+                     results.concat(comments_for_resource(manifest.model_class_name.constantize, component)) if manifest.model_class_name.present?
+                   end
+          )
         end
 
         # rubocop:disable Metrics/CyclomaticComplexity
@@ -101,6 +109,10 @@ module Decidim
         end
         # rubocop:enable Metrics/CyclomaticComplexity
         # rubocop:enable Metrics/PerceivedComplexity
+
+        def comment_votes_for_component(component)
+          Decidim::Comments::CommentVote.where(decidim_comment_id: comments_for_component(component)&.pluck(:id))
+        end
 
         def endorsements_for_component(component)
           component_resource_manifests_including_trait(component&.manifest_name, Decidim::Endorsable).each.with_object([]) do |manifest, results|
@@ -215,6 +227,18 @@ module Decidim
             resource_class: Decidim::Budgets::Project,
             query: Decidim::Budgets::Project.where(budget:)
           )
+        end
+
+        def comments_for_budget(budget)
+          component_resource_cache_set(
+            container: budget,
+            resource_class: Decidim::Comments::Comment,
+            query: Decidim::Comments::Comment.where(root_commentable: projects_for_budget(budget))
+          )
+        end
+
+        def comment_votes_for_budget(budget)
+          Decidim::Comments::CommentVote.where(decidim_comment_id: comments_for_budget(budget)&.pluck(:id))
         end
       end
     end

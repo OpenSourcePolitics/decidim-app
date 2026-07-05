@@ -189,6 +189,12 @@ module Decidim
                   collection: ->(parent) { comments_for_component(parent) }
                 },
                 {
+                  path: "comments-votes",
+                  include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(proposals debates accountability).include?(parent&.manifest_name) },
+                  serializer: Decidim::Content::CommentVoteSerializer,
+                  collection: ->(parent) { comment_votes_for_component(parent) }
+                },
+                {
                   path: "answers",
                   include_if: ->(parent) { parent&.manifest_name == "surveys" },
                   serializer: Decidim::Content::SurveyAnswerSerializer,
@@ -268,7 +274,12 @@ module Decidim
               {
                 path: "comments",
                 serializer: Decidim::Content::CommentSerializer,
-                collection: ->(parent) { Decidim::Comments::Comment.where(root_commentable: projects_for_budget(parent)) }
+                collection: ->(parent) { comments_for_budget(parent) }
+              },
+              {
+                path: "comment_votes",
+                serializer: Decidim::Content::CommentVoteSerializer,
+                collection: ->(parent) { comment_votes_for_budget(parent) }
               },
               {
                 path: "followers",

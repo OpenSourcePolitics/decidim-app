@@ -14,6 +14,7 @@
   billiards-line
   survey-line
   node-tree
+  eye-off-line
 ).each do |icon_name|
   Decidim.icons.register(name: icon_name, icon: icon_name, category: "system", description: "", engine: :core)
 end

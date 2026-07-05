@@ -15,9 +15,8 @@ module Decidim
           up_votes_count: resource.up_votes&.count,
           down_votes_count: resource.down_votes&.count,
           depth: resource.depth,
-          comments_count: resource.comments_count,
-          # commentable: uid(resource.commentable),
-          # root_commentable: uid(resource.root_commentable),
+          # Aparently, this is only used for root_commentable, but Comments can't be root_commentable, so this is always 0.
+          # comments_count: resource.comments_count,
           commentable: polymorphic_uid(resource, :decidim_commentable),
           root_commentable: polymorphic_uid(resource, :decidim_root_commentable),
           created_at: resource.created_at,
