@@ -9,7 +9,6 @@
 module Decidim
   module Content
     class CsvBundler
-      include Decidim::Content::UidTools
       include Decidim::Content::ComponentTools
 
       DEFAULT_OPTIONS = {
@@ -161,19 +160,16 @@ module Decidim
                   path: "proposals",
                   include_if: ->(parent) { parent&.manifest_name == "proposals" },
                   serializer: Decidim::Content::ProposalSerializer,
-                  collection: lambda { |parent|
-                    proposals_for_component(parent).includes(:category)
-                  }
+                  collection: ->(parent) { proposals_for_component(parent).includes(:category) }
                 },
                 # TODO : after proposals -> endorsements, followers
                 {
                   path: "debates",
                   include_if: ->(parent) { parent&.manifest_name == "debates" },
                   serializer: Decidim::Content::DebateSerializer,
-                  collection: lambda { |parent|
-                    debates_for_component(parent).includes(:category)
-                  }
+                  collection: ->(parent) { debates_for_component(parent).includes(:category) }
                 },
+                *components_bundle_for_budgets_array,
                 {
                   path: "attachment_collections",
                   include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(proposals accountability).include?(parent&.manifest_name) },
@@ -233,6 +229,55 @@ module Decidim
             }
           ]
         }
+      end
+
+      def components_bundle_for_budgets_array
+        # A budget component can have multiple budgets, and each budget can have multiple projects.
+        # So we create a folder for each budget, and inside that folder we create a folder for each project.
+        [
+          {
+            path: ->(resource) { uid(resource) },
+            include_if: ->(parent) { parent&.manifest_name == "budgets" },
+            collection: ->(parent) { Decidim::Budgets::Budget.where(component: parent).reorder(:weight, :id) },
+            children: [
+              {
+                path: "budget",
+                serializer: Decidim::Content::BudgetSerializer,
+                collection: ->(parent) { [parent] }
+              },
+              {
+                path: "projects",
+                serializer: Decidim::Content::BudgetProjectSerializer,
+                collection: ->(parent) { projects_for_budget(parent).includes(:category, :budget) }
+              },
+              {
+                path: "orders",
+                serializer: Decidim::Content::BudgetOrderSerializer,
+                collection: ->(parent) { Decidim::Budgets::Order.where(budget: parent).includes(:line_items) }
+              },
+              {
+                path: "attachment_collections",
+                serializer: Decidim::Content::AttachmentCollectionSerializer,
+                collection: ->(parent) { Decidim::AttachmentCollection.where(collection_for: projects_for_budget(parent)) }
+              },
+              {
+                path: "attachments",
+                serializer: Decidim::Content::AttachmentSerializer,
+                collection: ->(parent) { Decidim::Attachment.where(attached_to: projects_for_budget(parent)) }
+              },
+              {
+                path: "comments",
+                serializer: Decidim::Content::CommentSerializer,
+                collection: ->(parent) { Decidim::Comments::Comment.where(root_commentable: projects_for_budget(parent)) }
+              },
+              {
+                path: "followers",
+                serializer: Decidim::Content::FollowerSerializer,
+                collection: ->(parent) { Decidim::Follow.where(followable: projects_for_budget(parent)) }
+              }
+            ]
+          }
+        ]
       end
 
       def export_to_directory

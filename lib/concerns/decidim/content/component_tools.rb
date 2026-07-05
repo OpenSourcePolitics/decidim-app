@@ -7,24 +7,26 @@ module Decidim
     module ComponentTools
       extend ActiveSupport::Concern
       included do
+        include Decidim::Content::UidTools
+
         def component_resource_cache
           @component_resource_cache ||= Hash.new { |h, k| h[k] = h.dup.clear }
         end
 
-        def component_resource_cache_set(component:, resource_class:, query:, force: false)
-          if force || component_resource_cache[component.id][resource_class.name].blank?
-            component_resource_cache[component.id][resource_class.name] = query
+        def component_resource_cache_set(container:, resource_class:, query:, force: false)
+          if force || component_resource_cache[uid(container)][resource_class.name].blank?
+            component_resource_cache[uid(container)][resource_class.name] = query
           else
-            resource_class.none
+            component_resource_cache[uid(container)][resource_class.name]
           end
         end
 
-        def component_resource_cache_get(component:, resource_class:)
-          component_resource_cache[component.id][resource_class.name]
+        def component_resource_cache_get(container:, resource_class:)
+          (component_resource_cache[uid(container)][resource_class.name].presence || resource_class.none)
         end
 
-        def component_resource_cache_exists?(component:, resource_class:)
-          component_resource_cache[component.id][resource_class.name].present?
+        def component_resource_cache_exists?(container:, resource_class:)
+          component_resource_cache[uid(container)][resource_class.name].present?
         end
 
         def component_resource_manifests(manifest_name)
@@ -81,8 +83,8 @@ module Decidim
               root_commentable = gateway_resources.present? ? resource_class.where(through => gateway_resources) : resource_class.none
             end
 
-            if component_resource_cache_exists?(component:, resource_class:)
-              cached_ids = component_resource_cache_get(component:, resource_class:).pluck(:id)
+            if component_resource_cache_exists?(container: component, resource_class:)
+              cached_ids = component_resource_cache_get(container: component, resource_class:).pluck(:id)
               root_commentable = root_commentable.where(id: cached_ids)
             end
 
@@ -94,7 +96,7 @@ module Decidim
             end
           end
           Rails.logger.warn "Decidim::Content::ComponentTools.comments_for_resource (concerns) : No comments found for #{resource_class} with component association."
-          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(component:, resource_class:)
+          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(container: component, resource_class:)
           Decidim::Comments::Comment.none
         end
         # rubocop:enable Metrics/CyclomaticComplexity
@@ -180,7 +182,7 @@ module Decidim
 
         def proposals_for_component(component)
           component_resource_cache_set(
-            component:,
+            container: component,
             resource_class: Decidim::Proposals::Proposal,
             query: Decidim::Proposals::Proposal
                     .published
@@ -191,7 +193,7 @@ module Decidim
 
         def debates_for_component(component)
           component_resource_cache_set(
-            component:,
+            container: component,
             resource_class: Decidim::Debates::Debate,
             query: Decidim::Debates::Debate
                     .not_hidden
@@ -201,9 +203,17 @@ module Decidim
 
         def accountability_results_for_component(component)
           component_resource_cache_set(
-            component:,
+            container: component,
             resource_class: Decidim::Accountability::Result,
             query: Decidim::Accountability::Result.where(component:).order("children_count DESC, parent_id ASC, id ASC")
+          )
+        end
+
+        def projects_for_budget(budget)
+          component_resource_cache_set(
+            container: budget,
+            resource_class: Decidim::Budgets::Project,
+            query: Decidim::Budgets::Project.where(budget:)
           )
         end
       end
