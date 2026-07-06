@@ -2,6 +2,35 @@
 
 module Decidim
   module AccountControllerExtends
+    def update
+      enforce_permission_to(:update, :user, current_user:)
+
+      @account = form(Decidim::AccountForm).from_params(account_params)
+
+      Decidim::UpdateAccount.call(@account) do
+        on(:ok) do |email_is_unconfirmed|
+          flash[:notice] = if email_is_unconfirmed
+                             t("account.update.success_with_email_confirmation", scope: "decidim")
+                           else
+                             t("account.update.success", scope: "decidim")
+                           end
+
+          bypass_sign_in(current_user)
+
+          redirect_url = session.delete(:euf_redirect_url) ||
+                         stored_location_for(current_user) ||
+                         decidim.account_path
+          redirect_to redirect_url
+        end
+
+        on(:invalid) do |password|
+          fetch_entered_password(password)
+          flash[:alert] = t("account.update.error", scope: "decidim")
+          render action: :show
+        end
+      end
+    end
+
     def destroy
       enforce_permission_to(:delete, :user, current_user:)
       @form = form(Decidim::DeleteAccountForm).from_params(params)
@@ -16,6 +45,23 @@ module Decidim
     end
 
     private
+
+    def private_space_path_for(user)
+      private_user = Decidim::ParticipatorySpacePrivateUser
+                     .where(user:)
+                     .order(created_at: :desc)
+                     .first
+
+      return if private_user&.privatable_to.blank?
+
+      space = private_user.privatable_to
+      case space
+      when Decidim::Assembly
+        decidim_assemblies.assembly_path(space.slug)
+      when Decidim::ParticipatoryProcess
+        decidim_participatory_processes.participatory_process_path(space.slug)
+      end
+    end
 
     def handle_successful_destruction
       sign_out(current_user)
@@ -48,6 +94,8 @@ module Decidim
     def account_params
       params[:user][:name] = current_user.name if disable_profile_field?(:name)
       params[:user][:email] = current_user.email if disable_profile_field?(:email)
+      params[:user][:nickname] ||= current_user.nickname
+      params[:user][:tos_agreement] = "1"
       params[:user].to_unsafe_h
     end
 

@@ -22,6 +22,7 @@ module DecidimApp
       require "extends/commands/decidim/participatory_processes/admin/copy_participatory_process_extends"
       require "extends/commands/decidim/create_omniauth_registration_extends"
       require "extends/commands/decidim/forms/admin/update_questionnaire_extends"
+      require "extends/commands/decidim/admin/content_blocks/update_content_block_extends"
       # forms
       require "extends/forms/decidim/assemblies/admin/assembly_copy_form_extends"
       require "extends/forms/decidim/participatory_processes/admin/participatory_process_copy_form_extends"
@@ -31,7 +32,10 @@ module DecidimApp
       require "extends/forms/decidim/omniauth_registration_form_extends"
       require "extends/forms/decidim/account_form_extends"
       require "extends/forms/decidim/editor_image_form_extends"
+      require "extends/forms/decidim/admin/content_block_form_extends"
       # controllers
+      require "extends/controllers/application_controller_extends"
+      require "extends/controllers/decidim/devise/invitations_controller_extends"
       require "extends/controllers/decidim/admin/scopes_controller_extends"
       require "extends/controllers/decidim/scopes_controller_extends"
       require "extends/controllers/decidim/comments/comments_controller_extends"
@@ -43,6 +47,8 @@ module DecidimApp
       require "extends/controllers/decidim/budgets/projects_controller_extends"
       require "extends/controllers/decidim/proposals/admin/proposal_states_controller_extends"
       require "extends/controllers/decidim/proposals/proposals_controller_extends"
+      require "extends/controllers/decidim/assemblies/admin/assembly_landing_page_content_blocks_controller_extends"
+      require "extends/controllers/decidim/participatory_processes/admin/participatory_process_landing_page_content_blocks_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       require "extends/helpers/decidim/omniauth_helper_extends"
@@ -57,6 +63,7 @@ module DecidimApp
       require "extends/models/decidim/accountability/result_extends"
       require "extends/models/decidim/proposals/proposal_state_extends"
       require "extends/models/decidim/searchable_author_extends"
+      require "extends/models/decidim/content_block_attachment_extends"
       # permissions
       require "extends/permissions/initiatives/permissions_extends"
       # presenters
