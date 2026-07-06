@@ -248,6 +248,10 @@ nl:
           highlighted_initiatives:
             active_initiatives: Active initiatives
             see_all_initiatives: See all initiatives
+      initiatives:
+        pending_initiatives:
+          description: Deze initiatieven zijn nog niet openbaar. Bekijk ze en dien ze in voor technische validatie, zodat ze openbaar kunnen worden gemaakt.
+          title: Concepten en lopende initiatieven
       unavailable_scope: Unavailable scope
     meetings:
       application_helper:
