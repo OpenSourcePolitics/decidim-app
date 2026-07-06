@@ -16,6 +16,9 @@ fr:
         document_number: Numéro unique
       participatory_process:
         copy_landing_page_blocks: Copier les blocs de la page d'accueil
+      sms_code:
+        phone_country: Pays
+        phone_number: Numéro de téléphone
   activerecord:
     models:
       decidim:
@@ -259,6 +262,8 @@ fr:
         models:
           project:
             name: Projet
+      creation:
+        text: Ce projet a été ajouté à ce budget
     budgets_importer:
       actions:
         import: Importer des projets

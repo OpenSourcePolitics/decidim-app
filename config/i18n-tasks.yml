@@ -207,5 +207,6 @@ ignore_unused:
   - decidim.initiatives.form.edit_documents
   - layouts.decidim.initiative_creation_header.*
   - decidim.initiatives.signatures.workflows.legacy_signature_handler.*
-  # initiatives
   - decidim.initiatives.initiatives.pending_initiatives.*
+  - activemodel.attributes.sms_code.*
+  - decidim.budgets.creation.text

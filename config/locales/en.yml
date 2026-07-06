@@ -8,6 +8,9 @@ en:
         document_number: Unique number
       participatory_process:
         copy_landing_page_blocks: Copy landing page blocks
+      sms_code:
+        phone_country: Country code
+        phone_number: Phone number
   activerecord:
     models:
       decidim:
@@ -251,6 +254,8 @@ en:
         models:
           project:
             name: Project
+      creation:
+        text: They were added to this budget
     budgets_importer:
       actions:
         import: Import projects to budget
