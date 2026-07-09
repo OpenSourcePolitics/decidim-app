@@ -18,12 +18,47 @@ en:
             followers: "Followers"
             hidden_moderations: "Hidden content"
             moderations: "Moderations"
+            organization:
+              areas:
+                one: "Area"
+                other: "Areas"
+              authorizations:
+                one: "Authorization"
+                other: "Authorizations"
+              created_at: "Created %{time_ago} ago"
+              omniauth_providers:
+                one: "External identity provider"
+                other: "External identity providers"
+              scopes:
+                one: "Scope"
+                other: "Scopes"
+              static_pages:
+                one: "Static page"
+                other: "Static pages"
+              static_page_topics:
+                one: "Static page topic"
+                other: "Static page topics"
+              users:
+                users:
+                  one: "User"
+                  other: "Users"
+                user_groups:
+                  one: "User Group"
+                  other: "User Groups"
+                admins:
+                  one: "Admin"
+                  other: "Admins"
+                user_managers:
+                  one: "Participant Manager"
+                  other: "Participant Managers"
             signatures: "Signatures"
           views:
             index:
-              title: "Content Tree"
               actions:
                 export_to_csv: "Export tree to CSV"
+              organization:
+                header: "Organization"
+              title: "Content Tree"
             table:
               title: "Content Table"
       menu:

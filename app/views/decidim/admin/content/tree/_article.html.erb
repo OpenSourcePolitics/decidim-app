@@ -27,23 +27,13 @@
           </div>
           <% if item.dig(:metadata, :labels).present? %>
             <div class="item-labels grow">
-              <% item[:metadata][:labels].each do |key, label| %>
-                  <span class="label !text-sm <%= label[:level] %>">
-                    <%= icon(label[:icon]) if label[:icon].present? %>
-                    <%= label[:text] || label[:value] %>
-                  </span>
-              <% end %>
+              <%= render partial: "labels", locals: { labels: item[:metadata][:labels] } %>
             </div>
           <% end %>
         </div>
         <% if item.dig(:metadata, :stats).present? %>
           <div class="item-stats">
-            <% item[:metadata][:stats].except(:components_count).each do |key, label| %>
-              <span class="label !text-sm <%= label[:level] %>">
-                <%= label[:value] %>
-                <%= label[:text] %>
-              </span>
-            <% end %>
+            <%= render partial: "stats", locals: { stats: item[:metadata][:stats] } %>
           </div>
         <% end %>
       </div>

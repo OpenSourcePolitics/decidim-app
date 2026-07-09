@@ -7,6 +7,8 @@
   </h1>
 </div>
 
+<%= render partial: "organization", locals: { organization: content_tree.except(:children) } %>
+
 <div class="content-tree tree-view" data-component="accordion">
   <% content_tree[:children].each do |participatory_spaces| %>
     <% participatory_space_type_prefix = participatory_spaces[:manifest][:space_class].to_s.demodulize.underscore.pluralize %>

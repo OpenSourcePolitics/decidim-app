@@ -5,6 +5,8 @@ module Decidim
     module MetadataGenerator
       extend ActiveSupport::Concern
       included do
+        include ActionView::Helpers::DateHelper
+
         INITIATIVE_STATE_ICON_MAP = {
           created: "draft-line",
           validating: "time-line",
@@ -32,6 +34,7 @@ module Decidim
 
         def labels_for(instance)
           labels = {}
+          labels.merge!(organization_labels(instance)) if instance.is_a?(Decidim::Organization)
           labels.merge!(hashtag(instance)) if instance.respond_to?(:hashtag) && instance.hashtag.present?
           labels.merge!(component_type(instance)) if instance.is_a?(Decidim::Component)
           labels.merge!(private_space(instance)) if instance.is_a?(Decidim::HasPrivateUsers)
@@ -39,14 +42,15 @@ module Decidim
           labels
         end
 
-        def stats_for(instance, empty_values: false)
+        def stats_for(instance, empty_values: false) # rubocop:disable Metrics/CyclomaticComplexity
           stats = {}
+          stats.merge!(organization_stats(instance)) if instance.is_a?(Decidim::Organization)
           stats.merge!(component_stats(instance)) if instance.is_a?(Decidim::Component)
           stats.merge!(initiative_stats(instance)) if instance.is_a?(Decidim::Initiative)
           stats.merge!(participatory_space_stats(instance)) if instance.is_a?(Decidim::Participable)
           stats.merge!(followers_stats(instance)) if instance.is_a?(Decidim::Followable)
           stats.merge!(participatory_space_moderations_stats(instance)) if instance.is_a?(Decidim::Participable)
-          stats.reject! { |_, stat| stat[:value].to_i.zero? } unless empty_values
+          stats.reject! { |_, stat| stat[:value].to_i.zero? && !stat[:force_display] } unless empty_values
           stats
         end
 
@@ -210,6 +214,98 @@ module Decidim
               value: instance.follows_count,
               text: I18n.t("decidim.admin.content.tree.stats.followers"),
               icon: "group-line",
+              level: "info"
+            }
+          }
+        end
+
+        def organization_labels(organization)
+          {
+            created_at: {
+              text: I18n.t("decidim.admin.content.tree.stats.organization.created_at", time_ago: time_ago_in_words(organization.created_at)),
+              icon: "time-line",
+              level: "info"
+            }
+          }
+        end
+
+        def organization_stats(organization)
+          {
+            **organization_users_stats(organization),
+            **organization_system_stats(organization),
+            **organization_transversal_content_stats(organization)
+          }
+        end
+
+        def organization_users_stats(organization)
+          {
+            **organization.user_entities.group(:type).count.sort.to_h.each.inject({}) do |stats, (type, count)|
+              key = type.to_s.demodulize.underscore.pluralize
+              stats.merge(
+                key.to_sym => {
+                  value: count || 0,
+                  text: I18n.t("decidim.admin.content.tree.stats.organization.users.#{key}", count:, default: key.humanize),
+                  level: "info"
+                }
+              )
+            end,
+            admins: {
+              value: admin_count = organization.admins.count,
+              text: I18n.t("decidim.admin.content.tree.stats.organization.users.admins", count: admin_count),
+              level: admin_count.positive? ? "info" : "warning",
+              force_display: true
+            },
+            **organization.users_with_any_role.group(:roles).count.each_with_object({}) do |(roles, count), stats|
+              roles.each do |role|
+                key = role.to_s.pluralize
+                stats.merge!(
+                  key.to_sym => {
+                    value: count || 0,
+                    text: I18n.t("decidim.admin.content.tree.stats.organization.users.#{key}", count:, default: key.humanize),
+                    level: "info"
+                  }
+                ) { |_key, old_value, new_value| old_value + new_value }
+              end
+              stats
+            end
+          }
+        end
+
+        def organization_system_stats(organization)
+          {
+            authorizations: {
+              value: authorizations_count = organization.available_authorizations.size,
+              text: I18n.t("decidim.admin.content.tree.stats.organization.authorizations", count: authorizations_count),
+              level: "info"
+            },
+            omniauth_providers: {
+              value: omniauth_providers_count = organization.enabled_omniauth_providers.size,
+              text: I18n.t("decidim.admin.content.tree.stats.organization.omniauth_providers", count: omniauth_providers_count),
+              level: "info"
+            }
+          }
+        end
+
+        def organization_transversal_content_stats(organization)
+          {
+            scopes: {
+              value: scopes_count = organization.scopes.count,
+              text: I18n.t("decidim.admin.content.tree.stats.organization.scopes", count: scopes_count),
+              level: "info"
+            },
+            areas: {
+              value: areas_count = organization.areas.count,
+              text: I18n.t("decidim.admin.content.tree.stats.organization.areas", count: areas_count),
+              level: "info"
+            },
+            static_pages: {
+              value: static_pages_count = organization.static_pages.count,
+              text: I18n.t("decidim.admin.content.tree.stats.organization.static_pages", count: static_pages_count),
+              level: "info"
+            },
+            static_page_topics: {
+              value: static_page_topics_count = organization.static_page_topics.count,
+              text: I18n.t("decidim.admin.content.tree.stats.organization.static_page_topics", count: static_page_topics_count),
               level: "info"
             }
           }
