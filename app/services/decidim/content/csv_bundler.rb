@@ -169,28 +169,34 @@ module Decidim
                   serializer: Decidim::Content::DebateSerializer,
                   collection: ->(parent) { debates_for_component(parent).includes(:category) }
                 },
+                {
+                  path: "posts",
+                  include_if: ->(parent) { parent&.manifest_name == "blogs" },
+                  serializer: Decidim::Content::PostSerializer,
+                  collection: ->(parent) { posts_for_component(parent) }
+                },
                 *components_bundle_for_budgets_array,
                 {
                   path: "attachment_collections",
-                  include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(proposals accountability).include?(parent&.manifest_name) },
+                  include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) },
                   serializer: Decidim::Content::AttachmentCollectionSerializer,
                   collection: ->(parent) { attachment_collections_for_component(parent) }
                 },
                 {
                   path: "attachments",
-                  include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(proposals accountability).include?(parent&.manifest_name) },
+                  include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) },
                   serializer: Decidim::Content::AttachmentSerializer,
                   collection: ->(parent) { attachments_for_component(parent) }
                 },
                 {
                   path: "comments",
-                  include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(proposals debates accountability).include?(parent&.manifest_name) },
+                  include_if: ->(parent) { commentable_component?(parent&.manifest_name) },
                   serializer: Decidim::Content::CommentSerializer,
                   collection: ->(parent) { comments_for_component(parent) }
                 },
                 {
                   path: "comments-votes",
-                  include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(proposals debates accountability).include?(parent&.manifest_name) },
+                  include_if: ->(parent) { commentable_component?(parent&.manifest_name) },
                   serializer: Decidim::Content::CommentVoteSerializer,
                   collection: ->(parent) { comment_votes_for_component(parent) }
                 },
@@ -221,13 +227,13 @@ module Decidim
                 },
                 {
                   path: "endorsements",
-                  include_if: ->(parent) { endorsable_component?(parent&.manifest_name) && %w(proposals debates).include?(parent&.manifest_name) },
+                  include_if: ->(parent) { endorsable_component?(parent&.manifest_name) },
                   serializer: Decidim::Content::EndorsementSerializer,
                   collection: ->(parent) { endorsements_for_component(parent) }
                 },
                 {
                   path: "followers",
-                  include_if: ->(parent) { followable_component?(parent&.manifest_name) && %w(proposals debates accountability).include?(parent&.manifest_name) },
+                  include_if: ->(parent) { followable_component?(parent&.manifest_name) },
                   serializer: Decidim::Content::FollowerSerializer,
                   collection: ->(parent) { followers_for_component(parent) }
                 }

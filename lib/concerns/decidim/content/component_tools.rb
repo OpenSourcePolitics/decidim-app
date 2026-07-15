@@ -213,6 +213,15 @@ module Decidim
           )
         end
 
+        def posts_for_component(component)
+          component_resource_cache_set(
+            container: component,
+            resource_class: Decidim::Blogs::Post,
+            query: Decidim::Blogs::Post
+                    .where(component:)
+          )
+        end
+
         def accountability_results_for_component(component)
           component_resource_cache_set(
             container: component,
