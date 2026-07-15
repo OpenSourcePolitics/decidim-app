@@ -21,6 +21,18 @@
             <span class="item-count"><%= participatory_spaces[:item_count] %></span>
           <% end %>
         </h2>
+        <div class="flex grow gap-1">
+          <% if participatory_spaces.dig(:metadata, :labels).present? %>
+            <div class="item-labels">
+              <%= render partial: "labels", locals: { labels: participatory_spaces[:metadata][:labels] } %>
+            </div>
+          <% end %>
+          <% if participatory_spaces.dig(:metadata, :warnings).present? %>
+            <div class="item-warnings">
+              <%= render partial: "warnings", locals: { warnings: participatory_spaces[:metadata][:warnings] } %>
+            </div>
+          <% end %>
+        </div>
       </header>
       <div id="<%= participatory_space_type_prefix + "__group" %>" aria-hidden="true" class="accordion-group">
         <% participatory_spaces[:children].each do |participatory_space| %>

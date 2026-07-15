@@ -61,5 +61,11 @@ fr:
               title: "Arbre de contenu"
             table:
               title: "Tableau de contenu"
+          warnings:
+            assembly:
+              subassemblies: "Sous-assemblées"
+              subassemblies_depth: "Sous-assemblées sur %{depth} niveaux"
+            component:
+              permissions: "Permissions d'actions"
       menu:
         reversibility: "Arbre de contenu"

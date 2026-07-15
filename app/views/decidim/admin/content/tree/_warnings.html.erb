@@ -1,0 +1,6 @@
+<% warnings.each do |key, warning| %>
+  <span class="label !text-sm <%= warning[:level] %>">
+    <%= icon(warning[:icon]) if warning[:icon].present? %>
+    <%= warning[:text] || warning[:value] %>
+  </span>
+<% end %>

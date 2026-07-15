@@ -25,11 +25,18 @@
               <% end %>
             </span>
           </div>
-          <% if item.dig(:metadata, :labels).present? %>
-            <div class="item-labels grow">
-              <%= render partial: "labels", locals: { labels: item[:metadata][:labels] } %>
-            </div>
-          <% end %>
+          <div class="flex grow gap-1">
+            <% if item.dig(:metadata, :labels).present? %>
+              <div class="item-labels">
+                <%= render partial: "labels", locals: { labels: item[:metadata][:labels] } %>
+              </div>
+            <% end %>
+            <% if item.dig(:metadata, :warnings).present? %>
+              <div class="item-warnings">
+                <%= render partial: "warnings", locals: { warnings: item[:metadata][:warnings] } %>
+              </div>
+            <% end %>
+          </div>
         </div>
         <% if item.dig(:metadata, :stats).present? %>
           <div class="item-stats">

@@ -61,5 +61,11 @@ en:
               title: "Content Tree"
             table:
               title: "Content Table"
+          warnings:
+            assembly:
+              subassemblies: "Sub assemblies"
+              subassemblies_depth: "Sub assemblies on %{depth} levels"
+            component:
+              permissions: "Action permissions"
       menu:
         reversibility: "Content Tree"

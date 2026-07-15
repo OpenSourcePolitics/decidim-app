@@ -90,7 +90,8 @@ module Decidim
               manifest:,
               children: children = build_participatory_spaces_array(manifest)
             }.merge(
-              item_count: count_space_children(children)
+              item_count: count_space_children(children),
+              metadata: options[:include_metadata] ? metadata_for(manifest) : nil
             )
           end
         ) { |_key, old_value, new_value| old_value + new_value }
