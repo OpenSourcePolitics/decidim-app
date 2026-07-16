@@ -39,8 +39,7 @@ module OmniauthRegistrationsControllerExtends
 
     def sign_in_and_redirect(resource_or_scope, *args)
       strategy = request.env["omniauth.strategy"]
-      provider = strategy.name
-      session["omniauth.provider"] = provider
+      session["omniauth.provider"] = strategy.name if strategy
       super
     end
 
