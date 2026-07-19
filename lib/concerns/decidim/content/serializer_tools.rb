@@ -12,6 +12,7 @@ module Decidim
         include Decidim::Content::UrlTools
         include Decidim::Content::UidTools
         include Decidim::Content::AuthorableTools
+        include Decidim::Content::QuestionnaireTools
 
         def normalize_translated_attribute(attribute)
           # NOTES : if returning nil creates issues then return empty_translatable

@@ -114,7 +114,7 @@ module Decidim
             collection: ->(parent) { parent.categories }
           },
           {
-            path: "attachment_collections",
+            path: "attachment-collections",
             serializer: Decidim::Content::AttachmentCollectionSerializer,
             collection: ->(parent) { parent.attachment_collections }
           },
@@ -138,7 +138,7 @@ module Decidim
           children: [
             {
               path: ->(resource) { "#{uid(resource)}---#{resource.try(:manifest_name)}" },
-              collection: ->(parent) { parent.components },
+              collection: ->(parent) { parent.components.select { |c| c.try(:manifest_name) == "meetings" } },
               children: [
                 {
                   path: "component",
@@ -162,7 +162,6 @@ module Decidim
                   serializer: Decidim::Content::ProposalSerializer,
                   collection: ->(parent) { proposals_for_component(parent).includes(:category) }
                 },
-                # TODO : after proposals -> endorsements, followers
                 {
                   path: "debates",
                   include_if: ->(parent) { parent&.manifest_name == "debates" },
@@ -176,34 +175,35 @@ module Decidim
                   collection: ->(parent) { posts_for_component(parent) }
                 },
                 *components_bundle_for_budgets_array,
+                *components_bundle_for_meetings_array,
                 {
-                  path: "attachment_collections",
-                  include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) },
+                  path: "attachment-collections",
+                  include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(budgets meetings).exclude?(parent&.manifest_name) },
                   serializer: Decidim::Content::AttachmentCollectionSerializer,
                   collection: ->(parent) { attachment_collections_for_component(parent) }
                 },
                 {
                   path: "attachments",
-                  include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) },
+                  include_if: ->(parent) { component_has_attachments?(parent&.manifest_name) && %w(budgets meetings).exclude?(parent&.manifest_name) },
                   serializer: Decidim::Content::AttachmentSerializer,
                   collection: ->(parent) { attachments_for_component(parent) }
                 },
                 {
                   path: "comments",
-                  include_if: ->(parent) { commentable_component?(parent&.manifest_name) },
+                  include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(budgets meetings).exclude?(parent&.manifest_name) },
                   serializer: Decidim::Content::CommentSerializer,
                   collection: ->(parent) { comments_for_component(parent) }
                 },
                 {
                   path: "comments-votes",
-                  include_if: ->(parent) { commentable_component?(parent&.manifest_name) },
+                  include_if: ->(parent) { commentable_component?(parent&.manifest_name) && %w(budgets meetings).exclude?(parent&.manifest_name) },
                   serializer: Decidim::Content::CommentVoteSerializer,
                   collection: ->(parent) { comment_votes_for_component(parent) }
                 },
                 {
                   path: "answers",
                   include_if: ->(parent) { parent&.manifest_name == "surveys" },
-                  serializer: Decidim::Content::SurveyAnswerSerializer,
+                  serializer: Decidim::Content::QuestionnaireAnswersSerializer,
                   collection: lambda { |parent|
                     survey = Decidim::Surveys::Survey.find_by(component: parent)
                     Decidim::Forms::QuestionnaireUserAnswers.for(survey.questionnaire)
@@ -233,7 +233,7 @@ module Decidim
                 },
                 {
                   path: "followers",
-                  include_if: ->(parent) { followable_component?(parent&.manifest_name) },
+                  include_if: ->(parent) { followable_component?(parent&.manifest_name) && %w(budgets meetings).exclude?(parent&.manifest_name) },
                   serializer: Decidim::Content::FollowerSerializer,
                   collection: ->(parent) { followers_for_component(parent) }
                 }
@@ -268,7 +268,7 @@ module Decidim
                 collection: ->(parent) { Decidim::Budgets::Order.where(budget: parent).includes(:line_items) }
               },
               {
-                path: "attachment_collections",
+                path: "attachment-collections",
                 serializer: Decidim::Content::AttachmentCollectionSerializer,
                 collection: ->(parent) { Decidim::AttachmentCollection.where(collection_for: projects_for_budget(parent)) }
               },
@@ -283,7 +283,7 @@ module Decidim
                 collection: ->(parent) { comments_for_budget(parent) }
               },
               {
-                path: "comment_votes",
+                path: "comment-votes",
                 serializer: Decidim::Content::CommentVoteSerializer,
                 collection: ->(parent) { comment_votes_for_budget(parent) }
               },
@@ -291,6 +291,72 @@ module Decidim
                 path: "followers",
                 serializer: Decidim::Content::FollowerSerializer,
                 collection: ->(parent) { Decidim::Follow.where(followable: projects_for_budget(parent)) }
+              }
+            ]
+          }
+        ]
+      end
+
+      def components_bundle_for_meetings_array
+        # There is too much data associated with a meeting (registrations, questionnaire + answers, attachments, comments, etc.)
+        # so we create a folder for each meeting to help organize the data.
+        [
+          {
+            path: ->(resource) { uid(resource) },
+            include_if: ->(parent) { parent&.manifest_name == "meetings" },
+            collection: ->(parent) { meetings_for_component(parent).includes(:category, :questionnaire) },
+            children: [
+              {
+                path: "meeting",
+                serializer: Decidim::Content::MeetingSerializer,
+                collection: ->(parent) { [parent] }
+              },
+              {
+                path: "invites",
+                serializer: Decidim::Content::MeetingInviteSerializer,
+                collection: ->(parent) { invites_for_meeting(parent) }
+              },
+              {
+                path: "registrations",
+                serializer: Decidim::Content::MeetingRegistrationSerializer,
+                collection: ->(parent) { registrations_for_meeting(parent) }
+              },
+              {
+                path: "registrations-answers",
+                serializer: Decidim::Content::QuestionnaireAnswersSerializer,
+                include_if: ->(parent) { parent.try(:questionnaire).present? },
+                collection: ->(parent) { Decidim::Forms::QuestionnaireUserAnswers.for(parent.questionnaire) }
+              },
+              {
+                path: "poll-answers",
+                serializer: Decidim::Content::MeetingPollAnswersSerializer,
+                include_if: ->(parent) { parent.try(:poll).try(:questionnaire).present? },
+                collection: ->(parent) { Decidim::Meetings::QuestionnaireUserAnswers.for(parent.poll.questionnaire) }
+              },
+              {
+                path: "attachment-collections",
+                serializer: Decidim::Content::AttachmentCollectionSerializer,
+                collection: ->(parent) { Decidim::AttachmentCollection.where(collection_for: meetings_for_component(parent)) }
+              },
+              {
+                path: "attachments",
+                serializer: Decidim::Content::AttachmentSerializer,
+                collection: ->(parent) { Decidim::Attachment.where(attached_to: meetings_for_component(parent)) }
+              },
+              {
+                path: "comments",
+                serializer: Decidim::Content::CommentSerializer,
+                collection: ->(parent) { comments_for_meeting(parent) }
+              },
+              {
+                path: "comment-votes",
+                serializer: Decidim::Content::CommentVoteSerializer,
+                collection: ->(parent) { comment_votes_for_meeting(parent) }
+              },
+              {
+                path: "followers",
+                serializer: Decidim::Content::FollowerSerializer,
+                collection: ->(parent) { Decidim::Follow.where(followable: meetings_for_component(parent)) }
               }
             ]
           }

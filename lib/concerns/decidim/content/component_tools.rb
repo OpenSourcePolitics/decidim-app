@@ -222,6 +222,45 @@ module Decidim
           )
         end
 
+        def meetings_for_component(component)
+          component_resource_cache_set(
+            container: component,
+            resource_class: Decidim::Meetings::Meeting,
+            query: Decidim::Meetings::Meeting
+                    .not_hidden
+                    .where(component:)
+          )
+        end
+
+        def invites_for_meeting(meeting)
+          component_resource_cache_set(
+            container: meeting,
+            resource_class: Decidim::Meetings::Invite,
+            query: Decidim::Meetings::Invite
+                    .where(meeting:)
+          )
+        end
+
+        def registrations_for_meeting(meeting)
+          component_resource_cache_set(
+            container: meeting,
+            resource_class: Decidim::Meetings::Registration,
+            query: Decidim::Meetings::Registration.where(meeting:)
+          )
+        end
+
+        def comments_for_meeting(meeting)
+          component_resource_cache_set(
+            container: meeting,
+            resource_class: Decidim::Comments::Comment,
+            query: Decidim::Comments::Comment.where(root_commentable: meeting)
+          )
+        end
+
+        def comment_votes_for_meeting(meeting)
+          Decidim::Comments::CommentVote.where(decidim_comment_id: comments_for_meeting(meeting)&.pluck(:id))
+        end
+
         def accountability_results_for_component(component)
           component_resource_cache_set(
             container: component,

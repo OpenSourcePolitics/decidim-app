@@ -2,13 +2,8 @@
 
 module Decidim
   module Content
-    class SurveyAnswerSerializer < Decidim::Exporters::Serializer
+    class MeetingPollAnswersSerializer < Decidim::Exporters::Serializer
       include Decidim::Content::SerializerTools
-
-      EXCLUDED_QUESTION_TYPES = [
-        Decidim::Forms::Question::SEPARATOR_TYPE,
-        Decidim::Forms::Question::TITLE_AND_DESCRIPTION_TYPE
-      ].freeze
 
       def initialize(answers)
         @answers = answers
@@ -20,6 +15,7 @@ module Decidim
       def serialize
         {
           **user_data,
+          questionnaire_id: answers&.first&.decidim_questionnaire_id,
           created_at: answers&.first&.created_at,
           **questions_hash
         }
@@ -43,7 +39,7 @@ module Decidim
         questionnaire_id = answers&.first&.decidim_questionnaire_id
         return {} unless questionnaire_id
 
-        questions = Decidim::Forms::Question.where(decidim_questionnaire_id: questionnaire_id).where.not(question_type: EXCLUDED_QUESTION_TYPES).order(:position)
+        questions = Decidim::Meetings::Question.where(decidim_questionnaire_id: questionnaire_id).order(:position)
         return {} if questions.none?
 
         answers_hash = answers.each.inject({}) do |result, answer|
@@ -54,30 +50,13 @@ module Decidim
 
         questions.each.inject({}) do |serialized, question|
           serialized.update(
-            uid(question) => normalize_body(question, answers_hash[question.id])
+            uid(question) => normalize_body(answers_hash[question.id])
           )
         end
       end
 
-      def normalize_body(question, answer)
-        case question.question_type
-        when "single_option", "multiple_option", "sorting"
-          normalize_choices(answer&.choices)
-        when "matrix_single", "matrix_multiple"
-          normalize_matrix(question, answer)
-        when "files"
-          answer&.attachments&.map(&:url)
-        else
-          answer&.body
-        end
-      end
-
-      def normalize_matrix(question, answer)
-        question.matrix_rows&.map do |matrix_row|
-          {
-            uid(matrix_row) => normalize_choices(answer&.choices&.where(matrix_row:))
-          }
-        end
+      def normalize_body(answer)
+        normalize_choices(answer&.choices)
       end
 
       def normalize_choices(choices)
@@ -86,7 +65,7 @@ module Decidim
 
       def normalize_single_choice(choice)
         {
-          answer_option: uid(Decidim::Forms::AnswerOption.new(id: choice.decidim_answer_option_id)),
+          answer_option: uid(Decidim::Meetings::AnswerOption.new(id: choice.decidim_answer_option_id)),
           position: choice.try(:position),
           body: choice.try(:body),
           custom_body: choice.try(:custom_body)
