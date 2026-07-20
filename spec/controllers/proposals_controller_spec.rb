@@ -31,7 +31,7 @@ module Decidim
             get :index
             expect(response).to have_http_status(:ok)
             expect(subject).to render_template(:index)
-            expect(assigns(:proposals).order_values).to eq(["position(decidim_proposals_proposals.id::text in '')"])
+            expect(assigns(:proposals).order_values).to eq(["array_position(ARRAY[]::bigint[], decidim_proposals_proposals.id)"])
           end
 
           it "sets two different collections" do
