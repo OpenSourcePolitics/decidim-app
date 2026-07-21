@@ -24,8 +24,10 @@ module Decidim
       def convert_settings_to_uid(settings)
         return unless settings
 
-        settings["steps"].transform_keys! { |key| uid(Decidim::ParticipatoryProcessStep.new(id: key.to_i)) } if settings["steps"]
-        settings["global"]["scope_id"] = uid(Decidim::Scope.new(id: settings["global"]["scope_id"].to_i)) if settings.dig("global", "scope_id")
+        settings.tap do |s|
+          s["steps"].transform_keys! { |key| uid(Decidim::ParticipatoryProcessStep.new(id: key.to_i)) } if s["steps"].present?
+          s["global"]["scope_id"] = uid(Decidim::Scope.new(id: s["global"]["scope_id"].to_i)) if s.dig("global", "scope_id").present?
+        end
       end
 
       def convert_specific_data_to_uid(specific_data)

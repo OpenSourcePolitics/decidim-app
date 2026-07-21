@@ -222,6 +222,15 @@ module Decidim
           )
         end
 
+        def sortitions_for_component(component)
+          component_resource_cache_set(
+            container: component,
+            resource_class: Decidim::Sortitions::Sortition,
+            query: Decidim::Sortitions::Sortition
+                    .where(component:)
+          )
+        end
+
         def meetings_for_component(component)
           component_resource_cache_set(
             container: component,

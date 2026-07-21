@@ -138,7 +138,7 @@ module Decidim
           children: [
             {
               path: ->(resource) { "#{uid(resource)}---#{resource.try(:manifest_name)}" },
-              collection: ->(parent) { parent.components.select { |c| c.try(:manifest_name) == "meetings" } },
+              collection: ->(parent) { parent.components },
               children: [
                 {
                   path: "component",
@@ -173,6 +173,12 @@ module Decidim
                   include_if: ->(parent) { parent&.manifest_name == "blogs" },
                   serializer: Decidim::Content::PostSerializer,
                   collection: ->(parent) { posts_for_component(parent) }
+                },
+                {
+                  path: "sortitions",
+                  include_if: ->(parent) { parent&.manifest_name == "sortitions" },
+                  serializer: Decidim::Content::SortitionSerializer,
+                  collection: ->(parent) { sortitions_for_component(parent) }
                 },
                 *components_bundle_for_budgets_array,
                 *components_bundle_for_meetings_array,
