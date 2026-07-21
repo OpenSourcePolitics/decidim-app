@@ -122,14 +122,14 @@ module Decidim
 
         def endorsements_for_resource(resource_class, component)
           endorsable_resources = resource_class.where(component:)
-          if component_resource_cache_exists?(component:, resource_class:)
-            cached_ids = component_resource_cache_get(component:, resource_class:).pluck(:id)
+          if component_resource_cache_exists?(container: component, resource_class:)
+            cached_ids = component_resource_cache_get(container: component, resource_class:).pluck(:id)
             endorsable_resources = endorsable_resources.where(id: cached_ids)
           end
           return Decidim::Endorsement.where(resource: endorsable_resources) if endorsable_resources.present?
 
           Rails.logger.warn "Decidim::Content::ComponentTools.endorsements_for_resource (concerns) : No endorsements found for #{resource_class} with component association."
-          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(component:, resource_class:)
+          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(container: component, resource_class:)
           Decidim::Endorsement.none
         end
 
@@ -141,14 +141,14 @@ module Decidim
 
         def followers_for_resource(resource_class, component)
           followable_resources = resource_class.where(component:)
-          if component_resource_cache_exists?(component:, resource_class:)
-            cached_ids = component_resource_cache_get(component:, resource_class:).pluck(:id)
+          if component_resource_cache_exists?(container: component, resource_class:)
+            cached_ids = component_resource_cache_get(container: component, resource_class:).pluck(:id)
             followable_resources = followable_resources.where(id: cached_ids)
           end
           return Decidim::Follow.where(followable: followable_resources) if followable_resources.present?
 
           Rails.logger.warn "Decidim::Content::ComponentTools.followers_for_resource (concerns) : No followers found for #{resource_class} with component association."
-          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(component:, resource_class:)
+          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(container: component, resource_class:)
           Decidim::Follow.none
         end
 
@@ -160,8 +160,8 @@ module Decidim
 
         def attachment_collections_for_resource(resource_class, component)
           attachable_resources = resource_class.where(component:)
-          if component_resource_cache_exists?(component:, resource_class:)
-            cached_ids = component_resource_cache_get(component:, resource_class:).pluck(:id)
+          if component_resource_cache_exists?(container: component, resource_class:)
+            cached_ids = component_resource_cache_get(container: component, resource_class:).pluck(:id)
             attachable_resources = attachable_resources.where(id: cached_ids)
           end
           return Decidim::AttachmentCollection.where(collection_for: attachable_resources) if attachable_resources.present?
@@ -169,7 +169,7 @@ module Decidim
           Rails.logger.warn do
             "Decidim::Content::ComponentTools.attachment_collections_for_resource (concerns) : No attachment collections found for #{resource_class} with component association."
           end
-          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(component:, resource_class:)
+          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(container: component, resource_class:)
           Decidim::AttachmentCollection.none
         end
 
@@ -181,14 +181,14 @@ module Decidim
 
         def attachments_for_resource(resource_class, component)
           attachable_resources = resource_class.where(component:)
-          if component_resource_cache_exists?(component:, resource_class:)
-            cached_ids = component_resource_cache_get(component:, resource_class:).pluck(:id)
+          if component_resource_cache_exists?(container: component, resource_class:)
+            cached_ids = component_resource_cache_get(container: component, resource_class:).pluck(:id)
             attachable_resources = attachable_resources.where(id: cached_ids)
           end
           return Decidim::Attachment.where(attached_to: attachable_resources) if attachable_resources.present?
 
           Rails.logger.warn "Decidim::Content::ComponentTools.attachments_for_resource (concerns) : No attachments found for #{resource_class} with component association."
-          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(component:, resource_class:)
+          Rails.logger.warn "-- cached query was involved with #{cached_ids.size} records" if component_resource_cache_exists?(container: component, resource_class:)
           Decidim::Attachment.none
         end
 
