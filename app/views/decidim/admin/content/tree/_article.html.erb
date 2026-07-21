@@ -20,7 +20,7 @@
             </span>
             <span class="item-name">
               <%= item[:name] %>
-              <% if item[:item_count].to_i.positive? %>
+              <% if item[:kind] != "component" && item[:item_count].to_i.positive? %>
                 <span class="item-count"><%= item[:item_count] %></span>
               <% end %>
             </span>
@@ -45,6 +45,9 @@
         <% end %>
       </div>
       <div class="actions px-4">
+        <% if item.dig(:uid).present? %>
+          <span class="label info font-mono"><pre class="!text-xs"><%= item[:uid] %></pre></span>
+        <% end %>
         <% button_cell_attributes = { button_classes: "button button__xs button__transparent-secondary", html_options: { target: "_blank", data: { "external-link": false } } } %>
         <% if item[:path].present? %>
           <%= cell("decidim/button", { text: "View", icon: "eye-line", path: item[:path] }, button_cell_attributes) %>

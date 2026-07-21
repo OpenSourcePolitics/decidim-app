@@ -6,6 +6,7 @@ module Decidim
       include Decidim::TranslatableAttributes
       include Decidim::Content::MetadataGenerator
       include Decidim::Content::LocationGenerator
+      include Decidim::Content::UidTools
 
       SUPPORTED_PARTICIPATORY_SPACES = [
         {
@@ -101,7 +102,7 @@ module Decidim
       def to_csv
         rows = flatten_hash_for_csv(hash)
 
-        forced_headers = [:kind, :group, :sub_group, :space, :class, :component_type, :name, :private, :published, :item_count, :stats, :url, :admin_url, :gid]
+        forced_headers = [:kind, :group, :sub_group, :space, :class, :component_type, :name, :private, :published, :item_count, :stats, :url, :admin_url, :gid, :uid]
         rejected_headers = [:manifest, :components, :component_count, :hashtag]
 
         headers_row_hash = rows.each_with_object([]) do |row, keys|
@@ -225,6 +226,7 @@ module Decidim
           manifest:,
           class: instance.class.name,
           gid: instance.to_global_id.to_s,
+          uid: uid(instance),
           name: name_attribute(instance) ||
                 "-- #{instance.class.name}(ID:#{instance.id}) --"
         }
