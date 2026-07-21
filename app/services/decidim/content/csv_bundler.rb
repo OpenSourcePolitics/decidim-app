@@ -34,7 +34,7 @@ module Decidim
             {
               path: "users",
               serializer: Decidim::Content::UserSerializer,
-              collection: organization.user_entities.reorder("id ASC")
+              collection: organization.user_entities.not_blocked.reorder("id ASC")
             },
             {
               path: "scopes",
