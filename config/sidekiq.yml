@@ -37,6 +37,18 @@
       cron: "*/15 * * * *"
       class: Decidim::ParticipatoryProcesses::ChangeActiveStepJob
       queue: scheduled
+    CheckPublishedInitiatives:
+      cron: '0 1 * * *'
+      class: Decidim::Initiatives::CheckPublishedInitiatives
+      queue: initiatives
+    CheckValidatingInitiatives:
+      cron: '0 1 * * *'
+      class: Decidim::Initiatives::CheckValidatingInitiatives
+      queue: initiatives
+    NotifyProgressInitiatives:
+      cron: '0 1 * * *'
+      class: Decidim::Initiatives::NotifyProgressInitiatives
+      queue: initiatives
 
 #  Decidim-AI Spam Digest Jobs
     AiSpamDigestDaily:
