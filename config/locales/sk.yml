@@ -1,5 +1,10 @@
 ---
 sk:
+  decidim:
+    assemblies:
+      assemblies:
+        show:
+          title: "O tejto iniciatíve"
   date:
     buttons:
       close: "Zavrieť"
