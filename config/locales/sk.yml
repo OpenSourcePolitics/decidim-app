@@ -1,0 +1,21 @@
+---
+sk:
+  decidim:
+    assemblies:
+      assemblies:
+        show:
+          title: "O tejto iniciatíve"
+  date:
+    buttons:
+      close: "Zavrieť"
+      select: "Vybrať"
+    formats:
+      order: d-m-y
+      separator: "."
+      help:
+        date_format: 'Formát: dd.mm.rrrr'
+  time:
+    clock_format: 24
+    formats:
+      help:
+        time_format: 'Formát: hh:mm'
