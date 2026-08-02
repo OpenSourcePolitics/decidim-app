@@ -1104,6 +1104,7 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whatlanguage (2.0.1)
     wicked_pdf (2.8.2)
       activesupport
       ostruct
@@ -1193,6 +1194,7 @@ DEPENDENCIES
   stackprof
   uri (>= 1.0.4)
   web-console (~> 4.2)
+  whatlanguage
   wicked_pdf (~> 2.8, >= 2.8.2)
   wkhtmltopdf-binary
 
