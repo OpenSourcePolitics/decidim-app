@@ -157,6 +157,12 @@ module Decidim
                 },
                 # TODO : before proposals -> states
                 {
+                  path: "proposal-states",
+                  include_if: ->(parent) { parent&.manifest_name == "proposals" },
+                  serializer: Decidim::Content::ProposalStateSerializer,
+                  collection: ->(parent) { Decidim::Proposals::ProposalState.where(component: parent) }
+                },
+                {
                   path: "proposals",
                   include_if: ->(parent) { parent&.manifest_name == "proposals" },
                   serializer: Decidim::Content::ProposalSerializer,
@@ -417,6 +423,9 @@ module Decidim
                   path: compute_path(manifest[:path], object:, index:),
                   data: generate_csv_for(manifest)
                 )
+              else
+                # if manifest[:collection] is empty, we restore the index to avoid gaps in the numbering of the next manifest with a collection.
+                index -= 1
               end
             elsif manifest[:children].present?
               if manifest[:collection] # .present? doesn't fit in this case because [] is a valid candidate
