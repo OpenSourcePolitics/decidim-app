@@ -95,7 +95,6 @@ module Decidim
         @analyzable_users ||= begin
           Rails.logger.debug "Performing analyzable_users query"
           base_query = organization.users.available
-          base_query = base_query.not_blocked
           base_query = base_query.where.not(quick_auth_users_sql)
           base_query = base_query.where.not(legacy_spam_unreported_users_sql)
           base_query = base_query.where.not(already_analyzed_users_sql) unless options[:ignore_previous_analysis]

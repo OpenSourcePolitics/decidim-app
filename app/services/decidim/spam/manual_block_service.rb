@@ -46,15 +46,17 @@ module Decidim
       end
 
       def base_query_for_users
-        @base_query ||= organization.users.available.not_blocked
+        @base_query ||= organization.users.available
       end
 
       def blockable_users
         @blockable_users ||= begin
           Rails.logger.debug "Performing blockable_users query"
           base_query = base_query_for_users
-          base_query = base_query.where(spam_users_sql)
-          base_query = base_query.where(suspicious_users_sql) if options[:block_suspicious_users]
+
+          spam_conclusions = ["spam"]
+          spam_conclusions << "suspicious" if options[:block_suspicious_users]
+          base_query = base_query.where(spam_conclusions_users_sql, spam_conclusions)
 
           begin
             base_query = base_query.where("created_at < ?", Date.parse(options[:before]).to_fs(:db)) if options[:before].present?
@@ -75,12 +77,8 @@ module Decidim
         # .tap(&:load) # Ensure the query is executed and cached
       end
 
-      def spam_users_sql
-        "extended_data -> 'spam_detection' -> 'manual' ->> 'conclusion' = 'spam'"
-      end
-
-      def suspicious_users_sql
-        "extended_data -> 'spam_detection' -> 'manual' ->> 'conclusion' = 'suspicious'"
+      def spam_conclusions_users_sql
+        "extended_data -> 'spam_detection' -> 'manual' ->> 'conclusion' = ANY (array[?])"
       end
 
       def run
