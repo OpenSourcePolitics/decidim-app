@@ -136,6 +136,9 @@ fr:
       force_euf_completion:
         alert: Veuillez compléter votre profil avant de continuer. Les champs obligatoires doivent être renseignés.
     forms:
+      answer:
+        errors:
+          duplicate: Vous avez déjà répondu à cette question.
       questionnaire_answer_presenter:
         download_attachment: Télécharger la pièce jointe
       questionnaires:
