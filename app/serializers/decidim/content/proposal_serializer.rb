@@ -13,7 +13,7 @@ module Decidim
           category: uid(resource.try(:category)),
           scope: uid(Decidim::Scope.new(id: resource.try(:decidim_scope_id))),
           title: normalize_translated_attribute(resource.try(:title)),
-          body: normalize_translated_attribute(resource.try(:body)),
+          body: format_body,
           address: resource.try(:address),
           latitude: resource.try(:latitude),
           longitude: resource.try(:longitude),
@@ -39,6 +39,37 @@ module Decidim
           url: Decidim::ResourceLocatorPresenter.new(resource).url
         } # TODO : add custom fields (public & private)
       end
+
+      # rubocop:disable Metrics/CyclomaticComplexity
+      def format_body
+        Rails.logger.debug { "format_body for proposal #{resource.id} - #{resource.title}" }
+        original = normalize_translated_attribute(resource.try(:body))
+
+        original.transform_values do |text|
+          return text unless text.present? && text.starts_with?("<xml>")
+
+          Rails.logger.debug { " -- text starts with <xml> and text is #{text}" }
+          doc = Nokogiri::XML.fragment(text, &:noblanks)
+
+          search_path = "xml > dl > *"
+          return text unless doc.present? && (nodes = doc.search(search_path)).present?
+
+          body = ""
+          nodes.each do |node|
+            node_text = node.text.strip
+            case node.name
+            when "dt"
+              node_text = "<strong>#{node_text}</strong><br/>"
+            when "dd"
+              node_text = node_text.gsub("\n", "<br/>") if node["name"] == "textarea"
+              node_text = "#{node_text}<br/><br/>"
+            end
+            body += node_text
+          end
+          body
+        end
+      end
+      # rubocop:enable Metrics/CyclomaticComplexity
     end
   end
 end
