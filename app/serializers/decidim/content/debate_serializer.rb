@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class DebateSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class DebateSerializer < Decidim::Content::BaseContentSerializer
       def serialize
         {
           uid: uid(resource),

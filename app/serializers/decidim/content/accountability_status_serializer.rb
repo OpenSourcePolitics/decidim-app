@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class AccountabilityStatusSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class AccountabilityStatusSerializer < Decidim::Content::BaseContentSerializer
       def serialize
         {
           uid: uid(resource),

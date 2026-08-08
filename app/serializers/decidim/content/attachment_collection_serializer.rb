@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class AttachmentCollectionSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class AttachmentCollectionSerializer < Decidim::Content::BaseContentSerializer
       def serialize
         {
           uid: uid(resource),

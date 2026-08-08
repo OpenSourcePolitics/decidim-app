@@ -3,9 +3,7 @@
 module Decidim
   module Content
     # see : Decidim::Proposals::ProposalSerializer
-    class ProposalSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class ProposalSerializer < Decidim::Content::BaseContentSerializer
       def serialize
         {
           uid: uid(resource),

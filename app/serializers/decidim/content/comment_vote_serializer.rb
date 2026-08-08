@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class CommentVoteSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class CommentVoteSerializer < Decidim::Content::BaseContentSerializer
       def serialize
         {
           uid: uid(resource),

@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class EndorsementSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class EndorsementSerializer < Decidim::Content::BaseContentSerializer
       def serialize
         {
           uid: uid(resource),

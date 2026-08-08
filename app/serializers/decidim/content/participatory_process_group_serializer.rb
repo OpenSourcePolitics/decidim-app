@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class ParticipatoryProcessGroupSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class ParticipatoryProcessGroupSerializer < Decidim::Content::BaseContentSerializer
       delegate :organization, to: :resource
 
       def serialize

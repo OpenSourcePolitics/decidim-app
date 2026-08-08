@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class QuestionnaireAnswersSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class QuestionnaireAnswersSerializer < Decidim::Content::BaseContentSerializer
       EXCLUDED_QUESTION_TYPES = [
         Decidim::Forms::Question::SEPARATOR_TYPE,
         Decidim::Forms::Question::TITLE_AND_DESCRIPTION_TYPE

@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class CategorySerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class CategorySerializer < Decidim::Content::BaseContentSerializer
       def serialize
         {
           uid: uid(resource),

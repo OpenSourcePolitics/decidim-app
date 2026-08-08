@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class ParticipatoryProcessSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class ParticipatoryProcessSerializer < Decidim::Content::BaseContentSerializer
       def serialize
         {
           uid: uid(resource),

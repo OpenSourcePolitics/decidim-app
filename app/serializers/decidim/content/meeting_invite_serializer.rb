@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class MeetingInviteSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class MeetingInviteSerializer < Decidim::Content::BaseContentSerializer
       def serialize
         {
           uid: uid(resource),

@@ -12,15 +12,21 @@ module Decidim
       include Decidim::Content::ComponentTools
 
       DEFAULT_OPTIONS = {
-        flatten_json: false,
-        export_mode: :archive
+        export_mode: :archive,
+        serializers: {
+          flatten_json: false,
+          private_fields: false
+        },
+        csv: {
+          col_sep: ","
+        }
       }.freeze
 
       attr_reader :organization, :options
 
       def initialize(organization:, **options)
         @organization = organization
-        @options = DEFAULT_OPTIONS.merge(options)
+        @options = DEFAULT_OPTIONS.deep_merge(options)
       end
 
       def bundle
@@ -498,18 +504,11 @@ module Decidim
         @local_export_path ||= Rails.root.join("tmp/exports/content", bundle_prefix)
       end
 
-      def csv_options
-        @csv_options ||= {
-          col_sep: ","
-        }
-      end
-
       def generate_csv_for(exportable)
         Decidim::Content::CsvExporter.new(
           collection: exportable[:collection],
           serializer: exportable[:serializer],
-          flatten: options[:flatten_json],
-          csv_options:
+          **options.slice(:serializers, :csv)
         ).export.read
       end
 

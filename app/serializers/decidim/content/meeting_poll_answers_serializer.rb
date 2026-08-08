@@ -2,9 +2,7 @@
 
 module Decidim
   module Content
-    class MeetingPollAnswersSerializer < Decidim::Exporters::Serializer
-      include Decidim::Content::SerializerTools
-
+    class MeetingPollAnswersSerializer < Decidim::Content::BaseContentSerializer
       def initialize(answers)
         @answers = answers
       end
