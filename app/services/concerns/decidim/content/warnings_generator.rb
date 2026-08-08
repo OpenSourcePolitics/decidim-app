@@ -43,7 +43,7 @@ module Decidim
 
       def assemblies_warnings
         {}.tap do |warnings|
-          max_depth = ActiveRecord::Base.connection.execute(Decidim::Assembly.select("nlevel(parents_path) AS depth").order("depth DESC").to_sql).pick("depth")
+          max_depth = ActiveRecord::Base.connection.execute(Decidim::Assembly.select("nlevel(parents_path) AS depth").order("depth DESC").to_sql).pick("depth") || 0
           if max_depth > 1
             warnings[:subassemblies_depth] = {
               value: max_depth,
