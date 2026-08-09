@@ -8,8 +8,9 @@ module Decidim
         Decidim::Forms::Question::TITLE_AND_DESCRIPTION_TYPE
       ].freeze
 
-      def initialize(answers)
+      def initialize(answers, **options)
         @answers = answers
+        @options = options
       end
 
       attr_reader :answers
