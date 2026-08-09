@@ -13,6 +13,7 @@ module Decidim
         include Decidim::Content::UidTools
         include Decidim::Content::AuthorableTools
         include Decidim::Content::QuestionnaireTools
+        include Decidim::Content::DecidimAwesomeTools
 
         def normalize_translated_attribute(attribute)
           # NOTES : if returning nil creates issues then return empty_translatable
@@ -20,6 +21,12 @@ module Decidim
           return attribute unless attribute.is_a?(Hash) && attribute["machine_translations"].present?
 
           attribute.merge(attribute.delete("machine_translations"))
+        end
+
+        def convert_newlines_to_html(text)
+          return text unless text.is_a?(String)
+
+          text.gsub(/\r\n|\r|\n/, "<br/>")
         end
       end
     end
