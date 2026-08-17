@@ -54,6 +54,9 @@ module Decidim
         @whatlanguage = WhatLanguage.new
 
         @analysis_report = preflight_report
+        # TODO(review): this loads every analyzable user into memory at once, unbatched.
+        # Could be an issue on a large organization. Maybe it's worth batching with
+        # find_each/find_in_batches before running on a big instance.
         @analysis_results = analyzable_users.to_a
       end
 
@@ -113,6 +116,11 @@ module Decidim
 
           base_query = base_query.limit(options[:limit]) if options[:limit].present?
           base_query = base_query.order(options[:order]) if options[:order].present?
+          # TODO(review): this join's result isn't reassigned to base_query, so it has no
+          # effect, avatar.attached? in analyse_user falls back to one query per user
+          # (N+1, visible in the logs as individual ActiveStorage::Attachment Load calls).
+          # Should be `base_query = base_query.joins(:avatar_attachment)` (or dropped if
+          # unused), can you confirm which was intended?
           base_query.joins(:avatar_attachment)
           base_query
         end
