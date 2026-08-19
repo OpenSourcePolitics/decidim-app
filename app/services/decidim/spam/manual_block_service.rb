@@ -49,6 +49,9 @@ module Decidim
         @base_query ||= organization.users.available
       end
 
+      # TODO(review): this doesn't exclude admins. If an admin's profile happens to match
+      # the spam scoring criteria, they can end up in blockable_users like anyone else,
+      # might be worth adding a `where(admin: false)` (or similar) before running this for real.
       def blockable_users
         @blockable_users ||= begin
           Rails.logger.debug "Performing blockable_users query"
@@ -81,6 +84,10 @@ module Decidim
         "extended_data -> 'spam_detection' -> 'manual' ->> 'conclusion' = ANY (array[?])"
       end
 
+      # TODO(review): block_user isn't rescued per-user here, so one failure (a raised
+      # exception on a single user) stops the whole batch, the final report won't tell
+      # you which users were actually processed before that happened. Perhaps worth wrapping the
+      # block_user call so one bad user doesn't take down the rest of the run.
       def run
         run_started_at = Time.current
         user_processed = 0
@@ -108,6 +115,11 @@ module Decidim
             notifications_sending_frequency: "none"
           )
         else
+          # TODO(review): the result of this call isn't checked. If the form is invalid
+          # (validation failure, user already blocked, etc.), this silently will do nothing,
+          # user_processed still increments in run, so the report can say "processed" for
+          # users that weren't actually blocked. Worth checking the returned outcome
+          # and fixing it if needed.
           Decidim::Admin::BlockUser.call(
             Decidim::Admin::BlockUserForm.new(
               user_id: user.id,
