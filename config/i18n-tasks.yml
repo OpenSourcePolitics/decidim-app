@@ -152,3 +152,5 @@ ignore_unused:
   - decidim.searches.filters.jump_to
   - decidim.components.proposals.settings.global.enable_iframe
   - decidim.components.proposals.settings.global.iframe_url
+  - decidim.admin.content.tree.stats.*
+  - decidim.admin.menu.reversibility
