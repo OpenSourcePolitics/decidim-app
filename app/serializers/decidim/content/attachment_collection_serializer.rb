@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+module Decidim
+  module Content
+    class AttachmentCollectionSerializer < Decidim::Content::BaseContentSerializer
+      def serialize
+        {
+          uid: uid(resource),
+          name: normalize_translated_attribute(resource.name),
+          weight: resource.try(:weight),
+          description: normalize_translated_attribute(resource.description),
+          collection_for: polymorphic_uid(resource, :collection_for)
+        }
+      end
+    end
+  end
+end

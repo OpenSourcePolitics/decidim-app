@@ -7,6 +7,7 @@ DECIDIM_TAG = "v0.29.5"
 
 gem "decidim", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "decidim-conferences", github: "decidim/decidim", tag: DECIDIM_TAG
+gem "decidim-design", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "decidim-initiatives", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "decidim-templates", github: "decidim/decidim", tag: DECIDIM_TAG
 
@@ -23,6 +24,7 @@ gem "letter_opener_web", "~> 2.0"
 gem "rack-attack", "~> 6.7"
 gem "rgeo"
 gem "rgeo-activerecord"
+gem "whatlanguage"
 
 # Fix for WickedPdf compatibility issues
 gem "wicked_pdf", "~> 2.8", ">= 2.8.2"

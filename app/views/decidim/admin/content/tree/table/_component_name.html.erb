@@ -1,0 +1,12 @@
+<span class="label !text-sm font-normal">
+  <%= icon("tools-line")%>
+  <%= component[:object].manifest_name.humanize %>
+</span>
+<span class="ms-1 relative -top-px font-semibold">
+  <%= component[:name] %>
+</span>
+<% if component[:item_count].present? %>
+  <span class="ml-2 inline-flex items-center justify-center w-5 h-5 text-xs font-semibold rounded-full bg-gray-3 border-secondary">
+    <%= component[:item_count] %>
+  </span>
+<% end %>

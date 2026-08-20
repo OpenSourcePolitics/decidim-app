@@ -1,0 +1,36 @@
+<div class="item_show__header">
+  <h1 class="item_show__header-title"><%= I18n.t("decidim.admin.content.tree.views.table.title") %></h1>
+</div>
+
+<div class="table-scroll">
+  <table class="table-list content-tree" id="content_tree__table">
+    <% content_tree[:children].each do |participatory_spaces| %>
+      <% participatory_space_type_prefix = participatory_spaces[:manifest][:space_class].to_s.demodulize.underscore.pluralize %>
+      <thead>
+        <tr>
+          <th scope="rowgroup" colspan="3" class="border-b border-background-4 bg-background-3 py-2" id="<%= participatory_space_type_prefix + "__header" %>">
+            <h2 class="inline text-lg font-semibold">
+              <%= participatory_spaces[:name] %>
+              <% if participatory_spaces[:item_count].present? %>
+                <span class="item-count">
+                  <%= participatory_spaces[:item_count] %>
+                </span>
+              <% end %>
+            </h2>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="<%= participatory_space_type_prefix + "__group" %>">
+        <% participatory_spaces[:children].each do |participatory_space| %>
+          <%= render partial: "table/row", locals: { item: participatory_space, group_prefix: participatory_space_type_prefix + "__group" } %>
+        <% end %>
+      </tbody>
+    <% end %>
+  </table>
+</div>
+<% if Rails.env.development? %>
+<hr/>
+<div class="my-4">
+<pre><%= JSON.pretty_generate(content_tree) %></pre>
+</div>
+<% end %>

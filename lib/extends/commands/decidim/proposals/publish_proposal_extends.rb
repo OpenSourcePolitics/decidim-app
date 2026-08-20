@@ -28,7 +28,7 @@ module PublishProposalExtends
         resource: @proposal,
         affected_users: [@proposal.creator_identity],
         extra: { force_email: true },
-        force_send: true
+        force_send: !Rails.env.development?
       )
     end
   end

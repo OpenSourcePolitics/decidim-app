@@ -1,0 +1,41 @@
+.whitespace-collapse {
+  white-space: collapse;
+}
+
+.icon-button-lg {
+  // TODO: find how to retrieve var(--text-lg--line-height)
+  height: 1.55rem;
+  vertical-align: bottom;
+}
+
+.item-count {
+  @apply ml-1 inline-flex items-center justify-center w-5 h-5 text-xs font-semibold rounded-full bg-gray-3 border-secondary;
+  line-height: unset;
+}
+
+.content-tree {
+  .accordion-group[aria-hidden="true"] {
+    @apply hidden;
+  }
+
+  .accordion--trigger {
+    @apply leading-[0];
+
+    &[aria-expanded="false"] {
+      svg.accordion--trigger-collapsed {
+        @apply inline-block;
+      }
+      svg.accordion--trigger-expanded {
+        @apply hidden;
+      }
+    }
+    &[aria-expanded="true"] {
+      svg.accordion--trigger-collapsed {
+        @apply hidden;
+      }
+      svg.accordion--trigger-expanded {
+        @apply inline-block;
+      }
+    }
+  }
+}
