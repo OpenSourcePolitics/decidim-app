@@ -1,71 +1,72 @@
+---
 en:
   decidim:
     admin:
       content:
         tree:
           label:
-            previously_published: "Previously published"
-            private: "Private"
-            published: "Published"
-            public: "Public"
-            unpublished: "Not published"
+            previously_published: Previously published
+            private: Private
+            public: Public
+            published: Published
+            unpublished: Not published
           stats:
-            attachments: "Attachments"
-            authors: "Authors"
-            categories: "Categories"
-            comments: "Comments"
-            components: "Components"
-            followers: "Followers"
-            hidden_moderations: "Hidden content"
-            moderations: "Moderations"
+            attachments: Attachments
+            authors: Authors
+            categories: Categories
+            comments: Comments
+            components: Components
+            followers: Followers
+            hidden_moderations: Hidden content
+            moderations: Moderations
             organization:
               areas:
-                one: "Area"
-                other: "Areas"
+                one: Area
+                other: Areas
               authorizations:
-                one: "Authorization"
-                other: "Authorizations"
-              created_at: "Created %{time_ago} ago"
+                one: Authorization
+                other: Authorizations
+              created_at: Created %{time_ago} ago
               omniauth_providers:
-                one: "External identity provider"
-                other: "External identity providers"
+                one: External identity provider
+                other: External identity providers
               scopes:
-                one: "Scope"
-                other: "Scopes"
-              static_pages:
-                one: "Static page"
-                other: "Static pages"
+                one: Scope
+                other: Scopes
               static_page_topics:
-                one: "Static page topic"
-                other: "Static page topics"
+                one: Static page topic
+                other: Static page topics
+              static_pages:
+                one: Static page
+                other: Static pages
               users:
-                users:
-                  one: "User"
-                  other: "Users"
-                user_groups:
-                  one: "User Group"
-                  other: "User Groups"
                 admins:
-                  one: "Admin"
-                  other: "Admins"
+                  one: Admin
+                  other: Admins
+                user_groups:
+                  one: User Group
+                  other: User Groups
                 user_managers:
-                  one: "Participant Manager"
-                  other: "Participant Managers"
-            signatures: "Signatures"
+                  one: Participant Manager
+                  other: Participant Managers
+                users:
+                  one: User
+                  other: Users
+            signatures: Signatures
           views:
             index:
               actions:
-                export_to_csv: "Export tree to CSV"
+                export_to_csv: Export tree to CSV
               organization:
-                header: "Organization"
-              title: "Content Tree"
+                header: Organization
+              title: Content Tree
             table:
-              title: "Content Table"
+              title: Content Table
           warnings:
             assembly:
-              subassemblies: "Sub assemblies"
-              subassemblies_depth: "Sub assemblies on %{depth} levels"
+              subassemblies: Sub assemblies
+              subassemblies_depth: Sub assemblies on %{depth} levels
             component:
-              permissions: "Action permissions"
+              permissions: Action permissions
       menu:
-        reversibility: "Content Tree"
+        reversibility: Content Tree
