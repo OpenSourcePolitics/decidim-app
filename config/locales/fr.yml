@@ -125,6 +125,7 @@ fr:
       shared:
         links:
           log_in_with_provider: Connectez-vous avec %{provider}
+          provider_display_name: "%{provider}"
     events:
       proposals:
         author_confirmation_proposal_event:
