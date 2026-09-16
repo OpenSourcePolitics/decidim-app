@@ -23,7 +23,7 @@ nl:
       help:
         date_format: 'Formaat: dd-mm-jjjj'
       order: d-m-j
-      separator: .
+      separator: "-"
   decidim:
     account:
       omniauth_synced_profile:
