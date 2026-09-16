@@ -14,6 +14,16 @@ nl:
         private_space: Private space
       participatory_space_private_user_csv_import:
         file: importing file
+  date:
+    buttons:
+      close: Sluiten
+      select: Selecteren
+    formats:
+      decidim_short_dashed: '%d-%m-%Y'
+      help:
+        date_format: 'Formaat: dd-mm-jjjj'
+      order: d-m-j
+      separator: .
   decidim:
     account:
       omniauth_synced_profile:
@@ -415,5 +425,17 @@ nl:
       time: 'You will be able to navigate on our website in :'
       time_unit: seconds
       title: Thank you for your participation on %{organization_name}
+  time:
+    buttons:
+      close: Sluiten
+      reset: Resetten
+    clock_format: 24
+    formats:
+      ddmm: '%d.%m'
+      ddmmyyyy: '%d.%m.%Y'
+      help:
+        time_format: 'Formaat: hh:mm'
+      long_with_particles: '%d. %B %Y om %H:%M'
+      tooltip: '%d.%m.%Y %H:%M %p %Z (GMT %:z)'
   sms_verification_workflow:
     message: 'Hello, here is the code to authenticate yourself on the %{platform} platform: %{code}'
