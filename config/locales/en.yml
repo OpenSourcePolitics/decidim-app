@@ -117,6 +117,7 @@ en:
       shared:
         links:
           log_in_with_provider: Log in with %{provider}
+          provider_display_name: "%{provider}"
     events:
       proposals:
         author_confirmation_proposal_event:

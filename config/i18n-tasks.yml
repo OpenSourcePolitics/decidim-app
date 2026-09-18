@@ -151,3 +151,4 @@ ignore_unused:
   - decidim.searches.filters.jump_to
   - decidim.components.proposals.settings.global.enable_iframe
   - decidim.components.proposals.settings.global.iframe_url
+  - decidim.devise.shared.links.(log_in_with_provider|provider_display_name)

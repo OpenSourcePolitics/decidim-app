@@ -41,6 +41,13 @@ describe "Registration" do
         end
       end
     end
+
+    describe "omniauth buttons", :caching do
+      it "renders every configured provider without raising an error" do
+        expect(page).to have_no_content("We're sorry, but something went wrong")
+        expect(page).to have_css(".login__omniauth-button, .login__omniauth-image-button", minimum: 1)
+      end
+    end
   end
 
   context "when newsletter checkbox is unchecked" do
