@@ -4,6 +4,17 @@ module UserAnswersSerializerExtends
   extend ActiveSupport::Concern
 
   included do
+    def serialize
+      answers_hash = hash_for(@answers.first)
+      answers_hash.merge!(questions_hash)
+
+      @answers.each do |answer|
+        answers_hash[translated_question_key(question_positions[answer.decidim_question_id], answer.question.body)] = normalize_body(answer)
+      end
+
+      answers_hash
+    end
+
     private
 
     def hash_for(answer)
@@ -20,6 +31,25 @@ module UserAnswersSerializerExtends
         answer_translated_attribute_name(:email) => answer&.user&.email.presence || "",
         answer_translated_attribute_name(:name) => answer&.user&.name || ""
       }
+    end
+
+    def questions_hash
+      questionnaire_id = @answers.first&.decidim_questionnaire_id
+      return {} unless questionnaire_id
+
+      questions = Decidim::Forms::Question.where(decidim_questionnaire_id: questionnaire_id).order(:position)
+      return {} if questions.none?
+
+      questions.each.inject({}) do |serialized, question|
+        question_positions[question.id] = question.position
+        serialized.update(
+          translated_question_key(question.position, question.body) => ""
+        )
+      end
+    end
+
+    def question_positions
+      @question_positions ||= {}
     end
 
     def answer_translated_attribute_name(attribute)

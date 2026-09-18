@@ -185,16 +185,6 @@ module Decidim
           end
 
           it "does not load the questionnaire description to memory every time when iterating an answer" do
-            # NOTE:
-            # For this test it is important to fetch the single user "answer
-            # sets" to an array and store them there because this is the same
-            # way the answers are loaded e.g. in the survey component export
-            # functionality. The export had previously a memory leak because the
-            # questionnaire is fetched individually for each "answer set" and if
-            # it has a very long description, it caused the description to be
-            # stored multiple times within the array (for each "answer set"
-            # separately) causing a out of memory errors when there is a large
-            # amount of answers.
             all_answers = Decidim::Forms::QuestionnaireUserAnswers.for(questionnaire)
 
             initial_memory = memory_usage
@@ -208,12 +198,46 @@ module Decidim
             `ps -o rss #{Process.pid}`.lines.last.to_i
           end
         end
+
+        context "when a question's position changes mid-export" do
+          it "uses the position captured before iterating answers, not a live re-read per answer" do
+            original_questions_hash = subject.method(:questions_hash)
+            allow(subject).to receive(:questions_hash) do
+              result = original_questions_hash.call
+              questions.first.update_column(:position, 99) # rubocop:disable Rails/SkipsModelValidations
+              result
+            end
+
+            first_key = "1. #{translated(questions.first.body, locale: I18n.locale)}"
+
+            expect(serialized).to include(first_key => answers.first.body)
+          end
+        end
       end
 
       describe "questions_hash" do
         it "generates a hash of questions ordered by position" do
           questions.shuffle!
           expect(subject.instance_eval { questions_hash }.keys.map { |key| key[0].to_i }.uniq).to eq(questions.sort_by(&:position).map { |question| question.position + 1 })
+        end
+      end
+
+      describe "question_positions" do
+        it "is memoized across multiple calls within the same instance" do
+          subject.send(:questions_hash)
+          first_call = subject.send(:question_positions)
+          questions.first.update_column(:position, 42) # rubocop:disable Rails/SkipsModelValidations
+
+          expect(subject.send(:question_positions)).to equal(first_call)
+        end
+
+        it "maps each question id to its position" do
+          subject.send(:questions_hash)
+          positions = subject.send(:question_positions)
+
+          questions.each do |question|
+            expect(positions[question.id]).to eq(question.position)
+          end
         end
       end
     end
