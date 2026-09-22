@@ -19,5 +19,9 @@ Rails.application.routes.draw do
         to: "decidim/devise/sessions#destroy"
   end
 
+  match "/api", to: redirect("/404"), via: :all
+  match "/api/graphiql", to: redirect("/404"), via: :all
+  match "/api/docs", to: redirect("/404"), via: :all
+
   mount Decidim::Core::Engine => "/"
 end
