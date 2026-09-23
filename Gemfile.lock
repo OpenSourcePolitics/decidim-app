@@ -256,6 +256,8 @@ GIT
     decidim-debates (0.29.5)
       decidim-comments (= 0.29.5)
       decidim-core (= 0.29.5)
+    decidim-design (0.29.5)
+      decidim-core (= 0.29.5)
     decidim-dev (0.29.5)
       bullet (~> 7.1.6)
       byebug (~> 11.0)
@@ -1102,6 +1104,7 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whatlanguage (2.0.1)
     wicked_pdf (2.8.2)
       activesupport
       ostruct
@@ -1151,6 +1154,7 @@ DEPENDENCIES
   decidim-conferences!
   decidim-dataspace!
   decidim-decidim_awesome!
+  decidim-design!
   decidim-dev!
   decidim-emitter!
   decidim-extra_user_fields!
@@ -1190,6 +1194,7 @@ DEPENDENCIES
   stackprof
   uri (>= 1.0.4)
   web-console (~> 4.2)
+  whatlanguage
   wicked_pdf (~> 2.8, >= 2.8.2)
   wkhtmltopdf-binary
 

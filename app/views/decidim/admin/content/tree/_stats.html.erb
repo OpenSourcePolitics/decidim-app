@@ -1,0 +1,6 @@
+<% stats.except(:components_count).each do |key, label| %>
+  <span class="label !text-sm <%= label[:level] %>">
+    <%= label[:value] %>
+    <%= label[:text] %>
+  </span>
+<% end %>

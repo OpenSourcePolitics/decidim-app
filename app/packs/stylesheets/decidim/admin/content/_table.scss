@@ -1,0 +1,21 @@
+.indent-level-0 {
+  @apply pl-0;
+}
+.indent-level-1 {
+  @apply pl-4;
+}
+.indent-level-2 {
+  @apply pl-8;
+}
+.indent-level-3 {
+  @apply pl-12;
+}
+.indent-level-4 {
+  @apply pl-16;
+}
+
+table.content-tree {
+  thead tr th:first-child {
+    @apply pl-3;
+  }
+}

@@ -1,0 +1,72 @@
+---
+fr:
+  decidim:
+    admin:
+      content:
+        tree:
+          label:
+            previously_published: Publié précédemment
+            private: Privé
+            public: Public
+            published: Publié
+            unpublished: Non publié
+          stats:
+            attachments: Pièces jointes
+            authors: Auteurs
+            categories: Catégories
+            comments: Commentaires
+            components: Fonctionnalités
+            followers: Abonnés
+            hidden_moderations: Contenus cachés
+            moderations: Modérations
+            organization:
+              areas:
+                one: Périmètre d'assemblée
+                other: Périmètres d'assemblée
+              authorizations:
+                one: Autorisation
+                other: Autorisations
+              created_at: Créée il y a %{time_ago}
+              omniauth_providers:
+                one: Fournisseur d'identité externe
+                other: Fournisseurs d'identité externe
+              scopes:
+                one: Secteur
+                other: Secteurs
+              static_page_topics:
+                one: Sujet
+                other: Sujets
+              static_pages:
+                one: Page
+                other: Pages
+              users:
+                admins:
+                  one: Administrateur
+                  other: Administrateurs
+                user_groups:
+                  one: Groupe d'utilisateurs
+                  other: Groupes d'utilisateurs
+                user_managers:
+                  one: Représentant de l'utilisateur
+                  other: Représentants de l'utilisateur
+                users:
+                  one: Utilisateur
+                  other: Utilisateurs
+            signatures: Signatures
+          views:
+            index:
+              actions:
+                export_to_csv: Exporter l'arbre en CSV
+              organization:
+                header: Organisation
+              title: Arbre de contenu
+            table:
+              title: Tableau de contenu
+          warnings:
+            assembly:
+              subassemblies: Sous-assemblées
+              subassemblies_depth: Sous-assemblées sur %{depth} niveaux
+            component:
+              permissions: Permissions d'actions
+      menu:
+        reversibility: Arbre de contenu

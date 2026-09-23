@@ -1,0 +1,17 @@
+<section class="organization-abstract rounded-lg bg-background-2 border border-background-4 p-2 ps-4 mb-4">
+  <div class="flex items-center gap-2 mb-2">
+    <h2 class="text-lg font-semibold">
+      <%= I18n.t("decidim.admin.content.tree.views.index.organization.header") %>
+    </h2>
+    <% if organization.dig(:metadata, :labels).present? %>
+      <div class="organization-labels">
+        <%= render partial: "labels", locals: { labels: organization[:metadata][:labels] } %>
+      </div>
+    <% end %>
+  </div>
+  <% if organization.dig(:metadata, :stats).present? %>
+    <div class="organization-stats">
+      <%= render partial: "stats", locals: { stats: organization[:metadata][:stats] } %>
+    </div>
+  <% end %>
+</section>

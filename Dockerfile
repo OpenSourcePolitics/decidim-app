@@ -11,6 +11,7 @@ ENV RAILS_ENV=production \
     BUNDLE_JOBS=8 \
     MAKEFLAGS="-j8" \
     NODE_OPTIONS="--max-old-space-size=4096" \
+    ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true \
     EXECJS_RUNTIME=Node
 
 WORKDIR /opt/decidim

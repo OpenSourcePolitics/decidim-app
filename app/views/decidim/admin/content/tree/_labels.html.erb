@@ -1,0 +1,6 @@
+<% labels.each do |key, label| %>
+  <span class="label !text-sm <%= label[:level] %>">
+    <%= icon(label[:icon]) if label[:icon].present? %>
+    <%= label[:text] || label[:value] %>
+  </span>
+<% end %>
