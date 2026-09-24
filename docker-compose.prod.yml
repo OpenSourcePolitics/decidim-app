@@ -1,0 +1,90 @@
+# Production overlay. Use with:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# docker-compose.yml (dev) stays untouched and usable on its own.
+#
+# !reset and !override are avoided on depends_on due to a known Compose bug
+# (docker/compose#11980) where the merge is silently ignored in some cases.
+# They are only used on ports/volumes here, where they are reliable.
+#
+# Rack::Attack.enabled is hardcoded to false in config/initializers/rack_attack.rb -
+# there is no ENV var that re-enables it. Not addressed here; flagging it since
+# it means the app has no rate limiting regardless of environment.
+
+services:
+
+  database:
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=md5
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports: !reset []
+    restart: unless-stopped
+
+  memcached:
+    ports: !reset []
+    restart: unless-stopped
+
+  redis:
+    ports: !reset []
+    restart: unless-stopped
+
+  init_storage:
+    restart: "no"
+
+  # One-shot migration job. Run manually before (re)starting app/sidekiq on
+  # each deploy: `docker compose -f docker-compose.yml -f docker-compose.prod.yml run --rm db_migrate`
+  # db:create is safe to run every time - it is a no-op (with a warning) if
+  # the database already exists, same as the dev Makefile's setup-database.
+  db_migrate:
+    image: decidim-app:3.4.0
+    command: [ "/bin/bash", "-c", "DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:create db:migrate" ]
+    env_file:
+      - .env
+    environment:
+      - DATABASE_HOST=database
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - RAILS_ENV=production
+    depends_on:
+      database:
+        condition: service_started
+      init_storage:
+        condition: service_completed_successfully
+    volumes:
+      - storage-data:/opt/decidim/storage
+    restart: "no"
+
+  sidekiq:
+    env_file:
+      - .env
+    environment:
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - DECIDIM_HOST=${DECIDIM_HOST}
+      - RAILS_ASSET_HOST=${RAILS_ASSET_HOST:-}
+      - RAILS_LOG_LEVEL=info
+      - ENABLE_LETTER_OPENER=0
+      - STORAGE_PROVIDER=${STORAGE_PROVIDER:-local}
+    volumes: !override
+      - storage-data:/opt/decidim/storage
+    restart: unless-stopped
+
+  app:
+    environment:
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - DECIDIM_HOST=${DECIDIM_HOST}
+      - RAILS_ASSET_HOST=${RAILS_ASSET_HOST:-}
+      - RAILS_LOG_LEVEL=info
+      - ENABLE_LETTER_OPENER=0
+      - STORAGE_PROVIDER=${STORAGE_PROVIDER:-local}
+    volumes: !override
+      - storage-data:/opt/decidim/storage
+    # TLS terminated by an external reverse proxy in production, not by Rails.
+    # Rack's Puma handler only special-cases the "ssl://" scheme in -b; for
+    # plain TCP it expects a bare host, not a URI (a "tcp://" prefix here
+    # causes URI::InvalidComponentError). "-p 3000 -b 0.0.0.0" is the correct
+    # plain-TCP equivalent of the dev server's "ssl://..." bind.
+    command: [ "bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000" ]
+    restart: unless-stopped
+    ports: !reset []
+    expose:
+      - "3000"
