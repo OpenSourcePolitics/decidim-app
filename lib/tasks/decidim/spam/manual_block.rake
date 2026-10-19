@@ -13,7 +13,7 @@ namespace :decidim_app do
       idx ? ARGV[(idx + 1)..] : []
     end
 
-    desc "Run manual spam block for an organization, based on a previous manual_detection run (usage: rake decidim_app:spam:manual_block -- [options])"
+    desc "Run manual spam block for an organization, based on a previous manual_detection run or a reviewed list of ids (usage: rake decidim_app:spam:manual_block -- [options])"
     task manual_block: :environment do
       options = {}
 
@@ -27,6 +27,12 @@ namespace :decidim_app do
         opts.on("--session-id ID", "Session identifier (default: timestamp)") { |v| options[:session_id] = v }
 
         opts.on("--block-users", "Actually block the matched users") { options[:block_users] = true }
+        opts.on("--block-probable-spam-users", "Also block users concluded as probable_spam") { options[:block_probable_spam_users] = true }
+        opts.on(
+          "--user-ids-file PATH",
+          "Block only the user ids listed in this file, ignoring conclusions : one id per line, a CSV with the id first, " \
+          "or a reviewed CSV export (rows with force_user_block = yes/oui/block/true, using force_justification)"
+        ) { |v| options[:user_ids_file] = v }
         opts.on("--block-suspicious-users", "Also block users concluded as suspicious, not just spam") { options[:block_suspicious_users] = true }
         opts.on("--dirty-block", "Block by writing columns directly, bypassing Decidim::Admin::BlockUser (no admin log entry, no notification)") { options[:dirty_block] = true }
         opts.on("--block-by-email EMAIL", "Admin user credited for the block (defaults to the organization's first admin)") { |v| options[:block_by_email] = v }

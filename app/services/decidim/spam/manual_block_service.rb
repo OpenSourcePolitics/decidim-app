@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "csv"
+
 module Decidim
   module Spam
     class ManualBlockService
@@ -9,8 +11,14 @@ module Decidim
         session_id: Time.zone.now.strftime("%Y%m%d%H%M%S"),
         block_users: false,
         block_suspicious_users: false,
-        dirty_block: false
+        block_probable_spam_users: false,
+        dirty_block: false,
+        user_ids: nil,
+        user_ids_file: nil
       }.freeze
+
+      # Accepted values (case insensitive) in the "force_user_block" column of a reviewed CSV
+      FORCE_USER_BLOCK_VALUES = %w(yes oui block true).freeze
 
       attr_reader :organization, :options, :block_report
 
@@ -19,6 +27,8 @@ module Decidim
         raise ArgumentError, "Invalid organization provided : #{organization.inspect}" if @organization.nil? || !@organization.is_a?(Decidim::Organization)
 
         @options = DEFAULT_OPTIONS.deep_merge(options)
+        @justifications = {}
+        @options[:user_ids] = load_user_ids
 
         begin
           @current_user = organization.admins.find_by(email: @options[:block_by_email]) if @options[:block_by_email].present?
@@ -33,33 +43,67 @@ module Decidim
 
       def preflight_report
         {
-          **options,
+          **options.except(:user_ids),
           organization: {
             id: organization.id,
             name: organization.name,
             host: organization.host
           },
           spam: {
+            requested_user_ids: options[:user_ids]&.size,
+            custom_justifications: @justifications.size,
             blockable: blockable_users.count
-          }
+          }.compact
         }
       end
 
-      def base_query_for_users
-        @base_query ||= organization.users.available
+      # Explicit list of user ids to block (e.g. a reviewed analysis export), given directly or as a file :
+      # - a CSV with "id" and "force_user_block" columns : only rows with FORCE_USER_BLOCK_VALUES are kept,
+      #   and their "force_justification" (if any) is used as block justification
+      # - otherwise one id per line (or a CSV whose first column is the id)
+      def load_user_ids
+        ids = Array(options[:user_ids])
+        ids += user_ids_from_file if options[:user_ids_file].present?
+        ids = ids.map(&:to_s).map(&:strip).grep(/\A\d+\z/).map(&:to_i).uniq
+        ids.presence
       end
 
-      # TODO(review): this doesn't exclude admins. If an admin's profile happens to match
-      # the spam scoring criteria, they can end up in blockable_users like anyone else,
-      # might be worth adding a `where(admin: false)` (or similar) before running this for real.
+      def user_ids_from_file
+        content = File.read(options[:user_ids_file], encoding: "bom|utf-8")
+        header = content.lines.first.to_s
+        return content.lines.map { |line| line.split(/[;,]/).first.to_s.strip } unless header.include?("force_user_block")
+
+        CSV.parse(content, headers: true, col_sep: header.count(";") > header.count(",") ? ";" : ",").filter_map do |row|
+          next unless FORCE_USER_BLOCK_VALUES.include?(row["force_user_block"].to_s.strip.downcase)
+
+          id = row["id"].to_s.strip
+          @justifications[id.to_i] = row["force_justification"].to_s.strip if row["force_justification"].present?
+          id
+        end
+      end
+
+      def justification_for(user)
+        default_justification = "Blocked by manual spam detection service (session #{options[:session_id]})"
+        return default_justification if @justifications[user.id].blank?
+
+        # Suffix the default justification to stay above Decidim::UserBlock::MINIMUM_JUSTIFICATION_LENGTH
+        "#{@justifications[user.id]} - #{default_justification}"
+      end
+
+      def base_query_for_users
+        @base_query ||= organization.users.available.where(admin: false).where("roles = '{}' OR roles IS NULL")
+      end
+
       def blockable_users
         @blockable_users ||= begin
           Rails.logger.debug "Performing blockable_users query"
           base_query = base_query_for_users
 
-          spam_conclusions = ["spam"]
-          spam_conclusions << "suspicious" if options[:block_suspicious_users]
-          base_query = base_query.where(spam_conclusions_users_sql, spam_conclusions)
+          base_query = if options[:user_ids].present?
+                         base_query.where(id: options[:user_ids])
+                       else
+                         base_query.where(spam_conclusions_users_sql, spam_conclusions)
+                       end
 
           begin
             base_query = base_query.where("created_at < ?", Date.parse(options[:before]).to_fs(:db)) if options[:before].present?
@@ -78,6 +122,13 @@ module Decidim
           base_query
         end
         # .tap(&:load) # Ensure the query is executed and cached
+      end
+
+      def spam_conclusions
+        ["spam"].tap do |conclusions|
+          conclusions << "probable_spam" if options[:block_probable_spam_users]
+          conclusions << "suspicious" if options[:block_suspicious_users]
+        end
       end
 
       def spam_conclusions_users_sql
@@ -111,7 +162,7 @@ module Decidim
             blocked: true,
             blocked_at: Time.current,
             name: "Blocked user",
-            extended_data: user.extended_data.merge("user_name" => user.name),
+            extended_data: user.extended_data.merge("user_name" => user.name, "block_justification" => justification_for(user)),
             notifications_sending_frequency: "none"
           )
         else
@@ -123,7 +174,7 @@ module Decidim
           Decidim::Admin::BlockUser.call(
             Decidim::Admin::BlockUserForm.new(
               user_id: user.id,
-              justification: "Blocked by manual spam detection service (session #{options[:session_id]})",
+              justification: justification_for(user),
               hide: true
             ).with_context(
               {
