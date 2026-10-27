@@ -74,7 +74,8 @@ ENV RAILS_ENV=production \
     DOCKER_IMAGE_TAG=${DOCKER_IMAGE_TAG:-latest} \
     DOCKER_IMAGE=${DOCKER_IMAGE:-rg.fr-par.scw.cloud/decidim-app/decidim-app} \
     MALLOC_ARENA_MAX=2 \
-    RUBY_YJIT_ENABLE=1
+    RUBY_YJIT_ENABLE=1 \
+    PORT=3030
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -106,7 +107,8 @@ COPY --from=builder --chown=decidim:decidim /opt/decidim /opt/decidim
 
 USER decidim
 
-EXPOSE 3000
+# Default port only: `rails server` listens on $PORT, override it at runtime.
+EXPOSE 3030
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

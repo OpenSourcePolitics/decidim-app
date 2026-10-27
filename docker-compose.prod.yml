@@ -76,15 +76,20 @@ services:
       - RAILS_LOG_LEVEL=info
       - ENABLE_LETTER_OPENER=0
       - STORAGE_PROVIDER=${STORAGE_PROVIDER:-local}
+      - PORT=${PORT:-3030}
     volumes: !override
       - storage-data:/opt/decidim/storage
     # TLS terminated by an external reverse proxy in production, not by Rails.
     # Rack's Puma handler only special-cases the "ssl://" scheme in -b; for
     # plain TCP it expects a bare host, not a URI (a "tcp://" prefix here
-    # causes URI::InvalidComponentError). "-p 3000 -b 0.0.0.0" is the correct
-    # plain-TCP equivalent of the dev server's "ssl://..." bind.
-    command: [ "bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000" ]
+    # causes URI::InvalidComponentError). "-b 0.0.0.0" is the correct
+    # plain-TCP equivalent of the dev server's "ssl://..." bind; without -p,
+    # `rails server` listens on $PORT (set in .env, 3030 by default).
+    command: [ "bundle", "exec", "rails", "server", "-b", "0.0.0.0" ]
     restart: unless-stopped
-    ports: !reset []
+    # Published on localhost only: the host's NGINX proxies to it. Docker-published
+    # ports bypass the host firewall's input rules, so 0.0.0.0 would expose the app.
+    ports: !override
+      - "127.0.0.1:${PORT:-3030}:${PORT:-3030}"
     expose:
-      - "3000"
+      - "${PORT:-3030}"

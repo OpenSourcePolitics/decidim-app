@@ -48,10 +48,10 @@ minimize downtime during the actual cutover.
 - From OSP: a PostgreSQL dump in custom format (`pg_dump -Fc`) of your
   current database, and the Active Storage files (uploaded images,
   documents, attachments) from your current instance.
-- Your existing `config/master.key` from the OSP-hosted app. This decrypts
-  `config/credentials.yml.enc` and must carry over unchanged - request it
-  from OSP if you don't already have it. Using the same key was confirmed
-  to make encrypted-data restore frictionless in testing.
+- The `SECRET_KEY_BASE` of your current OSP-hosted instance - request it
+  from OSP if you don't already have it. Decidim derives the key that
+  encrypts some database columns (organization SMTP and authentication
+  settings, among others) from it, so it must carry over unchanged.
 - This repository (`docker-compose.yml`, `docker-compose.prod.yml`,
   `.env-example`, `Makefile`) checked out on the server.
 
@@ -67,15 +67,20 @@ assets, non-root user). `3.4.0` is just this build's image tag (set by
 gem version, check the `Gemfile` if you need to know which Decidim
 version is actually installed.
 
-## Step 2: Generate a secret key
+## Step 2: Retrieve the existing secret key
+
+Keep the `SECRET_KEY_BASE` obtained from OSP (see "What you need before starting") for
+Step 3. **Do not generate a new one**: besides signing sessions and
+cookies, it is what `Decidim::AttributeEncryptor` derives its key from
+(see `lib/extends/lib/decidim/attribute_encryptor_extends.rb`). Encrypted
+columns in your restored data (Step 7) can only be decrypted with the
+value that encrypted them.
+
+Only for a brand-new instance with no data to restore, generate one with:
 
 ```bash
 openssl rand -hex 64
 ```
-
-Keep this for Step 3 - it becomes `SECRET_KEY_BASE`. Generate a new one
-even though you're migrating: it protects Rails sessions/cookies for this
-specific deployment, and is unrelated to `RAILS_MASTER_KEY` below.
 
 ## Step 3: Create and fill in the environment file
 
@@ -89,8 +94,7 @@ Fill in every line marked `# required`:
 |---|---|
 | `DECIDIM_HOST` | your domain, e.g. `participation.example.org` |
 | `POSTGRES_PASSWORD` | a strong, generated password (new, does not need to match anything from OSP) |
-| `SECRET_KEY_BASE` | the value from Step 2 |
-| `RAILS_MASTER_KEY` | **your existing `config/master.key` content from OSP - not a new one.** Encrypted columns in your restored data (Step 7) will fail to decrypt if this doesn't match what encrypted them originally. |
+| `SECRET_KEY_BASE` | **the existing value from OSP (Step 2) - not a new one.** Encrypted columns in your restored data (Step 7) will fail to decrypt if this doesn't match what encrypted them originally. |
 
 Fill in `SMTP_ADDRESS`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `SMTP_DOMAIN`
 with real credentials - unlike a throwaway test, this deployment needs to
@@ -112,10 +116,12 @@ server, anywhere convenient (e.g. `~/migration/dump.pgcustom` and
 ## Step 5: Set up the reverse proxy
 
 Point your reverse proxy's config at `DECIDIM_HOST`, forwarding to
-`app` on port 3000, with TLS terminated at the proxy. `app` itself binds
-with `rails server -b 0.0.0.0 -p 3000` (plain HTTP, no scheme) - see
-`docker-compose.prod.yml`. The exact proxy config depends on which one
-you're using; this repository doesn't include one.
+`app` on `127.0.0.1:<PORT>` (`PORT` in `.env`, 3030 by default), with TLS
+terminated at the proxy. `app` itself binds with `rails server -b 0.0.0.0`
+(plain HTTP, no scheme) and listens on `PORT`; the same value is published
+on the host's loopback only - see `docker-compose.prod.yml`. The exact
+proxy config depends on which one you're using; this repository doesn't
+include one.
 
 ## Step 6: Initialize storage and create an empty database
 
@@ -350,9 +356,9 @@ Migration-specific issues:
   `make prod-restore-storage` was pointed at the right source directory,
   and that the file count matches.
 - **Encrypted fields raise decryption errors, or look like garbage**:
-  `RAILS_MASTER_KEY` (Step 3) doesn't match the key OSP's instance used.
-  Confirm you copied `config/master.key` exactly, with no extra
-  whitespace or line endings added.
+  `SECRET_KEY_BASE` (Step 3) doesn't match the one OSP's instance used.
+  Confirm you copied it exactly, with no extra whitespace or line
+  endings added.
 - **Clicking "Edit" on the organization in `/system` does nothing (page
   just reloads)**: `org.host` (Step 9) doesn't match the domain you're
   accessing the app from. Fix it in the Rails console and retry.
