@@ -442,6 +442,8 @@ module Decidim
                     collection_results.concat(collection_item_results)
                   end
                 )
+                # each collection item used an index : the next manifest starts after the last one
+                index += manifest[:collection].size - 1 if manifest[:collection].any?
               else
                 manifest[:path] = compute_path(manifest[:path], object:, index:)
                 results.concat(parse_bundle_manifests(manifest[:children], object:))
