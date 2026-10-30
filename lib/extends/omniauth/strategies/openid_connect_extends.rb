@@ -31,28 +31,33 @@ module OpenIDConnectExtends
       user_info.name || [user_info.given_name, user_info.family_name].join(" ")
     end
 
+    # Every request goes through this method, so it must stay a plain pass-through:
+    # its frame is silenced in config/initializers/backtrace_silencers.rb, otherwise
+    # it would be the only application frame logged for any downstream error.
     def other_phase
       log :debug, "logout_path_pattern #{logout_path_pattern}"
       log :debug, "current_path #{current_path}"
       log :debug, "logout_path_pattern match #{logout_path_pattern.match?(current_path)}"
-      if logout_path_pattern.match?(current_path)
-        if end_session_callback?
-          log :debug, "Logout phase callback."
-          session.delete("omniauth.logout.callback")
-          return redirect(decidim.destroy_user_session_path)
-        else
-          log :debug, "Logout phase initiated."
-          @env["omniauth.strategy"] ||= self
-          setup_phase
-          options.issuer = issuer if options.issuer.to_s.empty?
-          discover!
-          session["omniauth.logout.callback"] = end_session_callback_value
-          end_session_redirect_uri = end_session_uri
-          log :debug, "End session redirect URI: #{end_session_redirect_uri}"
-          return redirect(end_session_redirect_uri) if end_session_redirect_uri.present?
-        end
+      response = logout_phase if logout_path_pattern.match?(current_path)
+      response || call_app!
+    end
+
+    def logout_phase
+      if end_session_callback?
+        log :debug, "Logout phase callback."
+        session.delete("omniauth.logout.callback")
+        redirect(decidim.destroy_user_session_path)
+      else
+        log :debug, "Logout phase initiated."
+        @env["omniauth.strategy"] ||= self
+        setup_phase
+        options.issuer = issuer if options.issuer.to_s.empty?
+        discover!
+        session["omniauth.logout.callback"] = end_session_callback_value
+        end_session_redirect_uri = end_session_uri
+        log :debug, "End session redirect URI: #{end_session_redirect_uri}"
+        redirect(end_session_redirect_uri) if end_session_redirect_uri.present?
       end
-      call_app!
     end
 
     def end_session_uri
