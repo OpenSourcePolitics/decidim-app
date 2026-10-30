@@ -60,13 +60,26 @@ module OpenIDConnectExtends
       end
     end
 
+    # The ID token is only available during the callback, so it is kept in session
+    # to be sent back as id_token_hint on logout.
+    def auth_hash
+      session["omniauth.id_token_hint"] = credentials[:id_token]
+      super
+    end
+
+    # Must not read `credentials` here: outside of the callback there is no
+    # authorization code, so it would request a client_credentials token instead.
+    # client_id lets the provider honour post_logout_redirect_uri without hint.
     def end_session_uri
       return unless end_session_endpoint_is_valid?
 
       end_session_uri = URI(client_options.end_session_endpoint)
       end_session_uri.query = URI.encode_www_form(
-        id_token_hint: credentials[:id_token],
-        post_logout_redirect_uri: options.post_logout_redirect_uri
+        {
+          id_token_hint: session.delete("omniauth.id_token_hint"),
+          client_id: client_options.identifier,
+          post_logout_redirect_uri: options.post_logout_redirect_uri
+        }.compact
       )
       end_session_uri.to_s
     end

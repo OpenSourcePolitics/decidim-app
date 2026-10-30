@@ -128,17 +128,54 @@ module OmniAuth
         end
       end
 
+      describe "#auth_hash" do
+        before do
+          strategy.instance_variable_set(:@env, env)
+          allow(strategy).to receive(:credentials).and_return(id_token:)
+        end
+
+        it "keeps the ID token in session for the logout" do
+          strategy.auth_hash
+
+          expect(session["omniauth.id_token_hint"]).to eq(id_token)
+        end
+      end
+
       describe "#end_session_uri" do
-        before { allow(strategy).to receive(:credentials).and_return(id_token: "the-id-token") }
+        let(:session) { { "session_id" => "abc123", "omniauth.id_token_hint" => "the-id-token" } }
+        let(:end_session_uri) { strategy.end_session_uri }
+        let(:query) { URI.decode_www_form(URI(end_session_uri).query).to_h }
 
-        it "adds the ID token hint and the post logout redirect URI" do
-          uri = URI(strategy.end_session_uri)
+        before { strategy.instance_variable_set(:@env, env) }
 
-          expect(uri.to_s).to start_with(end_session_endpoint)
-          expect(URI.decode_www_form(uri.query).to_h).to eq(
+        it "adds the ID token hint kept in session, the client ID and the post logout redirect URI" do
+          expect(end_session_uri).to start_with(end_session_endpoint)
+          expect(query).to eq(
             "id_token_hint" => "the-id-token",
+            "client_id" => "dummy",
             "post_logout_redirect_uri" => "https://decidim.example.org"
           )
+        end
+
+        it "consumes the ID token hint" do
+          strategy.end_session_uri
+
+          expect(session).not_to have_key("omniauth.id_token_hint")
+        end
+
+        it "never requests a token from the provider" do
+          strategy.end_session_uri
+
+          expect(strategy).not_to have_received(:access_token)
+        end
+
+        context "without ID token hint in session" do
+          let(:session) { { "session_id" => "abc123" } }
+
+          it "omits it and still identifies the client" do
+            expect(query).to eq("client_id" => "dummy", "post_logout_redirect_uri" => "https://decidim.example.org")
+            expect(strategy).not_to have_received(:access_token)
+          end
         end
 
         context "with an invalid end session endpoint" do
@@ -183,8 +220,7 @@ module OmniAuth
 
         context "when the request is a logout" do
           let(:path) { "/users/auth/openid_connect/logout" }
-
-          before { allow(strategy).to receive(:credentials).and_return(id_token: "the-id-token") }
+          let(:session) { { "session_id" => "abc123", "omniauth.id_token_hint" => "the-id-token" } }
 
           it "redirects to the end session endpoint and remembers the logout in session" do
             status, headers, = response
@@ -192,6 +228,7 @@ module OmniAuth
             expect(status).to eq(302)
             expect(headers["Location"]).to start_with("#{end_session_endpoint}?id_token_hint=the-id-token")
             expect(session["omniauth.logout.callback"]).to eq("openid_connect--abc123")
+            expect(strategy).not_to have_received(:access_token)
           end
 
           context "with a setup" do
