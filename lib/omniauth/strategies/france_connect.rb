@@ -23,11 +23,6 @@ module OmniAuth
         [user_info.given_name, user_info.preferred_username || user_info.family_name].join(" ")
       end
 
-      def auth_hash
-        session["omniauth.id_token_hint"] = credentials[:id_token]
-        super
-      end
-
       def end_session_uri
         return unless end_session_endpoint_is_valid?
 
@@ -35,9 +30,11 @@ module OmniAuth
 
         end_session_uri = URI(client_options.end_session_endpoint)
         end_session_uri.query = URI.encode_www_form(
-          id_token_hint: session.delete("omniauth.id_token_hint") || credentials[:id_token],
-          state: new_state,
-          post_logout_redirect_uri: options.post_logout_redirect_uri
+          {
+            id_token_hint: session.delete("omniauth.id_token_hint"),
+            state: new_state,
+            post_logout_redirect_uri: options.post_logout_redirect_uri
+          }.compact
         )
         end_session_uri.to_s
       end
