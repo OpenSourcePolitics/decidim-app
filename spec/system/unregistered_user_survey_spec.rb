@@ -83,6 +83,36 @@ describe "Answer a survey" do
       expect(last_answer.ip_hash).not_to be_empty
     end
 
+    it "gives distinct session tokens to two different unregistered visitors" do
+      Capybara.using_session("visitor_1") do
+        visit_component
+        fill_in question.body["en"], with: "First visitor's answer"
+        check "questionnaire_tos_agreement"
+        accept_confirm { click_on "Submit" }
+
+        within ".success.flash" do
+          expect(page).to have_content("successfully")
+        end
+      end
+
+      Capybara.using_session("visitor_2") do
+        visit_component
+        fill_in question.body["en"], with: "Second visitor's answer"
+        check "questionnaire_tos_agreement"
+        accept_confirm { click_on "Submit" }
+
+        within ".success.flash" do
+          expect(page).to have_content("successfully")
+        end
+      end
+
+      answers = questionnaire.answers.where(question:).order(:created_at)
+      expect(answers.count).to eq(2)
+      expect(answers.first.session_token).to be_present
+      expect(answers.second.session_token).to be_present
+      expect(answers.first.session_token).not_to eq(answers.second.session_token)
+    end
+
     context "and honeypot is filled" do
       it "fails with spam complain" do
         visit_component

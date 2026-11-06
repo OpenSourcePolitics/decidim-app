@@ -128,6 +128,9 @@ en:
       force_euf_completion:
         alert: Please complete your profile before continuing. Required fields must be filled in.
     forms:
+      answer:
+        errors:
+          duplicate: You have already answered this question.
       questionnaire_answer_presenter:
         download_attachment: Download attachment
       questionnaires:

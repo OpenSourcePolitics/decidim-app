@@ -23,6 +23,7 @@ module DecidimApp
       require "extends/commands/decidim/create_omniauth_registration_extends"
       require "extends/commands/decidim/forms/admin/update_questionnaire_extends"
       require "extends/commands/decidim/admin/content_blocks/update_content_block_extends"
+      require "extends/commands/decidim/forms/answer_questionnaire_extends"
       # forms
       require "extends/forms/decidim/assemblies/admin/assembly_copy_form_extends"
       require "extends/forms/decidim/participatory_processes/admin/participatory_process_copy_form_extends"
@@ -50,6 +51,7 @@ module DecidimApp
       require "extends/controllers/decidim/assemblies/admin/assembly_landing_page_content_blocks_controller_extends"
       require "extends/controllers/decidim/participatory_processes/admin/participatory_process_landing_page_content_blocks_controller_extends"
       require "extends/controllers/decidim/proposals/proposals_controller_reorder_extends"
+      require "extends/controllers/decidim/surveys/surveys_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       require "extends/helpers/decidim/omniauth_helper_extends"
@@ -65,6 +67,7 @@ module DecidimApp
       require "extends/models/decidim/proposals/proposal_state_extends"
       require "extends/models/decidim/searchable_author_extends"
       require "extends/models/decidim/content_block_attachment_extends"
+      require "extends/models/decidim/forms/answer_extends"
       # permissions
       require "extends/permissions/initiatives/permissions_extends"
       # presenters
