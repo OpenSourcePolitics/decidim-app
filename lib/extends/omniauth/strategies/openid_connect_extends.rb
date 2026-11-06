@@ -31,37 +31,55 @@ module OpenIDConnectExtends
       user_info.name || [user_info.given_name, user_info.family_name].join(" ")
     end
 
+    # Every request goes through this method, so it must stay a plain pass-through:
+    # its frame is silenced in config/initializers/backtrace_silencers.rb, otherwise
+    # it would be the only application frame logged for any downstream error.
     def other_phase
       log :debug, "logout_path_pattern #{logout_path_pattern}"
       log :debug, "current_path #{current_path}"
       log :debug, "logout_path_pattern match #{logout_path_pattern.match?(current_path)}"
-      if logout_path_pattern.match?(current_path)
-        if end_session_callback?
-          log :debug, "Logout phase callback."
-          session.delete("omniauth.logout.callback")
-          return redirect(decidim.destroy_user_session_path)
-        else
-          log :debug, "Logout phase initiated."
-          @env["omniauth.strategy"] ||= self
-          setup_phase
-          options.issuer = issuer if options.issuer.to_s.empty?
-          discover!
-          session["omniauth.logout.callback"] = end_session_callback_value
-          end_session_redirect_uri = end_session_uri
-          log :debug, "End session redirect URI: #{end_session_redirect_uri}"
-          return redirect(end_session_redirect_uri) if end_session_redirect_uri.present?
-        end
-      end
-      call_app!
+      response = logout_phase if logout_path_pattern.match?(current_path)
+      response || call_app!
     end
 
+    def logout_phase
+      if end_session_callback?
+        log :debug, "Logout phase callback."
+        session.delete("omniauth.logout.callback")
+        redirect(decidim.destroy_user_session_path)
+      else
+        log :debug, "Logout phase initiated."
+        @env["omniauth.strategy"] ||= self
+        setup_phase
+        options.issuer = issuer if options.issuer.to_s.empty?
+        discover!
+        session["omniauth.logout.callback"] = end_session_callback_value
+        end_session_redirect_uri = end_session_uri
+        log :debug, "End session redirect URI: #{end_session_redirect_uri}"
+        redirect(end_session_redirect_uri) if end_session_redirect_uri.present?
+      end
+    end
+
+    # The ID token is only available during the callback, so it is kept in session
+    # to be sent back as id_token_hint on logout.
+    def auth_hash
+      session["omniauth.id_token_hint"] = credentials[:id_token]
+      super
+    end
+
+    # Must not read `credentials` here: outside of the callback there is no
+    # authorization code, so it would request a client_credentials token instead.
+    # client_id lets the provider honour post_logout_redirect_uri without hint.
     def end_session_uri
       return unless end_session_endpoint_is_valid?
 
       end_session_uri = URI(client_options.end_session_endpoint)
       end_session_uri.query = URI.encode_www_form(
-        id_token_hint: credentials[:id_token],
-        post_logout_redirect_uri: options.post_logout_redirect_uri
+        {
+          id_token_hint: session.delete("omniauth.id_token_hint"),
+          client_id: client_options.identifier,
+          post_logout_redirect_uri: options.post_logout_redirect_uri
+        }.compact
       )
       end_session_uri.to_s
     end
