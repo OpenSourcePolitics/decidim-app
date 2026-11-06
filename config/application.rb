@@ -14,6 +14,8 @@ module DecidimApp
     require "decidim_app/omniauth/configurator"
 
     config.after_initialize do
+      # jobs
+      require "extends/jobs/decidim/open_data_job_extends"
       # commands
       require "extends/commands/decidim/proposals/create_proposal_extends"
       require "extends/commands/decidim/proposals/publish_proposal_extends"
