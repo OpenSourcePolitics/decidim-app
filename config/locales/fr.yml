@@ -575,11 +575,48 @@ fr:
           followable: La ressource ou l'espace qui est suivi
           id: L'identifiant unique de ce suivi
           updated_at: La date et l'heure de la dernière mise à jour du suivi
+        initiatives:
+          answer: La réponse que cette initiative a reçue (le cas échéant)
+          answer_url: L'URL de la réponse (le cas échéant)
+          answered_at: La date de la réponse (le cas échéant)
+          area: La zone de cette initiative
+          authors: Les auteurs de cette initiative
+          comments_count: Le nombre de commentaires de cette initiative
+          created_at: La date de création de cet espace
+          description: La description de l'initiative
+          first_progress_notification_at: La date d'envoi de la première notification d'avancement
+          follows_count: Le nombre d'utilisateurs suivant cet espace
+          offline_votes: Le nombre de signatures que cette initiative a recueillies en dehors de cette plateforme
+          online_votes: Le nombre de signatures que cette initiative a recueillies en ligne (directement sur la plateforme)
+          published_at: La date de publication de cet espace
+          reference: La référence unique de cet espace
+          scope: Le secteur de cette initiative
+          second_progress_notification_at: La date d'envoi de la deuxième notification d'avancement
+          signature_end_date: La date de fin de la période de collecte des signatures
+          signature_start_date: La date de début de la période de collecte des signatures
+          signature_type: Le type de collecte des signatures (en ligne ou en présentiel)
+          signatures: Le nombre de signatures de cette initiative
+          state: Le statut actuel de cette initiative
+          title: Le titre de l'initiative
+          type: Le type de l'initiative
+          updated_at: La dernière date de mise à jour de cet espace
+          url: L'URL de l'espace
         messaging_conversations:
           created_at: La date de création de cette conversation
           id: L'identifiant unique de cette conversation
           messages: Les messages de cette conversation
           updated_at: La date de la dernière mise à jour de cette conversation
+        proposal_comments:
+          alignment: Si ce commentaire était favorable, défavorable ou neutre
+          author: Le nom du participant qui a rédigé ce commentaire
+          body: Le commentaire lui-même
+          commentable_id: L'identifiant unique de l'élément commentable
+          commentable_type: Le type de l'élément commentable (s'il s'agit d'un résultat, d'une proposition, etc.)
+          created_at: La date de création de ce commentaire
+          depth: La position de ce commentaire dans l'arborescence des commentaires (s'il s'agit d'une réponse ou d'une réponse à une réponse)
+          id: L'identifiant de ce commentaire
+          locale: La langue du participant lors de la rédaction de ce commentaire
+          root_commentable_url: L'URL de la ressource associée à ce commentaire
         proposals:
           address: L'adresse de la proposition dans le cas où elle a un emplacement physique
           answer: La réponse à la proposition dans le cas où elle a reçu une réponse
