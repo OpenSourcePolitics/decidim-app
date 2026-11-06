@@ -1,0 +1,6 @@
+<!-- replace_contents "ul:has(erb[silent]:contains('decidim.open_data.help'))" -->
+<% help = t(export_manifest.name, scope: "decidim.open_data.help", default: nil) %>
+<% help = t(export_manifest.name, scope: "decidim.open_data.help", locale: :en, default: {}) unless help.is_a?(Hash) %>
+<% help.each do |i18n_key, i18n_value| %>
+  <li> <b><%= i18n_key %></b>: <%= i18n_value %> </li>
+<% end %>
