@@ -9,9 +9,15 @@ describe "Open data page" do
     switch_to_host(organization.host)
   end
 
+  # The field lists live in the collapsed "detailed" accordion section.
+  def open_detailed_section
+    find("button[data-controls='panel-title--detailed']").click
+  end
+
   context "when visiting the page in French" do
     before do
       visit decidim.open_data_path(locale: :fr)
+      open_detailed_section
     end
 
     it "renders the French help for proposal comments and initiatives" do
@@ -30,6 +36,7 @@ describe "Open data page" do
       end
 
       visit decidim.open_data_path(locale: :fr)
+      open_detailed_section
     end
 
     it "renders the page with the English help instead" do
