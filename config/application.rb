@@ -57,6 +57,8 @@ module DecidimApp
       require "extends/permissions/initiatives/permissions_extends"
       # presenters
       require "extends/presenters/decidim/forms/admin/questionnaire_response_presenter_extends"
+      # serializers
+      require "extends/serializers/decidim/exporters/open_data_blocked_user_serializer_extends"
     end
 
     config.to_prepare do
