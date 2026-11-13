@@ -18,6 +18,19 @@ module DecidimApp
     MIN_RENAME_WORDS = 3
     # Modules used only to develop or generate apps.
     IGNORED_MODULES = %w(decidim-dev decidim-generators).freeze
+    BUCKETS = [:applied, :renamed, :reworded, :completed, :corrections, :skipped].freeze
+    # English rewordings made on develop that keep the meaning (applied to
+    # downcased text).
+    REWORDINGS = [
+      [/\ban error (has )?occ?ur?red\b/, "there was a problem"],
+      [/\ban error\b/, "a problem"],
+      [/\bhas been\b/, "was"],
+      [/\bhave been\b/, "were"],
+      [/\bresponses\b/, "answers"],
+      [/\bresponse\b/, "answer"],
+      [/\bresponded\b/, "answered"],
+      [/\brespond\b/, "answer"]
+    ].freeze
 
     Entry = Struct.new(:mod, :key, :value, :en, :source_en, :previous, :source_key, :reason, :candidates, keyword_init: true) do
       def dotted_key = key.join(".")
@@ -68,10 +81,31 @@ module DecidimApp
       strings(value).flat_map { |string| string.scan(HTML_TAG).flatten.map(&:downcase) }.tally
     end
 
+    # True when the English texts differ only by case, punctuation or one of
+    # the REWORDINGS, so a translation of one fits the other.
+    def self.same_meaning?(english, newer_english)
+      normalized_wording(english) == normalized_wording(newer_english)
+    end
+
+    def self.normalized_wording(value)
+      text = strings(value).join(" ").downcase
+      REWORDINGS.each { |pattern, replacement| text = text.gsub(pattern, replacement) }
+      text.gsub(/[[:punct:]]/, " ").split.join(" ")
+    end
+
+    # True when the new list or plural value only fills items that are blank
+    # in the current one.
+    def self.completes?(current, value)
+      return false unless current.instance_of?(value.class) && (current.is_a?(Array) || current.is_a?(Hash))
+
+      pairs = current.is_a?(Array) ? current.each_with_index.map { |item, index| [item, value[index]] } : current.map { |form, item| [item, value[form]] }
+      pairs.all? { |item, new_item| item.to_s.strip.empty? || item == new_item }
+    end
+
     # Compares the locked (target) and develop (source) locale data of one
     # module and sorts every candidate key into a bucket.
     class Comparison
-      attr_reader :mod, :applied, :renamed, :corrections, :skipped
+      attr_reader :mod, :applied, :renamed, :reworded, :completed, :corrections, :skipped
 
       def initialize(mod:, target_en:, target_locale:, source_en:, source_locale:)
         @mod = mod
@@ -81,6 +115,8 @@ module DecidimApp
         @source_locale = source_locale
         @applied = []
         @renamed = []
+        @reworded = []
+        @completed = []
         @corrections = []
         @skipped = []
       end
@@ -105,17 +141,27 @@ module DecidimApp
         return unless CrowdinBackport.translated?(source_value, @source_en[key])
 
         current = @target_locale[key]
-        bucket = if !CrowdinBackport.translated?(current, english)
-                   @applied
-                 elsif current != source_value
-                   @corrections
-                 end
-        return unless bucket
+        missing = !CrowdinBackport.translated?(current, english)
+        return if !missing && current == source_value
 
         entry = Entry.new(mod: @mod, key:, value: source_value, en: english, source_en: @source_en[key], previous: current, source_key: key)
-        return skip(entry, :english_changed) if @source_en[key] != english
+        return compare_reworded(entry, missing) if @source_en[key] != english
 
-        check_and_add(bucket, entry)
+        check_and_add(same_english_bucket(missing, current, source_value), entry)
+      end
+
+      # The English text changed on develop: only a rewording with the same
+      # meaning keeps the translation valid, and only for a missing one.
+      def compare_reworded(entry, missing)
+        return skip(entry, :english_changed) unless missing && CrowdinBackport.same_meaning?(entry.en, entry.source_en)
+
+        check_and_add(@reworded, entry)
+      end
+
+      def same_english_bucket(missing, current, source_value)
+        return @applied if missing
+
+        CrowdinBackport.completes?(current, source_value) ? @completed : @corrections
       end
 
       # The key does not exist on develop any more (renamed or removed). Look
@@ -282,7 +328,8 @@ module DecidimApp
 
       def entries_to_write(comparisons)
         comparisons.flat_map do |comparison|
-          comparison.applied + comparison.renamed + (@corrections ? comparison.corrections : [])
+          comparison.applied + comparison.renamed + comparison.reworded + comparison.completed +
+            (@corrections ? comparison.corrections : [])
         end
       end
 
@@ -297,11 +344,13 @@ module DecidimApp
         FileUtils.mkdir_p(File.dirname(report))
         File.write(report, Report.new(@locale, comparisons, @target.revision, @source.revision, @corrections).to_markdown)
 
-        review = Review.new(@locale, comparisons, corrections_applied: @corrections)
-        base = File.join(File.dirname(report), "#{@locale}_review")
-        File.write("#{base}.csv", review.to_csv)
-        review.to_workbook.write("#{base}.xlsx")
-        File.binwrite("#{base}.ods", review.to_ods)
+        { "review" => false, "review_short" => true }.each do |name, shortlist|
+          review = Review.new(@locale, comparisons, corrections_applied: @corrections, shortlist:)
+          base = File.join(File.dirname(report), "#{@locale}_#{name}")
+          File.write("#{base}.csv", review.to_csv)
+          review.to_workbook.write("#{base}.xlsx")
+          File.binwrite("#{base}.ods", review.to_ods)
+        end
       end
     end
 
@@ -322,6 +371,8 @@ module DecidimApp
           "",
           summary,
           section("Renamed keys (applied, English text matched on another develop key)", :renamed, source: true),
+          section("Reworded English (applied, same meaning)", :reworded),
+          section("Completed lists (applied, only blank items filled)", :completed, previous: true),
           section("Corrections (#{@corrections ? "applied" : "NOT applied, rerun with CORRECTIONS=true"})", :corrections, previous: true),
           section("Skipped", :skipped, reason: true),
           section("Applied", :applied)
@@ -330,10 +381,10 @@ module DecidimApp
 
       def summary
         rows = @comparisons.map do |c|
-          "| #{c.mod} | #{c.applied.size} | #{c.renamed.size} | #{c.corrections.size} | #{c.skipped.size} |"
+          "| #{c.mod} | #{BUCKETS.map { |bucket| c.public_send(bucket).size }.join(" | ")} |"
         end
-        totals = [:applied, :renamed, :corrections, :skipped].map { |bucket| @comparisons.sum { |c| c.public_send(bucket).size } }
-        ["| Module | Applied | Renamed | Corrections | Skipped |", "|---|---|---|---|---|", *rows, "| **Total** | #{totals.join(" | ")} |", ""].join("\n")
+        totals = BUCKETS.map { |bucket| @comparisons.sum { |c| c.public_send(bucket).size } }
+        ["| Module | #{BUCKETS.map(&:capitalize).join(" | ")} |", "|---#{"|---" * BUCKETS.size}|", *rows, "| **Total** | #{totals.join(" | ")} |", ""].join("\n")
       end
 
       def section(title, bucket, source: false, previous: false, reason: false)
