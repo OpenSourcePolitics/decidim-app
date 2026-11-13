@@ -340,6 +340,8 @@ sk:
           attributes:
             base:
               not_official: Nie sú oficiálne
+        questionnaire:
+          request_invalid: Pri spracovaní požiadavky sa vyskytol problém. Skúste to znova.
         user:
           attributes:
             nickname:
@@ -573,6 +575,7 @@ sk:
           new: Nový administrátor
       admin_terms_of_service:
         accept:
+          error: Pri prijímaní podmienok používania pre administrátorov sa vyskytol problém.
           success: Skvelé! Prijali ste podmienky používania pre administrátorov.
         actions:
           accept: Súhlasím s podmienkami
@@ -679,6 +682,8 @@ sk:
       conflicts:
         attempts: Pokusy
         'false': Nie
+        index:
+          text: Vyhľadávať podľa e-mailu, mena alebo prezývky aktuálneho používateľa
         managed_user_name: Spravovaný používateľ
         solved: Vyriešené
         title: Konflikty overenia
@@ -693,6 +698,7 @@ sk:
         user_name: Používateľ
       content_blocks:
         create:
+          error: Pri vytváraní bloku obsahu sa vyskytol problém.
           success: Blok obsahu bol úspešne vytvorený.
         destroy:
           error: Pri pokuse o odstránenie tohto bloku obsahu sa vyskytol problém.
@@ -719,6 +725,7 @@ sk:
         form:
           domain_too_short: Doména je príliš krátka
         update:
+          error: Nepodarilo sa aktualizovať zoznam povolených externých domén.
           success: Zoznam povolených externých domén bol úspešne aktualizovaný.
       exports:
         notice: Váš export momentálne prebieha. Po jeho dokončení dostanete e-mail.
@@ -835,7 +842,9 @@ sk:
         search_placeholder:
           full_name_or_user_name_or_user_nickname_cont: Hľadať podľa mena alebo prezývky
           report_count_eq: Počet nahlásení sa rovná
+          reported_id_string_or_reported_content_cont: Hľadať %{collection} podľa ID nahlásenia alebo obsahu
           user_name_or_user_email_cont: Hľadať podľa mena alebo e-mailu
+          user_name_or_user_nickname_or_user_email_cont: Hľadať %{collection} podľa e-mailu, mena alebo prezývky
         sent_at_not_null:
           label: Odoslané
           values:
@@ -905,6 +914,7 @@ sk:
       logs:
         filters:
           participatory_space: Nájsť participatívny priestor
+          text: Hľadať podľa e-mailu, mena alebo prezývky používateľa
           user: Používateľ
         logs_list:
           no_logs_yet: Zatiaľ tu nie sú žiadne záznamy.
@@ -934,6 +944,7 @@ sk:
           destroy:
             confirm: Zrušenie autorizácií pred dátumom nie je možné vrátiť späť. Naozaj chcete pokračovať?
             confirm_all: Zrušenie všetkých autorizácií nie je možné vrátiť späť. Naozaj chcete pokračovať?
+          destroy_nok: Pri rušení autorizácií sa vyskytol problém.
           no_data: Žiadni overení účastníci.
           title: Zrušenie autorizácií
         authorization_workflows: Autorizácie
@@ -1063,6 +1074,7 @@ sk:
           send_me_a_test_email: Pošlite mi testovací e-mail
       officializations:
         block:
+          error: Pri blokovaní účastníka sa vyskytol problém.
           success: Účastník bol úspešne zablokovaný.
         create:
           success: Účastník bol úspešne oficionalizovaný.
@@ -1074,6 +1086,7 @@ sk:
           description: Ak potrebujete kontaktovať účastníka priamo, môžete kliknúť na tlačidlo Zobraziť a uvidíte jeho e-mailovú adresu. Táto akcia bude zaznamenaná.
           title: Zobraziť e-mailovú adresu účastníka
         unblock:
+          error: Pri odblokovaní účastníka sa vyskytol problém.
           success: Účastník bol úspešne odblokovaný.
       organization_appearance:
         form:
@@ -1444,6 +1457,12 @@ sk:
           - Príklad obsluhy autorizácie, aby vývojári pochopili, ako funguje jednoduché overenie.
           - Je určený pre vývojárov, aby pochopili, ako implementovať vlastný systém overovania.
           - Nechajte sa overiť zadaním čísla dokladu končiaceho na "X".
+        id_documents:
+          help:
+          - Užívatelia vyplní informácie o svojej identite a nahrajú kópiu dokumentu.
+          - Vyplníte informácie obsiahnuté v nahranom obrázku.
+          - Informácie by mali zodpovedať používateľovi, ktorý vyplnil.
+          - Ak informácie nevidíte jasne alebo ich nemôžete overiť, môžete žiadosť zamietnuť a používateľ ju bude môcť opraviť.
         sms:
           help:
           - Účastníci požiadajú o zaslanie overovacieho kódu na ich telefón.
@@ -2140,6 +2159,7 @@ sk:
       files:
         file_cannot_be_processed: Súbor nie je možné spracovať
         file_resolution_too_large: Rozlíšenie súboru je príliš veľké
+        not_inside_organization: Súbor nie je pripojený k žiadnej organizácii.
       internal_server_error:
         copied: Text bol skopírovaný!
         copy_error_message_clarification: Kopírovať chybové hlásenie do schránky
@@ -2501,6 +2521,9 @@ sk:
           unearned_another: Tento účastník zatiaľ nepublikoval žiadne iniciatívy.
           unearned_own: Zatiaľ nemáte publikované žiadne iniciatívy.
         proposal_votes:
+          conditions:
+          - Pozrite si a prečítajte návrhy ďalších účastníkov.
+          - Hlasujte za návrhy, ktoré sa vám páčia alebo ich považujete za zaujímavé
           description: Tento odznak získate, keď hlasujete za návrhy iných ľudí.
           description_another: Tento účastník hlasoval za %{score} návrhov.
           description_own: Hlasovali ste za %{score} návrhov.
@@ -2836,6 +2859,13 @@ sk:
           update:
             invalid: Pri aktualizácii tejto ankety stretnutia sa vyskytol problém.
             success: Anketa stretnutia bola úspešne aktualizovaná.
+        poll:
+          form:
+            announcement_html:
+            - Keď otázka získa odpovede alebo je publikovaná/uzavretá, už ju nie je možné upravovať.
+            - Otázku môžete pridať kedykoľvek.
+            - Anketa bude uzavretá, keď budú publikované výsledky všetkých vytvorených otázok.
+            - Navštívte <a href='%{admin_link}'>stránku správy ankety</a>, kde môžete odosielať otázky a publikovať výsledky.
         registrations:
           edit:
             validate: Overiť
@@ -2993,6 +3023,8 @@ sk:
             announcement: Odpovede na túto otázku boli uzavreté.
             question: Otázka
             question_results: Výsledky
+          index:
+            empty_questions: Počas tohto stretnutia budú odoslané niektoré otázky a budete na ne môcť odpovedať. Zobrazia sa tu.
           index_admin:
             edit: Upraviť v paneli správcu
             question: Otázka
@@ -3387,8 +3419,10 @@ sk:
             success: Stav bol úspešne aktualizovaný
         proposals:
           answer:
+            invalid: Vyskytol sa problém pri odpovedaní na tento návrh.
             success: Návrh bol úspešne zodpovedaný.
           create:
+            invalid: Vyskytol sa problém pri vytváraní tohto návrhu.
             success: Návrh bol úspešne vytvorený.
           index:
             statuses: Stavy
@@ -3413,6 +3447,12 @@ sk:
             success: Proces importu sa začal. Po jeho dokončení vás budeme informovať.
           new:
             title: Importovať návrhy z iného komponentu
+        proposals_merges:
+          create:
+            invalid: 'Pri zlučovaní vybratých návrhov sa vyskytol problém, pretože niektoré z nich:'
+        proposals_splits:
+          create:
+            invalid: 'Pri rozdeľovaní vybratých návrhov sa vyskytol problém, pretože niektoré z nich:'
       application_helper:
         filter_origin_values:
           participants: Účastníci
@@ -3611,6 +3651,10 @@ sk:
     surveys:
       last_activity:
         new_survey: 'Nový prieskum:'
+      survey_confirmation_mailer:
+        confirmation:
+          body: Úspešne ste odpovedali na prieskum %{questionnaire_title} v rámci %{participatory_space}
+        export_name: Odpovede na prieskum
     system:
       actions:
         new_admin: Nový administrátor
@@ -4222,6 +4266,8 @@ sk:
         user_menu: Používateľské menu
       language_chooser:
         choose_language: Vybrať jazyk
+      navigation:
+        aria_label: 'Navigačné menu: %{title}'
       notifications_dashboard:
         mark_as_read: Označiť ako prečítané
       offline_banner:

@@ -17,7 +17,9 @@ module DecidimApp
       # [order, explanation]: rows are grouped in this order.
       WHY = {
         renamed: [1, "Crowdin translation of the same English text, found under another key. Check it fits here."],
-        corrections: [2, "Crowdin completes the translation shown today."],
+        reworded: [2, "Crowdin translated the same English text, slightly reworded since (see \"Newer English\"). Same meaning."],
+        completed: [3, "Crowdin fills items missing from the translation shown today."],
+        corrections: [4, "Crowdin completes the translation shown today."],
         english_changed: [3, "Crowdin translated a newer English text (see \"Newer English\"). Adapt it to the English used here."],
         weak_rename: [4, "Short text that Crowdin translated for another screen. Check it fits here."],
         ambiguous_rename: [5, "Crowdin has several translations for this text. Pick one or write yours."],
@@ -25,11 +27,12 @@ module DecidimApp
         html: [7, "The HTML tags differ from the English. Fix them."]
       }.freeze
 
-      def initialize(locale, comparisons, corrections_applied:)
+      def initialize(locale, comparisons, corrections_applied:, shortlist: false)
         @locale = locale
         @code = locale.to_s.upcase
         @comparisons = comparisons
         @corrections_applied = corrections_applied
+        @shortlist = shortlist
       end
 
       def headers
@@ -89,19 +92,53 @@ module DecidimApp
           "",
           "Texts you already changed in Term Customizer keep your version on the platform.",
           "\"Why review\" explains each row. The last columns give context: the text shown today, the newer English text Crowdin translated, and the Crowdin key."
+        ] + shortlist_note
+      end
+
+      def shortlist_note
+        return [] unless @shortlist
+
+        [
+          "",
+          "This is the short list. #{left_out_count} rows with an obvious answer were left out and are applied as proposed: " \
+          "texts that only moved to another key, English texts only reworded (e.g. \"an error\" / \"a problem\"), and lists where only missing items are filled. " \
+          "The full review file lists them too."
         ]
       end
 
       private
 
-      # [[entry, reason, applied], ...] sorted by group, then key.
+      # [[entry, reason, applied], ...] sorted by group, then key. The
+      # shortlist leaves out the obvious ones.
       def entries
-        list = @comparisons.flat_map do |comparison|
+        list = all_entries
+        list = list.reject { |entry, reason, _applied| obvious?(entry, reason) } if @shortlist
+        list.sort_by { |entry, reason, applied| [applied ? 0 : 1, WHY.dig(reason, 0) || 99, entry.dotted_key] }
+      end
+
+      def all_entries
+        @comparisons.flat_map do |comparison|
           comparison.renamed.map { |entry| [entry, :renamed, true] } +
+            comparison.reworded.map { |entry| [entry, :reworded, true] } +
+            comparison.completed.map { |entry| [entry, :completed, true] } +
             comparison.corrections.map { |entry| [entry, :corrections, @corrections_applied] } +
             comparison.skipped.map { |entry| [entry, entry.reason, false] }
         end
-        list.sort_by { |entry, reason, applied| [applied ? 0 : 1, WHY.dig(reason, 0) || 99, entry.dotted_key] }
+      end
+
+      # Applied rows whose answer is almost surely OK: the key only moved (same
+      # last segment, same English), the English was only reworded, or blank
+      # list items are filled.
+      def obvious?(entry, reason)
+        case reason
+        when :reworded, :completed then true
+        when :renamed then entry.key.last == entry.source_key.last
+        else false
+        end
+      end
+
+      def left_out_count
+        all_entries.sum { |entry, reason, applied| obvious?(entry, reason) ? entry_rows(entry, reason, applied).size : 0 }
       end
 
       def entry_rows(entry, reason, applied)

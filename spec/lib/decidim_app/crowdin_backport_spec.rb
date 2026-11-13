@@ -70,6 +70,27 @@ describe DecidimApp::CrowdinBackport do
       end
     end
 
+    context "when the English text was only reworded on develop" do
+      let(:target_en) { { "a" => { "error" => "There has been an error creating this proposal." } } }
+      let(:source_en) { { "a" => { "error" => "There was a problem creating this proposal" } } }
+      let(:source_locale) { { "a" => { "error" => "Vyskytol sa problém pri vytváraní tohto návrhu." } } }
+
+      it "applies it as reworded" do
+        expect(keys(:reworded)).to eq(["a.error"])
+      end
+    end
+
+    context "when the locked version misses items of a list" do
+      let(:target_en) { { "a" => { "steps" => %w(Read Vote) } } }
+      let(:target_locale) { { "a" => { "steps" => ["Čítajte", nil] } } }
+      let(:source_locale) { { "a" => { "steps" => %w(Čítajte Hlasujte) } } }
+
+      it "applies it as completed" do
+        expect(keys(:completed)).to eq(["a.steps"])
+        expect(keys(:corrections)).to be_empty
+      end
+    end
+
     context "when develop is not translated either" do
       let(:source_locale) { { "a" => { "title" => "Title" } } }
 
@@ -174,6 +195,15 @@ describe DecidimApp::CrowdinBackport do
       )
       expect(review.rows.first[10]).to eq("renamed.new")
       expect(review.rows[1].values_at(1, 2, 8, 9)).to eq(["1 vote", "1 hlas", "", "One vote"])
+    end
+
+    context "with the shortlist" do
+      subject(:review) { described_class.new("sk", [comparison], corrections_applied: false, shortlist: true) }
+
+      it "leaves out keys that only moved, and says so in the instructions" do
+        expect(review.rows.map(&:first)).to eq(["a.count.one", "a.count.few"])
+        expect(review.instructions.last).to include("1 rows with an obvious answer were left out")
+      end
     end
 
     it "writes a CSV readable by Excel" do

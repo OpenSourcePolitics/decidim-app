@@ -33,7 +33,7 @@ namespace :decidim_app do
       corrections: ENV["CORRECTIONS"] == "true"
     ).call(output:, report:)
 
-    totals = [:applied, :renamed, :corrections, :skipped].index_with { |bucket| comparisons.sum { |c| c.public_send(bucket).size } }
+    totals = DecidimApp::CrowdinBackport::BUCKETS.index_with { |bucket| comparisons.sum { |c| c.public_send(bucket).size } }
     puts "Wrote #{output.relative_path_from(Rails.root)} and #{report.relative_path_from(Rails.root)}"
     puts totals.map { |bucket, count| "#{bucket}: #{count}" }.join(", ")
   end
