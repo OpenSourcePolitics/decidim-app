@@ -50,6 +50,7 @@ module DecidimApp
       require "extends/controllers/decidim/assemblies/admin/assembly_landing_page_content_blocks_controller_extends"
       require "extends/controllers/decidim/participatory_processes/admin/participatory_process_landing_page_content_blocks_controller_extends"
       require "extends/controllers/decidim/proposals/proposals_controller_reorder_extends"
+            require "extends/controllers/decidim/errors_controller_extends"
       # helpers
       require "extends/helpers/decidim/check_boxes_tree_helper_extends"
       require "extends/helpers/decidim/omniauth_helper_extends"
