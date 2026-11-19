@@ -401,9 +401,6 @@ GEM
     activerecord (7.0.8.7)
       activemodel (= 7.0.8.7)
       activesupport (= 7.0.8.7)
-    activerecord-postgis-adapter (8.0.3)
-      activerecord (~> 7.0.0)
-      rgeo-activerecord (~> 7.0.0)
     activestorage (7.0.8.7)
       actionpack (= 7.0.8.7)
       activejob (= 7.0.8.7)
@@ -925,10 +922,6 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.4.4)
-    rgeo (3.0.1)
-    rgeo-activerecord (7.0.1)
-      activerecord (>= 5.0)
-      rgeo (>= 1.0.0)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -1131,7 +1124,6 @@ PLATFORMS
 DEPENDENCIES
   actionpack (~> 7.0.8.7)
   activejob-uniqueness
-  activerecord-postgis-adapter (~> 8.0, >= 8.0.3)
   aws-sdk-s3
   bootsnap (~> 1.4)
   brakeman (~> 6.1)
@@ -1182,8 +1174,6 @@ DEPENDENCIES
   rack-attack (~> 6.7)
   rack-mini-profiler
   rexml (>= 3.4.2)
-  rgeo
-  rgeo-activerecord
   sidekiq (~> 6.0)
   sidekiq-scheduler (~> 5.0)
   spring

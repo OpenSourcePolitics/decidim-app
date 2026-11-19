@@ -13,7 +13,6 @@ gem "decidim-templates", github: "decidim/decidim", tag: DECIDIM_TAG
 gem "bootsnap", "~> 1.4", require: false
 gem "puma", ">= 6.3.1"
 
-gem "activerecord-postgis-adapter", "~> 8.0", ">= 8.0.3"
 gem "aws-sdk-s3", require: false
 gem "dalli"
 gem "deface"
@@ -21,8 +20,6 @@ gem "dotenv-rails", "~> 2.7"
 gem "faker", "~> 3.2"
 gem "letter_opener_web", "~> 2.0"
 gem "rack-attack", "~> 6.7"
-gem "rgeo"
-gem "rgeo-activerecord"
 
 # Fix for WickedPdf compatibility issues
 gem "wicked_pdf", "~> 2.8", ">= 2.8.2"
