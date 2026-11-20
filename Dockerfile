@@ -92,6 +92,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update && apt-get install -y --no-install-recommends \
     postgresql-client imagemagick libproj-dev proj-bin p7zip-full libgeos-dev libjemalloc2 \
     libssl3 libxrender1 libxext6 libfontconfig1 xfonts-75dpi xfonts-base curl \
+    libicu76 \
     && WKHTML_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "arm64" || echo "amd64") \
     && curl -fsSL "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_${WKHTML_ARCH}.deb" -o /tmp/wkhtmltox.deb \
     && apt-get install -y --no-install-recommends /tmp/wkhtmltox.deb \
