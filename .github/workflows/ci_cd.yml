@@ -147,9 +147,45 @@ jobs:
           database_password: ${{ env.DATABASE_PASSWORD }}
           database_host: ${{ env.DATABASE_HOST }}
           push: "true"
+  smoke_image:
+    name: Smoke-test built image
+    needs: docker_build
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - name: Log in to the registry
+        run: echo "${{ secrets.TOKEN }}" | docker login "${{ vars.REGISTRY_ENDPOINT }}" -u "${{ vars.REGISTRY_USERNAME || 'nologin' }}" --password-stdin
+      - name: Resolve built image ref
+        id: img
+        run: |
+          # build-and-test-images-action tags the image from the git ref with '/' -> '-'.
+          tag="${GITHUB_REF_NAME//\//-}"
+          echo "ref=${{ vars.REGISTRY_ENDPOINT }}/${{ vars.REGISTRY_NAMESPACE }}/${{ vars.IMAGE_NAME }}:${tag}" >> "$GITHUB_OUTPUT"
+      - name: Scan gem native extensions for missing runtime libs
+        run: |
+          # Runs the final runner image and ldd-scans every gem native extension.
+          # Catches runtime libs the builder has but the runner image doesn't ship
+          # (e.g. libicu for charlock_holmes) — invisible to a build-only check.
+          ref="${{ steps.img.outputs.ref }}"
+          echo "Scanning $ref"
+          docker pull --quiet "$ref"
+          docker run --rm "$ref" bash -lc '
+            fail=0
+            while IFS= read -r so; do
+              miss=$(ldd "$so" 2>/dev/null | grep "not found" || true)
+              if [ -n "$miss" ]; then
+                echo "::error::missing runtime lib for $so"
+                echo "$so"; echo "$miss" | sed "s/^/    /"
+                fail=1
+              fi
+            done < <(find /usr/local/bundle -name "*.so")
+            if [ "$fail" -eq 0 ]; then
+              echo "✅ no missing runtime libs in any gem native extension"
+            fi
+            exit $fail'
   generate_release:
     name: Generate release
-    needs: [lint, zeitwerk, tests, docker_build]
+    needs: [lint, zeitwerk, tests, docker_build, smoke_image]
     if: "github.ref == 'refs/heads/main'"
     runs-on: ubuntu-22.04
     steps:
