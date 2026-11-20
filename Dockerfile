@@ -29,7 +29,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     rm -f /var/lib/apt/lists/lock && \
     apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev curl git libicu-dev build-essential xz-utils \
+    libpq-dev curl git libicu-dev zlib1g-dev build-essential xz-utils \
     libssl3 libxrender1 libxext6 libfontconfig1 xfonts-75dpi xfonts-base \
     && NODE_VERSION=22.12.0 \
     && case "${TARGETARCH}" in \
