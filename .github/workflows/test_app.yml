@@ -8,7 +8,12 @@ on:
         type: string
       ruby_version:
         description: 'Ruby Version'
-        default: "3.2.2"
+        default: "3.2.11"
+        required: false
+        type: string
+      ruby_cache_key:
+        description: 'Cache key of a prebuilt patched Ruby (~/.ruby-patched). When set, that Ruby is used instead of ruby/setup-ruby.'
+        default: ""
         required: false
         type: string
       test_command:
@@ -72,8 +77,22 @@ jobs:
         with:
           fetch-depth: 1
       - uses: ruby/setup-ruby@v1
+        if: inputs.ruby_cache_key == ''
         with:
           ruby-version: ${{ inputs.ruby_version }}
+      - name: Restore patched Ruby
+        if: inputs.ruby_cache_key != ''
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.ruby-patched
+          key: ${{ inputs.ruby_cache_key }}
+          fail-on-cache-miss: true
+      - name: Use patched Ruby
+        if: inputs.ruby_cache_key != ''
+        shell: "bash"
+        run: |
+          echo "$HOME/.ruby-patched/${{ inputs.ruby_version }}/bin" >> "$GITHUB_PATH"
+          "$HOME/.ruby-patched/${{ inputs.ruby_version }}/bin/ruby" -v
       - uses: browser-actions/setup-chrome@v1
         name: Install Chrome
       - uses: actions/cache@v4

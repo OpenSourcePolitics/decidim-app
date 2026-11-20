@@ -1,4 +1,14 @@
-FROM ruby:3.2.2-slim as builder
+# Custom Ruby 3.2.11 base image (rebuilt from source with additional upstream
+# fixes; Ruby 3.2 is EOL). Built and published from ./ruby-patched (see
+# ruby-patched/README.md). Override with --build-arg RUBY_IMAGE=... to build
+# against a locally built tag.
+#
+# Prefer pinning an immutable digest (ruby:3.2.11-patched@sha256:...) over the
+# bare tag, so a given commit always builds against the base it was reviewed
+# with. `PUSH=1 PIN=1 ./ruby-patched/build.sh` prints and rewrites this line.
+# CI (check_ruby_image) verifies whatever ref is pinned here exists on the registry.
+ARG RUBY_IMAGE=rg.fr-par.scw.cloud/decidim-app/ruby:3.2.11-patched
+FROM ${RUBY_IMAGE} as builder
 
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
@@ -60,7 +70,7 @@ RUN rm -rf node_modules tmp/cache vendor/bundle/spec .git .gitignore .dockerigno
     && find /usr/local/bundle/bundler/gems/decidim-* -type d -name "docs" -exec rm -rf {} + 2>/dev/null || true \
     && rm -rf log/*.log tmp/* public/packs-test
 
-FROM ruby:3.2.2-slim as runner
+FROM ${RUBY_IMAGE} as runner
 
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
