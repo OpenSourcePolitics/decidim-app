@@ -7,7 +7,7 @@
 # bare tag, so a given commit always builds against the base it was reviewed
 # with. `PUSH=1 PIN=1 ./ruby-patched/build.sh` prints and rewrites this line.
 # CI (check_ruby_image) verifies whatever ref is pinned here exists on the registry.
-ARG RUBY_IMAGE=rg.fr-par.scw.cloud/decidim-app/ruby:3.2.11-patched
+ARG RUBY_IMAGE=rg.fr-par.scw.cloud/decidim-app/ruby:3.2.11-patched@sha256:bf7db04804573f4759db2bc231186696068edbbc79c60efca70c0551b17a100a
 FROM ${RUBY_IMAGE} as builder
 
 ARG DOCKER_IMAGE_TAG
