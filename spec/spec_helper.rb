@@ -26,4 +26,22 @@ RSpec.configure do |config|
       options:
     )
   end
+
+  # Recent Chrome versions no longer know the "iPhone 6" device preset used by
+  # decidim-dev, so the same device is emulated from its explicit metrics.
+  Capybara.register_driver :iphone do |app|
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.args << "--headless=new"
+    options.args << "--no-sandbox"
+    options.args << "--disable-dev-shm-usage"
+    options.add_emulation(
+      device_metrics: { width: 375, height: 667, pixelRatio: 2, touch: true, mobile: true },
+      user_agent: "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1"
+    )
+    Capybara::Selenium::Driver.new(
+      app,
+      browser: :chrome,
+      options:
+    )
+  end
 end

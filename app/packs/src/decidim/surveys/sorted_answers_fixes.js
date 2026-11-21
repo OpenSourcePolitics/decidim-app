@@ -3,14 +3,11 @@ $(() => {
 
   if (!isTouchDevice) return;
 
-  let isDragging = false;
+  // Only sorting answers are draggable; other answer types share .js-collection-input
+  const SORTABLE_ITEM = '.js-sortable-check-box-collection .js-collection-input';
 
   const preventScroll = (e) => {
-    if (isDragging) {
-      e.preventDefault();
-      e.stopPropagation();
-      return false;
-    }
+    e.preventDefault();
   };
 
   const scrollToTopIfNeeded = () => {
@@ -19,22 +16,21 @@ $(() => {
     }
   };
 
+  // Block scrolling only while a sorting item is being dragged, so the page keeps native scrolling otherwise
   const handleInteractionStart = (e) => {
-    if (e.target.closest('.js-collection-input')) {
-      isDragging = true;
+    if (e.target.closest(SORTABLE_ITEM)) {
+      document.addEventListener('touchmove', preventScroll, { passive: false });
       if (e.type === 'dragstart') scrollToTopIfNeeded();
     }
   };
 
   const handleInteractionEnd = () => {
-    isDragging = false;
+    document.removeEventListener('touchmove', preventScroll, { passive: false });
   };
 
   document.addEventListener('dragstart', handleInteractionStart);
   document.addEventListener('dragend', handleInteractionEnd);
-  document.addEventListener('touchstart', handleInteractionStart);
+  document.addEventListener('touchstart', handleInteractionStart, { passive: true });
   document.addEventListener('touchend', handleInteractionEnd);
-  document.addEventListener('touchmove', preventScroll, { passive: false });
-  document.addEventListener('scroll', preventScroll, { passive: false });
-  document.addEventListener('wheel', preventScroll, { passive: false });
+  document.addEventListener('touchcancel', handleInteractionEnd);
 });

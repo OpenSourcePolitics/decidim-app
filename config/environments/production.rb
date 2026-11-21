@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "active_support/core_ext/integer/time"
+require "decidim_app/static_cache_control"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -25,6 +26,11 @@ Rails.application.configure do
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+
+  # Fingerprinted Shakapacker packs never change once built: let browsers and
+  # proxies keep them for a year. Scoped to /decidim-packs/ so that
+  # non-fingerprinted files (robots.txt, icons, 422.html) are not marked immutable.
+  config.middleware.insert_before ActionDispatch::Static, DecidimApp::StaticCacheControl if config.public_file_server.enabled
 
   # Compress CSS using a preprocessor.
   #
