@@ -91,7 +91,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     rm -f /var/lib/apt/lists/lock && \
     apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client imagemagick libproj-dev proj-bin p7zip-full libgeos-dev libjemalloc2 \
+    postgresql-client imagemagick p7zip-full libjemalloc2 \
     libssl3 libxrender1 libxext6 libfontconfig1 xfonts-75dpi xfonts-base curl \
     libicu76 \
     && WKHTML_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "arm64" || echo "amd64") \
