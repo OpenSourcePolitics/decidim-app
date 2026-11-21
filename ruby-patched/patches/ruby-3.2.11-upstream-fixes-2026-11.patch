@@ -1,0 +1,1040 @@
+Additional upstream correctness and hardening fixes backported onto the Ruby
+3.2.11 source tree (the final 3.2.x release). Ruby 3.2 is end-of-life, so there
+is no newer 3.2.x release to pick them up from and they are carried here.
+
+Generated against the pristine ruby-3.2.11.tar.gz
+(sha256 b3eeabd6636f334531db3ffdc3229eb05e524740e6c84fdc043720573cf2f8b2).
+Apply with:  patch -p1 --fuzz=0 < ruby-3.2.11-upstream-fixes-2026-11.patch
+
+Touches the string case-mapping code (string.c, enc/*.c) and the bundled regex
+engine (re.c, regparse.c, regcomp.c, regexec.c, regint.h, regerror.c,
+include/ruby/onigmo.h).
+---------------------------------------------------------------------------
+diff --git a/enc/emacs_mule.c b/enc/emacs_mule.c
+index f92eb18..c7d93d2 100644
+--- a/enc/emacs_mule.c
++++ b/enc/emacs_mule.c
+@@ -272,24 +272,7 @@ mbc_case_fold(OnigCaseFoldType flag,
+ 	      const UChar** pp, const UChar* end, UChar* lower,
+ 	      OnigEncoding enc)
+ {
+-  int len;
+-  const UChar* p = *pp;
+-
+-  if (ONIGENC_IS_MBC_ASCII(p)) {
+-    *lower = ONIGENC_ASCII_CODE_TO_LOWER_CASE(*p);
+-    (*pp)++;
+-    return 1;
+-  }
+-  else {
+-    int i;
+-
+-    len = mbc_enc_len(p, end, enc);
+-    for (i = 0; i < len; i++) {
+-      *lower++ = *p++;
+-    }
+-    (*pp) += len;
+-    return len; /* return byte length of converted char to lower */
+-  }
++  return onigenc_mbn_mbc_case_fold(enc, flag, pp, end, lower);
+ }
+ 
+ static UChar*
+diff --git a/enc/iso_8859_1.c b/enc/iso_8859_1.c
+index 7af0888..5535358 100644
+--- a/enc/iso_8859_1.c
++++ b/enc/iso_8859_1.c
+@@ -264,7 +264,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/iso_8859_10.c b/enc/iso_8859_10.c
+index cae4be2..33dbab6 100644
+--- a/enc/iso_8859_10.c
++++ b/enc/iso_8859_10.c
+@@ -233,7 +233,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/iso_8859_13.c b/enc/iso_8859_13.c
+index fe1ddd7..0586253 100644
+--- a/enc/iso_8859_13.c
++++ b/enc/iso_8859_13.c
+@@ -226,7 +226,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/iso_8859_14.c b/enc/iso_8859_14.c
+index 647514a..be347d7 100644
+--- a/enc/iso_8859_14.c
++++ b/enc/iso_8859_14.c
+@@ -235,7 +235,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/iso_8859_15.c b/enc/iso_8859_15.c
+index 377a3af..6ccb5f9 100644
+--- a/enc/iso_8859_15.c
++++ b/enc/iso_8859_15.c
+@@ -229,7 +229,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/iso_8859_16.c b/enc/iso_8859_16.c
+index 135630e..47aff1e 100644
+--- a/enc/iso_8859_16.c
++++ b/enc/iso_8859_16.c
+@@ -231,7 +231,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/iso_8859_2.c b/enc/iso_8859_2.c
+index 3a05c63..3e3d506 100644
+--- a/enc/iso_8859_2.c
++++ b/enc/iso_8859_2.c
+@@ -229,7 +229,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/iso_8859_3.c b/enc/iso_8859_3.c
+index 2a343ea..8c78fdd 100644
+--- a/enc/iso_8859_3.c
++++ b/enc/iso_8859_3.c
+@@ -231,7 +231,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/iso_8859_4.c b/enc/iso_8859_4.c
+index e2134e8..24f78bb 100644
+--- a/enc/iso_8859_4.c
++++ b/enc/iso_8859_4.c
+@@ -232,7 +232,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/iso_8859_9.c b/enc/iso_8859_9.c
+index 004eec3..4670823 100644
+--- a/enc/iso_8859_9.c
++++ b/enc/iso_8859_9.c
+@@ -224,7 +224,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/windows_1250.c b/enc/windows_1250.c
+index daf23e9..62a3cbb 100644
+--- a/enc/windows_1250.c
++++ b/enc/windows_1250.c
+@@ -199,7 +199,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/windows_1252.c b/enc/windows_1252.c
+index b685878..a8a9b20 100644
+--- a/enc/windows_1252.c
++++ b/enc/windows_1252.c
+@@ -190,7 +190,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/windows_1254.c b/enc/windows_1254.c
+index 5e6d92d..b9fe1be 100644
+--- a/enc/windows_1254.c
++++ b/enc/windows_1254.c
+@@ -232,7 +232,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/enc/windows_1257.c b/enc/windows_1257.c
+index ada03b7..350c90e 100644
+--- a/enc/windows_1257.c
++++ b/enc/windows_1257.c
+@@ -236,7 +236,7 @@ case_map(OnigCaseFoldType* flagP, const OnigUChar** pp,
+   OnigUChar *to_start = to;
+   OnigCaseFoldType flags = *flagP;
+ 
+-  while (*pp < end && to < to_end) {
++  while (*pp < end && to_end - to > 1) {
+     code = *(*pp)++;
+     if (code == SHARP_s) {
+       if (flags & ONIGENC_CASE_UPCASE) {
+diff --git a/include/ruby/onigmo.h b/include/ruby/onigmo.h
+index 8d7c601..5adcf71 100644
+--- a/include/ruby/onigmo.h
++++ b/include/ruby/onigmo.h
+@@ -686,6 +686,9 @@ ONIG_EXTERN const OnigSyntaxType*   OnigDefaultSyntax;
+ #define ONIGERR_NEVER_ENDING_RECURSION                       -221
+ #define ONIGERR_GROUP_NUMBER_OVER_FOR_CAPTURE_HISTORY        -222
+ #define ONIGERR_INVALID_CHAR_PROPERTY_NAME                   -223
++#define ONIGERR_TOO_MANY_RANGE_REPEAT                        -224
++#define ONIGERR_TOO_MANY_NULL_CHECK                          -225
++#define ONIGERR_TOO_BIG_COMPILED_PROGRAM                     -226
+ #define ONIGERR_INVALID_CODE_POINT_VALUE                     -400
+ #define ONIGERR_INVALID_WIDE_CHAR_VALUE                      -400
+ #define ONIGERR_TOO_BIG_WIDE_CHAR_VALUE                      -401
+diff --git a/re.c b/re.c
+index f357d38..001b271 100644
+--- a/re.c
++++ b/re.c
+@@ -561,6 +561,10 @@ rb_reg_to_s(VALUE re)
+     return rb_reg_str_with_term(re, '/');
+ }
+ 
++static VALUE
++rb_reg_preprocess(const char *p, const char *end, rb_encoding *enc,
++        rb_encoding **fixed_enc, onig_errmsg_buffer err, int options);
++
+ static VALUE
+ rb_reg_str_with_term(VALUE re, int term)
+ {
+@@ -616,14 +620,23 @@ rb_reg_str_with_term(VALUE re, int term)
+         if (*ptr == ':' && ptr[len-1] == ')') {
+             Regexp *rp;
+             VALUE verbose = ruby_verbose;
+-            ruby_verbose = Qfalse;
++            rb_encoding *fixed_enc = 0;
++            onig_errmsg_buffer errmsg = "";
++            VALUE unescaped;
+ 
+             ++ptr;
+             len -= 2;
+-            err = onig_new(&rp, ptr, ptr + len, options,
++            unescaped = rb_reg_preprocess((const char *)ptr, (const char *)ptr + len,
++                                          enc, &fixed_enc, errmsg, options);
++            if (!NIL_P(unescaped)) {
++                ruby_verbose = Qfalse;
++                err = onig_new(&rp, (UChar *)RSTRING_PTR(unescaped),
++                               (UChar *)RSTRING_END(unescaped), options,
+                            enc, OnigDefaultSyntax, NULL);
+             onig_free(rp);
+             ruby_verbose = verbose;
++                RB_GC_GUARD(unescaped);
++            }
+         }
+         if (err) {
+             options = RREGEXP_PTR(re)->options;
+@@ -1530,10 +1543,6 @@ rb_reg_fixed_encoding_p(VALUE re)
+     return RBOOL(FL_TEST(re, KCODE_FIXED));
+ }
+ 
+-static VALUE
+-rb_reg_preprocess(const char *p, const char *end, rb_encoding *enc,
+-        rb_encoding **fixed_enc, onig_errmsg_buffer err, int options);
+-
+ NORETURN(static void reg_enc_error(VALUE re, VALUE str));
+ 
+ static void
+@@ -2931,6 +2940,7 @@ escape_asis:
+                         *encp = enc;
+                     }
+                 }
++                rb_str_buf_cat(buf, "(?#)", 4);
+                 break;
+             }
+             rb_str_buf_cat(buf, (char *)&c, 1);
+@@ -2989,6 +2999,9 @@ escape_asis:
+                         c = '(';
+                         rb_str_buf_cat(buf, (char *)&c, 1);
+                     }
++                    else {
++                        rb_str_buf_cat(buf, "(?#)", 4);
++                    }
+                     break;
+                 }
+                 else {
+diff --git a/regcomp.c b/regcomp.c
+index be85d85..07933e4 100644
+--- a/regcomp.c
++++ b/regcomp.c
+@@ -221,9 +221,26 @@ unset_addr_list_add(UnsetAddrList* uslist, int offset, struct _Node* node)
+ #endif /* USE_SUBEXP_CALL */
+ 
+ 
++/* Reject a write that would push the compiled program past the size its
++   offset type (int) can address.  This must run before every write to the
++   program buffer, not only in add_opcode(): the bulk writers below emit
++   class bodies and exact strings in a single BBUF_ADD, which never revisits
++   the per-instruction guard.  The arithmetic stays unsigned so a multi-GiB
++   payload cannot wrap the accounting and copy past the allocation. */
++static int
++check_compiled_program_size(regex_t* reg, OnigDistance add_len)
++{
++  if (reg->used > MAX_COMPILED_PROGRAM_SIZE ||
++      add_len > (OnigDistance )(MAX_COMPILED_PROGRAM_SIZE - reg->used))
++    return ONIGERR_TOO_BIG_COMPILED_PROGRAM;
++  return 0;
++}
++
+ static int
+ add_opcode(regex_t* reg, int opcode)
+ {
++  int r = check_compiled_program_size(reg, 1);
++  if (r) return r;
+   BBUF_ADD1(reg, opcode);
+   return 0;
+ }
+@@ -307,6 +324,8 @@ add_opcode_rel_addr(regex_t* reg, int opcode, int addr)
+ static int
+ add_bytes(regex_t* reg, UChar* bytes, OnigDistance len)
+ {
++  int r = check_compiled_program_size(reg, len);
++  if (r) return r;
+   BBUF_ADD(reg, bytes, len);
+   return 0;
+ }
+@@ -314,6 +333,8 @@ add_bytes(regex_t* reg, UChar* bytes, OnigDistance len)
+ static int
+ add_bitset(regex_t* reg, BitSetRef bs)
+ {
++  int r = check_compiled_program_size(reg, SIZE_BITSET);
++  if (r) return r;
+   BBUF_ADD(reg, bs, SIZE_BITSET);
+   return 0;
+ }
+@@ -395,6 +416,7 @@ compile_tree_empty_check(Node* node, regex_t* reg, int empty_info)
+     r = add_mem_num(reg, reg->num_null_check); /* NULL CHECK ID */
+     if (r) return r;
+     reg->num_null_check++;
++    if ((MemNumType)reg->num_null_check <= 0) return ONIGERR_TOO_MANY_NULL_CHECK;
+   }
+ 
+   r = compile_tree(node, reg);
+@@ -463,21 +485,25 @@ static int
+ add_compile_string(UChar* s, int mb_len, OnigDistance byte_len,
+                    regex_t* reg, int ignore_case)
+ {
++  int r;
+   int op = select_str_opcode(mb_len, byte_len, ignore_case);
+-  add_opcode(reg, op);
++  r = add_opcode(reg, op);
++  if (r) return r;
+ 
+-  if (op == OP_EXACTMBN)
+-    add_length(reg, mb_len);
++  if (op == OP_EXACTMBN) {
++    r = add_length(reg, mb_len);
++    if (r) return r;
++  }
+ 
+   if (IS_NEED_STR_LEN_OP_EXACT(op)) {
+     if (op == OP_EXACTN_IC)
+-      add_length(reg, byte_len);
++      r = add_length(reg, byte_len);
+     else
+-      add_length(reg, byte_len / mb_len);
++      r = add_length(reg, byte_len / mb_len);
++    if (r) return r;
+   }
+ 
+-  add_bytes(reg, s, byte_len);
+-  return 0;
++  return add_bytes(reg, s, byte_len);
+ }
+ 
+ 
+@@ -581,21 +607,27 @@ static int
+ add_multi_byte_cclass(BBuf* mbuf, regex_t* reg)
+ {
+ #ifdef PLATFORM_UNALIGNED_WORD_ACCESS
+-  add_length(reg, mbuf->used);
++  int r = add_length(reg, mbuf->used);
++  if (r) return r;
+   return add_bytes(reg, mbuf->p, mbuf->used);
+ #else
+   int r, pad_size;
+   UChar* p = BBUF_GET_ADD_ADDRESS(reg) + SIZE_LENGTH;
+ 
+   GET_ALIGNMENT_PAD_SIZE(p, pad_size);
+-  add_length(reg, mbuf->used + (WORD_ALIGNMENT_SIZE - 1));
+-  if (pad_size != 0) add_bytes(reg, PadBuf, pad_size);
++  r = add_length(reg, mbuf->used + (WORD_ALIGNMENT_SIZE - 1));
++  if (r) return r;
++  if (pad_size != 0) {
++    r = add_bytes(reg, PadBuf, pad_size);
++    if (r) return r;
++  }
+ 
+   r = add_bytes(reg, mbuf->p, mbuf->used);
++  if (r) return r;
+ 
+   /* padding for return value from compile_length_cclass_node() to be fix. */
+   pad_size = (WORD_ALIGNMENT_SIZE - 1) - pad_size;
+-  if (pad_size != 0) add_bytes(reg, PadBuf, pad_size);
++  if (pad_size != 0) r = add_bytes(reg, PadBuf, pad_size);
+   return r;
+ #endif
+ }
+@@ -632,26 +664,29 @@ compile_cclass_node(CClassNode* cc, regex_t* reg)
+ 
+   if (IS_NULL(cc->mbuf)) {
+     if (IS_NCCLASS_NOT(cc))
+-      add_opcode(reg, OP_CCLASS_NOT);
++      r = add_opcode(reg, OP_CCLASS_NOT);
+     else
+-      add_opcode(reg, OP_CCLASS);
++      r = add_opcode(reg, OP_CCLASS);
++    if (r) return r;
+ 
+     r = add_bitset(reg, cc->bs);
+   }
+   else {
+     if (ONIGENC_MBC_MINLEN(reg->enc) > 1 || bitset_is_empty(cc->bs)) {
+       if (IS_NCCLASS_NOT(cc))
+-	add_opcode(reg, OP_CCLASS_MB_NOT);
++	r = add_opcode(reg, OP_CCLASS_MB_NOT);
+       else
+-	add_opcode(reg, OP_CCLASS_MB);
++	r = add_opcode(reg, OP_CCLASS_MB);
++      if (r) return r;
+ 
+       r = add_multi_byte_cclass(cc->mbuf, reg);
+     }
+     else {
+       if (IS_NCCLASS_NOT(cc))
+-	add_opcode(reg, OP_CCLASS_MIX_NOT);
++	r = add_opcode(reg, OP_CCLASS_MIX_NOT);
+       else
+-	add_opcode(reg, OP_CCLASS_MIX);
++	r = add_opcode(reg, OP_CCLASS_MIX);
++      if (r) return r;
+ 
+       r = add_bitset(reg, cc->bs);
+       if (r) return r;
+@@ -704,6 +739,7 @@ compile_range_repeat_node(QtfrNode* qn, int target_len, int empty_info,
+   if (r) return r;
+   r = add_mem_num(reg, num_repeat); /* OP_REPEAT ID */
+   reg->num_repeat++;
++  if ((MemNumType)reg->num_repeat <= 0) return ONIGERR_TOO_MANY_RANGE_REPEAT;
+   if (r) return r;
+   r = add_rel_addr(reg, target_len + SIZE_OP_REPEAT_INC);
+   if (r) return r;
+@@ -740,6 +776,10 @@ is_anychar_star_quantifier(QtfrNode* qn)
+ }
+ 
+ #define QUANTIFIER_EXPAND_LIMIT_SIZE   50
++/* (tlen * n <= QUANTIFIER_EXPAND_LIMIT_SIZE) without overflowing int: tlen
++   and n are each bounded by ONIG_MAX_REPEAT_NUM, but their product is not. */
++#define IS_EXPAND_LIMIT_OK(tlen, n) \
++  ((n) <= 0 || (tlen) <= QUANTIFIER_EXPAND_LIMIT_SIZE / (n))
+ #define CKN_ON   (ckn > 0)
+ 
+ #ifdef USE_COMBINATION_EXPLOSION_CHECK
+@@ -1004,7 +1044,7 @@ compile_length_quantifier_node(QtfrNode* qn, regex_t* reg)
+     mod_tlen = tlen;
+ 
+   if (infinite &&
+-      (qn->lower <= 1 || tlen * qn->lower <= QUANTIFIER_EXPAND_LIMIT_SIZE)) {
++      (qn->lower <= 1 || IS_EXPAND_LIMIT_OK(tlen, qn->lower))) {
+     if (qn->lower == 1 && tlen > QUANTIFIER_EXPAND_LIMIT_SIZE) {
+       len = SIZE_OP_JUMP;
+     }
+@@ -1030,8 +1070,8 @@ compile_length_quantifier_node(QtfrNode* qn, regex_t* reg)
+     len = SIZE_OP_JUMP + tlen;
+   }
+   else if (!infinite && qn->greedy &&
+-           (qn->upper == 1 || (tlen + SIZE_OP_PUSH) * qn->upper
+-                                      <= QUANTIFIER_EXPAND_LIMIT_SIZE)) {
++           (qn->upper == 1 ||
++            IS_EXPAND_LIMIT_OK(tlen + SIZE_OP_PUSH, qn->upper))) {
+     len = tlen * qn->lower;
+     len += (SIZE_OP_PUSH + tlen) * (qn->upper - qn->lower);
+   }
+@@ -1081,7 +1121,7 @@ compile_quantifier_node(QtfrNode* qn, regex_t* reg)
+     mod_tlen = tlen;
+ 
+   if (infinite &&
+-      (qn->lower <= 1 || tlen * qn->lower <= QUANTIFIER_EXPAND_LIMIT_SIZE)) {
++      (qn->lower <= 1 || IS_EXPAND_LIMIT_OK(tlen, qn->lower))) {
+     if (qn->lower == 1 && tlen > QUANTIFIER_EXPAND_LIMIT_SIZE) {
+       if (qn->greedy) {
+ #ifdef USE_OP_PUSH_OR_JUMP_EXACT
+@@ -1110,7 +1150,8 @@ compile_quantifier_node(QtfrNode* qn, regex_t* reg)
+ 	r = add_opcode_rel_addr(reg, OP_PUSH_OR_JUMP_EXACT1,
+ 			     mod_tlen + SIZE_OP_JUMP);
+ 	if (r) return r;
+-	add_bytes(reg, NSTR(qn->head_exact)->s, 1);
++	r = add_bytes(reg, NSTR(qn->head_exact)->s, 1);
++	if (r) return r;
+ 	r = compile_tree_empty_check(qn->target, reg, empty_info);
+ 	if (r) return r;
+ 	r = add_opcode_rel_addr(reg, OP_JUMP,
+@@ -1122,7 +1163,8 @@ compile_quantifier_node(QtfrNode* qn, regex_t* reg)
+ 	r = add_opcode_rel_addr(reg, OP_PUSH_IF_PEEK_NEXT,
+ 				mod_tlen + SIZE_OP_JUMP);
+ 	if (r) return r;
+-	add_bytes(reg, NSTR(qn->next_head_exact)->s, 1);
++	r = add_bytes(reg, NSTR(qn->next_head_exact)->s, 1);
++	if (r) return r;
+ 	r = compile_tree_empty_check(qn->target, reg, empty_info);
+ 	if (r) return r;
+ 	r = add_opcode_rel_addr(reg, OP_JUMP,
+@@ -1151,8 +1193,8 @@ compile_quantifier_node(QtfrNode* qn, regex_t* reg)
+     r = compile_tree(qn->target, reg);
+   }
+   else if (!infinite && qn->greedy &&
+-           (qn->upper == 1 || (tlen + SIZE_OP_PUSH) * qn->upper
+-                                  <= QUANTIFIER_EXPAND_LIMIT_SIZE)) {
++           (qn->upper == 1 ||
++            IS_EXPAND_LIMIT_OK(tlen + SIZE_OP_PUSH, qn->upper))) {
+     int n = qn->upper - qn->lower;
+ 
+     r = compile_tree_n_times(qn->target, qn->lower, reg);
+@@ -1619,23 +1661,24 @@ compile_length_tree(Node* node, regex_t* reg)
+       r = compile_length_tree(NCAR(node), reg);
+       if (r < 0) return r;
+       len += r;
++      if (len > (int )MAX_COMPILED_PROGRAM_SIZE)
++	return ONIGERR_TOO_BIG_COMPILED_PROGRAM;
+     } while (IS_NOT_NULL(node = NCDR(node)));
+     r = len;
+     break;
+ 
+   case NT_ALT:
+-    {
+-      int n = 0;
+-      len = 0;
+-      do {
+-	r = compile_length_tree(NCAR(node), reg);
+-	if (r < 0) return r;
+-	len += r;
+-	n++;
+-      } while (IS_NOT_NULL(node = NCDR(node)));
+-      r = len;
+-      r += (SIZE_OP_PUSH + SIZE_OP_JUMP) * (n - 1);
+-    }
++    len = 0;
++    do {
++      r = compile_length_tree(NCAR(node), reg);
++      if (r < 0) return r;
++      len += r;
++      if (IS_NOT_NULL(NCDR(node)))
++	len += SIZE_OP_PUSH + SIZE_OP_JUMP;
++      if (len > (int )MAX_COMPILED_PROGRAM_SIZE)
++	return ONIGERR_TOO_BIG_COMPILED_PROGRAM;
++    } while (IS_NOT_NULL(node = NCDR(node)));
++    r = len;
+     break;
+ 
+   case NT_STR:
+@@ -1698,6 +1741,8 @@ compile_length_tree(Node* node, regex_t* reg)
+     break;
+   }
+ 
++  if (r > (int )MAX_COMPILED_PROGRAM_SIZE)
++    return ONIGERR_TOO_BIG_COMPILED_PROGRAM;
+   return r;
+ }
+ 
+@@ -1723,6 +1768,8 @@ compile_tree(Node* node, regex_t* reg)
+ 	if (NCDR(x) != NULL) {
+ 	  len += SIZE_OP_PUSH + SIZE_OP_JUMP;
+ 	}
++	if (len > (int )MAX_COMPILED_PROGRAM_SIZE)
++	  return ONIGERR_TOO_BIG_COMPILED_PROGRAM;
+       } while (IS_NOT_NULL(x = NCDR(x)));
+       pos = reg->used + len;  /* goal position */
+ 
+@@ -5747,7 +5794,11 @@ onig_compile(regex_t* reg, const UChar* pattern, const UChar* pattern_end,
+   UnsetAddrList  uslist;
+ #endif
+ 
+-  if (IS_NOT_NULL(einfo)) einfo->par = (UChar* )NULL;
++  if (IS_NOT_NULL(einfo)) {
++    einfo->enc     = reg->enc;
++    einfo->par     = (UChar* )NULL;
++    einfo->par_end = (UChar* )NULL;
++  }
+ 
+ #ifdef RUBY
+   scan_env.sourcefile = sourcefile;
+@@ -5876,6 +5927,7 @@ onig_compile(regex_t* reg, const UChar* pattern, const UChar* pattern_end,
+   r = compile_tree(root, reg);
+   if (r == 0) {
+     r = add_opcode(reg, OP_END);
++    if (r != 0) goto err_unset;
+ #ifdef USE_SUBEXP_CALL
+     if (scan_env.num_call > 0) {
+       r = unset_addr_list_fix(&uslist, reg);
+diff --git a/regerror.c b/regerror.c
+index b18fc2e..cee59ff 100644
+--- a/regerror.c
++++ b/regerror.c
+@@ -165,6 +165,12 @@ onig_error_code_to_format(OnigPosition code)
+     p = "group number is too big for capture history"; break;
+   case ONIGERR_INVALID_CHAR_PROPERTY_NAME:
+     p = "invalid character property name {%n}"; break;
++  case ONIGERR_TOO_MANY_RANGE_REPEAT:
++    p = "too many range repeat"; break;
++  case ONIGERR_TOO_MANY_NULL_CHECK:
++    p = "too many null check"; break;
++  case ONIGERR_TOO_BIG_COMPILED_PROGRAM:
++    p = "too big compiled program"; break;
+   case ONIGERR_TOO_MANY_CAPTURE_GROUPS:
+     p = "too many capture groups are specified"; break;
+   case ONIGERR_INVALID_CODE_POINT_VALUE:
+diff --git a/regexec.c b/regexec.c
+index c45cc54..4143e85 100644
+--- a/regexec.c
++++ b/regexec.c
+@@ -1782,6 +1782,7 @@ static int string_cmp_ic(OnigEncoding enc, int case_fold_flag,
+   s2   = *ps2;
+   end1 = s1 + mblen;
+   while (s1 < end1) {
++    if (s2 >= text_end) return 0;
+     len1 = ONIGENC_MBC_CASE_FOLD(enc, case_fold_flag, &s1, text_end, buf1);
+     len2 = ONIGENC_MBC_CASE_FOLD(enc, case_fold_flag, &s2, text_end, buf2);
+     if (len1 != len2) return 0;
+@@ -2494,6 +2495,7 @@ match_at(regex_t* reg, const UChar* str, const UChar* end,
+ 		    case_fold_flag,
+ 		    &s, end, lowbuf);
+ 	DATA_ENSURE(0);
++	if (len != enclen(encode, p, reg->p + reg->used)) goto fail;
+ 	q = lowbuf;
+ 	while (len-- > 0) {
+ 	  if (*p != *q) {
+@@ -2583,6 +2585,7 @@ match_at(regex_t* reg, const UChar* str, const UChar* end,
+ 		      case_fold_flag,
+ 		      &s, end, lowbuf);
+ 	  DATA_ENSURE(0);
++	  if (len > endp - p) goto fail;
+ 	  q = lowbuf;
+ 	  while (len-- > 0) {
+ 	    if (*p != *q) goto fail;
+@@ -3906,7 +3909,7 @@ match_at(regex_t* reg, const UChar* str, const UChar* end,
+ 	if (msa->cache_index_table == NULL) {
+ 	  OnigCacheIndex *table = (OnigCacheIndex *)xmalloc(msa->num_cache_table * sizeof(OnigCacheIndex));
+ 	  if (table == NULL) {
+-	    return ONIGERR_MEMORY;
++	    goto memory_error;
+ 	  }
+ 	  OnigPosition r = init_cache_index_table(reg, table);
+           if (r < 0) {
+@@ -3919,16 +3922,16 @@ match_at(regex_t* reg, const UChar* str, const UChar* end,
+ 	size_t match_cache_size8 = (size_t)msa->num_cache_opcode * len;
+ 	/* overflow check */
+ 	if (match_cache_size8 / len != (size_t)msa->num_cache_opcode) {
+-	  return ONIGERR_MEMORY;
++	  goto memory_error;
+ 	}
+ 	/* Currently, int is used for the key of match_cache */
+ 	if (match_cache_size8 >= LONG_MAX_LIMIT) {
+-	  return ONIGERR_MEMORY;
++	  goto memory_error;
+ 	}
+ 	size_t match_cache_size = (match_cache_size8 >> 3) + (match_cache_size8 & 7 ? 1 : 0);
+ 	msa->match_cache = (uint8_t*)xmalloc(match_cache_size * sizeof(uint8_t));
+ 	if (msa->match_cache == NULL) {
+-	  return ONIGERR_MEMORY;
++	  goto memory_error;
+ 	}
+ 	xmemset(msa->match_cache, 0, match_cache_size * sizeof(uint8_t));
+       }
+@@ -3971,6 +3974,15 @@ match_at(regex_t* reg, const UChar* str, const UChar* end,
+   STACK_SAVE;
+   if (xmalloc_base) xfree(xmalloc_base);
+   return ONIGERR_UNEXPECTED_BYTECODE;
++
++#ifdef USE_CACHE_MATCH_OPT
++ memory_error:
++  /* Write the (possibly reallocated) match stack back into msa before
++     returning, like the other error exits below. */
++  STACK_SAVE;
++  if (xmalloc_base) xfree(xmalloc_base);
++  return ONIGERR_MEMORY;
++#endif
+ }
+ 
+ 
+diff --git a/regint.h b/regint.h
+index cee766a..a55bfb9 100644
+--- a/regint.h
++++ b/regint.h
+@@ -396,6 +396,11 @@ typedef unsigned int  BitStatusType;
+ #define INT_MAX_LIMIT           ((1UL << (SIZEOF_INT * 8 - 1)) - 1)
+ #define LONG_MAX_LIMIT           ((1UL << (SIZEOF_LONG * 8 - 1)) - 1)
+ 
++/* Program offsets are RelAddrType, and the compile_length_*() functions sum
++   into int, so a larger program would wrap both.  The quarter leaves room
++   for the sums the offset arithmetic makes out of those lengths. */
++#define MAX_COMPILED_PROGRAM_SIZE  ((unsigned int )(INT_MAX_LIMIT / 4))
++
+ #define DIGITVAL(code)    ((code) - '0')
+ #define ODIGITVAL(code)   DIGITVAL(code)
+ #define XDIGITVAL(enc,code) \
+@@ -478,38 +483,52 @@ typedef struct _BBuf {
+   (buf)->p = tmp;\
+ } while (0)
+ 
++/* A BBuf addresses its contents with unsigned int used/alloc fields, so it
++   cannot hold more than this.  Every size below is computed in size_t and
++   checked against it, so neither "pos + n" nor the alloc doubling can wrap
++   and send a write or an infinite grow loop past the buffer. */
++#define ONIG_MAX_BBUF_SIZE  ((size_t )INT_MAX_LIMIT)
++
+ #define BBUF_EXPAND(buf,low) do{\
+   UChar *tmp;\
+-  do { (buf)->alloc *= 2; } while ((buf)->alloc < (unsigned int )low);\
+-  tmp = (UChar* )xrealloc((buf)->p, (buf)->alloc);\
++  size_t new_alloc = ((buf)->alloc == 0) ? 1 : (size_t )(buf)->alloc;\
++  if ((size_t )(low) > ONIG_MAX_BBUF_SIZE) return(ONIGERR_MEMORY);\
++  do { new_alloc *= 2; } while (new_alloc < (size_t )(low));\
++  if (new_alloc > ONIG_MAX_BBUF_SIZE) new_alloc = ONIG_MAX_BBUF_SIZE;\
++  tmp = (UChar* )xrealloc((buf)->p, new_alloc);\
+   if (IS_NULL(tmp)) return(ONIGERR_MEMORY);\
+   (buf)->p = tmp;\
++  (buf)->alloc = (unsigned int )new_alloc;\
+ } while (0)
+ 
+ #define BBUF_ENSURE_SIZE(buf,size) do{\
+-  unsigned int new_alloc = (buf)->alloc;\
+-  while (new_alloc < (unsigned int )(size)) { new_alloc *= 2; }\
+-  if ((buf)->alloc != new_alloc) {\
++  size_t new_alloc = ((buf)->alloc == 0) ? 1 : (size_t )(buf)->alloc;\
++  if ((size_t )(size) > ONIG_MAX_BBUF_SIZE) return(ONIGERR_MEMORY);\
++  while (new_alloc < (size_t )(size)) { new_alloc *= 2; }\
++  if (new_alloc > ONIG_MAX_BBUF_SIZE) new_alloc = ONIG_MAX_BBUF_SIZE;\
++  if ((buf)->alloc != (unsigned int )new_alloc) {\
+     UChar *tmp;\
+     tmp = (UChar* )xrealloc((buf)->p, new_alloc);\
+     if (IS_NULL(tmp)) return(ONIGERR_MEMORY);\
+     (buf)->p = tmp;\
+-    (buf)->alloc = new_alloc;\
++    (buf)->alloc = (unsigned int )new_alloc;\
+   }\
+ } while (0)
+ 
+ #define BBUF_WRITE(buf,pos,bytes,n) do{\
+-  int used = (pos) + (int )(n);\
+-  if ((buf)->alloc < (unsigned int )used) BBUF_EXPAND((buf),used);\
++  size_t used = (size_t )(pos) + (size_t )(n);\
++  if (used > ONIG_MAX_BBUF_SIZE) return(ONIGERR_MEMORY);\
++  if ((size_t )(buf)->alloc < used) BBUF_EXPAND((buf),used);\
+   xmemcpy((buf)->p + (pos), (bytes), (n));\
+-  if ((buf)->used < (unsigned int )used) (buf)->used = used;\
++  if ((size_t )(buf)->used < used) (buf)->used = (unsigned int )used;\
+ } while (0)
+ 
+ #define BBUF_WRITE1(buf,pos,byte) do{\
+-  int used = (pos) + 1;\
+-  if ((buf)->alloc < (unsigned int )used) BBUF_EXPAND((buf),used);\
++  size_t used = (size_t )(pos) + 1;\
++  if (used > ONIG_MAX_BBUF_SIZE) return(ONIGERR_MEMORY);\
++  if ((size_t )(buf)->alloc < used) BBUF_EXPAND((buf),used);\
+   (buf)->p[(pos)] = (UChar )(byte);\
+-  if ((buf)->used < (unsigned int )used) (buf)->used = used;\
++  if ((size_t )(buf)->used < used) (buf)->used = (unsigned int )used;\
+ } while (0)
+ 
+ #define BBUF_ADD(buf,bytes,n)       BBUF_WRITE((buf),(buf)->used,(bytes),(n))
+@@ -519,9 +538,11 @@ typedef struct _BBuf {
+ 
+ /* from < to */
+ #define BBUF_MOVE_RIGHT(buf,from,to,n) do {\
+-  if ((unsigned int )((to)+(n)) > (buf)->alloc) BBUF_EXPAND((buf),(to) + (n));\
++  size_t end = (size_t )(to) + (size_t )(n);\
++  if (end > ONIG_MAX_BBUF_SIZE) return(ONIGERR_MEMORY);\
++  if (end > (size_t )(buf)->alloc) BBUF_EXPAND((buf),end);\
+   xmemmove((buf)->p + (to), (buf)->p + (from), (n));\
+-  if ((unsigned int )((to)+(n)) > (buf)->used) (buf)->used = (to) + (n);\
++  if (end > (size_t )(buf)->used) (buf)->used = (unsigned int )end;\
+ } while (0)
+ 
+ /* from > to */
+diff --git a/regparse.c b/regparse.c
+index 33df0e0..04db6b9 100644
+--- a/regparse.c
++++ b/regparse.c
+@@ -1443,6 +1443,15 @@ node_str_cat_codepoint(Node* node, OnigEncoding enc, OnigCodePoint c)
+   return onig_node_str_cat(node, buf, buf + num);
+ }
+ 
++static int
++check_code_point(OnigCodePoint code, OnigEncoding enc)
++{
++  if (ONIGENC_IS_UNICODE(enc) &&
++      (code > 0x10ffff || (code >= 0xd800 && code <= 0xdfff)))
++    return ONIGERR_INVALID_CODE_POINT_VALUE;
++  return 0;
++}
++
+ #if 0
+ extern void
+ onig_node_conv_to_str_node(Node* node, int flag)
+@@ -4640,7 +4649,6 @@ parse_char_class(Node** np, Node** asc_np, OnigToken* tok, UChar** src, UChar* e
+       /* tok->base != 0 : octal or hexadec. */
+       if (! ONIGENC_IS_SINGLEBYTE(env->enc) && tok->base != 0) {
+ 	UChar buf[ONIGENC_CODE_TO_MBC_MAXLEN];
+-	UChar* bufe = buf + ONIGENC_CODE_TO_MBC_MAXLEN;
+ 	UChar* psave = p;
+ 	int i, base = tok->base;
+ 
+@@ -4660,9 +4668,10 @@ parse_char_class(Node** np, Node** asc_np, OnigToken* tok, UChar** src, UChar* e
+ 	  goto err;
+ 	}
+ 
+-	len = enclen(env->enc, buf, buf + i);
+-	if (i < len) {
+-	  r = ONIGERR_TOO_SHORT_MULTI_BYTE_STRING;
++        len = ONIGENC_PRECISE_MBC_ENC_LEN(env->enc, buf, buf + i);
++        if (! ONIGENC_MBCLEN_CHARFOUND_P(len)) {
++          r = ONIGENC_MBCLEN_NEEDMORE_P(len) ?
++            ONIGERR_TOO_SHORT_MULTI_BYTE_STRING : ONIGERR_INVALID_CODE_POINT_VALUE;
+ 	  goto err;
+ 	}
+ 	else if (i > len) { /* fetch back */
+@@ -4679,7 +4688,7 @@ parse_char_class(Node** np, Node** asc_np, OnigToken* tok, UChar** src, UChar* e
+ 	  goto raw_single;
+ 	}
+ 	else {
+-	  v = ONIGENC_MBC_TO_CODE(env->enc, buf, bufe);
++          v = ONIGENC_MBC_TO_CODE(env->enc, buf, buf + len);
+ 	  in_type = CCV_CODE_POINT;
+ 	}
+       }
+@@ -4694,6 +4703,8 @@ parse_char_class(Node** np, Node** asc_np, OnigToken* tok, UChar** src, UChar* e
+ 
+     case TK_CODE_POINT:
+       v = tok->u.code;
++      r = check_code_point(v, env->enc);
++      if (r != 0) goto err;
+       in_israw = 1;
+     val_entry:
+       len = ONIGENC_CODE_TO_MBCLEN(env->enc, v);
+@@ -4724,12 +4735,12 @@ parse_char_class(Node** np, Node** asc_np, OnigToken* tok, UChar** src, UChar* e
+     case TK_CHAR_TYPE:
+       r = add_ctype_to_cc(cc, tok->u.prop.ctype, tok->u.prop.not,
+ 			  IS_ASCII_RANGE(env->option), env);
+-      if (r != 0) return r;
++      if (r != 0) goto err;
+       if (IS_NOT_NULL(asc_cc)) {
+ 	if (tok->u.prop.ctype != ONIGENC_CTYPE_WORD)
+ 	  r = add_ctype_to_cc(asc_cc, tok->u.prop.ctype, tok->u.prop.not,
+ 			      IS_ASCII_RANGE(env->option), env);
+-	if (r != 0) return r;
++	if (r != 0) goto err;
+       }
+ 
+     next_class:
+@@ -4742,13 +4753,16 @@ parse_char_class(Node** np, Node** asc_np, OnigToken* tok, UChar** src, UChar* e
+ 	int ctype;
+ 
+ 	ctype = fetch_char_property_to_ctype(&p, end, env);
+-	if (ctype < 0) return ctype;
++	if (ctype < 0) {
++	  r = ctype;
++	  goto err;
++	}
+ 	r = add_ctype_to_cc(cc, ctype, tok->u.prop.not, 0, env);
+-	if (r != 0) return r;
++	if (r != 0) goto err;
+ 	if (IS_NOT_NULL(asc_cc)) {
+ 	  if (ctype != ONIGENC_CTYPE_ASCII)
+ 	    r = add_ctype_to_cc(asc_cc, ctype, tok->u.prop.not, 0, env);
+-	  if (r != 0) return r;
++	  if (r != 0) goto err;
+ 	}
+ 	goto next_class;
+       }
+@@ -4849,6 +4863,7 @@ parse_char_class(Node** np, Node** asc_np, OnigToken* tok, UChar** src, UChar* e
+ 	  r = and_cclass(prev_cc, cc, env);
+ 	  if (r != 0) goto err;
+ 	  bbuf_free(cc->mbuf);
++	  cc->mbuf = NULL;
+ 	  if (IS_NOT_NULL(asc_cc)) {
+ 	    r = and_cclass(asc_prev_cc, asc_cc, env);
+ 	    if (r != 0) goto err;
+@@ -6200,6 +6215,8 @@ parse_exp(Node** np, OnigToken* tok, int term,
+ 	}
+ #ifndef NUMBERED_CHAR_IS_NOT_CASE_AMBIG
+ 	else if (r == TK_CODE_POINT) {
++          r = check_code_point(tok->u.code, env->enc);
++          if (r != 0) return r;
+ 	  r = node_str_cat_codepoint(*np, env->enc, tok->u.code);
+ 	}
+ #endif
+@@ -6223,11 +6240,15 @@ parse_exp(Node** np, OnigToken* tok, int term,
+       len = 1;
+       while (1) {
+ 	if (len >= ONIGENC_MBC_MINLEN(env->enc)) {
+-	  if (len == enclen(env->enc, NSTR(*np)->s, NSTR(*np)->end)) {
++          int n = ONIGENC_IS_SINGLEBYTE(env->enc) ? 1 :
++            ONIGENC_PRECISE_MBC_ENC_LEN(env->enc, NSTR(*np)->s, NSTR(*np)->end);
++          if (n == len) {
+ 	    r = fetch_token(tok, src, end, env);
+ 	    NSTRING_CLEAR_RAW(*np);
+ 	    goto string_end;
+ 	  }
++          if (! ONIGENC_MBCLEN_NEEDMORE_P(n))
++            return ONIGERR_INVALID_CODE_POINT_VALUE;
+ 	}
+ 
+ 	r = fetch_token(tok, src, end, env);
+@@ -6258,6 +6279,8 @@ parse_exp(Node** np, OnigToken* tok, int term,
+ 
+   case TK_CODE_POINT:
+     {
++      r = check_code_point(tok->u.code, env->enc);
++      if (r != 0) return r;
+       *np = node_new_empty();
+       CHECK_NULL_RETURN_MEMERR(*np);
+       r = node_str_cat_codepoint(*np, env->enc, tok->u.code);
+@@ -6536,7 +6559,7 @@ parse_subexp(Node** top, OnigToken* tok, int term,
+ 	     UChar** src, UChar* end, ScanEnv* env)
+ {
+   int r;
+-  Node *node, **headp;
++  Node *node, *topnode, **headp;
+ 
+   *top = NULL;
+   env->parse_depth++;
+@@ -6552,23 +6575,31 @@ parse_subexp(Node** top, OnigToken* tok, int term,
+     *top = node;
+   }
+   else if (r == TK_ALT) {
+-    *top  = onig_node_new_alt(node, NULL);
+-    headp = &(NCDR(*top));
++    topnode = onig_node_new_alt(node, NULL);
++    headp   = &(NCDR(topnode));
+     while (r == TK_ALT) {
+       r = fetch_token(tok, src, end, env);
+-      if (r < 0) return r;
++      if (r < 0) {
++	onig_node_free(topnode);
++	return r;
++      }
+       r = parse_branch(&node, tok, term, src, end, env);
+       if (r < 0) {
++	/* the failed branch is not linked into topnode yet: free both */
+ 	onig_node_free(node);
++	onig_node_free(topnode);
+ 	return r;
+       }
+ 
+       *headp = onig_node_new_alt(node, NULL);
+-      headp = &(NCDR(*headp));
++      headp  = &(NCDR(*headp));
+     }
+ 
+-    if (tok->type != (enum TokenSyms )term)
++    if (tok->type != (enum TokenSyms )term) {
++      onig_node_free(topnode);
+       goto err;
++    }
++    *top = topnode;
+   }
+   else {
+     onig_node_free(node);
+diff --git a/string.c b/string.c
+index b9ffd19..bedc8c6 100644
+--- a/string.c
++++ b/string.c
+@@ -7313,7 +7313,7 @@ rb_str_casemap(VALUE source, OnigCaseFoldType *flags, rb_encoding *enc)
+     VALUE target;
+ 
+     const OnigUChar *source_current, *source_end;
+-    int target_length = 0;
++    long target_length = 0;
+     VALUE buffer_anchor;
+     mapping_buffer *current_buffer = 0;
+     mapping_buffer **pre_buffer;
+@@ -7321,6 +7321,8 @@ rb_str_casemap(VALUE source, OnigCaseFoldType *flags, rb_encoding *enc)
+     int buffer_length_or_invalid;
+ 
+     if (RSTRING_LEN(source) == 0) return str_duplicate(rb_cString, source);
++    if (RSTRING_LEN(source) > INT_MAX - CASE_MAPPING_ADDITIONAL_LENGTH)
++        rb_raise(rb_eArgError, "string size too big");
+ 
+     source_current = (OnigUChar*)RSTRING_PTR(source);
+     source_end = (OnigUChar*)RSTRING_END(source);
+@@ -7329,7 +7331,11 @@ rb_str_casemap(VALUE source, OnigCaseFoldType *flags, rb_encoding *enc)
+     pre_buffer = (mapping_buffer **)&DATA_PTR(buffer_anchor);
+     while (source_current < source_end) {
+         /* increase multiplier using buffer count to converge quickly */
+-        size_t capa = (size_t)(source_end-source_current)*++buffer_count + CASE_MAPPING_ADDITIONAL_LENGTH;
++        size_t capa = (size_t)(source_end-source_current);
++        if (capa > (INT_MAX - CASE_MAPPING_ADDITIONAL_LENGTH) / ++buffer_count)
++            capa = INT_MAX;
++        else
++            capa = capa * buffer_count + CASE_MAPPING_ADDITIONAL_LENGTH;
+         if (CASEMAP_DEBUG) {
+             fprintf(stderr, "Buffer allocation, capa is %"PRIuSIZE"\n", capa); /* for tuning */
+         }
+@@ -7343,11 +7349,13 @@ rb_str_casemap(VALUE source, OnigCaseFoldType *flags, rb_encoding *enc)
+                                    current_buffer->space,
+                                    current_buffer->space+current_buffer->capa,
+                                    enc);
+-        if (buffer_length_or_invalid < 0) {
++        if (buffer_length_or_invalid < 0 || buffer_length_or_invalid > LONG_MAX - target_length) {
+             current_buffer = DATA_PTR(buffer_anchor);
+             DATA_PTR(buffer_anchor) = 0;
+             mapping_buffer_free(current_buffer);
++            if (buffer_length_or_invalid < 0)
+             rb_raise(rb_eArgError, "input string invalid");
++            rb_raise(rb_eArgError, "string size too big");
+         }
+         target_length  += current_buffer->used = buffer_length_or_invalid;
+     }

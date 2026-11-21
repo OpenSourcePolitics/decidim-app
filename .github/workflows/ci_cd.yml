@@ -3,7 +3,7 @@ on: [push]
 
 env:
   RSPEC_FORMAT: "documentation"
-  RUBY_VERSION: 3.2.2
+  RUBY_VERSION: 3.2.11
   RAILS_ENV: test
   NODE_ENV: test
   NODE_VERSION: 22.13.1
@@ -30,10 +30,34 @@ jobs:
   zeitwerk:
     name: Check for Zeitwerk errors
     uses: ./.github/workflows/zeitwerk.yml
+  build_ruby:
+    name: Build patched Ruby
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    outputs:
+      cache_key: ${{ steps.key.outputs.key }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - id: key
+        name: Compute cache key
+        run: echo "key=patched-ruby-ubuntu2204-${RUBY_VERSION}-${{ hashFiles('ruby-patched/patches/*.patch', 'ruby-patched/ci-build-ruby.sh') }}" >> "$GITHUB_OUTPUT"
+      - id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.ruby-patched
+          key: ${{ steps.key.outputs.key }}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        name: Compile patched Ruby from source
+        run: ./ruby-patched/ci-build-ruby.sh
   build_app:
+    needs: build_ruby
     uses: ./.github/workflows/build_app.yml
     secrets: inherit
     name: Build test application
+    with:
+      ruby_cache_key: ${{ needs.build_ruby.outputs.cache_key }}
   tests:
     strategy:
       fail-fast: false
@@ -45,17 +69,56 @@ jobs:
             name: "System specs"
           - command: bundle exec parallel_test --type rspec --pattern spec/ --exclude-pattern 'spec/(system|lib)'
             name: "Tasks specs"
-    needs: build_app
+    needs: [build_app, build_ruby]
     name: ${{ matrix.test.name }}
     uses: ./.github/workflows/test_app.yml
     secrets: inherit
     with:
       test_command: ${{ matrix.test.command }}
+      ruby_cache_key: ${{ needs.build_ruby.outputs.cache_key }}
       bullet_n_plus_one: false
       bullet_unused_eager_loading: false
+  check_ruby_image:
+    name: Check patched Ruby base image
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Resolve base image reference from Dockerfile
+        id: ref
+        run: |
+          ref="$(sed -n 's/^ARG RUBY_IMAGE=//p' Dockerfile | head -1)"
+          if [ -z "$ref" ]; then
+            echo "::error::could not read ARG RUBY_IMAGE from Dockerfile"; exit 1
+          fi
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
+          echo "host=${ref%%/*}" >> "$GITHUB_OUTPUT"
+          echo "Base image pinned in Dockerfile: $ref"
+      - name: Log in to the registry
+        run: echo "${{ secrets.TOKEN }}" | docker login "${{ steps.ref.outputs.host }}" -u "${{ vars.REGISTRY_USERNAME || 'nologin' }}" --password-stdin
+      - name: Verify the image is available and matches the committed patch
+        run: |
+          ref="${{ steps.ref.outputs.ref }}"
+          if ! docker pull --quiet "$ref" >/dev/null 2>&1; then
+            echo "::error::Base image '$ref' could not be pulled. Build & push it first: PUSH=1 ./ruby-patched/build.sh"
+            exit 1
+          fi
+          want="$(cat ruby-patched/patches/*.patch | sha256sum | awk '{print $1}')"
+          got="$(docker inspect --format '{{ index .Config.Labels "ruby.patch.sha256" }}' "$ref" 2>/dev/null || true)"
+          if [ -z "$got" ]; then
+            echo "::error::Base image '$ref' has no ruby.patch.sha256 label. Rebuild it with the current build.sh and repin: PUSH=1 PIN=1 ./ruby-patched/build.sh"
+            exit 1
+          fi
+          if [ "$got" != "$want" ]; then
+            echo "::error::Pinned base was built from a different patch (image=$got repo=$want). Rebuild & repin: PUSH=1 PIN=1 ./ruby-patched/build.sh"
+            exit 1
+          fi
+          echo "✅ $ref is available and was built from the committed patch ($want)"
   docker_build:
     name: Test build docker image
-    needs: [lint, zeitwerk]
+    needs: [lint, zeitwerk, check_ruby_image]
     runs-on: ubuntu-22.04
     services:
       postgres:
@@ -84,9 +147,45 @@ jobs:
           database_password: ${{ env.DATABASE_PASSWORD }}
           database_host: ${{ env.DATABASE_HOST }}
           push: "true"
+  smoke_image:
+    name: Smoke-test built image
+    needs: docker_build
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - name: Log in to the registry
+        run: echo "${{ secrets.TOKEN }}" | docker login "${{ vars.REGISTRY_ENDPOINT }}" -u "${{ vars.REGISTRY_USERNAME || 'nologin' }}" --password-stdin
+      - name: Resolve built image ref
+        id: img
+        run: |
+          # build-and-test-images-action tags the image from the git ref with '/' -> '-'.
+          tag="${GITHUB_REF_NAME//\//-}"
+          echo "ref=${{ vars.REGISTRY_ENDPOINT }}/${{ vars.REGISTRY_NAMESPACE }}/${{ vars.IMAGE_NAME }}:${tag}" >> "$GITHUB_OUTPUT"
+      - name: Scan gem native extensions for missing runtime libs
+        run: |
+          # Runs the final runner image and ldd-scans every gem native extension.
+          # Catches runtime libs the builder has but the runner image doesn't ship
+          # (e.g. libicu for charlock_holmes) — invisible to a build-only check.
+          ref="${{ steps.img.outputs.ref }}"
+          echo "Scanning $ref"
+          docker pull --quiet "$ref"
+          docker run --rm "$ref" bash -lc '
+            fail=0
+            while IFS= read -r so; do
+              miss=$(ldd "$so" 2>/dev/null | grep "not found" || true)
+              if [ -n "$miss" ]; then
+                echo "::error::missing runtime lib for $so"
+                echo "$so"; echo "$miss" | sed "s/^/    /"
+                fail=1
+              fi
+            done < <(find /usr/local/bundle -name "*.so")
+            if [ "$fail" -eq 0 ]; then
+              echo "✅ no missing runtime libs in any gem native extension"
+            fi
+            exit $fail'
   generate_release:
     name: Generate release
-    needs: [lint, zeitwerk, tests, docker_build]
+    needs: [lint, zeitwerk, tests, docker_build, smoke_image]
     if: "github.ref == 'refs/heads/main'"
     runs-on: ubuntu-22.04
     steps:

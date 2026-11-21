@@ -3,7 +3,12 @@ on:
     inputs:
       ruby_version:
         description: 'Ruby Version'
-        default: "3.2.2"
+        default: "3.2.11"
+        type: string
+        required: false
+      ruby_cache_key:
+        description: 'Cache key of a prebuilt patched Ruby (~/.ruby-patched). When set, that Ruby is used instead of ruby/setup-ruby.'
+        default: ""
         type: string
         required: false
       node_version:
@@ -38,9 +43,26 @@ jobs:
         with:
           fetch-depth: 1
       - uses: ruby/setup-ruby@v1
+        if: inputs.ruby_cache_key == ''
         with:
           ruby-version: ${{ inputs.ruby_version }}
           bundler-cache: true
+      - name: Restore patched Ruby
+        if: inputs.ruby_cache_key != ''
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.ruby-patched
+          key: ${{ inputs.ruby_cache_key }}
+          fail-on-cache-miss: true
+      - name: Use patched Ruby and install gems
+        if: inputs.ruby_cache_key != ''
+        shell: "bash"
+        run: |
+          echo "$HOME/.ruby-patched/${{ inputs.ruby_version }}/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.ruby-patched/${{ inputs.ruby_version }}/bin:$PATH"
+          ruby -v
+          bundle config set --local path vendor/bundle
+          bundle install --jobs 4 --retry 3
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ inputs.node_version }}
