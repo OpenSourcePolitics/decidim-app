@@ -12,11 +12,9 @@ unchanged), `docker-compose.prod.yml` (production overlay), `.env-example`
 - A domain name pointing to the server's public IP.
 - A reverse proxy (Traefik, nginx, Caddy, or similar) installed on the
   server, separate from this stack. `docker-compose.prod.yml` does not
-  include one - `app` only exposes port 3000 internally, on the Docker
-  network, and expects something in front of it to terminate TLS and
-  forward traffic from 80/443.
-- Access to the existing `config/master.key` from the Decidim application
-  (needed for `RAILS_MASTER_KEY`, see step 3).
+  include one - `app` only publishes its port (`PORT` in `.env`, 3030
+  by default) on the host's loopback, and expects something in front of
+  it to terminate TLS and forward traffic from 80/443.
 - SMTP credentials for outgoing mail.
 
 ## Step 1: Build the application image
@@ -37,7 +35,14 @@ set in the `Gemfile` and unaffected by changing this tag.
 openssl rand -hex 64
 ```
 
-Keep this value for step 3 (`SECRET_KEY_BASE`).
+Keep this value for step 3 (`SECRET_KEY_BASE`), and store it safely
+outside the server. Besides signing sessions and cookies, it is what
+`Decidim::AttributeEncryptor` derives its key from (see
+`lib/extends/lib/decidim/attribute_encryptor_extends.rb`): once the app
+holds data, changing it makes encrypted columns (organization SMTP and
+authentication settings, among others) unreadable. A new key only fits
+a fresh install - when moving an existing instance, reuse its value
+(see `MIGRATION-GUIDE.md`).
 
 ## Step 3: Create and fill in the environment file
 
@@ -53,7 +58,6 @@ boot without these:
 | `DECIDIM_HOST` | the production domain, e.g. `decidim.example.org` |
 | `POSTGRES_PASSWORD` | a strong, generated password |
 | `SECRET_KEY_BASE` | the value generated in step 2 |
-| `RAILS_MASTER_KEY` | the existing `config/master.key` content - do not generate a new one, it must match the key that encrypted `config/credentials.yml.enc` |
 
 `RAILS_ASSET_HOST` is optional - only set it if compiled assets (CSS, JS,
 images) are served from a separate host or CDN instead of `DECIDIM_HOST`.
@@ -76,12 +80,12 @@ it will contain real secrets once filled in.
 ## Step 4: Set up the reverse proxy
 
 Configure the reverse proxy already installed on the server to forward
-traffic for `DECIDIM_HOST` to `localhost:3000` (or the Docker network
-address of the `app` service, depending on the proxy setup) and to
+traffic for `DECIDIM_HOST` to `localhost:<PORT>` (3030 by default, or the
+Docker network address of the `app` service, depending on the proxy setup) and to
 terminate TLS there. The exact configuration depends on which proxy is
 in use; this repository does not provide one.
 
-`app` binds with `rails server -b 0.0.0.0 -p 3000` (see
+`app` binds with `rails server -b 0.0.0.0` and listens on `PORT` (see
 `docker-compose.prod.yml`) - plain host and port, no URI scheme. Puma's
 rack handler only special-cases the `ssl://` scheme for `-b`; anything
 else (including a `tcp://` prefix) is treated as a raw host and fails to

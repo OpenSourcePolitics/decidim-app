@@ -23,6 +23,19 @@ build:
 		--build-arg DOCKER_IMAGE=rg.fr-par.scw.cloud/decidim-app/$(image_name):$(image_tag) \
 		-t "$(image_name):$(image_tag)" .
 
+ruby-image: ## Build the patched Ruby base image locally (this host's arch)
+	PLATFORM=linux/$(TARGET_ARCH) ./ruby-patched/build.sh
+
+ruby-image-push: ## Build and push the patched Ruby base image (amd64; needs docker login)
+	PUSH=1 PLATFORM=linux/amd64 ./ruby-patched/build.sh
+
+ruby-image-pin: ## Build, push (amd64) and pin the pushed digest into the Dockerfile
+	PUSH=1 PIN=1 PLATFORM=linux/amd64 ./ruby-patched/build.sh
+
+hooks: ## Install the repo git hooks (sets core.hooksPath to .githooks)
+	git config core.hooksPath .githooks
+	@echo "Git hooks installed from .githooks. Bypass a hook with: git commit --no-verify"
+
 teardown: ## Stop containers and remove volumes
 	docker compose down -v --rmi all
 
@@ -144,6 +157,6 @@ help: ## Show available commands
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: help run up build teardown create-database setup-database create-seeds restore-dump shell restart status logs external rebuild tls-cert \
+.PHONY: help run up build ruby-image ruby-image-push ruby-image-pin hooks teardown create-database setup-database create-seeds restore-dump shell restart status logs external rebuild tls-cert \
 	prod-init-storage prod-create-db prod-migrate prod-up prod-deploy prod-restart prod-status prod-logs prod-shell prod-console prod-down \
 	prod-restore-dump prod-restore-storage prod-config

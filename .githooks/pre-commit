@@ -1,0 +1,43 @@
+#!/usr/bin/env sh
+#
+# Guard against the patched Ruby base drifting from the app.
+#
+# If a commit changes ruby-patched/patches/ but does not also update the pinned
+# base image in the app Dockerfile, the base and the app can fall out of sync.
+# This hook catches that locally; CI (check_ruby_image) is the authoritative
+# check and verifies the pinned image's label actually matches the patch.
+#
+# Install once per clone with: make hooks
+# Bypass a single commit with:  git commit --no-verify
+#
+set -eu
+
+# Only act when this commit touches the Ruby patch(es).
+if ! git diff --cached --name-only --diff-filter=ACM | grep -q '^ruby-patched/patches/'; then
+  exit 0
+fi
+
+# Pinned base image as it will be committed (index version of the Dockerfile).
+pinned="$(git show :Dockerfile 2>/dev/null | sed -n 's/^ARG RUBY_IMAGE=//p' | head -1)"
+
+case "$pinned" in
+  *@sha256:*)
+    # Digest-pinned: the ARG RUBY_IMAGE line must change in this same commit.
+    if git diff --cached -U0 -- Dockerfile | grep -qE '^\+ARG RUBY_IMAGE='; then
+      exit 0
+    fi
+    echo "pre-commit: ruby-patched/patches changed but the pinned base image in Dockerfile was not updated." >&2
+    echo "            Rebuild, push and repin the base, then stage the Dockerfile:" >&2
+    echo "              make ruby-image-pin" >&2
+    echo "            Bypass with: git commit --no-verify" >&2
+    exit 1
+    ;;
+  *)
+    # Tag-pinned (no digest): a repin isn't required, but the base still needs
+    # to be rebuilt and pushed, or CI's docker build will use a stale base.
+    echo "pre-commit: ruby-patched/patches changed. Remember to rebuild & push the base image:" >&2
+    echo "              make ruby-image-push    # or ruby-image-pin to pin an immutable digest" >&2
+    ;;
+esac
+
+exit 0

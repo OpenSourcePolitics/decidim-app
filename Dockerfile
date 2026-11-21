@@ -1,4 +1,14 @@
-FROM ruby:3.2.2-slim as builder
+# Custom Ruby 3.2.11 base image (rebuilt from source with additional upstream
+# fixes; Ruby 3.2 is EOL). Built and published from ./ruby-patched (see
+# ruby-patched/README.md). Override with --build-arg RUBY_IMAGE=... to build
+# against a locally built tag.
+#
+# Prefer pinning an immutable digest (ruby:3.2.11-patched@sha256:...) over the
+# bare tag, so a given commit always builds against the base it was reviewed
+# with. `PUSH=1 PIN=1 ./ruby-patched/build.sh` prints and rewrites this line.
+# CI (check_ruby_image) verifies whatever ref is pinned here exists on the registry.
+ARG RUBY_IMAGE=rg.fr-par.scw.cloud/decidim-app/ruby:3.2.11-patched@sha256:bf7db04804573f4759db2bc231186696068edbbc79c60efca70c0551b17a100a
+FROM ${RUBY_IMAGE} as builder
 
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
@@ -19,7 +29,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     rm -f /var/lib/apt/lists/lock && \
     apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev curl git libicu-dev build-essential xz-utils \
+    libpq-dev curl git libicu-dev zlib1g-dev build-essential xz-utils \
     libssl3 libxrender1 libxext6 libfontconfig1 xfonts-75dpi xfonts-base \
     && NODE_VERSION=22.12.0 \
     && case "${TARGETARCH}" in \
@@ -60,7 +70,7 @@ RUN rm -rf node_modules tmp/cache vendor/bundle/spec .git .gitignore .dockerigno
     && find /usr/local/bundle/bundler/gems/decidim-* -type d -name "docs" -exec rm -rf {} + 2>/dev/null || true \
     && rm -rf log/*.log tmp/* public/packs-test
 
-FROM ruby:3.2.2-slim as runner
+FROM ${RUBY_IMAGE} as runner
 
 ARG DOCKER_IMAGE_TAG
 ARG DOCKER_IMAGE_NAME
@@ -74,7 +84,8 @@ ENV RAILS_ENV=production \
     DOCKER_IMAGE_TAG=${DOCKER_IMAGE_TAG:-latest} \
     DOCKER_IMAGE=${DOCKER_IMAGE:-rg.fr-par.scw.cloud/decidim-app/decidim-app} \
     MALLOC_ARENA_MAX=2 \
-    RUBY_YJIT_ENABLE=1
+    RUBY_YJIT_ENABLE=1 \
+    PORT=3000
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -82,6 +93,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update && apt-get install -y --no-install-recommends \
     postgresql-client imagemagick libproj-dev proj-bin p7zip-full libgeos-dev libjemalloc2 \
     libssl3 libxrender1 libxext6 libfontconfig1 xfonts-75dpi xfonts-base curl \
+    libicu76 \
     && WKHTML_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "arm64" || echo "amd64") \
     && curl -fsSL "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_${WKHTML_ARCH}.deb" -o /tmp/wkhtmltox.deb \
     && apt-get install -y --no-install-recommends /tmp/wkhtmltox.deb \
@@ -106,6 +118,8 @@ COPY --from=builder --chown=decidim:decidim /opt/decidim /opt/decidim
 
 USER decidim
 
+# Default port only: `rails server` listens on $PORT (default 3000), override it
+# at runtime — dev and prod compose set PORT=3030 explicitly.
 EXPOSE 3000
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
